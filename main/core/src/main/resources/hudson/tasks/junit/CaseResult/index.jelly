@@ -25,7 +25,7 @@ THE SOFTWARE.
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
          xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:lo="hudson:linkout">
   <l:layout title="${it.owner} test - ${it.displayName}">
-    <st:include it="${it.owner}" page="sidepanel.jelly" />
+    <st:include page="sidepanel.jelly" />
     <l:main-panel>
       <j:set var="st" value="${it.status}" />
       <h1 class="${st.cssClass}">
@@ -56,6 +56,12 @@ THE SOFTWARE.
         <div style="text-align:right;">
           ${%took(it.durationString)}
         </div>
+
+      <table style="margin-top: 1em; margin-left:0em;">
+		  <j:forEach var="action" items="${it.testActions}">
+	          <st:include page="summary.jelly" from="${action}" optional="true" it="${action}" />
+		  </j:forEach>
+	  </table>
 
     <d:taglib uri="hudson:linkout">
         <d:bean name="out" className="hudson.util.HyperlinkingOutTag"/>

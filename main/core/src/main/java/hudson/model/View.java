@@ -23,14 +23,12 @@
  */
 package hudson.model;
 
+import static hudson.model.Hudson.checkGoodName;
+import hudson.DescriptorExtensionList;
+import hudson.Extension;
 import hudson.ExtensionPoint;
 import hudson.Util;
-import hudson.Extension;
-import hudson.DescriptorExtensionList;
-import hudson.Plugin;
-import hudson.widgets.Widget;
 import hudson.model.Descriptor.FormException;
-import static hudson.model.Hudson.checkGoodName;
 import hudson.scm.ChangeLogSet.Entry;
 import hudson.search.CollectionSearchIndex;
 import hudson.search.SearchIndexBuilder;
@@ -40,14 +38,10 @@ import hudson.security.Permission;
 import hudson.security.PermissionGroup;
 import hudson.util.DescriptorList;
 import hudson.util.RunList;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
-import org.kohsuke.stapler.export.ExportedBean;
+import hudson.widgets.Widget;
 
-import javax.servlet.ServletException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -57,7 +51,13 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.text.ParseException;
+
+import javax.servlet.ServletException;
+
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
 
 /**
  * Encapsulates the rendering of the list of {@link TopLevelItem}s

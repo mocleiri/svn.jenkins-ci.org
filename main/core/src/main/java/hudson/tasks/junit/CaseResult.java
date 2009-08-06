@@ -24,6 +24,8 @@
 package hudson.tasks.junit;
 
 import hudson.model.AbstractBuild;
+import hudson.model.Run;
+
 import org.dom4j.Element;
 import org.kohsuke.stapler.export.Exported;
 
@@ -139,6 +141,10 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         this.stdout = stdout;
         this.stderr = stderr;
     }
+    
+    public ClassResult getParent() {
+    	return classResult;
+    }
 
     private static String getError(Element testCase) {
         String msg = testCase.elementText("error");
@@ -241,6 +247,10 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     public int getFailedSince() {
         return failedSince;
     }
+    
+    public Run<?,?> getFailedSinceRun() {
+    	return getOwner().getParent().getBuildByNumber(failedSince);
+    }
 
     /**
      * Gets the number of consecutive builds (including this)
@@ -270,7 +280,7 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     @Exported
     public String getStdout() {
         if(stdout!=null)    return stdout;
-        return getParent().getStdout();
+        return getSuiteResult().getStdout();
     }
 
     /**
@@ -282,7 +292,7 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     @Exported
     public String getStderr() {
         if(stderr!=null)    return stderr;
-        return getParent().getStderr();
+        return getSuiteResult().getStderr();
     }
 
     @Override
@@ -326,12 +336,12 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         return skipped;
     }
 
-    public SuiteResult getParent() {
+    public SuiteResult getSuiteResult() {
         return parent;
     }
 
     public AbstractBuild<?,?> getOwner() {
-        return parent.getParent().getOwner();
+        return getSuiteResult().getParent().getOwner();
     }
 
     /**

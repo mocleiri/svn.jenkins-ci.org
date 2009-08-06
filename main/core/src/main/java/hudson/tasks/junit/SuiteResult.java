@@ -23,17 +23,19 @@
  */
 package hudson.tasks.junit;
 
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
-
-import java.io.File;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Result of one test suite.
@@ -50,6 +52,7 @@ import java.util.List;
  */
 @ExportedBean
 public final class SuiteResult implements Serializable {
+	private final File file;
     private final String name;
     private final String stdout;
     private final String stderr;
@@ -70,6 +73,7 @@ public final class SuiteResult implements Serializable {
         this.name = name;
         this.stderr = stderr;
         this.stdout = stdout;
+        this.file = null;
     }
 
     /**
@@ -102,6 +106,7 @@ public final class SuiteResult implements Serializable {
     }
 
     private SuiteResult(File xmlReport, Element suite) throws DocumentException {
+    	this.file = xmlReport;
         String name = suite.attributeValue("name");
         if(name==null)
             // some user reported that name is null in their environment.
@@ -183,8 +188,15 @@ public final class SuiteResult implements Serializable {
     public String getStderr() {
         return stderr;
     }
+    
+    /**
+     * The location of the original test report
+     */
+    public File getFile() {
+		return file;
+	}
 
-    public TestResult getParent() {
+	public TestResult getParent() {
         return parent;
     }
 
@@ -218,6 +230,14 @@ public final class SuiteResult implements Serializable {
         }
         return null;
     }
+    
+	public Set<String> getClassNames() {
+		Set<String> result = new HashSet<String>();
+		for (CaseResult c : cases) {
+			result.add(c.getClassName());
+		}
+		return result;
+	}
 
     /*package*/ boolean freeze(TestResult owner) {
         if(this.parent!=null)

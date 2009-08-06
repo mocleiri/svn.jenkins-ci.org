@@ -61,7 +61,7 @@ THE SOFTWARE.
     <j:set var="taskMatching" value="${context.parent}"/>
     <d:invokeBody />
   </j:scope>
-
+  
   <j:if test="${attrs.permission==null or h.hasPermission(it,attrs.permission)}">
     <j:choose>
       <j:when test="${taskMatching!=null}">

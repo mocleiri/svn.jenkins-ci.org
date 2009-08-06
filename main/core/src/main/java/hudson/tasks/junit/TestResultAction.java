@@ -31,7 +31,13 @@ import hudson.model.BuildListener;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.StringConverter2;
 import hudson.util.XStream2;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.collections.MultiMap;
+import org.apache.commons.collections.map.MultiValueMap;
 import org.kohsuke.stapler.StaplerProxy;
 import org.kohsuke.stapler.export.Exported;
 
@@ -58,7 +64,7 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
     private int failCount;
     private int skipCount;
     private Integer totalCount;
-
+    private List<Data> testData;
 
     public TestResultAction(AbstractBuild owner, TestResult result, BuildListener listener) {
         super(owner);
@@ -155,7 +161,25 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
         return getResult();
     }
 
-
+    public List<TestAction> getActions(TestObject object) {
+    	List<TestAction> result = new ArrayList<TestAction>();
+    	for (Data data: testData) {
+    		TestAction a = data.getTestAction(object);
+    		if (a != null) {
+    			result.add(a);
+    		}
+    	}
+		return Collections.unmodifiableList(result);
+    }
+    
+	public void setData(List<Data> testData) {
+		this.testData = testData;
+	}
+    
+    public static abstract class Data {
+    	//TODO decide: return List<TestAction> ?
+    	public abstract TestAction getTestAction(TestObject testObject);
+    }
 
     private static final Logger logger = Logger.getLogger(TestResultAction.class.getName());
 
@@ -168,4 +192,5 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
         XSTREAM.registerConverter(new StringConverter2(),100);
 
     }
+
 }

@@ -57,6 +57,10 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
         this.packageName = packageName;
         this.parent = parent;
     }
+    
+    public TestResult getParent() {
+    	return parent;
+    }
 
     @Exported(visibility=999)
     public String getName() {
@@ -65,10 +69,6 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
 
     public @Override String getSafeName() {
         return uniquifyName(parent.getChildren(), safe(getName()));
-    }
-
-    public AbstractBuild<?,?> getOwner() {
-        return parent.getOwner();
     }
 
     public PackageResult getPreviousResult() {
@@ -105,9 +105,18 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
         return skipCount;
     }
 
-    public ClassResult getDynamic(String name, StaplerRequest req, StaplerResponse rsp) {
-        return classes.get(name);
+    public Object getDynamic(String name, StaplerRequest req, StaplerResponse rsp) {
+        ClassResult result = getClassResult(name);
+        if (result != null) {
+        	return result;
+        } else {
+        	return super.getDynamic(name, req, rsp);
+        }
     }
+
+	public ClassResult getClassResult(String name) {
+		return classes.get(name);
+	}
 
     @Exported(name="child")
     public Collection<ClassResult> getChildren() {
@@ -128,7 +137,7 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
 
     void add(CaseResult r) {
         String n = r.getSimpleName(), sn = safe(n);
-        ClassResult c = classes.get(sn);
+        ClassResult c = getClassResult(sn);
         if(c==null)
             classes.put(sn,c=new ClassResult(this,n));
         c.add(r);

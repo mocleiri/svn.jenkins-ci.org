@@ -24,6 +24,7 @@
 package hudson.tasks.junit;
 
 import hudson.model.AbstractBuild;
+import hudson.model.Action;
 import hudson.model.ModelObject;
 import hudson.model.Api;
 import hudson.Util;
@@ -31,8 +32,12 @@ import hudson.Util;
 import java.io.Serializable;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
+
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.ExportedBean;
 
 /**
@@ -42,8 +47,42 @@ import org.kohsuke.stapler.export.ExportedBean;
  */
 @ExportedBean
 public abstract class TestObject implements ModelObject, Serializable {
-    public abstract AbstractBuild<?,?> getOwner();
-
+    public AbstractBuild<?,?> getOwner() {
+    	return getParent().getOwner();
+    }
+    
+    private volatile transient String id;
+    
+    public abstract TestObject getParent();
+    
+    public String getId() {
+    	if (id == null) {
+    		id = getParent().getId() + "/" + getSafeName();
+    	}
+    	return id;
+    }
+    
+    public TestResult getTestResult() {
+    	return getParent().getTestResult();
+    }
+    
+    public TestResultAction getTestResultAction() {
+    	return getOwner().getAction(TestResultAction.class);
+    }
+    
+    public List<TestAction> getTestActions() {
+    	return getTestResultAction().getActions(this); 
+    }
+    
+    public <T> T getTestAction(Class<T> klazz) {
+    	for (TestAction action: getTestActions()) {
+    		if (klazz.isAssignableFrom(action.getClass())) {
+    			return klazz.cast(action);
+    		}
+    	}
+    	return null;
+    }
+    
     /**
      * Gets the counter part of this {@link TestObject} in the previous run.
      *
@@ -108,5 +147,18 @@ public abstract class TestObject implements ModelObject, Serializable {
         return s.replace('/','_').replace('\\', '_').replace(':','_');
     }
 
+    public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+        for (Action a : getTestActions()) {
+            if(a==null)
+                continue;   // be defensive
+            String urlName = a.getUrlName();
+            if(urlName==null)
+                continue;
+            if(urlName.equals(token))
+                return a;
+        }
+        return null;
+    }
+    
     private static final long serialVersionUID = 1L;
 }

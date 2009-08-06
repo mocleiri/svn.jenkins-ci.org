@@ -57,14 +57,10 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
         return parent;
     }
 
-    public AbstractBuild<?,?> getOwner() {
-        return parent.getOwner();
-    }
-
     public ClassResult getPreviousResult() {
         PackageResult pr = parent.getPreviousResult();
         if(pr==null)    return null;
-        return pr.getDynamic(getName(),null,null);
+        return pr.getClassResult(getName());
     }
 
     public String getTitle() {
@@ -81,13 +77,22 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
     public @Override String getSafeName() {
         return uniquifyName(parent.getChildren(), safe(getName()));
     }
-
-    public CaseResult getDynamic(String name, StaplerRequest req, StaplerResponse rsp) {
+    
+    private CaseResult getCaseResult(String name) {
         for (CaseResult c : cases) {
             if(c.getSafeName().equals(name))
                 return c;
         }
         return null;
+    }
+
+    public Object getDynamic(String name, StaplerRequest req, StaplerResponse rsp) {
+    	CaseResult c = getCaseResult(name);
+    	if (c != null) {
+    		return c;
+    	} else {
+    		return super.getDynamic(name, req, rsp);
+    	}
     }
 
 
@@ -139,6 +144,9 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
         Collections.sort(cases);
     }
 
+    public String getClassName() {
+    	return className;
+    }
 
     public int compareTo(ClassResult that) {
         return this.className.compareTo(that.className);

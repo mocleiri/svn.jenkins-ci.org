@@ -23,14 +23,10 @@
  */
 package hudson.tasks.junit;
 
+import hudson.AbortException;
+import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.util.IOException2;
-import hudson.*;
-import org.apache.tools.ant.DirectoryScanner;
-import org.dom4j.DocumentException;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +37,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import org.apache.tools.ant.DirectoryScanner;
+import org.dom4j.DocumentException;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.export.Exported;
 
 /**
  * Root of all the test results for one build.
@@ -80,7 +82,7 @@ public final class TestResult extends MetaTabulatedResult {
      * Number of failed/error tests.
      */
     private transient List<CaseResult> failedTests;
-
+    
     /**
      * Creates an empty result.
      */
@@ -93,6 +95,19 @@ public final class TestResult extends MetaTabulatedResult {
      */
     public TestResult(long buildTime, DirectoryScanner results) throws IOException {
         parse(buildTime, results);
+    }
+    
+    public TestObject getParent() {
+    	return null;
+    }
+    
+    public String getId() {
+    	return "";
+    }
+    
+    @Override
+    public TestResult getTestResult() {
+    	return this;
     }
 
     /**
@@ -240,8 +255,13 @@ public final class TestResult extends MetaTabulatedResult {
         return "";
     }
 
-    public PackageResult getDynamic(String packageName, StaplerRequest req, StaplerResponse rsp) {
-        return byPackage(packageName);
+    public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
+        PackageResult result = byPackage(token);
+        if (result != null) {
+        	return result;
+        } else {
+        	return super.getDynamic(token, req, rsp);
+        }
     }
 
     public PackageResult byPackage(String packageName) {
@@ -251,7 +271,7 @@ public final class TestResult extends MetaTabulatedResult {
     public SuiteResult getSuite(String name) {
         return suitesByName.get(name);
     }
-
+    
     /**
      * Builds up the transient part of the data structure
      * from results {@link #parse(File) parsed} so far.
