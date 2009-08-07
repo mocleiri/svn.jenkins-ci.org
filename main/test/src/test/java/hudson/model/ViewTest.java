@@ -32,13 +32,11 @@ import org.jvnet.hudson.test.HudsonTestCase;
 import org.w3c.dom.Text;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
-<<<<<<< .mine
-=======
-import org.jvnet.hudson.test.Email;
-import org.jvnet.hudson.test.HudsonTestCase;
->>>>>>> .r20509
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -67,72 +65,4 @@ public class ViewTest extends HudsonTestCase {
 		}
 	}
 
-	public void testPrivateView() throws Exception {
-		createFreeStyleProject("project1");
-		User user = User.get("me", true); // create user
-
-		WebClient wc = new WebClient();
-		HtmlPage userPage = wc.goTo("/user/me");
-		HtmlAnchor privateViewsLink = userPage.getFirstAnchorByText("My Views");
-		assertNotNull("My Views link not available", privateViewsLink);
-
-		HtmlPage privateViewsPage = (HtmlPage) privateViewsLink.click();
-
-		Text viewLabel = (Text) privateViewsPage
-				.getFirstByXPath("//table[@id='viewList']//td[@class='active']/text()");
-		assertTrue("'All' view should be selected", viewLabel.getTextContent()
-				.contains(Hudson_ViewName()));
-
-		View listView = new ListView("listView", hudson);
-		hudson.addView(listView);
-
-		HtmlPage newViewPage = wc.goTo("/user/me/my-views/newView");
-		HtmlForm form = newViewPage.getFormByName("createView");
-		form.getInputByName("name").setValueAttribute("proxy-view");
-		((HtmlRadioButtonInput) form.getInputByValue("hudson.model.ProxyView"))
-				.setChecked(true);
-		HtmlPage proxyViewConfigurePage = submit(form);
-		View proxyView = user.getProperty(MyViewsProperty.class).getView(
-				"proxy-view");
-		assertNotNull(proxyView);
-		form = proxyViewConfigurePage.getFormByName("viewConfig");
-		form.getSelectByName("proxiedViewName").setSelectedAttribute(
-				"listView", true);
-		submit(form);
-
-		assertTrue(proxyView instanceof ProxyView);
-		assertEquals(((ProxyView) proxyView).getProxiedViewName(), "listView");
-		assertEquals(((ProxyView) proxyView).getProxiedView(), listView);
-	}
-
-	public void testDeleteView() throws Exception {
-		WebClient wc = new WebClient();
-
-		ListView v = new ListView("list", hudson);
-		hudson.addView(v);
-		HtmlPage delete = wc.getPage(v, "delete");
-		submit(delete.getFormByName("delete"));
-		assertNull(hudson.getView("list"));
-
-		User user = User.get("user", true);
-		MyViewsProperty p = user.getProperty(MyViewsProperty.class);
-		v = new ListView("list", p);
-		p.addView(v);
-		delete = wc.getPage(v, "delete");
-		submit(delete.getFormByName("delete"));
-		assertNull(p.getView("list"));
-	}
-
-	public void testMyViewsGlobalLink() throws Exception {
-		hudson.setSecurityRealm(new LegacySecurityRealm());
-		WebClient wc = new WebClient().login("alice");
-
-		HtmlPage page = wc.goTo("/");
-		page = (HtmlPage) page.getFirstAnchorByText("My Views").click();
-
-		String breadCrumb = ((HtmlElement) page
-				.getFirstByXPath("//*[@id='left-top-nav']")).getTextContent();
-		Assert.assertTrue(breadCrumb.contains("alice"));
-		Assert.assertTrue(breadCrumb.contains("My Views"));
-	}
 }
