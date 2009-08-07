@@ -30,6 +30,8 @@ import hudson.util.IOException2;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -179,11 +181,18 @@ public final class TestResult extends MetaTabulatedResult {
         } catch (RuntimeException e) {
             throw new IOException2("Failed to read "+reportFile,e);
         } catch (DocumentException e) {
-            if(!reportFile.getPath().endsWith(".xml"))
+            if (!reportFile.getPath().endsWith(".xml")) {
                 throw new IOException2("Failed to read "+reportFile+"\n"+
                     "Is this really a JUnit report file? Your configuration must be matching too many files",e);
-            else
+            } else {
+                SuiteResult sr = new SuiteResult(reportFile.getName(), "", "");
+                StringWriter writer = new StringWriter();
+                e.printStackTrace(new PrintWriter(writer));
+                String error = "Failed to read test report file "+reportFile.getAbsolutePath()+"\n"+writer.toString();
+                sr.addCase(new CaseResult(sr,"<init>",error));
+                add(sr);
                 throw new IOException2("Failed to read "+reportFile,e);
+            }
         }
     }
 
