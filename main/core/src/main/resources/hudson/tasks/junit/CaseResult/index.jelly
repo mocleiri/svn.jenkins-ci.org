@@ -57,6 +57,8 @@ THE SOFTWARE.
           ${%took(it.durationString)}
         </div>
 
+      <t:editableDescription permission="${it.owner.BUILD}"/>
+
       <table style="margin-top: 1em; margin-left:0em;">
 		  <j:forEach var="action" items="${it.testActions}">
 	          <st:include page="summary.jelly" from="${action}" optional="true" it="${action}" />

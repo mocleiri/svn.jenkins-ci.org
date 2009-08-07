@@ -23,7 +23,6 @@
  */
 package hudson.tasks.junit;
 
-import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
@@ -32,20 +31,20 @@ import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.StringConverter2;
 import hudson.util.XStream2;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.collections.MultiMap;
-import org.apache.commons.collections.map.MultiValueMap;
-import org.kohsuke.stapler.StaplerProxy;
-import org.kohsuke.stapler.export.Exported;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.kohsuke.stapler.StaplerProxy;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * {@link Action} that displays the JUnit test result.
@@ -65,6 +64,7 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
     private int skipCount;
     private Integer totalCount;
     private List<Data> testData;
+    private Map<String,String> descriptions = new ConcurrentHashMap<String, String>();
 
     public TestResultAction(AbstractBuild owner, TestResult result, BuildListener listener) {
         super(owner);
@@ -160,7 +160,15 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
     public Object getTarget() {
         return getResult();
     }
-
+    
+    public String getDescription(TestObject object) {
+    	return descriptions.get(object.getId());
+    }
+    
+    public void setDescription(TestObject object, String description) {
+    	descriptions.put(object.getId(), description);
+    }
+    
     public List<TestAction> getActions(TestObject object) {
     	List<TestAction> result = new ArrayList<TestAction>();
     	for (Data data: testData) {
@@ -181,6 +189,17 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
     	public abstract TestAction getTestAction(TestObject testObject);
     }
 
+    public Object readResolve() {
+    	if (descriptions == null) {
+    		descriptions = new ConcurrentHashMap<String, String>();
+    	}
+    	if (testData == null) {
+    		testData = new ArrayList<Data>();
+    	}
+    	
+    	return this;
+    }
+    
     private static final Logger logger = Logger.getLogger(TestResultAction.class.getName());
 
     private static final XStream XSTREAM = new XStream2();
