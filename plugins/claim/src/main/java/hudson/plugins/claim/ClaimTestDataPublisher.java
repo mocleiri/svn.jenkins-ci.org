@@ -65,7 +65,7 @@ public class ClaimTestDataPublisher extends TestDataPublisher {
 			
 			if (testObject instanceof CaseResult) {
 				CaseResult cr = (CaseResult) testObject;
-				if (!cr.isPassed()) {
+				if (!cr.isPassed() && !cr.isSkipped()) {
 					return new ClaimTestAction(this, testObject.getId());
 				}
 			}
