@@ -63,6 +63,13 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
         return pr.getClassResult(getName());
     }
 
+    @Override
+    public ClassResult getResultInBuild(AbstractBuild<?, ?> build) {
+        PackageResult pr = getParent().getResultInBuild(build);
+        if(pr==null)    return null;
+        return pr.getClassResult(getName());
+    }
+
     public String getTitle() {
         return Messages.ClassResult_getTitle(getName());
     }
@@ -78,7 +85,7 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
         return uniquifyName(parent.getChildren(), safe(getName()));
     }
     
-    private CaseResult getCaseResult(String name) {
+    public CaseResult getCaseResult(String name) {
         for (CaseResult c : cases) {
             if(c.getSafeName().equals(name))
                 return c;

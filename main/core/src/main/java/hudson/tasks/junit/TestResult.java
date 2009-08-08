@@ -213,6 +213,13 @@ public final class TestResult extends MetaTabulatedResult {
             return null;
     }
 
+    @Override
+    public TestResult getResultInBuild(AbstractBuild<?, ?> build) {
+        TestResultAction tra = build.getAction(TestResultAction.class);
+        if (tra == null) return null;
+        return tra.getResult();
+    }
+    
     public String getTitle() {
         return Messages.TestResult_getTitle();
     }

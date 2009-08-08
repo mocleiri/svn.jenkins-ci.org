@@ -77,6 +77,13 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
         return tr.byPackage(getName());
     }
 
+    @Override
+    public PackageResult getResultInBuild(AbstractBuild<?, ?> build) {
+        TestResult tr = parent.getResultInBuild(build);
+        if(tr==null)    return null;
+        return tr.byPackage(getName());
+    }
+
     public String getTitle() {
         return Messages.PackageResult_getTitle(getName());
     }

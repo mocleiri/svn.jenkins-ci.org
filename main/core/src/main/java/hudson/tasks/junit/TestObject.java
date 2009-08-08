@@ -28,8 +28,19 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractModelObject;
 import hudson.model.Action;
 import hudson.model.Api;
+import hudson.model.Build;
 import hudson.model.Item;
+import hudson.model.Messages;
+import hudson.model.Result;
+import hudson.model.Run;
+import hudson.util.ChartUtil;
+import hudson.util.ColorPalette;
+import hudson.util.DataSetBuilder;
+import hudson.util.ShiftedCategoryAxis;
+import hudson.util.StackedAreaRenderer2;
 
+import java.awt.Color;
+import java.awt.Paint;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
@@ -39,6 +50,16 @@ import java.util.WeakHashMap;
 
 import javax.servlet.ServletException;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.StackedAreaRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.ui.RectangleInsets;
 import org.kohsuke.stapler.HttpRedirect;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.QueryParameter;
@@ -95,6 +116,8 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
 	 * @return null if no such counter part exists.
 	 */
 	public abstract TestObject getPreviousResult();
+	
+	public abstract TestObject getResultInBuild(AbstractBuild<?,?> build); 
 
 	/**
 	 * Time took to run this test. In seconds.
@@ -168,7 +191,14 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
 		// 3 replace calls is still 2-3x faster than a regex replaceAll
 		return s.replace('/', '_').replace('\\', '_').replace(':', '_');
 	}
-
+	
+	public abstract int getFailCount();
+	public abstract int getSkipCount();
+	
+	public DurationChart getDurationChart() {
+		return new DurationChart(this);
+	}
+	
 	public Object getDynamic(String token, StaplerRequest req,
 			StaplerResponse rsp) {
 		for (Action a : getTestActions()) {

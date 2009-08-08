@@ -1,7 +1,7 @@
 <!--
 The MIT License
 
-Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
+Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,31 +22,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 
-<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:test="/lib/test">
-  <l:layout title="${it.owner} ${it.displayName}">
-    <st:include page="sidepanel.jelly" />
-    <l:main-panel>
-      <h1>${it.title}</h1>
-
-      <j:set var="prev" value="${it.previousResult}" />
-
-      <test:bar />
-
-        <div style="text-align:right;">
-        <a href="durationChart">
-          Took ${it.durationString} 
-        </a>
-        </div>
-
-      <t:editableDescription permission="${it.owner.BUILD}"/>
-
-      <table style="margin-top: 1em; margin-left:0em;">
-	  <j:forEach var="action" items="${it.testActions}">
-          <st:include page="summary.jelly" from="${action}" optional="true" it="${action}" />
-	  </j:forEach>
-	  </table>
-
-      <st:include page="body.jelly" />
+<!-- Displays the chart that show how long builds are taking -->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <l:layout title="Test duration for ${it.testObject.displayName}">
+		<st:include from="${it.testObject}" it="${it.testObject}" page="sidepanel.jelly" />
+		<l:main-panel>
+      <j:choose>
+        <j:when test="${it.testObject.previousResult != null}">
+          <div align="center">
+            <img src="graph" width="500" height="400" lazymap="map" alt="Duration graph]"/>
+          </div>
+        </j:when>
+        <j:otherwise>
+          ${%More than 1 builds are needed for the trend report.}
+        </j:otherwise>
+      </j:choose>
     </l:main-panel>
-  </l:layout>
+	</l:layout>
 </j:jelly>

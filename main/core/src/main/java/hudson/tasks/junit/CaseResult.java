@@ -301,6 +301,13 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         if(pr==null)    return null;
         return pr.getCase(getName());
     }
+    
+    @Override
+    public CaseResult getResultInBuild(AbstractBuild<?, ?> build) {
+        ClassResult pr = getParent().getResultInBuild(build);
+        if(pr==null)    return null;
+        return pr.getCaseResult(getName());
+    }
 
     /**
      * If there was an error or a failure, this is the stack trace, or otherwise null.
@@ -464,4 +471,14 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     };
 
     private static final long serialVersionUID = 1L;
+
+	@Override
+	public int getFailCount() {
+		if (!isPassed() && !isSkipped()) return 1; else return 0;
+	}
+
+	@Override
+	public int getSkipCount() {
+		if (isSkipped()) return 1; else return 0;
+	}
 }
