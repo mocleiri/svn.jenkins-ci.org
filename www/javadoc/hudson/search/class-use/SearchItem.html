@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.search.SearchItem (Hudson main module 1.318 API)
+Uses of Interface hudson.search.SearchItem (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.search.SearchItem (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.search.SearchItem (Hudson main module 1.318 API)";
+        parent.document.title="Uses of Interface hudson.search.SearchItem (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -529,6 +529,14 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/ProxyView.html" title="class in hudson.model">ProxyView</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A view that delegates to another.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/Queue.BlockedItem.html" title="class in hudson.model">Queue.BlockedItem</A></B></CODE>
 
 <BR>
@@ -853,7 +861,7 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
      java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
@@ -871,7 +879,7 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)">find</A></B>(java.lang.String&nbsp;token,
      java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
@@ -889,11 +897,11 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
         java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method returns the superset of <A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)"><CODE>SearchIndex.find(String, List)</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -907,11 +915,11 @@ Uses of <A HREF="../../../hudson/search/SearchItem.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>UnionSearchIndex.</B><B><A HREF="../../../hudson/search/UnionSearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
+<TD><CODE><B>SearchIndex.</B><B><A HREF="../../../hudson/search/SearchIndex.html#suggest(java.lang.String, java.util.List)">suggest</A></B>(java.lang.String&nbsp;token,
         java.util.List&lt;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>&gt;&nbsp;result)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method returns the superset of <A HREF="../../../hudson/search/SearchIndex.html#find(java.lang.String, java.util.List)"><CODE>SearchIndex.find(String, List)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

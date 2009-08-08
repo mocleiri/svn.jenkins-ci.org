@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.318 API)
+Hudson (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.318 API)";
+        parent.document.title="Hudson (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -215,6 +215,14 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#CONCURRENT_BUILD">CONCURRENT_BUILD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tentative switch to activate the concurrent build behavior.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#FLYWEIGHT_SUPPORT">FLYWEIGHT_SUPPORT</A></B></CODE>
 
 <BR>
@@ -363,6 +371,15 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread-safe reusable <CODE>XStream</CODE>.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Node"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Node.html#holdOffLaunchUntilSave">holdOffLaunchUntilSave</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
@@ -552,6 +569,15 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new job.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createProjectFromXML(java.lang.String, java.io.InputStream)">createProjectFromXML</A></B>(java.lang.String&nbsp;name,
+                     java.io.InputStream&nbsp;xml)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new job from its configuration XML.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2067,7 +2093,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -2344,6 +2370,20 @@ public static boolean <B>FLYWEIGHT_SUPPORT</B></PRE>
 <DL>
 <DL>
 </DL>
+</DL>
+<HR>
+
+<A NAME="CONCURRENT_BUILD"><!-- --></A><H3>
+CONCURRENT_BUILD</H3>
+<PRE>
+public static boolean <B>CONCURRENT_BUILD</B></PRE>
+<DL>
+<DD>Tentative switch to activate the concurrent build behavior.
+ When we merge this back to the trunk, this allows us to keep
+ this feature hidden for a while until we iron out the kinks.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/AbstractProject.html#isConcurrentBuild()"><CODE>AbstractProject.isConcurrentBuild()</CODE></A></DL>
 </DL>
 <HR>
 
@@ -4906,6 +4946,29 @@ public <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createProjectFromXML(java.lang.String, java.io.InputStream)"><!-- --></A><H3>
+createProjectFromXML</H3>
+<PRE>
+public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A> <B>createProjectFromXML</B>(java.lang.String&nbsp;name,
+                                         java.io.InputStream&nbsp;xml)
+                                  throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a new job from its configuration XML. The type of the job created will be determined by
+ what's in this XML.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+  <DD>1.319</DD>
+</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath (Hudson main module 1.318 API)
+FilePath (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson main module 1.318 API)";
+        parent.document.title="FilePath (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -692,6 +692,14 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#sibling(java.lang.String)">sibling</A></B>(java.lang.String&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getParent().child(rel)</code>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#tar(java.io.OutputStream, java.io.FileFilter)">tar</A></B>(java.io.OutputStream&nbsp;out,
     java.io.FileFilter&nbsp;filter)</CODE>
@@ -828,6 +836,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates a relative file path from this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#withSuffix(java.lang.String)">withSuffix</A></B>(java.lang.String&nbsp;suffix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> by adding the given suffix to this path name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1537,6 +1553,38 @@ public java.lang.String <B>getName</B>()</PRE>
 <DD>Gets just the file name portion.
 
  This method assumes that the file name is the same between local and remote.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="sibling(java.lang.String)"><!-- --></A><H3>
+sibling</H3>
+<PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>sibling</B>(java.lang.String&nbsp;rel)</PRE>
+<DL>
+<DD>Short for <code>getParent().child(rel)</code>. Useful for getting other files in the same directory.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="withSuffix(java.lang.String)"><!-- --></A><H3>
+withSuffix</H3>
+<PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>withSuffix</B>(java.lang.String&nbsp;suffix)</PRE>
+<DL>
+<DD>Returns a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> by adding the given suffix to this path name.
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HistoryWidget (Hudson main module 1.318 API)
+HistoryWidget (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HistoryWidget (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HistoryWidget (Hudson main module 1.318 API)";
+        parent.document.title="HistoryWidget (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -238,6 +238,14 @@ Displays the history of records (normally <A HREF="../../hudson/model/Run.html" 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/widgets/HistoryWidget.html#getFirstTransientBuildKey()">getFirstTransientBuildKey</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/widgets/HistoryWidget.html#getNextBuildNumberToFetch()">getNextBuildNumberToFetch</A></B>()</CODE>
 
 <BR>
@@ -311,7 +319,7 @@ baseList</H3>
 <PRE>
 public java.lang.Iterable&lt;<A HREF="../../hudson/widgets/HistoryWidget.html" title="type parameter in HistoryWidget">T</A>&gt; <B>baseList</B></PRE>
 <DL>
-<DD>The given data model of records.
+<DD>The given data model of records. Newer ones first.
 <P>
 <DL>
 </DL>
@@ -417,6 +425,17 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/widgets/Widget.html#getUrlName()">getUrlName</A></CODE> in class <CODE><A HREF="../../hudson/widgets/Widget.html" title="class in hudson.widgets">Widget</A></CODE></DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFirstTransientBuildKey()"><!-- --></A><H3>
+getFirstTransientBuildKey</H3>
+<PRE>
+public java.lang.String <B>getFirstTransientBuildKey</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

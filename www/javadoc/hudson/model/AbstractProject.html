@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.318 API)
+AbstractProject (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.318 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -587,7 +587,8 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getModuleRoot()">getModuleRoot</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the root directory of the checked-out module.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -595,7 +596,8 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getModuleRoots()">getModuleRoots</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the root directories of all checked-out modules.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -688,6 +690,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getSomeWorkspace()">getSomeWorkspace</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a workspace for some build of this project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.Set&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getTransitiveDownstreamProjects()">getTransitiveDownstreamProjects</A></B>()</CODE>
 
@@ -746,11 +756,19 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">getWorkspace</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the directory where the module is checked out.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      To support concurrent builds of the same project, this method is moved to <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>.
+      For backward compatibility, this method returns the right <A HREF="../../hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A> if called
+      from <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>, and otherwise the workspace of the last build.
+
+      <p>
+      If your are calling this method during a build from an executor, swtich it to <A HREF="../../hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A>.
+      If you are calling this method to serve a file from the workspace, doing a form validation, etc., then
+      use <A HREF="../../hudson/model/AbstractProject.html#getSomeWorkspace()"><CODE>getSomeWorkspace()</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -758,7 +776,14 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getWorkspaceResource()">getWorkspaceResource</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A> that represents the workspace of this project.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      Projects no longer have a fixed workspace, ands builds will find an available workspace via
+      <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A> for each build (furthermore, that happens after a build is started.)
+      So a <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A> representation for a workspace at the project level no longer makes sense.
+
+      <p>
+      If you need to lock a workspace while you do some computation, see the source code of
+      <A HREF="../../hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)"><CODE>pollSCMChanges(TaskListener)</CODE></A> for how to obtain a lock of a workspace through <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -801,6 +826,14 @@ T</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the execution should be blocked
  for temporary reasons.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#isConcurrentBuild()">isConcurrentBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does this project perform concurrent builds?</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1022,6 +1055,14 @@ void</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the assigned label.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#setConcurrentBuild(boolean)">setConcurrentBuild</A></B>(boolean&nbsp;b)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1316,6 +1357,41 @@ protected void <B>performDelete</B>()
 </DL>
 <HR>
 
+<A NAME="isConcurrentBuild()"><!-- --></A><H3>
+isConcurrentBuild</H3>
+<PRE>
+public boolean <B>isConcurrentBuild</B>()</PRE>
+<DL>
+<DD>Does this project perform concurrent builds?
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.XXX</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setConcurrentBuild(boolean)"><!-- --></A><H3>
+setConcurrentBuild</H3>
+<PRE>
+public void <B>setConcurrentBuild</B>(boolean&nbsp;b)
+                        throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getAssignedLabel()"><!-- --></A><H3>
 getAssignedLabel</H3>
 <PRE>
@@ -1389,8 +1465,18 @@ public <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.
 <A NAME="getWorkspace()"><!-- --></A><H3>
 getWorkspace</H3>
 <PRE>
-public abstract <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getWorkspace</B>()</PRE>
+public final <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getWorkspace</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      To support concurrent builds of the same project, this method is moved to <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>.
+      For backward compatibility, this method returns the right <A HREF="../../hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A> if called
+      from <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>, and otherwise the workspace of the last build.
+
+      <p>
+      If your are calling this method during a build from an executor, swtich it to <A HREF="../../hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A>.
+      If you are calling this method to serve a file from the workspace, doing a form validation, etc., then
+      use <A HREF="../../hudson/model/AbstractProject.html#getSomeWorkspace()"><CODE>getSomeWorkspace()</CODE></A></I>
+<P>
 <DD>Gets the directory where the module is checked out.
 <P>
 <DD><DL>
@@ -1403,11 +1489,38 @@ public abstract <A HREF="../../hudson/FilePath.html" title="class in hudson">Fil
 </DL>
 <HR>
 
+<A NAME="getSomeWorkspace()"><!-- --></A><H3>
+getSomeWorkspace</H3>
+<PRE>
+public final <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getSomeWorkspace</B>()</PRE>
+<DL>
+<DD>Gets a workspace for some build of this project.
+
+ <p>
+ This is useful for obtaining a workspace for the purpose of form field validation, where exactly
+ which build the workspace belonged is less important. The implementation makes a cursory effort
+ to find some workspace.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if there's no available workspace.<DT><B>Since:</B></DT>
+  <DD>1.XXX</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getModuleRoot()"><!-- --></A><H3>
 getModuleRoot</H3>
 <PRE>
 public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getModuleRoot</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I>
+<P>
 <DD>Returns the root directory of the checked-out module.
  <p>
  This is usually where <tt>pom.xml</tt>, <tt>build.xml</tt>
@@ -1427,6 +1540,9 @@ getModuleRoots</H3>
 <PRE>
 public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>[] <B>getModuleRoots</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I>
+<P>
 <DD>Returns the root directories of all checked-out modules.
  <p>
  Some SCMs support checking out multiple modules into the same workspace.
@@ -2201,6 +2317,15 @@ getWorkspaceResource</H3>
 <PRE>
 public <A HREF="../../hudson/model/Resource.html" title="class in hudson.model">Resource</A> <B>getWorkspaceResource</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+      Projects no longer have a fixed workspace, ands builds will find an available workspace via
+      <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A> for each build (furthermore, that happens after a build is started.)
+      So a <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A> representation for a workspace at the project level no longer makes sense.
+
+      <p>
+      If you need to lock a workspace while you do some computation, see the source code of
+      <A HREF="../../hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)"><CODE>pollSCMChanges(TaskListener)</CODE></A> for how to obtain a lock of a workspace through <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A>.</I>
+<P>
 <DD>Gets the <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A> that represents the workspace of this project.
  Useful for locking and mutual exclusion control.
 <P>

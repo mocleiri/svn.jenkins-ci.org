@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Executor (Hudson main module 1.318 API)
+Executor (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Executor (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Executor (Hudson main module 1.318 API)";
+        parent.document.title="Executor (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -235,6 +235,16 @@ Thread that executes builds.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Executor.html#getCurrentWorkspace()">getCurrentWorkspace</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If <A HREF="../../hudson/model/Executor.html#getCurrentExecutable()">current executable</A> is <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>,
+ return the workspace that this executor is using, or null if the build hasn't gotten
+ to that point yet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Executor.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -347,6 +357,23 @@ Thread that executes builds.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the current build is likely stuck.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Executor.html#newImpersonatingProxy(java.lang.Class, T)">newImpersonatingProxy</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
+                      T&nbsp;core)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a proxy object that executes the callee in the context that impersonates
+ this executor.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -494,6 +521,24 @@ getCurrentExecutable</H3>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if the executor is idle.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCurrentWorkspace()"><!-- --></A><H3>
+getCurrentWorkspace</H3>
+<PRE>
+public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getCurrentWorkspace</B>()</PRE>
+<DL>
+<DD>If <A HREF="../../hudson/model/Executor.html#getCurrentExecutable()">current executable</A> is <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>,
+ return the workspace that this executor is using, or null if the build hasn't gotten
+ to that point yet.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -764,6 +809,24 @@ getApi</H3>
 public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
 <DL>
 <DD>Exposes the executor to the remote API.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="newImpersonatingProxy(java.lang.Class,java.lang.Object)"><!-- --></A><A NAME="newImpersonatingProxy(java.lang.Class, T)"><!-- --></A><H3>
+newImpersonatingProxy</H3>
+<PRE>
+public &lt;T&gt; T <B>newImpersonatingProxy</B>(java.lang.Class&lt;T&gt;&nbsp;type,
+                                   T&nbsp;core)</PRE>
+<DL>
+<DD>Creates a proxy object that executes the callee in the context that impersonates
+ this executor. Useful to export an object to a remote channel.
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model (Hudson main module 1.318 API)
+hudson.model (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson main module 1.318 API)";
+        parent.document.title="hudson.model (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -205,10 +205,6 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>Marker interface for actions that are added to <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/model/Run.Runner.html" title="interface in hudson.model">Run.Runner</A></B></TD>
-<TD>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/RunMap.Constructor.html" title="interface in hudson.model">RunMap.Constructor&lt;R extends Run&lt;?,R&gt;&gt;</A></B></TD>
 <TD><A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A> factory.</TD>
 </TR>
@@ -340,6 +336,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/CheckPoint.html" title="class in hudson.model">CheckPoint</A></B></TD>
+<TD>Provides a mechanism for synchronizing build executions in the face of concurrent builds.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/ChoiceParameterDefinition.html" title="class in hudson.model">ChoiceParameterDefinition</A></B></TD>
@@ -590,6 +590,18 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MyViewsProperty.html" title="class in hudson.model">MyViewsProperty</A></B></TD>
+<TD>A UserProperty that remembers user-private views.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MyViewsProperty.DescriptorImpl.html" title="class in hudson.model">MyViewsProperty.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/MyViewsProperty.GlobalAction.html" title="class in hudson.model">MyViewsProperty.GlobalAction</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TD>
 <TD>Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
 </TR>
@@ -635,6 +647,18 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>A value for a parameter in a build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/PasswordParameterDefinition.html" title="class in hudson.model">PasswordParameterDefinition</A></B></TD>
+<TD>Parameter whose value is a string, but is hidden from the UI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/PasswordParameterDefinition.ParameterDescriptorImpl.html" title="class in hudson.model">PasswordParameterDefinition.ParameterDescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/PasswordParameterValue.html" title="class in hudson.model">PasswordParameterValue</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PeriodicWork.html" title="class in hudson.model">PeriodicWork</A></B></TD>
 <TD>Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)</TD>
 </TR>
@@ -645,6 +669,14 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Project.html" title="class in hudson.model">Project&lt;P extends Project&lt;P,B&gt;,B extends Build&lt;P,B&gt;&gt;</A></B></TD>
 <TD>Buildable software project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/ProxyView.html" title="class in hudson.model">ProxyView</A></B></TD>
+<TD>A view that delegates to another.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/ProxyView.DescriptorImpl.html" title="class in hudson.model">ProxyView.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.html" title="class in hudson.model">Queue</A></B></TD>
@@ -819,6 +851,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A></B></TD>
 <TD>Represents a user.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/User.Me.html" title="class in hudson.model">User.Me</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/UserProperties.html" title="class in hudson.model">UserProperties</A></B></TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase.WebClient (Hudson main module 1.318 API)
+HudsonTestCase.WebClient (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase.WebClient (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.318 API)";
+        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -247,6 +247,23 @@ Extends <CODE>WebClient</CODE> and provide convenience methods
       that you probably should be using <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#goTo(java.lang.String)"><CODE>goTo(String)</CODE></A> method, which accepts
       a relative path within the Hudson being tested. (IOW, if you really need to hit
       a website on the internet, there's nothing wrong with using this method.)</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.View)">getPage</A></B>(<A HREF="../../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.html.HtmlPage</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getPage(hudson.model.View, java.lang.String)">getPage</A></B>(<A HREF="../../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
+        java.lang.String&nbsp;relative)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -482,6 +499,39 @@ public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="../..
 getPage</H3>
 <PRE>
 public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="../../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;item,
+                                                           java.lang.String&nbsp;relative)
+                                                    throws java.io.IOException,
+                                                           org.xml.sax.SAXException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>org.xml.sax.SAXException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPage(hudson.model.View)"><!-- --></A><H3>
+getPage</H3>
+<PRE>
+public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="../../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)
+                                                    throws java.io.IOException,
+                                                           org.xml.sax.SAXException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>org.xml.sax.SAXException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPage(hudson.model.View, java.lang.String)"><!-- --></A><H3>
+getPage</H3>
+<PRE>
+public com.gargoylesoftware.htmlunit.html.HtmlPage <B>getPage</B>(<A HREF="../../../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
                                                            java.lang.String&nbsp;relative)
                                                     throws java.io.IOException,
                                                            org.xml.sax.SAXException</PRE>

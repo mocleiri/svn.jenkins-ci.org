@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCMTrigger (Hudson main module 1.318 API)
+SCMTrigger (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMTrigger (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMTrigger (Hudson main module 1.318 API)";
+        parent.document.title="SCMTrigger (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -247,14 +247,6 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.concurrent.locks.ReentrantLock</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.html#getLock()">getLock</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.io.File</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.html#getLogFile()">getLogFile</A></B>()</CODE>
 
@@ -272,14 +264,6 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.lang.Object</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.html#readResolve()">readResolve</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.html#run()">run</A></B>()</CODE>
 
@@ -293,7 +277,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.triggers.<A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/triggers/Trigger.html#all()">all</A>, <A HREF="../../hudson/triggers/Trigger.html#checkTriggers(java.util.Calendar)">checkTriggers</A>, <A HREF="../../hudson/triggers/Trigger.html#for_(hudson.model.Item)">for_</A>, <A HREF="../../hudson/triggers/Trigger.html#getSpec()">getSpec</A>, <A HREF="../../hudson/triggers/Trigger.html#init()">init</A>, <A HREF="../../hudson/triggers/Trigger.html#start(J, boolean)">start</A>, <A HREF="../../hudson/triggers/Trigger.html#stop()">stop</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/triggers/Trigger.html#all()">all</A>, <A HREF="../../hudson/triggers/Trigger.html#checkTriggers(java.util.Calendar)">checkTriggers</A>, <A HREF="../../hudson/triggers/Trigger.html#for_(hudson.model.Item)">for_</A>, <A HREF="../../hudson/triggers/Trigger.html#getSpec()">getSpec</A>, <A HREF="../../hudson/triggers/Trigger.html#init()">init</A>, <A HREF="../../hudson/triggers/Trigger.html#readResolve()">readResolve</A>, <A HREF="../../hudson/triggers/Trigger.html#start(J, boolean)">start</A>, <A HREF="../../hudson/triggers/Trigger.html#stop()">stop</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -361,34 +345,6 @@ SCMTrigger</H3>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="getLock()"><!-- --></A><H3>
-getLock</H3>
-<PRE>
-public java.util.concurrent.locks.ReentrantLock <B>getLock</B>()</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="readResolve()"><!-- --></A><H3>
-readResolve</H3>
-<PRE>
-protected java.lang.Object <B>readResolve</B>()
-                                throws java.io.ObjectStreamException</PRE>
-<DL>
-<DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/triggers/Trigger.html#readResolve()">readResolve</A></CODE> in class <CODE><A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>&gt;</CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.ObjectStreamException</CODE></DL>
-</DD>
-</DL>
-<HR>
 
 <A NAME="run()"><!-- --></A><H3>
 run</H3>

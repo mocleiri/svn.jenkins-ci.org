@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ParameterDefinition (Hudson main module 1.318 API)
+ParameterDefinition (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterDefinition (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterDefinition (Hudson main module 1.318 API)";
+        parent.document.title="ParameterDefinition (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -104,7 +104,8 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>ParameterDefinition</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;, <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.io.Serializable</DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean(defaultVisibility=3)
+</FONT>public abstract class <B>ParameterDefinition</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;, <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.io.Serializable</DL>
 </PRE>
 
 <P>
@@ -376,7 +377,8 @@ public <B>ParameterDefinition</B>(java.lang.String&nbsp;name,
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>
 <PRE>
-public java.lang.String <B>getName</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getName</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -390,7 +392,8 @@ public java.lang.String <B>getName</B>()</PRE>
 <A NAME="getDescription()"><!-- --></A><H3>
 getDescription</H3>
 <PRE>
-public java.lang.String <B>getDescription</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getDescription</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -461,7 +464,8 @@ public abstract <A HREF="../../hudson/model/ParameterValue.html" title="class in
 <A NAME="getDefaultParameterValue()"><!-- --></A><H3>
 getDefaultParameterValue</H3>
 <PRE>
-public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>getDefaultParameterValue</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>getDefaultParameterValue</B>()</PRE>
 <DL>
 <DD>Returns default parameter value for this definition.
 <P>

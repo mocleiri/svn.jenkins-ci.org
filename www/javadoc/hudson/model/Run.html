@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.318 API)
+Run (Hudson main module 1.319 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-07-31">
+<META NAME="date" CONTENT="2009-08-08">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.318 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.318 API)";
+        parent.document.title="Run (Hudson main module 1.319 API)";
     }
 }
 </SCRIPT>
@@ -169,8 +169,8 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected static&nbsp;interface</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Run.Runner.html" title="interface in hudson.model">Run.Runner</A></B></CODE>
+<CODE>protected &nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.Runner.html" title="class in hudson.model">Run.Runner</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -811,6 +811,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getPreviousBuildInProgress()">getPreviousBuildInProgress</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the next younger build in progress.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getPreviousCompletedBuild()">getPreviousCompletedBuild</A></B>()</CODE>
 
 <BR>
@@ -988,7 +996,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Run.html#run(hudson.model.Run.Runner)">run</A></B>(<A HREF="../../hudson/model/Run.Runner.html" title="interface in hudson.model">Run.Runner</A>&nbsp;job)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#run(hudson.model.Run.Runner)">run</A></B>(<A HREF="../../hudson/model/Run.Runner.html" title="class in hudson.model">Run.Runner</A>&nbsp;job)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1774,6 +1782,27 @@ public final <A HREF="../../hudson/model/Run.html" title="type parameter in Run"
 </DL>
 <HR>
 
+<A NAME="getPreviousBuildInProgress()"><!-- --></A><H3>
+getPreviousBuildInProgress</H3>
+<PRE>
+public final <A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A> <B>getPreviousBuildInProgress</B>()</PRE>
+<DL>
+<DD>Obtains the next younger build in progress. It uses a skip-pointer so that we can compute this without
+ O(n) computation time. This method also fixes up the skip list as we go, in a way that's concurrency safe.
+
+ <p>
+ We basically follow the existing skip list, and wherever we find a non-optimal pointer, we remember them
+ in 'fixUp' and update them later.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getPreviousNotFailedBuild()"><!-- --></A><H3>
 getPreviousNotFailedBuild</H3>
 <PRE>
@@ -2147,7 +2176,7 @@ public void <B>delete</B>()
 <A NAME="run(hudson.model.Run.Runner)"><!-- --></A><H3>
 run</H3>
 <PRE>
-protected final void <B>run</B>(<A HREF="../../hudson/model/Run.Runner.html" title="interface in hudson.model">Run.Runner</A>&nbsp;job)</PRE>
+protected final void <B>run</B>(<A HREF="../../hudson/model/Run.Runner.html" title="class in hudson.model">Run.Runner</A>&nbsp;job)</PRE>
 <DL>
 <DD><DL>
 </DL>
