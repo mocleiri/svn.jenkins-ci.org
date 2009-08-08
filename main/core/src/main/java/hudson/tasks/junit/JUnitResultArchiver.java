@@ -98,6 +98,8 @@ public class JUnitResultArchiver extends Recorder implements Serializable,
 			BuildListener listener) throws InterruptedException, IOException {
 		listener.getLogger().println(Messages.JUnitResultArchiver_Recording());
 		TestResultAction action;
+		
+		final String testResults = build.getEnvironment(listener).expand(this.testResults);
 
 		try {
 			final long buildTime = build.getTimestamp().getTimeInMillis();
