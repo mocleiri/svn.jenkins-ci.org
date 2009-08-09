@@ -30,6 +30,7 @@ THE SOFTWARE.
 	</f:entry>
 	<j:invokeStatic var="testDataPublisherDescriptors"
 		className="hudson.tasks.junit.TestDataPublisher" method="all" />
+	<j:if test="${testDataPublisherDescriptors.size() > 0}">
 	<f:entry title="Additional test report features" field="testDataPublishers">
 		<j:set var="testDataPublisherInstances" value="${instance.testDataPublishers}"/>
 		<table>
@@ -43,4 +44,5 @@ THE SOFTWARE.
 			</j:forEach>
 		</table>
 	</f:entry>
+	</j:if>
 </j:jelly>
