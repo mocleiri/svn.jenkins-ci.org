@@ -88,6 +88,13 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
 		}
 		return id;
 	}
+	
+	/**
+	 * Returns url relative to TestResult
+	 */
+	public String getUrl() {
+		return getId();
+	}
 
 	public TestResult getTestResult() {
 		return getParent().getTestResult();
@@ -195,8 +202,8 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
 	public abstract int getFailCount();
 	public abstract int getSkipCount();
 	
-	public DurationChart getDurationChart() {
-		return new DurationChart(this);
+	public History getHistory() {
+		return new History(this);
 	}
 	
 	public Object getDynamic(String token, StaplerRequest req,

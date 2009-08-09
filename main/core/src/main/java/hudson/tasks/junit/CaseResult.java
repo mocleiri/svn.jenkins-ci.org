@@ -239,6 +239,16 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
         return className+'.'+getName();
     }
 
+
+	@Override
+	public int getFailCount() {
+		if (!isPassed() && !isSkipped()) return 1; else return 0;
+	}
+
+	@Override
+	public int getSkipCount() {
+		if (isSkipped()) return 1; else return 0;
+	}
     /**
      * If this test failed, then return the build number
      * when this test started failing.
@@ -471,14 +481,4 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     };
 
     private static final long serialVersionUID = 1L;
-
-	@Override
-	public int getFailCount() {
-		if (!isPassed() && !isSkipped()) return 1; else return 0;
-	}
-
-	@Override
-	public int getSkipCount() {
-		if (isSkipped()) return 1; else return 0;
-	}
 }

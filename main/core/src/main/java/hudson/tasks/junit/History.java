@@ -10,6 +10,8 @@ import hudson.util.StackedAreaRenderer2;
 import java.awt.Color;
 import java.awt.Paint;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -24,34 +26,43 @@ import org.jfree.ui.RectangleInsets;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
-public class DurationChart {
+public class History {
 
 	private final TestObject testObject;
 
-	public DurationChart(TestObject testObject) {
+	public History(TestObject testObject) {
 		this.testObject = testObject;
 	}
 
 	public TestObject getTestObject() {
 		return testObject;
 	}
+	
+	public List<TestObject> getList() {
+		List<TestObject> list = new ArrayList<TestObject>();
+		for (AbstractBuild<?,?> b: testObject.getOwner().getParent().getBuilds()) {
+			if (b.isBuilding()) continue;
+			TestObject o = testObject.getResultInBuild(b);
+			if (o != null) {
+				list.add(o);
+			}
+		}
+		return list;
+	}
 
-	public void doGraph(StaplerRequest req, StaplerResponse rsp) throws IOException {
+	public void doDurationGraph(StaplerRequest req, StaplerResponse rsp) throws IOException {
 		if (req.checkIfModified(testObject.getOwner().getTimestamp(), rsp)) return;
 		ChartUtil.generateGraph(req, rsp, createDurationGraph(), 500, 400);
 	}
 
-	public void doMap(StaplerRequest req, StaplerResponse rsp) throws IOException {
+	public void doDurationMap(StaplerRequest req, StaplerResponse rsp) throws IOException {
 		if (req.checkIfModified(testObject.getOwner().getTimestamp(), rsp)) return;
 		ChartUtil.generateClickableMap(req, rsp, createDurationGraph(), 500, 400);
 	}
 
 	private JFreeChart createDurationGraph() {
         DataSetBuilder<String, ChartLabel> data = new DataSetBuilder<String, ChartLabel>();
-        for (AbstractBuild<?,?> r : testObject.getOwner().getProject().getBuilds()) {
-            if (r.isBuilding()) continue;
-            TestObject o = testObject.getResultInBuild(r);
-            if (o == null) continue;
+        for (TestObject o: getList()) {
             data.add(((double) o.getDuration()) / (1000), "s", new ChartLabel(o));
         }
 
