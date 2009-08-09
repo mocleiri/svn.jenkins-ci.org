@@ -67,23 +67,19 @@ THE SOFTWARE.
 		  </j:forEach>
 	  </table>
 
-    <d:taglib uri="hudson:linkout">
-        <d:bean name="out" className="hudson.util.HyperlinkingOutTag"/>
-    </d:taglib>
-
     <h3>${%Error Message}</h3>
-      <pre><lo:out value="${it.errorDetails}"/></pre>
+      <pre>"${it.annotate(it.errorDetails)}</pre>
     <h3>${%Stacktrace}</h3>
-      <pre><lo:out value="${it.errorStackTrace}"/></pre>
+      <pre><lo:out value="${it.annotate(it.errorStackTrace)}"/></pre>
 
       <j:if test="${!empty(it.stdout)}">
         <h3>${%Standard Output}</h3>
-        <pre><lo:out value="${it.stdout}"/></pre>
+        <pre>${it.annotate(it.stdout)}</pre>
       </j:if>
 
       <j:if test="${!empty(it.stderr)}">
         <h3>${%Standard Error}</h3>
-        <pre><lo:out value="${it.stderr}"/></pre>
+        <pre>${it.annotate(it.stderr)}</pre>
       </j:if>
     </l:main-panel>
   </l:layout>

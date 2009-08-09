@@ -38,7 +38,7 @@ import java.util.List;
  * @author Kohsuke Kawaguchi
  */
 public final class ClassResult extends TabulatedResult implements Comparable<ClassResult> {
-    private final String className;
+    private final String className; // simple name
 
     private final List<CaseResult> cases = new ArrayList<CaseResult>();
 
@@ -161,5 +161,28 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
 
     public String getDisplayName() {
         return getName();
+    }
+    
+    public String getFullName() {
+    	return getParent().getDisplayName() + "." + className;
+    }
+
+    /**
+     * Gets the relative path to this test case from the given object.
+     */
+    public String getRelativePathFrom(TestObject it) {
+        if(it==this)
+            return ".";
+        
+        if (it instanceof TestResult) {
+        	return getParent().getSafeName() + "/" + getSafeName();
+        } else if (it instanceof PackageResult) {
+        	return getSafeName();
+        } else if (it instanceof CaseResult) {
+        	return "..";
+        } else {
+        	throw new UnsupportedOperationException();
+        }
+
     }
 }

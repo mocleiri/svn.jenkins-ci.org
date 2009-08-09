@@ -26,12 +26,12 @@ package hudson.tasks.junit;
 import hudson.model.AbstractBuild;
 import hudson.model.Run;
 
-import org.dom4j.Element;
-import org.kohsuke.stapler.export.Exported;
-
-import java.util.Comparator;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.Comparator;
+
+import org.dom4j.Element;
+import org.kohsuke.stapler.export.Exported;
 
 /**
  * One test result.
@@ -362,6 +362,19 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
     public SuiteResult getSuiteResult() {
         return parent;
     }
+    
+	public String annotate(String text) {
+		if (text == null)
+			return null;
+		text = text.replace("&", "&amp;").replace("<", "&lt;").replaceAll(
+				"\\b(https?://[^\\s)>]+)", "<a href=\"$1\">$1</a>");
+		
+		for (TestAction action: getTestActions()) {
+			text = action.annotate(text);
+		}
+		
+		return text;
+	}
 
     public AbstractBuild<?,?> getOwner() {
         return getSuiteResult().getParent().getOwner();

@@ -14,6 +14,13 @@ import hudson.model.Action;
  * @author tom
  *
  */
-public interface TestAction extends Action {
+public abstract class TestAction implements Action {
+
+	/**
+	 * Returns text with annotations.
+	 */
+	public String annotate(String text) {
+		return text;
+	}
 
 }

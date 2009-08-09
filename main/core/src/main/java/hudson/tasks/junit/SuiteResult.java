@@ -52,7 +52,7 @@ import org.kohsuke.stapler.export.ExportedBean;
  */
 @ExportedBean
 public final class SuiteResult implements Serializable {
-	private final File file;
+	private final String file;
     private final String name;
     private final String stdout;
     private final String stderr;
@@ -106,7 +106,7 @@ public final class SuiteResult implements Serializable {
     }
 
     private SuiteResult(File xmlReport, Element suite) throws DocumentException {
-    	this.file = xmlReport;
+    	this.file = xmlReport.getAbsolutePath();
         String name = suite.attributeValue("name");
         if(name==null)
             // some user reported that name is null in their environment.
@@ -190,9 +190,9 @@ public final class SuiteResult implements Serializable {
     }
     
     /**
-     * The location of the original test report
+     * The absolute path to the original test report. OS-dependent.
      */
-    public File getFile() {
+    public String getFile() {
 		return file;
 	}
 
