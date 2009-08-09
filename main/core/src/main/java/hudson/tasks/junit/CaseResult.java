@@ -249,6 +249,12 @@ public final class CaseResult extends TestObject implements Comparable<CaseResul
 	public int getSkipCount() {
 		if (isSkipped()) return 1; else return 0;
 	}
+	
+	@Override
+	public int getPassCount() {
+		return isPassed() ? 1 : 0; 
+	}
+	
     /**
      * If this test failed, then return the build number
      * when this test started failing.

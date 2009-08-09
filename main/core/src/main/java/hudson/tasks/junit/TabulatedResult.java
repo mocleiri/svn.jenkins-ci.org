@@ -38,28 +38,6 @@ public abstract class TabulatedResult extends TestObject {
     public abstract String getTitle();
 
     /**
-     * Gets the total number of passed tests.
-     */
-    public abstract int getPassCount();
-
-    /**
-     * Gets the total number of failed tests.
-     */
-    public abstract int getFailCount();
-
-    /**
-     * Gets the total number of skipped tests.
-     */
-    public abstract int getSkipCount();
-
-    /**
-     * Gets the total number of tests.
-     */
-    public final int getTotalCount() {
-        return getPassCount()+getFailCount()+getSkipCount();
-    }
-
-    /**
      * Gets the child test result objects.
      */
     public abstract Collection<?> getChildren();

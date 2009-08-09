@@ -25,13 +25,34 @@ THE SOFTWARE.
 <!-- Displays the chart that show how long builds are taking -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
   <l:layout title="History for ${it.testObject.displayName}">
+
+		<script type="text/javascript">
+			function setCount() {
+				document.getElementById("graph").src = "countGraph";
+				document.getElementById("graph").lazyMap = "countMap";
+				document.getElementById("duration-link").style.display = "";
+				document.getElementById("count-link").style.display = "none";
+			}
+			function setDuration() {
+				document.getElementById("graph").src = "durationGraph"
+				document.getElementById("graph").lazyMap = "durationMap"
+				document.getElementById("duration-link").style.display = "none";
+				document.getElementById("count-link").style.display = "";
+			}
+		 </script>
+
 		<st:include from="${it.testObject}" it="${it.testObject}" page="sidepanel.jelly" />
 		<l:main-panel>
 		<H2>History for ${it.testObject.displayName}</H2>
       <j:choose>
         <j:when test="${it.testObject.previousResult != null}">
           <div align="center">
-            <img src="durationGraph" width="600" height="300" lazymap="durationMap" alt="[Duration graph]"/>
+            <img id="graph" src="durationGraph" width="600" height="300" lazymap="durationMap" alt="[Duration graph]"/>
+          </div>
+          <div align="center">
+          	show
+          	<a id="count-link" href="#" onclick='javascript:setCount()'>count</a>
+          	<a id="duration-link" href="#" onclick="javascript:setDuration()" style="display:none;">duration</a> 
           </div>
         </j:when>
         <j:otherwise>

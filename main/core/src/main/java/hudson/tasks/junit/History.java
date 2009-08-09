@@ -52,26 +52,61 @@ public class History {
 
 	public void doDurationGraph(StaplerRequest req, StaplerResponse rsp) throws IOException {
 		if (req.checkIfModified(testObject.getOwner().getTimestamp(), rsp)) return;
-		ChartUtil.generateGraph(req, rsp, createDurationGraph(), 500, 400);
+		ChartUtil.generateGraph(req, rsp, createGraph(getDurationData(), "seconds"), 500, 400);
 	}
 
 	public void doDurationMap(StaplerRequest req, StaplerResponse rsp) throws IOException {
 		if (req.checkIfModified(testObject.getOwner().getTimestamp(), rsp)) return;
-		ChartUtil.generateClickableMap(req, rsp, createDurationGraph(), 500, 400);
+		ChartUtil.generateClickableMap(req, rsp, createGraph(getDurationData(), ""), 500, 400);
 	}
 
-	private JFreeChart createDurationGraph() {
-        DataSetBuilder<String, ChartLabel> data = new DataSetBuilder<String, ChartLabel>();
+	private DataSetBuilder<String, ChartLabel> getDurationData() {
+		DataSetBuilder<String, ChartLabel> data = new DataSetBuilder<String, ChartLabel>();
         for (TestObject o: getList()) {
-            data.add(((double) o.getDuration()) / (1000), "s", new ChartLabel(o));
+            data.add(((double) o.getDuration()) / (1000), "", new ChartLabel(o)  {
+            	@Override
+            	public Color getColor() {
+            		if (o.getFailCount() > 0)
+            			return ColorPalette.RED;
+            		else if (o.getSkipCount() > 0)
+            			return ColorPalette.YELLOW;
+            		else
+            			return ColorPalette.BLUE;
+            	}
+            });
         }
+		return data;
+	}
 
-        final CategoryDataset dataset = data.build();
+	private DataSetBuilder<String, ChartLabel> getCountData() {
+		DataSetBuilder<String, ChartLabel> data = new DataSetBuilder<String, ChartLabel>();
+		
+        for (TestObject o: getList()) {
+        	data.add(o.getPassCount(), "2Passed", new ChartLabel(o));
+        	data.add(o.getFailCount(), "1Failed", new ChartLabel(o));
+        	data.add(o.getSkipCount(), "0Skipped", new ChartLabel(o));
+        }
+		return data;
+	}
+
+	public void doCountGraph(StaplerRequest req, StaplerResponse rsp) throws IOException {
+		if (req.checkIfModified(testObject.getOwner().getTimestamp(), rsp)) return;
+		ChartUtil.generateGraph(req, rsp, createGraph(getCountData(), ""), 500, 400);
+	}
+
+	public void doCountMap(StaplerRequest req, StaplerResponse rsp) throws IOException {
+		if (req.checkIfModified(testObject.getOwner().getTimestamp(), rsp)) return;
+		ChartUtil.generateClickableMap(req, rsp, createGraph(getCountData(), ""), 500, 400);
+	}
+
+	
+	private JFreeChart createGraph(DataSetBuilder<String, ChartLabel> data, String yLabel) {
+		final CategoryDataset dataset = data.build();
 
         final JFreeChart chart = ChartFactory.createStackedAreaChart(null, // chart
                                                                             // title
                 null, // unused
-                "seconds", // range axis label
+                yLabel, // range axis label
                 dataset, // data
                 PlotOrientation.VERTICAL, // orientation
                 false, // include legend
@@ -100,14 +135,16 @@ public class History {
         domainAxis.setCategoryMargin(0.0);
 
         final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-        ChartUtil.adjustChebyshev(dataset, rangeAxis); //TODO why does this not work ?
+        ChartUtil.adjustChebyshev(dataset, rangeAxis);
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        rangeAxis.setAutoRange(true);
 
         StackedAreaRenderer ar = new StackedAreaRenderer2() {
             @Override
             public Paint getItemPaint(int row, int column) {
                 ChartLabel key = (ChartLabel) dataset.getColumnKey(column);
-                return key.getColor();
+                if (key.getColor() != null) return key.getColor();
+                return super.getItemPaint(row, column);
             }
 
             @Override
@@ -126,6 +163,9 @@ public class History {
             }
         };
         plot.setRenderer(ar);
+        ar.setSeriesPaint(0,ColorPalette.RED); // Failures.
+        ar.setSeriesPaint(1,ColorPalette.YELLOW); // Skips.
+        ar.setSeriesPaint(2,ColorPalette.BLUE); // Total.
 
         // crop extra space around the graph
         plot.setInsets(new RectangleInsets(0, 0, 0, 5.0));
@@ -154,14 +194,7 @@ public class History {
         }
 
         public Color getColor() {
-            // TODO: consider gradation. See
-            // http://www.javadrive.jp/java2d/shape/index9.html
-            if (o.getFailCount() > 0)
-                return ColorPalette.RED;
-            else if (o.getSkipCount() > 0)
-                return ColorPalette.YELLOW;
-            else
-                return ColorPalette.BLUE;
+        	return null;
         }
 
         public int hashCode() {
