@@ -1,0 +1,1285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Hudson core - Jelly Taglib references</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                    <span id="bannerLeft">
+    
+            Hudson core
+    
+            </span>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2009-01-13
+                      </div>
+            <div class="xright">            <a href="">Hudson core</a>
+            
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                             <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+            
+              
+            <li class="expanded">
+                    <a href="project-reports.html">Project Reports</a>
+                  <ul>
+                  
+    <li class="none">
+              <strong>Jelly taglib reference</strong>
+        </li>
+              </ul>
+        </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <p>The following Jelly tag libraries are defined in this project.</p>
+<table class="bodyTable"><tr class="a"><th>Namespace URI</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td><a href='#form'>/lib/form</a></td>
+<td><p>/lib/form</p></td>
+</tr>
+<tr class="a"><td><a href='#hudson'>/lib/hudson</a></td>
+<td><p>/lib/hudson</p></td>
+</tr>
+<tr class="b"><td><a href='#test'>/lib/test</a></td>
+<td><p>/lib/test</p></td>
+</tr>
+<tr class="a"><td><a href='#project'>/lib/hudson/project</a></td>
+<td><p>Tag files used in project pages</p></td>
+</tr>
+<tr class="b"><td><a href='#layout'>/lib/layout</a></td>
+<td><p>Tag library that defines the basic layout of Hudson pages.</p></td>
+</tr>
+<tr class="a"><td><a href='#newFromList'>/lib/hudson/newFromList</a></td>
+<td><p>These tags provide a higher level primitive for building a form page for creating a new item from a list of descriptors.Used in "create new job" page, for an example.</p></td>
+</tr>
+</table>
+<a name="form"></a>
+<div class="section"><h2>/lib/form</h2>
+<p>/lib/form</p><p>This tag library is <a href='taglib-form.xsd'>also available as an XML Schema</a></p>
+<table class="bodyTable"><tr class="b"><th>Tag Name</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td><a href='#form:advanced'>advanced</a></td>
+<td><p>    Expandable section that shows "advanced..." button by default.    Upon clicking it, a section unfolds, and the HTML rendered by the body of this tag    appears.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:block'>block</a></td>
+<td><p>    Full-width space in the form table that can be filled with arbitrary HTML.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:checkbox'>checkbox</a></td>
+<td><p>    &lt;input type="checkbox"> tag that takes true/false for @checked, which is more Jelly friendly.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:description'>description</a></td>
+<td><p>    Renders a row that shows description text below an input field.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:descriptorList'>descriptorList</a></td>
+<td><p>    Generate config pages from a list of Descriptors into a section.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:descriptorRadioList'>descriptorRadioList</a></td>
+<td><p>    Generate config pages from a list of Descriptors into a section.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:dropdownList'>dropdownList</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#form:dropdownListBlock'>dropdownListBlock</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#form:editableComboBox'>editableComboBox</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#form:editableComboBoxValue'>editableComboBoxValue</a></td>
+<td><p>    Used inside &lt;f:editableComboBox/> to specify one value of a combobox.    Normally one would use multiple values.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:entry'>entry</a></td>
+<td><p>    An entry of the &lt;f:form>, which is one logical row (that consists of    several &lt;TR> tags.</p><p>    One entry normally host one control.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:enum'>enum</a></td>
+<td><p>    Binds an enum field to a &lt;select> element.    The body of this tag is evaluated for each enum value,    which is passed as 'it'.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:expandableTextbox'>expandableTextbox</a></td>
+<td><p>    single-line textbox that can be expanded into a multi-line textarea.</p><p>    This control is useful for a field that expects multiple whitespaec-separated tokens    (such as URLs, glob patterns, etc.) When the user only enters a few tokens,    they can keep it as a single line to save space, but to enter a large number of values,    this can be turned into textarea for better visibility.</p><p>    If the initial value is already multi-line text, the control starts with    textarea.</p><p>    On the server side, your program is responsible for treating ' ', \t, \r, and \n for    separators. (StringTokenizer would do this.)</p></td>
+</tr>
+<tr class="b"><td><a href='#form:form'>form</a></td>
+<td><p>    Outer-most tag of the entire form taglib, that generates &lt;form> element.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:helpArea'>helpArea</a></td>
+<td><p>    Place holder to lazy-load help text via AJAX.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:hetero-list'>hetero-list</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#form:nested'>nested</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#form:option'>option</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#form:optionalBlock'>optionalBlock</a></td>
+<td><p>    Foldable block that can be expanded to show more controls by checking the checkbox.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:password'>password</a></td>
+<td><p>    Glorified &lt;input type="password"></p></td>
+</tr>
+<tr class="a"><td><a href='#form:radio'>radio</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#form:radioBlock'>radioBlock</a></td>
+<td><p>    Radio button with a label that hides additional controls.    When checked, those additional controls are displayed. This is useful    for presenting mutually exclusive options, where each option comes    with a subform that provides additional configuration.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:repeatable'>repeatable</a></td>
+<td><p> ]    Repeatable blocks used to present UI where the user can configure multiple entries    of the same kind (see the Java installations configuration in the system config.)</p><p>    This tag works like &lt;j:forEach> and repeatedly evaluate the body so that    initially all the items get their own copy. This tag also evaluate the body    once more with var=null to create a 'master copy', which is the template entry    used when a new copy is inserted.</p><h1 id="HTMLstructure">HTML structure</h1><p>      this tag mainly produces the nested DIVs with CSS classes as follows:</p><pre>      &lt;div class="repeated-container">   // container for the whole thing
+        &lt;div class="repeated-chunk">
+          ... copy 1 ...
+        &lt;div class="repeated-chunk">
+          ... copy 2 ...
+        ...
+      
+</pre><p>      The 'repeated-chunk' DIVs will also have additional CSS classes that represent      their positions among siblings:</p><p>        first : first chunk among the siblings        last  : last chunk among the siblings        middle: neither first nor last        only  : it is the only chunk (automatically get first and last at the same time)</p><h1 id="UsageNote">Usage Note</h1><p>      The caller of this tag should define a button to add a new copy and delete      the current copy. Such buttons should have 'repeatable-add' CSS class and      'repeatable-delete' CSS class respectively (it can have other CSS classes),      so that their event handlers get properly wired up.</p><p>      The positional CSS classes on 'repeated-chunk' DIVs (as explained above)      can be used to control the visibility of such buttons. For example, this allows      you to hide 'delete' button if there's only one item, or only show 'add' button      on the last row. There are a few CSS classes already defined in style.css      for this purpose.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:repeatableDeleteButton'>repeatableDeleteButton</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#form:richtextarea'>richtextarea</a></td>
+<td><p>    Rich HTML editor from <a href="http://developer.yahoo.com/yui/editor/">http://developer.yahoo.com/yui/editor/</a>    All the attributes are those of the &lt;textarea> tag.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:rowSet'>rowSet</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#form:section'>section</a></td>
+<td><p>    Section header in the form table.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:slave-mode'>slave-mode</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#form:submit'>submit</a></td>
+<td><p>    Submit button themed by YUI. This should be always    used instead of the plain &lt;input tag.</p></td>
+</tr>
+<tr class="b"><td><a href='#form:textarea'>textarea</a></td>
+<td><p>    &lt;textarea> tag on steroid.    The textarea will be rendered to fit the content. It also gets the resize handle.</p></td>
+</tr>
+<tr class="a"><td><a href='#form:textbox'>textbox</a></td>
+<td><p>    Generates an input field  to be    used inside &lt;f:entry/></p></td>
+</tr>
+<tr class="b"><td><a href='#form:validateButton'>validateButton</a></td>
+<td><p>    See    <a href="http://hudson.gotdns.com/wiki/display/HUDSON/Jelly+form+controls">http://hudson.gotdns.com/wiki/display/HUDSON/Jelly+form+controls</a>    for the reference.</p></td>
+</tr>
+</table>
+<a name="form:advanced"></a>
+<div class="section"><h3>advanced</h3>
+<p>    Expandable section that shows "advanced..." button by default.    Upon clicking it, a section unfolds, and the HTML rendered by the body of this tag    appears.</p></div>
+<a name="form:block"></a>
+<div class="section"><h3>block</h3>
+<p>    Full-width space in the form table that can be filled with arbitrary HTML.</p></div>
+<a name="form:checkbox"></a>
+<div class="section"><h3>checkbox</h3>
+<p>    &lt;input type="checkbox"> tag that takes true/false for @checked, which is more Jelly friendly.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>checked (required)</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="a"><td>class</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="b"><td>id</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="a"><td>name (required)</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="b"><td>onclick</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="a"><td>value</td>
+<td>-</td>
+<td></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:description"></a>
+<div class="section"><h3>description</h3>
+<p>    Renders a row that shows description text below an input field.</p></div>
+<a name="form:descriptorList"></a>
+<div class="section"><h3>descriptorList</h3>
+<p>    Generate config pages from a list of Descriptors into a section.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>descriptors (required)</td>
+<td>-</td>
+<td><p>      hudson.model.Descriptor collection whose configuration page is rendered.</p></td>
+</tr>
+<tr class="b"><td>instances (required)</td>
+<td>-</td>
+<td><p>      Map&lt;Descriptor,Describable> that defines current instances of those descriptors.      These are used to fill initial values. Other classes that define the get(Descriptor)      method works fine, too.</p></td>
+</tr>
+<tr class="a"><td>targetType</td>
+<td>-</td>
+<td><p>      the type for which descriptors will be configured.      default to ${it.class}</p></td>
+</tr>
+<tr class="b"><td>title (required)</td>
+<td>-</td>
+<td><p>      Human readable title of the section to be rendered in HTML.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:descriptorRadioList"></a>
+<div class="section"><h3>descriptorRadioList</h3>
+<p>    Generate config pages from a list of Descriptors into a section.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>descriptors (required)</td>
+<td>-</td>
+<td><p>      hudson.model.Descriptor collection whose configuration page is rendered.</p></td>
+</tr>
+<tr class="a"><td>instances (required)</td>
+<td>-</td>
+<td><p>      Map&lt;Descriptor,Describable> that defines current instances of those descriptors.      These are used to fill initial values. Other classes that define the get(Descriptor)      method works fine, too.</p></td>
+</tr>
+<tr class="b"><td>targetType</td>
+<td>-</td>
+<td><p>      the type for which descriptors will be configured.      default to ${it.class}</p></td>
+</tr>
+<tr class="a"><td>title (required)</td>
+<td>-</td>
+<td><p>      Human readable title of the section to be rendered in HTML.</p></td>
+</tr>
+<tr class="b"><td>varName (required)</td>
+<td>-</td>
+<td><p>      Used as a variable name as well as block name.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:dropdownList"></a>
+<div class="section"><h3>dropdownList</h3>
+</div>
+<a name="form:dropdownListBlock"></a>
+<div class="section"><h3>dropdownListBlock</h3>
+</div>
+<a name="form:editableComboBox"></a>
+<div class="section"><h3>editableComboBox</h3>
+</div>
+<a name="form:editableComboBoxValue"></a>
+<div class="section"><h3>editableComboBoxValue</h3>
+<p>    Used inside &lt;f:editableComboBox/> to specify one value of a combobox.    Normally one would use multiple values.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>value (required)</td>
+<td>-</td>
+<td></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:entry"></a>
+<div class="section"><h3>entry</h3>
+<p>    An entry of the &lt;f:form>, which is one logical row (that consists of    several &lt;TR> tags.</p><p>    One entry normally host one control.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>description</td>
+<td>-</td>
+<td><p>      If it's not obvious to the user as to what the control expects,      specify some description text (which currently gets rendered as      small text under the control, but that may change.)</p><p>      This text shouldn't get too long, and in recent Hudson, this feature      is somewhat de-emphasized, in favor of the inline foldable help page      specified via @help.</p></td>
+</tr>
+<tr class="a"><td>help</td>
+<td>-</td>
+<td><p>      URL to the HTML page. When this attribute is specified, the entry gets      a (?) icon on the right, and if the user clicks it, the contents of the      given URL is rendered as a box below the entry.</p><p>      The URL should return an HTML document wrapped in a &lt;div> tag.      The URL is interpreted to be rooted at the context path of Hudson,      so it's normally something like "/plugin/foobar/help/abc.html".</p></td>
+</tr>
+<tr class="b"><td>title</td>
+<td>-</td>
+<td><p>      Name of the entry. Think of this like a label for the control.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:enum"></a>
+<div class="section"><h3>enum</h3>
+<p>    Binds an enum field to a &lt;select> element.    The body of this tag is evaluated for each enum value,    which is passed as 'it'.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>field</td>
+<td>-</td>
+<td><p>      Used for databinding. TBD.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:expandableTextbox"></a>
+<div class="section"><h3>expandableTextbox</h3>
+<p>    single-line textbox that can be expanded into a multi-line textarea.</p><p>    This control is useful for a field that expects multiple whitespaec-separated tokens    (such as URLs, glob patterns, etc.) When the user only enters a few tokens,    they can keep it as a single line to save space, but to enter a large number of values,    this can be turned into textarea for better visibility.</p><p>    If the initial value is already multi-line text, the control starts with    textarea.</p><p>    On the server side, your program is responsible for treating ' ', \t, \r, and \n for    separators. (StringTokenizer would do this.)</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>field</td>
+<td>-</td>
+<td><p>      Used for databinding. TBD.</p></td>
+</tr>
+<tr class="a"><td>name</td>
+<td>-</td>
+<td><p>      This becomes @name of the &lt;input> tag.      If @field is specified, this value is inferred from it.</p></td>
+</tr>
+<tr class="b"><td>value</td>
+<td>-</td>
+<td><p>      The initial value of the field. This becomes the @value of the &lt;input> tag.      If @field is specified, the current property from the "instance" object      will be set as the initial value automatically,      which is the recommended approach.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:form"></a>
+<div class="section"><h3>form</h3>
+<p>    Outer-most tag of the entire form taglib, that generates &lt;form> element.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>action (required)</td>
+<td>-</td>
+<td><p>      @action of the form field. The URL where the submission is sent.</p></td>
+</tr>
+<tr class="a"><td>enctype</td>
+<td>-</td>
+<td><p>      @enctype of the &lt;form> HTML element.</p></td>
+</tr>
+<tr class="b"><td>method (required)</td>
+<td>-</td>
+<td><p>      Submission method. Either post or get.</p></td>
+</tr>
+<tr class="a"><td>name (required)</td>
+<td>-</td>
+<td><p>      @name of the form. In HTML this is not a mandatory attribute,      but in Hudson you should have it for testing and page scraping,      so this attribute is marked required.</p></td>
+</tr>
+<tr class="b"><td>target</td>
+<td>-</td>
+<td><p>      @target of the &lt;form> HTML element. Works like &lt;a target="...">      and controls which window the result of the submission goes to.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:helpArea"></a>
+<div class="section"><h3>helpArea</h3>
+<p>    Place holder to lazy-load help text via AJAX.</p><p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:hetero-list"></a>
+<div class="section"><h3>hetero-list</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:nested"></a>
+<div class="section"><h3>nested</h3>
+</div>
+<a name="form:option"></a>
+<div class="section"><h3>option</h3>
+</div>
+<a name="form:optionalBlock"></a>
+<div class="section"><h3>optionalBlock</h3>
+<p>    Foldable block that can be expanded to show more controls by checking the checkbox.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>checked (required)</td>
+<td>-</td>
+<td><p>      initial checkbox status. true/false.</p></td>
+</tr>
+<tr class="a"><td>help</td>
+<td>-</td>
+<td><p>      If present, the (?) icon will be rendered on the right to show inline help.      See @help for &lt;f:entry>.</p></td>
+</tr>
+<tr class="b"><td>name (required)</td>
+<td>-</td>
+<td><p>      Name of the checkbox. Can be used by the server to determine      if the block is collapsed or expanded at the time of submission.</p><p>      Note that when the block is collapsed, none of its child controls will send      the values to the server (unlike &lt;f:advanced>)</p></td>
+</tr>
+<tr class="a"><td>negative</td>
+<td>-</td>
+<td><p>      if present, the foldable section expands when the checkbox is unchecked.</p></td>
+</tr>
+<tr class="b"><td>title (required)</td>
+<td>-</td>
+<td><p>      Human readable text that follows the checkbox.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:password"></a>
+<div class="section"><h3>password</h3>
+<p>    Glorified &lt;input type="password"></p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>checkUrl</td>
+<td>-</td>
+<td><p>      If specified, the value entered in this input field will be checked (via AJAX)      against this URL, and errors will be rendered under the text field.</p><p>      If @field is specified, this will be inferred automatically,      which is the recommended approach.</p></td>
+</tr>
+<tr class="a"><td>field</td>
+<td>-</td>
+<td><p>      Used for databinding. TBD.</p></td>
+</tr>
+<tr class="b"><td>name</td>
+<td>-</td>
+<td><p>      This becomes @name of the &lt;input> tag.      If @field is specified, this value is inferred from it.</p></td>
+</tr>
+<tr class="a"><td>value</td>
+<td>-</td>
+<td><p>      The initial value of the field. This becomes the @value of the &lt;input> tag.      If @field is specified, the current property from the "instance" object      will be set as the initial value automatically,      which is the recommended approach.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:radio"></a>
+<div class="section"><h3>radio</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:radioBlock"></a>
+<div class="section"><h3>radioBlock</h3>
+<p>    Radio button with a label that hides additional controls.    When checked, those additional controls are displayed. This is useful    for presenting mutually exclusive options, where each option comes    with a subform that provides additional configuration.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>checked (required)</td>
+<td>boolean</td>
+<td><p>      Should this control be initially checked or not?</p></td>
+</tr>
+<tr class="b"><td>help</td>
+<td>-</td>
+<td><p>      If specified, the (?) help icon will be rendered on the right,      for in place help text. See &lt;f:entry> for the details.</p></td>
+</tr>
+<tr class="a"><td>name (required)</td>
+<td>-</td>
+<td><p>      Name of the radio button group.</p></td>
+</tr>
+<tr class="b"><td>title (required)</td>
+<td>-</td>
+<td><p>      Human readable label text to be rendered next to the radio button.</p></td>
+</tr>
+<tr class="a"><td>value (required)</td>
+<td>-</td>
+<td><p>      @value of the &lt;input> element.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:repeatable"></a>
+<div class="section"><h3>repeatable</h3>
+<p> ]    Repeatable blocks used to present UI where the user can configure multiple entries    of the same kind (see the Java installations configuration in the system config.)</p><p>    This tag works like &lt;j:forEach> and repeatedly evaluate the body so that    initially all the items get their own copy. This tag also evaluate the body    once more with var=null to create a 'master copy', which is the template entry    used when a new copy is inserted.</p><h1 id="HTMLstructure">HTML structure</h1><p>      this tag mainly produces the nested DIVs with CSS classes as follows:</p><pre>      &lt;div class="repeated-container">   // container for the whole thing
+        &lt;div class="repeated-chunk">
+          ... copy 1 ...
+        &lt;div class="repeated-chunk">
+          ... copy 2 ...
+        ...
+      
+</pre><p>      The 'repeated-chunk' DIVs will also have additional CSS classes that represent      their positions among siblings:</p><p>        first : first chunk among the siblings        last  : last chunk among the siblings        middle: neither first nor last        only  : it is the only chunk (automatically get first and last at the same time)</p><h1 id="UsageNote">Usage Note</h1><p>      The caller of this tag should define a button to add a new copy and delete      the current copy. Such buttons should have 'repeatable-add' CSS class and      'repeatable-delete' CSS class respectively (it can have other CSS classes),      so that their event handlers get properly wired up.</p><p>      The positional CSS classes on 'repeated-chunk' DIVs (as explained above)      can be used to control the visibility of such buttons. For example, this allows      you to hide 'delete' button if there's only one item, or only show 'add' button      on the last row. There are a few CSS classes already defined in style.css      for this purpose.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>items (required)</td>
+<td>-</td>
+<td><p>      The item collection to loop over.</p></td>
+</tr>
+<tr class="b"><td>minimum</td>
+<td>-</td>
+<td><p>      At least provide this number of copies initially.      minimum="1" is useful to make sure there's always at least one entry for the user to fill in.</p></td>
+</tr>
+<tr class="a"><td>name</td>
+<td>-</td>
+<td><p>      name used in the structured form submission. Defaults to the same name as @var.</p></td>
+</tr>
+<tr class="b"><td>noAddButton</td>
+<td>-</td>
+<td><p>      true if the default 'add' button (that adds a new copy) shouldn't be displayed.      When you use this attribute,</p></td>
+</tr>
+<tr class="a"><td>var (required)</td>
+<td>-</td>
+<td><p>      variable that receives the item of the current iteration.      Accessible from the body.</p></td>
+</tr>
+<tr class="b"><td>varStatus</td>
+<td>-</td>
+<td><p>      Status variable that indicates the loop status.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:repeatableDeleteButton"></a>
+<div class="section"><h3>repeatableDeleteButton</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:richtextarea"></a>
+<div class="section"><h3>richtextarea</h3>
+<p>    Rich HTML editor from <a href="http://developer.yahoo.com/yui/editor/">http://developer.yahoo.com/yui/editor/</a>    All the attributes are those of the &lt;textarea> tag.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>id</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="a"><td>name (required)</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="b"><td>style</td>
+<td>-</td>
+<td></td>
+</tr>
+<tr class="a"><td>value (required)</td>
+<td>-</td>
+<td></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:rowSet"></a>
+<div class="section"><h3>rowSet</h3>
+</div>
+<a name="form:section"></a>
+<div class="section"><h3>section</h3>
+<p>    Section header in the form table.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>title (required)</td>
+<td>-</td>
+<td><p>      The section header text.      If null is given, the entire &lt;f:section> tag becomes no-op.</p></td>
+</tr>
+</table>
+</div>
+<a name="form:slave-mode"></a>
+<div class="section"><h3>slave-mode</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:submit"></a>
+<div class="section"><h3>submit</h3>
+<p>    Submit button themed by YUI. This should be always    used instead of the plain &lt;input tag.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>value (required)</td>
+<td>-</td>
+<td><p>      The text of the submit button. Something like "submit", "OK", etc.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:textarea"></a>
+<div class="section"><h3>textarea</h3>
+<p>    &lt;textarea> tag on steroid.    The textarea will be rendered to fit the content. It also gets the resize handle.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>checkUrl</td>
+<td>-</td>
+<td><p>      If specified, the value entered in this input field will be checked (via AJAX)      against this URL, and errors will be rendered under the text field.</p><p>      If @field is specified, this will be inferred automatically,      which is the recommended approach.</p></td>
+</tr>
+<tr class="b"><td>field</td>
+<td>-</td>
+<td><p>      Used for databinding. TBD.</p></td>
+</tr>
+<tr class="a"><td>name</td>
+<td>-</td>
+<td><p>      This becomes @name of the &lt;textarea> tag.      If @field is specified, this value is inferred from it.</p></td>
+</tr>
+<tr class="b"><td>value</td>
+<td>-</td>
+<td><p>      The initial value of the field. This becomes the value of the &lt;textarea> tag.      If @field is specified, the current property from the "instance" object      will be set as the initial value automatically,      which is the recommended approach.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:textbox"></a>
+<div class="section"><h3>textbox</h3>
+<p>    Generates an input field  to be    used inside &lt;f:entry/></p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>checkUrl</td>
+<td>-</td>
+<td><p>      If specified, the value entered in this input field will be checked (via AJAX)      against this URL, and errors will be rendered under the text field.</p><p>      If @field is specified, this will be inferred automatically,      which is the recommended approach.</p></td>
+</tr>
+<tr class="a"><td>field</td>
+<td>-</td>
+<td><p>      Used for databinding. TBD.</p></td>
+</tr>
+<tr class="b"><td>name</td>
+<td>-</td>
+<td><p>      This becomes @name of the &lt;input> tag.      If @field is specified, this value is inferred from it.</p></td>
+</tr>
+<tr class="a"><td>value</td>
+<td>-</td>
+<td><p>      The initial value of the field. This becomes the @value of the &lt;input> tag.      If @field is specified, the current property from the "instance" object      will be set as the initial value automatically,      which is the recommended approach.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="form:validateButton"></a>
+<div class="section"><h3>validateButton</h3>
+<p>    See    <a href="http://hudson.gotdns.com/wiki/display/HUDSON/Jelly+form+controls">http://hudson.gotdns.com/wiki/display/HUDSON/Jelly+form+controls</a>    for the reference.</p><p>This tag does not accept any child elements/text.</p>
+</div>
+</div>
+<a name="hudson"></a>
+<div class="section"><h2>/lib/hudson</h2>
+<p>/lib/hudson</p><p>This tag library is <a href='taglib-hudson.xsd'>also available as an XML Schema</a></p>
+<table class="bodyTable"><tr class="b"><th>Tag Name</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td><a href='#hudson:actions'>actions</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:artifactList'>artifactList</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:ballColorTd'>ballColorTd</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:buildCaption'>buildCaption</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:buildHealth'>buildHealth</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:buildLink'>buildLink</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:buildListTable'>buildListTable</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:buildProgressBar'>buildProgressBar</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:buildRangeLink'>buildRangeLink</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:editTypeIcon'>editTypeIcon</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:editableDescription'>editableDescription</a></td>
+<td><p>    Renders ${it.description} and then allow it to be editable in place,    if the current user has the specified permission.</p></td>
+</tr>
+<tr class="b"><td><a href='#hudson:executors'>executors</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:help'>help</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:listScmBrowsers'>listScmBrowsers</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:node'>node</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:progressBar'>progressBar</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:progressiveText'>progressiveText</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:projectView'>projectView</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:projectViewNested'>projectViewNested</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:projectViewRow'>projectViewRow</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:propertyTable'>propertyTable</a></td>
+<td><p>    Dispaly sortable table of properties.</p></td>
+</tr>
+<tr class="b"><td><a href='#hudson:queue'>queue</a></td>
+<td><p>    Displays the build queue as &lt;l:pane></p></td>
+</tr>
+<tr class="a"><td><a href='#hudson:rssBar'>rssBar</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:rssBar-with-iconSize'>rssBar-with-iconSize</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:scriptConsole'>scriptConsole</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:setIconSize'>setIconSize</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#hudson:summary'>summary</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#hudson:test-result'>test-result</a></td>
+<td></td>
+</tr>
+</table>
+<a name="hudson:actions"></a>
+<div class="section"><h3>actions</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:artifactList"></a>
+<div class="section"><h3>artifactList</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:ballColorTd"></a>
+<div class="section"><h3>ballColorTd</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:buildCaption"></a>
+<div class="section"><h3>buildCaption</h3>
+</div>
+<a name="hudson:buildHealth"></a>
+<div class="section"><h3>buildHealth</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:buildLink"></a>
+<div class="section"><h3>buildLink</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:buildListTable"></a>
+<div class="section"><h3>buildListTable</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:buildProgressBar"></a>
+<div class="section"><h3>buildProgressBar</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:buildRangeLink"></a>
+<div class="section"><h3>buildRangeLink</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:editTypeIcon"></a>
+<div class="section"><h3>editTypeIcon</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:editableDescription"></a>
+<div class="section"><h3>editableDescription</h3>
+<p>    Renders ${it.description} and then allow it to be editable in place,    if the current user has the specified permission.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>permission (required)</td>
+<td>-</td>
+<td><p>      If the current user doesn't have this permission, the description      is not editable.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:executors"></a>
+<div class="section"><h3>executors</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:help"></a>
+<div class="section"><h3>help</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:listScmBrowsers"></a>
+<div class="section"><h3>listScmBrowsers</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:node"></a>
+<div class="section"><h3>node</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:progressBar"></a>
+<div class="section"><h3>progressBar</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:progressiveText"></a>
+<div class="section"><h3>progressiveText</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:projectView"></a>
+<div class="section"><h3>projectView</h3>
+</div>
+<a name="hudson:projectViewNested"></a>
+<div class="section"><h3>projectViewNested</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:projectViewRow"></a>
+<div class="section"><h3>projectViewRow</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:propertyTable"></a>
+<div class="section"><h3>propertyTable</h3>
+<p>    Dispaly sortable table of properties.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>items (required)</td>
+<td>-</td>
+<td><p>      A Map object that gets rendered as a table.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:queue"></a>
+<div class="section"><h3>queue</h3>
+<p>    Displays the build queue as &lt;l:pane></p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>items (required)</td>
+<td>-</td>
+<td><p>      Queue items to be displayed. Normally you should specify ${app.queue.items},      but for example yuo can specify a sublist after some filtering to narrow down      the list.</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:rssBar"></a>
+<div class="section"><h3>rssBar</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:rssBar-with-iconSize"></a>
+<div class="section"><h3>rssBar-with-iconSize</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:scriptConsole"></a>
+<div class="section"><h3>scriptConsole</h3>
+</div>
+<a name="hudson:setIconSize"></a>
+<div class="section"><h3>setIconSize</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="hudson:summary"></a>
+<div class="section"><h3>summary</h3>
+</div>
+<a name="hudson:test-result"></a>
+<div class="section"><h3>test-result</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+</div>
+<a name="test"></a>
+<div class="section"><h2>/lib/test</h2>
+<p>/lib/test</p><p>This tag library is <a href='taglib-test.xsd'>also available as an XML Schema</a></p>
+<table class="bodyTable"><tr class="a"><th>Tag Name</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td><a href='#test:bar'>bar</a></td>
+<td></td>
+</tr>
+</table>
+<a name="test:bar"></a>
+<div class="section"><h3>bar</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+</div>
+<a name="project"></a>
+<div class="section"><h2>/lib/hudson/project</h2>
+<p>Tag files used in project pages</p><p>This tag library is <a href='taglib-project.xsd'>also available as an XML Schema</a></p>
+<table class="bodyTable"><tr class="a"><th>Tag Name</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td><a href='#project:build-permalink'>build-permalink</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#project:config-buildWrappers'>config-buildWrappers</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#project:config-builders'>config-builders</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#project:config-disableBuild'>config-disableBuild</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#project:config-publishers'>config-publishers</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#project:config-quietPeriod'>config-quietPeriod</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#project:config-scm'>config-scm</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#project:config-trigger'>config-trigger</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#project:config-upstream-pseudo-trigger'>config-upstream-pseudo-trigger</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#project:matrix'>matrix</a></td>
+<td><p>    Generate configuration matrix and invoke body with 'p' as the instance of T    (of Layouter&lt;T>)</p></td>
+</tr>
+<tr class="b"><td><a href='#project:projectActionFloatingBox'>projectActionFloatingBox</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#project:upstream-downstream'>upstream-downstream</a></td>
+<td></td>
+</tr>
+</table>
+<a name="project:build-permalink"></a>
+<div class="section"><h3>build-permalink</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:config-buildWrappers"></a>
+<div class="section"><h3>config-buildWrappers</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:config-builders"></a>
+<div class="section"><h3>config-builders</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:config-disableBuild"></a>
+<div class="section"><h3>config-disableBuild</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:config-publishers"></a>
+<div class="section"><h3>config-publishers</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:config-quietPeriod"></a>
+<div class="section"><h3>config-quietPeriod</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:config-scm"></a>
+<div class="section"><h3>config-scm</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:config-trigger"></a>
+<div class="section"><h3>config-trigger</h3>
+</div>
+<a name="project:config-upstream-pseudo-trigger"></a>
+<div class="section"><h3>config-upstream-pseudo-trigger</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:matrix"></a>
+<div class="section"><h3>matrix</h3>
+<p>    Generate configuration matrix and invoke body with 'p' as the instance of T    (of Layouter&lt;T>)</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>autoRefresh</td>
+<td>-</td>
+<td><p>      If specified, the content of the matrix will be automatically updated via AJAX.      (This happens by requesting URL "./ajaxMatrix", so the caller needs "ajaxMatrix.jelly"      to serve this request.)</p></td>
+</tr>
+</table>
+</div>
+<a name="project:projectActionFloatingBox"></a>
+<div class="section"><h3>projectActionFloatingBox</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="project:upstream-downstream"></a>
+<div class="section"><h3>upstream-downstream</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+</div>
+<a name="layout"></a>
+<div class="section"><h2>/lib/layout</h2>
+<p>Tag library that defines the basic layout of Hudson pages.</p><p>This tag library is <a href='taglib-layout.xsd'>also available as an XML Schema</a></p>
+<table class="bodyTable"><tr class="b"><th>Tag Name</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td><a href='#layout:ajax'>ajax</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#layout:expandButton'>expandButton</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#layout:hasPermission'>hasPermission</a></td>
+<td><p>    Renders the body only if the current user has the specified permission</p></td>
+</tr>
+<tr class="b"><td><a href='#layout:header'>header</a></td>
+<td><p>    Header portion of the HTML page, that gets rendered into the &lt;head> tag.    Multiple &lt;l:header> elements can be specified, and can even come after    &lt;l:main-panel>.</p></td>
+</tr>
+<tr class="a"><td><a href='#layout:isAdmin'>isAdmin</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#layout:isAdminOrTest'>isAdminOrTest</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#layout:layout'>layout</a></td>
+<td><p>    Outer-most tag for a normal (non-AJAX) HTML rendering.    This is used with nested &lt;side-panel> and &lt;main-panel>    to form Hudson's basic HTML layout.</p></td>
+</tr>
+<tr class="b"><td><a href='#layout:main-panel'>main-panel</a></td>
+<td><p>    Generates the body as the main content part of a Hudson page.</p></td>
+</tr>
+<tr class="a"><td><a href='#layout:pane'>pane</a></td>
+<td><p>    Used in the &lt;l:side-panel> to draw a box with a title.</p><p>    The box is drawn as a table, and the body of this tag    is expected to draw a series of &lt;TR>s to fill in the contents    of the box.</p></td>
+</tr>
+<tr class="b"><td><a href='#layout:rightspace'>rightspace</a></td>
+<td><p>    Creates a space for the right-hand side of the page.    This sticks to the right of the page even when the content overflows.</p></td>
+</tr>
+<tr class="a"><td><a href='#layout:side-panel'>side-panel</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#layout:tab'>tab</a></td>
+<td></td>
+</tr>
+<tr class="a"><td><a href='#layout:tabBar'>tabBar</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#layout:task'>task</a></td>
+<td><p>    This tag inside &lt;l:tasks> tag renders the left navigation bar of Hudson.    Each &lt;task> tag gets an icon and link.</p></td>
+</tr>
+<tr class="a"><td><a href='#layout:tasks'>tasks</a></td>
+<td></td>
+</tr>
+<tr class="b"><td><a href='#layout:yui'>yui</a></td>
+<td><p>    Load Yahoo UI module.</p></td>
+</tr>
+</table>
+<a name="layout:ajax"></a>
+<div class="section"><h3>ajax</h3>
+</div>
+<a name="layout:expandButton"></a>
+<div class="section"><h3>expandButton</h3>
+</div>
+<a name="layout:hasPermission"></a>
+<div class="section"><h3>hasPermission</h3>
+<p>    Renders the body only if the current user has the specified permission</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>permission (required)</td>
+<td>Permission</td>
+<td><p>      permission object to check. If this is null, the body will be also rendered.</p></td>
+</tr>
+</table>
+</div>
+<a name="layout:header"></a>
+<div class="section"><h3>header</h3>
+<p>    Header portion of the HTML page, that gets rendered into the &lt;head> tag.    Multiple &lt;l:header> elements can be specified, and can even come after    &lt;l:main-panel>.</p></div>
+<a name="layout:isAdmin"></a>
+<div class="section"><h3>isAdmin</h3>
+</div>
+<a name="layout:isAdminOrTest"></a>
+<div class="section"><h3>isAdminOrTest</h3>
+</div>
+<a name="layout:layout"></a>
+<div class="section"><h3>layout</h3>
+<p>    Outer-most tag for a normal (non-AJAX) HTML rendering.    This is used with nested &lt;side-panel> and &lt;main-panel>    to form Hudson's basic HTML layout.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>css (deprecated)</td>
+<td>-</td>
+<td><p>      specify path that starts from "/" for loading additional CSS stylesheet.      path is interprted as relative to the context root. e.g.,</p><pre>&lt;l:layout css="/plugin/mysuperplugin/css/myneatstyle.css">
+</pre><p>      This was originally added to allow plugins to load their stylesheets, but      <strong>the use of thie attribute is discouraged now.</strong>      plugins should now do so by inserting &lt;style> elements and/or &lt;script> elements      in &lt;l:header/> tag.</p></td>
+</tr>
+<tr class="a"><td>norefresh</td>
+<td>-</td>
+<td><p>      If non-null, auto refresh is disabled on this page.      This is necessary for pages that include forms.</p></td>
+</tr>
+<tr class="b"><td>permission</td>
+<td>-</td>
+<td><p>      If given, this page is only made available to users that has the specified permission.      (The permission will be checked against the "it" object.)</p></td>
+</tr>
+<tr class="a"><td>title (required)</td>
+<td>-</td>
+<td><p>      Title of the HTML page. Rendered into &lt;title> tag.</p></td>
+</tr>
+</table>
+</div>
+<a name="layout:main-panel"></a>
+<div class="section"><h3>main-panel</h3>
+<p>    Generates the body as the main content part of a Hudson page.</p></div>
+<a name="layout:pane"></a>
+<div class="section"><h3>pane</h3>
+<p>    Used in the &lt;l:side-panel> to draw a box with a title.</p><p>    The box is drawn as a table, and the body of this tag    is expected to draw a series of &lt;TR>s to fill in the contents    of the box.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>id</td>
+<td>-</td>
+<td><p>      @id of the table, if specified.</p></td>
+</tr>
+<tr class="b"><td>title (required)</td>
+<td>-</td>
+<td><p>      Title of the box. Can include HTML.</p></td>
+</tr>
+<tr class="a"><td>width (required)</td>
+<td>-</td>
+<td><p>      Specify the number of columns in the table      (so that the title can stretch to the entire table width.</p></td>
+</tr>
+</table>
+</div>
+<a name="layout:rightspace"></a>
+<div class="section"><h3>rightspace</h3>
+<p>    Creates a space for the right-hand side of the page.    This sticks to the right of the page even when the content overflows.</p></div>
+<a name="layout:side-panel"></a>
+<div class="section"><h3>side-panel</h3>
+</div>
+<a name="layout:tab"></a>
+<div class="section"><h3>tab</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+<a name="layout:tabBar"></a>
+<div class="section"><h3>tabBar</h3>
+</div>
+<a name="layout:task"></a>
+<div class="section"><h3>task</h3>
+<p>    This tag inside &lt;l:tasks> tag renders the left navigation bar of Hudson.    Each &lt;task> tag gets an icon and link.</p><table class="bodyTable"><tr class="b"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>href (required)</td>
+<td>-</td>
+<td><p>      Link target. Relative to the current page.</p></td>
+</tr>
+<tr class="b"><td>icon (required)</td>
+<td>-</td>
+<td><p>      URL to the icon, which should be 24x24 in size.      It's relative to the context path of Hudson.</p><p>      The common values include:</p><p>      # "images/24x24/..." then points to the stock icon resources      # "plugin/foobar/abc/def.png" that points to "src/main/webapp/abc/def.png" in your plugin resources</p></td>
+</tr>
+<tr class="a"><td>permission</td>
+<td>-</td>
+<td><p>      If specified, the link will be only displayed when the current user      has the specified permission against the "it" object.</p><p>      This is useful for showing links to restricted pages, as showing      them to unprivileged users don't make sense.</p></td>
+</tr>
+<tr class="b"><td>title (required)</td>
+<td>-</td>
+<td><p>      Human readable text that follows the icon.</p></td>
+</tr>
+</table>
+</div>
+<a name="layout:tasks"></a>
+<div class="section"><h3>tasks</h3>
+</div>
+<a name="layout:yui"></a>
+<div class="section"><h3>yui</h3>
+<p>    Load Yahoo UI module.</p><table class="bodyTable"><tr class="a"><th>Attribute Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr class="b"><td>module (required)</td>
+<td>-</td>
+<td><p>      YUI module name to load.</p></td>
+</tr>
+<tr class="a"><td>suffix</td>
+<td>-</td>
+<td><p>      if loading beta module, use suffix='-beta'</p></td>
+</tr>
+</table>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+</div>
+<a name="newFromList"></a>
+<div class="section"><h2>/lib/hudson/newFromList</h2>
+<p>These tags provide a higher level primitive for building a form page for creating a new item from a list of descriptors.Used in "create new job" page, for an example.</p><p>This tag library is <a href='taglib-newFromList.xsd'>also available as an XML Schema</a></p>
+<table class="bodyTable"><tr class="b"><th>Tag Name</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td><a href='#newFromList:form'>form</a></td>
+<td></td>
+</tr>
+</table>
+<a name="newFromList:form"></a>
+<div class="section"><h3>form</h3>
+<p>This tag does not accept any child elements/text.</p>
+</div>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2009
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
