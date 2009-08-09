@@ -162,8 +162,8 @@ public class DurationChart {
             String s = o.getOwner().getBuiltOnStr();
             if (s != null)
                 l += ' ' + s;
-//            return l;
-            return o.getDisplayName() + " " + o.getOwner().getDisplayName();
+            return l;
+//            return o.getDisplayName() + " " + o.getOwner().getDisplayName();
         }
 
     }
