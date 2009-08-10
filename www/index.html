@@ -84,14 +84,42 @@
 			background-repeat: no-repeat;
 		}
 
+        table.rightnav-icon {
+          border-spacing:0;
+        }
+        table.rightnav-icon td {
+          vertical-align:middle;
+        }
 	</style>
 </head>
 <body>
 <div style="float:right">
-  <div style="padding-right: 1em; margin-top: 1em;" id="downloadBox">
-    <a href="http://hudson-ci.org/latest/hudson.war" style="font-size: 1.5em;">
-      <img src="images/download.gif" style="vertical-align: middle;" border="0">Download
-    </a>
+    <table class="rightnav-icon"><tr>
+      <td style="padding: 0pt;">
+        <img border="0" src="images/download.gif" />
+      </td><td>
+        <a href="http://hudson-ci.org/latest/hudson.war" style="font-size: 1.5em;">
+          Download
+        </a>
+        <div align="right">latest and greatest</div>
+      </td>
+    </tr></table>
+
+    <table class="rightnav-icon"><tr>
+      <td style="padding: 0pt;">
+        <img border="0" src="images/download.gif" />
+      </td><td>
+        <a href="http://hudson-ci.org/supported/hudson.war" style="font-size: 1.5em;">
+          Download
+        </a>
+        <div align="right">older but supported</div>
+      </td>
+    </tr></table>
+
+    <ul>
+      <li><a href="changelog.html">changelog</a></li>
+      <li><a href="/servlets/ProjectDocumentList?folderID=2761">old releases</a></li>
+    </ul>
     <ul>
       <li><a href="changelog.html">changelog</a></li>
       <li><a href="/servlets/ProjectDocumentList?folderID=2761">old releases</a></li>
