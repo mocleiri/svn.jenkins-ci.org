@@ -31,7 +31,7 @@ public class BuildTrigger extends Notifier {
 	public BuildTrigger(BuildTriggerConfig... configs) {
 		this(Arrays.asList(configs));
 	}
-	
+
 	public List<BuildTriggerConfig> getConfigs() {
 		return configs;
 	}
@@ -52,6 +52,11 @@ public class BuildTrigger extends Notifier {
 		return true;
 	}
 
+	public Object readResolve() {
+		System.out.println(configs);
+		return this;
+	}
+
 	@Extension
 	public static class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 
@@ -60,28 +65,27 @@ public class BuildTrigger extends Notifier {
 				throws FormException {
 			List<BuildTriggerConfig> result = new ArrayList<BuildTriggerConfig>();
 			Object c = json.get("configs");
-	        if (c instanceof JSONObject) {
-	            JSONObject j = (JSONObject) c;
-	            result.add(bindBuildTrigger(req, j));
-	        }
-	        if (c instanceof JSONArray) {
-	            JSONArray a = (JSONArray) c;
-	            for (Object o : a) {
-	                if (o instanceof JSONObject) {
-	                    JSONObject j = (JSONObject) o;
-	    	            result.add(bindBuildTrigger(req, j));
-	                }
-	            }
-	        }
+			if (c instanceof JSONObject) {
+				JSONObject j = (JSONObject) c;
+				result.add(bindBuildTrigger(req, j));
+			}
+			if (c instanceof JSONArray) {
+				JSONArray a = (JSONArray) c;
+				for (Object o : a) {
+					if (o instanceof JSONObject) {
+						JSONObject j = (JSONObject) o;
+						result.add(bindBuildTrigger(req, j));
+					}
+				}
+			}
 			return new BuildTrigger(result);
 		}
 
-		private BuildTriggerConfig bindBuildTrigger(StaplerRequest req, JSONObject o) throws FormException {
-					return new BuildTriggerConfig(o.getString("projects"),
-							ResultCondition.valueOf(o
-									.getString("condition")),
-							newInstancesFromHeteroList(req, o, "configs",
-									CONFIGS));
+		private BuildTriggerConfig bindBuildTrigger(StaplerRequest req,
+				JSONObject o) throws FormException {
+			return new BuildTriggerConfig(o.getString("projects"),
+					ResultCondition.valueOf(o.getString("condition")),
+					newInstancesFromHeteroList(req, o, "configs", CONFIGS));
 		}
 
 		@Override
@@ -108,7 +112,7 @@ public class BuildTrigger extends Notifier {
 		}
 
 	}
-
+	
 	public static final DescriptorList<AbstractBuildParameters> CONFIGS = new DescriptorList<AbstractBuildParameters>(
 			AbstractBuildParameters.class);
 

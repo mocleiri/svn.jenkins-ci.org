@@ -49,9 +49,6 @@ public class SubversionRevisionBuildTriggerConfigTest extends HudsonTestCase {
 
 		FreeStyleBuild b2 = p2.getLastBuild();
 
-		System.out.println(b1.getAction(SubversionTagAction.class).getTags()
-				.keySet().iterator().next().revision);
-
 		assertEquals(b1.getAction(SubversionTagAction.class).getTags().keySet()
 				.iterator().next().revision,
 				b2.getAction(SubversionTagAction.class).getTags().keySet()

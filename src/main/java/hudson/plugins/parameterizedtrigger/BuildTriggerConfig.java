@@ -18,6 +18,7 @@ import hudson.model.ParameterDefinition;
 import hudson.model.ParameterValue;
 import hudson.model.ParametersAction;
 import hudson.model.StringParameterValue;
+import hudson.plugins.parameterizedtrigger.AbstractBuildParameters.DontTriggerException;
 
 import java.util.Hashtable;
 import java.util.ArrayList;
@@ -64,28 +65,32 @@ public class BuildTriggerConfig {
 		return Items.fromNameList(projects, AbstractProject.class);
 	}
 
-	public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
+	public void perform(AbstractBuild<?, ?> build, Launcher launcher,
 			BuildListener listener) throws InterruptedException, IOException {
 
-		if (condition.isMet(build.getResult())) {
-			List<Action> actions = new ArrayList<Action>();
-			for (AbstractBuildParameters config : configs) {
-				Action a = config.getAction(build, launcher, listener);
-				if (a != null) {
-					actions.add(a);
+		try {
+			if (condition.isMet(build.getResult())) {
+				List<Action> actions = new ArrayList<Action>();
+				for (AbstractBuildParameters config : configs) {
+					Action a = config.getAction(build, launcher, listener);
+					if (a != null) {
+						actions.add(a);
+					}
 				}
-			}
 
-			if (!actions.isEmpty()) {
-				for (AbstractProject project : getProjectList()) {
-					project.scheduleBuild(0, new Cause.UpstreamCause(build),
-							(Action[]) actions.toArray(new Action[actions
-									.size()]));
+				if (!actions.isEmpty()) {
+					for (AbstractProject project : getProjectList()) {
+						project.scheduleBuild(0,
+								new Cause.UpstreamCause(build),
+								(Action[]) actions.toArray(new Action[actions
+										.size()]));
+					}
 				}
 			}
+		} catch (DontTriggerException e) {
+			// don't trigger on this configuration
+			return;
 		}
-
-		return true;
 	}
 
 	@Override
@@ -93,6 +98,5 @@ public class BuildTriggerConfig {
 		return "BuildTriggerConfig [projects=" + projects + ", condition="
 				+ condition + ", configs=" + configs + "]";
 	}
-	
-	
+
 }
