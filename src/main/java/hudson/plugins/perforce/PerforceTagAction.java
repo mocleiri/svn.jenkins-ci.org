@@ -133,7 +133,6 @@ public class PerforceTagAction extends AbstractScmTagAction {
         try {
             P4JServer server = P4jUtil.newServer(depot.getPort(), "prog", "ver", depot.getUser(), depot.getPassword());
             P4JLabel label = P4jUtil.newLabel(server, tag, desc, changeNumber, view.split("\n"));
-            //label.update();
             server.updateLabel(label);
         } catch (Exception e) {
             tag = null;

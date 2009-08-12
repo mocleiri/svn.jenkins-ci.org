@@ -21,9 +21,13 @@ public class P4jUtilTest extends TestCase {
     private static final String p4client = "hudson_plugin_debug_client";
     private static final String p4label = "hudson_plugin_debug_label";
     private static final String fakeRoot = "/tmp/p4j";
-    private static final String scratchDir = "/Tomcat6.0.10/conf";
-    private static final String scratchDepotPath = "//depot/" + scratchDir + "/..." ;
-    private static final String scratchClientPath = "//" + p4client + "/" + scratchDir + "/..." ;
+    private static final String testDir = "/Tomcat6.0.10/conf";
+    private static final String testDepotPath = "//depot" + testDir + "/..." ;
+    private static final String testClientPath = "//" + p4client + testDir + "/..." ;
+    private static final int existingCl = 253215;  // any valid existing CL
+    private static final int existingClWithJob = 225748;  // any valid existing CL with a Job attached
+    private static final int rangeCl0 = 118758;  // Start CL for range test
+    private static final int rangeCl1 = 121965;  // End CL for rage test--should yield 4 CLs
 
     private static P4JServer makeTestServer() throws Exception {
         return P4jUtil.newServer(p4port, "p4jUtilTest", "1", p4user, p4pass);
@@ -34,7 +38,7 @@ public class P4jUtilTest extends TestCase {
         P4jUtil.deleteClient(server, p4client);
         P4JClient client = P4jUtil.retrieveClient(server, p4client, false, fakeRoot);
         P4jUtil.clearView(client);
-        P4jUtil.addViewMapping(client, scratchDepotPath, scratchClientPath);
+        P4jUtil.addViewMapping(client, testDepotPath, testClientPath);
         server.updateClient(client);
         server.setCurrentClient(client);
         return client;
@@ -55,7 +59,7 @@ public class P4jUtilTest extends TestCase {
     public void testGetUser() throws Exception {
         P4JServer server = makeTestServer();
         P4JUser user = P4jUtil.getUser(server, p4user);
-        System.out.println("user id:" + user.getLoginName() + " email:" + user.getEmail() + " full:" + user.getFullName());
+        System.out.println("user: id:" + user.getLoginName() + " email:" + user.getEmail() + " full:" + user.getFullName());
         assertEquals(p4user, user.getLoginName());
         server.disconnect();
     }
@@ -70,7 +74,7 @@ public class P4jUtilTest extends TestCase {
 
     public void testGetSpecificChangelist() throws Exception {
         P4JServer server = makeTestServer();
-        P4JChangeList change = P4jUtil.getChange(server, 253215); // NOTE: any existing CL
+        P4JChangeList change = P4jUtil.getChange(server, existingCl);
         assertEquals(253215, change.getId());
     }
 
@@ -87,7 +91,7 @@ public class P4jUtilTest extends TestCase {
 
     public void testJobStatus() throws Exception {
         P4JServer server = makeTestServer();
-        P4JChangeList change = P4jUtil.getChange(server, 225748); // NOTE: any existing CL w/ a job
+        P4JChangeList change = P4jUtil.getChange(server, existingClWithJob);
         assertEquals(1, change.getJobList().size());
         P4JJob job = change.getJobList().get(0);
         //System.out.println("Status for " + job.getId() + " is " + P4jUtil.jobStatus(job));
@@ -136,10 +140,11 @@ public class P4jUtilTest extends TestCase {
         P4JServer server = makeTestServer();
         P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         P4jUtil.clearView(client);
-        P4jUtil.addViewMapping(client, "//depot/A/...", "//"+p4client+"/a/...");
-        P4jUtil.addViewMapping(client, "//depot/B/...", "//"+p4client+"/b/...");
-        P4jUtil.addViewMapping(client, "//depot/C/...", "//"+p4client+"/c/...");
+        P4jUtil.addViewMapping(client, "//depot/A/...", "//" + p4client + "/a/...");
+        P4jUtil.addViewMapping(client, "//depot/B/...", "//" + p4client + "/b/...");
+        P4jUtil.addViewMapping(client, "//depot/C/...", "//" + p4client + "/c/...");
         server.updateClient(client);
+        // TODO: retrieve view and check that mappings match
         server.disconnect();
     }
 
@@ -147,12 +152,12 @@ public class P4jUtilTest extends TestCase {
         P4JServer server = makeTestServer();
         P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         P4jUtil.clearView(client);
-        P4jUtil.addViewMapping(client, scratchDepotPath, scratchClientPath);
+        P4jUtil.addViewMapping(client, testDepotPath, testClientPath);
         server.updateClient(client);
         server.setCurrentClient(client);
         int lastCl = P4jUtil.latestChangeId(client);
         System.out.println("latest CL in client:" + lastCl);
-        //assertTrue(lastCl > 0);
+        assertTrue(lastCl > 0);
         server.disconnect();
     }
 
@@ -161,10 +166,10 @@ public class P4jUtilTest extends TestCase {
         P4JServer server = makeTestServer();
         P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         P4jUtil.clearView(client);
-        P4jUtil.addViewMapping(client, scratchDepotPath, scratchClientPath);
+        P4jUtil.addViewMapping(client, testDepotPath, testClientPath);
         server.updateClient(client);
         server.setCurrentClient(client);
-        List<P4JChangeList> changes = P4jUtil.changesInRange(client, 118758, 121965);  // NOTE: valid range of 4 existing CLs
+        List<P4JChangeList> changes = P4jUtil.changesInRange(client, rangeCl0, rangeCl1);
         assertNotNull(changes);
         System.out.println("changeCount:" + changes.size());
         for (P4JChangeList cl : changes) {
@@ -185,12 +190,19 @@ public class P4jUtilTest extends TestCase {
         client.getServer().disconnect();
     }
 
+    // TODO reenable this test once P4Java spports label deletion
+    public void BROKEN_testDeleteLabel() throws Exception {
+        P4JServer server = makeTestServer();
+        P4jUtil.deleteLabel(server, p4label);
+        P4JLabel label = server.getLabel(p4label);
+        assertNull(label);
+    }
+
     public void testMakeLabel() throws Exception {
         P4JServer server = makeTestServer();
         P4jUtil.deleteLabel(server, p4label);
-        P4JLabel label = P4jUtil.newLabel(server, p4label, "Just a test label", 260000,  // NOTE: any existing CL
-                new String[] { scratchDepotPath });
-        //label.update();  // TODO(CQ) need to double check this commit
+        P4JLabel label = P4jUtil.newLabel(server, p4label, "Just a test label", existingCl,
+                new String[] { testDepotPath });
         server.updateLabel(label);
         server.disconnect();
     }
