@@ -46,6 +46,10 @@
   <li class=bug>
     Fixed possible <tt>Unable to call getCredential. Invalid object ID</tt> race problem.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4176">issue 4176</a>)
+  <li class='bug'>
+    If the timing coincides between polling and build, Hudson ended up creating multiple workspaces for the same job,
+    even when concurrent build is off.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4202">issue 4202</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
