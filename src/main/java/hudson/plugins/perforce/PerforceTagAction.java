@@ -1,8 +1,11 @@
 package hudson.plugins.perforce;
 
+import com.perforce.p4java.core.P4JChangeList;
+import com.perforce.p4java.core.P4JLabel;
+import com.perforce.p4java.impl.generic.core.P4JLabelImpl;
+import com.perforce.p4java.server.P4JServer;
+
 import com.tek42.perforce.Depot;
-import com.tek42.perforce.PerforceException;
-import com.tek42.perforce.model.Label;
 import static hudson.Util.fixEmpty;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
@@ -23,12 +26,16 @@ import java.util.regex.Pattern;
  * @author Mike Wille
  */
 public class PerforceTagAction extends AbstractScmTagAction {
+    private final Depot depot;
     private final int changeNumber;
-    private Depot depot;
+    private final String view;
+
     private String tag;
     private String desc;
-    private String view;
 
+    /**
+     * Constructs a new tag action for tagging the build at a given change id
+     */
     public PerforceTagAction(AbstractBuild build, Depot depot, int changeNumber, String views) {
         super(build);
         this.depot = depot;
@@ -36,10 +43,13 @@ public class PerforceTagAction extends AbstractScmTagAction {
         this.view = views;
     }
 
+    /**
+     * Constructs a new tag action for tagging the build at a given label
+     */
     public PerforceTagAction(AbstractBuild build, Depot depot, String label, String views) {
         super(build);
         this.depot = depot;
-        this.changeNumber = -1;
+        this.changeNumber = P4JChangeList.UNKNOWN;  // -1
         this.tag = label;
         this.view = views;
     }
@@ -55,10 +65,7 @@ public class PerforceTagAction extends AbstractScmTagAction {
     }
 
     public String getDisplayName() {
-        if (isTagged())
-            return "Perforce Label";
-        else
-            return "Label This Build";
+        return isTagged() ? "Perforce Label" : "Label This Build";
     }
 
     public String getTag() {
@@ -114,6 +121,8 @@ public class PerforceTagAction extends AbstractScmTagAction {
 
     /**
      * Invoked to actually tag the workspace.
+     * TODO(CQ) fix existing bug where this code assumes that views is a depot-only list of
+     * mappings, not a list of depot-client pairs.
      */
     public synchronized void doSubmit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
         if (!Hudson.adminCheck(req, rsp))
@@ -121,21 +130,16 @@ public class PerforceTagAction extends AbstractScmTagAction {
 
         tag = req.getParameter("name");
         desc = req.getParameter("desc");
-
-        Label label = new Label();
-        label.setName(tag);
-        label.setDescription(desc);
-        label.setRevision(new Integer(changeNumber).toString());
-        for (String eachView : view.split("\n")) {
-            label.addView(eachView);
-        }
         try {
-            depot.getLabels().saveLabel(label);
-        } catch(PerforceException e) {
+            P4JServer server = P4jUtil.newServer(depot.getPort(), "prog", "ver", depot.getUser(), depot.getPassword());
+            P4JLabel label = P4jUtil.newLabel(server, tag, desc, changeNumber, view.split("\n"));
+            //label.update();
+            server.updateLabel(label);
+        } catch (Exception e) {
             tag = null;
             desc = null;
             e.printStackTrace();
-            throw new IOException("Failed to issue perforce label." + e.getMessage());
+            throw new IOException("Failed to issue perforce label: " + e.getMessage());
         }
         build.save();
         rsp.sendRedirect(".");

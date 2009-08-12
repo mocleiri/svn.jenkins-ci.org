@@ -5,6 +5,8 @@ import hudson.model.User;
 import hudson.tasks.MailAddressResolver;
 import hudson.Extension;
 
+import com.perforce.p4java.server.P4JUser;
+
 /**
  * Implementation of {@link MailAddressResolver} for looking up the email address of a user in the Perforce repository.
  *
@@ -13,20 +15,18 @@ import hudson.Extension;
  */
 @Extension
 public class PerforceMailResolver extends MailAddressResolver {
+
     public String findMailAddressFor(User u) {
-
         for (AbstractProject p : u.getProjects()) {
-
             if (p.getScm() instanceof PerforceSCM) {
                 PerforceSCM pscm = (PerforceSCM) p.getScm();
                 try {
                     // couldn't resist the name pu...
-                    com.tek42.perforce.model.User pu = pscm.getDepot().getUsers().getUser(u.getId());
+                    P4JUser pu = P4jUtil.getUser(pscm.getServer(), u.getId());
                     if (pu.getEmail() != null && !pu.getEmail().equals(""))
                         return pu.getEmail();
-
                 } catch (Exception e) {
-                    // where are we supposed to log this errror?
+                    // where are we supposed to log this error?
                 }
             }
         }

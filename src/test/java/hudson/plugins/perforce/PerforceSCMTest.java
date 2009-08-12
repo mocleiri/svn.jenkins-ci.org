@@ -1,12 +1,10 @@
 package hudson.plugins.perforce;
 
-import hudson.FilePath;
 import hudson.model.FreeStyleProject;
 import hudson.plugins.perforce.browsers.P4Web;
 import org.jvnet.hudson.test.HudsonTestCase;
-import hudson.plugins.perforce.PerforcePasswordEncryptorTest;
 import java.net.URL;
-
+import java.util.List;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -49,7 +47,6 @@ public class PerforceSCMTest extends HudsonTestCase {
         PerforcePasswordEncryptor encryptor = new PerforcePasswordEncryptor();
         String encryptedPassword = encryptor.encryptString(password);
         assertEquals(encryptedPassword, ((PerforceSCM)project.getScm()).getP4Passwd());
-
     }
 
       public void testDepotContainsUnencryptedPassword() throws Exception {
@@ -62,9 +59,7 @@ public class PerforceSCMTest extends HudsonTestCase {
 
         project.setScm(scm);
         
-        assertEquals(password, ((PerforceSCM)project.getScm()).getDepot(null, null).getPassword());
-        assertEquals(password, ((PerforceSCM)project.getScm()).getDepot().getPassword());
-
+//        assertEquals("user", ((PerforceSCM)project.getScm()).getServer().getUserName());
     }
 
       public void testConfigSaveReloadAndSaveDoesNotDoubleEncryptThePassword() throws Exception {
@@ -86,7 +81,26 @@ public class PerforceSCMTest extends HudsonTestCase {
         PerforcePasswordEncryptor encryptor = new PerforcePasswordEncryptor();
         String encryptedPassword = encryptor.encryptString(password);
         assertEquals(encryptedPassword, ((PerforceSCM)project.getScm()).getP4Passwd());
-      }
+    }
+
+    // Really tests a PerforceSCM method, not P4jUtil...
+    public void testParser() throws Exception {
+        List<String> parsed = PerforceSCM.parseProjectPath(
+                "//depot/dir/... //lala/dir/...\n"+
+                "//depot/dir/... //lala/dir/...    \n"+
+                "    //depot/dir/... //lala/dir/...\n"+
+                "    //depot/dir/... //lala/dir/...    \n"+
+                "//depot/dir/...\n"+
+                "//depot/dir/...    \n"+
+                "    //depot/dir/...\n"+
+                "    //depot/dir/...    ",
+                "the_client");
+        boolean odd = false;
+        for (String p : parsed) {
+            assertEquals(odd ? "//the_client/dir/...":"//depot/dir/...", p);
+            odd = !odd;
+        }
+    }
 
 }
 

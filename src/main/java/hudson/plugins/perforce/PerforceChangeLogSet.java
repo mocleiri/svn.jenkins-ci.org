@@ -1,5 +1,9 @@
 package hudson.plugins.perforce;
 
+import com.perforce.p4java.core.P4JChangeList;
+import com.perforce.p4java.core.P4JJob;
+import com.perforce.p4java.core.file.P4JFileSpec;
+import com.perforce.p4java.exception.P4JException;
 import hudson.Util;
 import hudson.util.WriterOutputStream;
 import hudson.model.AbstractBuild;
@@ -65,13 +69,11 @@ public class PerforceChangeLogSet extends ChangeLogSet<PerforceChangeLogEntry> {
     public static PerforceChangeLogSet parse(AbstractBuild build, InputStream changeLogStream) throws IOException, SAXException {
 
         ArrayList<PerforceChangeLogEntry> changeLogEntries = new ArrayList<PerforceChangeLogEntry>();
-
-        SAXReader reader = new SAXReader();
-        Document changeDoc = null;
         PerforceChangeLogSet changeLogSet = new PerforceChangeLogSet(build, changeLogEntries);
 
         try {
-            changeDoc = reader.read(changeLogStream);
+            SAXReader reader = new SAXReader();
+            Document changeDoc = reader.read(changeLogStream);
 
             Node historyNode = changeDoc.selectSingleNode("/changelog");
             if (historyNode == null)
@@ -126,7 +128,7 @@ public class PerforceChangeLogSet extends ChangeLogSet<PerforceChangeLogEntry> {
                 entry.setChange(change);
                 changeLogEntries.add(entry);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new IOException("Failed to parse changelog file: " + e.getMessage());
         }
 
@@ -142,35 +144,35 @@ public class PerforceChangeLogSet extends ChangeLogSet<PerforceChangeLogEntry> {
      *            the history objects to store
      * @throws IOException
      */
-    public static void saveToChangeLog(OutputStream outputStream, List<Changelist> changes) throws IOException {
+    public static void saveToChangeLog(OutputStream outputStream, List<P4JChangeList> changes) throws IOException, P4JException {
         OutputStreamWriter writer = new OutputStreamWriter(outputStream, Charset.forName("UTF-8"));
         WriterOutputStream stream1 = new WriterOutputStream(writer);
         PrintStream stream = new PrintStream(stream1);
 
         stream.println("<?xml version='1.0' encoding='UTF-8'?>");
         stream.println("<changelog>");
-        for (Changelist change : changes) {
+        for (P4JChangeList change : changes) {
             stream.println("\t<entry>");
-            stream.println("\t\t<changenumber>" + change.getChangeNumber() + "</changenumber>");
+            stream.println("\t\t<changenumber>" + change.getId() + "</changenumber>");
             stream.println("\t\t<date>" + Util.xmlEscape(javaDateToStringDate(change.getDate())) + "</date>");
             stream.println("\t\t<description>" + Util.xmlEscape(change.getDescription()) + "</description>");
-            stream.println("\t\t<user>" + Util.xmlEscape(change.getUser()) + "</user>");
-            stream.println("\t\t<workspace>" + Util.xmlEscape(change.getWorkspace()) + "</workspace>");
+            stream.println("\t\t<user>" + Util.xmlEscape(change.getUsername()) + "</user>");
+            stream.println("\t\t<workspace>" + Util.xmlEscape(change.getClientId()) + "</workspace>");
             stream.println("\t\t<files>");
-            for (Changelist.FileEntry entry : change.getFiles()) {
+            for (P4JFileSpec fileSpec : change.getFiles(false)) {
                 stream.println("\t\t\t<file>");
-                stream.println("\t\t\t\t<name>" + Util.xmlEscape(entry.getFilename()) + "</name>");
-                stream.println("\t\t\t\t<rev>" + Util.xmlEscape(entry.getRevision()) + "</rev>");
-                stream.println("\t\t\t\t<action>" + entry.getAction() + "</action>");
+                stream.println("\t\t\t\t<name>" + Util.xmlEscape(fileSpec.getPath()) + "</name>");
+                stream.println("\t\t\t\t<rev>" + fileSpec.getEndRevision() + "</rev>");
+                stream.println("\t\t\t\t<action>" + fileSpec.getAction() + "</action>");
                 stream.println("\t\t\t</file>");
             }
             stream.println("\t\t</files>");
             stream.println("\t\t<jobs>");
-            for (Changelist.JobEntry entry : change.getJobs()) {
+            for (P4JJob job : change.getJobList()) {
                 stream.println("\t\t\t<job>");
-                stream.println("\t\t\t\t<name>" + Util.xmlEscape(entry.getJob()) + "</name>");
-                stream.println("\t\t\t\t<description>" + Util.xmlEscape(entry.getDescription()) + "</description>");
-                stream.println("\t\t\t\t<status>" + Util.xmlEscape(entry.getStatus()) + "</status>");
+                stream.println("\t\t\t\t<name>" + Util.xmlEscape(job.getId()) + "</name>");
+                stream.println("\t\t\t\t<description>" + Util.xmlEscape(job.getDescription()) + "</description>");
+                stream.println("\t\t\t\t<status>" + Util.xmlEscape(P4jUtil.jobStatus(job)) + "</status>");
                 stream.println("\t\t\t</job>");
             }
             stream.println("\t\t</jobs>");
