@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SuiteResult (Hudson main module 1.319 API)
+SuiteResult (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SuiteResult (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SuiteResult (Hudson main module 1.319 API)";
+        parent.document.title="SuiteResult (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -153,11 +153,27 @@ Result of one test suite.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/SuiteResult.html#getClassNames()">getClassNames</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;float</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/SuiteResult.html#getDuration()">getDuration</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/SuiteResult.html#getFile()">getFile</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The absolute path to the original test report.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -298,6 +314,22 @@ getStderr</H3>
 </DL>
 <HR>
 
+<A NAME="getFile()"><!-- --></A><H3>
+getFile</H3>
+<PRE>
+public java.lang.String <B>getFile</B>()</PRE>
+<DL>
+<DD>The absolute path to the original test report. OS-dependent.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getParent()"><!-- --></A><H3>
 getParent</H3>
 <PRE>
@@ -367,6 +399,20 @@ public <A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hud
  <p>
  Note that test name needs not be unique.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getClassNames()"><!-- --></A><H3>
+getClassNames</H3>
+<PRE>
+public java.util.Set&lt;java.lang.String&gt; <B>getClassNames</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

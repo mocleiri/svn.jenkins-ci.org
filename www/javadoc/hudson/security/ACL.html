@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ACL (Hudson main module 1.319 API)
+ACL (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ACL (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ACL (Hudson main module 1.319 API)";
+        parent.document.title="ACL (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -131,6 +131,14 @@ Gate-keeper that controls access to Hudson's model objects.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>Sid</CODE> that represents the anonymous unauthenticated users.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;org.acegisecurity.acls.sid.Sid[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/ACL.html#AUTOMATIC_SIDS">AUTOMATIC_SIDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -249,6 +257,16 @@ public static final org.acegisecurity.acls.sid.Sid <B>ANONYMOUS</B></PRE>
  <A HREF="../../hudson/security/HudsonFilter.html" title="class in hudson.security"><CODE>HudsonFilter</CODE></A> sets this up, so this sid remains the same
  regardless of the current <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> in use.
 <P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="AUTOMATIC_SIDS"><!-- --></A><H3>
+AUTOMATIC_SIDS</H3>
+<PRE>
+protected static final org.acegisecurity.acls.sid.Sid[] <B>AUTOMATIC_SIDS</B></PRE>
+<DL>
 <DL>
 </DL>
 </DL>

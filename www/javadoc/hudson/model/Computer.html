@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Computer (Hudson main module 1.319 API)
+Computer (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson main module 1.319 API)";
+        parent.document.title="Computer (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -176,6 +176,14 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#offlineCause">offlineCause</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains info about reason behind computer being offline.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#PERMISSIONS">PERMISSIONS</A></B></CODE>
 
@@ -289,6 +297,15 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#disconnect()">disconnect</A></B>()</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.320.
+      Use <A HREF="../../hudson/model/Computer.html#disconnect(hudson.slaves.OfflineCause)"><CODE>disconnect(OfflineCause)</CODE></A> and specify the cause.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#disconnect(hudson.slaves.OfflineCause)">disconnect</A></B>(<A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;cause)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disconnect this computer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -374,8 +391,9 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doToggleOffline</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doToggleOffline</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                java.lang.String&nbsp;offlineMessage)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -575,6 +593,15 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#getOfflineCause()">getOfflineCause</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the computer was offline (either temporarily or not),
+ this method will return the cause.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/OneOffExecutor.html" title="class in hudson.model">OneOffExecutor</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#getOneOffExecutors()">getOneOffExecutors</A></B>()</CODE>
 
@@ -758,7 +785,18 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean)">setTemporarilyOffline</A></B>(boolean&nbsp;temporarilyOffline)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.320.
+      Use <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean, hudson.slaves.OfflineCause)"><CODE>setTemporarilyOffline(boolean, OfflineCause)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean, hudson.slaves.OfflineCause)">setTemporarilyOffline</A></B>(boolean&nbsp;temporarilyOffline,
+                      <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;cause)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks the computer as temporarily offline.This retains the underlying
+ <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> connection, but prevent builds from executing.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -830,6 +868,18 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="offlineCause"><!-- --></A><H3>
+offlineCause</H3>
+<PRE>
+protected volatile <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A> <B>offlineCause</B></PRE>
+<DL>
+<DD>Contains info about reason behind computer being offline.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
 
 <A NAME="nodeName"><!-- --></A><H3>
 nodeName</H3>
@@ -1015,6 +1065,25 @@ public boolean <B>hasPermission</B>(<A HREF="../../hudson/security/Permission.ht
 </DL>
 <HR>
 
+<A NAME="getOfflineCause()"><!-- --></A><H3>
+getOfflineCause</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A> <B>getOfflineCause</B>()</PRE>
+<DL>
+<DD>If the computer was offline (either temporarily or not),
+ this method will return the cause.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if the system was put offline without given a cause.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getChannel()"><!-- --></A><H3>
 getChannel</H3>
 <PRE>
@@ -1178,10 +1247,10 @@ public final long <B>getConnectTime</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="disconnect()"><!-- --></A><H3>
+<A NAME="disconnect(hudson.slaves.OfflineCause)"><!-- --></A><H3>
 disconnect</H3>
 <PRE>
-public java.util.concurrent.Future&lt;?&gt; <B>disconnect</B>()</PRE>
+public java.util.concurrent.Future&lt;?&gt; <B>disconnect</B>(<A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;cause)</PRE>
 <DL>
 <DD>Disconnect this computer.
 
@@ -1192,8 +1261,29 @@ public java.util.concurrent.Future&lt;?&gt; <B>disconnect</B>()</PRE>
 </DL>
 </DD>
 <DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cause</CODE> - Object that identifies the reason the node was disconnected.
+<DT><B>Returns:</B><DD><CODE>Future</CODE> to track the asynchronous disconnect operation.<DT><B>Since:</B></DT>
+  <DD>1.320</DD>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#connect(boolean)"><CODE>connect(boolean)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
 
-<DT><B>Returns:</B><DD><CODE>Future</CODE> to track the asynchronous disconnect operation.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Computer.html#connect(boolean)"><CODE>connect(boolean)</CODE></A></DL>
+<A NAME="disconnect()"><!-- --></A><H3>
+disconnect</H3>
+<PRE>
+public java.util.concurrent.Future&lt;?&gt; <B>disconnect</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.320.
+      Use <A HREF="../../hudson/model/Computer.html#disconnect(hudson.slaves.OfflineCause)"><CODE>disconnect(OfflineCause)</CODE></A> and specify the cause.</I>
+<P>
+<DD>Equivalent to <code>disconnect(null)</code>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -1454,11 +1544,33 @@ setTemporarilyOffline</H3>
 <PRE>
 public void <B>setTemporarilyOffline</B>(boolean&nbsp;temporarilyOffline)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.320.
+      Use <A HREF="../../hudson/model/Computer.html#setTemporarilyOffline(boolean, hudson.slaves.OfflineCause)"><CODE>setTemporarilyOffline(boolean, OfflineCause)</CODE></A></I>
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTemporarilyOffline(boolean, hudson.slaves.OfflineCause)"><!-- --></A><H3>
+setTemporarilyOffline</H3>
+<PRE>
+public void <B>setTemporarilyOffline</B>(boolean&nbsp;temporarilyOffline,
+                                  <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;cause)</PRE>
+<DL>
+<DD>Marks the computer as temporarily offline.This retains the underlying
+ <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> connection, but prevent builds from executing.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cause</CODE> - If the first argument is true, specify the reason why the node is being put
+      offline.</DL>
 </DD>
 </DL>
 <HR>
@@ -1973,11 +2085,13 @@ public void <B>doRssFailed</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
 doToggleOffline</H3>
 <PRE>
 public void <B>doToggleOffline</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                            <FONT SIZE="-1">@QueryParameter</FONT>
+                            java.lang.String&nbsp;offlineMessage)
                      throws java.io.IOException,
                             javax.servlet.ServletException</PRE>
 <DL>

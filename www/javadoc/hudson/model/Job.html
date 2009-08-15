@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.319 API)
+Job (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.319 API)";
+        parent.document.title="Job (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -279,24 +279,6 @@ A job is an runnable entity under the monitoring of Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Job.html#doBuildTimeGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraph</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the graph that shows how long each build took.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Job.html#doBuildTimeGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraphMap</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the clickable map for the build time graph.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#doConfigDotXml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigDotXml</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -424,6 +406,14 @@ A job is an runnable entity under the monitoring of Hudson.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getBuildStatusUrl()">getBuildStatusUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/Graph.html" title="class in hudson.util">Graph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getBuildTimeGraph()">getBuildTimeGraph</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1866,43 +1856,16 @@ public java.lang.String <B>getBuildStatusUrl</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doBuildTimeGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doBuildTimeGraph</H3>
+<A NAME="getBuildTimeGraph()"><!-- --></A><H3>
+getBuildTimeGraph</H3>
 <PRE>
-public void <B>doBuildTimeGraph</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                      throws java.io.IOException</PRE>
+public <A HREF="../../hudson/util/Graph.html" title="class in hudson.util">Graph</A> <B>getBuildTimeGraph</B>()</PRE>
 <DL>
-<DD>Returns the graph that shows how long each build took.
-<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
-</DD>
 </DL>
-<HR>
-
-<A NAME="doBuildTimeGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-doBuildTimeGraphMap</H3>
-<PRE>
-public void <B>doBuildTimeGraphMap</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                         throws java.io.IOException</PRE>
-<DL>
-<DD>Returns the clickable map for the build time graph. Loaded lazily by
- AJAX.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

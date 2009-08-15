@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractBuild.AbstractRunner (Hudson main module 1.319 API)
+AbstractBuild.AbstractRunner (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractBuild.AbstractRunner (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractBuild.AbstractRunner (Hudson main module 1.319 API)";
+        parent.document.title="AbstractBuild.AbstractRunner (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -175,7 +175,7 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#decideWorkspace(hudson.model.Node, hudson.slaves.WorkspaceList)">decideWorkspace</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n,
                 <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves">WorkspaceList</A>&nbsp;wsl)</CODE>
 
@@ -366,13 +366,18 @@ protected final <A HREF="../../hudson/model/Node.html" title="class in hudson.mo
 <A NAME="decideWorkspace(hudson.model.Node, hudson.slaves.WorkspaceList)"><!-- --></A><H3>
 decideWorkspace</H3>
 <PRE>
-protected <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>decideWorkspace</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n,
-                                   <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves">WorkspaceList</A>&nbsp;wsl)</PRE>
+protected <A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A> <B>decideWorkspace</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n,
+                                              <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves">WorkspaceList</A>&nbsp;wsl)
+                                       throws java.lang.InterruptedException,
+                                              java.io.IOException</PRE>
 <DL>
 <DD>Allocates the workspace from <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A>.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>n</CODE> - Passed in for the convenience. The node where the build is running.<DD><CODE>wsl</CODE> - Passed in for the convenience. The returned path must be registered to this object.</DL>
+<DT><B>Parameters:</B><DD><CODE>n</CODE> - Passed in for the convenience. The node where the build is running.<DD><CODE>wsl</CODE> - Passed in for the convenience. The returned path must be registered to this object.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.InterruptedException</CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

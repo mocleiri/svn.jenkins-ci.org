@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AtomicFileWriter (Hudson main module 1.319 API)
+AtomicFileWriter (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AtomicFileWriter (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AtomicFileWriter (Hudson main module 1.319 API)";
+        parent.document.title="AtomicFileWriter (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -152,6 +152,13 @@ Buffered <CODE>FileWriter</CODE> that uses UTF-8.
 <TD><CODE><B><A HREF="../../hudson/util/AtomicFileWriter.html#AtomicFileWriter(java.io.File)">AtomicFileWriter</A></B>(java.io.File&nbsp;f)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes with UTF-8 encoding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/util/AtomicFileWriter.html#AtomicFileWriter(java.io.File, java.lang.String)">AtomicFileWriter</A></B>(java.io.File&nbsp;f,
+                 java.lang.String&nbsp;encoding)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -272,8 +279,24 @@ AtomicFileWriter</H3>
 public <B>AtomicFileWriter</B>(java.io.File&nbsp;f)
                  throws java.io.IOException</PRE>
 <DL>
+<DD>Writes with UTF-8 encoding.
+<P>
 <DL>
 
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="AtomicFileWriter(java.io.File, java.lang.String)"><!-- --></A><H3>
+AtomicFileWriter</H3>
+<PRE>
+public <B>AtomicFileWriter</B>(java.io.File&nbsp;f,
+                        java.lang.String&nbsp;encoding)
+                 throws java.io.IOException</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>encoding</CODE> - File encoding to write. If null, platform default encoding is chosen.
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
 </DL>

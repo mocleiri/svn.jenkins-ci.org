@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JUnitResultArchiver (Hudson main module 1.319 API)
+JUnitResultArchiver (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JUnitResultArchiver (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JUnitResultArchiver (Hudson main module 1.319 API)";
+        parent.document.title="JUnitResultArchiver (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../hudson/tasks/junit/ClassResult.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/junit/JUnitResultArchiver.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -197,6 +197,13 @@ Generates HTML report from JUnit test result XML files.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#JUnitResultArchiver(java.lang.String)">JUnitResultArchiver</A></B>(java.lang.String&nbsp;testResults)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#JUnitResultArchiver(java.lang.String, hudson.util.DescribableList)">JUnitResultArchiver</A></B>(java.lang.String&nbsp;testResults,
+                    <A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>&gt;&gt;&nbsp;testDataPublishers)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -238,6 +245,14 @@ Generates HTML report from JUnit test result XML files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#getTestDataPublishers()">getTestDataPublishers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#getTestResults()">getTestResults</A></B>()</CODE>
 
@@ -251,7 +266,7 @@ Generates HTML report from JUnit test result XML files.
             long&nbsp;buildTime)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -325,8 +340,22 @@ Generates HTML report from JUnit test result XML files.
 <A NAME="JUnitResultArchiver(java.lang.String)"><!-- --></A><H3>
 JUnitResultArchiver</H3>
 <PRE>
-<FONT SIZE="-1">@DataBoundConstructor
+<FONT SIZE="-1">@Deprecated
 </FONT>public <B>JUnitResultArchiver</B>(java.lang.String&nbsp;testResults)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD>left for backwards compatibility
+<P>
+</DL>
+<HR>
+
+<A NAME="JUnitResultArchiver(java.lang.String, hudson.util.DescribableList)"><!-- --></A><H3>
+JUnitResultArchiver</H3>
+<PRE>
+<FONT SIZE="-1">@DataBoundConstructor
+</FONT>public <B>JUnitResultArchiver</B>(java.lang.String&nbsp;testResults,
+                                                <A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>&gt;&gt;&nbsp;testDataPublishers)</PRE>
 <DL>
 </DL>
 
@@ -385,6 +414,10 @@ protected <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in 
                                  long&nbsp;buildTime)
                           throws java.io.IOException</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I></I>
+<P>
+<DD>Not actually used, but left for backward compatibility
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -416,6 +449,20 @@ public <A HREF="../../../hudson/tasks/BuildStepMonitor.html" title="enum in huds
 getTestResults</H3>
 <PRE>
 public java.lang.String <B>getTestResults</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTestDataPublishers()"><!-- --></A><H3>
+getTestDataPublishers</H3>
+<PRE>
+public <A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>&gt;&gt; <B>getTestDataPublishers</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -513,7 +560,7 @@ public <A HREF="../../../hudson/matrix/MatrixAggregator.html" title="class in hu
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../hudson/tasks/junit/ClassResult.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/junit/JUnitResultArchiver.html" target="_top"><B>FRAMES</B></A>  &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractNodeMonitorDescriptor (Hudson main module 1.319 API)
+AbstractNodeMonitorDescriptor (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractNodeMonitorDescriptor (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractNodeMonitorDescriptor (Hudson main module 1.319 API)";
+        parent.document.title="AbstractNodeMonitorDescriptor (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -245,6 +245,16 @@ Convenient base class for common <A HREF="../../hudson/node_monitors/NodeMonitor
 <TD><CODE><B><A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer)">markOffline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.320
+      Use <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer, hudson.slaves.OfflineCause)"><CODE>markOffline(Computer, OfflineCause)</CODE></A> to specify the cause.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer, hudson.slaves.OfflineCause)">markOffline</A></B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+            <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;oc)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utility method to mark the computer offline for derived classes.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -383,10 +393,11 @@ public boolean <B>isIgnored</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="markOffline(hudson.model.Computer)"><!-- --></A><H3>
+<A NAME="markOffline(hudson.model.Computer, hudson.slaves.OfflineCause)"><!-- --></A><H3>
 markOffline</H3>
 <PRE>
-protected boolean <B>markOffline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
+protected boolean <B>markOffline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
+                              <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;oc)</PRE>
 <DL>
 <DD>Utility method to mark the computer offline for derived classes.
 <P>
@@ -395,6 +406,20 @@ protected boolean <B>markOffline</B>(<A HREF="../../hudson/model/Computer.html" 
 <DT><B>Returns:</B><DD>true
       if the node was actually taken offline by this act (as opposed to us deciding not to do it,
       or the computer already marked offline.)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="markOffline(hudson.model.Computer)"><!-- --></A><H3>
+markOffline</H3>
+<PRE>
+protected boolean <B>markOffline</B>(<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.320
+      Use <A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer, hudson.slaves.OfflineCause)"><CODE>markOffline(Computer, OfflineCause)</CODE></A> to specify the cause.</I>
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

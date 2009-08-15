@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.319 API)
+Deprecated List (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.319 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -578,6 +578,12 @@ function windowTitle()
       Use <A HREF="hudson/FilePath.html#zip(java.io.OutputStream, java.lang.String)"><CODE>FilePath.zip(OutputStream,String)</CODE></A> that has more consistent name.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Computer.html#disconnect()">hudson.model.Computer.disconnect()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320.
+      Use <A HREF="hudson/model/Computer.html#disconnect(hudson.slaves.OfflineCause)"><CODE>Computer.disconnect(OfflineCause)</CODE></A> and specify the cause.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#doFieldCheck(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">hudson.model.Hudson.doFieldCheck(StaplerRequest, StaplerResponse)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294
@@ -606,6 +612,34 @@ function windowTitle()
 <TD><A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">hudson.slaves.Channels.forProcess(String, ExecutorService, InputStream, OutputStream, Proc)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)"><CODE>Channels.forProcess(String, ExecutorService, InputStream, OutputStream, OutputStream, Proc)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/ChartUtil.html#generateClickableMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)">hudson.util.ChartUtil.generateClickableMap(StaplerRequest, StaplerResponse, JFreeChart, Area)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320
+      Bind <A HREF="hudson/util/Graph.html" title="class in hudson.util"><CODE>Graph</CODE></A> to the URL space. See <A HREF="hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><CODE>History</CODE></A> as an example (note that doing so involves
+      a bit of URL structure change.)</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/ChartUtil.html#generateClickableMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, int, int)">hudson.util.ChartUtil.generateClickableMap(StaplerRequest, StaplerResponse, JFreeChart, int, int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320
+      Bind <A HREF="hudson/util/Graph.html" title="class in hudson.util"><CODE>Graph</CODE></A> to the URL space. See <A HREF="hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><CODE>History</CODE></A> as an example (note that doing so involves
+      a bit of URL structure change.)</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/ChartUtil.html#generateGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, hudson.util.Area)">hudson.util.ChartUtil.generateGraph(StaplerRequest, StaplerResponse, JFreeChart, Area)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320
+      Bind <A HREF="hudson/util/Graph.html" title="class in hudson.util"><CODE>Graph</CODE></A> to the URL space. See <A HREF="hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><CODE>History</CODE></A> as an example (note that doing so involves
+      a bit of URL structure change.)</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/ChartUtil.html#generateGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, org.jfree.chart.JFreeChart, int, int)">hudson.util.ChartUtil.generateGraph(StaplerRequest, StaplerResponse, JFreeChart, int, int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320
+      Bind <A HREF="hudson/util/Graph.html" title="class in hudson.util"><CODE>Graph</CODE></A> to the URL space. See <A HREF="hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><CODE>History</CODE></A> as an example (note that doing so involves
+      a bit of URL structure change.)</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/ComputerSet.html#get_monitors()">hudson.model.ComputerSet.get_monitors()</A>
@@ -976,6 +1010,12 @@ function windowTitle()
       Use <A HREF="hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer)">hudson.node_monitors.AbstractNodeMonitorDescriptor.markOffline(Computer)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320
+      Use <A HREF="hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer, hudson.slaves.OfflineCause)"><CODE>AbstractNodeMonitorDescriptor.markOffline(Computer, OfflineCause)</CODE></A> to specify the cause.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.newInstance(StaplerRequest)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Implement <A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Descriptor.newInstance(StaplerRequest, JSONObject)</CODE></A> method instead.
@@ -991,6 +1031,11 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.292
       Use <A HREF="hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)"><CODE>ComputerListener.onOnline(Computer, TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/junit/JUnitResultArchiver.html#parseResult(org.apache.tools.ant.DirectoryScanner, long)">hudson.tasks.junit.JUnitResultArchiver.parseResult(DirectoryScanner, long)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/scm/SCMS.html#parseSCM(org.kohsuke.stapler.StaplerRequest)">hudson.scm.SCMS.parseSCM(StaplerRequest)</A>
@@ -1111,6 +1156,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Hudson.html#setNodes(java.util.List)"><CODE>Hudson.setNodes(List)</CODE></A>. Since 1.252.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Computer.html#setTemporarilyOffline(boolean)">hudson.model.Computer.setTemporarilyOffline(boolean)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320.
+      Use <A HREF="hudson/model/Computer.html#setTemporarilyOffline(boolean, hudson.slaves.OfflineCause)"><CODE>Computer.setTemporarilyOffline(boolean, OfflineCause)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildWrapper.html#setUp(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">hudson.tasks.BuildWrapper.setUp(Build, Launcher, BuildListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/BuildWrapper.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildWrapper.setUp(AbstractBuild, Launcher, BuildListener)</CODE></A> instead.</I>&nbsp;</TD>
@@ -1193,6 +1244,11 @@ function windowTitle()
 <TD><A HREF="hudson/model/HealthReport.html#HealthReport(int, java.lang.String, java.lang.String)">hudson.model.HealthReport(int, String, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>use <A HREF="hudson/model/HealthReport.html#HealthReport(int, java.lang.String, org.jvnet.localizer.Localizable)"><CODE>HealthReport.HealthReport(int, String, org.jvnet.localizer.Localizable)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/junit/JUnitResultArchiver.html#JUnitResultArchiver(java.lang.String)">hudson.tasks.junit.JUnitResultArchiver(String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)">hudson.tasks.Maven.MavenInstallation(String, String)</A>

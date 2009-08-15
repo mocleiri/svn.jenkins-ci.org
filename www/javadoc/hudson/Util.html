@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Util (Hudson main module 1.319 API)
+Util (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson main module 1.319 API)";
+        parent.document.title="Util (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -452,6 +452,18 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extracts the Win32 error message from <CODE>Throwable</CODE> if possible.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#isOverridden(java.lang.Class, java.lang.Class, java.lang.String, java.lang.Class...)">isOverridden</A></B>(java.lang.Class&nbsp;base,
+             java.lang.Class&nbsp;derived,
+             java.lang.String&nbsp;methodName,
+             java.lang.Class...&nbsp;types)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the public method defined on the base type with the given arguments
+ are overridden in the given derived type.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1496,6 +1508,23 @@ public static java.lang.Number <B>tryParseNumber</B>(java.lang.String&nbsp;numbe
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>numberStr</CODE> - string to parse<DD><CODE>defaultNumber</CODE> - number to return if the string can not be parsed
 <DT><B>Returns:</B><DD>returns the parsed string; otherwise the default number</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isOverridden(java.lang.Class, java.lang.Class, java.lang.String, java.lang.Class...)"><!-- --></A><H3>
+isOverridden</H3>
+<PRE>
+public static boolean <B>isOverridden</B>(java.lang.Class&nbsp;base,
+                                   java.lang.Class&nbsp;derived,
+                                   java.lang.String&nbsp;methodName,
+                                   java.lang.Class...&nbsp;types)</PRE>
+<DL>
+<DD>Checks if the public method defined on the base type with the given arguments
+ are overridden in the given derived type.
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.slaves (Hudson main module 1.319 API)
+Uses of Package hudson.slaves (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.slaves (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.slaves (Hudson main module 1.319 API)";
+        parent.document.title="Uses of Package hudson.slaves (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -103,6 +103,10 @@ Packages that use <A HREF="../../hudson/slaves/package-summary.html">hudson.slav
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.node_monitors"><B>hudson.node_monitors</B></A></TD>
+<TD>Code that monitors the health of slaves&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.os.windows"><B>hudson.os.windows</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
@@ -176,6 +180,12 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used by <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> to keep track of workspaces that are actively in use.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/WorkspaceList.Lease.html#hudson.matrix"><B>WorkspaceList.Lease</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a leased workspace that needs to be returned later.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -236,6 +246,12 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents any concept that can be adapted for a node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/OfflineCause.html#hudson.model"><B>OfflineCause</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a cause that puts a <A HREF="../../hudson/model/Computer.html#isOffline()">computer offline</A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/slaves/class-use/RetentionStrategy.html#hudson.model"><B>RetentionStrategy</B></A></B>
 
 <BR>
@@ -252,6 +268,27 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used by <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> to keep track of workspaces that are actively in use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/WorkspaceList.Lease.html#hudson.model"><B>WorkspaceList.Lease</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a leased workspace that needs to be returned later.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.node_monitors"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> used by <A HREF="../../hudson/node_monitors/package-summary.html">hudson.node_monitors</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/OfflineCause.html#hudson.node_monitors"><B>OfflineCause</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a cause that puts a <A HREF="../../hudson/model/Computer.html#isOffline()">computer offline</A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -355,6 +392,12 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents any concept that can be adapted for a node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/OfflineCause.html#hudson.slaves"><B>OfflineCause</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a cause that puts a <A HREF="../../hudson/model/Computer.html#isOffline()">computer offline</A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/slaves/class-use/RetentionStrategy.html#hudson.slaves"><B>RetentionStrategy</B></A></B>
 
 <BR>
@@ -377,6 +420,12 @@ Classes in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> for <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/slaves/class-use/WorkspaceList.Lease.html#hudson.slaves"><B>WorkspaceList.Lease</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a leased workspace that needs to be returned later.</TD>
 </TR>
 </TABLE>
 &nbsp;

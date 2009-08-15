@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Permission (Hudson main module 1.319 API)
+Permission (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Permission (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Permission (Hudson main module 1.319 API)";
+        parent.document.title="Permission (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -261,7 +261,7 @@ Permission, which represents activity that requires a security privilege.
            <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defines a new permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, hudson.security.Permission)">Permission</A></B>(<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
@@ -555,6 +555,21 @@ public <B>Permission</B>(<A HREF="../../hudson/security/PermissionGroup.html" ti
                   org.jvnet.localizer.Localizable&nbsp;description,
                   <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</PRE>
 <DL>
+<DD>Defines a new permission.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>group</CODE> - Permissions are grouped per classes that own them. Specify the permission group
+      created for that class. The idiom is:
+
+ <pre>
+ class Foo {
+     private static final PermissionGroup PERMISSIONS = new PermissionGroup(Foo.class,...);
+     public static final Permission ABC = new Permisison(PERMISSION,...) ;
+ }
+ </pre>
+
+      Because of the classloading problems and the difficulty for Hudson to enumerate them,
+      the permission constants really need to be static field of the owner class.<DD><CODE>name</CODE> - See <A HREF="../../hudson/security/Permission.html#name"><CODE>name</CODE></A>.<DD><CODE>description</CODE> - See <A HREF="../../hudson/security/Permission.html#description"><CODE>description</CODE></A>.<DD><CODE>impliedBy</CODE> - See <A HREF="../../hudson/security/Permission.html#impliedBy"><CODE>impliedBy</CODE></A>.</DL>
 </DL>
 <HR>
 

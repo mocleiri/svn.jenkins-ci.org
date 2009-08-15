@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.FilePath (Hudson main module 1.319 API)
+Uses of Class hudson.FilePath (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.FilePath (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.FilePath (Hudson main module 1.319 API)";
+        parent.document.title="Uses of Class hudson.FilePath (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -97,10 +97,6 @@ Packages that use <A HREF="../../hudson/FilePath.html" title="class in hudson">F
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.fsp"><B>hudson.fsp</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="#hudson.matrix"><B>hudson.matrix</B></A></TD>
-<TD>Matrix project&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
@@ -728,32 +724,6 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TABLE>
 &nbsp;
 <P>
-<A NAME="hudson.matrix"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> in <A HREF="../../hudson/matrix/package-summary.html">hudson.matrix</A></FONT></TH>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/matrix/package-summary.html">hudson.matrix</A> that return <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>MatrixRun.RunnerImpl.</B><B><A HREF="../../hudson/matrix/MatrixRun.RunnerImpl.html#decideWorkspace(hudson.model.Node, hudson.slaves.WorkspaceList)">decideWorkspace</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n,
-                <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves">WorkspaceList</A>&nbsp;wsl)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
 <A NAME="hudson.model"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -783,24 +753,6 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> on this node.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#decideWorkspace(hudson.model.Node, hudson.slaves.WorkspaceList)">decideWorkspace</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n,
-                <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves">WorkspaceList</A>&nbsp;wsl)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allocates the workspace from <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>FreeStyleBuild.RunnerImpl.</B><B><A HREF="../../hudson/model/FreeStyleBuild.RunnerImpl.html#decideWorkspace(hudson.model.Node, hudson.slaves.WorkspaceList)">decideWorkspace</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;n,
-                <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves">WorkspaceList</A>&nbsp;wsl)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -955,6 +907,15 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.297
       Instead of calling this method explicitly, just return the <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object
       from the <code>doXYZ</code> method and let Stapler generate a response for you.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../hudson/model/AbstractBuild.html#setWorkspace(hudson.FilePath)">setWorkspace</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Normally, a workspace is assigned by <A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html" title="class in hudson.model"><CODE>AbstractBuild.AbstractRunner</CODE></A>, but this lets you set the workspace in case
+ <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A> is created without a build.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1246,31 +1207,23 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> that return <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></FONT></TH>
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> declared as <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#acquire(hudson.FilePath)">acquire</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;p)</CODE>
+<TD><CODE><B>WorkspaceList.Entry.</B><B><A HREF="../../hudson/slaves/WorkspaceList.Entry.html#path">path</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acquires the given workspace.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#allocate(hudson.FilePath)">allocate</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base)</CODE>
+<TD><CODE><B>WorkspaceList.Lease.</B><B><A HREF="../../hudson/slaves/WorkspaceList.Lease.html#path">path</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allocates some workspace by adding some variation to the given base if necessary.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#record(hudson.FilePath)">record</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;p)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just record that this workspace is being used, without paying any attention to the sycnhronization support.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1282,7 +1235,7 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A></CODE></FONT></TD>
 <TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#acquire(hudson.FilePath)">acquire</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;p)</CODE>
 
 <BR>
@@ -1290,11 +1243,28 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A></CODE></FONT></TD>
+<TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#acquire(hudson.FilePath, boolean)">acquire</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;p,
+        boolean&nbsp;quick)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <A HREF="../../hudson/slaves/WorkspaceList.html#acquire(hudson.FilePath)"><CODE>WorkspaceList.acquire(FilePath)</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A></CODE></FONT></TD>
 <TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#allocate(hudson.FilePath)">allocate</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allocates some workspace by adding some variation to the given base if necessary.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allocates a workspace by adding some variation to the given base to make it unique.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A></CODE></FONT></TD>
+<TD><CODE><B>WorkspaceList.Lease.</B><B><A HREF="../../hudson/slaves/WorkspaceList.Lease.html#createDummyLease(hudson.FilePath)">createDummyLease</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a dummy <A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves"><CODE>WorkspaceList.Lease</CODE></A> object that does no-op in the release.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1322,19 +1292,25 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A></CODE></FONT></TD>
 <TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#record(hudson.FilePath)">record</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;p)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just record that this workspace is being used, without paying any attention to the sycnhronization support.</TD>
 </TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../hudson/slaves/package-summary.html">hudson.slaves</A> with parameters of type <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></FONT></TH>
+</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>WorkspaceList.</B><B><A HREF="../../hudson/slaves/WorkspaceList.html#release(hudson.FilePath)">release</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;p)</CODE>
+<TD><CODE><B><A HREF="../../hudson/slaves/WorkspaceList.Lease.html#WorkspaceList.Lease(hudson.FilePath)">WorkspaceList.Lease</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;path)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Releases an allocated or acquired workspace.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

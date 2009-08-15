@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.slaves (Hudson main module 1.319 API)
+hudson.slaves (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.slaves (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.slaves (Hudson main module 1.319 API)";
+        parent.document.title="hudson.slaves (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -210,6 +210,19 @@ Code related to slaves.
 <TD>The node addition activity in progress.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A></B></TD>
+<TD>Represents a cause that puts a <A HREF="../../hudson/model/Computer.html#isOffline()">computer offline</A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/OfflineCause.ChannelTermination.html" title="class in hudson.slaves">OfflineCause.ChannelTermination</A></B></TD>
+<TD>Caused by unexpected channel termination.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/OfflineCause.SimpleOfflineCause.html" title="class in hudson.slaves">OfflineCause.SimpleOfflineCause</A></B></TD>
+<TD><A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves"><CODE>OfflineCause</CODE></A> that renders a static text,
+ but without any further UI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy&lt;T extends Computer&gt;</A></B></TD>
 <TD>Controls when to take <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> offline, bring it back online, or even to destroy it.</TD>
 </TR>
@@ -244,6 +257,14 @@ Code related to slaves.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves">WorkspaceList</A></B></TD>
 <TD>Used by <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> to keep track of workspaces that are actively in use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/WorkspaceList.Entry.html" title="class in hudson.slaves">WorkspaceList.Entry</A></B></TD>
+<TD>Book keeping for workspace allocation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A></B></TD>
+<TD>Represents a leased workspace that needs to be returned later.</TD>
 </TR>
 </TABLE>
 &nbsp;

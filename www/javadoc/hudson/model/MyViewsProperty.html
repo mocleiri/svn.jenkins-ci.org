@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MyViewsProperty (Hudson main module 1.319 API)
+MyViewsProperty (Hudson main module 1.320 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-08">
+<META NAME="date" CONTENT="2009-08-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MyViewsProperty (Hudson main module 1.319 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MyViewsProperty (Hudson main module 1.319 API)";
+        parent.document.title="MyViewsProperty (Hudson main module 1.320 API)";
     }
 }
 </SCRIPT>
@@ -352,6 +352,23 @@ A UserProperty that remembers user-private views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> calls this method when it's renamed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MyViewsProperty.html#readResolve()">readResolve</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MyViewsProperty.html#reconfigure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">reconfigure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;form)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -810,6 +827,38 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 
 <DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web
       (when you do that, be sure to also return null from <A HREF="../../hudson/model/Action.html#getIconFileName()"><CODE>Action.getIconFileName()</CODE></A>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="reconfigure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><!-- --></A><H3>
+reconfigure</H3>
+<PRE>
+public <A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A> <B>reconfigure</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                net.sf.json.JSONObject&nbsp;form)
+                         throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/UserProperty.html#reconfigure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">reconfigure</A></CODE> in class <CODE><A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readResolve()"><!-- --></A><H3>
+readResolve</H3>
+<PRE>
+public java.lang.Object <B>readResolve</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
