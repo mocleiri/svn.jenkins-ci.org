@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.ModelObject (Hudson main module 1.320 API)
+Uses of Interface hudson.model.ModelObject (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.ModelObject (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.ModelObject (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Interface hudson.model.ModelObject (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -387,9 +387,8 @@ Uses of <A HREF="../../../hudson/model/ModelObject.html" title="interface in hud
 <TD><CODE><B><A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1554,6 +1553,14 @@ Uses of <A HREF="../../../hudson/model/ModelObject.html" title="interface in hud
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> that implement <A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/ClosureExecuterAction.html" title="class in org.jvnet.hudson.test">ClosureExecuterAction</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Server-side logic that implements <CODE>HudsonTestCase#onServer(Closure)</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

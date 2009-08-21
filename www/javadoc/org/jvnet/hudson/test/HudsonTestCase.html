@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.320 API)
+HudsonTestCase (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.320 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -447,12 +447,28 @@ R</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html" title="class in org.jvnet.hudson.test">HudsonTestCase.WebClient</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createWebClient()">createWebClient</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to assist Groovy test clients who are incapable of instantiating the inner classes properly.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;javax.servlet.ServletContext</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createWebServer()">createWebServer</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepares a webapp hosting environment to get <CODE>ServletContext</CODE> implementation
  that we need for testing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#executeOnServer(groovy.lang.Closure)">executeOnServer</A></B>(groovy.lang.Closure&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes the given closure on the server, in the context of an HTTP request.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -499,7 +515,7 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;org.mozilla.javascript.tools.debugger.Dim</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#interactiveJavaScriptDebugger()">interactiveJavaScriptDebugger</A></B>()</CODE>
 
 <BR>
@@ -1138,7 +1154,7 @@ public void <B>interactiveBreak</B>()
 <A NAME="interactiveJavaScriptDebugger()"><!-- --></A><H3>
 interactiveJavaScriptDebugger</H3>
 <PRE>
-public void <B>interactiveJavaScriptDebugger</B>()</PRE>
+public org.mozilla.javascript.tools.debugger.Dim <B>interactiveJavaScriptDebugger</B>()</PRE>
 <DL>
 <DD>Starts an interactive JavaScript debugger, and break at the next JavaScript execution.
 
@@ -1467,6 +1483,39 @@ with</H3>
 <PRE>
 public <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A> <B>with</B>(<A HREF="../../../../org/jvnet/hudson/test/HudsonHomeLoader.html" title="interface in org.jvnet.hudson.test">HudsonHomeLoader</A>&nbsp;homeLoader)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="executeOnServer(groovy.lang.Closure)"><!-- --></A><H3>
+executeOnServer</H3>
+<PRE>
+public java.lang.Object <B>executeOnServer</B>(groovy.lang.Closure&nbsp;c)
+                                 throws java.lang.Throwable</PRE>
+<DL>
+<DD>Executes the given closure on the server, in the context of an HTTP request.
+ This is useful for testing some methods that require <CODE>StaplerRequest</CODE> and <CODE>StaplerResponse</CODE>.
+
+ <p>
+ The closure will get the request and response as parameters.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Throwable</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createWebClient()"><!-- --></A><H3>
+createWebClient</H3>
+<PRE>
+public <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html" title="class in org.jvnet.hudson.test">HudsonTestCase.WebClient</A> <B>createWebClient</B>()</PRE>
+<DL>
+<DD>This is to assist Groovy test clients who are incapable of instantiating the inner classes properly.
+<P>
 <DD><DL>
 </DL>
 </DD>

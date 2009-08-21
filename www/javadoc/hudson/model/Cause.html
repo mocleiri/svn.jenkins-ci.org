@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Cause (Hudson main module 1.320 API)
+Cause (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Cause (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Cause (Hudson main module 1.320 API)";
+        parent.document.title="Cause (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -107,15 +107,23 @@ java.lang.Object
 
 <P>
 Cause object base class.  This class hierarchy is used to keep track of why 
- a given build was started.   The Cause object is connected to a build via the
- CauseAction object.
+ a given build was started. This object encapsulates the UI rendering of the cause,
+ as well as providing more useful information in respective subypes.
+
+ The Cause object is connected to a build via the <A HREF="../../hudson/model/CauseAction.html" title="class in hudson.model"><CODE>CauseAction</CODE></A> object.
+
+ <h2>Views</h2>
+ <dl>
+ <dt>description.jelly
+ <dd>Renders the cause to HTML. By default, it puts the short description.
+ </dl>
 <P>
 
 <P>
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Michael Donohue</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Run.html#getCauses()"><CODE>Run.getCauses()</CODE></A></DL>
 <HR>
 
 <P>
@@ -133,7 +141,7 @@ Cause object base class.  This class hierarchy is used to keep track of why
 <TD><CODE><B><A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model">Cause.LegacyCodeCause</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fall back implementation when no other type is available.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -149,7 +157,7 @@ Cause object base class.  This class hierarchy is used to keep track of why
 <TD><CODE><B><A HREF="../../hudson/model/Cause.UpstreamCause.html" title="class in hudson.model">Cause.UpstreamCause</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A build is triggered by the completion of another build (AKA upstream build.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -157,7 +165,7 @@ Cause object base class.  This class hierarchy is used to keep track of why
 <TD><CODE><B><A HREF="../../hudson/model/Cause.UserCause.html" title="class in hudson.model">Cause.UserCause</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A build is started by an user action.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -191,7 +199,7 @@ Cause object base class.  This class hierarchy is used to keep track of why
 <TD><CODE><B><A HREF="../../hudson/model/Cause.html#getShortDescription()">getShortDescription</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One-line human-readable text of the cause.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -239,6 +247,11 @@ getShortDescription</H3>
 <FONT SIZE="-1">@Exported(visibility=3)
 </FONT>public abstract java.lang.String <B>getShortDescription</B>()</PRE>
 <DL>
+<DD>One-line human-readable text of the cause.
+
+ <p>
+ By default, this method is used to render HTML as well.
+<P>
 <DD><DL>
 </DL>
 </DD>

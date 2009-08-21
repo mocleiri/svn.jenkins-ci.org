@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson (Hudson main module 1.320 API)
+Uses of Package hudson (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Package hudson (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -97,6 +97,10 @@ Packages that use <A HREF="../hudson/package-summary.html">hudson</A></FONT></TH
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.cli"><B>hudson.cli</B></A></TD>
 <TD>Server-side CLI commands for Hudson.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.cli.declarative"><B>hudson.cli.declarative</B></A></TD>
+<TD>Code for supporting declarative CLI commands, which are annotated methods on model objects.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.diagnosis"><B>hudson.diagnosis</B></A></TD>
@@ -415,6 +419,42 @@ Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.cli"><B>ExtensionPoint</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface that designates extensible components
+ in Hudson that can be implemented by plugins.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionPoint.LegacyInstancesAreScopedToHudson.html#hudson.cli"><B>ExtensionPoint.LegacyInstancesAreScopedToHudson</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used by designers of extension points (direct subtypes of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>) to indicate that
+ the legacy instances are scoped to <A HREF="../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.cli.declarative"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../hudson/package-summary.html">hudson</A> used by <A HREF="../hudson/cli/declarative/package-summary.html">hudson.cli.declarative</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/Extension.html#hudson.cli.declarative"><B>Extension</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks a field, a method, or a class for automatic discovery, so that Hudson can locate
+ implementations of <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A>s automatically.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionFinder.html#hudson.cli.declarative"><B>ExtensionFinder</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discovers the implementations of an extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../hudson/class-use/ExtensionPoint.html#hudson.cli.declarative"><B>ExtensionPoint</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface that designates extensible components

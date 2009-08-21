@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.Extension (Hudson main module 1.320 API)
+Uses of Class hudson.Extension (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.Extension (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.Extension (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Class hudson.Extension (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -97,6 +97,10 @@ Packages that use <A HREF="../../hudson/Extension.html" title="annotation in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.cli"><B>hudson.cli</B></A></TD>
 <TD>Server-side CLI commands for Hudson.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.cli.declarative"><B>hudson.cli.declarative</B></A></TD>
+<TD>Code for supporting declarative CLI commands, which are annotated methods on model objects.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.diagnosis"><B>hudson.diagnosis</B></A></TD>
@@ -305,6 +309,31 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shows the version.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.cli.declarative"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Extension</A> in <A HREF="../../hudson/cli/declarative/package-summary.html">hudson.cli.declarative</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../hudson/cli/declarative/package-summary.html">hudson.cli.declarative</A> with annotations of type <A HREF="../../hudson/Extension.html" title="annotation in hudson">Extension</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/declarative/CLIRegisterer.html" title="class in hudson.cli.declarative">CLIRegisterer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discover <A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative"><CODE>CLIMethod</CODE></A>s and register them as <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"><CODE>CLICommand</CODE></A> implementations.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -684,16 +713,16 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;<A HREF="../../hudson/node_monitors/ResponseTimeMonitor.Data.html" title="class in hudson.node_monitors">ResponseTimeMonitor.Data</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ResponseTimeMonitor.</B><B><A HREF="../../hudson/node_monitors/ResponseTimeMonitor.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+<CODE>static&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;<A HREF="../../hudson/util/ClockDifference.html" title="class in hudson.util">ClockDifference</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ClockMonitor.</B><B><A HREF="../../hudson/node_monitors/ClockMonitor.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;<A HREF="../../hudson/util/ClockDifference.html" title="class in hudson.util">ClockDifference</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ClockMonitor.</B><B><A HREF="../../hudson/node_monitors/ClockMonitor.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+<CODE>static&nbsp;<A HREF="../../hudson/node_monitors/AbstractNodeMonitorDescriptor.html" title="class in hudson.node_monitors">AbstractNodeMonitorDescriptor</A>&lt;<A HREF="../../hudson/node_monitors/ResponseTimeMonitor.Data.html" title="class in hudson.node_monitors">ResponseTimeMonitor.Data</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ResponseTimeMonitor.</B><B><A HREF="../../hudson/node_monitors/ResponseTimeMonitor.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -717,7 +746,7 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;hudson.node_monitors.DiskSpaceMonitorDescriptor</CODE></FONT></TD>
-<TD><CODE><B>DiskSpaceMonitor.</B><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#install()">install</A></B>()</CODE>
+<TD><CODE><B>TemporarySpaceMonitor.</B><B><A HREF="../../hudson/node_monitors/TemporarySpaceMonitor.html#install()">install</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -725,7 +754,7 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;hudson.node_monitors.DiskSpaceMonitorDescriptor</CODE></FONT></TD>
-<TD><CODE><B>TemporarySpaceMonitor.</B><B><A HREF="../../hudson/node_monitors/TemporarySpaceMonitor.html#install()">install</A></B>()</CODE>
+<TD><CODE><B>DiskSpaceMonitor.</B><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#install()">install</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -955,7 +984,15 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>FullControlOnceLoggedInAuthorizationStrategy.</B><B><A HREF="../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+<TD><CODE><B>ProjectMatrixAuthorizationStrategy.</B><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A></CODE></FONT></TD>
+<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -971,15 +1008,7 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/security/AuthorizationStrategy.html" title="class in hudson.security">AuthorizationStrategy</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>ProjectMatrixAuthorizationStrategy.</B><B><A HREF="../../hudson/security/ProjectMatrixAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security">GlobalMatrixAuthorizationStrategy.DescriptorImpl</A></CODE></FONT></TD>
-<TD><CODE><B>GlobalMatrixAuthorizationStrategy.</B><B><A HREF="../../hudson/security/GlobalMatrixAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+<TD><CODE><B>FullControlOnceLoggedInAuthorizationStrategy.</B><B><A HREF="../../hudson/security/FullControlOnceLoggedInAuthorizationStrategy.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1563,6 +1592,14 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../org/jvnet/hudson/test/ClosureExecuterAction.html" title="class in org.jvnet.hudson.test">ClosureExecuterAction</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Server-side logic that implements <CODE>HudsonTestCase#onServer(Closure)</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">FailureBuilder.DescriptorImpl</A></B></CODE>
 
@@ -1589,6 +1626,14 @@ Uses of <A HREF="../../hudson/Extension.html" title="annotation in hudson">Exten
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../org/jvnet/hudson/test/TestCrumbIssuer.DescriptorImpl.html" title="class in org.jvnet.hudson.test">TestCrumbIssuer.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../org/jvnet/hudson/test/UnstableBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test">UnstableBuilder.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

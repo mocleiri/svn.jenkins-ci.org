@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-EnvironmentVariablesNodeProperty (Hudson main module 1.320 API)
+EnvironmentVariablesNodeProperty (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ EnvironmentVariablesNodeProperty (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="EnvironmentVariablesNodeProperty (Hudson main module 1.320 API)";
+        parent.document.title="EnvironmentVariablesNodeProperty (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -217,7 +217,7 @@ java.lang.Object
       <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs before the <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> runs, and performs a set up.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs before the <A HREF="../../hudson/scm/SCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><CODE>SCM.checkout(AbstractBuild, Launcher, FilePath, BuildListener, File)</CODE></A> runs, and performs a set up.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.slaves.NodeProperty"><!-- --></A>
@@ -298,8 +298,8 @@ public <A HREF="../../hudson/model/Environment.html" title="class in hudson.mode
                          java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/slaves/NodeProperty.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">NodeProperty</A></CODE></B></DD>
-<DD>Runs before the <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> runs, and performs a set up. Can contribute additional properties
- to the environment.
+<DD>Runs before the <A HREF="../../hudson/scm/SCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><CODE>SCM.checkout(AbstractBuild, Launcher, FilePath, BuildListener, File)</CODE></A> runs, and performs a set up.
+ Can contribute additional properties to the environment.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/slaves/NodeProperty.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">setUp</A></CODE> in class <CODE><A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>&lt;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;</CODE></DL>

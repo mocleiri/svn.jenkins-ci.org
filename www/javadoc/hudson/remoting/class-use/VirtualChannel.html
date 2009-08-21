@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.remoting.VirtualChannel (Hudson main module 1.320 API)
+Uses of Interface hudson.remoting.VirtualChannel (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.remoting.VirtualChannel (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.remoting.VirtualChannel (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Interface hudson.remoting.VirtualChannel (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -261,19 +261,27 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
-<TD><CODE><B>Hudson.MasterComputer.</B><B><A HREF="../../../hudson/model/Hudson.MasterComputer.html#getChannel()">getChannel</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getChannel()">getChannel</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the channel that can be used to run a program on this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#getChannel()">getChannel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the current channel, if the node is connected and online, or null.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B>Hudson.MasterComputer.</B><B><A HREF="../../../hudson/model/Hudson.MasterComputer.html#getChannel()">getChannel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -444,7 +452,7 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B>LabelFinder.</B><B><A HREF="../../../hudson/tasks/LabelFinder.html#findLabels(hudson.remoting.VirtualChannel)">findLabels</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+<TD><CODE><B>DynamicLabeler.</B><B><A HREF="../../../hudson/tasks/DynamicLabeler.html#findLabels(hudson.remoting.VirtualChannel)">findLabels</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the labels that the node supports.</TD>
@@ -452,7 +460,7 @@ Uses of <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B>DynamicLabeler.</B><B><A HREF="../../../hudson/tasks/DynamicLabeler.html#findLabels(hudson.remoting.VirtualChannel)">findLabels</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
+<TD><CODE><B>LabelFinder.</B><B><A HREF="../../../hudson/tasks/LabelFinder.html#findLabels(hudson.remoting.VirtualChannel)">findLabels</A></B>(<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the labels that the node supports.</TD>

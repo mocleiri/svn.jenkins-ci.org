@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Result (Hudson main module 1.320 API)
+Uses of Class hudson.model.Result (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Result (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Result (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Class hudson.model.Result (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -91,6 +91,10 @@ function windowTitle()
 Packages that use <A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.matrix"><B>hudson.matrix</B></A></TD>
+<TD>Matrix project&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
 </TR>
@@ -102,6 +106,47 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
 <TD>Test harness for Hudson and its plugins.&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.matrix"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A> in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A> that return <A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B>MatrixProject.</B><B><A HREF="../../../hudson/matrix/MatrixProject.html#getTouchStoneResultCondition()">getTouchStoneResultCondition</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A> with parameters of type <A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>MatrixProject.</B><B><A HREF="../../../hudson/matrix/MatrixProject.html#setTouchStoneResultCondition(hudson.model.Result)">setTouchStoneResultCondition</A></B>(<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;touchStoneResultCondition)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -203,6 +248,14 @@ Uses of <A HREF="../../../hudson/model/Result.html" title="class in hudson.model
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B>Result.</B><B><A HREF="../../../hudson/model/Result.html#fromString(java.lang.String)">fromString</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
 <TD><CODE><B>Run.</B><B><A HREF="../../../hudson/model/Run.html#getResult()">getResult</A></B>()</CODE>
 
@@ -211,19 +264,19 @@ Uses of <A HREF="../../../hudson/model/Result.html" title="class in hudson.model
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
-<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#run(hudson.model.BuildListener)">run</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
 <TD><CODE><B>Run.Runner.</B><B><A HREF="../../../hudson/model/Run.Runner.html#run(hudson.model.BuildListener)">run</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs the main build and returns the status code.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#run(hudson.model.BuildListener)">run</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -244,18 +297,18 @@ Uses of <A HREF="../../../hudson/model/Result.html" title="class in hudson.model
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>StreamBuildListener.</B><B><A HREF="../../../hudson/model/StreamBuildListener.html#finished(hudson.model.Result)">finished</A></B>(<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;result)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>BuildListener.</B><B><A HREF="../../../hudson/model/BuildListener.html#finished(hudson.model.Result)">finished</A></B>(<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;result)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when a build is finished.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>StreamBuildListener.</B><B><A HREF="../../../hudson/model/StreamBuildListener.html#finished(hudson.model.Result)">finished</A></B>(<A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;result)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -329,6 +382,13 @@ Uses of <A HREF="../../../hudson/model/Result.html" title="class in hudson.model
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> with parameters of type <A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/BuildTrigger.html#BuildTrigger(java.util.Collection, hudson.model.Result)">BuildTrigger</A></B>(java.util.Collection&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;childProjects,
+             <A HREF="../../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;threshold)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/tasks/BuildTrigger.html#BuildTrigger(java.util.List, hudson.model.Result)">BuildTrigger</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;childProjects,

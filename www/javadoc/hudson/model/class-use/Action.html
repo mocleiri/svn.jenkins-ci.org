@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Action (Hudson main module 1.320 API)
+Uses of Interface hudson.model.Action (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Action (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Action (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Interface hudson.model.Action (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -127,6 +127,10 @@ action (such as the built-in JUnit one).&nbsp;</TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.triggers"><B>hudson.triggers</B></A></TD>
 <TD>Built-in <a href="../../../hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -489,7 +493,23 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Actionable.</B><B><A HREF="../../../hudson/model/Actionable.html#getActions()">getActions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets actions contributed to this build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>ListView.</B><B><A HREF="../../../hudson/model/ListView.html#getActions()">getActions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getActions()">getActions</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
@@ -505,26 +525,10 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getActions()">getActions</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#getActions()">getActions</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Actionable.</B><B><A HREF="../../../hudson/model/Actionable.html#getActions()">getActions</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets actions contributed to this build.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -623,18 +627,18 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>Queue.QueueAction.</B><B><A HREF="../../../hudson/model/Queue.QueueAction.html#shouldSchedule(java.util.List)">shouldSchedule</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether the new item should be scheduled.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>ParametersAction.</B><B><A HREF="../../../hudson/model/ParametersAction.html#shouldSchedule(java.util.List)">shouldSchedule</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allow an other build of the same project to be scheduled, if it has other parameters.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Queue.QueueAction.</B><B><A HREF="../../../hudson/model/Queue.QueueAction.html#shouldSchedule(java.util.List)">shouldSchedule</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether the new item should be scheduled.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1005,6 +1009,31 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> that implement <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/jvnet/hudson/test/ClosureExecuterAction.html" title="class in org.jvnet.hudson.test">ClosureExecuterAction</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Server-side logic that implements <CODE>HudsonTestCase#onServer(Closure)</CODE>.</TD>
 </TR>
 </TABLE>
 &nbsp;

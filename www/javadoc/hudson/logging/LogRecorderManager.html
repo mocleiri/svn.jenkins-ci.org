@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LogRecorderManager (Hudson main module 1.320 API)
+LogRecorderManager (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LogRecorderManager (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LogRecorderManager (Hudson main module 1.320 API)";
+        parent.document.title="LogRecorderManager (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -161,9 +161,8 @@ Owner of <A HREF="../../hudson/logging/LogRecorder.html" title="class in hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/logging/LogRecorderManager.html#doConfigLogger(org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)">doConfigLogger</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-               java.lang.String&nbsp;name,
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/logging/LogRecorderManager.html#doConfigLogger(java.lang.String, java.lang.String)">doConfigLogger</A></B>(java.lang.String&nbsp;name,
                java.lang.String&nbsp;level)</CODE>
 
 <BR>
@@ -171,10 +170,8 @@ Owner of <A HREF="../../hudson/logging/LogRecorder.html" title="class in hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/logging/LogRecorderManager.html#doNewLogRecorder(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doNewLogRecorder</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                 java.lang.String&nbsp;name)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/logging/LogRecorderManager.html#doNewLogRecorder(java.lang.String)">doNewLogRecorder</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new log recorder.</TD>
@@ -368,43 +365,32 @@ public void <B>load</B>()
 </DL>
 <HR>
 
-<A NAME="doNewLogRecorder(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doNewLogRecorder(java.lang.String)"><!-- --></A><H3>
 doNewLogRecorder</H3>
 <PRE>
-public void <B>doNewLogRecorder</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                             <FONT SIZE="-1">@QueryParameter</FONT>
-                             java.lang.String&nbsp;name)
-                      throws java.io.IOException,
-                             javax.servlet.ServletException</PRE>
+public org.kohsuke.stapler.HttpResponse <B>doNewLogRecorder</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                                         java.lang.String&nbsp;name)</PRE>
 <DL>
 <DD>Creates a new log recorder.
 <P>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doConfigLogger(org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="doConfigLogger(java.lang.String, java.lang.String)"><!-- --></A><H3>
 doConfigLogger</H3>
 <PRE>
-public void <B>doConfigLogger</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                           <FONT SIZE="-1">@QueryParameter</FONT>
-                           java.lang.String&nbsp;name,
-                           <FONT SIZE="-1">@QueryParameter</FONT>
-                           java.lang.String&nbsp;level)
-                    throws java.io.IOException</PRE>
+public org.kohsuke.stapler.HttpResponse <B>doConfigLogger</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                                       java.lang.String&nbsp;name,
+                                                       <FONT SIZE="-1">@QueryParameter</FONT>
+                                                       java.lang.String&nbsp;level)</PRE>
 <DL>
 <DD>Configure the logging level.
 <P>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <HR>

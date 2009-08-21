@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Util (Hudson main module 1.320 API)
+Util (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson main module 1.320 API)";
+        parent.document.title="Util (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -271,6 +271,14 @@ Various utility methods that don't have more proper home.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes the contents of the given directory (but not the directory itself)
  recursively.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#deleteFile(java.io.File)">deleteFile</A></B>(java.io.File&nbsp;f)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes this file (and does not take no for an answer).</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -846,6 +854,22 @@ public static void <B>deleteContentsRecursive</B>(java.io.File&nbsp;file)
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE> - if the operation fails.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="deleteFile(java.io.File)"><!-- --></A><H3>
+deleteFile</H3>
+<PRE>
+public static void <B>deleteFile</B>(java.io.File&nbsp;f)
+                       throws java.io.IOException</PRE>
+<DL>
+<DD>Deletes this file (and does not take no for an answer).
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>f</CODE> - a file to delete
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - if it exists but could not be successfully deleted</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-View (Hudson main module 1.320 API)
+View (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ View (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="View (Hudson main module 1.320 API)";
+        parent.document.title="View (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -531,6 +531,15 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#getViewUrl()">getViewUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Same as <A HREF="../../hudson/model/View.html#getUrl()"><CODE>getUrl()</CODE></A> except this returns a view/{name} path
+ even for the default view.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/widgets/Widget.html" title="class in hudson.widgets">Widget</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/View.html#getWidgets()">getWidgets</A></B>()</CODE>
 
@@ -1007,8 +1016,25 @@ public java.lang.String <B>getUrl</B>()</PRE>
 <DL>
 <DD>Returns the path relative to the context root.
 
- Doesn't start with '/' but ends with '/'. (except when this is
- Hudson,
+ Doesn't start with '/' but ends with '/' (except returns
+ empty string when this is the default view).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getViewUrl()"><!-- --></A><H3>
+getViewUrl</H3>
+<PRE>
+public java.lang.String <B>getViewUrl</B>()</PRE>
+<DL>
+<DD>Same as <A HREF="../../hudson/model/View.html#getUrl()"><CODE>getUrl()</CODE></A> except this returns a view/{name} path
+ even for the default view.
 <P>
 <DD><DL>
 </DL>
@@ -1260,7 +1286,8 @@ doConfigSubmit</H3>
 public final void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                           throws java.io.IOException,
-                                 javax.servlet.ServletException</PRE>
+                                 javax.servlet.ServletException,
+                                 <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DD>Accepts submission from the configuration page.
 
@@ -1273,7 +1300,8 @@ public final void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Hudson (Hudson main module 1.320 API)
+Uses of Class hudson.model.Hudson (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Hudson (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Hudson (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Class hudson.model.Hudson (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -93,6 +93,10 @@ Packages that use <A HREF="../../../hudson/model/Hudson.html" title="class in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson"><B>hudson</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.cli.declarative"><B>hudson.cli.declarative</B></A></TD>
+<TD>Code for supporting declarative CLI commands, which are annotated methods on model objects.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.matrix"><B>hudson.matrix</B></A></TD>
@@ -249,6 +253,39 @@ Uses of <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.cli.declarative"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A> in <A HREF="../../../hudson/cli/declarative/package-summary.html">hudson.cli.declarative</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/cli/declarative/package-summary.html">hudson.cli.declarative</A> with parameters of type <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.Collection&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>CLIRegisterer.</B><B><A HREF="../../../hudson/cli/declarative/CLIRegisterer.html#findExtensions(java.lang.Class, hudson.model.Hudson)">findExtensions</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
+               <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.matrix"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -307,18 +344,18 @@ Uses of <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></CODE></FONT></TD>
-<TD><CODE><B>ExternalJob.</B><B><A HREF="../../../hudson/model/ExternalJob.html#getParent()">getParent</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></CODE></FONT></TD>
 <TD><CODE><B>TopLevelItem.</B><B><A HREF="../../../hudson/model/TopLevelItem.html#getParent()">getParent</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By definition the parent of the top-level item is always <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A></CODE></FONT></TD>
+<TD><CODE><B>ExternalJob.</B><B><A HREF="../../../hudson/model/ExternalJob.html#getParent()">getParent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

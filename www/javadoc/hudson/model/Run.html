@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.320 API)
+Run (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.320 API)";
+        parent.document.title="Run (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -594,7 +594,15 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getCauses()">getCauses</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../hudson/model/Cause.html" title="class in hudson.model"><CODE>Cause</CODE></A>s that tirggered a build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getCharacteristicEnvVars()">getCharacteristicEnvVars</A></B>()</CODE>
 
 <BR>
@@ -1490,6 +1498,29 @@ public final java.nio.charset.Charset <B>getCharset</B>()</PRE>
 
 <DT><B>Returns:</B><DD>never null.<DT><B>Since:</B></DT>
   <DD>1.257</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCauses()"><!-- --></A><H3>
+getCauses</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt; <B>getCauses</B>()</PRE>
+<DL>
+<DD>Returns the <A HREF="../../hudson/model/Cause.html" title="class in hudson.model"><CODE>Cause</CODE></A>s that tirggered a build.
+
+ <p>
+ If a build sits in the queue for a long time, multiple build requests made during this period
+ are all rolled up into one build, hence this method may return a list.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null. read-only.<DT><B>Since:</B></DT>
+  <DD>1.321</DD>
 </DL>
 </DD>
 </DL>
@@ -2600,7 +2631,7 @@ public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <
 <A NAME="getCharacteristicEnvVars()"><!-- --></A><H3>
 getCharacteristicEnvVars</H3>
 <PRE>
-protected final <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getCharacteristicEnvVars</B>()</PRE>
+public final <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getCharacteristicEnvVars</B>()</PRE>
 <DL>
 <DD>Builds up the environment variable map that's sufficient to identify a process
  as ours. This is used to kill run-away processes via <A HREF="../../hudson/util/ProcessTree.html#killAll(java.util.Map)"><CODE>ProcessTree.killAll(Map)</CODE></A>.

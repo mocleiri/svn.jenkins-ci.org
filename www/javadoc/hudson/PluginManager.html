@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginManager (Hudson main module 1.320 API)
+PluginManager (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson main module 1.320 API)";
+        parent.document.title="PluginManager (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/Plugin.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Plugin.DummyImpl.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/PluginManager.FailedPlugin.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/PluginManager.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -240,9 +240,8 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/PluginManager.html#doUploadPlugin(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doUploadPlugin</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#doUploadPlugin(org.kohsuke.stapler.StaplerRequest)">doUploadPlugin</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uploads a plugin.</TD>
@@ -640,13 +639,12 @@ public void <B>doProxyConfigure</B>(<FONT SIZE="-1">@QueryParameter(value="proxy
 </DL>
 <HR>
 
-<A NAME="doUploadPlugin(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doUploadPlugin(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
 doUploadPlugin</H3>
 <PRE>
-public void <B>doUploadPlugin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                    throws java.io.IOException,
-                           javax.servlet.ServletException</PRE>
+public org.kohsuke.stapler.HttpResponse <B>doUploadPlugin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
+                                                throws java.io.IOException,
+                                                       javax.servlet.ServletException</PRE>
 <DL>
 <DD>Uploads a plugin.
 <P>
@@ -688,7 +686,7 @@ public void <B>doUploadPlugin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/Plugin.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/Plugin.DummyImpl.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/PluginManager.FailedPlugin.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/PluginManager.html" target="_top"><B>FRAMES</B></A>  &nbsp;

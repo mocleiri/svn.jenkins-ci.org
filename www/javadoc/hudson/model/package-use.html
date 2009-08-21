@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.model (Hudson main module 1.320 API)
+Uses of Package hudson.model (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.model (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.model (Hudson main module 1.320 API)";
+        parent.document.title="Uses of Package hudson.model (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -97,6 +97,10 @@ Packages that use <A HREF="../../hudson/model/package-summary.html">hudson.model
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.cli"><B>hudson.cli</B></A></TD>
 <TD>Server-side CLI commands for Hudson.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.cli.declarative"><B>hudson.cli.declarative</B></A></TD>
+<TD>Code for supporting declarative CLI commands, which are annotated methods on model objects.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.cli.handlers"><B>hudson.cli.handlers</B></A></TD>
@@ -240,9 +244,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Computer.html#hudson"><B>Computer</B></A></B>
@@ -390,6 +393,21 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.cli.declarative"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> used by <A HREF="../../hudson/cli/declarative/package-summary.html">hudson.cli.declarative</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Hudson.html#hudson.cli.declarative"><B>Hudson</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root object of the system.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.cli.handlers"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -509,9 +527,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.lifecycle"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ManagementLink.html#hudson.lifecycle"><B>ManagementLink</B></A></B>
@@ -763,6 +780,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activity that requires certain resources for its execution.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Result.html#hudson.matrix"><B>Result</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build outcome.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Run.html#hudson.matrix"><B>Run</B></A></B>
 
 <BR>
@@ -853,9 +876,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.model"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Actionable.html#hudson.model"><B>Actionable</B></A></B>
@@ -1011,6 +1033,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a periodically updated JSON data file obtained from a remote URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/DynamicLabels.html#hudson.model"><B>DynamicLabels</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dynamic labels (with its recomputing logic.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Environment.html#hudson.model"><B>Environment</B></A></B>
@@ -1930,9 +1958,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.scm"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/BuildBadgeAction.html#hudson.scm"><B>BuildBadgeAction</B></A></B>
@@ -2077,9 +2104,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.security"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Computer.html#hudson.security"><B>Computer</B></A></B>
@@ -2398,9 +2424,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.tasks"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Build.html#hudson.tasks"><B>Build</B></A></B>
@@ -2585,9 +2610,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.tasks.junit"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Api.html#hudson.tasks.junit"><B>Api</B></A></B>
@@ -2668,9 +2692,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.tasks.test"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Api.html#hudson.tasks.test"><B>Api</B></A></B>
@@ -2818,9 +2841,8 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/Action.html#hudson.triggers"><B>Action</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/AdministrativeMonitor.html#hudson.triggers"><B>AdministrativeMonitor</B></A></B>
@@ -3063,6 +3085,13 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s that build software.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Action.html#org.jvnet.hudson.test"><B>Action</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/BuildListener.html#org.jvnet.hudson.test"><B>BuildListener</B></A></B>
 
 <BR>
@@ -3127,6 +3156,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build outcome.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/RootAction.html#org.jvnet.hudson.test"><B>RootAction</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marker interface for actions that are added to <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Run.html#org.jvnet.hudson.test"><B>Run</B></A></B>

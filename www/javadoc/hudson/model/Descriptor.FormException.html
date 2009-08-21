@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Descriptor.FormException (Hudson main module 1.320 API)
+Descriptor.FormException (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Descriptor.FormException (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Descriptor.FormException (Hudson main module 1.320 API)";
+        parent.document.title="Descriptor.FormException (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -99,14 +99,14 @@ java.lang.Object
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Descriptor.FormException</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable, org.kohsuke.stapler.HttpResponse</DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/model/Descriptor.html" title="type parameter in Descriptor">T</A> extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Descriptor.html" title="type parameter in Descriptor">T</A>&gt;&gt;</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static final class <B>Descriptor.FormException</B><DT>extends java.lang.Exception</DL>
+<DT><PRE>public static final class <B>Descriptor.FormException</B><DT>extends java.lang.Exception<DT>implements org.kohsuke.stapler.HttpResponse</DL>
 </PRE>
 
 <P>
@@ -155,6 +155,16 @@ java.lang.Object
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Descriptor.FormException.html#generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)">generateResponse</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                 java.lang.Object&nbsp;node)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -242,6 +252,30 @@ public java.lang.String <B>getFormField</B>()</PRE>
 <P>
 <DD><DL>
 </DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)"><!-- --></A><H3>
+generateResponse</H3>
+<PRE>
+public void <B>generateResponse</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                             java.lang.Object&nbsp;node)
+                      throws java.io.IOException,
+                             javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>generateResponse</CODE> in interface <CODE>org.kohsuke.stapler.HttpResponse</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

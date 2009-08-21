@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Cause.LegacyCodeCause (Hudson main module 1.320 API)
+Cause.LegacyCodeCause (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Cause.LegacyCodeCause (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Cause.LegacyCodeCause (Hudson main module 1.320 API)";
+        parent.document.title="Cause.LegacyCodeCause (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -106,6 +106,10 @@ java.lang.Object
 </PRE>
 
 <P>
+Fall back implementation when no other type is available.
+<P>
+
+<P>
 <HR>
 
 <P>
@@ -159,7 +163,7 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/model/Cause.LegacyCodeCause.html#getShortDescription()">getShortDescription</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;One-line human-readable text of the cause.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -206,6 +210,12 @@ getShortDescription</H3>
 <PRE>
 public java.lang.String <B>getShortDescription</B>()</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Cause.html#getShortDescription()">Cause</A></CODE></B></DD>
+<DD>One-line human-readable text of the cause.
+
+ <p>
+ By default, this method is used to render HTML as well.
+<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Cause.html#getShortDescription()">getShortDescription</A></CODE> in class <CODE><A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A></CODE></DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Node (Hudson main module 1.320 API)
+Node (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Node (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Node (Hudson main module 1.320 API)";
+        parent.document.title="Node (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -162,6 +162,15 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/model/DynamicLabels.html" title="class in hudson.model">DynamicLabels</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#dynamicLabels">dynamicLabels</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels assigned to this node dynamically by plugins or other computation
+ rather than via user configuration.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#holdOffLaunchUntilSave">holdOffLaunchUntilSave</A></B></CODE>
 
@@ -243,6 +252,14 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the possibly empty set of labels that are assigned to this node,
  including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#getChannel()">getChannel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the current channel, if the node is connected and online, or null.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -384,6 +401,14 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#isChangedDynamicLabels()">isChangedDynamicLabels</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check if we should rebuild the list of dynamic labels.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A></B>()</CODE>
 
@@ -445,6 +470,19 @@ protected transient volatile boolean <B>holdOffLaunchUntilSave</B></PRE>
 <DL>
 <DD>Newly copied slaves get this flag set, so that Hudson doesn't try to start this node until its configuration
  is saved once.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="dynamicLabels"><!-- --></A><H3>
+dynamicLabels</H3>
+<PRE>
+protected transient volatile <A HREF="../../hudson/model/DynamicLabels.html" title="class in hudson.model">DynamicLabels</A> <B>dynamicLabels</B></PRE>
+<DL>
+<DD>labels assigned to this node dynamically by plugins or other computation
+ rather than via user configuration.
 <P>
 <DL>
 </DL>
@@ -655,6 +693,24 @@ public final <A HREF="../../hudson/model/Computer.html" title="class in hudson.m
 
 <DT><B>Returns:</B><DD>this method can return null if there's no <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> object for this node,
       such as when this node has no executors at all.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getChannel()"><!-- --></A><H3>
+getChannel</H3>
+<PRE>
+public final <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>getChannel</B>()</PRE>
+<DL>
+<DD>Gets the current channel, if the node is connected and online, or null.
+
+ This is just a convenience method for <A HREF="../../hudson/model/Computer.html#getChannel()"><CODE>Computer.getChannel()</CODE></A> with null check.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -936,6 +992,23 @@ public abstract <A HREF="../../hudson/util/ClockDifference.html" title="class in
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.InterruptedException</CODE> - if the operation is aborted.
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isChangedDynamicLabels()"><!-- --></A><H3>
+isChangedDynamicLabels</H3>
+<PRE>
+protected boolean <B>isChangedDynamicLabels</B>()</PRE>
+<DL>
+<DD>Check if we should rebuild the list of dynamic labels.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

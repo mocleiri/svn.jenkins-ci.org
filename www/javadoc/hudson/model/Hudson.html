@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.320 API)
+Hudson (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.320 API)";
+        parent.document.title="Hudson (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -379,7 +379,7 @@ Root object of the system.
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#holdOffLaunchUntilSave">holdOffLaunchUntilSave</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#dynamicLabels">dynamicLabels</A>, <A HREF="../../hudson/model/Node.html#holdOffLaunchUntilSave">holdOffLaunchUntilSave</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
@@ -2016,6 +2016,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#restart()">restart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a restart.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#save()">save</A></B>()</CODE>
 
 <BR>
@@ -2101,7 +2109,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getChannel()">getChannel</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#isChangedDynamicLabels()">isChangedDynamicLabels</A>, <A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -3491,7 +3499,7 @@ public <A HREF="../../hudson/model/Label.html" title="class in hudson.model">Lab
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>null if no such label exists.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Label.html#parse(java.lang.String)"><CODE>Label.parse(String)</CODE></A></DL>
+<DT><B>Returns:</B><DD>null if no name is null.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Label.html#parse(java.lang.String)"><CODE>Label.parse(String)</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -4749,7 +4757,8 @@ doConfigSubmit</H3>
 public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                     throws java.io.IOException,
-                           javax.servlet.ServletException</PRE>
+                           javax.servlet.ServletException,
+                           <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DD>Accepts submission from the configuration page.
 <P>
@@ -4760,7 +4769,8 @@ public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -5026,7 +5036,8 @@ doCreateView</H3>
 public void <B>doCreateView</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                   throws java.io.IOException,
-                         javax.servlet.ServletException</PRE>
+                         javax.servlet.ServletException,
+                         <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -5035,7 +5046,8 @@ public void <B>doCreateView</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -5309,6 +5321,23 @@ public void <B>doRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="restart()"><!-- --></A><H3>
+restart</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="restart")
+</FONT>public void <B>restart</B>()</PRE>
+<DL>
+<DD>Performs a restart.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLICommand (Hudson main module 1.320 API)
+CLICommand (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson main module 1.320 API)";
+        parent.document.title="CLICommand (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.lang.Cloneable</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/ClearQueueCommand.html" title="class in hudson.cli">ClearQueueCommand</A>, <A HREF="../../hudson/cli/CopyJobCommand.html" title="class in hudson.cli">CopyJobCommand</A>, <A HREF="../../hudson/cli/CreateJobCommand.html" title="class in hudson.cli">CreateJobCommand</A>, <A HREF="../../hudson/cli/DeleteJobCommand.html" title="class in hudson.cli">DeleteJobCommand</A>, <A HREF="../../hudson/cli/DisableJobCommand.html" title="class in hudson.cli">DisableJobCommand</A>, <A HREF="../../hudson/cli/EnableJobCommand.html" title="class in hudson.cli">EnableJobCommand</A>, <A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli">GroovyCommand</A>, <A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/ClearQueueCommand.html" title="class in hudson.cli">ClearQueueCommand</A>, <A HREF="../../hudson/cli/CloneableCLICommand.html" title="class in hudson.cli">CloneableCLICommand</A>, <A HREF="../../hudson/cli/CopyJobCommand.html" title="class in hudson.cli">CopyJobCommand</A>, <A HREF="../../hudson/cli/CreateJobCommand.html" title="class in hudson.cli">CreateJobCommand</A>, <A HREF="../../hudson/cli/DeleteJobCommand.html" title="class in hudson.cli">DeleteJobCommand</A>, <A HREF="../../hudson/cli/DisableJobCommand.html" title="class in hudson.cli">DisableJobCommand</A>, <A HREF="../../hudson/cli/EnableJobCommand.html" title="class in hudson.cli">EnableJobCommand</A>, <A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli">GroovyCommand</A>, <A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
 </DL>
 <HR>
 <DL>
@@ -119,7 +119,7 @@ Base class for Hudson CLI.
 
  <p>
  The Hudson master then picks the right <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"><CODE>CLICommand</CODE></A> to execute, clone it, and
- calls <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)"><CODE>main(List, InputStream, PrintStream, PrintStream)</CODE></A> method.
+ calls <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)"><CODE>main(List, Locale, InputStream, PrintStream, PrintStream)</CODE></A> method.
 
  <h2>Note for CLI command implementor</h2>
  <ul>
@@ -129,7 +129,7 @@ Base class for Hudson CLI.
  <li>
  Use <a href="http://args4j.dev.java.net/">args4j</a> annotation on your implementation to define
  options and arguments (however, if you don't like that, you could override
- the <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)"><CODE>main(List, InputStream, PrintStream, PrintStream)</CODE></A> method directly.
+ the <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)"><CODE>main(List, Locale, InputStream, PrintStream, PrintStream)</CODE></A> method directly.
 
  <li>
  stdin, stdout, stderr are remoted, so proper buffering is necessary for good user experience.
@@ -147,7 +147,7 @@ Base class for Hudson CLI.
   <DD>1.302</DD>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative"><CODE>CLIMethod</CODE></A></DL>
 <HR>
 
 <P>
@@ -185,6 +185,14 @@ Base class for Hudson CLI.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that represents the CLI JVM.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.Locale</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#locale">locale</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The locale of the client.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -254,6 +262,14 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#createClone()">createClone</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a clone to be used to execute a command.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#getName()">getName</A></B>()</CODE>
 
@@ -271,7 +287,8 @@ Base class for Hudson CLI.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)">main</A></B>(java.util.List&lt;java.lang.String&gt;&nbsp;args,
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)">main</A></B>(java.util.List&lt;java.lang.String&gt;&nbsp;args,
+     java.util.Locale&nbsp;locale,
      java.io.InputStream&nbsp;stdin,
      java.io.PrintStream&nbsp;stdout,
      java.io.PrintStream&nbsp;stderr)</CODE>
@@ -381,6 +398,18 @@ protected transient <A HREF="../../hudson/remoting/Channel.html" title="class in
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="locale"><!-- --></A><H3>
+locale</H3>
+<PRE>
+protected transient java.util.Locale <B>locale</B></PRE>
+<DL>
+<DD>The locale of the client. Messages should be formatted with this resource.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -450,10 +479,11 @@ public abstract java.lang.String <B>getShortDescription</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="main(java.util.List, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)"><!-- --></A><H3>
+<A NAME="main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)"><!-- --></A><H3>
 main</H3>
 <PRE>
 public int <B>main</B>(java.util.List&lt;java.lang.String&gt;&nbsp;args,
+                java.util.Locale&nbsp;locale,
                 java.io.InputStream&nbsp;stdin,
                 java.io.PrintStream&nbsp;stdout,
                 java.io.PrintStream&nbsp;stderr)</PRE>
@@ -496,6 +526,22 @@ printUsage</H3>
 protected void <B>printUsage</B>(java.io.PrintStream&nbsp;stderr,
                           org.kohsuke.args4j.CmdLineParser&nbsp;p)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createClone()"><!-- --></A><H3>
+createClone</H3>
+<PRE>
+protected <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A> <B>createClone</B>()</PRE>
+<DL>
+<DD>Creates a clone to be used to execute a command.
+<P>
 <DD><DL>
 </DL>
 </DD>

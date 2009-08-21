@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model (Hudson main module 1.320 API)
+hudson.model (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson main module 1.320 API)";
+        parent.document.title="hudson.model (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -97,9 +97,8 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></B></TD>
-<TD>Object that contributes an item to the left hand side menu
- of a <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
- (for example to <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>, and etc.)</TD>
+<TD>Object that contributes additional information, behaviors, and UIs to <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>
+ (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A></B></TD>
@@ -319,7 +318,7 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model">Cause.LegacyCodeCause</A></B></TD>
-<TD>&nbsp;</TD>
+<TD>Fall back implementation when no other type is available.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Cause.RemoteCause.html" title="class in hudson.model">Cause.RemoteCause</A></B></TD>
@@ -327,11 +326,11 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Cause.UpstreamCause.html" title="class in hudson.model">Cause.UpstreamCause</A></B></TD>
-<TD>&nbsp;</TD>
+<TD>A build is triggered by the completion of another build (AKA upstream build.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Cause.UserCause.html" title="class in hudson.model">Cause.UserCause</A></B></TD>
-<TD>&nbsp;</TD>
+<TD>A build is started by an user action.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A></B></TD>
@@ -386,6 +385,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model">DownloadService.Downloadable</A></B></TD>
 <TD>Represents a periodically updated JSON data file obtained from a remote URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/DynamicLabels.html" title="class in hudson.model">DynamicLabels</A></B></TD>
+<TD>Dynamic labels (with its recomputing logic.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A></B></TD>
@@ -925,6 +928,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Failure.html" title="class in hudson.model">Failure</A></B></TD>
+<TD>Represents an error induced by user, encountered during HTTP request processing.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Run.RunnerAbortedException.html" title="class in hudson.model">Run.RunnerAbortedException</A></B></TD>

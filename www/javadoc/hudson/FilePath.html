@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath (Hudson main module 1.320 API)
+FilePath (Hudson main module 1.321 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-15">
+<META NAME="date" CONTENT="2009-08-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson main module 1.320 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson main module 1.320 API)";
+        parent.document.title="FilePath (Hudson main module 1.321 API)";
     }
 }
 </SCRIPT>
@@ -1737,8 +1737,9 @@ public boolean <B>delete</B>()
 </DD>
 <DD><DL>
 
+<DT><B>Returns:</B><DD>true, for a modicum of compatibility
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.io.IOException</CODE> - if it exists but could not be successfully deleted
 <DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
