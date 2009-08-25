@@ -351,7 +351,8 @@ public final class P4jUtil {
         return label;
     }
 
-    static void deleteLabel(P4JServer server, String label) {
+    static void deleteLabel(P4JServer server, String label)
+            throws P4JConnectionException, P4JRequestException, P4JAccessException {
         //TODO(CQ) P4JServer.deleteLabel is missing from P4Java, reported to Perforce.
         // server.deleteLabel(label, false);
     }

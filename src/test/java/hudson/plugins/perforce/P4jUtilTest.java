@@ -16,7 +16,7 @@ import junit.framework.TestCase;
 public class P4jUtilTest extends TestCase {
 
     private static final String p4port = "perforce:1666";
-    private static final String p4user = "cquinn"; //rolem";
+    private static final String p4user = "cquinn"; //rolem cquinn
     private static final String p4pass = "";
     private static final String p4client = "hudson_plugin_debug_client";
     private static final String p4label = "hudson_plugin_debug_label";

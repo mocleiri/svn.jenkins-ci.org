@@ -63,10 +63,10 @@ public class PerforceSCM extends SCM {
     String projectPath;
     String p4Label;
 
-    // TODO(CQ): how can we remove these 3 since they are not needed for P4Java ?
-    String p4Exe = "C:\\Program Files\\Perforce\\p4.exe";
-    String p4SysDrive = "C:";
-    String p4SysRoot = "C:\\WINDOWS";
+    // Keep these fields around a while for compatibility with old serialized data.
+    transient String p4Exe;
+    transient String p4SysDrive;
+    transient String p4SysRoot;
 
     transient P4JServer server;  // default connected server avail for the life of this SCM
 
@@ -165,7 +165,6 @@ public class PerforceSCM extends SCM {
         return newServer(p4Port, p4User, encryptor.decryptString(p4Passwd));
     }
 
-    // TODO(CQ) rolled the 2 getDepot()s into a single lazy getServer()
     /**
      * Returns the re-usable Perforce server object managed by this SCM instance.
      */
@@ -207,16 +206,22 @@ public class PerforceSCM extends SCM {
     }
 
     /**
-     * Override of SCM.buildEnvVars() in order to setup the last change we have
-     * sync'd to as a Hudson
-     * environment variable: P4_CHANGELIST
-     *
-     * @param build
-     * @param env
+     * Override of SCM.buildEnvVars() in order to setup some useful Perforce environment variables
+     * to be available to the build subprocesses.
+     * <ul>
+     *  <li> the last change we have sync'd to: P4_CHANGELIST
+     *  <li> or, the label we have sync'd to: P4_LABEL
+     *  <li> the user: P4USER
+     *  <li> the client: P4CLIENT
+     *  <li> the server & port: P4PORT
+     * </ul>
      */
     @Override
     public void buildEnvVars(AbstractBuild build, Map<String, String> env) {
         super.buildEnvVars(build, env);
+        env.put("P4PORT", p4Port);
+        env.put("P4USER", p4User);
+        env.put("PCLIENT", p4Client);
         PerforceTagAction pta = getMostRecentTagAction(build);
         if (pta != null) {
             if (pta.getChangeNumber() > 0) {
@@ -237,7 +242,8 @@ public class PerforceSCM extends SCM {
     }
 
     /*
-     * @see hudson.scm.SCM#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)
+     * TODO(CQ) consider: change checkout() so that it finds the list of new changes only if the
+     * current and previous builds did NOT use a p4 label.
      */
     @Override
     public boolean checkout(AbstractBuild build, Launcher launcher,
@@ -408,6 +414,8 @@ public class PerforceSCM extends SCM {
             if (!P4jUtil.existsClient(server, clientName)) {
                 logger.println("New client: " + clientName);
                 return true;
+                // TODO: possible improvement: if the client spec has been deleted but the
+                // workspace is uptodate, this return will be a false positive.
             }
             P4JClient client = getPreparedClient(server, clientName, launcher, workspace, listener);
 
@@ -1063,8 +1071,9 @@ public class PerforceSCM extends SCM {
      */
     @Override
     public boolean processWorkspaceBeforeDeletion(AbstractProject<?,?> project, FilePath workspace, Node node) {
-        Logger.getLogger(PerforceSCM.class.getName()).info(
-                "Veto workspace cleanup");
+        Logger.getLogger(PerforceSCM.class.getName()).info("Veto workspace cleanup");
         return false;
+        // TODO(CQ): figure out how to tell the server that we've delete the workspace instead?
+        // Or, use the -p (serverBypass) on sync so the server doesn't track our files at all?
     }
 }
