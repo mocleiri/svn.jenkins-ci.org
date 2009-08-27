@@ -98,6 +98,15 @@ public class RunMojo extends AbstractJetty6Mojo {
      */
     protected ArtifactRepository localRepository;
 
+    /**
+     * Specifies the HTTP port number.
+     *
+     * If connectors are configured in the Mojo, that'll take precedence.
+     *
+     * @parameter expression="${port}"
+     */
+    protected String defaultPort;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         // compute hudsonHome
         if(hudsonHome==null) {
@@ -281,5 +290,12 @@ public class RunMojo extends AbstractJetty6Mojo {
     }
 
     public void finishConfigurationBeforeStart() {
+    }
+
+    @Override
+    protected String getDefaultHttpPort() {
+        if (defaultPort!=null)
+            return defaultPort;
+        return super.getDefaultHttpPort();
     }
 }
