@@ -11,6 +11,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Represents {@link JNFile} that has the version number as the file name.
@@ -20,10 +23,15 @@ import java.net.URL;
 public class VersionedFile implements Comparable<VersionedFile> {
     final VersionNumber version;
     final URL url;
-
-    public VersionedFile(URL url, VersionNumber version) {
+    final Date lastModified;
+    final String modifiedBy;
+    
+    public VersionedFile(URL url, VersionNumber version, Date lastModified,
+			 String modifiedBy) {
         this.url = url;
         this.version = version;
+	this.lastModified = lastModified;
+	this.modifiedBy = modifiedBy;
     }
 
     public JSONObject toJSON(String name) {
@@ -31,9 +39,16 @@ public class VersionedFile implements Comparable<VersionedFile> {
         o.put("name",name);
         o.put("version",version.toString());
         o.put("url",url.toExternalForm());
+	SimpleDateFormat buildDateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+
+	o.put("buildDate",buildDateFormatter.format(lastModified));
         return o;
     }
 
+    public String getModifiedBy() {
+	return modifiedBy;
+    }
+    
     public String toString() {
         return url+" ("+version+")";
     }

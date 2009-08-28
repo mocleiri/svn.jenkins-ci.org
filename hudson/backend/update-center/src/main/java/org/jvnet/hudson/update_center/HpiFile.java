@@ -42,6 +42,14 @@ public final class HpiFile {
         return attributes.getValue("Long-Name");
     }
 
+    public String getSandboxStatus() {
+        return attributes.getValue("Sandbox-Status");
+    }
+
+    public String getBuildDate() {
+        return attributes.getValue("Build-Date");
+    }
+
     public List<Dependency> getDependencies() {
         String deps = attributes.getValue("Plugin-Dependencies");
         if(deps==null)  return Collections.emptyList();
@@ -52,6 +60,19 @@ public final class HpiFile {
         return r;
     }
 
+    public List<Developer> getDevelopers() {
+        String devs = attributes.getValue("Plugin-Developers");
+        if(devs==null)  return Collections.emptyList();
+
+        List<Developer> r = new ArrayList<Developer>();
+        for(String token : devs.split(",")) {
+	    Developer d = new Developer(token);
+	    if (d!=null) 
+		r.add(d);
+	}
+        return r;
+    }
+    
     public static class Dependency {
         public final String name;
         public final String version;
@@ -76,5 +97,36 @@ public final class HpiFile {
             o.put("optional",optional);
             return o;
         }
+    }
+
+    public static class Developer {
+	public final String name;
+	public final String developerId;
+	public final String email;
+
+	Developer(String token) {
+	    String[] pieces = token.split(":");
+	    name = pieces[0];
+	    developerId = pieces[1];
+	    email = pieces[2];
+	}
+
+	public JSONObject toJSON() {
+	    JSONObject o = new JSONObject();
+	    if (!name.equals("") && !name.equals(" "))
+		o.put("name",name);
+	    if (!developerId.equals(""))
+		o.put("developerId",developerId);
+	    if (!email.equals("") && !email.equals(" "))
+		o.put("email",email);
+
+	    if (!o.isEmpty()) {
+		return o;
+	    }
+	    else {
+		return null;
+	    }
+	}	
+	
     }
 }

@@ -38,7 +38,7 @@ public class Main {
     public void run() throws Exception {
         JavaNet jn = JavaNet.connect();
         JNProject p = jn.getProject("hudson");
-
+	
         JSONObject root = new JSONObject();
         root.put("updateCenterVersion","1");    // we'll bump the version when we make incompatible changes
         root.put("plugins", buildPlugins(p));

@@ -80,7 +80,8 @@ public class Plugin {
         } catch (RemoteException e) {
             System.err.println("POM points to a non-confluence page for "+artifactId);
             e.printStackTrace();
-        }
+	}
+
 
         try {
             String p = OVERRIDES.getProperty(artifactId);
@@ -138,11 +139,25 @@ public class Plugin {
         if (hpi.getCompatibleSinceVersion() != null) {
             json.put("compatibleSinceVersion",hpi.getCompatibleSinceVersion());
         }
+        if (hpi.getSandboxStatus() != null) {
+            json.put("sandboxStatus",hpi.getSandboxStatus());
+        }
 
         JSONArray deps = new JSONArray();
         for (HpiFile.Dependency d : hpi.getDependencies())
             deps.add(d.toJSON());
         json.put("dependencies",deps);
+
+	JSONArray devs = new JSONArray();
+	if (!hpi.getDevelopers().isEmpty()) { 
+	    for (HpiFile.Developer dev : hpi.getDevelopers())
+		devs.add(dev.toJSON());
+	}
+	else {
+	    devs.add(new HpiFile.Developer(" :" + file.getModifiedBy()
+					   + ": ").toJSON());
+	}
+        json.put("developers",devs);
 
         return json;
     }

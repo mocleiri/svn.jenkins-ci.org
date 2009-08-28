@@ -13,7 +13,8 @@ public class JavaNetVersionedFile extends VersionedFile {
     final JNFile file;
 
     public JavaNetVersionedFile(JNFile file) {
-        super(file.getURL(),parseVersion(file));
+        super(file.getURL(),parseVersion(file),file.getLastModified(),
+	      file.getModifiedBy().getName());
         this.file = file;
     }
 
