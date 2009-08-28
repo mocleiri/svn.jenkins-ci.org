@@ -42,7 +42,7 @@
   
     
             <div class="xleft">
-        Last Published: 2009-07-21
+        Last Published: 2009-08-27
                       </div>
             <div class="xright">            <a href="">Maven Hudson Plugin</a>
             
@@ -122,7 +122,7 @@
       <div id="contentBox">
         <div class="section"><h2><a name="hpi:run"></a>hpi:run</h2>
 <p><strong>Full name</strong>:</p>
-<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.41:run</p>
+<p>org.jvnet.hudson.tools:maven-hpi-plugin:1.42:run</p>
 <p><strong>Description</strong>:</p>
 <div>Runs Hudson with the current plugin project. 
 
@@ -188,28 +188,35 @@ target/jetty-tmp<br />
 single SelectChannelConnector at port 8080<br />
 </td>
 </tr>
-<tr class="a"><td><strong><a href="#hudsonHome">hudsonHome</a></strong></td>
+<tr class="a"><td><strong><a href="#defaultPort">defaultPort</a></strong></td>
+<td><code>String</code></td>
+<td><code>-</code></td>
+<td>Specifies the HTTP port number. If connectors are configured in the
+Mojo, that'll take precedence.<br />
+</td>
+</tr>
+<tr class="b"><td><strong><a href="#hudsonHome">hudsonHome</a></strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
 <td>Path to <tt>$HUDSON_HOME</tt>. The launched hudson will use this
 directory as the workspace.<br />
 </td>
 </tr>
-<tr class="b"><td><strong><a href="#jettyConfig">jettyConfig</a></strong></td>
+<tr class="a"><td><strong><a href="#jettyConfig">jettyConfig</a></strong></td>
 <td><code>String</code></td>
 <td><code>-</code></td>
 <td>Location of a jetty xml configuration file whose contents will be
 applied before any plugin configuration. Optional.<br />
 </td>
 </tr>
-<tr class="a"><td><strong><a href="#requestLog">requestLog</a></strong></td>
+<tr class="b"><td><strong><a href="#requestLog">requestLog</a></strong></td>
 <td><code>RequestLog</code></td>
 <td><code>-</code></td>
 <td>A RequestLog implementation to use for the webapp at runtime.
 Optional.<br />
 </td>
 </tr>
-<tr class="b"><td><strong><a href="#systemProperties">systemProperties</a></strong></td>
+<tr class="a"><td><strong><a href="#systemProperties">systemProperties</a></strong></td>
 <td><code>SystemProperty[]</code></td>
 <td><code>-</code></td>
 <td>System properties to set before execution. Note that these
@@ -217,13 +224,13 @@ properties will NOT override System properties that have been set
 on the command line or by the JVM. Optional.<br />
 </td>
 </tr>
-<tr class="a"><td><strong><a href="#userRealms">userRealms</a></strong></td>
+<tr class="b"><td><strong><a href="#userRealms">userRealms</a></strong></td>
 <td><code>UserRealm[]</code></td>
 <td><code>-</code></td>
 <td>List of security realms to set up. Optional.<br />
 </td>
 </tr>
-<tr class="b"><td><strong><a href="#webApp">webApp</a></strong></td>
+<tr class="a"><td><strong><a href="#webApp">webApp</a></strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
 <td>The location of the war file. 
@@ -234,7 +241,7 @@ overwritten.</p>
 <br />
 </td>
 </tr>
-<tr class="a"><td><strong><a href="#webDefaultXml">webDefaultXml</a></strong></td>
+<tr class="b"><td><strong><a href="#webDefaultXml">webDefaultXml</a></strong></td>
 <td><code>File</code></td>
 <td><code>-</code></td>
 <td>A webdefault.xml file to use instead of the default for the webapp.
@@ -254,6 +261,13 @@ single SelectChannelConnector at port 8080</div><ul><li><strong>Type</strong>: <
 <div>The context path for the webapp. Defaults to &quot;/&quot;</div><ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
 <li><strong>Required</strong>: <code>Yes</code></li>
 <li><strong>Expression</strong>: <code>/</code></li>
+</ul>
+<hr />
+<p><strong><a name="defaultPort">defaultPort</a>:</strong></p>
+<div>Specifies the HTTP port number. If connectors are configured in the
+Mojo, that'll take precedence.</div><ul><li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>Expression</strong>: <code>${port}</code></li>
 </ul>
 <hr />
 <p><strong><a name="hudsonHome">hudsonHome</a>:</strong></p>
