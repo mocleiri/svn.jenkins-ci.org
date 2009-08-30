@@ -14,6 +14,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Represents {@link JNFile} that has the version number as the file name.
@@ -24,6 +25,7 @@ public class VersionedFile implements Comparable<VersionedFile> {
     final VersionNumber version;
     final URL url;
     final Date lastModified;
+    private Date prevModified = new Date(0);
     final String modifiedBy;
     
     public VersionedFile(URL url, VersionNumber version, Date lastModified,
@@ -40,15 +42,31 @@ public class VersionedFile implements Comparable<VersionedFile> {
         o.put("version",version.toString());
         o.put("url",url.toExternalForm());
 	SimpleDateFormat buildDateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-
+	SimpleDateFormat fisheyeDateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.00Z'", Locale.US);
+	fisheyeDateFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
 	o.put("buildDate",buildDateFormatter.format(lastModified));
-        return o;
+	o.put("releaseTimestamp", fisheyeDateFormatter.format(lastModified));
+	o.put("previousTimestamp", fisheyeDateFormatter.format(prevModified));
+	
+	return o;
     }
 
     public String getModifiedBy() {
 	return modifiedBy;
     }
-    
+
+    public Date getLastModified() {
+	return lastModified;
+    }
+
+    public Date getPrevModified() {
+	return prevModified;
+    }
+
+    public void setPrevModified(Date prevModified) {
+	this.prevModified = prevModified;
+    }
+
     public String toString() {
         return url+" ("+version+")";
     }

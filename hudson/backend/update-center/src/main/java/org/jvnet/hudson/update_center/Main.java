@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -71,9 +72,19 @@ public class Main {
                 continue;       // subsumed into the ivy plugin. Hiding from the update center
 
             VersionedFile latest = findLatestPlugin(dir);
+	    VersionedFile secondLatest = findSecondLatestPlugin(dir);
+	    
             if(latest==null)
                 continue;       // couldn't find it
 
+	    if (secondLatest!=null) {
+		latest.setPrevModified(secondLatest.getLastModified());
+	    }
+	    else {
+		// If there's no previous version of the plugin, set the previous date to epoch.
+		latest.setPrevModified(new Date(0));
+	    }
+	    
             Plugin plugin = new Plugin(dir.getName(),latest,cpl,cache);
 
             if(plugin.page!=null)
@@ -90,8 +101,14 @@ public class Main {
         return plugins;
     }
 
+
+    
     protected VersionedFile findLatestPlugin(JNFileFolder dir) throws ProcessingException {
         return JavaNetVersionedFile.findLatestFrom(dir);
+    }
+
+    protected VersionedFile findSecondLatestPlugin(JNFileFolder dir) throws ProcessingException {
+        return JavaNetVersionedFile.findSecondLatestFrom(dir);
     }
 
     /**

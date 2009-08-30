@@ -11,6 +11,7 @@ import org.dom4j.DocumentFactory;
 import org.dom4j.io.SAXReader;
 
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -81,7 +82,6 @@ public class Plugin {
             System.err.println("POM points to a non-confluence page for "+artifactId);
             e.printStackTrace();
 	}
-
 
         try {
             String p = OVERRIDES.getProperty(artifactId);
