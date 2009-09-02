@@ -511,9 +511,10 @@ public abstract class AbstractClearCaseScm extends SCM {
             for (String loadRule : loadRules.split("[\\r\\n]+")) {
                 if (!loadRule.equals("")) {
                     // Make sure the load rule starts with \ or /, as appropriate
-                    if (!(loadRule.startsWith("\\")) && !(loadRule.startsWith("/"))) {
-                        loadRule = PathUtil.fileSepForOS(ctLauncher.getLauncher().isUnix()) + loadRule;
+                    while (loadRule.startsWith("\\") || loadRule.startsWith("/")) {
+                        loadRule = loadRule.substring(1);
                     }
+
                     tempFilterRules += Pattern.quote(loadRule) + "\n";
                 }
             }

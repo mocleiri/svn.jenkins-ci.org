@@ -197,6 +197,12 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
             try {
                 String pwv = ct.pwv(getViewName());
                 if (pwv != null) {
+                    if (pwv.contains("/")) {
+                        pwv += "/";
+                    }
+                    else {
+                        pwv += "\\";
+                    }
                     action.setExtendedViewPath(pwv);
                 }
             } catch (Exception e) {
