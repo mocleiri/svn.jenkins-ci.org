@@ -17,7 +17,7 @@ import static java.util.logging.Level.INFO;
 import java.util.logging.Logger;
 
 /**
- * DHCP 
+ * Proxy DHCP service that works in conjunction with a real DHCP server to point PXEclients to the TFTP boot coordinates.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -93,6 +93,11 @@ public class ProxyDhcpService implements Runnable, Closeable {
             return;
         }
 
+        if (!shallWeRespond(datagram,packet)) {
+            LOGGER.fine("Ignoring this request");
+            return;
+        }
+
         // at this point we think someone is PXE booting and we need to tell it where the boot image is
         DHCPPacket reply = packet.createResponse();
         reply.siaddr = tftpServer;
@@ -109,6 +114,20 @@ public class ProxyDhcpService implements Runnable, Closeable {
         datagram.setPort(DHCP_CLIENT_PORT);
         replySocket.send(datagram);
         LOGGER.fine("responded");
+    }
+
+    /**
+     * Subtypes can override this method to selectively respond to the boot requests.
+     *
+     * By default, this method always return true, meaning it responds to every request.
+     *
+     * @param datagram
+     *      The received DHCP DISCOVER packet.
+     * @param packet
+     *      Interpreted packet.
+     */
+    protected boolean shallWeRespond(DatagramPacket datagram, DHCPPacket packet) {
+        return true;
     }
 
     public static final int DHCP_CLIENT_PORT = 68;
