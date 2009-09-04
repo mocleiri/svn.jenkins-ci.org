@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.322 API)
+Deprecated List (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.322 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -538,7 +538,7 @@ function windowTitle()
 <TD><A HREF="hudson/Util.html#combine(long, java.lang.String)">hudson.Util.combine(long, String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use individual localization methods instead. 
-   See <CODE>#Messages.Util_year(long)</CODE> for an example.
+   See <A HREF="hudson/Messages.html#Util_year(java.lang.Object)"><CODE>Messages.Util_year(Object)</CODE></A> for an example.
    Deprecated since 2009-06-24, remove method after 2009-12-24.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -781,13 +781,13 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#getModuleRoot()">hudson.model.AbstractProject.getModuleRoot()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.319
       See <A HREF="hudson/model/AbstractProject.html#getWorkspace()"><CODE>AbstractProject.getWorkspace()</CODE></A> for a migration strategy.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#getModuleRoots()">hudson.model.AbstractProject.getModuleRoots()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.319
       See <A HREF="hudson/model/AbstractProject.html#getWorkspace()"><CODE>AbstractProject.getWorkspace()</CODE></A> for a migration strategy.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -843,7 +843,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#getWorkspace()">hudson.model.AbstractProject.getWorkspace()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.319
       To support concurrent builds of the same project, this method is moved to <A HREF="hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>.
       For backward compatibility, this method returns the right <A HREF="hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A> if called
       from <A HREF="hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>, and otherwise the workspace of the last build.
@@ -856,7 +856,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#getWorkspaceResource()">hudson.model.AbstractProject.getWorkspaceResource()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.319
       Projects no longer have a fixed workspace, ands builds will find an available workspace via
       <A HREF="hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A> for each build (furthermore, that happens after a build is started.)
       So a <A HREF="hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A> representation for a workspace at the project level no longer makes sense.

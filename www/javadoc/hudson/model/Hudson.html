@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.322 API)
+Hudson (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.322 API)";
+        parent.document.title="Hudson (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -379,7 +379,7 @@ Root object of the system.
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#dynamicLabels">dynamicLabels</A>, <A HREF="../../hudson/model/Node.html#holdOffLaunchUntilSave">holdOffLaunchUntilSave</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#holdOffLaunchUntilSave">holdOffLaunchUntilSave</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
@@ -598,6 +598,14 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckJobName(java.lang.String)">doCheckJobName</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes sure that the given name is good as a job name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, java.lang.String)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                    java.lang.String&nbsp;value)</CODE>
 
@@ -738,14 +746,6 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changes the icon size by changing the cookie</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doItemExistsCheck(java.lang.String)">doItemExistsCheck</A></B>(java.lang.String&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the top-level item with the given name exists.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -940,14 +940,6 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getAllCvsRoots()">getAllCvsRoots</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all <code>CVSROOT</code> strings used in the current Hudson installation.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
@@ -971,15 +963,6 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getAssignedLabels()">getAssignedLabels</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the possibly empty set of labels that are assigned to this node,
- including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1169,14 +1152,6 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDynamicLabels()">getDynamicLabels</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the possibly empty set of labels that it has been determined as supported by this node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1394,7 +1369,7 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getLabelString()">getLabelString</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>Node.getAssignedLabels()</CODE></A> but returns labels as a single text.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the manually configured label for a node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2109,7 +2084,7 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getChannel()">getChannel</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#isChangedDynamicLabels()">isChangedDynamicLabels</A>, <A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getAssignedLabels()">getAssignedLabels</A>, <A HREF="../../hudson/model/Node.html#getChannel()">getChannel</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getLabelCloud()">getLabelCloud</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -2201,7 +2176,8 @@ public transient volatile <A HREF="../../hudson/TcpSlaveAgentListener.html" titl
 <A NAME="overallLoad"><!-- --></A><H3>
 overallLoad</H3>
 <PRE>
-public final transient <A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A> <B>overallLoad</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final transient <A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A> <B>overallLoad</B></PRE>
 <DL>
 <DD>Load statistics of the entire system.
 <P>
@@ -4621,7 +4597,11 @@ getLabelString</H3>
 public java.lang.String <B>getLabelString</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Node.html#getLabelString()">Node</A></CODE></B></DD>
-<DD>The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>Node.getAssignedLabels()</CODE></A> but returns labels as a single text.
+<DD>Returns the manually configured label for a node. The list of assigned
+ and dynamically determined labels is available via 
+ <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>Node.getAssignedLabels()</CODE></A> and includes all labels that have been
+ manually configured.
+ 
  Mainly for form binding.
 <P>
 <DD><DL>
@@ -4629,40 +4609,6 @@ public java.lang.String <B>getLabelString</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getAssignedLabels()"><!-- --></A><H3>
-getAssignedLabels</H3>
-<PRE>
-public java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>getAssignedLabels</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Node.html#getAssignedLabels()">Node</A></CODE></B></DD>
-<DD>Returns the possibly empty set of labels that are assigned to this node,
- including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#getAssignedLabels()">getAssignedLabels</A></CODE> in class <CODE><A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDynamicLabels()"><!-- --></A><H3>
-getDynamicLabels</H3>
-<PRE>
-public java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>getDynamicLabels</B>()</PRE>
-<DL>
-<DD>Returns the possibly empty set of labels that it has been determined as supported by this node.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Node.html#getDynamicLabels()">getDynamicLabels</A></CODE> in class <CODE><A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></DL>
-</DD>
-<DD><DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/tasks/LabelFinder.html" title="interface in hudson.tasks"><CODE>LabelFinder</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -5546,13 +5492,13 @@ public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.ut
 </DL>
 <HR>
 
-<A NAME="doItemExistsCheck(java.lang.String)"><!-- --></A><H3>
-doItemExistsCheck</H3>
+<A NAME="doCheckJobName(java.lang.String)"><!-- --></A><H3>
+doCheckJobName</H3>
 <PRE>
-public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doItemExistsCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
-                                        java.lang.String&nbsp;value)</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckJobName</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                     java.lang.String&nbsp;value)</PRE>
 <DL>
-<DD>Checks if the top-level item with the given name exists.
+<DD>Makes sure that the given name is good as a job name.
 <P>
 <DD><DL>
 </DL>
@@ -5716,27 +5662,6 @@ isDarwin</H3>
 <PRE>
 public static boolean <B>isDarwin</B>()</PRE>
 <DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getAllCvsRoots()"><!-- --></A><H3>
-getAllCvsRoots</H3>
-<PRE>
-public java.util.Set&lt;java.lang.String&gt; <B>getAllCvsRoots</B>()</PRE>
-<DL>
-<DD>Returns all <code>CVSROOT</code> strings used in the current Hudson installation.
-
- <p>
- Ideally this shouldn't be defined in here
- but EL doesn't provide a convenient way of invoking a static function,
- so I'm putting it here for now.
-<P>
 <DD><DL>
 </DL>
 </DD>

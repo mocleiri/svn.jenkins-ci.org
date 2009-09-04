@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CVSSCM.DescriptorImpl (Hudson main module 1.322 API)
+CVSSCM.DescriptorImpl (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSSCM.DescriptorImpl (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSSCM.DescriptorImpl (Hudson main module 1.322 API)";
+        parent.document.title="CVSSCM.DescriptorImpl (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -224,6 +224,22 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCheckCvsExe(java.lang.String)">doCheckCvsExe</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if cvs executable exists.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCheckCvspassFile(java.lang.String)">doCheckCvspassFile</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCheckCvsRoot(java.lang.String)">doCheckCvsRoot</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
@@ -236,22 +252,6 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the excludeRegions Regex</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCvsExeCheck(java.lang.String)">doCvsExeCheck</A></B>(java.lang.String&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if cvs executable exists.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#doCvsPassCheck(java.lang.String)">doCvsPassCheck</A></B>(java.lang.String&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -270,6 +270,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Displays "cvs --version" for trouble shooting.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Set&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.DescriptorImpl.html#getAllCvsRoots()">getAllCvsRoots</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all <code>CVSROOT</code> strings used in the current Hudson installation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -582,11 +590,27 @@ public boolean <B>isBrowserReusable</B>(<A HREF="../../hudson/scm/CVSSCM.html" t
 </DL>
 <HR>
 
-<A NAME="doCvsPassCheck(java.lang.String)"><!-- --></A><H3>
-doCvsPassCheck</H3>
+<A NAME="getAllCvsRoots()"><!-- --></A><H3>
+getAllCvsRoots</H3>
 <PRE>
-public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCvsPassCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
-                                     java.lang.String&nbsp;value)</PRE>
+public java.util.Set&lt;java.lang.String&gt; <B>getAllCvsRoots</B>()</PRE>
+<DL>
+<DD>Returns all <code>CVSROOT</code> strings used in the current Hudson installation.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doCheckCvspassFile(java.lang.String)"><!-- --></A><H3>
+doCheckCvspassFile</H3>
+<PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckCvspassFile</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                         java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -597,10 +621,10 @@ public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.ut
 </DL>
 <HR>
 
-<A NAME="doCvsExeCheck(java.lang.String)"><!-- --></A><H3>
-doCvsExeCheck</H3>
+<A NAME="doCheckCvsExe(java.lang.String)"><!-- --></A><H3>
+doCheckCvsExe</H3>
 <PRE>
-public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCvsExeCheck</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckCvsExe</B>(<FONT SIZE="-1">@QueryParameter</FONT>
                                     java.lang.String&nbsp;value)</PRE>
 <DL>
 <DD>Checks if cvs executable exists.

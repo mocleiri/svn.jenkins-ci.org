@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CVSSCM (Hudson main module 1.322 API)
+CVSSCM (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CVSSCM (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CVSSCM (Hudson main module 1.322 API)";
+        parent.document.title="CVSSCM (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -152,6 +152,14 @@ CVS.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.TagActionDescriptor.html" title="class in hudson.scm">CVSSCM.TagActionDescriptor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.TagWorkerThread.html" title="class in hudson.scm">CVSSCM.TagWorkerThread</A></B></CODE>
 
 <BR>
@@ -221,7 +229,7 @@ CVS.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/scm/CVSSCM.html#CVSSCM(java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, boolean, boolean, java.lang.String)">CVSSCM</A></B>(java.lang.String&nbsp;cvsRoot,
-       java.lang.String&nbsp;module,
+       java.lang.String&nbsp;allModules,
        java.lang.String&nbsp;branch,
        java.lang.String&nbsp;cvsRsh,
        boolean&nbsp;canUseUpdate,
@@ -529,7 +537,7 @@ CVSSCM</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>CVSSCM</B>(java.lang.String&nbsp;cvsRoot,
-                                   java.lang.String&nbsp;module,
+                                   java.lang.String&nbsp;allModules,
                                    java.lang.String&nbsp;branch,
                                    java.lang.String&nbsp;cvsRsh,
                                    boolean&nbsp;canUseUpdate,

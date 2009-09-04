@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Item (Hudson main module 1.322 API)
+Queue.Item (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Item (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Item (Hudson main module 1.322 API)";
+        parent.document.title="Queue.Item (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -209,6 +209,14 @@ Item in a queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can be used to wait for the completion (either normal, abnormal, or cancellation) of the <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#getParams()">getParams</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a human-readable message about the parameters of this item</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -435,6 +443,21 @@ getWhy</H3>
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParams()"><!-- --></A><H3>
+getParams</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getParams</B>()</PRE>
+<DL>
+<DD>Gets a human-readable message about the parameters of this item
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>String</DL>
 </DD>
 </DL>
 <HR>

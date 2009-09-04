@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.322 API)
+HudsonTestCase (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.322 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -100,6 +100,9 @@ java.lang.Object
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>junit.framework.Test</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../org/jvnet/hudson/test/GroovyHudsonTestCase.html" title="class in org.jvnet.hudson.test">GroovyHudsonTestCase</A></DD>
 </DL>
 <HR>
 <DL>
@@ -338,6 +341,14 @@ R</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultMaven()">configureDefaultMaven</A></B>()</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the older default Maven, while still allowing specification of other bundled Mavens.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultMaven(java.lang.String)">configureDefaultMaven</A></B>(java.lang.String&nbsp;mavenVersion)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locates Maven2 and configure that as the only Maven in the system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -504,6 +515,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.net.URL</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#getURL()">getURL</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of the webapp top page.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -944,6 +963,22 @@ configureDefaultMaven</H3>
 protected <A HREF="../../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A> <B>configureDefaultMaven</B>()
                                                  throws java.lang.Exception</PRE>
 <DL>
+<DD>Returns the older default Maven, while still allowing specification of other bundled Mavens.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configureDefaultMaven(java.lang.String)"><!-- --></A><H3>
+configureDefaultMaven</H3>
+<PRE>
+protected <A HREF="../../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A> <B>configureDefaultMaven</B>(java.lang.String&nbsp;mavenVersion)
+                                                 throws java.lang.Exception</PRE>
+<DL>
 <DD>Locates Maven2 and configure that as the only Maven in the system.
 <P>
 <DD><DL>
@@ -1113,6 +1148,23 @@ public <A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson
 
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getURL()"><!-- --></A><H3>
+getURL</H3>
+<PRE>
+public java.net.URL <B>getURL</B>()
+                    throws java.io.IOException</PRE>
+<DL>
+<DD>Returns the URL of the webapp top page.
+ URL ends with '/'.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

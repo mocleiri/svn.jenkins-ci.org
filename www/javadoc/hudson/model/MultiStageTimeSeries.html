@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MultiStageTimeSeries (Hudson main module 1.322 API)
+MultiStageTimeSeries (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MultiStageTimeSeries (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MultiStageTimeSeries (Hudson main module 1.322 API)";
+        parent.document.title="MultiStageTimeSeries (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -98,7 +98,8 @@ java.lang.Object
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <B>MultiStageTimeSeries</B><DT>extends java.lang.Object</DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public class <B>MultiStageTimeSeries</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -236,6 +237,14 @@ Maintains several <A HREF="../../hudson/model/TimeSeries.html" title="class in h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/MultiStageTimeSeries.html#getApi()">getApi</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;float</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/MultiStageTimeSeries.html#getLatest(hudson.model.MultiStageTimeSeries.TimeScale)">getLatest</A></B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</CODE>
 
@@ -308,7 +317,8 @@ public final java.awt.Color <B>color</B></PRE>
 <A NAME="sec10"><!-- --></A><H3>
 sec10</H3>
 <PRE>
-public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model">TimeSeries</A> <B>sec10</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model">TimeSeries</A> <B>sec10</B></PRE>
 <DL>
 <DD>Updated every 10 seconds. Keep data up to 1 hour.
 <P>
@@ -320,7 +330,8 @@ public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson
 <A NAME="min"><!-- --></A><H3>
 min</H3>
 <PRE>
-public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model">TimeSeries</A> <B>min</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model">TimeSeries</A> <B>min</B></PRE>
 <DL>
 <DD>Updated every 1 min. Keep data up to 1 day.
 <P>
@@ -332,7 +343,8 @@ public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson
 <A NAME="hour"><!-- --></A><H3>
 hour</H3>
 <PRE>
-public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model">TimeSeries</A> <B>hour</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/TimeSeries.html" title="class in hudson.model">TimeSeries</A> <B>hour</B></PRE>
 <DL>
 <DD>Updated every 1 hour. Keep data up to 4 weeks.
 <P>
@@ -414,6 +426,17 @@ public float <B>getLatest</B>(<A HREF="../../hudson/model/MultiStageTimeSeries.T
 <DL>
 <DD>Gets the most up-to-date data point value.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getApi()"><!-- --></A><H3>
+getApi</H3>
+<PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

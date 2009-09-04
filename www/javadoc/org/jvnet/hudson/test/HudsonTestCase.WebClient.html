@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase.WebClient (Hudson main module 1.322 API)
+HudsonTestCase.WebClient (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase.WebClient (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.322 API)";
+        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -608,13 +608,16 @@ public com.gargoylesoftware.htmlunit.Page <B>goTo</B>(java.lang.String&nbsp;rela
 <A NAME="getContextPath()"><!-- --></A><H3>
 getContextPath</H3>
 <PRE>
-public java.lang.String <B>getContextPath</B>()</PRE>
+public java.lang.String <B>getContextPath</B>()
+                                throws java.io.IOException</PRE>
 <DL>
 <DD>Returns the URL of the webapp top page.
  URL ends with '/'.
 <P>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -636,14 +639,14 @@ public com.gargoylesoftware.htmlunit.WebRequestSettings <B>addCrumb</B>(com.garg
 createCrumbedUrl</H3>
 <PRE>
 public java.net.URL <B>createCrumbedUrl</B>(java.lang.String&nbsp;relativePath)
-                              throws java.net.MalformedURLException</PRE>
+                              throws java.io.IOException</PRE>
 <DL>
 <DD>Creates a URL with crumb parameters relative to {<A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#getContextPath()"><CODE>getContextPath()</CODE></A>
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.net.MalformedURLException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

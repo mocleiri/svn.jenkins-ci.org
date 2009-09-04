@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.FilePath (Hudson main module 1.322 API)
+Uses of Class hudson.FilePath (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.FilePath (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.FilePath (Hudson main module 1.322 API)";
+        parent.document.title="Uses of Class hudson.FilePath (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -778,7 +778,7 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../hudson/model/AbstractProject.html#getModuleRoot()">getModuleRoot</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319
       See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>AbstractProject.getWorkspace()</CODE></A> for a migration strategy.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -795,7 +795,7 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../hudson/model/AbstractProject.html#getModuleRoots()">getModuleRoots</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319
       See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>AbstractProject.getWorkspace()</CODE></A> for a migration strategy.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -844,7 +844,7 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">getWorkspace</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319
       To support concurrent builds of the same project, this method is moved to <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>.
       For backward compatibility, this method returns the right <A HREF="../../hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A> if called
       from <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>, and otherwise the workspace of the last build.
@@ -1555,6 +1555,18 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>SingleFileSCM.</B><B><A HREF="../../org/jvnet/hudson/test/SingleFileSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+         <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+         <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+         java.io.File&nbsp;changeLogFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>ExtractResourceWithChangesSCM.</B><B><A HREF="../../org/jvnet/hudson/test/ExtractResourceWithChangesSCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
          <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
          <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,

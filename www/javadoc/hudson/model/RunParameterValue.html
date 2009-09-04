@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-RunParameterValue (Hudson main module 1.322 API)
+RunParameterValue (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RunParameterValue (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RunParameterValue (Hudson main module 1.322 API)";
+        parent.document.title="RunParameterValue (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -188,6 +188,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/RunParameterValue.html#getShortDescription()">getShortDescription</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes a human-readable possible-localized one-line description of the parameter value.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ParameterValue"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -284,6 +292,27 @@ public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" 
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.<DD><CODE>env</CODE> - never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShortDescription()"><!-- --></A><H3>
+getShortDescription</H3>
+<PRE>
+public java.lang.String <B>getShortDescription</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterValue.html#getShortDescription()">ParameterValue</A></CODE></B></DD>
+<DD>Computes a human-readable possible-localized one-line description of the parameter value.
+
+ <P>
+ This message is used as a tooltip to describe jobs in the queue. The text should be one line without
+ new line. No HTML allowed (the caller will perform necessary HTML escapes, so any text can be returend.)
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/ParameterValue.html#getShortDescription()">getShortDescription</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter.Plugin (Hudson main module 1.322 API)
+UpdateCenter.Plugin (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.Plugin (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.Plugin (Hudson main module 1.322 API)";
+        parent.document.title="UpdateCenter.Plugin (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -120,6 +120,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#compatibleSinceVersion">compatibleSinceVersion</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional version # from which this plugin release is configuration-compatible.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#excerpt">excerpt</A></B></CODE>
 
 <BR>
@@ -208,6 +216,16 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules the installation of this plugin.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#isCompatibleWithInstalledVersion()">isCompatibleWithInstalledVersion</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the plugin is already installed, and the new version of the plugin has a "compatibleSinceVersion"
+ value (i.e., it's only directly compatible with that version or later), this will check to
+ see if the installed version is older than the compatible-since version.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.UpdateCenter.Entry"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -215,7 +233,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model">UpdateCenter.Entry</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/UpdateCenter.Entry.html#isNewerThan(java.lang.String)">isNewerThan</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/UpdateCenter.Entry.html#isNewerThan(java.lang.String)">isNewerThan</A>, <A HREF="../../hudson/model/UpdateCenter.Entry.html#isNewerThan(java.lang.String, java.lang.String)">isNewerThan</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -278,6 +296,18 @@ public final java.lang.String <B>excerpt</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="compatibleSinceVersion"><!-- --></A><H3>
+compatibleSinceVersion</H3>
+<PRE>
+public final java.lang.String <B>compatibleSinceVersion</B></PRE>
+<DL>
+<DD>Optional version # from which this plugin release is configuration-compatible.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -325,6 +355,23 @@ public <A HREF="../../hudson/PluginWrapper.html" title="class in hudson">PluginW
 <DL>
 <DD>If some version of this plugin is currently installed, return <A HREF="../../hudson/PluginWrapper.html" title="class in hudson"><CODE>PluginWrapper</CODE></A>.
  Otherwise null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isCompatibleWithInstalledVersion()"><!-- --></A><H3>
+isCompatibleWithInstalledVersion</H3>
+<PRE>
+public boolean <B>isCompatibleWithInstalledVersion</B>()</PRE>
+<DL>
+<DD>If the plugin is already installed, and the new version of the plugin has a "compatibleSinceVersion"
+ value (i.e., it's only directly compatible with that version or later), this will check to
+ see if the installed version is older than the compatible-since version. If it is older, it'll return false.
+ If it's not older, or it's not installed, or it's installed but there's no compatibleSinceVersion
+ specified, it'll return true.
 <P>
 <DD><DL>
 </DL>

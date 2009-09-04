@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.322 API)
+AbstractProject (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.322 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -170,6 +170,15 @@ Base implementation of <A HREF="../../hudson/model/Job.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#blockBuildWhenUpstreamBuilding">blockBuildWhenUpstreamBuilding</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True to keep builds of this project in queue when upstream projects are
+ building.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="../../hudson/model/RunMap.html" title="class in hudson.model">RunMap</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#builds">builds</A></B></CODE>
 
@@ -307,6 +316,14 @@ void</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a new <A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A> to this <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> if not active yet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#blockBuildWhenUpstreamBuilding()">blockBuildWhenUpstreamBuilding</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -526,6 +543,15 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getBuildingUpstream()">getBuildingUpstream</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the project if any of the upstream project (or itself) is either
+ building or is in the queue.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getBuildTriggerUpstreamProjects()">getBuildTriggerUpstreamProjects</A></B>()</CODE>
 
@@ -587,7 +613,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getModuleRoot()">getModuleRoot</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319
       See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -596,7 +622,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getModuleRoots()">getModuleRoots</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319
       See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -690,6 +716,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getSomeBuildWithWorkspace()">getSomeBuildWithWorkspace</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets some build that has a live workspace.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getSomeWorkspace()">getSomeWorkspace</A></B>()</CODE>
 
@@ -760,7 +794,7 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">getWorkspace</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319
       To support concurrent builds of the same project, this method is moved to <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>.
       For backward compatibility, this method returns the right <A HREF="../../hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A> if called
       from <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>, and otherwise the workspace of the last build.
@@ -776,7 +810,7 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getWorkspaceResource()">getWorkspaceResource</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319
       Projects no longer have a fixed workspace, ands builds will find an available workspace via
       <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A> for each build (furthermore, that happens after a build is started.)
       So a <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A> representation for a workspace at the project level no longer makes sense.
@@ -1244,6 +1278,19 @@ protected volatile boolean <B>disabled</B></PRE>
 </DL>
 <HR>
 
+<A NAME="blockBuildWhenUpstreamBuilding"><!-- --></A><H3>
+blockBuildWhenUpstreamBuilding</H3>
+<PRE>
+protected volatile boolean <B>blockBuildWhenUpstreamBuilding</B></PRE>
+<DL>
+<DD>True to keep builds of this project in queue when upstream projects are
+ building. False by default to keep from breaking existing behavior.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="triggers"><!-- --></A><H3>
 triggers</H3>
 <PRE>
@@ -1369,7 +1416,7 @@ public boolean <B>isConcurrentBuild</B>()</PRE>
 </DD>
 <DD><DL>
 <DT><B>Since:</B></DT>
-  <DD>1.XXX</DD>
+  <DD>1.319</DD>
 </DL>
 </DD>
 </DL>
@@ -1467,7 +1514,7 @@ getWorkspace</H3>
 <PRE>
 public final <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getWorkspace</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.319
       To support concurrent builds of the same project, this method is moved to <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A>.
       For backward compatibility, this method returns the right <A HREF="../../hudson/model/AbstractBuild.html#getWorkspace()"><CODE>AbstractBuild.getWorkspace()</CODE></A> if called
       from <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>, and otherwise the workspace of the last build.
@@ -1507,8 +1554,25 @@ public final <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePa
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if there's no available workspace.<DT><B>Since:</B></DT>
-  <DD>1.XXX</DD>
+  <DD>1.319</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSomeBuildWithWorkspace()"><!-- --></A><H3>
+getSomeBuildWithWorkspace</H3>
+<PRE>
+public final <A HREF="../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A> <B>getSomeBuildWithWorkspace</B>()</PRE>
+<DL>
+<DD>Gets some build that has a live workspace.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if no such build exists.</DL>
 </DD>
 </DL>
 <HR>
@@ -1518,7 +1582,7 @@ getModuleRoot</H3>
 <PRE>
 public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getModuleRoot</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.319
       See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I>
 <P>
 <DD>Returns the root directory of the checked-out module.
@@ -1540,7 +1604,7 @@ getModuleRoots</H3>
 <PRE>
 public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>[] <B>getModuleRoots</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.319
       See <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()"><CODE>getWorkspace()</CODE></A> for a migration strategy.</I>
 <P>
 <DD>Returns the root directories of all checked-out modules.
@@ -1639,6 +1703,20 @@ public boolean <B>isConfigurable</B>()</PRE>
 <DD>Used in <tt>sidepanel.jelly</tt> to decide whether to display
  the config/delete/build links.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="blockBuildWhenUpstreamBuilding()"><!-- --></A><H3>
+blockBuildWhenUpstreamBuilding</H3>
+<PRE>
+public boolean <B>blockBuildWhenUpstreamBuilding</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -2209,7 +2287,8 @@ public boolean <B>isBuildBlocked</B>()</PRE>
 
  <p>
  A project must be blocked if its own previous build is in progress,
- but derived classes can also check other conditions.
+ or if the blockBuildWhenUpstreamBuilding option is true and an upstream
+ project is building, but derived classes can also check other conditions.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()">isBuildBlocked</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
@@ -2232,6 +2311,26 @@ public java.lang.String <B>getWhyBlocked</B>()</PRE>
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuildingUpstream()"><!-- --></A><H3>
+getBuildingUpstream</H3>
+<PRE>
+protected <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A> <B>getBuildingUpstream</B>()</PRE>
+<DL>
+<DD>Returns the project if any of the upstream project (or itself) is either
+ building or is in the queue.
+ <p>
+ This means eventually there will be an automatic triggering of
+ the given project (provided that all builds went smoothly.)
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>
@@ -2319,7 +2418,7 @@ getWorkspaceResource</H3>
 <PRE>
 public <A HREF="../../hudson/model/Resource.html" title="class in hudson.model">Resource</A> <B>getWorkspaceResource</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>as of 1.XXX
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.319
       Projects no longer have a fixed workspace, ands builds will find an available workspace via
       <A HREF="../../hudson/slaves/WorkspaceList.html" title="class in hudson.slaves"><CODE>WorkspaceList</CODE></A> for each build (furthermore, that happens after a build is started.)
       So a <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A> representation for a workspace at the project level no longer makes sense.

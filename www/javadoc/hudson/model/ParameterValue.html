@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ParameterValue (Hudson main module 1.322 API)
+ParameterValue (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterValue (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterValue (Hudson main module 1.322 API)";
+        parent.document.title="ParameterValue (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -255,6 +255,14 @@ A value for a parameter in a build.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name of the parameter.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#getShortDescription()">getShortDescription</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes a human-readable possible-localized one-line description of the parameter value.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -509,6 +517,28 @@ public boolean <B>equals</B>(java.lang.Object&nbsp;obj)</PRE>
 <DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShortDescription()"><!-- --></A><H3>
+getShortDescription</H3>
+<PRE>
+public java.lang.String <B>getShortDescription</B>()</PRE>
+<DL>
+<DD>Computes a human-readable possible-localized one-line description of the parameter value.
+
+ <P>
+ This message is used as a tooltip to describe jobs in the queue. The text should be one line without
+ new line. No HTML allowed (the caller will perform necessary HTML escapes, so any text can be returend.)
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.323</DD>
 </DL>
 </DD>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TimeSeries (Hudson main module 1.322 API)
+TimeSeries (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TimeSeries (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TimeSeries (Hudson main module 1.322 API)";
+        parent.document.title="TimeSeries (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -98,7 +98,8 @@ java.lang.Object
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public final class <B>TimeSeries</B><DT>extends java.lang.Object</DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public final class <B>TimeSeries</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -239,7 +240,8 @@ public void <B>update</B>(float&nbsp;newData)</PRE>
 <A NAME="getHistory()"><!-- --></A><H3>
 getHistory</H3>
 <PRE>
-public float[] <B>getHistory</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public float[] <B>getHistory</B>()</PRE>
 <DL>
 <DD>Gets the history data of the exponential moving average. The returned array should be treated
  as read-only and immutable.
@@ -254,7 +256,8 @@ public float[] <B>getHistory</B>()</PRE>
 <A NAME="getLatest()"><!-- --></A><H3>
 getLatest</H3>
 <PRE>
-public float <B>getLatest</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public float <B>getLatest</B>()</PRE>
 <DL>
 <DD>Gets the most up-to-date data point value. <code>getHistory[0]</code>.
 <P>

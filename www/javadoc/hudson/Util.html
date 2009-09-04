@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Util (Hudson main module 1.322 API)
+Util (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson main module 1.322 API)";
+        parent.document.title="Util (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -139,6 +139,14 @@ Various utility methods that don't have more proper home.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#SYMLINK_ESCAPEHATCH">SYMLINK_ESCAPEHATCH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.apache.commons.lang.time.FastDateFormat</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Util.html#XS_DATETIME_FORMATTER">XS_DATETIME_FORMATTER</A></B></CODE>
 
@@ -179,7 +187,7 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use individual localization methods instead. 
-   See <CODE>#Messages.Util_year(long)</CODE> for an example.
+   See <A HREF="../hudson/Messages.html#Util_year(java.lang.Object)"><CODE>Messages.Util_year(Object)</CODE></A> for an example.
    Deprecated since 2009-06-24, remove method after 2009-12-24.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -718,6 +726,16 @@ public static boolean <B>NO_SYMLINK</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="SYMLINK_ESCAPEHATCH"><!-- --></A><H3>
+SYMLINK_ESCAPEHATCH</H3>
+<PRE>
+public static boolean <B>SYMLINK_ESCAPEHATCH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -1208,7 +1226,7 @@ public static java.lang.String <B>combine</B>(long&nbsp;n,
                                        java.lang.String&nbsp;suffix)</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>Use individual localization methods instead. 
-   See <CODE>#Messages.Util_year(long)</CODE> for an example.
+   See <A HREF="../hudson/Messages.html#Util_year(java.lang.Object)"><CODE>Messages.Util_year(Object)</CODE></A> for an example.
    Deprecated since 2009-06-24, remove method after 2009-12-24.</I>
 <P>
 <DD>Combines number and unit, with a plural suffix if needed.
@@ -1263,7 +1281,7 @@ public static java.lang.String <B>rawEncode</B>(java.lang.String&nbsp;s)</PRE>
  plus backslash (Windows path separator).
  Note that slash(/) is encoded, so the given string should be a
  single path component used in constructing a URL.
- Method name inspired by PHP's rawencode.
+ Method name inspired by PHP's rawurlencode.
 <P>
 <DD><DL>
 </DL>

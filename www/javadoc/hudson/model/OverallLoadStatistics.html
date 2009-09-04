@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-OverallLoadStatistics (Hudson main module 1.322 API)
+OverallLoadStatistics (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ OverallLoadStatistics (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="OverallLoadStatistics (Hudson main module 1.322 API)";
+        parent.document.title="OverallLoadStatistics (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -213,7 +213,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/LoadStatistics.html#configureRenderer(org.jfree.chart.renderer.category.LineAndShapeRenderer)">configureRenderer</A>, <A HREF="../../hudson/model/LoadStatistics.html#createChart(org.jfree.data.category.CategoryDataset)">createChart</A>, <A HREF="../../hudson/model/LoadStatistics.html#createTrendChart(hudson.model.MultiStageTimeSeries.TimeScale)">createTrendChart</A>, <A HREF="../../hudson/model/LoadStatistics.html#doGraph(java.lang.String)">doGraph</A>, <A HREF="../../hudson/model/LoadStatistics.html#getLatestIdleExecutors(hudson.model.MultiStageTimeSeries.TimeScale)">getLatestIdleExecutors</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/LoadStatistics.html#configureRenderer(org.jfree.chart.renderer.category.LineAndShapeRenderer)">configureRenderer</A>, <A HREF="../../hudson/model/LoadStatistics.html#createChart(org.jfree.data.category.CategoryDataset)">createChart</A>, <A HREF="../../hudson/model/LoadStatistics.html#createTrendChart(hudson.model.MultiStageTimeSeries.TimeScale)">createTrendChart</A>, <A HREF="../../hudson/model/LoadStatistics.html#doGraph(java.lang.String)">doGraph</A>, <A HREF="../../hudson/model/LoadStatistics.html#getApi()">getApi</A>, <A HREF="../../hudson/model/LoadStatistics.html#getLatestIdleExecutors(hudson.model.MultiStageTimeSeries.TimeScale)">getLatestIdleExecutors</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -241,7 +241,8 @@ java.lang.Object
 <A NAME="totalQueueLength"><!-- --></A><H3>
 totalQueueLength</H3>
 <PRE>
-public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>totalQueueLength</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>totalQueueLength</B></PRE>
 <DL>
 <DD>Number of total <A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><CODE>Queue.BuildableItem</CODE></A>s that represents blocked builds.
 <P>

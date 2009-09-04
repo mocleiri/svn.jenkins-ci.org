@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Node (Hudson main module 1.322 API)
+Node (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Node (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Node (Hudson main module 1.322 API)";
+        parent.document.title="Node (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -162,15 +162,6 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/model/DynamicLabels.html" title="class in hudson.model">DynamicLabels</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Node.html#dynamicLabels">dynamicLabels</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels assigned to this node dynamically by plugins or other computation
- rather than via user configuration.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#holdOffLaunchUntilSave">holdOffLaunchUntilSave</A></B></CODE>
 
@@ -246,12 +237,14 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#getAssignedLabels()">getAssignedLabels</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the possibly empty set of labels that are assigned to this node,
- including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>.</TD>
+ including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>, manually
+ assigned labels and dynamically assigned labels via the
+ <A HREF="../../hudson/model/LabelFinder.html" title="class in hudson.model"><CODE>LabelFinder</CODE></A> extension point.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -287,14 +280,6 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Node.html#getDynamicLabels()">getDynamicLabels</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A></B>()</CODE>
 
@@ -303,11 +288,19 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/TagCloud.html" title="class in hudson.util">TagCloud</A>&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#getLabelCloud()">getLabelCloud</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the possibly empty tag cloud for the labels of this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#getLabelString()">getLabelString</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>getAssignedLabels()</CODE></A> but returns labels as a single text.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the manually configured label for a node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -401,14 +394,6 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Node.html#isChangedDynamicLabels()">isChangedDynamicLabels</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check if we should rebuild the list of dynamic labels.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A></B>()</CODE>
 
@@ -470,19 +455,6 @@ protected transient volatile boolean <B>holdOffLaunchUntilSave</B></PRE>
 <DL>
 <DD>Newly copied slaves get this flag set, so that Hudson doesn't try to start this node until its configuration
  is saved once.
-<P>
-<DL>
-</DL>
-</DL>
-<HR>
-
-<A NAME="dynamicLabels"><!-- --></A><H3>
-dynamicLabels</H3>
-<PRE>
-protected transient volatile <A HREF="../../hudson/model/DynamicLabels.html" title="class in hudson.model">DynamicLabels</A> <B>dynamicLabels</B></PRE>
-<DL>
-<DD>labels assigned to this node dynamically by plugins or other computation
- rather than via user configuration.
 <P>
 <DL>
 </DL>
@@ -732,14 +704,36 @@ protected abstract <A HREF="../../hudson/model/Computer.html" title="class in hu
 </DL>
 <HR>
 
+<A NAME="getLabelCloud()"><!-- --></A><H3>
+getLabelCloud</H3>
+<PRE>
+public <A HREF="../../hudson/util/TagCloud.html" title="class in hudson.util">TagCloud</A>&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>getLabelCloud</B>()</PRE>
+<DL>
+<DD>Return the possibly empty tag cloud for the labels of this node.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getAssignedLabels()"><!-- --></A><H3>
 getAssignedLabels</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public abstract java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>getAssignedLabels</B>()</PRE>
+</FONT>public java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>getAssignedLabels</B>()</PRE>
 <DL>
 <DD>Returns the possibly empty set of labels that are assigned to this node,
- including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>.
+ including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>, manually
+ assigned labels and dynamically assigned labels via the
+ <A HREF="../../hudson/model/LabelFinder.html" title="class in hudson.model"><CODE>LabelFinder</CODE></A> extension point.
+
+ This method has a side effect of updating the hudson-wide set of labels
+ and should be called after events that will change that - e.g. a slave
+ connecting.
 <P>
 <DD><DL>
 </DL>
@@ -755,23 +749,13 @@ getLabelString</H3>
 <PRE>
 public abstract java.lang.String <B>getLabelString</B>()</PRE>
 <DL>
-<DD>The same as <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>getAssignedLabels()</CODE></A> but returns labels as a single text.
+<DD>Returns the manually configured label for a node. The list of assigned
+ and dynamically determined labels is available via 
+ <A HREF="../../hudson/model/Node.html#getAssignedLabels()"><CODE>getAssignedLabels()</CODE></A> and includes all labels that have been
+ manually configured.
+ 
  Mainly for form binding.
 <P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDynamicLabels()"><!-- --></A><H3>
-getDynamicLabels</H3>
-<PRE>
-public abstract java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt; <B>getDynamicLabels</B>()</PRE>
-<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -992,23 +976,6 @@ public abstract <A HREF="../../hudson/util/ClockDifference.html" title="class in
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.InterruptedException</CODE> - if the operation is aborted.
 <DD><CODE>java.io.IOException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="isChangedDynamicLabels()"><!-- --></A><H3>
-isChangedDynamicLabels</H3>
-<PRE>
-protected boolean <B>isChangedDynamicLabels</B>()</PRE>
-<DL>
-<DD>Check if we should rebuild the list of dynamic labels.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

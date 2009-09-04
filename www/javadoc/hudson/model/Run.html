@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.322 API)
+Run (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.322 API)";
+        parent.document.title="Run (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -484,6 +484,15 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#doConsoleText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConsoleText</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out the raw console output.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -823,6 +832,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the next younger build in progress.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getPreviousBuiltBuild()">getPreviousBuiltBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last build that was actually built - i.e., skipping any with Result.NOT_BUILT</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1834,6 +1851,22 @@ public final <A HREF="../../hudson/model/Run.html" title="type parameter in Run"
 </DL>
 <HR>
 
+<A NAME="getPreviousBuiltBuild()"><!-- --></A><H3>
+getPreviousBuiltBuild</H3>
+<PRE>
+public <A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A> <B>getPreviousBuiltBuild</B>()</PRE>
+<DL>
+<DD>Returns the last build that was actually built - i.e., skipping any with Result.NOT_BUILT
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getPreviousNotFailedBuild()"><!-- --></A><H3>
 getPreviousNotFailedBuild</H3>
 <PRE>
@@ -2408,6 +2441,26 @@ public void <B>doBuildTimestamp</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                       throws java.io.IOException</PRE>
 <DL>
 <DD>Returns the build time stamp in the body.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doConsoleText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doConsoleText</H3>
+<PRE>
+public void <B>doConsoleText</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                   throws java.io.IOException</PRE>
+<DL>
+<DD>Sends out the raw console output.
 <P>
 <DD><DL>
 </DL>

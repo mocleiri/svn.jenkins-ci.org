@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LoadStatistics (Hudson main module 1.322 API)
+LoadStatistics (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LoadStatistics (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LoadStatistics (Hudson main module 1.322 API)";
+        parent.document.title="LoadStatistics (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,8 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>LoadStatistics</B><DT>extends java.lang.Object</DL>
+<DT><PRE><FONT SIZE="-1">@ExportedBean
+</FONT>public abstract class <B>LoadStatistics</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -277,6 +278,14 @@ Utilization statistics for a node or a set of nodes.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#getApi()">getApi</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;float</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/LoadStatistics.html#getLatestIdleExecutors(hudson.model.MultiStageTimeSeries.TimeScale)">getLatestIdleExecutors</A></B>(<A HREF="../../hudson/model/MultiStageTimeSeries.TimeScale.html" title="enum in hudson.model">MultiStageTimeSeries.TimeScale</A>&nbsp;timeScale)</CODE>
 
@@ -309,7 +318,8 @@ Utilization statistics for a node or a set of nodes.
 <A NAME="busyExecutors"><!-- --></A><H3>
 busyExecutors</H3>
 <PRE>
-public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>busyExecutors</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>busyExecutors</B></PRE>
 <DL>
 <DD>Number of busy executors and how it changes over time.
 <P>
@@ -321,7 +331,8 @@ public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class
 <A NAME="totalExecutors"><!-- --></A><H3>
 totalExecutors</H3>
 <PRE>
-public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>totalExecutors</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>totalExecutors</B></PRE>
 <DL>
 <DD>Number of total executors and how it changes over time.
 <P>
@@ -333,7 +344,8 @@ public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class
 <A NAME="queueLength"><!-- --></A><H3>
 queueLength</H3>
 <PRE>
-public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>queueLength</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A> <B>queueLength</B></PRE>
 <DL>
 <DD>Number of <A HREF="../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><CODE>Queue.BuildableItem</CODE></A>s that can run on any node in this node set but blocked.
 <P>
@@ -494,6 +506,17 @@ public <A HREF="../../hudson/model/MultiStageTimeSeries.TrendChart.html" title="
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getApi()"><!-- --></A><H3>
+getApi</H3>
+<PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

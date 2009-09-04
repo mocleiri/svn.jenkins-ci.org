@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Label (Hudson main module 1.322 API)
+Label (Hudson main module 1.323 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-08-28">
+<META NAME="date" CONTENT="2009-09-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Label (Hudson main module 1.322 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Label (Hudson main module 1.322 API)";
+        parent.document.title="Label (Hudson main module 1.323 API)";
     }
 }
 </SCRIPT>
@@ -211,6 +211,14 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#get(java.lang.String)">get</A></B>(java.lang.String&nbsp;l)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a label by its <A HREF="../../hudson/model/Label.html#getName()">name</A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#getApi()">getApi</A></B>()</CODE>
 
@@ -380,7 +388,8 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <A NAME="loadStatistics"><!-- --></A><H3>
 loadStatistics</H3>
 <PRE>
-public final <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A> <B>loadStatistics</B></PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A> <B>loadStatistics</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -769,6 +778,22 @@ public static java.util.Set&lt;<A HREF="../../hudson/model/Label.html" title="cl
 <DT><B>Returns:</B><DD>Can be empty but never null. A new writable set is always returned,
       so that the caller can add more to the set.<DT><B>Since:</B></DT>
   <DD>1.308</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="get(java.lang.String)"><!-- --></A><H3>
+get</H3>
+<PRE>
+public static <A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A> <B>get</B>(java.lang.String&nbsp;l)</PRE>
+<DL>
+<DD>Obtains a label by its <A HREF="../../hudson/model/Label.html#getName()">name</A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
 </DL>
 </DD>
 </DL>
