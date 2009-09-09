@@ -16,7 +16,12 @@
 <!-- Record your changes in the trunk here. -->
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
-  <li class=>
+  <li class=bug>
+    Added call to MailSender in RunnerImpl.cleanUp so that mail gets sent for top-level Maven project as well as individual modules. This means mail will be sent if there are POM parsing errors, etc.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1066">issue 1066</a>)
+  <li class=bug>
+    Fixed setting of "blockBuildWhenUpstreamBuilding" for AbstractProject - wasn't being set at all, or displayed.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4423">issue 4423</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
