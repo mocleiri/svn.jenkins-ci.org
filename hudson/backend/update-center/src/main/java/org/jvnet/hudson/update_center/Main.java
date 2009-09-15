@@ -55,7 +55,7 @@ public class Main {
     /**
      * Build JSON for the plugin list.
      */
-    protected JSONObject buildPlugins(JNProject p) throws ProcessingException, IOException, ServiceException {
+    protected JSONObject buildPlugins(JNProject p) throws ProcessingException, IOException, ServiceException, InterruptedException {
         JNFileFolder pluginsFolder = p.getFolder("/plugins");
         ConfluencePluginList cpl = new ConfluencePluginList();
 
@@ -71,20 +71,22 @@ public class Main {
             if(dir.getName().equals("ivy2"))
                 continue;       // subsumed into the ivy plugin. Hiding from the update center
 
+            // pausing, to give java.net a bit of breath time
+            Thread.sleep(5000);
+
             VersionedFile latest = findLatestPlugin(dir);
-	    VersionedFile secondLatest = findSecondLatestPlugin(dir);
-	    
+            VersionedFile secondLatest = findSecondLatestPlugin(dir);
+
             if(latest==null)
                 continue;       // couldn't find it
 
-	    if (secondLatest!=null) {
-		latest.setPrevModified(secondLatest.getLastModified());
-	    }
-	    else {
-		// If there's no previous version of the plugin, set the previous date to epoch.
-		latest.setPrevModified(new Date(0));
-	    }
-	    
+            if (secondLatest != null) {
+                latest.setPrevModified(secondLatest.getLastModified());
+            } else {
+                // If there's no previous version of the plugin, set the previous date to epoch.
+                latest.setPrevModified(new Date(0));
+            }
+
             Plugin plugin = new Plugin(dir.getName(),latest,cpl,cache);
 
             if(plugin.page!=null)
