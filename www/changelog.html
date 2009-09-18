@@ -20,6 +20,10 @@
     Self restart was not working on Solaris 64bit JVM.
   <li class=bug>
     Fixed a possible <tt>NoSuchElementException</tt> in Hudson start up.
+  <li class=rfe>
+    If a Maven project is built with "-N" or "--non-recursive" in the goals, it will not attempt to
+    load and parse the POMs for any modules defined in the root POM.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4491">issue 4491</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
