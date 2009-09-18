@@ -12,12 +12,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.net.URL;
@@ -108,16 +110,26 @@ public class ExtensionPointLister implements AnnotationProcessor {
 
             if(pageName!=null) {
                 env.getMessager().printNotice("Uploading to "+pageName);
-                ConfluenceSoapService service = Confluence.connect(new URL("http://hudson.gotdns.com/wiki/"));
-                RemotePage p = service.getPage("", "HUDSON", pageName);
+                ConfluenceSoapService service = Confluence.connect(new URL("http://wiki.hudson-ci.org/"));
+
+                Properties props = new Properties();
+                File credential = new File(new File(System.getProperty("user.home")), ".hudson.confluence");
+                if (!credential.exists())
+                    throw new IOException("You need to have userName and password in "+credential);
+                props.load(new FileInputStream(credential));
+                String token = service.login(props.getProperty("userName"),props.getProperty("password"));
+
+                RemotePage p = service.getPage(token, "HUDSON", pageName);
                 p.setContent(FileUtils.readFileToString(output));
-                service.storePage("",p);
+                service.storePage(token,p);
             }
         } catch (IOException e) {
             env.getMessager().printError(e.getMessage());
+            e.printStackTrace();
         } catch (ServiceException e) {
             e.printStackTrace();
             env.getMessager().printError(e.getMessage());
+            e.printStackTrace();
         } finally {
             Thread.currentThread().setContextClassLoader(oldCC);
         }
