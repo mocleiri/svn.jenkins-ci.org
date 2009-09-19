@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Permission (Hudson main module 1.323 API)
+Permission (Hudson main module 1.324 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-04">
+<META NAME="date" CONTENT="2009-09-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Permission (Hudson main module 1.323 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Permission (Hudson main module 1.323 API)";
+        parent.document.title="Permission (Hudson main module 1.324 API)";
     }
 }
 </SCRIPT>
@@ -158,6 +158,14 @@ Permission, which represents activity that requires a security privilege.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/Permission.html#enabled">enabled</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether this permission is available for use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#FULL_CONTROL">FULL_CONTROL</A></B></CODE>
 
@@ -261,6 +269,16 @@ Permission, which represents activity that requires a security privilege.
            <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/security/Permission.html#Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission, boolean)">Permission</A></B>(<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
+           java.lang.String&nbsp;name,
+           org.jvnet.localizer.Localizable&nbsp;description,
+           <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy,
+           boolean&nbsp;enable)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defines a new permission.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -300,6 +318,14 @@ Permission, which represents activity that requires a security privilege.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/Permission.html#getEnabled()">getEnabled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#getId()">getId</A></B>()</CODE>
 
@@ -307,6 +333,14 @@ Permission, which represents activity that requires a security privilege.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the string representation of this <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A>,
  which can be converted back to <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> via the
  <A HREF="../../hudson/security/Permission.html#fromId(java.lang.String)"><CODE>fromId(String)</CODE></A> method.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/Permission.html#setEnabled(boolean)">setEnabled</A></B>(boolean&nbsp;enable)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -412,6 +446,25 @@ public final <A HREF="../../hudson/security/Permission.html" title="class in hud
  that need finer control can do so.
 <P>
 <DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="enabled"><!-- --></A><H3>
+enabled</H3>
+<PRE>
+public boolean <B>enabled</B></PRE>
+<DL>
+<DD>Whether this permission is available for use.
+
+ <p>
+ This allows us to dynamically enable or disable the visibility of
+ permissions, so administrators can control the complexitity of their
+ permission matrix.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.325</DD>
 </DL>
 </DL>
 <HR>
@@ -547,13 +600,14 @@ public static final <A HREF="../../hudson/security/Permission.html" title="class
 </TR>
 </TABLE>
 
-<A NAME="Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)"><!-- --></A><H3>
+<A NAME="Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission, boolean)"><!-- --></A><H3>
 Permission</H3>
 <PRE>
 public <B>Permission</B>(<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
                   java.lang.String&nbsp;name,
                   org.jvnet.localizer.Localizable&nbsp;description,
-                  <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</PRE>
+                  <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy,
+                  boolean&nbsp;enable)</PRE>
 <DL>
 <DD>Defines a new permission.
 <P>
@@ -570,6 +624,17 @@ public <B>Permission</B>(<A HREF="../../hudson/security/PermissionGroup.html" ti
 
       Because of the classloading problems and the difficulty for Hudson to enumerate them,
       the permission constants really need to be static field of the owner class.<DD><CODE>name</CODE> - See <A HREF="../../hudson/security/Permission.html#name"><CODE>name</CODE></A>.<DD><CODE>description</CODE> - See <A HREF="../../hudson/security/Permission.html#description"><CODE>description</CODE></A>.<DD><CODE>impliedBy</CODE> - See <A HREF="../../hudson/security/Permission.html#impliedBy"><CODE>impliedBy</CODE></A>.</DL>
+</DL>
+<HR>
+
+<A NAME="Permission(hudson.security.PermissionGroup, java.lang.String, org.jvnet.localizer.Localizable, hudson.security.Permission)"><!-- --></A><H3>
+Permission</H3>
+<PRE>
+public <B>Permission</B>(<A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A>&nbsp;group,
+                  java.lang.String&nbsp;name,
+                  org.jvnet.localizer.Localizable&nbsp;description,
+                  <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;impliedBy)</PRE>
+<DL>
 </DL>
 <HR>
 
@@ -635,6 +700,28 @@ public java.lang.String <B>toString</B>()</PRE>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEnabled(boolean)"><!-- --></A><H3>
+setEnabled</H3>
+<PRE>
+public void <B>setEnabled</B>(boolean&nbsp;enable)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnabled()"><!-- --></A><H3>
+getEnabled</H3>
+<PRE>
+public boolean <B>getEnabled</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue (Hudson main module 1.323 API)
+Queue (Hudson main module 1.324 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-04">
+<META NAME="date" CONTENT="2009-09-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson main module 1.323 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson main module 1.323 API)";
+        parent.document.title="Queue (Hudson main module 1.324 API)";
     }
 }
 </SCRIPT>
@@ -424,6 +424,14 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/Queue.html" title="class in hudson.model">Queue</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#getInstance()">getInstance</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#getItem(int)">getItem</A></B>(int&nbsp;id)</CODE>
 
@@ -698,7 +706,8 @@ public void <B>save</B>()</PRE>
 <A NAME="clear()"><!-- --></A><H3>
 clear</H3>
 <PRE>
-public void <B>clear</B>()</PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="clear-queue")
+</FONT>public void <B>clear</B>()</PRE>
 <DL>
 <DD>Wipes out all the items currently in the queue, as if all of them are cancelled at once.
 <P>
@@ -1107,6 +1116,21 @@ public void <B>maintain</B>()</PRE>
 getApi</H3>
 <PRE>
 public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInstance()"><!-- --></A><H3>
+getInstance</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIResolver.html" title="annotation in hudson.cli.declarative">@CLIResolver</A>
+</FONT>public static <A HREF="../../hudson/model/Queue.html" title="class in hudson.model">Queue</A> <B>getInstance</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

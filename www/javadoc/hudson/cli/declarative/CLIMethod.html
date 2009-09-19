@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLIMethod (Hudson main module 1.323 API)
+CLIMethod (Hudson main module 1.324 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-04">
+<META NAME="date" CONTENT="2009-09-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLIMethod (Hudson main module 1.323 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLIMethod (Hudson main module 1.323 API)";
+        parent.document.title="CLIMethod (Hudson main module 1.324 API)";
     }
 }
 </SCRIPT>
@@ -106,8 +106,19 @@ Annotates methods on model objects to expose them as CLI commands.
 
  <p>
  You need to have <tt>Messages.properties</tt> in the same package with the
- <tt>CLI.command-name.shortDescription</tt> key to describe the command.
- This is used for <A HREF="../../../hudson/cli/CLICommand.html#getShortDescription()"><CODE>CLICommand.getShortDescription()</CODE></A>.
+ <tt>CLI.<i>command-name</i>.shortDescription</tt> key to describe the command.
+ This is used for the same purpose as <A HREF="../../../hudson/cli/CLICommand.html#getShortDescription()"><CODE>CLICommand.getShortDescription()</CODE></A>.
+
+ <p>
+ If you put a <A HREF="../../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative"><CODE>CLIMethod</CODE></A> on an instance method (as opposed to a static method),
+ you need a corresponding <A HREF="../../../hudson/cli/declarative/CLIResolver.html" title="annotation in hudson.cli.declarative">CLI resolver method</A>.
+
+ <p>
+ A CLI method can have its parameters annotated with <A HREF="../../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util"><CODE>ListBoxModel.Option</CODE></A> and <CODE>Argument</CODE>,
+ to receive parameter/argument injections.
+
+ <p>
+ A CLI method needs to be public.
 <P>
 
 <P>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.323 API)
+HudsonTestCase (Hudson main module 1.324 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-04">
+<META NAME="date" CONTENT="2009-09-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.323 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.323 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.324 API)";
     }
 }
 </SCRIPT>
@@ -475,8 +475,15 @@ R</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#executeOnServer(groovy.lang.Closure)">executeOnServer</A></B>(groovy.lang.Closure&nbsp;c)</CODE>
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;V&gt; V</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#executeOnServer(java.util.concurrent.Callable)">executeOnServer</A></B>(java.util.concurrent.Callable&lt;V&gt;&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes the given closure on the server, in the context of an HTTP request.</TD>
@@ -1541,11 +1548,11 @@ public <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html" title="cl
 </DL>
 <HR>
 
-<A NAME="executeOnServer(groovy.lang.Closure)"><!-- --></A><H3>
+<A NAME="executeOnServer(java.util.concurrent.Callable)"><!-- --></A><H3>
 executeOnServer</H3>
 <PRE>
-public java.lang.Object <B>executeOnServer</B>(groovy.lang.Closure&nbsp;c)
-                                 throws java.lang.Throwable</PRE>
+public &lt;V&gt; V <B>executeOnServer</B>(java.util.concurrent.Callable&lt;V&gt;&nbsp;c)
+                  throws java.lang.Exception</PRE>
 <DL>
 <DD>Executes the given closure on the server, in the context of an HTTP request.
  This is useful for testing some methods that require <CODE>StaplerRequest</CODE> and <CODE>StaplerResponse</CODE>.
@@ -1556,7 +1563,7 @@ public java.lang.Object <B>executeOnServer</B>(groovy.lang.Closure&nbsp;c)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.lang.Throwable</CODE></DL>
+<DD><CODE>java.lang.Exception</CODE></DL>
 </DD>
 </DL>
 <HR>

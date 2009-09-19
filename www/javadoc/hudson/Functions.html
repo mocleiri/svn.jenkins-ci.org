@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Functions (Hudson main module 1.323 API)
+Functions (Hudson main module 1.324 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-04">
+<META NAME="date" CONTENT="2009-09-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson main module 1.323 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson main module 1.323 API)";
+        parent.document.title="Functions (Hudson main module 1.324 API)";
     }
 }
 </SCRIPT>
@@ -149,14 +149,6 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if you need to use the debug version of YUI.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Functions.html#isUnitTest">isUnitTest</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if we are running unit tests.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -555,6 +547,14 @@ Utility functions used in views.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the path to the icon of the given action
  from the context path.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getIsUnitTest()">getIsUnitTest</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if we are running unit tests.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1048,18 +1048,6 @@ DEBUG_YUI</H3>
 public static boolean <B>DEBUG_YUI</B></PRE>
 <DL>
 <DD>Set to true if you need to use the debug version of YUI.
-<P>
-<DL>
-</DL>
-</DL>
-<HR>
-
-<A NAME="isUnitTest"><!-- --></A><H3>
-isUnitTest</H3>
-<PRE>
-public static boolean <B>isUnitTest</B></PRE>
-<DL>
-<DD>Set to true if we are running unit tests.
 <P>
 <DL>
 </DL>
@@ -2315,6 +2303,19 @@ getCurrentTime</H3>
 <PRE>
 public static java.util.Date <B>getCurrentTime</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIsUnitTest()"><!-- --></A><H3>
+getIsUnitTest</H3>
+<PRE>
+public static boolean <B>getIsUnitTest</B>()</PRE>
+<DL>
+<DD>Returns true if we are running unit tests.
+<P>
 <DD><DL>
 </DL>
 </DD>
