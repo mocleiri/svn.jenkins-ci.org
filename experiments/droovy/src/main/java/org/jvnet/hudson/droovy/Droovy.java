@@ -1,4 +1,4 @@
-package test;
+package org.jvnet.hudson.droovy;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyObjectSupport;
@@ -155,7 +155,7 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
             }
         });
 
-        Server s = new test.Server(this, new Channel(name, exec, p2i,
+        Server s = new Server(this, new Channel(name, exec, p2i,
 //                new TeeOutputStream(p1,new FileOutputStream("/tmp/outgoing"))));
                 p1));
         servers.add(s);
