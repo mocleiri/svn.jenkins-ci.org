@@ -1,4 +1,4 @@
-package test;
+package org.jvnet.hudson.droovy;
 
 import groovy.lang.Closure;
 import hudson.remoting.DelegatingCallable;

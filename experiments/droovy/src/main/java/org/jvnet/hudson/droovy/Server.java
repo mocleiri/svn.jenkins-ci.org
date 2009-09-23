@@ -1,4 +1,4 @@
-package test;
+package org.jvnet.hudson.droovy;
 
 import groovy.lang.Closure;
 import hudson.remoting.Channel;
@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+import test.ClosureAdapter;
 
 /**
  * Represents a connection to a remote server.
