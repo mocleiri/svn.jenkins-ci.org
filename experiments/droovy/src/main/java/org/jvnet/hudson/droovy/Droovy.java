@@ -15,9 +15,11 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.MalformedURLException;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -112,7 +114,7 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
      * Connects by using a random unique name.
      */
     public Server connect() throws IOException {
-        return connect("server"+servers.size());
+        return connect("server"+servers.size(),null);
     }
 
     /**
@@ -121,8 +123,11 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
      * @param name
      *      Human-readable name that represents this server. Used for error messages
      *      and status screen on Hudson.
+     * @param label
+     *      The label that controls what type of the slaves to connect to.
+     *      Null if you don't care.
      */
-    public Server connect(String name) throws IOException {
+    public Server connect(String name, final String label) throws IOException {
         FastPipedOutputStream p1 = new FastPipedOutputStream();
         final FastPipedInputStream p1i = new FastPipedInputStream(p1);
 
@@ -132,18 +137,20 @@ public class Droovy extends GroovyObjectSupport implements Serializable {
         exec.submit(new Callable() {
             public Object call() throws Exception {
                 try {
+                    List<String> args = new ArrayList<String>();
+                    args.add("dist-fork");
+                    if (label!=null)    args.addAll(asList("-l",label));
+                    args.addAll(asList(
+                        "-f",
+                        "remoting.jar=" + Which.jarFile(Channel.class),
+                        "java",
+//                        "-Xrunjdwp:transport=dt_socket,server=y,address=8000", // debug opt
+                        "-classpath",
+                        "remoting.jar",
+                        "hudson.remoting.Launcher"
+                    ));
                     // this never comes back, so we need a new thread.
-                    return cli.execute(Arrays.asList(
-                            "dist-fork",
-                            "-f",
-                            "remoting.jar=" + Which.jarFile(Channel.class),
-                            "java",
-    //                        "-Xrunjdwp:transport=dt_socket,server=y,address=8000", // debug opt
-                            "-classpath",
-                            "remoting.jar",
-                            "hudson.remoting.Launcher"),
-                            p1i,
-                            p2, System.err);
+                    return cli.execute(args, p1i, p2, System.err);
 //                        new TeeOutputStream(p2,new FileOutputStream("/tmp/incoming")), System.err);
                 } catch (IOException e) {
                     System.err.println(e);
