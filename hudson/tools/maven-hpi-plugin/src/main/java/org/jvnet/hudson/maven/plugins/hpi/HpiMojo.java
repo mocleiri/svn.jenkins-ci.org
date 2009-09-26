@@ -155,10 +155,6 @@ public class HpiMojo extends AbstractHpiMojo {
      * Generates a manifest file to be included in the .hpi file
      */
     private void generateManifest(File manifestFile) throws MojoExecutionException {
-        // since this involves scanning the source code, don't do it unless necessary
-        if(manifestFile.exists())
-            return;
-
         // create directory if it doesn't exist yet
         if(!manifestFile.getParentFile().exists())
             manifestFile.getParentFile().mkdirs();
