@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ParameterValue (Hudson main module 1.324 API)
+ParameterValue (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterValue (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterValue (Hudson main module 1.324 API)";
+        parent.document.title="ParameterValue (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -235,7 +235,8 @@ A value for a parameter in a build.
 <TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#getDefinition()">getDefinition</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>parameter definition may change any time. So if you find yourself
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2008-09-20.
+    parameter definition may change any time. So if you find yourself
     in need of accessing the information from <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A>,
     instead copy them in <A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>ParameterDefinition.createValue(StaplerRequest, JSONObject)</CODE></A>
     into <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A>.</I></TD>
@@ -478,7 +479,8 @@ getDefinition</H3>
 <PRE>
 public <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A> <B>getDefinition</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>parameter definition may change any time. So if you find yourself
+<DD><B>Deprecated.</B>&nbsp;<I>since 2008-09-20.
+    parameter definition may change any time. So if you find yourself
     in need of accessing the information from <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A>,
     instead copy them in <A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>ParameterDefinition.createValue(StaplerRequest, JSONObject)</CODE></A>
     into <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A>.</I>

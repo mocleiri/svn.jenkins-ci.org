@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildWrapper.Environment (Hudson main module 1.324 API)
+BuildWrapper.Environment (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildWrapper.Environment (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildWrapper.Environment (Hudson main module 1.324 API)";
+        parent.document.title="BuildWrapper.Environment (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -158,7 +158,8 @@ Represents the environment set up by <A HREF="../../hudson/tasks/BuildWrapper.ht
          <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-10-28.
+      Use <A HREF="../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Environment"><!-- --></A>
@@ -245,12 +246,14 @@ public boolean <B>tearDown</B>(<A HREF="../../hudson/model/AbstractBuild.html" t
 <A NAME="tearDown(hudson.model.Build, hudson.model.BuildListener)"><!-- --></A><H3>
 tearDown</H3>
 <PRE>
-public boolean <B>tearDown</B>(<A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
-                        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
+<FONT SIZE="-1">@Deprecated
+</FONT>public boolean <B>tearDown</B>(<A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>&nbsp;build,
+                                   <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
                  throws java.io.IOException,
                         java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>since 2007-10-28.
+      Use <A HREF="../../hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I>
 <P>
 <DD><DL>
 

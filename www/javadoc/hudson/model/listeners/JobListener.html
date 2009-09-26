@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JobListener (Hudson main module 1.324 API)
+JobListener (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JobListener (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JobListener (Hudson main module 1.324 API)";
+        parent.document.title="JobListener (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,8 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DD>
 </DL>
 <HR>
-<B>Deprecated.</B>&nbsp;<I><A HREF="../../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A> is the generalized form of this.</I>
+<B>Deprecated.</B>&nbsp;<I>since 2007-10-09.
+     <A HREF="../../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A> is the generalized form of this.</I>
 <P>
 <DL>
 <DT><PRE>public abstract class <B>JobListener</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
@@ -195,8 +196,7 @@ Receives notifications about jobs.
 <TD><CODE><B><A HREF="../../../hudson/model/listeners/JobListener.html#onLoaded()">onLoaded</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called after all the jobs are loaded from disk into <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>
- object.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Called after all the jobs are loaded from disk into <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> object.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -259,8 +259,7 @@ onLoaded</H3>
 <PRE>
 public void <B>onLoaded</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<DD>Called after all the jobs are loaded from disk into <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>
- object.
+<DD><B>Deprecated.</B>&nbsp;<DD>Called after all the jobs are loaded from disk into <A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> object.
 <P>
 <DD><DL>
 </DL>

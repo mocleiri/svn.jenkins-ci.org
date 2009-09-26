@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Permission (Hudson main module 1.324 API)
+Permission (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Permission (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Permission (Hudson main module 1.324 API)";
+        parent.document.title="Permission (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -170,7 +170,8 @@ Permission, which represents activity that requires a security privilege.
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#FULL_CONTROL">FULL_CONTROL</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A>.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2009-01-23.
+      Use <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -194,7 +195,8 @@ Permission, which represents activity that requires a security privilege.
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#HUDSON_ADMINISTER">HUDSON_ADMINISTER</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Access <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A> instead.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2009-01-23.
+      Access <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -202,7 +204,8 @@ Permission, which represents activity that requires a security privilege.
 <TD><CODE><B><A HREF="../../hudson/security/Permission.html#HUDSON_PERMISSIONS">HUDSON_PERMISSIONS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Access <A HREF="../../hudson/model/Hudson.html#PERMISSIONS"><CODE>Hudson.PERMISSIONS</CODE></A> instead.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2009-01-23.
+      Access <A HREF="../../hudson/model/Hudson.html#PERMISSIONS"><CODE>Hudson.PERMISSIONS</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -474,7 +477,8 @@ HUDSON_PERMISSIONS</H3>
 <PRE>
 public static final <A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security">PermissionGroup</A> <B>HUDSON_PERMISSIONS</B></PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Access <A HREF="../../hudson/model/Hudson.html#PERMISSIONS"><CODE>Hudson.PERMISSIONS</CODE></A> instead.</I><DD><A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security"><CODE>PermissionGroup</CODE></A> for <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
+<DD><B>Deprecated.</B>&nbsp;<I>since 2009-01-23.
+      Access <A HREF="../../hudson/model/Hudson.html#PERMISSIONS"><CODE>Hudson.PERMISSIONS</CODE></A> instead.</I><DD><A HREF="../../hudson/security/PermissionGroup.html" title="class in hudson.security"><CODE>PermissionGroup</CODE></A> for <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
 <P>
 <DL>
 </DL>
@@ -486,7 +490,8 @@ HUDSON_ADMINISTER</H3>
 <PRE>
 public static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>HUDSON_ADMINISTER</B></PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Access <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A> instead.</I><DD><A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> that represents the God-like access. Equivalent of Unix root.
+<DD><B>Deprecated.</B>&nbsp;<I>since 2009-01-23.
+      Access <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A> instead.</I><DD><A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> that represents the God-like access. Equivalent of Unix root.
 
  <p>
  All permissions are eventually <A HREF="../../hudson/security/Permission.html#impliedBy">implied by</A> this permission.
@@ -511,7 +516,8 @@ FULL_CONTROL</H3>
 <PRE>
 public static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>FULL_CONTROL</B></PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A>.</I><DD>Historically this was separate from <A HREF="../../hudson/security/Permission.html#HUDSON_ADMINISTER"><CODE>HUDSON_ADMINISTER</CODE></A> but such a distinction doesn't make sense
+<DD><B>Deprecated.</B>&nbsp;<I>since 2009-01-23.
+      Use <A HREF="../../hudson/model/Hudson.html#ADMINISTER"><CODE>Hudson.ADMINISTER</CODE></A>.</I><DD>Historically this was separate from <A HREF="../../hudson/security/Permission.html#HUDSON_ADMINISTER"><CODE>HUDSON_ADMINISTER</CODE></A> but such a distinction doesn't make sense
  any more, so deprecated.
 <P>
 <DL>

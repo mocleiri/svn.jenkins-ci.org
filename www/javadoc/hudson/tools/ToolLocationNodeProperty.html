@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ToolLocationNodeProperty (Hudson main module 1.324 API)
+ToolLocationNodeProperty (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolLocationNodeProperty (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolLocationNodeProperty (Hudson main module 1.324 API)";
+        parent.document.title="ToolLocationNodeProperty (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -225,7 +225,8 @@ java.lang.Object
             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2009-04-09.
+      Use <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node,TaskListener)</CODE></A></I></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.slaves.NodeProperty"><!-- --></A>
@@ -316,7 +317,8 @@ public static java.lang.String <B>getToolHome</B>(<A HREF="../../hudson/model/No
                                     throws java.io.IOException,
                                            java.lang.InterruptedException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <CODE>ToolInstallation#translateFor(Node)</CODE></I>
+<DD><B>Deprecated.</B>&nbsp;<I>since 2009-04-09.
+      Use <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node,TaskListener)</CODE></A></I>
 <P>
 <DD>Checks if the location of the tool is overridden for the given node, and if so,
  return the node-specific home directory. Otherwise return <code>installation.getHome()</code>

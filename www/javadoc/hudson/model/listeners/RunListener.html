@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-RunListener (Hudson main module 1.324 API)
+RunListener (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RunListener (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RunListener (Hudson main module 1.324 API)";
+        parent.document.title="RunListener (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -282,7 +282,8 @@ Receives notifications about builds.
 <TD><CODE><B><A HREF="../../../hudson/model/listeners/RunListener.html#register()">register</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -443,7 +444,8 @@ register</H3>
 <PRE>
 public void <B>register</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.281
+      Put <A HREF="../../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I>
 <P>
 <DD>Registers this object as an active listener so that it can start getting
  callbacks invoked.

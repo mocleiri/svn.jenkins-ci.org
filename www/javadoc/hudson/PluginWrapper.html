@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginWrapper (Hudson main module 1.324 API)
+PluginWrapper (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson main module 1.324 API)";
+        parent.document.title="PluginWrapper (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -196,16 +196,32 @@ Represents a Hudson plug-in and associated control information
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#doMakeDisabled(org.kohsuke.stapler.StaplerResponse)">doMakeDisabled</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#doMakeDisabled()">doMakeDisabled</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#doMakeEnabled(org.kohsuke.stapler.StaplerResponse)">doMakeEnabled</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#doMakeEnabled()">doMakeEnabled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#doPin()">doPin</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#doUnpin()">doUnpin</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -330,6 +346,14 @@ Represents a Hudson plug-in and associated control information
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this plugin is enabled for this session.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#isBundled()">isBundled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -602,6 +626,17 @@ public boolean <B>isActive</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="isBundled()"><!-- --></A><H3>
+isBundled</H3>
+<PRE>
+public boolean <B>isBundled</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="isEnabled()"><!-- --></A><H3>
 isEnabled</H3>
 <PRE>
@@ -695,11 +730,11 @@ public boolean <B>hasUpdate</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doMakeEnabled(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doMakeEnabled()"><!-- --></A><H3>
 doMakeEnabled</H3>
 <PRE>
-public void <B>doMakeEnabled</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                   throws java.io.IOException</PRE>
+public org.kohsuke.stapler.HttpResponse <B>doMakeEnabled</B>()
+                                               throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
 
@@ -709,11 +744,39 @@ public void <B>doMakeEnabled</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 </DL>
 <HR>
 
-<A NAME="doMakeDisabled(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doMakeDisabled()"><!-- --></A><H3>
 doMakeDisabled</H3>
 <PRE>
-public void <B>doMakeDisabled</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                    throws java.io.IOException</PRE>
+public org.kohsuke.stapler.HttpResponse <B>doMakeDisabled</B>()
+                                                throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doPin()"><!-- --></A><H3>
+doPin</H3>
+<PRE>
+public org.kohsuke.stapler.HttpResponse <B>doPin</B>()
+                                       throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doUnpin()"><!-- --></A><H3>
+doUnpin</H3>
+<PRE>
+public org.kohsuke.stapler.HttpResponse <B>doUnpin</B>()
+                                         throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
 

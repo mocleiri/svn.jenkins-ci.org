@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Util (Hudson main module 1.324 API)
+Util (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson main module 1.324 API)";
+        parent.document.title="Util (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -181,6 +181,15 @@ Various utility methods that don't have more proper home.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.io.File</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#changeExtension(java.io.File, java.lang.String)">changeExtension</A></B>(java.io.File&nbsp;dst,
+                java.lang.String&nbsp;ext)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a file name by changing its extension.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Util.html#combine(long, java.lang.String)">combine</A></B>(long&nbsp;n,
         java.lang.String&nbsp;suffix)</CODE>
@@ -337,7 +346,7 @@ Various utility methods that don't have more proper home.
 <TD><CODE><B><A HREF="../hudson/Util.html#encodeRFC2396(java.lang.String)">encodeRFC2396</A></B>(java.lang.String&nbsp;url)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2008-05-13. This method is broken (see ISSUE#1666). It should probably
  be removed but I'm not sure if it is considered part of the public API
  that needs to be maintained for backwards compatibility.
  Use <A HREF="../hudson/Util.html#encode(java.lang.String)"><CODE>encode(String)</CODE></A> instead.</I></TD>
@@ -397,6 +406,36 @@ Various utility methods that don't have more proper home.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convert empty string to null, and trim whitespace.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.List&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#fixNull(java.util.List)">fixNull</A></B>(java.util.List&lt;T&gt;&nbsp;l)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; java.util.Set&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Util.html#fixNull(java.util.Set)">fixNull</A></B>(java.util.Set&lt;T&gt;&nbsp;l)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1448,6 +1487,28 @@ public static java.lang.String <B>fixEmptyAndTrim</B>(java.lang.String&nbsp;s)</
 </DL>
 <HR>
 
+<A NAME="fixNull(java.util.List)"><!-- --></A><H3>
+fixNull</H3>
+<PRE>
+public static &lt;T&gt; java.util.List&lt;T&gt; <B>fixNull</B>(java.util.List&lt;T&gt;&nbsp;l)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="fixNull(java.util.Set)"><!-- --></A><H3>
+fixNull</H3>
+<PRE>
+public static &lt;T&gt; java.util.Set&lt;T&gt; <B>fixNull</B>(java.util.Set&lt;T&gt;&nbsp;l)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getFileName(java.lang.String)"><!-- --></A><H3>
 getFileName</H3>
 <PRE>
@@ -1552,7 +1613,7 @@ encodeRFC2396</H3>
 <FONT SIZE="-1">@Deprecated
 </FONT>public static java.lang.String <B>encodeRFC2396</B>(java.lang.String&nbsp;url)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>This method is broken (see ISSUE#1666). It should probably
+<DD><B>Deprecated.</B>&nbsp;<I>since 2008-05-13. This method is broken (see ISSUE#1666). It should probably
  be removed but I'm not sure if it is considered part of the public API
  that needs to be maintained for backwards compatibility.
  Use <A HREF="../hudson/Util.html#encode(java.lang.String)"><CODE>encode(String)</CODE></A> instead.</I>
@@ -1615,6 +1676,20 @@ public static boolean <B>isOverridden</B>(java.lang.Class&nbsp;base,
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="changeExtension(java.io.File, java.lang.String)"><!-- --></A><H3>
+changeExtension</H3>
+<PRE>
+public static java.io.File <B>changeExtension</B>(java.io.File&nbsp;dst,
+                                           java.lang.String&nbsp;ext)</PRE>
+<DL>
+<DD>Returns a file name by changing its extension.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>ext</CODE> - For example, ".zip"</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

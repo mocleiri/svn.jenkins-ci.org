@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCMDescriptor (Hudson main module 1.324 API)
+SCMDescriptor (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMDescriptor (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMDescriptor (Hudson main module 1.324 API)";
+        parent.document.title="SCMDescriptor (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -248,6 +248,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional method used by the automatic SCM browser inference.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCMDescriptor.html#load()">load</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the data from the disk into this object.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -255,7 +263,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile()">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -283,7 +291,7 @@ java.lang.Object
 <A NAME="repositoryBrowser"><!-- --></A><H3>
 repositoryBrowser</H3>
 <PRE>
-public final java.lang.Class&lt;? extends <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt; <B>repositoryBrowser</B></PRE>
+public final transient java.lang.Class&lt;? extends <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A>&gt; <B>repositoryBrowser</B></PRE>
 <DL>
 <DD>If this SCM has corresponding <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A>,
  that type. Otherwise this SCM will not have any repository browser.
@@ -350,6 +358,28 @@ protected <B>SCMDescriptor</B>(java.lang.Class&lt;? extends <A HREF="../../hudso
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="load()"><!-- --></A><H3>
+load</H3>
+<PRE>
+public void <B>load</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Descriptor.html#load()">Descriptor</A></CODE></B></DD>
+<DD>Loads the data from the disk into this object.
+
+ <p>
+ The constructor of the derived class must call this method.
+ (If we do that in the base class, the derived class won't
+ get a chance to set default values.)
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#load()">load</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm">SCM</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="isBrowserReusable(hudson.scm.SCM,hudson.scm.SCM)"><!-- --></A><A NAME="isBrowserReusable(T, T)"><!-- --></A><H3>
 isBrowserReusable</H3>

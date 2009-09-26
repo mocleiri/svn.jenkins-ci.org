@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Mailer.DescriptorImpl (Hudson main module 1.324 API)
+Mailer.DescriptorImpl (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Mailer.DescriptorImpl (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Mailer.DescriptorImpl (Hudson main module 1.324 API)";
+        parent.document.title="Mailer.DescriptorImpl (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -221,6 +221,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doCheckAdminAddress(java.lang.String)">doCheckAdminAddress</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doCheckUrl(java.lang.String)">doCheckUrl</A></B>(java.lang.String&nbsp;value)</CODE>
 
 <BR>
@@ -228,8 +236,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doSendTestMail(org.kohsuke.stapler.StaplerResponse)">doSendTestMail</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#doSendTestMail(java.lang.String, java.lang.String, boolean, java.lang.String, java.lang.String, boolean, java.lang.String)">doSendTestMail</A></B>(java.lang.String&nbsp;smtpServer,
+               java.lang.String&nbsp;adminAddress,
+               boolean&nbsp;useSMTPAuth,
+               java.lang.String&nbsp;smtpAuthUserName,
+               java.lang.String&nbsp;smtpAuthPassword,
+               boolean&nbsp;useSsl,
+               java.lang.String&nbsp;smtpPort)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send an email to the admin address</TD>
@@ -325,10 +339,11 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+            net.sf.json.JSONObject&nbsp;formData)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a configured instance from the submitted form.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -350,6 +365,15 @@ java.lang.Object
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#setHudsonUrl(java.lang.String)">setHudsonUrl</A></B>(java.lang.String&nbsp;hudsonUrl)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Mailer.DescriptorImpl.html#setSmtpAuth(java.lang.String, java.lang.String)">setSmtpAuth</A></B>(java.lang.String&nbsp;userName,
+            java.lang.String&nbsp;password)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -394,7 +418,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A>, <A HREF="../../hudson/model/Descriptor.html#doHelp(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doHelp</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.util.Collection, java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/model/Descriptor.html#getCheckUrl(java.lang.String)">getCheckUrl</A>, <A HREF="../../hudson/model/Descriptor.html#getConfigPage()">getConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getGlobalConfigPage()">getGlobalConfigPage</A>, <A HREF="../../hudson/model/Descriptor.html#getHelpFile(java.lang.String)">getHelpFile</A>, <A HREF="../../hudson/model/Descriptor.html#getJsonSafeClassName()">getJsonSafeClassName</A>, <A HREF="../../hudson/model/Descriptor.html#getPropertyType(java.lang.String)">getPropertyType</A>, <A HREF="../../hudson/model/Descriptor.html#getViewPage(java.lang.Class, java.lang.String)">getViewPage</A>, <A HREF="../../hudson/model/Descriptor.html#isInstance(T)">isInstance</A>, <A HREF="../../hudson/model/Descriptor.html#load()">load</A>, <A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A>, <A HREF="../../hudson/model/Descriptor.html#save()">save</A>, <A HREF="../../hudson/model/Descriptor.html#toArray(T...)">toArray</A>, <A HREF="../../hudson/model/Descriptor.html#toList(T...)">toList</A>, <A HREF="../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -691,16 +715,45 @@ public void <B>setSmtpPort</B>(java.lang.String&nbsp;smtpPort)</PRE>
 </DL>
 <HR>
 
-<A NAME="newInstance(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
-newInstance</H3>
+<A NAME="setSmtpAuth(java.lang.String, java.lang.String)"><!-- --></A><H3>
+setSmtpAuth</H3>
 <PRE>
-public <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A> <B>newInstance</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+public void <B>setSmtpAuth</B>(java.lang.String&nbsp;userName,
+                        java.lang.String&nbsp;password)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><!-- --></A><H3>
+newInstance</H3>
+<PRE>
+public <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A> <B>newInstance</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                             net.sf.json.JSONObject&nbsp;formData)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">Descriptor</A></CODE></B></DD>
+<DD>Creates a configured instance from the submitted form.
+
+ <p>
+ Hudson only invokes this method when the user wants an instance of <tt>T</tt>.
+ So there's no need to check that in the implementation.
+
+ <p>
+ Starting 1.206, the default implementation of this method does the following:
+ <pre>
+ req.bindJSON(clazz,formData);
+ </pre>
+ <p>
+ ... which performs the databinding on the constructor of <A HREF="../../hudson/model/Descriptor.html#clazz"><CODE>Descriptor.clazz</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>req</CODE> - Always non-null. This object includes represents the entire submisison.<DD><CODE>formData</CODE> - The JSON object that captures the configuration data for this <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
+      See http://hudson.gotdns.com/wiki/display/HUDSON/Structured+Form+Submission</DL>
 </DD>
 </DL>
 <HR>
@@ -731,18 +784,43 @@ public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.ut
 </DL>
 <HR>
 
-<A NAME="doSendTestMail(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCheckAdminAddress(java.lang.String)"><!-- --></A><H3>
+doCheckAdminAddress</H3>
+<PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckAdminAddress</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                          java.lang.String&nbsp;value)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doSendTestMail(java.lang.String, java.lang.String, boolean, java.lang.String, java.lang.String, boolean, java.lang.String)"><!-- --></A><H3>
 doSendTestMail</H3>
 <PRE>
-public void <B>doSendTestMail</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                    throws java.io.IOException,
-                           javax.servlet.ServletException,
-                           java.lang.InterruptedException</PRE>
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doSendTestMail</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                     java.lang.String&nbsp;smtpServer,
+                                     <FONT SIZE="-1">@QueryParameter</FONT>
+                                     java.lang.String&nbsp;adminAddress,
+                                     <FONT SIZE="-1">@QueryParameter</FONT>
+                                     boolean&nbsp;useSMTPAuth,
+                                     <FONT SIZE="-1">@QueryParameter</FONT>
+                                     java.lang.String&nbsp;smtpAuthUserName,
+                                     <FONT SIZE="-1">@QueryParameter</FONT>
+                                     java.lang.String&nbsp;smtpAuthPassword,
+                                     <FONT SIZE="-1">@QueryParameter</FONT>
+                                     boolean&nbsp;useSsl,
+                                     <FONT SIZE="-1">@QueryParameter</FONT>
+                                     java.lang.String&nbsp;smtpPort)
+                              throws java.io.IOException,
+                                     javax.servlet.ServletException,
+                                     java.lang.InterruptedException</PRE>
 <DL>
 <DD>Send an email to the admin address
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>rsp</CODE> - used to write the result of the sending
+
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE>

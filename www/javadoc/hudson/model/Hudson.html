@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.324 API)
+Hudson (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.324 API)";
+        parent.document.title="Hudson (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -431,7 +431,8 @@ Root object of the system.
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#addListener(hudson.model.listeners.JobListener)">addListener</A></B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().add(l)</code> instead.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-01-04.
+      Use <code>getJobListeners().add(l)</code> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -455,7 +456,8 @@ Root object of the system.
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#adminCheck()">adminCheck</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -464,7 +466,8 @@ Root object of the system.
            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -606,8 +609,8 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, java.lang.String)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
-                   java.lang.String&nbsp;value)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                   org.kohsuke.stapler.StaplerResponse&nbsp;response)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if container uses UTF-8 to decode URLs.</TD>
@@ -1852,7 +1855,8 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isAdmin()">isAdmin</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This method is deprecated when Hudson moved from simple Unix root-like model
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      This method is deprecated when Hudson moved from simple Unix root-like model
       of "admin gets to do everything, and others don't have any privilege" to more
       complex <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> and <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> based scheme.
 
@@ -1871,7 +1875,8 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#isAdmin(org.kohsuke.stapler.StaplerRequest)">isAdmin</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.
       See <A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>isAdmin()</CODE></A> for more instructions.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -1980,7 +1985,8 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#removeListener(hudson.model.listeners.JobListener)">removeListener</A></B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().remove(l)</code> instead.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-01-04.
+      Use <code>getJobListeners().remove(l)</code> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2448,7 +2454,8 @@ public <B>Hudson</B>(java.io.File&nbsp;root,
 <A NAME="getInstance()"><!-- --></A><H3>
 getInstance</H3>
 <PRE>
-public static <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A> <B>getInstance</B>()</PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIResolver.html" title="annotation in hudson.cli.declarative">@CLIResolver</A>
+</FONT>public static <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A> <B>getInstance</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2938,7 +2945,8 @@ addListener</H3>
 <PRE>
 public void <B>addListener</B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().add(l)</code> instead.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>since 2007-01-04.
+      Use <code>getJobListeners().add(l)</code> instead.</I>
 <P>
 <DD>Adds a new <A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners"><CODE>JobListener</CODE></A>.
 <P>
@@ -2956,7 +2964,8 @@ removeListener</H3>
 <PRE>
 public boolean <B>removeListener</B>(<A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>&nbsp;l)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <code>getJobListeners().remove(l)</code> instead.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>since 2007-01-04.
+      Use <code>getJobListeners().remove(l)</code> instead.</I>
 <P>
 <DD>Deletes an existing <A HREF="../../hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners"><CODE>JobListener</CODE></A>.
 <P>
@@ -4840,7 +4849,8 @@ public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 <A NAME="doQuietDown()"><!-- --></A><H3>
 doQuietDown</H3>
 <PRE>
-public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="quiet-down")
+</FONT>public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()
                                              throws java.io.IOException,
                                                     javax.servlet.ServletException</PRE>
 <DL>
@@ -4859,7 +4869,8 @@ public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()
 <A NAME="doCancelQuietDown()"><!-- --></A><H3>
 doCancelQuietDown</H3>
 <PRE>
-public org.kohsuke.stapler.HttpRedirect <B>doCancelQuietDown</B>()
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="cancel-quiet-down")
+</FONT>public org.kohsuke.stapler.HttpRedirect <B>doCancelQuietDown</B>()
                                                    throws java.io.IOException,
                                                           javax.servlet.ServletException</PRE>
 <DL>
@@ -5611,12 +5622,11 @@ public void <B>doResources</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, java.lang.String)"><!-- --></A><H3>
+<A NAME="doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doCheckURIEncoding</H3>
 <PRE>
 public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckURIEncoding</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
-                                         <FONT SIZE="-1">@QueryParameter</FONT>
-                                         java.lang.String&nbsp;value)
+                                         org.kohsuke.stapler.StaplerResponse&nbsp;response)
                                   throws java.io.IOException</PRE>
 <DL>
 <DD>Checks if container uses UTF-8 to decode URLs. See
@@ -5793,7 +5803,8 @@ adminCheck</H3>
 public static boolean <B>adminCheck</B>()
                           throws java.io.IOException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I>
+<DD><B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I>
 <P>
 <DD><DL>
 </DL>
@@ -5813,7 +5824,8 @@ public static boolean <B>adminCheck</B>(org.kohsuke.stapler.StaplerRequest&nbsp;
                                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                           throws java.io.IOException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I>
+<DD><B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I>
 <P>
 <DD><DL>
 </DL>
@@ -5831,7 +5843,8 @@ isAdmin</H3>
 <PRE>
 public static boolean <B>isAdmin</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>This method is deprecated when Hudson moved from simple Unix root-like model
+<DD><B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      This method is deprecated when Hudson moved from simple Unix root-like model
       of "admin gets to do everything, and others don't have any privilege" to more
       complex <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"><CODE>ACL</CODE></A> and <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> based scheme.
 
@@ -5861,7 +5874,8 @@ isAdmin</H3>
 <PRE>
 public static boolean <B>isAdmin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.
+<DD><B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
+      Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.
       See <A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>isAdmin()</CODE></A> for more instructions.</I>
 <P>
 <DD><DL>

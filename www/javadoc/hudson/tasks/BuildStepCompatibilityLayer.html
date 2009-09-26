@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildStepCompatibilityLayer (Hudson main module 1.324 API)
+BuildStepCompatibilityLayer (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildStepCompatibilityLayer (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildStepCompatibilityLayer (Hudson main module 1.324 API)";
+        parent.document.title="BuildStepCompatibilityLayer (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -103,6 +103,8 @@ java.lang.Object
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>, <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A></DD>
 </DL>
 <HR>
+<B>Deprecated.</B>&nbsp;<I>since 1.150</I>
+<P>
 <DL>
 <DT><PRE>public abstract class <B>BuildStepCompatibilityLayer</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></DL>
 </PRE>
@@ -172,7 +174,7 @@ Provides compatibility with <A HREF="../../hudson/tasks/BuildStep.html" title="i
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#BuildStepCompatibilityLayer()">BuildStepCompatibilityLayer</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -190,7 +192,7 @@ Provides compatibility with <A HREF="../../hudson/tasks/BuildStep.html" title="i
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -209,7 +211,7 @@ Provides compatibility with <A HREF="../../hudson/tasks/BuildStep.html" title="i
         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs the step over the given build and reports the progress to the listener.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Runs the step over the given build and reports the progress to the listener.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -228,7 +230,7 @@ Provides compatibility with <A HREF="../../hudson/tasks/BuildStep.html" title="i
          <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs before the build begins.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Runs before the build begins.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -276,7 +278,7 @@ BuildStepCompatibilityLayer</H3>
 <PRE>
 public <B>BuildStepCompatibilityLayer</B>()</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -294,7 +296,7 @@ prebuild</H3>
 public boolean <B>prebuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">BuildStep</A></CODE></B></DD>
+<DD><B>Deprecated.</B>&nbsp;<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">BuildStep</A></CODE></B></DD>
 <DD>Runs before the build begins.
 <P>
 <DD><DL>
@@ -317,7 +319,7 @@ public boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" ti
                 throws java.lang.InterruptedException,
                        java.io.IOException</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">BuildStep</A></CODE></B></DD>
+<DD><B>Deprecated.</B>&nbsp;<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">BuildStep</A></CODE></B></DD>
 <DD>Runs the step over the given build and reports the progress to the listener.
 
  <p>
@@ -351,7 +353,7 @@ getProjectAction</H3>
 <PRE>
 public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
+<DD><B>Deprecated.</B>&nbsp;<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
 <DD>Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
 

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ItemListener (Hudson main module 1.324 API)
+ItemListener (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ItemListener (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ItemListener (Hudson main module 1.324 API)";
+        parent.document.title="ItemListener (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -176,6 +176,15 @@ Receives notifications about CRUD operations of <A HREF="../../../hudson/model/I
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/listeners/ItemListener.html#onCopied(hudson.model.Item, hudson.model.Item)">onCopied</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;src,
+         <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after a new job is created by copying from an existing job.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/listeners/ItemListener.html#onCreated(hudson.model.Item)">onCreated</A></B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</CODE>
 
 <BR>
@@ -268,6 +277,29 @@ public void <B>onCreated</B>(<A HREF="../../../hudson/model/Item.html" title="in
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onCopied(hudson.model.Item, hudson.model.Item)"><!-- --></A><H3>
+onCopied</H3>
+<PRE>
+public void <B>onCopied</B>(<A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;src,
+                     <A HREF="../../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&nbsp;item)</PRE>
+<DL>
+<DD>Called after a new job is created by copying from an existing job.
+
+ For backward compatibility, the default implementation of this method calls <A HREF="../../../hudson/model/listeners/ItemListener.html#onCreated(hudson.model.Item)"><CODE>onCreated(Item)</CODE></A>.
+ If you choose to handle this method, think about whether you want to call super.onCopied or not.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>src</CODE> - The source item that the new one was copied from. Never null.<DD><CODE>item</CODE> - The newly created item. Never null.<DT><B>Since:</B></DT>
+  <DD>1.325
+      Before this version, a copy triggered <A HREF="../../../hudson/model/listeners/ItemListener.html#onCreated(hudson.model.Item)"><CODE>onCreated(Item)</CODE></A>.</DD>
 </DL>
 </DD>
 </DL>

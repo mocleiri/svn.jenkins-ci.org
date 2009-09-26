@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath (Hudson main module 1.324 API)
+FilePath (Hudson main module 1.325 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-18">
+<META NAME="date" CONTENT="2009-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson main module 1.324 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson main module 1.324 API)";
+        parent.document.title="FilePath (Hudson main module 1.325 API)";
     }
 }
 </SCRIPT>
@@ -2424,7 +2424,8 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
                                        boolean&nbsp;errorIfNotExist)
                                 throws java.io.IOException</PRE>
 <DL>
-<DD>Checks the GLOB-style file mask. See <A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)"><CODE>validateAntFileMask(String)</CODE></A>
+<DD>Checks the GLOB-style file mask. See <A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)"><CODE>validateAntFileMask(String)</CODE></A>.
+ Requires configure permission on ancestor AbstractProject object in request.
 <P>
 <DD><DL>
 </DL>
@@ -2448,6 +2449,7 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
                                     throws java.io.IOException</PRE>
 <DL>
 <DD>Validates a relative file path from this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>.
+ Requires configure permission on ancestor AbstractProject object in request.
 <P>
 <DD><DL>
 </DL>
