@@ -42,7 +42,7 @@
   
     
             <div class="xleft">
-        Last Published: 2009-09-02
+        Last Published: 2009-09-25
                       </div>
             <div class="xright">            <a href="">Maven Hudson Plugin</a>
             
@@ -151,7 +151,10 @@ one Mojo calls another Mojo, this turns out to be the easiest.</td>
 <tr class="b"><td><a href="hpl-mojo.html">hpi:hpl</a></td>
 <td>Generate .hpl file.</td>
 </tr>
-<tr class="a"><td><a href="run-mojo.html">hpi:run</a></td>
+<tr class="a"><td><a href="insert-test-mojo.html">hpi:insert-test</a></td>
+<td>Insert default test suite.</td>
+</tr>
+<tr class="b"><td><a href="run-mojo.html">hpi:run</a></td>
 <td>Runs Hudson with the current plugin project. 
 
 <p>This only needs the source files to be compiled, so run in the
@@ -160,26 +163,26 @@ compile phase.</p>
 <p>To specify the HTTP port, use
 <tt>-Djetty.port=<i>PORT</i></tt></p></td>
 </tr>
-<tr class="b"><td><a href="test-hpl-mojo.html">hpi:test-hpl</a></td>
+<tr class="a"><td><a href="test-hpl-mojo.html">hpi:test-hpl</a></td>
 <td>Generate .hpl file in the test class directory so that test harness
 can locate the plugin.</td>
 </tr>
-<tr class="a"><td><a href="upload-mojo.html">hpi:upload</a></td>
+<tr class="b"><td><a href="upload-mojo.html">hpi:upload</a></td>
 <td>Posts the hpi file to java.net.</td>
 </tr>
 </table>
 <div class="section"><h3>System Requirements</h3>
 <p>The following specifies the minimum requirements to run this Maven plugin:</p>
-<table class="bodyTable"><tr class="b"><td>Maven</td>
+<table class="bodyTable"><tr class="a"><td>Maven</td>
 <td>2.0</td>
 </tr>
-<tr class="a"><td>JDK</td>
+<tr class="b"><td>JDK</td>
 <td>1.5</td>
 </tr>
-<tr class="b"><td>Memory</td>
+<tr class="a"><td>Memory</td>
 <td>No minimum requirement.</td>
 </tr>
-<tr class="a"><td>Disk Space</td>
+<tr class="b"><td>Disk Space</td>
 <td>No minimum requirement.</td>
 </tr>
 </table>
@@ -195,7 +198,7 @@ can locate the plugin.</td>
         &lt;plugin&gt;
           &lt;groupId&gt;org.jvnet.hudson.tools&lt;/groupId&gt;
           &lt;artifactId&gt;maven-hpi-plugin&lt;/artifactId&gt;
-          &lt;version&gt;1.43&lt;/version&gt;
+          &lt;version&gt;1.44&lt;/version&gt;
         &lt;/plugin&gt;
         ...
       &lt;/plugins&gt;
@@ -205,7 +208,7 @@ can locate the plugin.</td>
       &lt;plugin&gt;
         &lt;groupId&gt;org.jvnet.hudson.tools&lt;/groupId&gt;
         &lt;artifactId&gt;maven-hpi-plugin&lt;/artifactId&gt;
-        &lt;version&gt;1.43&lt;/version&gt;
+        &lt;version&gt;1.44&lt;/version&gt;
       &lt;/plugin&gt;
       ...
     &lt;/plugins&gt;
@@ -214,7 +217,7 @@ can locate the plugin.</td>
 &lt;/project&gt;
 </pre>
 </div>
-<p>For more information, see <a href="http://maven.apache.org/guides/mini/guide-configuring-plugins.html" class="externalLink">&quot;Guide to Configuring Plug-ins&quot;</a></p>
+<p>For more information, see <a class="externalLink" href="http://maven.apache.org/guides/mini/guide-configuring-plugins.html">&quot;Guide to Configuring Plug-ins&quot;</a></p>
 </div>
 </div>
 
