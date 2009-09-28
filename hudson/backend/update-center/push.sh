@@ -1,7 +1,7 @@
 #!/bin/sh -ex
 
 # generate output.json
-mvn clean install exec:java
+mvn -e clean install exec:java
 
 # push that to the website
 rm -rf www || true
