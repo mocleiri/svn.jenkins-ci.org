@@ -100,33 +100,32 @@ public final class HpiFile {
     }
 
     public static class Developer {
-	public final String name;
-	public final String developerId;
-	public final String email;
+        public final String name;
+        public final String developerId;
+        public final String email;
 
-	Developer(String token) {
-	    String[] pieces = token.split(":");
-	    name = pieces[0];
-	    developerId = pieces[1];
-	    email = pieces[2];
-	}
+        Developer(String token) {
+            String[] pieces = token.split(":");
+            name = pieces[0];
+            developerId = pieces[1];
+            email = pieces[2];
+        }
 
-	public JSONObject toJSON() {
-	    JSONObject o = new JSONObject();
-	    if (!name.equals("") && !name.equals(" "))
-		o.put("name",name);
-	    if (!developerId.equals(""))
-		o.put("developerId",developerId);
-	    if (!email.equals("") && !email.equals(" "))
-		o.put("email",email);
+        public JSONObject toJSON() {
+            JSONObject o = new JSONObject();
+            if (!name.equals("") && !name.equals(" "))
+                o.put("name", name);
+            if (!developerId.equals(""))
+                o.put("developerId", developerId);
+            if (!email.equals("") && !email.equals(" "))
+                o.put("email", email);
 
-	    if (!o.isEmpty()) {
-		return o;
-	    }
-	    else {
-		return null;
-	    }
-	}	
-	
+            if (!o.isEmpty()) {
+                return o;
+            } else {
+                return null;
+            }
+        }
+
     }
 }

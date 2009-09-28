@@ -148,16 +148,15 @@ public class Plugin {
             deps.add(d.toJSON());
         json.put("dependencies",deps);
 
-	JSONArray devs = new JSONArray();
-	if (!hpi.getDevelopers().isEmpty()) { 
-	    for (HpiFile.Developer dev : hpi.getDevelopers())
-		devs.add(dev.toJSON());
-	}
-	else {
-	    devs.add(new HpiFile.Developer(" :" + file.getModifiedBy()
-					   + ": ").toJSON());
-	}
-        json.put("developers",devs);
+        JSONArray devs = new JSONArray();
+        if (!hpi.getDevelopers().isEmpty()) {
+            for (HpiFile.Developer dev : hpi.getDevelopers())
+                devs.add(dev.toJSON());
+        } else {
+            devs.add(new HpiFile.Developer(" :" + file.getModifiedBy()
+                    + ": ").toJSON());
+        }
+        json.put("developers", devs);
 
         return json;
     }
