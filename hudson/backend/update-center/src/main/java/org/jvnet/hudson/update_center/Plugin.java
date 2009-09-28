@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.util.Properties;
 import java.util.Collections;
 import java.util.regex.Matcher;
@@ -153,8 +154,11 @@ public class Plugin {
             for (HpiFile.Developer dev : hpi.getDevelopers())
                 devs.add(dev.toJSON());
         } else {
-            devs.add(new HpiFile.Developer(" :" + file.getModifiedBy()
-                    + ": ").toJSON());
+            try {
+                devs.add(new HpiFile.Developer(" :" + file.getModifiedBy()+ ": ").toJSON());
+            } catch (ParseException e) {
+                throw new AssertionError(e);
+            }
         }
         json.put("developers", devs);
 
