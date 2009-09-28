@@ -10,6 +10,7 @@ import java.util.jar.Attributes;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.text.ParseException;
 
 /**
  * Represents an .hpi file.
@@ -62,17 +63,20 @@ public final class HpiFile {
 
     public List<Developer> getDevelopers() {
         String devs = attributes.getValue("Plugin-Developers");
-        if(devs==null)  return Collections.emptyList();
+        if (devs == null) return Collections.emptyList();
 
         List<Developer> r = new ArrayList<Developer>();
-        for(String token : devs.split(",")) {
-	    Developer d = new Developer(token);
-	    if (d!=null) 
-		r.add(d);
-	}
+        for (String token : devs.split(",")) {
+            try {
+                r.add(new Developer(token));
+            } catch (ParseException e) {
+                // ignore and move on
+                System.err.println(e);
+            }
+        }
         return r;
     }
-    
+
     public static class Dependency {
         public final String name;
         public final String version;
@@ -104,8 +108,10 @@ public final class HpiFile {
         public final String developerId;
         public final String email;
 
-        Developer(String token) {
+        Developer(String token) throws ParseException {
             String[] pieces = token.split(":");
+            if (pieces.length!=3)
+                throw new ParseException("Unexpected developer name: "+token,0);
             name = pieces[0];
             developerId = pieces[1];
             email = pieces[2];
