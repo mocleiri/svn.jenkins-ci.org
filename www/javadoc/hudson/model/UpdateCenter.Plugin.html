@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter.Plugin (Hudson main module 1.326 API)
+UpdateCenter.Plugin (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.Plugin (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.Plugin (Hudson main module 1.326 API)";
+        parent.document.title="UpdateCenter.Plugin (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -186,6 +186,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#deploy()">deploy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules the installation of this plugin.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#doInstall(org.kohsuke.stapler.StaplerResponse)">doInstall</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -214,7 +222,8 @@ java.lang.Object
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html#install()">install</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules the installation of this plugin.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.326
+      Use <A HREF="../../hudson/model/UpdateCenter.Plugin.html#deploy()"><CODE>deploy()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -383,6 +392,20 @@ public boolean <B>isCompatibleWithInstalledVersion</B>()</PRE>
 install</H3>
 <PRE>
 public void <B>install</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.326
+      Use <A HREF="../../hudson/model/UpdateCenter.Plugin.html#deploy()"><CODE>deploy()</CODE></A>.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="deploy()"><!-- --></A><H3>
+deploy</H3>
+<PRE>
+public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>&gt; <B>deploy</B>()</PRE>
 <DL>
 <DD>Schedules the installation of this plugin.
 

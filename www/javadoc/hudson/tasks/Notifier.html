@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Notifier (Hudson main module 1.326 API)
+Notifier (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Notifier (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Notifier (Hudson main module 1.326 API)";
+        parent.document.title="Notifier (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -115,7 +115,8 @@ java.lang.Object
  <p>
  <A HREF="../../hudson/tasks/Notifier.html" title="class in hudson.tasks"><CODE>Notifier</CODE></A> is a kind of <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> that sends out the outcome of the builds to
  other systems and humans. This marking ensures that notifiers are run after the build result
- is set to its final values by other <A HREF="../../hudson/tasks/Recorder.html" title="class in hudson.tasks"><CODE>Recorder</CODE></A>s.
+ is set to its final value by other <A HREF="../../hudson/tasks/Recorder.html" title="class in hudson.tasks"><CODE>Recorder</CODE></A>s.  To run even after the build is marked
+ as complete, override <A HREF="../../hudson/tasks/Publisher.html#needsToRunAfterFinalized()"><CODE>Publisher.needsToRunAfterFinalized()</CODE></A> to return true.
 
  <p>
  To register a custom <A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> from a plugin,

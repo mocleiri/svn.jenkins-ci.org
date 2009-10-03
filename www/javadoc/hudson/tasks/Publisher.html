@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Publisher (Hudson main module 1.326 API)
+Publisher (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Publisher (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Publisher (Hudson main module 1.326 API)";
+        parent.document.title="Publisher (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -368,7 +368,7 @@ public boolean <B>needsToRunAfterFinalized</B>()</PRE>
  <p>
  So normally, that is the preferrable behavior, but in a few cases
  this is problematic. One of such cases is when a publisher needs to
- trigger other builds, whcih in turn need to see this build as a
+ trigger other builds, which in turn need to see this build as a
  completed build. Those plugins that need to do this can return true
  from this method, so that the <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> 
  method is called after the build is marked as completed.

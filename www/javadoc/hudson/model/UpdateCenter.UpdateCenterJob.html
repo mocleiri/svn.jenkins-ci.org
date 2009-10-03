@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter.UpdateCenterJob (Hudson main module 1.326 API)
+UpdateCenter.UpdateCenterJob (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.UpdateCenterJob (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.UpdateCenterJob (Hudson main module 1.326 API)";
+        parent.document.title="UpdateCenter.UpdateCenterJob (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -151,7 +151,16 @@ Things that <A HREF="../../hudson/model/UpdateCenter.html#installerService"><COD
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#schedule()">schedule</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.326
+      Use <A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#submit()"><CODE>submit()</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.concurrent.Future&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#submit()">submit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules this job for an execution</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -207,11 +216,31 @@ schedule</H3>
 <PRE>
 public void <B>schedule</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.326
+      Use <A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#submit()"><CODE>submit()</CODE></A> instead.</I>
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="submit()"><!-- --></A><H3>
+submit</H3>
+<PRE>
+public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>&gt; <B>submit</B>()</PRE>
+<DL>
+<DD>Schedules this job for an execution
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><CODE>Future</CODE> to keeps track of the status of the execution.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

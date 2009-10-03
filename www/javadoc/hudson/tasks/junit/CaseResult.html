@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CaseResult (Hudson main module 1.326 API)
+CaseResult (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CaseResult (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CaseResult (Hudson main module 1.326 API)";
+        parent.document.title="CaseResult (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -481,7 +481,7 @@ getName</H3>
 <A NAME="getDuration()"><!-- --></A><H3>
 getDuration</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public float <B>getDuration</B>()</PRE>
 <DL>
 <DD>Gets the duration of the test, in seconds
@@ -514,7 +514,7 @@ public java.lang.String <B>getSafeName</B>()</PRE>
 <A NAME="getClassName()"><!-- --></A><H3>
 getClassName</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public java.lang.String <B>getClassName</B>()</PRE>
 <DL>
 <DD>Gets the class name of a test class.
@@ -628,7 +628,7 @@ public int <B>getPassCount</B>()</PRE>
 <A NAME="getFailedSince()"><!-- --></A><H3>
 getFailedSince</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public int <B>getFailedSince</B>()</PRE>
 <DL>
 <DD>If this test failed, then return the build number
@@ -660,7 +660,7 @@ public <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Ru
 <A NAME="getAge()"><!-- --></A><H3>
 getAge</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public int <B>getAge</B>()</PRE>
 <DL>
 <DD>Gets the number of consecutive builds (including this)
@@ -806,7 +806,7 @@ public boolean <B>isPassed</B>()</PRE>
 <A NAME="isSkipped()"><!-- --></A><H3>
 isSkipped</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public boolean <B>isSkipped</B>()</PRE>
 <DL>
 <DD>Tests whether the test was skipped or not.  TestNG allows tests to be
@@ -912,7 +912,8 @@ public int <B>compareTo</B>(<A HREF="../../../hudson/tasks/junit/CaseResult.html
 <A NAME="getStatus()"><!-- --></A><H3>
 getStatus</H3>
 <PRE>
-<FONT SIZE="-1">@Exported(name="status")
+<FONT SIZE="-1">@Exported(name="status",
+          visibility=9)
 </FONT>public <A HREF="../../../hudson/tasks/junit/CaseResult.Status.html" title="enum in hudson.tasks.junit">CaseResult.Status</A> <B>getStatus</B>()</PRE>
 <DL>
 <DD><DL>

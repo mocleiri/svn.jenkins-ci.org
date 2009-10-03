@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.326 API)
+Hudson (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.326 API)";
+        parent.document.title="Hudson (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -1141,6 +1141,14 @@ T</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instances for the given
  kind of <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getDescriptorOrDie(java.lang.Class)">getDescriptorOrDie</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works just like <A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.Class)"><CODE>getDescriptor(Class)</CODE></A> but don't take no for an answer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2903,6 +2911,26 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptorOrDie(java.lang.Class)"><!-- --></A><H3>
+getDescriptorOrDie</H3>
+<PRE>
+public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A> <B>getDescriptorOrDie</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Works just like <A HREF="../../hudson/model/Hudson.html#getDescriptor(java.lang.Class)"><CODE>getDescriptor(Class)</CODE></A> but don't take no for an answer.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.AssertionError</CODE> - If the descriptor is missing.<DT><B>Since:</B></DT>
+  <DD>1.326</DD>
 </DL>
 </DD>
 </DL>

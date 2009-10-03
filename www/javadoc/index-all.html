@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.326 API)
+Index (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.326 API)";
+        parent.document.title="Index (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -761,6 +761,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Queue.QueueDecisionH
 <DT><A HREF="./hudson/model/Queue.QueueSortingHandler.html#all()"><B>all()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A>
 <DD>All registered <A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model"><CODE>Queue.QueueSortingHandler</CODE></A>s
+<DT><A HREF="./hudson/model/TransientProjectActionFactory.html#all()"><B>all()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/TransientProjectActionFactory.html" title="class in hudson.model">TransientProjectActionFactory</A>
+<DD>Returns all the registered <A HREF="./hudson/model/TransientProjectActionFactory.html" title="class in hudson.model"><CODE>TransientProjectActionFactory</CODE></A>s.
 <DT><A HREF="./hudson/model/UserProperty.html#all()"><B>all()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/UserProperty.html" title="class in hudson.model">UserProperty</A>
 <DD>Returns all the registered <A HREF="./hudson/model/UserPropertyDescriptor.html" title="class in hudson.model"><CODE>UserPropertyDescriptor</CODE></A>s.
@@ -1400,6 +1403,9 @@ Method in class hudson.util.<A HREF="./hudson/util/DataSetBuilder.html" title="c
 Static method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/JellyTestSuiteBuilder.html" title="class in org.jvnet.hudson.test">JellyTestSuiteBuilder</A>
 <DD>Given a jar file or a class file directory, recursively search all the Jelly files and build a <CODE>TestSuite</CODE>
  that performs static syntax checks.
+<DT><A HREF="./org/jvnet/hudson/test/PluginAutomaticTestBuilder.html#build(java.util.Map)"><B>build(Map)</B></A> - 
+Static method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/PluginAutomaticTestBuilder.html" title="class in org.jvnet.hudson.test">PluginAutomaticTestBuilder</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Build.RunnerImpl.html" title="class in hudson.model"><B>Build.RunnerImpl</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Build.RunnerImpl.html#Build.RunnerImpl()"><B>Build.RunnerImpl()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Build.RunnerImpl.html" title="class in hudson.model">Build.RunnerImpl</A>
 <DD>&nbsp;
@@ -3175,6 +3181,9 @@ Method in class hudson.security.<A HREF="./hudson/security/SecurityRealm.html" t
 <DT><A HREF="./hudson/model/TreeView.html#createFixedIndenter(java.lang.String)"><B>createFixedIndenter(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/TreeView.html" title="class in hudson.model">TreeView</A>
 <DD>Returns <A HREF="./hudson/Indenter.html" title="class in hudson"><CODE>Indenter</CODE></A> that has the fixed indentation width.
+<DT><A HREF="./hudson/model/TransientProjectActionFactory.html#createFor(hudson.model.AbstractProject)"><B>createFor(AbstractProject)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/TransientProjectActionFactory.html" title="class in hudson.model">TransientProjectActionFactory</A>
+<DD>Creates actions for the given project.
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#createFreeStyleProject()"><B>createFreeStyleProject()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>&nbsp;
@@ -3836,7 +3845,10 @@ Constructor for class hudson.model.<A HREF="./hudson/model/DependencyGraph.html"
 <DT><A HREF="./hudson/DependencyRunner.html" title="class in hudson"><B>DependencyRunner</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Runs a job on all projects in the order of dependencies<DT><A HREF="./hudson/DependencyRunner.html#DependencyRunner(hudson.DependencyRunner.ProjectRunnable)"><B>DependencyRunner(DependencyRunner.ProjectRunnable)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/DependencyRunner.html" title="class in hudson">DependencyRunner</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/DependencyRunner.ProjectRunnable.html" title="interface in hudson"><B>DependencyRunner.ProjectRunnable</B></A> - Interface in <A HREF="./hudson/package-summary.html">hudson</A><DD>&nbsp;<DT><A HREF="./hudson/util/Scrambler.html#descramble(java.lang.String)"><B>descramble(String)</B></A> - 
+<DT><A HREF="./hudson/DependencyRunner.ProjectRunnable.html" title="interface in hudson"><B>DependencyRunner.ProjectRunnable</B></A> - Interface in <A HREF="./hudson/package-summary.html">hudson</A><DD>&nbsp;<DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#deploy()"><B>deploy()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
+<DD>Schedules the installation of this plugin.
+<DT><A HREF="./hudson/util/Scrambler.html#descramble(java.lang.String)"><B>descramble(String)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Scrambler.html" title="class in hudson.util">Scrambler</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Describable.html" title="interface in hudson.model"><B>Describable</B></A>&lt;<A HREF="./hudson/model/Describable.html" title="type parameter in Describable">T</A> extends <A HREF="./hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="./hudson/model/Describable.html" title="type parameter in Describable">T</A>&gt;&gt; - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Classes that are described by <A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.<DT><A HREF="./hudson/util/DescribableList.html" title="class in hudson.util"><B>DescribableList</B></A>&lt;<A HREF="./hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A> extends <A HREF="./hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="./hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;,<A HREF="./hudson/util/DescribableList.html" title="type parameter in DescribableList">D</A> extends <A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="./hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Persisted list of <A HREF="./hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>s with some operations specific
@@ -5896,6 +5908,9 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DT><A HREF="./hudson/Util.html#fixNull(java.util.Set)"><B>fixNull(Set&lt;T&gt;)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Util.html#fixNull(java.util.Collection)"><B>fixNull(Collection&lt;T&gt;)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/logging/WeakLogHandler.html#flush()"><B>flush()</B></A> - 
 Method in class hudson.logging.<A HREF="./hudson/logging/WeakLogHandler.html" title="class in hudson.logging">WeakLogHandler</A>
 <DD>&nbsp;
@@ -7659,6 +7674,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Returns <A HREF="./hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered <A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instances for the given
  kind of <A HREF="./hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>.
+<DT><A HREF="./hudson/model/Hudson.html#getDescriptorOrDie(java.lang.Class)"><B>getDescriptorOrDie(Class&lt;? extends Describable&gt;)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>Works just like <A HREF="./hudson/model/Hudson.html#getDescriptor(java.lang.Class)"><CODE>Hudson.getDescriptor(Class)</CODE></A> but don't take no for an answer.
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#getDest()"><B>getDest()</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>get the file where the checked out files should be placed
@@ -10721,6 +10739,9 @@ Method in class hudson.cli.<A HREF="./hudson/cli/GroovyshCommand.html" title="cl
 <DT><A HREF="./hudson/cli/HelpCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/cli/InstallToolCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/cli/MailCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>
 <DD>&nbsp;
@@ -12354,7 +12375,8 @@ Method in interface hudson.<A HREF="./hudson/PluginStrategy.html" title="interfa
 <DD>Optionally start services provided by the plugin.
 <DT><A HREF="./hudson/model/UpdateCenter.Plugin.html#install()"><B>install()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>
-<DD>Schedules the installation of this plugin.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.326
+      Use <A HREF="./hudson/model/UpdateCenter.Plugin.html#deploy()"><CODE>UpdateCenter.Plugin.deploy()</CODE></A>.</I>
 <DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterConfiguration.html#install(hudson.model.UpdateCenter.DownloadJob, java.io.File, java.io.File)"><B>install(UpdateCenter.DownloadJob, File, File)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model">UpdateCenter.UpdateCenterConfiguration</A>
 <DD>Called after a plugin has been downloaded to move it into its final
@@ -12395,6 +12417,9 @@ Constructor for class hudson.tools.<A HREF="./hudson/tools/InstallSourceProperty
 <DT><A HREF="./hudson/tools/Messages.html#InstallSourceProperty_DescriptorImpl_displayName()"><B>InstallSourceProperty_DescriptorImpl_displayName()</B></A> - 
 Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title="class in hudson.tools">Messages</A>
 <DD>Install automatically
+<DT><A HREF="./hudson/cli/InstallToolCommand.html" title="class in hudson.cli"><B>InstallToolCommand</B></A> - Class in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>Performs automatic tool installation on demand.<DT><A HREF="./hudson/cli/InstallToolCommand.html#InstallToolCommand()"><B>InstallToolCommand()</B></A> - 
+Constructor for class hudson.cli.<A HREF="./hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.DescriptorImpl.html#INSTANCE"><B>INSTANCE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A>
 <DD>&nbsp;
@@ -13184,6 +13209,9 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#isWindows()"><B>isWindows()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/remoting/Launcher.html#isWindows()"><B>isWindows()</B></A> - 
+Static method in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title="class in hudson.remoting">Launcher</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Run.Summary.html#isWorse"><B>isWorse</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Run.Summary.html" title="class in hudson.model">Run.Summary</A>
@@ -16209,6 +16237,9 @@ Constructor for class hudson.<A HREF="./hudson/Plugin.html" title="class in huds
  supply one on its own.<DT><A HREF="./hudson/Plugin.DummyImpl.html#Plugin.DummyImpl()"><B>Plugin.DummyImpl()</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/Plugin.DummyImpl.html" title="class in hudson">Plugin.DummyImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/PluginAutomaticTestBuilder.html" title="class in org.jvnet.hudson.test"><B>PluginAutomaticTestBuilder</B></A> - Class in <A HREF="./org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A><DD>Called by the code generated by maven-hpi-plugin to build tests for plugins.<DT><A HREF="./org/jvnet/hudson/test/PluginAutomaticTestBuilder.html#PluginAutomaticTestBuilder()"><B>PluginAutomaticTestBuilder()</B></A> - 
+Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/PluginAutomaticTestBuilder.html" title="class in org.jvnet.hudson.test">PluginAutomaticTestBuilder</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#pluginManager"><B>pluginManager</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Loaded plugins.
@@ -17419,6 +17450,9 @@ Method in class hudson.cli.<A HREF="./hudson/cli/GroovyshCommand.html" title="cl
 <DT><A HREF="./hudson/cli/HelpCommand.html#run()"><B>run()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/cli/InstallToolCommand.html#run()"><B>run()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/cli/MailCommand.html#run()"><B>run()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>
 <DD>&nbsp;
@@ -17749,7 +17783,8 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html#schedule()"><B>schedule()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.326
+      Use <A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html#submit()"><CODE>UpdateCenter.UpdateCenterJob.submit()</CODE></A> instead.</I>
 <DT><A HREF="./hudson/util/DoubleLaunchChecker.html#schedule()"><B>schedule()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DoubleLaunchChecker.html" title="class in hudson.util">DoubleLaunchChecker</A>
 <DD>Schedules the next execution.
@@ -19118,6 +19153,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ProxyView.html" title="clas
 <DT><A HREF="./hudson/model/TreeView.html#submit(org.kohsuke.stapler.StaplerRequest)"><B>submit(StaplerRequest)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/TreeView.html" title="class in hudson.model">TreeView</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html#submit()"><B>submit()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>
+<DD>Schedules this job for an execution
 <DT><A HREF="./hudson/model/View.html#submit(org.kohsuke.stapler.StaplerRequest)"><B>submit(StaplerRequest)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
 <DD>Handles the configuration submission.
@@ -19673,6 +19711,9 @@ Static method in class hudson.tools.<A HREF="./hudson/tools/Messages.html" title
  of the <A HREF="./hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A> for the given <A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.<DT><A HREF="./hudson/tools/ToolLocationTranslator.html#ToolLocationTranslator()"><B>ToolLocationTranslator()</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/ToolLocationTranslator.html" title="class in hudson.tools">ToolLocationTranslator</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/cli/InstallToolCommand.html#toolName"><B>toolName</B></A> - 
+Variable in class hudson.cli.<A HREF="./hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tools/ToolProperty.html" title="class in hudson.tools"><B>ToolProperty</B></A>&lt;<A HREF="./hudson/tools/ToolProperty.html" title="type parameter in ToolProperty">T</A> extends <A HREF="./hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt; - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>Extensible property of <A HREF="./hudson/tools/ToolInstallation.html" title="class in hudson.tools"><CODE>ToolInstallation</CODE></A>.<DT><A HREF="./hudson/tools/ToolProperty.html#ToolProperty()"><B>ToolProperty()</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>
 <DD>&nbsp;
@@ -19681,6 +19722,9 @@ Constructor for class hudson.tools.<A HREF="./hudson/tools/ToolPropertyDescripto
 <DD>&nbsp;
 <DT><A HREF="./hudson/tools/ToolPropertyDescriptor.html#ToolPropertyDescriptor()"><B>ToolPropertyDescriptor()</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/ToolPropertyDescriptor.html" title="class in hudson.tools">ToolPropertyDescriptor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/cli/InstallToolCommand.html#toolType"><B>toolType</B></A> - 
+Variable in class hudson.cli.<A HREF="./hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/diagnosis/TooManyJobsButNoView.html" title="class in hudson.diagnosis"><B>TooManyJobsButNoView</B></A> - Class in <A HREF="./hudson/diagnosis/package-summary.html">hudson.diagnosis</A><DD>If Hudson is run with a lot of jobs but no views, suggest the user that they can create views.<DT><A HREF="./hudson/diagnosis/TooManyJobsButNoView.html#TooManyJobsButNoView()"><B>TooManyJobsButNoView()</B></A> - 
 Constructor for class hudson.diagnosis.<A HREF="./hudson/diagnosis/TooManyJobsButNoView.html" title="class in hudson.diagnosis">TooManyJobsButNoView</A>
@@ -19862,6 +19906,9 @@ Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">
 Variable in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD><A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s contributed from subsidiary objects associated with
  <A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>, such as from triggers, builders, publishers, etc.
+<DT><A HREF="./hudson/model/TransientProjectActionFactory.html" title="class in hudson.model"><B>TransientProjectActionFactory</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Extension point for inserting transient <A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s into <A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>s.<DT><A HREF="./hudson/model/TransientProjectActionFactory.html#TransientProjectActionFactory()"><B>TransientProjectActionFactory()</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/TransientProjectActionFactory.html" title="class in hudson.model">TransientProjectActionFactory</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><B>translateFor(Node, TaskListener)</B></A> - 
 Method in class hudson.tools.<A HREF="./hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>
 <DD>Finds a tool on a node.

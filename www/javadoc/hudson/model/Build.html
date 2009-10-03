@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Build (Hudson main module 1.326 API)
+Build (Hudson main module 1.327 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-09-28">
+<META NAME="date" CONTENT="2009-10-02">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Build (Hudson main module 1.326 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Build (Hudson main module 1.326 API)";
+        parent.document.title="Build (Hudson main module 1.327 API)";
     }
 }
 </SCRIPT>
@@ -113,6 +113,39 @@ java.lang.Object
 
 <P>
 A build of a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
+
+ <h2>Steps of a build</h2>
+ <p>
+ Roughly speaking, a <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> goes through the following stages:
+
+ <dl>
+ <dt>SCM checkout
+ <dd>Hudson decides which directory to use for a build, then the source code is checked out
+
+ <dt>Pre-build steps
+ <dd>Everyone gets their <A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildStep.prebuild(AbstractBuild, BuildListener)</CODE></A> invoked
+ to indicate that the build is starting
+
+ <dt>Build wrapper set up
+ <dd><A HREF="../../hudson/tasks/BuildWrapper.html#setUp(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildWrapper.setUp(AbstractBuild, Launcher, BuildListener)</CODE></A> is invoked. This is normally
+ to prepare an environment for the build.
+
+ <dt>Builder runs
+ <dd><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> is invoked. This is where
+ things that are useful to users happen, like calling Ant, Make, etc.
+
+ <dt>Recorder runs
+ <dd><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> is invoked. This is normally
+ to record the output from the build, such as test results.
+
+ <dt>Notifier runs
+ <dd><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> is invoked. This is normally
+ to send out notifications, based on the results determined so far.
+ </dl>
+
+ <p>
+ And beyond that, the build is considered complete, and from then on <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A> object is there to
+ keep the record of what happened in this build.
 <P>
 
 <P>
@@ -302,7 +335,7 @@ A build of a <A HREF="../../hudson/model/Project.html" title="class in hudson.mo
 <TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Queue.Executable"><!-- --></A>
