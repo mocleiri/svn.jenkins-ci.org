@@ -1,5 +1,7 @@
 package hudson.plugins.perforce;
 
+import com.perforce.p4java.exception.P4JAccessException;
+import com.perforce.p4java.exception.P4JConnectionException;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Util;
@@ -20,6 +22,7 @@ import hudson.scm.SCMDescriptor;
 import hudson.util.FormFieldValidator;
 import hudson.util.FormValidation;
 
+import java.util.logging.Level;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -312,7 +315,7 @@ public class PerforceSCM extends SCM {
 
             long startTime = System.currentTimeMillis();
 
-            P4jUtil.sync(client, syncPath, forceSync);
+            workspace.act(new SyncTask(clientName, syncPath, forceSync, this, listener));
 
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
@@ -336,7 +339,7 @@ public class PerforceSCM extends SCM {
 
             // Save the one time use variables.
             build.getParent().save();
-
+            server.disconnect();
             return true;
 
         } catch (URISyntaxException e) {
@@ -346,8 +349,64 @@ public class PerforceSCM extends SCM {
             logServerException(e, log);
         } catch (InterruptedException e) {
             throw new IOException("Unable to get hostname from slave. " + e.getMessage());
+        } finally {
+            if( server.isConnected() ){
+                try {
+                    server.disconnect();
+                } catch (P4JConnectionException ex) {
+                    logServerException(ex, log);
+                } catch (P4JAccessException ex) {
+                    logServerException(ex, log);
+                }
+            }
         }
         return false;
+    }
+
+    private static class SyncTask implements FileCallable<Boolean>{
+
+        private final String clientName;
+        private final String syncPath;
+        private final boolean forceSync;
+        private final PerforceSCM parent;
+        private final BuildListener listener;
+
+        public SyncTask(String clientName, String syncPath, boolean forceSync, PerforceSCM parent, BuildListener listener){
+            this.clientName = clientName;
+            this.syncPath = syncPath;
+            this.forceSync = forceSync;
+            this.parent = parent;
+            this.listener = listener;
+        }
+
+        public Boolean invoke(File workspace, VirtualChannel virtualChannel) throws IOException {
+            PrintStream log = listener.getLogger();
+
+            P4JServer server = null;
+            try {
+                server = parent.getServer();
+                P4JClient client = server.getClient(clientName);
+                P4jUtil.sync(client, syncPath, forceSync);
+                server.disconnect();
+                return true;
+            } catch (URISyntaxException ex) {
+                logServerException(ex, log);
+            } catch (P4JException ex) {
+                logServerException(ex, log);
+            } finally {
+                try {
+                    if(server != null && server.isConnected()){
+                        server.disconnect();
+                    }
+                } catch (P4JConnectionException ex) {
+                    logServerException(ex, log);
+                } catch (P4JAccessException ex) {
+                    logServerException(ex, log);
+                }
+            }
+            return false;
+        }
+        
     }
 
     @Override
@@ -413,6 +472,7 @@ public class PerforceSCM extends SCM {
             String clientName = getEffectiveClientName(project.getLastBuiltOn(), workspace, listener);
             if (!P4jUtil.existsClient(server, clientName)) {
                 logger.println("New client: " + clientName);
+                server.disconnect();
                 return true;
                 // TODO: possible improvement: if the client spec has been deleted but the
                 // workspace is uptodate, this return will be a false positive.
@@ -424,11 +484,22 @@ public class PerforceSCM extends SCM {
                 needToBuild = wouldSyncChangeWorkspace(client, logger);
             }
             logger.flush();
+            server.disconnect();
             return needToBuild;
 
         } catch (Exception e) {
             logServerException(e, logger);
             throw new IOException("Unable to communicate with Perforce.  Check log file for: " + e.getMessage());
+        } finally {
+            if (server.isConnected()){
+                try {
+                    server.disconnect();
+                } catch (P4JConnectionException ex) {
+                    logServerException(ex, logger);
+                } catch (P4JAccessException ex) {
+                    logServerException(ex, logger);
+                }
+            }
         }
     }
 
