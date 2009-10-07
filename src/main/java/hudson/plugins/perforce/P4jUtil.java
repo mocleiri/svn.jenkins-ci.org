@@ -16,10 +16,12 @@ import com.perforce.p4java.impl.generic.client.P4JClientSpecImpl;
 import com.perforce.p4java.impl.generic.client.P4JClientViewImpl;
 import com.perforce.p4java.impl.generic.core.P4JLabelImpl;
 import com.perforce.p4java.impl.mapbased.client.P4JClientImpl;
+import com.perforce.p4java.impl.mapbased.rpc.sys.helper.P4JRpcSystemFileCommandsImpl;
 import com.perforce.p4java.server.P4JServer;
 import com.perforce.p4java.server.P4JServerFactory;
 import com.perforce.p4java.server.P4JUser;
 import com.perforce.p4java.server.callback.P4JLogCallback;
+import com.perforce.p4java.server.callback.P4JSSOCallback;
 import com.perforce.p4java.server.callback.P4JProgressCallback;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -65,8 +67,14 @@ public final class P4jUtil {
         Properties props = new Properties();
         props.put("programName", prog);
         props.put("programVersion", ver);
+        props.put("autoConnect", false);
+        props.put("autoLogin", false);
         // Note: props= PROG_NAME_KEY(programName), PROG_VERSION_KEY(programVersion)
         // Note: props= USER_NAME_KEY(userName), CLIENT_NAME_KEY(clientName), AUTO_CONNECT_KEY(autoConnect)
+
+        //This bit is needed in order to operate on windows successfully.
+        //This also makes the plugin require java 1.6 I believe...
+        P4JServerFactory.setRpcFileSystemHelper(new P4JRpcSystemFileCommandsImpl());
         P4JServer server = P4JServerFactory.getServer("p4java://" + p4port, props);
         server.connect();
         if (user != null) {

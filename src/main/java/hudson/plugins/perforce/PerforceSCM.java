@@ -1,5 +1,6 @@
 package hudson.plugins.perforce;
 
+import com.perforce.p4java.P4JLog;
 import com.perforce.p4java.exception.P4JAccessException;
 import com.perforce.p4java.exception.P4JConnectionException;
 import hudson.Extension;
@@ -46,6 +47,9 @@ import com.perforce.p4java.exception.P4JException;
 import com.perforce.p4java.client.P4JClient;
 import com.perforce.p4java.core.P4JChangeList;
 import com.perforce.p4java.core.P4JLabel;
+import com.perforce.p4java.core.file.P4JFileSpec;
+import com.perforce.p4java.core.file.P4JFileSpecBuilder;
+import com.perforce.p4java.server.callback.P4JLogCallback;
 import com.tek42.perforce.Depot;
 import hudson.PluginWrapper;
 
@@ -70,7 +74,6 @@ public class PerforceSCM extends SCM {
     transient String p4Exe;
     transient String p4SysDrive;
     transient String p4SysRoot;
-
     transient P4JServer server;  // default connected server avail for the life of this SCM
 
     PerforceRepositoryBrowser browser;
@@ -259,6 +262,7 @@ public class PerforceSCM extends SCM {
 
         try {
             P4JServer server = getServer();
+
             String clientName = getEffectiveClientName(build.getBuiltOn(), workspace, listener);
             P4JClient client = getPreparedClient(server, clientName, launcher, workspace, listener);
 
@@ -315,7 +319,9 @@ public class PerforceSCM extends SCM {
 
             long startTime = System.currentTimeMillis();
 
-            workspace.act(new SyncTask(clientName, syncPath, forceSync, this, listener));
+            PerforcePasswordEncryptor encryptor = new PerforcePasswordEncryptor();
+            workspace.act(new SyncTask(clientName, syncPath, forceSync, listener,
+                    p4Port, p4User, encryptor.decryptString(p4Passwd)));
 
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
@@ -350,7 +356,7 @@ public class PerforceSCM extends SCM {
         } catch (InterruptedException e) {
             throw new IOException("Unable to get hostname from slave. " + e.getMessage());
         } finally {
-            if( server.isConnected() ){
+            if( server != null && server.isConnected() ){
                 try {
                     server.disconnect();
                 } catch (P4JConnectionException ex) {
@@ -368,24 +374,33 @@ public class PerforceSCM extends SCM {
         private final String clientName;
         private final String syncPath;
         private final boolean forceSync;
-        private final PerforceSCM parent;
         private final BuildListener listener;
+        private final String p4port;
+        private final String p4user;
+        private final String p4passwd;
 
-        public SyncTask(String clientName, String syncPath, boolean forceSync, PerforceSCM parent, BuildListener listener){
+        public SyncTask(String clientName, String syncPath, boolean forceSync, 
+                BuildListener listener, String p4port,
+                String p4user, String p4passwd){
             this.clientName = clientName;
             this.syncPath = syncPath;
             this.forceSync = forceSync;
-            this.parent = parent;
             this.listener = listener;
+            this.p4port = p4port;
+            this.p4passwd = p4passwd;
+            this.p4user = p4user;
         }
 
         public Boolean invoke(File workspace, VirtualChannel virtualChannel) throws IOException {
-            PrintStream log = listener.getLogger();
+            final PrintStream log = listener.getLogger();
 
             P4JServer server = null;
             try {
-                server = parent.getServer();
+                //TODO: pass version information into the filecaller
+                server = P4jUtil.newServer(p4port, "hudson", "sync", p4user, p4passwd);
                 P4JClient client = server.getClient(clientName);
+                client.sync(P4JFileSpecBuilder.makeFileSpecList(new String [] {syncPath}),true,false,false,false);
+                server.setCurrentClient(client);
                 P4jUtil.sync(client, syncPath, forceSync);
                 server.disconnect();
                 return true;
