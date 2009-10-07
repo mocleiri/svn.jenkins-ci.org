@@ -1,6 +1,5 @@
 package hudson.plugins.perforce;
 
-import com.perforce.p4java.server.P4JServer;
 import hudson.model.AbstractProject;
 import hudson.model.User;
 import hudson.tasks.MailAddressResolver;
@@ -23,9 +22,7 @@ public class PerforceMailResolver extends MailAddressResolver {
                 PerforceSCM pscm = (PerforceSCM) p.getScm();
                 try {
                     // couldn't resist the name pu...
-                    P4JServer server = pscm.getServer();
-                    P4JUser pu = P4jUtil.getUser(server, u.getId());
-                    server.disconnect();
+                    P4JUser pu = P4jUtil.getUser(pscm.getServer(), u.getId());
                     if (pu.getEmail() != null && !pu.getEmail().equals(""))
                         return pu.getEmail();
                 } catch (Exception e) {

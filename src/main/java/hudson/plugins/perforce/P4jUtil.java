@@ -21,7 +21,6 @@ import com.perforce.p4java.server.P4JServer;
 import com.perforce.p4java.server.P4JServerFactory;
 import com.perforce.p4java.server.P4JUser;
 import com.perforce.p4java.server.callback.P4JLogCallback;
-import com.perforce.p4java.server.callback.P4JSSOCallback;
 import com.perforce.p4java.server.callback.P4JProgressCallback;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -72,8 +71,8 @@ public final class P4jUtil {
         // Note: props= PROG_NAME_KEY(programName), PROG_VERSION_KEY(programVersion)
         // Note: props= USER_NAME_KEY(userName), CLIENT_NAME_KEY(clientName), AUTO_CONNECT_KEY(autoConnect)
 
-        //This bit is needed in order to operate on windows successfully.
-        //This also makes the plugin require java 1.6 I believe...
+        // This bit is needed in order to operate on windows successfully.
+        // This also makes the plugin require java 1.6 I believe...
         P4JServerFactory.setRpcFileSystemHelper(new P4JRpcSystemFileCommandsImpl());
         P4JServer server = P4JServerFactory.getServer("p4java://" + p4port, props);
         server.connect();

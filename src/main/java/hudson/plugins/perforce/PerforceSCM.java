@@ -1,8 +1,5 @@
 package hudson.plugins.perforce;
 
-import com.perforce.p4java.P4JLog;
-import com.perforce.p4java.exception.P4JAccessException;
-import com.perforce.p4java.exception.P4JConnectionException;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Util;
@@ -23,7 +20,6 @@ import hudson.scm.SCMDescriptor;
 import hudson.util.FormFieldValidator;
 import hudson.util.FormValidation;
 
-import java.util.logging.Level;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -47,9 +43,6 @@ import com.perforce.p4java.exception.P4JException;
 import com.perforce.p4java.client.P4JClient;
 import com.perforce.p4java.core.P4JChangeList;
 import com.perforce.p4java.core.P4JLabel;
-import com.perforce.p4java.core.file.P4JFileSpec;
-import com.perforce.p4java.core.file.P4JFileSpecBuilder;
-import com.perforce.p4java.server.callback.P4JLogCallback;
 import com.tek42.perforce.Depot;
 import hudson.PluginWrapper;
 
@@ -345,7 +338,6 @@ public class PerforceSCM extends SCM {
 
             // Save the one time use variables.
             build.getParent().save();
-            server.disconnect();
             return true;
 
         } catch (URISyntaxException e) {
@@ -355,21 +347,11 @@ public class PerforceSCM extends SCM {
             logServerException(e, log);
         } catch (InterruptedException e) {
             throw new IOException("Unable to get hostname from slave. " + e.getMessage());
-        } finally {
-            if( server != null && server.isConnected() ){
-                try {
-                    server.disconnect();
-                } catch (P4JConnectionException ex) {
-                    logServerException(ex, log);
-                } catch (P4JAccessException ex) {
-                    logServerException(ex, log);
-                }
-            }
         }
         return false;
     }
 
-    private static class SyncTask implements FileCallable<Boolean>{
+    private static class SyncTask implements FileCallable<Boolean> {
 
         private final String clientName;
         private final String syncPath;
@@ -381,7 +363,7 @@ public class PerforceSCM extends SCM {
 
         public SyncTask(String clientName, String syncPath, boolean forceSync, 
                 BuildListener listener, String p4port,
-                String p4user, String p4passwd){
+                String p4user, String p4passwd) {
             this.clientName = clientName;
             this.syncPath = syncPath;
             this.forceSync = forceSync;
@@ -396,12 +378,13 @@ public class PerforceSCM extends SCM {
 
             P4JServer server = null;
             try {
-                //TODO: pass version information into the filecaller
+                // TODO: pass version information into the filecaller
                 server = P4jUtil.newServer(p4port, "hudson", "sync", p4user, p4passwd);
                 P4JClient client = server.getClient(clientName);
-                client.sync(P4JFileSpecBuilder.makeFileSpecList(new String [] {syncPath}),true,false,false,false);
                 server.setCurrentClient(client);
                 P4jUtil.sync(client, syncPath, forceSync);
+                // Logout and disconnect since this is a new connection
+                server.logout();
                 server.disconnect();
                 return true;
             } catch (URISyntaxException ex) {
@@ -410,12 +393,11 @@ public class PerforceSCM extends SCM {
                 logServerException(ex, log);
             } finally {
                 try {
-                    if(server != null && server.isConnected()){
+                    if (server != null && server.isConnected()) {
+                        server.logout();
                         server.disconnect();
                     }
-                } catch (P4JConnectionException ex) {
-                    logServerException(ex, log);
-                } catch (P4JAccessException ex) {
+                } catch (P4JException ex) {
                     logServerException(ex, log);
                 }
             }
@@ -487,7 +469,6 @@ public class PerforceSCM extends SCM {
             String clientName = getEffectiveClientName(project.getLastBuiltOn(), workspace, listener);
             if (!P4jUtil.existsClient(server, clientName)) {
                 logger.println("New client: " + clientName);
-                server.disconnect();
                 return true;
                 // TODO: possible improvement: if the client spec has been deleted but the
                 // workspace is uptodate, this return will be a false positive.
@@ -499,22 +480,11 @@ public class PerforceSCM extends SCM {
                 needToBuild = wouldSyncChangeWorkspace(client, logger);
             }
             logger.flush();
-            server.disconnect();
             return needToBuild;
 
         } catch (Exception e) {
             logServerException(e, logger);
             throw new IOException("Unable to communicate with Perforce.  Check log file for: " + e.getMessage());
-        } finally {
-            if (server.isConnected()){
-                try {
-                    server.disconnect();
-                } catch (P4JConnectionException ex) {
-                    logServerException(ex, logger);
-                } catch (P4JAccessException ex) {
-                    logServerException(ex, logger);
-                }
-            }
         }
     }
 
