@@ -24,20 +24,6 @@ updateCenter.post(
       "releaseTimestamp": "2008-09-11T08:26:00.00Z",
       "version": "1.0.-2.1"
     },
-    "ConfigurationSlicing":     {
-      "dependencies": [],
-      "buildDate": "Jul 29, 2009",
-      "title": "Configuration Slicing Plugin",
-      "developers": [{"developerId": "mdonohue"}],
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Configuration+Slicing+Plugin",
-      "previousTimestamp": "2009-04-17T05:26:33.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/140094/configurationslicing.hpi",
-      "requiredCore": "1.297",
-      "excerpt": "This plugin allows mass configuration of select project properties",
-      "name": "ConfigurationSlicing",
-      "releaseTimestamp": "2009-07-30T04:43:23.00Z",
-      "version": "1.9"
-    },
     "email-ext":     {
       "dependencies": [],
       "buildDate": "Dec 23, 2008",
@@ -51,6 +37,20 @@ updateCenter.post(
       "name": "email-ext",
       "releaseTimestamp": "2008-12-23T19:06:12.00Z",
       "version": "2.2.1"
+    },
+    "ConfigurationSlicing":     {
+      "dependencies": [],
+      "buildDate": "Jul 29, 2009",
+      "title": "Configuration Slicing Plugin",
+      "developers": [{"developerId": "mdonohue"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Configuration+Slicing+Plugin",
+      "previousTimestamp": "2009-04-17T05:26:33.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/140094/configurationslicing.hpi",
+      "requiredCore": "1.297",
+      "excerpt": "This plugin allows mass configuration of select project properties",
+      "name": "ConfigurationSlicing",
+      "releaseTimestamp": "2009-07-30T04:43:23.00Z",
+      "version": "1.9"
     },
     "cvs-tag":     {
       "dependencies": [],
@@ -93,6 +93,23 @@ updateCenter.post(
       "name": "cppunit",
       "releaseTimestamp": "2009-08-28T23:14:42.00Z",
       "version": "1.1"
+    },
+    "cpptest":     {
+      "dependencies": [      {
+        "optional": false,
+        "name": "xunit",
+        "version": "0.2"
+      }],
+      "buildDate": "Oct 08, 2009",
+      "title": "Cpptest Plugin",
+      "developers": [{"developerId": "gbois"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cpptest+Plugin",
+      "previousTimestamp": "2009-10-08T23:05:25.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/143981/cpptest.hpi",
+      "requiredCore": "1.327",
+      "name": "cpptest",
+      "releaseTimestamp": "2009-10-08T23:05:25.00Z",
+      "version": "0.1"
     },
     "zentimestamp":     {
       "dependencies": [],
@@ -1338,16 +1355,16 @@ updateCenter.post(
     },
     "clover":     {
       "dependencies": [],
-      "buildDate": "Oct 06, 2009",
+      "buildDate": "Oct 08, 2009",
       "title": "Clover Plugin",
       "developers": [{"developerId": "npellow"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Clover+Plugin",
-      "previousTimestamp": "2009-09-18T08:29:28.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/143873/clover.hpi",
+      "previousTimestamp": "2009-10-07T01:01:42.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/143997/clover.hpi",
       "requiredCore": "1.323",
       "name": "clover",
-      "releaseTimestamp": "2009-10-07T01:01:42.00Z",
-      "version": "2.3"
+      "releaseTimestamp": "2009-10-09T06:32:29.00Z",
+      "version": "2.5"
     },
     "powershell":     {
       "dependencies": [],
@@ -1533,18 +1550,18 @@ updateCenter.post(
       "dependencies": [      {
         "optional": false,
         "name": "maven-plugin",
-        "version": "1.314"
+        "version": "1.327"
       }],
-      "buildDate": "Jul 06, 2009",
+      "buildDate": "Oct 08, 2009",
       "title": "CopyArchiver Plugin",
       "developers": [{"developerId": "gbois"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CopyArchiver+Plugin",
-      "previousTimestamp": "2009-07-01T21:38:35.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/138065/copyarchiver.hpi",
-      "requiredCore": "1.314",
+      "previousTimestamp": "2009-07-06T21:00:52.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/143980/copyarchiver.hpi",
+      "requiredCore": "1.327",
       "name": "copyarchiver",
-      "releaseTimestamp": "2009-07-06T21:00:52.00Z",
-      "version": "0.3"
+      "releaseTimestamp": "2009-10-08T22:37:01.00Z",
+      "version": "0.4"
     },
     "jmeter":     {
       "dependencies": [],
@@ -2555,13 +2572,16 @@ updateCenter.post(
     "xfpanel":     {
       "dependencies": [],
       "buildDate": "Oct 08, 2009",
-      "developers": [{"developerId": "rtyler"}],
-      "previousTimestamp": "2009-10-08T02:53:20.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/143961/xfpanel.hpi",
+      "title": "eXtreme Feedback Panel Plugin",
+      "developers": [{"developerId": "julienrenaut"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/eXtreme+Feedback+Panel+Plugin",
+      "previousTimestamp": "2009-10-08T18:10:13.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/143992/xfpanel.hpi",
       "requiredCore": "1.326",
+      "excerpt": "This plugin provides an eXtreme Feedback Panel that can be used to expose the status of a selected number of Jobs.",
       "name": "xfpanel",
-      "releaseTimestamp": "2009-10-08T18:10:13.00Z",
-      "version": "1.0.3"
+      "releaseTimestamp": "2009-10-09T03:47:36.00Z",
+      "version": "1.0.4"
     },
     "disk-usage":     {
       "dependencies": [],
