@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ToolLocationTranslator (Hudson main module 1.327 API)
+ToolLocationTranslator (Hudson main module 1.328 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-02">
+<META NAME="date" CONTENT="2009-10-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ToolLocationTranslator (Hudson main module 1.327 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ToolLocationTranslator (Hudson main module 1.327 API)";
+        parent.document.title="ToolLocationTranslator (Hudson main module 1.328 API)";
     }
 }
 </SCRIPT>
@@ -250,7 +250,7 @@ public abstract java.lang.String <B>getToolHome</B>(<A HREF="../../hudson/model/
 
  <p>
  If this implementation is capable of determining the location, return the path in the absolute file name.
- (This method doesn't return <A HREF="../../hudson/scm/CVSChangeLogSet.File.html" title="class in hudson.scm"><CODE>CVSChangeLogSet.File</CODE></A> so that it can handle path names of a different OS.
+ (This method doesn't return <CODE>File</CODE> so that it can handle path names of a different OS.
 
  <p>
  Otherwise return null to let other <A HREF="../../hudson/tools/ToolLocationTranslator.html" title="class in hudson.tools"><CODE>ToolLocationTranslator</CODE></A>s a chance to do translations
