@@ -2,6 +2,7 @@
 <head>
 	<title>an extensible continuous integration engine</title>
 	<link rel="alternate" title="Hudson announcements" href="https://hudson.dev.java.net/servlets/ProjectNewsRSS" type="application/rss+xml">
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<style>
 		dt {
 			font-weight: bold;
@@ -14,6 +15,14 @@
 		TABLE.axial {
 		  display:none;
 		}
+
+		.navbar {
+			text-align:center; background-color:black; color:white; padding: 1em;
+		}
+		.navbar A {
+			color: white;
+		}
+
 		
 		.application .directory A {
 			text-decoration: none !important;
@@ -90,10 +99,37 @@
         table.rightnav-icon td {
           vertical-align:middle;
         }
+	img {
+		border: none;
+	}	
+	#footer {
+		padding-top: 10em;
+		text-align: center;
+		text-size: 0.75em;
+	}
+	#footer A {
+		color: grey;
+	}
 	</style>
 </head>
-<body>
-<div style="float:right">
+<body style="margin:0;">
+
+<!-- nagivation bar -->
+<div class="navbar">
+  <a href="https://hudson.dev.java.net/mailing-lists.html">Mailing Lists</a>
+  | 
+  <a href="https://hudson.dev.java.net/issues/">Bugs</a>
+  |
+  <a href="http://wiki.hudson-ci.org/display/HUDSON/Home">Wiki</a>
+  | 
+  <a href="https://hudson.dev.java.net/irc.html">Chat</a>
+  |
+  <a href="http://twitter.com/hudsonci">Twitter</a>
+  | 
+  <a href="http://wiki.hudson-ci.org/display/HUDSON/Source+code">Source Code</a>
+</div>
+<div class="application" style="margin-left: 2em;">
+<div style="float:left">
   <div>
     <table class="rightnav-icon"><tr>
       <td style="padding: 0pt;">
@@ -123,7 +159,7 @@
     </ul>
   </div>
 
-  <div style="padding-right: 1em; margin-top: 1em;" id="supportBox">
+  <div style="padding-right: 1em; margin-top: 3em;" id="supportBox">
     <a href="http://wiki.hudson-ci.org/display/HUDSON/Commercial+Support" style="font-size: 1.5em;">
       <img src="images/protect.gif" style="vertical-align: middle;" border="0">Support
     </a>
@@ -132,8 +168,18 @@
       support?
     </div>
   </div>
+</div>
+
+<div align=center>
+	<div style="font-size:3em; font-weight:bold; margin-top: 1em;">Hudson</div>
+	<div style="margin:1em">
+		Extensible continuous integration engine
+	</div>
+</div>
+
+<div style="float:right">
 	
-	<div style="margin-top: 3em;">
+	<div>
 		<ul id="feeds">
 			<li><a href="http://feeds.feedburner.com/KohsukesHudsonBlogs">Blog</a>
 			<li><a href="http://feeds.feedburner.com/HudsonBlogs-ja">日本語ブログ</a>
@@ -152,13 +198,6 @@
 Useful for posting note
 </div>
 -->
-<div align=center>
-	<div style="font-size:3em; font-weight:bold; margin-top: 1em;">Hudson</div>
-	<div style="margin:1em">
-		Extensible continuous integration engine
-	</div>
-</div>
-
 <div align=center>
 	<table valign=middle class=directory>
 		<tr>
@@ -183,6 +222,19 @@ Useful for posting note
 			</a></td>
 		</tr>
 	</table>
+</div>
+</div>
+
+
+<div id="footer">
+<a class="helplink" href="http://java-net.dev.java.net/feedback.html" >Feedback</a>   |
+<a href="http://www.java.net/javanet-web-site-terms-use" >Terms of Use</a> | 
+<a href="http://www.sun.com/privacy" >Privacy</a> |
+<a href="http://www.sun.com/suntrademarks/" >Trademarks</a>
+</td>
+</div>
+
+
 </div>
 </body>
 </html>
