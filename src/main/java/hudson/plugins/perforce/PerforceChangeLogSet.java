@@ -161,7 +161,7 @@ public class PerforceChangeLogSet extends ChangeLogSet<PerforceChangeLogEntry> {
             stream.println("\t\t<files>");
             for (P4JFileSpec fileSpec : change.getFiles(false)) {
                 stream.println("\t\t\t<file>");
-                stream.println("\t\t\t\t<name>" + Util.xmlEscape(fileSpec.getPath()) + "</name>");
+                stream.println("\t\t\t\t<name>" + Util.xmlEscape(fileSpec.getDepotPath()) + "</name>");
                 stream.println("\t\t\t\t<rev>" + fileSpec.getEndRevision() + "</rev>");
                 stream.println("\t\t\t\t<action>" + fileSpec.getAction() + "</action>");
                 stream.println("\t\t\t</file>");

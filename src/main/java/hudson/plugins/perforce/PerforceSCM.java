@@ -20,6 +20,7 @@ import hudson.scm.SCMDescriptor;
 import hudson.util.FormFieldValidator;
 import hudson.util.FormValidation;
 
+import java.util.logging.Level;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -168,12 +169,30 @@ public class PerforceSCM extends SCM {
      * Returns the re-usable Perforce server object managed by this SCM instance.
      */
     protected synchronized P4JServer getServer()  throws URISyntaxException, P4JException {
-        if (server == null) {
+        if (server == null || !server.isConnected()) {
             server = newServer();
         }
         return server;
     }
 
+    protected synchronized void disconnectServer(P4JServer server) throws P4JException {
+        if (server != null && server.isConnected()) {
+            server.logout();
+            server.disconnect();
+        }
+    }
+
+    protected synchronized void disconnectServer(P4JServer server, PrintStream log) {
+        try {
+            disconnectServer(server);
+            if(server != null && server.isConnected()){
+                log.println("Perforce failed to disconnect!");
+            }
+        } catch (P4JException ex) {
+            logServerException(ex, log);
+        }
+    }
+    
     // TODO(CQ) shouldn't need this since getServer() now lazily inits
     /**
      * Depot is transient, so we need to create a new one on start up
@@ -255,7 +274,7 @@ public class PerforceSCM extends SCM {
 
         try {
             P4JServer server = getServer();
-
+            
             String clientName = getEffectiveClientName(build.getBuiltOn(), workspace, listener);
             P4JClient client = getPreparedClient(server, clientName, launcher, workspace, listener);
 
@@ -347,7 +366,10 @@ public class PerforceSCM extends SCM {
             logServerException(e, log);
         } catch (InterruptedException e) {
             throw new IOException("Unable to get hostname from slave. " + e.getMessage());
+        } finally {
+            disconnectServer(server, log);
         }
+
         return false;
     }
 
@@ -393,19 +415,18 @@ public class PerforceSCM extends SCM {
                 logServerException(ex, log);
             } finally {
                 try {
-                    if (server != null && server.isConnected()) {
+                    if (server != null && server.isConnected()){
                         server.logout();
                         server.disconnect();
                     }
-                } catch (P4JException ex) {
+                } catch (P4JException ex){
                     logServerException(ex, log);
                 }
             }
             return false;
         }
-        
     }
-
+    
     @Override
     public PerforceRepositoryBrowser getBrowser() {
        return browser;
@@ -485,6 +506,8 @@ public class PerforceSCM extends SCM {
         } catch (Exception e) {
             logServerException(e, logger);
             throw new IOException("Unable to communicate with Perforce.  Check log file for: " + e.getMessage());
+        } finally {
+            disconnectServer(server, logger);
         }
     }
 
