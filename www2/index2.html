@@ -110,6 +110,9 @@
 	#footer A {
 		color: grey;
 	}
+	body {
+		font-family: Verdana, Helvetica, Arial, sans-serif;
+	}
 	</style>
 </head>
 <body style="margin:0;">
@@ -128,35 +131,120 @@
   | 
   <a href="http://wiki.hudson-ci.org/display/HUDSON/Source+code">Source Code</a>
 </div>
+
 <div class="application" style="margin-left: 2em;">
 <div style="float:left">
-  <div>
-    <table class="rightnav-icon"><tr>
-      <td style="padding: 0pt;">
-        <img border="0" src="images/download.gif" />
-      </td><td>
-        <a href="http://hudson-ci.org/latest/hudson.war" style="font-size: 1.5em;">
-          Download
-        </a>
-        <div align="right">latest and greatest</div>
-      </td>
-    </tr></table>
+  <style>
+    #download {
+	background-color: #d3d7cf;
+	padding: 1em;
+    }
+    #download DT {
+	margin: 0;
+	padding: 0.5em 0em;
+    }
+    #download DD IMG {
+        vertical-align:middle;
+    }
+    #download A.soft {
+        color: #888;
+    }
+    #download .small {
+        font-size:0.8em;
+    }
+    #platforms {
+        cursor: pointer;
+    }
+    #platforms IMG.selected {
+        border: solid #847d89 4px;
+    }
+    #platforms IMG.unselected {
+        margin: 4px;
+    }
+  </style>
+  <div id="download">
+    <script>
+      function stage(id,func) {
+        var e = document.getElementById(id);
+        var f = e.nextSibling;
+        while (f.nodeType!=1)  f=f.nextSibling;  // find next element
 
-    <table class="rightnav-icon"><tr>
-      <td style="padding: 0pt;">
-        <img border="0" src="images/download.gif" />
-      </td><td>
-        <a href="http://hudson-ci.org/supported/hudson.war" style="font-size: 1.5em;">
-          Download
-        </a>
-        <div align="right">older but supported</div>
-      </td>
-    </tr></table>
+        func(e); func(f);
+      }
+      function hide(e) {
+        e.style.visibility="hidden";
+      }
+      function show(e) {
+        e.style.visibility="visible";
+      }
+    </script>
 
-    <ul>
-      <li><a href="/changelog.html">changelog</a></li>
-      <li><a href="https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=2761">old releases</a></li>
-    </ul>
+    <div style="font-weight:bold; font-size:1.5em;">Download</div>
+    <dl>
+    <dt id="stage1">1. Select version</dt>
+    <dd>
+      <div>
+        <input type="radio" name="version" id="latest"><label for="latest">Latest and greatest &mdash; 1.328</label>
+      </div><div>
+        <input type="radio" name="version" id="stable"><label for="stable">Older but supported &mdash; 1.312</label>
+      </div><div class=small style="text-align:right; padding-top:0.5em;">
+        <a href="download/" class=soft>Looking for past releases?</a>
+      </div>
+    </dd>
+    <script>
+      function wireUp(id) {
+        var e = document.getElementById(id);
+        e.onchange = e.onclick = function() {
+          stage('stage2',show);
+        }
+      }
+      wireUp('latest'); wireUp('stable');
+    </script>
+
+    <dt id="stage2">2. Download <a href="hudson.war">hudson.war</a></dt>
+    <dd>
+      or choose a native package:
+      <div id=platforms>
+        <img title="Windows" src="images/os/win_other.png"
+        ><img title="Ubuntu/Debian" src="images/os/ubuntu.png"
+        ><img title="RedHat/Fedora/CentOS" src="images/os/redhat.png"
+        ><img title="OpenSolaris" src="images/os/opensolaris.png"
+        ><img title="Platform independent bundle" src="images/os/other.png">
+      </div>
+      <div id="platform-caption">&nbsp;</div>
+    </dd> 
+    <script>
+      var platform = null; // selected platform
+
+      var platforms = document.getElementById("platforms");  
+      var caption =   document.getElementById("platform-caption");
+      for (e=platforms.firstChild; e!=null; e=e.nextSibling) {
+        e.onmouseover = function () {
+          caption.innerHTML = this.getAttribute("title");
+        }
+        e.onmouseout = function() {
+          caption.innerHTML = platform!=null ? platform.getAttribute("title") : "&nbsp;";
+        }
+        e.onclick = function() {
+          this.className="selected";
+          if (platform!=null)   platform.className="unselected";
+          platform=this;
+          stage('stage2',show);
+        }
+        e.className = "unselected";
+      }
+    </script>
+
+    <dt id="stage3">3. <img style="vertical-align:middle" src="/images/download.png"/> <a href="latest/hudson.war">Download</a></dt>
+    <dd style="text-align:right; color:#888" class=small>
+       (<a href="/changelog.html" class=soft>changelog</a>)
+    </dd>
+
+    </dl>
+    <script>
+      stage('stage2',hide);
+      stage('stage3',hide);
+    </script>
   </div>
 
   <div style="padding-right: 1em; margin-top: 3em;" id="supportBox">
