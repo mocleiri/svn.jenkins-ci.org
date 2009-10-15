@@ -110,6 +110,9 @@
 	#footer A {
 		color: grey;
 	}
+	body {
+		font-family: Verdana, Helvetica, Arial, sans-serif;
+	}
 	</style>
 </head>
 <body style="margin:0;">
@@ -128,35 +131,71 @@
   | 
   <a href="http://wiki.hudson-ci.org/display/HUDSON/Source+code">Source Code</a>
 </div>
+
 <div class="application" style="margin-left: 2em;">
 <div style="float:left">
-  <div>
-    <table class="rightnav-icon"><tr>
-      <td style="padding: 0pt;">
-        <img border="0" src="images/download.gif" />
-      </td><td>
-        <a href="http://hudson-ci.org/latest/hudson.war" style="font-size: 1.5em;">
-          Download
-        </a>
-        <div align="right">latest and greatest</div>
-      </td>
-    </tr></table>
+  <style>
+    #download {
+	background-color: #d3d7cf;
+        background-image:url(images/download.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+	padding: 1em;
+    }
+    #download DL {
+        margin: 0;
+    }
+    #download DT {
+        font-size: 1.2em;
+	margin: 0.2em 0;
+	padding: 0;
+    }
+    #download DD {
+        margin-left: 1em;
+    }
+    #download DD IMG {
+        vertical-align:middle;
+    }
+    #download A.soft {
+        color: #888;
+    }
+    #download .small {
+        font-size:0.8em;
+    }
+    #platforms DIV {
+        margin: 2px;
+    }
+  </style>
+  <div id="download">
+    <dl>
+    <dt>Download hudson.war</dt>
+    <dd style="margin-bottom:1em">
+      <ul>
+        <li><a href="/latest/hudson.war">Latest and greatest 1.328</a>
+        <li><a href="/supported/hudson.war">Older but supported 1.312</a>
+      </ul>
+      <div class=small style="text-align:right">
+       <a href="/changelog.html" class=soft>changelog</a> | <a href="download/" class=soft>past releases</a>
+      </div>
+    </dd>
+    
+    <dt>Or native package</dt>
+    <dd id="platforms">
+      <div>
+        <img src="images/os/ubuntu.png">
+        <a class=soft href="/debian/">Ubuntu/Debian</a>
+      </div>
+      <div>
+        <img src="images/os/redhat.png">
+        <a class=soft href="/redhat/">RedHat/Fedora/CentOS</a>
+      </div>
+      <div>
+        <img src="images/os/opensolaris.png">
+        <a class=soft href="http://pkg.hudson-ci.org/">OpenSolaris/Nevada</a>
+      </div>
+    </dd> 
 
-    <table class="rightnav-icon"><tr>
-      <td style="padding: 0pt;">
-        <img border="0" src="images/download.gif" />
-      </td><td>
-        <a href="http://hudson-ci.org/supported/hudson.war" style="font-size: 1.5em;">
-          Download
-        </a>
-        <div align="right">older but supported</div>
-      </td>
-    </tr></table>
-
-    <ul>
-      <li><a href="/changelog.html">changelog</a></li>
-      <li><a href="https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=2761">old releases</a></li>
-    </ul>
+    </dl>
   </div>
 
   <div style="padding-right: 1em; margin-top: 3em;" id="supportBox">
