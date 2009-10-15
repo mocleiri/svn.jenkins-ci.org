@@ -152,14 +152,8 @@
     #download .small {
         font-size:0.8em;
     }
-    #platforms {
-        cursor: pointer;
-    }
-    #platforms IMG.selected {
-        border: solid #847d89 4px;
-    }
-    #platforms IMG.unselected {
-        margin: 4px;
+    #platforms DIV {
+	margin: 0.1em 0;
     }
   </style>
   <div id="download">
@@ -186,64 +180,47 @@
       <div>
         <input type="radio" name="version" id="latest"><label for="latest">Latest and greatest &mdash; 1.328</label>
       </div><div>
-        <input type="radio" name="version" id="stable"><label for="stable">Older but supported &mdash; 1.312</label>
+        <input type="radio" name="version" id="supported"><label for="supported">Older but supported &mdash; 1.312</label>
       </div><div class=small style="text-align:right; padding-top:0.5em;">
         <a href="download/" class=soft>Looking for past releases?</a>
       </div>
     </dd>
-    <script>
-      function wireUp(id) {
-        var e = document.getElementById(id);
-        e.onchange = e.onclick = function() {
-          stage('stage2',show);
-        }
-      }
-      wireUp('latest'); wireUp('stable');
-    </script>
 
-    <dt id="stage2">2. Download <a href="hudson.war">hudson.war</a></dt>
-    <dd>
-      or choose a native package:
-      <div id=platforms>
-        <img title="Windows" src="images/os/win_other.png"
-        ><img title="Ubuntu/Debian" src="images/os/ubuntu.png"
-        ><img title="RedHat/Fedora/CentOS" src="images/os/redhat.png"
-        ><img title="OpenSolaris" src="images/os/opensolaris.png"
-        ><img title="Platform independent bundle" src="images/os/other.png">
+    <dt id="stage2">2. Download <a id=download-link href="hudson.war">hudson.war</a></dt>
+    <dd id="platforms">
+      or a native package:
+      <div>
+        <img src="images/os/ubuntu.png">
+        <a class=soft href="/debian/">Ubuntu/Debian</a>
       </div>
-      <div id="platform-caption">&nbsp;</div>
-    </dd> 
-    <script>
-      var platform = null; // selected platform
-
-      var platforms = document.getElementById("platforms");  
-      var caption =   document.getElementById("platform-caption");
-      for (e=platforms.firstChild; e!=null; e=e.nextSibling) {
-        e.onmouseover = function () {
-          caption.innerHTML = this.getAttribute("title");
-        }
-        e.onmouseout = function() {
-          caption.innerHTML = platform!=null ? platform.getAttribute("title") : "&nbsp;";
-        }
-        e.onclick = function() {
-          this.className="selected";
-          if (platform!=null)   platform.className="unselected";
-          platform=this;
-          stage('stage2',show);
-        }
-        e.className = "unselected";
-      }
-    </script>
-
-    <dt id="stage3">3. <img style="vertical-align:middle" src="/images/download.png"/> <a href="latest/hudson.war">Download</a></dt>
-    <dd style="text-align:right; color:#888" class=small>
+      <div>
+        <img src="images/os/redhat.png">
+        <a class=soft href="/redhat/">RedHat/Fedora/CentOS</a>
+      </div>
+      <div>
+        <img src="images/os/opensolaris.png">
+        <a class=soft href="http://pkg.hudson-ci.org/">OpenSolaris/Nevada</a>
+      </div>
+      <div class=small style="text-align:right">
        (<a href="/changelog.html" class=soft>changelog</a>)
-    </dd>
+      </div>
+    </dd> 
 
     </dl>
     <script>
       stage('stage2',hide);
-      stage('stage3',hide);
+
+      function wireUp(id) {
+        var e = document.getElementById(id);
+        e.onchange = e.onclick = function() {
+          stage('stage2',show);
+          document.getElementById("download-link").href = "/"+this.id+"/hudson.war";
+        }
+        if (e.checked)
+          e.onclick();  // this happens if the user has reloaded the page
+      }
+      wireUp('latest');
+      wireUp('supported');
     </script>
   </div>
 
