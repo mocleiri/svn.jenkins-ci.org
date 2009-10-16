@@ -85,18 +85,26 @@ public class Main {
             if (dlc!=null) {
                 // build dlc.sun.com layout
                 for (HPI v : versions) {
-                    File target = new File(dlc,"plugins/"+hpi.artifactId+"/"+v.version+"/"+hpi.artifactId+".hpi");
-                    target.getParentFile().mkdirs();
                     ArtifactInfo a = v.artifact;
-                    ProcessBuilder pb = new ProcessBuilder();
-                    pb.command("ln","-sf","../../../../../maven/2/"+a.groupId.replace('.','/')+"/"+a.artifactId+"/"+a.version+"/"+a.artifactId+"-"+a.version+"."+a.packaging,target.getAbsolutePath());
-                    if (pb.start().waitFor()!=0)
-                        throw new IOException("ln failed");
+                    ln("../../../../../maven/2/"+ a.groupId.replace('.','/')+"/"+ a.artifactId+"/"+ a.version+"/"+ a.artifactId+"-"+ a.version+"."+ a.packaging,
+                            new File(dlc,"plugins/"+hpi.artifactId+"/"+v.version+"/"+hpi.artifactId+".hpi"));
                 }
             }
         }
 
         return plugins;
+    }
+
+    /**
+     * Creates a symlink.
+     */
+    private void ln(String from, File to) throws InterruptedException, IOException {
+        to.getParentFile().mkdirs();
+
+        ProcessBuilder pb = new ProcessBuilder();
+        pb.command("ln","-sf", from,to.getAbsolutePath());
+        if (pb.start().waitFor()!=0)
+            throw new IOException("ln failed");
     }
 
     /**
@@ -113,13 +121,9 @@ public class Main {
         if (dlc!=null) {
             // build dlc.sun.com layout
             for (HudsonWar w : wars.values()) {
-                File target = new File(dlc,"war/"+w.version+"/hudson.war");
-                target.getParentFile().mkdirs();
                 ArtifactInfo a = w.artifact;
-                ProcessBuilder pb = new ProcessBuilder();
-                pb.command("ln","-sf","../../../../maven/2/org/jvnet/hudson/main/hudson-war/"+a.version+"/hudson-war-"+a.version+".war",target.getAbsolutePath());
-                if (pb.start().waitFor()!=0)
-                    throw new IOException("ln failed");
+                ln("../../../../maven/2/org/jvnet/hudson/main/hudson-war/"+a.version+"/hudson-war-"+a.version+".war",
+                        new File(dlc,"war/"+w.version+"/hudson.war"));
             }
         }
         return core;
