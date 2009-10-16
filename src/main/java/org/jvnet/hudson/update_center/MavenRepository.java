@@ -110,7 +110,10 @@ public class MavenRepository {
         return plugins.values();
     }
 
-    public MavenArtifact getLatestHudsonWar() throws IOException, AbstractArtifactResolutionException {
+    /**
+     * Discover all hudson.war versions.
+     */
+    public TreeMap<VersionNumber,HudsonWar> getHudsonWar() throws IOException, AbstractArtifactResolutionException {
         BooleanQuery q = new BooleanQuery();
         q.add(indexer.constructQuery(ArtifactInfo.GROUP_ID,"org.jvnet.hudson.main"), Occur.MUST);
         q.add(indexer.constructQuery(ArtifactInfo.PACKAGING,"war"), Occur.MUST);
@@ -118,26 +121,17 @@ public class MavenRepository {
         FlatSearchRequest request = new FlatSearchRequest(q);
         FlatSearchResponse response = indexer.searchFlat(request);
 
-        VersionNumber latest = new VersionNumber("0.0");
-        ArtifactInfo latestArtifact=null;
+        TreeMap<VersionNumber,HudsonWar> r = new TreeMap<VersionNumber, HudsonWar>();
+
         for (ArtifactInfo a : response.getResults()) {
             if (a.version.contains("SNAPSHOT"))     continue;       // ignore snapshots
             if (!a.artifactId.equals("hudson-war"))  continue;      // somehow using this as a query results in 0 hits.
+            if (a.classifier!=null)  continue;          // just pick up the main war
 
             VersionNumber v = new VersionNumber(a.version);
-            if (v.compareTo(latest)>0) {
-                latest = v;
-                latestArtifact = a;
-            }
+            r.put(v,new HudsonWar(this,a));
         }
 
-        if (latestArtifact==null)
-            throw new IOException("No hudson.war found. Corrupt or outdated index?");
-
-        return new MavenArtifact(this,latestArtifact);
-    }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println(new MavenRepository().getLatestHudsonWar());
+        return r;
     }
 }
