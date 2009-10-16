@@ -2,5 +2,5 @@
 Options +Indexes
 
 # Actual download traffic goes to dlc.sun.com, but redirection allows us to track download counts
-Redirect 302 /download/war/ http://dlc.sun.com/hudson/downloads/war/
-Redirect 302 /download/plugins/ http://dlc.sun.com/hudson/downloads/plugins/
+RedirectMatch 302 /download/war/(.*)\.war$ http://dlc.sun.com/hudson/downloads/war/$1.war
+RedirectMatch 302 /download/plugins/(.*)\.hpi$ http://dlc.sun.com/hudson/downloads/plugins/$1.hpi
