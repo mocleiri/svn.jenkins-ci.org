@@ -1,58 +1,65 @@
 package org.jvnet.hudson.update_center;
 
 import net.sf.json.JSONObject;
+import org.apache.maven.artifact.resolver.AbstractArtifactResolutionException;
+import org.sonatype.nexus.index.ArtifactInfo;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
-import java.util.jar.Attributes;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
-import java.text.ParseException;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 /**
- * Represents an .hpi file.
+ * A particular version of a plugin and its metadata.
  *
  * @author Kohsuke Kawaguchi
  */
-public final class HpiFile {
-    public final File file;
-    public final Manifest manifest;
-    public final Attributes attributes;
+public class HPI extends MavenArtifact {
+    /**
+     * Which of the lineage did this come from?
+     */
+    public final PluginHistory history;
 
-    public HpiFile(File file) throws IOException {
-        this.file = file;
-
-        JarFile j = new JarFile(file);
-        manifest = j.getManifest();
-        j.close();
-        attributes = manifest.getMainAttributes();
+    public HPI(MavenRepository repository, PluginHistory history, ArtifactInfo artifact) throws AbstractArtifactResolutionException {
+        super(repository, artifact);
+        this.history = history;
     }
 
-    public String getRequiredHudsonVersion() {
-        return attributes.getValue("Hudson-Version");
+    /**
+     * Download a plugin via more intuitive URL. This also helps us track download counts.
+     */
+    public URL getURL() throws MalformedURLException {
+        return new URL("http://hudson-ci.org/download/plugins/"+artifact.artifactId+"/"+version+"/"+artifact.artifactId+".hpi");
     }
 
-    public String getCompatibleSinceVersion() {
-        return attributes.getValue("Compatible-Since-Version");
+    /**
+     * Who built this release?
+     */
+    public String getBuiltBy() throws IOException {
+        return getManifestAttributes().getValue("Built-By");
     }
 
-    public String getDisplayName() {
-        return attributes.getValue("Long-Name");
+    public String getRequiredHudsonVersion() throws IOException {
+        return getManifestAttributes().getValue("Hudson-Version");
     }
 
-    public String getSandboxStatus() {
-        return attributes.getValue("Sandbox-Status");
+    public String getCompatibleSinceVersion() throws IOException {
+        return getManifestAttributes().getValue("Compatible-Since-Version");
     }
 
-    public String getBuildDate() {
-        return attributes.getValue("Build-Date");
+    public String getDisplayName() throws IOException {
+        return getManifestAttributes().getValue("Long-Name");
     }
 
-    public List<Dependency> getDependencies() {
-        String deps = attributes.getValue("Plugin-Dependencies");
+    public String getSandboxStatus() throws IOException {
+        return getManifestAttributes().getValue("Sandbox-Status");
+    }
+
+    public List<Dependency> getDependencies() throws IOException {
+        String deps = getManifestAttributes().getValue("Plugin-Dependencies");
         if(deps==null)  return Collections.emptyList();
 
         List<Dependency> r = new ArrayList<Dependency>();
@@ -61,8 +68,8 @@ public final class HpiFile {
         return r;
     }
 
-    public List<Developer> getDevelopers() {
-        String devs = attributes.getValue("Plugin-Developers");
+    public List<Developer> getDevelopers() throws IOException {
+        String devs = getManifestAttributes().getValue("Plugin-Developers");
         if (devs == null) return Collections.emptyList();
 
         List<Developer> r = new ArrayList<Developer>();
