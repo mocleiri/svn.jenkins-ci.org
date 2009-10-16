@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Testing Nexus indexer based plugin discovery, as a part of the effort to move away from java.net.
+ * Maven repository and its nexus index.
  *
  * Using Maven embedder 2.0.4 results in problem caused by Plexus incompatibility.
  *
