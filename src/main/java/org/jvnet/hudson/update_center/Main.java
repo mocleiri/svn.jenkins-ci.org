@@ -21,7 +21,7 @@ public class Main {
     public File output = new File("output.json");
 
     @Option(name="-h",usage="htaccess file")
-    public File htaccess = new File(".htaccess.plugins");
+    public File htaccess = new File(".htaccess");
 
     /**
      * This option builds the directory image to be staged to http://dlc.sun.com/hudson/downloads
