@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SuiteResult (Hudson main module 1.328 API)
+SuiteResult (Hudson main module 1.329 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-09">
+<META NAME="date" CONTENT="2009-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SuiteResult (Hudson main module 1.328 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SuiteResult (Hudson main module 1.328 API)";
+        parent.document.title="SuiteResult (Hudson main module 1.329 API)";
     }
 }
 </SCRIPT>
@@ -249,7 +249,7 @@ Result of one test suite.
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public java.lang.String <B>getName</B>()</PRE>
 <DL>
 <DD><DL>
@@ -264,7 +264,7 @@ getName</H3>
 <A NAME="getDuration()"><!-- --></A><H3>
 getDuration</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public float <B>getDuration</B>()</PRE>
 <DL>
 <DD><DL>
@@ -347,7 +347,7 @@ public <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hud
 <A NAME="getTimestamp()"><!-- --></A><H3>
 getTimestamp</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(visibility=9)
 </FONT>public java.lang.String <B>getTimestamp</B>()</PRE>
 <DL>
 <DD><DL>
@@ -362,7 +362,8 @@ getTimestamp</H3>
 <A NAME="getCases()"><!-- --></A><H3>
 getCases</H3>
 <PRE>
-<FONT SIZE="-1">@Exported(inline=true)
+<FONT SIZE="-1">@Exported(inline=true,
+          visibility=9)
 </FONT>public java.util.List&lt;<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&gt; <B>getCases</B>()</PRE>
 <DL>
 <DD><DL>

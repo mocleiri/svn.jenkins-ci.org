@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.328 API)
+Index (Hudson main module 1.329 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-09">
+<META NAME="date" CONTENT="2009-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.328 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.328 API)";
+        parent.document.title="Index (Hudson main module 1.329 API)";
     }
 }
 </SCRIPT>
@@ -1431,6 +1431,12 @@ Constructor for class hudson.views.<A HREF="./hudson/views/BuildButtonColumn.Des
 <DT><A HREF="./hudson/views/Messages.html#BuildButtonColumn_DisplayName()"><B>BuildButtonColumn_DisplayName()</B></A> - 
 Static method in class hudson.views.<A HREF="./hudson/views/Messages.html" title="class in hudson.views">Messages</A>
 <DD>Build Button
+<DT><A HREF="./hudson/cli/BuildCommand.html" title="class in hudson.cli"><B>BuildCommand</B></A> - Class in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>Builds a job, and optionally waits until its completion.<DT><A HREF="./hudson/cli/BuildCommand.html#BuildCommand()"><B>BuildCommand()</B></A> - 
+Constructor for class hudson.cli.<A HREF="./hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/cli/BuildCommand.CLICause.html" title="class in hudson.cli"><B>BuildCommand.CLICause</B></A> - Class in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>&nbsp;<DT><A HREF="./hudson/cli/BuildCommand.CLICause.html#BuildCommand.CLICause()"><B>BuildCommand.CLICause()</B></A> - 
+Constructor for class hudson.cli.<A HREF="./hudson/cli/BuildCommand.CLICause.html" title="class in hudson.cli">BuildCommand.CLICause</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/BatchFile.html#buildCommandLine(hudson.FilePath)"><B>buildCommandLine(FilePath)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/BatchFile.html" title="class in hudson.tasks">BatchFile</A>
 <DD>&nbsp;
@@ -2214,6 +2220,9 @@ Static method in class hudson.cli.<A HREF="./hudson/cli/Messages.html" title="cl
 <DT><A HREF="./hudson/model/Messages.html#CLI_quiet_down_shortDescription()"><B>CLI_quiet_down_shortDescription()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Quiet down Hudson, in preparation for a restart.
+<DT><A HREF="./hudson/model/Messages.html#CLI_reload_configuration_shortDescription()"><B>CLI_reload_configuration_shortDescription()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Discard all the loaded data in memory and reload everything from file system.
 <DT><A HREF="./hudson/model/Messages.html#CLI_restart_shortDescription()"><B>CLI_restart_shortDescription()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Restart Hudson
@@ -4675,7 +4684,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/Hudson.html#doQuietDown()"><B>doQuietDown()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Hudson.html#doReload(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doReload(StaplerRequest, StaplerResponse)</B></A> - 
+<DT><A HREF="./hudson/model/Hudson.html#doReload()"><B>doReload()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>Reloads the configuration.
 <DT><A HREF="./hudson/model/Hudson.html#doResources(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doResources(StaplerRequest, StaplerResponse)</B></A> - 
@@ -10727,6 +10736,12 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" 
 <DT><A HREF="./hudson/tasks/Shell.DescriptorImpl.html#getShellOrDefault()"><B>getShellOrDefault()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/cli/BuildCommand.CLICause.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/BuildCommand.CLICause.html" title="class in hudson.cli">BuildCommand.CLICause</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/cli/BuildCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/cli/CLICommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>
 <DD>Gets the quick summary of what this command does.
@@ -13419,6 +13434,9 @@ Constructor for class hudson.slaves.<A HREF="./hudson/slaves/JNLPLauncher.html" 
 <DT><A HREF="./hudson/slaves/Messages.html#JNLPLauncher_displayName()"><B>JNLPLauncher_displayName()</B></A> - 
 Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" title="class in hudson.slaves">Messages</A>
 <DD>Launch slave agents via JNLP
+<DT><A HREF="./hudson/cli/BuildCommand.html#job"><B>job</B></A> - 
+Variable in class hudson.cli.<A HREF="./hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Job.html" title="class in hudson.model"><B>Job</B></A>&lt;<A HREF="./hudson/model/Job.html" title="type parameter in Job">JobT</A> extends <A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;<A HREF="./hudson/model/Job.html" title="type parameter in Job">JobT</A>,<A HREF="./hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;,<A HREF="./hudson/model/Job.html" title="type parameter in Job">RunT</A> extends <A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;<A HREF="./hudson/model/Job.html" title="type parameter in Job">JobT</A>,<A HREF="./hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;&gt; - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>A job is an runnable entity under the monitoring of Hudson.<DT><A HREF="./hudson/model/Job.html#Job(hudson.model.ItemGroup, java.lang.String)"><B>Job(ItemGroup, String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>&nbsp;
@@ -15809,6 +15827,9 @@ Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/Cronta
 <DT><A HREF="./hudson/model/Run.html#ORDER_BY_DATE"><B>ORDER_BY_DATE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Sort by date.
+<DT><A HREF="./hudson/model/Result.html#ordinal"><B>ordinal</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/Result.html" title="class in hudson.model">Result</A>
+<DD>Bigger numbers are worse.
 <DT><A HREF="./org/acegisecurity/providers/ldap/authenticator/package-summary.html"><B>org.acegisecurity.providers.ldap.authenticator</B></A> - package org.acegisecurity.providers.ldap.authenticator<DD>&nbsp;<DT><A HREF="./org/apache/maven/lifecycle/package-summary.html"><B>org.apache.maven.lifecycle</B></A> - package org.apache.maven.lifecycle<DD>&nbsp;<DT><A HREF="./org/jvnet/hudson/test/package-summary.html"><B>org.jvnet.hudson.test</B></A> - package org.jvnet.hudson.test<DD>Test harness for Hudson and its plugins.<DT><A HREF="./org/jvnet/hudson/test/junit/package-summary.html"><B>org.jvnet.hudson.test.junit</B></A> - package org.jvnet.hudson.test.junit<DD>&nbsp;<DT><A HREF="./org/jvnet/hudson/test/recipes/package-summary.html"><B>org.jvnet.hudson.test.recipes</B></A> - package org.jvnet.hudson.test.recipes<DD>Declaratively specify the environment in which a test will be run.<DT><A HREF="./org/jvnet/hudson/test/rhino/package-summary.html"><B>org.jvnet.hudson.test.rhino</B></A> - package org.jvnet.hudson.test.rhino<DD>Code to interface with Rhino the JavaScript engine.<DT><A HREF="./hudson/util/DelegatingOutputStream.html#out"><B>out</B></A> - 
 Variable in class hudson.util.<A HREF="./hudson/util/DelegatingOutputStream.html" title="class in hudson.util">DelegatingOutputStream</A>
 <DD>&nbsp;
@@ -16426,6 +16447,12 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DT><A HREF="./hudson/cli/CLICommand.html#printUsage(java.io.PrintStream, org.kohsuke.args4j.CmdLineParser)"><B>printUsage(PrintStream, CmdLineParser)</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/cli/BuildCommand.html#printUsageSummary(java.io.PrintStream)"><B>printUsageSummary(PrintStream)</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/cli/CLICommand.html#printUsageSummary(java.io.PrintStream)"><B>printUsageSummary(PrintStream)</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>
+<DD>Called while producing usage.
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.Failure.html#problem"><B>problem</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.Failure.html" title="class in hudson.model">UpdateCenter.DownloadJob.Failure</A>
 <DD>&nbsp;
@@ -17438,6 +17465,9 @@ Variable in class hudson.security.<A HREF="./hudson/security/LDAPSecurityRealm.h
 <DT><A HREF="./hudson/model/RSS.html" title="class in hudson.model"><B>RSS</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>RSS related code.<DT><A HREF="./hudson/model/RSS.html#RSS()"><B>RSS()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/RSS.html" title="class in hudson.model">RSS</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/cli/BuildCommand.html#run()"><B>run()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/cli/CLICommand.html#run()"><B>run()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>
 <DD>Executes the command, and return the exit code.
@@ -17896,7 +17926,7 @@ Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html"
 <DD>{0} Polling Log
 <DT><A HREF="./hudson/triggers/Messages.html#SCMTrigger_SCMTriggerCause_ShortDescription()"><B>SCMTrigger_SCMTriggerCause_ShortDescription()</B></A> - 
 Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html" title="class in hudson.triggers">Messages</A>
-<DD>A SCM change trigger started this job
+<DD>Started by an SCM change
 <DT><A HREF="./hudson/util/Scrambler.html#scramble(java.lang.String)"><B>scramble(String)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Scrambler.html" title="class in hudson.util">Scrambler</A>
 <DD>&nbsp;
@@ -18122,6 +18152,9 @@ Method in class hudson.model.<A HREF="./hudson/model/FreeStyleProject.html" titl
 <DD>User-specified workspace directory, or null if it's up to Hudson.
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#setCvsExe(java.lang.String)"><B>setCvsExe(String)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#setCvsExe(java.lang.String)"><B>setCvsExe(String)</B></A> - 
+Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html#setCvspassFile(java.lang.String)"><B>setCvspassFile(String)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/CVSSCM.DescriptorImpl.html" title="class in hudson.scm">CVSSCM.DescriptorImpl</A>
@@ -19233,6 +19266,9 @@ Static method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/Mess
 <DT><A HREF="./hudson/Util.html#SYMLINK_ESCAPEHATCH"><B>SYMLINK_ESCAPEHATCH</B></A> - 
 Static variable in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/cli/BuildCommand.html#sync"><B>sync</B></A> - 
+Variable in class hudson.cli.<A HREF="./hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/jna/WINNT.html#SYNCHRONIZE"><B>SYNCHRONIZE</B></A> - 
 Static variable in interface hudson.util.jna.<A HREF="./hudson/util/jna/WINNT.html" title="interface in hudson.util.jna">WINNT</A>
 <DD>&nbsp;
@@ -19508,7 +19544,7 @@ Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html"
 <DD>Build periodically
 <DT><A HREF="./hudson/triggers/Messages.html#TimerTrigger_TimerTriggerCause_ShortDescription()"><B>TimerTrigger_TimerTriggerCause_ShortDescription()</B></A> - 
 Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html" title="class in hudson.triggers">Messages</A>
-<DD>A timer trigger started this job
+<DD>Started by timer
 <DT><A HREF="./hudson/model/MultiStageTimeSeries.TrendChart.html#timeScale"><B>timeScale</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/MultiStageTimeSeries.TrendChart.html" title="class in hudson.model">MultiStageTimeSeries.TrendChart</A>
 <DD>&nbsp;
@@ -21382,6 +21418,9 @@ Static method in class hudson.cli.<A HREF="./hudson/cli/Messages.html" title="cl
 <DT><A HREF="./hudson/model/Messages.html#_CLI_quiet_down_shortDescription()"><B>_CLI_quiet_down_shortDescription()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Quiet down Hudson, in preparation for a restart.
+<DT><A HREF="./hudson/model/Messages.html#_CLI_reload_configuration_shortDescription()"><B>_CLI_reload_configuration_shortDescription()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Discard all the loaded data in memory and reload everything from file system.
 <DT><A HREF="./hudson/model/Messages.html#_CLI_restart_shortDescription()"><B>_CLI_restart_shortDescription()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Restart Hudson
@@ -22159,7 +22198,7 @@ Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html"
 <DD>{0} Polling Log
 <DT><A HREF="./hudson/triggers/Messages.html#_SCMTrigger_SCMTriggerCause_ShortDescription()"><B>_SCMTrigger_SCMTriggerCause_ShortDescription()</B></A> - 
 Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html" title="class in hudson.triggers">Messages</A>
-<DD>A SCM change trigger started this job
+<DD>Started by an SCM change
 <DT><A HREF="./hudson/tasks/Messages.html#_Shell_DisplayName()"><B>_Shell_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Execute shell
@@ -22222,7 +22261,7 @@ Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html"
 <DD>Build periodically
 <DT><A HREF="./hudson/triggers/Messages.html#_TimerTrigger_TimerTriggerCause_ShortDescription()"><B>_TimerTrigger_TimerTriggerCause_ShortDescription()</B></A> - 
 Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html" title="class in hudson.triggers">Messages</A>
-<DD>A timer trigger started this job
+<DD>Started by timer
 <DT><A HREF="./hudson/scheduler/CrontabParser.html#_tokenNames"><B>_tokenNames</B></A> - 
 Static variable in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabParser.html" title="class in hudson.scheduler">CrontabParser</A>
 <DD>&nbsp;

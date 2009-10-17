@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.328 API)
+Hudson (Hudson main module 1.329 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-09">
+<META NAME="date" CONTENT="2009-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.328 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.328 API)";
+        parent.document.title="Hudson (Hudson main module 1.329 API)";
     }
 }
 </SCRIPT>
@@ -808,9 +808,8 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doReload(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doReload</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doReload()">doReload</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reloads the configuration.</TD>
@@ -5163,12 +5162,12 @@ public void <B>doLogRss</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doReload(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doReload()"><!-- --></A><H3>
 doReload</H3>
 <PRE>
-public void <B>doReload</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                     org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-              throws java.io.IOException</PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="reload-configuration")
+</FONT>public org.kohsuke.stapler.HttpResponse <B>doReload</B>()
+                                          throws java.io.IOException</PRE>
 <DL>
 <DD>Reloads the configuration.
 <P>
