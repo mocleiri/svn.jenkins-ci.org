@@ -10,6 +10,7 @@ import hudson.model.AbstractBuild;
 import hudson.scm.ChangeLogSet;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -18,12 +19,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.nio.charset.Charset;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.SAXException;
 
 import com.tek42.perforce.model.Changelist;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * @author Mike Wille
@@ -84,7 +89,7 @@ public class PerforceChangeLogSet extends ChangeLogSet<PerforceChangeLogEntry> {
                 return changeLogSet;
 
             for (Node node : entries) {
-                Changelist change = new Changelist();
+                PerforceChangeLogEntry change = new PerforceChangeLogEntry(changeLogSet);
 
                 if (node.selectSingleNode("changenumber") != null)
                     change.setChangeNumber(new Integer(node.selectSingleNode("changenumber").getStringValue()));
@@ -102,34 +107,31 @@ public class PerforceChangeLogSet extends ChangeLogSet<PerforceChangeLogEntry> {
                     change.setWorkspace(node.selectSingleNode("workspace").getStringValue());
 
                 List<Node> fileNodes = node.selectSingleNode("files").selectNodes("file");
-                List<Changelist.FileEntry> files = new ArrayList<Changelist.FileEntry>();
+                List<PerforceChangeLogEntry.FileEntry> files = new ArrayList<PerforceChangeLogEntry.FileEntry>();
                 for (Node fnode : fileNodes) {
-                    Changelist.FileEntry file = new Changelist.FileEntry();
+                    PerforceChangeLogEntry.FileEntry file = new PerforceChangeLogEntry.FileEntry();
                     file.setFilename(fnode.selectSingleNode("name").getStringValue());
                     file.setRevision(fnode.selectSingleNode("rev").getStringValue());
-                    file.setAction(Changelist.FileEntry.Action.valueOf(fnode.selectSingleNode("action")
-                            .getStringValue()));
+                    file.setAction(fnode.selectSingleNode("action").getStringValue());
                     files.add(file);
                 }
                 change.setFiles(files);
 
                 List<Node> jobNodes = node.selectSingleNode("jobs").selectNodes("job");
-                List<Changelist.JobEntry> jobs = new ArrayList<Changelist.JobEntry>();
+                List<PerforceChangeLogEntry.JobEntry> jobs = new ArrayList<PerforceChangeLogEntry.JobEntry>();
                 for (Node jnode : jobNodes) {
-                    Changelist.JobEntry job = new Changelist.JobEntry();
+                    PerforceChangeLogEntry.JobEntry job = new PerforceChangeLogEntry.JobEntry();
                     job.setJob(jnode.selectSingleNode("name").getStringValue());
                     job.setDescription(jnode.selectSingleNode("description").getStringValue());
                     job.setStatus(jnode.selectSingleNode("status").getStringValue());
                     jobs.add(job);
                 }
                 change.setJobs(jobs);
-
-                PerforceChangeLogEntry entry = new PerforceChangeLogEntry(changeLogSet);
-                entry.setChange(change);
-                changeLogEntries.add(entry);
+                
+                changeLogEntries.add(change);
             }
         } catch (Exception e) {
-            throw new IOException("Failed to parse changelog file: " + e.getMessage());
+            throw new IOException("Failed to parse changelog file: " + e.getMessage(), e);
         }
 
         return changeLogSet;
@@ -218,31 +220,15 @@ public class PerforceChangeLogSet extends ChangeLogSet<PerforceChangeLogEntry> {
      *            the string date to convert
      * @return A java.util.Date based off of the string format.
      */
-    protected static java.util.Date stringDateToJavaDate(String newDate) {
-        // when we have a null from the database, give it zeros first.
-        if (newDate == null || newDate.equals("")) {
-            return null;
+    protected static java.util.Date stringDateToJavaDate(String newDate) throws IOException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        java.util.Date date = new java.util.Date();
+        try {
+            date = df.parse(newDate);
+        } catch (ParseException e) {
+            throw new IOException("Could not parse changelog date: " + e.getMessage(), e);
         }
-
-        String[] parts = newDate.split(" ");
-        String[] date = parts[0].split("-");
-        String[] time = null;
-
-        if (parts.length > 1) {
-            time = parts[1].split(":");
-            time[2] = time[2].replaceAll("\\.0", "");
-        } else {
-            time = "00:00:00".split(":");
-        }
-
-        GregorianCalendar cal = (GregorianCalendar) Calendar.getInstance();
-        cal.clear();
-
-        cal.set(new Integer(date[0]).intValue(), (new Integer(date[1]).intValue() - 1),
-                new Integer(date[2]).intValue(), new Integer(time[0]).intValue(), new Integer(time[1]).intValue(),
-                new Integer(time[2]).intValue());
-
-        return cal.getTime();
+        return date;
     }
 
     private static String putZero(int i) {

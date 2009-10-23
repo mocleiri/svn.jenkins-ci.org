@@ -49,7 +49,7 @@ public final class FishEyePerforce extends PerforceRepositoryBrowser {
 
     @Override
     public URL getChangeSetLink(PerforceChangeLogEntry change) throws IOException {
-        return new URL(url,"../../changelog/"+getProjectName()+"/?cs="+change.getChange().getChangeNumber());
+        return new URL(url,"../../changelog/"+getProjectName()+"/?cs="+change.getChangeNumber());
     }
 
     /**

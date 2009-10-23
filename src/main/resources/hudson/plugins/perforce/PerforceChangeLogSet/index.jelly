@@ -16,17 +16,17 @@
 			<div class="changeset-message" style="width: 650px; margin-bottom: 4px;">
 				<a name="detail${loop.index}"></a>
 				<img src="${rootURL}/plugin/perforce/icons/changelist.gif" border="0" style="vertical-align: middle"/>
-				<b>${entry.change.changeNumber}</b> by <a href="${rootURL}/${entry.author.url}/">${entry.author}@${entry.change.workspace}</a> 
-				on <i:formatDate value="${entry.change.date}" type="both" dateStyle="medium" timeStyle="medium"/>
+				<b>${entry.changeNumber}</b> by <a href="${rootURL}/${entry.author.url}/">${entry.author}@${entry.workspace}</a> 
+				on <i:formatDate value="${entry.date}" type="both" dateStyle="medium" timeStyle="medium"/>
 				<br/>
 				${entry.msgAnnotated}
 				<br/>
 			</div>
 
-			<j:if test="${entry.change.files.size() > 0}">
+			<j:if test="${entry.files.size() > 0}">
 				Affected Files:
 				<ul style="list-style-type: none;">
-					<j:forEach var="file" items="${entry.change.files}" varStatus="fileloop">
+					<j:forEach var="file" items="${entry.files}" varStatus="fileloop">
 						<li><img src="${rootURL}/plugin/perforce/icons/action-${file.action}.gif" border="0" style="vertical-align"/> 
 						<a href="${browser.getFileLink(file)}">${file.filename}</a>
             			<j:set var="diff" value="${browser.getDiffLink(file)}"/>
@@ -44,10 +44,10 @@
 				</ul>
 			</j:if>
 	      
-			<j:if test="${entry.change.jobs.size() > 0}">
+			<j:if test="${entry.jobs.size() > 0}">
 				Affected Jobs:
 				<ul style="list-style-type: none;">
-					<j:forEach var="job" items="${entry.change.jobs}" varStatus="jobloop">
+					<j:forEach var="job" items="${entry.jobs}" varStatus="jobloop">
 						<li><img src="${rootURL}/plugin/perforce/icons/job.gif" border="0" style="vertical-align"/> ${job.job} - ${job.status}<br/>
 						${job.description}
 						</li>
