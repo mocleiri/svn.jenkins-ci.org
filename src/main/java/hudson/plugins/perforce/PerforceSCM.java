@@ -175,6 +175,11 @@ public class PerforceSCM extends SCM {
         return server;
     }
 
+    protected synchronized void disconnectServer() throws P4JException {
+        disconnectServer(server);
+        server = null;
+    }
+
     protected synchronized void disconnectServer(P4JServer server) throws P4JException {
         if (server != null && server.isConnected()) {
             server.logout();
@@ -193,6 +198,19 @@ public class PerforceSCM extends SCM {
         }
     }
     
+    protected synchronized void disconnectServer(PrintStream log){
+        try {
+            disconnectServer(server);
+            if(server != null && server.isConnected()){
+                log.println("Perforce failed to disconnect!");
+            }
+        } catch (P4JException ex) {
+            logServerException(ex, log);
+        } finally {
+            server = null;
+        }
+    }
+
     // TODO(CQ) shouldn't need this since getServer() now lazily inits
     /**
      * Depot is transient, so we need to create a new one on start up
@@ -367,7 +385,7 @@ public class PerforceSCM extends SCM {
         } catch (InterruptedException e) {
             throw new IOException("Unable to get hostname from slave. " + e.getMessage());
         } finally {
-            disconnectServer(server, log);
+            disconnectServer(log);
         }
 
         return false;
@@ -507,7 +525,7 @@ public class PerforceSCM extends SCM {
             logServerException(e, logger);
             throw new IOException("Unable to communicate with Perforce.  Check log file for: " + e.getMessage());
         } finally {
-            disconnectServer(server, logger);
+            disconnectServer(logger);
         }
     }
 

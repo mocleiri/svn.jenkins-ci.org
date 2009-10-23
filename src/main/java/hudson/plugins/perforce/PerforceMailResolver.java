@@ -35,7 +35,7 @@ public class PerforceMailResolver extends MailAddressResolver {
                     // where are we supposed to log this error?
                 } finally {
                     try {
-                        pscm.disconnectServer(server);
+                        pscm.disconnectServer();
                     } catch (P4JException ex) {
                         // where are we supposed to log this error?
                     }
