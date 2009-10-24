@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model (Hudson main module 1.329 API)
+hudson.model (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson main module 1.329 API)";
+        parent.document.title="hudson.model (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -140,10 +140,6 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TD>A listener for task related events from Executors</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A></B></TD>
-<TD>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/HealthReportingAction.html" title="interface in hudson.model">HealthReportingAction</A></B></TD>
 <TD>An <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> that can return information about the health of the Job.</TD>
 </TR>
@@ -262,6 +258,14 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A></B></TD>
 <TD><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes should implement this base class as a descriptor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/AbstractProject.BecauseOfBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfBuildInProgress</A></B></TD>
+<TD>Blocked because the previous build is already in progress.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfUpstreamBuildInProgress</A></B></TD>
+<TD>Because the upstream build is in progress, and we are configured to wait for that.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></B></TD>

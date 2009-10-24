@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.329 API)
+AbstractProject (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.329 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -140,6 +140,22 @@ Base implementation of <A HREF="../../hudson/model/Job.html" title="class in hud
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes should implement this base class as a descriptor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.BecauseOfBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfBuildInProgress</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blocked because the previous build is already in progress.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfUpstreamBuildInProgress</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Because the upstream build is in progress, and we are configured to wait for that.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
@@ -576,6 +592,15 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getCauseOfBlockage()">getCauseOfBlockage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the execution of this task should be blocked for temporary reasons,
+ this method returns a non-null object explaining why.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getDownstreamProjects()">getDownstreamProjects</A></B>()</CODE>
 
@@ -801,8 +826,7 @@ T</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#getWhyBlocked()">getWhyBlocked</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When <A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()"><CODE>Queue.Task.isBuildBlocked()</CODE></A> is true, this method returns
- human readable description of why the build is blocked.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2359,8 +2383,7 @@ public boolean <B>isBuildBlocked</B>()</PRE>
  for temporary reasons.
 
  <p>
- This can be used to define mutual exclusion that goes beyond
- <A HREF="../../hudson/model/ResourceActivity.html#getResourceList()"><CODE>ResourceActivity.getResourceList()</CODE></A>.
+ Short-hand for <code>getCauseOfBlockage()!=null</code>.
 
  <p>
  A project must be blocked if its own previous build is in progress,
@@ -2381,13 +2404,33 @@ getWhyBlocked</H3>
 <PRE>
 public java.lang.String <B>getWhyBlocked</B>()</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">Queue.Task</A></CODE></B></DD>
-<DD>When <A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()"><CODE>Queue.Task.isBuildBlocked()</CODE></A> is true, this method returns
- human readable description of why the build is blocked.
- Used for HTML rendering.
-<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCauseOfBlockage()"><!-- --></A><H3>
+getCauseOfBlockage</H3>
+<PRE>
+public <A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A> <B>getCauseOfBlockage</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Queue.Task.html#getCauseOfBlockage()">Queue.Task</A></CODE></B></DD>
+<DD>If the execution of this task should be blocked for temporary reasons,
+ this method returns a non-null object explaining why.
+
+ <p>
+ Otherwise this method returns null, indicating that the build can proceed right away.
+
+ <p>
+ This can be used to define mutual exclusion that goes beyond
+ <A HREF="../../hudson/model/ResourceActivity.html#getResourceList()"><CODE>ResourceActivity.getResourceList()</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Task.html#getCauseOfBlockage()">getCauseOfBlockage</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

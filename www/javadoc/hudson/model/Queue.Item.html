@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Item (Hudson main module 1.329 API)
+Queue.Item (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Item (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Item (Hudson main module 1.329 API)";
+        parent.document.title="Queue.Item (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -196,6 +196,14 @@ Item in a queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#getCauseOfBlockage()">getCauseOfBlockage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets an object that describes why this item is in the queue.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -228,7 +236,7 @@ Item in a queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#getWhy()">getWhy</A></B>()</CODE>
 
 <BR>
@@ -437,9 +445,22 @@ public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/Queue.Executab
 getWhy</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public abstract java.lang.String <B>getWhy</B>()</PRE>
+</FONT>public final java.lang.String <B>getWhy</B>()</PRE>
 <DL>
 <DD>Gets a human-readable status message describing why it's in the queue.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCauseOfBlockage()"><!-- --></A><H3>
+getCauseOfBlockage</H3>
+<PRE>
+public abstract <A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A> <B>getCauseOfBlockage</B>()</PRE>
+<DL>
+<DD>Gets an object that describes why this item is in the queue.
 <P>
 <DD><DL>
 </DL>

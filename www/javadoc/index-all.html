@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.329 API)
+Index (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.329 API)";
+        parent.document.title="Index (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -176,6 +176,12 @@ Constructor for class hudson.model.<A HREF="./hudson/model/AbstractProject.html"
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model"><B>AbstractProject.AbstractProjectDescriptor</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes should implement this base class as a descriptor.<DT><A HREF="./hudson/model/AbstractProject.AbstractProjectDescriptor.html#AbstractProject.AbstractProjectDescriptor()"><B>AbstractProject.AbstractProjectDescriptor()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractProject.BecauseOfBuildInProgress.html" title="class in hudson.model"><B>AbstractProject.BecauseOfBuildInProgress</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Blocked because the previous build is already in progress.<DT><A HREF="./hudson/model/AbstractProject.BecauseOfBuildInProgress.html#AbstractProject.BecauseOfBuildInProgress(hudson.model.AbstractBuild)"><B>AbstractProject.BecauseOfBuildInProgress(AbstractBuild&lt;?, ?&gt;)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/AbstractProject.BecauseOfBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfBuildInProgress</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html" title="class in hudson.model"><B>AbstractProject.BecauseOfUpstreamBuildInProgress</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Because the upstream build is in progress, and we are configured to wait for that.<DT><A HREF="./hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html#AbstractProject.BecauseOfUpstreamBuildInProgress(hudson.model.AbstractProject)"><B>AbstractProject.BecauseOfUpstreamBuildInProgress(AbstractProject&lt;?, ?&gt;)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfUpstreamBuildInProgress</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Messages.html#AbstractProject_Aborted()"><B>AbstractProject_Aborted()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
@@ -1841,6 +1847,21 @@ Constructor for class hudson.model.<A HREF="./hudson/model/CauseAction.html" tit
 <DT><A HREF="./hudson/model/CauseAction.html#CauseAction(hudson.model.CauseAction)"><B>CauseAction(CauseAction)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue"><B>CauseOfBlockage</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>If a <A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> execution is blocked in the queue, this object represents why.<DT><A HREF="./hudson/model/queue/CauseOfBlockage.html#CauseOfBlockage()"><B>CauseOfBlockage()</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsBusy.html" title="class in hudson.model.queue"><B>CauseOfBlockage.BecauseLabelIsBusy</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Build is blocked because a node is fully busy<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsBusy.html#CauseOfBlockage.BecauseLabelIsBusy(hudson.model.Label)"><B>CauseOfBlockage.BecauseLabelIsBusy(Label)</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsBusy.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseLabelIsBusy</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsOffline.html" title="class in hudson.model.queue"><B>CauseOfBlockage.BecauseLabelIsOffline</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Build is blocked because all the nodes in a given label is offline.<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsOffline.html#CauseOfBlockage.BecauseLabelIsOffline(hudson.model.Label)"><B>CauseOfBlockage.BecauseLabelIsOffline(Label)</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsOffline.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseLabelIsOffline</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsBusy.html" title="class in hudson.model.queue"><B>CauseOfBlockage.BecauseNodeIsBusy</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Build is blocked because a node is fully busy<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsBusy.html#CauseOfBlockage.BecauseNodeIsBusy(hudson.model.Node)"><B>CauseOfBlockage.BecauseNodeIsBusy(Node)</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsBusy.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseNodeIsBusy</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsOffline.html" title="class in hudson.model.queue"><B>CauseOfBlockage.BecauseNodeIsOffline</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Build is blocked because a node is offline.<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsOffline.html#CauseOfBlockage.BecauseNodeIsOffline(hudson.model.Node)"><B>CauseOfBlockage.BecauseNodeIsOffline(Node)</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsOffline.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseNodeIsOffline</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/ChainedServletFilter.html" title="class in hudson.security"><B>ChainedServletFilter</B></A> - Class in <A HREF="./hudson/security/package-summary.html">hudson.security</A><DD>Servlet <CODE>Filter</CODE> that chains multiple <CODE>Filter</CODE>s.<DT><A HREF="./hudson/security/ChainedServletFilter.html#ChainedServletFilter()"><B>ChainedServletFilter()</B></A> - 
 Constructor for class hudson.security.<A HREF="./hudson/security/ChainedServletFilter.html" title="class in hudson.security">ChainedServletFilter</A>
 <DD>&nbsp;
@@ -2719,7 +2740,7 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultMaven()"><B>configureDefaultMaven()</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Returns the older default Maven, while still allowing specification of other bundled Mavens.
-<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultMaven(java.lang.String)"><B>configureDefaultMaven(String)</B></A> - 
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultMaven(java.lang.String, int)"><B>configureDefaultMaven(String, int)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Locates Maven2 and configure that as the only Maven in the system.
 <DT><A HREF="./hudson/TcpSlaveAgentListener.html#configuredPort"><B>configuredPort</B></A> - 
@@ -5975,12 +5996,13 @@ Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title
 <DT><A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html#fnOrScript"><B>fnOrScript</B></A> - 
 Variable in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhino/CallStackFrame.html" title="class in org.jvnet.hudson.test.rhino">CallStackFrame</A>
 <DD>The function being executed.
-<DT><A HREF="./hudson/model/FoldableAction.html" title="interface in hudson.model"><B>FoldableAction</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/CauseAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)"><B>foldIntoExisting(Queue.Task, List&lt;Action&gt;)</B></A> - 
+<DT><A HREF="./hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue"><B>FoldableAction</B></A> - Interface in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>An action interface that allows action data to be folded together.<DT><A HREF="./hudson/model/CauseAction.html#foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)"><B>foldIntoExisting(Queue.Item, Queue.Task, List&lt;Action&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/CauseAction.html" title="class in hudson.model">CauseAction</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)"><B>foldIntoExisting(Queue.Task, List&lt;Action&gt;)</B></A> - 
-Method in interface hudson.model.<A HREF="./hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A>
-<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)"><B>foldIntoExisting(Queue.Item, Queue.Task, List&lt;Action&gt;)</B></A> - 
+Method in interface hudson.model.queue.<A HREF="./hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue">FoldableAction</A>
+<DD>Notifies that the <A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that "owns" this action (that is, the task for which this action is submitted)
+ is considered as a duplicate.
 <DT><A HREF="./hudson/slaves/NodeProperty.html#for_(hudson.model.Node)"><B>for_(Node)</B></A> - 
 Static method in class hudson.slaves.<A HREF="./hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>
 <DD>List up all <A HREF="./hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves"><CODE>NodePropertyDescriptor</CODE></A>s that are applicable for the
@@ -6151,6 +6173,9 @@ Variable in class hudson.model.<A HREF="./hudson/model/AbstractBuild.DependencyC
 <DT><A HREF="./hudson/security/Permission.html#fromId(java.lang.String)"><B>fromId(String)</B></A> - 
 Static method in class hudson.security.<A HREF="./hudson/security/Permission.html" title="class in hudson.security">Permission</A>
 <DD>Convert the ID representation into <A HREF="./hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> object.
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.html#fromMessage(org.jvnet.localizer.Localizable)"><B>fromMessage(Localizable)</B></A> - 
+Static method in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A>
+<DD>Obtains a simple implementation backed by <CODE>Localizable</CODE>.
 <DT><A HREF="./hudson/model/Items.html#fromNameList(java.lang.String, java.lang.Class)"><B>fromNameList(String, Class&lt;T&gt;)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Items.html" title="class in hudson.model">Items</A>
 <DD>Does the opposite of <A HREF="./hudson/model/Items.html#toNameList(java.util.Collection)"><CODE>Items.toNameList(Collection)</CODE></A>.
@@ -7007,6 +7032,25 @@ Method in exception hudson.remoting.<A HREF="./hudson/remoting/ProxyException.ht
 <DD><A HREF="./hudson/remoting/ProxyException.html" title="class in hudson.remoting"><CODE>ProxyException</CODE></A> all the way down.
 <DT><A HREF="./hudson/util/IOException2.html#getCause()"><B>getCause()</B></A> - 
 Method in exception hudson.util.<A HREF="./hudson/util/IOException2.html" title="class in hudson.util">IOException2</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractProject.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.BlockedItem.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.BlockedItem.html" title="class in hudson.model">Queue.BlockedItem</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.BuildableItem.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.Item.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>
+<DD>Gets an object that describes why this item is in the queue.
+<DT><A HREF="./hudson/model/Queue.Task.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
+Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
+<DD>If the execution of this task should be blocked for temporary reasons,
+ this method returns a non-null object explaining why.
+<DT><A HREF="./hudson/model/Queue.WaitingItem.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Executor.html#getCauseOfDeath()"><B>getCauseOfDeath()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
@@ -10769,6 +10813,12 @@ Method in class hudson.cli.<A HREF="./hudson/cli/MailCommand.html" title="class 
 <DT><A HREF="./hudson/cli/VersionCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractProject.BecauseOfBuildInProgress.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.BecauseOfBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfBuildInProgress</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfUpstreamBuildInProgress</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Cause.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Cause.html" title="class in hudson.model">Cause</A>
 <DD>One-line human-readable text of the cause.
@@ -10794,6 +10844,21 @@ Method in class hudson.model.<A HREF="./hudson/model/FileParameterValue.html" ti
 <DT><A HREF="./hudson/model/ParameterValue.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>
 <DD>Computes a human-readable possible-localized one-line description of the parameter value.
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsBusy.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsBusy.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseLabelIsBusy</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsOffline.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsOffline.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseLabelIsOffline</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsBusy.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsBusy.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseNodeIsBusy</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsOffline.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsOffline.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseNodeIsOffline</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A>
+<DD>Human readable description of why the build is blocked.
 <DT><A HREF="./hudson/model/RunParameterValue.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/RunParameterValue.html" title="class in hudson.model">RunParameterValue</A>
 <DD>&nbsp;
@@ -11223,6 +11288,12 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="
 <DT><A HREF="./hudson/model/AbstractProject.html#getTransitiveUpstreamProjects()"><B>getTransitiveUpstreamProjects()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Gets all the upstream projects including transitive upstream projects.
+<DT><A HREF="./hudson/model/Run.ArtifactList.html#getTree()"><B>getTree()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Run.ArtifactList.html" title="class in hudson.model">Run.ArtifactList</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Run.Artifact.html#getTreeNodeId()"><B>getTreeNodeId()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Run.Artifact.html" title="class in hudson.model">Run.Artifact</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractProject.html#getTrigger(java.lang.Class)"><B>getTrigger(Class&lt;T&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Gets the specific trigger, or null if the propert is not configured for this job.
@@ -11574,25 +11645,16 @@ Method in class hudson.util.<A HREF="./hudson/util/IncompatibleAntVersionDetecte
 <DT><A HREF="./hudson/util/IncompatibleServletVersionDetected.html#getWhereServletIsLoaded()"><B>getWhereServletIsLoaded()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/IncompatibleServletVersionDetected.html" title="class in hudson.util">IncompatibleServletVersionDetected</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Queue.BlockedItem.html#getWhy()"><B>getWhy()</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Queue.BlockedItem.html" title="class in hudson.model">Queue.BlockedItem</A>
-<DD>&nbsp;
-<DT><A HREF="./hudson/model/Queue.BuildableItem.html#getWhy()"><B>getWhy()</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Item.html#getWhy()"><B>getWhy()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>
 <DD>Gets a human-readable status message describing why it's in the queue.
-<DT><A HREF="./hudson/model/Queue.WaitingItem.html#getWhy()"><B>getWhy()</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractProject.html#getWhyBlocked()"><B>getWhyBlocked()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getWhyBlocked()"><B>getWhyBlocked()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
-<DD>When <A HREF="./hudson/model/Queue.Task.html#isBuildBlocked()"><CODE>Queue.Task.isBuildBlocked()</CODE></A> is true, this method returns
- human readable description of why the build is blocked.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.330
+      Use <A HREF="./hudson/model/queue/CauseOfBlockage.html#getShortDescription()"><CODE>CauseOfBlockage.getShortDescription()</CODE></A> instead.</I>
 <DT><A HREF="./hudson/matrix/MatrixRun.html#getWhyKeepLog()"><B>getWhyKeepLog()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixRun.html" title="class in hudson.matrix">MatrixRun</A>
 <DD>If the parent <A HREF="./hudson/matrix/MatrixBuild.html" title="class in hudson.matrix"><CODE>MatrixBuild</CODE></A> is kept, keep this record too.
@@ -12085,7 +12147,7 @@ Constructor for class hudson.model.<A HREF="./hudson/model/Hudson.CloudList.html
 <DT><A HREF="./hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model"><B>Hudson.DescriptorImpl</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Hudson.DescriptorImpl.html#Hudson.DescriptorImpl()"><B>Hudson.DescriptorImpl()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Hudson.DescriptorImpl.html" title="class in hudson.model">Hudson.DescriptorImpl</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/diagnosis/package-summary.html"><B>hudson.diagnosis</B></A> - package hudson.diagnosis<DD>&nbsp;<DT><A HREF="./hudson/fsp/package-summary.html"><B>hudson.fsp</B></A> - package hudson.fsp<DD>&nbsp;<DT><A HREF="./hudson/lifecycle/package-summary.html"><B>hudson.lifecycle</B></A> - package hudson.lifecycle<DD>&nbsp;<DT><A HREF="./hudson/logging/package-summary.html"><B>hudson.logging</B></A> - package hudson.logging<DD>&nbsp;<DT><A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/matrix/package-summary.html"><B>hudson.matrix</B></A> - package hudson.matrix<DD>Matrix project<DT><A HREF="./hudson/maven/agent/package-summary.html"><B>hudson.maven.agent</B></A> - package hudson.maven.agent<DD>&nbsp;<DT><A HREF="./hudson/model/package-summary.html"><B>hudson.model</B></A> - package hudson.model<DD>Core object model that are bound to URLs via stapler, rooted at <a href="./hudson/model/Hudson.html"><tt>Hudson</tt></a>.<DT><A HREF="./hudson/model/listeners/package-summary.html"><B>hudson.model.listeners</B></A> - package hudson.model.listeners<DD>Listener interfaces for various events that occur inside the server.<DT><A HREF="./hudson/node_monitors/package-summary.html"><B>hudson.node_monitors</B></A> - package hudson.node_monitors<DD>Code that monitors the health of slaves<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs</B></A> - package hudson.org.apache.tools.ant.taskdefs<DD>&nbsp;<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs.cvslib</B></A> - package hudson.org.apache.tools.ant.taskdefs.cvslib<DD>Fork of Ant CVS <tt>changelog</tt> task to work around issues.<DT><A HREF="./hudson/org/apache/tools/tar/package-summary.html"><B>hudson.org.apache.tools.tar</B></A> - package hudson.org.apache.tools.tar<DD>&nbsp;<DT><A HREF="./hudson/os/package-summary.html"><B>hudson.os</B></A> - package hudson.os<DD>&nbsp;<DT><A HREF="./hudson/os/solaris/package-summary.html"><B>hudson.os.solaris</B></A> - package hudson.os.solaris<DD>Solaris specific features of Hudson.<DT><A HREF="./hudson/os/windows/package-summary.html"><B>hudson.os.windows</B></A> - package hudson.os.windows<DD>&nbsp;<DT><A HREF="./hudson/remoting/package-summary.html"><B>hudson.remoting</B></A> - package hudson.remoting<DD>Remoting infrastructure for Hudson.<DT><A HREF="./hudson/remoting/forward/package-summary.html"><B>hudson.remoting.forward</B></A> - package hudson.remoting.forward<DD>TCP port forwarding over <code>hudson.remoting</code>.<DT><A HREF="./hudson/remoting/jnlp/package-summary.html"><B>hudson.remoting.jnlp</B></A> - package hudson.remoting.jnlp<DD>Code for launching the remote agent through JNLP.<DT><A HREF="./hudson/scheduler/package-summary.html"><B>hudson.scheduler</B></A> - package hudson.scheduler<DD>Classes that implement cron-like features<DT><A HREF="./hudson/scm/package-summary.html"><B>hudson.scm</B></A> - package hudson.scm<DD>Hudson's interface with source code management systems.<DT><A HREF="./hudson/scm/browsers/package-summary.html"><B>hudson.scm.browsers</B></A> - package hudson.scm.browsers<DD>Code that computes links to external source code repository browsers.<DT><A HREF="./hudson/search/package-summary.html"><B>hudson.search</B></A> - package hudson.search<DD><a href="http://docs.blacktree.com/quicksilver/what_is_quicksilver">QuickSilver</a>-like
+<DT><A HREF="./hudson/diagnosis/package-summary.html"><B>hudson.diagnosis</B></A> - package hudson.diagnosis<DD>&nbsp;<DT><A HREF="./hudson/fsp/package-summary.html"><B>hudson.fsp</B></A> - package hudson.fsp<DD>&nbsp;<DT><A HREF="./hudson/lifecycle/package-summary.html"><B>hudson.lifecycle</B></A> - package hudson.lifecycle<DD>&nbsp;<DT><A HREF="./hudson/logging/package-summary.html"><B>hudson.logging</B></A> - package hudson.logging<DD>&nbsp;<DT><A HREF="./hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/matrix/package-summary.html"><B>hudson.matrix</B></A> - package hudson.matrix<DD>Matrix project<DT><A HREF="./hudson/maven/agent/package-summary.html"><B>hudson.maven.agent</B></A> - package hudson.maven.agent<DD>&nbsp;<DT><A HREF="./hudson/model/package-summary.html"><B>hudson.model</B></A> - package hudson.model<DD>Core object model that are bound to URLs via stapler, rooted at <a href="./hudson/model/Hudson.html"><tt>Hudson</tt></a>.<DT><A HREF="./hudson/model/listeners/package-summary.html"><B>hudson.model.listeners</B></A> - package hudson.model.listeners<DD>Listener interfaces for various events that occur inside the server.<DT><A HREF="./hudson/model/queue/package-summary.html"><B>hudson.model.queue</B></A> - package hudson.model.queue<DD>&nbsp;<DT><A HREF="./hudson/node_monitors/package-summary.html"><B>hudson.node_monitors</B></A> - package hudson.node_monitors<DD>Code that monitors the health of slaves<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs</B></A> - package hudson.org.apache.tools.ant.taskdefs<DD>&nbsp;<DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/cvslib/package-summary.html"><B>hudson.org.apache.tools.ant.taskdefs.cvslib</B></A> - package hudson.org.apache.tools.ant.taskdefs.cvslib<DD>Fork of Ant CVS <tt>changelog</tt> task to work around issues.<DT><A HREF="./hudson/org/apache/tools/tar/package-summary.html"><B>hudson.org.apache.tools.tar</B></A> - package hudson.org.apache.tools.tar<DD>&nbsp;<DT><A HREF="./hudson/os/package-summary.html"><B>hudson.os</B></A> - package hudson.os<DD>&nbsp;<DT><A HREF="./hudson/os/solaris/package-summary.html"><B>hudson.os.solaris</B></A> - package hudson.os.solaris<DD>Solaris specific features of Hudson.<DT><A HREF="./hudson/os/windows/package-summary.html"><B>hudson.os.windows</B></A> - package hudson.os.windows<DD>&nbsp;<DT><A HREF="./hudson/remoting/package-summary.html"><B>hudson.remoting</B></A> - package hudson.remoting<DD>Remoting infrastructure for Hudson.<DT><A HREF="./hudson/remoting/forward/package-summary.html"><B>hudson.remoting.forward</B></A> - package hudson.remoting.forward<DD>TCP port forwarding over <code>hudson.remoting</code>.<DT><A HREF="./hudson/remoting/jnlp/package-summary.html"><B>hudson.remoting.jnlp</B></A> - package hudson.remoting.jnlp<DD>Code for launching the remote agent through JNLP.<DT><A HREF="./hudson/scheduler/package-summary.html"><B>hudson.scheduler</B></A> - package hudson.scheduler<DD>Classes that implement cron-like features<DT><A HREF="./hudson/scm/package-summary.html"><B>hudson.scm</B></A> - package hudson.scm<DD>Hudson's interface with source code management systems.<DT><A HREF="./hudson/scm/browsers/package-summary.html"><B>hudson.scm.browsers</B></A> - package hudson.scm.browsers<DD>Code that computes links to external source code repository browsers.<DT><A HREF="./hudson/search/package-summary.html"><B>hudson.search</B></A> - package hudson.search<DD><a href="http://docs.blacktree.com/quicksilver/what_is_quicksilver">QuickSilver</a>-like
 search/jump capability for better navigation around the website.<DT><A HREF="./hudson/security/package-summary.html"><B>hudson.security</B></A> - package hudson.security<DD>Security-related code<DT><A HREF="./hudson/security/csrf/package-summary.html"><B>hudson.security.csrf</B></A> - package hudson.security.csrf<DD>&nbsp;<DT><A HREF="./hudson/slaves/package-summary.html"><B>hudson.slaves</B></A> - package hudson.slaves<DD>Code related to slaves.<DT><A HREF="./hudson/tasks/package-summary.html"><B>hudson.tasks</B></A> - package hudson.tasks<DD>Built-in <a href="./hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="./hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.<DT><A HREF="./hudson/tasks/junit/package-summary.html"><B>hudson.tasks.junit</B></A> - package hudson.tasks.junit<DD>Model objects that represent JUnit test reports.<DT><A HREF="./hudson/tasks/test/package-summary.html"><B>hudson.tasks.test</B></A> - package hudson.tasks.test<DD>Defines contracts that need to be implemented by a test reporting
 action (such as the built-in JUnit one).<DT><A HREF="./hudson/tools/package-summary.html"><B>hudson.tools</B></A> - package hudson.tools<DD>&nbsp;<DT><A HREF="./hudson/triggers/package-summary.html"><B>hudson.triggers</B></A> - package hudson.triggers<DD>Built-in <a href="./hudson/triggers/Trigger.html"><tt>Trigger</tt></a>s that run periodically to kick a new build.<DT><A HREF="./hudson/util/package-summary.html"><B>hudson.util</B></A> - package hudson.util<DD>Other miscellaneous utility code<DT><A HREF="./hudson/util/jna/package-summary.html"><B>hudson.util.jna</B></A> - package hudson.util.jna<DD>Native code wrappers.<DT><A HREF="./hudson/util/spring/package-summary.html"><B>hudson.util.spring</B></A> - package hudson.util.spring<DD>Spring Bean Builder by using Groovy.<DT><A HREF="./hudson/views/package-summary.html"><B>hudson.views</B></A> - package hudson.views<DD>&nbsp;<DT><A HREF="./hudson/widgets/package-summary.html"><B>hudson.widgets</B></A> - package hudson.widgets<DD>&nbsp;<DT><A HREF="./hudson/security/Permission.html#HUDSON_ADMINISTER"><B>HUDSON_ADMINISTER</B></A> - 
@@ -13689,6 +13751,12 @@ Variable in exception hudson.util.<A HREF="./hudson/util/FormValidation.html" ti
 <DT><A HREF="./hudson/model/Label.html" title="class in hudson.model"><B>Label</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Group of <A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s.<DT><A HREF="./hudson/model/Label.html#Label(java.lang.String)"><B>Label(String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Label.html" title="class in hudson.model">Label</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsBusy.html#label"><B>label</B></A> - 
+Variable in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsBusy.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseLabelIsBusy</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsOffline.html#label"><B>label</B></A> - 
+Variable in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseLabelIsOffline.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseLabelIsOffline</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Label.ConverterImpl.html" title="class in hudson.model"><B>Label.ConverterImpl</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Label.ConverterImpl.html#Label.ConverterImpl()"><B>Label.ConverterImpl()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Label.ConverterImpl.html" title="class in hudson.model">Label.ConverterImpl</A>
 <DD>&nbsp;
@@ -14042,6 +14110,9 @@ Method in class hudson.util.<A HREF="./hudson/util/ConsistentHash.html" title="c
 Static variable in class hudson.views.<A HREF="./hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.281
       Use <A HREF="./hudson/views/ListViewColumn.html#all()"><CODE>ListViewColumn.all()</CODE></A> for read access and <A HREF="./hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>
+<DT><A HREF="./hudson/model/Run.html#LIST_CUTOFF"><B>LIST_CUTOFF</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/ListBoxModel.html" title="class in hudson.util"><B>ListBoxModel</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Model object of dynamically filled list box.<DT><A HREF="./hudson/util/ListBoxModel.html#ListBoxModel(int)"><B>ListBoxModel(int)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/ListBoxModel.html" title="class in hudson.util">ListBoxModel</A>
 <DD>&nbsp;
@@ -14072,6 +14143,9 @@ Variable in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson
 <DT><A HREF="./hudson/matrix/MatrixAggregator.html#listener"><B>listener</B></A> - 
 Variable in class hudson.matrix.<A HREF="./hudson/matrix/MatrixAggregator.html" title="class in hudson.matrix">MatrixAggregator</A>
 <DD>The listener to send the output to.
+<DT><A HREF="./hudson/model/AbstractBuild.AbstractRunner.html#listener"><B>listener</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/AbstractBuild.AbstractRunner.html" title="class in hudson.model">AbstractBuild.AbstractRunner</A>
+<DD>Output/progress of this build goes here.
 <DT><A HREF="./hudson/remoting/Engine.html#listener"><B>listener</B></A> - 
 Variable in class hudson.remoting.<A HREF="./hudson/remoting/Engine.html" title="class in hudson.remoting">Engine</A>
 <DD>&nbsp;
@@ -14779,7 +14853,13 @@ Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstaller.
 Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstaller.DescriptorImpl.html" title="class in hudson.tasks">Maven.MavenInstaller.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Maven.ProjectWithMaven.html" title="interface in hudson.tasks"><B>Maven.ProjectWithMaven</B></A> - Interface in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>Optional interface that can be implemented by <A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>
- that has "contextual" <A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> associated with it.<DT><A HREF="./hudson/tasks/Messages.html#Maven_DisplayName()"><B>Maven_DisplayName()</B></A> - 
+ that has "contextual" <A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks"><CODE>Maven.MavenInstallation</CODE></A> associated with it.<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#MAVEN_20"><B>MAVEN_20</B></A> - 
+Static variable in class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
+<DD>Constants for describing Maven versions for comparison.
+<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#MAVEN_21"><B>MAVEN_21</B></A> - 
+Static variable in class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Messages.html#Maven_DisplayName()"><B>Maven_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>Invoke top-level Maven targets
 <DT><A HREF="./hudson/tasks/Messages.html#Maven_ExecFailed()"><B>Maven_ExecFailed()</B></A> - 
@@ -14812,6 +14892,9 @@ Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabLexer.html" 
 <DT><A HREF="./hudson/scheduler/CrontabLexer.html#mDIV(boolean)"><B>mDIV(boolean)</B></A> - 
 Method in class hudson.scheduler.<A HREF="./hudson/scheduler/CrontabLexer.html" title="class in hudson.scheduler">CrontabLexer</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Maven.MavenInstallation.html#meetsMavenReqVersion(hudson.Launcher, int)"><B>meetsMavenReqVersion(Launcher, int)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>
+<DD>Compares the version of this Maven installation to the minimum required version specified.
 <DT><A HREF="./hudson/util/Memoizer.html" title="class in hudson.util"><B>Memoizer</B></A>&lt;<A HREF="./hudson/util/Memoizer.html" title="type parameter in Memoizer">K</A>,<A HREF="./hudson/util/Memoizer.html" title="type parameter in Memoizer">V</A>&gt; - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Implements memoization semantics.<DT><A HREF="./hudson/util/Memoizer.html#Memoizer()"><B>Memoizer()</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/Memoizer.html" title="class in hudson.util">Memoizer</A>
 <DD>&nbsp;
@@ -15389,6 +15472,12 @@ Method in enum hudson.model.<A HREF="./hudson/model/BallColor.html" title="enum 
 <DD>Gets the unanimated version.
 <DT><A HREF="./hudson/model/Node.html" title="class in hudson.model"><B>Node</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Base type of Hudson slaves (although in practice, you probably extend <A HREF="./hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)<DT><A HREF="./hudson/model/Node.html#Node()"><B>Node()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Node.html" title="class in hudson.model">Node</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsBusy.html#node"><B>node</B></A> - 
+Variable in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsBusy.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseNodeIsBusy</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsOffline.html#node"><B>node</B></A> - 
+Variable in class hudson.model.queue.<A HREF="./hudson/model/queue/CauseOfBlockage.BecauseNodeIsOffline.html" title="class in hudson.model.queue">CauseOfBlockage.BecauseNodeIsOffline</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/slaves/NodeProperty.html#node"><B>node</B></A> - 
 Variable in class hudson.slaves.<A HREF="./hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>
@@ -19954,6 +20043,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/TransientProjectActio
 <DT><A HREF="./hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><B>translateFor(Node, TaskListener)</B></A> - 
 Method in class hudson.tools.<A HREF="./hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>
 <DD>Finds a tool on a node.
+<DT><A HREF="./hudson/model/Run.html#TREE_CUTOFF"><B>TREE_CUTOFF</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/TreeView.html" title="class in hudson.model"><B>TreeView</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>EXPERIMENTAL<DT><A HREF="./hudson/model/TreeView.html#TreeView(java.lang.String)"><B>TreeView(String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/TreeView.html" title="class in hudson.model">TreeView</A>
 <DD>&nbsp;
@@ -20157,6 +20249,9 @@ Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">
 <DT><A HREF="./hudson/FilePath.html#unzipFrom(java.io.InputStream)"><B>unzipFrom(InputStream)</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Reads the given InputStream as a zip file and extracts it into this directory.
+<DT><A HREF="./hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html#up"><B>up</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfUpstreamBuildInProgress</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/MultiStageTimeSeries.html#update(float)"><B>update(float)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/MultiStageTimeSeries.html" title="class in hudson.model">MultiStageTimeSeries</A>
 <DD>Call this method every 10 sec and supply a new data point.

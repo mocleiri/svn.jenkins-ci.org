@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CauseAction (Hudson main module 1.329 API)
+CauseAction (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CauseAction (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CauseAction (Hudson main module 1.329 API)";
+        parent.document.title="CauseAction (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -97,12 +97,12 @@ java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.CauseAction</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue">FoldableAction</A></DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public class <B>CauseAction</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A></DL>
+</FONT>public class <B>CauseAction</B><DT>extends java.lang.Object<DT>implements <A HREF="../../hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue">FoldableAction</A></DL>
 </PRE>
 
 <P>
@@ -143,11 +143,13 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t,
-                 java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></B>(<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&nbsp;item,
+                 <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;owner,
+                 java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;otherActions)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notifies that the <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that "owns" this action (that is, the task for which this action is submitted)
+ is considered as a duplicate.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -355,17 +357,23 @@ public java.lang.String <B>getShortDescription</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="foldIntoExisting(hudson.model.Queue.Task, java.util.List)"><!-- --></A><H3>
+<A NAME="foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)"><!-- --></A><H3>
 foldIntoExisting</H3>
 <PRE>
-public void <B>foldIntoExisting</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t,
-                             java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</PRE>
+public void <B>foldIntoExisting</B>(<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&nbsp;item,
+                             <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;owner,
+                             java.util.List&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;otherActions)</PRE>
 <DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/queue/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)">FoldableAction</A></CODE></B></DD>
+<DD>Notifies that the <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that "owns" this action (that is, the task for which this action is submitted)
+ is considered as a duplicate.
+<P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></CODE> in interface <CODE><A HREF="../../hudson/model/FoldableAction.html" title="interface in hudson.model">FoldableAction</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/queue/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></CODE> in interface <CODE><A HREF="../../hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue">FoldableAction</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>item</CODE> - The existing <CODE>Queue.Item</CODE> in the queue against which we are judged as a duplicate. Never null.<DD><CODE>owner</CODE> - The <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> with which this action was submitted to the queue. Never null.<DD><CODE>otherActions</CODE> - Other <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s that are submitted with the task. (One of them is this <A HREF="../../hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue"><CODE>FoldableAction</CODE></A>.)
+      Never null.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

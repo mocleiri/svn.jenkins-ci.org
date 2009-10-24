@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.BuildableItem (Hudson main module 1.329 API)
+Queue.BuildableItem (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.BuildableItem (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.BuildableItem (Hudson main module 1.329 API)";
+        parent.document.title="Queue.BuildableItem (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -179,11 +179,11 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.BuildableItem.html#getWhy()">getWhy</A></B>()</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.BuildableItem.html#getCauseOfBlockage()">getCauseOfBlockage</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a human-readable status message describing why it's in the queue.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets an object that describes why this item is in the queue.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -200,7 +200,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Queue.Item.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A>, <A HREF="../../hudson/model/Queue.Item.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Queue.Item.html#getFuture()">getFuture</A>, <A HREF="../../hudson/model/Queue.Item.html#getParams()">getParams</A>, <A HREF="../../hudson/model/Queue.Item.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Queue.Item.html#hasCancelPermission()">hasCancelPermission</A>, <A HREF="../../hudson/model/Queue.Item.html#isBlocked()">isBlocked</A>, <A HREF="../../hudson/model/Queue.Item.html#isBuildable()">isBuildable</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Queue.Item.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A>, <A HREF="../../hudson/model/Queue.Item.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Queue.Item.html#getFuture()">getFuture</A>, <A HREF="../../hudson/model/Queue.Item.html#getParams()">getParams</A>, <A HREF="../../hudson/model/Queue.Item.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/Queue.Item.html#getWhy()">getWhy</A>, <A HREF="../../hudson/model/Queue.Item.html#hasCancelPermission()">hasCancelPermission</A>, <A HREF="../../hudson/model/Queue.Item.html#isBlocked()">isBlocked</A>, <A HREF="../../hudson/model/Queue.Item.html#isBuildable()">isBuildable</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
@@ -268,16 +268,16 @@ public <B>Queue.BuildableItem</B>(<A HREF="../../hudson/model/Queue.NotWaitingIt
 </TR>
 </TABLE>
 
-<A NAME="getWhy()"><!-- --></A><H3>
-getWhy</H3>
+<A NAME="getCauseOfBlockage()"><!-- --></A><H3>
+getCauseOfBlockage</H3>
 <PRE>
-public java.lang.String <B>getWhy</B>()</PRE>
+public <A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A> <B>getCauseOfBlockage</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Queue.Item.html#getWhy()">Queue.Item</A></CODE></B></DD>
-<DD>Gets a human-readable status message describing why it's in the queue.
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Queue.Item.html#getCauseOfBlockage()">Queue.Item</A></CODE></B></DD>
+<DD>Gets an object that describes why this item is in the queue.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Item.html#getWhy()">getWhy</A></CODE> in class <CODE><A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Item.html#getCauseOfBlockage()">getCauseOfBlockage</A></CODE> in class <CODE><A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

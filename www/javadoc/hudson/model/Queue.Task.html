@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Task (Hudson main module 1.329 API)
+Queue.Task (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Task (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Task (Hudson main module 1.329 API)";
+        parent.document.title="Queue.Task (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -163,6 +163,15 @@ Task whose execution is controlled by the queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getCauseOfBlockage()">getCauseOfBlockage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the execution of this task should be blocked for temporary reasons,
+ this method returns a non-null object explaining why.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;long</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getEstimatedDuration()">getEstimatedDuration</A></B>()</CODE>
 
@@ -208,8 +217,8 @@ Task whose execution is controlled by the queue.
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When <A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()"><CODE>isBuildBlocked()</CODE></A> is true, this method returns
- human readable description of why the build is blocked.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.330
+      Use <A HREF="../../hudson/model/queue/CauseOfBlockage.html#getShortDescription()"><CODE>CauseOfBlockage.getShortDescription()</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -306,8 +315,7 @@ boolean <B>isBuildBlocked</B>()</PRE>
  for temporary reasons.
 
  <p>
- This can be used to define mutual exclusion that goes beyond
- <A HREF="../../hudson/model/ResourceActivity.html#getResourceList()"><CODE>ResourceActivity.getResourceList()</CODE></A>.
+ Short-hand for <code>getCauseOfBlockage()!=null</code>.
 <P>
 <DD><DL>
 </DL>
@@ -323,9 +331,32 @@ getWhyBlocked</H3>
 <PRE>
 java.lang.String <B>getWhyBlocked</B>()</PRE>
 <DL>
-<DD>When <A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()"><CODE>isBuildBlocked()</CODE></A> is true, this method returns
- human readable description of why the build is blocked.
- Used for HTML rendering.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.330
+      Use <A HREF="../../hudson/model/queue/CauseOfBlockage.html#getShortDescription()"><CODE>CauseOfBlockage.getShortDescription()</CODE></A> instead.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCauseOfBlockage()"><!-- --></A><H3>
+getCauseOfBlockage</H3>
+<PRE>
+<A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A> <B>getCauseOfBlockage</B>()</PRE>
+<DL>
+<DD>If the execution of this task should be blocked for temporary reasons,
+ this method returns a non-null object explaining why.
+
+ <p>
+ Otherwise this method returns null, indicating that the build can proceed right away.
+
+ <p>
+ This can be used to define mutual exclusion that goes beyond
+ <A HREF="../../hudson/model/ResourceActivity.html#getResourceList()"><CODE>ResourceActivity.getResourceList()</CODE></A>.
 <P>
 <DD><DL>
 </DL>

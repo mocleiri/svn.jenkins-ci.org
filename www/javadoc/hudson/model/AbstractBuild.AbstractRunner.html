@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractBuild.AbstractRunner (Hudson main module 1.329 API)
+AbstractBuild.AbstractRunner (Hudson main module 1.330 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-16">
+<META NAME="date" CONTENT="2009-10-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractBuild.AbstractRunner (Hudson main module 1.329 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractBuild.AbstractRunner (Hudson main module 1.329 API)";
+        parent.document.title="AbstractBuild.AbstractRunner (Hudson main module 1.330 API)";
     }
 }
 </SCRIPT>
@@ -128,6 +128,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Since configuration can be changed while a build is in progress,
  create a launcher once and stick to it for the entire build duration.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#listener">listener</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output/progress of this build goes here.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -318,6 +326,18 @@ protected <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher<
 <DL>
 <DD>Since configuration can be changed while a build is in progress,
  create a launcher once and stick to it for the entire build duration.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="listener"><!-- --></A><H3>
+listener</H3>
+<PRE>
+protected <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A> <B>listener</B></PRE>
+<DL>
+<DD>Output/progress of this build goes here.
 <P>
 <DL>
 </DL>
