@@ -206,7 +206,7 @@ public class UpdateSource {
             return;
         }
 
-        LOGGER.info("Obtained the latest update center data file");
+        LOGGER.info("Obtained the latest update center data file for UpdateSource "+updateId);
         getDataFile().write(json);
     }
 

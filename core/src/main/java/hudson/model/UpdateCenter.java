@@ -267,7 +267,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         if(file==null||!file.exists())
             return;
         try {
-            file.unmarshal(sources);
+            sources = (List)file.unmarshal(sources);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Failed to load "+file, e);
         }
@@ -336,8 +336,13 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         public final Map<String,Plugin> plugins = new TreeMap<String,Plugin>(String.CASE_INSENSITIVE_ORDER);
         
         Data(String sourceId, JSONObject o) {
-            this.sourceId = sourceId; 
-            core = new Entry(sourceId, o.getJSONObject("core"));
+            this.sourceId = sourceId;
+            if (sourceId.equals("default")) {
+                core = new Entry(sourceId, o.getJSONObject("core"));
+            }
+            else {
+                core = null;
+            }
             for(Map.Entry<String,JSONObject> e : (Set<Map.Entry<String,JSONObject>>)o.getJSONObject("plugins").entrySet()) {
                 plugins.put(e.getKey(),new Plugin(sourceId, e.getValue()));
             }
@@ -347,7 +352,12 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
          * Is there a new version of the core?
          */
         public boolean hasCoreUpdates() {
-            return core.isNewerThan(Hudson.VERSION);
+            if (core!=null) {
+                return core.isNewerThan(Hudson.VERSION);
+            }
+            else {
+                return false;
+            }
         }
 
         /**
