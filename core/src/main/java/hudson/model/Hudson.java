@@ -522,7 +522,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
             Trigger.timer = new Timer("Hudson cron thread");
             queue = new Queue(CONSISTENT_HASH?LoadBalancer.CONSISTENT_HASH:LoadBalancer.DEFAULT);
-
+            
             try {
                 dependencyGraph = DependencyGraph.EMPTY;
             } catch (InternalError e) {
@@ -549,7 +549,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             } catch (IOException e) {
                 LOGGER.log(SEVERE, "Failed to load proxy configuration", e);
             }
-
+            
             // load plugins.
             pluginManager = new PluginManager(context);
             pluginManager.initialize();
@@ -619,6 +619,9 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 userContentDir.mkdirs();
                 FileUtils.writeStringToFile(new File(userContentDir,"readme.txt"),Messages.Hudson_USER_CONTENT_README());
             }
+
+            // Initialize update center.
+            updateCenter.initialize();
 
             Trigger.init();
 // pending SEZPOZ-8

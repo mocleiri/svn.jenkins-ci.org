@@ -361,10 +361,13 @@ public final class PluginManager extends AbstractModelObject {
             String n =  en.nextElement();
             if(n.startsWith("plugin.")) {
                 n = n.substring(7);
-                UpdateCenter.Plugin p = Hudson.getInstance().getUpdateCenter().getPlugin(n);
-                if(p==null)
-                    throw new Failure("No such plugin: "+n);
-                p.install();
+                if (n.indexOf(".") > 0) {
+                    String[] pluginInfo = n.split("\\.");
+                    UpdateCenter.Plugin p = Hudson.getInstance().getUpdateCenter().getById(pluginInfo[1]).getPlugin(pluginInfo[0]);
+                    if(p==null)
+                        throw new Failure("No such plugin: "+n);
+                    p.install();
+                }
             }
         }
         rsp.sendRedirect("../updateCenter/");

@@ -1565,14 +1565,16 @@ var downloadService = {
 
 // update center service. for historical reasons,
 // this is separate from downloadSerivce
-var updateCenter = {
+var updateCenter = downloadService;
+/*var updateCenter = {
     postBackURL : null,
     info: {},
     completionHandler: null,
     url: "http://hudson-ci.org/",
-
+    updateFile: "update-center.json",
+    
     checkUpdates : function() {
-        loadScript(updateCenter.url+"update-center.json?"+Hash.toQueryString(updateCenter.info));
+        loadScript(updateCenter.url+updateFile+"?"+Hash.toQueryString(updateCenter.info));
     },
 
     post : function(data) {
@@ -1585,7 +1587,7 @@ var updateCenter = {
         });
     }
 };
-
+*/
 /*
 redirects to a page once the page is ready.
 
