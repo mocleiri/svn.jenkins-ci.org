@@ -43,7 +43,15 @@ public class App {
         // N -> H : key exchange
         // H -> N : command request
 
-        // on HTTP, this can be implemented as a series of redirection with payload as a part of request URL:
+// Implementing this on HTTP
+//=============================================
+        // Hudson needs to find the endpoints of IDEs. It does so by creating <img src="http://localhost:PORT/info-about-hudson>
+        // for ports in a certain range. NetBeans need to run a small HTTP server in one of the supported port range
+        // and respond to this request. While using <script> would be easier for discovery, Use of <img> protects the web page
+        // from receiving malicious JavaScript.
+
+        // Data exchange can be implemented as a series of HTTP redirects. this works as long as
+        // payload isn't too long.
         //
         // 1. user initiates the whole thing by POST-ing to http://hudson/endpoint with endpoint=http://netbeans/endpoint, request=open-abc
         // 2. this redirects to http://netbeans/endpoint with endpoint=http://hudson/endpoint?state=encrypted-state1, payload=key-exchange-data1
