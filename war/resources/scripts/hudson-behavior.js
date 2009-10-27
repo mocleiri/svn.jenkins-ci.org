@@ -1552,6 +1552,10 @@ var downloadService = {
     },
 
     post : function(id,data) {
+        if (data==undefined) {
+            data = id;
+            id = "default";
+        }
         var o = this.continuations[id];
         new Ajax.Request(o.postBack, {
             parameters:{json:Object.toJSON(data)},

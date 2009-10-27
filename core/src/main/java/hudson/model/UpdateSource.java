@@ -114,7 +114,7 @@ public class UpdateSource {
     public UpdateSource() {
         this("default",
              "http://www.google.com",
-             "http://andrewbayer.com/",
+             "http://hudson-ci.org/",
              "http://hudson-ci.org/",
              "");
     }
