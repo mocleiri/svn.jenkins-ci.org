@@ -30,15 +30,15 @@ THE SOFTWARE.
   This file is pulled into the layout.jelly
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-  <j:forEach var="source" items="${app.updateCenter.sources}">
-    <j:if test="${source.due or forcedUpdateCheck}">
+  <j:forEach var="site" items="${app.updateCenter.sites}">
+    <j:if test="${site.due or forcedUpdateCheck}">
       <script>
         Behaviour.addLoadEvent(function() {
             downloadService.download(
-                "${source.id}",
-                "${source.url}",
+                "${site.id}",
+                "${site.url}",
                 {version:"${h.version}"},
-                "${rootURL}/updateCenter/byId/${source.id}/postBack",
+                "${rootURL}/updateCenter/byId/${site.id}/postBack",
                 null);
         });
       </script>

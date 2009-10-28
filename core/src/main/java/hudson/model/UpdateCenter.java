@@ -38,6 +38,7 @@ import hudson.model.UpdateSite.Plugin;
 import hudson.util.DaemonThreadFactory;
 import hudson.util.IOException2;
 import hudson.util.PersistedList;
+import hudson.util.XStream2;
 import org.acegisecurity.Authentication;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.CountingInputStream;
@@ -110,7 +111,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     /**
      * List of {@link UpdateSite}s to be used.
      */
-    private final PersistedList<UpdateSite> sources = new PersistedList<UpdateSite>(this);
+    private final PersistedList<UpdateSite> sites = new PersistedList<UpdateSite>(this);
 
     /**
      * Update center configuration data
@@ -154,8 +155,8 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      * @return
      *      can be empty but never null.
      */
-    public PersistedList<UpdateSite> getSources() {
-        return sources;
+    public PersistedList<UpdateSite> getSites() {
+        return sites;
     }
 
     /**
@@ -164,7 +165,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      */
     public String getLastUpdatedString() {
         long newestTs = -1;
-        for (UpdateSite s : sources) {
+        for (UpdateSite s : sites) {
             if (s.getDataTimestamp()>newestTs) {
                 newestTs = s.getDataTimestamp();
             }
@@ -178,7 +179,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      * Used to bind them to URL.
      */
     public UpdateSite getById(String id) {
-        for (UpdateSite s : sources) {
+        for (UpdateSite s : sites) {
             if (s.getId().equals(id)) {
                 return s;
             }
@@ -193,7 +194,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      *      null if no such update center is provided.
      */
     public UpdateSite getCoreSource() {
-        for (UpdateSite s : sources)
+        for (UpdateSite s : sites)
             if (s.getData().core!=null)
                 return s;
         return null;
@@ -214,7 +215,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      * Gets the plugin with the given name from the first {@link UpdateSite} to contain it.
      */
     public Plugin getPlugin(String artifactId) {
-        for (UpdateSite s : sources) {
+        for (UpdateSite s : sites) {
             Plugin p = s.getPlugin(artifactId);
             if (p!=null) return p;
         }
@@ -259,7 +260,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public synchronized void save() {
         if(BulkChange.contains(this))   return;
         try {
-            getConfigFile().write(sources);
+            getConfigFile().write(sites);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Failed to save "+getConfigFile(),e);
         }
@@ -272,28 +273,28 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         XmlFile file = getConfigFile();
         if(file.exists()) {
             try {
-                file.unmarshal(sources);
+                sites.replaceBy(((PersistedList)file.unmarshal(sites)).toList());
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, "Failed to load "+file, e);
             }
         } else {
             // If there aren't already any UpdateSources, add the default one.
-            if (sources.isEmpty()) {
+            if (sites.isEmpty()) {
                 // to maintain compatibility with existing UpdateCenterConfiguration, create the default one as specified by UpdateCenterConfiguration
-                sources.add(new UpdateSite("default",config.getUpdateCenterUrl()+"update-center.json"));
+                sites.add(new UpdateSite("default",config.getUpdateCenterUrl()+"update-center.json"));
             }
         }
     }
     
     private XmlFile getConfigFile() {
-        return new XmlFile(new File(Hudson.getInstance().root,
+        return new XmlFile(XSTREAM,new File(Hudson.getInstance().root,
                                     UpdateCenter.class.getName()+".xml"));
     }
 
     public List<Plugin> getAvailables() {
         List<Plugin> plugins = new ArrayList<Plugin>();
 
-        for (UpdateSite s : sources) {
+        for (UpdateSite s : sites) {
             plugins.addAll(s.getAvailables());
         }
 
@@ -303,14 +304,14 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public List<Plugin> getUpdates() {
         List<Plugin> plugins = new ArrayList<Plugin>();
 
-        for (UpdateSite s : sources) {
+        for (UpdateSite s : sites) {
             plugins.addAll(s.getUpdates());
         }
 
         return plugins;
     }
 
-    
+
     /**
      * {@link AdministrativeMonitor} that checks if there's Hudson update.
      */
@@ -841,4 +842,10 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     private static final Logger LOGGER = Logger.getLogger(UpdateCenter.class.getName());
 
     public static boolean neverUpdate = Boolean.getBoolean(UpdateCenter.class.getName()+".never");
+
+    public static final XStream2 XSTREAM = new XStream2();
+    static {
+        XSTREAM.alias("site",UpdateSite.class);
+        XSTREAM.alias("sites",PersistedList.class);
+    }
 }

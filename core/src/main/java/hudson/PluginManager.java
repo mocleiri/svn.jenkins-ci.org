@@ -361,7 +361,7 @@ public final class PluginManager extends AbstractModelObject {
             BulkChange bc = new BulkChange(uc);
             try {
                 for (String id : req.getParameterValues("sources"))
-                    uc.getSources().remove(uc.getById(id));
+                    uc.getSites().remove(uc.getById(id));
             } finally {
                 bc.commit();
             }
