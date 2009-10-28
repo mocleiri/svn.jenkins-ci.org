@@ -37,6 +37,7 @@ import hudson.model.UpdateSource.Data;
 import hudson.model.UpdateSource.Plugin;
 import hudson.util.DaemonThreadFactory;
 import hudson.util.IOException2;
+import hudson.util.PersistedList;
 import org.acegisecurity.Authentication;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.CountingInputStream;
@@ -84,11 +85,6 @@ import java.util.logging.Logger;
  */
 public class UpdateCenter extends AbstractModelObject implements Saveable {
     /**
-     * What's the time stamp of data file?
-     */
-    private long dataTimestamp = -1;
-
-    /**
      * {@link ExecutorService} that performs installation.
      */
     private final ExecutorService installerService = Executors.newSingleThreadExecutor(
@@ -114,14 +110,14 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     /**
      * List of {@link UpdateSource}s to be used.
      */
-    private List<UpdateSource> sources = new ArrayList<UpdateSource>();
+    private final PersistedList<UpdateSource> sources = new PersistedList<UpdateSource>(this);
 
     /**
      * Update center configuration data
      */
     private UpdateCenterConfiguration config;
 
-    public UpdateCenter(Hudson parent) {
+    public UpdateCenter() {
         configure(new UpdateCenterConfiguration());
     }
 
@@ -139,10 +135,6 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         }
     }
 
-    public void initialize() {
-        load();
-    }
-    
     /**
      * Returns the list of {@link UpdateCenterJob} representing scheduled installation attempts.
      *
@@ -157,19 +149,15 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
 
     /**
      * Returns the list of {@link UpdateSource}s to be used.
+     * This is a live list, whose change will be persisted automatically.
      *
      * @return
      *      can be empty but never null.
      */
-    public List<UpdateSource> getSources() {
+    public PersistedList<UpdateSource> getSources() {
         return sources;
     }
 
-    public void replaceSources(List<UpdateSource> newSources) {
-        sources.clear();
-        sources.addAll(newSources);
-    }
-    
     /**
      * Gets the string representing how long ago the data was obtained.
      * Will be the newest of all {@link UpdateSource}s.
@@ -280,17 +268,17 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     /**
      * Loads the data from the disk into this object.
      */
-    public synchronized void load() {
+    public synchronized void load() throws IOException {
         XmlFile file = getConfigFile();
         if(file.exists()) {
             try {
-                sources = (List)file.unmarshal(sources);
+                file.unmarshal(sources);
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, "Failed to load "+file, e);
             }
         } else {
             // If there aren't already any UpdateSources, add the default one.
-            if (sources.size() == 0) {
+            if (sources.isEmpty()) {
                 // to maintain compatibility with existing UpdateCenterConfiguration, create the default one as specified by UpdateCenterConfiguration
                 sources.add(new UpdateSource("default",config.getUpdateCenterUrl()+"update-center.json"));
             }

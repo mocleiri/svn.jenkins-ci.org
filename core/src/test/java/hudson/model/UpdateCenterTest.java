@@ -49,8 +49,8 @@ public class UpdateCenterTest extends TestCase {
         String jsonp = IOUtils.toString(url.openStream());
         String json = jsonp.substring(jsonp.indexOf('(')+1,jsonp.lastIndexOf(')'));
 
-        UpdateCenter uc = new UpdateCenter(null);
-        UpdateCenter.Data data = uc.new Data("default",JSONObject.fromObject(json));
+        UpdateSource us = new UpdateSource("default", url.toExternalForm());
+        UpdateSource.Data data = us.new Data(JSONObject.fromObject(json));
         assertTrue(data.core.url.startsWith("https://hudson.dev.java.net/"));
         assertTrue(data.plugins.containsKey("rake"));
         System.out.println(data.core.url);
