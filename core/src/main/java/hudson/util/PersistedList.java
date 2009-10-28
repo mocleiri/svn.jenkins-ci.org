@@ -32,7 +32,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.Mapper;
 import hudson.model.Describable;
 import hudson.model.Saveable;
-import hudson.model.UpdateSource;
 
 import java.io.IOException;
 import java.util.ArrayList;

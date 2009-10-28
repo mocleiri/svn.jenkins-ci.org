@@ -54,14 +54,14 @@ import java.util.logging.Logger;
  * Source of the update center information, like "http://hudson-ci.org/update-center.json"
  *
  * <p>
- * Hudson can have multiple {@link UpdateSource}s registered in the system, so that it can pick up plugins
+ * Hudson can have multiple {@link UpdateSite}s registered in the system, so that it can pick up plugins
  * from different locations.
  *
  * @author Andrew Bayer
  * @author Kohsuke Kawaguchi
  * @since 1.MULTIUPDATE
  */
-public class UpdateSource {
+public class UpdateSite {
     /**
      * What's the time stamp of data file?
      */
@@ -87,7 +87,7 @@ public class UpdateSource {
      */
     private final String url;
 
-    public UpdateSource(String id, String url) {
+    public UpdateSite(String id, String url) {
         this.id = id;
         this.url = url;
     }
@@ -258,7 +258,7 @@ public class UpdateSource {
      */
     public final class Data {
         /**
-         * The {@link UpdateSource} ID.
+         * The {@link UpdateSite} ID.
          */
         public final String sourceId;
 
@@ -309,7 +309,7 @@ public class UpdateSource {
 
     public static class Entry {
         /**
-         * {@link UpdateSource} ID.
+         * {@link UpdateSite} ID.
          */
         public final String sourceId;
 
@@ -456,7 +456,7 @@ public class UpdateSource {
         public Future<UpdateCenterJob> deploy() {
             Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
             UpdateCenter uc = Hudson.getInstance().getUpdateCenter();
-            return uc.addJob(uc.new InstallationJob(this, UpdateSource.this, Hudson.getAuthentication()));
+            return uc.addJob(uc.new InstallationJob(this, UpdateSite.this, Hudson.getAuthentication()));
         }
 
         /**
@@ -470,7 +470,7 @@ public class UpdateSource {
 
     private static final long DAY = DAYS.toMillis(1);
 
-    private static final Logger LOGGER = Logger.getLogger(UpdateSource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UpdateSite.class.getName());
 
     public static boolean neverUpdate = Boolean.getBoolean(UpdateCenter.class.getName()+".never");
 

@@ -26,7 +26,7 @@ package hudson;
 import hudson.model.AbstractModelObject;
 import hudson.model.Failure;
 import hudson.model.Hudson;
-import hudson.model.UpdateSource;
+import hudson.model.UpdateSite;
 import hudson.model.UpdateCenter;
 import hudson.util.Service;
 import org.apache.commons.fileupload.FileItem;
@@ -40,7 +40,6 @@ import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.WebApp;
-import org.kohsuke.stapler.HttpResponses;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -384,7 +383,7 @@ public final class PluginManager extends AbstractModelObject {
                 n = n.substring(7);
                 if (n.indexOf(".") > 0) {
                     String[] pluginInfo = n.split("\\.");
-                    UpdateSource.Plugin p = Hudson.getInstance().getUpdateCenter().getById(pluginInfo[1]).getPlugin(pluginInfo[0]);
+                    UpdateSite.Plugin p = Hudson.getInstance().getUpdateCenter().getById(pluginInfo[1]).getPlugin(pluginInfo[0]);
                     if(p==null)
                         throw new Failure("No such plugin: "+n);
                     p.install();

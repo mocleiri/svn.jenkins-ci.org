@@ -33,8 +33,8 @@ import hudson.ProxyConfiguration;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.lifecycle.Lifecycle;
-import hudson.model.UpdateSource.Data;
-import hudson.model.UpdateSource.Plugin;
+import hudson.model.UpdateSite.Data;
+import hudson.model.UpdateSite.Plugin;
 import hudson.util.DaemonThreadFactory;
 import hudson.util.IOException2;
 import hudson.util.PersistedList;
@@ -102,15 +102,15 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     private final Vector<UpdateCenterJob> jobs = new Vector<UpdateCenterJob>();
 
     /**
-     * {@link UpdateSource}s from which we've already installed a plugin at least once.
+     * {@link UpdateSite}s from which we've already installed a plugin at least once.
      * This is used to skip network tests.
      */
-    private final Set<UpdateSource> sourcesUsed = new HashSet<UpdateSource>();
+    private final Set<UpdateSite> sourcesUsed = new HashSet<UpdateSite>();
 
     /**
-     * List of {@link UpdateSource}s to be used.
+     * List of {@link UpdateSite}s to be used.
      */
-    private final PersistedList<UpdateSource> sources = new PersistedList<UpdateSource>(this);
+    private final PersistedList<UpdateSite> sources = new PersistedList<UpdateSite>(this);
 
     /**
      * Update center configuration data
@@ -148,23 +148,23 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     }
 
     /**
-     * Returns the list of {@link UpdateSource}s to be used.
+     * Returns the list of {@link UpdateSite}s to be used.
      * This is a live list, whose change will be persisted automatically.
      *
      * @return
      *      can be empty but never null.
      */
-    public PersistedList<UpdateSource> getSources() {
+    public PersistedList<UpdateSite> getSources() {
         return sources;
     }
 
     /**
      * Gets the string representing how long ago the data was obtained.
-     * Will be the newest of all {@link UpdateSource}s.
+     * Will be the newest of all {@link UpdateSite}s.
      */
     public String getLastUpdatedString() {
         long newestTs = -1;
-        for (UpdateSource s : sources) {
+        for (UpdateSite s : sources) {
             if (s.getDataTimestamp()>newestTs) {
                 newestTs = s.getDataTimestamp();
             }
@@ -174,11 +174,11 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     }
 
     /**
-     * Gets {@link UpdateSource} by its ID.
+     * Gets {@link UpdateSite} by its ID.
      * Used to bind them to URL.
      */
-    public UpdateSource getById(String id) {
-        for (UpdateSource s : sources) {
+    public UpdateSite getById(String id) {
+        for (UpdateSite s : sources) {
             if (s.getId().equals(id)) {
                 return s;
             }
@@ -187,13 +187,13 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     }
 
     /**
-     * Gets the {@link UpdateSource} from which we receive updates for <tt>hudson.war</tt>.
+     * Gets the {@link UpdateSite} from which we receive updates for <tt>hudson.war</tt>.
      *
      * @return
      *      null if no such update center is provided.
      */
-    public UpdateSource getCoreSource() {
-        for (UpdateSource s : sources)
+    public UpdateSite getCoreSource() {
+        for (UpdateSite s : sources)
             if (s.getData().core!=null)
                 return s;
         return null;
@@ -211,10 +211,10 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     }
 
     /**
-     * Gets the plugin with the given name from the first {@link UpdateSource} to contain it.
+     * Gets the plugin with the given name from the first {@link UpdateSite} to contain it.
      */
     public Plugin getPlugin(String artifactId) {
-        for (UpdateSource s : sources) {
+        for (UpdateSite s : sources) {
             Plugin p = s.getPlugin(artifactId);
             if (p!=null) return p;
         }
@@ -240,8 +240,8 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
 
     /*package*/ synchronized Future<UpdateCenterJob> addJob(UpdateCenterJob job) {
         // the first job is always the connectivity check
-        if (sourcesUsed.add(job.source))
-            new ConnectionCheckJob(job.source).submit();
+        if (sourcesUsed.add(job.site))
+            new ConnectionCheckJob(job.site).submit();
         return job.submit();
     }
 
@@ -280,7 +280,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
             // If there aren't already any UpdateSources, add the default one.
             if (sources.isEmpty()) {
                 // to maintain compatibility with existing UpdateCenterConfiguration, create the default one as specified by UpdateCenterConfiguration
-                sources.add(new UpdateSource("default",config.getUpdateCenterUrl()+"update-center.json"));
+                sources.add(new UpdateSite("default",config.getUpdateCenterUrl()+"update-center.json"));
             }
         }
     }
@@ -293,7 +293,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public List<Plugin> getAvailables() {
         List<Plugin> plugins = new ArrayList<Plugin>();
 
-        for (UpdateSource s : sources) {
+        for (UpdateSite s : sources) {
             plugins.addAll(s.getAvailables());
         }
 
@@ -303,7 +303,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public List<Plugin> getUpdates() {
         List<Plugin> plugins = new ArrayList<Plugin>();
 
-        for (UpdateSource s : sources) {
+        for (UpdateSite s : sources) {
             plugins.addAll(s.getUpdates());
         }
 
@@ -322,7 +322,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         }
 
         public Data getData() {
-            UpdateSource cs = Hudson.getInstance().getUpdateCenter().getCoreSource();
+            UpdateSite cs = Hudson.getInstance().getUpdateCenter().getCoreSource();
             if (cs!=null)   return cs.getData();
             return null;
         }
@@ -336,10 +336,10 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      * Until 1.MULTIUPDATE, this extension point used to control the configuration of
      * where to get updates (hence the name of this class), but with the introduction
      * of multiple update center sites capability, that functionality is achieved by
-     * simply installing another {@link UpdateSource}.
+     * simply installing another {@link UpdateSite}.
      *
      * <p>
-     * See {@link UpdateSource} for how to manipulate them programmatically.
+     * See {@link UpdateSite} for how to manipulate them programmatically.
      *
      * @since 1.266
      */
@@ -489,7 +489,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
          *
          * @deprecated as of 1.MULTIUPDATE
          *      With the introduction of multiple update center capability, this information
-         *      is now moved to {@link UpdateSource}.
+         *      is now moved to {@link UpdateSite}.
          * @return
          *      Absolute URL that ends with '/'.
          */
@@ -528,12 +528,12 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      */
     public abstract class UpdateCenterJob implements Runnable {
         /**
-         * Which {@link UpdateSource} does this belong to?
+         * Which {@link UpdateSite} does this belong to?
          */
-        public final UpdateSource source;
+        public final UpdateSite site;
 
-        protected UpdateCenterJob(UpdateSource source) {
-            this.source = source;
+        protected UpdateCenterJob(UpdateSite site) {
+            this.site = site;
         }
 
         /**
@@ -562,14 +562,14 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public final class ConnectionCheckJob extends UpdateCenterJob {
         private final Vector<String> statuses= new Vector<String>();
 
-        public ConnectionCheckJob(UpdateSource source) {
-            super(source);
+        public ConnectionCheckJob(UpdateSite site) {
+            super(site);
         }
 
         public void run() {
             LOGGER.fine("Doing a connectivity check");
             try {
-                String connectionCheckUrl = source.getConnectionCheckUrl();
+                String connectionCheckUrl = site.getConnectionCheckUrl();
                 if (connectionCheckUrl!=null) {
                     statuses.add(Messages.UpdateCenter_Status_CheckingInternet());
                     try {
@@ -584,7 +584,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
                 }
                 
                 statuses.add(Messages.UpdateCenter_Status_CheckingJavaNet());
-                config.checkUpdateCenter(this, source.getUrl());
+                config.checkUpdateCenter(this, site.getUrl());
 
                 statuses.add(Messages.UpdateCenter_Status_Success());
             } catch (UnknownHostException e) {
@@ -647,8 +647,8 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
             return this.authentication;
         }
         
-        protected DownloadJob(UpdateSource source, Authentication authentication) {
-            super(source);
+        protected DownloadJob(UpdateSite site, Authentication authentication) {
+            super(site);
             this.authentication = authentication;
         }
         
@@ -755,8 +755,8 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
 
         private final PluginManager pm = Hudson.getInstance().getPluginManager();
 
-        public InstallationJob(Plugin plugin, UpdateSource source, Authentication auth) {
-            super(source, auth);
+        public InstallationJob(Plugin plugin, UpdateSite site, Authentication auth) {
+            super(site, auth);
             this.plugin = plugin;
         }
 
@@ -797,12 +797,12 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      * Represents the state of the upgrade activity of Hudson core.
      */
     public final class HudsonUpgradeJob extends DownloadJob {
-        public HudsonUpgradeJob(UpdateSource source, Authentication auth) {
-            super(source, auth);
+        public HudsonUpgradeJob(UpdateSite site, Authentication auth) {
+            super(site, auth);
         }
 
         protected URL getURL() throws MalformedURLException {
-            return new URL(source.getData().core.url);
+            return new URL(site.getData().core.url);
         }
 
         protected File getDestination() {
