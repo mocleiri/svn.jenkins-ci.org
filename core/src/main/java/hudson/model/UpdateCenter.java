@@ -199,10 +199,16 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     }
 
     /**
-     * Gets the default {@link UpdateSource}.
+     * Gets the {@link UpdateSource} from which we receive updates for <tt>hudson.war</tt>.
+     *
+     * @return
+     *      null if no such update center is provided.
      */
-    public UpdateSource getDefaultSource() {
-        return getById("default");
+    public UpdateSource getCoreSource() {
+        for (UpdateSource s : sources)
+            if (s.getData().core!=null)
+                return s;
+        return null;
     }
 
     /**
@@ -233,7 +239,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public void doUpgrade(StaplerResponse rsp) throws IOException, ServletException {
         requirePOST();
         Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
-        HudsonUpgradeJob job = new HudsonUpgradeJob(getDefaultSource(), Hudson.getAuthentication());
+        HudsonUpgradeJob job = new HudsonUpgradeJob(getCoreSource(), Hudson.getAuthentication());
         if(!Lifecycle.get().canRewriteHudsonWar()) {
             sendError("Hudson upgrade not supported in this running mode");
             return;
@@ -328,7 +334,9 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         }
 
         public Data getData() {
-            return Hudson.getInstance().getUpdateCenter().getDefaultSource().getData();
+            UpdateSource cs = Hudson.getInstance().getUpdateCenter().getCoreSource();
+            if (cs!=null)   return cs.getData();
+            return null;
         }
     }
 
