@@ -25,66 +25,47 @@
 
 package hudson.model;
 
-import hudson.ExtensionPoint;
-import hudson.Functions;
-import hudson.PluginManager;
 import hudson.PluginWrapper;
-import hudson.Util;
-import hudson.ProxyConfiguration;
-import hudson.Extension;
+import hudson.PluginManager;
+import hudson.model.UpdateCenter.UpdateCenterJob;
 import hudson.lifecycle.Lifecycle;
-import hudson.model.UpdateCenter.UpdateCenterConfiguration;
-import hudson.model.UpdateCenter.Data;
-import hudson.model.UpdateCenter.Entry;
-import hudson.model.UpdateCenter.Plugin;
-import hudson.util.DaemonThreadFactory;
 import hudson.util.TextFile;
 import hudson.util.VersionNumber;
-import hudson.util.IOException2;
 import static hudson.util.TimeUnit2.DAYS;
 import net.sf.json.JSONObject;
-import org.acegisecurity.Authentication;
-import org.apache.commons.io.input.CountingInputStream;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.NullOutputStream;
-import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.StaplerResponse;
 
-import javax.servlet.ServletException;
-import javax.net.ssl.SSLHandshakeException;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.UnknownHostException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.Vector;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
+import java.util.Set;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-
+/**
+ * Source of the update center information, like "http://hudson-ci.org/update-center.json"
+ *
+ * <p>
+ * Hudson can have multiple {@link UpdateSource}s registered in the system, so that it can pick up plugins
+ * from different locations.
+ *
+ * @author Andrew Bayer
+ * @author Kohsuke Kawaguchi
+ * @since 1.MULTIUPDATE
+ */
 public class UpdateSource {
     /**
      * What's the time stamp of data file?
      */
-    private long dataTimestamp = -1;
+    private transient long dataTimestamp = -1;
 
     /**
      * When was the last time we asked a browser to check the data for us?
@@ -94,103 +75,40 @@ public class UpdateSource {
      * until we get the data back, so this variable is used to avoid asking too many browseres
      * all at once.
      */
-    private volatile long lastAttempt = -1;
-
-    /**
-     * Update center configuration data
-     */
-    private transient UpdateCenterConfiguration config;
+    private transient volatile long lastAttempt = -1;
 
     /**
      * ID string for this update source.
      */
-    private final String updateId;
+    private final String id;
 
-    private final String connectionCheckUrl;
-    private final String updateCenterUrl;
-    private final String pluginRepositoryBaseUrl;
-    private final String dataFilePrefix;
-    
-    public UpdateSource() {
-        this("default",
-             "http://www.google.com",
-             "http://hudson-ci.org/",
-             "http://hudson-ci.org/",
-             "");
+    /**
+     * Path to <tt>update-center.json</tt>, like <tt>http://hudson-ci.org/update-center.json</tt>.
+     */
+    private final String url;
+
+    public UpdateSource(String id, String url) {
+        this.id = id;
+        this.url = url;
     }
 
-    public UpdateSource(final String updateId,
-                        final String updateCenterUrl) {
-        this(updateId,
-             "http://www.google.com",
-             updateCenterUrl,
-             updateCenterUrl,
-             "");
-    }
-    
-    public UpdateSource(final String updateId,
-                        final String connectionCheckUrl,
-                        final String updateCenterUrl,
-                        final String pluginRepositoryBaseUrl,
-                        final String dataFilePrefix) {
-        this.connectionCheckUrl = connectionCheckUrl;
-        this.updateCenterUrl = updateCenterUrl;
-        this.pluginRepositoryBaseUrl = pluginRepositoryBaseUrl;
-        this.dataFilePrefix = dataFilePrefix;
-        this.updateId = updateId;
-        initialize();
-    }
-    
-    public void initialize() {
-        configure(new UpdateCenterConfiguration() {
-                public String getDataFilePrefix() {
-                    return dataFilePrefix;
-                }
-
-                public String getConnectionCheckUrl() {
-                    return connectionCheckUrl;
-                }
-
-                public String getUpdateCenterUrl() {
-                    return updateCenterUrl;
-                }
-
-                public String getPluginRepositoryBaseUrl() {
-                    return pluginRepositoryBaseUrl;
-                }
-            });
+    /**
+     * When read back from XML, initialize them back to -1.
+     */
+    private Object readResolve() {
+        dataTimestamp = lastAttempt = -1;
+        return this;
     }
 
     /**
      * Get ID string.
      */
     public String getId() {
-        return updateId;
+        return id;
     }
 
     public long getDataTimestamp() {
         return dataTimestamp;
-    }
-
-    /**
-     * Gets the {@link UpdateCenterConfiguration} for this source.
-     */
-    public UpdateCenterConfiguration getConfiguration() {
-        return config;
-    }
-
-    /**
-     * Configures update center to get plugins/updates from alternate servers,
-     * and optionally using alternate strategies for downloading, installing
-     * and upgrading.
-     * 
-     * @param config Configuration data
-     * @see UpdateCenterConfiguration
-     */
-    public void configure(UpdateCenterConfiguration config) {
-        if (config!=null) {
-            this.config = config;
-        }
     }
 
     /**
@@ -206,7 +124,7 @@ public class UpdateSource {
             return;
         }
 
-        LOGGER.info("Obtained the latest update center data file for UpdateSource "+updateId);
+        LOGGER.info("Obtained the latest update center data file for UpdateSource "+ id);
         getDataFile().write(json);
     }
 
@@ -233,7 +151,7 @@ public class UpdateSource {
         TextFile df = getDataFile();
         if(df.exists()) {
             try {
-                return Hudson.getInstance().getUpdateCenter().new Data(updateId, JSONObject.fromObject(df.read()));
+                return new Data(JSONObject.fromObject(df.read()));
             } catch (IOException e) {
                 LOGGER.log(Level.SEVERE,"Failed to parse "+df,e);
                 df.delete(); // if we keep this file, it will cause repeated failures
@@ -273,13 +191,22 @@ public class UpdateSource {
         if(dt==null)    return null;
         return dt.plugins.get(artifactId);
     }
-    
+
+    /**
+     * Returns an "always up" server for Internet connectivity testing, or null if we are going to skip the test.
+     */
+    public String getConnectionCheckUrl() {
+        Data dt = getData();
+        if(dt==null)    return "http://www.google.com/";
+        return dt.connectionCheckUrl;
+    }
+
     /**
      * This is where we store the update center data.
      */
     private TextFile getDataFile() {
         return new TextFile(new File(Hudson.getInstance().getRootDir(),
-                                     "updates/" + config.getDataFileName()));
+                                     "updates/" + getId()+".json"));
     }
     
     /**
@@ -323,15 +250,222 @@ public class UpdateSource {
      * in Javascript.
      */
     public String getUrl() {
-        return config.getUpdateCenterUrl() + config.getDataFileName();
+        return url;
     }
-    
+
     /**
-     * Exposed to get rid of hardcoding of the URL that serves up update-center.json
-     * in Javascript.
+     * In-memory representation of the update center data.
      */
-    public String getUpdateFileName() {
-        return config.getDataFileName();
+    public final class Data {
+        /**
+         * The {@link UpdateSource} ID.
+         */
+        public final String sourceId;
+
+        /**
+         * The latest hudson.war.
+         */
+        public final Entry core;
+        /**
+         * Plugins in the repository, keyed by their artifact IDs.
+         */
+        public final Map<String,Plugin> plugins = new TreeMap<String,Plugin>(String.CASE_INSENSITIVE_ORDER);
+
+        /**
+         * If this is non-null, Hudson is going to check the connectivity to this URL to make sure
+         * the network connection is up. Null to skip the check.
+         */
+        public final String connectionCheckUrl;
+
+        Data(JSONObject o) {
+            this.sourceId = (String)o.get("id");
+            if (sourceId.equals("default")) {
+                core = new Entry(sourceId, o.getJSONObject("core"));
+            }
+            else {
+                core = null;
+            }
+            for(Map.Entry<String,JSONObject> e : (Set<Map.Entry<String,JSONObject>>)o.getJSONObject("plugins").entrySet()) {
+                plugins.put(e.getKey(),new Plugin(sourceId, e.getValue()));
+            }
+
+            connectionCheckUrl = (String)o.get("connectionCheckUrl");
+        }
+
+        /**
+         * Is there a new version of the core?
+         */
+        public boolean hasCoreUpdates() {
+            return core != null && core.isNewerThan(Hudson.VERSION);
+        }
+
+        /**
+         * Do we support upgrade?
+         */
+        public boolean canUpgrade() {
+            return Lifecycle.get().canRewriteHudsonWar();
+        }
+    }
+
+    public static class Entry {
+        /**
+         * {@link UpdateSource} ID.
+         */
+        public final String sourceId;
+
+        /**
+         * Artifact ID.
+         */
+        public final String name;
+        /**
+         * The version.
+         */
+        public final String version;
+        /**
+         * Download URL.
+         */
+        public final String url;
+
+        public Entry(String sourceId, JSONObject o) {
+            this.sourceId = sourceId;
+            this.name = o.getString("name");
+            this.version = o.getString("version");
+            this.url = o.getString("url");
+        }
+
+        /**
+         * Checks if the specified "current version" is older than the version of this entry.
+         *
+         * @param currentVersion
+         *      The string that represents the version number to be compared.
+         * @return
+         *      true if the version listed in this entry is newer.
+         *      false otherwise, including the situation where the strings couldn't be parsed as version numbers.
+         */
+        public boolean isNewerThan(String currentVersion) {
+	        return isNewerThan(currentVersion, version);
+	    }
+
+        /**
+         * Compares two versions - returns true if the first version is newer than the second.
+         *
+         * @param firstVersion
+         *      The first version to test against.
+         * @param secondVersion
+         *      The second version to test against.
+         * @return
+         *      True if the first version is newer than the second version. False in all other cases.
+         */
+        private static boolean isNewerThan(String firstVersion, String secondVersion) {
+            try {
+                return new VersionNumber(firstVersion).compareTo(new VersionNumber(secondVersion)) < 0;
+            } catch (IllegalArgumentException e) {
+                // couldn't parse as the version number.
+                return false;
+            }
+        }
+    }
+
+    public final class Plugin extends Entry {
+        /**
+         * Optional URL to the Wiki page that discusses this plugin.
+         */
+        public final String wiki;
+        /**
+         * Human readable title of the plugin, taken from Wiki page.
+         * Can be null.
+         *
+         * <p>
+         * beware of XSS vulnerability since this data comes from Wiki
+         */
+        public final String title;
+        /**
+         * Optional excerpt string.
+         */
+        public final String excerpt;
+        /**
+         * Optional version # from which this plugin release is configuration-compatible.
+         */
+        public final String compatibleSinceVersion;
+
+        @DataBoundConstructor
+        public Plugin(String sourceId, JSONObject o) {
+            super(sourceId, o);
+            this.wiki = get(o,"wiki");
+            this.title = get(o,"title");
+            this.excerpt = get(o,"excerpt");
+            this.compatibleSinceVersion = get(o,"compatibleSinceVersion");
+        }
+
+        private String get(JSONObject o, String prop) {
+            if(o.has(prop))
+                return o.getString(prop);
+            else
+                return null;
+        }
+
+        public String getDisplayName() {
+            if(title!=null) return title;
+            return name;
+        }
+
+        /**
+         * If some version of this plugin is currently installed, return {@link PluginWrapper}.
+         * Otherwise null.
+         */
+        public PluginWrapper getInstalled() {
+            PluginManager pm = Hudson.getInstance().getPluginManager();
+            return pm.getPlugin(name);
+        }
+
+        /**
+         * If the plugin is already installed, and the new version of the plugin has a "compatibleSinceVersion"
+         * value (i.e., it's only directly compatible with that version or later), this will check to
+         * see if the installed version is older than the compatible-since version. If it is older, it'll return false.
+         * If it's not older, or it's not installed, or it's installed but there's no compatibleSinceVersion
+         * specified, it'll return true.
+         */
+        public boolean isCompatibleWithInstalledVersion() {
+            PluginWrapper installedVersion = getInstalled();
+            if (installedVersion != null) {
+                if (compatibleSinceVersion != null) {
+                    if (new VersionNumber(installedVersion.getVersion())
+                            .isOlderThan(new VersionNumber(compatibleSinceVersion))) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /**
+         * @deprecated as of 1.326
+         *      Use {@link #deploy()}.
+         */
+        public void install() {
+            deploy();
+        }
+
+        /**
+         * Schedules the installation of this plugin.
+         *
+         * <p>
+         * This is mainly intended to be called from the UI. The actual installation work happens
+         * asynchronously in another thread.
+         */
+        public Future<UpdateCenterJob> deploy() {
+            Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+            UpdateCenter uc = Hudson.getInstance().getUpdateCenter();
+            return uc.addJob(uc.new InstallationJob(this, UpdateSource.this, Hudson.getAuthentication()));
+        }
+
+        /**
+         * Making the installation web bound.
+         */
+        public void doInstall(StaplerResponse rsp) throws IOException {
+            deploy();
+            rsp.sendRedirect2("../..");
+        }
     }
 
     private static final long DAY = DAYS.toMillis(1);
