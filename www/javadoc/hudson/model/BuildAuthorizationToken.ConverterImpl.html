@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildAuthorizationToken.ConverterImpl (Hudson main module 1.330 API)
+BuildAuthorizationToken.ConverterImpl (Hudson main module 1.331 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-23">
+<META NAME="date" CONTENT="2009-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildAuthorizationToken.ConverterImpl (Hudson main module 1.330 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildAuthorizationToken.ConverterImpl (Hudson main module 1.330 API)";
+        parent.document.title="BuildAuthorizationToken.ConverterImpl (Hudson main module 1.331 API)";
     }
 }
 </SCRIPT>
@@ -94,18 +94,18 @@ hudson.model</FONT>
 Class BuildAuthorizationToken.ConverterImpl</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by ">com.thoughtworks.xstream.converters.basic.AbstractBasicConverter
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by ">com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.BuildAuthorizationToken.ConverterImpl</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>com.thoughtworks.xstream.converters.Converter, com.thoughtworks.xstream.converters.ConverterMatcher</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>com.thoughtworks.xstream.converters.ConverterMatcher, com.thoughtworks.xstream.converters.SingleValueConverter</DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/model/BuildAuthorizationToken.html" title="class in hudson.model">BuildAuthorizationToken</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static final class <B>BuildAuthorizationToken.ConverterImpl</B><DT>extends com.thoughtworks.xstream.converters.basic.AbstractBasicConverter</DL>
+<DT><PRE>public static final class <B>BuildAuthorizationToken.ConverterImpl</B><DT>extends com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter</DL>
 </PRE>
 
 <P>
@@ -147,7 +147,7 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.lang.Object</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/BuildAuthorizationToken.ConverterImpl.html#fromString(java.lang.String)">fromString</A></B>(java.lang.String&nbsp;str)</CODE>
 
 <BR>
@@ -155,20 +155,11 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/BuildAuthorizationToken.ConverterImpl.html#toString(java.lang.Object)">toString</A></B>(java.lang.Object&nbsp;obj)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_com.thoughtworks.xstream.converters.basic.AbstractBasicConverter"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class com.thoughtworks.xstream.converters.basic.AbstractBasicConverter</B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>marshal, unmarshal</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -216,7 +207,7 @@ canConvert</H3>
 public boolean <B>canConvert</B>(java.lang.Class&nbsp;type)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>canConvert</CODE> in interface <CODE>com.thoughtworks.xstream.converters.ConverterMatcher</CODE><DT><B>Specified by:</B><DD><CODE>canConvert</CODE> in class <CODE>com.thoughtworks.xstream.converters.basic.AbstractBasicConverter</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>canConvert</CODE> in interface <CODE>com.thoughtworks.xstream.converters.ConverterMatcher</CODE><DT><B>Specified by:</B><DD><CODE>canConvert</CODE> in class <CODE>com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -227,10 +218,10 @@ public boolean <B>canConvert</B>(java.lang.Class&nbsp;type)</PRE>
 <A NAME="fromString(java.lang.String)"><!-- --></A><H3>
 fromString</H3>
 <PRE>
-protected java.lang.Object <B>fromString</B>(java.lang.String&nbsp;str)</PRE>
+public java.lang.Object <B>fromString</B>(java.lang.String&nbsp;str)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>fromString</CODE> in class <CODE>com.thoughtworks.xstream.converters.basic.AbstractBasicConverter</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>fromString</CODE> in interface <CODE>com.thoughtworks.xstream.converters.SingleValueConverter</CODE><DT><B>Specified by:</B><DD><CODE>fromString</CODE> in class <CODE>com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -241,10 +232,10 @@ protected java.lang.Object <B>fromString</B>(java.lang.String&nbsp;str)</PRE>
 <A NAME="toString(java.lang.Object)"><!-- --></A><H3>
 toString</H3>
 <PRE>
-protected java.lang.String <B>toString</B>(java.lang.Object&nbsp;obj)</PRE>
+public java.lang.String <B>toString</B>(java.lang.Object&nbsp;obj)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>com.thoughtworks.xstream.converters.basic.AbstractBasicConverter</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>toString</CODE> in interface <CODE>com.thoughtworks.xstream.converters.SingleValueConverter</CODE><DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

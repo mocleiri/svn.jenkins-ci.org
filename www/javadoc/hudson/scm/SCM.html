@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCM (Hudson main module 1.330 API)
+SCM (Hudson main module 1.331 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-23">
+<META NAME="date" CONTENT="2009-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCM (Hudson main module 1.330 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCM (Hudson main module 1.330 API)";
+        parent.document.title="SCM (Hudson main module 1.331 API)";
     }
 }
 </SCRIPT>
@@ -262,6 +262,14 @@ Captures the configuration information in it.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#getApi()">getApi</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expose <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> to the remote API.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SCM.html#getBrowser()">getBrowser</A></B>()</CODE>
 
@@ -301,6 +309,14 @@ Captures the configuration information in it.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the top directories of all the checked out modules.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#getType()">getType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type of this SCM.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -421,10 +437,27 @@ public <B>SCM</B>()</PRE>
 </TR>
 </TABLE>
 
+<A NAME="getApi()"><!-- --></A><H3>
+getApi</H3>
+<PRE>
+public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+<DL>
+<DD>Expose <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> to the remote API.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getBrowser()"><!-- --></A><H3>
 getBrowser</H3>
 <PRE>
-public <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A> <B>getBrowser</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A> <B>getBrowser</B>()</PRE>
 <DL>
 <DD>Returns the <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> for files
  controlled by this <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.
@@ -440,10 +473,30 @@ public <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.
 </DL>
 <HR>
 
+<A NAME="getType()"><!-- --></A><H3>
+getType</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public java.lang.String <B>getType</B>()</PRE>
+<DL>
+<DD>Type of this SCM.
+
+ Exposed so that the client of the remote API can tell what SCM this is.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getEffectiveBrowser()"><!-- --></A><H3>
 getEffectiveBrowser</H3>
 <PRE>
-public final <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A> <B>getEffectiveBrowser</B>()</PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public final <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A> <B>getEffectiveBrowser</B>()</PRE>
 <DL>
 <DD>Returns the applicable <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> for files
  controlled by this <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.

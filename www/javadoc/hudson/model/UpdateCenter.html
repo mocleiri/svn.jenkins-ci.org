@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter (Hudson main module 1.330 API)
+UpdateCenter (Hudson main module 1.331 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-23">
+<META NAME="date" CONTENT="2009-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter (Hudson main module 1.330 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter (Hudson main module 1.330 API)";
+        parent.document.title="UpdateCenter (Hudson main module 1.331 API)";
     }
 }
 </SCRIPT>
@@ -241,6 +241,14 @@ Controls update center capability.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#signatureCheck">signatureCheck</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Off by default until we know this is reasonably working.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -422,6 +430,18 @@ public static boolean <B>neverUpdate</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="signatureCheck"><!-- --></A><H3>
+signatureCheck</H3>
+<PRE>
+public static boolean <B>signatureCheck</B></PRE>
+<DL>
+<DD>Off by default until we know this is reasonably working.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -511,14 +531,16 @@ public java.lang.String <B>getLastUpdatedString</B>()</PRE>
 doPostBack</H3>
 <PRE>
 public void <B>doPostBack</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
-                throws java.io.IOException</PRE>
+                throws java.io.IOException,
+                       java.security.GeneralSecurityException</PRE>
 <DL>
 <DD>This is the endpoint that receives the update center data file from the browser.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.security.GeneralSecurityException</CODE></DL>
 </DD>
 </DL>
 <HR>

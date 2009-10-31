@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.330 API)
+HudsonTestCase (Hudson main module 1.331 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-23">
+<META NAME="date" CONTENT="2009-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.330 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.330 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.331 API)";
     }
 }
 </SCRIPT>
@@ -117,7 +117,7 @@ Base class for all Hudson test cases.
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-<DT><B>See Also:</B><DD><a href="http://hudson.gotdns.com/wiki/display/HUDSON/Unit+Test">Wiki article about unit testing in Hudson</a></DL>
+<DT><B>See Also:</B><DD><a href="http://wiki.hudson-ci.org/wiki/display/HUDSON/Unit+Test">Wiki article about unit testing in Hudson</a></DL>
 <HR>
 
 <P>
@@ -229,6 +229,14 @@ Base class for all Hudson test cases.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#SLAVE_DEBUG_PORT">SLAVE_DEBUG_PORT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify this to a TCP/IP port number to have slaves started with the debugger.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -873,6 +881,18 @@ NO_PROPERTIES</H3>
 <PRE>
 protected static final java.util.List&lt;<A HREF="../../../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt; <B>NO_PROPERTIES</B></PRE>
 <DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SLAVE_DEBUG_PORT"><!-- --></A><H3>
+SLAVE_DEBUG_PORT</H3>
+<PRE>
+public static int <B>SLAVE_DEBUG_PORT</B></PRE>
+<DL>
+<DD>Specify this to a TCP/IP port number to have slaves started with the debugger.
+<P>
 <DL>
 </DL>
 </DL>

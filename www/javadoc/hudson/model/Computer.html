@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Computer (Hudson main module 1.330 API)
+Computer (Hudson main module 1.331 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-10-23">
+<META NAME="date" CONTENT="2009-10-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson main module 1.330 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson main module 1.330 API)";
+        parent.document.title="Computer (Hudson main module 1.331 API)";
     }
 }
 </SCRIPT>
@@ -390,10 +390,8 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)">doToggleOffline</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                java.lang.String&nbsp;offlineMessage)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doToggleOffline(java.lang.String)">doToggleOffline</A></B>(java.lang.String&nbsp;offlineMessage)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2090,15 +2088,13 @@ public void <B>doRssFailed</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doToggleOffline(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String)"><!-- --></A><H3>
+<A NAME="doToggleOffline(java.lang.String)"><!-- --></A><H3>
 doToggleOffline</H3>
 <PRE>
-public void <B>doToggleOffline</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                            <FONT SIZE="-1">@QueryParameter</FONT>
-                            java.lang.String&nbsp;offlineMessage)
-                     throws java.io.IOException,
-                            javax.servlet.ServletException</PRE>
+public org.kohsuke.stapler.HttpResponse <B>doToggleOffline</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                                        java.lang.String&nbsp;offlineMessage)
+                                                 throws java.io.IOException,
+                                                        javax.servlet.ServletException</PRE>
 <DL>
 <DD><DL>
 </DL>
