@@ -41,6 +41,10 @@
     (<a href="https://hudson-dev.java.net/issues/show_bug.cgi?id=4553">issue 4553</a>)
   <li class=rfe>
     Added "delete-builds" CLI command for bulk build record deletion.
+  <li class='major bug'>
+    Fixed another <tt>NotExportableException</tt> when making a remote API call on a project.
+    Broke NetBeans integration and possibly others.
+    (<a href="https://hudson-dev.java.net/issues/show_bug.cgi?id=4760">issue 4760</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
@@ -54,7 +58,7 @@
   <li class=bug>
     Fixed a regression in 1.331 where previously disabled plugins and their artifacts in <tt>build.xml</tt> can cause build records to fail to load.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4752">issue 4752</a>)
-  <li class=bug>
+  <li class='major bug'>
     Fixed <tt>NotExportableException</tt> when making a remote API call on a project.
     (<a href="https://hudson.dev.java.net/servlets/BrowseList?list=users&by=thread&from=2222483">report</a>)
   <li class=bug>
