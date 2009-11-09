@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.332 API)
+Hudson (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.332 API)";
+        parent.document.title="Hudson (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -831,6 +831,24 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perform a restart of Hudson, if we can.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doSafeExit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSafeExit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shutdown the system safely.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doSafeRestart(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSafeRestart</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queues up a restart of Hudson for when there are no builds running, if we can.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2010,6 +2028,14 @@ java.util.List&lt;P&gt;</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a restart.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#safeRestart()">safeRestart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queues up a restart to be performed once there are no builds currently running.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -5311,6 +5337,32 @@ public void <B>doRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
+<A NAME="doSafeRestart(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doSafeRestart</H3>
+<PRE>
+public void <B>doSafeRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                   throws java.io.IOException,
+                          javax.servlet.ServletException</PRE>
+<DL>
+<DD>Queues up a restart of Hudson for when there are no builds running, if we can.
+
+ This first replaces "app" to <A HREF="../../hudson/util/HudsonIsRestarting.html" title="class in hudson.util"><CODE>HudsonIsRestarting</CODE></A>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE><DT><B>Since:</B></DT>
+  <DD>1.332</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="restart()"><!-- --></A><H3>
 restart</H3>
 <PRE>
@@ -5323,6 +5375,25 @@ restart</H3>
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="safeRestart()"><!-- --></A><H3>
+safeRestart</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="safe-restart")
+</FONT>public void <B>safeRestart</B>()</PRE>
+<DL>
+<DD>Queues up a restart to be performed once there are no builds currently running.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.332</DD>
 </DL>
 </DD>
 </DL>
@@ -5345,6 +5416,28 @@ public void <B>doExit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
   <DD>1.161</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doSafeExit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doSafeExit</H3>
+<PRE>
+public void <B>doSafeExit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                throws java.io.IOException</PRE>
+<DL>
+<DD>Shutdown the system safely.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+  <DD>1.332</DD>
 </DL>
 </DD>
 </DL>

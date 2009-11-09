@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.332 API)
+UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.332 API)";
+        parent.document.title="UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.UpdateCenterConfiguration.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -108,11 +108,16 @@ java.lang.Object
 </PRE>
 
 <P>
-Configuration data for controlling the update center's behaviors. The update
- center's defaults will check internet connectivity by trying to connect
- to www.google.com; will download plugins, the plugin catalog and updates
- from hudson-ci.org; and will install plugins with file system
- operations.
+Strategy object for controlling the update center's behaviors.
+
+ <p>
+ Until 1.MULTIUPDATE, this extension point used to control the configuration of
+ where to get updates (hence the name of this class), but with the introduction
+ of multiple update center sites capability, that functionality is achieved by
+ simply installing another <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>.
+
+ <p>
+ See <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> for how to manipulate them programmatically.
 <P>
 
 <P>
@@ -155,7 +160,7 @@ Configuration data for controlling the update center's behaviors. The update
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#UpdateCenter.UpdateCenterConfiguration()">UpdateCenter.UpdateCenterConfiguration</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates default update center configuration - uses settings for global update center.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -202,7 +207,10 @@ Configuration data for controlling the update center's behaviors. The update
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getConnectionCheckUrl()">getConnectionCheckUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an "always up" server for Internet connectivity testing</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.MULTIUPDATE
+      With the introduction of multiple update center capability, this information
+      is now a part of the <tt>update-center.json</tt> file. See
+      <tt>http://hudson-ci.org/update-center.json</tt> as an example.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -210,7 +218,9 @@ Configuration data for controlling the update center's behaviors. The update
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getPluginRepositoryBaseUrl()">getPluginRepositoryBaseUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of the server that hosts plugins and core updates.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.MULTIUPDATE
+      <tt>update-center.json</tt> is now signed, so we don't have to further make sure that
+      we aren't downloading from anywhere unsecure.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -218,8 +228,9 @@ Configuration data for controlling the update center's behaviors. The update
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getUpdateCenterUrl()">getUpdateCenterUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of the server that hosts the update-center.json
- file.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.MULTIUPDATE
+      With the introduction of multiple update center capability, this information
+      is now moved to <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -290,6 +301,8 @@ UpdateCenter.UpdateCenterConfiguration</H3>
 <PRE>
 public <B>UpdateCenter.UpdateCenterConfiguration</B>()</PRE>
 <DL>
+<DD>Creates default update center configuration - uses settings for global update center.
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -351,9 +364,7 @@ public void <B>preValidate</B>(<A HREF="../../hudson/model/UpdateCenter.Download
                         java.net.URL&nbsp;src)
                  throws java.io.IOException</PRE>
 <DL>
-<DD>Validate the URL of the resource before downloading it. The default
- implementation enforces that the base of the resource URL starts
- with the string returned by <A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getPluginRepositoryBaseUrl()"><CODE>getPluginRepositoryBaseUrl()</CODE></A>.
+<DD>Validate the URL of the resource before downloading it.
 <P>
 <DD><DL>
 </DL>
@@ -463,7 +474,12 @@ getConnectionCheckUrl</H3>
 <PRE>
 public java.lang.String <B>getConnectionCheckUrl</B>()</PRE>
 <DL>
-<DD>Returns an "always up" server for Internet connectivity testing
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.MULTIUPDATE
+      With the introduction of multiple update center capability, this information
+      is now a part of the <tt>update-center.json</tt> file. See
+      <tt>http://hudson-ci.org/update-center.json</tt> as an example.</I>
+<P>
+<DD>Returns an "always up" server for Internet connectivity testing.
 <P>
 <DD><DL>
 </DL>
@@ -479,6 +495,10 @@ getUpdateCenterUrl</H3>
 <PRE>
 public java.lang.String <B>getUpdateCenterUrl</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.MULTIUPDATE
+      With the introduction of multiple update center capability, this information
+      is now moved to <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>.</I>
+<P>
 <DD>Returns the URL of the server that hosts the update-center.json
  file.
 <P>
@@ -497,6 +517,10 @@ getPluginRepositoryBaseUrl</H3>
 <PRE>
 public java.lang.String <B>getPluginRepositoryBaseUrl</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.MULTIUPDATE
+      <tt>update-center.json</tt> is now signed, so we don't have to further make sure that
+      we aren't downloading from anywhere unsecure.</I>
+<P>
 <DD>Returns the URL of the server that hosts plugins and core updates.
 <P>
 <DD><DL>
@@ -537,7 +561,7 @@ public java.lang.String <B>getPluginRepositoryBaseUrl</B>()</PRE>
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.UpdateCenterConfiguration.html" target="_top"><B>FRAMES</B></A>  &nbsp;

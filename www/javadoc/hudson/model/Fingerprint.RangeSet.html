@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Fingerprint.RangeSet (Hudson main module 1.332 API)
+Fingerprint.RangeSet (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Fingerprint.RangeSet (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Fingerprint.RangeSet (Hudson main module 1.332 API)";
+        parent.document.title="Fingerprint.RangeSet (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -153,6 +153,15 @@ Set of <A HREF="../../hudson/model/Fingerprint.Range.html" title="class in hudso
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expands the range set to include the given value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Fingerprint.RangeSet.html#fromString(java.lang.String, boolean)">fromString</A></B>(java.lang.String&nbsp;list,
+           boolean&nbsp;skipError)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parses a <A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><CODE>Fingerprint.RangeSet</CODE></A> from a string like "1-3,5,7-9"</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -408,6 +417,20 @@ public boolean <B>isSmallerThan</B>(int&nbsp;n)</PRE>
  but {[1,3),[100,105)} is not smaller than anything less than 105.
 
  Note that {} is smaller than any n.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="fromString(java.lang.String, boolean)"><!-- --></A><H3>
+fromString</H3>
+<PRE>
+public static <A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A> <B>fromString</B>(java.lang.String&nbsp;list,
+                                              boolean&nbsp;skipError)</PRE>
+<DL>
+<DD>Parses a <A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><CODE>Fingerprint.RangeSet</CODE></A> from a string like "1-3,5,7-9"
 <P>
 <DD><DL>
 </DL>

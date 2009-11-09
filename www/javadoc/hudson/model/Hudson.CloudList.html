@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson.CloudList (Hudson main module 1.332 API)
+Hudson.CloudList (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson.CloudList (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson.CloudList (Hudson main module 1.332 API)";
+        parent.document.title="Hudson.CloudList (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.util.DescribableList">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.util.DescribableList">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.util.PersistedList">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -94,8 +94,9 @@ hudson.model</FONT>
 Class Hudson.CloudList</H2>
 <PRE>
 java.lang.Object
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">hudson.util.DescribableList</A>&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt;
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Hudson.CloudList</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/util/PersistedList.html" title="class in hudson.util">hudson.util.PersistedList</A>&lt;T&gt;
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">hudson.util.DescribableList</A>&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt;
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Hudson.CloudList</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;</DD>
@@ -131,7 +132,25 @@ java.lang.Object
 </TR>
 </TABLE>
 &nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
 
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.util.PersistedList"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.util.<A HREF="../../hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/util/PersistedList.html#data">data</A>, <A HREF="../../hudson/util/PersistedList.html#owner">owner</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -177,7 +196,16 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.util.<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/util/DescribableList.html#add(T)">add</A>, <A HREF="../../hudson/util/DescribableList.html#addAll(java.util.Collection)">addAll</A>, <A HREF="../../hudson/util/DescribableList.html#addAllTo(java.util.Collection)">addAllTo</A>, <A HREF="../../hudson/util/DescribableList.html#buildDependencyGraph(hudson.model.AbstractProject, hudson.model.DependencyGraph)">buildDependencyGraph</A>, <A HREF="../../hudson/util/DescribableList.html#clear()">clear</A>, <A HREF="../../hudson/util/DescribableList.html#contains(D)">contains</A>, <A HREF="../../hudson/util/DescribableList.html#get(java.lang.Class)">get</A>, <A HREF="../../hudson/util/DescribableList.html#get(D)">get</A>, <A HREF="../../hudson/util/DescribableList.html#getAll(java.lang.Class)">getAll</A>, <A HREF="../../hudson/util/DescribableList.html#iterator()">iterator</A>, <A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)">rebuild</A>, <A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List, java.lang.String)">rebuild</A>, <A HREF="../../hudson/util/DescribableList.html#rebuildHetero(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.Collection, java.lang.String)">rebuildHetero</A>, <A HREF="../../hudson/util/DescribableList.html#remove(java.lang.Class)">remove</A>, <A HREF="../../hudson/util/DescribableList.html#remove(D)">remove</A>, <A HREF="../../hudson/util/DescribableList.html#removeAll(java.lang.Class)">removeAll</A>, <A HREF="../../hudson/util/DescribableList.html#replace(T)">replace</A>, <A HREF="../../hudson/util/DescribableList.html#replaceBy(java.util.Collection)">replaceBy</A>, <A HREF="../../hudson/util/DescribableList.html#setOwner(hudson.util.DescribableList.Owner)">setOwner</A>, <A HREF="../../hudson/util/DescribableList.html#setOwner(hudson.model.Saveable)">setOwner</A>, <A HREF="../../hudson/util/DescribableList.html#size()">size</A>, <A HREF="../../hudson/util/DescribableList.html#toArray(T[])">toArray</A>, <A HREF="../../hudson/util/DescribableList.html#toList()">toList</A>, <A HREF="../../hudson/util/DescribableList.html#toMap()">toMap</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/util/DescribableList.html#buildDependencyGraph(hudson.model.AbstractProject, hudson.model.DependencyGraph)">buildDependencyGraph</A>, <A HREF="../../hudson/util/DescribableList.html#contains(D)">contains</A>, <A HREF="../../hudson/util/DescribableList.html#get(java.lang.Class)">get</A>, <A HREF="../../hudson/util/DescribableList.html#get(D)">get</A>, <A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)">rebuild</A>, <A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List, java.lang.String)">rebuild</A>, <A HREF="../../hudson/util/DescribableList.html#rebuildHetero(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.Collection, java.lang.String)">rebuildHetero</A>, <A HREF="../../hudson/util/DescribableList.html#remove(D)">remove</A>, <A HREF="../../hudson/util/DescribableList.html#replace(T)">replace</A>, <A HREF="../../hudson/util/DescribableList.html#setOwner(hudson.util.DescribableList.Owner)">setOwner</A>, <A HREF="../../hudson/util/DescribableList.html#toArray(T[])">toArray</A>, <A HREF="../../hudson/util/DescribableList.html#toMap()">toMap</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.util.PersistedList"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.util.<A HREF="../../hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/util/PersistedList.html#add(T)">add</A>, <A HREF="../../hudson/util/PersistedList.html#addAll(java.util.Collection)">addAll</A>, <A HREF="../../hudson/util/PersistedList.html#addAllTo(java.util.Collection)">addAllTo</A>, <A HREF="../../hudson/util/PersistedList.html#clear()">clear</A>, <A HREF="../../hudson/util/PersistedList.html#getAll(java.lang.Class)">getAll</A>, <A HREF="../../hudson/util/PersistedList.html#isEmpty()">isEmpty</A>, <A HREF="../../hudson/util/PersistedList.html#iterator()">iterator</A>, <A HREF="../../hudson/util/PersistedList.html#remove(java.lang.Class)">remove</A>, <A HREF="../../hudson/util/PersistedList.html#remove(T)">remove</A>, <A HREF="../../hudson/util/PersistedList.html#removeAll(java.lang.Class)">removeAll</A>, <A HREF="../../hudson/util/PersistedList.html#replaceBy(java.util.Collection)">replaceBy</A>, <A HREF="../../hudson/util/PersistedList.html#setOwner(hudson.model.Saveable)">setOwner</A>, <A HREF="../../hudson/util/PersistedList.html#size()">size</A>, <A HREF="../../hudson/util/PersistedList.html#toList()">toList</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -233,11 +261,11 @@ onModified</H3>
 protected void <B>onModified</B>()
                    throws java.io.IOException</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/util/DescribableList.html#onModified()">DescribableList</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/util/PersistedList.html#onModified()">PersistedList</A></CODE></B></DD>
 <DD>Called when a list is mutated.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/util/DescribableList.html#onModified()">onModified</A></CODE> in class <CODE><A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;&gt;</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/util/PersistedList.html#onModified()">onModified</A></CODE> in class <CODE><A HREF="../../hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A>&lt;<A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves">Cloud</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 
@@ -297,7 +325,7 @@ protected void <B>onModified</B>()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.util.DescribableList">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.util.DescribableList">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.util.PersistedList">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

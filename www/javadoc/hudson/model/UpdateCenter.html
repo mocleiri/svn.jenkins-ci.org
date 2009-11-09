@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter (Hudson main module 1.332 API)
+UpdateCenter (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter (Hudson main module 1.332 API)";
+        parent.document.title="UpdateCenter (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -98,11 +98,11 @@ java.lang.Object
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.UpdateCenter</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>UpdateCenter</B><DT>extends <A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></DL>
+<DT><PRE>public class <B>UpdateCenter</B><DT>extends <A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A><DT>implements <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
 </PRE>
 
 <P>
@@ -155,26 +155,10 @@ Controls update center capability.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model">UpdateCenter.Data</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In-memory representation of the update center data.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for a job that downloads a file from the Hudson project.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Entry.html" title="class in hudson.model">UpdateCenter.Entry</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -202,19 +186,11 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model">UpdateCenter.UpdateCenterConfiguration</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configuration data for controlling the update center's behaviors.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strategy object for controlling the update center's behaviors.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -243,11 +219,20 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#signatureCheck">signatureCheck</A></B></CODE>
+<CODE>static&nbsp;<A HREF="../../hudson/util/XStream2.html" title="class in hudson.util">XStream2</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#XSTREAM">XSTREAM</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Off by default until we know this is reasonably working.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -260,10 +245,10 @@ Controls update center capability.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#UpdateCenter(hudson.model.Hudson)">UpdateCenter</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#UpdateCenter()">UpdateCenter</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create update center to get plugins/updates from hudson.dev.java.net</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -288,14 +273,6 @@ Controls update center capability.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#doPostBack(org.kohsuke.stapler.StaplerRequest)">doPostBack</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the endpoint that receives the update center data file from the browser.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#doUpgrade(org.kohsuke.stapler.StaplerResponse)">doUpgrade</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
@@ -303,19 +280,36 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getAvailables()">getAvailables</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a list of plugins that should be shown in the "available" tab.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model">UpdateCenter.Data</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getData()">getData</A></B>()</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getById(java.lang.String)">getById</A></B>(java.lang.String&nbsp;id)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the update center data, if any.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> by its ID.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getCoreSource()">getCoreSource</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> from which we receive updates for <tt>hudson.war</tt>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getDefaultBaseUrl()">getDefaultBaseUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>TODO: revisit tool update mechanism, as that should be de-centralized, too. In the mean time,
+      please try not to use this method, and instead ping us to get this part completed.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -343,11 +337,11 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getPlugin(java.lang.String)">getPlugin</A></B>(java.lang.String&nbsp;artifactId)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the information about a specific plugin.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the plugin with the given name from the first <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> to contain it.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -359,36 +353,35 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A>&lt;<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getSites()">getSites</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the list of <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>s to be used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getUpdates()">getUpdates</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the list of plugins that are updates to currently installed ones.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getUrl()">getUrl</A></B>()</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#load()">load</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposed to get rid of hardcoding of the URL that serves up update-center.json
- in Javascript.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the data from the disk into this object.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#hasUpdates()">hasUpdates</A></B>()</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#save()">save</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does any of the plugin has updates?</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#isDue()">isDue</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if it's time for us to check for new version.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saves the configuration info to the disk.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -432,13 +425,11 @@ public static boolean <B>neverUpdate</B></PRE>
 </DL>
 <HR>
 
-<A NAME="signatureCheck"><!-- --></A><H3>
-signatureCheck</H3>
+<A NAME="XSTREAM"><!-- --></A><H3>
+XSTREAM</H3>
 <PRE>
-public static boolean <B>signatureCheck</B></PRE>
+public static final <A HREF="../../hudson/util/XStream2.html" title="class in hudson.util">XStream2</A> <B>XSTREAM</B></PRE>
 <DL>
-<DD>Off by default until we know this is reasonably working.
-<P>
 <DL>
 </DL>
 </DL>
@@ -453,13 +444,11 @@ public static boolean <B>signatureCheck</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="UpdateCenter(hudson.model.Hudson)"><!-- --></A><H3>
+<A NAME="UpdateCenter()"><!-- --></A><H3>
 UpdateCenter</H3>
 <PRE>
-public <B>UpdateCenter</B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent)</PRE>
+public <B>UpdateCenter</B>()</PRE>
 <DL>
-<DD>Create update center to get plugins/updates from hudson.dev.java.net
-<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -482,20 +471,10 @@ public void <B>configure</B>(<A HREF="../../hudson/model/UpdateCenter.UpdateCent
  and upgrading.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>config</CODE> - Configuration data<DT><B>See Also:</B><DD><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model"><CODE>UpdateCenter.UpdateCenterConfiguration</CODE></A></DL>
+</DL>
 </DD>
-</DL>
-<HR>
-
-<A NAME="isDue()"><!-- --></A><H3>
-isDue</H3>
-<PRE>
-public boolean <B>isDue</B>()</PRE>
-<DL>
-<DD>Returns true if it's time for us to check for new version.
-<P>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>config</CODE> - Configuration data<DT><B>See Also:</B><DD><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model"><CODE>UpdateCenter.UpdateCenterConfiguration</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -508,8 +487,29 @@ public java.util.List&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJo
 <DD>Returns the list of <A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model"><CODE>UpdateCenter.UpdateCenterJob</CODE></A> representing scheduled installation attempts.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Returns:</B><DD>can be empty but never null. Oldest entries first.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSites()"><!-- --></A><H3>
+getSites</H3>
+<PRE>
+public <A HREF="../../hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A>&lt;<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>&gt; <B>getSites</B>()</PRE>
+<DL>
+<DD>Returns the list of <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>s to be used.
+ This is a live list, whose change will be persisted automatically.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null.</DL>
 </DD>
 </DL>
 <HR>
@@ -520,27 +520,82 @@ getLastUpdatedString</H3>
 public java.lang.String <B>getLastUpdatedString</B>()</PRE>
 <DL>
 <DD>Gets the string representing how long ago the data was obtained.
+ Will be the newest of all <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>s.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="doPostBack(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
-doPostBack</H3>
+<A NAME="getById(java.lang.String)"><!-- --></A><H3>
+getById</H3>
 <PRE>
-public void <B>doPostBack</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
-                throws java.io.IOException,
-                       java.security.GeneralSecurityException</PRE>
+public <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A> <B>getById</B>(java.lang.String&nbsp;id)</PRE>
 <DL>
-<DD>This is the endpoint that receives the update center data file from the browser.
+<DD>Gets <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> by its ID.
+ Used to bind them to URL.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.security.GeneralSecurityException</CODE></DL>
+<A NAME="getCoreSource()"><!-- --></A><H3>
+getCoreSource</H3>
+<PRE>
+public <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A> <B>getCoreSource</B>()</PRE>
+<DL>
+<DD>Gets the <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> from which we receive updates for <tt>hudson.war</tt>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if no such update center is provided.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDefaultBaseUrl()"><!-- --></A><H3>
+getDefaultBaseUrl</H3>
+<PRE>
+public java.lang.String <B>getDefaultBaseUrl</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>TODO: revisit tool update mechanism, as that should be de-centralized, too. In the mean time,
+      please try not to use this method, and instead ping us to get this part completed.</I>
+<P>
+<DD>Gets the default base URL.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlugin(java.lang.String)"><!-- --></A><H3>
+getPlugin</H3>
+<PRE>
+public <A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A> <B>getPlugin</B>(java.lang.String&nbsp;artifactId)</PRE>
+<DL>
+<DD>Gets the plugin with the given name from the first <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> to contain it.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -555,79 +610,13 @@ public void <B>doUpgrade</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 <DD>Schedules a Hudson upgrade.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getData()"><!-- --></A><H3>
-getData</H3>
-<PRE>
-public <A HREF="../../hudson/model/UpdateCenter.Data.html" title="class in hudson.model">UpdateCenter.Data</A> <B>getData</B>()</PRE>
-<DL>
-<DD>Loads the update center data, if any.
-<P>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>null if no data is available.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getAvailables()"><!-- --></A><H3>
-getAvailables</H3>
-<PRE>
-public java.util.List&lt;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&gt; <B>getAvailables</B>()</PRE>
-<DL>
-<DD>Returns a list of plugins that should be shown in the "available" tab.
- These are "all plugins - installed plugins".
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getPlugin(java.lang.String)"><!-- --></A><H3>
-getPlugin</H3>
-<PRE>
-public <A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A> <B>getPlugin</B>(java.lang.String&nbsp;artifactId)</PRE>
-<DL>
-<DD>Gets the information about a specific plugin.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>artifactId</CODE> - The short name of the plugin. Corresponds to <A HREF="../../hudson/PluginWrapper.html#getShortName()"><CODE>PluginWrapper.getShortName()</CODE></A>.
-<DT><B>Returns:</B><DD>null if no such information is found.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getUpdates()"><!-- --></A><H3>
-getUpdates</H3>
-<PRE>
-public java.util.List&lt;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&gt; <B>getUpdates</B>()</PRE>
-<DL>
-<DD>Returns the list of plugins that are updates to currently installed ones.
-<P>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>can be empty but never null.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="hasUpdates()"><!-- --></A><H3>
-hasUpdates</H3>
-<PRE>
-public boolean <B>hasUpdates</B>()</PRE>
-<DL>
-<DD>Does any of the plugin has updates?
-<P>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <HR>
@@ -637,6 +626,9 @@ getDisplayName</H3>
 <PRE>
 public java.lang.String <B>getDisplayName</B>()</PRE>
 <DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -652,6 +644,9 @@ public java.lang.String <B>getSearchUrl</B>()</PRE>
 <DD>Returns the URL of this item relative to the parent <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.
 <P>
 <DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">getSearchUrl</A></CODE> in interface <CODE><A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></CODE></DL>
+</DD>
+<DD><DL>
 
 <DT><B>Returns:</B><DD>URL like "foo" or "foo/bar". The path can end with '/'.
       The path that starts with '/' will be interpreted as the absolute path
@@ -660,14 +655,63 @@ public java.lang.String <B>getSearchUrl</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="getUrl()"><!-- --></A><H3>
-getUrl</H3>
+<A NAME="save()"><!-- --></A><H3>
+save</H3>
 <PRE>
-public java.lang.String <B>getUrl</B>()</PRE>
+public void <B>save</B>()</PRE>
 <DL>
-<DD>Exposed to get rid of hardcoding of the URL that serves up update-center.json
- in Javascript.
+<DD>Saves the configuration info to the disk.
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="load()"><!-- --></A><H3>
+load</H3>
+<PRE>
+public void <B>load</B>()
+          throws java.io.IOException</PRE>
+<DL>
+<DD>Loads the data from the disk into this object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAvailables()"><!-- --></A><H3>
+getAvailables</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&gt; <B>getAvailables</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUpdates()"><!-- --></A><H3>
+getUpdates</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&gt; <B>getUpdates</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

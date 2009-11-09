@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.332 API)
+Deprecated List (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.332 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -748,6 +748,20 @@ function windowTitle()
       Use <A HREF="hudson/slaves/ComputerListener.html#all()"><CODE>ComputerListener.all()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getConnectionCheckUrl()">hudson.model.UpdateCenter.UpdateCenterConfiguration.getConnectionCheckUrl()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.MULTIUPDATE
+      With the introduction of multiple update center capability, this information
+      is now a part of the <tt>update-center.json</tt> file. See
+      <tt>http://hudson-ci.org/update-center.json</tt> as an example.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/UpdateCenter.html#getDefaultBaseUrl()">hudson.model.UpdateCenter.getDefaultBaseUrl()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>TODO: revisit tool update mechanism, as that should be de-centralized, too. In the mean time,
+      please try not to use this method, and instead ping us to get this part completed.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/ParameterValue.html#getDefinition()">hudson.model.ParameterValue.getDefinition()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2008-09-20.
@@ -846,6 +860,13 @@ function windowTitle()
       a website on the internet, there's nothing wrong with using this method.)</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getPluginRepositoryBaseUrl()">hudson.model.UpdateCenter.UpdateCenterConfiguration.getPluginRepositoryBaseUrl()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.MULTIUPDATE
+      <tt>update-center.json</tt> is now signed, so we don't have to further make sure that
+      we aren't downloading from anywhere unsecure.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">hudson.tasks.Publisher.getProjectAction(Project)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.150</I>&nbsp;</TD>
@@ -876,6 +897,13 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2009-04-09.
       Use <A HREF="hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node,TaskListener)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getUpdateCenterUrl()">hudson.model.UpdateCenter.UpdateCenterConfiguration.getUpdateCenterUrl()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.MULTIUPDATE
+      With the introduction of multiple update center capability, this information
+      is now moved to <A HREF="hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getUrl()">hudson.model.Hudson.getUrl()</A>
@@ -922,10 +950,10 @@ function windowTitle()
       is no longer necessary.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/UpdateCenter.Plugin.html#install()">hudson.model.UpdateCenter.Plugin.install()</A>
+<TD><A HREF="hudson/model/UpdateSite.Plugin.html#install()">hudson.model.UpdateSite.Plugin.install()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.326
-      Use <A HREF="hudson/model/UpdateCenter.Plugin.html#deploy()"><CODE>UpdateCenter.Plugin.deploy()</CODE></A>.</I>&nbsp;</TD>
+      Use <A HREF="hudson/model/UpdateSite.Plugin.html#deploy()"><CODE>UpdateSite.Plugin.deploy()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#isAdmin()">hudson.model.Hudson.isAdmin()</A>
@@ -1216,7 +1244,7 @@ function windowTitle()
 <TD><A HREF="hudson/util/DescribableList.html#setOwner(hudson.util.DescribableList.Owner)">hudson.util.DescribableList.setOwner(DescribableList.Owner)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2008-08-15.
-      Use <A HREF="hudson/util/DescribableList.html#setOwner(hudson.model.Saveable)"><CODE>DescribableList.setOwner(Saveable)</CODE></A></I>&nbsp;</TD>
+      Use <A HREF="hudson/util/PersistedList.html#setOwner(hudson.model.Saveable)"><CODE>PersistedList.setOwner(Saveable)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#setSlaves(java.util.List)">hudson.model.Hudson.setSlaves(List<Slave>)</A>

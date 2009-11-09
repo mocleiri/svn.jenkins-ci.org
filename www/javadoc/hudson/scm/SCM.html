@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCM (Hudson main module 1.332 API)
+SCM (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCM (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCM (Hudson main module 1.332 API)";
+        parent.document.title="SCM (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -457,8 +457,7 @@ public <A HREF="../../hudson/model/Api.html" title="class in hudson.model">Api</
 <A NAME="getBrowser()"><!-- --></A><H3>
 getBrowser</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
-</FONT>public <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A> <B>getBrowser</B>()</PRE>
+public <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A> <B>getBrowser</B>()</PRE>
 <DL>
 <DD>Returns the <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> for files
  controlled by this <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A>.
@@ -496,7 +495,7 @@ getType</H3>
 <A NAME="getEffectiveBrowser()"><!-- --></A><H3>
 getEffectiveBrowser</H3>
 <PRE>
-<FONT SIZE="-1">@Exported
+<FONT SIZE="-1">@Exported(name="browser")
 </FONT>public final <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm">RepositoryBrowser</A> <B>getEffectiveBrowser</B>()</PRE>
 <DL>
 <DD>Returns the applicable <A HREF="../../hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><CODE>RepositoryBrowser</CODE></A> for files

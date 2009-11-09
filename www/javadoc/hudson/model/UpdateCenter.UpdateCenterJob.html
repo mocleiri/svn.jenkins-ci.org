@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter.UpdateCenterJob (Hudson main module 1.332 API)
+UpdateCenter.UpdateCenterJob (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.UpdateCenterJob (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.UpdateCenterJob (Hudson main module 1.332 API)";
+        parent.document.title="UpdateCenter.UpdateCenterJob (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/UsageStatistics.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.UpdateCenterJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.UpdateCenterJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -120,7 +120,24 @@ Things that <A HREF="../../hudson/model/UpdateCenter.html#installerService"><COD
 <HR>
 
 <P>
+<!-- =========== FIELD SUMMARY =========== -->
 
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#site">site</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Which <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> does this belong to?</TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -130,7 +147,9 @@ Things that <A HREF="../../hudson/model/UpdateCenter.html#installerService"><COD
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#UpdateCenter.UpdateCenterJob()">UpdateCenter.UpdateCenterJob</A></B>()</CODE>
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#UpdateCenter.UpdateCenterJob(hudson.model.UpdateSite)">UpdateCenter.UpdateCenterJob</A></B>(<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>&nbsp;site)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -184,6 +203,27 @@ Things that <A HREF="../../hudson/model/UpdateCenter.html#installerService"><COD
 &nbsp;
 <P>
 
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="site"><!-- --></A><H3>
+site</H3>
+<PRE>
+public final <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A> <B>site</B></PRE>
+<DL>
+<DD>Which <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> does this belong to?
+<P>
+<DL>
+</DL>
+</DL>
+
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <A NAME="constructor_detail"><!-- --></A>
@@ -194,10 +234,10 @@ Things that <A HREF="../../hudson/model/UpdateCenter.html#installerService"><COD
 </TR>
 </TABLE>
 
-<A NAME="UpdateCenter.UpdateCenterJob()"><!-- --></A><H3>
+<A NAME="UpdateCenter.UpdateCenterJob(hudson.model.UpdateSite)"><!-- --></A><H3>
 UpdateCenter.UpdateCenterJob</H3>
 <PRE>
-public <B>UpdateCenter.UpdateCenterJob</B>()</PRE>
+protected <B>UpdateCenter.UpdateCenterJob</B>(<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>&nbsp;site)</PRE>
 <DL>
 </DL>
 
@@ -275,7 +315,7 @@ public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/UpdateCenter.U
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/UsageStatistics.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/UpdateCenter.UpdateCenterJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="UpdateCenter.UpdateCenterJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -295,9 +335,9 @@ public java.util.concurrent.Future&lt;<A HREF="../../hudson/model/UpdateCenter.U
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

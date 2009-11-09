@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter.InstallationJob (Hudson main module 1.332 API)
+UpdateCenter.InstallationJob (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.InstallationJob (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.InstallationJob (Hudson main module 1.332 API)";
+        parent.document.title="UpdateCenter.InstallationJob (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -146,7 +146,7 @@ Represents the state of the installation activity of one plugin.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#plugin">plugin</A></B></CODE>
 
 <BR>
@@ -162,6 +162,15 @@ Represents the state of the installation activity of one plugin.
 <TD><CODE><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#id">id</A>, <A HREF="../../hudson/model/UpdateCenter.DownloadJob.html#status">status</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.UpdateCenter.UpdateCenterJob"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html#site">site</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -172,7 +181,8 @@ Represents the state of the installation activity of one plugin.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#UpdateCenter.InstallationJob(hudson.model.UpdateCenter.Plugin, org.acegisecurity.Authentication)">UpdateCenter.InstallationJob</A></B>(<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&nbsp;plugin,
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.InstallationJob.html#UpdateCenter.InstallationJob(hudson.model.UpdateSite.Plugin, hudson.model.UpdateSite, org.acegisecurity.Authentication)">UpdateCenter.InstallationJob</A></B>(<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&nbsp;plugin,
+                             <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>&nbsp;site,
                              org.acegisecurity.Authentication&nbsp;auth)</CODE>
 
 <BR>
@@ -280,7 +290,7 @@ Represents the state of the installation activity of one plugin.
 <A NAME="plugin"><!-- --></A><H3>
 plugin</H3>
 <PRE>
-public final <A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A> <B>plugin</B></PRE>
+public final <A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A> <B>plugin</B></PRE>
 <DL>
 <DD>What plugin are we trying to install?
 <P>
@@ -298,10 +308,11 @@ public final <A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class 
 </TR>
 </TABLE>
 
-<A NAME="UpdateCenter.InstallationJob(hudson.model.UpdateCenter.Plugin, org.acegisecurity.Authentication)"><!-- --></A><H3>
+<A NAME="UpdateCenter.InstallationJob(hudson.model.UpdateSite.Plugin, hudson.model.UpdateSite, org.acegisecurity.Authentication)"><!-- --></A><H3>
 UpdateCenter.InstallationJob</H3>
 <PRE>
-public <B>UpdateCenter.InstallationJob</B>(<A HREF="../../hudson/model/UpdateCenter.Plugin.html" title="class in hudson.model">UpdateCenter.Plugin</A>&nbsp;plugin,
+public <B>UpdateCenter.InstallationJob</B>(<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&nbsp;plugin,
+                                    <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>&nbsp;site,
                                     org.acegisecurity.Authentication&nbsp;auth)</PRE>
 <DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.332 API)
+Job (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.332 API)";
+        parent.document.title="Job (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -401,6 +401,14 @@ A job is an runnable entity under the monitoring of Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the builds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getBuilds(hudson.model.Fingerprint.RangeSet)">getBuilds</A></B>(<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>&nbsp;rs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains all the <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s whose build numbers matches the given <A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><CODE>Fingerprint.RangeSet</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1427,6 +1435,22 @@ getBuilds</H3>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>never null. The first entry is the latest build.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBuilds(hudson.model.Fingerprint.RangeSet)"><!-- --></A><H3>
+getBuilds</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>getBuilds</B>(<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>&nbsp;rs)</PRE>
+<DL>
+<DD>Obtains all the <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s whose build numbers matches the given <A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><CODE>Fingerprint.RangeSet</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

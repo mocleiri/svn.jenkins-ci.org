@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-GNUCLibrary (Hudson main module 1.332 API)
+GNUCLibrary (Hudson main module 1.333 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-02">
+<META NAME="date" CONTENT="2009-11-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ GNUCLibrary (Hudson main module 1.332 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="GNUCLibrary (Hudson main module 1.332 API)";
+        parent.document.title="GNUCLibrary (Hudson main module 1.333 API)";
     }
 }
 </SCRIPT>
@@ -342,6 +342,15 @@ GNU C library.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/util/jna/GNUCLibrary.html#symlink(java.lang.String, java.lang.String)">symlink</A></B>(java.lang.String&nbsp;oldname,
+        java.lang.String&nbsp;newname)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a symlink.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -790,6 +799,25 @@ int <B>sysctlnametomib</B>(java.lang.String&nbsp;name,
                     com.sun.jna.Pointer&nbsp;mibp,
                     com.sun.jna.ptr.IntByReference&nbsp;size)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="symlink(java.lang.String, java.lang.String)"><!-- --></A><H3>
+symlink</H3>
+<PRE>
+int <B>symlink</B>(java.lang.String&nbsp;oldname,
+            java.lang.String&nbsp;newname)</PRE>
+<DL>
+<DD>Creates a symlink.
+
+ See http://linux.die.net/man/3/symlink
+<P>
 <DD><DL>
 </DL>
 </DD>
