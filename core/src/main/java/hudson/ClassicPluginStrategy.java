@@ -72,7 +72,7 @@ public class ClassicPluginStrategy implements PluginStrategy {
 	}
 
 	public PluginWrapper createPluginWrapper(File archive) throws IOException {
-		LOGGER.info("Loading plugin: " + archive);
+		LOGGER.info("Preparing plugin: " + archive);
 
 		final Manifest manifest;
 		URL baseResourceURL;

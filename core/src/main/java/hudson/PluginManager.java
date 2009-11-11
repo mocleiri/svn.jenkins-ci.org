@@ -26,14 +26,22 @@ package hudson;
 import hudson.model.AbstractModelObject;
 import hudson.model.Failure;
 import hudson.model.Hudson;
-import hudson.model.UpdateSite;
 import hudson.model.UpdateCenter;
+import hudson.model.UpdateSite;
 import hudson.util.Service;
+import hudson.init.InitMilestone;
+import static hudson.init.InitMilestone.PLUGINS_PREPARED;
+import static hudson.init.InitMilestone.PLUGINS_STARTED;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.LogFactory;
+import org.jvnet.hudson.reactor.Executable;
+import org.jvnet.hudson.reactor.Milestone;
+import org.jvnet.hudson.reactor.Session;
+import org.jvnet.hudson.reactor.TaskGraphBuilder;
+import org.jvnet.hudson.reactor.TaskBuilder;
 import org.kohsuke.stapler.HttpRedirect;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.QueryParameter;
@@ -102,7 +110,7 @@ public final class PluginManager extends AbstractModelObject {
     /**
      * Strategy for creating and initializing plugins
      */
-    private PluginStrategy strategy;
+    private final PluginStrategy strategy;
 
     public PluginManager(ServletContext context) {
         this.context = context;
@@ -112,58 +120,8 @@ public final class PluginManager extends AbstractModelObject {
         rootDir = new File(Hudson.getInstance().getRootDir(),"plugins");
         if(!rootDir.exists())
             rootDir.mkdirs();
-
-        Collection<String> bundledPlugins = loadBundledPlugins();
-
-        File[] archives = rootDir.listFiles(new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".hpi")        // plugin jar file
-                    || name.endsWith(".hpl");       // linked plugin. for debugging.
-            }
-        });
-
-        if(archives==null) {
-            LOGGER.severe("Hudson is unable to create "+rootDir+"\nPerhaps its security privilege is insufficient");
-            return;
-        }
         
         strategy = createPluginStrategy();
-
-        // load plugins from a system property, for use in the "mvn hudson-dev:run"
-        List<File> archivesList = new ArrayList<File>(Arrays.asList(archives));
-        String hplProperty = System.getProperty("hudson.bundled.plugins");
-        if (hplProperty != null) {
-            for (String hplLocation: hplProperty.split(",")) {
-                File hpl = new File(hplLocation.trim());
-                if (hpl.exists())
-                    archivesList.add(hpl);
-                else
-                    LOGGER.warning("bundled plugin " + hplLocation + " does not exist");
-            }
-        }
-
-        for( File arc : archivesList ) {
-            try {
-                PluginWrapper p = strategy.createPluginWrapper(arc);
-                p.isBundled = bundledPlugins.contains(arc.getName());
-                plugins.add(p);
-                if(p.isActive())
-                    activePlugins.add(p);
-            } catch (IOException e) {
-                failedPlugins.add(new FailedPlugin(arc.getName(),e));
-                LOGGER.log(Level.SEVERE, "Failed to load a plug-in " + arc, e);
-            }
-        }
-
-        for (PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()]))
-            try {
-            	strategy.load(p);
-            } catch (IOException e) {
-                failedPlugins.add(new FailedPlugin(p.getShortName(),e));
-                LOGGER.log(Level.SEVERE, "Failed to load a plug-in " + p.getShortName(), e);
-                activePlugins.remove(p);
-                plugins.remove(p);
-            }
     }
 
     /**
@@ -171,18 +129,101 @@ public final class PluginManager extends AbstractModelObject {
      * This is a separate method so that code executed from here will see a valid value in
      * {@link Hudson#pluginManager}. 
      */
-    public void initialize() {
-        for (PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
-            strategy.initializeComponents(p);
-            try {
-                p.getPlugin().postInitialize();
-            } catch (Exception e) {
-                failedPlugins.add(new FailedPlugin(p.getShortName(), e));
-                LOGGER.log(Level.SEVERE, "Failed to post-initialize a plug-in " + p.getShortName(), e);
-                activePlugins.remove(p);
-                plugins.remove(p);
+    public TaskBuilder initTasks() {
+        return new TaskGraphBuilder() {
+            File[] archives;
+            Collection<String> bundledPlugins;
+
+            {
+                Handle loadBundledPlugins = add("Loading bundled plugins", new Executable() {
+                    public void run(Session session) throws Exception {
+                        bundledPlugins = loadBundledPlugins();
+                    }
+                });
+
+                Handle listUpPlugins = requires(loadBundledPlugins).add("Listing up plugins", new Executable() {
+                    public void run(Session session) throws Exception {
+                        archives = rootDir.listFiles(new FilenameFilter() {
+                            public boolean accept(File dir, String name) {
+                                return name.endsWith(".hpi")        // plugin jar file
+                                    || name.endsWith(".hpl");       // linked plugin. for debugging.
+                            }
+                        });
+
+                        if (archives == null)
+                            throw new IOException("Hudson is unable to create " + rootDir + "\nPerhaps its security privilege is insufficient");
+
+                        // load plugins from a system property, for use in the "mvn hudson-dev:run"
+                        List<File> archivesList = new ArrayList<File>(Arrays.asList(archives));
+                        String hplProperty = System.getProperty("hudson.bundled.plugins");
+                        if (hplProperty != null) {
+                            for (String hplLocation : hplProperty.split(",")) {
+                                File hpl = new File(hplLocation.trim());
+                                if (hpl.exists())
+                                    archivesList.add(hpl);
+                                else
+                                    LOGGER.warning("bundled plugin " + hplLocation + " does not exist");
+                            }
+                        }
+                    }
+                });
+
+                requires(listUpPlugins).attains(PLUGINS_PREPARED).add("Preparing plugins",new Executable() {
+                    public void run(Session session) throws Exception {
+                        for( File arc : archives ) {
+                            try {
+                                PluginWrapper p = strategy.createPluginWrapper(arc);
+                                p.isBundled = bundledPlugins.contains(arc.getName());
+                                plugins.add(p);
+                                if(p.isActive())
+                                    activePlugins.add(p);
+                            } catch (IOException e) {
+                                failedPlugins.add(new FailedPlugin(arc.getName(),e));
+                                LOGGER.log(Level.SEVERE, "Failed to load a plug-in " + arc, e);
+                            }
+                        }
+
+                        TaskGraphBuilder g = new TaskGraphBuilder();
+                        Handle h=null; // used to run prearing/initializing sequentially
+
+                        // schedule execution of loading plugins
+                        for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
+                            h = g.requires(h).attains(PLUGINS_PREPARED).add("Loading plugin " + p.getShortName(), new Executable() {
+                                public void run(Session session) throws Exception {
+                                    try {
+                                        strategy.load(p);
+                                    } catch (IOException e) {
+                                        failedPlugins.add(new FailedPlugin(p.getShortName(), e));
+                                        LOGGER.log(Level.SEVERE, "Failed to load a plug-in " + p.getShortName(), e);
+                                        activePlugins.remove(p);
+                                        plugins.remove(p);
+                                    }
+                                }
+                            });
+                        }
+
+                        // schedule execution of initializing plugins
+                        for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
+                            h = g.requires(h).attains(PLUGINS_STARTED).add("Initializing plugin " + p.getShortName(), new Executable() {
+                                public void run(Session session) throws Exception {
+                                    try {
+                                        p.getPlugin().postInitialize();
+                                    } catch (Exception e) {
+                                        failedPlugins.add(new FailedPlugin(p.getShortName(), e));
+                                        LOGGER.log(Level.SEVERE, "Failed to post-initialize a plug-in " + p.getShortName(), e);
+                                        activePlugins.remove(p);
+                                        plugins.remove(p);
+                                    }
+                                }
+                            });
+                        }
+
+                        // register them all
+                        session.addAll(g.discoverTasks(session));
+                    }
+                });
             }
-        }
+        };
     }
 
     /**
