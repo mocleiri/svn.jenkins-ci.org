@@ -2694,9 +2694,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             @Override
             public void run() {
                 try {
-                    executeReactor(loadTasks());
-                    User.reload();
-                    servletContext.setAttribute("app",Hudson.this);
+                    reload();
                 } catch (IOException e) {
                     LOGGER.log(SEVERE,"Failed to reload Hudson config",e);
                 } catch (ReactorException e) {
@@ -2708,6 +2706,15 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         }.start();
 
         return HttpResponses.redirectViaContextPath("/");
+    }
+
+    /**
+     * Reloads the configuration synchronously.
+     */
+    public void reload() throws IOException, InterruptedException, ReactorException {
+        executeReactor(loadTasks());
+        User.reload();
+        servletContext.setAttribute("app", this);
     }
 
     /**
