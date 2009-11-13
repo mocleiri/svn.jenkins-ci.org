@@ -23,25 +23,23 @@
  */
 package hudson;
 
+import static hudson.init.InitMilestone.PLUGINS_PREPARED;
+import static hudson.init.InitMilestone.PLUGINS_STARTED;
 import hudson.model.AbstractModelObject;
 import hudson.model.Failure;
 import hudson.model.Hudson;
 import hudson.model.UpdateCenter;
 import hudson.model.UpdateSite;
 import hudson.util.Service;
-import hudson.init.InitMilestone;
-import static hudson.init.InitMilestone.PLUGINS_PREPARED;
-import static hudson.init.InitMilestone.PLUGINS_STARTED;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.LogFactory;
 import org.jvnet.hudson.reactor.Executable;
-import org.jvnet.hudson.reactor.Milestone;
-import org.jvnet.hudson.reactor.Session;
-import org.jvnet.hudson.reactor.TaskGraphBuilder;
+import org.jvnet.hudson.reactor.Reactor;
 import org.jvnet.hudson.reactor.TaskBuilder;
+import org.jvnet.hudson.reactor.TaskGraphBuilder;
 import org.kohsuke.stapler.HttpRedirect;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.QueryParameter;
@@ -136,13 +134,13 @@ public final class PluginManager extends AbstractModelObject {
 
             {
                 Handle loadBundledPlugins = add("Loading bundled plugins", new Executable() {
-                    public void run(Session session) throws Exception {
+                    public void run(Reactor session) throws Exception {
                         bundledPlugins = loadBundledPlugins();
                     }
                 });
 
                 Handle listUpPlugins = requires(loadBundledPlugins).add("Listing up plugins", new Executable() {
-                    public void run(Session session) throws Exception {
+                    public void run(Reactor session) throws Exception {
                         archives = rootDir.listFiles(new FilenameFilter() {
                             public boolean accept(File dir, String name) {
                                 return name.endsWith(".hpi")        // plugin jar file
@@ -169,7 +167,7 @@ public final class PluginManager extends AbstractModelObject {
                 });
 
                 requires(listUpPlugins).attains(PLUGINS_PREPARED).add("Preparing plugins",new Executable() {
-                    public void run(Session session) throws Exception {
+                    public void run(Reactor session) throws Exception {
                         for( File arc : archives ) {
                             try {
                                 PluginWrapper p = strategy.createPluginWrapper(arc);
@@ -189,7 +187,7 @@ public final class PluginManager extends AbstractModelObject {
                         // schedule execution of loading plugins
                         for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
                             h = g.requires(h).attains(PLUGINS_PREPARED).add("Loading plugin " + p.getShortName(), new Executable() {
-                                public void run(Session session) throws Exception {
+                                public void run(Reactor session) throws Exception {
                                     try {
                                         strategy.load(p);
                                     } catch (IOException e) {
@@ -205,7 +203,7 @@ public final class PluginManager extends AbstractModelObject {
                         // schedule execution of initializing plugins
                         for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
                             h = g.requires(h).attains(PLUGINS_STARTED).add("Initializing plugin " + p.getShortName(), new Executable() {
-                                public void run(Session session) throws Exception {
+                                public void run(Reactor session) throws Exception {
                                     try {
                                         p.getPlugin().postInitialize();
                                     } catch (Exception e) {

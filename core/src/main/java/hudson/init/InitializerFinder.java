@@ -25,10 +25,10 @@ package hudson.init;
 
 import org.jvnet.hudson.annotation_indexer.Index;
 import org.jvnet.hudson.reactor.Milestone;
-import org.jvnet.hudson.reactor.Session;
 import org.jvnet.hudson.reactor.Task;
 import org.jvnet.hudson.reactor.TaskBuilder;
 import org.jvnet.hudson.reactor.MilestoneImpl;
+import org.jvnet.hudson.reactor.Reactor;
 import org.jvnet.localizer.ResourceBundleHolder;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class InitializerFinder extends TaskBuilder {
         this(Thread.currentThread().getContextClassLoader());
     }
 
-    public Collection<Task> discoverTasks(Session session) throws IOException {
+    public Collection<Task> discoverTasks(Reactor session) throws IOException {
         List<Task> result = new ArrayList<Task>();
         for ( final Method e : Index.list(Initializer.class,cl,Method.class)) {
             if (!Modifier.isStatic(e.getModifiers()))
@@ -82,7 +82,7 @@ public class InitializerFinder extends TaskBuilder {
                     return getDisplayNameOf(e,i);
                 }
 
-                public void run(Session session) {
+                public void run(Reactor session) {
                     invoke(e);
                 }
 

@@ -134,12 +134,12 @@ import org.apache.commons.jelly.Script;
 import org.apache.commons.logging.LogFactory;
 import org.jvnet.hudson.reactor.Executable;
 import org.jvnet.hudson.reactor.ReactorException;
-import org.jvnet.hudson.reactor.Session;
 import org.jvnet.hudson.reactor.Task;
 import org.jvnet.hudson.reactor.TaskBuilder;
 import org.jvnet.hudson.reactor.TaskGraphBuilder;
-import org.jvnet.hudson.reactor.SessionListener;
 import org.jvnet.hudson.reactor.Milestone;
+import org.jvnet.hudson.reactor.Reactor;
+import org.jvnet.hudson.reactor.ReactorListener;
 import org.jvnet.hudson.reactor.TaskGraphBuilder.Handle;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.HttpRedirect;
@@ -610,7 +610,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * Executes a reactor.
      */
     private void executeReactor(TaskBuilder... builders) throws IOException, InterruptedException, ReactorException {
-        Session reactor = new Session(builders) {
+        Reactor reactor = new Reactor(builders) {
             /**
              * Sets the thread name to the task for better diagnostics.
              */
@@ -639,7 +639,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         else
             es = Executors.newSingleThreadExecutor(new DaemonThreadFactory());
         try {
-            reactor.execute(es,new SessionListener() {
+            reactor.execute(es,new ReactorListener() {
                 public void onTaskStarted(Task t) {
                     LOGGER.fine("Started "+t.getDisplayName());
                 }
@@ -2026,7 +2026,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
         TaskGraphBuilder g = new TaskGraphBuilder();
         Handle loadHudson = g.requires(PLUGINS_STARTED).attains(JOB_LOADED).add("Loading global config", new Executable() {
-            public void run(Session session) throws Exception {
+            public void run(Reactor session) throws Exception {
                 XmlFile cfg = getConfigFile();
                 if (cfg.exists()) {
                     // reset some data that may not exit in the disk file
@@ -2046,7 +2046,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
         for (final File subdir : subdirs) {
             g.requires(loadHudson).attains(JOB_LOADED).add("Loading job "+subdir.getName(),new Executable() {
-                public void run(Session session) throws Exception {
+                public void run(Reactor session) throws Exception {
                     try {
                         TopLevelItem item = (TopLevelItem) Items.load(Hudson.this, subdir);
                         items.put(item.getName(), item);
@@ -2062,7 +2062,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         }
 
         g.requires(JOB_LOADED).add("Finalizing set up",new Executable() {
-            public void run(Session session) throws Exception {
+            public void run(Reactor session) throws Exception {
                 rebuildDependencyGraph();
 
                 {// recompute label objects - populates the labels mapping.
