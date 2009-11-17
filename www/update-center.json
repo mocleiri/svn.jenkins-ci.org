@@ -1,12 +1,12 @@
 updateCenter.post(
 {
   "core":   {
-    "buildDate": "Nov 09, 2009",
+    "buildDate": "Nov 16, 2009",
     "previousTimestamp": "1970-01-01T00:00:00.00Z",
-    "url": "https://hudson.dev.java.net/files/documents/2402/145169/hudson.war",
+    "url": "https://hudson.dev.java.net/files/documents/2402/145351/hudson.war",
     "name": "core",
-    "version": "1.333",
-    "releaseTimestamp": "2009-11-09T17:45:59.00Z"
+    "version": "1.334",
+    "releaseTimestamp": "2009-11-17T00:48:53.00Z"
   },
   "updateCenterVersion": "1",
   "plugins":   {
@@ -2622,18 +2622,26 @@ updateCenter.post(
       "version": "1.0"
     },
     "gnat":     {
-      "dependencies": [],
-      "buildDate": "Apr 13, 2009",
+      "dependencies": [      {
+        "optional": false,
+        "name": "xunit",
+        "version": "0.4"
+      }],
+      "buildDate": "Nov 16, 2009",
       "title": "Gnat Plugin",
-      "developers": [{"developerId": "gbois"}],
+      "developers": [      {
+        "developerId": "gbois",
+        "email": "gregory.boissinot@gmail.com",
+        "name": "Gregory Boissinot"
+      }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gnat+Plugin",
       "previousTimestamp": "2009-04-14T00:03:08.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/132296/gnat.hpi",
-      "requiredCore": "1.299",
+      "url": "https://hudson.dev.java.net/files/documents/2402/145345/gnat.hpi",
+      "requiredCore": "1.333",
       "excerpt": "This plugin allows Hudson to integrate <a href='http://www.adacore.com/home/products/gnatpro/toolsuite/tool_partners/'>Gnat<\/a> features for ADA languages.",
       "name": "gnat",
-      "releaseTimestamp": "2009-04-14T00:03:08.00Z",
-      "version": "0.1"
+      "releaseTimestamp": "2009-11-16T20:01:54.00Z",
+      "version": "0.2"
     },
     "piwikanalytics":     {
       "dependencies": [],
