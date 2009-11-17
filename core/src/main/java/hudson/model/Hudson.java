@@ -2052,6 +2052,8 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                     // so that we can take a proper compensation action later.
                     primaryView = null;
                     views.clear();
+
+                    // load from disk
                     cfg.unmarshal(Hudson.this);
                 }
 
@@ -2064,18 +2066,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         });
 
         for (final File subdir : subdirs) {
-            g.requires(loadHudson).attains(JOB_LOADED).add("Loading job "+subdir.getName(),new Executable() {
+            g.requires(loadHudson).attains(JOB_LOADED).notFatal().add("Loading job "+subdir.getName(),new Executable() {
                 public void run(Reactor session) throws Exception {
-                    try {
-                        TopLevelItem item = (TopLevelItem) Items.load(Hudson.this, subdir);
-                        items.put(item.getName(), item);
-                    } catch (Error e) {
-                        LOGGER.log(Level.WARNING, "Failed to load "+subdir,e);
-                    } catch (RuntimeException e) {
-                        LOGGER.log(Level.WARNING, "Failed to load "+subdir,e);
-                    } catch (IOException e) {
-                        LOGGER.log(Level.WARNING, "Failed to load "+subdir,e);
-                    }
+                    TopLevelItem item = (TopLevelItem) Items.load(Hudson.this, subdir);
+                    items.put(item.getName(), item);
                 }
             });
         }
