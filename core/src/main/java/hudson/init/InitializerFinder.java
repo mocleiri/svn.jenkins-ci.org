@@ -82,6 +82,10 @@ public class InitializerFinder extends TaskBuilder {
                     return getDisplayNameOf(e,i);
                 }
 
+                public boolean failureIsFatal() {
+                    return i.fatal();
+                }
+
                 public void run(Reactor session) {
                     invoke(e);
                 }

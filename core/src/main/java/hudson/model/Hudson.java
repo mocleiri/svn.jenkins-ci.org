@@ -54,6 +54,7 @@ import static hudson.init.InitMilestone.JOB_LOADED;
 import static hudson.init.InitMilestone.PLUGINS_STARTED;
 import hudson.init.InitializerFinder;
 import hudson.init.InitMilestone;
+import hudson.init.InitReactorListener;
 import hudson.lifecycle.Lifecycle;
 import hudson.logging.LogRecorderManager;
 import hudson.model.Descriptor.FormException;
@@ -119,8 +120,10 @@ import hudson.util.StreamTaskListener;
 import hudson.util.TextFile;
 import hudson.util.VersionNumber;
 import hudson.util.XStream2;
+import hudson.util.ServiceLoader;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
+import net.java.sezpoz.Index;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.AcegiSecurityException;
 import org.acegisecurity.Authentication;
@@ -141,6 +144,7 @@ import org.jvnet.hudson.reactor.Milestone;
 import org.jvnet.hudson.reactor.Reactor;
 import org.jvnet.hudson.reactor.ReactorListener;
 import org.jvnet.hudson.reactor.TaskGraphBuilder.Handle;
+import org.jvnet.hudson.annotation_indexer.Indexed;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.HttpRedirect;
 import org.kohsuke.stapler.HttpResponse;
@@ -213,6 +217,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import static java.util.logging.Level.SEVERE;
+import static java.util.logging.Level.FINE;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -639,25 +644,39 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         else
             es = Executors.newSingleThreadExecutor(new DaemonThreadFactory());
         try {
-            reactor.execute(es,new ReactorListener() {
-                public void onTaskStarted(Task t) {
-                    LOGGER.fine("Started "+t.getDisplayName());
-                }
-
-                public void onTaskCompleted(Task t) {
-                    LOGGER.fine("Completed "+t.getDisplayName());
-                }
-
-                public void onTaskFailed(Task t, Throwable err) {
-                }
-
-                public void onAttained(Milestone milestone) {
-                    LOGGER.fine("Attained "+milestone.toString());
-                }
-            });
+            reactor.execute(es,buildReactorListener());
         } finally {
             es.shutdownNow();   // upon a successful return the executor queue should be empty. Upon an exception, we want to cancel all pending tasks
         }
+    }
+
+    /**
+     * Aggregates all the listeners into one and returns it.
+     *
+     * <p>
+     * At this point plugins are not loaded yet, so we fall back to the META-INF/services look up to discover implementations.
+     * As such there's no way for plugins to participate into this process. 
+     */
+    private ReactorListener buildReactorListener() throws IOException {
+        List<ReactorListener> r = (List) ServiceLoader.load(Thread.currentThread().getContextClassLoader(), InitReactorListener.class);
+        r.add(new ReactorListener() {
+            public void onTaskStarted(Task t) {
+                LOGGER.fine("Started "+t.getDisplayName());
+            }
+
+            public void onTaskCompleted(Task t) {
+                LOGGER.fine("Completed "+t.getDisplayName());
+            }
+
+            public void onTaskFailed(Task t, Throwable err, boolean fatal) {
+                LOGGER.log(Level.SEVERE, "Failed "+t.getDisplayName(),err);
+            }
+
+            public void onAttained(Milestone milestone) {
+                LOGGER.fine("Attained "+milestone.toString());
+            }
+        });
+        return new ReactorListener.Aggregator(r);
     }
 
     public TcpSlaveAgentListener getTcpSlaveAgentListener() {

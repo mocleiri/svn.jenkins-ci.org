@@ -168,33 +168,37 @@ public final class PluginManager extends AbstractModelObject {
 
                 requires(listUpPlugins).attains(PLUGINS_PREPARED).add("Preparing plugins",new Executable() {
                     public void run(Reactor session) throws Exception {
-                        for( File arc : archives ) {
-                            try {
-                                PluginWrapper p = strategy.createPluginWrapper(arc);
-                                p.isBundled = bundledPlugins.contains(arc.getName());
-                                plugins.add(p);
-                                if(p.isActive())
-                                    activePlugins.add(p);
-                            } catch (IOException e) {
-                                failedPlugins.add(new FailedPlugin(arc.getName(),e));
-                                LOGGER.log(Level.SEVERE, "Failed to load a plug-in " + arc, e);
-                            }
-                        }
-
                         TaskGraphBuilder g = new TaskGraphBuilder();
-                        Handle h=null; // used to run prearing/initializing sequentially
+                        Handle h=null; // used to run prearing/initializing sequentially to avoid concurrency hassle
+
+                        for( final File arc : archives ) {
+                            h = g.requires(h).notFatal().attains(PLUGINS_PREPARED).add("Inspecting plugin " + arc, new Executable() {
+                                public void run(Reactor session) throws Exception {
+                                    try {
+                                        PluginWrapper p = strategy.createPluginWrapper(arc);
+                                        p.isBundled = bundledPlugins.contains(arc.getName());
+                                        plugins.add(p);
+                                        if(p.isActive())
+                                            activePlugins.add(p);
+                                    } catch (IOException e) {
+                                        failedPlugins.add(new FailedPlugin(arc.getName(),e));
+                                        throw e;
+                                    }
+                                }
+                            });
+                        }
 
                         // schedule execution of loading plugins
                         for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
-                            h = g.requires(h).attains(PLUGINS_PREPARED).add("Loading plugin " + p.getShortName(), new Executable() {
+                            h = g.requires(h).notFatal().attains(PLUGINS_PREPARED).add("Loading plugin " + p.getShortName(), new Executable() {
                                 public void run(Reactor session) throws Exception {
                                     try {
                                         strategy.load(p);
                                     } catch (IOException e) {
                                         failedPlugins.add(new FailedPlugin(p.getShortName(), e));
-                                        LOGGER.log(Level.SEVERE, "Failed to load a plug-in " + p.getShortName(), e);
                                         activePlugins.remove(p);
                                         plugins.remove(p);
+                                        throw e;
                                     }
                                 }
                             });
@@ -202,15 +206,15 @@ public final class PluginManager extends AbstractModelObject {
 
                         // schedule execution of initializing plugins
                         for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
-                            h = g.requires(h).attains(PLUGINS_STARTED).add("Initializing plugin " + p.getShortName(), new Executable() {
+                            h = g.requires(h).notFatal().attains(PLUGINS_STARTED).add("Initializing plugin " + p.getShortName(), new Executable() {
                                 public void run(Reactor session) throws Exception {
                                     try {
                                         p.getPlugin().postInitialize();
                                     } catch (Exception e) {
                                         failedPlugins.add(new FailedPlugin(p.getShortName(), e));
-                                        LOGGER.log(Level.SEVERE, "Failed to post-initialize a plug-in " + p.getShortName(), e);
                                         activePlugins.remove(p);
                                         plugins.remove(p);
+                                        throw e;
                                     }
                                 }
                             });

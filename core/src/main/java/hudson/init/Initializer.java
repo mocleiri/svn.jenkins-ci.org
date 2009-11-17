@@ -24,6 +24,7 @@
 package hudson.init;
 
 import org.jvnet.hudson.annotation_indexer.Indexed;
+import org.jvnet.hudson.reactor.Task;
 
 import java.lang.annotation.Documented;
 import static java.lang.annotation.ElementType.METHOD;
@@ -81,4 +82,11 @@ public @interface Initializer {
      * Defaults to "${short class name}.${method Name}".
      */
     String displayName() default "";
+
+    /**
+     * Should the failure in this task prevent Hudson from starting up?
+     *
+     * @see Task#failureIsFatal() 
+     */
+    boolean fatal() default true;
 }
