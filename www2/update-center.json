@@ -2,10 +2,10 @@ updateCenter.post(
 {
   "connectionCheckUrl": "http://www.google.com/",
   "core":   {
-    "buildDate": "Nov 09, 2009",
+    "buildDate": "Nov 16, 2009",
     "name": "core",
-    "url": "http://hudson-ci.org/download/war/1.333/hudson.war",
-    "version": "1.333"
+    "url": "http://hudson-ci.org/download/war/1.334/hudson.war",
+    "version": "1.334"
   },
   "id": "default",
   "plugins":   {
@@ -621,7 +621,7 @@ updateCenter.post(
       "developers": [{"developerId": "kohsuke"}],
       "excerpt": "This plugin will perform cvs tagging (specifically cvs rtag) after a job has been built successfully.",
       "name": "cvs-tag",
-      "previousTimestamp": "2008-12-09T18:42:18.00Z",
+      "previousTimestamp": "2009-04-25T02:56:02.00Z",
       "releaseTimestamp": "2009-05-11T16:59:34.00Z",
       "requiredCore": "1.304",
       "title": "CVS Tagging Plugin",
@@ -727,7 +727,7 @@ updateCenter.post(
       "developers": [{"developerId": "dvrzalik"}],
       "excerpt": "This plugin records disk usage. ",
       "name": "disk-usage",
-      "previousTimestamp": "2009-03-27T00:23:38.00Z",
+      "previousTimestamp": "2009-03-26T16:31:12.00Z",
       "releaseTimestamp": "2009-05-29T02:20:12.00Z",
       "requiredCore": "1.307",
       "title": "Disk Usage Plugin",
@@ -1022,16 +1022,25 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Github+Plugin"
     },
     "gnat":     {
-      "buildDate": "Apr 14, 2009",
-      "dependencies": [],
-      "developers": [{"developerId": "S0011918"}],
+      "buildDate": "Nov 16, 2009",
+      "dependencies": [      {
+        "name": "xunit",
+        "optional": false,
+        "version": "0.4"
+      }],
+      "developers": [      {
+        "developerId": "gbois",
+        "email": "gregory.boissinot@gmail.com",
+        "name": "Gregory Boissinot"
+      }],
       "excerpt": "This plugin allows Hudson to integrate <a href='http://www.adacore.com/home/products/gnatpro/toolsuite/tool_partners/'>Gnat<\/a> features for ADA languages.",
       "name": "gnat",
-      "releaseTimestamp": "2009-04-14T08:58:50.00Z",
-      "requiredCore": "1.299",
+      "previousTimestamp": "2009-04-14T08:58:50.00Z",
+      "releaseTimestamp": "2009-11-17T04:57:24.00Z",
+      "requiredCore": "1.333",
       "title": "Gnat Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gnat/0.1/gnat.hpi",
-      "version": "0.1",
+      "url": "http://hudson-ci.org/download/plugins/gnat/0.2/gnat.hpi",
+      "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gnat+Plugin"
     },
     "googleanalytics":     {
@@ -1699,15 +1708,15 @@ updateCenter.post(
       "version": "0.0.2"
     },
     "maven-plugin":     {
-      "buildDate": "Nov 09, 2009",
+      "buildDate": "Nov 16, 2009",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
       "name": "maven-plugin",
-      "previousTimestamp": "2009-11-03T02:49:38.00Z",
-      "releaseTimestamp": "2009-11-09T17:38:16.00Z",
-      "requiredCore": "1.333",
-      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.333/maven-plugin.hpi",
-      "version": "1.333"
+      "previousTimestamp": "2009-11-09T17:38:16.00Z",
+      "releaseTimestamp": "2009-11-17T00:43:28.00Z",
+      "requiredCore": "1.334",
+      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.334/maven-plugin.hpi",
+      "version": "1.334"
     },
     "mercurial":     {
       "buildDate": "Nov 13, 2009",
@@ -1857,13 +1866,13 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Next+Build+Number+Plugin"
     },
     "nunit":     {
-      "buildDate": "Apr 14, 2009",
+      "buildDate": "Apr 13, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "erikra"}],
+      "developers": [{"developerId": "hudson"}],
       "excerpt": "This plugin allows you publish <a href='http://www.nunit.org/'>NUnit<\/a> test results ",
       "name": "nunit",
       "previousTimestamp": "2009-04-07T06:49:44.00Z",
-      "releaseTimestamp": "2009-04-14T22:50:24.00Z",
+      "releaseTimestamp": "2009-04-14T02:51:22.00Z",
       "requiredCore": "1.299",
       "title": "NUnit Plugin",
       "url": "http://hudson-ci.org/download/plugins/nunit/0.8/nunit.hpi",
@@ -2963,8 +2972,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "B6/U8eJy7DjVbqoLtjw2qSJmq9c=",
-    "signature": "iZ/wmNurjAsBt2qLNumLkR2QWipQYFABFS6YsZkC+hb/ssbDlsfBDACXiSYtJnCLpZGKIyPsaMwl6CVY+dxWtnDjlZrvbL2a7ufZgB7+1JIn2FwQqyH4Z81qSVPm5SssSWzHiWSv8L5jKLKyPMEdD9tjDx/W+WKfivDN7gaZS+RW1jwdz0l+75WbNa/6Y4xFs06agrjGNAeYEAzzz5uaxZ6VDNf5OWFDMY+M2eTB7voF4LsT95phK2RCJ9FB95522BftiknWh59mmQ5KbM3K7uecIxRzuu46IZdHUqnfDIJUkzTqgg9xEYFC5nTs5srykaIShup4l+Vj1Sd+K+1DnQ=="
+    "digest": "odG7toKaGbeKP4giAyYQGFEbvVc=",
+    "signature": "JS9jnj0oTdT2UOUNxxsGkGpXNjubf+HtkD0Izt/MZlYX14cDb7hcorOpe1e1BiAvgzrUp0AZfgBKyGw3gMDDKaeZT/gTRSzQMrros/QImVBfb9kodeUa13e71U2j+nIoIGjWo051KfQSrBPU4opv+g4uRJJ6+u4OSLDQ/P0SzrF7mJKum+fa1er+kyCOpUnAq9hY9CMm/qf9vuOrY+CPNyQnh7BnZDuGmkTrG3y2rREFmK2vsIslGEvLSZ31PdU8l5yCFu4oKSFnEnc5hQziv2xEgv0A8+Ggrt+dTYPxaI9m2/ezjslCn27mm2ZGqsPmv5jv8mZzBOHJLinVAiX3YA=="
   },
   "updateCenterVersion": "1"
 }
