@@ -327,8 +327,6 @@ public class ClassicPluginStrategy implements PluginStrategy {
         if(explodeTime.exists() && explodeTime.lastModified()==archive.lastModified())
             return; // no need to expand
 
-        LOGGER.info("Extracting "+archive);
-
         // delete the contents so that old files won't interfere with new files
         Util.deleteContentsRecursive(destDir);
 
