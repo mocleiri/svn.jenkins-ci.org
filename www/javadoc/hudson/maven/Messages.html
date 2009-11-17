@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Messages (Hudson core 1.295 API)
+Messages (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Messages (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Messages (Hudson core 1.295 API)";
+        parent.document.title="Messages (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -222,7 +222,24 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#_MavenModuleSetBuild_NoSuchFile(java.lang.Object)">_MavenModuleSetBuild_NoSuchFile</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#_MavenModuleSetBuild_NoMavenInstall()">_MavenModuleSetBuild_NoMavenInstall</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Maven installation needs to be available for this project to be built.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#_MavenModuleSetBuild_NoSuchAlternateSettings(java.lang.Object)">_MavenModuleSetBuild_NoSuchAlternateSettings</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No such settings file {0} exists
+ Please verify that your alternate settings file is specified properly and exists in the workspace.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#_MavenModuleSetBuild_NoSuchPOMFile(java.lang.Object)">_MavenModuleSetBuild_NoSuchPOMFile</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No such file {0}
@@ -368,7 +385,24 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#MavenModuleSetBuild_NoSuchFile(java.lang.Object)">MavenModuleSetBuild_NoSuchFile</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#MavenModuleSetBuild_NoMavenInstall()">MavenModuleSetBuild_NoMavenInstall</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A Maven installation needs to be available for this project to be built.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#MavenModuleSetBuild_NoSuchAlternateSettings(java.lang.Object)">MavenModuleSetBuild_NoSuchAlternateSettings</A></B>(java.lang.Object&nbsp;arg1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No such settings file {0} exists
+ Please verify that your alternate settings file is specified properly and exists in the workspace.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/Messages.html#MavenModuleSetBuild_NoSuchPOMFile(java.lang.Object)">MavenModuleSetBuild_NoSuchPOMFile</A></B>(java.lang.Object&nbsp;arg1)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No such file {0}
@@ -461,34 +495,6 @@ public <B>Messages</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="MavenModuleSetBuild_NoSuchFile(java.lang.Object)"><!-- --></A><H3>
-MavenModuleSetBuild_NoSuchFile</H3>
-<PRE>
-public static java.lang.String <B>MavenModuleSetBuild_NoSuchFile</B>(java.lang.Object&nbsp;arg1)</PRE>
-<DL>
-<DD>No such file {0}
- Perhaps you need to specify the correct POM file path in the project configuration?
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="_MavenModuleSetBuild_NoSuchFile(java.lang.Object)"><!-- --></A><H3>
-_MavenModuleSetBuild_NoSuchFile</H3>
-<PRE>
-public static org.jvnet.localizer.Localizable <B>_MavenModuleSetBuild_NoSuchFile</B>(java.lang.Object&nbsp;arg1)</PRE>
-<DL>
-<DD>No such file {0}
- Perhaps you need to specify the correct POM file path in the project configuration?
-<P>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
 
 <A NAME="MavenBuild_KeptBecauseOfParent(java.lang.Object)"><!-- --></A><H3>
 MavenBuild_KeptBecauseOfParent</H3>
@@ -596,6 +602,34 @@ public static org.jvnet.localizer.Localizable <B>_MavenModuleSetBuild_Discovered
 </DL>
 <HR>
 
+<A NAME="MavenModuleSetBuild_NoSuchPOMFile(java.lang.Object)"><!-- --></A><H3>
+MavenModuleSetBuild_NoSuchPOMFile</H3>
+<PRE>
+public static java.lang.String <B>MavenModuleSetBuild_NoSuchPOMFile</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>No such file {0}
+ Perhaps you need to specify the correct POM file path in the project configuration?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_MavenModuleSetBuild_NoSuchPOMFile(java.lang.Object)"><!-- --></A><H3>
+_MavenModuleSetBuild_NoSuchPOMFile</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_MavenModuleSetBuild_NoSuchPOMFile</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>No such file {0}
+ Perhaps you need to specify the correct POM file path in the project configuration?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="MavenProcessFactory_ClassWorldsNotFound(java.lang.Object)"><!-- --></A><H3>
 MavenProcessFactory_ClassWorldsNotFound</H3>
 <PRE>
@@ -615,6 +649,34 @@ _MavenProcessFactory_ClassWorldsNotFound</H3>
 public static org.jvnet.localizer.Localizable <B>_MavenProcessFactory_ClassWorldsNotFound</B>(java.lang.Object&nbsp;arg1)</PRE>
 <DL>
 <DD>No classworlds*.jar found in {0} -- Is this a valid maven2 directory?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="MavenModuleSetBuild_NoSuchAlternateSettings(java.lang.Object)"><!-- --></A><H3>
+MavenModuleSetBuild_NoSuchAlternateSettings</H3>
+<PRE>
+public static java.lang.String <B>MavenModuleSetBuild_NoSuchAlternateSettings</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>No such settings file {0} exists
+ Please verify that your alternate settings file is specified properly and exists in the workspace.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_MavenModuleSetBuild_NoSuchAlternateSettings(java.lang.Object)"><!-- --></A><H3>
+_MavenModuleSetBuild_NoSuchAlternateSettings</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_MavenModuleSetBuild_NoSuchAlternateSettings</B>(java.lang.Object&nbsp;arg1)</PRE>
+<DL>
+<DD>No such settings file {0} exists
+ Please verify that your alternate settings file is specified properly and exists in the workspace.
 <P>
 <DD><DL>
 </DL>
@@ -823,6 +885,34 @@ _MavenRedeployer_DisplayName</H3>
 public static org.jvnet.localizer.Localizable <B>_MavenRedeployer_DisplayName</B>()</PRE>
 <DL>
 <DD>Deploy to Maven repository
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="MavenModuleSetBuild_NoMavenInstall()"><!-- --></A><H3>
+MavenModuleSetBuild_NoMavenInstall</H3>
+<PRE>
+public static java.lang.String <B>MavenModuleSetBuild_NoMavenInstall</B>()</PRE>
+<DL>
+<DD>A Maven installation needs to be available for this project to be built.
+ Either your server has no Maven installations defined, or the requested Maven version does not exist.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_MavenModuleSetBuild_NoMavenInstall()"><!-- --></A><H3>
+_MavenModuleSetBuild_NoMavenInstall</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_MavenModuleSetBuild_NoMavenInstall</B>()</PRE>
+<DL>
+<DD>A Maven installation needs to be available for this project to be built.
+ Either your server has no Maven installations defined, or the requested Maven version does not exist.
 <P>
 <DD><DL>
 </DL>

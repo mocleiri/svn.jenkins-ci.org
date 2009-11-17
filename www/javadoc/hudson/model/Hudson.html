@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.333 API)
+Hudson (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.333 API)";
+        parent.document.title="Hudson (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -569,6 +569,16 @@ T</CODE></FONT></TD>
 <CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createProject(hudson.model.TopLevelItemDescriptor, java.lang.String)">createProject</A></B>(<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>&nbsp;type,
               java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new job.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#createProject(hudson.model.TopLevelItemDescriptor, java.lang.String, boolean)">createProject</A></B>(<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>&nbsp;type,
+              java.lang.String&nbsp;name,
+              boolean&nbsp;notify)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new job.</TD>
@@ -3500,7 +3510,8 @@ public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">
 <A NAME="getComputer(java.lang.String)"><!-- --></A><H3>
 getComputer</H3>
 <PRE>
-public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A> <B>getComputer</B>(java.lang.String&nbsp;name)</PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIResolver.html" title="annotation in hudson.cli.declarative">@CLIResolver</A>
+</FONT>public <A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A> <B>getComputer</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -4536,6 +4547,28 @@ public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson
 
 <DT><B>Throws:</B>
 <DD><CODE>java.lang.IllegalArgumentException</CODE> - if the project of the given name already exists.
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createProject(hudson.model.TopLevelItemDescriptor, java.lang.String, boolean)"><!-- --></A><H3>
+createProject</H3>
+<PRE>
+public <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A> <B>createProject</B>(<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>&nbsp;type,
+                                  java.lang.String&nbsp;name,
+                                  boolean&nbsp;notify)
+                           throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a new job.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - Descriptor for job type<DD><CODE>name</CODE> - Name for job<DD><CODE>notify</CODE> - Whether to fire onCreated method for all ItemListeners
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if a project of the give name already exists.
 <DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>

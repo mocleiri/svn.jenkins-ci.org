@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenArtifact (Hudson core 1.295 API)
+MavenArtifact (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenArtifact (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenArtifact (Hudson core 1.295 API)";
+        parent.document.title="MavenArtifact (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -177,6 +177,14 @@ Captures information about an artifact created by Maven and archived by
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifact.html#md5sum">md5sum</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The md5sum for this artifact.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifact.html#type">type</A></B></CODE>
 
 <BR>
@@ -207,12 +215,13 @@ Captures information about an artifact created by Maven and archived by
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifact.html#MavenArtifact(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">MavenArtifact</A></B>(java.lang.String&nbsp;groupId,
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifact.html#MavenArtifact(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)">MavenArtifact</A></B>(java.lang.String&nbsp;groupId,
               java.lang.String&nbsp;artifactId,
               java.lang.String&nbsp;version,
               java.lang.String&nbsp;classifier,
               java.lang.String&nbsp;type,
-              java.lang.String&nbsp;fileName)</CODE>
+              java.lang.String&nbsp;fileName,
+              java.lang.String&nbsp;md5sum)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -398,6 +407,18 @@ public final java.lang.String <B>canonicalName</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="md5sum"><!-- --></A><H3>
+md5sum</H3>
+<PRE>
+public final java.lang.String <B>md5sum</B></PRE>
+<DL>
+<DD>The md5sum for this artifact.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -412,12 +433,17 @@ public final java.lang.String <B>canonicalName</B></PRE>
 <A NAME="MavenArtifact(org.apache.maven.artifact.Artifact)"><!-- --></A><H3>
 MavenArtifact</H3>
 <PRE>
-public <B>MavenArtifact</B>(org.apache.maven.artifact.Artifact&nbsp;a)</PRE>
+public <B>MavenArtifact</B>(org.apache.maven.artifact.Artifact&nbsp;a)
+              throws java.io.IOException</PRE>
 <DL>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DL>
 <HR>
 
-<A NAME="MavenArtifact(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="MavenArtifact(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 MavenArtifact</H3>
 <PRE>
 public <B>MavenArtifact</B>(java.lang.String&nbsp;groupId,
@@ -425,7 +451,8 @@ public <B>MavenArtifact</B>(java.lang.String&nbsp;groupId,
                      java.lang.String&nbsp;version,
                      java.lang.String&nbsp;classifier,
                      java.lang.String&nbsp;type,
-                     java.lang.String&nbsp;fileName)</PRE>
+                     java.lang.String&nbsp;fileName,
+                     java.lang.String&nbsp;md5sum)</PRE>
 <DL>
 </DL>
 
@@ -442,7 +469,8 @@ public <B>MavenArtifact</B>(java.lang.String&nbsp;groupId,
 <A NAME="create(org.apache.maven.artifact.Artifact)"><!-- --></A><H3>
 create</H3>
 <PRE>
-public static <A HREF="../../../hudson/maven/reporters/MavenArtifact.html" title="class in hudson.maven.reporters">MavenArtifact</A> <B>create</B>(org.apache.maven.artifact.Artifact&nbsp;a)</PRE>
+public static <A HREF="../../../hudson/maven/reporters/MavenArtifact.html" title="class in hudson.maven.reporters">MavenArtifact</A> <B>create</B>(org.apache.maven.artifact.Artifact&nbsp;a)
+                            throws java.io.IOException</PRE>
 <DL>
 <DD>Convenience method to check if the given <CODE>Artifact</CODE> object contains
  enough information suitable for recording, and if so, create <A HREF="../../../hudson/maven/reporters/MavenArtifact.html" title="class in hudson.maven.reporters"><CODE>MavenArtifact</CODE></A>.
@@ -451,7 +479,9 @@ public static <A HREF="../../../hudson/maven/reporters/MavenArtifact.html" title
 </DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CauseAction (Hudson main module 1.333 API)
+CauseAction (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CauseAction (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CauseAction (Hudson main module 1.333 API)";
+        parent.document.title="CauseAction (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -150,6 +150,14 @@ java.lang.Object
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notifies that the <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that "owns" this action (that is, the task for which this action is submitted)
  is considered as a duplicate.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>,java.lang.Integer&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/CauseAction.html#getCauseCounts()">getCauseCounts</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get list of causes with duplicates combined into counters.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -336,6 +344,23 @@ public java.lang.String <B>getUrlName</B>()</PRE>
 
 <DT><B>Returns:</B><DD>null if this action object doesn't need to be bound to web
       (when you do that, be sure to also return null from <A HREF="../../hudson/model/Action.html#getIconFileName()"><CODE>Action.getIconFileName()</CODE></A>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCauseCounts()"><!-- --></A><H3>
+getCauseCounts</H3>
+<PRE>
+public java.util.Map&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>,java.lang.Integer&gt; <B>getCauseCounts</B>()</PRE>
+<DL>
+<DD>Get list of causes with duplicates combined into counters.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Map of Cause to number of occurrences of that Cause</DL>
 </DD>
 </DL>
 <HR>

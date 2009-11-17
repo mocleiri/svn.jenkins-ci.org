@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.util (Hudson main module 1.333 API)
+hudson.util (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson main module 1.333 API)";
+        parent.document.title="hudson.util (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -361,6 +361,12 @@ Other miscellaneous utility code
 <TD><CODE>FilterInputStream</CODE> that buffers the first N bytes to a byte array on the side.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/HeapSpaceStringConverter.html" title="class in hudson.util">HeapSpaceStringConverter</A></B></TD>
+<TD>The default <CODE>StringConverter</CODE> in XStream
+ uses <CODE>String.intern()</CODE>, which stresses the
+ (rather limited) PermGen space with a large XML file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/HexBinaryConverter.html" title="class in hudson.util">HexBinaryConverter</A></B></TD>
 <TD>&nbsp;</TD>
 </TR>
@@ -570,9 +576,8 @@ Other miscellaneous utility code
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/StringConverter2.html" title="class in hudson.util">StringConverter2</A></B></TD>
-<TD>The default <CODE>StringConverter</CODE> in XStream
- uses <CODE>String.intern()</CODE>, which stresses the
- (rather limited) PermGen space with a large XML file.</TD>
+<TD><B>Deprecated.</B>&nbsp;<I>since 2009-11-06
+     Use <A HREF="../../hudson/util/HeapSpaceStringConverter.html" title="class in hudson.util"><CODE>HeapSpaceStringConverter</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/TableNestChecker.html" title="class in hudson.util">TableNestChecker</A></B></TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FileParameterDefinition (Hudson main module 1.333 API)
+FileParameterDefinition (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileParameterDefinition (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileParameterDefinition (Hudson main module 1.333 API)";
+        parent.document.title="FileParameterDefinition (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -204,6 +204,15 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/FileParameterDefinition.html#createValue(hudson.cli.CLICommand, java.lang.String)">createValue</A></B>(<A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>&nbsp;command,
+            java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from the string given in the CLI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/FileParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
@@ -303,6 +312,32 @@ public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.m
 <DD><DL>
 
 <DT><B>Returns:</B><DD></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createValue(hudson.cli.CLICommand, java.lang.String)"><!-- --></A><H3>
+createValue</H3>
+<PRE>
+public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>createValue</B>(<A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>&nbsp;command,
+                                  java.lang.String&nbsp;value)
+                           throws java.io.IOException,
+                                  java.lang.InterruptedException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(hudson.cli.CLICommand, java.lang.String)">ParameterDefinition</A></CODE></B></DD>
+<DD>Create a parameter value from the string given in the CLI.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(hudson.cli.CLICommand, java.lang.String)">createValue</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>command</CODE> - This is the command that got the parameter. You can use its <A HREF="../../hudson/cli/CLICommand.html#channel"><CODE>CLICommand.channel</CODE></A>
+      for interacting with the CLI JVM.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/AbortException.html" title="class in hudson">AbortException</A></CODE> - If the CLI processing should be aborted. Hudson will report the error message
+      without stack trace, and then exits this command. Useful for graceful termination.
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

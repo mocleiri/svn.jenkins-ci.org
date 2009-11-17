@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.maven.MavenModule (Hudson core 1.295 API)
+Uses of Class hudson.maven.MavenModule (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.maven.MavenModule (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.maven.MavenModule (Hudson core 1.295 API)";
+        parent.document.title="Uses of Class hudson.maven.MavenModule (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -158,6 +158,14 @@ Uses of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A></CODE></FONT></TD>
+<TD><CODE><B>MavenBuild.</B><B><A HREF="../../../hudson/maven/MavenBuild.html#getParent()">getParent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A></CODE></FONT></TD>
 <TD><CODE><B>MavenModuleSet.</B><B><A HREF="../../../hudson/maven/MavenModuleSet.html#getRootModule()">getRootModule</A></B>()</CODE>
 
 <BR>
@@ -227,6 +235,14 @@ Uses of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>MavenModule.</B><B><A HREF="../../../hudson/maven/MavenModule.html#getSubsidiaries()">getSubsidiaries</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the list of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>s that are 'under' this POM filesystem-wise.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -344,14 +360,6 @@ Uses of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>MavenSiteArchiver.</B><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;project)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
 <TD><CODE><B>SurefireArchiver.</B><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
 
 <BR>
@@ -359,16 +367,8 @@ Uses of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></FONT></TD>
-<TD><CODE><B>MavenFingerprinter.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/MavenFingerprinter.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/BuildInfoRecorder.html" title="class in hudson.maven.reporters">BuildInfoRecorder</A></CODE></FONT></TD>
-<TD><CODE><B>BuildInfoRecorder.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/BuildInfoRecorder.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
+<TD><CODE><B>MavenSiteArchiver.</B><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;project)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -383,16 +383,24 @@ Uses of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/ReportCollector.html" title="class in hudson.maven.reporters">ReportCollector</A></CODE></FONT></TD>
-<TD><CODE><B>ReportCollector.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/ReportCollector.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></FONT></TD>
+<TD><CODE><B>MavenFingerprinter.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/MavenFingerprinter.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.html" title="class in hudson.maven.reporters">MavenSiteArchiver</A></CODE></FONT></TD>
-<TD><CODE><B>MavenSiteArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/SurefireArchiver.html" title="class in hudson.maven.reporters">SurefireArchiver</A></CODE></FONT></TD>
+<TD><CODE><B>SurefireArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/ReportCollector.html" title="class in hudson.maven.reporters">ReportCollector</A></CODE></FONT></TD>
+<TD><CODE><B>ReportCollector.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/ReportCollector.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -407,8 +415,16 @@ Uses of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/SurefireArchiver.html" title="class in hudson.maven.reporters">SurefireArchiver</A></CODE></FONT></TD>
-<TD><CODE><B>SurefireArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/BuildInfoRecorder.html" title="class in hudson.maven.reporters">BuildInfoRecorder</A></CODE></FONT></TD>
+<TD><CODE><B>BuildInfoRecorder.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/BuildInfoRecorder.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.html" title="class in hudson.maven.reporters">MavenSiteArchiver</A></CODE></FONT></TD>
+<TD><CODE><B>MavenSiteArchiver.DescriptorImpl.</B><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.DescriptorImpl.html#newAutoInstance(hudson.maven.MavenModule)">newAutoInstance</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

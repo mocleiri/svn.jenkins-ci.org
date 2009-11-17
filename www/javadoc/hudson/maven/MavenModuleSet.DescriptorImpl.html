@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenModuleSet.DescriptorImpl (Hudson core 1.295 API)
+MavenModuleSet.DescriptorImpl (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModuleSet.DescriptorImpl (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModuleSet.DescriptorImpl (Hudson core 1.295 API)";
+        parent.document.title="MavenModuleSet.DescriptorImpl (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -151,6 +151,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -194,20 +203,20 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.DescriptorImpl.html#isApplicable(hudson.model.Descriptor)">isApplicable</A></B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&nbsp;descriptor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes can override this method to veto some <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s
+ from showing up on their configuration screen.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/maven/MavenModuleSet.DescriptorImpl.html#newInstance(java.lang.String)">newInstance</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractProject.AbstractProjectDescriptor"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html#isApplicable(hudson.model.Descriptor)">isApplicable</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.TopLevelItemDescriptor"><!-- --></A>
@@ -314,6 +323,38 @@ public <A HREF="../../hudson/tasks/Maven.DescriptorImpl.html" title="class in hu
 <DL>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isApplicable(hudson.model.Descriptor)"><!-- --></A><H3>
+isApplicable</H3>
+<PRE>
+public boolean <B>isApplicable</B>(<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&nbsp;descriptor)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html#isApplicable(hudson.model.Descriptor)">AbstractProject.AbstractProjectDescriptor</A></CODE></B></DD>
+<DD><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> subtypes can override this method to veto some <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s
+ from showing up on their configuration screen. This is often useful when you are building
+ a workflow/company specific project type, where you want to limit the number of choices
+ given to the users.
+
+ <p>
+ Some <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s define their own schemes for controlling applicability
+ (such as <A HREF="../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)"><CODE>BuildStepDescriptor.isApplicable(Class)</CODE></A>),
+ This method works like AND in conjunction with them;
+ Both this method and that method need to return true in order for a given <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>
+ to show up for the given <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
+
+ <p>
+ The default implementation returns true for everything.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html#isApplicable(hudson.model.Descriptor)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)"><CODE>BuildStepDescriptor.isApplicable(Class)</CODE></A>, 
+<A HREF="../../hudson/tasks/BuildWrapperDescriptor.html#isApplicable(hudson.model.AbstractProject)"><CODE>BuildWrapperDescriptor.isApplicable(AbstractProject)</CODE></A>, 
+<A HREF="../../hudson/triggers/TriggerDescriptor.html#isApplicable(hudson.model.Item)"><CODE>TriggerDescriptor.isApplicable(Item)</CODE></A></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

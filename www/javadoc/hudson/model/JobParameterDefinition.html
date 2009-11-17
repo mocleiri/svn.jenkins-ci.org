@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JobParameterDefinition (Hudson main module 1.333 API)
+JobParameterDefinition (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JobParameterDefinition (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JobParameterDefinition (Hudson main module 1.333 API)";
+        parent.document.title="JobParameterDefinition (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -95,14 +95,15 @@ Class JobParameterDefinition</H2>
 <PRE>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">hudson.model.ParameterDefinition</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JobParameterDefinition</B>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/SimpleParameterDefinition.html" title="class in hudson.model">hudson.model.SimpleParameterDefinition</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JobParameterDefinition</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>&gt;, java.io.Serializable</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>JobParameterDefinition</B><DT>extends <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></DL>
+<DT><PRE>public class <B>JobParameterDefinition</B><DT>extends <A HREF="../../hudson/model/SimpleParameterDefinition.html" title="class in hudson.model">SimpleParameterDefinition</A></DL>
 </PRE>
 
 <P>
@@ -194,19 +195,28 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/JobParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from a GET (with query string) or POST.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/JobParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">createValue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
             net.sf.json.JSONObject&nbsp;jo)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from a form submission</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobParameterDefinition.html#createValue(java.lang.String)">createValue</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A> from the string representation.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.SimpleParameterDefinition"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/SimpleParameterDefinition.html" title="class in hudson.model">SimpleParameterDefinition</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/SimpleParameterDefinition.html#createValue(hudson.cli.CLICommand, java.lang.String)">createValue</A>, <A HREF="../../hudson/model/SimpleParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ParameterDefinition"><!-- --></A>
@@ -277,21 +287,19 @@ public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.m
 </DL>
 <HR>
 
-<A NAME="createValue(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+<A NAME="createValue(java.lang.String)"><!-- --></A><H3>
 createValue</H3>
 <PRE>
-public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>createValue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+public <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>createValue</B>(java.lang.String&nbsp;value)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">ParameterDefinition</A></CODE></B></DD>
-<DD>Create a parameter value from a GET (with query string) or POST.
- If no value is available in the request, it returns a default value if possible, or null.
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/SimpleParameterDefinition.html#createValue(java.lang.String)">SimpleParameterDefinition</A></CODE></B></DD>
+<DD>Creates a <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A> from the string representation.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/SimpleParameterDefinition.html#createValue(java.lang.String)">createValue</A></CODE> in class <CODE><A HREF="../../hudson/model/SimpleParameterDefinition.html" title="class in hudson.model">SimpleParameterDefinition</A></CODE></DL>
 </DD>
 <DD><DL>
-
-<DT><B>Returns:</B><DD></DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

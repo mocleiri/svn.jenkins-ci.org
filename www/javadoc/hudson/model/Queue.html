@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue (Hudson main module 1.333 API)
+Queue (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson main module 1.333 API)";
+        parent.document.title="Queue (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -794,7 +794,7 @@ public <A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudso
 </DL>
 </DD>
 <DD><DL>
-
+<DT><B>Parameters:</B><DD><CODE>actions</CODE> - For the convenience of the caller, this list can contain null, and those will be silently ignored.
 <DT><B>Returns:</B><DD>null if this task is already in the queue and therefore the add operation was no-op.
       Otherwise indicates the <A HREF="../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><CODE>Queue.WaitingItem</CODE></A> object added, although the nature of the queue
       is that such <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> only captures the state of the item at a particular moment,

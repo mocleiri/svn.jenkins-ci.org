@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateSite.Plugin (Hudson main module 1.333 API)
+UpdateSite.Plugin (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateSite.Plugin (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateSite.Plugin (Hudson main module 1.333 API)";
+        parent.document.title="UpdateSite.Plugin (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -136,6 +136,14 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#requiredCore">requiredCore</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Version of Hudson core this plugin was compiled against.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#title">title</A></B></CODE>
 
 <BR>
@@ -236,6 +244,14 @@ java.lang.Object
  value (i.e., it's only directly compatible with that version or later), this will check to
  see if the installed version is older than the compatible-since version.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#isForNewerHudson()">isForNewerHudson</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.UpdateSite.Entry"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -318,6 +334,18 @@ public final java.lang.String <B>compatibleSinceVersion</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="requiredCore"><!-- --></A><H3>
+requiredCore</H3>
+<PRE>
+public final java.lang.String <B>requiredCore</B></PRE>
+<DL>
+<DD>Version of Hudson core this plugin was compiled against.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -384,6 +412,17 @@ public boolean <B>isCompatibleWithInstalledVersion</B>()</PRE>
  If it's not older, or it's not installed, or it's installed but there's no compatibleSinceVersion
  specified, it'll return true.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isForNewerHudson()"><!-- --></A><H3>
+isForNewerHudson</H3>
+<PRE>
+public boolean <B>isForNewerHudson</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

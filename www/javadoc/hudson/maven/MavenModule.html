@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenModule (Hudson core 1.295 API)
+MavenModule (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModule (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModule (Hudson core 1.295 API)";
+        parent.document.title="MavenModule (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -137,7 +137,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.AbstractProjectDescriptor.html" title="class in hudson.model">AbstractProject.AbstractProjectDescriptor</A>, <A HREF="../../hudson/model/AbstractProject.BecauseOfBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfBuildInProgress</A>, <A HREF="../../hudson/model/AbstractProject.BecauseOfUpstreamBuildInProgress.html" title="class in hudson.model">AbstractProject.BecauseOfUpstreamBuildInProgress</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -166,7 +166,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#ABORT">ABORT</A>, <A HREF="../../hudson/model/AbstractProject.html#builds">builds</A>, <A HREF="../../hudson/model/AbstractProject.html#disabled">disabled</A>, <A HREF="../../hudson/model/AbstractProject.html#transientActions">transientActions</A>, <A HREF="../../hudson/model/AbstractProject.html#triggers">triggers</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#ABORT">ABORT</A>, <A HREF="../../hudson/model/AbstractProject.html#blockBuildWhenUpstreamBuilding">blockBuildWhenUpstreamBuilding</A>, <A HREF="../../hudson/model/AbstractProject.html#builds">builds</A>, <A HREF="../../hudson/model/AbstractProject.html#disabled">disabled</A>, <A HREF="../../hudson/model/AbstractProject.html#transientActions">transientActions</A>, <A HREF="../../hudson/model/AbstractProject.html#triggers">triggers</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Job"><!-- --></A>
@@ -187,13 +187,22 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/AbstractItem.html#description">description</A>, <A HREF="../../hudson/model/AbstractItem.html#name">name</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.model.Item"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Item.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Item.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/Item.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Item.html#WORKSPACE">WORKSPACE</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Item.html#BUILD">BUILD</A>, <A HREF="../../hudson/model/Item.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/Item.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/Item.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/Item.html#EXTENDED_READ">EXTENDED_READ</A>, <A HREF="../../hudson/model/Item.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/Item.html#READ">READ</A>, <A HREF="../../hudson/model/Item.html#WORKSPACE">WORKSPACE</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -343,7 +352,7 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relative path to this module's root directory
- from <A HREF="../../hudson/maven/MavenModuleSet.html#getWorkspace()"><CODE>MavenModuleSet.getWorkspace()</CODE></A>.</TD>
+ from the workspace of a <A HREF="../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -360,6 +369,14 @@ java.lang.Object
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this item relative to the parent <A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model"><CODE>ItemGroup</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModule.html#getSubsidiaries()">getSubsidiaries</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computes the list of <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>s that are 'under' this POM filesystem-wise.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -381,19 +398,11 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/maven/MavenModule.html#getWorkspace()">getWorkspace</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the directory where the module is checked out.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Resource.html" title="class in hudson.model">Resource</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/maven/MavenModule.html#getWorkspaceResource()">getWorkspaceResource</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Workspace of a <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> is a part of the parent's workspace.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.319 in <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -486,7 +495,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#_getRuns()">_getRuns</A>, <A HREF="../../hudson/model/AbstractProject.html#addProperty(hudson.model.JobProperty)">addProperty</A>, <A HREF="../../hudson/model/AbstractProject.html#addToList(T, java.util.List)">addToList</A>, <A HREF="../../hudson/model/AbstractProject.html#addTrigger(hudson.triggers.Trigger)">addTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)">buildDescribable</A>, <A HREF="../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)">buildDescribable</A>, <A HREF="../../hudson/model/AbstractProject.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../hudson/model/AbstractProject.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener, java.io.File)">checkout</A>, <A HREF="../../hudson/model/AbstractProject.html#createExecutable()">createExecutable</A>, <A HREF="../../hudson/model/AbstractProject.html#createHistoryWidget()">createHistoryWidget</A>, <A HREF="../../hudson/model/AbstractProject.html#doBuild(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#doBuildWithParameters(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildWithParameters</A>, <A HREF="../../hudson/model/AbstractProject.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/AbstractProject.html#doDisable(org.kohsuke.stapler.StaplerResponse)">doDisable</A>, <A HREF="../../hudson/model/AbstractProject.html#doDoWipeOutWorkspace(org.kohsuke.stapler.StaplerResponse)">doDoWipeOutWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#doEnable(org.kohsuke.stapler.StaplerResponse)">doEnable</A>, <A HREF="../../hudson/model/AbstractProject.html#doPolling(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doPolling</A>, <A HREF="../../hudson/model/AbstractProject.html#doRssChangelog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssChangelog</A>, <A HREF="../../hudson/model/AbstractProject.html#doWs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doWs</A>, <A HREF="../../hudson/model/AbstractProject.html#findNearest(java.lang.String)">findNearest</A>, <A HREF="../../hudson/model/AbstractProject.html#getActions()">getActions</A>, <A HREF="../../hudson/model/AbstractProject.html#getAuthToken()">getAuthToken</A>, <A HREF="../../hudson/model/AbstractProject.html#getBuildTriggerUpstreamProjects()">getBuildTriggerUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getDownstreamProjects()">getDownstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../hudson/model/AbstractProject.html#getHasCustomQuietPeriod()">getHasCustomQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getIconColor()">getIconColor</A>, <A HREF="../../hudson/model/AbstractProject.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/AbstractProject.html#getModuleRoot()">getModuleRoot</A>, <A HREF="../../hudson/model/AbstractProject.html#getModuleRoots()">getModuleRoots</A>, <A HREF="../../hudson/model/AbstractProject.html#getProminentActions()">getProminentActions</A>, <A HREF="../../hudson/model/AbstractProject.html#getQueueItem()">getQueueItem</A>, <A HREF="../../hudson/model/AbstractProject.html#getQuietPeriod()">getQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getRelationship(hudson.model.AbstractProject)">getRelationship</A>, <A HREF="../../hudson/model/AbstractProject.html#getResourceActivities()">getResourceActivities</A>, <A HREF="../../hudson/model/AbstractProject.html#getResourceList()">getResourceList</A>, <A HREF="../../hudson/model/AbstractProject.html#getRootProject()">getRootProject</A>, <A HREF="../../hudson/model/AbstractProject.html#getScm()">getScm</A>, <A HREF="../../hudson/model/AbstractProject.html#getTransitiveDownstreamProjects()">getTransitiveDownstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getTransitiveUpstreamProjects()">getTransitiveUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getTrigger(java.lang.Class)">getTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#getTriggers()">getTriggers</A>, <A HREF="../../hudson/model/AbstractProject.html#getUpstreamProjects()">getUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../hudson/model/AbstractProject.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../hudson/model/AbstractProject.html#hasParticipant(hudson.model.User)">hasParticipant</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuildable()">isBuildable</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuildBlocked()">isBuildBlocked</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuilding()">isBuilding</A>, <A HREF="../../hudson/model/AbstractProject.html#isConfigurable()">isConfigurable</A>, <A HREF="../../hudson/model/AbstractProject.html#isDisabled()">isDisabled</A>, <A HREF="../../hudson/model/AbstractProject.html#isInQueue()">isInQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#isParameterized()">isParameterized</A>, <A HREF="../../hudson/model/AbstractProject.html#loadBuild(java.io.File)">loadBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#makeDisabled(boolean)">makeDisabled</A>, <A HREF="../../hudson/model/AbstractProject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)">pollSCMChanges</A>, <A HREF="../../hudson/model/AbstractProject.html#removeFromList(hudson.model.Descriptor, java.util.List)">removeFromList</A>, <A HREF="../../hudson/model/AbstractProject.html#removeRun(R)">removeRun</A>, <A HREF="../../hudson/model/AbstractProject.html#removeTrigger(hudson.triggers.TriggerDescriptor)">removeTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild()">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause, hudson.model.Action...)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int)">scheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause)">scheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause, hudson.model.Action...)">scheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#schedulePolling()">schedulePolling</A>, <A HREF="../../hudson/model/AbstractProject.html#setAssignedLabel(hudson.model.Label)">setAssignedLabel</A>, <A HREF="../../hudson/model/AbstractProject.html#setJDK(hudson.model.JDK)">setJDK</A>, <A HREF="../../hudson/model/AbstractProject.html#setScm(hudson.scm.SCM)">setScm</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#_getRuns()">_getRuns</A>, <A HREF="../../hudson/model/AbstractProject.html#addProperty(hudson.model.JobProperty)">addProperty</A>, <A HREF="../../hudson/model/AbstractProject.html#addToList(T, java.util.List)">addToList</A>, <A HREF="../../hudson/model/AbstractProject.html#addTrigger(hudson.triggers.Trigger)">addTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#blockBuildWhenUpstreamBuilding()">blockBuildWhenUpstreamBuilding</A>, <A HREF="../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)">buildDescribable</A>, <A HREF="../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)">buildDescribable</A>, <A HREF="../../hudson/model/AbstractProject.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../hudson/model/AbstractProject.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener, java.io.File)">checkout</A>, <A HREF="../../hudson/model/AbstractProject.html#createExecutable()">createExecutable</A>, <A HREF="../../hudson/model/AbstractProject.html#createHistoryWidget()">createHistoryWidget</A>, <A HREF="../../hudson/model/AbstractProject.html#disable()">disable</A>, <A HREF="../../hudson/model/AbstractProject.html#doBuild(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#doBuildWithParameters(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildWithParameters</A>, <A HREF="../../hudson/model/AbstractProject.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#doCheckRetryCount(java.lang.String)">doCheckRetryCount</A>, <A HREF="../../hudson/model/AbstractProject.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A>, <A HREF="../../hudson/model/AbstractProject.html#doDisable()">doDisable</A>, <A HREF="../../hudson/model/AbstractProject.html#doDoWipeOutWorkspace()">doDoWipeOutWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#doEnable()">doEnable</A>, <A HREF="../../hudson/model/AbstractProject.html#doPolling(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doPolling</A>, <A HREF="../../hudson/model/AbstractProject.html#doRssChangelog(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssChangelog</A>, <A HREF="../../hudson/model/AbstractProject.html#doWs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doWs</A>, <A HREF="../../hudson/model/AbstractProject.html#enable()">enable</A>, <A HREF="../../hudson/model/AbstractProject.html#findNearest(java.lang.String)">findNearest</A>, <A HREF="../../hudson/model/AbstractProject.html#getActions()">getActions</A>, <A HREF="../../hudson/model/AbstractProject.html#getAuthToken()">getAuthToken</A>, <A HREF="../../hudson/model/AbstractProject.html#getBuildingUpstream()">getBuildingUpstream</A>, <A HREF="../../hudson/model/AbstractProject.html#getBuildTriggerUpstreamProjects()">getBuildTriggerUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getCauseOfBlockage()">getCauseOfBlockage</A>, <A HREF="../../hudson/model/AbstractProject.html#getDownstreamProjects()">getDownstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../hudson/model/AbstractProject.html#getHasCustomQuietPeriod()">getHasCustomQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getIconColor()">getIconColor</A>, <A HREF="../../hudson/model/AbstractProject.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/AbstractProject.html#getModuleRoot()">getModuleRoot</A>, <A HREF="../../hudson/model/AbstractProject.html#getModuleRoots()">getModuleRoots</A>, <A HREF="../../hudson/model/AbstractProject.html#getProminentActions()">getProminentActions</A>, <A HREF="../../hudson/model/AbstractProject.html#getQueueItem()">getQueueItem</A>, <A HREF="../../hudson/model/AbstractProject.html#getQuietPeriod()">getQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getRelationship(hudson.model.AbstractProject)">getRelationship</A>, <A HREF="../../hudson/model/AbstractProject.html#getResourceActivities()">getResourceActivities</A>, <A HREF="../../hudson/model/AbstractProject.html#getResourceList()">getResourceList</A>, <A HREF="../../hudson/model/AbstractProject.html#getRootProject()">getRootProject</A>, <A HREF="../../hudson/model/AbstractProject.html#getScm()">getScm</A>, <A HREF="../../hudson/model/AbstractProject.html#getScmCheckoutRetryCount()">getScmCheckoutRetryCount</A>, <A HREF="../../hudson/model/AbstractProject.html#getSomeBuildWithWorkspace()">getSomeBuildWithWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#getSomeWorkspace()">getSomeWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#getTransitiveDownstreamProjects()">getTransitiveDownstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getTransitiveUpstreamProjects()">getTransitiveUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getTrigger(java.lang.Class)">getTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#getTriggers()">getTriggers</A>, <A HREF="../../hudson/model/AbstractProject.html#getUpstreamProjects()">getUpstreamProjects</A>, <A HREF="../../hudson/model/AbstractProject.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">getWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../hudson/model/AbstractProject.html#hasCustomScmCheckoutRetryCount()">hasCustomScmCheckoutRetryCount</A>, <A HREF="../../hudson/model/AbstractProject.html#hasParticipant(hudson.model.User)">hasParticipant</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuildable()">isBuildable</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuildBlocked()">isBuildBlocked</A>, <A HREF="../../hudson/model/AbstractProject.html#isConcurrentBuild()">isConcurrentBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#isConfigurable()">isConfigurable</A>, <A HREF="../../hudson/model/AbstractProject.html#isDisabled()">isDisabled</A>, <A HREF="../../hudson/model/AbstractProject.html#isInQueue()">isInQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#isParameterized()">isParameterized</A>, <A HREF="../../hudson/model/AbstractProject.html#loadBuild(java.io.File)">loadBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#makeDisabled(boolean)">makeDisabled</A>, <A HREF="../../hudson/model/AbstractProject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractProject.html#PascheduleBuild2(int, hudson.model.Cause)">PascheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)">pollSCMChanges</A>, <A HREF="../../hudson/model/AbstractProject.html#removeFromList(hudson.model.Descriptor, java.util.List)">removeFromList</A>, <A HREF="../../hudson/model/AbstractProject.html#removeRun(R)">removeRun</A>, <A HREF="../../hudson/model/AbstractProject.html#removeTrigger(hudson.triggers.TriggerDescriptor)">removeTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild()">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause, hudson.model.Action...)">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int)">scheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause, hudson.model.Action...)">scheduleBuild2</A>, <A HREF="../../hudson/model/AbstractProject.html#schedulePolling()">schedulePolling</A>, <A HREF="../../hudson/model/AbstractProject.html#setAssignedLabel(hudson.model.Label)">setAssignedLabel</A>, <A HREF="../../hudson/model/AbstractProject.html#setBlockBuildWhenUpstreamBuilding(boolean)">setBlockBuildWhenUpstreamBuilding</A>, <A HREF="../../hudson/model/AbstractProject.html#setConcurrentBuild(boolean)">setConcurrentBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#setJDK(hudson.model.JDK)">setJDK</A>, <A HREF="../../hudson/model/AbstractProject.html#setScm(hudson.scm.SCM)">setScm</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Job"><!-- --></A>
@@ -495,7 +504,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Job.html#assignBuildNumber()">assignBuildNumber</A>, <A HREF="../../hudson/model/Job.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraph</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraphMap</A>, <A HREF="../../hudson/model/Job.html#doConfigDotXml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigDotXml</A>, <A HREF="../../hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoRename</A>, <A HREF="../../hudson/model/Job.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Job.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Job.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Job.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Job.html#getAllProperties()">getAllProperties</A>, <A HREF="../../hudson/model/Job.html#getBuild(java.lang.String)">getBuild</A>, <A HREF="../../hudson/model/Job.html#getBuildByNumber(int)">getBuildByNumber</A>, <A HREF="../../hudson/model/Job.html#getBuildDir()">getBuildDir</A>, <A HREF="../../hudson/model/Job.html#getBuildHealth()">getBuildHealth</A>, <A HREF="../../hudson/model/Job.html#getBuildHealthReports()">getBuildHealthReports</A>, <A HREF="../../hudson/model/Job.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Job.html#getBuildsAsMap()">getBuildsAsMap</A>, <A HREF="../../hudson/model/Job.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Job.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../hudson/model/Job.html#getFirstBuild()">getFirstBuild</A>, <A HREF="../../hudson/model/Job.html#getLastBuild()">getLastBuild</A>, <A HREF="../../hudson/model/Job.html#getLastCompletedBuild()">getLastCompletedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastFailedBuild()">getLastFailedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastStableBuild()">getLastStableBuild</A>, <A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()">getLastSuccessfulBuild</A>, <A HREF="../../hudson/model/Job.html#getNearestBuild(int)">getNearestBuild</A>, <A HREF="../../hudson/model/Job.html#getNearestOldBuild(int)">getNearestOldBuild</A>, <A HREF="../../hudson/model/Job.html#getNextBuildNumber()">getNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#getPermalinks()">getPermalinks</A>, <A HREF="../../hudson/model/Job.html#getProperties()">getProperties</A>, <A HREF="../../hudson/model/Job.html#getProperty(java.lang.Class)">getProperty</A>, <A HREF="../../hudson/model/Job.html#getWidgets()">getWidgets</A>, <A HREF="../../hudson/model/Job.html#isKeepDependencies()">isKeepDependencies</A>, <A HREF="../../hudson/model/Job.html#logRotate()">logRotate</A>, <A HREF="../../hudson/model/Job.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Job.html#removeProperty(java.lang.Class)">removeProperty</A>, <A HREF="../../hudson/model/Job.html#removeProperty(hudson.model.JobProperty)">removeProperty</A>, <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)">renameTo</A>, <A HREF="../../hudson/model/Job.html#saveNextBuildNumber()">saveNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#updateNextBuildNumber(int)">updateNextBuildNumber</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Job.html#assignBuildNumber()">assignBuildNumber</A>, <A HREF="../../hudson/model/Job.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Job.html#doConfigDotXml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigDotXml</A>, <A HREF="../../hudson/model/Job.html#doDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDescription</A>, <A HREF="../../hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoRename</A>, <A HREF="../../hudson/model/Job.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Job.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Job.html#getACL()">getACL</A>, <A HREF="../../hudson/model/Job.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Job.html#getAllProperties()">getAllProperties</A>, <A HREF="../../hudson/model/Job.html#getBuild(java.lang.String)">getBuild</A>, <A HREF="../../hudson/model/Job.html#getBuildByNumber(int)">getBuildByNumber</A>, <A HREF="../../hudson/model/Job.html#getBuildDir()">getBuildDir</A>, <A HREF="../../hudson/model/Job.html#getBuildForCLI(java.lang.String)">getBuildForCLI</A>, <A HREF="../../hudson/model/Job.html#getBuildHealth()">getBuildHealth</A>, <A HREF="../../hudson/model/Job.html#getBuildHealthReports()">getBuildHealthReports</A>, <A HREF="../../hudson/model/Job.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Job.html#getBuilds(hudson.model.Fingerprint.RangeSet)">getBuilds</A>, <A HREF="../../hudson/model/Job.html#getBuildsAsMap()">getBuildsAsMap</A>, <A HREF="../../hudson/model/Job.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Job.html#getBuildTimeGraph()">getBuildTimeGraph</A>, <A HREF="../../hudson/model/Job.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../hudson/model/Job.html#getFirstBuild()">getFirstBuild</A>, <A HREF="../../hudson/model/Job.html#getLastBuild()">getLastBuild</A>, <A HREF="../../hudson/model/Job.html#getLastCompletedBuild()">getLastCompletedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastFailedBuild()">getLastFailedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastStableBuild()">getLastStableBuild</A>, <A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()">getLastSuccessfulBuild</A>, <A HREF="../../hudson/model/Job.html#getNearestBuild(int)">getNearestBuild</A>, <A HREF="../../hudson/model/Job.html#getNearestOldBuild(int)">getNearestOldBuild</A>, <A HREF="../../hudson/model/Job.html#getNextBuildNumber()">getNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#getPermalinks()">getPermalinks</A>, <A HREF="../../hudson/model/Job.html#getProperties()">getProperties</A>, <A HREF="../../hudson/model/Job.html#getProperty(java.lang.Class)">getProperty</A>, <A HREF="../../hudson/model/Job.html#getWidgets()">getWidgets</A>, <A HREF="../../hudson/model/Job.html#isBuilding()">isBuilding</A>, <A HREF="../../hudson/model/Job.html#isKeepDependencies()">isKeepDependencies</A>, <A HREF="../../hudson/model/Job.html#logRotate()">logRotate</A>, <A HREF="../../hudson/model/Job.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Job.html#removeProperty(java.lang.Class)">removeProperty</A>, <A HREF="../../hudson/model/Job.html#removeProperty(hudson.model.JobProperty)">removeProperty</A>, <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)">renameTo</A>, <A HREF="../../hudson/model/Job.html#saveNextBuildNumber()">saveNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#updateNextBuildNumber(int)">updateNextBuildNumber</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractItem"><!-- --></A>
@@ -504,7 +513,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#save()">save</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#resolveForCLI(java.lang.String)">resolveForCLI</A>, <A HREF="../../hudson/model/AbstractItem.html#save()">save</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
@@ -549,7 +558,7 @@ java.lang.Object
 <TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Item.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/Item.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Item.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/Item.html#getName()">getName</A>, <A HREF="../../hudson/model/Item.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Item.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Item.html#save()">save</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Item.html#delete()">delete</A>, <A HREF="../../hudson/model/Item.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/Item.html#getAllJobs()">getAllJobs</A>, <A HREF="../../hudson/model/Item.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Item.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/Item.html#getName()">getName</A>, <A HREF="../../hudson/model/Item.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Item.html#onCopiedFrom(hudson.model.Item)">onCopiedFrom</A>, <A HREF="../../hudson/model/Item.html#save()">save</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.PersistenceRoot"><!-- --></A>
@@ -659,6 +668,27 @@ public boolean <B>supportsLogRotator</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getSubsidiaries()"><!-- --></A><H3>
+getSubsidiaries</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&gt; <B>getSubsidiaries</B>()</PRE>
+<DL>
+<DD>Computes the list of <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>s that are 'under' this POM filesystem-wise. The list doens't include
+ this module itself.
+
+ <p>
+ Note that this doesn't necessary has anything to do with the module inheritance structure or parent/child
+ relationship of the POM.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="doSetName(java.lang.String)"><!-- --></A><H3>
 doSetName</H3>
 <PRE>
@@ -707,7 +737,7 @@ getRelativePath</H3>
 public java.lang.String <B>getRelativePath</B>()</PRE>
 <DL>
 <DD>Relative path to this module's root directory
- from <A HREF="../../hudson/maven/MavenModuleSet.html#getWorkspace()"><CODE>MavenModuleSet.getWorkspace()</CODE></A>.
+ from the workspace of a <A HREF="../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven"><CODE>MavenModuleSet</CODE></A>.
 
  The path separator is normalized to '/'.
 <P>
@@ -773,24 +803,6 @@ public java.lang.String <B>getUserConfiguredGoals</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getWorkspace()"><!-- --></A><H3>
-getWorkspace</H3>
-<PRE>
-public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getWorkspace</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">AbstractProject</A></CODE></B></DD>
-<DD>Gets the directory where the module is checked out.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">getWorkspace</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>null if the workspace is on a slave that's not connected.</DL>
 </DD>
 </DL>
 <HR>
@@ -921,7 +933,8 @@ public java.lang.String <B>getShortUrl</B>()</PRE>
 <A NAME="getDisplayName()"><!-- --></A><H3>
 getDisplayName</H3>
 <PRE>
-public java.lang.String <B>getDisplayName</B>()</PRE>
+<FONT SIZE="-1">@Exported(visibility=2)
+</FONT>public java.lang.String <B>getDisplayName</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Item.html#getDisplayName()">Item</A></CODE></B></DD>
 <DD>Gets the human readable short name of this item.
@@ -1037,6 +1050,8 @@ getWorkspaceResource</H3>
 <PRE>
 public <A HREF="../../hudson/model/Resource.html" title="class in hudson.model">Resource</A> <B>getWorkspaceResource</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.319 in <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>.</I>
+<P>
 <DD>Workspace of a <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> is a part of the parent's workspace.
  <p>
  That is,  builds are incompatible with any <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>
