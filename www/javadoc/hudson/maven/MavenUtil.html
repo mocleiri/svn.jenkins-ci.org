@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenUtil (Hudson core 1.295 API)
+MavenUtil (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenUtil (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenUtil (Hudson core 1.295 API)";
+        parent.document.title="MavenUtil (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/MavenReportInfo.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/MavenTestDataPublisher.DescriptorImpl.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/maven/Messages.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/maven/MavenUtil.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -180,6 +180,31 @@ java.lang.Object
                java.util.Properties&nbsp;systemProperties)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties, java.lang.String)">createEmbedder</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+               java.io.File&nbsp;mavenHome,
+               java.lang.String&nbsp;profiles,
+               java.util.Properties&nbsp;systemProperties,
+               java.lang.String&nbsp;privateRepository)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties, java.lang.String, java.io.File)">createEmbedder</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+               java.io.File&nbsp;mavenHome,
+               java.lang.String&nbsp;profiles,
+               java.util.Properties&nbsp;systemProperties,
+               java.lang.String&nbsp;privateRepository,
+               java.io.File&nbsp;alternateSettings)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a fresh <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><CODE>MavenEmbedder</CODE></A> instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -189,17 +214,18 @@ java.lang.Object
                java.lang.String&nbsp;profiles)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String, java.util.Properties)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String, Properties)</CODE></A> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties)"><CODE>createEmbedder(TaskListener, File, String, Properties)</CODE></A>  
       or other overloaded versions that infers maven home.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/maven/MavenUtil.html#resolveModules(hudson.maven.MavenEmbedder, org.apache.maven.project.MavenProject, java.lang.String, java.util.Map, hudson.model.BuildListener)">resolveModules</A></B>(<A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>&nbsp;embedder,
+<TD><CODE><B><A HREF="../../hudson/maven/MavenUtil.html#resolveModules(hudson.maven.MavenEmbedder, org.apache.maven.project.MavenProject, java.lang.String, java.util.Map, hudson.model.BuildListener, boolean)">resolveModules</A></B>(<A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>&nbsp;embedder,
                org.apache.maven.project.MavenProject&nbsp;project,
                java.lang.String&nbsp;rel,
                java.util.Map&lt;org.apache.maven.project.MavenProject,java.lang.String&gt;&nbsp;relativePathInfo,
-               <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+               <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+               boolean&nbsp;nonRecursive)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recursively resolves module POMs that are referenced from
@@ -275,7 +301,7 @@ public static <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hu
                                     throws org.apache.maven.embedder.MavenEmbedderException,
                                            java.io.IOException</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/tasks/Maven.MavenInstallation.html#createEmbedder(hudson.model.BuildListener, java.lang.String, java.util.Properties)"><CODE>Maven.MavenInstallation.createEmbedder(BuildListener, String, Properties)</CODE></A> 
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties)"><CODE>createEmbedder(TaskListener, File, String, Properties)</CODE></A>  
       or other overloaded versions that infers maven home.</I>
 <P>
 <DD><DL>
@@ -294,7 +320,8 @@ public static <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hu
                                            <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
                                            java.lang.String&nbsp;profiles)
                                     throws org.apache.maven.embedder.MavenEmbedderException,
-                                           java.io.IOException</PRE>
+                                           java.io.IOException,
+                                           java.lang.InterruptedException</PRE>
 <DL>
 <DD>This version tries to infer mavenHome by looking at a project.
 <P>
@@ -302,7 +329,8 @@ public static <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hu
 
 <DT><B>Throws:</B>
 <DD><CODE>org.apache.maven.embedder.MavenEmbedderException</CODE>
-<DD><CODE>java.io.IOException</CODE><DT><B>See Also:</B><DD><A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String)"><CODE>createEmbedder(TaskListener, File, String)</CODE></A></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE><DT><B>See Also:</B><DD><A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String)"><CODE>createEmbedder(TaskListener, File, String)</CODE></A></DL>
 </DD>
 </DL>
 <HR>
@@ -335,11 +363,8 @@ public static <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hu
                                     throws org.apache.maven.embedder.MavenEmbedderException,
                                            java.io.IOException</PRE>
 <DL>
-<DD>Creates a fresh <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><CODE>MavenEmbedder</CODE></A> instance.
-<P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>listener</CODE> - This is where the log messages from Maven will be recorded.<DD><CODE>mavenHome</CODE> - Directory of the Maven installation. We read <code>conf/settings.xml</code>
-      from here. Can be null.<DD><CODE>profiles</CODE> - Profiles to activate/deactivate. Can be null.<DD><CODE>systemProperties</CODE> - The system properties that the embedded Maven sees. See <A HREF="../../hudson/maven/MavenEmbedder.html#setSystemProperties(java.util.Properties)"><CODE>MavenEmbedder.setSystemProperties(Properties)</CODE></A>.
+
 <DT><B>Throws:</B>
 <DD><CODE>org.apache.maven.embedder.MavenEmbedderException</CODE>
 <DD><CODE>java.io.IOException</CODE></DL>
@@ -347,14 +372,59 @@ public static <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hu
 </DL>
 <HR>
 
-<A NAME="resolveModules(hudson.maven.MavenEmbedder, org.apache.maven.project.MavenProject, java.lang.String, java.util.Map, hudson.model.BuildListener)"><!-- --></A><H3>
+<A NAME="createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties, java.lang.String)"><!-- --></A><H3>
+createEmbedder</H3>
+<PRE>
+public static <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A> <B>createEmbedder</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                                           java.io.File&nbsp;mavenHome,
+                                           java.lang.String&nbsp;profiles,
+                                           java.util.Properties&nbsp;systemProperties,
+                                           java.lang.String&nbsp;privateRepository)
+                                    throws org.apache.maven.embedder.MavenEmbedderException,
+                                           java.io.IOException</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.maven.embedder.MavenEmbedderException</CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties, java.lang.String, java.io.File)"><!-- --></A><H3>
+createEmbedder</H3>
+<PRE>
+public static <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A> <B>createEmbedder</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                                           java.io.File&nbsp;mavenHome,
+                                           java.lang.String&nbsp;profiles,
+                                           java.util.Properties&nbsp;systemProperties,
+                                           java.lang.String&nbsp;privateRepository,
+                                           java.io.File&nbsp;alternateSettings)
+                                    throws org.apache.maven.embedder.MavenEmbedderException,
+                                           java.io.IOException</PRE>
+<DL>
+<DD>Creates a fresh <A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven"><CODE>MavenEmbedder</CODE></A> instance.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>listener</CODE> - This is where the log messages from Maven will be recorded.<DD><CODE>mavenHome</CODE> - Directory of the Maven installation. We read <code>conf/settings.xml</code>
+      from here. Can be null.<DD><CODE>profiles</CODE> - Profiles to activate/deactivate. Can be null.<DD><CODE>systemProperties</CODE> - The system properties that the embedded Maven sees. See <A HREF="../../hudson/maven/MavenEmbedder.html#setSystemProperties(java.util.Properties)"><CODE>MavenEmbedder.setSystemProperties(Properties)</CODE></A>.<DD><CODE>privateRepository</CODE> - Optional private repository to use as the local repository.<DD><CODE>alternateSettings</CODE> - Optional alternate settings.xml file.
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.maven.embedder.MavenEmbedderException</CODE>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="resolveModules(hudson.maven.MavenEmbedder, org.apache.maven.project.MavenProject, java.lang.String, java.util.Map, hudson.model.BuildListener, boolean)"><!-- --></A><H3>
 resolveModules</H3>
 <PRE>
 public static void <B>resolveModules</B>(<A HREF="../../hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>&nbsp;embedder,
                                   org.apache.maven.project.MavenProject&nbsp;project,
                                   java.lang.String&nbsp;rel,
                                   java.util.Map&lt;org.apache.maven.project.MavenProject,java.lang.String&gt;&nbsp;relativePathInfo,
-                                  <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
+                                  <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                                  boolean&nbsp;nonRecursive)
                            throws org.apache.maven.project.ProjectBuildingException,
                                   <A HREF="../../hudson/AbortException.html" title="class in hudson">AbortException</A></PRE>
 <DL>
@@ -402,7 +472,7 @@ public static void <B>resolveModules</B>(<A HREF="../../hudson/maven/MavenEmbedd
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/MavenReportInfo.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/MavenTestDataPublisher.DescriptorImpl.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/maven/Messages.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/maven/MavenUtil.html" target="_top"><B>FRAMES</B></A>  &nbsp;

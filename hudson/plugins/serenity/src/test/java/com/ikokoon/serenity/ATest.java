@@ -1,10 +1,8 @@
 package com.ikokoon.serenity;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -19,11 +17,8 @@ import com.ikokoon.serenity.model.Line;
 import com.ikokoon.serenity.model.Method;
 import com.ikokoon.serenity.model.Package;
 import com.ikokoon.serenity.model.Project;
-import com.ikokoon.serenity.persistence.ADataBase;
 import com.ikokoon.serenity.persistence.IDataBase;
 import com.ikokoon.target.Target;
-import com.ikokoon.target.one.One;
-import com.ikokoon.toolkit.Toolkit;
 
 /**
  * Base class for the tests.
@@ -36,10 +31,10 @@ public abstract class ATest implements IConstants {
 
 	protected static Logger logger;
 
-	protected ADataBase dataBase;
+	protected IDataBase dataBase;
 
-	protected String packageName = One.class.getPackage().getName();
-	protected String className = One.class.getName();
+	protected String packageName = Target.class.getPackage().getName();
+	protected String className = Target.class.getName();
 	protected String methodName = "complexMethod";
 	protected String methodDescription = "methodDescription";
 	protected double lineNumber = 70;
@@ -51,19 +46,18 @@ public abstract class ATest implements IConstants {
 
 	@BeforeClass
 	public static void setup() {
-		URL url = ATest.class.getResource(LOG_4_J_PROPERTIES);
-		if (url != null) {
-			PropertyConfigurator.configure(url);
-		}
+		LoggingConfigurator.configure();
 		logger = Logger.getLogger(ATest.class);
-		logger.info("Loaded logging properties from : " + url);
 		StringBuilder builder = new StringBuilder(CoverageClassAdapter.class.getName());
 		builder.append(";");
 		builder.append(DependencyClassAdapter.class.getName());
 		builder.append(";");
 		builder.append(ComplexityClassAdapter.class.getName());
 		System.setProperty(IConstants.INCLUDED_ADAPTERS_PROPERTY, builder.toString());
-		Configuration.getConfiguration().includedPackages.add(Target.class.getPackage().getName());
+		System.setProperty(IConstants.INCLUDED_PACKAGES_PROPERTY, Target.class.getPackage().getName());
+		Configuration.getConfiguration().includedPackages.add(Transformer.class.getPackage().getName());
+		// Configuration.getConfiguration().excludedPackages.add(Target.class.getPackage().getName());
+		Configuration.getConfiguration().excludedPackages.add(Project.class.getPackage().getName());
 	}
 
 	@Before
@@ -71,14 +65,17 @@ public abstract class ATest implements IConstants {
 		// OdbConfiguration.setDebugEnabled(true);
 		// OdbConfiguration.setAutomaticCloseFileOnExit(true);
 		// OdbConfiguration.setDisplayWarnings(true);
-		dataBase = (ADataBase) IDataBase.DataBase.getDataBase(IConstants.DATABASE_FILE, true);
-		Project project = (Project) dataBase.find(Toolkit.hash(Project.class.getName()));
-		project.getChildren().clear();
-		project.getIndex().clear();
-		project.getIndex().add(project);
+		if (dataBase == null) {
+			dataBase = IDataBase.DataBaseManager.getDataBase(IConstants.DATABASE_FILE, false);
+		}
+		// Project<?, ?> project = (Project<?, ?>) dataBase.find(Toolkit.hash(Project.class.getName()));
+		// project.getChildren().clear();
+		// project.getIndex().clear();
+		// project.getIndex().add(project);
 	}
 
-	protected Package getPackage() {
+	@SuppressWarnings("unchecked")
+	protected Package<?, ?> getPackage() {
 		Package pakkage = new Package();
 		pakkage.setAbstractness(1d);
 		pakkage.setAfferent(1d);
@@ -87,7 +84,7 @@ public abstract class ATest implements IConstants {
 		pakkage.setCoverage(1d);
 		pakkage.setDistance(1d);
 		pakkage.setEfferent(1d);
-		pakkage.setImplementations(1d);
+		pakkage.setImplement(1d);
 		pakkage.setInterfaces(1d);
 		pakkage.setName(packageName);
 		pakkage.setStability(1d);
@@ -95,7 +92,8 @@ public abstract class ATest implements IConstants {
 		return pakkage;
 	}
 
-	protected Class getClass(Package pakkage) {
+	@SuppressWarnings("unchecked")
+	protected Class<?, ?> getClass(Package<?, ?> pakkage) {
 		Class klass = new Class();
 		klass.setParent(pakkage);
 		pakkage.getChildren().add(klass);
@@ -120,7 +118,8 @@ public abstract class ATest implements IConstants {
 		return klass;
 	}
 
-	protected Method getMethod(Class klass) {
+	@SuppressWarnings("unchecked")
+	protected Method<?, ?> getMethod(Class<?, ?> klass) {
 		Method method = new Method();
 		method.setParent(klass);
 		method.setClassName(klass.getName());
@@ -134,7 +133,8 @@ public abstract class ATest implements IConstants {
 		return method;
 	}
 
-	protected Line getLine(Method method) {
+	@SuppressWarnings("unchecked")
+	protected Line<?, ?> getLine(Method<?, ?> method) {
 		Line line = new Line();
 		line.setCounter(1d);
 		line.setNumber(lineNumber);

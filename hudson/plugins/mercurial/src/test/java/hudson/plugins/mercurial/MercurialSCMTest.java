@@ -18,7 +18,6 @@ import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.recipes.LocalData;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -26,7 +25,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import org.jvnet.hudson.test.Bug;
 
 /**
@@ -61,18 +59,18 @@ public class MercurialSCMTest extends HudsonTestCase {
         touchAndCommit("init");
         hg("tag", "init");
         touchAndCommit("default-1");
-        hg("up", "-C", "init");
+        hg("update", "--clean", "init");
         hg("branch", "b");
         touchAndCommit("b-1");
         FreeStyleProject p = createFreeStyleProject();
         // Clone off b.
         p.setScm(new MercurialSCM(null, repo.getPath(), "b", null, null, false, false));
         buildAndCheck(p, "b-1");
-        hg("up", "-C", "default");
+        hg("update", "--clean", "default");
         touchAndCommit("default-2");
         // Changes in default should be ignored.
         assertFalse(p.pollSCMChanges(new StreamTaskListener(System.out)));
-        hg("up", "-C", "b");
+        hg("update", "--clean", "b");
         touchAndCommit("b-2");
         // But changes in b should be pulled.
         assertTrue(p.pollSCMChanges(new StreamTaskListener(System.out)));
@@ -151,7 +149,7 @@ public class MercurialSCMTest extends HudsonTestCase {
             toCreate.touch(0);
             hg("add", name);
         }
-        hg("commit", "-m", "added " + Arrays.toString(names));
+        hg("commit", "--message", "added " + Arrays.toString(names));
     }
 
     private void buildAndCheck(FreeStyleProject p, String name) throws Exception {

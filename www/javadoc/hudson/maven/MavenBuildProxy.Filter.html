@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenBuildProxy.Filter (Hudson core 1.295 API)
+MavenBuildProxy.Filter (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenBuildProxy.Filter (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenBuildProxy.Filter (Hudson core 1.295 API)";
+        parent.document.title="MavenBuildProxy.Filter (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -100,6 +100,9 @@ java.lang.Object
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>, java.io.Serializable</DD>
 </DL>
 <DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/maven/MavenBuildProxy2.Filter.html" title="class in hudson.maven">MavenBuildProxy2.Filter</A></DD>
+</DL>
+<DL>
 <DT><B>Enclosing interface:</B><DD><A HREF="../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A></DD>
 </DL>
 <HR>
@@ -133,7 +136,7 @@ Filter for <A HREF="../../hudson/maven/MavenBuildProxy.html" title="interface in
 <TD><CODE><B><A HREF="../../hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven">MavenBuildProxy.Filter.AsyncInvoker</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="https://hudson.dev.java.net/pom/remoting/apidocs/hudson/remoting/Callable.html?is-external=true" title="class or interface in hudson.remoting"><CODE>Callable</CODE></A> for invoking <A HREF="../../hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><CODE>MavenBuildProxy.BuildCallable</CODE></A> asynchronously.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> for invoking <A HREF="../../hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><CODE>MavenBuildProxy.BuildCallable</CODE></A> asynchronously.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.maven.MavenBuildProxy"><!-- --></A>
@@ -263,6 +266,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenBuildProxy.Filter.html#isArchivingDisabled()">isArchivingDisabled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, artifacts will not actually be archived to master.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -522,6 +533,23 @@ public long <B>getMilliSecsSinceBuildStart</B>()</PRE>
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/maven/MavenBuildProxy.html#getMilliSecsSinceBuildStart()">getMilliSecsSinceBuildStart</A></CODE> in interface <CODE><A HREF="../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isArchivingDisabled()"><!-- --></A><H3>
+isArchivingDisabled</H3>
+<PRE>
+public boolean <B>isArchivingDisabled</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/maven/MavenBuildProxy.html#isArchivingDisabled()">MavenBuildProxy</A></CODE></B></DD>
+<DD>If true, artifacts will not actually be archived to master. Calls <A HREF="../../hudson/maven/MavenModuleSet.html#isArchivingDisabled()"><CODE>MavenModuleSet.isArchivingDisabled()</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/maven/MavenBuildProxy.html#isArchivingDisabled()">isArchivingDisabled</A></CODE> in interface <CODE><A HREF="../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

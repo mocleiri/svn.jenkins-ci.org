@@ -17,8 +17,16 @@
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
   <li class=bug>
+    Space in axis value for matrix type project was lost on reconfiguration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2360">issue 2360</a>)
+  <li class=bug>
+    Remember me did not work with unix authentication.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3057">issue 3057</a>)
+  <li class=bug>
     Node variables not passed through to Maven jobs.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4030">issue 4030</a>)
+  <li class=bug>
+    Core version in coreWarning message was null on PluginManager.
   <li class=rfe>
     Hudson's UDP broadcast/discovery now supports IP multicast.
 </ul>
@@ -26,8 +34,14 @@
 
 <!-- these changes are controlled by the release process. DO NOT MODIFY -->
 <div style="display:none;"><!--=BEGIN=-->
-<h3><a name=v1.334>What's new in 1.334</a></h3>
+<h3><a name=v1.335>What's new in 1.335</a></h3>
+<!--=RC-CHANGES=-->
+</div><!--=END=-->
+<h3><a name=v1.334>What's new in 1.334</a> (2009/11/16)</h3>
 <ul class=image>
+  <li class='major bug'>
+    Fixed a possible exception in submitting forms and obtaining update center metadata with Winstone in 1.333.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4804">issue 4804</a>)
   <li class='major bug'>
     Remoting layer was unable to kill remote processes. Prevented Mercurial plugin from implementing poll timeout on slaves.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4611">issue 4611</a>)
@@ -55,16 +69,13 @@
     Fixed <tt>OutOfMemoryError</tt> in Winp
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4058">issue 4058</a>)
   <li class=bug>
-    Fixed a possible exception in submitting forms and obtaining update center metadata with Winstone in 1.333.
-    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4804">issue 4804</a>)
-  <li class=bug>
     Write log message and ignore unrecognized permissions when loading XML.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4573">issue 4573</a>)
   <li class=bug>
     Fix in stapler so we don't redirect to "." which causes problem in some containers.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4787">issue 4787</a>)
   <li class=bug>
-    Don't record duplicate cause entries for a build.
+    List counts for duplicate cause entries for a build rather than listing many times.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4831">issue 4831</a>)
   <li class=rfe>
     Plugin manager now shows warning for upgrade/install of plugins into a Hudson that
@@ -79,7 +90,6 @@
   <li class=rfe>
     Added new SaveableListener to be called when objects implementing Saveable are saved.
 </ul>
-</div><!--=END=-->
 <h3><a name=v1.333>What's new in 1.333</a> (2009/11/09)</h3>
 <ul class=image>
   <li class=bug>
@@ -1285,6 +1295,7 @@
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3044">issue 3044</a>)
   <li class=bug>
     In matrix build, show axes used for that build rather than currently configured axes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2407">issue 2407</a>)
   <li class=rfe>
     Don't let containers persist authentication information, which may not deserialize correctly.
     (<a href="http://www.nabble.com/ActiveDirectory-Plugin%3A-ClassNotFoundException-while-loading--persisted-sessions%3A-td22085140.html">report</a>)

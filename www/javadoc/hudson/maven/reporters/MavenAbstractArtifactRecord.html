@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenAbstractArtifactRecord (Hudson core 1.295 API)
+MavenAbstractArtifactRecord (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenAbstractArtifactRecord (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenAbstractArtifactRecord (Hudson core 1.295 API)";
+        parent.document.title="MavenAbstractArtifactRecord (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -221,10 +221,8 @@ UI to redeploy artifacts after the fact.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenAbstractArtifactRecord.html#doRedeploy(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String, boolean)">doRedeploy</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-           org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-           java.lang.String&nbsp;id,
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenAbstractArtifactRecord.html#doRedeploy(java.lang.String, java.lang.String, boolean)">doRedeploy</A></B>(java.lang.String&nbsp;id,
            java.lang.String&nbsp;repositoryUrl,
            boolean&nbsp;uniqueVersion)</CODE>
 
@@ -510,6 +508,10 @@ public final java.lang.String <B>getUrlName</B>()</PRE>
  <p>
  The returned string can be an absolute URL, like "http://www.sun.com/",
  which is useful for directly connecting to external systems.
+
+ <p>
+ If the returned string starts with '/', like '/foo', then it's assumed to be
+ relative to the context path of the Hudson webapp.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE> in interface <CODE><A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>
@@ -583,19 +585,17 @@ public java.lang.Object <B>getDynamic</B>(java.lang.String&nbsp;token,
 </DL>
 <HR>
 
-<A NAME="doRedeploy(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String, boolean)"><!-- --></A><H3>
+<A NAME="doRedeploy(java.lang.String, java.lang.String, boolean)"><!-- --></A><H3>
 doRedeploy</H3>
 <PRE>
-public final void <B>doRedeploy</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                             <FONT SIZE="-1">@QueryParameter(value="redeploy.id")</FONT>
-                             java.lang.String&nbsp;id,
-                             <FONT SIZE="-1">@QueryParameter(value="redeploy.url")</FONT>
-                             java.lang.String&nbsp;repositoryUrl,
-                             <FONT SIZE="-1">@QueryParameter(value="redeploy.uniqueVersion")</FONT>
-                             boolean&nbsp;uniqueVersion)
-                      throws javax.servlet.ServletException,
-                             java.io.IOException</PRE>
+public final org.kohsuke.stapler.HttpResponse <B>doRedeploy</B>(<FONT SIZE="-1">@QueryParameter(value="_.id")</FONT>
+                                                         java.lang.String&nbsp;id,
+                                                         <FONT SIZE="-1">@QueryParameter(value="_.url")</FONT>
+                                                         java.lang.String&nbsp;repositoryUrl,
+                                                         <FONT SIZE="-1">@QueryParameter(value="_.uniqueVersion")</FONT>
+                                                         boolean&nbsp;uniqueVersion)
+                                                  throws javax.servlet.ServletException,
+                                                         java.io.IOException</PRE>
 <DL>
 <DD>Performs a redeployment.
 <P>

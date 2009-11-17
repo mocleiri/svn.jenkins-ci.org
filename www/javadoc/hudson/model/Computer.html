@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Computer (Hudson main module 1.333 API)
+Computer (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson main module 1.333 API)";
+        parent.document.title="Computer (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -252,6 +252,38 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#cliConnect(boolean)">cliConnect</A></B>(boolean&nbsp;force)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI command to reconnect this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#cliDisconnect(java.lang.String)">cliDisconnect</A></B>(java.lang.String&nbsp;cause)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI command to disconnects this node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#cliOffline(java.lang.String)">cliOffline</A></B>(java.lang.String&nbsp;cause)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLI command to mark the node offline.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#cliOnline()">cliOnline</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.concurrent.Future&lt;?&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#connect(boolean)">connect</A></B>(boolean&nbsp;forceReconnect)</CODE>
 
@@ -319,8 +351,8 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doDoDelete(org.kohsuke.stapler.StaplerResponse)">doDoDelete</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Computer.html#doDoDelete()">doDoDelete</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Really deletes the slave.</TD>
@@ -794,8 +826,7 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
                       <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;cause)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks the computer as temporarily offline.This retains the underlying
- <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> connection, but prevent builds from executing.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks the computer as temporarily offline.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1229,6 +1260,28 @@ protected abstract java.util.concurrent.Future&lt;?&gt; <B>_connect</B>(boolean&
 </DL>
 <HR>
 
+<A NAME="cliConnect(boolean)"><!-- --></A><H3>
+cliConnect</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="connect-node")
+</FONT>public void <B>cliConnect</B>(boolean&nbsp;force)
+                throws java.util.concurrent.ExecutionException,
+                       java.lang.InterruptedException</PRE>
+<DL>
+<DD>CLI command to reconnect this node.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.util.concurrent.ExecutionException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getConnectTime()"><!-- --></A><H3>
 getConnectTime</H3>
 <PRE>
@@ -1283,6 +1336,70 @@ public java.util.concurrent.Future&lt;?&gt; <B>disconnect</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cliDisconnect(java.lang.String)"><!-- --></A><H3>
+cliDisconnect</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="disconnect-node")
+</FONT>public void <B>cliDisconnect</B>(java.lang.String&nbsp;cause)
+                   throws java.util.concurrent.ExecutionException,
+                          java.lang.InterruptedException</PRE>
+<DL>
+<DD>CLI command to disconnects this node.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.util.concurrent.ExecutionException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cliOffline(java.lang.String)"><!-- --></A><H3>
+cliOffline</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="offline-node")
+</FONT>public void <B>cliOffline</B>(java.lang.String&nbsp;cause)
+                throws java.util.concurrent.ExecutionException,
+                       java.lang.InterruptedException</PRE>
+<DL>
+<DD>CLI command to mark the node offline.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.util.concurrent.ExecutionException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cliOnline()"><!-- --></A><H3>
+cliOnline</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="online-node")
+</FONT>public void <B>cliOnline</B>()
+               throws java.util.concurrent.ExecutionException,
+                      java.lang.InterruptedException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.util.concurrent.ExecutionException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1565,7 +1682,7 @@ setTemporarilyOffline</H3>
 public void <B>setTemporarilyOffline</B>(boolean&nbsp;temporarilyOffline,
                                   <A HREF="../../hudson/slaves/OfflineCause.html" title="class in hudson.slaves">OfflineCause</A>&nbsp;cause)</PRE>
 <DL>
-<DD>Marks the computer as temporarily offline.This retains the underlying
+<DD>Marks the computer as temporarily offline. This retains the underlying
  <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> connection, but prevent builds from executing.
 <P>
 <DD><DL>
@@ -2236,11 +2353,12 @@ public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doDoDelete(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doDoDelete()"><!-- --></A><H3>
 doDoDelete</H3>
 <PRE>
-public void <B>doDoDelete</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                throws java.io.IOException</PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="delete-node")
+</FONT>public org.kohsuke.stapler.HttpResponse <B>doDoDelete</B>()
+                                            throws java.io.IOException</PRE>
 <DL>
 <DD>Really deletes the slave.
 <P>

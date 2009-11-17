@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenSiteArchiver.SiteAction (Hudson core 1.295 API)
+MavenSiteArchiver.SiteAction (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenSiteArchiver.SiteAction (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenSiteArchiver.SiteAction (Hudson core 1.295 API)";
+        parent.document.title="MavenSiteArchiver.SiteAction (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -138,12 +138,11 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.SiteAction.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDynamic</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.SiteAction.html#doDynamic()">doDynamic</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serves the site.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -228,6 +227,10 @@ public java.lang.String <B>getUrlName</B>()</PRE>
  <p>
  The returned string can be an absolute URL, like "http://www.sun.com/",
  which is useful for directly connecting to external systems.
+
+ <p>
+ If the returned string starts with '/', like '/foo', then it's assumed to be
+ relative to the context path of the Hudson webapp.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/model/Action.html#getUrlName()">getUrlName</A></CODE> in interface <CODE><A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></DL>
@@ -290,24 +293,18 @@ public java.lang.String <B>getIconFileName</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doDynamic()"><!-- --></A><H3>
 doDynamic</H3>
 <PRE>
-public void <B>doDynamic</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-               throws java.io.IOException,
-                      javax.servlet.ServletException,
-                      java.lang.InterruptedException</PRE>
+public <A HREF="../../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A> <B>doDynamic</B>()</PRE>
 <DL>
+<DD>Serves the site.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>javax.servlet.ServletException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

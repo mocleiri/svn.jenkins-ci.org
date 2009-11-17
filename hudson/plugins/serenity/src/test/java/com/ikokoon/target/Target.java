@@ -1,11 +1,8 @@
 package com.ikokoon.target;
 
-import org.apache.log4j.Logger;
+import java.io.Serializable;
 
-import com.ikokoon.target.one.One;
-import com.ikokoon.target.three.Four;
-import com.ikokoon.target.three.Three;
-import com.ikokoon.target.two.Two;
+import org.apache.log4j.Logger;
 
 /**
  * This is the test class for the coverage functionality.
@@ -14,10 +11,10 @@ import com.ikokoon.target.two.Two;
  * @since 12.07.09
  * @version 01.00
  */
-public class Target implements ITarget {
+public class Target implements ITarget, Serializable {
 
 	/** The logger for the class. */
-	private Logger logger = Logger.getLogger(Target.class);
+	private transient Logger logger = Logger.getLogger(Target.class);
 
 	@SuppressWarnings("unused")
 	private String name;
@@ -26,16 +23,6 @@ public class Target implements ITarget {
 	 * Constructor.
 	 */
 	public Target() {
-		One one = new One();
-		Two two = new Two();
-		Three three = new Three();
-		Four four = new Four();
-
-		one.setTwo();
-		two.getOne();
-		three.execute();
-		four.execute();
-		four.execute(this);
 	}
 
 	/**

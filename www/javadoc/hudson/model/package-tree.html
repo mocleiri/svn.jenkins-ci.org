@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model Class Hierarchy (Hudson main module 1.333 API)
+hudson.model Class Hierarchy (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model Class Hierarchy (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model Class Hierarchy (Hudson main module 1.333 API)";
+        parent.document.title="hudson.model Class Hierarchy (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/agent/package-tree.html"><B>PREV</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/reporters/package-tree.html"><B>PREV</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/listeners/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -193,7 +193,8 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Descriptor.PropertyType.html" title="class in hudson.model"><B>Descriptor.PropertyType</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><B>DirectoryBrowserSupport</B></A> (implements org.kohsuke.stapler.HttpResponse)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model"><B>DirectoryBrowserSupport.Path</B></A> (implements java.io.Serializable)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/DownloadService.Downloadable.html" title="class in hudson.model"><B>DownloadService.Downloadable</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Environment.html" title="class in hudson.model"><B>Environment</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Fingerprint.html" title="class in hudson.model"><B>Fingerprint</B></A> (implements hudson.model.<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Environment.html" title="class in hudson.model"><B>Environment</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/FileParameterValue.FileItemImpl.html" title="class in hudson.model"><B>FileParameterValue.FileItemImpl</B></A> (implements org.apache.commons.fileupload.FileItem)
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Fingerprint.html" title="class in hudson.model"><B>Fingerprint</B></A> (implements hudson.model.<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model"><B>Fingerprint.BuildPtr</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Fingerprint.Range.html" title="class in hudson.model"><B>Fingerprint.Range</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Fingerprint.RangeItem.html" title="class in hudson.model"><B>Fingerprint.RangeItem</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><B>Fingerprint.RangeSet</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/HealthReport.html" title="class in hudson.model"><B>HealthReport</B></A> (implements java.lang.Comparable&lt;T&gt;, java.io.Serializable)
 <LI TYPE="circle">java.io.InputStream (implements java.io.Closeable)
 <UL>
@@ -223,8 +224,10 @@ Class Hierarchy
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><B>ParameterDefinition</B></A> (implements hudson.model.<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.io.Serializable)
 <UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/BooleanParameterDefinition.html" title="class in hudson.model"><B>BooleanParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ChoiceParameterDefinition.html" title="class in hudson.model"><B>ChoiceParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/FileParameterDefinition.html" title="class in hudson.model"><B>FileParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model"><B>JobParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/RunParameterDefinition.html" title="class in hudson.model"><B>RunParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/StringParameterDefinition.html" title="class in hudson.model"><B>StringParameterDefinition</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/FileParameterDefinition.html" title="class in hudson.model"><B>FileParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/SimpleParameterDefinition.html" title="class in hudson.model"><B>SimpleParameterDefinition</B></A><UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/BooleanParameterDefinition.html" title="class in hudson.model"><B>BooleanParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ChoiceParameterDefinition.html" title="class in hudson.model"><B>ChoiceParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model"><B>JobParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/RunParameterDefinition.html" title="class in hudson.model"><B>RunParameterDefinition</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/StringParameterDefinition.html" title="class in hudson.model"><B>StringParameterDefinition</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/PasswordParameterDefinition.html" title="class in hudson.model"><B>PasswordParameterDefinition</B></A></UL>
+</UL>
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ParametersAction.html" title="class in hudson.model"><B>ParametersAction</B></A> (implements hudson.model.<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>, hudson.model.<A HREF="../../hudson/model/EnvironmentContributingAction.html" title="interface in hudson.model">EnvironmentContributingAction</A>, java.lang.Iterable&lt;T&gt;, hudson.model.<A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model"><B>ParameterValue</B></A> (implements java.io.Serializable)
@@ -421,7 +424,7 @@ Enum Hierarchy
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/agent/package-tree.html"><B>PREV</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/reporters/package-tree.html"><B>PREV</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/model/listeners/package-tree.html"><B>NEXT</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/package-tree.html" target="_top"><B>FRAMES</B></A>  &nbsp;

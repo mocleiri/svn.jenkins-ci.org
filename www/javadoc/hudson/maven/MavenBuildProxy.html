@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenBuildProxy (Hudson core 1.295 API)
+MavenBuildProxy (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenBuildProxy (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenBuildProxy (Hudson core 1.295 API)";
+        parent.document.title="MavenBuildProxy (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,10 @@ hudson.maven</FONT>
 <BR>
 Interface MavenBuildProxy</H2>
 <DL>
-<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/maven/MavenBuildProxy.Filter.html" title="class in hudson.maven">MavenBuildProxy.Filter</A></DD>
+<DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/maven/MavenBuildProxy2.html" title="interface in hudson.maven">MavenBuildProxy2</A></DD>
+</DL>
+<DL>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/maven/MavenBuildProxy.Filter.html" title="class in hudson.maven">MavenBuildProxy.Filter</A>, <A HREF="../../hudson/maven/MavenBuildProxy2.Filter.html" title="class in hudson.maven">MavenBuildProxy2.Filter</A></DD>
 </DL>
 <HR>
 <DL>
@@ -220,6 +223,14 @@ V</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenBuildProxy.html#isArchivingDisabled()">isArchivingDisabled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, artifacts will not actually be archived to master.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -401,6 +412,19 @@ long <B>getMilliSecsSinceBuildStart</B>()</PRE>
  Where the clock skew is involved between the master and the Maven JVM, comparing
  current time on Maven JVM with <A HREF="../../hudson/maven/MavenBuildProxy.html#getTimestamp()"><CODE>getTimestamp()</CODE></A> could be problematic,
  but this value is more robust.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isArchivingDisabled()"><!-- --></A><H3>
+isArchivingDisabled</H3>
+<PRE>
+boolean <B>isArchivingDisabled</B>()</PRE>
+<DL>
+<DD>If true, artifacts will not actually be archived to master. Calls <A HREF="../../hudson/maven/MavenModuleSet.html#isArchivingDisabled()"><CODE>MavenModuleSet.isArchivingDisabled()</CODE></A>.
 <P>
 <DD><DL>
 </DL>

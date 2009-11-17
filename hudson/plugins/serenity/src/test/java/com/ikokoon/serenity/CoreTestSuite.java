@@ -19,19 +19,19 @@ package com.ikokoon.serenity;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import com.ikokoon.serenity.persistence.DataBaseXmlTest;
+import com.ikokoon.serenity.hudson.modeller.ModellerTest;
+import com.ikokoon.serenity.persistence.DataBaseRamTest;
 import com.ikokoon.serenity.persistence.PermutationsTest;
 import com.ikokoon.serenity.process.AccumulatorTest;
 import com.ikokoon.serenity.process.AggregatorTest;
-import com.ikokoon.target.TargetTest;
 import com.ikokoon.toolkit.ToolkitTest;
 
 /**
  * @author Michael Couck
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AccumulatorTest.class, AggregatorTest.class, CollectorTest.class, TransformerTest.class, PermutationsTest.class,
-		ToolkitTest.class, TargetTest.class, DataBaseXmlTest.class })
+@Suite.SuiteClasses( { ModellerTest.class, AccumulatorTest.class, AggregatorTest.class, CollectorTest.class, TransformerTest.class,
+		PermutationsTest.class, ToolkitTest.class, DataBaseRamTest.class })
 public class CoreTestSuite {
 	// DataBaseDb4oTest.class
 }

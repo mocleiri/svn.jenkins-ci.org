@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-RedeployPublisher (Hudson core 1.295 API)
+RedeployPublisher (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RedeployPublisher (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RedeployPublisher (Hudson core 1.295 API)";
+        parent.document.title="RedeployPublisher (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/ProcessCache.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/ProcessCache.NewProcess.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/maven/RedeployPublisher.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -248,6 +248,14 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/tasks/BuildStepMonitor.html" title="enum in hudson.tasks">BuildStepMonitor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/RedeployPublisher.html#getRequiredMonitorService()">getRequiredMonitorService</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Declares the scope of the synchronization monitor this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> expects from outside.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/maven/RedeployPublisher.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
         <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
@@ -429,6 +437,77 @@ protected <A HREF="../../hudson/maven/reporters/MavenAbstractArtifactRecord.html
 </DL>
 </DD>
 </DL>
+<HR>
+
+<A NAME="getRequiredMonitorService()"><!-- --></A><H3>
+getRequiredMonitorService</H3>
+<PRE>
+public <A HREF="../../hudson/tasks/BuildStepMonitor.html" title="enum in hudson.tasks">BuildStepMonitor</A> <B>getRequiredMonitorService</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getRequiredMonitorService()">BuildStep</A></CODE></B></DD>
+<DD>Declares the scope of the synchronization monitor this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> expects from outside.
+
+ <p>
+ This method is introduced for preserving compatibility with plugins written for earlier versions of Hudson,
+ which never run multiple builds of the same job in parallel. Such plugins often assume that the outcome
+ of the previous build is completely available, which is no longer true when we do concurrent builds.
+
+ <p>
+ To minimize the necessary code change for such plugins, <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> implementations can request
+ Hudson to externally perform synchronization before executing them. This behavior is as follows:
+
+ <dl>
+ <dt><A HREF="../../hudson/tasks/BuildStepMonitor.html#BUILD"><CODE>BuildStepMonitor.BUILD</CODE></A>
+ <dd>
+ This <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> is only executed after the previous build is fully
+ completed (thus fully restoring the earlier semantics of one build at a time.)
+
+ <dt><A HREF="../../hudson/tasks/BuildStepMonitor.html#STEP"><CODE>BuildStepMonitor.STEP</CODE></A>
+ <dd>
+ This <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> is only executed after the same step in the previous build is completed.
+ For build steps that use a weaker assumption and only rely on the output from the same build step of
+ the early builds, this improves the concurrency.
+
+ <dt><A HREF="../../hudson/tasks/BuildStepMonitor.html#NONE"><CODE>BuildStepMonitor.NONE</CODE></A>
+ <dd>
+ No external synchronization is performed on this build step. This is the most efficient, and thus
+ <b>the recommended value for newer plugins</b>. Wherever necessary, you can directly use <A HREF="../../hudson/model/CheckPoint.html" title="class in hudson.model"><CODE>CheckPoint</CODE></A>s
+ to perform necessary synchronizations.
+ </dl>
+
+ <h2>Migrating Older Implementation</h2>
+ <p>
+ If you are migrating <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> implementations written for earlier versions of Hudson,
+ here's what you can do:
+
+ <ul>
+ <li>
+ Just return <A HREF="../../hudson/tasks/BuildStepMonitor.html#BUILD"><CODE>BuildStepMonitor.BUILD</CODE></A> to demand the backward compatible behavior from Hudson,
+ and make no other changes to the code. This will prevent users from reaping the benefits of concurrent
+ builds, but at least your plugin will work correctly, and therefore this is a good easy first step.
+ <li>
+ If your build step doesn't use anything from a previous build (for example, if you don't even call
+ <A HREF="../../hudson/model/Run.html#getPreviousBuild()"><CODE>Run.getPreviousBuild()</CODE></A>), then you can return <A HREF="../../hudson/tasks/BuildStepMonitor.html#NONE"><CODE>BuildStepMonitor.NONE</CODE></A> without making further
+ code changes and you are done with migration.
+ <li>
+ If your build step only depends on <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s that you added in the previous build by yourself,
+ then you only need <A HREF="../../hudson/tasks/BuildStepMonitor.html#STEP"><CODE>BuildStepMonitor.STEP</CODE></A> scope synchronization. Return it from this method
+ ,and you are done with migration without any further code changes.
+ <li>
+ If your build step makes more complex assumptions, return <A HREF="../../hudson/tasks/BuildStepMonitor.html#NONE"><CODE>BuildStepMonitor.NONE</CODE></A> and use
+ <A HREF="../../hudson/model/CheckPoint.html" title="class in hudson.model"><CODE>CheckPoint</CODE></A>s directly in your code. The general idea is to call <A HREF="../../hudson/model/CheckPoint.html#block()"><CODE>CheckPoint.block()</CODE></A> before
+ you try to access the state from the previous build.
+ </ul>
+
+ <h2>Note to caller</h2>
+ <p>
+ For plugins written against earlier versions of Hudson, calling this method results in
+ <CODE>AbstractMethodError</CODE>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
 
@@ -460,7 +539,7 @@ protected <A HREF="../../hudson/maven/reporters/MavenAbstractArtifactRecord.html
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/ProcessCache.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/ProcessCache.NewProcess.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/maven/RedeployPublisher.html" target="_top"><B>FRAMES</B></A>  &nbsp;

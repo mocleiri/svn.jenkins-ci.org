@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.XmlFile (Hudson main module 1.333 API)
+Uses of Class hudson.XmlFile (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.XmlFile (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.XmlFile (Hudson main module 1.333 API)";
+        parent.document.title="Uses of Class hudson.XmlFile (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -97,6 +97,10 @@ Packages that use <A HREF="../../hudson/XmlFile.html" title="class in hudson">Xm
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.model.listeners"><B>hudson.model.listeners</B></A></TD>
+<TD>Listener interfaces for various events that occur inside the server.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -180,6 +184,41 @@ Uses of <A HREF="../../hudson/XmlFile.html" title="class in hudson">XmlFile</A> 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The file we save our configuration.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.model.listeners"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/XmlFile.html" title="class in hudson">XmlFile</A> in <A HREF="../../hudson/model/listeners/package-summary.html">hudson.model.listeners</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/model/listeners/package-summary.html">hudson.model.listeners</A> with parameters of type <A HREF="../../hudson/XmlFile.html" title="class in hudson">XmlFile</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>SaveableListener.</B><B><A HREF="../../hudson/model/listeners/SaveableListener.html#fireOnChange(hudson.model.Saveable, hudson.XmlFile)">fireOnChange</A></B>(<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>&nbsp;o,
+             <A HREF="../../hudson/XmlFile.html" title="class in hudson">XmlFile</A>&nbsp;file)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fires the <A HREF="../../hudson/model/listeners/SaveableListener.html#onChange(hudson.model.Saveable, hudson.XmlFile)"><CODE>SaveableListener.onChange(hudson.model.Saveable, hudson.XmlFile)</CODE></A> event.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>SaveableListener.</B><B><A HREF="../../hudson/model/listeners/SaveableListener.html#onChange(hudson.model.Saveable, hudson.XmlFile)">onChange</A></B>(<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>&nbsp;o,
+         <A HREF="../../hudson/XmlFile.html" title="class in hudson">XmlFile</A>&nbsp;file)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when a change is made to a <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model"><CODE>Saveable</CODE></A> object.</TD>
 </TR>
 </TABLE>
 &nbsp;

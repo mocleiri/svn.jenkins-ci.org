@@ -3,12 +3,10 @@ package com.ikokoon.serenity;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
-import java.net.URL;
 import java.security.ProtectionDomain;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -36,6 +34,8 @@ public class Transformer implements ClassFileTransformer, IConstants {
 	public static final Transformer INSTANCE = new Transformer();
 	/** The aggregated flag. */
 	private static boolean accumulated = false;
+	/** During tests there can be more than one shutdown hook added. */
+	private static boolean shutdownHookAdded = false;
 
 	/** The chain of adapters for analysing the classes. */
 	private Class<ClassVisitor>[] classAdapterClasses;
@@ -57,25 +57,24 @@ public class Transformer implements ClassFileTransformer, IConstants {
 	 *            the instrumentation implementation of the JVM
 	 */
 	public static void premain(String args, Instrumentation instrumentation) {
-		URL url = Transformer.class.getResource(LOG_4_J_PROPERTIES);
-		if (url != null) {
-			PropertyConfigurator.configure(url);
-		}
+		LoggingConfigurator.configure();
 		LOGGER = Logger.getLogger(Transformer.class);
-		LOGGER.error("Loaded logging properties from : " + url);
+		if (!shutdownHookAdded) {
+			shutdownHookAdded = true;
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+				public void run() {
+					LOGGER.info("Writing and finalizing the persistence");
+					IDataBase dataBase = IDataBase.DataBaseManager.getDataBase(IConstants.DATABASE_FILE, false);
+					new Cleaner(null).execute();
+					new Aggregator(null, dataBase).execute();
+					dataBase.close();
+					long million = 1000 * 1000;
+					LOGGER.info("Total memory : " + (Runtime.getRuntime().totalMemory() / million) + ", max memory : "
+							+ (Runtime.getRuntime().maxMemory() / million) + ", free memory : " + (Runtime.getRuntime().freeMemory() / million));
+				}
+			});
+		}
 
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			public void run() {
-				LOGGER.info("Writing and finalizing the persistence");
-				IDataBase dataBase = IDataBase.DataBase.getDataBase(IConstants.DATABASE_FILE, false);
-				new Cleaner(null).execute();
-				new Aggregator(null, dataBase).execute();
-				dataBase.close();
-				long million = 1000 * 1000;
-				LOGGER.info("Total memory : " + (Runtime.getRuntime().totalMemory() / million) + ", max memory : "
-						+ (Runtime.getRuntime().maxMemory() / million) + ", free memory : " + (Runtime.getRuntime().freeMemory() / million));
-			}
-		});
 		if (instrumentation != null) {
 			instrumentation.addTransformer(INSTANCE);
 		}

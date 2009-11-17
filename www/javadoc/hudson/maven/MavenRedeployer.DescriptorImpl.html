@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenRedeployer.DescriptorImpl (Hudson core 1.295 API)
+MavenRedeployer.DescriptorImpl (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenRedeployer.DescriptorImpl (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenRedeployer.DescriptorImpl (Hudson core 1.295 API)";
+        parent.document.title="MavenRedeployer.DescriptorImpl (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -95,7 +95,7 @@ Class MavenRedeployer.DescriptorImpl</H2>
 <PRE>
 java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">hudson.model.Descriptor</A>&lt;T&gt;
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks">hudson.tasks.BuildStepDescriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks">hudson.tasks.BuildStepDescriptor</A>
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.maven.MavenRedeployer.DescriptorImpl</B>
 </PRE>
 <DL>
@@ -106,7 +106,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static final class <B>MavenRedeployer.DescriptorImpl</B><DT>extends <A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks">BuildStepDescriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</DL>
+<DT><PRE>public static final class <B>MavenRedeployer.DescriptorImpl</B><DT>extends <A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks">BuildStepDescriptor</A></DL>
 </PRE>
 
 <P>
@@ -150,6 +150,15 @@ java.lang.Object
 <TD><CODE><A HREF="../../hudson/model/Descriptor.html#clazz">clazz</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
@@ -186,7 +195,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/maven/MavenRedeployer.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</CODE>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenRedeployer.DescriptorImpl.html#isApplicable(java.lang.Class)">isApplicable</A></B>(java.lang.Class&nbsp;jobType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this task is applicable to the given project.</TD>
@@ -252,13 +261,13 @@ public <B>MavenRedeployer.DescriptorImpl</B>()</PRE>
 <A NAME="isApplicable(java.lang.Class)"><!-- --></A><H3>
 isApplicable</H3>
 <PRE>
-public boolean <B>isApplicable</B>(java.lang.Class&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;jobType)</PRE>
+public boolean <B>isApplicable</B>(java.lang.Class&nbsp;jobType)</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)">BuildStepDescriptor</A></CODE></B></DD>
 <DD>Returns true if this task is applicable to the given project.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks">BuildStepDescriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)">isApplicable</A></CODE> in class <CODE><A HREF="../../hudson/tasks/BuildStepDescriptor.html" title="class in hudson.tasks">BuildStepDescriptor</A></CODE></DL>
 </DD>
 <DD><DL>
 
@@ -276,7 +285,7 @@ public java.lang.String <B>getDisplayName</B>()</PRE>
 <DD>Human readable name of this kind of configurable object.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt;</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

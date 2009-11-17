@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLICommand (Hudson main module 1.333 API)
+CLICommand (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson main module 1.333 API)";
+        parent.document.title="CLICommand (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -183,7 +183,7 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#channel">channel</A></B></CODE>
 
 <BR>
@@ -191,7 +191,7 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.util.Locale</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Locale</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#locale">locale</A></B></CODE>
 
 <BR>
@@ -199,7 +199,7 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.io.PrintStream</CODE></FONT></TD>
+<CODE>&nbsp;java.io.PrintStream</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#stderr">stderr</A></B></CODE>
 
 <BR>
@@ -207,7 +207,7 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.io.InputStream</CODE></FONT></TD>
+<CODE>&nbsp;java.io.InputStream</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#stdin">stdin</A></B></CODE>
 
 <BR>
@@ -215,7 +215,7 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;java.io.PrintStream</CODE></FONT></TD>
+<CODE>&nbsp;java.io.PrintStream</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#stdout">stdout</A></B></CODE>
 
 <BR>
@@ -350,7 +350,7 @@ Base class for Hudson CLI.
 <A NAME="stdout"><!-- --></A><H3>
 stdout</H3>
 <PRE>
-protected transient java.io.PrintStream <B>stdout</B></PRE>
+public transient java.io.PrintStream <B>stdout</B></PRE>
 <DL>
 <DD>Connected to stdout and stderr of the CLI agent that initiated the session.
  IOW, if you write to these streams, the person who launched the CLI command
@@ -368,7 +368,7 @@ protected transient java.io.PrintStream <B>stdout</B></PRE>
 <A NAME="stderr"><!-- --></A><H3>
 stderr</H3>
 <PRE>
-protected transient java.io.PrintStream <B>stderr</B></PRE>
+public transient java.io.PrintStream <B>stderr</B></PRE>
 <DL>
 <DD>Connected to stdout and stderr of the CLI agent that initiated the session.
  IOW, if you write to these streams, the person who launched the CLI command
@@ -386,7 +386,7 @@ protected transient java.io.PrintStream <B>stderr</B></PRE>
 <A NAME="stdin"><!-- --></A><H3>
 stdin</H3>
 <PRE>
-protected transient java.io.InputStream <B>stdin</B></PRE>
+public transient java.io.InputStream <B>stdin</B></PRE>
 <DL>
 <DD>Connected to stdin of the CLI agent.
 
@@ -401,7 +401,7 @@ protected transient java.io.InputStream <B>stdin</B></PRE>
 <A NAME="channel"><!-- --></A><H3>
 channel</H3>
 <PRE>
-protected transient <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A> <B>channel</B></PRE>
+public transient <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A> <B>channel</B></PRE>
 <DL>
 <DD><A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that represents the CLI JVM. You can use this to
  execute <A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> on the CLI JVM, among other things.
@@ -414,7 +414,7 @@ protected transient <A HREF="../../hudson/remoting/Channel.html" title="class in
 <A NAME="locale"><!-- --></A><H3>
 locale</H3>
 <PRE>
-protected transient java.util.Locale <B>locale</B></PRE>
+public transient java.util.Locale <B>locale</B></PRE>
 <DL>
 <DD>The locale of the client. Messages should be formatted with this resource.
 <P>

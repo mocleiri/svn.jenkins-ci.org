@@ -3,12 +3,12 @@
 <HTML>
 <HEAD>
 <!-- -->
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenEmbedder (Hudson core 1.295 API)
+MavenEmbedder (Hudson main module 1.334 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-03-30">
+<META NAME="date" CONTENT="2009-11-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenEmbedder (Hudson core 1.295 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenEmbedder (Hudson core 1.295 API)";
+        parent.document.title="MavenEmbedder (Hudson main module 1.334 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/MavenComputerListener.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/maven/MavenEmbedder.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -440,6 +440,14 @@ Class intended to be used by clients who wish to embed Maven into their applicat
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenEmbedder.html#setAlternateSettings(java.io.File)">setAlternateSettings</A></B>(java.io.File&nbsp;alternateSettings)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets alternate settings file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/maven/MavenEmbedder.html#setClassLoader(java.lang.ClassLoader)">setClassLoader</A></B>(java.lang.ClassLoader&nbsp;classLoader)</CODE>
 
 <BR>
@@ -709,6 +717,21 @@ public void <B>setProfiles</B>(java.lang.String&nbsp;profiles)</PRE>
 <DL>
 <DD>Activates/deactivates profiles.
  ','-separated profile list, or null. This works exactly like the CLI "-P" option.
+
+ This method needs to be called before the embedder is <A HREF="../../hudson/maven/MavenEmbedder.html#start()"><CODE>started</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAlternateSettings(java.io.File)"><!-- --></A><H3>
+setAlternateSettings</H3>
+<PRE>
+public void <B>setAlternateSettings</B>(java.io.File&nbsp;alternateSettings)</PRE>
+<DL>
+<DD>Sets alternate settings file.
 
  This method needs to be called before the embedder is <A HREF="../../hudson/maven/MavenEmbedder.html#start()"><CODE>started</CODE></A>.
 <P>
@@ -1000,7 +1023,7 @@ public void <B>execute</B>(org.apache.maven.project.MavenProject&nbsp;project,
                     java.util.Properties&nbsp;properties,
                     java.io.File&nbsp;executionRootDirectory)
              throws org.codehaus.plexus.util.dag.CycleDetectedException,
-                    <A HREF="https://hudson.dev.java.net/pom/maven-interceptor/apidocs/org/apache/maven/lifecycle/LifecycleExecutionException.html?is-external=true" title="class or interface in org.apache.maven.lifecycle">LifecycleExecutionException</A>,
+                    org.apache.maven.lifecycle.LifecycleExecutionException,
                     org.apache.maven.BuildFailureException,
                     org.apache.maven.project.DuplicateProjectException</PRE>
 <DL>
@@ -1008,7 +1031,7 @@ public void <B>execute</B>(org.apache.maven.project.MavenProject&nbsp;project,
 
 <DT><B>Throws:</B>
 <DD><CODE>org.codehaus.plexus.util.dag.CycleDetectedException</CODE>
-<DD><CODE><A HREF="https://hudson.dev.java.net/pom/maven-interceptor/apidocs/org/apache/maven/lifecycle/LifecycleExecutionException.html?is-external=true" title="class or interface in org.apache.maven.lifecycle">LifecycleExecutionException</A></CODE>
+<DD><CODE>org.apache.maven.lifecycle.LifecycleExecutionException</CODE>
 <DD><CODE>org.apache.maven.BuildFailureException</CODE>
 <DD><CODE>org.apache.maven.project.DuplicateProjectException</CODE></DL>
 </DD>
@@ -1025,7 +1048,7 @@ public void <B>execute</B>(java.util.List&nbsp;projects,
                     java.util.Properties&nbsp;properties,
                     java.io.File&nbsp;executionRootDirectory)
              throws org.codehaus.plexus.util.dag.CycleDetectedException,
-                    <A HREF="https://hudson.dev.java.net/pom/maven-interceptor/apidocs/org/apache/maven/lifecycle/LifecycleExecutionException.html?is-external=true" title="class or interface in org.apache.maven.lifecycle">LifecycleExecutionException</A>,
+                    org.apache.maven.lifecycle.LifecycleExecutionException,
                     org.apache.maven.BuildFailureException,
                     org.apache.maven.project.DuplicateProjectException</PRE>
 <DL>
@@ -1033,7 +1056,7 @@ public void <B>execute</B>(java.util.List&nbsp;projects,
 
 <DT><B>Throws:</B>
 <DD><CODE>org.codehaus.plexus.util.dag.CycleDetectedException</CODE>
-<DD><CODE><A HREF="https://hudson.dev.java.net/pom/maven-interceptor/apidocs/org/apache/maven/lifecycle/LifecycleExecutionException.html?is-external=true" title="class or interface in org.apache.maven.lifecycle">LifecycleExecutionException</A></CODE>
+<DD><CODE>org.apache.maven.lifecycle.LifecycleExecutionException</CODE>
 <DD><CODE>org.apache.maven.BuildFailureException</CODE>
 <DD><CODE>org.apache.maven.project.DuplicateProjectException</CODE></DL>
 </DD>
@@ -1241,7 +1264,7 @@ public java.lang.Object <B>lookup</B>(java.lang.String&nbsp;role,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/maven/MavenBuildProxy.Filter.AsyncInvoker.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/MavenComputerListener.html" title="class in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/maven/MavenEmbedder.html" target="_top"><B>FRAMES</B></A>  &nbsp;
