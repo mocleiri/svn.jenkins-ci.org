@@ -26,7 +26,7 @@ public class ServiceLoader {
             String line;
             while ((line = configFile.readLine()) != null) {
                 line = line.trim();
-                if (line.startsWith("#") || line.isEmpty())   continue;
+                if (line.startsWith("#") || line.length()==0)   continue;
 
                 try {
                     Class<?> t = classLoader.loadClass(line);
