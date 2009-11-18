@@ -49,6 +49,11 @@ public enum InitMilestone implements Milestone {
     STARTED,
 
     /**
+     * By this milestone, all plugins metadata are inspected and their dependencies figured out.
+     */
+    PLUGINS_LISTED,
+
+    /**
      * By this milestone, all plugin metadata are loaded and its classloader set up.
      */
     PLUGINS_PREPARED,
@@ -80,7 +85,7 @@ public enum InitMilestone implements Milestone {
         TaskGraphBuilder b = new TaskGraphBuilder();
         InitMilestone[] v = values();
         for (int i=0; i<v.length-1; i++)
-            b.add("", Executable.NOOP).requires(v[i]).attains(v[i+1]);
+            b.add(null, Executable.NOOP).requires(v[i]).attains(v[i+1]);
         return b;
     }
 }

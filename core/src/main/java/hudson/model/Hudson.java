@@ -621,15 +621,18 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
              */
             protected void runTask(Task task) throws Exception {
                 SecurityContextHolder.getContext().setAuthentication(ACL.SYSTEM);   // full access in the initialization thread
+                String taskName = task.getDisplayName();
+
                 Thread t = Thread.currentThread();
                 String name = t.getName();
-                t.setName(task.getDisplayName());
+                if (taskName !=null)
+                    t.setName(taskName);
                 try {
                     long start = System.currentTimeMillis();
                     super.runTask(task);
                     if(LOG_STARTUP_PERFORMANCE)
                         LOGGER.info(String.format("Took %dms for %s by %s",
-                                System.currentTimeMillis()-start, task.getDisplayName(), name));
+                                System.currentTimeMillis()-start, taskName, name));
                 } finally {
                     t.setName(name);
                     SecurityContextHolder.clearContext();

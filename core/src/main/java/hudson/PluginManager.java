@@ -25,6 +25,8 @@ package hudson;
 
 import static hudson.init.InitMilestone.PLUGINS_PREPARED;
 import static hudson.init.InitMilestone.PLUGINS_STARTED;
+import static hudson.init.InitMilestone.PLUGINS_LISTED;
+import hudson.init.InitMilestone;
 import hudson.model.AbstractModelObject;
 import hudson.model.Failure;
 import hudson.model.Hudson;
@@ -169,10 +171,9 @@ public final class PluginManager extends AbstractModelObject {
                 requires(listUpPlugins).attains(PLUGINS_PREPARED).add("Preparing plugins",new Executable() {
                     public void run(Reactor session) throws Exception {
                         TaskGraphBuilder g = new TaskGraphBuilder();
-                        Handle h=null; // used to run prearing/initializing sequentially to avoid concurrency hassle
 
                         for( final File arc : archives ) {
-                            h = g.requires(h).notFatal().attains(PLUGINS_PREPARED).add("Inspecting plugin " + arc, new Executable() {
+                            g.followedBy().notFatal().attains(PLUGINS_LISTED).add("Inspecting plugin " + arc, new Executable() {
                                 public void run(Reactor session) throws Exception {
                                     try {
                                         PluginWrapper p = strategy.createPluginWrapper(arc);
@@ -188,37 +189,49 @@ public final class PluginManager extends AbstractModelObject {
                             });
                         }
 
-                        // schedule execution of loading plugins
-                        for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
-                            h = g.requires(h).notFatal().attains(PLUGINS_PREPARED).add("Loading plugin " + p.getShortName(), new Executable() {
-                                public void run(Reactor session) throws Exception {
-                                    try {
-                                        strategy.load(p);
-                                    } catch (IOException e) {
-                                        failedPlugins.add(new FailedPlugin(p.getShortName(), e));
-                                        activePlugins.remove(p);
-                                        plugins.remove(p);
-                                        throw e;
-                                    }
-                                }
-                            });
-                        }
+                        g.requires(PLUGINS_LISTED).add("Loading plugins",new Executable() {
+                            /**
+                             * One the plugins are listed, schedule their initialization.
+                             */
+                            public void run(Reactor session) throws Exception {
+                                TaskGraphBuilder g = new TaskGraphBuilder();
 
-                        // schedule execution of initializing plugins
-                        for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
-                            h = g.requires(h).notFatal().attains(PLUGINS_STARTED).add("Initializing plugin " + p.getShortName(), new Executable() {
-                                public void run(Reactor session) throws Exception {
-                                    try {
-                                        p.getPlugin().postInitialize();
-                                    } catch (Exception e) {
-                                        failedPlugins.add(new FailedPlugin(p.getShortName(), e));
-                                        activePlugins.remove(p);
-                                        plugins.remove(p);
-                                        throw e;
-                                    }
+                                // schedule execution of loading plugins
+                                for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
+                                    g.followedBy().notFatal().attains(PLUGINS_PREPARED).add("Loading plugin " + p.getShortName(), new Executable() {
+                                        public void run(Reactor session) throws Exception {
+                                            try {
+                                                strategy.load(p);
+                                            } catch (IOException e) {
+                                                failedPlugins.add(new FailedPlugin(p.getShortName(), e));
+                                                activePlugins.remove(p);
+                                                plugins.remove(p);
+                                                throw e;
+                                            }
+                                        }
+                                    });
                                 }
-                            });
-                        }
+
+                                // schedule execution of initializing plugins
+                                for (final PluginWrapper p : activePlugins.toArray(new PluginWrapper[activePlugins.size()])) {
+                                    g.followedBy().notFatal().attains(PLUGINS_STARTED).add("Initializing plugin " + p.getShortName(), new Executable() {
+                                        public void run(Reactor session) throws Exception {
+                                            try {
+                                                p.getPlugin().postInitialize();
+                                            } catch (Exception e) {
+                                                failedPlugins.add(new FailedPlugin(p.getShortName(), e));
+                                                activePlugins.remove(p);
+                                                plugins.remove(p);
+                                                throw e;
+                                            }
+                                        }
+                                    });
+                                }
+
+                                // register them all
+                                session.addAll(g.discoverTasks(session));
+                            }
+                        });
 
                         // register them all
                         session.addAll(g.discoverTasks(session));
