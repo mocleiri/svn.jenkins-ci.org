@@ -160,7 +160,7 @@ public final class PluginManager extends AbstractModelObject {
                     }
                 });
 
-                requires(listUpPlugins).attains(PLUGINS_PREPARED).add("Preparing plugins",new Executable() {
+                requires(listUpPlugins).attains(PLUGINS_LISTED).add("Preparing plugins",new Executable() {
                     public void run(Reactor session) throws Exception {
                         TaskGraphBuilder g = new TaskGraphBuilder();
 
@@ -181,7 +181,7 @@ public final class PluginManager extends AbstractModelObject {
                             });
                         }
 
-                        g.requires(PLUGINS_LISTED).add("Loading plugins",new Executable() {
+                        g.requires(PLUGINS_LISTED).attains(PLUGINS_PREPARED).add("Loading plugins",new Executable() {
                             /**
                              * One the plugins are listed, schedule their initialization.
                              */
