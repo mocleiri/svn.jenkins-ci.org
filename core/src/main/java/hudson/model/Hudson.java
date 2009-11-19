@@ -55,6 +55,7 @@ import static hudson.init.InitMilestone.PLUGINS_STARTED;
 import hudson.init.InitializerFinder;
 import hudson.init.InitMilestone;
 import hudson.init.InitReactorListener;
+import hudson.init.InitStrategy;
 import hudson.lifecycle.Lifecycle;
 import hudson.logging.LogRecorderManager;
 import hudson.model.Descriptor.FormException;
@@ -123,7 +124,6 @@ import hudson.util.XStream2;
 import hudson.util.ServiceLoader;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
-import net.java.sezpoz.Index;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.AcegiSecurityException;
 import org.acegisecurity.Authentication;
@@ -144,7 +144,6 @@ import org.jvnet.hudson.reactor.Milestone;
 import org.jvnet.hudson.reactor.Reactor;
 import org.jvnet.hudson.reactor.ReactorListener;
 import org.jvnet.hudson.reactor.TaskGraphBuilder.Handle;
-import org.jvnet.hudson.annotation_indexer.Indexed;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.HttpRedirect;
 import org.kohsuke.stapler.HttpResponse;
@@ -217,7 +216,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import static java.util.logging.Level.SEVERE;
-import static java.util.logging.Level.FINE;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -573,10 +571,12 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
             adjuncts = new AdjunctManager(servletContext, pluginManager.uberClassLoader,"adjuncts/"+VERSION_HASH);
 
+            InitStrategy is = InitStrategy.get(Thread.currentThread().getContextClassLoader());
+
             // initialization consists of ...
             executeReactor(
                     new InitializerFinder(),        // misc. stuff
-                    pluginManager.initTasks(),      // loading and preparing plugins
+                    pluginManager.initTasks(is),    // loading and preparing plugins
                     loadTasks(),                    // load jobs
                     InitMilestone.ordering()        // forced ordering among key milestones
             );

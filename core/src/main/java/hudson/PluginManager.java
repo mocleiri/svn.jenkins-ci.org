@@ -26,7 +26,7 @@ package hudson;
 import static hudson.init.InitMilestone.PLUGINS_PREPARED;
 import static hudson.init.InitMilestone.PLUGINS_STARTED;
 import static hudson.init.InitMilestone.PLUGINS_LISTED;
-import hudson.init.InitMilestone;
+import hudson.init.InitStrategy;
 import hudson.model.AbstractModelObject;
 import hudson.model.Failure;
 import hudson.model.Hudson;
@@ -129,7 +129,7 @@ public final class PluginManager extends AbstractModelObject {
      * This is a separate method so that code executed from here will see a valid value in
      * {@link Hudson#pluginManager}. 
      */
-    public TaskBuilder initTasks() {
+    public TaskBuilder initTasks(final InitStrategy initStrategy) {
         return new TaskGraphBuilder() {
             File[] archives;
             Collection<String> bundledPlugins;
@@ -143,15 +143,7 @@ public final class PluginManager extends AbstractModelObject {
 
                 Handle listUpPlugins = requires(loadBundledPlugins).add("Listing up plugins", new Executable() {
                     public void run(Reactor session) throws Exception {
-                        archives = rootDir.listFiles(new FilenameFilter() {
-                            public boolean accept(File dir, String name) {
-                                return name.endsWith(".hpi")        // plugin jar file
-                                    || name.endsWith(".hpl");       // linked plugin. for debugging.
-                            }
-                        });
-
-                        if (archives == null)
-                            throw new IOException("Hudson is unable to create " + rootDir + "\nPerhaps its security privilege is insufficient");
+                        archives = initStrategy.listPluginArchives(PluginManager.this);
 
                         // load plugins from a system property, for use in the "mvn hudson-dev:run"
                         List<File> archivesList = new ArrayList<File>(Arrays.asList(archives));
