@@ -59,54 +59,14 @@ public class InitializerFinder extends TaskBuilder {
 
     public Collection<Task> discoverTasks(Reactor session) throws IOException {
         List<Task> result = new ArrayList<Task>();
-        for ( final Method e : Index.list(Initializer.class,cl,Method.class)) {
+        for (Method e : Index.list(Initializer.class,cl,Method.class)) {
             if (!Modifier.isStatic(e.getModifiers()))
                 throw new IOException(e+" is not a static method");
 
-            final Initializer i = e.getAnnotation(Initializer.class);
+            Initializer i = e.getAnnotation(Initializer.class);
             if (i==null)        continue; // stale index
 
-            result.add(new Task() {
-                final Collection<Milestone> requires = toMilestones(i.requires(), i.after());
-                final Collection<Milestone> attains = toMilestones(i.attains(), i.before());
-
-                public Collection<Milestone> requires() {
-                    return requires;
-                }
-
-                public Collection<Milestone> attains() {
-                    return attains;
-                }
-
-                public String getDisplayName() {
-                    return getDisplayNameOf(e,i);
-                }
-
-                public boolean failureIsFatal() {
-                    return i.fatal();
-                }
-
-                public void run(Reactor session) {
-                    invoke(e);
-                }
-
-                public String toString() {
-                    return e.toString();
-                }
-
-                private Collection<Milestone> toMilestones(String[] tokens, InitMilestone m) {
-                    List<Milestone> r = new ArrayList<Milestone>();
-                    for (String s : tokens) {
-                        try {
-                            r.add(InitMilestone.valueOf(s));
-                        } catch (IllegalArgumentException x) {
-                            r.add(new MilestoneImpl(s));
-                        }
-                    }
-                    r.add(m);
-                    return r;
-                }
-            });
+            result.add(new TaskImpl(i, e));
         }
         return result;
     }
@@ -151,5 +111,67 @@ public class InitializerFinder extends TaskBuilder {
         if (type== Hudson.class)
             return Hudson.getInstance();
         throw new IllegalArgumentException("Unable to inject "+type);
+    }
+
+    /**
+     * Task implementation.
+     */
+    public class TaskImpl implements Task {
+        final Collection<Milestone> requires;
+        final Collection<Milestone> attains;
+        private final Initializer i;
+        private final Method e;
+
+        private TaskImpl(Initializer i, Method e) {
+            this.i = i;
+            this.e = e;
+            requires = toMilestones(i.requires(), i.after());
+            attains = toMilestones(i.attains(), i.before());
+        }
+
+        public Initializer getAnnotation() {
+            return i;
+        }
+
+        public Method getMethod() {
+            return e;
+        }
+
+        public Collection<Milestone> requires() {
+            return requires;
+        }
+
+        public Collection<Milestone> attains() {
+            return attains;
+        }
+
+        public String getDisplayName() {
+            return getDisplayNameOf(e, i);
+        }
+
+        public boolean failureIsFatal() {
+            return i.fatal();
+        }
+
+        public void run(Reactor session) {
+            invoke(e);
+        }
+
+        public String toString() {
+            return e.toString();
+        }
+
+        private Collection<Milestone> toMilestones(String[] tokens, InitMilestone m) {
+            List<Milestone> r = new ArrayList<Milestone>();
+            for (String s : tokens) {
+                try {
+                    r.add(InitMilestone.valueOf(s));
+                } catch (IllegalArgumentException x) {
+                    r.add(new MilestoneImpl(s));
+                }
+            }
+            r.add(m);
+            return r;
+        }
     }
 }
