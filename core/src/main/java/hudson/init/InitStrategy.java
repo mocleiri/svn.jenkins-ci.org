@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import hudson.PluginManager;
@@ -33,7 +35,7 @@ public class InitStrategy {
      *
      * @return never null but can be empty.
      */
-    public File[] listPluginArchives(PluginManager pm) throws IOException {
+    public List<File> listPluginArchives(PluginManager pm) throws IOException {
         File[] archives = pm.rootDir.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 return name.endsWith(".hpi")        // plugin jar file
@@ -42,7 +44,30 @@ public class InitStrategy {
         });
         if (archives == null)
             throw new IOException("Hudson is unable to create " + pm.rootDir + "\nPerhaps its security privilege is insufficient");
-        return archives;
+
+        List<File> r = new ArrayList<File>(Arrays.asList(archives));
+        getBundledPluginsFromProperty(r);
+
+        return r;
+    }
+
+    /**
+     * Lists up additional bundled plugins from the system property.
+     *
+     * For use in the "mvn hudson-dev:run".
+     * TODO: maven-hpi-plugin should inject its own InitStrategy instead of having this in the core.
+     */
+    protected void getBundledPluginsFromProperty(List<File> r) {
+        String hplProperty = System.getProperty("hudson.bundled.plugins");
+        if (hplProperty != null) {
+            for (String hplLocation : hplProperty.split(",")) {
+                File hpl = new File(hplLocation.trim());
+                if (hpl.exists())
+                    r.add(hpl);
+                else
+                    LOGGER.warning("bundled plugin " + hplLocation + " does not exist");
+            }
+        }
     }
 
 

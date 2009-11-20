@@ -131,7 +131,7 @@ public final class PluginManager extends AbstractModelObject {
      */
     public TaskBuilder initTasks(final InitStrategy initStrategy) {
         return new TaskGraphBuilder() {
-            File[] archives;
+            List<File> archives;
             Collection<String> bundledPlugins;
 
             {
@@ -144,19 +144,6 @@ public final class PluginManager extends AbstractModelObject {
                 Handle listUpPlugins = requires(loadBundledPlugins).add("Listing up plugins", new Executable() {
                     public void run(Reactor session) throws Exception {
                         archives = initStrategy.listPluginArchives(PluginManager.this);
-
-                        // load plugins from a system property, for use in the "mvn hudson-dev:run"
-                        List<File> archivesList = new ArrayList<File>(Arrays.asList(archives));
-                        String hplProperty = System.getProperty("hudson.bundled.plugins");
-                        if (hplProperty != null) {
-                            for (String hplLocation : hplProperty.split(",")) {
-                                File hpl = new File(hplLocation.trim());
-                                if (hpl.exists())
-                                    archivesList.add(hpl);
-                                else
-                                    LOGGER.warning("bundled plugin " + hplLocation + " does not exist");
-                            }
-                        }
                     }
                 });
 
