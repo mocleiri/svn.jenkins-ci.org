@@ -33,7 +33,9 @@ public class InitStrategy {
      * <p>
      * Normally we look at {@code $HUDSON_HOME/plugins/*.hpi} and *.hpl.
      *
-     * @return never null but can be empty.
+     * @return
+     *      never null but can be empty. The list can contain different versions of the same plugin,
+     *      and when that happens, Hudson will ignore all but the first one in the list.
      */
     public List<File> listPluginArchives(PluginManager pm) throws IOException {
         File[] archives = pm.rootDir.listFiles(new FilenameFilter() {
@@ -45,8 +47,9 @@ public class InitStrategy {
         if (archives == null)
             throw new IOException("Hudson is unable to create " + pm.rootDir + "\nPerhaps its security privilege is insufficient");
 
-        List<File> r = new ArrayList<File>(Arrays.asList(archives));
+        List<File> r = new ArrayList<File>();
         getBundledPluginsFromProperty(r);
+        r.addAll(Arrays.asList(archives));
 
         return r;
     }

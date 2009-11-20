@@ -52,17 +52,17 @@ import org.kohsuke.stapler.WebApp;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -151,11 +151,15 @@ public final class PluginManager extends AbstractModelObject {
                     public void run(Reactor session) throws Exception {
                         TaskGraphBuilder g = new TaskGraphBuilder();
 
+                        final Map<String,File> inspectedShortNames = new HashMap<String,File>();
+
                         for( final File arc : archives ) {
                             g.followedBy().notFatal().attains(PLUGINS_LISTED).add("Inspecting plugin " + arc, new Executable() {
                                 public void run(Reactor session) throws Exception {
                                     try {
                                         PluginWrapper p = strategy.createPluginWrapper(arc);
+                                        if (isDuplicate(p)) return;
+
                                         p.isBundled = bundledPlugins.contains(arc.getName());
                                         plugins.add(p);
                                         if(p.isActive())
@@ -165,12 +169,27 @@ public final class PluginManager extends AbstractModelObject {
                                         throw e;
                                     }
                                 }
+
+                                /**
+                                 * Inspects duplication. this happens when you run hpi:run on a bundled plugin,
+                                 * as well as putting numbered hpi files, like "cobertura-1.0.hpi" and "cobertura-1.1.hpi"
+                                 */
+                                private boolean isDuplicate(PluginWrapper p) {
+                                    String shortName = p.getShortName();
+                                    if (inspectedShortNames.containsKey(shortName)) {
+                                        LOGGER.info("Ignoring "+arc+" because "+inspectedShortNames.get(shortName)+" is already loaded");
+                                        return true;
+                                    }
+
+                                    inspectedShortNames.put(shortName,arc);
+                                    return false;
+                                }
                             });
                         }
 
                         g.requires(PLUGINS_LISTED).attains(PLUGINS_PREPARED).add("Loading plugins",new Executable() {
                             /**
-                             * One the plugins are listed, schedule their initialization.
+                             * Once the plugins are listed, schedule their initialization.
                              */
                             public void run(Reactor session) throws Exception {
                                 TaskGraphBuilder g = new TaskGraphBuilder();
