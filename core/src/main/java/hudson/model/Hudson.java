@@ -574,7 +574,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             InitStrategy is = InitStrategy.get(Thread.currentThread().getContextClassLoader());
 
             // initialization consists of ...
-            executeReactor(
+            executeReactor( is,
                     new InitializerFinder(),        // misc. stuff
                     pluginManager.initTasks(is),    // loading and preparing plugins
                     loadTasks(),                    // load jobs
@@ -613,13 +613,18 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
     /**
      * Executes a reactor.
+     *
+     * @param is
+     *      If non-null, this can be consulted for ignoring some tasks. Only used during the initialization of Hudson.
      */
-    private void executeReactor(TaskBuilder... builders) throws IOException, InterruptedException, ReactorException {
+    private void executeReactor(final InitStrategy is, TaskBuilder... builders) throws IOException, InterruptedException, ReactorException {
         Reactor reactor = new Reactor(builders) {
             /**
              * Sets the thread name to the task for better diagnostics.
              */
             protected void runTask(Task task) throws Exception {
+                if (is!=null && is.skipInitTask(task))  return;
+
                 SecurityContextHolder.getContext().setAuthentication(ACL.SYSTEM);   // full access in the initialization thread
                 String taskName = task.getDisplayName();
 
@@ -2730,7 +2735,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * Reloads the configuration synchronously.
      */
     public void reload() throws IOException, InterruptedException, ReactorException {
-        executeReactor(loadTasks());
+        executeReactor(null,loadTasks());
         User.reload();
         servletContext.setAttribute("app", this);
     }

@@ -1,6 +1,7 @@
 package hudson.init;
 
 import org.kohsuke.MetaInfServices;
+import org.jvnet.hudson.reactor.Task;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -71,6 +72,16 @@ public class InitStrategy {
                     LOGGER.warning("bundled plugin " + hplLocation + " does not exist");
             }
         }
+    }
+
+    /**
+     * Selectively skip some of the initialization tasks.
+     * 
+     * @return
+     *      true to skip the execution.
+     */
+    public boolean skipInitTask(Task task) {
+        return false;
     }
 
 
