@@ -2410,14 +2410,14 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     @CLIMethod(name="quiet-down")
-    public synchronized HttpRedirect doQuietDown() throws IOException, ServletException {
+    public synchronized HttpRedirect doQuietDown() {
         checkPermission(ADMINISTER);
         isQuietingDown = true;
         return new HttpRedirect(".");
     }
 
     @CLIMethod(name="cancel-quiet-down")
-    public synchronized HttpRedirect doCancelQuietDown() throws IOException, ServletException {
+    public synchronized HttpRedirect doCancelQuietDown() {
         checkPermission(ADMINISTER);
         isQuietingDown = false;
         getQueue().scheduleMaintenance();
