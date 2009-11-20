@@ -129,10 +129,16 @@ public class InitializerFinder extends TaskBuilder {
             attains = toMilestones(i.attains(), i.before());
         }
 
+        /**
+         * {@link Initializer} annotaion on the {@linkplain #getMethod() method}
+         */
         public Initializer getAnnotation() {
             return i;
         }
 
+        /**
+         * Static method that runs the initialization, that this task wraps.
+         */
         public Method getMethod() {
             return e;
         }
