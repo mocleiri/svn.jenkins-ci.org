@@ -1076,7 +1076,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         } else {
             if(n.getNumExecutors()>0) {
                 computers.put(n,c=n.createComputer());
-                if (!n.holdOffLaunchUntilSave) {
+                if (!n.holdOffLaunchUntilSave && AUTOMATIC_SLAVE_LAUNCH) {
                     RetentionStrategy retentionStrategy = c.getRetentionStrategy();
                     if (retentionStrategy != null) {
                         // if there is a retention strategy, it is responsible for deciding to start the computer
@@ -3572,6 +3572,11 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      */
     public static boolean CONCURRENT_BUILD = true;
 
+    /**
+     * Automatically try to launch a slave when Hudson is initialized or a new slave is created.
+     */
+    public static boolean AUTOMATIC_SLAVE_LAUNCH = true;
+    
     private static final Logger LOGGER = Logger.getLogger(Hudson.class.getName());
 
     private static final Pattern ICON_SIZE = Pattern.compile("\\d+x\\d+");
