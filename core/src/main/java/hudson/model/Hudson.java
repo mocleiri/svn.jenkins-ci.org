@@ -537,6 +537,9 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 throw new IllegalStateException("second instance");
             theInstance = this;
 
+            // doing this early allows InitStrategy to set environment upfront 
+            final InitStrategy is = InitStrategy.get(Thread.currentThread().getContextClassLoader());
+            
             Trigger.timer = new Timer("Hudson cron thread");
             queue = new Queue(CONSISTENT_HASH?LoadBalancer.CONSISTENT_HASH:LoadBalancer.DEFAULT);
             
@@ -570,8 +573,6 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             pluginManager = new PluginManager(context);
 
             adjuncts = new AdjunctManager(servletContext, pluginManager.uberClassLoader,"adjuncts/"+VERSION_HASH);
-
-            InitStrategy is = InitStrategy.get(Thread.currentThread().getContextClassLoader());
 
             // initialization consists of ...
             executeReactor( is,
