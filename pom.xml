@@ -103,7 +103,7 @@ THE SOFTWARE.
         <configuration>
           <!-- enable release profile during the release, create IPS package, and sign bits. -->
           <prepareVerifyArgs>-P release,ips,sign</prepareVerifyArgs>
-          <goals>-DskipTests install javadoc:javadoc animal-sniffer:check deploy javadoc:aggregate</goals>
+          <goals>-DskipTests javadoc:javadoc animal-sniffer:check deploy javadoc:aggregate</goals>
           <remoteTagging>true</remoteTagging><!-- work around http://jira.codehaus.org/browse/SCM-406 -->
         </configuration>
       </plugin>
@@ -262,7 +262,7 @@ THE SOFTWARE.
                 <configuration>
                   <finalName>hudson-${version}</finalName>
                   <descriptors>
-                    <descriptor>assembly-src.xml</descriptor>
+                    <descriptor>${project.basedir}/assembly-src.xml</descriptor>
                   </descriptors>
                 </configuration>
               </execution>
