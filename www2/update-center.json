@@ -599,7 +599,7 @@ updateCenter.post(
         "name": "Bertrand Gressier"
       }],
       "name": "createjobadvanced",
-      "previousTimestamp": "2009-10-23T04:48:34.00Z",
+      "previousTimestamp": "2009-10-27T23:47:04.00Z",
       "releaseTimestamp": "2009-11-19T21:24:14.00Z",
       "requiredCore": "1.334",
       "title": "Create Job Advanced Plugin",
@@ -625,7 +625,7 @@ updateCenter.post(
       "developers": [{"developerId": "kohsuke"}],
       "excerpt": "This plugin will perform cvs tagging (specifically cvs rtag) after a job has been built successfully.",
       "name": "cvs-tag",
-      "previousTimestamp": "2009-04-25T02:56:02.00Z",
+      "previousTimestamp": "2009-04-30T00:02:58.00Z",
       "releaseTimestamp": "2009-05-11T16:59:34.00Z",
       "requiredCore": "1.304",
       "title": "CVS Tagging Plugin",
@@ -731,7 +731,7 @@ updateCenter.post(
       "developers": [{"developerId": "dvrzalik"}],
       "excerpt": "This plugin records disk usage. ",
       "name": "disk-usage",
-      "previousTimestamp": "2009-03-26T16:31:12.00Z",
+      "previousTimestamp": "2009-03-27T00:23:38.00Z",
       "releaseTimestamp": "2009-05-29T02:20:12.00Z",
       "requiredCore": "1.307",
       "title": "Disk Usage Plugin",
@@ -1246,7 +1246,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Distributed+Workspace+Clean+plugin"
     },
     "instant-messaging":     {
-      "buildDate": "Oct 31, 2009",
+      "buildDate": "Nov 23, 2009",
       "dependencies": [],
       "developers": [      {
         "developerId": "kutzi",
@@ -1254,25 +1254,41 @@ updateCenter.post(
         "name": "Christoph Kutzinski"
       }],
       "name": "instant-messaging",
-      "previousTimestamp": "2009-10-23T05:14:54.00Z",
-      "releaseTimestamp": "2009-11-01T05:30:00.00Z",
+      "previousTimestamp": "2009-11-01T05:30:00.00Z",
+      "releaseTimestamp": "2009-11-24T02:37:14.00Z",
       "requiredCore": "1.327",
       "title": "Instant Messaging Plugin",
-      "url": "http://hudson-ci.org/download/plugins/instant-messaging/1.2/instant-messaging.hpi",
-      "version": "1.2",
+      "url": "http://hudson-ci.org/download/plugins/instant-messaging/1.3/instant-messaging.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Instant+Messaging+Plugin"
     },
     "ircbot":     {
-      "buildDate": "Aug 24, 2007",
-      "dependencies": [],
-      "developers": [{"developerId": "kohsuke"}],
-      "excerpt": "This plugin installs Hudson IRC bot on your choice of IRC channels. You can get notifications via IRC and interact with Hudson via IRC.",
+      "buildDate": "Nov 23, 2009",
+      "dependencies":       [
+                {
+          "name": "instant-messaging",
+          "optional": false,
+          "version": "1.3"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.327"
+        }
+      ],
+      "developers": [      {
+        "developerId": "kutzi",
+        "email": "kutzi@gmx.de",
+        "name": "Christoph Kutzinski"
+      }],
+      "excerpt": "This plugin installs Hudson IRC bot on your choice of IRC channels. You can get notifications via IRC and interact with Hudson via IRC.  Note that you also need to install the <a href='http://wiki.hudson-ci.org/display/HUDSON/Instant+Messaging+Plugin'>instant-messaging plugin<\/a> .",
       "name": "ircbot",
-      "previousTimestamp": "2007-03-06T22:00:56.00Z",
-      "releaseTimestamp": "2007-08-25T01:32:44.00Z",
+      "previousTimestamp": "2007-08-25T01:32:44.00Z",
+      "releaseTimestamp": "2009-11-24T02:48:04.00Z",
+      "requiredCore": "1.327",
       "title": "IRC Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ircbot/1.7/ircbot.hpi",
-      "version": "1.7",
+      "url": "http://hudson-ci.org/download/plugins/ircbot/2.0/ircbot.hpi",
+      "version": "2.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/IRC+Plugin"
     },
     "ivy":     {
@@ -1290,12 +1306,12 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ivy+Plugin"
     },
     "jabber":     {
-      "buildDate": "Oct 31, 2009",
+      "buildDate": "Nov 23, 2009",
       "compatibleSinceVersion": "1.0",
       "dependencies": [      {
         "name": "instant-messaging",
         "optional": false,
-        "version": "1.2"
+        "version": "1.3"
       }],
       "developers":       [
                 {
@@ -1310,12 +1326,12 @@ updateCenter.post(
         }
       ],
       "name": "jabber",
-      "previousTimestamp": "2009-10-31T22:15:48.00Z",
-      "releaseTimestamp": "2009-11-01T05:41:48.00Z",
+      "previousTimestamp": "2009-11-01T05:41:48.00Z",
+      "releaseTimestamp": "2009-11-24T02:54:52.00Z",
       "requiredCore": "1.327",
       "title": "Jabber Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jabber/1.3/jabber.hpi",
-      "version": "1.3",
+      "url": "http://hudson-ci.org/download/plugins/jabber/1.4/jabber.hpi",
+      "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Jabber+Plugin"
     },
     "japex":     {
@@ -1894,7 +1910,7 @@ updateCenter.post(
       "excerpt": "This plugin allows you publish <a href='http://www.nunit.org/'>NUnit<\/a> test results ",
       "name": "nunit",
       "previousTimestamp": "2009-04-07T06:49:44.00Z",
-      "releaseTimestamp": "2009-04-14T02:51:22.00Z",
+      "releaseTimestamp": "2009-04-14T01:32:10.00Z",
       "requiredCore": "1.299",
       "title": "NUnit Plugin",
       "url": "http://hudson-ci.org/download/plugins/nunit/0.8/nunit.hpi",
@@ -2994,8 +3010,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "TM5vgNEscMSlVdOMLEFno2oeNY8=",
-    "signature": "jhf7rCznRGDJHM+2lQnt0qO1VM1OaYGKB2QLA4wQMNy1eIUx4SvUEAxWzp6vkx+5MvxZjGsWn5iS8sZfROPA2xCGIINfo1Jlr6N59wliVloZd5JvhlOmVdAX+iP91QZ7NtSeFtIIW4Azb0KNypXVziazQt2+n4u7dtFU75GkPDlcCjKpfPfutuvYSXFhSZ1sZDclkf9cDAwWLhq/ubOG5aEYpIitBQOPsZfrB9Sbjuxyxv0e6cqTDp5IRGF1/Nqi6l9bGH2rxspBQDS3mNN6X1vMfjFuWdY67UlyiXQpkopGwV8avPeCOO7dm1GZcsyoMC35t5vc3MtuQLHitps8hQ=="
+    "digest": "yyLm++uU/eQCzM88YIlVbVkhoIQ=",
+    "signature": "AiA1f/OltkmA7UEaQ0hfIqifRLTtLjgE577vhSFS5+qxujSYA0f4dbFVuIlC3SqgzYacq4XIMYcemkXGYN7jnIx/M6SQ26eyKXbxo9GQXVsQXsFScunY659JnW+/clzrkKf+n6iVD9mZQ5+niRwWnrT/Qpp5D65l2f3hH7EIifI0BGr9SqEK7y8ZUI9hf0Vyp7en/MQUNJIPalHFrMuoCiwAbCMVgGBl/b4Fym3RWNTBaMKF7DbP+p5+cNdNsPI2XFJWDo5aHu/dDMhU4ed9B1sV3Y10wFlO3evv7W5wx7aaQ+yH7AJKU3LyjsFOPGV2nAI4L77pXDJWIz8+zHWTHQ=="
   },
   "updateCenterVersion": "1"
 }

@@ -17,6 +17,10 @@
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
   <li class=bug>
+    Update or remove lastSuccessful/lastStable symlinks on filesystem as appropriate
+    when a build is deleted.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1986">issue 1986</a>)
+  <li class=bug>
     In-demand strategy could not relaunch slave nodes since 1.302.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3890">issue 3890</a>)
   <li class=bug>
@@ -33,9 +37,20 @@
   <li class=bug>
     Debian package now demands full JRE, not just a headless JRE.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4879">issue 4879</a>)
+  <li class=bug>
+    Avoid exception if a plugin provides null for a dynamic node label.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4924">issue 4924</a>)
+  <li class=bug>
+    If restart is not supported, explain why.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4876">issue 4876</a>)
+  <li class=bug>
+    Matrix configuration builds should continue even when Hudson is about to shut down.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4873">issue 4873</a>)
   <li class=rfe>
     Gracefully detect the double loading of JNA instead of failing later with <tt>NoClassDefFoundError</tt>
     (<a href="http://wiki.hudson-ci.org/display/HUDSON/JNA+is+already+loaded">detail</a>)
+  <li class=rfe>
+    Introduced a structure around the initialization process for better reporting and etc.
 </ul>
 </div><!--=TRUNK-END=-->
 
@@ -66,7 +81,7 @@
     failed to build in 1.334.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4894">issue 4894</a>)
   <li class=bug>
-    Core version in coreWarning message was null on PluginManager.
+    Core version number in plugin manager warning message was missing in 1.334.
   <li class=bug>
     Matrix build wasn't showing their full name in the executor list on the left.
   <li class=rfe>
@@ -115,6 +130,7 @@
   <li class=rfe>
     Plugin manager now shows warning for upgrade/install of plugins into a Hudson that
     is older than the plugin was built for.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=541">issue 541</a>)
   <li class=rfe>
     CLI "build" command now supports passing parameters.
   <li class=rfe>
@@ -217,6 +233,7 @@
     Update center switched over from <tt>https://hudson.dev.java.net/</tt> to <tt>http://hudson-ci.org/</tt>
   <li class=rfe>
     Use tree view to show 17-40 build artifacts on build/project pages.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2280">issue 2280</a>)
   <li class=rfe>
     When showing why a build is pending, Hudson now puts hyperlinks to node/label/project names.
   <li class=rfe>
