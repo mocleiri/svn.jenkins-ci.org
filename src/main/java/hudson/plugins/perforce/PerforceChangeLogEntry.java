@@ -5,8 +5,6 @@ import java.util.*;
 import hudson.scm.*;
 import hudson.model.User;
 
-import com.tek42.perforce.model.Changelist;
-
 /**
  * Perforce Implementation of {@link ChangeLogSet.Entry}.  This is a 1 to 1 mapping of
  * Perforce changelists.
@@ -132,6 +130,10 @@ public class PerforceChangeLogEntry extends ChangeLogSet.Entry {
 
         public void setRevision(String revision) {
             this.revision = revision;
+        }
+        public static class Action {
+            public static final String EDIT = "EDIT";
+            public static final String INTEGRATE = "INTEGRATE";
         }
     }
 

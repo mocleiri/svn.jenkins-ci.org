@@ -44,7 +44,6 @@ import com.perforce.p4java.exception.P4JException;
 import com.perforce.p4java.client.P4JClient;
 import com.perforce.p4java.core.P4JChangeList;
 import com.perforce.p4java.core.P4JLabel;
-import com.tek42.perforce.Depot;
 import hudson.PluginWrapper;
 
 /**
@@ -232,8 +231,8 @@ public class PerforceSCM extends SCM {
      * will be serialized, such as PerforceTagAction. This Depot is not functional,
      * but merely serves to hold onto server login information
      */
-    private Depot newDepot() {
-        Depot depot = new Depot();
+    private PerforceDepot newDepot() {
+        PerforceDepot depot = new PerforceDepot();
         depot.setPort(p4Port);
         depot.setUser(p4User);
         depot.setPassword(new PerforcePasswordEncryptor().decryptString(p4Passwd));

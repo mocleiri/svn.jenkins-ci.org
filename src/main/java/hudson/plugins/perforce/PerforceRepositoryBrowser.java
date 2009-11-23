@@ -5,8 +5,6 @@ import hudson.scm.*;
 import java.io.IOException;
 import java.net.URL;
 
-import com.tek42.perforce.model.Changelist;
-
 /**
  * {@link RepositoryBrowser} for Perforce.
  *
@@ -20,7 +18,7 @@ public abstract class PerforceRepositoryBrowser extends RepositoryBrowser<Perfor
      * @return
      *      null if the browser doesn't have any URL for diff.
      */
-    public abstract URL getDiffLink(Changelist.FileEntry file) throws IOException;
+    public abstract URL getDiffLink(PerforceChangeLogEntry.FileEntry file) throws IOException;
 
     /**
      * Determines the link to a single file under Perforce.
@@ -29,7 +27,7 @@ public abstract class PerforceRepositoryBrowser extends RepositoryBrowser<Perfor
      * @return
      *      null if the browser doesn't have any suitable URL.
      */
-    public abstract URL getFileLink(Changelist.FileEntry file) throws IOException;
+    public abstract URL getFileLink(PerforceChangeLogEntry.FileEntry file) throws IOException;
 
     private static final long serialVersionUID = 1L;
 }

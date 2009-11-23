@@ -5,7 +5,6 @@ import com.perforce.p4java.core.P4JLabel;
 import com.perforce.p4java.impl.generic.core.P4JLabelImpl;
 import com.perforce.p4java.server.P4JServer;
 
-import com.tek42.perforce.Depot;
 import static hudson.Util.fixEmpty;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
@@ -26,7 +25,7 @@ import java.util.regex.Pattern;
  * @author Mike Wille
  */
 public class PerforceTagAction extends AbstractScmTagAction {
-    private final Depot depot;
+    private final PerforceDepot depot;
     private final int changeNumber;
     private final String view;
 
@@ -36,7 +35,7 @@ public class PerforceTagAction extends AbstractScmTagAction {
     /**
      * Constructs a new tag action for tagging the build at a given change id
      */
-    public PerforceTagAction(AbstractBuild build, Depot depot, int changeNumber, String views) {
+    public PerforceTagAction(AbstractBuild build, PerforceDepot depot, int changeNumber, String views) {
         super(build);
         this.depot = depot;
         this.changeNumber = changeNumber;
@@ -46,7 +45,7 @@ public class PerforceTagAction extends AbstractScmTagAction {
     /**
      * Constructs a new tag action for tagging the build at a given label
      */
-    public PerforceTagAction(AbstractBuild build, Depot depot, String label, String views) {
+    public PerforceTagAction(AbstractBuild build, PerforceDepot depot, String label, String views) {
         super(build);
         this.depot = depot;
         this.changeNumber = P4JChangeList.UNKNOWN;  // -1

@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.tek42.perforce.model.Changelist;
-
 /**
  * {@link RepositoryBrowser} for Perforce's P4Web.
  * 
@@ -43,8 +41,8 @@ public class P4Web extends PerforceRepositoryBrowser {
     }
 
     @Override
-    public URL getDiffLink(Changelist.FileEntry file) throws IOException {
-        if(file.getAction() != Changelist.FileEntry.Action.EDIT && file.getAction() != Changelist.FileEntry.Action.INTEGRATE)
+    public URL getDiffLink(PerforceChangeLogEntry.FileEntry file) throws IOException {
+        if(!file.getAction().equals(PerforceChangeLogEntry.FileEntry.Action.EDIT) && !file.getAction().equals(PerforceChangeLogEntry.FileEntry.Action.INTEGRATE))
         	return null;
         int r = new Integer(file.getRevision());
         if(r <= 1)
@@ -54,7 +52,7 @@ public class P4Web extends PerforceRepositoryBrowser {
     }
 
     @Override
-    public URL getFileLink(Changelist.FileEntry file) throws IOException {
+    public URL getFileLink(PerforceChangeLogEntry.FileEntry file) throws IOException {
         return new URL(url.toString() + file.getFilename() + p4WebEndShite);
     }
 

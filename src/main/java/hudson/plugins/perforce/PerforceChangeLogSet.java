@@ -26,7 +26,6 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.xml.sax.SAXException;
 
-import com.tek42.perforce.model.Changelist;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
