@@ -1,13 +1,5 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
-  <f:entry title="Setup" help="/plugin/perforce/help/setup.html">
-    <table width="100%">
-      <f:entry title="Path to p4 executable">
-        <f:textbox field="p4Exe" id="p4Exe"/>
-      </f:entry>
-    </table>
-  </f:entry>
-
   <f:entry title="Depot" help="/plugin/perforce/help/depot.html">
     <table width="100%">
       <f:entry title="P4PORT (hostname:port)">
@@ -62,18 +54,6 @@
     <f:entry title="Don't rename workspace for each slave" help="/plugin/perforce/help/dontRenameClient.html">
       <f:checkbox field="dontRenameClient" default="false" />
     </f:entry>
-
-    <f:entry title="Windows Specific Details" help="/plugin/perforce/help/windows.html">
-      <table width="100%">
-        <f:entry title="System Drive">
-          <f:textbox field="p4SysDrive" />
-        </f:entry>
-        <f:entry title="System Root">
-          <f:textbox field="p4SysRoot" />
-        </f:entry>
-      </table>
-    </f:entry>
-
   </f:advanced>
 
 </j:jelly>
