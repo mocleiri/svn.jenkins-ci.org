@@ -1,0 +1,546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<!-- -->
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>
+MavenJob (Hudson core 1.74 API)
+</TITLE>
+
+<META NAME="date" CONTENT="2007-01-17">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="MavenJob (Hudson core 1.74 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/MavenJob.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/maven/MavenJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="MavenJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.DirectoryHolder">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+hudson.maven</FONT>
+<BR>
+Class MavenJob</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">hudson.model.Actionable</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/DirectoryHolder.html" title="class in hudson.model">hudson.model.DirectoryHolder</A>
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Job.html" title="class in hudson.model">hudson.model.Job</A>&lt;P,R&gt;
+                  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">hudson.model.AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;
+                      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.maven.MavenJob</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>MavenJob</B><DT>extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;<DT>implements <A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A></DL>
+</PRE>
+
+<P>
+<A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> that builds projects based on Maven2.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Kohsuke Kawaguchi</DD>
+</DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.model.DirectoryHolder"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.model.<A HREF="../../hudson/model/DirectoryHolder.html" title="class in hudson.model">DirectoryHolder</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/DirectoryHolder.Path.html" title="class in hudson.model">DirectoryHolder.Path</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/JobDescriptor.html" title="class in hudson.model">JobDescriptor</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#DESCRIPTOR">DESCRIPTOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.AbstractProject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#builds">builds</A>, <A HREF="../../hudson/model/AbstractProject.html#triggers">triggers</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Job"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.model.<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Job.html#description">description</A>, <A HREF="../../hudson/model/Job.html#name">name</A>, <A HREF="../../hudson/model/Job.html#nextBuildNumber">nextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#root">root</A>, <A HREF="../../hudson/model/Job.html#XSTREAM">XSTREAM</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#MavenJob(hudson.model.Hudson, java.lang.String)">MavenJob</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent,
+         java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts submission from the configuration page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/JobDescriptor.html" title="class in hudson.model">JobDescriptor</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#getReporters()">getReporters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of active <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s configured for this project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#loadBuild(java.io.File)">loadBuild</A></B>(java.io.File&nbsp;dir)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads an existing build record from disk.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#newBuild()">newBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new build of this project for immediate execution.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenJob.html#onLoad(hudson.model.Hudson, java.lang.String)">onLoad</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;root,
+       java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called when a <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> is loaded from disk.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractProject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractProject.html#_getRuns()">_getRuns</A>, <A HREF="../../hudson/model/AbstractProject.html#addToList(T, java.util.List)">addToList</A>, <A HREF="../../hudson/model/AbstractProject.html#addTrigger(hudson.triggers.Trigger)">addTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.util.List, java.lang.String)">buildDescribable</A>, <A HREF="../../hudson/model/AbstractProject.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener, java.io.File)">checkout</A>, <A HREF="../../hudson/model/AbstractProject.html#doBuild(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#doCancelQueue(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCancelQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#doWs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doWs</A>, <A HREF="../../hudson/model/AbstractProject.html#getAssignedNode()">getAssignedNode</A>, <A HREF="../../hudson/model/AbstractProject.html#getAuthToken()">getAuthToken</A>, <A HREF="../../hudson/model/AbstractProject.html#getHasCustomQuietPeriod()">getHasCustomQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getJDK()">getJDK</A>, <A HREF="../../hudson/model/AbstractProject.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/AbstractProject.html#getModuleRoot()">getModuleRoot</A>, <A HREF="../../hudson/model/AbstractProject.html#getQuietPeriod()">getQuietPeriod</A>, <A HREF="../../hudson/model/AbstractProject.html#getScm()">getScm</A>, <A HREF="../../hudson/model/AbstractProject.html#getTriggers()">getTriggers</A>, <A HREF="../../hudson/model/AbstractProject.html#getWorkspace()">getWorkspace</A>, <A HREF="../../hudson/model/AbstractProject.html#isBuildable()">isBuildable</A>, <A HREF="../../hudson/model/AbstractProject.html#isDisabled()">isDisabled</A>, <A HREF="../../hudson/model/AbstractProject.html#isEnableRemoteTrigger()">isEnableRemoteTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#isInQueue()">isInQueue</A>, <A HREF="../../hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)">pollSCMChanges</A>, <A HREF="../../hudson/model/AbstractProject.html#removeFromList(hudson.model.Descriptor, java.util.List)">removeFromList</A>, <A HREF="../../hudson/model/AbstractProject.html#removeRun(R)">removeRun</A>, <A HREF="../../hudson/model/AbstractProject.html#removeTrigger(hudson.model.Descriptor)">removeTrigger</A>, <A HREF="../../hudson/model/AbstractProject.html#scheduleBuild()">scheduleBuild</A>, <A HREF="../../hudson/model/AbstractProject.html#setJDK(hudson.model.JDK)">setJDK</A>, <A HREF="../../hudson/model/AbstractProject.html#setScm(hudson.scm.SCM)">setScm</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Job"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Job.html#assignBuildNumber()">assignBuildNumber</A>, <A HREF="../../hudson/model/Job.html#doBuildStatus(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildStatus</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraph</A>, <A HREF="../../hudson/model/Job.html#doBuildTimeGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildTimeGraphMap</A>, <A HREF="../../hudson/model/Job.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/Job.html#doDoRename(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoRename</A>, <A HREF="../../hudson/model/Job.html#doRssAll(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssAll</A>, <A HREF="../../hudson/model/Job.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRssFailed</A>, <A HREF="../../hudson/model/Job.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/Job.html#getBuild(java.lang.String)">getBuild</A>, <A HREF="../../hudson/model/Job.html#getBuildByNumber(int)">getBuildByNumber</A>, <A HREF="../../hudson/model/Job.html#getBuildDir()">getBuildDir</A>, <A HREF="../../hudson/model/Job.html#getBuilds()">getBuilds</A>, <A HREF="../../hudson/model/Job.html#getBuildsAsMap()">getBuildsAsMap</A>, <A HREF="../../hudson/model/Job.html#getBuildStatusUrl()">getBuildStatusUrl</A>, <A HREF="../../hudson/model/Job.html#getConfigFile(java.io.File)">getConfigFile</A>, <A HREF="../../hudson/model/Job.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/Job.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/Job.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../hudson/model/Job.html#getFirstBuild()">getFirstBuild</A>, <A HREF="../../hudson/model/Job.html#getIconColor()">getIconColor</A>, <A HREF="../../hudson/model/Job.html#getLastBuild()">getLastBuild</A>, <A HREF="../../hudson/model/Job.html#getLastFailedBuild()">getLastFailedBuild</A>, <A HREF="../../hudson/model/Job.html#getLastStableBuild()">getLastStableBuild</A>, <A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()">getLastSuccessfulBuild</A>, <A HREF="../../hudson/model/Job.html#getLogRotator()">getLogRotator</A>, <A HREF="../../hudson/model/Job.html#getName()">getName</A>, <A HREF="../../hudson/model/Job.html#getNextBuildNumber()">getNextBuildNumber</A>, <A HREF="../../hudson/model/Job.html#getParent()">getParent</A>, <A HREF="../../hudson/model/Job.html#getProperties()">getProperties</A>, <A HREF="../../hudson/model/Job.html#getProperty(java.lang.Class)">getProperty</A>, <A HREF="../../hudson/model/Job.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/Job.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Job.html#isKeepDependencies()">isKeepDependencies</A>, <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)">renameTo</A>, <A HREF="../../hudson/model/Job.html#save()">save</A>, <A HREF="../../hudson/model/Job.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/Job.html#setLogRotator(hudson.tasks.LogRotator)">setLogRotator</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.DirectoryHolder"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/DirectoryHolder.html" title="class in hudson.model">DirectoryHolder</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/DirectoryHolder.html#serveFile(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.FilePath, java.lang.String, boolean)">serveFile</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Actionable.html#getAction(java.lang.Class)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getAction(int)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getActions()">getActions</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.util.DescribableList.Owner"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.util.<A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util">DescribableList.Owner</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/util/DescribableList.Owner.html#save()">save</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="DESCRIPTOR"><!-- --></A><H3>
+DESCRIPTOR</H3>
+<PRE>
+public static final <A HREF="../../hudson/model/JobDescriptor.html" title="class in hudson.model">JobDescriptor</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt; <B>DESCRIPTOR</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="MavenJob(hudson.model.Hudson, java.lang.String)"><!-- --></A><H3>
+MavenJob</H3>
+<PRE>
+public <B>MavenJob</B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;parent,
+                java.lang.String&nbsp;name)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="onLoad(hudson.model.Hudson, java.lang.String)"><!-- --></A><H3>
+onLoad</H3>
+<PRE>
+protected void <B>onLoad</B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;root,
+                      java.lang.String&nbsp;name)
+               throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#onLoad(hudson.model.Hudson, java.lang.String)">Job</A></CODE></B></DD>
+<DD>Called when a <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> is loaded from disk.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#onLoad(hudson.model.Hudson, java.lang.String)">onLoad</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="newBuild()"><!-- --></A><H3>
+newBuild</H3>
+<PRE>
+public <A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A> <B>newBuild</B>()
+                    throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#newBuild()">AbstractProject</A></CODE></B></DD>
+<DD>Creates a new build of this project for immediate execution.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#newBuild()">newBuild</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="loadBuild(java.io.File)"><!-- --></A><H3>
+loadBuild</H3>
+<PRE>
+protected <A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A> <B>loadBuild</B>(java.io.File&nbsp;dir)
+                        throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#loadBuild(java.io.File)">AbstractProject</A></CODE></B></DD>
+<DD>Loads an existing build record from disk.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#loadBuild(java.io.File)">loadBuild</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getReporters()"><!-- --></A><H3>
+getReporters</H3>
+<PRE>
+public <A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>,<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&gt;&gt; <B>getReporters</B>()</PRE>
+<DL>
+<DD>List of active <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>s configured for this project.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doConfigSubmit</H3>
+<PRE>
+public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                    throws java.io.IOException,
+                           javax.servlet.ServletException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">Job</A></CODE></B></DD>
+<DD>Accepts submission from the configuration page.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../hudson/model/JobDescriptor.html" title="class in hudson.model">JobDescriptor</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt; <B>getDescriptor</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
+<DD>Gets the descriptor for this instance.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;<A HREF="../../hudson/maven/MavenJob.html" title="class in hudson.maven">MavenJob</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/MavenJob.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../hudson/maven/MavenBuildProxy.BuildCallable.html" title="interface in hudson.maven"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../index.html?hudson/maven/MavenJob.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="MavenJob.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_hudson.model.DirectoryHolder">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &copy; 2007 null. All Rights Reserved.
+</BODY>
+</HTML>

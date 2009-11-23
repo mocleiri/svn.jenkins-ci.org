@@ -1,0 +1,61 @@
+<html>
+<head>
+	<title>Hudson and Glassfish</title>
+	<style>
+		pre {
+			background-color: lightgray;
+			padding: 0.5em;
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Hudson and Glassfish</h1>
+
+<h3>Installation</h3>
+<p>
+	To install Hudson on Glassfish, simply copy <tt>huddson.war</tt> to <tt>$GLASSFISH_HOME/domains/domain1/autodeploy</tt>. Alternatively, you can do this from <a href="http://www.developinjava.com/readarticle.php?article_id=7">admin GUI</a>. See this document for more about this.
+
+<h3>Upgrade</h3>
+<p>
+	You can upgrade your existing Hudson by overwriting <tt>$GLASSFISH_HOME/domains/domain1/autodeploy/hudson.war</tt> with a newer version. Again, you can also do this from the admin GUI by choosing to redeploy the application as illustrated below.
+
+<div align=center>
+	<img src="glassfish-redeploy.png" />
+</div>
+
+<h3>Setting HUDSON_HOME</h3>
+<p>
+	There are many ways to do this, but one way to do so is to configure Glassfish to run with the "HUDSON_HOME" system property. From the command line, do the following:
+<pre>
+% ./asadmin create-jvm-options -DHUDSON_HOME=/path/to/hudson_home
+</pre>
+<p>
+	You can do the same from the admin GUI, as illustrated below:
+<div align=center>
+	<img src="glassfish-vm-opts.png" />
+</div>
+<p>
+	This technique should be also used to increase the VM heap size, when your Hudson gets big.
+<p>
+	If you get confused or this doesn't work, just try to set <tt>HUDSON_HOME</tt> environment variable before launching Glassfish:
+<pre>
+% export HUDSON_HOME=/path/to/hudson_home
+% ./asadmin start-domain
+</pre>
+<p>
+	Glassfish needs to be restarted for this change to take effect.
+
+<h3>Securing Hudson</h3>
+<p>
+  See <a href="http://forums.java.net/jive/message.jspa?messageID=202800">the forum thread</a> on this topic.
+</p>
+
+<h3>Relevant Issues</h3>
+<p>
+See <a href="https://hudson.dev.java.net/issues/buglist.cgi?component=hudson&version=current&email1=&emailtype1=exact&emailassigned_to1=1&email2=&emailtype2=exact&emailreporter2=1&issueidtype=include&issue_id=&changedin=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&short_desc=&short_desc_type=fulltext&long_desc=&long_desc_type=fulltext&issue_file_loc=&issue_file_loc_type=fulltext&status_whiteboard=glassfish&status_whiteboard_type=fulltext&field0-0-0=noop&type0-0-0=noop&value0-0-0=&cmdtype=doit&newqueryname=&order=Issue+Number&Submit+query=Submit+query">the list of issues</a> filed that are specifically marked relevant to Tomcat.
+
+
+</div></body>
+</html>
