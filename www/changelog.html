@@ -28,12 +28,12 @@
   <li class=bug>
     Improved display of why a slave is offline (don't incorrectly say "failed to launch").
   <li class=bug>
+    Improved the error diagnostics on the failure to establish connection with JNLP slaves early on.
+  <li class=bug>
     Fix so configure-slave permission actually allows configuration of slaves.
   <li class=bug>
     User pages showed add/edit description link to users without permission to edit,
     and guests were allowed to edit the user profile for anonymous user.
-  <li class=bug>
-    Improved the error diagnostics on the failure to establish connection with JNLP slaves early on.
   <li class=bug>
     Debian package now demands full JRE, not just a headless JRE.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4879">issue 4879</a>)
@@ -46,6 +46,9 @@
   <li class=bug>
     Matrix configuration builds should continue even when Hudson is about to shut down.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4873">issue 4873</a>)
+  <li class=bug>
+    Send build status email to valid addresses rather than aborting for one invalid address.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4927">issue 4927</a>)
   <li class=bug>
     Smart JDK/Maven/Ant auto installers aren't available for existing tool configurations.
   <li class=rfe>
@@ -67,7 +70,7 @@
 <h3><a name=v1.336>What's new in 1.336</a></h3>
 <!--=RC-CHANGES=-->
 </div><!--=END=-->
-<h3><a name=v1.335>What's new in 1.335</a></h3>
+<h3><a name=v1.335>What's new in 1.335</a> (2009/11/20)</h3>
 <ul class=image>
   <li class=bug>
     Space in axis value for matrix type project was lost on reconfiguration.
