@@ -7,7 +7,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mercurial</artifactId>
-  <version>1.24-SNAPSHOT</version>
+  <version>1.25-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>Hudson Mercurial plugin</name>
   <description>Integrates Hudson to Mercurial SCM</description>
@@ -31,4 +31,27 @@
           <version>1.0.0</version>
       </dependency>
   </dependencies>
+  <build>
+      <plugins>
+          <plugin>
+              <groupId>org.jvnet</groupId>
+              <artifactId>animal-sniffer</artifactId>
+              <version>1.2</version>
+              <executions>
+                  <execution>
+                      <goals>
+                          <goal>check</goal>
+                      </goals>
+                      <configuration>
+                          <signature>
+                              <groupId>org.jvnet.animal-sniffer</groupId>
+                              <artifactId>java1.5</artifactId>
+                              <version>1.0</version>
+                          </signature>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+      </plugins>
+  </build>
 </project>

@@ -1,12 +1,11 @@
 package hudson.plugins.warnings.parser;
 
-import hudson.plugins.warnings.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
 
@@ -47,7 +46,7 @@ public abstract class RegexpDocumentParser extends RegexpParser {
         String content = IOUtils.toString(file);
         file.close();
 
-        Set<FileAnnotation> warnings = new HashSet<FileAnnotation>();
+        ArrayList<FileAnnotation> warnings = new ArrayList<FileAnnotation>();
         findAnnotations(content, warnings);
 
         return warnings;

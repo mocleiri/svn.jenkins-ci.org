@@ -1,14 +1,11 @@
 package hudson.plugins.warnings.parser;
 
 import static junit.framework.Assert.*;
-import hudson.plugins.warnings.util.ParserResult;
-import hudson.plugins.warnings.util.model.FileAnnotation;
-import hudson.plugins.warnings.util.model.Priority;
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.Priority;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -34,10 +31,11 @@ public class MsBuildParserTest extends ParserTester {
      *
      * @throws IOException
      *      if the file could not be read
+     * @see <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3582">Issue 3582</a>
      */
     @Test
     public void issue3582() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new MsBuildParser().parse(openFile("issue3582.txt")));
+        Collection<FileAnnotation> warnings = new MsBuildParser().parse(openFile("issue3582.txt"));
 
         assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 1, warnings.size());
         FileAnnotation annotation = warnings.iterator().next();
@@ -45,27 +43,31 @@ public class MsBuildParserTest extends ParserTester {
     }
 
     /**
-     * Parses a file with 6 warnings of the MS Build tools.
+     * Parses a file with warnings of the MS Build linker.
      *
      * @throws IOException
      *      if the file could not be read
+     * @see <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4932">Issue 4932</a>
      */
     @Test
-    public void issue4472() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new MsBuildParser().parse(openFile("issue4472.txt")));
-        ParserResult parserResult = new ParserResult(warnings);
-        ArrayList<MsBuildParser> parsers = new ArrayList<MsBuildParser>();
-        parsers.add(new MsBuildParser());
-        ParserRegistry registry = ParserRegistryTest.createRegistryUnderTest("issue4472.txt", null, null, parsers);
-        Collection<FileAnnotation> registryResult = registry.parse(new File("issue4472.txt"));
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, warnings.size());
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, registryResult.size());
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, parserResult.getNumberOfAnnotations());
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 0, parserResult.getNumberOfAnnotations(Priority.HIGH));
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, parserResult.getNumberOfAnnotations(Priority.NORMAL));
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 0, parserResult.getNumberOfAnnotations(Priority.LOW));
-    }
+    public void issue4932() throws IOException {
+        Collection<FileAnnotation> warnings = new MsBuildParser().parse(openFile("issue4932.txt"));
 
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 2, warnings.size());
+        Iterator<FileAnnotation> iterator = warnings.iterator();
+        FileAnnotation annotation = iterator.next();
+        checkWarning(annotation,
+                0,
+                "unresolved external symbol \"public:",
+                "SynchronisationHeure.obj",
+                MsBuildParser.WARNING_TYPE, "LNK2001", Priority.HIGH);
+        annotation = iterator.next();
+        checkWarning(annotation,
+                0,
+                "1 unresolved externals",
+                "Release/Navineo.exe",
+                MsBuildParser.WARNING_TYPE, "LNK1120", Priority.HIGH);
+    }
 
     /**
      * Parses a file with warnings of the MS Build tools.
@@ -75,11 +77,11 @@ public class MsBuildParserTest extends ParserTester {
      */
     @Test
     public void parseWarnings() throws IOException {
-        ArrayList<FileAnnotation> sortedWarnings = sort(new MsBuildParser().parse(openFile()));
+        Collection<FileAnnotation> warnings = new MsBuildParser().parse(openFile());
 
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, sortedWarnings.size());
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, warnings.size());
 
-        Iterator<FileAnnotation> iterator = sortedWarnings.iterator();
+        Iterator<FileAnnotation> iterator = warnings.iterator();
         FileAnnotation annotation = iterator.next();
         checkWarning(annotation,
                 2242,
@@ -133,7 +135,7 @@ public class MsBuildParserTest extends ParserTester {
         testData.append("\r\n");
         testData.append("C:\\Src\\Parser\\CSharp\\file.cs (10): Error XXX: An error occurred");
 
-        Collection<FileAnnotation> warnings = sort(new MsBuildParser().parse(new InputStreamReader(IOUtils.toInputStream(testData.toString()))));
+        Collection<FileAnnotation> warnings = new MsBuildParser().parse(new InputStreamReader(IOUtils.toInputStream(testData.toString())));
 
         assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 2, warnings.size());
 

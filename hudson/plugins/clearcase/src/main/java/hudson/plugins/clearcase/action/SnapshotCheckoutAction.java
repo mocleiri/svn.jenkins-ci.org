@@ -25,6 +25,7 @@
 package hudson.plugins.clearcase.action;
 
 import java.io.IOException;
+import java.util.Set;
 
 import hudson.FilePath;
 import hudson.Launcher;
@@ -61,6 +62,10 @@ public class SnapshotCheckoutAction extends AbstractCheckoutAction {
                 if (!jobConfigSpec.trim().replaceAll("\r\n", "\n").equals(currentConfigSpec)) {
                     updateView = false;
                 }
+                Set<String> configSpecLoadRules = extractLoadRules(cleartool.catcs(viewName).trim());
+                if (loadRulesNeedUpdating(configSpecLoadRules)) {
+                    updateView = false;
+                }
             }
             else {
                 cleartool.rmview(viewName);
@@ -82,7 +87,12 @@ public class SnapshotCheckoutAction extends AbstractCheckoutAction {
         }
         
         if (updateView) {
-            cleartool.setcs(viewName, null);
+            try {
+                cleartool.setcs(viewName, null);
+            } catch (IOException e) {
+                launcher.getListener().fatalError(e.toString());
+                return false;
+            }
         }
         else {
             String newConfigSpec = jobConfigSpec + "\n";
@@ -95,10 +105,29 @@ public class SnapshotCheckoutAction extends AbstractCheckoutAction {
                 newConfigSpec += "load " + loadRule.trim() + "\n";
             }
             newConfigSpec = PathUtil.convertPathForOS(newConfigSpec, launcher);
-            cleartool.setcs(viewName, PathUtil.convertPathForOS(newConfigSpec, launcher));
+            try {
+                cleartool.setcs(viewName, PathUtil.convertPathForOS(newConfigSpec, launcher));
+            } catch (IOException e) {
+                launcher.getListener().fatalError(e.toString());
+                return false;
+            }
         }
 
         return true;
+    }
+
+    private boolean loadRulesNeedUpdating(Set<String> configSpecLoadRules) {
+        boolean recreate = false;
+        for (String loadRule : loadRules) {
+            if (!configSpecLoadRules.contains(loadRule)) {
+                System.out
+                    .println("Load rule: "
+                             + loadRule
+                             + " not found in current config spec, resetting config spec or recreating view");
+                recreate = true;
+            }
+        }
+        return recreate;
     }
 
 }

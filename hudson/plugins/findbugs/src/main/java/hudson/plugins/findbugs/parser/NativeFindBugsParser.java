@@ -1,9 +1,9 @@
 package hudson.plugins.findbugs.parser;
 
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.LineRange;
+import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.findbugs.FindBugsMessages;
-import hudson.plugins.findbugs.util.model.FileAnnotation;
-import hudson.plugins.findbugs.util.model.LineRange;
-import hudson.plugins.findbugs.util.model.Priority;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -125,14 +125,15 @@ public class NativeFindBugsParser {
     public Collection<FileAnnotation> parse(final InputStream file, final Collection<String> sources,
             final String moduleName, final Map<String, String> hashToMessageMapping) throws IOException,
             DocumentException {
-        Project project = createMavenProject(sources);
-
         SortedBugCollection collection = new SortedBugCollection();
-        collection.readXML(file, project);
+        collection.readXML(file);
 
-        SourceFinder sourceFinder = new SourceFinder();
-        sourceFinder.setSourceBaseList(project.getSourceDirList());
+        Project project = collection.getProject();
+        for (String sourceFolder : sources) {
+            project.addSourceDir(sourceFolder);
+        }
 
+        SourceFinder sourceFinder = new SourceFinder(project);
         String actualName = extractModuleName(moduleName, project);
 
         ArrayList<FileAnnotation> annotations = new ArrayList<FileAnnotation>();

@@ -1,10 +1,12 @@
 package hudson.plugins.checkstyle;
 
 import hudson.model.AbstractBuild;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.core.ResultAction;
 import hudson.plugins.checkstyle.parser.Warning;
-import hudson.plugins.checkstyle.util.BuildResult;
-import hudson.plugins.checkstyle.util.ParserResult;
-import hudson.plugins.checkstyle.util.ResultAction;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Represents the results of the Checkstyle analysis. One instance of this class
@@ -15,9 +17,6 @@ import hudson.plugins.checkstyle.util.ResultAction;
 public class CheckStyleResult extends BuildResult {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 2768250056765266658L;
-    static {
-        XSTREAM.alias("warning", Warning.class);
-    }
 
     /**
      * Creates a new instance of {@link CheckStyleResult}.
@@ -49,6 +48,12 @@ public class CheckStyleResult extends BuildResult {
     public CheckStyleResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
             final ParserResult result, final CheckStyleResult previous) {
         super(build, defaultEncoding, result, previous);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void configure(final XStream xstream) {
+        xstream.alias("warning", Warning.class);
     }
 
     /**

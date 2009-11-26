@@ -2,8 +2,8 @@ package com.ikokoon.serenity.process;
 
 import java.util.List;
 
-import com.ikokoon.IConstants;
 import com.ikokoon.serenity.Configuration;
+import com.ikokoon.serenity.IConstants;
 import com.ikokoon.serenity.model.Package;
 import com.ikokoon.serenity.model.Project;
 import com.ikokoon.serenity.persistence.IDataBase;
@@ -36,9 +36,8 @@ public class Cleaner extends AProcess implements IConstants {
 	public void execute() {
 		super.execute();
 		// Clean all the packages that got in the database along the processing
-		// that were not included in the packages required and all the packages and classes
-		// that have been deleted that are still hanging around
-		IDataBase dataBase = IDataBase.DataBase.getDataBase(IConstants.DATABASE_FILE, false);
+		// that were not included in the packages required
+		IDataBase dataBase = IDataBase.DataBaseManager.getDataBase(IConstants.DATABASE_FILE, false);
 		Project<?, ?> project = (Project<?, ?>) dataBase.find(Toolkit.hash(Project.class.getName()));
 		if (project != null) {
 			List<Package<?, ?>> packages = project.getChildren();
@@ -49,10 +48,10 @@ public class Cleaner extends AProcess implements IConstants {
 					continue;
 				}
 				// Remove the packages that have no classes, not interesting
-				if (pakkage.getChildren() != null && pakkage.getChildren().size() == 0) {
-					dataBase.remove(pakkage.getId());
-					continue;
-				}
+				// if (pakkage.getChildren() != null && pakkage.getChildren().size() == 0) {
+				// dataBase.remove(pakkage.getId());
+				// continue;
+				// }
 			}
 		}
 	}

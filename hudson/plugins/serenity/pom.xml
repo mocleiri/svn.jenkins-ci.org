@@ -13,6 +13,9 @@
 	<packaging>hpi</packaging>
 	<name>Hudson Serenity plugin</name>
 	<url>http://wiki.hudson-ci.org/display/HUDSON/Serenity+Plugin</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<build>
 		<plugins>
@@ -25,16 +28,22 @@
 						<phase>package</phase>
 						<configuration>
 							<tasks verbose="true">
-								<echo message="Unpacking and repacking serenity.jar with the agent manifest" />
-								<unjar src="target/serenity.jar" dest="target/temp" overwrite="true" taskname="repack.serenity.with.manifest" />
-								<jar destfile="target/serenity.jar" basedir="target/temp" manifest="src/main/java/META-INF/MANIFEST.MF">
+								<property name="src" value="src/main/java" />
+								<property name="temp" value="target/temp" />
+								<property name="serenity.jar" value="target/serenity.jar" />
+								<property name="serenity.hpi" value="target/serenity.hpi" />
+								<property name="manifest" value="${src}/META-INF/MANIFEST.MF" />
+
+								<echo message="Unpacking and repacking serenity.jar with the agent manifest and log4j  propeties file" />
+								<unjar src="${serenity.jar}" dest="${temp}" overwrite="true" taskname="repack.serenity.with.manifest" />
+								<jar destfile="${serenity.jar}" basedir="${temp}" manifest="${manifest}">
 									<!-- Include the source -->
-									<fileset dir="src/main/java">
+									<fileset dir="${src}">
 										<include name="**" />
 									</fileset>
 								</jar>
-								<echo message="Copying the trend applet to the SerenityResult folder" />
-								<!-- copy todir="../Findbugs/lib/" file="${serenity.jar}" overwrite="false" failonerror="true" / -->
+								<echo message="Copying the serrenity jar to the test project (Findbugs)" />
+								<copy todir="../Findbugs/lib" file="${serenity.jar}" overwrite="true" failonerror="true" />
 							</tasks>
 						</configuration>
 						<goals>
@@ -42,6 +51,26 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<systemProperties>
+						<forkMode>once</forkMode>
+						<property>
+							<name>java.class.path</name>
+							<value>${java.class.path}</value>
+						</property>
+						<property>
+							<name>included.packages</name>
+							<value>com.ikokoon.target;com.ikokoon.serenity</value>
+						</property>
+						<argLine>-javaagent:target/serenity.jar -Xms512m -Xmx1024m</argLine>
+						<additionalClasspathElements>${surefire.test.class.path}</additionalClasspathElements>
+					</systemProperties>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -57,16 +86,30 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm</artifactId>
-			<version>3.1</version>
+			<groupId>org.neodatis</groupId>
+			<artifactId>neodatis-odb</artifactId>
+			<version>1.9-beta-1</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.neodatis</groupId>
-			<artifactId>neodatis-odb</artifactId>
-			<version>1.9-beta-1</version>
+			<groupId>de.java2html</groupId>
+			<artifactId>java2html</artifactId>
+			<version>5.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-all</artifactId>
+			<version>3.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

@@ -1,7 +1,7 @@
 package hudson.plugins.warnings.parser;
 
-import hudson.plugins.warnings.util.EncodingValidator;
-import hudson.plugins.warnings.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.EncodingValidator;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +44,32 @@ public class ParserRegistry {
     /** The default charset to be used when reading and parsing files. */
     private final Charset defaultCharset;
 
+    /**
+     * Returns all available parsers.
+     *
+     * @return all available parsers
+     */
+    private static List<WarningsParser> getAllParsers() {
+        ArrayList<WarningsParser> parsers = new ArrayList<WarningsParser>();
+        parsers.add(new JavacParser());
+        parsers.add(new AntJavacParser());
+        parsers.add(new JavaDocParser());
+        parsers.add(new AntEclipseParser());
+        parsers.add(new MsBuildParser());
+        parsers.add(new GccParser());
+        parsers.add(new InvalidsParser());
+        parsers.add(new SunCParser());
+        parsers.add(new GnatParser());
+        parsers.add(new ErlcParser());
+        parsers.add(new IntelCParser());
+        parsers.add(new IarParser());
+        MsBuildParser pclintParser = new MsBuildParser();
+        pclintParser.setName("PC-Lint");
+        parsers.add(pclintParser);
+        parsers.add(new BuckminsterParser());
+        parsers.add(new TiCcsParser());
+        return Collections.unmodifiableList(parsers);
+    }
 
     /**
      * Creates a new instance of <code>ParserRegistry</code>.
@@ -53,7 +79,7 @@ public class ParserRegistry {
      * @param defaultEncoding
      *            the default encoding to be used when reading and parsing files
      */
-    public ParserRegistry(final List<? extends WarningsParser> parsers, final String defaultEncoding) {
+    public ParserRegistry(final List<WarningsParser> parsers, final String defaultEncoding) {
         this(parsers, defaultEncoding, StringUtils.EMPTY, StringUtils.EMPTY);
     }
 
@@ -71,7 +97,7 @@ public class ParserRegistry {
      * @param defaultEncoding
      *            the default encoding to be used when reading and parsing files
      */
-    public ParserRegistry(final List<? extends WarningsParser> parsers, final String defaultEncoding, final String includePattern, final String excludePattern) {
+    public ParserRegistry(final List<WarningsParser> parsers, final String defaultEncoding, final String includePattern, final String excludePattern) {
         defaultCharset = EncodingValidator.defaultCharset(defaultEncoding);
         this.parsers = new ArrayList<WarningsParser>(parsers);
         if (this.parsers.isEmpty()) {
@@ -106,7 +132,7 @@ public class ParserRegistry {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public Collection<FileAnnotation> parse(final File file) throws IOException {
-        Set<FileAnnotation> allAnnotations = new HashSet<FileAnnotation>();
+        List<FileAnnotation> allAnnotations = new ArrayList<FileAnnotation>();
         for (WarningsParser parser : parsers) {
             allAnnotations.addAll(parser.parse(createReader(file)));
         }
@@ -138,7 +164,7 @@ public class ParserRegistry {
      *            all annotations
      * @return the filtered annotations if there is a filter defined
      */
-    private Collection<FileAnnotation> applyExcludeFilter(final Collection<FileAnnotation> allAnnotations) {
+    private Collection<FileAnnotation> applyExcludeFilter(final List<FileAnnotation> allAnnotations) {
         if (fileFilter == null) {
             return allAnnotations;
         }
@@ -154,8 +180,8 @@ public class ParserRegistry {
      *            the annotations to filter
      * @return the annotations that are not excluded in the filter
      */
-    private Collection<FileAnnotation> filterAnnotations(final Collection<FileAnnotation> annotations) {
-        Set<FileAnnotation> filteredAnnotations = new HashSet<FileAnnotation>();
+    private Collection<FileAnnotation> filterAnnotations(final List<FileAnnotation> annotations) {
+        List<FileAnnotation> filteredAnnotations = new ArrayList<FileAnnotation>();
         for (FileAnnotation annotation : annotations) {
             if (fileFilter.matches(annotation.getFileName())) {
                 filteredAnnotations.add(annotation);
@@ -237,34 +263,6 @@ public class ParserRegistry {
             }
             return isIncluded(canonicalName) && !isExcluded(canonicalName);
         }
-    }
-
-    /**
-     * Returns all available parsers.
-     *
-     * @return all available parsers
-     */
-    private static List<WarningsParser> getAllParsers() {
-        ArrayList<WarningsParser> parsers = new ArrayList<WarningsParser>();
-        parsers.add(new JavacParser());
-        parsers.add(new AntJavacParser());
-        parsers.add(new JavaDocParser());
-        parsers.add(new AntEclipseParser());
-        parsers.add(new MsBuildParser());
-        parsers.add(new GccParser());
-		parsers.add(new GccIncludeParser());
-        parsers.add(new InvalidsParser());
-        parsers.add(new SunCParser());
-        parsers.add(new GnatParser());
-        parsers.add(new ErlcParser());
-        parsers.add(new IntelCParser());
-        parsers.add(new IarParser());
-        MsBuildParser pclintParser = new MsBuildParser();
-        pclintParser.setName("PC-Lint");
-        parsers.add(pclintParser);
-        parsers.add(new BuckminsterParser());
-        parsers.add(new YuiCompressorParser());
-        return Collections.unmodifiableList(parsers);
     }
 
     /**

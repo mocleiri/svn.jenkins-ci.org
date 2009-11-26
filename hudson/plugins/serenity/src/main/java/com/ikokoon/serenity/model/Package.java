@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.ikokoon.toolkit.Toolkit;
+
 /**
  * @author Michael Couck
  * @since 12.08.09
@@ -14,20 +16,32 @@ import java.util.TreeSet;
 public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> implements Comparable<Package<?, ?>>, Serializable {
 
 	private String name;
-	private double lines;
-	private double totalLinesExecuted;
-	private double complexity;
+
+	@Legend(name = COVERAGE, limits = { COVERAGE_GOOD, COVERAGE_OK, COVERAGE_BAD }, positive = 1.0)
 	private double coverage;
+	@Legend(name = COMPLEXITY, limits = { COMPLEXITY_GOOD, COMPLEXITY_OK, COMPLEXITY_BAD })
+	private double complexity;
+	@Legend(name = ABSTRACTNESS, limits = { ABSTRACTNESS_GOOD, ABSTRACTNESS_OK, ABSTRACTNESS_BAD }, positive = 1.0)
 	private double abstractness;
+	@Legend(name = STABILITY, limits = { STABILITY_GOOD, STABILITY_OK, STABILITY_BAD }, positive = 1.0)
 	private double stability;
+	@Legend(name = DISTANCE, limits = { DISTANCE_GOOD, DISTANCE_OK, DISTANCE_BAD }, positive = 1.0)
 	private double distance;
+	@Legend(name = LINES, limits = { NO_LIMIT, NO_LIMIT, NO_LIMIT })
+	private double lines;
+	@Legend(name = INTERFACES, limits = { NO_LIMIT, NO_LIMIT, NO_LIMIT })
 	private double interfaces;
-	private double implementations;
-	private double efferent;
-	private double afferent;
+	@Legend(name = IMPLEMENTATIONS, limits = { NO_LIMIT, NO_LIMIT, NO_LIMIT })
+	private double implement;
+	@Legend(name = EXECUTED, limits = { NO_LIMIT, NO_LIMIT, NO_LIMIT })
+	private double executed;
+
+	private double efference;
+	private double afference;
 	private Date timestamp;
-	private Set<Efferent> efference = new TreeSet<Efferent>();
-	private Set<Afferent> afference = new TreeSet<Afferent>();
+
+	private Set<Efferent> efferent = new TreeSet<Efferent>();
+	private Set<Afferent> afferent = new TreeSet<Afferent>();
 
 	public String getName() {
 		return name;
@@ -45,12 +59,12 @@ public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> impleme
 		this.lines = lines;
 	}
 
-	public double getTotalLinesExecuted() {
-		return totalLinesExecuted;
+	public double getExecuted() {
+		return executed;
 	}
 
-	public void setTotalLinesExecuted(double totalLinesExecuted) {
-		this.totalLinesExecuted = totalLinesExecuted;
+	public void setExecuted(double totalLinesExecuted) {
+		this.executed = totalLinesExecuted;
 	}
 
 	public Date getTimestamp() {
@@ -62,7 +76,7 @@ public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> impleme
 	}
 
 	public double getComplexity() {
-		return format(complexity, PRECISION);
+		return Toolkit.format(complexity, PRECISION);
 	}
 
 	public void setComplexity(double complexity) {
@@ -70,7 +84,7 @@ public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> impleme
 	}
 
 	public double getCoverage() {
-		return format(coverage, PRECISION);
+		return Toolkit.format(coverage, PRECISION);
 	}
 
 	public void setCoverage(double coverage) {
@@ -78,7 +92,7 @@ public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> impleme
 	}
 
 	public double getAbstractness() {
-		return format(abstractness, PRECISION);
+		return Toolkit.format(abstractness, PRECISION);
 	}
 
 	public void setAbstractness(double abstractness) {
@@ -86,7 +100,7 @@ public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> impleme
 	}
 
 	public double getStability() {
-		return format(stability, PRECISION);
+		return Toolkit.format(stability, PRECISION);
 	}
 
 	public void setStability(double stability) {
@@ -94,7 +108,7 @@ public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> impleme
 	}
 
 	public double getDistance() {
-		return format(distance, PRECISION);
+		return Toolkit.format(distance, PRECISION);
 	}
 
 	public void setDistance(double distance) {
@@ -102,51 +116,51 @@ public class Package<E, F> extends Composite<Project<?, ?>, Class<?, ?>> impleme
 	}
 
 	public double getInterfaces() {
-		return format(interfaces, PRECISION);
+		return Toolkit.format(interfaces, PRECISION);
 	}
 
 	public void setInterfaces(double interfaces) {
 		this.interfaces = interfaces;
 	}
 
-	public double getImplementations() {
-		return format(implementations, PRECISION);
+	public double getImplement() {
+		return Toolkit.format(implement, PRECISION);
 	}
 
-	public void setImplementations(double implementations) {
-		this.implementations = implementations;
+	public void setImplement(double implementations) {
+		this.implement = implementations;
 	}
 
-	public double getEfferent() {
-		return format(efferent, PRECISION);
+	public double getEfference() {
+		return Toolkit.format(efference, PRECISION);
 	}
 
-	public void setEfferent(double efferent) {
-		this.efferent = efferent;
+	public void setEfference(double efferent) {
+		this.efference = efferent;
 	}
 
-	public double getAfferent() {
-		return format(afferent, PRECISION);
+	public double getAfference() {
+		return Toolkit.format(afference, PRECISION);
 	}
 
-	public void setAfferent(double afferent) {
-		this.afferent = afferent;
+	public void setAfference(double afferent) {
+		this.afference = afferent;
 	}
 
-	public Set<Efferent> getEfference() {
-		return efference;
+	public Set<Efferent> getEfferent() {
+		return efferent;
 	}
 
-	public void setEfference(Set<Efferent> efference) {
-		this.efference = efference;
+	public void setEfferent(Set<Efferent> efference) {
+		this.efferent = efference;
 	}
 
-	public Set<Afferent> getAfference() {
-		return afference;
+	public Set<Afferent> getAfferent() {
+		return afferent;
 	}
 
-	public void setAfference(Set<Afferent> afference) {
-		this.afference = afference;
+	public void setAfferent(Set<Afferent> afference) {
+		this.afferent = afference;
 	}
 
 	public String toString() {

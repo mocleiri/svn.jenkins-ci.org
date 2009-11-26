@@ -1,9 +1,9 @@
 package hudson.plugins.tasks;
 
 import hudson.model.AbstractBuild;
-import hudson.plugins.tasks.util.AbstractResultAction;
-import hudson.plugins.tasks.util.HealthDescriptor;
-import hudson.plugins.tasks.util.PluginDescriptor;
+import hudson.plugins.analysis.core.AbstractResultAction;
+import hudson.plugins.analysis.core.HealthDescriptor;
+import hudson.plugins.analysis.core.PluginDescriptor;
 
 import java.util.NoSuchElementException;
 
@@ -75,11 +75,13 @@ public class TasksResultAction extends AbstractResultAction<TasksResult>  {
     }
 
     /** {@inheritDoc} */
+    @Override
     public String getMultipleItemsTooltip(final int numberOfItems) {
         return Messages.Tasks_ResultAction_MultipleWarnings(numberOfItems);
     }
 
     /** {@inheritDoc} */
+    @Override
     public String getSingleItemTooltip() {
         return Messages.Tasks_ResultAction_OneWarning();
     }

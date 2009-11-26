@@ -2,18 +2,19 @@ package com.ikokoon.toolkit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.objectweb.asm.Type;
 
 import com.ikokoon.serenity.ATest;
 import com.ikokoon.target.Target;
-import com.ikokoon.serenity.model.Package;
 
 /**
  * This is the test for the utility class.
@@ -40,7 +41,21 @@ public class ToolkitTest extends ATest {
 
 	@Test
 	public void classNameToPackageName() {
-		String name = Toolkit.classNameToPackageName(Target.class.getName());
+		Type type = Type.getObjectType(className);
+		logger.info("Type : " + type.getClassName() + ", " + type.getDescriptor() + ", " + type.getInternalName() + ", " + type.getSize() + ", "
+				+ type.getSort());
+
+		Type[] types = Type.getArgumentTypes("(Ljava/lang/Integer;Ljava/math/BigDecimal;)Ljava/lang/String;");
+		for (Type argumentType : types) {
+			logger.info("Type : " + argumentType.getClassName() + ", " + argumentType.getDescriptor() + ", " + argumentType.getInternalName() + ", "
+					+ argumentType.getSize() + ", " + argumentType.getSort());
+		}
+
+		Type returnType = Type.getReturnType("(Ljava/lang/Integer;Ljava/math/BigDecimal;)Ljava/lang/String;");
+		logger.info("Type : " + returnType.getClassName() + ", " + returnType.getDescriptor() + ", " + returnType.getInternalName() + ", "
+				+ returnType.getSize() + ", " + returnType.getSort());
+
+		String name = Toolkit.classNameToPackageName(Toolkit.dotToSlash(Target.class.getName()));
 		assertEquals("com.ikokoon.target", name);
 	}
 
@@ -51,23 +66,11 @@ public class ToolkitTest extends ATest {
 	}
 
 	@Test
-	public void byteCodeSignatureToClassNameArray() {
-		String[] classes = Toolkit.byteCodeSignatureToClassNameArray("([ZLjava/lang/Integer;ZLjava/math/BigDecimal;)[ZLjava/lang/String;");
-		assertEquals(Integer.class.getName(), classes[0]);
-		assertEquals(BigDecimal.class.getName(), classes[1]);
-		assertEquals(String.class.getName(), classes[2]);
-
-		classes = Toolkit.byteCodeSignatureToClassNameArray("Lorg/apache/log4j/Logger;");
-		assertEquals(Logger.class.getName(), classes[0]);
-	}
-
-	@Test
 	public void formatString() {
 		int precision = 3;
-		Package pakkage = new Package();
-		String string = pakkage.format("123456789,123456789", precision);
+		String string = Toolkit.format("123456789,123456789", precision);
 		assertEquals(precision, string.substring(string.indexOf(',') + 1, string.length()).length());
-		string = pakkage.format("123456789.123456789", precision);
+		string = Toolkit.format("123456789.123456789", precision);
 		assertEquals(precision, string.substring(string.indexOf('.') + 1, string.length()).length());
 	}
 
@@ -75,8 +78,7 @@ public class ToolkitTest extends ATest {
 	public void formatDouble() {
 		int precision = 3;
 		double d = 123456.8755135d;
-		Package pakkage = new Package();
-		d = pakkage.format(d, precision);
+		d = Toolkit.format(d, precision);
 		assertTrue(123456.875 == d);
 		assertFalse(123456.8755 == d);
 	}
@@ -89,6 +91,47 @@ public class ToolkitTest extends ATest {
 		objects.add(string);
 		Long arrayHash = Toolkit.hash(objects.toArray());
 		assertEquals(stringHash, arrayHash);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void serializeAndDeserializeToAndFrom64() {
+		Target<Object, Object> target = new Target<Object, Object>(Target.class);
+		String string = Toolkit.serializeToBase64(target);
+		assertNotNull(string);
+		target = (Target<Object, Object>) Toolkit.deserializeFromBase64(string);
+		assertNotNull(target);
+	}
+
+	@Test
+	public void deleteFile() throws Exception {
+		File folder = createFolderAndOneFile("target/folder", "file.txt");
+		Toolkit.deleteFile(folder);
+		logger.info("Deleted folder and file : " + folder.exists());
+	}
+
+	private File createFolderAndOneFile(String folderName, String fileName) throws Exception {
+		File folder = new File(".", folderName);
+		folder.mkdir();
+		assertTrue(folder.exists());
+
+		File file = new File(folder, fileName);
+		file.createNewFile();
+		assertTrue(file.exists());
+
+		return folder;
+	}
+
+	@Test
+	public void copyFiles() throws Exception {
+		File source = createFolderAndOneFile("target/folder", "file.txt");
+		File destination = new File(".", "target/folderCopy");
+		if (destination.exists()) {
+			Toolkit.deleteFile(destination);
+		}
+		logger.info("Deleted destination : " + destination.exists());
+		Toolkit.copyFile(source, destination);
+		logger.info("Copied file exists : " + new File(destination, "file.txt").exists());
 	}
 
 }

@@ -1,8 +1,8 @@
 package hudson.plugins.warnings.parser;
 
 import static junit.framework.Assert.*;
-import hudson.plugins.warnings.util.model.FileAnnotation;
-import hudson.plugins.warnings.util.model.Priority;
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.Priority;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -29,7 +29,7 @@ public class ErlcParserTest extends ParserTester {
      */
     @Test
     public void testWarningsParser() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new ErlcParser().parse(openFile()));
+        Collection<FileAnnotation> warnings = new ErlcParser().parse(openFile());
 
         assertEquals("Wrong number of warnings detected.", 2, warnings.size());
 

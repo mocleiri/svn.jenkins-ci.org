@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Describable (Hudson main module 1.333 API)
+Uses of Interface hudson.model.Describable (Hudson main module 1.335 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-09">
+<META NAME="date" CONTENT="2009-11-20">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Describable (Hudson main module 1.333 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Describable (Hudson main module 1.333 API)";
+        parent.document.title="Uses of Interface hudson.model.Describable (Hudson main module 1.335 API)";
     }
 }
 </SCRIPT>
@@ -101,6 +101,14 @@ Packages that use <A HREF="../../../hudson/model/Describable.html" title="interf
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.matrix"><B>hudson.matrix</B></A></TD>
 <TD>Matrix project&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.maven"><B>hudson.maven</B></A></TD>
+<TD>Maven support.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.maven.reporters"><B>hudson.maven.reporters</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
@@ -244,7 +252,7 @@ Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hud
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B>DescriptorExtensionList.</B><B><A HREF="../../../hudson/DescriptorExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A></B>(<A HREF="../../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
-       java.lang.Class&lt;T&gt;&nbsp;describableType)</CODE>
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;describableType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance.</TD>
@@ -299,6 +307,148 @@ Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hud
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A> that allows you to run multiple different configurations
  from a single setting.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.maven"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A> in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> that implement <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group of <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/MavenRedeployer.html" title="class in hudson.maven">MavenRedeployer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>Publisher</CODE> for Maven projects to deploy artifacts to a Maven repository
+ after the fact.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listens to the build execution of <A HREF="../../../hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A>,
+ and normally records some information and exposes thoses
+ in <A HREF="../../../hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A> later.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/MavenTestDataPublisher.html" title="class in hudson.maven">MavenTestDataPublisher</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Augments <A HREF="../../../hudson/maven/reporters/SurefireReport.html" title="class in hudson.maven.reporters"><CODE>SurefireReport</CODE></A> by executing <A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit"><CODE>TestDataPublisher</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> for <A HREF="../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><CODE>MavenModuleSetBuild</CODE></A> to deploy artifacts
+ after a build is fully succeeded.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.maven.reporters"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A> in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A> that implement <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/BuildInfoRecorder.html" title="class in hudson.maven.reporters">BuildInfoRecorder</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenArtifactArchiver.html" title="class in hudson.maven.reporters">MavenArtifactArchiver</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Archives artifacts of the build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenFingerprinter.html" title="class in hudson.maven.reporters">MavenFingerprinter</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records fingerprints of the builds to keep track of dependencies.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.html" title="class in hudson.maven.reporters">MavenJavadocArchiver</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records the javadoc and archives it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenMailer.html" title="class in hudson.maven.reporters">MavenMailer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends out an e-mail notification for Maven build result.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.html" title="class in hudson.maven.reporters">MavenSiteArchiver</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Watches out for the execution of maven-site-plugin and records its output.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/ReportCollector.html" title="class in hudson.maven.reporters">ReportCollector</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Watches out for executions of <CODE>MavenReport</CODE> mojos and record its output.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.html" title="class in hudson.maven.reporters">SurefireArchiver</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records the surefire test result.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -371,7 +521,7 @@ Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hud
 <TD><CODE><B><A HREF="../../../hudson/model/BooleanParameterDefinition.html" title="class in hudson.model">BooleanParameterDefinition</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> that is either 'true' or 'false'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -531,6 +681,14 @@ Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/SimpleParameterDefinition.html" title="class in hudson.model">SimpleParameterDefinition</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenient base class for <A HREF="../../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> whose value can be represented in a context-independent single string token.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/Slave.html" title="class in hudson.model">Slave</A></B></CODE>
 
 <BR>
@@ -606,7 +764,7 @@ void</CODE></FONT></TD>
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#addToList(T, java.util.List)">addToList</A></B>(T&nbsp;item,
-          java.util.List&lt;T&gt;&nbsp;collection)</CODE>
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;T&gt;&nbsp;collection)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -619,12 +777,12 @@ void</CODE></FONT></TD>
 <TD NOWRAP><FONT SIZE="-1">
 <CODE>&lt;T extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt; 
 <BR>
-java.util.List&lt;T&gt;</CODE></FONT></TD>
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)">buildDescribable</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                 java.util.List&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;descriptors)</CODE>
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;descriptors)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -637,13 +795,13 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD NOWRAP><FONT SIZE="-1">
 <CODE>&lt;T extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt; 
 <BR>
-java.util.List&lt;T&gt;</CODE></FONT></TD>
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List, java.lang.String)">buildDescribable</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                 java.util.List&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;descriptors,
-                 java.lang.String&nbsp;prefix)</CODE>
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;descriptors,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.261. Use <A HREF="../../../hudson/model/AbstractProject.html#buildDescribable(org.kohsuke.stapler.StaplerRequest, java.util.List)"><CODE>AbstractProject.buildDescribable(StaplerRequest, List)</CODE></A> instead.</I></TD>
@@ -660,7 +818,7 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptorList(java.lang.Class)">getDescriptorList</A></B>(java.lang.Class&lt;T&gt;&nbsp;type)</CODE>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptorList(java.lang.Class)">getDescriptorList</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <A HREF="../../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> that retains the discovered <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instances for the given
@@ -674,14 +832,14 @@ java.util.List&lt;T&gt;</CODE></FONT></TD>
 <TD NOWRAP><FONT SIZE="-1">
 <CODE>&lt;T extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt; 
 <BR>
-java.util.List&lt;T&gt;</CODE></FONT></TD>
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B>Descriptor.</B><B><A HREF="../../../hudson/model/Descriptor.html#newInstancesFromHeteroList(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.lang.String, java.util.Collection)">newInstancesFromHeteroList</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                            net.sf.json.JSONObject&nbsp;formData,
-                           java.lang.String&nbsp;key,
-                           java.util.Collection&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;descriptors)</CODE>
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;key,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;descriptors)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to build <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> instance list from &lt;f:hetero-list> tag.</TD>
@@ -699,7 +857,7 @@ void</CODE></FONT></TD>
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#removeFromList(hudson.model.Descriptor, java.util.List)">removeFromList</A></B>(<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&nbsp;item,
-               java.util.List&lt;T&gt;&nbsp;collection)</CODE>
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;T&gt;&nbsp;collection)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -712,11 +870,11 @@ void</CODE></FONT></TD>
 <TD NOWRAP><FONT SIZE="-1">
 <CODE>&lt;T extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt; 
 <BR>
-java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;,T&gt;</CODE></FONT></TD>
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;,T&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
-<TD><CODE><B>Descriptor.</B><B><A HREF="../../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></B>(java.lang.Iterable&lt;T&gt;&nbsp;describables)</CODE>
+<TD><CODE><B>Descriptor.</B><B><A HREF="../../../hudson/model/Descriptor.html#toMap(java.lang.Iterable)">toMap</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;T&gt;&nbsp;describables)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -732,7 +890,7 @@ java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptor(java.lang.Class)">getDescriptor</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</CODE>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptor(java.lang.Class)">getDescriptor</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> that corresponds to the given <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> type.</TD>
@@ -740,7 +898,7 @@ java.util.Map&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptorOrDie(java.lang.Class)">getDescriptorOrDie</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</CODE>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getDescriptorOrDie(java.lang.Class)">getDescriptorOrDie</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works just like <A HREF="../../../hudson/model/Hudson.html#getDescriptor(java.lang.Class)"><CODE>Hudson.getDescriptor(Class)</CODE></A> but don't take no for an answer.</TD>
@@ -1466,12 +1624,12 @@ Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hud
 <TD NOWRAP><FONT SIZE="-1">
 <CODE>&lt;T extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A> & <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;&gt; 
 <BR>
-java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;</CODE></FONT></TD>
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
-<TD><CODE><B>BuildStepDescriptor.</B><B><A HREF="../../../hudson/tasks/BuildStepDescriptor.html#filter(java.util.List, java.lang.Class)">filter</A></B>(java.util.List&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;base,
-       java.lang.Class&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;type)</CODE>
+<TD><CODE><B>BuildStepDescriptor.</B><B><A HREF="../../../hudson/tasks/BuildStepDescriptor.html#filter(java.util.List, java.lang.Class)">filter</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt;&nbsp;base,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;type)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filters a descriptor for <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A>s by using <A HREF="../../../hudson/tasks/BuildStepDescriptor.html#isApplicable(java.lang.Class)"><CODE>BuildStepDescriptor.isApplicable(Class)</CODE></A>.</TD>
@@ -1761,7 +1919,7 @@ Uses of <A HREF="../../../hudson/model/Describable.html" title="interface in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>DescriptorList.</B><B><A HREF="../../../hudson/util/DescriptorList.html#load(java.lang.Class)">load</A></B>(java.lang.Class&lt;? extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;c)</CODE>
+<TD><CODE><B>DescriptorList.</B><B><A HREF="../../../hudson/util/DescriptorList.html#load(java.lang.Class)">load</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No-op method used to force the class initialization of the given class.</TD>

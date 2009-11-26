@@ -10,7 +10,7 @@
     <artifactId>jabber</artifactId>
     <packaging>hpi</packaging>
     <name>Hudson Jabber notifier plugin</name>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.5-SNAPSHOT</version>
     <url>http://wiki.hudson-ci.org/display/HUDSON/Jabber+Plugin</url>
     <developers>
         <developer>
@@ -28,7 +28,7 @@
     </developers>
     
     <properties>
-        <version.instant-messaging.plugin>1.2</version.instant-messaging.plugin>
+        <version.instant-messaging.plugin>1.3</version.instant-messaging.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
@@ -54,11 +54,10 @@
             <plugin>
                 <groupId>org.jvnet.hudson.tools</groupId>
                 <artifactId>maven-hpi-plugin</artifactId>
-                <version>1.45</version>
+                <version>1.46</version>
                 <extensions>true</extensions>
 		        <configuration>
 					<compatibleSinceVersion>1.0</compatibleSinceVersion>
-                    <disabledTestInjection>true</disabledTestInjection>
 		        </configuration>
             </plugin>
             <!-- Make sure that we don't use any Java 1.6 dependencies -->

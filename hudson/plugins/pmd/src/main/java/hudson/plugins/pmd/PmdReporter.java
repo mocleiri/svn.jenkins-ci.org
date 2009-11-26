@@ -1,17 +1,18 @@
 package hudson.plugins.pmd;
 
+import hudson.Extension;
 import hudson.maven.MavenBuild;
 import hudson.maven.MavenBuildProxy;
 import hudson.maven.MavenModule;
 import hudson.maven.MavenReporterDescriptor;
 import hudson.maven.MojoInfo;
 import hudson.model.Action;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.FilesParser;
+import hudson.plugins.analysis.core.HealthAwareMavenReporter;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.pmd.parser.PmdParser;
-import hudson.plugins.pmd.util.BuildResult;
-import hudson.plugins.pmd.util.FilesParser;
-import hudson.plugins.pmd.util.HealthAwareMavenReporter;
-import hudson.plugins.pmd.util.ParserResult;
-import hudson.plugins.pmd.util.PluginLogger;
 
 import java.io.IOException;
 
@@ -26,8 +27,11 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class PmdReporter extends HealthAwareMavenReporter {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 2272875032054063496L;
+
     /** Descriptor of this publisher. */
+    @Extension
     public static final PmdReporterDescriptor PMD_SCANNER_DESCRIPTOR = new PmdReporterDescriptor(PmdPublisher.PMD_DESCRIPTOR);
+
     /** Default PMD pattern. */
     private static final String PMD_XML_FILE = "pmd.xml";
     /** Ant file-set pattern of files to work with. */

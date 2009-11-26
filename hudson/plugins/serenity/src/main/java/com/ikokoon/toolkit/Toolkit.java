@@ -1,5 +1,6 @@
 package com.ikokoon.toolkit;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,12 +8,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
+import org.objectweb.asm.Type;
+
+import com.ikokoon.serenity.model.Unique;
 
 /**
  * This class contains methods for changing a string to the byte code representation and visa versa. Also some other nifty functions like stripping a
@@ -99,14 +104,20 @@ public class Toolkit {
 	 * @return the package name of the class
 	 */
 	public static String classNameToPackageName(String className) {
-		className = slashToDot(className);
-		if (className.endsWith(".class")) {
-			className = className.substring(0, className.lastIndexOf('.'));
+		Type type = Type.getObjectType(className);
+		try {
+			return Class.forName(type.getClassName()).getPackage().getName();
+		} catch (ClassNotFoundException e) {
+			logger.info("Class not found, this could be an anon inner class : " + className, e);
+			// This is bad practice
+			if (type.getClassName().equals("java.lang.Synthetic")) {
+				// Dynamically created by the compiler? Synthetic access.
+				return "java.lang";
+			}
+		} catch (Exception e) {
+			logger.info("Shut down too soon? : " + className, e);
 		}
-		if (className.indexOf('.') > -1) {
-			return className.substring(0, className.lastIndexOf('.'));
-		}
-		// Default package
+		// Default and exception package
 		return "";
 	}
 
@@ -144,76 +155,54 @@ public class Toolkit {
 	 *            the signature of the field or method
 	 * @return the classes in the description/signature
 	 */
-	public static String[] byteCodeSignatureToClassNameArray(String signature) {
-		List<String> classNames = new ArrayList<String>();
-		if (signature == null) {
-			return classNames.toArray(new String[classNames.size()]);
-		}
-		StringTokenizer tokenizer = new StringTokenizer(signature, ";<>*");
-		while (tokenizer.hasMoreTokens()) {
-			String token = tokenizer.nextToken().trim();
-			logger.debug(token);
-			StringBuilder builder = new StringBuilder();
-			char[] chars = token.toCharArray();
-			for (int i = 0; i < chars.length; i++) {
-				char c = chars[i];
-				switch (c) {
-				case '(':
-				case ')':
-				case '[':
-				case ']':
-				case '+':
-				case '-':
-					break;
-				case 'B':
-					if (i <= 4) {
-						break;
-					}
-				case 'C':
-					if (i <= 4) {
-						break;
-					}
-				case 'D':
-					if (i <= 4) {
-						break;
-					}
-				case 'F':
-					if (i <= 4) {
-						break;
-					}
-				case 'I':
-					if (i <= 4) {
-						break;
-					}
-				case 'J':
-					if (i <= 4) {
-						break;
-					}
-				case 'L':
-					if (i <= 4) {
-						break;
-					}
-				case 'S':
-					if (i <= 4) {
-						break;
-					}
-				case 'Z':
-					if (i <= 4) {
-						break;
-					}
-				default:
-					builder.append(c);
-					break;
-				}
-			}
-			token = builder.toString();
-			logger.debug(token);
-			String className = Toolkit.slashToDot(token);
-			classNames.add(className);
-		}
-		return classNames.toArray(new String[classNames.size()]);
-	}
-
+	// public static String[] byteCodeSignatureToClassNameArray(String signature) {
+	// List<String> classNames = new ArrayList<String>();
+	// if (signature == null) {
+	// return classNames.toArray(new String[classNames.size()]);
+	// }
+	// StringTokenizer tokenizer = new StringTokenizer(signature, ";<>*()[]+-");
+	// while (tokenizer.hasMoreTokens()) {
+	// String token = tokenizer.nextToken().trim();
+	// String className = Toolkit.slashToDot(token);
+	// className = stripByteCodeCharacters(className);
+	// if (className.trim().equals("")) {
+	// continue;
+	// }
+	// classNames.add(className);
+	// }
+	// return classNames.toArray(new String[classNames.size()]);
+	// }
+	// private static final String stripByteCodeCharacters(String string) {
+	// StringBuilder builder = new StringBuilder();
+	// char[] chars = string.toCharArray();
+	// for (int i = 0; i < chars.length; i++) {
+	// char c = chars[i];
+	// switch (c) {
+	// case 'B':
+	// case 'C':
+	// case 'D':
+	// case 'F':
+	// case 'I':
+	// case 'J':
+	// case 'L':
+	// case 'S':
+	// case 'T':
+	// case 'V':
+	// case 'Z':
+	// if (i <= 4) {
+	// break;
+	// }
+	// default:
+	// builder.append(c);
+	// break;
+	// }
+	// }
+	// string = builder.toString();
+	// if (string.startsWith("I") || string.startsWith("L") || string.startsWith("V") || string.startsWith("D") || string.startsWith("Z")) {
+	// return stripByteCodeCharacters(string);
+	// }
+	// return string;
+	// }
 	/**
 	 * Removes any whitespace from the string.
 	 * 
@@ -416,7 +405,7 @@ public class Toolkit {
 		if (file.delete()) {
 			logger.debug("Deleted file : " + file);
 		} else {
-			logger.debug("Couldn't delete file : " + file);
+			logger.warn("Couldn't delete file : " + file);
 		}
 	}
 
@@ -498,6 +487,237 @@ public class Toolkit {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Formats a double to the required precision.
+	 * 
+	 * @param d
+	 *            the double to format
+	 * @param precision
+	 *            the precision for the result
+	 * @return the double formatted to the required precision
+	 */
+	public static double format(double d, int precision) {
+		String doubleString = Double.toString(d);
+		doubleString = format(doubleString, precision);
+		try {
+			d = Double.parseDouble(doubleString);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return d;
+	}
+
+	/**
+	 * Formats a string to the desired precision.
+	 * 
+	 * @param string
+	 *            the string to format to a precision
+	 * @param precision
+	 *            the precision of the result
+	 * @return the string formatted to the required precision
+	 */
+	public static String format(String string, int precision) {
+		if (string == null) {
+			return string;
+		}
+		char[] chars = string.trim().toCharArray();
+		StringBuilder builder = new StringBuilder();
+		int decimal = 1;
+		int state = 0;
+		int decimals = 0;
+		for (char c : chars) {
+			switch (c) {
+			case '.':
+			case ',':
+				state = decimal;
+				builder.append(c);
+				break;
+			default:
+				if (state == decimal) {
+					if (decimals++ >= precision) {
+						break;
+					}
+				}
+				builder.append(c);
+				break;
+			}
+		}
+		return builder.toString();
+	}
+
+	/**
+	 * Serializes an object to a byte array then to a base 64 string of the byte array.
+	 * 
+	 * @param object
+	 *            the object to serialise to base 64
+	 * @return the string representation of the object in serialised base 64
+	 */
+	public static String serializeToBase64(Object object) {
+		String base64 = null;
+		try {
+			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+			objectOutputStream.writeObject(object);
+			byte[] bytes = byteArrayOutputStream.toByteArray();
+			base64 = Base64.encode(bytes);
+			base64 = base64.replaceAll("\n", "");
+			base64 = base64.replaceAll("\r", "");
+			base64 = base64.replaceAll("\t", "");
+		} catch (Exception e) {
+			logger.error("Exception serializing the object : " + object, e);
+		}
+		return base64;
+	}
+
+	/**
+	 * De-serializes an object from a base 64 string to an object.
+	 * 
+	 * @param base64
+	 *            the base 64 string representation of the object
+	 * @return the object de-serialised from the string or null if an exception is thrown
+	 */
+	public static Object deserializeFromBase64(String base64) {
+		byte[] bytes = Base64.decode(base64);
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+		try {
+			ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+			return objectInputStream.readObject();
+		} catch (Exception e) {
+			logger.error("Exception deserializing the object from the base 64 string : " + base64, e);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns an array of values that are defined as being a unique combination for the entity by using the Unique annotation for the class.
+	 * 
+	 * @param <T>
+	 *            the type of object to be inspected for unique fields
+	 * @param t
+	 *            the object t inspect for unique field combinations
+	 * @return the array of unique field values for the entity
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T[] getUniqueValues(T t) {
+		Unique unique = t.getClass().getAnnotation(Unique.class);
+		if (unique == null) {
+			return (T[]) new Object[] { t };
+		}
+		String[] fields = unique.fields();
+		List<T> values = new ArrayList<T>();
+		for (String field : fields) {
+			Object value = Toolkit.getValue(Object.class, t, field);
+			T[] uniqueValues = (T[]) getUniqueValues(value);
+			for (T uniqueValue : uniqueValues) {
+				values.add(uniqueValue);
+			}
+		}
+		return (T[]) values.toArray(new Object[values.size()]);
+	}
+
+	/**
+	 * This function will copy files or directories from one location to another. note that the source and the destination must be mutually exclusive.
+	 * This function can not be used to copy a directory to a sub directory of itself. The function will also have problems if the destination files
+	 * already exist.
+	 * 
+	 * @param src
+	 *            A File object that represents the source for the copy
+	 * @param dest
+	 *            A File object that represents the destination for the copy.
+	 */
+	public static void copyFile(File src, File dest) {
+		// Check to ensure that the source is valid...
+		if (!src.exists()) {
+			logger.warn("Source file/directory does not exist : " + src);
+			return;
+		} else if (!src.canRead()) { // check to ensure we have rights to the source...
+			logger.warn("Source file/directory not readable : " + src);
+			return;
+		}
+		// is this a directory copy?
+		if (src.isDirectory()) {
+			if (!dest.exists()) { // does the destination already exist?
+				// if not we need to make it exist if possible (note this is mkdirs not mkdir)
+				if (!dest.mkdirs()) {
+					logger.warn("Could not create the new destination directory : " + dest);
+				}
+			}
+			// get a listing of files...
+			String list[] = src.list();
+			// copy all the files in the list.
+			for (int i = 0; i < list.length; i++) {
+				File dest1 = new File(dest, list[i]);
+				File src1 = new File(src, list[i]);
+				copyFile(src1, dest1);
+			}
+		} else {
+			// This was not a directory, so lets just copy the file
+			FileInputStream fin = null;
+			FileOutputStream fout = null;
+			byte[] buffer = new byte[4096]; // Buffer 4K at a time (you can change this).
+			int bytesRead;
+			try {
+				// open the files for input and output
+				fin = new FileInputStream(src);
+				fout = new FileOutputStream(dest);
+				// while bytesRead indicates a successful read, lets write...
+				while ((bytesRead = fin.read(buffer)) >= 0) {
+					fout.write(buffer, 0, bytesRead);
+				}
+			} catch (IOException e) { // Error copying file...
+				logger.error("Exception copying the source " + src + ", to destination : " + dest, e);
+			} finally { // Ensure that the files are closed (if they were open).
+				if (fin != null) {
+					try {
+						fin.close();
+					} catch (Exception e) {
+						logger.error("Exception closing the source input stream : " + fin, e);
+					}
+				}
+				if (fout != null) {
+					try {
+						fout.close();
+					} catch (Exception e) {
+						logger.error("Exception closing the destination output stream : " + fout, e);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * If Java 1.4 is unavailable, the following technique may be used.
+	 * 
+	 * @param aInput
+	 *            is the original String which may contain substring aOldPattern
+	 * @param aOldPattern
+	 *            is the non-empty substring which is to be replaced
+	 * @param aNewPattern
+	 *            is the replacement for aOldPattern
+	 */
+	public static String replaceOld(final String aInput, final String aOldPattern, final String aNewPattern) {
+		if (aOldPattern.equals("")) {
+			throw new IllegalArgumentException("Old pattern must have content.");
+		}
+		final StringBuffer result = new StringBuffer();
+		// startIdx and idxOld delimit various chunks of aInput; these
+		// chunks always end where aOldPattern begins
+		int startIdx = 0;
+		int idxOld = 0;
+		while ((idxOld = aInput.indexOf(aOldPattern, startIdx)) >= 0) {
+			// grab a part of aInput which does not include aOldPattern
+			result.append(aInput.substring(startIdx, idxOld));
+			// add aNewPattern to take place of aOldPattern
+			result.append(aNewPattern);
+			// reset the startIdx to just after the current match, to see
+			// if there are any further matches
+			startIdx = idxOld + aOldPattern.length();
+		}
+		// the final chunk will go to the end of aInput
+		result.append(aInput.substring(startIdx));
+		return result.toString();
 	}
 
 }

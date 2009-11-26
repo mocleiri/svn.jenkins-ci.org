@@ -4,15 +4,14 @@ import hudson.Extension;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.FilesParser;
+import hudson.plugins.analysis.core.HealthAwarePublisher;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.core.PluginDescriptor;
+import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.findbugs.parser.FindBugsParser;
-import hudson.plugins.findbugs.util.BuildResult;
-import hudson.plugins.findbugs.util.FilesParser;
-import hudson.plugins.findbugs.util.HealthAwarePublisher;
-import hudson.plugins.findbugs.util.ParserResult;
-import hudson.plugins.findbugs.util.PluginDescriptor;
-import hudson.plugins.findbugs.util.PluginLogger;
 import hudson.tasks.BuildStepDescriptor;
-import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 
 import java.io.IOException;
@@ -28,11 +27,13 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class FindBugsPublisher extends HealthAwarePublisher {
     /** Unique ID of this class. */
     private static final long serialVersionUID = -5748362182226609649L;
-    /** Default FindBugs pattern. */
-    private static final String DEFAULT_PATTERN = "**/findbugs.xml";
+
     /** Descriptor of this publisher. */
     @Extension
     public static final PluginDescriptor FIND_BUGS_DESCRIPTOR = new FindBugsDescriptor();
+
+    /** Default FindBugs pattern. */
+    private static final String DEFAULT_PATTERN = "**/findbugs.xml";
     /** Ant file-set pattern of files to work with. */
     private final String pattern;
 
@@ -112,9 +113,5 @@ public class FindBugsPublisher extends HealthAwarePublisher {
     @Override
     public BuildStepDescriptor<Publisher> getDescriptor() {
         return FIND_BUGS_DESCRIPTOR;
-    }
-
-    public BuildStepMonitor getRequiredMonitorService() {
-        return BuildStepMonitor.BUILD;
     }
 }

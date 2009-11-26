@@ -1,9 +1,9 @@
 package hudson.plugins.pmd.parser;
 
 import static org.junit.Assert.*;
-import hudson.plugins.pmd.util.model.FileAnnotation;
-import hudson.plugins.pmd.util.model.MavenModule;
-import hudson.plugins.pmd.util.model.Priority;
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.MavenModule;
+import hudson.plugins.analysis.util.model.Priority;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
@@ -58,6 +58,8 @@ public class PmdParserTest {
      */
     @Test
     public void scanFileWith4Warnings() throws InvocationTargetException {
+        PmdMessages.getInstance().initialize();
+
         String fileName = "4-pmd-warnings.xml";
         Collection<FileAnnotation> annotations = parseFile(fileName);
         MavenModule module = new MavenModule();

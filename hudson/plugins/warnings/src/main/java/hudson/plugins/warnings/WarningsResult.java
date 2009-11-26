@@ -1,10 +1,13 @@
 package hudson.plugins.warnings; // NOPMD
 
 import hudson.model.AbstractBuild;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.core.ResultAction;
 import hudson.plugins.warnings.parser.Warning;
-import hudson.plugins.warnings.util.BuildResult;
-import hudson.plugins.warnings.util.ParserResult;
-import hudson.plugins.warnings.util.ResultAction;
+
+import com.thoughtworks.xstream.XStream;
+
 
 /**
  * Represents the results of the warning analysis. One instance of this class is persisted for
@@ -15,10 +18,6 @@ import hudson.plugins.warnings.util.ResultAction;
 public class WarningsResult extends BuildResult {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -137460587767210579L;
-
-    static {
-        XSTREAM.alias("warning", Warning.class);
-    }
 
     /**
      * Creates a new instance of {@link WarningsResult}.
@@ -50,6 +49,12 @@ public class WarningsResult extends BuildResult {
     public WarningsResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
             final ParserResult result, final WarningsResult previous) {
         super(build, defaultEncoding, result, previous);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void configure(final XStream xstream) {
+        xstream.alias("warning", Warning.class);
     }
 
     /**

@@ -1,8 +1,8 @@
 package hudson.plugins.findbugs;
 
 import hudson.maven.MavenReporter;
-import hudson.plugins.findbugs.util.PluginDescriptor;
-import hudson.plugins.findbugs.util.ReporterDescriptor;
+import hudson.plugins.analysis.core.PluginDescriptor;
+import hudson.plugins.analysis.core.ReporterDescriptor;
 import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;

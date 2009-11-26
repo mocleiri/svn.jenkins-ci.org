@@ -1,8 +1,8 @@
 package hudson.plugins.warnings.parser;
 
 import static junit.framework.Assert.*;
-import hudson.plugins.warnings.util.model.FileAnnotation;
-import hudson.plugins.warnings.util.model.Priority;
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.Priority;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class JavaDocParserTest extends ParserTester {
      */
     @Test
     public void parseJavaDocWarnings() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new JavaDocParser().parse(openFile()));
+        Collection<FileAnnotation> warnings = new JavaDocParser().parse(openFile());
 
         assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, warnings.size());
 
@@ -43,6 +43,31 @@ public class JavaDocParserTest extends ParserTester {
                 116,
                 "Tag @link: can't find removeSpecChangeListener(ChangeListener, String) in chenomx.ccma.common.graph.module.GraphListenerRegistry",
                 "/home/builder/hudson/workspace/Homer/oddjob/src/chenomx/ccma/common/graph/module/GraphListenerRegistry.java",
+                JavaDocParser.WARNING_TYPE, StringUtils.EMPTY, Priority.NORMAL);
+    }
+
+    /**
+     * Parses a warning log with 2 JavaDoc warnings.
+     *
+     * @throws IOException
+     *      if the file could not be read
+     * @see <a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4576">Issue 4576</a>
+     */
+    @Test
+    public void issue4576() throws IOException {
+        Collection<FileAnnotation> warnings = new JavaDocParser().parse(openFile("issue4576.txt"));
+
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 2, warnings.size());
+        Iterator<FileAnnotation> iterator = warnings.iterator();
+        checkWarning(iterator.next(),
+                0,
+                "Multiple sources of package comments found for package \"org.hamcrest\"",
+                "org.hamcrest",
+                JavaDocParser.WARNING_TYPE, StringUtils.EMPTY, Priority.NORMAL);
+        checkWarning(iterator.next(),
+                94,
+                "@param argument \"<code>CoreAccountNumberTO</code>\" is not a parameter",
+                "/home/hudson-farm/.hudson/jobs/farm-toplevel/workspace/farm-toplevel/service-module/src/main/java/com/rackspace/farm/service/service/CoreAccountServiceImpl.java",
                 JavaDocParser.WARNING_TYPE, StringUtils.EMPTY, Priority.NORMAL);
     }
 

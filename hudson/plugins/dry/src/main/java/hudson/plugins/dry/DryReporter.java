@@ -1,17 +1,18 @@
 package hudson.plugins.dry;
 
+import hudson.Extension;
 import hudson.maven.MavenBuild;
 import hudson.maven.MavenBuildProxy;
 import hudson.maven.MavenModule;
 import hudson.maven.MavenReporterDescriptor;
 import hudson.maven.MojoInfo;
 import hudson.model.Action;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.FilesParser;
+import hudson.plugins.analysis.core.HealthAwareMavenReporter;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.dry.parser.DuplicationParserRegistry;
-import hudson.plugins.dry.util.BuildResult;
-import hudson.plugins.dry.util.FilesParser;
-import hudson.plugins.dry.util.HealthAwareMavenReporter;
-import hudson.plugins.dry.util.ParserResult;
-import hudson.plugins.dry.util.PluginLogger;
 
 import java.io.IOException;
 
@@ -26,8 +27,11 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class DryReporter extends HealthAwareMavenReporter {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 2272875032054063496L;
+
     /** Descriptor of this publisher. */
+    @Extension
     public static final DryReporterDescriptor DRY_SCANNER_DESCRIPTOR = new DryReporterDescriptor(DryPublisher.DRY_DESCRIPTOR);
+
     /** Default DRY pattern. */
     private static final String DRY_XML_FILE = "cpd.xml";
 

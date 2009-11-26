@@ -1,9 +1,9 @@
 package hudson.plugins.warnings.parser;
 
 import static junit.framework.Assert.*;
-import hudson.plugins.warnings.util.ParserResult;
-import hudson.plugins.warnings.util.model.FileAnnotation;
-import hudson.plugins.warnings.util.model.Priority;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.Priority;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -35,7 +35,7 @@ public class AntJavacParserTest extends ParserTester {
      */
     @Test
     public void parseDeprecation() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new AntJavacParser().parse(openFile()));
+        Collection<FileAnnotation> warnings = new AntJavacParser().parse(openFile());
 
         assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 1, warnings.size());
 
@@ -57,7 +57,7 @@ public class AntJavacParserTest extends ParserTester {
      */
     @Test
     public void issue2133() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new AntJavacParser().parse(openFile("issue2133.txt")));
+        Collection<FileAnnotation> warnings = new AntJavacParser().parse(openFile("issue2133.txt"));
 
         assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 2, warnings.size());
 
@@ -83,9 +83,9 @@ public class AntJavacParserTest extends ParserTester {
      */
     @Test
     public void issue2316() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new AntJavacParser().parse(openFile("issue2316.txt")));
+        Collection<FileAnnotation> warnings = new AntJavacParser().parse(openFile("issue2316.txt"));
 
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 18, warnings.size());
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 20, warnings.size());
 
         ParserResult result = new ParserResult();
         result.addAnnotations(warnings);

@@ -35,6 +35,7 @@ import hudson.FilePath;
 import hudson.lifecycle.WindowsSlaveInstaller;
 import hudson.Util;
 import hudson.AbortException;
+import hudson.remoting.Launcher;
 import static hudson.slaves.SlaveComputer.LogHolder.SLAVE_LOG_HANDLER;
 import hudson.slaves.OfflineCause.ChannelTermination;
 
@@ -163,9 +164,9 @@ public class SlaveComputer extends Computer {
 
     protected Future<?> _connect(boolean forceReconnect) {
         if(channel!=null)   return Futures.precomputed(null);
-        if(!forceReconnect && lastConnectActivity!=null)
+        if(!forceReconnect && isConnecting())
             return lastConnectActivity;
-        if(forceReconnect && lastConnectActivity!=null)
+        if(forceReconnect && isConnecting())
             logger.fine("Forcing a reconnect");
 
         closeChannel();
@@ -187,6 +188,9 @@ public class SlaveComputer extends Computer {
                 } catch (InterruptedException e) {
                     e.printStackTrace(listener.error(Messages.ComputerLauncher_abortedLaunch()));
                     throw e;
+                } finally {
+                    if (channel==null)
+                        offlineCause = new OfflineCause.LaunchFailed();
                 }
             }
         });
@@ -287,14 +291,18 @@ public class SlaveComputer extends Computer {
             in,out, launchLog);
         channel.addListener(new Channel.Listener() {
             @Override
-            public void onClosed(Channel c,IOException cause) {
+            public void onClosed(Channel c, IOException cause) {
                 SlaveComputer.this.channel = null;
-                offlineCause = new ChannelTermination(cause);
+                // Orderly shutdown will have null exception
+                if (cause!=null) offlineCause = new ChannelTermination(cause);
                 launcher.afterDisconnect(SlaveComputer.this, taskListener);
             }
         });
         if(listener!=null)
             channel.addListener(listener);
+
+        String slaveVersion = channel.call(new SlaveVersion());
+        log.println("Slave.jar version: " + slaveVersion);
 
         boolean _isUnix = channel.call(new DetectOS());
         log.println(_isUnix? hudson.model.Messages.Slave_UnixSlave():hudson.model.Messages.Slave_WindowsSlave());
@@ -454,8 +462,12 @@ public class SlaveComputer extends Computer {
         // maybe the configuration was changed to relaunch the slave, so try to re-launch now.
         // "constructed==null" test is an ugly hack to avoid launching before the object is fully
         // constructed.
-        if(constructed!=null)
-            connect(false);
+        if(constructed!=null) {
+            if (node instanceof Slave)
+                ((Slave)node).getRetentionStrategy().check(this);
+            else
+                connect(false);
+        }
     }
 
     /**
@@ -476,6 +488,12 @@ public class SlaveComputer extends Computer {
 
     private static final Logger logger = Logger.getLogger(SlaveComputer.class.getName());
 
+    private static final class SlaveVersion implements Callable<String,IOException> {
+        public String call() throws IOException {
+            try { return Launcher.VERSION; }
+            catch (Throwable ex) { return "< 1.335"; } // Older slave.jar won't have VERSION
+        }
+    }
     private static final class DetectOS implements Callable<Boolean,IOException> {
         public Boolean call() throws IOException {
             return File.pathSeparatorChar==':';

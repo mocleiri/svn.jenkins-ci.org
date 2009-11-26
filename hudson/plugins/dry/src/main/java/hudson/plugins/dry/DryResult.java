@@ -1,10 +1,12 @@
 package hudson.plugins.dry;
 
 import hudson.model.AbstractBuild;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.core.ResultAction;
 import hudson.plugins.dry.parser.DuplicateCode;
-import hudson.plugins.dry.util.BuildResult;
-import hudson.plugins.dry.util.ParserResult;
-import hudson.plugins.dry.util.ResultAction;
+
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Represents the results of the DRY analysis. One instance of this class is persisted for
@@ -15,9 +17,6 @@ import hudson.plugins.dry.util.ResultAction;
 public class DryResult extends BuildResult {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = 2768250056765266658L;
-    static {
-        XSTREAM.alias("dry", DuplicateCode.class);
-    }
 
     /**
      * Creates a new instance of {@link DryResult}.
@@ -49,6 +48,12 @@ public class DryResult extends BuildResult {
     public DryResult(final AbstractBuild<?, ?> build, final String defaultEncoding,
             final ParserResult result, final DryResult previous) {
         super(build, defaultEncoding, result, previous);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void configure(final XStream xstream) {
+        xstream.alias("dry", DuplicateCode.class);
     }
 
     /**

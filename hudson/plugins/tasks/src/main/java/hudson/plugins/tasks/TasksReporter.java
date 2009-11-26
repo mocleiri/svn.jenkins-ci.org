@@ -1,5 +1,6 @@
 package hudson.plugins.tasks;
 
+import hudson.Extension;
 import hudson.FilePath;
 import hudson.maven.MavenBuild;
 import hudson.maven.MavenBuildProxy;
@@ -8,12 +9,12 @@ import hudson.maven.MavenReporterDescriptor;
 import hudson.maven.MojoInfo;
 import hudson.model.Action;
 import hudson.model.Result;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.HealthAwareMavenReporter;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.tasks.parser.TasksParserResult;
 import hudson.plugins.tasks.parser.WorkspaceScanner;
-import hudson.plugins.tasks.util.BuildResult;
-import hudson.plugins.tasks.util.HealthAwareMavenReporter;
-import hudson.plugins.tasks.util.ParserResult;
-import hudson.plugins.tasks.util.PluginLogger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,8 +34,11 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class TasksReporter extends HealthAwareMavenReporter {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -4159947472293502606L;
+
     /** Descriptor of this publisher. */
+    @Extension
     public static final TasksReporterDescriptor TASK_SCANNER_DESCRIPTOR = new TasksReporterDescriptor(TasksPublisher.TASK_SCANNER_DESCRIPTOR);
+
     /** Default files pattern. */
     private static final String DEFAULT_PATTERN = "**/*.java";
     /** Ant file-set pattern of files to scan for open tasks in. */

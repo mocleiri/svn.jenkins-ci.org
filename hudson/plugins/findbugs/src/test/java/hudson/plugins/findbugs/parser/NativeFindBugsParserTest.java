@@ -1,14 +1,14 @@
 package hudson.plugins.findbugs.parser;
 
 import static org.junit.Assert.*;
+import hudson.plugins.analysis.test.AbstractEnglishLocaleTest;
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.JavaPackage;
+import hudson.plugins.analysis.util.model.LineRange;
+import hudson.plugins.analysis.util.model.MavenModule;
+import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.findbugs.FindBugsMessages;
 import hudson.plugins.findbugs.Messages;
-import hudson.plugins.findbugs.util.AbstractEnglishLocaleTest;
-import hudson.plugins.findbugs.util.model.FileAnnotation;
-import hudson.plugins.findbugs.util.model.JavaPackage;
-import hudson.plugins.findbugs.util.model.LineRange;
-import hudson.plugins.findbugs.util.model.MavenModule;
-import hudson.plugins.findbugs.util.model.Priority;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -156,7 +156,7 @@ public class NativeFindBugsParserTest extends AbstractEnglishLocaleTest {
         assertEquals(WRONG_NUMBER_OF_WARNINGS_PARSED, 1, module.getNumberOfAnnotations());
 
         FileAnnotation next = module.getAnnotations().iterator().next();
-        assertEquals("Warning has no message.", "RCN: Redundant nullcheck of previous, which is known to be non-null in hudson.plugins.warnings.WarningsResultBuilder.build(AbstractBuild, JavaProject)", next.getMessage());
+        assertTrue("Warning has no message.", next.getMessage().contains("Redundant nullcheck of"));
     }
 
     /**

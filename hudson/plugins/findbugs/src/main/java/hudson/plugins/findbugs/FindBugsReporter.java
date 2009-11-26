@@ -8,12 +8,12 @@ import hudson.maven.MavenReporterDescriptor;
 import hudson.maven.MojoInfo;
 import hudson.model.Action;
 import hudson.model.BuildListener;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.FilesParser;
+import hudson.plugins.analysis.core.HealthAwareMavenReporter;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.findbugs.parser.FindBugsParser;
-import hudson.plugins.findbugs.util.BuildResult;
-import hudson.plugins.findbugs.util.FilesParser;
-import hudson.plugins.findbugs.util.HealthAwareMavenReporter;
-import hudson.plugins.findbugs.util.ParserResult;
-import hudson.plugins.findbugs.util.PluginLogger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,16 +33,15 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class FindBugsReporter extends HealthAwareMavenReporter {
     /** Unique identifier of this class. */
     private static final long serialVersionUID = -288391908253344862L;
+
     /** Descriptor of this publisher. */
     @Extension
     public static final FindBugsReporterDescriptor FINDBUGS_SCANNER_DESCRIPTOR = new FindBugsReporterDescriptor(FindBugsPublisher.FIND_BUGS_DESCRIPTOR);
+
     /** FindBugs filename if maven findbugsXmlOutput is activated. */
     private static final String FINDBUGS_XML_FILE = "findbugsXml.xml";
     /** FindBugs filename if maven findbugsXmlOutput is not activated. */
     private static final String MAVEN_FINDBUGS_XML_FILE = "findbugs.xml";
-    /** Ant file-set pattern of files to work with. */
-    @SuppressWarnings("unused")
-    private String pattern; // obsolete since release 2.5
 
     /**
      * Creates a new instance of <code>FindBugsReporter</code>.
@@ -87,7 +86,6 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
         if ("findbugs".equals(mojo.getGoal())) {
             activateProperty(mojo, "xmlOutput");
             activateProperty(mojo, "findbugsXmlOutput");
-            activateProperty(mojo, "findbugsXmlWithMessages");
         }
         return true;
     }
@@ -175,5 +173,9 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
     public MavenReporterDescriptor getDescriptor() {
         return FINDBUGS_SCANNER_DESCRIPTOR;
     }
+
+    /** Ant file-set pattern of files to work with. */
+    @SuppressWarnings("unused")
+    private transient String pattern; // obsolete since release 2.5
 }
 

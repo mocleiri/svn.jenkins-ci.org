@@ -1,7 +1,7 @@
 package hudson.plugins.warnings.parser;
 
-import hudson.plugins.warnings.util.ParserResult;
-import hudson.plugins.warnings.util.model.FileAnnotation;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,7 +22,7 @@ import org.junit.Test;
  */
 public class ParserRegistryTest {
     /** Total number of expected warnings. */
-    private static final int TOTAL_WARNINGS = 177;
+    private static final int TOTAL_WARNINGS = 193;
     /** Error message. */
     private static final String WRONG_NUMBER_OF_ANNOTATIONS_PARSED = "Wrong number of annotations parsed";
 
@@ -81,14 +81,14 @@ public class ParserRegistryTest {
         ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", StringUtils.EMPTY, StringUtils.EMPTY, parsers);
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
-        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 8, annotations.size());
+        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 10, annotations.size());
 
         ParserResult result = new ParserResult();
         result.addAnnotations(annotations);
-        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 8, result.getNumberOfAnnotations());
+        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 10, result.getNumberOfAnnotations());
 
         result.addAnnotations(annotations);
-        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 8, result.getNumberOfAnnotations());
+        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 10, result.getNumberOfAnnotations());
     }
 
     /**
@@ -189,8 +189,7 @@ public class ParserRegistryTest {
      * @return the registry
      */
     @edu.umd.cs.findbugs.annotations.SuppressWarnings("SIC")
-    static ParserRegistry createRegistryUnderTest(final String fileName,
-            final String includePattern, final String excludePattern, final List<? extends WarningsParser> parsers) {
+    private ParserRegistry createRegistryUnderTest(final String fileName, final String includePattern, final String excludePattern, final List<WarningsParser> parsers) {
         ParserRegistry parserRegistry = new ParserRegistry(parsers, "", includePattern, excludePattern) {
             /** {@inheritDoc} */
             @Override

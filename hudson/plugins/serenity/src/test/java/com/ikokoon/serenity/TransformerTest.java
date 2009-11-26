@@ -1,21 +1,19 @@
 package com.ikokoon.serenity;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
 import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
 
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ikokoon.serenity.Collector;
-import com.ikokoon.serenity.Configuration;
-import com.ikokoon.serenity.Transformer;
+import com.ikokoon.serenity.instrumentation.coverage.CoverageClassAdapterChecker;
+import com.ikokoon.serenity.instrumentation.coverage.CoverageMethodAdapterChecker;
 import com.ikokoon.target.Target;
-import com.ikokoon.toolkit.Toolkit;
 
 /**
  * This class tests that the transformer adds the Collector instructions to the class byte code.
@@ -27,8 +25,6 @@ import com.ikokoon.toolkit.Toolkit;
 public class TransformerTest extends ATest {
 
 	/** The logger for the class. */
-	@SuppressWarnings("unused")
-	private Logger logger = Logger.getLogger(TransformerTest.class);
 	private Instrumentation instrumentation = null; // createMock(Instrumentation.class);
 	private ProtectionDomain protectionDomain; // = createMock(ProtectionDomain.class);
 
@@ -40,26 +36,29 @@ public class TransformerTest extends ATest {
 
 	@Test
 	public void transform() throws Exception {
-		String classPath = Toolkit.dotToSlash(className) + ".class";
-		InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream(classPath);
-		byte[] classfileBuffer = Toolkit.getContents(inputStream).toByteArray();
-		String byteCodes = new String(classfileBuffer);
-		assertTrue(byteCodes.indexOf(Collector.class.getSimpleName()) == -1);
+		byte[] classBytes = getClassBytes(className);
+		byte[] sourceBytes = getSourceBytes(className);
+		Exception exception = null;
+		try {
+			visitClass(CoverageMethodAdapterChecker.class, classBytes, sourceBytes);
+		} catch (Exception e) {
+			exception = e;
+		}
+		assertNotNull(exception);
 
-		Transformer coverageTransformer = new Transformer();
+		Transformer transformer = new Transformer();
 		Class<?> classBeingRedefined = Class.forName(className);
 		ClassLoader classLoader = TransformerTest.class.getClassLoader();
-		classfileBuffer = coverageTransformer.transform(classLoader, className, classBeingRedefined, protectionDomain, classfileBuffer);
+		classBytes = transformer.transform(classLoader, className, classBeingRedefined, protectionDomain, classBytes);
 
 		// We need to verify that the collector instructions have been added
-		byteCodes = new String(classfileBuffer);
-		assertTrue(byteCodes.indexOf(Collector.class.getSimpleName()) > -1);
+		visitClass(CoverageClassAdapterChecker.class, classBytes, sourceBytes);
 	}
 
 	@Test
 	public void excluded() {
-		assertFalse(Configuration.getConfiguration().excluded(Target.class.getName()));
 		assertTrue(Configuration.getConfiguration().excluded(Object.class.getName()));
+		assertFalse(Configuration.getConfiguration().excluded(InputStream.class.getName()));
 	}
 
 	@Test

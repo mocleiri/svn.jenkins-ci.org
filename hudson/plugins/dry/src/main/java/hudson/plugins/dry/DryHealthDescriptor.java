@@ -1,8 +1,8 @@
 package hudson.plugins.dry;
 
-import hudson.plugins.dry.util.AbstractHealthDescriptor;
-import hudson.plugins.dry.util.HealthDescriptor;
-import hudson.plugins.dry.util.model.AnnotationProvider;
+import hudson.plugins.analysis.core.AbstractHealthDescriptor;
+import hudson.plugins.analysis.core.HealthDescriptor;
+import hudson.plugins.analysis.util.model.AnnotationProvider;
 
 import org.jvnet.localizer.Localizable;
 

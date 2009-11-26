@@ -1,6 +1,6 @@
 package hudson.plugins.warnings.parser;
 
-import hudson.plugins.warnings.util.model.Priority;
+import hudson.plugins.analysis.util.model.Priority;
 
 import java.util.regex.Matcher;
 
@@ -12,10 +12,15 @@ import org.apache.commons.lang.StringUtils;
  * @author Greg Roth
  */
 public class GccParser extends RegexpLineParser {
+    /** A GCC error. */
+    static final String GCC_ERROR = "GCC error";
+    /** A LD error. */
+    static final String LINKER_ERROR = "Linker error";
     /** Warning type of this parser. */
     static final String WARNING_TYPE = "gcc";
     /** Pattern of gcc compiler warnings. */
-    private static final String GCC_WARNING_PATTERN = "^(.*\\.[chpimxsola0-9]+):(?:(\\d*):(?:\\d*:)*\\s*(?:(warning|error)\\s*:|\\s*(.*))|\\s*(undefined reference to.*))(.*)$";
+    private static final String GCC_WARNING_PATTERN = "^(.*\\.[chpimxsola0-9]+):(?:(\\d*):(?:\\d*:)*\\s*(?:(warning|error|note)\\s*:|\\s*(.*))|\\s*(undefined reference to.*))(.*)|.*ld:\\s*(.*-l(.*))$";
+
     /**
      * Creates a new instance of <code>GccParser</code>.
      */
@@ -26,6 +31,10 @@ public class GccParser extends RegexpLineParser {
     /** {@inheritDoc} */
     @Override
     protected Warning createWarning(final Matcher matcher) {
+        if (StringUtils.isNotBlank(matcher.group(7))) {
+            return new Warning(matcher.group(8), 0, WARNING_TYPE,
+                    LINKER_ERROR, matcher.group(7), Priority.HIGH);
+        }
         Priority priority;
         if ("warning".equalsIgnoreCase(matcher.group(3))) {
             priority = Priority.NORMAL;
@@ -33,21 +42,21 @@ public class GccParser extends RegexpLineParser {
         else if ("error".equalsIgnoreCase(matcher.group(3))) {
             priority = Priority.HIGH;
         }
+        else if ("note".equalsIgnoreCase(matcher.group(3))) {
+            priority = Priority.LOW;
+        }
         else if (StringUtils.isNotBlank(matcher.group(4))) {
             if (matcher.group(4).contains("instantiated from here")) {
                 return FALSE_POSITIVE;
             }
             priority = Priority.HIGH;
-            String category = "GCC error";
+            String category = GCC_ERROR;
             return new Warning(matcher.group(1), getLineNumber(matcher.group(2)), WARNING_TYPE,
                    category, matcher.group(4), priority);
         }
         else {
-    	    if (matcher.group(1).contains("                 from")) {
-    	        return FALSE_POSITIVE;
-    	    }
             priority = Priority.HIGH;
-            String category = "GCC error";
+            String category = GCC_ERROR;
             return new Warning(matcher.group(1), 0, WARNING_TYPE,
                     category, matcher.group(5), priority);
         }

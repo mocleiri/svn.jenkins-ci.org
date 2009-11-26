@@ -16,18 +16,98 @@
 <!-- Record your changes in the trunk here. -->
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
-  <li class=bug>
-    Node variables not passed through to Maven jobs.
-    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4030">issue 4030</a>)
-  <li class=rfe>
-    Hudson's UDP broadcast/discovery now supports IP multicast.
+  <li class=>
 </ul>
 </div><!--=TRUNK-END=-->
 
 <!-- these changes are controlled by the release process. DO NOT MODIFY -->
 <div style="display:none;"><!--=BEGIN=-->
-<h3><a name=v1.334>What's new in 1.334</a></h3>
+<h3><a name=v1.336>What's new in 1.336</a></h3>
 <ul class=image>
+  <li class=bug>
+    Update or remove lastSuccessful/lastStable symlinks on filesystem as appropriate
+    when a build is deleted.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1986">issue 1986</a>)
+  <li class=bug>
+    In-demand strategy could not relaunch slave nodes since 1.302.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3890">issue 3890</a>)
+  <li class=bug>
+    Actual cause for slave going offline was always masked by channel-terminated cause.
+  <li class=bug>
+    Improved display of why a slave is offline (don't incorrectly say "failed to launch").
+  <li class=bug>
+    Improved the error diagnostics on the failure to establish connection with JNLP slaves early on.
+  <li class=bug>
+    Fix so configure-slave permission actually allows configuration of slaves.
+  <li class=bug>
+    User pages showed add/edit description link to users without permission to edit,
+    and guests were allowed to edit the user profile for anonymous user.
+  <li class=bug>
+    Debian package now demands full JRE, not just a headless JRE.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4879">issue 4879</a>)
+  <li class=bug>
+    Avoid exception if a plugin provides null for a dynamic node label.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4924">issue 4924</a>)
+  <li class=bug>
+    If restart is not supported, explain why.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4876">issue 4876</a>)
+  <li class=bug>
+    Matrix configuration builds should continue even when Hudson is about to shut down.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4873">issue 4873</a>)
+  <li class=bug>
+    Send build status email to valid addresses rather than aborting for one invalid address.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4927">issue 4927</a>)
+  <li class=bug>
+    Smart JDK/Maven/Ant auto installers aren't available for existing tool configurations.
+  <li class=bug>
+    Hudson can now run gracefully (albeit bit slowly) where JNA is not available.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4820">issue 4820</a>)
+  <li class=rfe>
+    Add ability to delete users from Hudson.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=1867">issue 1867</a>)
+  <li class=rfe>
+    Gracefully detect the double loading of JNA instead of failing later with <tt>NoClassDefFoundError</tt>
+    (<a href="http://wiki.hudson-ci.org/display/HUDSON/JNA+is+already+loaded">detail</a>)
+  <li class=rfe>
+    Introduced a structure around the initialization process for better reporting and etc.
+  <li class=rfe>
+    Debian packages creates Hudson user with <tt>/bin/bash</tt> to accomodate some tools that want a valid shell.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4830">issue 4830</a>)
+</ul>
+</div><!--=END=-->
+<h3><a name=v1.335>What's new in 1.335</a> (2009/11/20)</h3>
+<ul class=image>
+  <li class=bug>
+    Space in axis value for matrix type project was lost on reconfiguration.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2360">issue 2360</a>)
+  <li class=bug>
+    Remember me did not work with unix authentication.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3057">issue 3057</a>)
+  <li class=bug>
+    Node variables not passed through to Maven jobs.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4030">issue 4030</a>)
+  <li class=bug>
+    Fix handling of non-ASCII characters in external job submission.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4877">issue 4877</a>)
+  <li class=bug>
+    Job assigned to label that no longer has any nodes generates exception since 1.330.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4878">issue 4878</a>)
+  <li class=bug>
+    Custom workspace on Windows with just a drive letter or using forward slashes in path
+    failed to build in 1.334.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4894">issue 4894</a>)
+  <li class=bug>
+    Core version number in plugin manager warning message was missing in 1.334.
+  <li class=bug>
+    Matrix build wasn't showing their full name in the executor list on the left.
+  <li class=rfe>
+    Hudson's UDP broadcast/discovery now supports IP multicast.
+</ul>
+<h3><a name=v1.334>What's new in 1.334</a> (2009/11/16)</h3>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a possible exception in submitting forms and obtaining update center metadata with Winstone in 1.333.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4804">issue 4804</a>)
   <li class='major bug'>
     Remoting layer was unable to kill remote processes. Prevented Mercurial plugin from implementing poll timeout on slaves.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4611">issue 4611</a>)
@@ -55,20 +135,18 @@
     Fixed <tt>OutOfMemoryError</tt> in Winp
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4058">issue 4058</a>)
   <li class=bug>
-    Fixed a possible exception in submitting forms and obtaining update center metadata with Winstone in 1.333.
-    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4804">issue 4804</a>)
-  <li class=bug>
     Write log message and ignore unrecognized permissions when loading XML.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4573">issue 4573</a>)
   <li class=bug>
     Fix in stapler so we don't redirect to "." which causes problem in some containers.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4787">issue 4787</a>)
   <li class=bug>
-    Don't record duplicate cause entries for a build.
+    List counts for duplicate cause entries for a build rather than listing many times.
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=4831">issue 4831</a>)
   <li class=rfe>
     Plugin manager now shows warning for upgrade/install of plugins into a Hudson that
     is older than the plugin was built for.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=541">issue 541</a>)
   <li class=rfe>
     CLI "build" command now supports passing parameters.
   <li class=rfe>
@@ -79,7 +157,6 @@
   <li class=rfe>
     Added new SaveableListener to be called when objects implementing Saveable are saved.
 </ul>
-</div><!--=END=-->
 <h3><a name=v1.333>What's new in 1.333</a> (2009/11/09)</h3>
 <ul class=image>
   <li class=bug>
@@ -172,6 +249,7 @@
     Update center switched over from <tt>https://hudson.dev.java.net/</tt> to <tt>http://hudson-ci.org/</tt>
   <li class=rfe>
     Use tree view to show 17-40 build artifacts on build/project pages.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2280">issue 2280</a>)
   <li class=rfe>
     When showing why a build is pending, Hudson now puts hyperlinks to node/label/project names.
   <li class=rfe>
@@ -1285,6 +1363,7 @@
     (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=3044">issue 3044</a>)
   <li class=bug>
     In matrix build, show axes used for that build rather than currently configured axes.
+    (<a href="https://hudson.dev.java.net/issues/show_bug.cgi?id=2407">issue 2407</a>)
   <li class=rfe>
     Don't let containers persist authentication information, which may not deserialize correctly.
     (<a href="http://www.nabble.com/ActiveDirectory-Plugin%3A-ClassNotFoundException-while-loading--persisted-sessions%3A-td22085140.html">report</a>)

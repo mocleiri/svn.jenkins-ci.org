@@ -1,8 +1,8 @@
 package hudson.plugins.warnings.parser;
 
 import static junit.framework.Assert.*;
-import hudson.plugins.warnings.util.model.FileAnnotation;
-import hudson.plugins.warnings.util.model.Priority;
+import hudson.plugins.analysis.util.model.FileAnnotation;
+import hudson.plugins.analysis.util.model.Priority;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -32,7 +32,7 @@ public class AntEclipseParserTest extends ParserTester {
      */
     @Test
     public void parseDeprecation() throws IOException {
-        Collection<FileAnnotation> warnings = sort(new AntEclipseParser().parse(openFile()));
+        Collection<FileAnnotation> warnings = new AntEclipseParser().parse(openFile());
 
         assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 8, warnings.size());
 

@@ -4,12 +4,12 @@ import hudson.Extension;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
+import hudson.plugins.analysis.core.BuildResult;
+import hudson.plugins.analysis.core.FilesParser;
+import hudson.plugins.analysis.core.HealthAwarePublisher;
+import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.checkstyle.parser.CheckStyleParser;
-import hudson.plugins.checkstyle.util.BuildResult;
-import hudson.plugins.checkstyle.util.FilesParser;
-import hudson.plugins.checkstyle.util.HealthAwarePublisher;
-import hudson.plugins.checkstyle.util.ParserResult;
-import hudson.plugins.checkstyle.util.PluginLogger;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
 
@@ -26,11 +26,13 @@ import org.kohsuke.stapler.DataBoundConstructor;
 public class CheckStylePublisher extends HealthAwarePublisher {
     /** Unique ID of this class. */
     private static final long serialVersionUID = 6369581633551160418L;
-    /** Default Checkstyle pattern. */
-    private static final String DEFAULT_PATTERN = "**/checkstyle-result.xml";
+
     /** Descriptor of this publisher. */
     @Extension
     public static final CheckStyleDescriptor CHECKSTYLE_DESCRIPTOR = new CheckStyleDescriptor();
+
+    /** Default Checkstyle pattern. */
+    private static final String DEFAULT_PATTERN = "**/checkstyle-result.xml";
     /** Ant file-set pattern of files to work with. */
     private final String pattern;
 
@@ -98,7 +100,7 @@ public class CheckStylePublisher extends HealthAwarePublisher {
 
         FilesParser parser = new FilesParser(logger, StringUtils.defaultIfEmpty(getPattern(), DEFAULT_PATTERN), new CheckStyleParser(getDefaultEncoding()),
                 isMavenBuild(build), isAntBuild(build));
-        ParserResult project = build.getWorkspace().act(parser);
+        ParserResult project = build.getProject().getWorkspace().act(parser);
         CheckStyleResult result = new CheckStyleResultBuilder().build(build, project, getDefaultEncoding());
         build.getActions().add(new CheckStyleResultAction(build, this, result));
 

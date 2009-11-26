@@ -2,25 +2,23 @@ package com.ikokoon.serenity.process;
 
 import static org.junit.Assert.assertEquals;
 
-import java.lang.reflect.Field;
-import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 
-import com.ikokoon.IConstants;
 import com.ikokoon.serenity.ATest;
 import com.ikokoon.serenity.Configuration;
+import com.ikokoon.serenity.IConstants;
 import com.ikokoon.serenity.model.Afferent;
+import com.ikokoon.serenity.model.Class;
 import com.ikokoon.serenity.model.Efferent;
 import com.ikokoon.serenity.model.Line;
 import com.ikokoon.serenity.model.Method;
-import com.ikokoon.serenity.model.Project;
 import com.ikokoon.serenity.model.Package;
-import com.ikokoon.serenity.model.Class;
+import com.ikokoon.serenity.model.Project;
+import com.ikokoon.target.ITarget;
 import com.ikokoon.target.Target;
-import com.ikokoon.target.one.One;
 import com.ikokoon.toolkit.Toolkit;
 
 /**
@@ -35,11 +33,12 @@ public class AggregatorTest extends ATest implements IConstants {
 
 	static {
 		Configuration.getConfiguration().includedPackages.add(Target.class.getPackage().getName());
-		Configuration.getConfiguration().includedPackages.add(One.class.getPackage().getName());
+		Configuration.getConfiguration().includedPackages.add(ITarget.class.getPackage().getName());
 		Configuration.getConfiguration().includedPackages.add("edu.umd.cs.findbugs");
 	}
 
 	@Test
+	@SuppressWarnings("unchecked")
 	public void onePackageClassMethodAndLine() {
 		Project project = (Project) dataBase.find(Toolkit.hash(Project.class.getName()));
 		Package pakkage = getPackage();
@@ -54,8 +53,6 @@ public class AggregatorTest extends ATest implements IConstants {
 		Aggregator aggregator = new Aggregator(null, dataBase);
 		aggregator.execute();
 
-		printModel(pakkage);
-
 		assertEquals(10, pakkage.getLines());
 		assertEquals(10, pakkage.getComplexity());
 		assertEquals(10, pakkage.getCoverage());
@@ -63,23 +60,23 @@ public class AggregatorTest extends ATest implements IConstants {
 		assertEquals(0.5, pakkage.getStability());
 		assertEquals(0.582910995399281, pakkage.getDistance());
 		assertEquals(0, pakkage.getInterfaces());
-		assertEquals(1, pakkage.getImplementations());
-		assertEquals(1, pakkage.getEfferent());
-		assertEquals(1, pakkage.getAfferent());
+		assertEquals(1, pakkage.getImplement());
+		assertEquals(1, pakkage.getEfference());
+		assertEquals(1, pakkage.getAfference());
 		assertEquals(1, pakkage.getChildren().size());
 
 		assertEquals(10, klass.getLines());
 		assertEquals(10, klass.getComplexity());
 		assertEquals(10, klass.getCoverage());
 		assertEquals(0.5, klass.getStability());
-		assertEquals(1, klass.getEfferent());
-		assertEquals(1, klass.getAfferent());
+		assertEquals(1, klass.getEfference());
+		assertEquals(1, klass.getAfference());
 		assertEquals(false, klass.getInterfaze());
 		assertEquals(1, klass.getChildren().size());
 
 		assertEquals(10, method.getComplexity());
 		assertEquals(10, method.getLines());
-		assertEquals(5, method.getTotalLinesExecuted());
+		assertEquals(5, method.getExecuted());
 		assertEquals(10, method.getCoverage());
 		assertEquals(1, method.getChildren().size());
 
@@ -88,7 +85,8 @@ public class AggregatorTest extends ATest implements IConstants {
 	}
 
 	@Test
-	public void onePackageTwoClassesTwoMethodsAndTwoLines() {
+	@SuppressWarnings("unchecked")
+	public void onePackageThreeClassesTwoMethodsAndTwoLines() {
 		Project project = (Project) dataBase.find(Toolkit.hash(Project.class.getName()));
 		Efferent efferent = new Efferent();
 		efferent.setName(Logger.class.getPackage().getName());
@@ -98,9 +96,11 @@ public class AggregatorTest extends ATest implements IConstants {
 		project.getChildren().add(pakkage);
 
 		Class classTarget = getClass(pakkage, Target.class.getName());
-		classTarget.setInterfaze(true);
+		// classTarget.setInterfaze(true);
+		Class classITarget = getClass(pakkage, ITarget.class.getName());
+		classITarget.setInterfaze(true);
 
-		classTarget.getEfferentPackages().add(efferent);
+		classTarget.getEfferent().add(efferent);
 
 		Method methodOne = getMethod(classTarget, "method name one", "method description one", 10, 10);
 		getline(methodOne, 1, 5);
@@ -110,7 +110,7 @@ public class AggregatorTest extends ATest implements IConstants {
 		getline(methodTwo, 1, 15);
 		getline(methodTwo, 2, 20);
 
-		Class classOne = getClass(pakkage, One.class.getName());
+		Class classOne = getClass(pakkage, ITarget.class.getName());
 		Method methodThree = getMethod(classOne, "method name three", "method description three", 15, 30);
 		getline(methodThree, 1, 25);
 		getline(methodThree, 2, 30);
@@ -123,8 +123,6 @@ public class AggregatorTest extends ATest implements IConstants {
 
 		Aggregator aggregator = new Aggregator(null, dataBase);
 		aggregator.execute();
-
-		printModel(pakkage);
 
 		assertEquals(65, pakkage.getLines());
 		// Sigma : (class lines / package lines) * class complexity
@@ -139,10 +137,10 @@ public class AggregatorTest extends ATest implements IConstants {
 		// d=|-stability + -abstractness + 1|/sqrt(-1²+-1²) = |-0.6666666666666666 + -0.5 + 1|sqrt(-1sq + -1sq) =
 		// assertEquals(0.38860733026618743, pakkage.getDistance());
 		assertEquals(1, pakkage.getInterfaces());
-		assertEquals(1, pakkage.getImplementations());
-		assertEquals(2, pakkage.getEfferent());
-		assertEquals(1, pakkage.getAfferent());
-		assertEquals(2, pakkage.getChildren().size());
+		assertEquals(2, pakkage.getImplement());
+		assertEquals(2, pakkage.getEfference());
+		assertEquals(1, pakkage.getAfference());
+		assertEquals(3, pakkage.getChildren().size());
 
 		// Check the first class, the Target class
 		assertEquals(15, classTarget.getLines()); // 10 + 15
@@ -153,17 +151,17 @@ public class AggregatorTest extends ATest implements IConstants {
 		assertEquals(26.666666666666664, classTarget.getCoverage());
 		// e / e + a = 2 / 2 + 1 = 0.666r
 		assertEquals(0.6666666666666666, classTarget.getStability());
-		assertEquals(2, classTarget.getEfferent());
-		assertEquals(1, classTarget.getAfferent());
-		assertEquals(true, classTarget.getInterfaze());
+		assertEquals(2, classTarget.getEfference());
+		assertEquals(1, classTarget.getAfference());
+		assertEquals(true, classITarget.getInterfaze());
 		assertEquals(2, classTarget.getChildren().size());
 
 		assertEquals(6.666666666666667, methodThree.getCoverage());
-		assertEquals(55, methodThree.getTotalLinesExecuted());
+		assertEquals(55, methodThree.getExecuted());
 		assertEquals(2, methodThree.getChildren().size());
 
 		assertEquals(10, methodFour.getCoverage());
-		assertEquals(75, methodFour.getTotalLinesExecuted());
+		assertEquals(75, methodFour.getExecuted());
 		assertEquals(2, methodFour.getChildren().size());
 
 		// Check the second class, the One class
@@ -175,55 +173,28 @@ public class AggregatorTest extends ATest implements IConstants {
 		assertEquals(7.996, classOne.getCoverage());
 		// e / e + a = 1 / 1 + 1 = 0.5
 		assertEquals(0.5, classOne.getStability());
-		assertEquals(1, classOne.getEfferent());
-		assertEquals(1, classOne.getAfferent());
+		assertEquals(1, classOne.getEfference());
+		assertEquals(1, classOne.getAfference());
 		assertEquals(false, classOne.getInterfaze());
 		assertEquals(2, classOne.getChildren().size());
 
 		assertEquals(6.666666666666667, methodThree.getCoverage());
-		assertEquals(55, methodThree.getTotalLinesExecuted());
+		assertEquals(55, methodThree.getExecuted());
 		assertEquals(2, methodThree.getChildren().size());
 
 		assertEquals(10, methodFour.getCoverage());
-		assertEquals(75, methodFour.getTotalLinesExecuted());
+		assertEquals(75, methodFour.getExecuted());
 		assertEquals(2, methodFour.getChildren().size());
 	}
 
-	private void printModel(Package pakkage) {
-		logger.info("PRINTING MODEL");
-		printEntity(pakkage);
-		logger.info("Classes : " + pakkage.getChildren().size());
-		for (Class klass : ((List<Class>) pakkage.getChildren())) {
-			logger.info("");
-			printEntity(klass);
-			logger.info("Methods : " + klass.getChildren().size());
-			for (Method method : ((List<Method>) klass.getChildren())) {
-				logger.info("");
-				printEntity(method);
-				logger.info("Lines : " + method.getChildren().size());
-				for (Line line : ((List<Line>) method.getChildren())) {
-					logger.info("");
-					printEntity(line);
-				}
-			}
-		}
-	}
-
-	private void printEntity(Object object) {
-		logger.info("Printing object : " + object + ", class : " + object.getClass());
-		Field[] fields = object.getClass().getDeclaredFields();
-		for (Field field : fields) {
-			Object value = Toolkit.getValue(Object.class, object, field.getName());
-			logger.info(field.getName() + " : " + value);
-		}
-	}
-
+	@SuppressWarnings("unchecked")
 	protected Package getPackage() {
 		Package pakkage = new Package();
 		pakkage.setName(Target.class.getPackage().getName());
 		return pakkage;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Class getClass(Package pakkage, String className) {
 		Afferent afferent = new Afferent();
 		afferent.setName(org.apache.log4j.Logger.class.getPackage().getName());
@@ -233,8 +204,8 @@ public class AggregatorTest extends ATest implements IConstants {
 		Class klass = new Class();
 
 		klass.setName(className);
-		klass.getAfferentPackages().add(afferent);
-		klass.getEfferentPackages().add(efferent);
+		klass.getAfferent().add(afferent);
+		klass.getEfferent().add(efferent);
 		klass.setInterfaze(false);
 		klass.setParent(pakkage);
 
@@ -243,6 +214,7 @@ public class AggregatorTest extends ATest implements IConstants {
 		return klass;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Method getMethod(Class klass, String name, String description, double complexity, double lines) {
 		Method method = new Method();
 		method.setName(name);
@@ -255,6 +227,7 @@ public class AggregatorTest extends ATest implements IConstants {
 		return method;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Line getline(Method method, double number, double counter) {
 		Line line = new Line();
 		line.setClassName(method.getClassName());
