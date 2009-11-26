@@ -48,3 +48,26 @@ var info = {
 _uacct = "UA-1257975-1";
 urchinTracker();
 </script>
+<script>
+var cont = document.getElementById('issuezilla')
+if (cont!=null) {
+    var note = document.createElement("div");
+    note.innerHTML = "<div style='background-color:red; text-align:center'><a href='http://n4.nabble.com/Head-s-Up-Migrating-Issue-Tracking-from-java-net-to-JIRA-Friday-11-27-td628176.html#a628176'><span style='font-weight:bold; color:white; font-size:2em'>Issue tracker is being migrated to JIRA, so please refrain from making changes.</span></a></div>";
+    
+    cont.insertBefore(note,cont.firstChild);
+    
+    function disableSubmit(f) {
+      if (f==null)  return;
+      for (var i=0; i<f.elements.length; i++) {
+        var e =  f.elements[i];
+        if (e.type=="submit") {
+          e.disabled = true;
+        }
+      }
+    }
+
+    disableSubmit(document.getElementById("changeform"));
+    disableSubmit(document.getElementById("enterform"));
+    
+}
+</script>
