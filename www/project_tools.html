@@ -49,7 +49,7 @@ addLoadEvent(function() {
 var cont = document.getElementById('issuezilla')
 if (cont!=null) {
     var note = document.createElement("div");
-    note.innerHTML = "<div style='background-color:red; text-align:center; padding:1em'><a href='http://n4.nabble.com/Head-s-Up-Migrating-Issue-Tracking-from-java-net-to-JIRA-Friday-11-27-td628176.html#a628176'><span style='font-weight:bold; color:white; font-size:1.2em'>Issue tracker is being migrated to JIRA, so please refrain from making changes.</span></a></div>";
+    note.innerHTML = "<div style='background-color:red; text-align:center; padding:1em'><a href='http://issues.hudson-ci.org/'><span style='font-weight:bold; color:white; font-size:1.2em'>Issue tracker has moved to JIRA</span></a></div>";
     
     cont.insertBefore(note,cont.firstChild);
     
@@ -66,6 +66,9 @@ if (cont!=null) {
     disableSubmit(document.getElementById("changeform"));
     disableSubmit(document.getElementById("enterform"));
     
+    if (window.location.href.indexOf("/issues/show_bug.cgi?id=")!=-1) {
+        window.location.replace("http://issues.hudson-ci.org/browse/HUDSON-"+window.location.search.substring(4));
+    }
 }
 });
 </script>
