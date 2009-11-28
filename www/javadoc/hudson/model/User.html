@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-User (Hudson main module 1.335 API)
+User (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ User (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="User (Hudson main module 1.335 API)";
+        parent.document.title="User (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -181,6 +181,14 @@ Represents a user.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/User.html#canDelete()">canDelete</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;With ADMINISTER permission, can delete users with persisted data but can't delete self.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/User.html#checkPermission(hudson.security.Permission)">checkPermission</A></B>(<A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A>&nbsp;permission)</CODE>
 
@@ -215,11 +223,28 @@ Represents a user.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/User.html#delete()">delete</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes the data directory and removes this user from Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/User.html#doConfigSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doConfigSubmit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Accepts submission from the configuration page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/User.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes this user from Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -956,6 +981,25 @@ public void <B>save</B>()
 </DL>
 <HR>
 
+<A NAME="delete()"><!-- --></A><H3>
+delete</H3>
+<PRE>
+public void <B>delete</B>()
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Deletes the data directory and removes this user from Hudson.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if we fail to delete.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getApi()"><!-- --></A><H3>
 getApi</H3>
 <PRE>
@@ -992,6 +1036,28 @@ public void <B>doConfigSubmit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doDoDelete</H3>
+<PRE>
+public void <B>doDoDelete</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                       javax.servlet.ServletException</PRE>
+<DL>
+<DD>Deletes this user from Hudson.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1081,6 +1147,22 @@ public boolean <B>hasPermission</B>(<A HREF="../../hudson/security/Permission.ht
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AccessControlled.html#hasPermission(hudson.security.Permission)">hasPermission</A></CODE> in interface <CODE><A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="canDelete()"><!-- --></A><H3>
+canDelete</H3>
+<PRE>
+public boolean <B>canDelete</B>()</PRE>
+<DL>
+<DD>With ADMINISTER permission, can delete users with persisted data but can't delete self.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>

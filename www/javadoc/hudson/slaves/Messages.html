@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Messages (Hudson main module 1.335 API)
+Messages (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Messages (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Messages (Hudson main module 1.335 API)";
+        parent.document.title="Messages (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -213,6 +213,14 @@ Class Messages</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#_OfflineCause_LaunchFailed()">_OfflineCause_LaunchFailed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This node is offline because Hudson failed to launch the slave agent on it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.jvnet.localizer.Localizable</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#_RetentionStrategy_Always_displayName()">_RetentionStrategy_Always_displayName</A></B>()</CODE>
 
 <BR>
@@ -232,7 +240,7 @@ Class Messages</H2>
 <TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#_RetentionStrategy_Demand_OfflineIdle()">_RetentionStrategy_Demand_OfflineIdle</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computer was idle</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Offline because computer was idle; it will be relaunched when needed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -342,6 +350,14 @@ Class Messages</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#OfflineCause_LaunchFailed()">OfflineCause_LaunchFailed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This node is offline because Hudson failed to launch the slave agent on it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#RetentionStrategy_Always_displayName()">RetentionStrategy_Always_displayName</A></B>()</CODE>
 
 <BR>
@@ -361,7 +377,7 @@ Class Messages</H2>
 <TD><CODE><B><A HREF="../../hudson/slaves/Messages.html#RetentionStrategy_Demand_OfflineIdle()">RetentionStrategy_Demand_OfflineIdle</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computer was idle</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Offline because computer was idle; it will be relaunched when needed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -459,7 +475,7 @@ RetentionStrategy_Demand_OfflineIdle</H3>
 <PRE>
 public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>RetentionStrategy_Demand_OfflineIdle</B>()</PRE>
 <DL>
-<DD>Computer was idle
+<DD>Offline because computer was idle; it will be relaunched when needed.
 <P>
 <DD><DL>
 </DL>
@@ -472,7 +488,7 @@ _RetentionStrategy_Demand_OfflineIdle</H3>
 <PRE>
 public static org.jvnet.localizer.Localizable <B>_RetentionStrategy_Demand_OfflineIdle</B>()</PRE>
 <DL>
-<DD>Computer was idle
+<DD>Offline because computer was idle; it will be relaunched when needed.
 <P>
 <DD><DL>
 </DL>
@@ -631,6 +647,32 @@ public static org.jvnet.localizer.Localizable <B>_SlaveComputer_DisconnectedBy</
                                                                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;arg2)</PRE>
 <DL>
 <DD>Disconnected by {0}{1}
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="OfflineCause_LaunchFailed()"><!-- --></A><H3>
+OfflineCause_LaunchFailed</H3>
+<PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>OfflineCause_LaunchFailed</B>()</PRE>
+<DL>
+<DD>This node is offline because Hudson failed to launch the slave agent on it.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_OfflineCause_LaunchFailed()"><!-- --></A><H3>
+_OfflineCause_LaunchFailed</H3>
+<PRE>
+public static org.jvnet.localizer.Localizable <B>_OfflineCause_LaunchFailed</B>()</PRE>
+<DL>
+<DD>This node is offline because Hudson failed to launch the slave agent on it.
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-GNUCLibrary (Hudson main module 1.335 API)
+GNUCLibrary (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ GNUCLibrary (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="GNUCLibrary (Hudson main module 1.335 API)";
+        parent.document.title="GNUCLibrary (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -102,6 +102,10 @@ Interface GNUCLibrary</H2>
 
 <P>
 GNU C library.
+
+ <p>
+ Not available on all platforms (such as Linux/PPC, IBM mainframe, etc.), so the caller should recover gracefully
+ in case of <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/LinkageError.html?is-external=true" title="class or interface in java.lang"><CODE>LinkageError</CODE></A>. See HUDSON-4820.
 <P>
 
 <P>

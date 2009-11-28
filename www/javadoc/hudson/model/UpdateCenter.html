@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter (Hudson main module 1.335 API)
+UpdateCenter (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter (Hudson main module 1.335 API)";
+        parent.document.title="UpdateCenter (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -369,6 +369,14 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#init(hudson.model.Hudson)">init</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;h)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initializes the update center.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#load()">load</A></B>()</CODE>
 
@@ -714,6 +722,28 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-e
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="init(hudson.model.Hudson)"><!-- --></A><H3>
+init</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/init/Initializer.html" title="annotation in hudson.init">@Initializer</A>(<A HREF="../../hudson/init/Initializer.html#after()">after</A>=<A HREF="../../hudson/init/InitMilestone.html#PLUGINS_STARTED">PLUGINS_STARTED</A>)
+</FONT>public static void <B>init</B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;h)
+                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Initializes the update center.
+
+ This has to wait until after all plugins load, to let custom UpdateCenterConfiguration take effect first.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

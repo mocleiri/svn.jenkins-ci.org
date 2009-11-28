@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildTrigger (Hudson main module 1.335 API)
+BuildTrigger (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildTrigger (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildTrigger (Hudson main module 1.335 API)";
+        parent.document.title="BuildTrigger (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -617,7 +617,7 @@ public static boolean <B>execute</B>(<A HREF="../../hudson/model/AbstractBuild.h
 <DT><B>Parameters:</B><DD><CODE>build</CODE> - The current build. Its downstreams will be triggered.<DD><CODE>listener</CODE> - Receives the progress report.<DD><CODE>trigger</CODE> - Optional <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><CODE>BuildTrigger</CODE></A> configured for the current build.
       If it is non-null, its configuration value will affect the triggering behavior.
       But even when this is null (meaning no user-defined downstream project is set up),
-      there might be other dependencies defined by somebody else, so buidl would
+      there might be other dependencies defined by somebody else, so build would
       still have to call this method.</DL>
 </DD>
 </DL>

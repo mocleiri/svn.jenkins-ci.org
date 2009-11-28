@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginManager (Hudson main module 1.335 API)
+PluginManager (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson main module 1.335 API)";
+        parent.document.title="PluginManager (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -320,8 +320,8 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/PluginManager.html#initialize()">initialize</A></B>()</CODE>
+<CODE>&nbsp;org.jvnet.hudson.reactor.TaskBuilder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#initTasks(hudson.init.InitStrategy)">initTasks</A></B>(<A HREF="../hudson/init/InitStrategy.html" title="class in hudson.init">InitStrategy</A>&nbsp;initStrategy)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called immediately after the construction.</TD>
@@ -449,10 +449,10 @@ public <B>PluginManager</B>(javax.servlet.ServletContext&nbsp;context)</PRE>
 </TR>
 </TABLE>
 
-<A NAME="initialize()"><!-- --></A><H3>
-initialize</H3>
+<A NAME="initTasks(hudson.init.InitStrategy)"><!-- --></A><H3>
+initTasks</H3>
 <PRE>
-public void <B>initialize</B>()</PRE>
+public org.jvnet.hudson.reactor.TaskBuilder <B>initTasks</B>(<A HREF="../hudson/init/InitStrategy.html" title="class in hudson.init">InitStrategy</A>&nbsp;initStrategy)</PRE>
 <DL>
 <DD>Called immediately after the construction.
  This is a separate method so that code executed from here will see a valid value in

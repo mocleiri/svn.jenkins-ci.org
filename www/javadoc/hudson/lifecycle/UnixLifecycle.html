@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UnixLifecycle (Hudson main module 1.335 API)
+UnixLifecycle (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UnixLifecycle (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UnixLifecycle (Hudson main module 1.335 API)";
+        parent.document.title="UnixLifecycle (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -169,19 +169,19 @@ Class UnixLifecycle</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/lifecycle/UnixLifecycle.html#canRestart()">canRestart</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>Lifecycle.restart()</CODE></A> method restart Hudson?</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/lifecycle/UnixLifecycle.html#restart()">restart</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this life cycle supports a restart of Hudson, do so.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/lifecycle/UnixLifecycle.html#verifyRestartable()">verifyRestartable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>Lifecycle.restart()</CODE></A> method restart Hudson?</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.lifecycle.Lifecycle"><!-- --></A>
@@ -190,7 +190,7 @@ Class UnixLifecycle</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.lifecycle.<A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#canRewriteHudsonWar()">canRewriteHudsonWar</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#get()">get</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#getHudsonWar()">getHudsonWar</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#rewriteHudsonWar(java.io.File)">rewriteHudsonWar</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#canRestart()">canRestart</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#canRewriteHudsonWar()">canRewriteHudsonWar</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#get()">get</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#getHudsonWar()">getHudsonWar</A>, <A HREF="../../hudson/lifecycle/Lifecycle.html#rewriteHudsonWar(java.io.File)">rewriteHudsonWar</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -269,19 +269,22 @@ public void <B>restart</B>()
 </DL>
 <HR>
 
-<A NAME="canRestart()"><!-- --></A><H3>
-canRestart</H3>
+<A NAME="verifyRestartable()"><!-- --></A><H3>
+verifyRestartable</H3>
 <PRE>
-public boolean <B>canRestart</B>()</PRE>
+public void <B>verifyRestartable</B>()
+                       throws <A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#canRestart()">Lifecycle</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#verifyRestartable()">Lifecycle</A></CODE></B></DD>
 <DD>Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>Lifecycle.restart()</CODE></A> method restart Hudson?
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#canRestart()">canRestart</A></CODE> in class <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/lifecycle/Lifecycle.html#verifyRestartable()">verifyRestartable</A></CODE> in class <CODE><A HREF="../../hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle">Lifecycle</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></CODE> - If the restart is not supported, throw this exception and explain the cause.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

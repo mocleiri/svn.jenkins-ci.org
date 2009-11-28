@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Lifecycle (Hudson main module 1.335 API)
+Lifecycle (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Lifecycle (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Lifecycle (Hudson main module 1.335 API)";
+        parent.document.title="Lifecycle (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -176,7 +176,8 @@ Provides the capability for starting/stopping/restarting/uninstalling Hudson.
 <TD><CODE><B><A HREF="../../hudson/lifecycle/Lifecycle.html#canRestart()">canRestart</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>restart()</CODE></A> method restart Hudson?</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../../hudson/lifecycle/Lifecycle.html#verifyRestartable()"><CODE>verifyRestartable()</CODE></A> except the status is indicated by the return value,
+ not by an exception.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -218,6 +219,14 @@ Provides the capability for starting/stopping/restarting/uninstalling Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces hudson.war by the given file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/lifecycle/Lifecycle.html#verifyRestartable()">verifyRestartable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>restart()</CODE></A> method restart Hudson?</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -368,12 +377,32 @@ public void <B>restart</B>()
 </DL>
 <HR>
 
+<A NAME="verifyRestartable()"><!-- --></A><H3>
+verifyRestartable</H3>
+<PRE>
+public void <B>verifyRestartable</B>()
+                       throws <A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></PRE>
+<DL>
+<DD>Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>restart()</CODE></A> method restart Hudson?
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></CODE> - If the restart is not supported, throw this exception and explain the cause.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="canRestart()"><!-- --></A><H3>
 canRestart</H3>
 <PRE>
 public boolean <B>canRestart</B>()</PRE>
 <DL>
-<DD>Can the <A HREF="../../hudson/lifecycle/Lifecycle.html#restart()"><CODE>restart()</CODE></A> method restart Hudson?
+<DD>The same as <A HREF="../../hudson/lifecycle/Lifecycle.html#verifyRestartable()"><CODE>verifyRestartable()</CODE></A> except the status is indicated by the return value,
+ not by an exception.
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model (Hudson main module 1.335 API)
+hudson.model (Hudson main module 1.336 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-20">
+<META NAME="date" CONTENT="2009-11-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson main module 1.335 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson main module 1.335 API)";
+        parent.document.title="hudson.model (Hudson main module 1.336 API)";
     }
 }
 </SCRIPT>
@@ -182,6 +182,11 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.FlyweightTask.html" title="interface in hudson.model">Queue.FlyweightTask</A></B></TD>
 <TD>Marks <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that do not consume <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.NonBlockingTask.html" title="interface in hudson.model">Queue.NonBlockingTask</A></B></TD>
+<TD>Marks <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that are not affected by the <A HREF="../../hudson/model/Hudson.html#isQuietingDown()">Hudson.isQuietingDown()</A>  quietting down},
+ because these tasks keep other tasks executing.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Queue.QueueAction.html" title="interface in hudson.model">Queue.QueueAction</A></B></TD>
