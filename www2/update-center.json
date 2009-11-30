@@ -86,6 +86,20 @@ updateCenter.post(
       "version": "1.15",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Active+Directory+plugin"
     },
+    "analysis-core":     {
+      "buildDate": "Nov 30, 2009",
+      "dependencies": [      {
+        "name": "maven-plugin",
+        "optional": false,
+        "version": "1.335"
+      }],
+      "developers": [{"developerId": "hafner"}],
+      "name": "analysis-core",
+      "releaseTimestamp": "2009-11-30T20:02:00.00Z",
+      "requiredCore": "1.335",
+      "url": "http://hudson-ci.org/download/plugins/analysis-core/1.0/analysis-core.hpi",
+      "version": "1.0"
+    },
     "audit-trail":     {
       "buildDate": "Nov 21, 2009",
       "dependencies": [],
@@ -324,12 +338,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Change+Log+History+Plugin"
     },
     "checkstyle":     {
-      "buildDate": "Sep 24, 2009",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.318"
-      }],
+      "buildDate": "Nov 30, 2009",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.335"
+        }
+      ],
       "developers": [{"developerId": "hafner"}],
       "excerpt": "This plugin generates the trend report for <a href='http://checkstyle.sourceforge.net/'>Checkstyle<\/a>, an open source static code analysis program.&nbsp; ",
       "labels":       [
@@ -338,12 +359,12 @@ updateCenter.post(
         "plugin-report"
       ],
       "name": "checkstyle",
-      "previousTimestamp": "2009-09-04T05:58:56.00Z",
-      "releaseTimestamp": "2009-09-25T05:29:28.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-09-25T05:29:28.00Z",
+      "releaseTimestamp": "2009-11-30T20:30:54.00Z",
+      "requiredCore": "1.335",
       "title": "Checkstyle Plugin",
-      "url": "http://hudson-ci.org/download/plugins/checkstyle/2.14/checkstyle.hpi",
-      "version": "2.14",
+      "url": "http://hudson-ci.org/download/plugins/checkstyle/3.0/checkstyle.hpi",
+      "version": "3.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Checkstyle+Plugin"
     },
     "chucknorris":     {
@@ -711,7 +732,7 @@ updateCenter.post(
         "plugin-scm-related"
       ],
       "name": "cvs-tag",
-      "previousTimestamp": "2009-04-25T02:56:02.00Z",
+      "previousTimestamp": "2008-12-09T18:42:18.00Z",
       "releaseTimestamp": "2009-05-11T16:59:34.00Z",
       "requiredCore": "1.304",
       "title": "CVS Tagging Plugin",
@@ -822,18 +843,18 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Description+Setter+Plugin"
     },
     "dimensionsscm":     {
-      "buildDate": "Nov 29, 2009",
+      "buildDate": "Nov 30, 2009",
       "dependencies": [],
       "developers": [{"developerId": "tpayne"}],
       "excerpt": "This plugin integrates Hudson with <a href='http://www.serena.com/products/dimensions-cm-configuration-management/index.html'>Dimensions<\/a> - the Serena SCM solution.",
       "labels": ["plugin-scm"],
       "name": "dimensionsscm",
-      "previousTimestamp": "2009-11-25T03:38:40.00Z",
-      "releaseTimestamp": "2009-11-29T08:23:24.00Z",
+      "previousTimestamp": "2009-11-29T08:23:24.00Z",
+      "releaseTimestamp": "2009-11-30T20:42:46.00Z",
       "requiredCore": "1.313",
       "title": "Dimensions Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.5.6/dimensionsscm.hpi",
-      "version": "0.5.6",
+      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.5.7/dimensionsscm.hpi",
+      "version": "0.5.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dimensions+Plugin"
     },
     "disk-usage":     {
@@ -843,7 +864,7 @@ updateCenter.post(
       "excerpt": "This plugin records disk usage. ",
       "labels": ["plugin-misc"],
       "name": "disk-usage",
-      "previousTimestamp": "2009-03-26T16:31:12.00Z",
+      "previousTimestamp": "2009-03-27T00:23:38.00Z",
       "releaseTimestamp": "2009-05-29T02:20:12.00Z",
       "requiredCore": "1.307",
       "title": "Disk Usage Plugin",
@@ -937,12 +958,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Drools+Plugin"
     },
     "dry":     {
-      "buildDate": "Sep 24, 2009",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.318"
-      }],
+      "buildDate": "Nov 30, 2009",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.335"
+        }
+      ],
       "developers": [{"developerId": "hafner"}],
       "excerpt": "This plugin generates the trend report for duplicate code checkers like <a href='http://pmd.sourceforge.net/cpd.html'>CPD<\/a>. ",
       "labels":       [
@@ -951,12 +979,12 @@ updateCenter.post(
         "plugin-report"
       ],
       "name": "dry",
-      "previousTimestamp": "2009-09-11T06:51:54.00Z",
-      "releaseTimestamp": "2009-09-25T05:38:22.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-09-25T05:38:22.00Z",
+      "releaseTimestamp": "2009-11-30T20:39:50.00Z",
+      "requiredCore": "1.335",
       "title": "DRY Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dry/1.13/dry.hpi",
-      "version": "1.13",
+      "url": "http://hudson-ci.org/download/plugins/dry/2.0/dry.hpi",
+      "version": "2.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DRY+Plugin"
     },
     "easyant":     {
@@ -1063,12 +1091,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/File+System+SCM"
     },
     "findbugs":     {
-      "buildDate": "Sep 24, 2009",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.319"
-      }],
+      "buildDate": "Nov 30, 2009",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.335"
+        }
+      ],
       "developers": [{"developerId": "hafner"}],
       "excerpt": "This plugin generates the trend report for <a href='http://findbugs.sourceforge.net/'>FindBugs<\/a>, an open source program which uses static analysis to  look for bugs in Java code.&nbsp; ",
       "labels":       [
@@ -1077,12 +1112,12 @@ updateCenter.post(
         "plugin-report"
       ],
       "name": "findbugs",
-      "previousTimestamp": "2009-09-11T07:00:24.00Z",
-      "releaseTimestamp": "2009-09-25T05:47:12.00Z",
-      "requiredCore": "1.319",
+      "previousTimestamp": "2009-09-25T05:47:12.00Z",
+      "releaseTimestamp": "2009-11-30T20:47:44.00Z",
+      "requiredCore": "1.335",
       "title": "FindBugs Plugin",
-      "url": "http://hudson-ci.org/download/plugins/findbugs/3.13/findbugs.hpi",
-      "version": "3.13",
+      "url": "http://hudson-ci.org/download/plugins/findbugs/4.0/findbugs.hpi",
+      "version": "4.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FindBugs+Plugin"
     },
     "ftppublisher":     {
@@ -2217,9 +2252,9 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Next+Build+Number+Plugin"
     },
     "nunit":     {
-      "buildDate": "Apr 13, 2009",
+      "buildDate": "Apr 14, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "hudson"}],
+      "developers": [{"developerId": "erikra"}],
       "excerpt": "This plugin allows you publish <a href='http://www.nunit.org/'>NUnit<\/a> test results ",
       "labels":       [
         "plugin-publisher",
@@ -2227,7 +2262,7 @@ updateCenter.post(
       ],
       "name": "nunit",
       "previousTimestamp": "2009-04-07T06:49:44.00Z",
-      "releaseTimestamp": "2009-04-14T02:51:22.00Z",
+      "releaseTimestamp": "2009-04-14T22:50:24.00Z",
       "requiredCore": "1.299",
       "title": "NUnit Plugin",
       "url": "http://hudson-ci.org/download/plugins/nunit/0.8/nunit.hpi",
@@ -2334,12 +2369,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Plot+Plugin"
     },
     "pmd":     {
-      "buildDate": "Sep 24, 2009",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.318"
-      }],
+      "buildDate": "Nov 30, 2009",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.335"
+        }
+      ],
       "developers": [{"developerId": "hafner"}],
       "excerpt": "This plugin generates the trend report for <a href='http://pmd.sourceforge.net/'>PMD<\/a>, an open source static code analysis program.&nbsp; ",
       "labels":       [
@@ -2348,12 +2390,12 @@ updateCenter.post(
         "plugin-publisher"
       ],
       "name": "pmd",
-      "previousTimestamp": "2009-09-11T07:10:32.00Z",
-      "releaseTimestamp": "2009-09-25T05:59:26.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-09-25T05:59:26.00Z",
+      "releaseTimestamp": "2009-11-30T20:56:50.00Z",
+      "requiredCore": "1.335",
       "title": "PMD Plugin",
-      "url": "http://hudson-ci.org/download/plugins/pmd/2.13/pmd.hpi",
-      "version": "2.13",
+      "url": "http://hudson-ci.org/download/plugins/pmd/3.0/pmd.hpi",
+      "version": "3.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PMD+Plugin"
     },
     "polarion":     {
@@ -3135,12 +3177,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Synergy+Plugin"
     },
     "tasks":     {
-      "buildDate": "Sep 24, 2009",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.318"
-      }],
+      "buildDate": "Nov 30, 2009",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.335"
+        }
+      ],
       "developers": [{"developerId": "hafner"}],
       "excerpt": "This plugin scans the workspace files for open tasks and generates a trend report.",
       "labels":       [
@@ -3149,12 +3198,12 @@ updateCenter.post(
         "plugin-maven"
       ],
       "name": "tasks",
-      "previousTimestamp": "2009-09-11T07:23:20.00Z",
-      "releaseTimestamp": "2009-09-25T06:15:00.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-09-25T06:15:00.00Z",
+      "releaseTimestamp": "2009-11-30T21:04:30.00Z",
+      "requiredCore": "1.335",
       "title": "Task Scanner Plugin",
-      "url": "http://hudson-ci.org/download/plugins/tasks/3.13/tasks.hpi",
-      "version": "3.13",
+      "url": "http://hudson-ci.org/download/plugins/tasks/4.0/tasks.hpi",
+      "version": "4.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Task+Scanner+Plugin"
     },
     "template-project":     {
@@ -3417,12 +3466,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Visual+SourceSafe+Plugin"
     },
     "warnings":     {
-      "buildDate": "Sep 24, 2009",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.318"
-      }],
+      "buildDate": "Nov 30, 2009",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.335"
+        }
+      ],
       "developers": [{"developerId": "hafner"}],
       "excerpt": "This plugin generates the trend report for compiler warnings in the console log or in log files. ",
       "labels":       [
@@ -3431,12 +3487,12 @@ updateCenter.post(
         "plugin-report"
       ],
       "name": "warnings",
-      "previousTimestamp": "2009-09-11T07:30:16.00Z",
-      "releaseTimestamp": "2009-09-25T06:23:14.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-09-25T06:23:14.00Z",
+      "releaseTimestamp": "2009-11-30T21:14:34.00Z",
+      "requiredCore": "1.335",
       "title": "Warnings Plugin",
-      "url": "http://hudson-ci.org/download/plugins/warnings/2.14/warnings.hpi",
-      "version": "2.14",
+      "url": "http://hudson-ci.org/download/plugins/warnings/3.0/warnings.hpi",
+      "version": "3.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Warnings+Plugin"
     },
     "webtestpresenter":     {
@@ -3531,8 +3587,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "EzurSHdpRcPeSZ0J3YlDGnEIgm0=",
-    "signature": "P8oSuwX/aIPYtq0MfbPaED0rKsefJuW6pwRrk+BqtTavOUSAV3Tl8EC6/FsXSrcnVpXOkbvLFXGC8Q5je4IVa3AxlzSQIa3ztCUIaeJ9W5IcULeiA8IJU/b3xqt4dn9Q5hqB8XDHkceYEN4YLO4QiC401kFCKbb2kHTdqe9wauRQOyaoSo6lG9SV/KtUPUiy471lkpNRYJReB1kIjl1MwyROjxFC2UNPyvDuGsnoUYYIRlt53nG3R5TPWyV/Gx4l649KUOEKvM1vnagp69EMWeNAUcc4ZRZRIcMcWx/8mZRjyJFd1tWDM50C48ra67ITifSCBBanxx/cY7gf1InlPA=="
+    "digest": "8akKNPaOUzUGinwatZ29n85ISEs=",
+    "signature": "pwERptcdfSImuYnPZkXNmsQaYuK3mW1ErZGQDG1i8oUDrCLwUsgsQmygxJ19rsxwxX5UdJCd+AygNjggcYFl3gUqwIBByRDKldUweJDACDpbPXbfKvMAHexy29YJj6SLIv+4R1rTSmy0RKIVCT67nMNhthBybMELzKckBbZWrnFbvRkHz+edkD0KT9LS0/t25aBoeJcjYpoLb8XMNyiGTxl+s7jG3YlHxQSqRXxS0ICaBuagHP7C2fGBmB4OCPuLtRHJ4CoDe2VVByd4Cb03RVaWgFdD0fTXzvLZwxNYioOtK2KmMgda3TXNB1hNPvOwxg8EKHQ4lwwuO/VSngeQPA=="
   },
   "updateCenterVersion": "1"
 }
