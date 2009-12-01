@@ -153,7 +153,10 @@ updateCenter.post(
       "dependencies": [],
       "developers": [{"developerId": "mindless"}],
       "excerpt": "This plugin adds batch tasks that are not regularly executed to projects, such as releases, integration, archiving, etc.",
-      "labels": ["builder"],
+      "labels":       [
+        "post-build",
+        "builder"
+      ],
       "name": "batch-task",
       "previousTimestamp": "2009-08-28T22:19:22.00Z",
       "releaseTimestamp": "2009-11-05T22:25:44.00Z",
@@ -472,10 +475,7 @@ updateCenter.post(
       "dependencies": [],
       "developers": [{"developerId": "niick"}],
       "excerpt": "This plugin allows you to capture code coverage reports from <a href='http://atlassian.com/software/clover/'>Clover<\/a>. Hudson will generate and track code coverage across time. This plugin can be used without the need to modify your build.xml. ",
-      "labels":       [
-        "publisher",
-        "report"
-      ],
+      "labels": ["report"],
       "name": "clover",
       "previousTimestamp": "2009-10-07T18:56:16.00Z",
       "releaseTimestamp": "2009-10-10T00:27:04.00Z",
@@ -524,7 +524,6 @@ updateCenter.post(
       "developers": [{"developerId": "carrd"}],
       "excerpt": "This plugin allows you to capture code coverage report from <a href='http://cobertura.sourceforge.net/'>Cobertura<\/a>. Hudson will generate the trend report of coverage.  The Cobertura plug in can be <a href='https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=7954&expandFolder=7954&folderID=0'>downloaded here<\/a>.",
       "labels":       [
-        "publisher",
         "maven",
         "report"
       ],
@@ -609,10 +608,7 @@ updateCenter.post(
       "dependencies": [],
       "developers": [{"developerId": "S0011918"}],
       "excerpt": "This plugin generates the trend report for <a href='http://cppcheck.wiki.sourceforge.net/'>CppCheck<\/a>.",
-      "labels":       [
-        "publisher",
-        "report"
-      ],
+      "labels": ["report"],
       "name": "cppcheck",
       "previousTimestamp": "2009-09-05T23:12:30.00Z",
       "releaseTimestamp": "2009-09-12T07:39:06.00Z",
@@ -654,10 +650,7 @@ updateCenter.post(
         "name": "Gregory Boissinot"
       }],
       "excerpt": "This plugin allows you publish <a href='http://apps.sourceforge.net/mediawiki/cppunit/'>CppUnit<\/a> test results. ",
-      "labels":       [
-        "publisher",
-        "report"
-      ],
+      "labels": ["report"],
       "name": "cppunit",
       "previousTimestamp": "2009-08-29T08:11:28.00Z",
       "releaseTimestamp": "2009-10-26T07:11:26.00Z",
@@ -672,10 +665,7 @@ updateCenter.post(
       "dependencies": [],
       "developers": [{"developerId": "dlindner"}],
       "excerpt": "This plugin reads the \"crappy methods\" report from <a href='http://crap4j.org/'>Crap4J<\/a>. Hudson will generate the trend report of crap percentage and provide detailed information about changes.",
-      "labels":       [
-        "publisher",
-        "report"
-      ],
+      "labels": ["report"],
       "name": "crap4j",
       "previousTimestamp": "2009-02-26T04:16:48.00Z",
       "releaseTimestamp": "2009-03-15T16:57:26.00Z",
@@ -1032,10 +1022,7 @@ updateCenter.post(
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
       "excerpt": "This plugin allows you to capture code coverage report from <a href='http://emma.sf.net/'>Emma<\/a>. Hudson will generate the trend report of coverage. ",
-      "labels":       [
-        "publisher",
-        "report"
-      ],
+      "labels": ["report"],
       "name": "emma",
       "previousTimestamp": "2009-04-07T07:00:38.00Z",
       "releaseTimestamp": "2009-06-10T00:05:14.00Z",
@@ -1495,8 +1482,6 @@ updateCenter.post(
       }],
       "excerpt": "This plugin installs Hudson IRC bot on your choice of IRC channels. You can get notifications via IRC and interact with Hudson via IRC.  Note that you also need to install the <a href='http://wiki.hudson-ci.org/display/HUDSON/Instant+Messaging+Plugin'>instant-messaging plugin<\/a> .",
       "labels":       [
-        "publisher",
-        "maven",
         "trigger",
         "notifier"
       ],
@@ -1546,7 +1531,6 @@ updateCenter.post(
       ],
       "excerpt": "Integrates Hudson with Jabber instant messaging protocol. Note that you also need to install the <a href='http://wiki.hudson-ci.org/display/HUDSON/Instant+Messaging+Plugin'>instant-messaging plugin<\/a> . ",
       "labels":       [
-        "publisher",
         "trigger",
         "notifier"
       ],
@@ -1976,7 +1960,10 @@ updateCenter.post(
         "name": "Andrew Bayer"
       }],
       "excerpt": "This plugin provides the ability to add pre- and post-build steps to Maven 2-type projects.",
-      "labels": ["buildwrapper"],
+      "labels":       [
+        "maven",
+        "buildwrapper"
+      ],
       "name": "m2-extra-steps",
       "previousTimestamp": "2009-07-16T16:32:06.00Z",
       "releaseTimestamp": "2009-09-28T20:47:50.00Z",
@@ -2084,7 +2071,7 @@ updateCenter.post(
       "version": "1.336"
     },
     "mercurial":     {
-      "buildDate": "Nov 13, 2009",
+      "buildDate": "Nov 30, 2009",
       "dependencies": [],
       "developers":       [
                 {
@@ -2101,12 +2088,12 @@ updateCenter.post(
       "excerpt": "This plugin integrates the <a href='http://selenic.com/mercurial/'>Mercurial version control system<\/a> with Hudson.",
       "labels": ["scm"],
       "name": "mercurial",
-      "previousTimestamp": "2009-10-23T21:04:20.00Z",
-      "releaseTimestamp": "2009-11-14T02:37:02.00Z",
+      "previousTimestamp": "2009-11-14T02:37:02.00Z",
+      "releaseTimestamp": "2009-12-01T00:42:38.00Z",
       "requiredCore": "1.324",
       "title": "Mercurial Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mercurial/1.24/mercurial.hpi",
-      "version": "1.24",
+      "url": "http://hudson-ci.org/download/plugins/mercurial/1.25/mercurial.hpi",
+      "version": "1.25",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Mercurial+Plugin"
     },
     "monitoring":     {
@@ -2738,9 +2725,9 @@ updateCenter.post(
       "buildDate": "Nov 28, 2009",
       "dependencies": [],
       "developers": [{"developerId": "tom"}],
-      "excerpt": "Shows a screenshot of a running build. ",
+      "excerpt": "Shows a screenshot of a running build.",
       "labels":       [
-        "page-decorator",
+        "ui",
         "buildwrapper"
       ],
       "name": "screenshot",
@@ -3564,8 +3551,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "5NAsflgNvVS3o6uj/Sk0vrIYlq4=",
-    "signature": "PraLwUEiO4wfN6L+l9ZMyB2txcR735N9ZIWyFZ4LN8nw/GxyLoz4B9+qB/yvMQF7DUgwKzzDRwQp3qK7+TyLvSYOg84d8mbA0xk3tkQiG5CjxjK/U/IM+xNtkh9mXKaQA/sWRpTeakRNuOR5GNJ3tz+ITII+MiszMUlmfC6j/QySWLFIwBR9XbPtw+OK/4qXsyhLXIdkMubrqzX9B2psiuki2ZkNhSiluLyp16ZSo7pfT/T2wWRjA1am8qq0oQwQWRARaYEgN0xhUvksKyHBvLin8uPqt1yr7qCj7/Bu+xW8zaUFMUSOmMH9msbKTpeixf9jyctqH6luORKs90Z3TA=="
+    "digest": "qP5VGMHmpwTcFcmf7Lgx3dNgf2I=",
+    "signature": "cF9Tuum9fXmnXnN7PYhsyCgltsP3KhVs3nhSPe3x9tV33a4TR7KN6kI+hCX4JtUbbKKA+5OA003ErW9YtTyBauC1ymMHGhc0cO5yyFqMO2yalsaPMYcErkT6ivb1Luowpxe2efdgMAhVdp4Bh++8jJJipbjEiTCh4qzUMgZkK+ZgBpHEGVZ0FfpEDB+FHey50tuUpOu6r45RCwy65uRMiCd+fy0+F9rurvRfc1eFFQ30dVO0JY/28u1qJZxAIKIxnsnC1zYbkAxzewnXjA3o9Vc+uq0seSPfKNLLNAisYfKch5oNoTo7HC2zNrzhitUDe3+8TpBCYFJ2ivnsrhUppg=="
   },
   "updateCenterVersion": "1"
 }
