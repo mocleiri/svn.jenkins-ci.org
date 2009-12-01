@@ -53,6 +53,7 @@ import hudson.util.ForkOutputStream;
 import hudson.util.IOException2;
 import hudson.util.FormValidation;
 import hudson.util.AtomicFileWriter;
+import hudson.util.PartialOrder;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.tools.ant.BuildException;
@@ -83,19 +84,19 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.logging.Logger;
 import static java.util.logging.Level.INFO;
 import java.util.concurrent.ExecutionException;
@@ -298,52 +299,73 @@ public class CVSSCM extends SCM implements Serializable {
         return !flatten;
     }
 
-    public boolean pollChanges(AbstractProject project, Launcher launcher, FilePath dir, TaskListener listener) throws IOException, InterruptedException {
+    /**
+     * {@link SCMRevisionState} for {@link CVSSCM}, which is a set of files that are newer
+     * in the repository than in the workspace.
+     * <p>
+     * This implementation is somewhat incomplete as it doesn't recognize new changes
+     * to the same file. "cvs up" parsing code needs to improve to handle that correctly.
+     */
+    private static final class CVSState extends SCMRevisionState {
+        /**
+         * Changed files compared to the workspace.
+         */
+        private final Set<String> changedFiles;
+
+        private CVSState(Set<String> changedFiles) {
+            this.changedFiles = changedFiles;
+        }
+
+        public PartialOrder compareTo(SCMRevisionState o) {
+            CVSState that = (CVSState) o;
+            return PartialOrder.from(setCompare(that,this),setCompare(this,that));
+        }
+
+        /**
+         * Is 'a' bigger than 'b'?
+         */
+        private static boolean setCompare(CVSState a, CVSState b) {
+            for (String s : a.changedFiles)
+                if (!b.changedFiles.contains(s))
+                    return true;
+            return false;
+        }
+    }
+
+    private static final CVSState BASELINE = new CVSState(Collections.<String>emptySet());
+
+    public SCMRevisionState calcRevisionsFromBuild(AbstractBuild<?, ?> build, Launcher launcher, TaskListener listener) throws IOException, InterruptedException {
+        return BASELINE;
+    }
+
+    protected PollingResult compareRemoteRevisionWith(AbstractProject project, Launcher launcher, FilePath dir, TaskListener listener, SCMRevisionState baseline) throws IOException, InterruptedException {
         String why = isUpdatable(dir);
         if(why!=null) {
             listener.getLogger().println(Messages.CVSSCM_WorkspaceInconsistent(why));
-            return true;
+            return PollingResult.BUILD_NOW;
         }
 
-        List<String> changedFiles = update(true, launcher, dir, listener, new Date());
+        Set<String> changedFiles = update(true, launcher, dir, listener, new Date());
 
-	     if (changedFiles != null && !changedFiles.isEmpty())
-	     {
-		     Pattern[] patterns = getExcludedRegionsPatterns();
+        if (changedFiles==null || changedFiles.isEmpty())
+            return new PollingResult(baseline,BASELINE);
 
-		     if (patterns != null)
-		     {
-			     boolean areThereChanges = false;
+         Pattern[] patterns = getExcludedRegionsPatterns();
+         if (patterns != null)
+         {// remove changes to files that we are told to ignore
+             for (Iterator<String> itr = changedFiles.iterator(); itr.hasNext();) {
+                 String s =  itr.next();
 
-			     for (String changedFile : changedFiles)
-			     {
-				     boolean patternMatched = false;
+                 for (Pattern pattern : patterns) {
+                     if (pattern.matcher(s).matches()) {
+                         itr.remove();
+                         break;
+                     }
+                 }
+             }
+         }
 
-				     for (Pattern pattern : patterns)
-				     {
-					     if (pattern.matcher(changedFile).matches())
-					     {
-						     patternMatched = true;
-						     break;
-					     }
-				     }
-
-				     if (!patternMatched)
-				     {
-					     areThereChanges = true;
-					     break;
-				     }
-			     }
-
-			     return areThereChanges;
-		     }
-
-		     // no excluded patterns so just return true as
-		     // changedFiles != null && !changedFiles.isEmpty() is true
-		     return true;
-	     }
-
-	     return false;
+        return new PollingResult(baseline,new CVSState(changedFiles));
     }
 
     private void configureDate(ArgumentListBuilder cmd, Date date) { // #192
@@ -354,7 +376,7 @@ public class CVSSCM extends SCM implements Serializable {
     }
 
     public boolean checkout(AbstractBuild build, Launcher launcher, FilePath ws, BuildListener listener, File changelogFile) throws IOException, InterruptedException {
-        List<String> changedFiles = null; // files that were affected by update. null this is a check out
+        Set<String> changedFiles = null; // files that were affected by update. null this is a check out
 
         if(canUseUpdate && isUpdatable(ws)==null) {
             changedFiles = update(false, launcher, ws, listener, build.getTimestamp().getTime());
@@ -517,9 +539,9 @@ public class CVSSCM extends SCM implements Serializable {
      *      List of affected file names, relative to the workspace directory.
      *      Null if the operation failed.
      */
-    private List<String> update(boolean dryRun, Launcher launcher, FilePath workspace, TaskListener listener, Date date) throws IOException, InterruptedException {
+    private Set<String> update(boolean dryRun, Launcher launcher, FilePath workspace, TaskListener listener, Date date) throws IOException, InterruptedException {
 
-        List<String> changedFileNames = new ArrayList<String>();    // file names relative to the workspace
+        Set<String> changedFileNames = new HashSet<String>();    // file names relative to the workspace
 
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add(getDescriptor().getCvsExeOrDefault(),"-q",compression());
@@ -632,7 +654,7 @@ public class CVSSCM extends SCM implements Serializable {
      *      that are no longer present. The path names are relative to the workspace,
      *      hence "String", not {@link File}.
      */
-    private void parseUpdateOutput(String baseName, ByteArrayOutputStream output, List<String> result) throws IOException {
+    private void parseUpdateOutput(String baseName, ByteArrayOutputStream output, Set<String> result) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(
             new ByteArrayInputStream(output.toByteArray())));
         String line;
@@ -770,7 +792,7 @@ public class CVSSCM extends SCM implements Serializable {
     private static final Pattern PSERVER_CVSROOT_WITH_PASSWORD = Pattern.compile("(:pserver:[^@:]+):[^@:]+(@.+)");
 
     /**
-     * Used to communicate the result of the detection in {@link CVSSCM#calcChangeLog(AbstractBuild, FilePath, List, File, BuildListener)}
+     * Used to communicate the result of the detection in {@link CVSSCM#calcChangeLog(AbstractBuild, FilePath, Set, File, BuildListener)}
      */
     static class ChangeLogResult implements Serializable {
         boolean hadError;
@@ -811,7 +833,7 @@ public class CVSSCM extends SCM implements Serializable {
      *      This is provided if the previous operation is update, otherwise null,
      *      which means we have to fall back to the default slow computation.
      */
-    private boolean calcChangeLog(AbstractBuild build, FilePath ws, final List<String> changedFiles, File changelogFile, final BuildListener listener) throws InterruptedException {
+    private boolean calcChangeLog(AbstractBuild build, FilePath ws, final Set<String> changedFiles, File changelogFile, final BuildListener listener) throws InterruptedException {
         if(build.getPreviousBuild()==null || (changedFiles!=null && changedFiles.isEmpty())) {
             // nothing to compare against, or no changes
             // (note that changedFiles==null means fallback, so we have to run cvs log.
