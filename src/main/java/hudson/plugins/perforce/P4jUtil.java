@@ -12,6 +12,7 @@ import com.perforce.p4java.exception.P4JAccessException;
 import com.perforce.p4java.exception.P4JConnectionException;
 import com.perforce.p4java.exception.P4JException;
 import com.perforce.p4java.exception.P4JRequestException;
+import com.perforce.p4java.impl.generic.client.P4JClientOptionsImpl;
 import com.perforce.p4java.impl.generic.client.P4JClientSpecImpl;
 import com.perforce.p4java.impl.generic.client.P4JClientViewImpl;
 import com.perforce.p4java.impl.generic.core.P4JLabelImpl;
@@ -164,7 +165,11 @@ public final class P4jUtil {
     /**
      * Returns a new or updated client with the host optionally stripped and the root optionaly set.
      */
-    static P4JClient retrieveClient(P4JServer server, String name, boolean clearHost, String root)
+    static P4JClient retrieveClient(P4JServer server, String name, boolean clearHost, String root) throws P4JException{
+        return P4jUtil.retrieveClient(server, name, clearHost, root, null);
+    }
+
+    static P4JClient retrieveClient(P4JServer server, String name, boolean clearHost, String root, String options)
             throws P4JException {
         // Get the existing client if available
         P4JClient client = server.getClient(name);
@@ -172,7 +177,8 @@ public final class P4jUtil {
         // If there are no changes to make, return the client directly
         if (client != null &&
                 (!clearHost || client.getHostName() == null) &&
-                (root == null || root.equals(client.getRoot()))) {
+                (root == null || root.equals(client.getRoot())) &&
+                (options == null || client.getOptions().toString().equals(options))) {
             //trace("U0", client);
             return client;
         }
@@ -192,6 +198,9 @@ public final class P4jUtil {
         }
         if (root != null) {
             spec.setRoot(root);
+        }
+        if (options != null){
+            spec.setOptions(new P4JClientOptionsImpl(options));
         }
 
         // Push new client-side client object to server & get updated reference

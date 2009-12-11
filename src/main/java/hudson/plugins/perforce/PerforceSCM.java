@@ -62,6 +62,7 @@ public class PerforceSCM extends SCM {
     String p4Client;
     String projectPath;
     String p4Label;
+    String projectOptions = "noallwrite clobber compress unlocked nomodtime rmdir";
 
     // Keep these fields around a while for compatibility with old serialized data.
     transient String p4Exe;
@@ -98,7 +99,7 @@ public class PerforceSCM extends SCM {
     int firstChange = -1;
 
     @DataBoundConstructor
-    public PerforceSCM(String p4User, String p4Passwd, String p4Client, String p4Port, String projectPath,
+    public PerforceSCM(String p4User, String p4Passwd, String p4Client, String p4Port, String projectPath, String projectOptions,
                        String p4Exe, String p4SysRoot, String p4SysDrive, String p4Label, boolean forceSync,
                        boolean updateView, boolean dontRenameClient, int firstChange, PerforceRepositoryBrowser browser) {
 
@@ -106,7 +107,7 @@ public class PerforceSCM extends SCM {
         this.setP4Passwd(p4Passwd);
         this.p4Client = p4Client;
         this.p4Port = p4Port;
-
+        this.projectOptions = projectOptions;
         //make it backwards compatible with the old way of specifying a label
         Matcher m = Pattern.compile("(@\\S+)\\s*").matcher(projectPath);
         if (m.find()) {
@@ -710,7 +711,7 @@ public class PerforceSCM extends SCM {
         // created it, or if we previously built on another node).
         String localPath = PerforceSCMHelper.getLocalPathName(workspace, launcher.isUnix());
 
-        P4JClient client = P4jUtil.retrieveClient(server, p4Client, dontRenameClient, localPath);
+        P4JClient client = P4jUtil.retrieveClient(server, p4Client, dontRenameClient, localPath, projectOptions);
 
         // If necessary, rewrite the views field in the clientspec
         if (updateView || creatingNewWorkspace) {
@@ -1117,6 +1118,14 @@ public class PerforceSCM extends SCM {
      */
     public boolean isDontRenameClient() {
         return dontRenameClient;
+    }
+
+    public String getProjectOptions() {
+        return projectOptions;
+    }
+
+    public void setProjectOptions(String p4ClientOptions) {
+        this.projectOptions = p4ClientOptions;
     }
 
     /**
