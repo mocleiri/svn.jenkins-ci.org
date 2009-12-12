@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Service (Hudson main module 1.336 API)
+Service (Hudson main module 1.337 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-28">
+<META NAME="date" CONTENT="2009-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Service (Hudson main module 1.336 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Service (Hudson main module 1.336 API)";
+        parent.document.title="Service (Hudson main module 1.337 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/SequentialExecutionQueue.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/util/ServiceLoader.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/util/ShiftedCategoryAxis.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/Service.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Service.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -156,6 +156,22 @@ Load classes by looking up <tt>META-INF/services</tt>.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Look up <tt>META-INF/service/<i>SPICLASSNAME</i></tt> from the classloader
  and all the discovered classes into the given collection.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;T&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/Service.html#loadInstances(java.lang.ClassLoader, java.lang.Class)">loadInstances</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;classLoader,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Poorman's clone of JDK6 ServiceLoader.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -195,6 +211,23 @@ public <B>Service</B>()</PRE>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="loadInstances(java.lang.ClassLoader, java.lang.Class)"><!-- --></A><H3>
+loadInstances</H3>
+<PRE>
+public static &lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;T&gt; <B>loadInstances</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;classLoader,
+                                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type)
+                             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Poorman's clone of JDK6 ServiceLoader.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="load(java.lang.Class, java.lang.ClassLoader, java.util.Collection)"><!-- --></A><H3>
 load</H3>
@@ -242,7 +275,7 @@ public static &lt;T&gt; void <B>load</B>(<A HREF="http://java.sun.com/j2se/1.5.0
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/SequentialExecutionQueue.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/util/ServiceLoader.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/util/ShiftedCategoryAxis.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/Service.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Service.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

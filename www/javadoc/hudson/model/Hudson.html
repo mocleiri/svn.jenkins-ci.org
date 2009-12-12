@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.336 API)
+Hudson (Hudson main module 1.337 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-28">
+<META NAME="date" CONTENT="2009-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.336 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.336 API)";
+        parent.document.title="Hudson (Hudson main module 1.337 API)";
     }
 }
 </SCRIPT>
@@ -234,7 +234,7 @@ Root object of the system.
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#FLYWEIGHT_SUPPORT">FLYWEIGHT_SUPPORT</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enabled by default as of 1.337.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1255,6 +1255,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/init/InitMilestone.html" title="enum in hudson.init">InitMilestone</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getInitLevel()">getInitLevel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the initialization milestone that we've already reached.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2427,6 +2435,8 @@ FLYWEIGHT_SUPPORT</H3>
 <PRE>
 public static boolean <B>FLYWEIGHT_SUPPORT</B></PRE>
 <DL>
+<DD>Enabled by default as of 1.337. Will keep it for a while just in case we have some serious problems.
+<P>
 <DL>
 </DL>
 </DL>
@@ -4420,6 +4430,24 @@ public boolean <B>isTerminating</B>()</PRE>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInitLevel()"><!-- --></A><H3>
+getInitLevel</H3>
+<PRE>
+public <A HREF="../../hudson/init/InitMilestone.html" title="enum in hudson.init">InitMilestone</A> <B>getInitLevel</B>()</PRE>
+<DL>
+<DD>Gets the initialization milestone that we've already reached.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><A HREF="../../hudson/init/InitMilestone.html#STARTED"><CODE>InitMilestone.STARTED</CODE></A> even if the initialization hasn't been started, so that this method
+      never returns null.</DL>
 </DD>
 </DL>
 <HR>

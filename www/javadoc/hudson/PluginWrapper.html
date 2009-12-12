@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginWrapper (Hudson main module 1.336 API)
+PluginWrapper (Hudson main module 1.337 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-28">
+<META NAME="date" CONTENT="2009-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson main module 1.336 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson main module 1.336 API)";
+        parent.document.title="PluginWrapper (Hudson main module 1.337 API)";
     }
 }
 </SCRIPT>
@@ -333,6 +333,14 @@ Represents a Hudson plug-in and associated control information
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getVersionNumber()">getVersionNumber</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the version number of this plugin</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginWrapper.html#hasUpdate()">hasUpdate</A></B>()</CODE>
 
@@ -363,6 +371,14 @@ Represents a Hudson plug-in and associated control information
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, the plugin is going to be activated next time
  Hudson runs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#isOlderThan(hudson.util.VersionNumber)">isOlderThan</A></B>(<A HREF="../hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A>&nbsp;v)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the version of this plugin is older than the given version.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -574,6 +590,32 @@ getVersion</H3>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getVersion</B>()</PRE>
 <DL>
 <DD>Returns the version number of this plugin
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVersionNumber()"><!-- --></A><H3>
+getVersionNumber</H3>
+<PRE>
+public <A HREF="../hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A> <B>getVersionNumber</B>()</PRE>
+<DL>
+<DD>Returns the version number of this plugin
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isOlderThan(hudson.util.VersionNumber)"><!-- --></A><H3>
+isOlderThan</H3>
+<PRE>
+public boolean <B>isOlderThan</B>(<A HREF="../hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A>&nbsp;v)</PRE>
+<DL>
+<DD>Returns true if the version of this plugin is older than the given version.
 <P>
 <DD><DL>
 </DL>

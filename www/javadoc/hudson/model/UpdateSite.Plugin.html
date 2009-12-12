@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateSite.Plugin (Hudson main module 1.336 API)
+UpdateSite.Plugin (Hudson main module 1.337 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-28">
+<META NAME="date" CONTENT="2009-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateSite.Plugin (Hudson main module 1.336 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateSite.Plugin (Hudson main module 1.336 API)";
+        parent.document.title="UpdateSite.Plugin (Hudson main module 1.337 API)";
     }
 }
 </SCRIPT>
@@ -119,11 +119,27 @@ Class UpdateSite.Plugin</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#categories">categories</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categories for grouping plugins, taken from labels assigned to wiki page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#compatibleSinceVersion">compatibleSinceVersion</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional version # from which this plugin release is configuration-compatible.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#dependencies">dependencies</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dependencies of this plugin.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -224,6 +240,14 @@ Class UpdateSite.Plugin</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If some version of this plugin is currently installed, return <A HREF="../../hudson/PluginWrapper.html" title="class in hudson"><CODE>PluginWrapper</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#getNeededDependencies()">getNeededDependencies</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a list of dependent plugins which need to be installed or upgraded for this plugin to work.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -346,6 +370,31 @@ public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.h
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="categories"><!-- --></A><H3>
+categories</H3>
+<PRE>
+public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>categories</B></PRE>
+<DL>
+<DD>Categories for grouping plugins, taken from labels assigned to wiki page.
+ Can be null.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="dependencies"><!-- --></A><H3>
+dependencies</H3>
+<PRE>
+public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>dependencies</B></PRE>
+<DL>
+<DD>Dependencies of this plugin.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -411,6 +460,19 @@ public boolean <B>isCompatibleWithInstalledVersion</B>()</PRE>
  see if the installed version is older than the compatible-since version. If it is older, it'll return false.
  If it's not older, or it's not installed, or it's installed but there's no compatibleSinceVersion
  specified, it'll return true.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNeededDependencies()"><!-- --></A><H3>
+getNeededDependencies</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&gt; <B>getNeededDependencies</B>()</PRE>
+<DL>
+<DD>Returns a list of dependent plugins which need to be installed or upgraded for this plugin to work.
 <P>
 <DD><DL>
 </DL>

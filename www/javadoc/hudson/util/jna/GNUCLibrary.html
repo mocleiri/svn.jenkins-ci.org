@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-GNUCLibrary (Hudson main module 1.336 API)
+GNUCLibrary (Hudson main module 1.337 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-28">
+<META NAME="date" CONTENT="2009-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ GNUCLibrary (Hudson main module 1.336 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="GNUCLibrary (Hudson main module 1.336 API)";
+        parent.document.title="GNUCLibrary (Hudson main module 1.337 API)";
     }
 }
 </SCRIPT>
@@ -321,6 +321,16 @@ GNU C library.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/util/jna/GNUCLibrary.html#readlink(java.lang.String, com.sun.jna.Memory, com.sun.jna.NativeLong)">readlink</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;filename,
+         com.sun.jna.Memory&nbsp;buffer,
+         com.sun.jna.NativeLong&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Read a symlink.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -827,6 +837,27 @@ int <B>symlink</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/St
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readlink(java.lang.String, com.sun.jna.Memory, com.sun.jna.NativeLong)"><!-- --></A><H3>
+readlink</H3>
+<PRE>
+int <B>readlink</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;filename,
+             com.sun.jna.Memory&nbsp;buffer,
+             com.sun.jna.NativeLong&nbsp;size)</PRE>
+<DL>
+<DD>Read a symlink. The name will be copied into the specified memory, and returns the number of
+ bytes copied. The string is not null-terminated.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>if the return value equals size, the caller needs to retry with a bigger buffer.
+      If -1, error.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

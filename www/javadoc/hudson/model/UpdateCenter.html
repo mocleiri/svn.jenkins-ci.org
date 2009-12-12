@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter (Hudson main module 1.336 API)
+UpdateCenter (Hudson main module 1.337 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-28">
+<META NAME="date" CONTENT="2009-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter (Hudson main module 1.336 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter (Hudson main module 1.336 API)";
+        parent.document.title="UpdateCenter (Hudson main module 1.337 API)";
     }
 }
 </SCRIPT>
@@ -187,6 +187,14 @@ Controls update center capability.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.PluginEntry.html" title="class in hudson.model">UpdateCenter.PluginEntry</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model">UpdateCenter.UpdateCenterConfiguration</A></B></CODE>
 
 <BR>
@@ -293,6 +301,14 @@ Controls update center capability.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets <A HREF="../../hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A> by its ID.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.PluginEntry.html" title="class in hudson.model">UpdateCenter.PluginEntry</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getCategorizedAvailables()">getCategorizedAvailables</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a list of plugins that should be shown in the "available" tab, grouped by category.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -703,6 +719,23 @@ getAvailables</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&gt; <B>getAvailables</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCategorizedAvailables()"><!-- --></A><H3>
+getCategorizedAvailables</H3>
+<PRE>
+public <A HREF="../../hudson/model/UpdateCenter.PluginEntry.html" title="class in hudson.model">UpdateCenter.PluginEntry</A>[] <B>getCategorizedAvailables</B>()</PRE>
+<DL>
+<DD>Returns a list of plugins that should be shown in the "available" tab, grouped by category.
+ A plugin with multiple categories will appear multiple times in the list.
+<P>
 <DD><DL>
 </DL>
 </DD>

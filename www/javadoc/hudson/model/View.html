@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-View (Hudson main module 1.336 API)
+View (Hudson main module 1.337 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-11-28">
+<META NAME="date" CONTENT="2009-12-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ View (Hudson main module 1.336 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="View (Hudson main module 1.336 API)";
+        parent.document.title="View (Hudson main module 1.337 API)";
     }
 }
 </SCRIPT>
@@ -209,6 +209,22 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message displayed in the view page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#filterExecutors">filterExecutors</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, only show relevant executors</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#filterQueue">filterQueue</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, only show relevant queue items</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -427,6 +443,14 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#getComputers()">getComputers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/View.html#getDescription()">getDescription</A></B>()</CODE>
 
@@ -507,6 +531,14 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#getQueueItems()">getQueueItems</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/View.html#getSearchUrl()">getSearchUrl</A></B>()</CODE>
 
@@ -577,6 +609,22 @@ Encapsulates the rendering of the list of <A HREF="../../hudson/model/TopLevelIt
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By default, return true to render the "Edit view" link on the page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#isFilterExecutors()">isFilterExecutors</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, only show relevant executors</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/View.html#isFilterQueue()">isFilterQueue</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If true, only show relevant queue items</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -675,6 +723,30 @@ description</H3>
 protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>description</B></PRE>
 <DL>
 <DD>Message displayed in the view page.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="filterExecutors"><!-- --></A><H3>
+filterExecutors</H3>
+<PRE>
+protected boolean <B>filterExecutors</B></PRE>
+<DL>
+<DD>If true, only show relevant executors
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="filterQueue"><!-- --></A><H3>
+filterQueue</H3>
+<PRE>
+protected boolean <B>filterQueue</B></PRE>
+<DL>
+<DD>If true, only show relevant queue items
 <P>
 <DL>
 </DL>
@@ -974,6 +1046,38 @@ public boolean <B>isEditable</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="isFilterExecutors()"><!-- --></A><H3>
+isFilterExecutors</H3>
+<PRE>
+public boolean <B>isFilterExecutors</B>()</PRE>
+<DL>
+<DD>If true, only show relevant executors
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFilterQueue()"><!-- --></A><H3>
+isFilterQueue</H3>
+<PRE>
+public boolean <B>isFilterQueue</B>()</PRE>
+<DL>
+<DD>If true, only show relevant queue items
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getWidgets()"><!-- --></A><H3>
 getWidgets</H3>
 <PRE>
@@ -1000,6 +1104,34 @@ public boolean <B>isDefault</B>()</PRE>
 <DL>
 <DD>If true, this is a view that renders the top page of Hudson.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComputers()"><!-- --></A><H3>
+getComputers</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&gt; <B>getComputers</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getQueueItems()"><!-- --></A><H3>
+getQueueItems</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&gt; <B>getQueueItems</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
