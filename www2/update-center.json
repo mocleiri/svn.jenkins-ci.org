@@ -2,10 +2,10 @@ updateCenter.post(
 {
   "connectionCheckUrl": "http://www.google.com/",
   "core":   {
-    "buildDate": "Dec 11, 2009",
+    "buildDate": "Dec 18, 2009",
     "name": "core",
-    "url": "http://hudson-ci.org/download/war/1.337/hudson.war",
-    "version": "1.337"
+    "url": "http://hudson-ci.org/download/war/1.338/hudson.war",
+    "version": "1.338"
   },
   "id": "default",
   "plugins":   {
@@ -593,22 +593,29 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cobertura+Plugin"
     },
     "collabnet":     {
-      "buildDate": "Aug 27, 2009",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.318"
-      }],
-      "developers": [{"developerId": "nmullaney"}],
+      "buildDate": "Dec 17, 2009",
+      "dependencies":       [
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.336"
+        },
+                {
+          "name": "subversion",
+          "optional": false,
+          "version": "1.7"
+        }
+      ],
+      "developers": [{"developerId": "whsu"}],
       "excerpt": "The CollabNet Plugin is an integration with <a href='http://www.open.collab.net/products/sfee/'>CollabNet TeamForge<\/a>.",
       "labels": ["external"],
       "name": "collabnet",
-      "previousTimestamp": "2009-07-20T19:54:30.00Z",
-      "releaseTimestamp": "2009-08-27T23:19:24.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-08-27T23:19:24.00Z",
+      "releaseTimestamp": "2009-12-17T23:13:26.00Z",
+      "requiredCore": "1.336",
       "title": "CollabNet Plugin",
-      "url": "http://hudson-ci.org/download/plugins/collabnet/1.1.1/collabnet.hpi",
-      "version": "1.1.1",
+      "url": "http://hudson-ci.org/download/plugins/collabnet/1.1.2/collabnet.hpi",
+      "version": "1.1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CollabNet+Plugin"
     },
     "configurationslicing":     {
@@ -1734,18 +1741,35 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JIRA+Plugin"
     },
     "jmeter":     {
-      "buildDate": "Mar 01, 2009",
+      "buildDate": "Dec 19, 2009",
+      "compatibleSinceVersion": "0.3-SNAPSHOT",
       "dependencies": [],
-      "developers": [{"developerId": "edva8332"}],
+      "developers":       [
+                {
+          "developerId": "vergnes",
+          "email": "vergnes@dev.java.net",
+          "name": "Vergnes"
+        },
+                {
+          "developerId": "aespy",
+          "email": "aespy@dev.java.net",
+          "name": "Arnaud Espy"
+        },
+                {
+          "developerId": "manuel_carrasco",
+          "email": "manolo@apache.org",
+          "name": "Manuel Carrasco Monino"
+        }
+      ],
       "excerpt": "This plugin allows you to capture report from <a href='http://jakarta.apache.org/jmeter/'>JMeter<\/a>. Hudson will generate graphic charts with the trend report of performance and robustness.  Release 0.3 includes the feature of setting the final build status as good, unstable or failed, based on the reported jmeter error percentage. ",
       "labels": ["report"],
       "name": "jmeter",
-      "previousTimestamp": "2008-12-09T17:26:32.00Z",
-      "releaseTimestamp": "2009-03-02T02:14:04.00Z",
-      "requiredCore": "1.287",
+      "previousTimestamp": "2009-03-02T02:14:04.00Z",
+      "releaseTimestamp": "2009-12-19T16:01:16.00Z",
+      "requiredCore": "1.332",
       "title": "JMeter Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jmeter/0.2/jmeter.hpi",
-      "version": "0.2",
+      "url": "http://hudson-ci.org/download/plugins/jmeter/0.3.0/jmeter.hpi",
+      "version": "0.3.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JMeter+Plugin"
     },
     "job-exporter":     {
@@ -1850,7 +1874,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JSUnit+plugin"
     },
     "jswidgets":     {
-      "buildDate": "Nov 21, 2009",
+      "buildDate": "Dec 16, 2009",
       "dependencies": [],
       "developers": [      {
         "developerId": "mfriedenhagen",
@@ -1860,12 +1884,12 @@ updateCenter.post(
       "excerpt": "Allows embedding various statistics available from Hudson in your via javascript-snippets ala ohloh.net.",
       "labels": ["ui"],
       "name": "jswidgets",
-      "previousTimestamp": "2009-11-22T05:33:52.00Z",
-      "releaseTimestamp": "2009-11-22T06:03:32.00Z",
-      "requiredCore": "1.334",
+      "previousTimestamp": "2009-11-22T06:03:32.00Z",
+      "releaseTimestamp": "2009-12-17T05:45:40.00Z",
+      "requiredCore": "1.335",
       "title": "JSWidgets Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jswidgets/1.2/jswidgets.hpi",
-      "version": "1.2",
+      "url": "http://hudson-ci.org/download/plugins/jswidgets/1.3/jswidgets.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JSWidgets+Plugin"
     },
     "junit-attachments":     {
@@ -2147,15 +2171,15 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Maven+Info+Plugin"
     },
     "maven-plugin":     {
-      "buildDate": "Dec 11, 2009",
+      "buildDate": "Dec 18, 2009",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
       "name": "maven-plugin",
-      "previousTimestamp": "2009-11-28T16:42:26.00Z",
-      "releaseTimestamp": "2009-12-11T23:57:30.00Z",
-      "requiredCore": "1.337",
-      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.337/maven-plugin.hpi",
-      "version": "1.337"
+      "previousTimestamp": "2009-12-11T23:57:30.00Z",
+      "releaseTimestamp": "2009-12-19T02:49:18.00Z",
+      "requiredCore": "1.338",
+      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.338/maven-plugin.hpi",
+      "version": "1.338"
     },
     "mercurial":     {
       "buildDate": "Nov 30, 2009",
@@ -2184,18 +2208,18 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Mercurial+Plugin"
     },
     "monitoring":     {
-      "buildDate": "Nov 20, 2009",
+      "buildDate": "Dec 16, 2009",
       "dependencies": [],
       "developers": [{"developerId": "VERNAT-E"}],
       "excerpt": "Monitoring plugin: Monitoring of Hudson itself with <a href='http://javamelody.googlecode.com'>JavaMelody<\/a>. Open the <a href='http://localhost:8080/monitoring'>report<\/a> (or [http://yourhost/monitoring]) after installation. ",
       "labels": ["misc"],
       "name": "monitoring",
-      "previousTimestamp": "2009-11-03T04:14:44.00Z",
-      "releaseTimestamp": "2009-11-21T07:20:04.00Z",
+      "previousTimestamp": "2009-11-21T07:20:04.00Z",
+      "releaseTimestamp": "2009-12-17T06:57:14.00Z",
       "requiredCore": "1.319",
       "title": "Monitoring",
-      "url": "http://hudson-ci.org/download/plugins/monitoring/1.9.0/monitoring.hpi",
-      "version": "1.9.0",
+      "url": "http://hudson-ci.org/download/plugins/monitoring/1.10.0/monitoring.hpi",
+      "version": "1.10.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Monitoring"
     },
     "mozmill":     {
@@ -3564,6 +3588,20 @@ updateCenter.post(
       "version": "3.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Warnings+Plugin"
     },
+    "was-builder":     {
+      "buildDate": "Dec 18, 2009",
+      "dependencies": [],
+      "developers": [{"developerId": "F276977"}],
+      "excerpt": "This plugin allows Hudson to invoke IBM WebSphere Application Server's *wsadmin* as a build step. ",
+      "labels": ["builder"],
+      "name": "was-builder",
+      "releaseTimestamp": "2009-12-18T16:04:20.00Z",
+      "requiredCore": "1.312",
+      "title": "WAS Builder Plugin",
+      "url": "http://hudson-ci.org/download/plugins/was-builder/1.0/was-builder.hpi",
+      "version": "1.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/WAS+Builder+Plugin"
+    },
     "webtestpresenter":     {
       "buildDate": "Jul 13, 2008",
       "dependencies": [],
@@ -3656,8 +3694,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "e0RWtuKCXqvvMSR7SpTCIyAJyGU=",
-    "signature": "daN5Ro0qY+TpJNg9fuo2wfMnn4kf1uTyhvp7qxSNsDK4a5/KC+SSRTH/obMkhnsGY0gVwO7pozW8Y1qMNjOxRjRuZsy3TBUM3PNqIKjAUR5HAOl07ugKaM+aD+FKw5asNFKYRZbm5xS6Tnq61cvuCCRdtBX/Wo/DwJNE7jrbTTZq9didMh9N0XR9hb6y7tZdUNwgOTgdw/HyOgq0L3mGggNLcPhnuTdYrXV07I3M6GeEnJq+rQlzK5I//dzuxR3wnTv8JVO9uswkgd1WWUlvKXY/+5jT3h4lLJPcwra8ZcA4i7SysDxAN5ugvYoYR9SIN/sbhw0PzFcktLzb+FjlCw=="
+    "digest": "HgZwDC6K1IegQBgEc1VwTxhwbh8=",
+    "signature": "M/Ap6A2Fidju59itTm2aU/NsiqD4WKIQUnnFc1xeE/5gEDhfShvuap+jcu/xJdNmyFzBcbTA6jKnkx4FgrWs6UoRgy43RGY2Iv6lDrKq9GjrEFAvHDR4svnQr0ANVx5sMoqQF/BSj2hnh7lnCAB6/0gqu4ic5K0/8wW9tc02UDLEh5iXvEP+bL9ywoAJfLES8c5+UFEyHOHvw2V7/R+ZbZpb+XhJPka6VgyJND0zzCTOwnX68CqK8FeswaPnzStTNPT73YjzeV3QsfmmYfLD2GCbstr62xbmG1ssdTvN9Tcugq1Iv2BJcuCesVyFiEfzqKu0jyvEDAwecS3KZm0qFg=="
   },
   "updateCenterVersion": "1"
 }
