@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.337 API)
+Index (Hudson main module 1.338 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-11">
+<META NAME="date" CONTENT="2009-12-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.337 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.337 API)";
+        parent.document.title="Index (Hudson main module 1.338 API)";
     }
 }
 </SCRIPT>
@@ -374,7 +374,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in
 <DT><A HREF="./hudson/model/Queue.html#add(hudson.model.Queue.Task, int, hudson.model.Action...)"><B>add(Queue.Task, int, Action...)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
-      Use <A HREF="./hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, hudson.model.Action...)"><CODE>Queue.schedule(Task, int, Action[])</CODE></A></I>
+      Use <A HREF="./hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, hudson.model.Action...)"><CODE>Queue.schedule(Task, int, Action...)</CODE></A></I>
 <DT><A HREF="./hudson/scm/browsers/QueryBuilder.html#add(java.lang.String)"><B>add(String)</B></A> - 
 Method in class hudson.scm.browsers.<A HREF="./hudson/scm/browsers/QueryBuilder.html" title="class in hudson.scm.browsers">QueryBuilder</A>
 <DD>&nbsp;
@@ -807,6 +807,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Queue.QueueDecisionH
 <DT><A HREF="./hudson/model/Queue.QueueSortingHandler.html#all()"><B>all()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A>
 <DD>All registered <A HREF="./hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model"><CODE>Queue.QueueSortingHandler</CODE></A>s
+<DT><A HREF="./hudson/model/TopLevelItemDescriptor.html#all()"><B>all()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>
+<DD>Returns all the registered <A HREF="./hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> descriptors.
 <DT><A HREF="./hudson/model/TransientProjectActionFactory.html#all()"><B>all()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/TransientProjectActionFactory.html" title="class in hudson.model">TransientProjectActionFactory</A>
 <DD>Returns all the registered <A HREF="./hudson/model/TransientProjectActionFactory.html" title="class in hudson.model"><CODE>TransientProjectActionFactory</CODE></A>s.
@@ -2861,6 +2864,9 @@ Static variable in class hudson.model.<A HREF="./hudson/model/Hudson.html" title
 <DT><A HREF="./hudson/maven/MojoInfo.html#configuration"><B>configuration</B></A> - 
 Variable in class hudson.maven.<A HREF="./hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>
 <DD>Configuration of the mojo for the current execution.
+<DT><A HREF="./hudson/maven/MavenModuleSet.DescriptorImpl.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>configure(StaplerRequest, JSONObject)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.DescriptorImpl.html" title="class in hudson.maven">MavenModuleSet.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Computer.html#CONFIGURE"><B>CONFIGURE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Permission to configure slaves.
@@ -9480,6 +9486,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="
 <DT><A HREF="./hudson/model/Descriptor.html#getGlobalConfigPage()"><B>getGlobalConfigPage()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/MavenModuleSet.DescriptorImpl.html#getGlobalMavenOpts()"><B>getGlobalMavenOpts()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.DescriptorImpl.html" title="class in hudson.maven">MavenModuleSet.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#getGlobalNodeProperties()"><B>getGlobalNodeProperties()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -14204,6 +14213,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSChangeLogSet.CVSChangeLog.ht
 <DT><A HREF="./hudson/model/AbstractProject.html#isConcurrentBuild()"><B>isConcurrentBuild()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Does this project perform concurrent builds?
+<DT><A HREF="./hudson/model/Queue.Task.html#isConcurrentBuild()"><B>isConcurrentBuild()</B></A> - 
+Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
+<DD>True if the task allows concurrent builds
 <DT><A HREF="./hudson/matrix/MatrixConfiguration.html#isConfigurable()"><B>isConfigurable()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>
 <DD>&nbsp;
@@ -14601,6 +14613,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.Range.html" tit
 Method in class hudson.model.<A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>
 <DD>Returns true if all the integers logically in this <A HREF="./hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><CODE>Fingerprint.RangeSet</CODE></A>
  is smaller than the given integer.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#isSomethingHappening()"><B>isSomethingHappening()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Returns true if Hudson is building something or going to build something.
 <DT><A HREF="./hudson/util/SequentialExecutionQueue.html#isStarving(long)"><B>isStarving(long)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/SequentialExecutionQueue.html" title="class in hudson.util">SequentialExecutionQueue</A>
 <DD>Returns true if too much time is spent since some <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A> is submitted into the queue
@@ -16715,6 +16730,9 @@ Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/Cronta
 <DT><A HREF="./hudson/FilePath.html#mkdirs()"><B>mkdirs()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Creates this directory.
+<DT><A HREF="./hudson/util/IOUtils.html#mkdirs(java.io.File)"><B>mkdirs(File)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/IOUtils.html" title="class in hudson.util">IOUtils</A>
+<DD>Ensures that the given directory exists (if not, it's created, including all the parent directories.)
 <DT><A HREF="./hudson/XmlFile.html#mkdirs()"><B>mkdirs()</B></A> - 
 Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">XmlFile</A>
 <DD>&nbsp;
@@ -20563,6 +20581,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/CVSChangeLogSet.File.html" titl
 <DT><A HREF="./hudson/maven/MavenEmbedder.html#setGlobalChecksumPolicy(java.lang.String)"><B>setGlobalChecksumPolicy(String)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenEmbedder.html" title="class in hudson.maven">MavenEmbedder</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/MavenModuleSet.DescriptorImpl.html#setGlobalMavenOpts(java.lang.String)"><B>setGlobalMavenOpts(String)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.DescriptorImpl.html" title="class in hudson.maven">MavenModuleSet.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/maven/MavenModuleSet.html#setGoals(java.lang.String)"><B>setGoals(String)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
 <DD>&nbsp;
@@ -20666,6 +20687,9 @@ Method in class hudson.org.apache.tools.tar.<A HREF="./hudson/org/apache/tools/t
 <DT><A HREF="./hudson/maven/MavenModuleSet.html#setMaven(java.lang.String)"><B>setMaven(String)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/MavenModuleSet.html#setMavenOpts(java.lang.String)"><B>setMavenOpts(String)</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
+<DD>Set mavenOpts.
 <DT><A HREF="./hudson/model/Slave.html#setMode(hudson.model.Node.Mode)"><B>setMode(Node.Mode)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Slave.html" title="class in hudson.model">Slave</A>
 <DD>&nbsp;
@@ -20793,6 +20817,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ProxyView.html" title="clas
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#setQuiet(boolean)"><B>setQuiet(boolean)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>If true, suppress informational messages.
+<DT><A HREF="./hudson/model/AbstractProject.html#setQuietPeriod(java.lang.Integer)"><B>setQuietPeriod(Integer)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>Sets the custom quiet period of this project, or revert to the global default if null is given.
 <DT><A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html#setReallyquiet(boolean)"><B>setReallyquiet(boolean)</B></A> - 
 Method in class hudson.org.apache.tools.ant.taskdefs.<A HREF="./hudson/org/apache/tools/ant/taskdefs/AbstractCvsTask.html" title="class in hudson.org.apache.tools.ant.taskdefs">AbstractCvsTask</A>
 <DD>If true, suppress all messages.
@@ -23243,6 +23270,13 @@ Method in class hudson.remoting.<A HREF="./hudson/remoting/Channel.html" title="
 <DT><A HREF="./hudson/remoting/Channel.html#waitForRemoteProperty(java.lang.Object)"><B>waitForRemoteProperty(Object)</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A>
 <DD>&nbsp;
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#waitUntilNoActivity()"><B>waitUntilNoActivity()</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Waits until Hudson finishes building everything, including those in the queue.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#waitUntilNoActivityUpTo(int)"><B>waitUntilNoActivityUpTo(int)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Waits until Hudson finishes building everything, including those in the queue, or fail the test
+ if the specified timeout milliseconds is
 <DT><A HREF="./hudson/maven/EmbedderLoggerImpl.html#warn(java.lang.String, java.lang.Throwable)"><B>warn(String, Throwable)</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/EmbedderLoggerImpl.html" title="class in hudson.maven">EmbedderLoggerImpl</A>
 <DD>&nbsp;

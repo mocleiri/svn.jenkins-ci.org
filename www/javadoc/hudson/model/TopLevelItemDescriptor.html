@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TopLevelItemDescriptor (Hudson main module 1.337 API)
+TopLevelItemDescriptor (Hudson main module 1.338 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-11">
+<META NAME="date" CONTENT="2009-12-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TopLevelItemDescriptor (Hudson main module 1.337 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TopLevelItemDescriptor (Hudson main module 1.337 API)";
+        parent.document.title="TopLevelItemDescriptor (Hudson main module 1.338 API)";
     }
 }
 </SCRIPT>
@@ -203,6 +203,14 @@ Class TopLevelItemDescriptor</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TopLevelItemDescriptor.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/TopLevelItemDescriptor.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -336,9 +344,9 @@ public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Strin
 
  <p>
  Used as the caption when the user chooses what job type to create.
- The descriptor implementation also needs to have <tt>detail.jelly</tt>
+ The descriptor implementation also needs to have <tt>newJobDetail.jelly</tt>
  script, which will be used to render the text below the caption
- that expains the job type.
+ that explains the job type.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Descriptor.html#getDisplayName()">getDisplayName</A></CODE> in class <CODE><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></DL>
@@ -387,6 +395,19 @@ newInstance</H3>
 public abstract <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A> <B>newInstance</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</PRE>
 <DL>
 <DD>Creates a new <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="all()"><!-- --></A><H3>
+all</H3>
+<PRE>
+public static <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>&gt; <B>all</B>()</PRE>
+<DL>
+<DD>Returns all the registered <A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> descriptors.
 <P>
 <DD><DL>
 </DL>

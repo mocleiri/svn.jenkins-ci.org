@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Task (Hudson main module 1.337 API)
+Queue.Task (Hudson main module 1.338 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-11">
+<META NAME="date" CONTENT="2009-12-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Task (Hudson main module 1.337 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Task (Hudson main module 1.337 API)";
+        parent.document.title="Queue.Task (Hudson main module 1.338 API)";
     }
 }
 </SCRIPT>
@@ -237,6 +237,14 @@ Task whose execution is controlled by the queue.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the execution should be blocked
  for temporary reasons.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#isConcurrentBuild()">isConcurrentBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if the task allows concurrent builds</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ModelObject"><!-- --></A>
@@ -490,6 +498,24 @@ getUrl</H3>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>URL that ends with '/'.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isConcurrentBuild()"><!-- --></A><H3>
+isConcurrentBuild</H3>
+<PRE>
+boolean <B>isConcurrentBuild</B>()</PRE>
+<DL>
+<DD>True if the task allows concurrent builds
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.338</DD>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

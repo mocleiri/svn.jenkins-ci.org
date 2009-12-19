@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ExternalJob.DescriptorImpl (Hudson main module 1.337 API)
+ExternalJob.DescriptorImpl (Hudson main module 1.338 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-11">
+<META NAME="date" CONTENT="2009-12-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ExternalJob.DescriptorImpl (Hudson main module 1.337 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ExternalJob.DescriptorImpl (Hudson main module 1.337 API)";
+        parent.document.title="ExternalJob.DescriptorImpl (Hudson main module 1.338 API)";
     }
 }
 </SCRIPT>
@@ -207,7 +207,7 @@ Class ExternalJob.DescriptorImpl</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/TopLevelItemDescriptor.html#isApplicable(hudson.model.Descriptor)">isApplicable</A>, <A HREF="../../hudson/model/TopLevelItemDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/TopLevelItemDescriptor.html#newInstanceDetailPage()">newInstanceDetailPage</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/TopLevelItemDescriptor.html#all()">all</A>, <A HREF="../../hudson/model/TopLevelItemDescriptor.html#isApplicable(hudson.model.Descriptor)">isApplicable</A>, <A HREF="../../hudson/model/TopLevelItemDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">newInstance</A>, <A HREF="../../hudson/model/TopLevelItemDescriptor.html#newInstanceDetailPage()">newInstanceDetailPage</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -268,9 +268,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 
  <p>
  Used as the caption when the user chooses what job type to create.
- The descriptor implementation also needs to have <tt>detail.jelly</tt>
+ The descriptor implementation also needs to have <tt>newJobDetail.jelly</tt>
  script, which will be used to render the text below the caption
- that expains the job type.
+ that explains the job type.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/TopLevelItemDescriptor.html#getDisplayName()">getDisplayName</A></CODE> in class <CODE><A HREF="../../hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A></CODE></DL>
