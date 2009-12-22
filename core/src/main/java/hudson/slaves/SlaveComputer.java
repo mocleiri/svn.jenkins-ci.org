@@ -49,6 +49,7 @@ import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+import java.util.logging.Handler;
 import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
@@ -164,9 +165,9 @@ public class SlaveComputer extends Computer {
 
     protected Future<?> _connect(boolean forceReconnect) {
         if(channel!=null)   return Futures.precomputed(null);
-        if(!forceReconnect && lastConnectActivity!=null)
+        if(!forceReconnect && isConnecting())
             return lastConnectActivity;
-        if(forceReconnect && lastConnectActivity!=null)
+        if(forceReconnect && isConnecting())
             logger.fine("Forcing a reconnect");
 
         closeChannel();
@@ -188,6 +189,9 @@ public class SlaveComputer extends Computer {
                 } catch (InterruptedException e) {
                     e.printStackTrace(listener.error(Messages.ComputerLauncher_abortedLaunch()));
                     throw e;
+                } finally {
+                    if (channel==null)
+                        offlineCause = new OfflineCause.LaunchFailed();
                 }
             }
         });
@@ -288,9 +292,10 @@ public class SlaveComputer extends Computer {
             in,out, launchLog);
         channel.addListener(new Channel.Listener() {
             @Override
-            public void onClosed(Channel c,IOException cause) {
+            public void onClosed(Channel c, IOException cause) {
                 SlaveComputer.this.channel = null;
-                offlineCause = new ChannelTermination(cause);
+                // Orderly shutdown will have null exception
+                if (cause!=null) offlineCause = new ChannelTermination(cause);
                 launcher.afterDisconnect(SlaveComputer.this, taskListener);
             }
         });
@@ -458,8 +463,12 @@ public class SlaveComputer extends Computer {
         // maybe the configuration was changed to relaunch the slave, so try to re-launch now.
         // "constructed==null" test is an ugly hack to avoid launching before the object is fully
         // constructed.
-        if(constructed!=null)
-            connect(false);
+        if(constructed!=null) {
+            if (node instanceof Slave)
+                ((Slave)node).getRetentionStrategy().check(this);
+            else
+                connect(false);
+        }
     }
 
     /**
@@ -511,9 +520,14 @@ public class SlaveComputer extends Computer {
 
     private static class SlaveInitializer implements Callable<Void,RuntimeException> {
         public Void call() {
-            // avoid double installation of the handler
+            // avoid double installation of the handler. JNLP slaves can reconnect to the master multiple times
+            // and each connection gets a different RemoteClassLoader, so we need to evict them by class name,
+            // not by their identity.
             Logger logger = Logger.getLogger("hudson");
-            logger.removeHandler(SLAVE_LOG_HANDLER);
+            for (Handler h : logger.getHandlers()) {
+                if (h.getClass().getName().equals(SLAVE_LOG_HANDLER.getClass().getName()))
+                    logger.removeHandler(h);
+            }
             logger.addHandler(SLAVE_LOG_HANDLER);
 
             // remove Sun PKCS11 provider if present. See http://hudson.gotdns.com/wiki/display/HUDSON/Solaris+Issue+6276483

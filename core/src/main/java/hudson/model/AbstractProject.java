@@ -402,6 +402,14 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
     public boolean getHasCustomQuietPeriod() {
         return quietPeriod!=null;
     }
+
+    /**
+     * Sets the custom quiet period of this project, or revert to the global default if null is given. 
+     */
+    public void setQuietPeriod(Integer seconds) throws IOException {
+        this.quietPeriod = seconds;
+        save();
+    }
     
     public boolean hasCustomScmCheckoutRetryCount(){
         return scmCheckoutRetryCount != null;
@@ -699,7 +707,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * Schedules a build of this project, and returns a {@link Future} object
      * to wait for the completion of the build.
      */
-    public Future<R> PascheduleBuild2(int quietPeriod, Cause c) {
+    public Future<R> scheduleBuild2(int quietPeriod, Cause c) {
         return scheduleBuild2(quietPeriod, c, new Action[0]);
     }
 

@@ -28,6 +28,8 @@ import hudson.ExtensionList;
 import hudson.ExtensionPoint;
 import hudson.Util;
 import hudson.XmlFile;
+import hudson.init.Initializer;
+import static hudson.init.InitMilestone.JOB_LOADED;
 import hudson.cli.declarative.CLIMethod;
 import hudson.cli.declarative.CLIResolver;
 import hudson.remoting.AsyncFutureImpl;
@@ -169,11 +171,14 @@ public class Queue extends ResourceController implements Saveable {
          * Verifies that the {@link Executor} represented by this object is capable of executing the given task.
          */
         public boolean canTake(Task task) {
+            Node node = getNode();
+            if (node==null)     return false;   // this executor is about to die
+
             Label l = task.getAssignedLabel();
-            if(l!=null && !l.contains(getNode()))
+            if(l!=null && !l.contains(node))
                 return false;   // the task needs to be executed on label that this node doesn't have.
 
-            if(l==null && getNode().getMode()== Mode.EXCLUSIVE)
+            if(l==null && node.getMode()== Mode.EXCLUSIVE)
                 return false;   // this node is reserved for tasks that are tied to it
 
             return isAvailable();
@@ -245,7 +250,7 @@ public class Queue extends ResourceController implements Saveable {
                     int maxId = 0;
                     for (Object o : list) {
                         if (o instanceof Task) {
-                            // backward compatiblity
+                            // backward compatibility
                             schedule((Task)o, 0);
                         } else if (o instanceof Item) {
                             Item item = (Item)o;
@@ -475,7 +480,7 @@ public class Queue extends ResourceController implements Saveable {
 
     /**
      * @deprecated as of 1.311
-     *      Use {@link #schedule(Task, int, Action[])}
+     *      Use {@link #schedule(Task, int, Action...)} 
      */
     public synchronized boolean add(Task p, int quietPeriod, Action... actions) {
     	return schedule(p, quietPeriod, actions)!=null;
@@ -832,6 +837,19 @@ public class Queue extends ResourceController implements Saveable {
         return t.isBuildBlocked() || !canRun(t.getResourceList());
     }
 
+    /**
+     *  Make sure we don't queue two tasks of the same project to be built
+     *  unless that project allows concurrent builds.
+     */
+    private boolean allowNewBuildableTask(Task t) {
+        try {
+            if (t.isConcurrentBuild())
+                return true;
+        } catch (AbstractMethodError e) {
+            // earlier versions don't have the "isConcurrentBuild" method, so fall back gracefully
+        }
+        return !buildables.containsKey(t);
+    }
 
     /**
      * Queue maintenance.
@@ -846,15 +864,7 @@ public class Queue extends ResourceController implements Saveable {
         Iterator<BlockedItem> itr = blockedProjects.values().iterator();
         while (itr.hasNext()) {
             BlockedItem p = itr.next();
-            if (!isBuildBlocked(p.task)) {
-                // Make sure that we don't make more than one item buildable unless the
-                // project can handle concurrent builds
-                if (p.task instanceof AbstractProject<?,?>) {
-                    AbstractProject<?,?> proj = (AbstractProject<?,?>) p.task;
-                    if (!proj.isConcurrentBuild() && buildables.containsKey(p.task)) {
-                        continue;
-                    }
-                }
+            if (!isBuildBlocked(p.task) && allowNewBuildableTask(p.task)) {
                 // ready to be executed
                 LOGGER.fine(p.task.getFullDisplayName() + " no longer blocked");
                 itr.remove();
@@ -870,7 +880,7 @@ public class Queue extends ResourceController implements Saveable {
 
             waitingList.remove(top);
             Task p = top.task;
-            if (!isBuildBlocked(p)) {
+            if (!isBuildBlocked(p) && allowNewBuildableTask(p)) {
                 // ready to be executed immediately
                 LOGGER.fine(p.getFullDisplayName() + " ready to build");
                 makeBuildable(new BuildableItem(top));
@@ -887,7 +897,7 @@ public class Queue extends ResourceController implements Saveable {
     }
 
     private void makeBuildable(BuildableItem p) {
-        if(Hudson.FLYWEIGHT_SUPPORT && p.task instanceof FlyweightTask) {
+        if(Hudson.FLYWEIGHT_SUPPORT && p.task instanceof FlyweightTask && (!Hudson.getInstance().isQuietingDown() || p.task instanceof NonBlockingTask)) {
             ConsistentHash<Node> hash = new ConsistentHash<Node>(new Hash<Node>() {
                 public String hash(Node node) {
                     return node.getNodeName();
@@ -900,7 +910,7 @@ public class Queue extends ResourceController implements Saveable {
             
             for (Node n : hash.list(p.task.getFullDisplayName())) {
                 Computer c = n.toComputer();
-                if (c==null)    continue;
+                if (c==null || c.isOffline())    continue;
                 c.startFlyWeightTask(p);
                 return;
             }
@@ -927,6 +937,14 @@ public class Queue extends ResourceController implements Saveable {
      * @since 1.318
      */
     public interface FlyweightTask extends Task {}
+
+    /**
+     * Marks {@link Task}s that are not affected by the {@linkplain Hudson#isQuietingDown()}  quieting down},
+     * because these tasks keep other tasks executing.
+     *
+     * @since 1.336 
+     */
+    public interface NonBlockingTask extends Task {}
 
     /**
      * Task whose execution is controlled by the queue.
@@ -1035,6 +1053,13 @@ public class Queue extends ResourceController implements Saveable {
          *      URL that ends with '/'.
          */
         String getUrl();
+        
+        /**
+         * True if the task allows concurrent builds
+         *
+         * @since 1.338
+         */
+        boolean isConcurrentBuild();
     }
 
     public interface Executable extends Runnable {
@@ -1208,6 +1233,11 @@ public class Queue extends ResourceController implements Saveable {
             this.future = new FutureImpl(task);
             return this;
         }
+
+        @Override
+        public String toString() {
+            return getClass().getName()+':'+task.toString();
+        }
     }
     
     /**
@@ -1365,7 +1395,7 @@ public class Queue extends ResourceController implements Saveable {
 
         public CauseOfBlockage getCauseOfBlockage() {
             Hudson hudson = Hudson.getInstance();
-            if(hudson.isQuietingDown())
+            if(hudson.isQuietingDown() && !(task instanceof NonBlockingTask))
                 return CauseOfBlockage.fromMessage(Messages._Queue_HudsonIsAboutToShutDown());
 
             Label label = task.getAssignedLabel();
@@ -1375,7 +1405,7 @@ public class Queue extends ResourceController implements Saveable {
             if (label != null) {
                 if (label.isOffline()) {
                     Set<Node> nodes = label.getNodes();
-                    if (nodes.size() > 1)       return new BecauseLabelIsOffline(label);
+                    if (nodes.size() != 1)      return new BecauseLabelIsOffline(label);
                     else                        return new BecauseNodeIsOffline(nodes.iterator().next());
                 }
             }
@@ -1384,7 +1414,7 @@ public class Queue extends ResourceController implements Saveable {
                 return CauseOfBlockage.fromMessage(Messages._Queue_WaitingForNextAvailableExecutor());
 
             Set<Node> nodes = label.getNodes();
-            if (nodes.size() > 1)       return new BecauseLabelIsBusy(label);
+            if (nodes.size() != 1)      return new BecauseLabelIsBusy(label);
             else                        return new BecauseNodeIsBusy(nodes.iterator().next());
         }
 
@@ -1563,5 +1593,13 @@ public class Queue extends ResourceController implements Saveable {
     @CLIResolver
     public static Queue getInstance() {
         return Hudson.getInstance().getQueue();
+    }
+
+    /**
+     * Restores the queue content during the start up.
+     */
+    @Initializer(after=JOB_LOADED)
+    public static void init(Hudson h) {
+        h.getQueue().load();
     }
 }

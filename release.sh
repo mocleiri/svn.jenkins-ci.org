@@ -99,6 +99,7 @@ cat war/target/hudson-war-$id.ipstgz | ssh wsinterop.sun.com "cd ips/repository;
 ssh wsinterop.sun.com "cd ips; ./start.sh"
 
 pushd $WWW
+svn update changelog.html 
 svn commit -m "Hudson $id released" changelog.html hudson.jnlp
 popd
 
@@ -108,8 +109,14 @@ mvn -P sorcerer sorcerer:aggregate
 rsync -avz target/site/sorcerer wsinterop.sun.com:~/public_html_hudson/
 popd
 
-# RPM
+# RedHat RPM
 pushd rpm
+./build.sh ../hudson.war
+./rsync.sh
+popd
+
+# OpenSUSE RPM
+pushd opensuse
 ./build.sh ../hudson.war
 ./rsync.sh
 popd

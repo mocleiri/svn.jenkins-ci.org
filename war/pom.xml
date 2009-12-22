@@ -27,7 +27,7 @@ THE SOFTWARE.
   <parent>
     <groupId>org.jvnet.hudson.main</groupId>
     <artifactId>pom</artifactId>
-    <version>1.334-SNAPSHOT</version>
+    <version>1.339-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   
@@ -202,6 +202,11 @@ THE SOFTWARE.
               <!-- stat collection pointless -->
               <name>hudson.model.UsageStatistics.disabled</name>
               <value>true</value>
+            </systemProperty>
+            <systemProperty>
+              <!-- update-center.json is too big for the default hard-coded Jetty limit for POST -->
+              <name>org.mortbay.jetty.Request.maxFormContentSize</name>
+              <value>-1</value>
             </systemProperty>
           </systemProperties>
         </configuration>

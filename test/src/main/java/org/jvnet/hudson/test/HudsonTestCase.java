@@ -32,6 +32,9 @@ import hudson.EnvVars;
 import hudson.ExtensionList;
 import hudson.DescriptorExtensionList;
 import hudson.Util;
+import hudson.model.Computer;
+import hudson.model.Executor;
+import hudson.model.Queue.Executable;
 import hudson.tools.ToolProperty;
 import hudson.remoting.Which;
 import hudson.Launcher.LocalLauncher;
@@ -76,7 +79,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -106,7 +108,6 @@ import junit.framework.TestCase;
 
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.resolver.AbstractArtifactResolutionException;
@@ -408,12 +409,7 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
         LOGGER.warning("Extracting a copy of Maven bundled in the test harness. " +
                 "To avoid a performance hit, set the system property 'maven.home' to point to a Maven2 installation.");
         FilePath mvn = hudson.getRootPath().createTempFile("maven", "zip");
-        OutputStream os = mvn.write();
-        try {
-            IOUtils.copy(HudsonTestCase.class.getClassLoader().getResourceAsStream(mavenVersion + "-bin.zip"), os);
-        } finally {
-            os.close();
-        }
+        mvn.copyFrom(HudsonTestCase.class.getClassLoader().getResource(mavenVersion + "-bin.zip"));
         File mvnHome = createTmpDir();
         mvn.unzip(new FilePath(mvnHome));
         // TODO: switch to tar that preserves file permissions more easily
@@ -437,12 +433,7 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
             LOGGER.warning("Extracting a copy of Ant bundled in the test harness. " +
                     "To avoid a performance hit, set the environment variable ANT_HOME to point to an  Ant installation.");
             FilePath ant = hudson.getRootPath().createTempFile("ant", "zip");
-            OutputStream os = ant.write();
-            try {
-                IOUtils.copy(HudsonTestCase.class.getClassLoader().getResourceAsStream("apache-ant-1.7.1-bin.zip"), os);
-            } finally {
-                os.close();
-            }
+            ant.copyFrom(HudsonTestCase.class.getClassLoader().getResource("apache-ant-1.7.1-bin.zip"));
             File antHome = createTmpDir();
             ant.unzip(new FilePath(antHome));
             // TODO: switch to tar that preserves file permissions more easily
@@ -883,6 +874,60 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
      */
     protected <T extends Descriptor<?>> T get(Class<T> d) {
         return hudson.getDescriptorByType(d);
+    }
+
+
+    /**
+     * Returns true if Hudson is building something or going to build something.
+     */
+    protected boolean isSomethingHappening() {
+        if (!hudson.getQueue().isEmpty())
+            return true;
+        for (Computer n : hudson.getComputers())
+            if (!n.isIdle())
+                return true;
+        return false;
+    }
+
+    /**
+     * Waits until Hudson finishes building everything, including those in the queue.
+     * <p>
+     * This method uses a default time out to prevent infinite hang in the automated test execution environment.
+     */
+    protected void waitUntilNoActivity() throws Exception {
+        waitUntilNoActivityUpTo(60*1000);
+    }
+
+    /**
+     * Waits until Hudson finishes building everything, including those in the queue, or fail the test
+     * if the specified timeout milliseconds is 
+     */
+    protected void waitUntilNoActivityUpTo(int timeout) throws Exception {
+        long startTime = System.currentTimeMillis();
+        int streak = 0;
+
+        while (true) {
+            Thread.sleep(100);
+            if (isSomethingHappening())
+                streak=0;
+            else
+                streak++;
+
+            if (streak>5)   // the system is quiet for a while
+                return;
+
+            if (System.currentTimeMillis()-startTime > timeout) {
+                List<Executable> building = new ArrayList<Executable>();
+                for (Computer c : hudson.getComputers()) {
+                    for (Executor e : c.getExecutors()) {
+                        if (e.isBusy())
+                            building.add(e.getCurrentExecutable());
+                    }
+                }
+                throw new AssertionError(String.format("Hudson is still doing something after %dms: queue=%s building=%s",
+                        timeout, Arrays.asList(hudson.getQueue().getItems()), building));
+            }
+        }
     }
 
 
@@ -1327,6 +1372,9 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
                 return !record.getMessage().contains("XMLHttpRequest.getResponseHeader() was called before the response was available.");
             }
         });
+
+        // remove the upper bound of the POST data size in Jetty.
+        System.setProperty("org.mortbay.jetty.Request.maxFormContentSize","-1");
     }
 
     private static final Logger LOGGER = Logger.getLogger(HudsonTestCase.class.getName());

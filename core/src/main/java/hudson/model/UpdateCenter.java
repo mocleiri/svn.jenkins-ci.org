@@ -32,6 +32,8 @@ import hudson.PluginWrapper;
 import hudson.ProxyConfiguration;
 import hudson.Util;
 import hudson.XmlFile;
+import static hudson.init.InitMilestone.PLUGINS_STARTED;
+import hudson.init.Initializer;
 import hudson.lifecycle.Lifecycle;
 import hudson.model.UpdateSite.Data;
 import hudson.model.UpdateSite.Plugin;
@@ -41,7 +43,6 @@ import hudson.util.IOException2;
 import hudson.util.PersistedList;
 import hudson.util.XStream2;
 import org.acegisecurity.Authentication;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.CountingInputStream;
 import org.apache.commons.io.output.NullOutputStream;
 import org.kohsuke.stapler.StaplerResponse;
@@ -51,7 +52,6 @@ import javax.servlet.ServletException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -61,6 +61,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -305,6 +306,33 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         return plugins;
     }
 
+    /**
+     * Returns a list of plugins that should be shown in the "available" tab, grouped by category.
+     * A plugin with multiple categories will appear multiple times in the list.
+     */
+    public PluginEntry[] getCategorizedAvailables() {
+        TreeSet<PluginEntry> entries = new TreeSet<PluginEntry>();
+        for (Plugin p : getAvailables()) {
+            if (p.categories==null || p.categories.length==0)
+                entries.add(new PluginEntry(p, getCategoryDisplayName(null)));
+            else
+                for (String c : p.categories)
+                    entries.add(new PluginEntry(p, getCategoryDisplayName(c)));
+        }
+        return entries.toArray(new PluginEntry[entries.size()]);
+    }
+
+    private static String getCategoryDisplayName(String category) {
+        if (category==null)
+            return Messages.UpdateCenter_PluginCategory_misc();
+        try {
+            return (String)Messages.class.getMethod(
+                    "UpdateCenter_PluginCategory_" + category.replace('-', '_')).invoke(null);
+        } catch (Exception ex) {
+            return Messages.UpdateCenter_PluginCategory_unrecognized(category);
+        }
+    }
+
     public List<Plugin> getUpdates() {
         List<Plugin> plugins = new ArrayList<Plugin>();
 
@@ -516,9 +544,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
 
         private void testConnection(URL url) throws IOException {
             try {
-                InputStream in = ProxyConfiguration.open(url).getInputStream();
-                IOUtils.copy(in,new NullOutputStream());
-                in.close();
+                Util.copyStreamAndClose(ProxyConfiguration.open(url).getInputStream(),new NullOutputStream());
             } catch (SSLHandshakeException e) {
                 if (e.getMessage().contains("PKIX path building failed"))
                    // fix up this crappy error message from JDK
@@ -829,6 +855,18 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         }
     }
 
+    public static final class PluginEntry implements Comparable<PluginEntry> {
+        public Plugin plugin;
+        public String category;
+        private PluginEntry(Plugin p, String c) { plugin = p; category = c; }
+
+        public int compareTo(PluginEntry o) {
+            int r = category.compareTo(o.category);
+            if (r==0) r = plugin.name.compareToIgnoreCase(o.plugin.name);
+            return r;
+        }
+    }
+
     /**
      * Adds the update center data retriever to HTML.
      */
@@ -837,6 +875,16 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         public PageDecoratorImpl() {
             super(PageDecoratorImpl.class);
         }
+    }
+
+    /**
+     * Initializes the update center.
+     *
+     * This has to wait until after all plugins load, to let custom UpdateCenterConfiguration take effect first.
+     */
+    @Initializer(after=PLUGINS_STARTED)
+    public static void init(Hudson h) throws IOException {
+        h.getUpdateCenter().load();
     }
 
     /**
@@ -849,6 +897,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public static boolean neverUpdate = Boolean.getBoolean(UpdateCenter.class.getName()+".never");
 
     public static final XStream2 XSTREAM = new XStream2();
+
     static {
         XSTREAM.alias("site",UpdateSite.class);
         XSTREAM.alias("sites",PersistedList.class);

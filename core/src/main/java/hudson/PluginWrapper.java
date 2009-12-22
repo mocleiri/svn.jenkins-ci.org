@@ -26,6 +26,7 @@ package hudson;
 import hudson.model.Hudson;
 import hudson.model.UpdateCenter;
 import hudson.model.UpdateSite;
+import hudson.util.VersionNumber;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -288,6 +289,26 @@ public final class PluginWrapper {
     }
 
     /**
+     * Returns the version number of this plugin
+     */
+    public VersionNumber getVersionNumber() {
+        return new VersionNumber(getVersion());
+    }
+
+    /**
+     * Returns true if the version of this plugin is older than the given version.
+     */
+    public boolean isOlderThan(VersionNumber v) {
+        try {
+            return getVersionNumber().compareTo(v) < 0;
+        } catch (IllegalArgumentException e) {
+            // if we can't figure out our current version, it probably means it's very old,
+            // since the version information is missing only from the very old plugins 
+            return true;
+        }
+    }
+
+    /**
      * Terminates the plugin.
      */
     void stop() {
@@ -295,8 +316,7 @@ public final class PluginWrapper {
         try {
             plugin.stop();
         } catch(Throwable t) {
-            System.err.println("Failed to shut down "+shortName);
-            System.err.println(t);
+            LOGGER.log(WARNING, "Failed to shut down "+shortName, t);
         }
         // Work around a bug in commons-logging.
         // See http://www.szegedi.org/articles/memleak.html

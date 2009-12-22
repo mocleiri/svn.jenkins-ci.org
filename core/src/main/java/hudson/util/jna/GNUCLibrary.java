@@ -27,11 +27,17 @@ import com.sun.jna.Library;
 import com.sun.jna.StringArray;
 import com.sun.jna.Pointer;
 import com.sun.jna.Native;
+import com.sun.jna.Memory;
+import com.sun.jna.NativeLong;
 import com.sun.jna.ptr.IntByReference;
 import org.jvnet.libpam.impl.CLibrary.passwd;
 
 /**
  * GNU C library.
+ *
+ * <p>
+ * Not available on all platforms (such as Linux/PPC, IBM mainframe, etc.), so the caller should recover gracefully
+ * in case of {@link LinkageError}. See HUDSON-4820.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -66,6 +72,9 @@ public interface GNUCLibrary extends Library {
     int chown(String fileName, int uid, int gid);
     int chmod(String fileName, int i);
 
+    // see http://www.gnu.org/s/libc/manual/html_node/Renaming-Files.html
+    int rename(String oldname, String newname);
+
 
     // this is listed in http://developer.apple.com/DOCUMENTATION/Darwin/Reference/ManPages/man3/sysctlbyname.3.html
     // but not in http://www.gnu.org/software/libc/manual/html_node/System-Parameters.html#index-sysctl-3493
@@ -82,6 +91,16 @@ public interface GNUCLibrary extends Library {
      * See http://linux.die.net/man/3/symlink
      */
     int symlink(String oldname, String newname);
+
+    /**
+     * Read a symlink. The name will be copied into the specified memory, and returns the number of
+     * bytes copied. The string is not null-terminated.
+     *
+     * @return
+     *      if the return value equals size, the caller needs to retry with a bigger buffer.
+     *      If -1, error.
+     */
+    int readlink(String filename, Memory buffer, NativeLong size);
 
     public static final GNUCLibrary LIBC = (GNUCLibrary) Native.loadLibrary("c",GNUCLibrary.class);
 }
