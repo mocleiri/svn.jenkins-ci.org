@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Daniel Dyer, Red Hat, Inc., Tom Huybrechts
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Daniel Dyer, Red Hat, Inc., Tom Huybrechts, Yahoo!, Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,16 @@
  */
 package hudson.tasks.junit;
 
+import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.tasks.test.AbstractTestResultAction;
+import hudson.tasks.test.TestObject;
 import hudson.util.HeapSpaceStringConverter;
 import hudson.util.XStream2;
+import org.kohsuke.stapler.StaplerProxy;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,10 +44,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.kohsuke.stapler.StaplerProxy;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * {@link Action} that displays the JUnit test result.

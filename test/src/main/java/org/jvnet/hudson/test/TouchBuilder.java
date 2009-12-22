@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Yahoo!, Inc.
+ * Copyright (c) 2009, Yahoo!, Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,40 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.tasks.test;
+package org.jvnet.hudson.test;
 
+import hudson.FilePath;
 import hudson.Launcher;
-import hudson.matrix.MatrixAggregator;
-import hudson.matrix.MatrixBuild;
-import hudson.matrix.MatrixRun;
+import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
+import hudson.tasks.Builder;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-/**
- * Aggregates {@link AbstractTestResultAction}s of {@link MatrixRun}s
- * into {@link MatrixBuild}.
- * 
- * @author Kohsuke Kawaguchi
- */
-public class TestResultAggregator extends MatrixAggregator {
-    private MatrixTestResult result;
-
-    public TestResultAggregator(MatrixBuild build, Launcher launcher, BuildListener listener) {
-        super(build, launcher, listener);
+public class TouchBuilder extends Builder implements Serializable {
+        @Override
+        public boolean perform(AbstractBuild<?, ?> build,
+                               Launcher launcher, BuildListener listener)
+                throws InterruptedException, IOException {
+            for (FilePath f : build.getWorkspace().list()) {
+                f.touch(System.currentTimeMillis());
+            }
+            return true;
+        }
     }
-
-    @Override
-    public boolean startBuild() throws InterruptedException, IOException {
-        result = new MatrixTestResult(build);
-        build.addAction(result);
-        return true;
-    }
-
-    @Override
-    public boolean endRun(MatrixRun run) throws InterruptedException, IOException {
-        AbstractTestResultAction atr = run.getAction(AbstractTestResultAction.class);
-        if(atr!=null)   result.add(atr);
-        return true;
-    }
-}

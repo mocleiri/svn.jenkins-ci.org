@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Xavier Le Vourch, Tom Huybrechts
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Xavier Le Vourch, Tom Huybrechts, Yahoo!, Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,19 +23,21 @@
  */
 package hudson.tasks.junit;
 
-import java.io.File;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import hudson.tasks.test.TestObject;
+import hudson.tasks.test.AbstractTestResult;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
+
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Result of one test suite.
@@ -211,9 +213,11 @@ public final class SuiteResult implements Serializable {
     }
 
     public SuiteResult getPreviousResult() {
-        TestResult pr = parent.getPreviousResult();
+        AbstractTestResult pr = parent.getPreviousResult();
         if(pr==null)    return null;
-        return pr.getSuite(name);
+        if(pr instanceof TestResult)
+            return ((TestResult)pr).getSuite(name);
+        return null;
     }
 
     /**
@@ -238,6 +242,16 @@ public final class SuiteResult implements Serializable {
 		}
 		return result;
 	}
+
+    /** KLUGE. We have to call this to prevent freeze()
+     * from calling c.freeze() on all its children,
+     * because that in turn calls c.getOwner(),
+     * which requires a non-null parent. 
+     * @param parent
+     */
+    void setParent(TestResult parent) {
+        this.parent = parent;
+    }
 
     /*package*/ boolean freeze(TestResult owner) {
         if(this.parent!=null)

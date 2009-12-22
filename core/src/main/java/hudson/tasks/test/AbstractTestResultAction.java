@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Daniel Dyer, Red Hat, Inc., Stephen Connolly, id:cactusman
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Daniel Dyer, Red Hat, Inc., Stephen Connolly, id:cactusman, Yahoo!, Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,13 +26,8 @@ package hudson.tasks.test;
 import hudson.Functions;
 import hudson.model.*;
 import hudson.tasks.junit.CaseResult;
-import hudson.util.ChartUtil;
+import hudson.util.*;
 import hudson.util.ChartUtil.NumberOnlyBuildLabel;
-import hudson.util.ColorPalette;
-import hudson.util.DataSetBuilder;
-import hudson.util.ShiftedCategoryAxis;
-import hudson.util.StackedAreaRenderer2;
-import hudson.util.Area;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -43,13 +38,13 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.StackedAreaRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.ui.RectangleInsets;
+import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.ExportedBean;
 import org.kohsuke.stapler.export.Exported;
-import org.jvnet.localizer.Localizable;
+import org.kohsuke.stapler.export.ExportedBean;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -170,6 +165,20 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
         }
     }
     
+    public AbstractTestResult findPreviousCorresponding(AbstractTestResult test) {
+        T previousResult = getPreviousResult();
+        if (previousResult != null) {
+            AbstractTestResult testResult = (AbstractTestResult)getResult();
+            return testResult.findCorrespondingResult(test.getId());
+        }
+
+        return null;
+    }
+
+    public AbstractTestResult findCorrespondingResult(String id) {
+        return ((AbstractTestResult)getResult()).findCorrespondingResult(id);
+    }
+    
     /**
      * A shortcut for summary.jelly
      * 
@@ -205,9 +214,9 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
     }
 
     /**
-     * 
+     * Returns a full path down to a test result
      */
-    public String getTestResultPath(CaseResult it) {
+    public String getTestResultPath(AbstractTestResult it) {
         return getUrlName() + "/" + it.getRelativePathFrom(null);
     }
 
@@ -322,4 +331,8 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
         if(relPath==null)   return "";
         return relPath;
     }
+
+    public abstract String getDescription(TestObject object);
+
+    public abstract void setDescription(TestObject object, String description);
 }
