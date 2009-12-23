@@ -41,11 +41,14 @@ import java.util.logging.Logger;
 
 /**
  * Base class for all test result objects.
+ * For compatibility with code that expects this class to be in hudson.tasks.junit,
+ * we've created a pure-abstract class, hudson.tasks.junit.TestObject. That
+ * stub class is deprecated; instead, people should use this class.  
  * 
  * @author Kohsuke Kawaguchi
  */
 @ExportedBean
-public abstract class TestObject extends AbstractModelObject implements Serializable {
+public abstract class TestObject extends hudson.tasks.junit.TestObject {
 
     private static final Logger LOGGER = Logger.getLogger(TestObject.class.getName());
     private volatile transient String id;
@@ -56,7 +59,8 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
      * Reverse pointer of {@link TabulatedResult#getChildren()}.
      */
     public abstract TestObject getParent();
-    
+
+    @Override
     public final String getId() {
         if (id == null) {
             StringBuilder buf = new StringBuilder();
@@ -78,6 +82,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     /**
      * Returns url relative to TestResult
      */
+    @Override
     public String getUrl() {
         return '/' + getId();
     }
@@ -89,6 +94,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
      * {@link #topLevelTestResult()} instead for a more general interface.
      * @return
      */
+    @Override
     public TestResult getTestResult() {
         TestObject parent = getParent();
 
@@ -99,7 +105,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
      * Returns the top level test result data.
      * 
      * @return
-     */
+     */    
     public AbstractTestResult getTopLevelTestResult() {
         TestObject parent = getParent();
 
@@ -187,6 +193,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     }
     
     // TODO: suggest that subclasses should override
+    @Override
     public AbstractTestResultAction getTestResultAction() {
         AbstractBuild<?, ?> owner = getOwner();
         if (owner != null) {
@@ -198,6 +205,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     }
 
     // TODO: suggest that subclasses should override
+    @Override
     public List<TestAction> getTestActions() {
         AbstractTestResultAction atra = getTestResultAction();
         if ((atra != null) && (atra instanceof TestResultAction)) {
@@ -209,6 +217,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     }
 
     // TODO: suggest that subclasses should override
+    @Override
     public <T> T getTestAction(Class<T> klazz) {
         for (TestAction action : getTestActions()) {
             if (klazz.isAssignableFrom(action.getClass())) {
@@ -241,7 +250,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
      * result.
      */
     public abstract AbstractTestResult findCorrespondingResult(String id);
-    
+
     /**
      * Time took to run this test. In seconds.
      */
@@ -251,10 +260,12 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
      * Returns the string representation of the {@link #getDuration()}, in a
      * human readable format.
      */
+    @Override
     public String getDurationString() {
         return Util.getTimeSpanString((long) (getDuration() * 1000));
     }
 
+    @Override
     public String getDescription() {
         AbstractTestResultAction action = getTestResultAction();
         if (action != null) {
@@ -263,6 +274,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
         return "";
     }
 
+    @Override
     public void setDescription(String description) {
         AbstractTestResultAction action = getTestResultAction();
         if (action != null) {
@@ -273,6 +285,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     /**
      * Exposes this object through the remote API.
      */
+    @Override
     public Api getApi() {
         return new Api(this);
     }
@@ -280,6 +293,7 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     /**
      * Gets the name of this object.
      */
+    @Override
     public/* abstract */ String getName() {
         return "";
     }
@@ -287,10 +301,12 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     /**
      * Gets the version of {@link #getName()} that's URL-safe.
      */
+    @Override
     public String getSafeName() {
         return safe(getName());
     }
 
+    @Override
     public String getSearchUrl() {
         return getSafeName();
     }
@@ -338,10 +354,12 @@ public abstract class TestObject extends AbstractModelObject implements Serializ
     /**
      * Gets the total number of tests.
      */
+    @Override
     public int getTotalCount() {
         return getPassCount() + getFailCount() + getSkipCount();
     }
 
+    @Override
     public History getHistory() {
         return new History(this);
     }

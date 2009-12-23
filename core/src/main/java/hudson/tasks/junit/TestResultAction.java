@@ -198,7 +198,7 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
          * @return
          *      Can be empty but never null. The caller must assume that the returned list is read-only.
     	 */
-    	public abstract List<TestAction> getTestAction(TestObject testObject);
+    	public abstract List<TestAction> getTestAction(hudson.tasks.junit.TestObject testObject);
     }
 
     public Object readResolve() {
