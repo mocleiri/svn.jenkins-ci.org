@@ -191,8 +191,14 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
         }
 
     }
-    
-    // TODO: suggest that subclasses should override
+
+    /**
+     * Subclasses may override this method if they are
+     * associated with a particular subclass of
+     * AbstractTestResultAction. 
+     *
+     * @return  the test result action that connects this test result to a particular build
+     */
     @Override
     public AbstractTestResultAction getTestResultAction() {
         AbstractBuild<?, ?> owner = getOwner();
@@ -204,7 +210,10 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
         }
     }
 
-    // TODO: suggest that subclasses should override
+    /**
+     * Get a list of all TestActions associated with this TestObject. 
+     * @return
+     */
     @Override
     public List<TestAction> getTestActions() {
         AbstractTestResultAction atra = getTestResultAction();
@@ -216,7 +225,12 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
         }
     }
 
-    // TODO: suggest that subclasses should override
+    /**
+     * Gets a test action of the class passed in. 
+     * @param klazz
+     * @param <T> an instance of the class passed in
+     * @return
+     */
     @Override
     public <T> T getTestAction(Class<T> klazz) {
         for (TestAction action : getTestActions()) {
@@ -228,14 +242,14 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
     }
 
     /**
-     * Gets the counter part of this {@link AbstractTestResult} in the previous run.
+     * Gets the counterpart of this {@link AbstractTestResult} in the previous run.
      *
      * @return null if no such counter part exists.
      */
     public abstract AbstractTestResult getPreviousResult();
 
     /**
-     * Gets the counter part of this {@link AbstractTestResult} in the specified run.
+     * Gets the counterpart of this {@link AbstractTestResult} in the specified run.
      *
      * @return null if no such counter part exists.
      */

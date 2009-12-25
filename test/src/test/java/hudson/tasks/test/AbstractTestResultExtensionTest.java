@@ -71,14 +71,7 @@ public class AbstractTestResultExtensionTest extends HudsonTestCase {
         AbstractTestResult abstractResult = (AbstractTestResult) resultObject;
         AbstractBuild<?,?> ownerBuild = abstractResult.getOwner();
         assertNotNull("we should have an owner", ownerBuild);
-//      Semantically, we should *not* have a parent!
-//        TestObject parent = abstractResult.getParent();
-//        assertNotNull("we should have a parent", parent);
         assertNotNull("we should have a list of test actions", abstractResult.getTestActions());
-        // TODO: is it okay if the list is empty? 
-        
-
-        // TODO: watch out for owner.getPreviousBuild() and owner.getNextBuild();
         // called from some jelly
         String description = abstractResult.getDescription();
         assertNotNull(description); 

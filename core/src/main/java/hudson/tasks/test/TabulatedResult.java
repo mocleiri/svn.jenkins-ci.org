@@ -28,8 +28,9 @@ import java.util.Collection;
 /**
  * Cumulated result of multiple tests.
  *
- * TODO: this class doesn't have a purpose anymore. AbstractTestResult
- * is a sufficient replacement.  
+ * This class doesn't have a purpose anymore. AbstractTestResult
+ * is a sufficient replacement, but we'll keep this one for
+ * backward-compatibility.  
  *
  * @author Kohsuke Kawaguchi
  */
