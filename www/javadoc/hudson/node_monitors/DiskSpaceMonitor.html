@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DiskSpaceMonitor (Hudson main module 1.338 API)
+DiskSpaceMonitor (Hudson main module 1.339 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-18">
+<META NAME="date" CONTENT="2009-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DiskSpaceMonitor (Hudson main module 1.338 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DiskSpaceMonitor (Hudson main module 1.338 API)";
+        parent.document.title="DiskSpaceMonitor (Hudson main module 1.339 API)";
     }
 }
 </SCRIPT>
@@ -95,14 +95,15 @@ Class DiskSpaceMonitor</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">hudson.node_monitors.NodeMonitor</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.node_monitors.DiskSpaceMonitor</B>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/node_monitors/AbstractDiskSpaceMonitor.html" title="class in hudson.node_monitors">hudson.node_monitors.AbstractDiskSpaceMonitor</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.node_monitors.DiskSpaceMonitor</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>&gt;</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>DiskSpaceMonitor</B><DT>extends <A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A></DL>
+<DT><PRE>public class <B>DiskSpaceMonitor</B><DT>extends <A HREF="../../hudson/node_monitors/AbstractDiskSpaceMonitor.html" title="class in hudson.node_monitors">AbstractDiskSpaceMonitor</A></DL>
 </PRE>
 
 <P>
@@ -156,6 +157,15 @@ Checks available disk space of the remote FS root.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.node_monitors.AbstractDiskSpaceMonitor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.node_monitors.<A HREF="../../hudson/node_monitors/AbstractDiskSpaceMonitor.html" title="class in hudson.node_monitors">AbstractDiskSpaceMonitor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/node_monitors/AbstractDiskSpaceMonitor.html#freeSpaceThreshold">freeSpaceThreshold</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.node_monitors.NodeMonitor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
@@ -175,7 +185,7 @@ Checks available disk space of the remote FS root.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#DiskSpaceMonitor()">DiskSpaceMonitor</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../hudson/node_monitors/DiskSpaceMonitor.html#DiskSpaceMonitor(java.lang.String)">DiskSpaceMonitor</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;freeSpaceThreshold)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -215,13 +225,22 @@ Checks available disk space of the remote FS root.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.node_monitors.AbstractDiskSpaceMonitor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.node_monitors.<A HREF="../../hudson/node_monitors/AbstractDiskSpaceMonitor.html" title="class in hudson.node_monitors">AbstractDiskSpaceMonitor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/node_monitors/AbstractDiskSpaceMonitor.html#data(hudson.model.Computer)">data</A>, <A HREF="../../hudson/node_monitors/AbstractDiskSpaceMonitor.html#getThresholdBytes()">getThresholdBytes</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.node_monitors.NodeMonitor"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left"><B>Methods inherited from class hudson.node_monitors.<A HREF="../../hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#all()">all</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#data(hudson.model.Computer)">data</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getAll()">getAll</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#isIgnored()">isIgnored</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#setIgnored(boolean)">setIgnored</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/node_monitors/NodeMonitor.html#all()">all</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getAll()">getAll</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#isIgnored()">isIgnored</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#setIgnored(boolean)">setIgnored</A>, <A HREF="../../hudson/node_monitors/NodeMonitor.html#triggerUpdate()">triggerUpdate</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -265,11 +284,17 @@ public static final hudson.node_monitors.DiskSpaceMonitorDescriptor <B>DESCRIPTO
 </TR>
 </TABLE>
 
-<A NAME="DiskSpaceMonitor()"><!-- --></A><H3>
+<A NAME="DiskSpaceMonitor(java.lang.String)"><!-- --></A><H3>
 DiskSpaceMonitor</H3>
 <PRE>
-public <B>DiskSpaceMonitor</B>()</PRE>
+<FONT SIZE="-1">@DataBoundConstructor
+</FONT>public <B>DiskSpaceMonitor</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;freeSpaceThreshold)
+                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/text/ParseException.html?is-external=true" title="class or interface in java.text">ParseException</A></PRE>
 <DL>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/text/ParseException.html?is-external=true" title="class or interface in java.text">ParseException</A></CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JavaScriptDebugger (Hudson main module 1.338 API)
+JavaScriptDebugger (Hudson main module 1.339 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-18">
+<META NAME="date" CONTENT="2009-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JavaScriptDebugger (Hudson main module 1.338 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JavaScriptDebugger (Hudson main module 1.338 API)";
+        parent.document.title="JavaScriptDebugger (Hudson main module 1.339 API)";
     }
 }
 </SCRIPT>
@@ -97,11 +97,11 @@ Class JavaScriptDebugger</H2>
   <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.jvnet.hudson.test.rhino.JavaScriptDebugger</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>org.mozilla.javascript.debug.Debugger</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>net.sourceforge.htmlunit.corejs.javascript.debug.Debugger</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>JavaScriptDebugger</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements org.mozilla.javascript.debug.Debugger</DL>
+<DT><PRE>public class <B>JavaScriptDebugger</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements net.sourceforge.htmlunit.corejs.javascript.debug.Debugger</DL>
 </PRE>
 
 <P>
@@ -171,9 +171,9 @@ Monitors the execution of the JavaScript inside HtmlUnit, and provides debug inf
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;org.mozilla.javascript.debug.DebugFrame</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../org/jvnet/hudson/test/rhino/JavaScriptDebugger.html#getFrame(org.mozilla.javascript.Context, org.mozilla.javascript.debug.DebuggableScript)">getFrame</A></B>(org.mozilla.javascript.Context&nbsp;cx,
-         org.mozilla.javascript.debug.DebuggableScript&nbsp;fnOrScript)</CODE>
+<CODE>&nbsp;net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/jvnet/hudson/test/rhino/JavaScriptDebugger.html#getFrame(net.sourceforge.htmlunit.corejs.javascript.Context, net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript)">getFrame</A></B>(net.sourceforge.htmlunit.corejs.javascript.Context&nbsp;cx,
+         net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript&nbsp;fnOrScript)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -181,8 +181,8 @@ Monitors the execution of the JavaScript inside HtmlUnit, and provides debug inf
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../org/jvnet/hudson/test/rhino/JavaScriptDebugger.html#handleCompilationDone(org.mozilla.javascript.Context, org.mozilla.javascript.debug.DebuggableScript, java.lang.String)">handleCompilationDone</A></B>(org.mozilla.javascript.Context&nbsp;cx,
-                      org.mozilla.javascript.debug.DebuggableScript&nbsp;fnOrScript,
+<TD><CODE><B><A HREF="../../../../../org/jvnet/hudson/test/rhino/JavaScriptDebugger.html#handleCompilationDone(net.sourceforge.htmlunit.corejs.javascript.Context, net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript, java.lang.String)">handleCompilationDone</A></B>(net.sourceforge.htmlunit.corejs.javascript.Context&nbsp;cx,
+                      net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript&nbsp;fnOrScript,
                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;source)</CODE>
 
 <BR>
@@ -258,15 +258,15 @@ public <B>JavaScriptDebugger</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="handleCompilationDone(org.mozilla.javascript.Context, org.mozilla.javascript.debug.DebuggableScript, java.lang.String)"><!-- --></A><H3>
+<A NAME="handleCompilationDone(net.sourceforge.htmlunit.corejs.javascript.Context, net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript, java.lang.String)"><!-- --></A><H3>
 handleCompilationDone</H3>
 <PRE>
-public void <B>handleCompilationDone</B>(org.mozilla.javascript.Context&nbsp;cx,
-                                  org.mozilla.javascript.debug.DebuggableScript&nbsp;fnOrScript,
+public void <B>handleCompilationDone</B>(net.sourceforge.htmlunit.corejs.javascript.Context&nbsp;cx,
+                                  net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript&nbsp;fnOrScript,
                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;source)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>handleCompilationDone</CODE> in interface <CODE>org.mozilla.javascript.debug.Debugger</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>handleCompilationDone</CODE> in interface <CODE>net.sourceforge.htmlunit.corejs.javascript.debug.Debugger</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -274,14 +274,14 @@ public void <B>handleCompilationDone</B>(org.mozilla.javascript.Context&nbsp;cx,
 </DL>
 <HR>
 
-<A NAME="getFrame(org.mozilla.javascript.Context, org.mozilla.javascript.debug.DebuggableScript)"><!-- --></A><H3>
+<A NAME="getFrame(net.sourceforge.htmlunit.corejs.javascript.Context, net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript)"><!-- --></A><H3>
 getFrame</H3>
 <PRE>
-public org.mozilla.javascript.debug.DebugFrame <B>getFrame</B>(org.mozilla.javascript.Context&nbsp;cx,
-                                                        org.mozilla.javascript.debug.DebuggableScript&nbsp;fnOrScript)</PRE>
+public net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame <B>getFrame</B>(net.sourceforge.htmlunit.corejs.javascript.Context&nbsp;cx,
+                                                                            net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript&nbsp;fnOrScript)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>getFrame</CODE> in interface <CODE>org.mozilla.javascript.debug.Debugger</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>getFrame</CODE> in interface <CODE>net.sourceforge.htmlunit.corejs.javascript.debug.Debugger</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

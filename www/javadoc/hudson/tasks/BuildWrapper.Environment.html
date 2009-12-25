@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildWrapper.Environment (Hudson main module 1.338 API)
+BuildWrapper.Environment (Hudson main module 1.339 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-18">
+<META NAME="date" CONTENT="2009-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildWrapper.Environment (Hudson main module 1.338 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildWrapper.Environment (Hudson main module 1.338 API)";
+        parent.document.title="BuildWrapper.Environment (Hudson main module 1.339 API)";
     }
 }
 </SCRIPT>
@@ -224,7 +224,9 @@ public boolean <B>tearDown</B>(<A HREF="../../hudson/model/AbstractBuild.html" t
  This method is invoked even when the build failed, so that the
  clean up operation can be performed regardless of the build result
  (for example, you'll want to stop application server even if a build
- fails.)
+ fails.)  <A HREF="../../hudson/model/Run.html#getResult()"><CODE>Run.getResult()</CODE></A> in this case will return Result.FAILURE
+ (since 1.339), and a null result indicates SUCCESS-so-far (post-build
+ actions may still affect the final result).
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)">tearDown</A></CODE> in class <CODE><A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A></CODE></DL>

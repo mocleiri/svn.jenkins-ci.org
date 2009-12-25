@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Proc (Hudson main module 1.338 API)
+Proc (Hudson main module 1.339 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-18">
+<META NAME="date" CONTENT="2009-12-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Proc (Hudson main module 1.338 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Proc (Hudson main module 1.338 API)";
+        parent.document.title="Proc (Hudson main module 1.339 API)";
     }
 }
 </SCRIPT>
@@ -202,7 +202,8 @@ External process wrapper.
 <TD><CODE><B><A HREF="../hudson/Proc.html#join()">join</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waits for the completion of the process.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waits for the completion of the process and until we finish reading everything that the process has produced
+ to stdout/stderr.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -317,7 +318,8 @@ public abstract int <B>join</B>()
                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
-<DD>Waits for the completion of the process.
+<DD>Waits for the completion of the process and until we finish reading everything that the process has produced
+ to stdout/stderr.
 
  <p>
  If the thread is interrupted while waiting for the completion
