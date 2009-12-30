@@ -95,7 +95,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.337"
       }],
-      "developers": [{"developerId": "hafner"}],
+      "developers": [      {
+        "developerId": "drulli",
+        "name": "Ulli Hafner"
+      }],
       "name": "analysis-core",
       "previousTimestamp": "2009-11-30T20:02:00.00Z",
       "releaseTimestamp": "2009-12-28T07:52:56.00Z",
@@ -183,7 +186,16 @@ updateCenter.post(
     "batch-task":     {
       "buildDate": "Dec 07, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers":       [
+                {
+          "developerId": "kohsuke",
+          "name": "Kohsuke Kawaguchi"
+        },
+                {
+          "developerId": "mindless",
+          "name": "Alan Harder"
+        }
+      ],
       "excerpt": "This plugin adds batch tasks that are not regularly executed to projects, such as releases, integration, archiving, etc.",
       "labels":       [
         "post-build",
@@ -301,7 +313,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.323"
       }],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "dvrzalik",
+        "name": "David Vrzalik"
+      }],
       "excerpt": "This plugin allows records from one Hudson to be published on another Hudson.",
       "labels": ["upload"],
       "name": "build-publisher",
@@ -316,7 +331,10 @@ updateCenter.post(
     "build-timeout":     {
       "buildDate": "Dec 28, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "kohsuke",
+        "name": "Kohsuke Kawaguchi"
+      }],
       "excerpt": "This plugin allows you to automatically abort a build if it's taking too long.",
       "labels": ["buildwrapper"],
       "name": "build-timeout",
@@ -391,7 +409,10 @@ updateCenter.post(
           "version": "1.337"
         }
       ],
-      "developers": [{"developerId": "hafner"}],
+      "developers": [      {
+        "developerId": "drulli",
+        "name": "Ulli Hafner"
+      }],
       "excerpt": "This plugin generates the trend report for <a href='http://checkstyle.sourceforge.net/'>Checkstyle<\/a>, an open source static code analysis program.&nbsp; ",
       "labels":       [
         "maven",
@@ -612,7 +633,10 @@ updateCenter.post(
           "version": "1.335"
         }
       ],
-      "developers": [{"developerId": "max"}],
+      "developers": [      {
+        "developerId": "mod",
+        "name": "Maximilian Odendahl"
+      }],
       "excerpt": "This plugin generates the trend report for <a href='http://carbidehelp.nokia.com/help/index.jsp?topic=/com.nokia.carbide.cpp.codescanner/html/pref_codescanner_01.htm'>Codescanner<\/a> , a tool which uses static analysis to  look for bugs, hints and other useful information in Symbian C+\\+ source code. ",
       "labels": ["report"],
       "name": "codescanner",
@@ -688,7 +712,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.328"
       }],
-      "developers": [{"developerId": "S0011918"}],
+      "developers": [      {
+        "developerId": "gbois",
+        "name": "Gregory Boissinot"
+      }],
       "excerpt": "The objective is to aggregate archived artifacts from several jobs into a shared directory. For each job, only archived artifacts of the last success build will be copied. ",
       "labels": ["upload"],
       "name": "copyarchiver",
@@ -1030,6 +1057,23 @@ updateCenter.post(
       "version": "0.2.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DocLinks+Plugin"
     },
+    "downstream-buildview":     {
+      "buildDate": "Dec 30, 2009",
+      "dependencies": [],
+      "developers": [{"developerId": "shinod.mohandas"}],
+      "labels":       [
+        "report",
+        "ui",
+        "misc"
+      ],
+      "name": "downstream-buildview",
+      "releaseTimestamp": "2009-12-30T18:14:50.00Z",
+      "requiredCore": "1.323",
+      "title": "Downstream buildview plugin",
+      "url": "http://hudson-ci.org/download/plugins/downstream-buildview/1.0/downstream-buildview.hpi",
+      "version": "1.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Downstream+buildview+plugin"
+    },
     "downstream-ext":     {
       "buildDate": "Dec 05, 2009",
       "dependencies": [],
@@ -1099,7 +1143,10 @@ updateCenter.post(
           "version": "1.337"
         }
       ],
-      "developers": [{"developerId": "hafner"}],
+      "developers": [      {
+        "developerId": "drulli",
+        "name": "Ulli Hafner"
+      }],
       "excerpt": "This plugin generates the trend report for duplicate code checkers like <a href='http://pmd.sourceforge.net/cpd.html'>CPD<\/a>. ",
       "labels":       [
         "maven",
@@ -1189,7 +1236,10 @@ updateCenter.post(
     "extended-read-permission":     {
       "buildDate": "Oct 05, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "dty"}],
+      "developers": [      {
+        "developerId": "dty",
+        "name": "Dean Yu"
+      }],
       "excerpt": "This plugin enables the Extended Read permission in Hudson 1.324 and newer.  ",
       "labels": ["user"],
       "name": "extended-read-permission",
@@ -1228,7 +1278,10 @@ updateCenter.post(
           "version": "1.337"
         }
       ],
-      "developers": [{"developerId": "hafner"}],
+      "developers": [      {
+        "developerId": "drulli",
+        "name": "Ulli Hafner"
+      }],
       "excerpt": "This plugin generates the trend report for <a href='http://findbugs.sourceforge.net/'>FindBugs<\/a>, an open source program which uses static analysis to  look for bugs in Java code.&nbsp; ",
       "labels":       [
         "maven",
@@ -1289,7 +1342,7 @@ updateCenter.post(
     "gcal":     {
       "buildDate": "Dec 28, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [{"name": "Arnaud Lacour"}],
       "excerpt": "This plugin publishes build records over to <a href='http://www.google.com/calendar/'>Google Calendar<\/a>",
       "labels":       [
         "external",
@@ -1445,24 +1498,30 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Green+Balls"
     },
     "grinder":     {
-      "buildDate": "Apr 12, 2009",
+      "buildDate": "Dec 29, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "eivindw"}],
+      "developers": [      {
+        "developerId": "eivindw",
+        "name": "Eivind B Waaler"
+      }],
       "excerpt": "This plugin reads output result files from <a href='http://grinder.sourceforge.net/'>Grinder<\/a> performance tests, and will generate reports showing test results for every build and trend reports showing performance results across builds.",
       "labels": ["report"],
       "name": "grinder",
-      "previousTimestamp": "2009-01-24T06:49:34.00Z",
-      "releaseTimestamp": "2009-04-12T15:20:46.00Z",
-      "requiredCore": "1.299",
+      "previousTimestamp": "2009-04-12T15:20:46.00Z",
+      "releaseTimestamp": "2009-12-30T07:26:38.00Z",
+      "requiredCore": "1.319",
       "title": "Grinder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/grinder/1.2/grinder.hpi",
-      "version": "1.2",
+      "url": "http://hudson-ci.org/download/plugins/grinder/1.3/grinder.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Grinder+Plugin"
     },
     "groovy":     {
       "buildDate": "Dec 29, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "dvrzalik",
+        "name": "David Vrzalik"
+      }],
       "excerpt": "This plugin adds the ability to directly execute Groovy code.",
       "labels": ["builder"],
       "name": "groovy",
@@ -1637,18 +1696,25 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/IRC+Plugin"
     },
     "ivy":     {
-      "buildDate": "Mar 19, 2009",
+      "buildDate": "Dec 29, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "jeff"}],
+      "developers":       [
+        {"developerId": "hibou"},
+                {
+          "developerId": "martinficker",
+          "name": "Martin Ficker"
+        },
+        {"developerId": "jmetcalf"}
+      ],
       "excerpt": "This plugin automatically configures a build to trigger other builds based on dependency configuration via <a href='http://ant.apache.org/ivy'>Apache Ivy<\/a>.",
       "labels": ["trigger"],
       "name": "ivy",
-      "previousTimestamp": "2009-02-02T04:29:30.00Z",
-      "releaseTimestamp": "2009-03-20T04:36:34.00Z",
-      "requiredCore": "1.292",
+      "previousTimestamp": "2009-03-20T04:36:34.00Z",
+      "releaseTimestamp": "2009-12-30T05:55:36.00Z",
+      "requiredCore": "1.324",
       "title": "Ivy Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ivy/0.3/ivy.hpi",
-      "version": "0.3",
+      "url": "http://hudson-ci.org/download/plugins/ivy/0.4/ivy.hpi",
+      "version": "0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ivy+Plugin"
     },
     "jabber":     {
@@ -1720,7 +1786,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.7"
       }],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "kohsuke",
+        "name": "Kohsuke Kawaguchi"
+      }],
       "excerpt": "This plugin extends Hudson for projects hosted on java.net by providing various capabilities",
       "labels": ["external"],
       "name": "javanet",
@@ -1735,7 +1804,10 @@ updateCenter.post(
     "javanet-uploader":     {
       "buildDate": "Dec 29, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "kohsuke",
+        "name": "Kohsuke Kawaguchi"
+      }],
       "excerpt": "This plugin uses <a href='https://javanettasks.dev.java.net/'>java.net tasks library<\/a> to make Hudson capable of posting artifacts to java.net",
       "labels":       [
         "external",
@@ -1965,23 +2037,28 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JUnit+Attachments+Plugin"
     },
     "jython":     {
-      "buildDate": "Jul 18, 2009",
+      "buildDate": "Dec 29, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "tyler"}],
+      "developers": [      {
+        "developerId": "rtyler",
+        "email": "tyler@slide.com",
+        "name": "R. Tyler Ballance"
+      }],
       "excerpt": "Adds the ability to execute Jython script from within the JVM",
       "labels": ["builder"],
       "name": "jython",
-      "releaseTimestamp": "2009-07-19T01:34:42.00Z",
-      "requiredCore": "1.300",
+      "previousTimestamp": "2009-07-19T01:34:42.00Z",
+      "releaseTimestamp": "2009-12-30T05:27:44.00Z",
+      "requiredCore": "1.319",
       "title": "Jython Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jython/1.0/jython.hpi",
-      "version": "1.0",
+      "url": "http://hudson-ci.org/download/plugins/jython/1.1/jython.hpi",
+      "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Jython+Plugin"
     },
     "kagemai":     {
       "buildDate": "Dec 29, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [{"developerId": "yamkazu"}],
       "excerpt": "This plugin integrates <a href='http://www.daifukuya.com/kagemai/'>Kagemai<\/a> to Hudson.",
       "labels": ["external"],
       "name": "kagemai",
@@ -2154,25 +2231,28 @@ updateCenter.post(
       "version": "1.0"
     },
     "m2release":     {
-      "buildDate": "Aug 21, 2009",
+      "buildDate": "Dec 29, 2009",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
-        "version": "1.316"
+        "version": "1.318"
       }],
-      "developers": [{"developerId": "nordj"}],
+      "developers": [      {
+        "developerId": "teilo",
+        "name": "James Nord"
+      }],
       "excerpt": "This plugin allows you to perform a release build using the <a href='http://maven.apache.org/plugins/maven-release-plugin/'>maven-release-plugin<\/a> from within Hudson. ",
       "labels":       [
         "buildwrapper",
         "maven"
       ],
       "name": "m2release",
-      "previousTimestamp": "2009-07-24T20:42:16.00Z",
-      "releaseTimestamp": "2009-08-21T18:26:44.00Z",
-      "requiredCore": "1.316",
+      "previousTimestamp": "2009-08-21T18:26:44.00Z",
+      "releaseTimestamp": "2009-12-30T05:00:42.00Z",
+      "requiredCore": "1.318",
       "title": "M2 Release Plugin",
-      "url": "http://hudson-ci.org/download/plugins/m2release/0.3.3/m2release.hpi",
-      "version": "0.3.3",
+      "url": "http://hudson-ci.org/download/plugins/m2release/0.3.4/m2release.hpi",
+      "version": "0.3.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/M2+Release+Plugin"
     },
     "mantis":     {
@@ -2407,7 +2487,10 @@ updateCenter.post(
     "next-build-number":     {
       "buildDate": "Oct 12, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "dty"}],
+      "developers": [      {
+        "developerId": "dty",
+        "name": "Dean Yu"
+      }],
       "excerpt": "This is a simple plugin that changes the next build number Hudson will use for a job.",
       "labels": ["misc"],
       "name": "next-build-number",
@@ -2582,7 +2665,16 @@ updateCenter.post(
     "port-allocator":     {
       "buildDate": "Dec 28, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers":       [
+                {
+          "developerId": "ramapulavarthi",
+          "name": "Rama Pulavarthi"
+        },
+                {
+          "developerId": "kohsuke",
+          "name": "Kohsuke Kawaguchi"
+        }
+      ],
       "excerpt": "Assigns unique TCP port addresses to jobs so that jobs executed concurrently won't collide with each other. Also performs clean ups to kill off daemons that are forked by jobs.",
       "labels": ["misc"],
       "name": "port-allocator",
@@ -2766,7 +2858,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.1"
       }],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "gaooh",
+        "name": "Akiko Asami"
+      }],
       "excerpt": "This plugin integrates <a href='http://www.redmine.org/'>Redmine<\/a> into Hudson (there's a <a href='http://d.hatena.ne.jp/couger/20090727'>plugin for Redmine<\/a> that integrates Hudson from the Redmine side, too.)",
       "labels": ["external"],
       "name": "redmine",
@@ -2866,7 +2961,10 @@ updateCenter.post(
     "schedule-failed-builds":     {
       "buildDate": "Dec 28, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "sfritz",
+        "name": "Stefan Fritz"
+      }],
       "excerpt": "Allows you to retry failed Hudson builds every n minutes.",
       "labels": ["trigger"],
       "name": "schedule-failed-builds",
@@ -3374,7 +3472,10 @@ updateCenter.post(
           "version": "1.337"
         }
       ],
-      "developers": [{"developerId": "hafner"}],
+      "developers": [      {
+        "developerId": "drulli",
+        "name": "Ulli Hafner"
+      }],
       "excerpt": "This plugin scans the workspace files for open tasks and generates a trend report.",
       "labels":       [
         "report",
@@ -3414,7 +3515,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.319"
       }],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "reikje",
+        "name": "Reik Schatz"
+      }],
       "excerpt": "This plugin generates trend reports for the <a href='http://code.google.com/p/testability-explorer/'>Testability Explorer<\/a>, an open source program which uses byte-code analysis to look for testability pitfalls in Java code.&nbsp; ",
       "labels": ["report"],
       "name": "testabilityexplorer",
@@ -3482,7 +3586,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.7"
       }],
-      "developers": [{"developerId": "tom"}],
+      "developers": [      {
+        "developerId": "huybrechts",
+        "name": "Tom Huybrechts"
+      }],
       "excerpt": "Lets one project track the Subversion revisions that are checked out for another project. ",
       "labels": ["scm-related"],
       "name": "tracking-svn",
@@ -3541,7 +3648,7 @@ updateCenter.post(
     "url-change-trigger":     {
       "buildDate": "Dec 29, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [{"developerId": "dfabulich"}],
       "excerpt": "The URL Change Trigger plugin allows you to trigger a Hudson build when the content of a URL changes.",
       "labels": ["trigger"],
       "name": "url-change-trigger",
@@ -3594,7 +3701,7 @@ updateCenter.post(
         "optional": false,
         "version": "1.8"
       }],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [{"name": "Mike Salnikov"}],
       "excerpt": "This plugin integrates <a href='http://www.viewvc.org'>ViewVC<\/a> browser interface for CVS and Subversion with Hudson.",
       "labels": ["scm-related"],
       "name": "viewVC",
@@ -3613,7 +3720,10 @@ updateCenter.post(
         "optional": false,
         "version": "1.319"
       }],
-      "developers": [{"developerId": "mindless"}],
+      "developers": [      {
+        "developerId": "peterkittreilly",
+        "name": "Peter Reilly"
+      }],
       "excerpt": "This plug-in generates reports static code violation detectors such as checkstyle, pmd, cpd, findbugs, fxcop, stylecop and simian. ",
       "labels":       [
         "maven",
@@ -3672,7 +3782,10 @@ updateCenter.post(
           "version": "1.337"
         }
       ],
-      "developers": [{"developerId": "hafner"}],
+      "developers": [      {
+        "developerId": "drulli",
+        "name": "Ulli Hafner"
+      }],
       "excerpt": "This plugin generates the trend report for compiler warnings in the console log or in log files. ",
       "labels":       [
         "maven",
@@ -3793,8 +3906,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "e7Ae3EFKTQKmEv/3y6GrbzUcGaA=",
-    "signature": "j/Psd0LA/3qM9XI5nFxhHofeu6Lum9bzmnNQ3W1dNqf5qzc2vT+zwTDeHlECm6W+veqBkBtdJxmKdDOHOvshVfBE/s76x5o9BwWGgk35xHAokZe3hQ4nlUdppoAm7sDTSjzpj5+nw2qoNzYv9s1om0gPHYa3dxwA156Dck5t8L4DBPDhoTfDHV2begM8J0yGiUklO94dNZ+zzURn2v60/xb1nwQXH36TvGX5A8lr0F/+o5lvlbyHRRpeQnhFcm+k69118w0BRDNbxF12iecRNVro3Z/13THEo5jEM63Me5tCoFsn0U/PKTeb6UanHsNNDgD1KDB2v4SEuXw4I7QysQ=="
+    "digest": "xtHVBScT0w46/1oJh6hnRpBJ/TY=",
+    "signature": "FrTAhi29OJcqNhQDGUnfpAu92rhk3cR2oEaFUcAPNRcHprs0ptFLx0A70Ju+wpiK2p2rSDyOckfjX3q46S+fahpLD0+oCOltwfVShiCIgRM41DiIhxmVJaQhThgSjTqivXEExF3+/A1Ao0sSH7XcswfgT1rFfhLk8Q2xne8iUl98nx7SOsXwLWopX5CMUmL3nNOArhljT5pQnVwd6XzaFmyaz1bWVq73VZKuBfDBZ9QJPootM6rsk5evu5jVyqAX2ryY+gu2UPDiRaVOjVQVJePgIzZ4ChgoksGRW4yBfDo3/+6CXPOZ+24of32tw67FGMF59Kg3WOBlU1jejFpTRg=="
   },
   "updateCenterVersion": "1"
 }
