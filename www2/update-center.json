@@ -461,17 +461,27 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ChuckNorris+Plugin"
     },
     "ci-game":     {
-      "buildDate": "Sep 18, 2009",
+      "buildDate": "Jan 03, 2010",
       "dependencies":       [
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.339"
+        },
                 {
           "name": "checkstyle",
           "optional": true,
-          "version": "2.0"
+          "version": "3.1"
+        },
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.0"
         },
                 {
           "name": "findbugs",
           "optional": true,
-          "version": "3.0"
+          "version": "4.0"
         },
                 {
           "name": "violations",
@@ -481,32 +491,36 @@ updateCenter.post(
                 {
           "name": "tasks",
           "optional": true,
-          "version": "3.0"
+          "version": "4.0"
         },
                 {
           "name": "pmd",
           "optional": true,
-          "version": "2.0"
+          "version": "3.1"
         },
                 {
           "name": "warnings",
           "optional": true,
-          "version": "2.0"
+          "version": "3.0"
         }
       ],
-      "developers": [{"developerId": "hudson"}],
+      "developers": [      {
+        "developerId": "redsolo",
+        "email": "eramfelt@gmail.com",
+        "name": "Erik Ramfelt"
+      }],
       "excerpt": "This plugin introduces a game where users gets point on improving the builds.",
       "labels":       [
         "misc",
         "maven"
       ],
       "name": "ci-game",
-      "previousTimestamp": "2009-09-15T04:48:50.00Z",
-      "releaseTimestamp": "2009-09-18T18:33:26.00Z",
-      "requiredCore": "1.322",
+      "previousTimestamp": "2009-09-18T18:33:26.00Z",
+      "releaseTimestamp": "2010-01-04T02:17:52.00Z",
+      "requiredCore": "1.339",
       "title": "The Continuous Integration Game plugin",
-      "url": "http://hudson-ci.org/download/plugins/ci-game/1.15/ci-game.hpi",
-      "version": "1.15",
+      "url": "http://hudson-ci.org/download/plugins/ci-game/1.16/ci-game.hpi",
+      "version": "1.16",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/The+Continuous+Integration+Game+plugin"
     },
     "claim":     {
@@ -1016,7 +1030,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Description+Setter+Plugin"
     },
     "dimensionsscm":     {
-      "buildDate": "Jan 01, 2010",
+      "buildDate": "Jan 03, 2010",
       "dependencies": [],
       "developers": [{"developerId": "TPayne"}],
       "excerpt": "This plugin integrates Hudson with <a href='http://www.serena.com/products/dimensions-cm-configuration-management/index.html'>Dimensions<\/a>, the Serena SCM solution.",
@@ -1026,12 +1040,12 @@ updateCenter.post(
         "scm"
       ],
       "name": "dimensionsscm",
-      "previousTimestamp": "2009-12-31T01:33:56.00Z",
-      "releaseTimestamp": "2010-01-02T00:02:52.00Z",
+      "previousTimestamp": "2010-01-02T00:02:52.00Z",
+      "releaseTimestamp": "2010-01-04T01:15:52.00Z",
       "requiredCore": "1.313",
       "title": "Dimensions Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.6.2/dimensionsscm.hpi",
-      "version": "0.6.2",
+      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.6.3/dimensionsscm.hpi",
+      "version": "0.6.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dimensions+Plugin"
     },
     "disk-usage":     {
@@ -1337,6 +1351,23 @@ updateCenter.post(
       "url": "http://hudson-ci.org/download/plugins/findbugs/4.1/findbugs.hpi",
       "version": "4.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FindBugs+Plugin"
+    },
+    "fortify360":     {
+      "buildDate": "Jan 03, 2010",
+      "dependencies": [],
+      "developers": [{"developerId": "sng"}],
+      "excerpt": "Fortify 360 FPR post-processing and uploading to Fortify 360 Server",
+      "labels":       [
+        "report",
+        "external"
+      ],
+      "name": "fortify360",
+      "releaseTimestamp": "2010-01-04T06:56:46.00Z",
+      "requiredCore": "1.323",
+      "title": "Fortify 360 Plugin",
+      "url": "http://hudson-ci.org/download/plugins/fortify360/1.0/fortify360.hpi",
+      "version": "1.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Fortify+360+Plugin"
     },
     "ftppublisher":     {
       "buildDate": "Aug 06, 2008",
@@ -2639,6 +2670,7 @@ updateCenter.post(
         "email": "georges.bossert@caps-entreprise.com",
         "name": "Georges Bossert"
       }],
+      "excerpt": "This plugin generates global and trend reports for tests results analysis. Based on an open XML tests results format, the plugin parses the generated files and publish statistics, reports and analysis on the current health of the project.",
       "labels": ["report"],
       "name": "perfpublisher",
       "releaseTimestamp": "2010-01-03T00:23:30.00Z",
@@ -4011,8 +4043,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "x79nsQQF7mjv73vOfuOWgwumdFE=",
-    "signature": "vM9A6ku5jOL8VZTRmQUH7lngeu0WS1JuDD7dQPfguDv5GyqOScPPh9H34jOf0ZsStQ9VC7EPCS4TGt60aEaZcpxnw+nFPGflS8uN1yAMGRRSMFekpqaZOlA8mMFm12c6+oWpcAsUtbwTjbPovVX9v21UBynY8T11qlXWV4MJkZM5REdkkJ2Detmr05xfgg/EFgjj4UL20xy3+OBNhiIA+uU0EsruZc9pYIKMlZJWTzggaIuS6+9ltwPfFseQAaVbggXK8VFv1Nf+g8EegU3qqJLLUs5Fyj6pbqXiKhWXEME+xvPUyCAF7Y+Z5o8kOX/mILWIXifsoXK7fSV8F+j4Cw=="
+    "digest": "Hrb7nPspT0StyZ60SxKcwyG5s4E=",
+    "signature": "fP+kUIiz2DoKZKrbABFLlfSyACbjulpK7tlG5sauF0T/H1w23QRod3ZptGgW2MgkyEkrkH63KD7P9C6AURsN0qhc+70v0pXbsHEV/prHY4tpmVDSO6FRLvSRj1sERuguSTS662mVWP9TCUinRPXBUBb66gfK7fWwFk0ip9uUUmT4f4XNcfe3iwW97dSe1B/AaJhLGNEXv0KXIdfwYOoipuPsKOfWcLs/n8BLqqjU2+EhdxMt3y7UBrJw4iFtu5AgD3RJLd8iviOk/bJL8eoFa4g2+uEMjC0eidHGQIRL+nhwdZYWw80n0AKzBFyNeir8vUOt7tPYXose7Yiis0xHQg=="
   },
   "updateCenterVersion": "1"
 }
