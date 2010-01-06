@@ -29,6 +29,7 @@ import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
+import hudson.model.TaskListener;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -61,6 +62,6 @@ public abstract class AbstractTestResultParser implements ExtensionPoint {
      */
     public abstract AbstractTestResult parse(String testResultLocations,
                                        AbstractBuild build, Launcher launcher,
-                                       BuildListener listener)
+                                       TaskListener listener)
             throws InterruptedException, IOException;
 }

@@ -23,10 +23,9 @@
  */
 package hudson.tasks.junit;
 
+import hudson.model.TaskListener;
 import hudson.tasks.test.AbstractTestResultParser;
-import hudson.tasks.test.AbstractTestResult;
 import hudson.model.AbstractBuild;
-import hudson.model.BuildListener;
 import hudson.*;
 import hudson.remoting.VirtualChannel;
 
@@ -55,7 +54,7 @@ public class JUnitParser extends AbstractTestResultParser {
     @Override
     public TestResult parse(String testResultLocations,
                                        AbstractBuild build, Launcher launcher,
-                                       BuildListener listener)
+                                       TaskListener listener)
             throws InterruptedException, IOException
     {
         final long buildTime = build.getTimestamp().getTimeInMillis();
