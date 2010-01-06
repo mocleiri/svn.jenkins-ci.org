@@ -46,8 +46,11 @@ import org.kohsuke.stapler.export.ExportedBean;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Common base class for recording test result.
@@ -61,6 +64,8 @@ import java.util.List;
 @ExportedBean
 public abstract class AbstractTestResultAction<T extends AbstractTestResultAction> implements HealthReportingAction {
     public final AbstractBuild<?,?> owner;
+
+    private Map<String,String> descriptions = new ConcurrentHashMap<String, String>();
 
     protected AbstractTestResultAction(AbstractBuild owner) {
         this.owner = owner;
@@ -332,7 +337,29 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
         return relPath;
     }
 
-    public abstract String getDescription(TestObject object);
+    /**
+     * {@link TestObject}s do not have their own persistence mechanism, so updatable data of {@link TestObject}s
+     * need to be persisted by the owning {@link AbstractTestResultAction}, and this method and
+     * {@link #setDescription(TestObject, String)} provides that logic.
+     *
+     * <p>
+     * The default implementation stores information in the 'this' object.
+     *
+     * @see TestObject#getDescription() 
+     */
+    protected String getDescription(TestObject object) {
+    	return descriptions.get(object.getId());
+    }
 
-    public abstract void setDescription(TestObject object, String description);
+    protected void setDescription(TestObject object, String description) {
+    	descriptions.put(object.getId(), description);
+    }
+
+    public Object readResolve() {
+    	if (descriptions == null) {
+    		descriptions = new ConcurrentHashMap<String, String>();
+    	}
+    	
+    	return this;
+    }
 }

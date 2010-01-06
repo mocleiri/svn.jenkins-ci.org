@@ -152,14 +152,28 @@ public class AggregatedTestResultPublisher extends Recorder {
             return this;
         }
 
+        /**
+         * Since there's no TestObject that points this action as the owner
+         * (aggregated {@link TestObject}s point to their respective real owners, not 'this'),
+         * so this method should be never invoked.
+         *
+         * @deprecated
+         *      so that IDE warns you if you accidentally try to call it.
+         */
         @Override
-        public String getDescription(TestObject object) {
-            return "";  // TODO: correct behavior?
+        protected final String getDescription(TestObject object) {
+            throw new AssertionError();
         }
 
+        /**
+         * See {@link #getDescription(TestObject)}
+         *
+         * @deprecated
+         *      so that IDE warns you if you accidentally try to call it.
+         */
         @Override
-        public void setDescription(TestObject object, String description) {
-            throw new UnsupportedOperationException(); 
+        protected final void setDescription(TestObject object, String description) {
+            throw new AssertionError();
         }
 
         /**

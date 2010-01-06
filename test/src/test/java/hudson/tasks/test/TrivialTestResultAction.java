@@ -69,16 +69,6 @@ public class TrivialTestResultAction extends AbstractTestResultAction<TrivialTes
         return result;
     }
 
-    @Override
-    public String getDescription(TestObject object) {
-        return "no description because this is trivial";
-    }
-
-    @Override
-    public void setDescription(TestObject object, String description) {
-        throw new UnsupportedOperationException();
-    }
-
     /**
      * Returns the object that is responsible for processing web requests.
      *
@@ -87,7 +77,6 @@ public class TrivialTestResultAction extends AbstractTestResultAction<TrivialTes
      *         {@link org.kohsuke.stapler.StaplerProxy} look-up is done and {@code this} object
      *         processes the request.
      */
-    @Override
     public Object getTarget() {
         return getResult();
     }

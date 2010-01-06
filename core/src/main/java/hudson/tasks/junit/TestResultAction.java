@@ -63,7 +63,6 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
     private int skipCount;
     private Integer totalCount;
     private List<Data> testData = new ArrayList<Data>();
-    private Map<String,String> descriptions = new ConcurrentHashMap<String, String>();
 
     public TestResultAction(AbstractBuild owner, TestResult result, BuildListener listener) {
         super(owner);
@@ -160,14 +159,6 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
         return getResult();
     }
     
-    public String getDescription(TestObject object) {
-    	return descriptions.get(object.getId());
-    }
-    
-    public void setDescription(TestObject object, String description) {
-    	descriptions.put(object.getId(), description);
-    }
-    
     public List<TestAction> getActions(TestObject object) {
     	List<TestAction> result = new ArrayList<TestAction>();
 	// Added check for null testData to avoid NPE from issue 4257.
@@ -202,9 +193,7 @@ public class TestResultAction extends AbstractTestResultAction<TestResultAction>
     }
 
     public Object readResolve() {
-    	if (descriptions == null) {
-    		descriptions = new ConcurrentHashMap<String, String>();
-    	}
+        super.readResolve(); // let it do the post-deserialization work
     	if (testData == null) {
     		testData = new ArrayList<Data>();
     	}
