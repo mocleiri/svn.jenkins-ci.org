@@ -33,7 +33,8 @@ import hudson.model.Result;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.ArrayList;
+
+import static java.util.Collections.emptyList;
 
 
 /**
@@ -42,12 +43,6 @@ import java.util.ArrayList;
  * Subclasses must add @Exported annotation to the fields they want to export. 
  */
 public abstract class AbstractTestResult extends TestObject implements ExtensionPoint {
-
-    /**
-     * An empty collection, useful as a singleton to return when subclasses
-     * need to return an empty list of AbstractTestResults, from getXXXTests methods.
-     */
-    public static final Collection<AbstractTestResult> EMPTY_COLLECTION = Collections.unmodifiableCollection(new ArrayList<AbstractTestResult>());
 
     /**
      * If the concept of a parent action is important to a subclass, then it should
@@ -183,7 +178,7 @@ public abstract class AbstractTestResult extends TestObject implements Extension
      * @return the children of this test result, if any, or an empty collection
      */
     public Collection<? extends AbstractTestResult> getFailedTests() {
-        return EMPTY_COLLECTION;
+        return emptyList();
     }
 
 
@@ -192,7 +187,7 @@ public abstract class AbstractTestResult extends TestObject implements Extension
      * @return the children of this test result, if any, or an empty collection
      */
     public Collection<? extends AbstractTestResult> getPassedTests() {
-        return EMPTY_COLLECTION;
+        return emptyList();
     }
 
     /**
@@ -200,7 +195,7 @@ public abstract class AbstractTestResult extends TestObject implements Extension
      * @return the children of this test result, if any, or an empty list
      */
     public Collection<? extends AbstractTestResult> getSkippedTests() {
-        return EMPTY_COLLECTION;
+        return emptyList();
     }
 
     /**

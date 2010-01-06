@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Logger;
 
+import static java.util.Collections.emptyList;
+
 /**
  * The simplest possible case result, with no language ties.
  * Acts as if it passed, has no children, and has no failed or skipped tests.
@@ -86,7 +88,7 @@ public class SimpleCaseResult extends AbstractTestResult {
      */
     @Override
     public Collection<? extends AbstractTestResult> getFailedTests() {
-        return AbstractTestResult.EMPTY_COLLECTION;
+        return emptyList();
     }
 
     /**
@@ -106,7 +108,7 @@ public class SimpleCaseResult extends AbstractTestResult {
      */
     @Override
     public Collection<? extends AbstractTestResult> getSkippedTests() {
-        return AbstractTestResult.EMPTY_COLLECTION;
+        return emptyList();
     }
 
     /**

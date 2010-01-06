@@ -34,6 +34,8 @@ import java.text.ParseException;
 import java.util.*;
 import java.util.logging.Logger;
 
+import static java.util.Collections.emptyList;
+
 /**
  * One test result.
  *
@@ -57,11 +59,6 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
     private transient SuiteResult parent;
 
     private transient ClassResult classResult;
-
-    /** A list only containing this one result. Useful for returning
-     * from getXXXTests() methods. 
-     */
-    private final List<CaseResult> listOnlyContainingThisObject = new ArrayList<CaseResult>(1);
 
     /**
      * Some tools report stdout and stderr at testcase level (such as Maven surefire plugin), others do so at
@@ -128,7 +125,6 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
         skipped = isMarkedAsSkipped(testCase);
         stdout = testCase.elementText("system-out");
         stderr = testCase.elementText("system-err");
-        listOnlyContainingThisObject.add(this); 
     }
 
     /**
@@ -148,7 +144,6 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
         this.skipped = skipped;
         this.stdout = stdout;
         this.stderr = stderr;
-        listOnlyContainingThisObject.add(this); 
     }
     
     public ClassResult getParent() {
@@ -218,13 +213,13 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      * Gets the version of {@link #getName()} that's URL-safe.
      */
     public @Override String getSafeName() {
-        StringBuffer buf = new StringBuffer(testName);
+        StringBuilder buf = new StringBuilder(testName);
         for( int i=0; i<buf.length(); i++ ) {
             char ch = buf.charAt(i);
             if(!Character.isJavaIdentifierPart(ch))
                 buf.setCharAt(i,'_');
         }
-        Collection<CaseResult> siblings = (classResult ==null ? Collections.EMPTY_LIST: classResult.getChildren());
+        Collection<CaseResult> siblings = (classResult ==null ? Collections.<CaseResult>emptyList(): classResult.getChildren());
         return uniquifyName(siblings, buf.toString());
     }
 
@@ -377,10 +372,7 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      */
     @Override
     public Collection<? extends AbstractTestResult> getFailedTests() {
-        if (!isPassed())
-            return listOnlyContainingThisObject;
-        else
-            return AbstractTestResult.EMPTY_COLLECTION;
+        return singletonListOrEmpty(!isPassed());
     }
 
     /**
@@ -390,10 +382,7 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      */
     @Override
     public Collection<? extends AbstractTestResult> getPassedTests() {
-        if (isPassed())
-            return listOnlyContainingThisObject;
-        else
-            return AbstractTestResult.EMPTY_COLLECTION;
+        return singletonListOrEmpty(isPassed());
     }
 
     /**
@@ -403,10 +392,14 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      */
     @Override
     public Collection<? extends AbstractTestResult> getSkippedTests() {
-        if (isSkipped())
-            return listOnlyContainingThisObject;
+        return singletonListOrEmpty(isSkipped());
+    }
+
+    private Collection<? extends AbstractTestResult> singletonListOrEmpty(boolean f) {
+        if (f)
+            return Collections.singletonList(this);
         else
-            return AbstractTestResult.EMPTY_COLLECTION;
+            return emptyList();
     }
 
     /**
