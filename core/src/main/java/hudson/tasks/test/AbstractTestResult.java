@@ -42,7 +42,7 @@ import static java.util.Collections.emptyList;
  * language or implementation specifics.
  * Subclasses must add @Exported annotation to the fields they want to export. 
  */
-public abstract class AbstractTestResult extends TestObject implements ExtensionPoint {
+public abstract class AbstractTestResult extends TestObject {
 
     /**
      * If the concept of a parent action is important to a subclass, then it should
@@ -83,15 +83,6 @@ public abstract class AbstractTestResult extends TestObject implements Extension
     public /* abstract */ String getTitle(){
         return "";
     }
-    /**
-     * Gets all extensions that implement the AbstractTestResult
-     * exentsion point.
-     * @return list of extensions 
-     */
-    public static ExtensionList<AbstractTestResult> all() {
-        return Hudson.getInstance().getExtensionList(AbstractTestResult.class);
-    }
-
 
     /**
      * Mark a build as unstable if there are failures. Otherwise, leave the
