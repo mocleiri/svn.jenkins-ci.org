@@ -62,12 +62,6 @@ public class AbstractTestResultExtensionTest extends HudsonTestCase {
         AbstractBuild<?,?> ownerBuild = abstractResult.getOwner();
         assertNotNull("we should have an owner", ownerBuild);
         assertNotNull("we should have a list of test actions", abstractResult.getTestActions());
-        // called from some jelly
-        String description = abstractResult.getDescription();
-        assertNotNull(description); 
-
-
-
 
         // Validate that there are test results where I expect them to be:
         HudsonTestCase.WebClient wc = new HudsonTestCase.WebClient();
