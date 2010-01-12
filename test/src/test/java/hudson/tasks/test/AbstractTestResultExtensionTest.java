@@ -43,16 +43,6 @@ import java.util.concurrent.TimeoutException;
  */
 public class AbstractTestResultExtensionTest extends HudsonTestCase {
 
-    public void testFindingTrivialExtension() {
-
-        ExtensionList<AbstractTestResult> all = AbstractTestResult.all();
-        assertFalse("we should have at least one AbstractTestResult", all.isEmpty());
-
-        for (AbstractTestResult result : all) {
-            System.out.println("found result: " + result);
-        }
-    }
-
     public void testTrivialRecorder() throws Exception, TimeoutException, ExecutionException, InterruptedException {
         FreeStyleProject project = createFreeStyleProject("trivialtest");
         TrivialTestResultRecorder recorder = new TrivialTestResultRecorder();
