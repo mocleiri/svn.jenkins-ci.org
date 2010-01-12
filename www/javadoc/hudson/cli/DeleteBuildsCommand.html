@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DeleteBuildsCommand (Hudson main module 1.339 API)
+DeleteBuildsCommand (Hudson main module 1.340 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2009-12-24">
+<META NAME="date" CONTENT="2010-01-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DeleteBuildsCommand (Hudson main module 1.339 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DeleteBuildsCommand (Hudson main module 1.339 API)";
+        parent.document.title="DeleteBuildsCommand (Hudson main module 1.340 API)";
     }
 }
 </SCRIPT>
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.cli.AbstractBuildRangeCommand">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -95,7 +95,8 @@ Class DeleteBuildsCommand</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">hudson.cli.CLICommand</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.cli.DeleteBuildsCommand</B>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">hudson.cli.AbstractBuildRangeCommand</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.cli.DeleteBuildsCommand</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A></DD>
@@ -103,7 +104,7 @@ Class DeleteBuildsCommand</H2>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1"><A HREF="../../hudson/Extension.html" title="annotation in hudson">@Extension</A>
-</FONT>public class <B>DeleteBuildsCommand</B><DT>extends <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A></DL>
+</FONT>public class <B>DeleteBuildsCommand</B><DT>extends <A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A></DL>
 </PRE>
 
 <P>
@@ -145,21 +146,14 @@ Deletes builds records in a bulk.
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/cli/DeleteBuildsCommand.html#job">job</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.cli.AbstractBuildRangeCommand"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class hudson.cli.<A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/cli/DeleteBuildsCommand.html#range">range</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD><CODE><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html#job">job</A>, <A HREF="../../hudson/cli/AbstractBuildRangeCommand.html#range">range</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_hudson.cli.CLICommand"><!-- --></A>
@@ -198,6 +192,14 @@ Deletes builds records in a bulk.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/DeleteBuildsCommand.html#act(java.util.List)">act</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&gt;&nbsp;builds)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/DeleteBuildsCommand.html#getShortDescription()">getShortDescription</A></B>()</CODE>
 
@@ -212,13 +214,14 @@ Deletes builds records in a bulk.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called while producing usage.</TD>
 </TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.cli.AbstractBuildRangeCommand"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.cli.<A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A></B></TH>
+</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/cli/DeleteBuildsCommand.html#run()">run</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes the command, and return the exit code.</TD>
+<TD><CODE><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html#run()">run</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.cli.CLICommand"><!-- --></A>
@@ -241,35 +244,6 @@ Deletes builds records in a bulk.
 </TABLE>
 &nbsp;
 <P>
-
-<!-- ============ FIELD DETAIL =========== -->
-
-<A NAME="field_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Field Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="job"><!-- --></A><H3>
-job</H3>
-<PRE>
-public <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt; <B>job</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
-<HR>
-
-<A NAME="range"><!-- --></A><H3>
-range</H3>
-<PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>range</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -335,26 +309,19 @@ protected void <B>printUsageSummary</B>(<A HREF="http://java.sun.com/j2se/1.5.0/
 </DL>
 <HR>
 
-<A NAME="run()"><!-- --></A><H3>
-run</H3>
+<A NAME="act(java.util.List)"><!-- --></A><H3>
+act</H3>
 <PRE>
-protected int <B>run</B>()
-           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+protected int <B>act</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&gt;&nbsp;builds)
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/cli/CLICommand.html#run()">CLICommand</A></CODE></B></DD>
-<DD>Executes the command, and return the exit code.
-<P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/cli/CLICommand.html#run()">run</A></CODE> in class <CODE><A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html#act(java.util.List)">act</A></CODE> in class <CODE><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A></CODE></DL>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>0 to indicate a success, otherwise an error code.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/AbortException.html" title="class in hudson">AbortException</A></CODE> - If the processing should be aborted. Hudson will report the error message
-      without stack trace, and then exits this command.
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE> - All the other exceptions cause the stack trace to be dumped, and then
-      the command exits with an error code.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -409,15 +376,15 @@ protected int <B>run</B>()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_hudson.cli.AbstractBuildRangeCommand">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2009. All Rights Reserved.
+Copyright &#169; 2010. All Rights Reserved.
 </BODY>
 </HTML>
