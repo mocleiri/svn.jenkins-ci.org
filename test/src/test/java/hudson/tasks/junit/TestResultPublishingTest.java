@@ -27,11 +27,10 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import hudson.FilePath;
-import hudson.model.FreeStyleBuild;
-import hudson.model.FreeStyleProject;
-import hudson.model.Project;
-import hudson.model.Run;
+import hudson.Functions;
+import hudson.model.*;
 import hudson.slaves.DumbSlave;
+import org.jvnet.hudson.test.Bug;
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.jvnet.hudson.test.TouchBuilder;
 import org.jvnet.hudson.test.recipes.LocalData;
@@ -202,6 +201,32 @@ public class TestResultPublishingTest extends HudsonTestCase {
     }
 
     /**
+     * Test to demonstrate bug HUDSON-5246, inter-build diffs for junit test results are wrong
+     */
+    @Bug(5246)
+    @LocalData
+    public void testInterBuildDiffs() throws IOException, SAXException {
+        List<Project> projects = this.hudson.getProjects();
+        // Make sure there's a project named TEST_PROJECT_WITH_HISTORY
+        Project proj = null;
+        for (Project p : projects) {
+            if (p.getName().equals(TEST_PROJECT_WITH_HISTORY)) proj = p;
+        }
+        assertNotNull("We should have a project named " + TEST_PROJECT_WITH_HISTORY, proj);
+
+        // Validate that there are test results where I expect them to be:
+        HudsonTestCase.WebClient wc = new HudsonTestCase.WebClient();
+        Run theRun = proj.getBuildByNumber(4);
+        assertTestResultsAsExpected(wc, theRun, "/testReport",
+                        "org.jvnet.hudson.examples.small", "12 ms", "FAILURE",
+                        /* total tests expected, diff */ 3, 0,
+                        /* fail count expected, diff */ 1, 0,
+                        /* skip count expected, diff */ 0, 0);
+
+
+    }
+
+    /**
      * Make sure the open junit publisher shows junit history
      * @throws IOException
      * @throws SAXException
@@ -250,7 +275,26 @@ public class TestResultPublishingTest extends HudsonTestCase {
 
 
   
+    void assertStringEmptyOrNull(String msg, String str) {
+        if (msg ==null)
+            return;
+        if (msg.equals(""))
+            return;
+        fail(msg + "(should be empty or null) : \'" + str + "\'"); 
+    }
 
+    void assertPaneDiffText(String msg, int expectedValue, Object paneObj) { 
+        assertTrue( "paneObj should be an HtmlElement", paneObj instanceof HtmlElement );
+        String paneText = ((HtmlElement) paneObj).asText();
+        if (expectedValue==0) {
+            assertStringEmptyOrNull(msg, paneText);
+        } else {
+            String expectedString =
+             (expectedValue >= 1 ? "+" : "-")
+                    + Math.abs(expectedValue);
+            assertEquals(msg, expectedString, paneText);
+        }
+    }
 
     void assertTestResultsAsExpected(WebClient wc, Run run, String restOfUrl,
                                      String packageName,
@@ -259,7 +303,9 @@ public class TestResultPublishingTest extends HudsonTestCase {
                                      int expectedFailCount, int expectedFailDiff,
                                      int expectedSkipCount, int expectedSkipDiff) throws IOException, SAXException {
 
-        //HtmlPage htmlPage = wc.getPage(run, "/" + restOfUrl + "/" + packageName);
+        // TODO: verify expectedResult
+        // TODO: verify expectedDuration
+
         XmlPage xmlPage = wc.goToXml(run.getUrl() + restOfUrl + "/" + packageName + "/api/xml");
         int expectedPassCount = expectedTotalTests - expectedFailCount - expectedSkipCount;
         // Verify xml results
@@ -269,6 +315,22 @@ public class TestResultPublishingTest extends HudsonTestCase {
         assertXPathValue(xmlPage, "/packageResult/name", packageName);
 
         // TODO: verify html results
+        HtmlPage testResultPage =   wc.getPage(run, restOfUrl);
+
+        // Verify inter-build diffs in html table
+        String xpathToFailDiff =  "//table[@id='testresult']//tr[td//span[text()=\"" + packageName + "\"]]/td[4]";
+        String xpathToSkipDiff =  "//table[@id='testresult']//tr[td//span[text()=\"" + packageName + "\"]]/td[6]";
+        String xpathToTotalDiff = "//table[@id='testresult']//tr[td//span[text()=\"" + packageName + "\"]]/td[last()]";
+
+        Object totalDiffObj = testResultPage.getFirstByXPath(xpathToTotalDiff);
+        assertPaneDiffText("total diff", expectedTotalDiff, totalDiffObj);
+
+        Object failDiffObj = testResultPage.getFirstByXPath(xpathToFailDiff);
+        assertPaneDiffText("failure diff", expectedFailDiff, failDiffObj);
+
+        Object skipDiffObj = testResultPage.getFirstByXPath(xpathToSkipDiff);
+        assertPaneDiffText("skip diff", expectedSkipDiff, skipDiffObj);
+
         // TODO: The link in the table for each of the three packages in the testReport table should link to a by-package page,
         // TODO: for example, http://localhost:8080/job/breakable/lastBuild/testReport/com.yahoo.breakable.misc/
 
