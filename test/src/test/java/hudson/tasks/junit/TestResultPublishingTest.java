@@ -276,9 +276,9 @@ public class TestResultPublishingTest extends HudsonTestCase {
 
   
     void assertStringEmptyOrNull(String msg, String str) {
-        if (msg ==null)
+        if (str==null)
             return;
-        if (msg.equals(""))
+        if (str.equals(""))
             return;
         fail(msg + "(should be empty or null) : \'" + str + "\'"); 
     }

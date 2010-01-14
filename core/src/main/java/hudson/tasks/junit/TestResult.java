@@ -235,12 +235,14 @@ public final class TestResult extends MetaTabulatedResult {
             sepIndex = subId.indexOf('/');
             if (sepIndex < 0) {
                 packageName = subId;
+                subId = null; 
             } else {
                 packageName = subId.substring(0, sepIndex);
                 subId = subId.substring(sepIndex + 1);
             }
         } else {
             packageName = firstElement;
+            subId = null; 
         }
         PackageResult child = byPackage(packageName);
         if (child != null) {
