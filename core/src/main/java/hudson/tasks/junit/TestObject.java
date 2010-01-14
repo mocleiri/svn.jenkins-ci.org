@@ -57,8 +57,6 @@ import org.kohsuke.stapler.export.ExportedBean;
  */
 @ExportedBean
 public abstract class TestObject extends AbstractModelObject implements Serializable {
-	private volatile transient String id;
-
     public abstract AbstractBuild<?,?> getOwner() ; 
 
    
