@@ -39,11 +39,11 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.perforce.p4java.server.P4JServer;
-import com.perforce.p4java.exception.P4JException;
-import com.perforce.p4java.client.P4JClient;
-import com.perforce.p4java.core.P4JChangeList;
-import com.perforce.p4java.core.P4JLabel;
+import com.perforce.p4java.server.IServer;
+import com.perforce.p4java.exception.P4JavaException;
+import com.perforce.p4java.client.IClient;
+import com.perforce.p4java.core.IChangelist;
+import com.perforce.p4java.core.ILabel;
 import hudson.PluginWrapper;
 
 /**
@@ -68,7 +68,7 @@ public class PerforceSCM extends SCM {
     transient String p4Exe;
     transient String p4SysDrive;
     transient String p4SysRoot;
-    transient P4JServer server;  // default connected server avail for the life of this SCM
+    transient IServer server;  // default connected server avail for the life of this SCM
 
     PerforceRepositoryBrowser browser;
 
@@ -145,11 +145,11 @@ public class PerforceSCM extends SCM {
      * Create, initialize, connect & login to the perforce server identified by a given port, user &
      * password.
      *
-     * @return a ready-to-use P4JServer instance that should have disconnect()
+     * @return a ready-to-use IServer instance that should have disconnect()
      * called before dropping.
      */
-    protected static P4JServer newServer(String port, String user, String pass)
-            throws URISyntaxException, P4JException {
+    protected static IServer newServer(String port, String user, String pass)
+            throws URISyntaxException, P4JavaException {
         PluginWrapper pw = Hudson.getInstance().getPluginManager().getPlugin("perforce");
         return P4jUtil.newServer(port, pw.getLongName(), pw.getVersion(), user, pass);
     }
@@ -157,10 +157,10 @@ public class PerforceSCM extends SCM {
     /**
      * Create, initialize, connect & login to the perforce server identified by our p4Xxx fields.
      *
-     * @return a ready-to-use P4JServer instance that should have .logout() and .disconnect()
+     * @return a ready-to-use IServer instance that should have .logout() and .disconnect()
      * called before dropping.
      */
-    protected P4JServer newServer() throws URISyntaxException, P4JException {
+    protected IServer newServer() throws URISyntaxException, P4JavaException {
         PerforcePasswordEncryptor encryptor = new PerforcePasswordEncryptor();
         return newServer(p4Port, p4User, encryptor.decryptString(p4Passwd));
     }
@@ -168,32 +168,32 @@ public class PerforceSCM extends SCM {
     /**
      * Returns the re-usable Perforce server object managed by this SCM instance.
      */
-    protected synchronized P4JServer getServer()  throws URISyntaxException, P4JException {
+    protected synchronized IServer getServer()  throws URISyntaxException, P4JavaException {
         if (server == null || !server.isConnected()) {
             server = newServer();
         }
         return server;
     }
 
-    protected synchronized void disconnectServer() throws P4JException {
+    protected synchronized void disconnectServer() throws P4JavaException {
         disconnectServer(server);
         server = null;
     }
 
-    protected synchronized void disconnectServer(P4JServer server) throws P4JException {
+    protected synchronized void disconnectServer(IServer server) throws P4JavaException {
         if (server != null && server.isConnected()) {
             server.logout();
             server.disconnect();
         }
     }
 
-    protected synchronized void disconnectServer(P4JServer server, PrintStream log) {
+    protected synchronized void disconnectServer(IServer server, PrintStream log) {
         try {
             disconnectServer(server);
             if(server != null && server.isConnected()){
                 log.println("Perforce failed to disconnect!");
             }
-        } catch (P4JException ex) {
+        } catch (P4JavaException ex) {
             logServerException(ex, log);
         }
     }
@@ -204,7 +204,7 @@ public class PerforceSCM extends SCM {
             if(server != null && server.isConnected()){
                 log.println("Perforce failed to disconnect!");
             }
-        } catch (P4JException ex) {
+        } catch (P4JavaException ex) {
             logServerException(ex, log);
         } finally {
             server = null;
@@ -291,23 +291,23 @@ public class PerforceSCM extends SCM {
         String projectPath = this.projectPath;
 
         try {
-            P4JServer server = getServer();
+            IServer server = getServer();
             
             String clientName = getEffectiveClientName(build.getBuiltOn(), workspace, listener);
-            P4JClient client = getPreparedClient(server, clientName, launcher, workspace, listener);
+            IClient client = getPreparedClient(server, clientName, launcher, workspace, listener);
 
             // Get the list of changes since the last time we looked...
             final int lastChange = getLastChange((Run) build.getPreviousBuild());
             log.println("Last sync'd change: " + lastChange);
 
-            List<P4JChangeList> changes;
+            List<IChangelist> changes;
             int newestChange = lastChange;
             if (p4Label != null) {
-                changes = new ArrayList<P4JChangeList>(0);
+                changes = new ArrayList<IChangelist>(0);
             } else {
                 newestChange = P4jUtil.latestChangeId(server);
                 if (lastChange <= 0 || lastChange >= newestChange) {
-                    changes = new ArrayList<P4JChangeList>(0);
+                    changes = new ArrayList<IChangelist>(0);
                 } else {
                     changes = P4jUtil.changesInRange(client, lastChange+1, newestChange);
                 }
@@ -380,7 +380,7 @@ public class PerforceSCM extends SCM {
         } catch (URISyntaxException e) {
             logServerException(e, log);
             //TODO(CQ) throw an IOException here too like in pollChanges()?
-        } catch (P4JException e) {
+        } catch (P4JavaException e) {
             logServerException(e, log);
         } catch (InterruptedException e) {
             throw new IOException("Unable to get hostname from slave. " + e.getMessage());
@@ -416,11 +416,11 @@ public class PerforceSCM extends SCM {
         public Boolean invoke(File workspace, VirtualChannel virtualChannel) throws IOException {
             final PrintStream log = listener.getLogger();
 
-            P4JServer server = null;
+            IServer server = null;
             try {
                 // TODO: pass version information into the filecaller
                 server = P4jUtil.newServer(p4port, "hudson", "sync", p4user, p4passwd);
-                P4JClient client = server.getClient(clientName);
+                IClient client = server.getClient(clientName);
                 server.setCurrentClient(client);
                 P4jUtil.sync(client, syncPath, forceSync);
                 // Logout and disconnect since this is a new connection
@@ -429,7 +429,7 @@ public class PerforceSCM extends SCM {
                 return true;
             } catch (URISyntaxException ex) {
                 logServerException(ex, log);
-            } catch (P4JException ex) {
+            } catch (P4JavaException ex) {
                 logServerException(ex, log);
             } finally {
                 try {
@@ -437,7 +437,7 @@ public class PerforceSCM extends SCM {
                         server.logout();
                         server.disconnect();
                     }
-                } catch (P4JException ex){
+                } catch (P4JavaException ex){
                     logServerException(ex, log);
                 }
             }
@@ -504,7 +504,7 @@ public class PerforceSCM extends SCM {
         logger.println("Looking for changes...");
 
         try {
-            P4JServer server = getServer();
+            IServer server = getServer();
             String clientName = getEffectiveClientName(project.getLastBuiltOn(), workspace, listener);
             if (!P4jUtil.existsClient(server, clientName)) {
                 logger.println("New client: " + clientName);
@@ -512,7 +512,7 @@ public class PerforceSCM extends SCM {
                 // TODO: possible improvement: if the client spec has been deleted but the
                 // workspace is uptodate, this return will be a false positive.
             }
-            P4JClient client = getPreparedClient(server, clientName, launcher, workspace, listener);
+            IClient client = getPreparedClient(server, clientName, launcher, workspace, listener);
 
             Boolean needToBuild = needToBuild(client, project, logger);
             if (needToBuild == null) {
@@ -535,8 +535,8 @@ public class PerforceSCM extends SCM {
      * @return True if there is definitely a need to build, False if definitely not, and null
      * if it cannot be determined.
      */
-    private Boolean needToBuild(P4JClient client, AbstractProject project, PrintStream logger)
-            throws IOException, InterruptedException, P4JException {
+    private Boolean needToBuild(IClient client, AbstractProject project, PrintStream logger)
+            throws IOException, InterruptedException, P4JavaException {
 
         /*
          * Don't bother polling if we're already building, or soon will.
@@ -620,7 +620,7 @@ public class PerforceSCM extends SCM {
     }
 
     // TODO Handle the case where p4Label is set.
-    private boolean wouldSyncChangeWorkspace(P4JClient client, PrintStream logger) throws P4JException {
+    private boolean wouldSyncChangeWorkspace(IClient client, PrintStream logger) throws P4JavaException {
         if (P4jUtil.wouldSyncAtHead(client)) {
             logger.println("Workspace not up-to-date.");
             return true;
@@ -662,7 +662,7 @@ public class PerforceSCM extends SCM {
      * Returns the effective name to use for the client on this build node.
      */
     private String getEffectiveClientName(Node buildNode, FilePath workspace, TaskListener listener)
-            throws IOException, InterruptedException, P4JException {
+            throws IOException, InterruptedException, P4JavaException {
         PrintStream log = listener.getLogger();
 
         // If we are building on a slave node, and each node is supposed to have
@@ -696,10 +696,10 @@ public class PerforceSCM extends SCM {
     /**
      * Prepare the Client instance for Perforce operations.
      */
-    private P4JClient getPreparedClient(
-            P4JServer server, String p4Client,
+    private IClient getPreparedClient(
+            IServer server, String p4Client,
             Launcher launcher, FilePath workspace, TaskListener listener)
-            throws IOException, InterruptedException, P4JException {
+            throws IOException, InterruptedException, P4JavaException {
         PrintStream log = listener.getLogger();
 
         boolean creatingNewWorkspace = !P4jUtil.existsClient(server, p4Client);
@@ -711,7 +711,7 @@ public class PerforceSCM extends SCM {
         // created it, or if we previously built on another node).
         String localPath = PerforceSCMHelper.getLocalPathName(workspace, launcher.isUnix());
 
-        P4JClient client = P4jUtil.retrieveClient(server, p4Client, dontRenameClient, localPath, projectOptions);
+        IClient client = P4jUtil.retrieveClient(server, p4Client, dontRenameClient, localPath, projectOptions);
 
         // If necessary, rewrite the views field in the clientspec
         if (updateView || creatingNewWorkspace) {
@@ -766,7 +766,7 @@ public class PerforceSCM extends SCM {
          * Returns a fresh server object given a request, or null if none available with
          * the request params. The returned server must be disconnected when no longer needed.
          */
-        protected P4JServer getServerFromRequest(StaplerRequest request) {
+        protected IServer getServerFromRequest(StaplerRequest request) {
             String port = fixNull(request.getParameter("port")).trim();
             String user = fixNull(request.getParameter("user")).trim();
             String pass = fixNull(request.getParameter("pass")).trim();
@@ -775,7 +775,7 @@ public class PerforceSCM extends SCM {
                 return null;
             }
             try {
-                P4JServer server = newServer(port, user, pass);
+                IServer server = newServer(port, user, pass);
                 try {
                     server.setUserName(user);
                     PerforcePasswordEncryptor encryptor = new PerforcePasswordEncryptor();
@@ -785,7 +785,7 @@ public class PerforceSCM extends SCM {
                     else {
                         server.login(pass);
                     }
-                } catch (P4JException e) {
+                } catch (P4JavaException e) {
                     // user or pass are not correct yet, keep going anyway with no user
                     server.setUserName(null);
                 }
@@ -796,7 +796,7 @@ public class PerforceSCM extends SCM {
             }
             catch (URISyntaxException e) {
                 // port is not valid yet
-            } catch (P4JException e) {
+            } catch (P4JavaException e) {
                 // connect failed for some other reason
             }
             return null;  // no luck talking to server
@@ -808,9 +808,9 @@ public class PerforceSCM extends SCM {
         public void doValidatePerforceLogin(StaplerRequest request, StaplerResponse rsp) throws IOException, ServletException {
             new FormFieldValidator(request, rsp, false) {
                 protected void check() throws IOException, ServletException {
-                    P4JServer server = getServerFromRequest(request);
+                    IServer server = getServerFromRequest(request);
                     if (server != null && server.getUserName() != null) {
-                        try { server.disconnect(); } catch (P4JException e) {}
+                        try { server.disconnect(); } catch (P4JavaException e) {}
                         ok();
                     } else {
                         error("Could not login to server");
@@ -828,20 +828,20 @@ public class PerforceSCM extends SCM {
             if (workspace == null) {
                 return FormValidation.error("You must enter a workspaces name");
             }
-            P4JServer server = getServerFromRequest(req);
+            IServer server = getServerFromRequest(req);
             if (server == null) {
                 return FormValidation.error("Unable to check workspace against depot");
             }
             try {
-                P4JClient client = server.getClient(workspace);
+                IClient client = server.getClient(workspace);
                 if (client == null || !client.canRefresh())
                     return FormValidation.warning("Workspace does not exist. " +
                             "If \"Let Hudson Manage Workspace View\" is check" +
                             " the workspace will be automatically created.");
-            } catch (P4JException e) {
+            } catch (P4JavaException e) {
                 return FormValidation.error("Error accessing perforce while checking workspace");
             } finally {
-                try { server.disconnect(); } catch (P4JException e) {}
+                try { server.disconnect(); } catch (P4JavaException e) {}
             }
 
             return FormValidation.ok();
@@ -856,16 +856,16 @@ public class PerforceSCM extends SCM {
             if (label == null)
                 return FormValidation.ok();
 
-            P4JServer server = getServerFromRequest(req);
+            IServer server = getServerFromRequest(req);
             if (server != null) {
                 try {
-                    P4JLabel p4Label = server.getLabel(label);
+                    ILabel p4Label = server.getLabel(label);
                     if (p4Label == null || !p4Label.canRefresh())
                         return FormValidation.error("Label does not exist");
-                } catch (P4JException e) {
+                } catch (P4JavaException e) {
                     return FormValidation.error("Error accessing perforce while checking label");
                 } finally {
-                    try { server.disconnect(); } catch (P4JException e) {}
+                    try { server.disconnect(); } catch (P4JavaException e) {}
                 }
 
             }
@@ -895,14 +895,14 @@ public class PerforceSCM extends SCM {
                         ok();
                         return;
                     }
-                    P4JServer server = getServerFromRequest(request);
+                    IServer server = getServerFromRequest(request);
                     if (server != null) {
                         try {
                             P4jUtil.getChange(server, Integer.parseInt(change));
-                        } catch (P4JException e) {
+                        } catch (P4JavaException e) {
                             error("Error accessing perforce while checking change: " + change);
                         } finally {
-                            try { server.disconnect(); } catch (P4JException e) {}
+                            try { server.disconnect(); } catch (P4JavaException e) {}
                         }
                     }
                     ok();

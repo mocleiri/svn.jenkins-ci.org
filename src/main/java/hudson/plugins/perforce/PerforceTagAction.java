@@ -1,9 +1,9 @@
 package hudson.plugins.perforce;
 
-import com.perforce.p4java.core.P4JChangeList;
-import com.perforce.p4java.core.P4JLabel;
-import com.perforce.p4java.impl.generic.core.P4JLabelImpl;
-import com.perforce.p4java.server.P4JServer;
+import com.perforce.p4java.core.IChangelist;
+import com.perforce.p4java.core.ILabel;
+import com.perforce.p4java.impl.generic.core.Label;
+import com.perforce.p4java.server.IServer;
 
 import static hudson.Util.fixEmpty;
 import hudson.model.AbstractBuild;
@@ -48,7 +48,7 @@ public class PerforceTagAction extends AbstractScmTagAction {
     public PerforceTagAction(AbstractBuild build, PerforceDepot depot, String label, String views) {
         super(build);
         this.depot = depot;
-        this.changeNumber = P4JChangeList.UNKNOWN;  // -1
+        this.changeNumber = IChangelist.UNKNOWN;  // -1
         this.tag = label;
         this.view = views;
     }
@@ -130,8 +130,8 @@ public class PerforceTagAction extends AbstractScmTagAction {
         tag = req.getParameter("name");
         desc = req.getParameter("desc");
         try {
-            P4JServer server = P4jUtil.newServer(depot.getPort(), "prog", "ver", depot.getUser(), depot.getPassword());
-            P4JLabel label = P4jUtil.newLabel(server, tag, desc, changeNumber, view.split("\n"));
+            IServer server = P4jUtil.newServer(depot.getPort(), "prog", "ver", depot.getUser(), depot.getPassword());
+            ILabel label = P4jUtil.newLabel(server, tag, desc, changeNumber, view.split("\n"));
             server.updateLabel(label);
         } catch (Exception e) {
             tag = null;

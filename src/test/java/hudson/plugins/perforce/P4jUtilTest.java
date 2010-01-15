@@ -1,12 +1,12 @@
 package hudson.plugins.perforce;
 
-import com.perforce.p4java.client.P4JClient;
-import com.perforce.p4java.core.P4JChangeList;
-import com.perforce.p4java.core.P4JJob;
-import com.perforce.p4java.core.P4JLabel;
-import com.perforce.p4java.server.P4JServer;
-import com.perforce.p4java.server.P4JServerStatus;
-import com.perforce.p4java.server.P4JUser;
+import com.perforce.p4java.client.IClient;
+import com.perforce.p4java.core.IChangelist;
+import com.perforce.p4java.core.IJob;
+import com.perforce.p4java.core.ILabel;
+import com.perforce.p4java.core.IUser;
+import com.perforce.p4java.server.IServer;
+import com.perforce.p4java.server.ServerStatus;
 import java.util.List;
 import junit.framework.TestCase;
 
@@ -29,14 +29,14 @@ public class P4jUtilTest extends TestCase {
     private static final int rangeCl0 = 118758;  // Start CL for range test
     private static final int rangeCl1 = 121965;  // End CL for rage test--should yield 4 CLs
 
-    private static P4JServer makeTestServer() throws Exception {
+    private static IServer makeTestServer() throws Exception {
         return P4jUtil.newServer(p4port, "p4jUtilTest", "1", p4user, p4pass);
     }
 
-    private static P4JClient makeSmallClient() throws Exception {
-        P4JServer server = makeTestServer();
+    private static IClient makeSmallClient() throws Exception {
+        IServer server = makeTestServer();
         P4jUtil.deleteClient(server, p4client);
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, false, fakeRoot);
+        IClient client = P4jUtil.retrieveClient(server, p4client, false, fakeRoot);
         P4jUtil.clearView(client);
         P4jUtil.addViewMapping(client, testDepotPath, testClientPath);
         server.updateClient(client);
@@ -45,8 +45,8 @@ public class P4jUtilTest extends TestCase {
     }
 
     public void testLogin() throws Exception {
-        P4JServer server = makeTestServer();
-        assertEquals(P4JServerStatus.READY, server.getStatus());
+        IServer server = makeTestServer();
+        assertEquals(ServerStatus.READY, server.getStatus());
         assertEquals(p4user, server.getUserName());
         System.out.println("clientAddr:" + server.getServerInfo().getClientAddress());
         System.out.println("clientHost:" + server.getServerInfo().getClientHost());
@@ -57,15 +57,15 @@ public class P4jUtilTest extends TestCase {
     }
 
     public void testGetUser() throws Exception {
-        P4JServer server = makeTestServer();
-        P4JUser user = P4jUtil.getUser(server, p4user);
+        IServer server = makeTestServer();
+        IUser user = P4jUtil.getUser(server, p4user);
         System.out.println("user: id:" + user.getLoginName() + " email:" + user.getEmail() + " full:" + user.getFullName());
         assertEquals(p4user, user.getLoginName());
         server.disconnect();
     }
 
     public void testGetLatestCL() throws Exception {
-        P4JServer server = makeTestServer();
+        IServer server = makeTestServer();
         int latestCl = P4jUtil.latestChangeId(server);
         System.out.println("latest CL on server:" + latestCl);
         assertTrue(latestCl > 0);
@@ -73,16 +73,16 @@ public class P4jUtilTest extends TestCase {
     }
 
     public void testGetSpecificChangelist() throws Exception {
-        P4JServer server = makeTestServer();
-        P4JChangeList change = P4jUtil.getChange(server, existingCl);
+        IServer server = makeTestServer();
+        IChangelist change = P4jUtil.getChange(server, existingCl);
         assertEquals(253215, change.getId());
     }
 
     public void testGetChangelistJobs() throws Exception {
-        P4JClient client = makeSmallClient();
+        IClient client = makeSmallClient();
         int lastCl = P4jUtil.latestChangeId(client);
-        P4JChangeList change = P4jUtil.getChange(client.getServer(), lastCl);
-        for (P4JJob job : change.getJobList()) {
+        IChangelist change = P4jUtil.getChange(client.getServer(), lastCl);
+        for (IJob job : change.getJobs()) {
             System.out.print(job.getId());
             System.out.print(job.getDescription());
         }
@@ -90,27 +90,27 @@ public class P4jUtilTest extends TestCase {
     }
 
     public void testJobStatus() throws Exception {
-        P4JServer server = makeTestServer();
-        P4JChangeList change = P4jUtil.getChange(server, existingClWithJob);
-        assertEquals(1, change.getJobList().size());
-        P4JJob job = change.getJobList().get(0);
+        IServer server = makeTestServer();
+        IChangelist change = P4jUtil.getChange(server, existingClWithJob);
+        assertEquals(1, change.getJobs().size());
+        IJob job = change.getJobs().get(0);
         //System.out.println("Status for " + job.getId() + " is " + P4jUtil.jobStatus(job));
         assertEquals("open", P4jUtil.jobStatus(job));
         server.disconnect();
     }
 
     public void testRetrieveRawClient() throws Exception {
-        P4JServer server = makeTestServer();
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, false, null);
+        IServer server = makeTestServer();
+        IClient client = P4jUtil.retrieveClient(server, p4client, false, null);
         //P4jUtil.trace("R ", client);
         assertEquals(p4client, client.getName());
         server.disconnect();
     }
 
     public void testRetrieveUpdatedClient() throws Exception {
-        P4JServer server = makeTestServer();
+        IServer server = makeTestServer();
         P4jUtil.retrieveClient(server, p4client, true, "/xxx");  // force a root change
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
+        IClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         //P4jUtil.trace("O ", client);
         assertEquals(p4client, client.getName());
         assertEquals(fakeRoot, client.getRoot());
@@ -119,26 +119,26 @@ public class P4jUtilTest extends TestCase {
     }
 
     public void testRetrieveNewClient() throws Exception {
-        P4JServer server = makeTestServer();
+        IServer server = makeTestServer();
         P4jUtil.deleteClient(server, p4client); // make sure the old one is gone
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
+        IClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         //P4jUtil.trace("N ", client);
         assertEquals(p4client, client.getName());
         server.disconnect();
     }
 
     public void testRetrieveSameClient() throws Exception {
-        P4JServer server = makeTestServer();
+        IServer server = makeTestServer();
         P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
+        IClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         //P4jUtil.trace("S ", client);
         assertEquals(p4client, client.getName());
         server.disconnect();
     }
 
     public void testUpdateClientViewSpec() throws Exception {
-        P4JServer server = makeTestServer();
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
+        IServer server = makeTestServer();
+        IClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         P4jUtil.clearView(client);
         P4jUtil.addViewMapping(client, "//depot/A/...", "//" + p4client + "/a/...");
         P4jUtil.addViewMapping(client, "//depot/B/...", "//" + p4client + "/b/...");
@@ -149,8 +149,8 @@ public class P4jUtilTest extends TestCase {
     }
 
     public void testGetLatestClientCL() throws Exception {
-        P4JServer server = makeTestServer();
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
+        IServer server = makeTestServer();
+        IClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         P4jUtil.clearView(client);
         P4jUtil.addViewMapping(client, testDepotPath, testClientPath);
         server.updateClient(client);
@@ -163,16 +163,16 @@ public class P4jUtilTest extends TestCase {
 
      //TODO(CQ) generalize this test
     public void testGetLatestClientChangesInRange() throws Exception {
-        P4JServer server = makeTestServer();
-        P4JClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
+        IServer server = makeTestServer();
+        IClient client = P4jUtil.retrieveClient(server, p4client, true, fakeRoot);
         P4jUtil.clearView(client);
         P4jUtil.addViewMapping(client, testDepotPath, testClientPath);
         server.updateClient(client);
         server.setCurrentClient(client);
-        List<P4JChangeList> changes = P4jUtil.changesInRange(client, rangeCl0, rangeCl1);
+        List<IChangelist> changes = P4jUtil.changesInRange(client, rangeCl0, rangeCl1);
         assertNotNull(changes);
         System.out.println("changeCount:" + changes.size());
-        for (P4JChangeList cl : changes) {
+        for (IChangelist cl : changes) {
             System.out.println(" change:" + cl.getId() + ": " + cl.getDescription());
         }
         assertTrue(changes.size() == 4);
@@ -180,7 +180,7 @@ public class P4jUtilTest extends TestCase {
     }
 
     public void testSyncAndWouldSync() throws Exception {
-        P4JClient client = makeSmallClient();
+        IClient client = makeSmallClient();
         int lastCl = P4jUtil.latestChangeId(client.getServer());
         System.out.println("Should sync:");
         assertTrue(P4jUtil.wouldSyncAtChangeId(client, lastCl));
@@ -190,18 +190,18 @@ public class P4jUtilTest extends TestCase {
         client.getServer().disconnect();
     }
 
-    // TODO reenable this test once P4Java spports label deletion
+    // TODO reenable this test once Iava spports label deletion
     public void BROKEN_testDeleteLabel() throws Exception {
-        P4JServer server = makeTestServer();
+        IServer server = makeTestServer();
         P4jUtil.deleteLabel(server, p4label);
-        P4JLabel label = server.getLabel(p4label);
+        ILabel label = server.getLabel(p4label);
         assertNull(label);
     }
 
     public void testMakeLabel() throws Exception {
-        P4JServer server = makeTestServer();
+        IServer server = makeTestServer();
         P4jUtil.deleteLabel(server, p4label);
-        P4JLabel label = P4jUtil.newLabel(server, p4label, "Just a test label", existingCl,
+        ILabel label = P4jUtil.newLabel(server, p4label, "Just a test label", existingCl,
                 new String[] { testDepotPath });
         server.updateLabel(label);
         server.disconnect();
