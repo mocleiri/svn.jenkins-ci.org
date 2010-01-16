@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JobProperty (Hudson main module 1.340 API)
+JobProperty (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JobProperty (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JobProperty (Hudson main module 1.340 API)";
+        parent.document.title="JobProperty (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -238,7 +238,15 @@ Extensible property of <A HREF="../../hudson/model/Job.html" title="class in hud
 <TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#getJobAction(J)">getJobAction</A></B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.341. Override <A HREF="../../hudson/model/JobProperty.html#getJobActions(J)"><CODE>getJobActions(Job)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#getJobActions(J)">getJobActions</A></B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -246,7 +254,15 @@ Extensible property of <A HREF="../../hudson/model/Job.html" title="class in hud
 <TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/JobProperty.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns action objects if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -395,10 +411,26 @@ getJobAction</H3>
 <PRE>
 public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getJobAction</B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</PRE>
 <DL>
-<DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.341. Override <A HREF="../../hudson/model/JobProperty.html#getJobActions(J)"><CODE>getJobActions(Job)</CODE></A> instead.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJobActions(hudson.model.Job)"><!-- --></A><A NAME="getJobActions(J)"><!-- --></A><H3>
+getJobActions</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getJobActions</B>(<A HREF="../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</PRE>
+<DL>
+<DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.
 
  <p>
- Returning non-null from this method allows a job property to add an item
+ Returning actions from this method allows a job property to add them
  to the left navigation bar in the job page.
 
  <p>
@@ -411,7 +443,7 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>job</CODE> - Always the same as <A HREF="../../hudson/model/JobProperty.html#owner"><CODE>owner</CODE></A> but passed in anyway for backward compatibility (I guess.)
       You really need not use this value at all.
-<DT><B>Returns:</B><DD>null if there's no such action.<DT><B>Since:</B></DT>
+<DT><B>Returns:</B><DD>can be empty but never null.<DT><B>Since:</B></DT>
   <DD>1.102</DD>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><CODE>ProminentProjectAction</CODE></A>, 
 <A HREF="../../hudson/model/PermalinkProjectAction.html" title="interface in hudson.model"><CODE>PermalinkProjectAction</CODE></A></DL>
@@ -501,8 +533,22 @@ getProjectAction</H3>
 <PRE>
 public final <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
-<DD>Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProjectActions(hudson.model.AbstractProject)"><!-- --></A><H3>
+getProjectActions</H3>
+<PRE>
+public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getProjectActions</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
+<DD>Returns action objects if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
 
  <p>
@@ -516,12 +562,12 @@ public final <A HREF="../../hudson/model/Action.html" title="interface in hudson
  block elements to render the details of the section.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>project</CODE> - <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> that owns this build step,
       since <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> object doesn't usually have this "parent" pointer.
-<DT><B>Returns:</B><DD>null if there's no action to be contributed.</DL>
+<DT><B>Returns:</B><DD>can be empty but never null.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.util Class Hierarchy (Hudson main module 1.340 API)
+hudson.util Class Hierarchy (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util Class Hierarchy (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util Class Hierarchy (Hudson main module 1.340 API)";
+        parent.document.title="hudson.util Class Hierarchy (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -155,7 +155,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/CopyOnWriteMap.html" title="class in hudson.util"><B>CopyOnWriteMap</B></A>&lt;K,V&gt; (implements java.util.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;K,V&gt;)
 <UL>
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/CopyOnWriteMap.Hash.html" title="class in hudson.util"><B>CopyOnWriteMap.Hash</B></A>&lt;K,V&gt;<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/CopyOnWriteMap.Tree.html" title="class in hudson.util"><B>CopyOnWriteMap.Tree</B></A>&lt;K,V&gt;</UL>
-<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/DaemonThreadFactory.html" title="class in hudson.util"><B>DaemonThreadFactory</B></A> (implements java.util.concurrent.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent">ThreadFactory</A>)
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/CyclicGraphDetector.html" title="class in hudson.util"><B>CyclicGraphDetector</B></A>&lt;N&gt;<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/DaemonThreadFactory.html" title="class in hudson.util"><B>DaemonThreadFactory</B></A> (implements java.util.concurrent.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent">ThreadFactory</A>)
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/DataSetBuilder.html" title="class in hudson.util"><B>DataSetBuilder</B></A>&lt;Row,Column&gt;<LI TYPE="circle">org.xml.sax.helpers.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/helpers/DefaultHandler.html?is-external=true" title="class or interface in org.xml.sax.helpers"><B>DefaultHandler</B></A> (implements org.xml.sax.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/ContentHandler.html?is-external=true" title="class or interface in org.xml.sax">ContentHandler</A>, org.xml.sax.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/DTDHandler.html?is-external=true" title="class or interface in org.xml.sax">DTDHandler</A>, org.xml.sax.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/EntityResolver.html?is-external=true" title="class or interface in org.xml.sax">EntityResolver</A>, org.xml.sax.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/ErrorHandler.html?is-external=true" title="class or interface in org.xml.sax">ErrorHandler</A>)
 <UL>
 <LI TYPE="circle">org.apache.commons.digester.Digester<UL>
@@ -197,10 +197,14 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/DescribableList.html" title="class in hudson.util"><B>DescribableList</B></A>&lt;T,D&gt;</UL>
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/PluginServletFilter.html" title="class in hudson.util"><B>PluginServletFilter</B></A> (implements hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, javax.servlet.Filter)
-<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util"><B>ProcessTree</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;T&gt;)
-<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util"><B>ProcessTree.OSProcess</B></A><UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util"><B>ProcessTree</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;T&gt;, hudson.util.<A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util">ProcessTreeRemoting.IProcessTree</A>, java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+<UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util"><B>ProcessTree.Remote</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+</UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util"><B>ProcessTree.OSProcess</B></A> (implements hudson.util.<A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A>, java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+<UL>
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTree.UnixProcess.html" title="class in hudson.util"><B>ProcessTree.UnixProcess</B></A></UL>
-<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><B>ProcessTreeKiller</B></A><LI TYPE="circle">org.apache.tools.ant.ProjectComponent (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A>)
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><B>ProcessTreeKiller</B></A><LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTreeRemoting.html" title="class in hudson.util"><B>ProcessTreeRemoting</B></A><LI TYPE="circle">org.apache.tools.ant.ProjectComponent (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A>)
 <UL>
 <LI TYPE="circle">org.apache.tools.ant.types.DataType (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A>)
 <UL>
@@ -222,7 +226,7 @@ Class Hierarchy
 <LI TYPE="circle">java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang"><B>Throwable</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
 <UL>
 <LI TYPE="circle">java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang"><B>Exception</B></A><UL>
-<LI TYPE="circle">java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><B>IOException</B></A><UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/CyclicGraphDetector.CycleDetectedException.html" title="class in hudson.util"><B>CyclicGraphDetector.CycleDetectedException</B></A><LI TYPE="circle">java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><B>IOException</B></A><UL>
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util"><B>FormValidation</B></A> (implements org.kohsuke.stapler.HttpResponse)
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/IOException2.html" title="class in hudson.util"><B>IOException2</B></A></UL>
 <LI TYPE="circle">java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang"><B>RuntimeException</B></A><UL>
@@ -255,8 +259,10 @@ Class Hierarchy
 Interface Hierarchy
 </H2>
 <UL>
-<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ConsistentHash.Hash.html" title="interface in hudson.util"><B>ConsistentHash.Hash</B></A>&lt;T&gt;<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/Function1.html" title="interface in hudson.util"><B>Function1</B></A>&lt;R,P1&gt;<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/InvocationInterceptor.html" title="interface in hudson.util"><B>InvocationInterceptor</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model"><B>Saveable</B></A><UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ConsistentHash.Hash.html" title="interface in hudson.util"><B>ConsistentHash.Hash</B></A>&lt;T&gt;<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/Function1.html" title="interface in hudson.util"><B>Function1</B></A>&lt;R,P1&gt;<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/InvocationInterceptor.html" title="interface in hudson.util"><B>InvocationInterceptor</B></A><LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util"><B>ProcessTreeRemoting.IOSProcess</B></A><LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util"><B>ProcessTreeRemoting.IProcessTree</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model"><B>Saveable</B></A><UL>
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/DescribableList.Owner.html" title="interface in hudson.util"><B>DescribableList.Owner</B></A></UL>
+<LI TYPE="circle">java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io"><B>Serializable</B></A><UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="interface in hudson.util"><B>ProcessTree.ProcessCallable</B></A>&lt;T&gt;</UL>
 <LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/TagCloud.WeightFunction.html" title="interface in hudson.util"><B>TagCloud.WeightFunction</B></A>&lt;T&gt;<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><B>VariableResolver</B></A>&lt;V&gt;</UL>
 <H2>
 Enum Hierarchy

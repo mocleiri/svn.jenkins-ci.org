@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model (Hudson main module 1.340 API)
+hudson.model (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model (Hudson main module 1.340 API)";
+        parent.document.title="hudson.model (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -162,7 +162,7 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/PermalinkProjectAction.html" title="interface in hudson.model">PermalinkProjectAction</A></B></TD>
 <TD>Optional interface for <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s that are attached
- to <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> (through <A HREF="../../hudson/model/JobProperty.html#getJobAction(J)"><CODE>JobProperty.getJobAction(Job)</CODE></A>),
+ to <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> (through <A HREF="../../hudson/model/JobProperty.html#getJobActions(J)"><CODE>JobProperty.getJobActions(Job)</CODE></A>),
  which allows plugins to define additional permalinks in the project.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -376,6 +376,10 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
  for efficient dependency computation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A></B></TD>
+<TD>Represents an edge in the dependency graph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor&lt;T extends Describable&lt;T&gt;&gt;</A></B></TD>
 <TD>Metadata about a configurable instance.</TD>
 </TR>
@@ -524,10 +528,6 @@ Core object model that are bound to URLs via stapler, rooted at <a href="Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/Job.html" title="class in hudson.model">Job&lt;JobT extends Job&lt;JobT,RunT&gt;,RunT extends Run&lt;JobT,RunT&gt;&gt;</A></B></TD>
 <TD>A job is an runnable entity under the monitoring of Hudson.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD WIDTH="15%"><B><A HREF="../../hudson/model/Job.Event.html" title="class in hudson.model">Job.Event</A></B></TD>
-<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model">JobParameterDefinition</A></B></TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Action (Hudson main module 1.340 API)
+Uses of Interface hudson.model.Action (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Action (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Action (Hudson main module 1.340 API)";
+        parent.document.title="Uses of Interface hudson.model.Action (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -331,8 +331,8 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TD><CODE><B>MavenReporter.</B><B><A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equivalent of <A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectAction(AbstractProject)</CODE></A>
- for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.341
+      Use <A HREF="../../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectActions(MavenModule)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -342,6 +342,23 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equivalent of <A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectAction(AbstractProject)</CODE></A>
  for <A HREF="../../../hudson/maven/MavenAggregatedReport.html" title="interface in hudson.maven"><CODE>MavenAggregatedReport</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/package-summary.html">hudson.maven</A> that return types with arguments of type <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>MavenReporter.</B><B><A HREF="../../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equivalent of <A HREF="../../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectActions(AbstractProject)</CODE></A>
+ for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -443,30 +460,6 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>MavenJavadocArchiver.</B><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;project)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>SurefireArchiver.</B><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>MavenSiteArchiver.</B><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;project)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
 <TD><CODE><B>MavenAggregatedArtifactRecord.</B><B><A HREF="../../../hudson/maven/reporters/MavenAggregatedArtifactRecord.html#getProjectAction(hudson.maven.MavenModuleSet)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;moduleSet)</CODE>
 
 <BR>
@@ -476,6 +469,38 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
 <TD><CODE><B>SurefireAggregatedReport.</B><B><A HREF="../../../hudson/maven/reporters/SurefireAggregatedReport.html#getProjectAction(hudson.maven.MavenModuleSet)">getProjectAction</A></B>(<A HREF="../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;moduleSet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/maven/reporters/package-summary.html">hudson.maven.reporters</A> that return types with arguments of type <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>MavenJavadocArchiver.</B><B><A HREF="../../../hudson/maven/reporters/MavenJavadocArchiver.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>SurefireArchiver.</B><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>MavenSiteArchiver.</B><B><A HREF="../../../hudson/maven/reporters/MavenSiteArchiver.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;project)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -529,7 +554,7 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional interface for <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s that are attached
- to <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> (through <A HREF="../../../hudson/model/JobProperty.html#getJobAction(J)"><CODE>JobProperty.getJobAction(Job)</CODE></A>),
+ to <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A> (through <A HREF="../../../hudson/model/JobProperty.html#getJobActions(J)"><CODE>JobProperty.getJobActions(Job)</CODE></A>),
  which allows plugins to define additional permalinks in the project.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -716,18 +741,10 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>ParametersDefinitionProperty.</B><B><A HREF="../../../hudson/model/ParametersDefinitionProperty.html#getJobAction(hudson.model.AbstractProject)">getJobAction</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;job)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
 <TD><CODE><B>JobProperty.</B><B><A HREF="../../../hudson/model/JobProperty.html#getJobAction(J)">getJobAction</A></B>(<A HREF="../../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.341. Override <A HREF="../../../hudson/model/JobProperty.html#getJobActions(J)"><CODE>JobProperty.getJobActions(Job)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -792,6 +809,30 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the transient <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s associated with the top page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ParametersDefinitionProperty.</B><B><A HREF="../../../hudson/model/ParametersDefinitionProperty.html#getJobActions(hudson.model.AbstractProject)">getJobActions</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>JobProperty.</B><B><A HREF="../../../hudson/model/JobProperty.html#getJobActions(J)">getJobActions</A></B>(<A HREF="../../../hudson/model/JobProperty.html" title="type parameter in JobProperty">J</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>JobProperty.</B><B><A HREF="../../../hudson/model/JobProperty.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -903,6 +944,16 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether the new item should be scheduled.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>DependencyGraph.Dependency.</B><B><A HREF="../../../hudson/model/DependencyGraph.Dependency.html#shouldTriggerBuild(hudson.model.AbstractBuild, hudson.model.TaskListener, java.util.List)">shouldTriggerBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                   <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide whether build should be triggered and provide any Actions for the build.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1087,15 +1138,7 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TD><CODE><B>BuildWrapper.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;job)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>JavadocArchiver.</B><B><A HREF="../../../hudson/tasks/JavadocArchiver.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tasks/BuildWrapper.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildWrapper.getProjectActions(AbstractProject)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1103,8 +1146,8 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TD><CODE><B>BuildStep.</B><B><A HREF="../../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
- to contribute to a <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.341.
+      Use <A HREF="../../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectActions(AbstractProject)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1125,18 +1168,51 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>Builder.</B><B><A HREF="../../../hudson/tasks/Builder.html#getProjectAction(hudson.model.Project)">getProjectAction</A></B>(<A HREF="../../../hudson/model/Project.html" title="class in hudson.model">Project</A>&nbsp;project)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation that does nothing.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
 <TD><CODE><B>BuildStepCompatibilityLayer.</B><B><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.Project)">getProjectAction</A></B>(<A HREF="../../../hudson/model/Project.html" title="class in hudson.model">Project</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStepCompatibilityLayer.getProjectAction(AbstractProject)</CODE></A> instead.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/package-summary.html">hudson.tasks</A> that return types with arguments of type <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>BuildWrapper.</B><B><A HREF="../../../hudson/tasks/BuildWrapper.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>JavadocArchiver.</B><B><A HREF="../../../hudson/tasks/JavadocArchiver.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>BuildStep.</B><B><A HREF="../../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns action objects if this <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
+ to contribute to a <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>BuildStepCompatibilityLayer.</B><B><A HREF="../../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1182,12 +1258,12 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> that return <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> that return types with arguments of type <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>JUnitResultArchiver.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>JUnitResultArchiver.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1290,13 +1366,29 @@ Uses of <A HREF="../../../hudson/model/Action.html" title="interface in hudson.m
 <TD><CODE><B>Trigger.</B><B><A HREF="../../../hudson/triggers/Trigger.html#getProjectAction()">getProjectAction</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../../hudson/triggers/Trigger.html" title="class in hudson.triggers"><CODE>Trigger</CODE></A> has an action
- to contribute to a <A HREF="../../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.341
+      Use <A HREF="../../../hudson/triggers/Trigger.html#getProjectActions()"><CODE>Trigger.getProjectActions()</CODE></A> instead.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/triggers/package-summary.html">hudson.triggers</A> that return types with arguments of type <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B>SCMTrigger.</B><B><A HREF="../../../hudson/triggers/SCMTrigger.html#getProjectAction()">getProjectAction</A></B>()</CODE>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Trigger.</B><B><A HREF="../../../hudson/triggers/Trigger.html#getProjectActions()">getProjectActions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>SCMTrigger.</B><B><A HREF="../../../hudson/triggers/SCMTrigger.html#getProjectActions()">getProjectActions</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

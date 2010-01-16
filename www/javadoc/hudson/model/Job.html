@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.340 API)
+Job (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.340 API)";
+        parent.document.title="Job (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Job.Event.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Job.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Job.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -135,14 +135,6 @@ A job is an runnable entity under the monitoring of Hudson.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Job.Event.html" title="class in hudson.model">Job.Event</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
@@ -340,10 +332,10 @@ A job is an runnable entity under the monitoring of Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Job.html#doTimelineData(long, long, org.kohsuke.stapler.StaplerResponse)">doTimelineData</A></B>(long&nbsp;min,
-               long&nbsp;max,
-               org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<CODE>&nbsp;org.koshuke.stapler.simile.timeline.TimelineEventList</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#doTimelineData(org.kohsuke.stapler.StaplerRequest, long, long)">doTimelineData</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+               long&nbsp;min,
+               long&nbsp;max)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -444,6 +436,15 @@ A job is an runnable entity under the monitoring of Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the builds in a map.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getBuildsByTimestamp(long, long)">getBuildsByTimestamp</A></B>(long&nbsp;start,
+                     long&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a list of builds, in the descending order, that are within the specified time range [start,end).</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1531,6 +1532,24 @@ public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT<
 </DL>
 <HR>
 
+<A NAME="getBuildsByTimestamp(long, long)"><!-- --></A><H3>
+getBuildsByTimestamp</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>getBuildsByTimestamp</B>(long&nbsp;start,
+                                       long&nbsp;end)</PRE>
+<DL>
+<DD>Obtains a list of builds, in the descending order, that are within the specified time range [start,end).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getBuildForCLI(java.lang.String)"><!-- --></A><H3>
 getBuildForCLI</H3>
 <PRE>
@@ -2050,15 +2069,15 @@ public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"
 </DL>
 <HR>
 
-<A NAME="doTimelineData(long, long, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doTimelineData(org.kohsuke.stapler.StaplerRequest, long, long)"><!-- --></A><H3>
 doTimelineData</H3>
 <PRE>
-public void <B>doTimelineData</B>(<FONT SIZE="-1">@QueryParameter</FONT>
-                           long&nbsp;min,
-                           <FONT SIZE="-1">@QueryParameter</FONT>
-                           long&nbsp;max,
-                           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public org.koshuke.stapler.simile.timeline.TimelineEventList <B>doTimelineData</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                                                            <FONT SIZE="-1">@QueryParameter</FONT>
+                                                                            long&nbsp;min,
+                                                                            <FONT SIZE="-1">@QueryParameter</FONT>
+                                                                            long&nbsp;max)
+                                                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2101,7 +2120,7 @@ public void <B>doTimelineData</B>(<FONT SIZE="-1">@QueryParameter</FONT>
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Job.Event.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/JobParameterDefinition.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/Job.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Job.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -2121,7 +2140,7 @@ public void <B>doTimelineData</B>(<FONT SIZE="-1">@QueryParameter</FONT>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.util (Hudson main module 1.340 API)
+hudson.util (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson main module 1.340 API)";
+        parent.document.title="hudson.util (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -110,6 +110,18 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/InvocationInterceptor.html" title="interface in hudson.util">InvocationInterceptor</A></B></TD>
 <TD>Interceptor around <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/InvocationHandler.html?is-external=true" title="class or interface in java.lang.reflect"><CODE>InvocationHandler</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="interface in hudson.util">ProcessTree.ProcessCallable&lt;T&gt;</A></B></TD>
+<TD>Code that gets executed on the machine where the <A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util"><CODE>ProcessTree.OSProcess</CODE></A> is local.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util">ProcessTreeRemoting.IProcessTree</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/TagCloud.WeightFunction.html" title="interface in hudson.util">TagCloud.WeightFunction&lt;T&gt;</A></B></TD>
@@ -232,6 +244,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/CopyOnWriteMap.Tree.ConverterImpl.html" title="class in hudson.util">CopyOnWriteMap.Tree.ConverterImpl</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/CyclicGraphDetector.html" title="class in hudson.util">CyclicGraphDetector&lt;N&gt;</A></B></TD>
+<TD>Traverses a directed graph and if it contains any cycle, throw an exception.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/DaemonThreadFactory.html" title="class in hudson.util">DaemonThreadFactory</A></B></TD>
@@ -508,8 +524,16 @@ Other miscellaneous utility code
 <TD>Represents a snapshot of the process tree of the current system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A></B></TD>
+<TD>Represents a process tree over a channel.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util">ProcessTreeKiller</A></B></TD>
 <TD><B>Deprecated.</B>&nbsp;<I>as of 1.315.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTreeRemoting.html" title="class in hudson.util">ProcessTreeRemoting</A></B></TD>
+<TD>Remoting interfaces of <A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util"><CODE>ProcessTreeRemoting.IProcessTree</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/Protector.html" title="class in hudson.util">Protector</A></B></TD>
@@ -649,6 +673,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Exception Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/CyclicGraphDetector.CycleDetectedException.html" title="class in hudson.util">CyclicGraphDetector.CycleDetectedException</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></B></TD>

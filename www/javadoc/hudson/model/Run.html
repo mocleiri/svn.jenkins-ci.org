@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.340 API)
+Run (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.340 API)";
+        parent.document.title="Run (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -908,6 +908,22 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getTime()">getTime</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Same as <A HREF="../../hudson/model/Run.html#getTimestamp()"><CODE>getTimestamp()</CODE></A> but in a different type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getTimeInMillis()">getTimeInMillis</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Same as <A HREF="../../hudson/model/Run.html#getTimestamp()"><CODE>getTimestamp()</CODE></A> but in a different type, that is since the time of the epoc.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getTimestamp()">getTimestamp</A></B>()</CODE>
 
@@ -1639,6 +1655,38 @@ getTimestamp</H3>
 </FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A> <B>getTimestamp</B>()</PRE>
 <DL>
 <DD>When the build is scheduled.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTime()"><!-- --></A><H3>
+getTime</H3>
+<PRE>
+public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Date.html?is-external=true" title="class or interface in java.util">Date</A> <B>getTime</B>()</PRE>
+<DL>
+<DD>Same as <A HREF="../../hudson/model/Run.html#getTimestamp()"><CODE>getTimestamp()</CODE></A> but in a different type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTimeInMillis()"><!-- --></A><H3>
+getTimeInMillis</H3>
+<PRE>
+public final long <B>getTimeInMillis</B>()</PRE>
+<DL>
+<DD>Same as <A HREF="../../hudson/model/Run.html#getTimestamp()"><CODE>getTimestamp()</CODE></A> but in a different type, that is since the time of the epoc.
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.340 API)
+Deprecated List (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.340 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -534,6 +534,21 @@ function windowTitle()
       Prefer automatic registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/DependencyGraph.html#addDependency(hudson.model.AbstractProject, hudson.model.AbstractProject)">hudson.model.DependencyGraph.addDependency(AbstractProject, AbstractProject)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.341; use <A HREF="hudson/model/DependencyGraph.html#addDependency(hudson.model.DependencyGraph.Dependency)"><CODE>DependencyGraph.addDependency(Dependency)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/DependencyGraph.html#addDependency(hudson.model.AbstractProject, java.util.Collection)">hudson.model.DependencyGraph.addDependency(AbstractProject, Collection<? extends AbstractProject>)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.341</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/DependencyGraph.html#addDependency(java.util.Collection, hudson.model.AbstractProject)">hudson.model.DependencyGraph.addDependency(Collection<? extends AbstractProject>, AbstractProject)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.341</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#addListener(hudson.model.listeners.JobListener)">hudson.model.Hudson.addListener(JobListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-01-04.
@@ -661,6 +676,11 @@ function windowTitle()
  be removed but I'm not sure if it is considered part of the public API
  that needs to be maintained for backwards compatibility.
  Use <A HREF="hudson/Util.html#encode(java.lang.String)"><CODE>Util.encode(String)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)">hudson.tasks.BuildTrigger.execute(AbstractBuild, BuildListener, BuildTrigger)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.341; use <A HREF="hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildTrigger.execute(AbstractBuild,BuildListener)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">hudson.slaves.Channels.forProcess(String, ExecutorService, InputStream, OutputStream, Proc)</A>
@@ -836,6 +856,11 @@ function windowTitle()
       Should not be invoked for any other purpose.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/JobProperty.html#getJobAction(J)">hudson.model.JobProperty.getJobAction(J)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.341. Override <A HREF="hudson/model/JobProperty.html#getJobActions(J)"><CODE>JobProperty.getJobActions(Job)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getJobCaseInsensitive(java.lang.String)">hudson.model.Hudson.getJobCaseInsensitive(String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Used only for mapping jobs to URL in a case-insensitive fashion.</I>&nbsp;</TD>
@@ -889,6 +914,29 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.MULTIUPDATE
       <tt>update-center.json</tt> is now signed, so we don't have to further make sure that
       we aren't downloading from anywhere unsecure.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/triggers/Trigger.html#getProjectAction()">hudson.triggers.Trigger.getProjectAction()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.341
+      Use <A HREF="hudson/triggers/Trigger.html#getProjectActions()"><CODE>Trigger.getProjectActions()</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/BuildWrapper.html#getProjectAction(hudson.model.AbstractProject)">hudson.tasks.BuildWrapper.getProjectAction(AbstractProject)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/BuildWrapper.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildWrapper.getProjectActions(AbstractProject)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">hudson.tasks.BuildStep.getProjectAction(AbstractProject<?, ?>)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.341.
+      Use <A HREF="hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectActions(AbstractProject)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">hudson.maven.MavenReporter.getProjectAction(MavenModule)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.341
+      Use <A HREF="hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectActions(MavenModule)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Publisher.html#getProjectAction(hudson.model.Project)">hudson.tasks.Publisher.getProjectAction(Project)</A>

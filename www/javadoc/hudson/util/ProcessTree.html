@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ProcessTree (Hudson main module 1.340 API)
+ProcessTree (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProcessTree (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProcessTree (Hudson main module 1.340 API)";
+        parent.document.title="ProcessTree (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -97,11 +97,14 @@ Class ProcessTree</H2>
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.ProcessTree</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A>&gt;</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util">ProcessTreeRemoting.IProcessTree</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A>&gt;</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>ProcessTree</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A>&gt;</DL>
+<DT><PRE>public abstract class <B>ProcessTree</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A>&gt;, <A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util">ProcessTreeRemoting.IProcessTree</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DL>
 </PRE>
 
 <P>
@@ -112,6 +115,9 @@ Represents a snapshot of the process tree of the current system.
  When Hudson runs on platforms that support process introspection, this allows you to introspect
  and do some useful things on processes. On other platforms, the implementation falls back to
  "do nothing" behavior.
+
+ <p>
+ <A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util"><CODE>ProcessTree</CODE></A> is remotable.
 <P>
 
 <P>
@@ -120,7 +126,7 @@ Represents a snapshot of the process tree of the current system.
   <DD>1.315</DD>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.util.ProcessTree">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -139,6 +145,22 @@ Represents a snapshot of the process tree of the current system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a process.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;interface</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="interface in hudson.util">ProcessTree.ProcessCallable</A>&lt;<A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="type parameter in ProcessTree.ProcessCallable">T</A>&gt;</B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code that gets executed on the machine where the <A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util"><CODE>ProcessTree.OSProcess</CODE></A> is local.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents a process tree over a channel.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -366,7 +388,7 @@ public abstract void <B>killAll</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs
  that cannot be tracked by the regular
 <P>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html#killAll(java.util.Map)">killAll</A></CODE> in interface <CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util">ProcessTreeRemoting.IProcessTree</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

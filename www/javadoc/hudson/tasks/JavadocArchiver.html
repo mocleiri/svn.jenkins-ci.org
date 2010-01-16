@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JavadocArchiver (Hudson main module 1.340 API)
+JavadocArchiver (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JavadocArchiver (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JavadocArchiver (Hudson main module 1.340 API)";
+        parent.document.title="JavadocArchiver (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -244,11 +244,11 @@ Saves Javadoc for the project and publish them.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</CODE>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/JavadocArchiver.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns action objects if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -302,7 +302,7 @@ Saves Javadoc for the project and publish them.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.<A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -320,7 +320,7 @@ Saves Javadoc for the project and publish them.
 <TH ALIGN="left"><B>Methods inherited from interface hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -415,13 +415,13 @@ public boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" ti
 </DL>
 <HR>
 
-<A NAME="getProjectAction(hudson.model.AbstractProject)"><!-- --></A><H3>
-getProjectAction</H3>
+<A NAME="getProjectActions(hudson.model.AbstractProject)"><!-- --></A><H3>
+getProjectActions</H3>
 <PRE>
-public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getProjectActions</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project)</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
-<DD>Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">BuildStep</A></CODE></B></DD>
+<DD>Returns action objects if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
 
  <p>
@@ -435,12 +435,12 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
  block elements to render the details of the section.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></CODE> in class <CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></CODE> in interface <CODE><A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></CODE> in class <CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>project</CODE> - <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> that owns this build step,
       since <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> object doesn't usually have this "parent" pointer.
-<DT><B>Returns:</B><DD>null if there's no action to be contributed.</DL>
+<DT><B>Returns:</B><DD>can be empty but never null.</DL>
 </DD>
 </DL>
 <HR>

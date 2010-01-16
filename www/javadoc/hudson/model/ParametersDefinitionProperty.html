@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ParametersDefinitionProperty (Hudson main module 1.340 API)
+ParametersDefinitionProperty (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParametersDefinitionProperty (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParametersDefinitionProperty (Hudson main module 1.340 API)";
+        parent.document.title="ParametersDefinitionProperty (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -249,11 +249,11 @@ Keeps a list of the parameters defined for a project.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ParametersDefinitionProperty.html#getJobAction(hudson.model.AbstractProject)">getJobAction</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;job)</CODE>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParametersDefinitionProperty.html#getJobActions(hudson.model.AbstractProject)">getJobActions</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;job)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -310,7 +310,7 @@ Keeps a list of the parameters defined for a project.
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/JobProperty.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/model/JobProperty.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/model/JobProperty.html#getRequiredMonitorService()">getRequiredMonitorService</A>, <A HREF="../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A>, <A HREF="../../hudson/model/JobProperty.html#setOwner(J)">setOwner</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/JobProperty.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/model/JobProperty.html#getJobAction(J)">getJobAction</A>, <A HREF="../../hudson/model/JobProperty.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/model/JobProperty.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A>, <A HREF="../../hudson/model/JobProperty.html#getRequiredMonitorService()">getRequiredMonitorService</A>, <A HREF="../../hudson/model/JobProperty.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/model/JobProperty.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A>, <A HREF="../../hudson/model/JobProperty.html#setOwner(J)">setOwner</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -405,16 +405,16 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-e
 </DL>
 <HR>
 
-<A NAME="getJobAction(hudson.model.AbstractProject)"><!-- --></A><H3>
-getJobAction</H3>
+<A NAME="getJobActions(hudson.model.AbstractProject)"><!-- --></A><H3>
+getJobActions</H3>
 <PRE>
-public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getJobAction</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;job)</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getJobActions</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;job)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/JobProperty.html#getJobAction(J)">JobProperty</A></CODE></B></DD>
-<DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> to be displayed in the job page.
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/JobProperty.html#getJobActions(J)">JobProperty</A></CODE></B></DD>
+<DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.
 
  <p>
- Returning non-null from this method allows a job property to add an item
+ Returning actions from this method allows a job property to add them
  to the left navigation bar in the job page.
 
  <p>
@@ -422,12 +422,12 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
  with the UI in different ways.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/JobProperty.html#getJobAction(J)">getJobAction</A></CODE> in class <CODE><A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&gt;</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/JobProperty.html#getJobActions(J)">getJobActions</A></CODE> in class <CODE><A HREF="../../hudson/model/JobProperty.html" title="class in hudson.model">JobProperty</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&gt;</CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>job</CODE> - Always the same as <A HREF="../../hudson/model/JobProperty.html#owner"><CODE>JobProperty.owner</CODE></A> but passed in anyway for backward compatibility (I guess.)
       You really need not use this value at all.
-<DT><B>Returns:</B><DD>null if there's no such action.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><CODE>ProminentProjectAction</CODE></A>, 
+<DT><B>Returns:</B><DD>can be empty but never null.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/ProminentProjectAction.html" title="interface in hudson.model"><CODE>ProminentProjectAction</CODE></A>, 
 <A HREF="../../hudson/model/PermalinkProjectAction.html" title="interface in hudson.model"><CODE>PermalinkProjectAction</CODE></A></DL>
 </DD>
 </DL>

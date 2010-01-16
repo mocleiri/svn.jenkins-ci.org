@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ProcessTree.UnixProcess (Hudson main module 1.340 API)
+ProcessTree.UnixProcess (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProcessTree.UnixProcess (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProcessTree.UnixProcess (Hudson main module 1.340 API)";
+        parent.document.title="ProcessTree.UnixProcess (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/ProcessTree.UnixProcess.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -98,6 +98,9 @@ Class ProcessTree.UnixProcess</H2>
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.ProcessTree.UnixProcess</B>
 </PRE>
 <DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
+</DL>
+<DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util">ProcessTree</A></DD>
 </DL>
 <HR>
@@ -110,6 +113,8 @@ A process.
 <P>
 
 <P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../serialized-form.html#hudson.util.ProcessTree.UnixProcess">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -123,7 +128,9 @@ A process.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/util/ProcessTree.UnixProcess.html#ProcessTree.UnixProcess()">ProcessTree.UnixProcess</A></B>()</CODE>
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ProcessTree.UnixProcess.html#ProcessTree.UnixProcess(int)">ProcessTree.UnixProcess</A></B>(int&nbsp;pid)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -177,7 +184,7 @@ A process.
 <TH ALIGN="left"><B>Methods inherited from class hudson.util.<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#getChildren()">getChildren</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#getEnvironmentVariables()">getEnvironmentVariables</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#getParent()">getParent</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#getPid()">getPid</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#hasMatchingEnvVars(java.util.Map)">hasMatchingEnvVars</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#act(hudson.util.ProcessTree.ProcessCallable)">act</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#getChildren()">getChildren</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#getEnvironmentVariables()">getEnvironmentVariables</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#getParent()">getParent</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#getPid()">getPid</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html#hasMatchingEnvVars(java.util.Map)">hasMatchingEnvVars</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -202,10 +209,10 @@ A process.
 </TR>
 </TABLE>
 
-<A NAME="ProcessTree.UnixProcess()"><!-- --></A><H3>
+<A NAME="ProcessTree.UnixProcess(int)"><!-- --></A><H3>
 ProcessTree.UnixProcess</H3>
 <PRE>
-public <B>ProcessTree.UnixProcess</B>()</PRE>
+protected <B>ProcessTree.UnixProcess</B>(int&nbsp;pid)</PRE>
 <DL>
 </DL>
 
@@ -238,7 +245,7 @@ public void <B>kill</B>()</PRE>
 <DD>Tries to kill this process.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#kill()">kill</A></CODE> in class <CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html#kill()">kill</A></CODE> in interface <CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#kill()">kill</A></CODE> in class <CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -260,7 +267,7 @@ public void <B>killRecursively</B>()</PRE>
  the current process.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#killRecursively()">killRecursively</A></CODE> in class <CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html#killRecursively()">killRecursively</A></CODE> in interface <CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#killRecursively()">killRecursively</A></CODE> in class <CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -276,7 +283,7 @@ public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.
 <DD>Obtains the argument list of this process.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#getArguments()">getArguments</A></CODE> in class <CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html#getArguments()">getArguments</A></CODE> in interface <CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html#getArguments()">getArguments</A></CODE> in class <CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A></CODE></DL>
 </DD>
 <DD><DL>
 
@@ -315,7 +322,7 @@ public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/util/ProcessTreeKiller.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/ProcessTree.UnixProcess.html" target="_top"><B>FRAMES</B></A>  &nbsp;

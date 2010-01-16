@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BallColor (Hudson main module 1.340 API)
+BallColor (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BallColor (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BallColor (Hudson main module 1.340 API)";
+        parent.document.title="BallColor (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -113,7 +113,7 @@ Ball color used for the build status indication.
  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Enum.html?is-external=true#ordinal()" title="class or interface in java.lang"><CODE>Enum.ordinal()</CODE></A> is the sort order. 
 
  <p>
- Note that mutiple <A HREF="../../hudson/model/BallColor.html" title="enum in hudson.model"><CODE>BallColor</CODE></A> instances may map to the same
+ Note that multiple <A HREF="../../hudson/model/BallColor.html" title="enum in hudson.model"><CODE>BallColor</CODE></A> instances may map to the same
  RGB color, to avoid the rainbow effect.
 
  <h2>Historical Note</h2>
@@ -232,6 +232,14 @@ Ball color used for the build status indication.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/awt/Color.html?is-external=true" title="class or interface in java.awt">Color</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/BallColor.html#getBaseColor()">getBaseColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the RGB color of this color.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/BallColor.html#getDescription()">getDescription</A></B>()</CODE>
 
@@ -241,10 +249,26 @@ Ball color used for the build status indication.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/BallColor.html#getHtmlBaseColor()">getHtmlBaseColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../hudson/model/BallColor.html#getBaseColor()"><CODE>getBaseColor()</CODE></A> in the "#RRGGBB" format.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/BallColor.html#getImage()">getImage</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String like "red.gif" that represents the file name of the image.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/BallColor.html#isAnimated()">isAnimated</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if the icon is animated.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -508,6 +532,32 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 </DL>
 <HR>
 
+<A NAME="getBaseColor()"><!-- --></A><H3>
+getBaseColor</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/awt/Color.html?is-external=true" title="class or interface in java.awt">Color</A> <B>getBaseColor</B>()</PRE>
+<DL>
+<DD>Gets the RGB color of this color. Animation effect is not reflected to this value.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHtmlBaseColor()"><!-- --></A><H3>
+getHtmlBaseColor</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getHtmlBaseColor</B>()</PRE>
+<DL>
+<DD>Returns the <A HREF="../../hudson/model/BallColor.html#getBaseColor()"><CODE>getBaseColor()</CODE></A> in the "#RRGGBB" format.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="toString()"><!-- --></A><H3>
 toString</H3>
 <PRE>
@@ -543,6 +593,19 @@ noAnime</H3>
 public <A HREF="../../hudson/model/BallColor.html" title="enum in hudson.model">BallColor</A> <B>noAnime</B>()</PRE>
 <DL>
 <DD>Gets the unanimated version.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAnimated()"><!-- --></A><H3>
+isAnimated</H3>
+<PRE>
+public boolean <B>isAnimated</B>()</PRE>
+<DL>
+<DD>True if the icon is animated.
 <P>
 <DD><DL>
 </DL>

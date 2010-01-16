@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenReporter (Hudson main module 1.340 API)
+MavenReporter (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenReporter (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenReporter (Hudson main module 1.340 API)";
+        parent.document.title="MavenReporter (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -255,7 +255,16 @@ Listens to the build execution of <A HREF="../../hudson/maven/MavenBuild.html" t
 <TD><CODE><B><A HREF="../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A></B>(<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equivalent of <A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectAction(AbstractProject)</CODE></A>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.341
+      Use <A HREF="../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)"><CODE>getProjectActions(MavenModule)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A></B>(<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equivalent of <A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectActions(AbstractProject)</CODE></A>
  for <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -610,6 +619,9 @@ getProjectAction</H3>
 <PRE>
 public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.341
+      Use <A HREF="../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)"><CODE>getProjectActions(MavenModule)</CODE></A> instead.</I>
+<P>
 <DD>Equivalent of <A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectAction(AbstractProject)</CODE></A>
  for <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.
 
@@ -631,6 +643,38 @@ public <A HREF="../../hudson/model/Action.html" title="interface in hudson.model
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null not to contribute an action, which is the default.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProjectActions(hudson.maven.MavenModule)"><!-- --></A><H3>
+getProjectActions</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getProjectActions</B>(<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</PRE>
+<DL>
+<DD>Equivalent of <A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectActions(AbstractProject)</CODE></A>
+ for <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.
+
+ <p>
+ Registers a transient action to <A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> when it's rendered.
+ This is useful if you'd like to display an action at the module level.
+
+ <p>
+ Since this contributes a transient action, the returned <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>
+ will not be serialized.
+
+ <p>
+ For this method to be invoked, your <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A> has to invoke
+ <A HREF="../../hudson/maven/MavenBuildProxy.html#registerAsProjectAction(hudson.maven.MavenReporter)"><CODE>MavenBuildProxy.registerAsProjectAction(MavenReporter)</CODE></A> during the build.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null.<DT><B>Since:</B></DT>
+  <DD>1.341</DD>
+</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DependencyGraph (Hudson main module 1.340 API)
+DependencyGraph (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DependencyGraph (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DependencyGraph (Hudson main module 1.340 API)";
+        parent.document.title="DependencyGraph (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/DependecyDeclarer.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/DependencyGraph.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="DependencyGraph.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -131,7 +131,24 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 <HR>
 
 <P>
-<!-- =========== FIELD SUMMARY =========== -->
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an edge in the dependency graph.</TD>
+</TR>
+</TABLE>
+&nbsp;<!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -180,7 +197,7 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
               <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called during the dependency graph build phase to add a dependency edge.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.341; use <A HREF="../../hudson/model/DependencyGraph.html#addDependency(hudson.model.DependencyGraph.Dependency)"><CODE>addDependency(Dependency)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -189,7 +206,7 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;downstream)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.341</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -198,7 +215,15 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
               <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.341</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#addDependency(hudson.model.DependencyGraph.Dependency)">addDependency</A></B>(<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A>&nbsp;dep)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called during the dependency graph build phase to add a dependency edge.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -237,6 +262,14 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#getDownstreamDependencies(hudson.model.AbstractProject)">getDownstreamDependencies</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#getTransitiveDownstream(hudson.model.AbstractProject)">getTransitiveDownstream</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;src)</CODE>
 
@@ -258,6 +291,14 @@ Maintains the build dependencies between <A HREF="../../hudson/model/AbstractPro
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the immediate upstream projects (IOW backward edges) of the given project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/DependencyGraph.html#getUpstreamDependencies(hudson.model.AbstractProject)">getUpstreamDependencies</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -372,11 +413,60 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-e
 </DL>
 <HR>
 
+<A NAME="getDownstreamDependencies(hudson.model.AbstractProject)"><!-- --></A><H3>
+getDownstreamDependencies</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A>&gt; <B>getDownstreamDependencies</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.341</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUpstreamDependencies(hudson.model.AbstractProject)"><!-- --></A><H3>
+getUpstreamDependencies</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A>&gt; <B>getUpstreamDependencies</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;p)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.341</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="addDependency(hudson.model.AbstractProject, hudson.model.AbstractProject)"><!-- --></A><H3>
 addDependency</H3>
 <PRE>
-public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
-                          <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</PRE>
+<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
+</FONT>public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
+                                     <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.341; use <A HREF="../../hudson/model/DependencyGraph.html#addDependency(hudson.model.DependencyGraph.Dependency)"><CODE>addDependency(Dependency)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addDependency(hudson.model.DependencyGraph.Dependency)"><!-- --></A><H3>
+addDependency</H3>
+<PRE>
+public void <B>addDependency</B>(<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model">DependencyGraph.Dependency</A>&nbsp;dep)</PRE>
 <DL>
 <DD>Called during the dependency graph build phase to add a dependency edge.
 <P>
@@ -392,9 +482,12 @@ public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.htm
 <A NAME="addDependency(hudson.model.AbstractProject, java.util.Collection)"><!-- --></A><H3>
 addDependency</H3>
 <PRE>
-public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;downstream)</PRE>
+<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
+</FONT>public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;upstream,
+                                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;downstream)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.341</I>
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -407,9 +500,12 @@ public void <B>addDependency</B>(<A HREF="../../hudson/model/AbstractProject.htm
 <A NAME="addDependency(java.util.Collection, hudson.model.AbstractProject)"><!-- --></A><H3>
 addDependency</H3>
 <PRE>
-public void <B>addDependency</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;upstream,
-                          <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</PRE>
+<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
+</FONT>public void <B>addDependency</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&gt;&nbsp;upstream,
+                                     <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;downstream)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.341</I>
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -555,7 +651,7 @@ public int <B>compare</B>(<A HREF="../../hudson/model/AbstractProject.html" titl
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/model/DependecyDeclarer.html" title="interface in hudson.model"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/model/DependencyGraph.Dependency.html" title="class in hudson.model"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/model/DependencyGraph.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="DependencyGraph.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -575,7 +671,7 @@ public int <B>compare</B>(<A HREF="../../hudson/model/AbstractProject.html" titl
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

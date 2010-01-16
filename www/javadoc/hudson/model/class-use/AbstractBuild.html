@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.AbstractBuild (Hudson main module 1.340 API)
+Uses of Class hudson.model.AbstractBuild (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.AbstractBuild (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.AbstractBuild (Hudson main module 1.340 API)";
+        parent.document.title="Uses of Class hudson.model.AbstractBuild (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -796,6 +796,16 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>DependencyGraph.Dependency.</B><B><A HREF="../../../hudson/model/DependencyGraph.Dependency.html#shouldTriggerBuild(hudson.model.AbstractBuild, hudson.model.TaskListener, java.util.List)">shouldTriggerBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                   <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide whether build should be triggered and provide any Actions for the build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B>ParametersAction.</B><B><A HREF="../../../hudson/model/ParametersAction.html#substitute(hudson.model.AbstractBuild, java.lang.String)">substitute</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;text)</CODE>
@@ -1144,12 +1154,21 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>BuildTrigger.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)">execute</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+        <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to trigger downstream builds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>BuildTrigger.</B><B><A HREF="../../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)">execute</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
         <A HREF="../../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>&nbsp;trigger)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to trigger downstream builds.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.341; use <A HREF="../../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildTrigger.execute(AbstractBuild,BuildListener)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

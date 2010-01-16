@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildTrigger (Hudson main module 1.340 API)
+BuildTrigger (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildTrigger (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildTrigger (Hudson main module 1.340 API)";
+        parent.document.title="BuildTrigger (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -263,12 +263,21 @@ Triggers builds of other projects.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)">execute</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to trigger downstream builds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)">execute</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
         <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>&nbsp;trigger)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to trigger downstream builds.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.341; use <A HREF="../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>execute(AbstractBuild,BuildListener)</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -363,7 +372,7 @@ Triggers builds of other projects.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.<A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html" title="class in hudson.tasks">BuildStepCompatibilityLayer</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">perform</A>, <A HREF="../../hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -381,7 +390,7 @@ Triggers builds of other projects.
 <TH ALIGN="left"><B>Methods inherited from interface hudson.tasks.<A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A>, <A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A>, <A HREF="../../hudson/tasks/BuildStep.html#prebuild(hudson.model.AbstractBuild, hudson.model.BuildListener)">prebuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -604,9 +613,27 @@ public boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" ti
 <A NAME="execute(hudson.model.AbstractBuild, hudson.model.BuildListener, hudson.tasks.BuildTrigger)"><!-- --></A><H3>
 execute</H3>
 <PRE>
+<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
+</FONT>public static boolean <B>execute</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                                         <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                                         <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>&nbsp;trigger)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.341; use <A HREF="../../hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>execute(AbstractBuild,BuildListener)</CODE></A></I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="execute(hudson.model.AbstractBuild, hudson.model.BuildListener)"><!-- --></A><H3>
+execute</H3>
+<PRE>
 public static boolean <B>execute</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
-                              <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                              <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks">BuildTrigger</A>&nbsp;trigger)</PRE>
+                              <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</PRE>
 <DL>
 <DD>Convenience method to trigger downstream builds.
 <P>
@@ -614,11 +641,7 @@ public static boolean <B>execute</B>(<A HREF="../../hudson/model/AbstractBuild.h
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>build</CODE> - The current build. Its downstreams will be triggered.<DD><CODE>listener</CODE> - Receives the progress report.<DD><CODE>trigger</CODE> - Optional <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><CODE>BuildTrigger</CODE></A> configured for the current build.
-      If it is non-null, its configuration value will affect the triggering behavior.
-      But even when this is null (meaning no user-defined downstream project is set up),
-      there might be other dependencies defined by somebody else, so build would
-      still have to call this method.</DL>
+<DT><B>Parameters:</B><DD><CODE>build</CODE> - The current build. Its downstreams will be triggered.<DD><CODE>listener</CODE> - Receives the progress report.</DL>
 </DD>
 </DL>
 <HR>

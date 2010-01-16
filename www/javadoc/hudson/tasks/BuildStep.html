@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildStep (Hudson main module 1.340 API)
+BuildStep (Hudson main module 1.341 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-11">
+<META NAME="date" CONTENT="2010-01-15">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildStep (Hudson main module 1.340 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildStep (Hudson main module 1.340 API)";
+        parent.document.title="BuildStep (Hudson main module 1.341 API)";
     }
 }
 </SCRIPT>
@@ -187,7 +187,16 @@ One step of the whole build process.
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildStep.html#getProjectAction(hudson.model.AbstractProject)">getProjectAction</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.341.
+      Use <A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>getProjectActions(AbstractProject)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns action objects if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -330,7 +339,21 @@ getProjectAction</H3>
 <PRE>
 <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A> <B>getProjectAction</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
 <DL>
-<DD>Returns an action object if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has an action
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.341.
+      Use <A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>getProjectActions(AbstractProject)</CODE></A> instead.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProjectActions(hudson.model.AbstractProject)"><!-- --></A><H3>
+getProjectActions</H3>
+<PRE>
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getProjectActions</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+<DL>
+<DD>Returns action objects if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
 
  <p>
@@ -346,7 +369,7 @@ getProjectAction</H3>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>project</CODE> - <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A> that owns this build step,
       since <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> object doesn't usually have this "parent" pointer.
-<DT><B>Returns:</B><DD>null if there's no action to be contributed.</DL>
+<DT><B>Returns:</B><DD>can be empty but never null.</DL>
 </DD>
 </DL>
 <HR>
