@@ -2,10 +2,10 @@ updateCenter.post(
 {
   "connectionCheckUrl": "http://www.google.com/",
   "core":   {
-    "buildDate": "Jan 11, 2010",
+    "buildDate": "Jan 15, 2010",
     "name": "core",
-    "url": "http://hudson-ci.org/download/war/1.340/hudson.war",
-    "version": "1.340"
+    "url": "http://hudson-ci.org/download/war/1.341/hudson.war",
+    "version": "1.341"
   },
   "id": "default",
   "plugins":   {
@@ -107,7 +107,7 @@ updateCenter.post(
       "version": "1.1"
     },
     "artifactory":     {
-      "buildDate": "Jan 07, 2010",
+      "buildDate": "Jan 15, 2010",
       "dependencies":       [
                 {
           "name": "maven-plugin",
@@ -128,12 +128,12 @@ updateCenter.post(
       "excerpt": "This plugin allows deploying maven artifacts and build info to Artifactory. ",
       "labels": ["upload"],
       "name": "artifactory",
-      "previousTimestamp": "2009-12-22T21:40:28.00Z",
-      "releaseTimestamp": "2010-01-08T01:25:18.00Z",
+      "previousTimestamp": "2010-01-08T01:25:18.00Z",
+      "releaseTimestamp": "2010-01-16T07:09:08.00Z",
       "requiredCore": "1.336",
       "title": "Artifactory Plugin",
-      "url": "http://hudson-ci.org/download/plugins/artifactory/1.0.3/artifactory.hpi",
-      "version": "1.0.3",
+      "url": "http://hudson-ci.org/download/plugins/artifactory/1.0.4/artifactory.hpi",
+      "version": "1.0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Artifactory+Plugin"
     },
     "audit-trail":     {
@@ -649,25 +649,28 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CMVC+Plugin"
     },
     "cobertura":     {
-      "buildDate": "Jul 08, 2009",
+      "buildDate": "Jan 15, 2010",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
-        "version": "1.314"
+        "version": "1.319"
       }],
-      "developers": [{"developerId": "carrd"}],
-      "excerpt": "This plugin allows you to capture code coverage report from <a href='http://cobertura.sourceforge.net/'>Cobertura<\/a>. Hudson will generate the trend report of coverage.  The Cobertura plug in can be <a href='https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=7954&expandFolder=7954&folderID=0'>downloaded here<\/a>.",
+      "developers": [      {
+        "developerId": "stephenconnolly",
+        "name": "Stephen Connolly"
+      }],
+      "excerpt": "This plugin allows you to capture code coverage report from <a href='http://cobertura.sourceforge.net/'>Cobertura<\/a>. Hudson will generate the trend report of coverage. ",
       "labels":       [
         "maven",
         "report"
       ],
       "name": "cobertura",
-      "previousTimestamp": "2009-06-11T08:37:14.00Z",
-      "releaseTimestamp": "2009-07-08T07:17:28.00Z",
-      "requiredCore": "1.314",
+      "previousTimestamp": "2009-07-08T07:17:28.00Z",
+      "releaseTimestamp": "2010-01-16T02:31:44.00Z",
+      "requiredCore": "1.319",
       "title": "Cobertura Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cobertura/0.8.9/cobertura.hpi",
-      "version": "0.8.9",
+      "url": "http://hudson-ci.org/download/plugins/cobertura/0.8.10/cobertura.hpi",
+      "version": "0.8.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cobertura+Plugin"
     },
     "codescanner":     {
@@ -726,18 +729,18 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CollabNet+Plugin"
     },
     "configurationslicing":     {
-      "buildDate": "Nov 02, 2009",
+      "buildDate": "Jan 15, 2010",
       "dependencies": [],
       "developers": [{"developerId": "mdonohue"}],
       "excerpt": "This plugin allows mass configuration of select project properties",
       "labels": ["misc"],
       "name": "configurationslicing",
-      "previousTimestamp": "2009-07-30T07:40:50.00Z",
-      "releaseTimestamp": "2009-11-03T06:23:32.00Z",
-      "requiredCore": "1.322",
+      "previousTimestamp": "2010-01-16T07:35:48.00Z",
+      "releaseTimestamp": "2010-01-16T07:58:26.00Z",
+      "requiredCore": "1.341",
       "title": "Configuration Slicing Plugin",
-      "url": "http://hudson-ci.org/download/plugins/configurationslicing/1.10/configurationslicing.hpi",
-      "version": "1.10",
+      "url": "http://hudson-ci.org/download/plugins/configurationslicing/1.13/configurationslicing.hpi",
+      "version": "1.13",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Configuration+Slicing+Plugin"
     },
     "copy-to-slave":     {
@@ -2111,7 +2114,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Job+Type+Column+Plugin"
     },
     "join":     {
-      "buildDate": "Sep 30, 2009",
+      "buildDate": "Jan 15, 2010",
       "dependencies":       [
                 {
           "name": "parameterized-trigger",
@@ -2129,16 +2132,19 @@ updateCenter.post(
           "version": "1.324"
         }
       ],
-      "developers": [{"developerId": "mdonohue"}],
+      "developers": [      {
+        "developerId": "mdonohue",
+        "name": "Michael Donohue"
+      }],
       "excerpt": "This plugin allows a job to be run after all the immediate downstream jobs have completed.",
       "labels": ["trigger"],
       "name": "join",
-      "previousTimestamp": "2009-09-18T07:58:34.00Z",
-      "releaseTimestamp": "2009-10-01T06:03:56.00Z",
+      "previousTimestamp": "2009-10-01T06:03:56.00Z",
+      "releaseTimestamp": "2010-01-16T06:16:48.00Z",
       "requiredCore": "1.324",
       "title": "Join Plugin",
-      "url": "http://hudson-ci.org/download/plugins/join/1.6/join.hpi",
-      "version": "1.6",
+      "url": "http://hudson-ci.org/download/plugins/join/1.7/join.hpi",
+      "version": "1.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Join+Plugin"
     },
     "jsunit":     {
@@ -2478,15 +2484,15 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Maven+Info+Plugin"
     },
     "maven-plugin":     {
-      "buildDate": "Jan 11, 2010",
+      "buildDate": "Jan 15, 2010",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
       "name": "maven-plugin",
-      "previousTimestamp": "2009-12-25T01:49:40.00Z",
-      "releaseTimestamp": "2010-01-11T23:48:26.00Z",
-      "requiredCore": "1.340",
-      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.340/maven-plugin.hpi",
-      "version": "1.340"
+      "previousTimestamp": "2010-01-11T23:48:26.00Z",
+      "releaseTimestamp": "2010-01-16T00:29:08.00Z",
+      "requiredCore": "1.341",
+      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.341/maven-plugin.hpi",
+      "version": "1.341"
     },
     "mercurial":     {
       "buildDate": "Nov 30, 2009",
@@ -2682,11 +2688,11 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/NUnit+Plugin"
     },
     "parameterized-trigger":     {
-      "buildDate": "Jan 11, 2010",
+      "buildDate": "Jan 15, 2010",
       "dependencies": [      {
         "name": "subversion",
         "optional": false,
-        "version": "1.8"
+        "version": "1.7"
       }],
       "developers": [      {
         "developerId": "huybrechts",
@@ -2698,12 +2704,12 @@ updateCenter.post(
         "post-build"
       ],
       "name": "parameterized-trigger",
-      "previousTimestamp": "2010-01-09T18:17:14.00Z",
-      "releaseTimestamp": "2010-01-12T02:10:34.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2010-01-12T02:10:34.00Z",
+      "releaseTimestamp": "2010-01-16T06:28:22.00Z",
+      "requiredCore": "1.341",
       "title": "Parameterized Trigger Plugin",
-      "url": "http://hudson-ci.org/download/plugins/parameterized-trigger/2.2/parameterized-trigger.hpi",
-      "version": "2.2",
+      "url": "http://hudson-ci.org/download/plugins/parameterized-trigger/2.3/parameterized-trigger.hpi",
+      "version": "2.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Parameterized+Trigger+Plugin"
     },
     "perforce":     {
@@ -4126,14 +4132,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/WAS+Builder+Plugin"
     },
     "webtestpresenter":     {
-      "buildDate": "Jul 13, 2008",
+      "buildDate": "Jan 15, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "aambrose"}],
+      "developers": [      {
+        "developerId": "aambrose",
+        "name": "Adam Ambrose"
+      }],
+      "excerpt": "This plugin publishes the reports generated by the <a href='http://webtest.canoo.com/'>Canoo WebTest<\/a> tool for each build.",
+      "labels": ["report"],
       "name": "webtestpresenter",
-      "releaseTimestamp": "2008-07-14T00:48:18.00Z",
-      "requiredCore": "1.234",
-      "url": "http://hudson-ci.org/download/plugins/webtestpresenter/0.22/webtestpresenter.hpi",
-      "version": "0.22"
+      "previousTimestamp": "2008-07-14T00:48:18.00Z",
+      "releaseTimestamp": "2010-01-16T06:53:06.00Z",
+      "requiredCore": "1.319",
+      "title": "WebTest Presenter Plugin",
+      "url": "http://hudson-ci.org/download/plugins/webtestpresenter/0.23/webtestpresenter.hpi",
+      "version": "0.23",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/WebTest+Presenter+Plugin"
     },
     "windmill":     {
       "buildDate": "Jun 25, 2009",
@@ -4225,8 +4239,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "EGRlmx1X1IvRD+5UKHjn+nTfwqY=",
-    "signature": "hkuXAkI5ExRJkiomm9vsMSFXMEf8Y9+wGfYJHfp7X+a/xLGN8VFsJvU5VwF9u+lijwiq9WgptLnNHYynYOVqpIFmQlCJFne5Aqm9ve4e8bc0rjsDNor0vQLEpVuGmZ/9csc1CGhGwDb+tNVl/FUjSiN2BuYoIoAazJnqolRnMhjddge41dwHUQW4XyatfxAOubSRFKxQdG+I4BJE7T5VDWKQL4PDiY8sc0P4nZPPS3p4h9H8dDVLa+o+gkXLKhvUrCg8Ivcogh4GJv6xH6DZgr//j3ofCZEReZsmnLPhCCi13Bo86cadiprOpoY5VwGlFO54bsT8Mlem5bigLYrfWg=="
+    "digest": "Hg3HFqHbygQytZsC2jxwk1gBnic=",
+    "signature": "Y4foYvaKLGRtoM+eWgIeDGaeapL56tm6Mubeh3v48jTvrJQYavB1OVbEY4qmo/AFEopSCqT4D4Pb8opC8/D3ZqPgRDjecGs2jbXsi4gtGyeLwFAIHbVDpiBrBbcM7h99ulb8NmJNJwRZ8+JibMHGpv/BiUK6wyacHETegKxjpWkLe0kurAo3gcYPZjNVTPT+8SKMcoZANVbny1f2o4wgi7neI8+TlQW1p07UQhEYvHeVtCbBDXfQeU9mVki8oImeezDsum6O4VSLZLMzffsXyMKg/jyAv+B6RwFCJocW9TDTBvSK+enfe6arEEJvUhTgYGkElucooJt0JCgegpZtww=="
   },
   "updateCenterVersion": "1"
 }
