@@ -45,8 +45,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Old fields are left so that old config data can be read in, but
+ * they are deprecated and transient so that they won't show up in XML
+ * when writing back
+ */
 public class SonarPublisher extends Notifier {
   private static final Logger LOG = Logger.getLogger(SonarPublisher.class.getName());
+
+  /**
+   * Store a config version, so we're able to migrate config on various
+   * functionality upgrades.
+   */
+  private Integer configVersion;
 
   /**
    * Sonar installation name.
@@ -129,17 +140,7 @@ public class SonarPublisher extends Notifier {
   private transient String cloverReportPath;
 
   public SonarPublisher(String installationName, String jobAdditionalProperties, String mavenOpts) {
-    this.installationName = installationName;
-
-    this.triggers = null;
-
-    this.jobAdditionalProperties = jobAdditionalProperties;
-    this.mavenOpts = mavenOpts;
-
-    this.rootPom = null;
-    this.mavenInstallationName = null;
-
-    this.lightProject = null;
+    this(installationName, null, jobAdditionalProperties, mavenOpts, null, null, null);
   }
 
   public SonarPublisher(
@@ -157,6 +158,8 @@ public class SonarPublisher extends Notifier {
                         String mavenInstallationName, String rootPom,
                         LightProjectConfig lightProject
   ) {
+    super();
+    this.configVersion = 1;
     this.installationName = installationName;
     // Triggers
     this.triggers = triggers;
@@ -177,36 +180,50 @@ public class SonarPublisher extends Notifier {
    */
   @SuppressWarnings({"UnusedDeclaration"})
   public Object readResolve() {
-    // Triggers migration
-    if (scmBuilds != null && timerBuilds != null && snapshotDependencyBuilds != null && skipIfBuildFails != null) {
-      this.triggers = new TriggersConfig(
-          scmBuilds,
-          timerBuilds,
-          true,
-          snapshotDependencyBuilds,
-          skipIfBuildFails
-      );
+    // Default unspecified to v0
+    if (configVersion == null) {
+      configVersion = 0;
     }
-    // Project migration
-    if (useSonarLight != null && useSonarLight) {
-      ReportsConfig reportsConfig = null;
-      if (reuseReports != null && reuseReports) {
-        reportsConfig = new ReportsConfig(surefireReportsPath, coberturaReportPath, cloverReportPath);
+    if (configVersion < 1) {
+      // Triggers migration
+      if (scmBuilds != null && timerBuilds != null && snapshotDependencyBuilds != null && skipIfBuildFails != null) {
+        this.triggers = new TriggersConfig(
+            scmBuilds,
+            timerBuilds,
+            true,
+            snapshotDependencyBuilds,
+            skipIfBuildFails
+        );
       }
-      this.lightProject = new LightProjectConfig(
-          groupId,
-          artifactId,
-          projectName,
-          projectVersion,
-          projectDescription,
-          javaVersion,
-          projectSrcDir,
-          projectSrcEncoding,
-          projectBinDir,
-          reportsConfig
-      );
+      // Project migration
+      if (useSonarLight != null && useSonarLight) {
+        ReportsConfig reportsConfig = null;
+        if (reuseReports != null && reuseReports) {
+          reportsConfig = new ReportsConfig(surefireReportsPath, coberturaReportPath, cloverReportPath);
+        }
+        this.lightProject = new LightProjectConfig(
+            groupId,
+            artifactId,
+            projectName,
+            projectVersion,
+            projectDescription,
+            javaVersion,
+            projectSrcDir,
+            projectSrcEncoding,
+            projectBinDir,
+            reportsConfig
+        );
+      }
+      configVersion = 1;
     }
     return this;
+  }
+
+  /**
+   * @return config version
+   */
+  public Integer getConfigVersion() {
+    return configVersion;
   }
 
   /**
