@@ -1,9 +1,13 @@
 package hudson.plugins.analysis.core;
 
 import java.io.IOException;
+import java.util.HashSet;
 
+import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+
+import com.google.common.collect.Sets;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
@@ -11,9 +15,16 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 
-import hudson.plugins.analysis.graph.DefaultGraphConfigurationDetail;
-import hudson.plugins.analysis.graph.GraphConfigurationDetail;
-import hudson.plugins.analysis.graph.UserGraphConfigurationDetail;
+import hudson.plugins.analysis.graph.BuildResultGraph;
+import hudson.plugins.analysis.graph.DefaultGraphConfigurationView;
+import hudson.plugins.analysis.graph.DifferenceGraph;
+import hudson.plugins.analysis.graph.EmptyGraph;
+import hudson.plugins.analysis.graph.GraphConfiguration;
+import hudson.plugins.analysis.graph.GraphConfigurationView;
+import hudson.plugins.analysis.graph.HealthGraph;
+import hudson.plugins.analysis.graph.NewVersusFixedGraph;
+import hudson.plugins.analysis.graph.PriorityGraph;
+import hudson.plugins.analysis.graph.UserGraphConfigurationView;
 
 import hudson.util.Graph;
 
@@ -92,12 +103,40 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
         else if ("configure".equals(link)) {
             return createUserConfiguration(request);
         }
-        else if ("trendGraph".equals(link)) {
-            return getTrendGraph(request);
-        }
         else {
             return null;
         }
+    }
+
+    /**
+     * Returns the trend graph.
+     *
+     * @return the current trend graph
+     */
+    public Object getTrendGraph() {
+        return getTrendGraph(Stapler.getCurrentRequest());
+    }
+
+    /**
+     * Returns the configured trend graph.
+     *
+     * @param request
+     *            Stapler request
+     * @return the trend graph
+     */
+    public Graph getTrendGraph(final StaplerRequest request) {
+        return createUserConfiguration(request).getGraphRenderer();
+    }
+
+    /**
+     * Returns whether the trend graph is visible.
+     *
+     * @param request
+     *            the request to get the cookie from
+     * @return the graph configuration
+     */
+    public boolean isTrendVisible(final StaplerRequest request) {
+        return hasValidResults() && createUserConfiguration(request).isVisible();
     }
 
     /**
@@ -107,17 +146,15 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *            Stapler request
      * @return a view to configure the trend graph for the current user
      */
-    private GraphConfigurationDetail createUserConfiguration(final StaplerRequest request) {
-        GraphConfigurationDetail graphConfiguration;
+    private GraphConfigurationView createUserConfiguration(final StaplerRequest request) {
         if (hasValidResults()) {
-            graphConfiguration = new UserGraphConfigurationDetail(getProject(), getUrlName(), request, getLastAction());
+            return new UserGraphConfigurationView(createConfiguration(), getProject(),
+                    getUrlName(), request.getCookies(), getLastAction());
         }
         else {
-            graphConfiguration = new UserGraphConfigurationDetail(getProject(), getUrlName(), request);
+            return new UserGraphConfigurationView(createConfiguration(), getProject(),
+                    getUrlName(), request.getCookies());
         }
-        registerAvailableGraphs(graphConfiguration);
-
-        return graphConfiguration;
     }
 
     /**
@@ -125,28 +162,50 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
      *
      * @return a view to configure the trend graph defaults
      */
-    private GraphConfigurationDetail createDefaultConfiguration() {
-        GraphConfigurationDetail graphConfiguration;
+    private GraphConfigurationView createDefaultConfiguration() {
         if (hasValidResults()) {
-            graphConfiguration = new DefaultGraphConfigurationDetail(getProject(), getUrlName(), getLastAction());
+            return new DefaultGraphConfigurationView(createConfiguration(), getProject(),
+                    getUrlName(), getLastAction());
         }
         else {
-            graphConfiguration = new DefaultGraphConfigurationDetail(getProject(), getUrlName());
+            return new DefaultGraphConfigurationView(createConfiguration(), getProject(),
+                    getUrlName());
         }
-        registerAvailableGraphs(graphConfiguration);
-
-        return graphConfiguration;
     }
 
     /**
-     * Registers the available trend graphs.
+     * Creates the graph configuration.
      *
-     * @param graphConfiguration
-     *            the configuration to register the graphs for.
+     * @return the graph configuration
      */
-    private void registerAvailableGraphs(final GraphConfigurationDetail graphConfiguration) {
-        // FIXME: register the graphs and add a overwritable method for custom actions
+    private GraphConfiguration createConfiguration() {
+        HashSet<BuildResultGraph> availableGraphs = Sets.newHashSet();
+        availableGraphs.add(new EmptyGraph());
+        availableGraphs.add(new NewVersusFixedGraph());
+        availableGraphs.add(new PriorityGraph());
+        if (hasValidResults()) {
+            availableGraphs.add(new HealthGraph(getLastAction().getHealthDescriptor()));
+        }
+        else {
+            availableGraphs.add(new HealthGraph(new NullHealthDescriptor()));
+        }
+        availableGraphs.add(new DifferenceGraph());
 
+        HashSet<BuildResultGraph> derivedGraphs = Sets.newHashSet();
+        registerAvailableGraphs(derivedGraphs);
+        availableGraphs.addAll(derivedGraphs);
+
+        return new GraphConfiguration(availableGraphs);
+    }
+
+    /**
+     * Register available trend graphs in the specified collection of graphs.
+     *
+     * @param availableGraphs
+     *            the collection of graphs that should be added
+     */
+    protected void registerAvailableGraphs(final HashSet<BuildResultGraph> availableGraphs) {
+        // empty default implementation
     }
 
     /**
@@ -210,45 +269,6 @@ public abstract class AbstractProjectAction<T extends ResultAction<?>> implement
             lastBuild = lastBuild.getPreviousBuild();
         }
         return lastBuild;
-    }
-
-    /**
-     * Returns the configured trend graph.
-     *
-     * @param request
-     *            Stapler request
-     * @return the trend graph
-     */
-    public Graph getTrendGraph(final StaplerRequest request) {
-        ResultAction<?> action = getLastAction();
-
-        GraphConfigurationDetail configuration = createGraphConfiguration(request, action);
-
-        return configuration.getGraph();
-    }
-
-    /**
-     * Returns whether the trend graph is visible.
-     *
-     * @param request
-     *            the request to get the cookie from
-     * @return the graph configuration
-     */
-    public boolean isTrendVisible(final StaplerRequest request) {
-        return hasValidResults() && new UserGraphConfigurationDetail(project, url, request).isVisible();
-    }
-
-    /**
-     * Creates the graph configuration from the cookie.
-     *
-     * @param request
-     *            the request to get the cookie from
-     * @param action
-     *            the last result action
-     * @return the graph configuration
-     */
-    public GraphConfigurationDetail createGraphConfiguration(final StaplerRequest request, final ResultAction<?> action) {
-        return new UserGraphConfigurationDetail(project, url, request, action);
     }
 
     /**
