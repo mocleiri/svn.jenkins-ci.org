@@ -34,6 +34,7 @@ import hudson.model.Environment;
 import hudson.model.Node;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
+import hudson.tasks.Ant;
 import hudson.tasks.BuildWrapper;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
@@ -51,12 +52,12 @@ import java.util.Map;
  * 
  * @author Kohsuke Kawaguchi
  */
-public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
+public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
     /**
-     * {@link IvyReporter}s that will contribute project actions.
-     * Can be null if there's none.
+     * {@link IvyReporter}s that will contribute project actions. Can be null if
+     * there's none.
      */
-    /*package*/ List<IvyReporter> projectActionReporters;
+    /* package */List<IvyReporter> projectActionReporters;
 
     public IvyBuild(IvyModule job) throws IOException {
         super(job);
@@ -73,13 +74,13 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
     @Override
     public String getUpUrl() {
         StaplerRequest req = Stapler.getCurrentRequest();
-        if(req!=null) {
+        if (req != null) {
             List<Ancestor> ancs = req.getAncestors();
-            for( int i=1; i<ancs.size(); i++) {
-                if(ancs.get(i).getObject()==this) {
-                    if(ancs.get(i-1).getObject() instanceof IvyModuleSetBuild) {
+            for (int i = 1; i < ancs.size(); i++) {
+                if (ancs.get(i).getObject() == this) {
+                    if (ancs.get(i - 1).getObject() instanceof IvyModuleSetBuild) {
                         // if under IvyModuleSetBuild, "up" means IMSB
-                        return ancs.get(i-1).getUrl()+'/';
+                        return ancs.get(i - 1).getUrl() + '/';
                     }
                 }
             }
@@ -90,11 +91,11 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
     @Override
     public String getDisplayName() {
         StaplerRequest req = Stapler.getCurrentRequest();
-        if(req!=null) {
+        if (req != null) {
             List<Ancestor> ancs = req.getAncestors();
-            for( int i=1; i<ancs.size(); i++) {
-                if(ancs.get(i).getObject()==this) {
-                    if(ancs.get(i-1).getObject() instanceof IvyModuleSetBuild) {
+            for (int i = 1; i < ancs.size(); i++) {
+                if (ancs.get(i).getObject() == this) {
+                    if (ancs.get(i - 1).getObject() instanceof IvyModuleSetBuild) {
                         // if under MavenModuleSetBuild, display the module name
                         return getParent().getDisplayName();
                     }
@@ -106,10 +107,9 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
 
     /**
      * Gets the {@link IvyModuleSetBuild} that has the same build number.
-     *
-     * @return
-     *      null if no such build exists, which happens when the module build
-     *      is manually triggered.
+     * 
+     * @return null if no such build exists, which happens when the module build
+     *         is manually triggered.
      * @see #getModuleSetBuild()
      */
     public IvyModuleSetBuild getParentBuild() {
@@ -117,12 +117,11 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
     }
 
     /**
-     * Gets the "governing" {@link MavenModuleSet} that has set
-     * the workspace for this build.
-     *
-     * @return
-     *      null if no such build exists, which happens if the build
-     *      is manually removed.
+     * Gets the "governing" {@link MavenModuleSet} that has set the workspace
+     * for this build.
+     * 
+     * @return null if no such build exists, which happens if the build is
+     *         manually removed.
      * @see #getParentBuild()
      */
     public IvyModuleSetBuild getModuleSetBuild() {
@@ -143,11 +142,11 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
     }
 
     public void registerAsProjectAction(IvyReporter reporter) {
-        if(projectActionReporters==null)
+        if (projectActionReporters == null)
             projectActionReporters = new ArrayList<IvyReporter>();
         projectActionReporters.add(reporter);
     }
-    
+
     @Override
     public void run() {
         run(new RunnerImpl());
@@ -155,7 +154,7 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
         getProject().updateTransientActions();
 
         IvyModuleSetBuild parentBuild = getModuleSetBuild();
-        if(parentBuild!=null)
+        if (parentBuild != null)
             parentBuild.notifyModuleBuild(this);
     }
 
@@ -175,8 +174,8 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
 
         private long startTime;
 
-        public Builder(BuildListener listener,IvyReporter[] reporters, List<String> goals, Map<String,String> systemProps) {
-            super(listener,goals,systemProps);
+        public Builder(BuildListener listener, IvyReporter[] reporters, List<String> goals, Map<String, String> systemProps) {
+            super(listener, goals, systemProps);
             this.reporters = reporters;
         }
 
@@ -197,10 +196,10 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
 
         protected Result doRun(BuildListener listener) throws Exception {
             // pick up a list of reporters to run
-//            reporters = getProject().createReporters();
+            // reporters = getProject().createReporters();
             IvyModuleSet mms = getProject().getParent();
-            if(debug)
-                listener.getLogger().println("Reporters="+reporters);
+            if (debug)
+                listener.getLogger().println("Reporters=" + reporters);
 
             for (BuildWrapper w : mms.getBuildWrappersList()) {
                 Environment e = w.setUp(IvyBuild.this, launcher, listener);
@@ -210,14 +209,17 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
                 buildEnvironments.add(e);
             }
 
-            EnvVars envVars = getEnvironment(listener); // buildEnvironments should be set up first
-            
+            Ant ant = new Ant(getProject().getTargets(), mms.getAnt().getName(), mms.getAntOpts(), getModuleRoot().child(mms.getBuildFile())
+                    .getName(), mms.getAntProperties());
+            if (ant.perform(IvyBuild.this, launcher, listener))
+                return Result.FAILURE;
+
             return Result.SUCCESS;
         }
 
         public void post2(BuildListener listener) throws Exception {
             for (IvyReporter reporter : reporters)
-                reporter.end(IvyBuild.this,launcher,listener);
+                reporter.end(IvyBuild.this, launcher, listener);
         }
 
         @Override
@@ -230,7 +232,7 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule,IvyBuild> {
      * Set true to produce debug output.
      */
     public static boolean debug = false;
-    
+
     @Override
     public IvyModule getParent() {// don't know why, but javac wants this
         return super.getParent();

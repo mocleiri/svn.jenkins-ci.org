@@ -36,7 +36,7 @@ THE SOFTWARE.
     <f:entry title="${%Ivy xml files}" field="ivyFilePattern">
       <f:textbox />
     </f:entry>
-    <f:entry title="${%Relative path to module root directory}" field="relPathToModuleRootDir">
+    <f:entry title="${%Relative path to descriptor from module root}" field="relativePathToDescriptorFromModuleRoot">
       <f:textbox />
     </f:entry>
     <j:set var="ants" value="${it.descriptor.antDescriptor.installations}" />
@@ -54,7 +54,7 @@ THE SOFTWARE.
         <select class="setting-input" name="ant.antName">
           <option value="(Default)">(${%Default})</option>
           <j:forEach var="inst" items="${ants}">
-            <f:option selected="${inst.name==instance.ant.name}" value="${inst.name}">${inst.name}</f:option>
+            <f:option selected="${inst.name==it.ant.name}" value="${inst.name}">${inst.name}</f:option>
           </j:forEach>
         </select>
       </f:entry>
@@ -64,13 +64,13 @@ THE SOFTWARE.
     </f:entry>
   <f:advanced>
     <f:entry title="${%Build File}">
-      <f:textbox name="ant.buildFile" value="${instance.buildFile}"/>
+      <f:textbox name="buildFile" value="${it.buildFile}"/>
     </f:entry>
     <f:entry title="${%Properties}">
-      <f:textarea name="ant.properties" value="${instance.properties}"/>
+      <f:textarea name="antProperties" value="${it.antProperties}"/>
     </f:entry>
     <f:entry title="${%Java Options}" help="/help/ant/ant-opts.html">
-      <f:expandableTextbox name="ant.antOpts" value="${instance.antOpts}"/>
+      <f:expandableTextbox name="antOpts" value="${it.antOpts}"/>
     </f:entry>
   </f:advanced>
   </f:section>

@@ -32,12 +32,13 @@ import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
 import org.apache.ivy.core.module.id.ModuleRevisionId;
 
 /**
- * Serializable representation of the key information obtained from an ivy.xml file.
- *
+ * Serializable representation of the key information obtained from an ivy
+ * descriptor file.
+ * 
  * <p>
- * This is used for the master to introspect the ivy.xml file, which is only available
- * as {@link ModuleDescriptor} object on slaves.
- *
+ * This is used for the master to introspect the ivy descriptor file, which is
+ * only available as {@link ModuleDescriptor} object on slaves.
+ * 
  * @author Timothy Bingaman
  */
 final class IvyModuleInfo implements Serializable {
@@ -47,22 +48,23 @@ final class IvyModuleInfo implements Serializable {
     /**
      * This is a human readable name of the Ivy module. Not necessarily unique
      * or file system safe.
-     *
-     * @see ModuleRevisionId#getName() 
+     * 
+     * @see ModuleRevisionId#getName()
      */
     public final String displayName;
 
     /**
-     * Relative path from the workspace to
-     * the directory of this module containing the ivy.xml file.
-     *
-     * Strings like "" (if the ivy.xml file is checked out directly in the workspace), "abc", "foo/bar/zot".
+     * Relative path from the workspace to the ivy descriptor file for this
+     * module.
+     * 
+     * Strings like "ivy.xml" (if the ivy.xml file is checked out directly in
+     * the workspace), "abc/ivy.xml", "foo/bar/zot/ivy.xml".
      */
-    public final String relativePath;
+    public final String relativePathToDescriptor;
 
     /**
-     * Revision number taken from ivy.xml file.
-     *
+     * Revision number taken from ivy descriptor file.
+     * 
      * @see ModuleRevisionId#getRevision()
      */
     public final String revision;
@@ -72,11 +74,11 @@ final class IvyModuleInfo implements Serializable {
      */
     public final Set<ModuleDependency> dependencies = new HashSet<ModuleDependency>();
 
-    public IvyModuleInfo(ModuleDescriptor module, String relPath) {
+    public IvyModuleInfo(ModuleDescriptor module, String relativePathToDescriptor) {
         this.name = new ModuleName(module);
         this.revision = module.getModuleRevisionId().getRevision();
         this.displayName = module.getModuleRevisionId().getName();
-        this.relativePath = relPath;
+        this.relativePathToDescriptor = relativePathToDescriptor;
 
         for (DependencyDescriptor dep : module.getDependencies())
             dependencies.add(new ModuleDependency(dep));

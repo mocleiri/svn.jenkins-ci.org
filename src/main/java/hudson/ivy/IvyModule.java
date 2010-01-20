@@ -45,6 +45,7 @@ import hudson.tasks.LogRotator;
 import hudson.tasks.Publisher;
 import hudson.util.DescribableList;
 
+import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
@@ -83,15 +84,30 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
 
     private transient ModuleName moduleName;
 
-    private String relativePath;
+    /**
+     * Relative path from the workspace to the ivy descriptor file for this
+     * module.
+     * 
+     * Strings like "ivy.xml" (if the ivy.xml file is checked out directly in
+     * the workspace), "abc/ivy.xml", "foo/bar/zot/ivy.xml".
+     */
+    private String relativePathToDescriptorFromWorkspace;
 
     /**
      * If this module has targets specified by itself. Otherwise leave it null
      * to use the default targets specified in the parent.
      */
     private String targets;
-    
-    private String relPathToModuleRootDir;
+
+
+    /**
+     * Relative path from the workspace to the ivy descriptor file for this
+     * module.
+     * 
+     * Strings like "ivy.xml" (if the ivy.xml file is directly in
+     * the module root), "ivy/ivy.xml", "build/ivy.xml".
+     */
+    private String relativePathToDescriptorFromModuleRoot;
 
     /**
      * List of modules that this module declares direct dependencies on.
@@ -127,7 +143,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     }
 
     /**
-     * Called to update the module with the new POM.
+     * Called to update the module with the new ivy.xml information.
      * <p>
      * This method is invoked on {@link IvyModule} that has the matching
      * {@link ModuleName}.
@@ -135,7 +151,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /* package */final void reconfigure(IvyModuleInfo moduleInfo) {
         this.displayName = moduleInfo.displayName;
         this.revision = moduleInfo.revision;
-        this.relativePath = moduleInfo.relativePath;
+        this.relativePathToDescriptorFromWorkspace = moduleInfo.relativePathToDescriptor;
         this.dependencies = moduleInfo.dependencies;
         disabled = false;
     }
@@ -164,7 +180,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
      * The path separator is normalized to '/'.
      */
     public String getRelativePath() {
-        return relativePath;
+        return relativePathToDescriptorFromWorkspace;
     }
 
     /**
@@ -187,14 +203,18 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
         return getParent().getTargets();
     }
 
-    public String getRelPathToModuleRootDir() {
-        if (relPathToModuleRootDir != null)
-            return relPathToModuleRootDir;
-        return getParent().getRelPathToModuleRootDir();
+    public String getRelativePathToDescriptorFromModuleRoot() {
+        if (relativePathToDescriptorFromModuleRoot != null)
+            return relativePathToDescriptorFromModuleRoot;
+        return getParent().getRelativePathToDescriptorFromModuleRoot();
     }
 
-    public String getUserConfiguredRelPathToModuleRootDir() {
-        return relPathToModuleRootDir;
+    public String getUserConfiguredRelativePathToDescriptorFromModuleRoot() {
+        return relativePathToDescriptorFromModuleRoot;
+    }
+    
+    public String getRelativePathToModuleRoot() {
+        return StringUtils.removeEnd(relativePathToDescriptorFromWorkspace, getRelativePathToDescriptorFromModuleRoot());
     }
 
     /**

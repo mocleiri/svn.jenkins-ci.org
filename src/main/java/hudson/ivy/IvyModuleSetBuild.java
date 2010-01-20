@@ -32,6 +32,7 @@ import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
 import hudson.model.Environment;
 import hudson.model.Fingerprint;
 import hudson.model.Hudson;
@@ -42,6 +43,7 @@ import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Ant.AntInstallation;
 import hudson.util.StreamTaskListener;
+import hudson.util.VariableResolver;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +52,7 @@ import java.io.InterruptedIOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,6 +60,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,9 +69,13 @@ import org.apache.ivy.Ivy;
 import org.apache.ivy.Ivy.IvyCallback;
 import org.apache.ivy.core.IvyContext;
 import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
+import org.apache.ivy.core.sort.SortOptions;
 import org.apache.ivy.plugins.parser.ModuleDescriptorParserRegistry;
 import org.apache.ivy.plugins.version.VersionMatcher;
 import org.apache.ivy.util.Message;
+import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -164,9 +172,8 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
              * descendants?
              */
             private boolean isDescendantOf(ChangeLogSet.Entry e, IvyModule mod) {
-                String basePath = StringUtils.removeEnd(mod.getRelativePath(), mod.getRelPathToModuleRootDir());
                 for (String path : e.getAffectedPaths())
-                    if (path.startsWith(basePath))
+                    if (path.startsWith(mod.getRelativePathToModuleRoot()))
                         return true;
                 return false;
             }
@@ -352,16 +359,11 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             PrintStream logger = listener.getLogger();
             try {
                 EnvVars envVars = getEnvironment(listener);
-                // AntInstallation ant = project.getAnt();
-                // if (ant == null)
-                // throw new
-                // AbortException("An Ant installation needs to be available for this project to be built.\n"
-                // +
-                // "Either your server has no Ant installations defined, or the requested Ant version does not exist.");
-                //
-                // ant =
-                // ant.forEnvironment(envVars).forNode(Computer.currentComputer().getNode(),
-                // listener);
+                AntInstallation ant = project.getAnt();
+                if (ant == null)
+                    throw new AbortException("An Ant installation needs to be available for this project to be built.\n"
+                            + "Either your server has no Ant installations defined, or the requested Ant version does not exist.");
+
                 parsePoms(listener, logger, envVars);
 
                 if (!project.isAggregatorStyleBuild()) {
@@ -391,6 +393,8 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 
                         SplittableBuildListener slistener = new SplittableBuildListener(listener);
                         List<String> changedModules = new ArrayList<String>();
+                        
+                        List<IvyBuild> ivyBuilds = new ArrayList<IvyBuild>();
 
                         for (IvyModule m : project.sortedActiveModules) {
                             IvyBuild mb = m.newBuild();
@@ -411,8 +415,29 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                                 }
                             }
 
-                            mb.setWorkspace(getModuleRoot().child(m.getRelativePath()));
+                            mb.setWorkspace(getModuleRoot().child(m.getRelativePathToModuleRoot()));
+                            ivyBuilds.add(mb);
                         }
+                        
+                        Project project = new Project();
+                        project.init();
+                        for (IvyBuild ivyBuild : ivyBuilds) {
+                            String buildFile = envVars.expand(ivyBuild.getProject().getParent().getBuildFile());
+                            File antBuildFile = new File(ivyBuild.getWorkspace().getRemote(), buildFile);
+                            ProjectHelper.configureProject(project, antBuildFile);
+
+                            VariableResolver<String> vr = ivyBuild.getBuildVariableResolver();
+
+                            String targets = Util.replaceMacro(envVars.expand(ivyBuild.getProject().getTargets()), vr);
+                            Vector<String> targetVector = new Vector<String>(Arrays.asList(targets.split("[\t\r\n]+")));
+                            try {
+                                project.executeTargets(targetVector);
+                                ivyBuild.setResult(Result.SUCCESS);
+                            } catch (BuildException e) {
+                                ivyBuild.setResult(Result.FAILURE);
+                            }
+                        }
+                        
                     } finally {
                         // tear down in reverse order
                         boolean failed = false;
@@ -488,6 +513,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                     sortedModules.add(mm);
                     mm.save();
                 }
+                
                 // at this point the list contains all the live modules
                 project.sortedActiveModules = sortedModules;
 
@@ -603,8 +629,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             FileSet ivyFiles = Util.createFileSet(ws, ivyFilePattern);
 
             Ivy ivy = getIvy();
-            VersionMatcher versionMatcher = ivy.getSettings().getVersionMatcher();
-            List<IvyModuleInfo> infos = new ArrayList<IvyModuleInfo>();
+            HashMap<ModuleDescriptor, String> moduleDescriptors = new HashMap<ModuleDescriptor, String>();
             for (String ivyFilePath : ivyFiles.getDirectoryScanner().getIncludedFiles()) {
                 final File ivyFile = new File(ws, ivyFilePath);
 
@@ -625,7 +650,13 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                         }
                     }
                 });
-                infos.add(new IvyModuleInfo(module, new File(ivyFilePath).getParent()));
+                moduleDescriptors.put(module, ivyFilePath);
+            }
+            
+            List<IvyModuleInfo> infos = new ArrayList<IvyModuleInfo>();
+            List<ModuleDescriptor> sortedModuleDescriptors = ivy.sortModuleDescriptors(moduleDescriptors.keySet(), SortOptions.DEFAULT);
+            for (ModuleDescriptor moduleDescriptor : sortedModuleDescriptors) {
+                infos.add(new IvyModuleInfo(moduleDescriptor, moduleDescriptors.get(moduleDescriptor)));
             }
 
             return infos;

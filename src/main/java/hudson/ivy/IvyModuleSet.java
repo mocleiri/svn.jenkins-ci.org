@@ -79,20 +79,30 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 
     private String targets;
     
-    private String relPathToModuleRootDir;
+    private String relativePathToDescriptorFromModuleRoot;
 
     private String alternateSettings;
 
     /**
      * Identifies {@link AntInstallation} to be used.
-     * Null to indicate 'default' ant.
      */
     private String antName;
 
     /**
-     * Equivalent of CLI <tt>ANT_OPTS</tt>. Can be null.
+     * ANT_OPTS if not null.
      */
     private String antOpts;
+
+    /**
+     * Optional build script path relative to the workspace.
+     * Used for the Ant '-f' option.
+     */
+    private String buildFile;
+
+    /**
+     * Optional properties to be passed to Ant. Follows {@link Properties} syntax.
+     */
+    private String antProperties;
 
     /**
      * If true, the build will be aggregator style, meaning
@@ -496,35 +506,12 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         this.targets = targets;
     }
 	
-    public String getRelPathToModuleRootDir() {
-        return relPathToModuleRootDir;
+    public String getRelativePathToDescriptorFromModuleRoot() {
+        return relativePathToDescriptorFromModuleRoot;
     }
 
-    public void setRelPathToModuleRootDir(String relPathToModuleRootDir) {
-        this.relPathToModuleRootDir = relPathToModuleRootDir;
-    }
-
-    private List<String> getMavenArgument(String shortForm, String longForm) {
-        List<String> args = new ArrayList<String>();
-        boolean switchFound=false;
-        for (String t : Util.tokenize(getTargets())) {
-            if(switchFound) {
-                args.add(t);
-                switchFound = false;
-            }
-            else
-            if(t.equals(shortForm) || t.equals(longForm))
-                switchFound=true;
-            else
-            if(t.startsWith(shortForm)) {
-                args.add(t.substring(shortForm.length()));
-            }
-            else
-            if(t.startsWith(longForm)) {
-                args.add(t.substring(longForm.length()));
-            }
-        }
-        return args;
+    public void setRelativePathToDescriptorFromModuleRoot(String relativePathToDescriptorFromModuleRoot) {
+        this.relativePathToDescriptorFromModuleRoot = relativePathToDescriptorFromModuleRoot;
     }
 
     /**
@@ -554,6 +541,14 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
      */
     public void setAntOpts(String antOpts) {
         this.antOpts = antOpts;
+    }
+
+    public String getBuildFile() {
+        return buildFile;
+    }
+
+    public String getAntProperties() {
+        return antProperties;
     }
 
     /**
@@ -611,7 +606,13 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         if (ivyFilePattern == null)
             ivyFilePattern = "**/ivy.xml";
         targets = Util.fixEmptyAndTrim(json.getString("targets"));
-        relPathToModuleRootDir = Util.fixEmptyAndTrim(json.getString("relPathToModuleRootDir"));
+        relativePathToDescriptorFromModuleRoot = Util.fixEmptyAndTrim(json.getString("relativePathToDescriptorFromModuleRoot"));
+        if (relativePathToDescriptorFromModuleRoot == null)
+            relativePathToDescriptorFromModuleRoot = "ivy.xml";
+        antName = Util.fixEmptyAndTrim(json.getString("antName"));
+        buildFile = Util.fixEmptyAndTrim(json.getString("buildFile"));
+        antOpts = Util.fixEmptyAndTrim(json.getString("antOpts"));
+        antProperties = Util.fixEmptyAndTrim(json.getString("antProperties"));
         
         publishers.rebuild(req,json,BuildStepDescriptor.filter(Publisher.all(),this.getClass()));
         buildWrappers.rebuild(req,json,BuildWrappers.getFor(this));
@@ -630,7 +631,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     }
     
     /**
-     * Check the location of the POM, alternate settings file, etc - any file.
+     * Check the location of the ivy descriptor file, alternate settings file, etc - any file.
      */
     public FormValidation doCheckFileInWorkspace(@QueryParameter String value) throws IOException, ServletException {
         IvyModuleSetBuild lb = getLastBuild();
