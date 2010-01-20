@@ -257,7 +257,7 @@ public class PerforceSCM extends SCM {
         super.buildEnvVars(build, env);
         env.put("P4PORT", p4Port);
         env.put("P4USER", p4User);
-        env.put("P4CLIENT", p4Client);
+        env.put("P4CLIENT", getEffectiveClientName(build));
         PerforceTagAction pta = getMostRecentTagAction(build);
         if (pta != null) {
             if (pta.getChangeNumber() > 0) {
@@ -661,10 +661,21 @@ public class PerforceSCM extends SCM {
     /**
      * Returns the effective name to use for the client on this build node.
      */
-    private String getEffectiveClientName(Node buildNode, FilePath workspace, TaskListener listener)
-            throws IOException, InterruptedException, P4JavaException {
-        PrintStream log = listener.getLogger();
+    private String getEffectiveClientName(AbstractBuild build) {
+        Node buildNode = build.getBuiltOn();
+        FilePath workspace = build.getWorkspace();
+        String p4Client = this.p4Client;
+        try {
+            p4Client = getEffectiveClientName(buildNode, workspace);
+        } catch (Exception e){
 
+        } finally {
+            return p4Client;
+        }
+    }
+
+    private String getEffectiveClientName(Node buildNode, FilePath workspace)
+            throws IOException, InterruptedException, P4JavaException {
         // If we are building on a slave node, and each node is supposed to have
         // its own unique client, then adjust the client name accordingly.
         // make sure each slave has a unique client name by adding it's
@@ -672,13 +683,7 @@ public class PerforceSCM extends SCM {
 
         String nodeSuffix = "";
         String p4Client = this.p4Client;
-        if (!nodeIsRemote(buildNode)) {
-            log.println("Using master perforce client: " + p4Client);
-        }
-        else if (dontRenameClient) {
-            log.println("Using shared perforce client: " + p4Client);
-        }
-        else {
+        if (nodeIsRemote(buildNode) && !dontRenameClient) {
             // Use the first part of the hostname as the node suffix.
             String host = workspace.act(new GetHostname());
             if (host.contains(".")) {
@@ -687,7 +692,23 @@ public class PerforceSCM extends SCM {
                 nodeSuffix = "-" + host;
             }
             p4Client += nodeSuffix;
+        }
+        return p4Client;
+    }
 
+    private String getEffectiveClientName(Node buildNode, FilePath workspace, TaskListener listener)
+            throws IOException, InterruptedException, P4JavaException {
+        PrintStream log = listener.getLogger();
+
+        String p4Client = this.p4Client;
+        p4Client = getEffectiveClientName(buildNode, workspace);
+        if (!nodeIsRemote(buildNode)) {
+            log.println("Using master perforce client: " + p4Client);
+        }
+        else if (dontRenameClient) {
+            log.println("Using shared perforce client: " + p4Client);
+        }
+        else {
             log.println("Using remote perforce client: " + p4Client);
         }
         return p4Client;
