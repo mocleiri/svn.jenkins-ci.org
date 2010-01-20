@@ -1,0 +1,86 @@
+/*
+ * The MIT License
+ * 
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package hudson.ivy;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.ivy.core.module.descriptor.DependencyDescriptor;
+import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
+import org.apache.ivy.core.module.id.ModuleRevisionId;
+
+/**
+ * Serializable representation of the key information obtained from an ivy.xml file.
+ *
+ * <p>
+ * This is used for the master to introspect the ivy.xml file, which is only available
+ * as {@link ModuleDescriptor} object on slaves.
+ *
+ * @author Timothy Bingaman
+ */
+final class IvyModuleInfo implements Serializable {
+
+    public final ModuleName name;
+
+    /**
+     * This is a human readable name of the Ivy module. Not necessarily unique
+     * or file system safe.
+     *
+     * @see ModuleRevisionId#getName() 
+     */
+    public final String displayName;
+
+    /**
+     * Relative path from the workspace to
+     * the directory of this module containing the ivy.xml file.
+     *
+     * Strings like "" (if the ivy.xml file is checked out directly in the workspace), "abc", "foo/bar/zot".
+     */
+    public final String relativePath;
+
+    /**
+     * Revision number taken from ivy.xml file.
+     *
+     * @see ModuleRevisionId#getRevision()
+     */
+    public final String revision;
+
+    /**
+     * Dependency of this project.
+     */
+    public final Set<ModuleDependency> dependencies = new HashSet<ModuleDependency>();
+
+    public IvyModuleInfo(ModuleDescriptor module, String relPath) {
+        this.name = new ModuleName(module);
+        this.revision = module.getModuleRevisionId().getRevision();
+        this.displayName = module.getModuleRevisionId().getName();
+        this.relativePath = relPath;
+
+        for (DependencyDescriptor dep : module.getDependencies())
+            dependencies.add(new ModuleDependency(dep));
+    }
+
+    private static final long serialVersionUID = 1L;
+}
