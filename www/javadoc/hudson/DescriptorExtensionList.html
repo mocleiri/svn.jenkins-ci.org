@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DescriptorExtensionList (Hudson main module 1.341 API)
+DescriptorExtensionList (Hudson main module 1.342 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-15">
+<META NAME="date" CONTENT="2010-01-22">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescriptorExtensionList (Hudson main module 1.341 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescriptorExtensionList (Hudson main module 1.341 API)";
+        parent.document.title="DescriptorExtensionList (Hudson main module 1.342 API)";
     }
 }
 </SCRIPT>
@@ -216,6 +216,14 @@ Class DescriptorExtensionList&lt;T extends <A HREF="../hudson/model/Describable.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#find(java.lang.Class)">find</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">T</A>&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds the descriptor that describes the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#find(java.lang.String)">find</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fqcn)</CODE>
 
 <BR>
@@ -364,6 +372,20 @@ public <A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>fqcn</CODE> - Fully qualified name of the descriptor, not the describable.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="find(java.lang.Class)"><!-- --></A><H3>
+find</H3>
+<PRE>
+public <A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A> <B>find</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">T</A>&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Finds the descriptor that describes the given type.
+ That is, if this method returns d, <code>d.clazz==type</code>
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ClassicPluginStrategy (Hudson main module 1.341 API)
+ClassicPluginStrategy (Hudson main module 1.342 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-15">
+<META NAME="date" CONTENT="2010-01-22">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ClassicPluginStrategy (Hudson main module 1.341 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ClassicPluginStrategy (Hudson main module 1.341 API)";
+        parent.document.title="ClassicPluginStrategy (Hudson main module 1.342 API)";
     }
 }
 </SCRIPT>
@@ -171,6 +171,15 @@ Class ClassicPluginStrategy</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ClassicPluginStrategy.html#createClassLoader(java.util.List, java.lang.ClassLoader)">createClassLoader</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&gt;&nbsp;paths,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the classloader that can load all the specified jar files and delegate to the given parent.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ClassicPluginStrategy.html#createPluginWrapper(java.io.File)">createPluginWrapper</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;archive)</CODE>
 
@@ -274,6 +283,26 @@ public <A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrap
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>archive</CODE> - Either a directory that points to a pre-exploded plugin, or an hpi file, or an hpl file.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createClassLoader(java.util.List, java.lang.ClassLoader)"><!-- --></A><H3>
+createClassLoader</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A> <B>createClassLoader</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&gt;&nbsp;paths,
+                                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;parent)
+                                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Creates the classloader that can load all the specified jar files and delegate to the given parent.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>

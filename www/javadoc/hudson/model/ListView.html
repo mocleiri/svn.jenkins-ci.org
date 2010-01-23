@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ListView (Hudson main module 1.341 API)
+ListView (Hudson main module 1.342 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-15">
+<META NAME="date" CONTENT="2010-01-22">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListView (Hudson main module 1.341 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListView (Hudson main module 1.341 API)";
+        parent.document.title="ListView (Hudson main module 1.342 API)";
     }
 }
 </SCRIPT>
@@ -99,11 +99,11 @@ Class ListView</H2>
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.ListView</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>ListView</B><DT>extends <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></DL>
+<DT><PRE>public class <B>ListView</B><DT>extends <A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A><DT>implements <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
 </PRE>
 
 <P>
@@ -171,6 +171,15 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><A HREF="../../hudson/model/View.html#CONFIGURE">CONFIGURE</A>, <A HREF="../../hudson/model/View.html#CREATE">CREATE</A>, <A HREF="../../hudson/model/View.html#DELETE">DELETE</A>, <A HREF="../../hudson/model/View.html#description">description</A>, <A HREF="../../hudson/model/View.html#filterExecutors">filterExecutors</A>, <A HREF="../../hudson/model/View.html#filterQueue">filterQueue</A>, <A HREF="../../hudson/model/View.html#LIST">LIST</A>, <A HREF="../../hudson/model/View.html#name">name</A>, <A HREF="../../hudson/model/View.html#owner">owner</A>, <A HREF="../../hudson/model/View.html#PERMISSIONS">PERMISSIONS</A>, <A HREF="../../hudson/model/View.html#SORTER">SORTER</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_hudson.model.Saveable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface hudson.model.<A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Saveable.html#NOOP">NOOP</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -282,6 +291,14 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#save()">save</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Persists the state of this object into XML.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#submit(org.kohsuke.stapler.StaplerRequest)">submit</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
@@ -356,11 +373,40 @@ public <B>ListView</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lan
 </TR>
 </TABLE>
 
+<A NAME="save()"><!-- --></A><H3>
+save</H3>
+<PRE>
+public void <B>save</B>()
+          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Saveable.html#save()">Saveable</A></CODE></B></DD>
+<DD>Persists the state of this object into XML.
+
+ <p>
+ For making a bulk change efficiently, see <A HREF="../../hudson/BulkChange.html" title="class in hudson"><CODE>BulkChange</CODE></A>.
+
+ <p>
+ To support listeners monitoring changes to this object, call <CODE>SaveableListener.fireOnChange</CODE>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the persistence failed.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="initColumns()"><!-- --></A><H3>
 initColumns</H3>
 <PRE>
 protected void <B>initColumns</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -391,14 +437,6 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?
 <DD><DL>
 </DL>
 </DD>
-</DL>
-<HR>
-
-<A NAME="getDefaultColumns()"><!-- --></A><H3>
-getDefaultColumns</H3>
-<PRE>
-public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt; <B>getDefaultColumns</B>()</PRE>
-<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -447,6 +485,9 @@ getIncludeRegex</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getIncludeRegex</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -523,6 +564,20 @@ protected void <B>submit</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
 <DT><B>Throws:</B>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDefaultColumns()"><!-- --></A><H3>
+getDefaultColumns</H3>
+<PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/views/ListViewColumn.html" title="class in hudson.views">ListViewColumn</A>&gt; <B>getDefaultColumns</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

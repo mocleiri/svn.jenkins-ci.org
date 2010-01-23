@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.341 API)
+UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.342 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-15">
+<META NAME="date" CONTENT="2010-01-22">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.341 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.341 API)";
+        parent.document.title="UpdateCenter.UpdateCenterConfiguration (Hudson main module 1.342 API)";
     }
 }
 </SCRIPT>
@@ -190,6 +190,15 @@ Strategy object for controlling the update center's behaviors.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check connection to update center server.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URLConnection.html?is-external=true" title="class or interface in java.net">URLConnection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.UpdateCenterConfiguration.html#connect(hudson.model.UpdateCenter.DownloadJob, java.net.URL)">connect</A></B>(<A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>&nbsp;job,
+        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;src)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connects to the given URL for downloading the binary.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -421,6 +430,27 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-ext
 <DT><B>Returns:</B><DD>A File object that describes the downloaded resource.
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if there were problems downloading the resource.<DT><B>See Also:</B><DD><A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model"><CODE>UpdateCenter.DownloadJob</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="connect(hudson.model.UpdateCenter.DownloadJob, java.net.URL)"><!-- --></A><H3>
+connect</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URLConnection.html?is-external=true" title="class or interface in java.net">URLConnection</A> <B>connect</B>(<A HREF="../../hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>&nbsp;job,
+                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;src)
+                         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Connects to the given URL for downloading the binary. Useful for tweaking
+ how the connection gets established.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

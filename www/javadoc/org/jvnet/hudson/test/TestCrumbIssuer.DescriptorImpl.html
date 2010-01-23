@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TestCrumbIssuer.DescriptorImpl (Hudson main module 1.341 API)
+TestCrumbIssuer.DescriptorImpl (Hudson main module 1.342 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-15">
+<META NAME="date" CONTENT="2010-01-22">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TestCrumbIssuer.DescriptorImpl (Hudson main module 1.341 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TestCrumbIssuer.DescriptorImpl (Hudson main module 1.341 API)";
+        parent.document.title="TestCrumbIssuer.DescriptorImpl (Hudson main module 1.342 API)";
     }
 }
 </SCRIPT>
@@ -298,13 +298,22 @@ public <A HREF="../../../../org/jvnet/hudson/test/TestCrumbIssuer.html" title="c
  </pre>
  <p>
  ... which performs the databinding on the constructor of <A HREF="../../../../hudson/model/Descriptor.html#clazz"><CODE>Descriptor.clazz</CODE></A>.
+
+ <p>
+ For some types of <A HREF="../../../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>, such as <A HREF="../../../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A>, this method
+ can be invoked with null request object for historical reason. Such design is considered
+ broken, but due to the compatibility reasons we cannot fix it. Because of this, the
+ default implementation gracefully handles null request, but the contract of the method
+ still is "request is always non-null." Extension points that need to define the "default instance"
+ semantics should define a descriptor subtype and add the no-arg newInstance method.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../../../hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)">newInstance</A></CODE> in class <CODE><A HREF="../../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../../hudson/security/csrf/CrumbIssuer.html" title="class in hudson.security.csrf">CrumbIssuer</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>req</CODE> - Always non-null. This object includes represents the entire submisison.<DD><CODE>formData</CODE> - The JSON object that captures the configuration data for this <A HREF="../../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
+<DT><B>Parameters:</B><DD><CODE>req</CODE> - Always non-null (see note above.) This object includes represents the entire submission.<DD><CODE>formData</CODE> - The JSON object that captures the configuration data for this <A HREF="../../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.
       See http://hudson.gotdns.com/wiki/display/HUDSON/Structured+Form+Submission
+      Always non-null.
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="../../../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE> - Signals a problem in the submitted form.</DL>
 </DD>

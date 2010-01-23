@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.341 API)
+Run (Hudson main module 1.342 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-15">
+<META NAME="date" CONTENT="2010-01-22">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.341 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.341 API)";
+        parent.document.title="Run (Hudson main module 1.342 API)";
     }
 }
 </SCRIPT>
@@ -274,7 +274,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#LIST_CUTOFF">LIST_CUTOFF</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maximum number of artifacts to list before using switching to the tree view.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -354,7 +354,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#TREE_CUTOFF">TREE_CUTOFF</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maximum number of artifacts to show in tree view before just showing a link.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -583,7 +583,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getArtifacts()">getArtifacts</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the first  artifacts (relative to <A HREF="../../hudson/model/Run.html#getArtifactsDir()"><CODE>getArtifactsDir()</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the artifacts (relative to <A HREF="../../hudson/model/Run.html#getArtifactsDir()"><CODE>getArtifactsDir()</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1275,6 +1275,8 @@ LIST_CUTOFF</H3>
 <PRE>
 public static final int <B>LIST_CUTOFF</B></PRE>
 <DL>
+<DD>Maximum number of artifacts to list before using switching to the tree view.
+<P>
 <DL>
 </DL>
 </DL>
@@ -1285,6 +1287,8 @@ TREE_CUTOFF</H3>
 <PRE>
 public static final int <B>TREE_CUTOFF</B></PRE>
 <DL>
+<DD>Maximum number of artifacts to show in tree view before just showing a link.
+<P>
 <DL>
 </DL>
 </DL>
@@ -2153,7 +2157,7 @@ getArtifacts</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Run.Artifact.html" title="class in hudson.model">Run.Artifact</A>&gt; <B>getArtifacts</B>()</PRE>
 <DL>
-<DD>Gets the first  artifacts (relative to <A HREF="../../hudson/model/Run.html#getArtifactsDir()"><CODE>getArtifactsDir()</CODE></A>.
+<DD>Gets the artifacts (relative to <A HREF="../../hudson/model/Run.html#getArtifactsDir()"><CODE>getArtifactsDir()</CODE></A>.
 <P>
 <DD><DL>
 </DL>
