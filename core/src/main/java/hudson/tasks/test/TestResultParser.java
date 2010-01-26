@@ -37,11 +37,17 @@ import java.io.IOException;
  * results files and produce some subclass of TestResult.
  */
 public abstract class TestResultParser implements ExtensionPoint {
-
-    public String getParserName() {
+    /**
+     * Returns a human readable name of the parser, like "JUnit Parser".
+     */
+    public String getDisplayName() {
         return "Unknown Parser"; 
     }
 
+    /**
+     * This text is used in the UI prompt for the GLOB that specifies files to be parsed by this parser.
+     * For example, "JUnit XML reports:"
+     */
     public String getTestResultLocationMessage() {
         return "Paths to results files to parse:";
     }
@@ -53,7 +59,8 @@ public abstract class TestResultParser implements ExtensionPoint {
         return Hudson.getInstance().getExtensionList(TestResultParser.class);
     }
 
-    /** Despite the fact that there's no data involved in parsing, and it might as well
+    /**
+     * Despite the fact that there's no data involved in parsing, and it might as well
      * be a static method, we have to make it an instance method to be able to use
      * runtime method dispatch from just the name of the class. 
      */

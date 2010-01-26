@@ -42,7 +42,7 @@ import org.apache.tools.ant.DirectoryScanner;
 @Extension
 public class JUnitParser extends TestResultParser {
     @Override
-    public String getParserName() {
+    public String getDisplayName() {
         return "JUnit Parser";
     }
 
