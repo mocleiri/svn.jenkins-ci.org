@@ -39,6 +39,6 @@ public abstract class MetaTabulatedResult extends TabulatedResult {
     /**
      * All failed tests.
      */
-    public abstract Collection<? extends AbstractTestResult> getFailedTests();
+    public abstract Collection<? extends TestResult> getFailedTests();
 
 }

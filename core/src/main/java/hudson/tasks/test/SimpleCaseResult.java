@@ -38,7 +38,7 @@ import static java.util.Collections.emptyList;
  * The simplest possible case result, with no language ties.
  * Acts as if it passed, has no children, and has no failed or skipped tests.
  */
-public class SimpleCaseResult extends AbstractTestResult {
+public class SimpleCaseResult extends TestResult {
     protected AbstractTestResultAction parentAction;
     protected final List<SimpleCaseResult> listOnlyContainingThisObject = new ArrayList<SimpleCaseResult>(1);
     protected float duration = 1.0f;
@@ -73,7 +73,7 @@ public class SimpleCaseResult extends AbstractTestResult {
     }
     
     @Override
-    public AbstractTestResult findCorrespondingResult(String id) {
+    public TestResult findCorrespondingResult(String id) {
         if (id.equals(getId())) {
             return this;
         }
@@ -87,7 +87,7 @@ public class SimpleCaseResult extends AbstractTestResult {
      * @return the children of this test result, if any, or an empty collection
      */
     @Override
-    public Collection<? extends AbstractTestResult> getFailedTests() {
+    public Collection<? extends TestResult> getFailedTests() {
         return emptyList();
     }
 
@@ -97,7 +97,7 @@ public class SimpleCaseResult extends AbstractTestResult {
      * @return the children of this test result, if any, or an empty collection
      */
     @Override
-    public Collection<? extends AbstractTestResult> getPassedTests() {
+    public Collection<? extends TestResult> getPassedTests() {
         return listOnlyContainingThisObject;
     }
 
@@ -107,7 +107,7 @@ public class SimpleCaseResult extends AbstractTestResult {
      * @return the children of this test result, if any, or an empty list
      */
     @Override
-    public Collection<? extends AbstractTestResult> getSkippedTests() {
+    public Collection<? extends TestResult> getSkippedTests() {
         return emptyList();
     }
 

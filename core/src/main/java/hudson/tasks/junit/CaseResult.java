@@ -25,7 +25,7 @@ package hudson.tasks.junit;
 
 import hudson.model.AbstractBuild;
 import hudson.model.Run;
-import hudson.tasks.test.AbstractTestResult;
+import hudson.tasks.test.TestResult;
 import org.dom4j.Element;
 import org.kohsuke.stapler.export.Exported;
 
@@ -41,7 +41,7 @@ import static java.util.Collections.emptyList;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class CaseResult extends AbstractTestResult implements Comparable<CaseResult> {
+public final class CaseResult extends TestResult implements Comparable<CaseResult> {
     private static final Logger LOGGER = Logger.getLogger(CaseResult.class.getName());
     private final float duration;
     /**
@@ -358,7 +358,7 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      * @return null
      */
     @Override
-    public AbstractTestResult findCorrespondingResult(String id) {
+    public TestResult findCorrespondingResult(String id) {
         if (id.equals(safe(getName()))) {
             return this;
     }
@@ -371,7 +371,7 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      * @return the children of this test result, if any, or an empty collection
      */
     @Override
-    public Collection<? extends AbstractTestResult> getFailedTests() {
+    public Collection<? extends TestResult> getFailedTests() {
         return singletonListOrEmpty(!isPassed());
     }
 
@@ -381,7 +381,7 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      * @return the children of this test result, if any, or an empty collection
      */
     @Override
-    public Collection<? extends AbstractTestResult> getPassedTests() {
+    public Collection<? extends TestResult> getPassedTests() {
         return singletonListOrEmpty(isPassed());
     }
 
@@ -391,11 +391,11 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
      * @return the children of this test result, if any, or an empty list
      */
     @Override
-    public Collection<? extends AbstractTestResult> getSkippedTests() {
+    public Collection<? extends TestResult> getSkippedTests() {
         return singletonListOrEmpty(isSkipped());
     }
 
-    private Collection<? extends AbstractTestResult> singletonListOrEmpty(boolean f) {
+    private Collection<? extends hudson.tasks.test.TestResult> singletonListOrEmpty(boolean f) {
         if (f)
             return Collections.singletonList(this);
         else
@@ -445,7 +445,7 @@ public final class CaseResult extends AbstractTestResult implements Comparable<C
         SuiteResult sr = getSuiteResult();
         if (sr==null) {
             LOGGER.warning("In getOwner(), getSuiteResult is null"); return null; }
-        TestResult tr = sr.getParent();
+        hudson.tasks.junit.TestResult tr = sr.getParent();
         if (tr==null) {
             LOGGER.warning("In getOwner(), suiteResult.getParent() is null."); return null; }
         return tr.getOwner(); 

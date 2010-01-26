@@ -38,7 +38,7 @@ import java.io.Serializable;
 
 
 /**
- * A class to exercise the AbstractTestResult extension mechanism.
+ * A class to exercise the TestResult extension mechanism.
  */
 public class TrivialTestResultRecorder extends Recorder implements Serializable {
     @Override

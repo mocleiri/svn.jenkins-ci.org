@@ -27,19 +27,16 @@ import hudson.ExtensionList;
 import hudson.ExtensionPoint;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
-import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.TaskListener;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * An extension point by which various parsers can register to parse
- * results files and produce some subclass of AbstractTestResult.
+ * results files and produce some subclass of TestResult.
  */
-public abstract class AbstractTestResultParser implements ExtensionPoint {
+public abstract class TestResultParser implements ExtensionPoint {
 
     public String getParserName() {
         return "Unknown Parser"; 
@@ -50,17 +47,17 @@ public abstract class AbstractTestResultParser implements ExtensionPoint {
     }
 
     /**
-     * All registered {@link AbstractTestResultParser}s
+     * All registered {@link TestResultParser}s
      */
-    public static ExtensionList<AbstractTestResultParser> all() {
-        return Hudson.getInstance().getExtensionList(AbstractTestResultParser.class);
+    public static ExtensionList<TestResultParser> all() {
+        return Hudson.getInstance().getExtensionList(TestResultParser.class);
     }
 
     /** Despite the fact that there's no data involved in parsing, and it might as well
      * be a static method, we have to make it an instance method to be able to use
      * runtime method dispatch from just the name of the class. 
      */
-    public abstract AbstractTestResult parse(String testResultLocations,
+    public abstract TestResult parse(String testResultLocations,
                                        AbstractBuild build, Launcher launcher,
                                        TaskListener listener)
             throws InterruptedException, IOException;

@@ -24,7 +24,6 @@
 package hudson.tasks.test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import hudson.ExtensionList;
 import hudson.model.FreeStyleBuild;
 import hudson.model.FreeStyleProject;
 import hudson.model.Result;
@@ -38,12 +37,12 @@ import java.util.concurrent.TimeoutException;
 
 
 /**
- * A test case to make sure that the AbstractTestResult extension mechanism
+ * A test case to make sure that the TestResult extension mechanism
  * is working properly. 
  */
-public class AbstractTestResultExtensionTest extends HudsonTestCase {
+public class TestResultExtensionTest extends HudsonTestCase {
 
-    public void testTrivialRecorder() throws Exception, TimeoutException, ExecutionException, InterruptedException {
+    public void testTrivialRecorder() throws Exception {
         FreeStyleProject project = createFreeStyleProject("trivialtest");
         TrivialTestResultRecorder recorder = new TrivialTestResultRecorder();
         project.getPublishersList().add(recorder);
@@ -56,12 +55,12 @@ public class AbstractTestResultExtensionTest extends HudsonTestCase {
         assertNotNull("parent action should have an owner", action.owner); 
         Object resultObject = action.getResult();
         assertNotNull("we should have a result");
-        assertTrue("result should be an AbstractTestResult",
-                resultObject instanceof AbstractTestResult);
-        AbstractTestResult abstractResult = (AbstractTestResult) resultObject;
-        AbstractBuild<?,?> ownerBuild = abstractResult.getOwner();
+        assertTrue("result should be an TestResult",
+                resultObject instanceof TestResult);
+        TestResult result = (TestResult) resultObject;
+        AbstractBuild<?,?> ownerBuild = result.getOwner();
         assertNotNull("we should have an owner", ownerBuild);
-        assertNotNull("we should have a list of test actions", abstractResult.getTestActions());
+        assertNotNull("we should have a list of test actions", result.getTestActions());
 
         // Validate that there are test results where I expect them to be:
         HudsonTestCase.WebClient wc = new HudsonTestCase.WebClient();

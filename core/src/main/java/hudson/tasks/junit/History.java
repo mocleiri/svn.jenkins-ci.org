@@ -25,8 +25,8 @@ package hudson.tasks.junit;
 
 import hudson.model.AbstractBuild;
 import hudson.model.Hudson;
+import hudson.tasks.test.TestResult;
 import hudson.tasks.test.TestObject;
-import hudson.tasks.test.AbstractTestResult;
 import hudson.util.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -66,11 +66,11 @@ public class History {
            return false; 
     }
 	
-	public List<AbstractTestResult> getList() {
-		List<AbstractTestResult> list = new ArrayList<AbstractTestResult>();
+	public List<TestResult> getList() {
+		List<TestResult> list = new ArrayList<TestResult>();
 		for (AbstractBuild<?,?> b: testObject.getOwner().getParent().getBuilds()) {
 			if (b.isBuilding()) continue;
-			AbstractTestResult o = testObject.getResultInBuild(b);
+			TestResult o = testObject.getResultInBuild(b);
 			if (o != null) {
 				list.add(o);
 			}
@@ -85,7 +85,7 @@ public class History {
        return new GraphImpl("seconds") {
            protected DataSetBuilder<String, ChartLabel> createDataSet() {
                DataSetBuilder<String, ChartLabel> data = new DataSetBuilder<String, ChartLabel>();
-               for (AbstractTestResult o: getList()) {
+               for (hudson.tasks.test.TestResult o: getList()) {
                    data.add(((double) o.getDuration()) / (1000), "", new ChartLabel(o)  {
                        @Override
                        public Color getColor() {
@@ -111,7 +111,7 @@ public class History {
             protected DataSetBuilder<String, ChartLabel> createDataSet() {
                 DataSetBuilder<String, ChartLabel> data = new DataSetBuilder<String, ChartLabel>();
 
-                for (AbstractTestResult o: getList()) {
+                for (TestResult o: getList()) {
                     data.add(o.getPassCount(), "2Passed", new ChartLabel(o));
                     data.add(o.getFailCount(), "1Failed", new ChartLabel(o));
                     data.add(o.getSkipCount(), "0Skipped", new ChartLabel(o));
@@ -206,9 +206,9 @@ public class History {
     }
 
     class ChartLabel implements Comparable<ChartLabel> {
-    	AbstractTestResult o;
+    	TestResult o;
         String url;
-        public ChartLabel(AbstractTestResult o) {
+        public ChartLabel(TestResult o) {
             this.o = o;
             this.url = null;
         }

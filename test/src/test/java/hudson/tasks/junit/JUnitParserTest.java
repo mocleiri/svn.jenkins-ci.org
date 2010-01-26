@@ -30,9 +30,8 @@ import hudson.model.BuildListener;
 import hudson.model.FreeStyleBuild;
 import hudson.model.FreeStyleProject;
 import hudson.tasks.Builder;
-import hudson.tasks.test.AbstractTestResult;
+import hudson.tasks.test.TestResult;
 import org.jvnet.hudson.test.HudsonTestCase;
-import org.jvnet.hudson.test.TouchBuilder;
 import org.jvnet.hudson.test.recipes.LocalData;
 
 import java.io.IOException;
@@ -46,7 +45,7 @@ import java.util.*;
  *
  */
 public class JUnitParserTest extends HudsonTestCase {
-    static TestResult theResult = null;
+    static hudson.tasks.junit.TestResult theResult = null;
 
     public static final class JUnitParserTestBuilder extends Builder implements Serializable {
         private String testResultLocation;
@@ -66,11 +65,11 @@ public class JUnitParserTest extends HudsonTestCase {
             }
 
             System.out.println("...touched everything");
-            TestResult result = (new JUnitParser()).parse( testResultLocation, build, launcher, listener);
+            hudson.tasks.junit.TestResult result = (new JUnitParser()).parse( testResultLocation, build, launcher, listener);
 
             System.out.println("back from parse");
             assertNotNull("we should have a non-null result", result);
-            assertTrue("result should be a TestResult", result instanceof TestResult);
+            assertTrue("result should be a TestResult", result instanceof hudson.tasks.junit.TestResult);
             System.out.println("We passed some assertions in the JUnitParserTestBuilder");
             theResult = result;
             return (result != null);
@@ -99,7 +98,7 @@ public class JUnitParserTest extends HudsonTestCase {
         assertNotNull("we should have a result in the static member", theResult);
 
         // Check the overall counts. We should have 1 failure, 0 skips, and 132 passes.
-        Collection<? extends AbstractTestResult> children = theResult.getChildren();
+        Collection<? extends TestResult> children = theResult.getChildren();
         assertFalse("Should have several packages", children.isEmpty());
         assertTrue("Should have several pacakges", children.size() > 3); 
         int passCount = theResult.getPassCount();
@@ -113,14 +112,14 @@ public class JUnitParserTest extends HudsonTestCase {
         final String EXPECTED_FAILING_TEST_NAME = "testDataCompatibilityWith1_282";
         final String EXPECTED_FAILING_TEST_CLASSNAME = "hudson.security.HudsonPrivateSecurityRealmTest";
 
-        Collection<? extends AbstractTestResult> failingTests = theResult.getFailedTests();
+        Collection<? extends TestResult> failingTests = theResult.getFailedTests();
         assertEquals("should have one failed test", 1, failingTests.size());
-        Map<String, AbstractTestResult> failedTestsByName = new HashMap<String, AbstractTestResult>();
-        for (AbstractTestResult r: failingTests) {
+        Map<String, TestResult> failedTestsByName = new HashMap<String, hudson.tasks.test.TestResult>();
+        for (TestResult r: failingTests) {
             failedTestsByName.put(r.getName(), r);  
         }
         assertTrue("we've got the expected failed test", failedTestsByName.containsKey(EXPECTED_FAILING_TEST_NAME));
-        AbstractTestResult firstFailedTest = failedTestsByName.get(EXPECTED_FAILING_TEST_NAME); 
+        TestResult firstFailedTest = failedTestsByName.get(EXPECTED_FAILING_TEST_NAME);
         assertFalse("should not have passed this test", firstFailedTest.isPassed());
 
         // TODO: Dig in to the passed tests, too

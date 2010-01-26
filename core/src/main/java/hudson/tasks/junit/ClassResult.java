@@ -24,10 +24,9 @@
 package hudson.tasks.junit;
 
 import hudson.model.AbstractBuild;
-import hudson.model.Run;
-import hudson.tasks.test.TabulatedResult;
+import hudson.tasks.test.*;
+import hudson.tasks.test.TestResult;
 import hudson.tasks.test.TestObject;
-import hudson.tasks.test.AbstractTestResult;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
@@ -35,7 +34,6 @@ import org.kohsuke.stapler.export.Exported;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Collection;
 
 /**
  * Cumulative test result of a test class.
@@ -70,7 +68,7 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
     @Override
     public ClassResult getPreviousResult() {
         if(parent==null)   return null;
-        AbstractTestResult pr = parent.getPreviousResult();
+        TestResult pr = parent.getPreviousResult();
         if(pr==null)    return null;
         if(pr instanceof PackageResult) {
             return ((PackageResult)pr).getClassResult(getName());
@@ -79,7 +77,7 @@ public final class ClassResult extends TabulatedResult implements Comparable<Cla
     }
 
     @Override
-    public AbstractTestResult findCorrespondingResult(String id) {
+    public hudson.tasks.test.TestResult findCorrespondingResult(String id) {
         String myID = safe(getName());
         int base = id.indexOf(myID);
         String caseName;

@@ -28,20 +28,20 @@ import java.util.Collection;
 /**
  * Cumulated result of multiple tests.
  *
- * This class doesn't have a purpose anymore. AbstractTestResult
+ * This class doesn't have a purpose anymore. TestResult
  * is a sufficient replacement, but we'll keep this one for
  * backward-compatibility.  
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class TabulatedResult extends AbstractTestResult {
+public abstract class TabulatedResult extends TestResult {
 
     /**
      * Gets the child test result objects.
      *
      * @see TestObject#getParent()
      */
-    public abstract Collection<? extends AbstractTestResult> getChildren();
+    public abstract Collection<? extends TestResult> getChildren();
 
     public abstract boolean hasChildren();
 

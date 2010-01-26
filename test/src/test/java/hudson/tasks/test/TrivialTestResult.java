@@ -24,17 +24,10 @@
 package hudson.tasks.test;
 
 import hudson.Extension;
-import hudson.tasks.junit.TestAction;
-import hudson.model.AbstractBuild;
-import hudson.model.Run;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collection;
 
 
 /**
- * A class to exercise the AbstractTestResult extension mechanism.
+ * A class to exercise the TestResult extension mechanism.
  */
 @Extension
 public class TrivialTestResult extends SimpleCaseResult {

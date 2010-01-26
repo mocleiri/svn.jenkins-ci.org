@@ -46,7 +46,6 @@ import org.kohsuke.stapler.export.ExportedBean;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -170,18 +169,18 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
         }
     }
     
-    public AbstractTestResult findPreviousCorresponding(AbstractTestResult test) {
+    public TestResult findPreviousCorresponding(TestResult test) {
         T previousResult = getPreviousResult();
         if (previousResult != null) {
-            AbstractTestResult testResult = (AbstractTestResult)getResult();
+            TestResult testResult = (TestResult)getResult();
             return testResult.findCorrespondingResult(test.getId());
         }
 
         return null;
     }
 
-    public AbstractTestResult findCorrespondingResult(String id) {
-        return ((AbstractTestResult)getResult()).findCorrespondingResult(id);
+    public TestResult findCorrespondingResult(String id) {
+        return ((TestResult)getResult()).findCorrespondingResult(id);
     }
     
     /**
@@ -221,7 +220,7 @@ public abstract class AbstractTestResultAction<T extends AbstractTestResultActio
     /**
      * Returns a full path down to a test result
      */
-    public String getTestResultPath(AbstractTestResult it) {
+    public String getTestResultPath(TestResult it) {
         return getUrlName() + "/" + it.getRelativePathFrom(null);
     }
 

@@ -23,16 +23,12 @@
  */
 package hudson.tasks.test;
 
-import hudson.ExtensionList;
-import hudson.ExtensionPoint;
 import hudson.tasks.junit.TestAction;
-import hudson.model.Hudson;
 import hudson.model.AbstractBuild;
 import hudson.model.Run;
 import hudson.model.Result;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import static java.util.Collections.emptyList;
 
@@ -42,7 +38,7 @@ import static java.util.Collections.emptyList;
  * language or implementation specifics.
  * Subclasses must add @Exported annotation to the fields they want to export. 
  */
-public abstract class AbstractTestResult extends TestObject {
+public abstract class TestResult extends TestObject {
 
     /**
      * If the concept of a parent action is important to a subclass, then it should
@@ -129,11 +125,11 @@ public abstract class AbstractTestResult extends TestObject {
     }
     
     /**
-     * Gets the counter part of this {@link AbstractTestResult} in the previous run.
+     * Gets the counter part of this {@link TestResult} in the previous run.
      *
      * @return null if no such counter part exists.
      */
-    public AbstractTestResult getPreviousResult() {
+    public TestResult getPreviousResult() {
         AbstractBuild<?,?> b = getOwner();
         if (b == null) {
             return null;
@@ -144,7 +140,7 @@ public abstract class AbstractTestResult extends TestObject {
                 return null;
             AbstractTestResultAction r = b.getAction(getParentAction().getClass());
             if(r!=null) {
-                AbstractTestResult result = r.findCorrespondingResult(this.getId());
+                TestResult result = r.findCorrespondingResult(this.getId());
                 if (result!=null)
                     return result;
             }
@@ -152,11 +148,11 @@ public abstract class AbstractTestResult extends TestObject {
     }
 
     /**
-     * Gets the counter part of this {@link AbstractTestResult} in the specified run.
+     * Gets the counter part of this {@link TestResult} in the specified run.
      *
      * @return null if no such counter part exists.
      */
-    public AbstractTestResult getResultInBuild(AbstractBuild<?,?> build) {
+    public TestResult getResultInBuild(AbstractBuild<?,?> build) {
         AbstractTestResultAction tra = build.getAction(getParentAction().getClass());
         if (tra == null) {
             tra = build.getAction(AbstractTestResultAction.class);
@@ -168,7 +164,7 @@ public abstract class AbstractTestResult extends TestObject {
      * Gets the "children" of this test result that failed
      * @return the children of this test result, if any, or an empty collection
      */
-    public Collection<? extends AbstractTestResult> getFailedTests() {
+    public Collection<? extends TestResult> getFailedTests() {
         return emptyList();
     }
 
@@ -177,7 +173,7 @@ public abstract class AbstractTestResult extends TestObject {
      * Gets the "children" of this test result that passed
      * @return the children of this test result, if any, or an empty collection
      */
-    public Collection<? extends AbstractTestResult> getPassedTests() {
+    public Collection<? extends TestResult> getPassedTests() {
         return emptyList();
     }
 
@@ -185,7 +181,7 @@ public abstract class AbstractTestResult extends TestObject {
      * Gets the "children" of this test result that were skipped
      * @return the children of this test result, if any, or an empty list
      */
-    public Collection<? extends AbstractTestResult> getSkippedTests() {
+    public Collection<? extends TestResult> getSkippedTests() {
         return emptyList();
     }
 

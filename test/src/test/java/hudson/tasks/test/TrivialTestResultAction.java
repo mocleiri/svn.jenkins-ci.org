@@ -27,7 +27,7 @@ import hudson.model.AbstractBuild;
 import org.kohsuke.stapler.StaplerProxy;
 
 /**
- * A class to exercise the AbstractTestResult extension mechanism.
+ * A class to exercise the TestResult extension mechanism.
  */
 public class TrivialTestResultAction extends AbstractTestResultAction<TrivialTestResultAction> implements StaplerProxy {
 

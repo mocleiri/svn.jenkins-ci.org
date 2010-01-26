@@ -24,7 +24,6 @@
 package hudson.tasks.junit;
 
 import hudson.tasks.test.TestObject;
-import hudson.tasks.test.AbstractTestResult;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -69,7 +68,7 @@ public final class SuiteResult implements Serializable {
      * All test cases.
      */
     private final List<CaseResult> cases = new ArrayList<CaseResult>();
-    private transient TestResult parent;
+    private transient hudson.tasks.junit.TestResult parent;
 
     SuiteResult(String name, String stdout, String stderr) {
         this.name = name;
@@ -198,7 +197,7 @@ public final class SuiteResult implements Serializable {
 		return file;
 	}
 
-	public TestResult getParent() {
+	public hudson.tasks.junit.TestResult getParent() {
         return parent;
     }
 
@@ -213,10 +212,10 @@ public final class SuiteResult implements Serializable {
     }
 
     public SuiteResult getPreviousResult() {
-        AbstractTestResult pr = parent.getPreviousResult();
+        hudson.tasks.test.TestResult pr = parent.getPreviousResult();
         if(pr==null)    return null;
-        if(pr instanceof TestResult)
-            return ((TestResult)pr).getSuite(name);
+        if(pr instanceof hudson.tasks.junit.TestResult)
+            return ((hudson.tasks.junit.TestResult)pr).getSuite(name);
         return null;
     }
 
@@ -249,11 +248,11 @@ public final class SuiteResult implements Serializable {
      * which requires a non-null parent. 
      * @param parent
      */
-    void setParent(TestResult parent) {
+    void setParent(hudson.tasks.junit.TestResult parent) {
         this.parent = parent;
     }
 
-    /*package*/ boolean freeze(TestResult owner) {
+    /*package*/ boolean freeze(hudson.tasks.junit.TestResult owner) {
         if(this.parent!=null)
             return false;   // already frozen
 

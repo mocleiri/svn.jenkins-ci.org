@@ -24,7 +24,7 @@
 package hudson.tasks.junit;
 
 import hudson.model.TaskListener;
-import hudson.tasks.test.AbstractTestResultParser;
+import hudson.tasks.test.TestResultParser;
 import hudson.model.AbstractBuild;
 import hudson.*;
 import hudson.remoting.VirtualChannel;
@@ -40,7 +40,7 @@ import org.apache.tools.ant.DirectoryScanner;
  * results parsed. 
  */
 @Extension
-public class JUnitParser extends AbstractTestResultParser {
+public class JUnitParser extends TestResultParser {
     @Override
     public String getParserName() {
         return "JUnit Parser";

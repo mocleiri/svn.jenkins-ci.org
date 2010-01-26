@@ -29,7 +29,6 @@ import hudson.model.AbstractBuild;
 import hudson.model.Run;
 import hudson.tasks.test.MetaTabulatedResult;
 import hudson.tasks.test.TestObject;
-import hudson.tasks.test.AbstractTestResult;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.IOException2;
 import org.apache.tools.ant.DirectoryScanner;
@@ -211,7 +210,7 @@ public final class TestResult extends MetaTabulatedResult {
     }
 
     @Override
-    public AbstractTestResult findCorrespondingResult(String id) {
+    public hudson.tasks.test.TestResult findCorrespondingResult(String id) {
         if (getId().equals(id) || (id == null)) {
             return this;
         }
@@ -304,7 +303,7 @@ public final class TestResult extends MetaTabulatedResult {
      * @return the children of this test result, if any, or an empty collection
      */
     @Override
-    public Collection<? extends AbstractTestResult> getPassedTests() {
+    public Collection<? extends hudson.tasks.test.TestResult> getPassedTests() {
         throw new UnsupportedOperationException();  // TODO: implement!(FIXME: generated)
     }
 
@@ -314,7 +313,7 @@ public final class TestResult extends MetaTabulatedResult {
      * @return the children of this test result, if any, or an empty list
      */
     @Override
-    public Collection<? extends AbstractTestResult> getSkippedTests() {
+    public Collection<? extends hudson.tasks.test.TestResult> getSkippedTests() {
         throw new UnsupportedOperationException();  // TODO: implement!(FIXME: generated)
     }
 

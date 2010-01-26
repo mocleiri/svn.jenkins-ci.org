@@ -24,9 +24,8 @@
 package hudson.tasks.junit;
 
 import hudson.model.AbstractBuild;
-import hudson.model.Run;
-import hudson.tasks.test.MetaTabulatedResult;
-import hudson.tasks.test.AbstractTestResult;
+import hudson.tasks.test.*;
+import hudson.tasks.test.TestResult;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
@@ -46,10 +45,10 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
      */
     private final Map<String,ClassResult> classes = new TreeMap<String,ClassResult>();
     private int passCount,failCount,skipCount;
-    private final TestResult parent;
+    private final hudson.tasks.junit.TestResult parent;
     private float duration; 
 
-    PackageResult(TestResult parent, String packageName) {
+    PackageResult(hudson.tasks.junit.TestResult parent, String packageName) {
         this.packageName = packageName;
         this.parent = parent;
     }
@@ -59,7 +58,7 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
         return (parent == null ? null : parent.getOwner());
     }
 
-    public TestResult getParent() {
+    public hudson.tasks.junit.TestResult getParent() {
     	return parent;
     }
 
@@ -77,7 +76,7 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
     }
 
     @Override
-    public AbstractTestResult findCorrespondingResult(String id) {
+    public TestResult findCorrespondingResult(String id) {
         String myID = safe(getName());
         int base = id.indexOf(myID);
         String className;
@@ -198,7 +197,7 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
      * @return the children of this test result, if any, or an empty collection
      */
     @Override
-    public Collection<? extends AbstractTestResult> getPassedTests() {
+    public Collection<? extends hudson.tasks.test.TestResult> getPassedTests() {
         List<CaseResult> r = new ArrayList<CaseResult>();
         for (ClassResult clr : classes.values()) {
             for (CaseResult cr : clr.getChildren()) {
@@ -217,7 +216,7 @@ public final class PackageResult extends MetaTabulatedResult implements Comparab
      * @return the children of this test result, if any, or an empty list
      */
     @Override
-    public Collection<? extends AbstractTestResult> getSkippedTests() {
+    public Collection<? extends TestResult> getSkippedTests() {
         List<CaseResult> r = new ArrayList<CaseResult>();
         for (ClassResult clr : classes.values()) {
             for (CaseResult cr : clr.getChildren()) {

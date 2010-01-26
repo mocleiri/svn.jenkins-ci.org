@@ -57,7 +57,7 @@ public class MatrixTestResult extends AggregatedTestResultAction {
     }
 
     @Override
-    public String getTestResultPath(AbstractTestResult it) {
+    public String getTestResultPath(TestResult it) {
         // Prepend Configuration path
         return it.getOwner().getParent().getShortUrl() + super.getTestResultPath(it);
     }

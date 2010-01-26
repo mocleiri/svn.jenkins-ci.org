@@ -24,12 +24,10 @@
 package hudson.tasks.junit;
 
 import hudson.*;
-import hudson.FilePath.FileCallable;
 import hudson.matrix.MatrixAggregatable;
 import hudson.matrix.MatrixAggregator;
 import hudson.matrix.MatrixBuild;
 import hudson.model.*;
-import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
@@ -37,7 +35,7 @@ import hudson.tasks.Recorder;
 import hudson.tasks.junit.TestResultAction.Data;
 import hudson.tasks.test.TestResultAggregator;
 import hudson.tasks.test.TestResultProjectAction;
-import hudson.tasks.test.AbstractTestResult;
+import hudson.tasks.test.TestResult;
 import hudson.util.DescribableList;
 import hudson.util.FormValidation;
 import net.sf.json.JSONObject;
@@ -48,7 +46,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -28,14 +28,12 @@ import hudson.Functions;
 import hudson.model.*;
 import hudson.tasks.junit.History;
 import hudson.tasks.junit.TestAction;
-import hudson.tasks.junit.TestResult;
 import hudson.tasks.junit.TestResultAction;
 import org.kohsuke.stapler.*;
 import org.kohsuke.stapler.export.ExportedBean;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -95,7 +93,7 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
      * @return
      */
     @Override
-    public TestResult getTestResult() {
+    public hudson.tasks.junit.TestResult getTestResult() {
         TestObject parent = getParent();
 
         return (parent == null ? null : getParent().getTestResult());
@@ -106,7 +104,7 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
      * 
      * @return
      */    
-    public AbstractTestResult getTopLevelTestResult() {
+    public TestResult getTopLevelTestResult() {
         TestObject parent = getParent();
 
         return (parent == null ? null : getParent().getTopLevelTestResult());
@@ -242,18 +240,18 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
     }
 
     /**
-     * Gets the counterpart of this {@link AbstractTestResult} in the previous run.
+     * Gets the counterpart of this {@link TestResult} in the previous run.
      *
      * @return null if no such counter part exists.
      */
-    public abstract AbstractTestResult getPreviousResult();
+    public abstract TestResult getPreviousResult();
 
     /**
-     * Gets the counterpart of this {@link AbstractTestResult} in the specified run.
+     * Gets the counterpart of this {@link TestResult} in the specified run.
      *
      * @return null if no such counter part exists.
      */
-    public abstract AbstractTestResult getResultInBuild(AbstractBuild<?, ?> build);
+    public abstract TestResult getResultInBuild(AbstractBuild<?, ?> build);
 
     /**
      * Find the test result corresponding to the one identified by <code>id></code>
@@ -263,7 +261,7 @@ public abstract class TestObject extends hudson.tasks.junit.TestObject {
      * @return A corresponding test result, or null if there is no corresponding
      * result.
      */
-    public abstract AbstractTestResult findCorrespondingResult(String id);
+    public abstract TestResult findCorrespondingResult(String id);
 
     /**
      * Time took to run this test. In seconds.
