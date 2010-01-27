@@ -127,7 +127,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     /**
      * If true, do not automatically schedule a build when one of the project dependencies is built.
      */
-    private boolean ignoreUpstremChanges = false;
+    private boolean ignoreUpstreamChanges = false;
 
     /**
      * If true, do not archive artifacts to the master.
@@ -268,8 +268,8 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         return aggregatorStyleBuild;
     }
 
-    public boolean ignoreUpstremChanges() {
-        return ignoreUpstremChanges;
+    public boolean ignoreUpstreamChanges() {
+        return ignoreUpstreamChanges;
     }
 
     public boolean isArchivingDisabled() {
@@ -293,7 +293,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     }
 
     public void setIgnoreUpstremChanges(boolean ignoreUpstremChanges) {
-        this.ignoreUpstremChanges = ignoreUpstremChanges;
+        this.ignoreUpstreamChanges = ignoreUpstremChanges;
     }
 
     public void setIsArchivingDisabled(boolean archivingDisabled) {
@@ -613,6 +613,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         buildFile = Util.fixEmptyAndTrim(json.getString("buildFile"));
         antOpts = Util.fixEmptyAndTrim(json.getString("antOpts"));
         antProperties = Util.fixEmptyAndTrim(json.getString("antProperties"));
+        aggregatorStyleBuild = !req.hasParameter("perModuleBuild");
         
         publishers.rebuild(req,json,BuildStepDescriptor.filter(Publisher.all(),this.getClass()));
         buildWrappers.rebuild(req,json,BuildWrappers.getFor(this));

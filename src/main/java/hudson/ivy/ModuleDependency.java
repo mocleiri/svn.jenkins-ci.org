@@ -42,7 +42,7 @@ public final class ModuleDependency implements Serializable {
     public ModuleDependency(String organisation, String name, String revision) {
         this.organisation = organisation;
         this.name = name;
-        if(revision==null)   revision=UNKNOWN;
+        if(revision==null || revision.startsWith("latest."))   revision=UNKNOWN;
         this.revision = revision;
     }
 

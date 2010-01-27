@@ -32,6 +32,7 @@ import hudson.model.DependencyGraph;
 import hudson.model.DependencyGraph.Dependency;
 import hudson.model.Descriptor;
 import hudson.model.Descriptor.FormException;
+import hudson.model.queue.CauseOfBlockage;
 import hudson.model.Hudson;
 import hudson.model.Item;
 import hudson.model.ItemGroup;
@@ -40,6 +41,7 @@ import hudson.model.Job;
 import hudson.model.Label;
 import hudson.model.Node;
 import hudson.model.Resource;
+import hudson.model.Result;
 import hudson.model.Saveable;
 import hudson.tasks.LogRotator;
 import hudson.tasks.Publisher;
@@ -52,6 +54,7 @@ import org.kohsuke.stapler.export.Exported;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -319,7 +322,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     }
 
     protected void buildDependencyGraph(DependencyGraph graph) {
-        if (isDisabled() || getParent().ignoreUpstremChanges())
+        if (isDisabled() || getParent().ignoreUpstreamChanges())
             return;
 
         Map<ModuleDependency, IvyModule> modules = new HashMap<ModuleDependency, IvyModule>();
@@ -349,8 +352,45 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
         for (ModuleDependency d : dependencies) {
             IvyModule src = modules.get(d);
             if (src != null) {
-                graph.addDependency(new Dependency(src, dest));
+                if(src.getParent().isAggregatorStyleBuild())
+                    graph.addDependency(new IvyDependency(src.getParent(), dest, Result.SUCCESS));
+                else
+                    graph.addDependency(new IvyDependency(src, dest, Result.SUCCESS));
             }
+        }
+    }
+
+    @Override
+    public CauseOfBlockage getCauseOfBlockage() {
+        CauseOfBlockage cob = super.getCauseOfBlockage();
+        if (cob != null)
+            return cob;
+
+        if (!getParent().isAggregatorStyleBuild()) {
+            DependencyGraph graph = Hudson.getInstance().getDependencyGraph();
+            Set<AbstractProject> tups = graph.getTransitiveUpstream(this);
+            tups.add(this);
+            for (AbstractProject tup : tups) {
+                if(tup!=this && this.getParent() == tup.getParent() && (tup.isBuilding() || tup.isInQueue()))
+                        return new BecauseOfUpstreamModuleBuildInProgress(tup);
+            }
+        }
+        
+        return null;
+    }
+
+    /**
+     * Because the upstream module build is in progress, and we are configured to wait for that.
+     */
+    public static class BecauseOfUpstreamModuleBuildInProgress extends CauseOfBlockage {
+        public final AbstractProject<?,?> up;
+
+        public BecauseOfUpstreamModuleBuildInProgress(AbstractProject<?,?> up) {
+            this.up = up;
+        }
+
+        public String getShortDescription() {
+            return Messages.IvyModule_UpstreamModuleBuildInProgress(up.getName());
         }
     }
 
@@ -396,6 +436,26 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     protected void performDelete() throws IOException, InterruptedException {
         super.performDelete();
          getParent().onModuleDeleted(this);
+    }
+
+    /**
+     * Creates a list of {@link IvyReporter}s to be used for a build of this project.
+     */
+    protected final List<IvyReporter> createReporters() {
+        List<IvyReporter> reporterList = new ArrayList<IvyReporter>();
+
+        getReporters().addAllTo(reporterList);
+        getParent().getReporters().addAllTo(reporterList);
+
+        for (IvyReporterDescriptor d : IvyReporterDescriptor.all()) {
+            if(getReporters().contains(d))
+                continue;   // already configured
+            IvyReporter auto = d.newAutoInstance(this);
+            if(auto!=null)
+                reporterList.add(auto);
+        }
+
+        return reporterList;
     }
 
     private static final Logger LOGGER = Logger.getLogger(IvyModule.class.getName());

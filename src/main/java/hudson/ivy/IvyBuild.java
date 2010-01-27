@@ -23,11 +23,13 @@
  */
 package hudson.ivy;
 
+import hudson.AbortException;
 import hudson.FilePath;
-import hudson.EnvVars;
+import hudson.remoting.Channel;
 import hudson.slaves.WorkspaceList;
 import hudson.slaves.WorkspaceList.Lease;
 import hudson.model.BuildListener;
+import hudson.model.Executor;
 import hudson.model.Result;
 import hudson.model.Run;
 import hudson.model.Environment;
@@ -36,12 +38,18 @@ import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
 import hudson.tasks.Ant;
 import hudson.tasks.BuildWrapper;
+
+import org.apache.tools.ant.BuildEvent;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -167,22 +175,221 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
     }
 
     /**
-     * Runs Maven and builds the project.
+     * Runs Ant/Ivy and builds the project.
      */
     private static final class Builder extends IvyBuilder {
+        private final IvyBuildProxy buildProxy;
         private final IvyReporter[] reporters;
 
         private long startTime;
 
-        public Builder(BuildListener listener, IvyReporter[] reporters, List<String> goals, Map<String, String> systemProps) {
+        public Builder(BuildListener listener, IvyBuildProxy buildProxy, IvyReporter[] reporters, List<String> goals, Map<String, String> systemProps) {
             super(listener, goals, systemProps);
+            this.buildProxy = new FilterImpl(buildProxy);
             this.reporters = reporters;
         }
 
-        private static final long serialVersionUID = 1L;
+        private class FilterImpl extends IvyBuildProxy.Filter<IvyBuildProxy> implements Serializable {
+            public FilterImpl(IvyBuildProxy buildProxy) {
+                super(buildProxy);
+            }
 
-        public Result call() throws IOException {
-            return null;
+            @Override
+            public void executeAsync(final BuildCallable<?, ?> program) throws IOException {
+                futures.add(Channel.current().callAsync(new AsyncInvoker(core, program)));
+            }
+
+            private static final long serialVersionUID = 1L;
+        }
+
+        @Override
+        void preBuild(BuildEvent event) throws IOException, InterruptedException {
+            for (IvyReporter r : reporters)
+                r.preBuild(buildProxy, event, listener);
+        }
+
+        @Override
+        void postBuild(BuildEvent event) throws IOException, InterruptedException {
+            for (IvyReporter r : reporters)
+                r.postBuild(buildProxy, event, listener);
+        }
+
+        @Override
+        void preModule(BuildEvent event) throws InterruptedException, IOException, AbortException {
+            for (IvyReporter r : reporters)
+                if (!r.enterModule(buildProxy, event, listener))
+                    throw new AbortException(r + " failed");
+        }
+
+        @Override
+        void postModule(BuildEvent event) throws InterruptedException, IOException, AbortException {
+            for (IvyReporter r : reporters)
+                if (!r.leaveModule(buildProxy, event, listener))
+                    throw new AbortException(r + " failed");
+        }
+
+        private static final long serialVersionUID = 1L;
+    }
+
+    /**
+     * {@link IvyBuildProxy} implementation.
+     */
+    class ProxyImpl implements IvyBuildProxy, Serializable {
+        public <V, T extends Throwable> V execute(BuildCallable<V, T> program) throws T, IOException, InterruptedException {
+            return program.call(IvyBuild.this);
+        }
+
+        /**
+         * This method is implemented by the remote proxy before the invocation
+         * gets to this. So correct code shouldn't be invoking this method on
+         * the master ever.
+         * 
+         * @deprecated This helps IDE find coding mistakes when someone tries to
+         *             call this method.
+         */
+        public final void executeAsync(BuildCallable<?, ?> program) throws IOException {
+            throw new AssertionError();
+        }
+
+        public FilePath getRootDir() {
+            return new FilePath(IvyBuild.this.getRootDir());
+        }
+
+        public FilePath getProjectRootDir() {
+            return new FilePath(IvyBuild.this.getParent().getRootDir());
+        }
+
+        public FilePath getModuleSetRootDir() {
+            return new FilePath(IvyBuild.this.getParent().getParent().getRootDir());
+        }
+
+        public FilePath getArtifactsDir() {
+            return new FilePath(IvyBuild.this.getArtifactsDir());
+        }
+
+        public void setResult(Result result) {
+            IvyBuild.this.setResult(result);
+        }
+
+        public Calendar getTimestamp() {
+            return IvyBuild.this.getTimestamp();
+        }
+
+        public long getMilliSecsSinceBuildStart() {
+            return System.currentTimeMillis() - getTimestamp().getTimeInMillis();
+        }
+
+        public boolean isArchivingDisabled() {
+            return IvyBuild.this.getParent().getParent().isArchivingDisabled();
+        }
+
+        public void registerAsProjectAction(IvyReporter reporter) {
+            IvyBuild.this.registerAsProjectAction(reporter);
+        }
+
+        public void registerAsAggregatedProjectAction(IvyReporter reporter) {
+            IvyModuleSetBuild pb = getParentBuild();
+            if (pb != null)
+                pb.registerAsProjectAction(reporter);
+        }
+
+        private Object writeReplace() {
+            return Channel.current().export(IvyBuildProxy.class, this);
+        }
+    }
+
+    class ProxyImpl2 extends ProxyImpl implements IvyBuildProxy2 {
+        private final SplittableBuildListener listener;
+        long startTime;
+        private final OutputStream log;
+        private final IvyModuleSetBuild parentBuild;
+
+        ProxyImpl2(IvyModuleSetBuild parentBuild, SplittableBuildListener listener) throws FileNotFoundException {
+            this.parentBuild = parentBuild;
+            this.listener = listener;
+            log = new FileOutputStream(getLogFile()); // no buffering so that
+                                                      // AJAX clients can see
+                                                      // the log live
+        }
+
+        public void start() {
+            onStartBuilding();
+            startTime = System.currentTimeMillis();
+            try {
+                listener.setSideOutputStream(log);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void end() {
+            if (result == null)
+                setResult(Result.SUCCESS);
+            onEndBuilding();
+            duration = System.currentTimeMillis() - startTime;
+            parentBuild.notifyModuleBuild(IvyBuild.this);
+            try {
+                listener.setSideOutputStream(null);
+                save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * Sends the accumuldated log in {@link SplittableBuildListener} to the
+         * log of this build.
+         */
+        public void appendLastLog() {
+            try {
+                listener.setSideOutputStream(log);
+                listener.setSideOutputStream(null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        /**
+         * Performs final clean up. Invoked after the entire aggregator build is
+         * completed.
+         */
+        protected void close() {
+            try {
+                log.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (hasntStartedYet()) {
+                // Mark the build as aborted. This method is used when the
+                // aggregated build
+                // failed before it didn't even get to this module.
+                run(new Runner() {
+                    public Result run(BuildListener listener) {
+                        listener.getLogger().println(Messages.IvyBuild_FailedEarlier());
+                        return Result.NOT_BUILT;
+                    }
+
+                    public void post(BuildListener listener) {
+                    }
+
+                    public void cleanUp(BuildListener listener) {
+                    }
+                });
+            }
+        }
+
+        /**
+         * Gets the build for which this proxy is created.
+         */
+        public IvyBuild owner() {
+            return IvyBuild.this;
+        }
+
+        private Object writeReplace() {
+            // when called from remote, methods need to be executed in the
+            // proper Executor's context.
+            return Channel.current().export(IvyBuildProxy2.class, Executor.currentExecutor().newImpersonatingProxy(IvyBuildProxy2.class, this));
         }
     }
 
@@ -191,12 +398,12 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
 
         @Override
         protected Lease decideWorkspace(Node n, WorkspaceList wsl) throws InterruptedException, IOException {
-            return wsl.allocate(getModuleSetBuild().getModuleRoot().child(getProject().getRelativePath()));
+            return wsl.allocate(getModuleSetBuild().getModuleRoot().child(getProject().getRelativePathToModuleRoot()));
         }
 
         protected Result doRun(BuildListener listener) throws Exception {
             // pick up a list of reporters to run
-            // reporters = getProject().createReporters();
+            reporters = getProject().createReporters();
             IvyModuleSet mms = getProject().getParent();
             if (debug)
                 listener.getLogger().println("Reporters=" + reporters);
@@ -212,9 +419,9 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
             Ant ant = new Ant(getProject().getTargets(), mms.getAnt().getName(), mms.getAntOpts(), getModuleRoot().child(mms.getBuildFile())
                     .getName(), mms.getAntProperties());
             if (ant.perform(IvyBuild.this, launcher, listener))
-                return Result.FAILURE;
+                return Result.SUCCESS;
 
-            return Result.SUCCESS;
+            return Result.FAILURE;
         }
 
         public void post2(BuildListener listener) throws Exception {

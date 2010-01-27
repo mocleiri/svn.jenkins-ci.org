@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
+import org.apache.tools.ant.BuildEvent;
 
 /**
  * Listens to the build execution of {@link IvyBuild},
@@ -94,12 +95,79 @@ import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
  * @see IvyReporters
  */
 public abstract class IvyReporter implements Describable<IvyReporter>, ExtensionPoint, Serializable {
+    /**
+     * Called before the actual ant execution begins.
+     *
+     * @param moduleDescriptor
+     *      Represents the Ivy module to be executed.
+     * @return
+     *      true if the build can continue, false if there was an error
+     *      and the build needs to be aborted.
+     * @throws InterruptedException
+     *      If the build is interrupted by the user (in an attempt to abort the build.)
+     *      Normally the {@link MavenReporter} implementations may simply forward the exception
+     *      it got from its lower-level functions.
+     * @throws IOException
+     *      If the implementation wants to abort the processing when an {@link IOException}
+     *      happens, it can simply propagate the exception to the caller. This will cause
+     *      the build to fail, with the default error message.
+     *      Implementations are encouraged to catch {@link IOException} on its own to
+     *      provide a better error message, if it can do so, so that users have better
+     *      understanding on why it failed.
+     */
+    public boolean preBuild(IvyBuildProxy build, BuildEvent event, BuildListener listener) throws InterruptedException, IOException {
+        return true;
+    }
 
     /**
-     * Called after the maven execution finished and the result is determined.
+     * Called when the build enters a next {@link IvyProject}.
      *
      * <p>
-     * This method fires after {@link #postBuild(IvyBuildProxy, IvyProject, BuildListener)}.
+     * When the current build is a multi-module reactor build, every time the build
+     * moves on to the next module, this method will be invoked.
+     *
+     * @return
+     *      See {@link #preBuild}
+     * @throws InterruptedException
+     *      See {@link #preBuild}
+     * @throws IOException
+     *      See {@link #preBuild}
+     */
+    public boolean enterModule(IvyBuildProxy build, BuildEvent event, BuildListener listener) throws InterruptedException, IOException {
+        return true;
+    }
+
+    /**
+     * Called when the build leaves the current {@link IvyProject}.
+     *
+     * @see #enterModule
+     */
+    public boolean leaveModule(IvyBuildProxy build, BuildEvent event, BuildListener listener) throws InterruptedException, IOException {
+        return true;
+    }
+
+    /**
+     * Called after a build of one Ivy module is completed.
+     *
+     * <p>
+     * Note that at this point the build result is still not determined.
+     *
+     * @return
+     *      See {@link #preBuild}
+     * @throws InterruptedException
+     *      See {@link #preBuild}
+     * @throws IOException
+     *      See {@link #preBuild}
+     */
+    public boolean postBuild(IvyBuildProxy build, BuildEvent event, BuildListener listener) throws InterruptedException, IOException {
+        return true;
+    }
+
+    /**
+     * Called after the Ant/Ivy execution finished and the result is determined.
+     *
+     * <p>
+     * This method fires after {@link #postBuild(IvyBuildProxy, ModuleDescriptor, BuildListener)}.
      * Works like {@link Publisher#perform(Build, Launcher, BuildListener)}.
      */
     public boolean end(IvyBuild build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {

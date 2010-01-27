@@ -24,35 +24,39 @@
 package hudson.ivy;
 
 import hudson.AbortException;
+import hudson.Launcher;
 import hudson.Util;
 import hudson.EnvVars;
 import hudson.scm.ChangeLogSet;
 import hudson.FilePath.FileCallable;
+import hudson.ivy.IvyBuild.ProxyImpl2;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.Build;
 import hudson.model.BuildListener;
-import hudson.model.Computer;
+import hudson.model.DependencyGraph;
 import hudson.model.Environment;
 import hudson.model.Fingerprint;
 import hudson.model.Hudson;
 import hudson.model.ParametersAction;
 import hudson.model.Result;
+import hudson.model.Run;
 import hudson.model.TaskListener;
+import hudson.model.Cause.UpstreamCause;
+import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Ant.AntInstallation;
 import hudson.util.StreamTaskListener;
-import hudson.util.VariableResolver;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.InterruptedIOException;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -60,22 +64,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.ivy.Ivy;
 import org.apache.ivy.Ivy.IvyCallback;
 import org.apache.ivy.core.IvyContext;
 import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
 import org.apache.ivy.core.sort.SortOptions;
 import org.apache.ivy.plugins.parser.ModuleDescriptorParserRegistry;
-import org.apache.ivy.plugins.version.VersionMatcher;
 import org.apache.ivy.util.Message;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.ProjectHelper;
+import org.apache.tools.ant.BuildEvent;
 import org.apache.tools.ant.types.FileSet;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -354,6 +354,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
      * triggers module builds.
      */
     private class RunnerImpl extends AbstractRunner {
+        private Map<ModuleName,IvyBuild.ProxyImpl2> proxies;
 
         protected Result doRun(final BuildListener listener) throws Exception {
             PrintStream logger = listener.getLogger();
@@ -364,10 +365,31 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                     throw new AbortException("An Ant installation needs to be available for this project to be built.\n"
                             + "Either your server has no Ant installations defined, or the requested Ant version does not exist.");
 
-                parsePoms(listener, logger, envVars);
+                parseIvyDescriptorFiles(listener, logger, envVars);
 
                 if (!project.isAggregatorStyleBuild()) {
                     // start module builds
+                    DependencyGraph graph = Hudson.getInstance().getDependencyGraph();
+                    Set<IvyModule> triggeredModules = new HashSet<IvyModule>();
+                    for (IvyModule module : project.sortedActiveModules) {
+                        // Don't trigger builds if we've already triggered one
+                        // of their dependencies.
+                        // It's safe to just get the direct dependencies since
+                        // the modules are sorted in dependency order. 
+                        List<AbstractProject> ups = module.getUpstreamProjects();
+                        boolean triggerBuild = true;
+                        for (AbstractProject upstreamDep : ups) {
+                            if (triggeredModules.contains(upstreamDep)) {
+                                triggerBuild = false;
+                                break;
+                            }
+                        }
+                        if (triggerBuild) {
+                            logger.println("Triggering "+module.getModuleName());
+                            module.scheduleBuild(new UpstreamCause((Run<?,?>)IvyModuleSetBuild.this));
+                        }
+                        triggeredModules.add(module);
+                    }
                 } else {
                     // do builds here
                     try {
@@ -392,9 +414,8 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                             return Result.FAILURE;
 
                         SplittableBuildListener slistener = new SplittableBuildListener(listener);
+                        proxies = new HashMap<ModuleName, ProxyImpl2>();
                         List<String> changedModules = new ArrayList<String>();
-                        
-                        List<IvyBuild> ivyBuilds = new ArrayList<IvyBuild>();
 
                         for (IvyModule m : project.sortedActiveModules) {
                             IvyBuild mb = m.newBuild();
@@ -416,28 +437,8 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                             }
 
                             mb.setWorkspace(getModuleRoot().child(m.getRelativePathToModuleRoot()));
-                            ivyBuilds.add(mb);
+                            proxies.put(m.getModuleName(), mb.new ProxyImpl2(IvyModuleSetBuild.this,slistener));
                         }
-                        
-                        Project project = new Project();
-                        project.init();
-                        for (IvyBuild ivyBuild : ivyBuilds) {
-                            String buildFile = envVars.expand(ivyBuild.getProject().getParent().getBuildFile());
-                            File antBuildFile = new File(ivyBuild.getWorkspace().getRemote(), buildFile);
-                            ProjectHelper.configureProject(project, antBuildFile);
-
-                            VariableResolver<String> vr = ivyBuild.getBuildVariableResolver();
-
-                            String targets = Util.replaceMacro(envVars.expand(ivyBuild.getProject().getTargets()), vr);
-                            Vector<String> targetVector = new Vector<String>(Arrays.asList(targets.split("[\t\r\n]+")));
-                            try {
-                                project.executeTargets(targetVector);
-                                ivyBuild.setResult(Result.SUCCESS);
-                            } catch (BuildException e) {
-                                ivyBuild.setResult(Result.FAILURE);
-                            }
-                        }
-                        
                     } finally {
                         // tear down in reverse order
                         boolean failed = false;
@@ -479,12 +480,12 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             }
         }
 
-        private void parsePoms(BuildListener listener, PrintStream logger, EnvVars envVars) throws IOException, InterruptedException {
-            logger.println("Parsing POMs");
+        private void parseIvyDescriptorFiles(BuildListener listener, PrintStream logger, EnvVars envVars) throws IOException, InterruptedException {
+            logger.println("Parsing Ivy Descriptor Files");
 
-            List<IvyModuleInfo> poms;
+            List<IvyModuleInfo> ivyDescriptors;
             try {
-                poms = getModuleRoot().act(new IvyXmlParser(listener, null, project));
+                ivyDescriptors = getModuleRoot().act(new IvyXmlParser(listener, null, project));
             } catch (IOException e) {
                 if (e.getCause() instanceof AbortException)
                     throw (AbortException) e.getCause();
@@ -498,7 +499,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                 List<IvyModule> sortedModules = new ArrayList<IvyModule>();
 
                 modules.clear();
-                for (IvyModuleInfo pom : poms) {
+                for (IvyModuleInfo pom : ivyDescriptors) {
                     IvyModule mm = old.get(pom.name);
                     if (mm != null) {// found an existing matching module
                         if (debug)
@@ -574,15 +575,102 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
      * aggregator style build}.
      */
     private static final class Builder extends IvyBuilder {
-        public Builder(BuildListener listener, Collection<IvyModule> modules, List<String> goals, Map<String, String> systemProps) {
-            super(listener, goals, systemProps);
+        private final Map<ModuleName,IvyBuildProxy2> proxies;
+        private final Map<ModuleName,List<IvyReporter>> reporters = new HashMap<ModuleName,List<IvyReporter>>();
+
+        private IvyBuildProxy2 lastProxy;
+
+        /**
+         * Kept so that we can finalize them in the end method.
+         */
+        private final transient Map<ModuleName,ProxyImpl2> sourceProxies;
+
+        public Builder(BuildListener listener,Map<ModuleName,ProxyImpl2> proxies, Collection<IvyModule> modules, List<String> goals, Map<String,String> systemProps) {
+            super(listener,goals,systemProps);
+            this.sourceProxies = proxies;
+            this.proxies = new HashMap<ModuleName, IvyBuildProxy2>(proxies);
+            for (Entry<ModuleName,IvyBuildProxy2> e : this.proxies.entrySet())
+                e.setValue(new FilterImpl(e.getValue()));
+
+            for (IvyModule m : modules)
+                reporters.put(m.getModuleName(),m.createReporters());
+        }
+
+        private class FilterImpl extends IvyBuildProxy2.Filter<IvyBuildProxy2> implements Serializable {
+            public FilterImpl(IvyBuildProxy2 core) {
+                super(core);
+            }
+
+            @Override
+            public void executeAsync(final BuildCallable<?,?> program) throws IOException {
+                futures.add(Channel.current().callAsync(new AsyncInvoker(core,program)));
+            }
+
+            private static final long serialVersionUID = 1L;
+        }
+
+        /**
+         * Invoked after the maven has finished running, and in the master, not in the maven process.
+         */
+        void end(Launcher launcher) throws IOException, InterruptedException {
+            for (Map.Entry<ModuleName,ProxyImpl2> e : sourceProxies.entrySet()) {
+                ProxyImpl2 p = e.getValue();
+                for (IvyReporter r : reporters.get(e.getKey())) {
+                    // we'd love to do this when the module build ends, but doing so requires
+                    // we know how many task segments are in the current build.
+                    r.end(p.owner(),launcher,listener);
+                    p.appendLastLog();
+                }
+                p.close();
+            }
+        }
+
+        @Override
+        public Result call() throws IOException {
+            try {
+                return super.call();
+            } finally {
+                if(lastProxy!=null)
+                    lastProxy.appendLastLog();
+            }
+        }
+
+        void preBuild(BuildEvent event) throws IOException, InterruptedException {
+            // TODO
+        }
+
+        void postBuild(BuildEvent event) throws IOException, InterruptedException {
+            // TODO
+        }
+
+        void preModule(BuildEvent event) throws InterruptedException, IOException, AbortException {
+            File baseDir = event.getProject().getBaseDir();
+            // TODO: find the module that contains this path?
+//            ModuleName name = new ModuleName(event.getProject().getBaseDir());
+//            IvyBuildProxy2 proxy = proxies.get(name);
+//            listener.getLogger().flush();   // make sure the data until here are all written
+//            proxy.start();
+//            for (IvyReporter r : reporters.get(name))
+//                if(!r.preBuild(proxy,event,listener))
+//                    throw new AbortException(r+" failed");
+        }
+
+        void postModule(BuildEvent event) throws InterruptedException, IOException, AbortException {
+//            ModuleName name = new ModuleName(project);
+//            IvyBuildProxy2 proxy = proxies.get(name);
+//            List<IvyReporter> rs = reporters.get(name);
+//            if(rs==null) { // probe for issue #906
+//                throw new AssertionError("reporters.get("+name+")==null. reporters="+reporters+" proxies="+proxies);
+//            }
+//            for (IvyReporter r : rs)
+//                if(!r.postBuild(proxy,event,listener))
+//                    throw new hudson.maven.agent.AbortException(r+" failed");
+//            listener.getLogger().flush();   // make sure the data until here are all written
+//            proxy.end();
+//            lastProxy = proxy;
         }
 
         private static final long serialVersionUID = 1L;
-
-        public Result call() throws IOException {
-            return null;
-        }
     }
 
     /**

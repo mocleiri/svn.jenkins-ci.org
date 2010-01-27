@@ -62,17 +62,23 @@ THE SOFTWARE.
     <f:entry title="${%Targets}" field="targets">
       <f:textbox />
     </f:entry>
-  <f:advanced>
-    <f:entry title="${%Build File}">
-      <f:textbox name="buildFile" value="${it.buildFile}"/>
-    </f:entry>
-    <f:entry title="${%Properties}">
-      <f:textarea name="antProperties" value="${it.antProperties}"/>
-    </f:entry>
-    <f:entry title="${%Java Options}" help="/help/ant/ant-opts.html">
-      <f:expandableTextbox name="antOpts" value="${it.antOpts}"/>
-    </f:entry>
-  </f:advanced>
+    <f:advanced>
+      <f:entry title="${%Build File}">
+        <f:textbox name="buildFile" value="${it.buildFile}"/>
+      </f:entry>
+      <f:entry title="${%Properties}">
+        <f:textarea name="antProperties" value="${it.antProperties}"/>
+      </f:entry>
+      <f:entry title="${%Java Options}" help="/help/ant/ant-opts.html">
+        <f:expandableTextbox name="antOpts" value="${it.antOpts}"/>
+      </f:entry>
+      <f:entry title="${%Incremental build - only build changed modules}" field="incrementalBuild">
+        <f:checkbox name="incrementalBuild" />
+      </f:entry>
+      <f:entry title="${%Build modules as separate jobs}">
+        <f:checkbox name="perModuleBuild" checked="${!it.aggregatorStyleBuild}" />
+      </f:entry>
+    </f:advanced>
   </f:section>
 
   <p:config-buildWrappers />
