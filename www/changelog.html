@@ -35,6 +35,9 @@
   <li class=bug>
     Fix for parameterized project with choice parameter value that has &lt; or &gt; character.
     (<a href="http://n4.nabble.com/Fwd-IllegalArgumentException-when-use-parametrised-build-with-choice-parametr-td1311451.html#a1311451">report</a>)
+  <li class=bug>
+    Build queue was showing some of the items in the wrong order &mdash; it should show new ones first and
+    old ones later.
   <li class=rfe>
     Move form to adjust logging levels to its own page and include table of configured levels.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-2210">issue 2210</a>)
@@ -52,6 +55,9 @@
     Auto-detect if Hudson is run in Solaris <a href="http://www.sun.com/bigadmin/content/selfheal/smf-quickstart.jsp">SMF</a>
     and provide restart capability.
     (<a href="http://n4.nabble.com/Self-restart-not-available-when-running-as-Solaris-SMF-tp1289605p1289605.html">report</a>)
+  <li class=rfe>
+    Formalized an extension point to control priority among builds in the queue.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-833">issue 833</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
@@ -124,7 +130,6 @@
     Hudson now detects a cyclic dependencies among plugins and report the error gracefully.
   <li class=rfe>
     Extension points can now contribute multiple actions.
-    (<a href="http://issues.hudson-ci.org/browse/HUDSON-4518">issue 4518</a>)
   <li class=rfe>
     Responses to remote API calls now honor the "Accept-Encoding" header.
     (<a href="http://n4.nabble.com/GZIP-encoded-response-only-for-css-js-resources-tp1010358p1010358.html">report</a>)
