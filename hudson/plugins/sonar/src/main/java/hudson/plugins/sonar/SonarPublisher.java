@@ -299,21 +299,14 @@ public class SonarPublisher extends Notifier {
     return currentProject instanceof MavenModuleSet;
   }
 
-  public List<MavenInstallation> getMavenInstallations() {
+  /**
+   * Returns list of configured Maven installations. This method used in UI.
+   *
+   * @return list of configured Maven installations
+   */
+  @SuppressWarnings({"UnusedDeclaration"})
+  public static List<MavenInstallation> getMavenInstallations() {
     return Arrays.asList(Hudson.getInstance().getDescriptorByType(Maven.DescriptorImpl.class).getInstallations());
-  }
-
-  public MavenInstallation getMavenInstallation() {
-    List<MavenInstallation> installations = getMavenInstallations();
-    if (StringUtils.isEmpty(getMavenInstallationName()) && !installations.isEmpty()) {
-      return installations.get(0);
-    }
-    for (MavenInstallation install : installations) {
-      if (StringUtils.equals(getMavenInstallationName(), install.getName())) {
-        return install;
-      }
-    }
-    return null;
   }
 
   public SonarInstallation getInstallation() {
@@ -363,17 +356,6 @@ public class SonarPublisher extends Notifier {
     return sonarSuccess;
   }
 
-  private Maven.MavenInstallation getMavenInstallationForSonar(AbstractBuild<?, ?> build, TaskListener listener) throws IOException, InterruptedException {
-    Maven.MavenInstallation mavenInstallation = null;
-    if (build.getProject() instanceof Maven.ProjectWithMaven) {
-      mavenInstallation = ((Maven.ProjectWithMaven) build.getProject()).inferMavenInstallation();
-    }
-    if (mavenInstallation == null) {
-      mavenInstallation = getMavenInstallation();
-    }
-    return mavenInstallation != null ? mavenInstallation.forNode(build.getBuiltOn(), listener) : mavenInstallation;
-  }
-
   public MavenModuleSet getMavenProject(AbstractBuild build) {
     return (build.getProject() instanceof MavenModuleSet) ? (MavenModuleSet) build.getProject() : null;
   }
@@ -404,9 +386,7 @@ public class SonarPublisher extends Notifier {
         SonarPomGenerator.generatePomForNonMavenProject(getLightProject(), root, pomName);
       }
       // Execute maven
-      MavenInstallation mavenInstallation = getMavenInstallationForSonar(build, listener);
-      String mavenName = mavenInstallation.getName();
-      return SonarHelper.executeMaven(build, launcher, listener, mavenName, pomName, sonarInstallation, this);
+      return SonarHelper.executeMaven(build, launcher, listener, getMavenInstallationName(), pomName, sonarInstallation, this);
     }
     catch (IOException e) {
       Util.displayIOException(e, listener);
@@ -415,11 +395,13 @@ public class SonarPublisher extends Notifier {
     }
     catch (InterruptedException e) {
       return false;
+    } catch (Exception e) {
+      e.printStackTrace(listener.fatalError("command execution failed"));
+      return false;
     }
   }
 
-  @Override
-  public Action getProjectAction(AbstractProject<?, ?> project) {
+  protected String getSonarUrl(AbstractProject<?, ?> project) {
     SonarInstallation sonarInstallation = getInstallation();
     if (sonarInstallation == null) {
       return null;
@@ -446,7 +428,12 @@ public class SonarPublisher extends Notifier {
           lightProject.getArtifactId()
       );
     }
-    return new ProjectSonarAction(url);
+    return url;
+  }
+
+  @Override
+  public Action getProjectAction(AbstractProject<?, ?> project) {
+    return new ProjectSonarAction(getSonarUrl(project));
   }
 
   public BuildStepMonitor getRequiredMonitorService() {

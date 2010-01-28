@@ -89,6 +89,15 @@ public class ClearcaseReleaseBuildWrapper extends BuildWrapper {
         public String getDisplayName() {
             return Messages.Wrapper_DisplayName();
         }
+
+                @Override
+        public final String getHelpFile() {
+            return getPluginRoot() + "helpCRWrapper.html";
+        }
+
+        public String getPluginRoot() {
+            return "/plugin/clearcase-release/";
+        }
     }
 
 

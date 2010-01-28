@@ -6,40 +6,46 @@ package hudson.plugins.jobConfigHistory;
 
 import hudson.model.FreeStyleProject;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.jvnet.hudson.test.HudsonTestCase;
 import org.xml.sax.SAXException;
-
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * @author mirko
  *
  */
 public class JobConfigHistoryJobListenerTest extends HudsonTestCase {
-    private WebClient webClient;
+
+    private File jobsDir;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        webClient = createWebClient();
+        jobsDir = new File(hudson.root, "jobs");
     }
 
     public void testCreation() throws IOException, SAXException {
-        System.out.println(hudson.root);
-        final FreeStyleProject project = createFreeStyleProject("newjob");
-        project.save();
-        HtmlPage htmlPage = webClient.getPage(project);
-        System.out.println(htmlPage.asXml());
+        createFreeStyleProject("newjob");
+        final List<File> historyFiles = Arrays.asList(new File(jobsDir, "newjob/config-history").listFiles());
+        assertEquals(historyFiles.toString(), 1, historyFiles.size());
     }
 
-    public void itestRename() throws IOException, SAXException {
+    public void testRename() throws IOException, SAXException {
         final FreeStyleProject project = createFreeStyleProject("newjob");
-        project.save();
-        webClient.goTo("job/newjob/jobConfigHistory");
-        project.renameTo("renamedob");
-        project.save();
-        webClient.goTo("job/renamedjob/jobConfigHistory");
+        project.renameTo("renamedjob");
+        final File[] historyFiles = new File(jobsDir, "newjob/config-history").listFiles();
+        assertNull("Got history files for old job", historyFiles);
+        final List<File> historyFilesNew = Arrays.asList(new File(jobsDir, "renamedjob/config-history").listFiles());
+        assertEquals(historyFilesNew.toString(), 1, historyFilesNew.size());
+    }
+
+    public void testNonAbstractProjects() {
+        final JobConfigHistoryJobListener listener = new JobConfigHistoryJobListener();
+        listener.onCreated(null);
+        listener.onRenamed(null, "oldName", "newName");
     }
 }

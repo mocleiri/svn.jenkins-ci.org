@@ -23,7 +23,6 @@ import org.kohsuke.stapler.export.Exported;
 /**
  * @author Stefan Brausch
  */
-
 public class JobConfigHistoryProjectAction extends JobConfigHistoryBaseAction {
 
     /** Our logger. */
@@ -49,29 +48,28 @@ public class JobConfigHistoryProjectAction extends JobConfigHistoryBaseAction {
     @Exported
     public List<ConfigInfo> getConfigs() {
         final ArrayList<ConfigInfo> configs = new ArrayList<ConfigInfo>();
-        final File dirList = new File(project.getRootDir(), "config-history");
-        if (!dirList.isDirectory()) {
-            LOG.info(dirList + " is not a directory, assuming that no history exists.");
+        final File historyRootDir = new File(project.getRootDir(), "config-history");
+        if (!historyRootDir.isDirectory()) {
+            LOG.info(historyRootDir + " is not a directory, assuming that no history exists.");
             return Collections.emptyList();
         }
-        final File[] configDirs = dirList.listFiles();
-        for (final File configDir : configDirs) {
-            final XmlFile myConfig = new XmlFile(new File(configDir, "history.xml"));
+        for (final File historyDir : historyRootDir.listFiles()) {
+            final XmlFile myConfig = new XmlFile(new File(historyDir, "history.xml"));
             final HistoryDescr histDescr;
             try {
                 histDescr = (HistoryDescr) myConfig.read();
             } catch (IOException e) {
                 throw new RuntimeException("Error reading " + myConfig, e);
             }
-            ConfigInfo config = new ConfigInfo();
+            final ConfigInfo config = new ConfigInfo();
             config.setJob(project.getName());
             config.setDate(histDescr.getTimestamp());
             config.setUser(histDescr.getUser());
             config.setOperation(histDescr.getOperation());
             try {
-                config.setFile(URLEncoder.encode(configDir.getAbsolutePath(), "utf-8"));
+                config.setFile(URLEncoder.encode(historyDir.getAbsolutePath(), "utf-8"));
             } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Error encoding " + historyDir, e);
             }
             configs.add(config);
 
@@ -99,28 +97,61 @@ public class JobConfigHistoryProjectAction extends JobConfigHistoryBaseAction {
         return getConfigFileContent();
     }
 
+    /**
+     * Returns the type parameter of the current request.
+     *
+     * @return type.
+     */
     @Exported
     public String getType() {
         return Stapler.getCurrentRequest().getParameter("type");
     }
 
+    /**
+     * Parses the incoming {@code POST} request and redirects as {@code GET showDiffFiles}.
+     *
+     * @param req
+     *            incoming request
+     * @param rsp
+     *            outgoing response
+     * @throws ServletException
+     *             when parsing the request as {@link MultipartFormDataParser} does not succeed.
+     * @throws IOException
+     *             when the redirection does not succeed.
+     */
     public void doDiffFiles(StaplerRequest req, StaplerResponse rsp) throws ServletException, IOException {
-
-        MultipartFormDataParser parser = new MultipartFormDataParser(req);
-        rsp
-                .sendRedirect("showDiffFiles?diffFile1=" + parser.get("DiffFile1") + "&diffFile2="
+        final MultipartFormDataParser parser = new MultipartFormDataParser(req);
+        rsp.sendRedirect("showDiffFiles?diffFile1=" + parser.get("DiffFile1") + "&diffFile2="
                         + parser.get("DiffFile2"));
 
     }
 
+    /**
+     * Returns a textual diff between two {@code config.xml} files located in {@code diffFile1} and {@code diffFile2}
+     * directories given as parameters of {@link Stapler#getCurrentRequest()}.
+     *
+     * @return diff
+     */
     @Exported
     public String getDiffFile() {
-
         final String diffFile1 = Stapler.getCurrentRequest().getParameter("diffFile1");
         final String diffFile2 = Stapler.getCurrentRequest().getParameter("diffFile2");
-        final StringBuilder diff = new StringBuilder("\nDiffs:\n\n");
-        final XmlFile myConfig1 = new XmlFile(new File(diffFile1, "config.xml"));
-        final XmlFile myConfig2 = new XmlFile(new File(diffFile2, "config.xml"));
+        return getDiffFile(diffFile1, diffFile2);
+    }
+
+    /**
+     * Returns a textual diff between two {@code config.xml} files located in {@code histDir1} and {@code histDir2}.
+     *
+     * @param histDir1
+     *            first history directory
+     * @param histDir2
+     *            second history directory
+     * @return diff
+     */
+    String getDiffFile(final String histDir1, final String histDir2) {
+
+        final XmlFile myConfig1 = new XmlFile(new File(histDir1, "config.xml"));
+        final XmlFile myConfig2 = new XmlFile(new File(histDir2, "config.xml"));
         assert myConfig1.exists();
         assert myConfig2.exists();
 
@@ -132,9 +163,23 @@ public class JobConfigHistoryProjectAction extends JobConfigHistoryBaseAction {
             x = myConfig1.asString().split("\\n");
             y = myConfig2.asString().split("\\n");
         } catch (IOException e) {
-            throw new RuntimeException("Error reading " + diffFile1 + " or " + diffFile2, e);
+            throw new RuntimeException("Error reading " + histDir1 + " or " + histDir2, e);
         }
 
+        return getDiff(x, y);
+    }
+
+    /**
+     * Returns a textual diff between two string arrays.
+     *
+     * @param x
+     *            first array
+     * @param y
+     *            second array
+     * @return diff
+     */
+    String getDiff(final String[] x, final String[] y) {
+        final StringBuilder diff = new StringBuilder("\nDiffs:\n\n");
         if (x != null && y != null) {
             // number of lines of each file
             final int xLength = x.length;
@@ -147,10 +192,11 @@ public class JobConfigHistoryProjectAction extends JobConfigHistoryBaseAction {
             // programming
             for (int i = xLength - 1; i >= 0; i--) {
                 for (int j = yLength - 1; j >= 0; j--) {
-                    if (x[i].equals(y[j]))
+                    if (x[i].equals(y[j])) {
                         opt[i][j] = opt[i + 1][j + 1] + 1;
-                    else
+                    } else {
                         opt[i][j] = Math.max(opt[i + 1][j], opt[i][j + 1]);
+                    }
                 }
             }
 

@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2009, Manufacture Française des Pneumatiques Michelin, Romain Seguy
+ * Copyright (c) 2009, Manufacture FranÃ§aise des Pneumatiques Michelin, Romain Seguy
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,6 +33,7 @@ import hudson.model.BuildListener;
 import hudson.model.Computer;
 import hudson.model.FreeStyleProject;
 import hudson.model.Hudson.MasterComputer;
+import hudson.model.Project;
 import hudson.slaves.SlaveComputer;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrapperDescriptor;
@@ -40,16 +41,14 @@ import hudson.util.FormValidation;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
-import net.sf.json.JSONObject;
+import org.jvnet.localizer.Localizable;
 import org.jvnet.localizer.ResourceBundleHolder;
 import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * @author Romain Seguy
- * @version 1.1
  */
 public class CopyToSlaveBuildWrapper extends BuildWrapper {
 
@@ -65,8 +64,7 @@ public class CopyToSlaveBuildWrapper extends BuildWrapper {
     @Override
     public Environment setUp(AbstractBuild build, final Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
         if(Computer.currentComputer() instanceof SlaveComputer) {
-            // are we really in a FreeStyleProject?
-            if(build.getProject() instanceof FreeStyleProject) {
+            try {
                 FilePath projectWorkspaceOnMaster;
                 FreeStyleProject project = (FreeStyleProject) build.getProject();
 
@@ -85,12 +83,11 @@ public class CopyToSlaveBuildWrapper extends BuildWrapper {
                 LOGGER.finest("Copying '" + getIncludes()
                         + "', excluding '" + getExcludes()
                         + "' from " + projectWorkspaceOnMaster.toURI() + " on the master "
-                        + "to '" + projectWorkspaceOnSlave.toURI() + "' on " + Computer.currentComputer().getNode());
+                        + "to '" + projectWorkspaceOnSlave.toURI() + "' on " + Computer.currentComputer().getNode() + '.');
                 projectWorkspaceOnMaster.copyRecursiveTo(getIncludes(), getExcludes(), projectWorkspaceOnSlave);
             }
-            else {
-                // normally we should NEVER get here
-                LOGGER.warning(this.getClass().getName() + " has been invoked on a non-free style project: Skipping it.");
+            catch(ClassCastException cce) {
+                LOGGER.warning("This project is not a free style project: The copy to slave will not take place.");
             }
         }
         else if(Computer.currentComputer() instanceof MasterComputer) {
@@ -126,54 +123,50 @@ public class CopyToSlaveBuildWrapper extends BuildWrapper {
             super(CopyToSlaveBuildWrapper.class);
         }
 
-        private FormValidation checkFile(FreeStyleProject project, String value) throws IOException {
-            FilePath projectWorkspaceOnMaster;
+        public static FormValidation checkFile(AbstractProject project, String value) throws IOException {
+            try {
+                FilePath projectWorkspaceOnMaster;
+                FreeStyleProject freeStyleProject = (FreeStyleProject) project;
 
-            // do we use a custom workspace?
-            if(project.getCustomWorkspace() != null && project.getCustomWorkspace().length() > 0) {
-                projectWorkspaceOnMaster = new FilePath(new File(project.getCustomWorkspace()));
-            }
-            else {
-                projectWorkspaceOnMaster = new FilePath(new File(project.getRootDir(), "workspace"));
-            }
+                // do we use a custom workspace?
+                if(freeStyleProject.getCustomWorkspace() != null && freeStyleProject.getCustomWorkspace().length() > 0) {
+                    projectWorkspaceOnMaster = new FilePath(new File(freeStyleProject.getCustomWorkspace()));
+                }
+                else {
+                    projectWorkspaceOnMaster = new FilePath(new File(freeStyleProject.getRootDir(), "workspace"));
+                }
 
-            return FilePath.validateFileMask(projectWorkspaceOnMaster, value);
+                return FilePath.validateFileMask(projectWorkspaceOnMaster, value);
+            }
+            catch(ClassCastException cce) {
+                return FormValidation.error(ResourceBundleHolder.get(CopyToSlaveBuildWrapper.class).format("NotApplicableForThisProject"));
+            }
         }
 
         /**
          * Validates {@link CopyToSlaveBuildWrapper#includes}
          */
         public FormValidation doCheckIncludes(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException {
-            return checkFile((FreeStyleProject) project, value);
+            return checkFile(project, value);
         }
 
         /**
          * Validates {@link CopyToSlaveBuildWrapper#excludes}.
          */
         public FormValidation doCheckExcludes(@AncestorInPath AbstractProject project, @QueryParameter String value) throws IOException {
-            return checkFile((FreeStyleProject) project, value);
+            return checkFile(project, value);
         }
 
         @Override
         public String getDisplayName() {
-            // displayed in the project's configuration page
-            return ResourceBundleHolder.get(CopyToSlaveBuildWrapper.class).format("DisplayName");
+            return new Localizable(ResourceBundleHolder.get(CopyToSlaveBuildWrapper.class), "DisplayName").toString();
         }
 
         @Override
         public boolean isApplicable(AbstractProject<?, ?> item) {
-            // I get an error when compiling if using instanceof ==> that's why
-            // I use this not-very-clean stuff below
-            if(item.getClass().getName().equals(FreeStyleProject.class.getName())) {
-                return true;
-            }
-            return false;
+            return true;
         }
 
-        @Override
-        public BuildWrapper newInstance(StaplerRequest req, JSONObject formData) throws FormException {
-            return req.bindJSON(CopyToSlaveBuildWrapper.class, formData);
-        }
     }
 
     private static final Logger LOGGER = Logger.getLogger(CopyToSlaveBuildWrapper.class.getName());

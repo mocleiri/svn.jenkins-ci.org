@@ -32,6 +32,12 @@
   <li class=bug>
     Fixed a NPE in the update center with the container authentication mode.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-5382">issue 5382</a>)
+  <li class=bug>
+    Fix for parameterized project with choice parameter value that has &lt; or &gt; character.
+    (<a href="http://n4.nabble.com/Fwd-IllegalArgumentException-when-use-parametrised-build-with-choice-parametr-td1311451.html#a1311451">report</a>)
+  <li class=bug>
+    Build queue was showing some of the items in the wrong order &mdash; it should show new ones first and
+    old ones later.
   <li class=rfe>
     Move form to adjust logging levels to its own page and include table of configured levels.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-2210">issue 2210</a>)
@@ -49,6 +55,9 @@
     Auto-detect if Hudson is run in Solaris <a href="http://www.sun.com/bigadmin/content/selfheal/smf-quickstart.jsp">SMF</a>
     and provide restart capability.
     (<a href="http://n4.nabble.com/Self-restart-not-available-when-running-as-Solaris-SMF-tp1289605p1289605.html">report</a>)
+  <li class=rfe>
+    Formalized an extension point to control priority among builds in the queue.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-833">issue 833</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
