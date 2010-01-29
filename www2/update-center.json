@@ -91,6 +91,67 @@ updateCenter.post(
       "version": "1.16",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Active+Directory+plugin"
     },
+    "analysis-collector":     {
+      "buildDate": "Jan 29, 2010",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.3"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.340"
+        },
+                {
+          "name": "checkstyle",
+          "optional": true,
+          "version": "3.2"
+        },
+                {
+          "name": "dry",
+          "optional": true,
+          "version": "2.2"
+        },
+                {
+          "name": "findbugs",
+          "optional": true,
+          "version": "4.2"
+        },
+                {
+          "name": "pmd",
+          "optional": true,
+          "version": "3.2"
+        },
+                {
+          "name": "tasks",
+          "optional": true,
+          "version": "4.2"
+        },
+                {
+          "name": "warnings",
+          "optional": true,
+          "version": "3.2"
+        }
+      ],
+      "developers": [      {
+        "developerId": "drulli",
+        "name": "Ulli Hafner"
+      }],
+      "excerpt": "This plug-in is an add-on for the plug-ins <a href='HUDSON:Checkstyle Plugin'>Checkstyle<\/a>, <a href='HUDSON:DRY Plugin'>Dry<\/a>, <a href='HUDSON:FindBugs Plugin'>FindBugs<\/a>, <a href='HUDSON:PMD Plugin'>PMD<\/a>, <a href='HUDSON:Task Scanner Plugin'>Task Scanner<\/a>, and <a href='HUDSON:Warnings Plugin'>Warnings<\/a>: the plug-in collects the different analysis results and shows the results in a combined trend graph. Additionally, the plug-in provides health reporting and build stability based on these combined results. ",
+      "labels":       [
+        "maven",
+        "report"
+      ],
+      "name": "analysis-collector",
+      "releaseTimestamp": "2010-01-29T16:41:42.00Z",
+      "requiredCore": "1.340",
+      "title": "Analysis Collector Plugin",
+      "url": "http://hudson-ci.org/download/plugins/analysis-collector/1.0/analysis-collector.hpi",
+      "version": "1.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Analysis+Collector+Plugin"
+    },
     "analysis-core":     {
       "buildDate": "Jan 27, 2010",
       "dependencies": [      {
@@ -161,20 +222,24 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Audit+Trail+Plugin"
     },
     "backlog":     {
-      "buildDate": "May 26, 2009",
+      "buildDate": "Jan 28, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "yamamoto"}],
+      "developers": [      {
+        "developerId": "dragon3",
+        "name": "Ryuzo Yamamoto"
+      }],
       "excerpt": "This plugin integrates <a href='http://www.backlog.jp/'>Backlog<\/a> to Hudson.",
       "labels":       [
         "maven",
         "external"
       ],
       "name": "backlog",
-      "releaseTimestamp": "2009-05-27T05:30:22.00Z",
-      "requiredCore": "1.307",
+      "previousTimestamp": "2009-05-27T05:30:22.00Z",
+      "releaseTimestamp": "2010-01-29T01:32:12.00Z",
+      "requiredCore": "1.318",
       "title": "Backlog Plugin",
-      "url": "http://hudson-ci.org/download/plugins/backlog/1.0/backlog.hpi",
-      "version": "1.0",
+      "url": "http://hudson-ci.org/download/plugins/backlog/1.1/backlog.hpi",
+      "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Backlog+Plugin"
     },
     "backup":     {
@@ -908,7 +973,7 @@ updateCenter.post(
       "excerpt": "This plugin extends creating job. When you create a job, it sets automatically all rights on the creator.   ",
       "labels": ["user"],
       "name": "createjobadvanced",
-      "previousTimestamp": "2009-10-27T23:47:04.00Z",
+      "previousTimestamp": "2009-10-23T04:48:34.00Z",
       "releaseTimestamp": "2009-11-19T21:24:14.00Z",
       "requiredCore": "1.334",
       "title": "Create Job Advanced Plugin",
@@ -946,21 +1011,32 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CVS+Plugin"
     },
     "cvs-tag":     {
-      "buildDate": "May 11, 2009",
+      "buildDate": "Jan 28, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "kohsuke"}],
-      "excerpt": "This plugin will perform cvs tagging (specifically cvs rtag) after a job has been built successfully.",
+      "developers":       [
+                {
+          "developerId": "draco2k8",
+          "email": "draco2k4@yahoo.com",
+          "name": "Brendt Lucas"
+        },
+                {
+          "developerId": "derekmahar",
+          "email": "derek@derekmahar.ca",
+          "name": "Derek Mahar"
+        }
+      ],
+      "excerpt": "This plugin will perform CVS tagging (specifically cvs rtag) after a job has been built successfully.",
       "labels":       [
         "post-build",
         "scm-related"
       ],
       "name": "cvs-tag",
-      "previousTimestamp": "2009-04-29T08:49:14.00Z",
-      "releaseTimestamp": "2009-05-11T16:59:34.00Z",
-      "requiredCore": "1.304",
+      "previousTimestamp": "2009-05-11T16:59:34.00Z",
+      "releaseTimestamp": "2010-01-29T01:44:12.00Z",
+      "requiredCore": "1.319",
       "title": "CVS Tagging Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cvs-tag/1.4/cvs-tag.hpi",
-      "version": "1.4",
+      "url": "http://hudson-ci.org/download/plugins/cvs-tag/1.5/cvs-tag.hpi",
+      "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CVS+Tagging+Plugin"
     },
     "cygpath":     {
@@ -1098,7 +1174,7 @@ updateCenter.post(
       "excerpt": "This plugin records disk usage. ",
       "labels": ["report"],
       "name": "disk-usage",
-      "previousTimestamp": "2009-03-27T00:23:38.00Z",
+      "previousTimestamp": "2009-03-26T16:31:12.00Z",
       "releaseTimestamp": "2009-05-29T02:20:12.00Z",
       "requiredCore": "1.307",
       "title": "Disk Usage Plugin",
@@ -2743,14 +2819,14 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Next+Build+Number+Plugin"
     },
     "nunit":     {
-      "buildDate": "Apr 14, 2009",
+      "buildDate": "Apr 13, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "erikra"}],
+      "developers": [{"developerId": "hudson"}],
       "excerpt": "This plugin allows you publish <a href='http://www.nunit.org/'>NUnit<\/a> test results ",
       "labels": ["report"],
       "name": "nunit",
       "previousTimestamp": "2009-04-07T06:49:44.00Z",
-      "releaseTimestamp": "2009-04-14T22:50:24.00Z",
+      "releaseTimestamp": "2009-04-14T02:51:22.00Z",
       "requiredCore": "1.299",
       "title": "NUnit Plugin",
       "url": "http://hudson-ci.org/download/plugins/nunit/0.8/nunit.hpi",
@@ -2793,7 +2869,7 @@ updateCenter.post(
       "excerpt": "Integrates Hudson with <a href='http://perforce.com'>Perforce<\/a> SCM Repositories. ",
       "labels": ["scm"],
       "name": "perforce",
-      "previousTimestamp": "2010-01-04T19:43:22.00Z",
+      "previousTimestamp": "2010-01-04T19:24:44.00Z",
       "releaseTimestamp": "2010-01-20T17:44:00.00Z",
       "requiredCore": "1.339",
       "title": "Perforce Plugin",
@@ -2950,7 +3026,7 @@ updateCenter.post(
         "report"
       ],
       "name": "pmd",
-      "previousTimestamp": "2009-12-30T01:32:00.00Z",
+      "previousTimestamp": "2009-12-28T19:20:50.00Z",
       "releaseTimestamp": "2010-01-28T00:41:40.00Z",
       "requiredCore": "1.340",
       "title": "PMD Plugin",
@@ -3304,17 +3380,22 @@ updateCenter.post(
       "version": "1.2"
     },
     "scons":     {
-      "buildDate": "Apr 09, 2009",
+      "buildDate": "Jan 28, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "gregory"}],
+      "developers": [      {
+        "developerId": "gbois",
+        "email": "gbois@dev.java.net",
+        "name": "Gregory Boissinot"
+      }],
       "excerpt": "This plugin allows Hudson to invoke <a href='http://www.scons.org/'>SCons<\/a> build script as the main build step.",
       "labels": ["builder"],
       "name": "scons",
-      "releaseTimestamp": "2009-04-09T07:21:24.00Z",
-      "requiredCore": "1.297",
+      "previousTimestamp": "2009-04-09T07:21:24.00Z",
+      "releaseTimestamp": "2010-01-29T06:55:26.00Z",
+      "requiredCore": "1.342",
       "title": "SCons Plugin",
-      "url": "http://hudson-ci.org/download/plugins/scons/0.1/scons.hpi",
-      "version": "0.1",
+      "url": "http://hudson-ci.org/download/plugins/scons/0.2/scons.hpi",
+      "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SCons+Plugin"
     },
     "scp":     {
@@ -4336,8 +4417,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "XHqMo4EBLTU2+lDVUsgjG0A75NY=",
-    "signature": "nU/ekBhXQs1EAiCBkGdbEwB2AHFmaaIozlWNakAO9jNjaJFC8UGzX9+Sb/xwWJU9o4RG8P4N+Puaw0DdCR6QQTG8XNvz4A8D6O9wfAh/4Z+GpuitbP6QCaHHWs5WKbQ49LdWRWKMUKjgZMPURTKAcUcmjgd0pDPlG51jeKyK2fU8uspZBN73Lx8vHo2IC7yazqkoXNgWUL9kSp+x07JsF3+PI9Y5nxijwzxJzWrk4AW1ocHckHZmq8flQ3L9JOnm1Q7u8f1V2WDB6CWsEeDoREnYHc283seG7MESOxOWtaueTFlIvhbSSVB32OS4YZF4rC4D9agBS4buX50ICXoL2A=="
+    "digest": "JaqkXPk2rjqHH5R/1WG2ekIknL8=",
+    "signature": "dNaOYZyKTYDOoS9d5Ahd3HQx/IpJMoSgJ9M1WGw8Px2LQCFg5xA7EmCrkbIv4irzsi0aCRYZTdrtMVSMT5hVY6cdculnBz9EuV8GB6NVtBO4Wutdtkn04LNFKl7rdmgJwXm4Wxh5wAPnGjb/mbMjC2NJC+/o41+SrS5tunG41RpgNIzA7t2HlOpXQ2VqEuSevSbJxbulQRgtgRqiZh2J9gpEjP9iBdKjiL1Y7Yssv46se/kRxw1p7mxWKbfqbXW0ST2SHkc0EntFoeWN0RhuALEOG+hTnSREGkt1ovJx33NcYRaOCu+Wjtase4vkWeJTEnzt2vgHh89PJlSNB7G9MQ=="
   },
   "updateCenterVersion": "1"
 }
