@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.model (Hudson main module 1.342 API)
+Uses of Package hudson.model (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.model (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.model (Hudson main module 1.342 API)";
+        parent.document.title="Uses of Package hudson.model (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -1828,12 +1828,6 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point for deciding if particular job should be scheduled or not</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/model/class-use/Queue.QueueSortingHandler.html#hudson.model"><B>Queue.QueueSortingHandler</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point for sorting buildable items</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Queue.Task.html#hudson.model"><B>Queue.Task</B></A></B>
 
 <BR>
@@ -2239,6 +2233,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base type of Hudson slaves (although in practice, you probably extend <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to define a new slave type.)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Queue.BuildableItem.html#hudson.model.queue"><B>Queue.BuildableItem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in the <A HREF="../../hudson/model/Queue.html#buildables"><CODE>Queue.buildables</CODE></A> stage.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Queue.Item.html#hudson.model.queue"><B>Queue.Item</B></A></B>
@@ -3100,12 +3100,6 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
  (more specifically <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model"><CODE>Actionable</CODE></A> objects, which most interesting <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A>s are.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../hudson/model/class-use/Api.html#hudson.tasks.junit"><B>Api</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to expose remote access API for ".../api/"</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/BuildListener.html#hudson.tasks.junit"><B>BuildListener</B></A></B>
 
 <BR>
@@ -3153,6 +3147,14 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object whose state is persisted to XML.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/TaskListener.html#hudson.tasks.junit"><B>TaskListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives events that happen during some lengthy operation
+ that has some chance of failures, such as a build, SCM change polling,
+ slave launch, and so on.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -3167,6 +3169,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s that build software.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/AbstractModelObject.html#hudson.tasks.test"><B>AbstractModelObject</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model"><CODE>ModelObject</CODE></A> with some convenience methods.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/AbstractProject.html#hudson.tasks.test"><B>AbstractProject</B></A></B>
@@ -3228,6 +3236,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A model object has a URL.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Result.html#hudson.tasks.test"><B>Result</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build outcome.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Run.html#hudson.tasks.test"><B>Run</B></A></B>

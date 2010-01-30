@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JUnitResultArchiver (Hudson main module 1.342 API)
+JUnitResultArchiver (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JUnitResultArchiver (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JUnitResultArchiver (Hudson main module 1.342 API)";
+        parent.document.title="JUnitResultArchiver (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../hudson/tasks/junit/JUnitParser.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/junit/JUnitResultArchiver.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -262,6 +262,17 @@ Generates HTML report from JUnit test result XML files.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">parse</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;expandedTestResults,
+      <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+      <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+      <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In progress.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#parseResult(org.apache.tools.ant.DirectoryScanner, long)">parseResult</A></B>(org.apache.tools.ant.DirectoryScanner&nbsp;ds,
             long&nbsp;buildTime)</CODE>
 
@@ -368,6 +379,30 @@ JUnitResultArchiver</H3>
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><!-- --></A><H3>
+parse</H3>
+<PRE>
+protected <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A> <B>parse</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;expandedTestResults,
+                           <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                           <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                           <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD>In progress. Working on delegating the actual parsing to the JUnitParser.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><!-- --></A><H3>
 perform</H3>
@@ -560,7 +595,7 @@ public <A HREF="../../../hudson/matrix/MatrixAggregator.html" title="class in hu
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../hudson/tasks/junit/JUnitParser.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.DescriptorImpl.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/junit/JUnitResultArchiver.html" target="_top"><B>FRAMES</B></A>  &nbsp;

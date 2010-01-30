@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.342 API)
+HudsonTestCase (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.342 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -338,6 +338,15 @@ R</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertGoodStatus(com.gargoylesoftware.htmlunit.Page)">assertGoodStatus</A></B>(com.gargoylesoftware.htmlunit.Page&nbsp;page)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the specifed page can be served with a "good" HTTP status,
+ eg, the page is not missing and can be served without a server error</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertLogContains(java.lang.String, hudson.model.Run)">assertLogContains</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;substring,
                   <A HREF="../../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&nbsp;run)</CODE>
 
@@ -347,11 +356,69 @@ R</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertStringContains(java.lang.String, java.lang.String)">assertStringContains</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;haystack,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertStringContains(java.lang.String, java.lang.String, java.lang.String)">assertStringContains</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;message,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;haystack,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertXPath(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String)">assertXPath</A></B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the XPath matches the contents of a DomNode page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertXPath(com.gargoylesoftware.htmlunit.html.HtmlPage, java.lang.String)">assertXPath</A></B>(com.gargoylesoftware.htmlunit.html.HtmlPage&nbsp;page,
             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that the XPath matches.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertXPathResultsContainText(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String, java.lang.String)">assertXPathResultsContainText</A></B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertXPathValue(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String, java.lang.String)">assertXPathValue</A></B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;expectedValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertXPathValueContains(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String, java.lang.String)">assertXPathValueContains</A></B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -377,6 +444,14 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locates Maven2 and configure that as the only Maven in the system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configureUpdateCenter()">configureUpdateCenter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configures the update center setting for the test.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -441,6 +516,34 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a empty Maven project with the given name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createOnlineSlave()">createOnlineSlave</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new slave on the local host and wait for it to come onilne
+ before returning.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createOnlineSlave(hudson.model.Label)">createOnlineSlave</A></B>(<A HREF="../../../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new slave on the local host and wait for it to come onilne
+ before returning.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createOnlineSlave(hudson.model.Label, hudson.EnvVars)">createOnlineSlave</A></B>(<A HREF="../../../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l,
+                  <A HREF="../../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new slave on the local host and wait for it to come online
+ before returning</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -606,6 +709,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts an interactive JavaScript debugger, and break at the next JavaScript execution.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#isGoodHttpStatus(int)">isGoodHttpStatus</A></B>(int&nbsp;status)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines whether the specifed HTTP status code is generally "good"</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -983,6 +1094,26 @@ protected void <B>setUp</B>()
 <DL>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE>setUp</CODE> in class <CODE>junit.framework.TestCase</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configureUpdateCenter()"><!-- --></A><H3>
+configureUpdateCenter</H3>
+<PRE>
+protected void <B>configureUpdateCenter</B>()
+                              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Configures the update center setting for the test.
+ By default, we load updates from local proxy to avoid network traffic as much as possible.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 
@@ -1442,6 +1573,67 @@ public <A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson
 </DL>
 <HR>
 
+<A NAME="createOnlineSlave()"><!-- --></A><H3>
+createOnlineSlave</H3>
+<PRE>
+public <A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A> <B>createOnlineSlave</B>()
+                            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Create a new slave on the local host and wait for it to come onilne
+ before returning.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createOnlineSlave(hudson.model.Label)"><!-- --></A><H3>
+createOnlineSlave</H3>
+<PRE>
+public <A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A> <B>createOnlineSlave</B>(<A HREF="../../../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l)
+                            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Create a new slave on the local host and wait for it to come onilne
+ before returning.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createOnlineSlave(hudson.model.Label, hudson.EnvVars)"><!-- --></A><H3>
+createOnlineSlave</H3>
+<PRE>
+public <A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A> <B>createOnlineSlave</B>(<A HREF="../../../../hudson/model/Label.html" title="class in hudson.model">Label</A>&nbsp;l,
+                                   <A HREF="../../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)
+                            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Create a new slave on the local host and wait for it to come online
+ before returning
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="interactiveBreak()"><!-- --></A><H3>
 interactiveBreak</H3>
 <PRE>
@@ -1562,6 +1754,39 @@ public &lt;R extends <A HREF="../../../../hudson/model/Run.html" title="class in
 </DL>
 <HR>
 
+<A NAME="isGoodHttpStatus(int)"><!-- --></A><H3>
+isGoodHttpStatus</H3>
+<PRE>
+public boolean <B>isGoodHttpStatus</B>(int&nbsp;status)</PRE>
+<DL>
+<DD>Determines whether the specifed HTTP status code is generally "good"
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertGoodStatus(com.gargoylesoftware.htmlunit.Page)"><!-- --></A><H3>
+assertGoodStatus</H3>
+<PRE>
+public void <B>assertGoodStatus</B>(com.gargoylesoftware.htmlunit.Page&nbsp;page)</PRE>
+<DL>
+<DD>Assert that the specifed page can be served with a "good" HTTP status,
+ eg, the page is not missing and can be served without a server error
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>page</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="assertBuildStatusSuccess(hudson.model.Run)"><!-- --></A><A NAME="assertBuildStatusSuccess(R)"><!-- --></A><H3>
 assertBuildStatusSuccess</H3>
 <PRE>
@@ -1627,6 +1852,104 @@ public void <B>assertXPath</B>(com.gargoylesoftware.htmlunit.html.HtmlPage&nbsp;
 <DL>
 <DD>Asserts that the XPath matches.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertXPath(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String)"><!-- --></A><H3>
+assertXPath</H3>
+<PRE>
+public void <B>assertXPath</B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath)</PRE>
+<DL>
+<DD>Asserts that the XPath matches the contents of a DomNode page. This
+ variant of assertXPath(HtmlPage page, String xpath) allows us to
+ examine XmlPages.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>page</CODE> - <DD><CODE>xpath</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertXPathValue(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String, java.lang.String)"><!-- --></A><H3>
+assertXPathValue</H3>
+<PRE>
+public void <B>assertXPathValue</B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;expectedValue)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertXPathValueContains(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String, java.lang.String)"><!-- --></A><H3>
+assertXPathValueContains</H3>
+<PRE>
+public void <B>assertXPathValueContains</B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+                                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath,
+                                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertXPathResultsContainText(com.gargoylesoftware.htmlunit.html.DomNode, java.lang.String, java.lang.String)"><!-- --></A><H3>
+assertXPathResultsContainText</H3>
+<PRE>
+public void <B>assertXPathResultsContainText</B>(com.gargoylesoftware.htmlunit.html.DomNode&nbsp;page,
+                                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;xpath,
+                                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertStringContains(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+assertStringContains</H3>
+<PRE>
+public void <B>assertStringContains</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;message,
+                                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;haystack,
+                                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertStringContains(java.lang.String, java.lang.String)"><!-- --></A><H3>
+assertStringContains</H3>
+<PRE>
+public void <B>assertStringContains</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;haystack,
+                                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;needle)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

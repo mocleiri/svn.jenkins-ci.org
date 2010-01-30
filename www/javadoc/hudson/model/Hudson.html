@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.342 API)
+Hudson (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.342 API)";
+        parent.document.title="Hudson (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -203,6 +203,14 @@ Root object of the system.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension list that <A HREF="../../hudson/model/Hudson.html#doResources(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><CODE>doResources(StaplerRequest, StaplerResponse)</CODE></A> can serve.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.acegisecurity.Authentication</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#ANONYMOUS">ANONYMOUS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>Authentication</CODE> object that represents the anonymous user.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2494,6 +2502,22 @@ READ</H3>
 public static final <A HREF="../../hudson/security/Permission.html" title="class in hudson.security">Permission</A> <B>READ</B></PRE>
 <DL>
 <DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ANONYMOUS"><!-- --></A><H3>
+ANONYMOUS</H3>
+<PRE>
+public static final org.acegisecurity.Authentication <B>ANONYMOUS</B></PRE>
+<DL>
+<DD><CODE>Authentication</CODE> object that represents the anonymous user.
+ Because Acegi creates its own <CODE>AnonymousAuthenticationToken</CODE> instances, the code must not
+ expect the singleton semantics. This is just a convenient instance.
+<P>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.343</DD>
 </DL>
 </DL>
 

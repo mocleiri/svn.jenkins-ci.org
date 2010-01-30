@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.util (Hudson main module 1.342 API)
+hudson.util (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson main module 1.342 API)";
+        parent.document.title="hudson.util (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -283,6 +283,22 @@ Other miscellaneous utility code
 <TD><CODE>Digester</CODE> wrapper to fix the issue DIGESTER-118.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/DirScanner.html" title="class in hudson.util">DirScanner</A></B></TD>
+<TD>Visits a directory and its contents and pass them to the <A HREF="../../hudson/util/FileVisitor.html" title="class in hudson.util"><CODE>FileVisitor</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/DirScanner.Filter.html" title="class in hudson.util">DirScanner.Filter</A></B></TD>
+<TD>Scans by filtering things out from <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileFilter.html?is-external=true" title="class or interface in java.io"><CODE>FileFilter</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/DirScanner.Full.html" title="class in hudson.util">DirScanner.Full</A></B></TD>
+<TD>Scans everything recursively.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/DirScanner.Glob.html" title="class in hudson.util">DirScanner.Glob</A></B></TD>
+<TD>Scans by using Ant GLOB syntax.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/DoubleLaunchChecker.html" title="class in hudson.util">DoubleLaunchChecker</A></B></TD>
 <TD>Makes sure that no other Hudson uses our <tt>HUDSON_HOME</tt> directory,
  to forestall the problem of running multiple instances of Hudson that point to the same data directory.</TD>
@@ -311,6 +327,10 @@ Other miscellaneous utility code
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util">ExceptionCatchingThreadFactory</A></B></TD>
 <TD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent"><CODE>ThreadFactory</CODE></A> that creates a thread, which in turn displays a stack trace
  when it terminates unexpectedly.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/FileVisitor.html" title="class in hudson.util">FileVisitor</A></B></TD>
+<TD>Visits files in a directory recursively.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ForkOutputStream.html" title="class in hudson.util">ForkOutputStream</A></B></TD>

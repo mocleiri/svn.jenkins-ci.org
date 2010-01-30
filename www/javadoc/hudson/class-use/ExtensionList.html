@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.ExtensionList (Hudson main module 1.342 API)
+Uses of Class hudson.ExtensionList (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.ExtensionList (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.ExtensionList (Hudson main module 1.342 API)";
+        parent.document.title="Uses of Class hudson.ExtensionList (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -111,6 +111,10 @@ Packages that use <A HREF="../../hudson/ExtensionList.html" title="class in huds
 <TD>Listener interfaces for various events that occur inside the server.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.model.queue"><B>hudson.model.queue</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
 </TR>
@@ -122,6 +126,11 @@ Packages that use <A HREF="../../hudson/ExtensionList.html" title="class in huds
 <TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
 <TD>Built-in <a href="../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks.test"><B>hudson.tasks.test</B></A></TD>
+<TD>Defines contracts that need to be implemented by a test reporting
+action (such as the built-in JUnit one).&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.tools"><B>hudson.tools</B></A></TD>
@@ -318,14 +327,6 @@ Uses of <A HREF="../../hudson/ExtensionList.html" title="class in hudson">Extens
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>Queue.QueueSortingHandler.</B><B><A HREF="../../hudson/model/Queue.QueueSortingHandler.html#all()">all</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model"><CODE>Queue.QueueSortingHandler</CODE></A>s</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/TransientProjectActionFactory.html" title="class in hudson.model">TransientProjectActionFactory</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>TransientProjectActionFactory.</B><B><A HREF="../../hudson/model/TransientProjectActionFactory.html#all()">all</A></B>()</CODE>
 
@@ -395,6 +396,31 @@ Uses of <A HREF="../../hudson/ExtensionList.html" title="class in hudson">Extens
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All the registered <A HREF="../../hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A>s.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.model.queue"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A> in <A HREF="../../hudson/model/queue/package-summary.html">hudson.model.queue</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/model/queue/package-summary.html">hudson.model.queue</A> that return <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue">QueueSorter</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>QueueSorter.</B><B><A HREF="../../hudson/model/queue/QueueSorter.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A>s.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -494,6 +520,31 @@ Uses of <A HREF="../../hudson/ExtensionList.html" title="class in hudson">Extens
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../hudson/tasks/MailAddressResolver.html" title="class in hudson.tasks"><CODE>MailAddressResolver</CODE></A> descriptors.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A> in <A HREF="../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A> that return <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../../hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test">TestResultParser</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>TestResultParser.</B><B><A HREF="../../hudson/tasks/test/TestResultParser.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All registered <A HREF="../../hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test"><CODE>TestResultParser</CODE></A>s</TD>
 </TR>
 </TABLE>
 &nbsp;

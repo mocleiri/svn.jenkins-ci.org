@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Computer (Hudson main module 1.342 API)
+Computer (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Computer (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Computer (Hudson main module 1.342 API)";
+        parent.document.title="Computer (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -305,7 +305,7 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#countExecutors()">countExecutors</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the current size of the executor pool for this computer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -732,7 +732,7 @@ Represents the running state of a remote computer that holds <A HREF="../../huds
 <TD><CODE><B><A HREF="../../hudson/model/Computer.html#isIdle()">isIdle</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if all the executors of this computer is idle.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if all the executors of this computer are idle.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1867,6 +1867,11 @@ countExecutors</H3>
 <PRE>
 public final int <B>countExecutors</B>()</PRE>
 <DL>
+<DD>Returns the current size of the executor pool for this computer.
+ This number may temporarily differ from <A HREF="../../hudson/model/Computer.html#getNumExecutors()"><CODE>getNumExecutors()</CODE></A> if there
+ are busy tasks when the configured size is decreased.  OneOffExecutors are
+ not included in this count.
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -1916,7 +1921,7 @@ isIdle</H3>
 <FONT SIZE="-1">@Exported
 </FONT>public final boolean <B>isIdle</B>()</PRE>
 <DL>
-<DD>Returns true if all the executors of this computer is idle.
+<DD>Returns true if all the executors of this computer are idle.
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Class Hierarchy (Hudson main module 1.342 API)
+Class Hierarchy (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Class Hierarchy (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Class Hierarchy (Hudson main module 1.342 API)";
+        parent.document.title="Class Hierarchy (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -217,11 +217,17 @@ Class Hierarchy
 </UL>
 <LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><B>TestObject</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
 <UL>
+<LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test"><B>TestObject</B></A><UL>
+<LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test"><B>TestResult</B></A><UL>
 <LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit"><B>CaseResult</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;T&gt;)
-<LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/TabulatedResult.html" title="class in hudson.tasks.junit"><B>TabulatedResult</B></A><UL>
+<LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/SimpleCaseResult.html" title="class in hudson.tasks.test"><B>SimpleCaseResult</B></A><LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/TabulatedResult.html" title="class in hudson.tasks.test"><B>TabulatedResult</B></A><UL>
 <LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/ClassResult.html" title="class in hudson.tasks.junit"><B>ClassResult</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;T&gt;)
+<LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/MetaTabulatedResult.html" title="class in hudson.tasks.test"><B>MetaTabulatedResult</B></A><UL>
 <LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/PackageResult.html" title="class in hudson.tasks.junit"><B>PackageResult</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;T&gt;)
 <LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit"><B>TestResult</B></A></UL>
+</UL>
+</UL>
+</UL>
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/UpdateCenter.html" title="class in hudson.model"><B>UpdateCenter</B></A> (implements hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/User.html" title="class in hudson.model"><B>User</B></A> (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;T&gt;, hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
@@ -306,7 +312,8 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Ant.html" title="class in hudson.tasks"><B>Ant</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/CaptureEnvironmentBuilder.html" title="class in org.jvnet.hudson.test"><B>CaptureEnvironmentBuilder</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/CommandInterpreter.html" title="class in hudson.tasks"><B>CommandInterpreter</B></A><UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BatchFile.html" title="class in hudson.tasks"><B>BatchFile</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Shell.html" title="class in hudson.tasks"><B>Shell</B></A></UL>
-<LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/FailureBuilder.html" title="class in org.jvnet.hudson.test"><B>FailureBuilder</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Maven.html" title="class in hudson.tasks"><B>Maven</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/MockBuilder.html" title="class in org.jvnet.hudson.test"><B>MockBuilder</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/SleepBuilder.html" title="class in org.jvnet.hudson.test"><B>SleepBuilder</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test"><B>TestBuilder</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/UnstableBuilder.html" title="class in org.jvnet.hudson.test"><B>UnstableBuilder</B></A></UL>
+<LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/FailureBuilder.html" title="class in org.jvnet.hudson.test"><B>FailureBuilder</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Maven.html" title="class in hudson.tasks"><B>Maven</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/MockBuilder.html" title="class in org.jvnet.hudson.test"><B>MockBuilder</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/SleepBuilder.html" title="class in org.jvnet.hudson.test"><B>SleepBuilder</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TestBuilder.html" title="class in org.jvnet.hudson.test"><B>TestBuilder</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TouchBuilder.html" title="class in org.jvnet.hudson.test"><B>TouchBuilder</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+<LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/UnstableBuilder.html" title="class in org.jvnet.hudson.test"><B>UnstableBuilder</B></A></UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Publisher.html" title="class in hudson.tasks"><B>Publisher</B></A> (implements hudson.tasks.<A HREF="hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>, hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;)
 <UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Notifier.html" title="class in hudson.tasks"><B>Notifier</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
@@ -466,6 +473,11 @@ Class Hierarchy
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Descriptor.PropertyType.html" title="class in hudson.model"><B>Descriptor.PropertyType</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><B>DirectoryBrowserSupport</B></A> (implements org.kohsuke.stapler.HttpResponse)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/DirectoryBrowserSupport.Path.html" title="class in hudson.model"><B>DirectoryBrowserSupport.Path</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/DirScanner.html" title="class in hudson.util"><B>DirScanner</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+<UL>
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/DirScanner.Full.html" title="class in hudson.util"><B>DirScanner.Full</B></A><UL>
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/DirScanner.Filter.html" title="class in hudson.util"><B>DirScanner.Filter</B></A></UL>
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/DirScanner.Glob.html" title="class in hudson.util"><B>DirScanner.Glob</B></A></UL>
 <LI TYPE="circle">hudson.util.jna.<A HREF="hudson/util/jna/DotNet.html" title="class in hudson.util.jna"><B>DotNet</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/DoubleLaunchChecker.html" title="class in hudson.util"><B>DoubleLaunchChecker</B></A><LI TYPE="circle">hudson.tools.<A HREF="hudson/tools/DownloadFromUrlInstaller.Installable.html" title="class in hudson.tools"><B>DownloadFromUrlInstaller.Installable</B></A><LI TYPE="circle">hudson.tools.<A HREF="hudson/tools/DownloadFromUrlInstaller.InstallableList.html" title="class in hudson.tools"><B>DownloadFromUrlInstaller.InstallableList</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/DownloadService.Downloadable.html" title="class in hudson.model"><B>DownloadService.Downloadable</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.tools.<A HREF="hudson/tools/JDKInstaller.JDKList.html" title="class in hudson.tools"><B>JDKInstaller.JDKList</B></A></UL>
@@ -488,7 +500,7 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.<A HREF="hudson/FileSystemProvisioner.Default.html" title="class in hudson"><B>FileSystemProvisioner.Default</B></A><LI TYPE="circle">hudson.os.solaris.<A HREF="hudson/os/solaris/ZFSProvisioner.html" title="class in hudson.os.solaris"><B>ZFSProvisioner</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.html" title="class in hudson.model"><B>Fingerprint</B></A> (implements hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/FileVisitor.html" title="class in hudson.util"><B>FileVisitor</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.html" title="class in hudson.model"><B>Fingerprint</B></A> (implements hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.BuildPtr.html" title="class in hudson.model"><B>Fingerprint.BuildPtr</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.Range.html" title="class in hudson.model"><B>Fingerprint.Range</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.RangeItem.html" title="class in hudson.model"><B>Fingerprint.RangeItem</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model"><B>Fingerprint.RangeSet</B></A><LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/Fingerprinter.FingerprintAction.html" title="class in hudson.tasks"><B>Fingerprinter.FingerprintAction</B></A> (implements hudson.model.<A HREF="hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <LI TYPE="circle">hudson.search.<A HREF="hudson/search/FixedSet.html" title="class in hudson.search"><B>FixedSet</B></A> (implements hudson.search.<A HREF="hudson/search/SearchIndex.html" title="interface in hudson.search">SearchIndex</A>)
 <LI TYPE="circle">hudson.util.<A HREF="hudson/util/FormFieldValidator.html" title="class in hudson.util"><B>FormFieldValidator</B></A><UL>
@@ -674,7 +686,10 @@ Class Hierarchy
 <LI TYPE="circle">hudson.util.<A HREF="hudson/util/Protector.html" title="class in hudson.util"><B>Protector</B></A><LI TYPE="circle">hudson.<A HREF="hudson/ProxyConfiguration.html" title="class in hudson"><B>ProxyConfiguration</B></A> (implements hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
 <LI TYPE="circle">hudson.scm.browsers.<A HREF="hudson/scm/browsers/QueryBuilder.html" title="class in hudson.scm.browsers"><B>QueryBuilder</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.ApplicableJobOfferList.html" title="class in hudson.model"><B>Queue.ApplicableJobOfferList</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;T&gt;)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.JobOffer.html" title="class in hudson.model"><B>Queue.JobOffer</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model"><B>Queue.QueueDecisionHandler</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model"><B>Queue.QueueSortingHandler</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.model.queue.<A HREF="hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><B>QueueSorter</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<UL>
+<LI TYPE="circle">hudson.model.queue.<A HREF="hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue"><B>AbstractQueueSorterImpl</B></A> (implements java.util.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util">Comparator</A>&lt;T&gt;)
+</UL>
 <LI TYPE="circle">org.jvnet.hudson.test.recipes.<A HREF="org/jvnet/hudson/test/recipes/Recipe.Runner.html" title="class in org.jvnet.hudson.test.recipes"><B>Recipe.Runner</B></A>&lt;T&gt;<UL>
 <LI TYPE="circle">org.jvnet.hudson.test.recipes.<A HREF="org/jvnet/hudson/test/recipes/LocalData.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes"><B>LocalData.RunnerImpl</B></A><LI TYPE="circle">org.jvnet.hudson.test.recipes.<A HREF="org/jvnet/hudson/test/recipes/PresetData.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes"><B>PresetData.RunnerImpl</B></A><LI TYPE="circle">org.jvnet.hudson.test.recipes.<A HREF="org/jvnet/hudson/test/recipes/WithPlugin.RunnerImpl.html" title="class in org.jvnet.hudson.test.recipes"><B>WithPlugin.RunnerImpl</B></A></UL>
 <LI TYPE="circle">hudson.util.jna.<A HREF="hudson/util/jna/RegistryKey.html" title="class in hudson.util.jna"><B>RegistryKey</B></A><LI TYPE="circle">hudson.security.<A HREF="hudson/security/RememberMeServicesProxy.html" title="class in hudson.security"><B>RememberMeServicesProxy</B></A> (implements org.acegisecurity.ui.rememberme.RememberMeServices)
@@ -735,7 +750,11 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model"><B>TaskThread.ListenerAndText</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TemporaryDirectoryAllocator.html" title="class in org.jvnet.hudson.test"><B>TemporaryDirectoryAllocator</B></A><LI TYPE="circle">hudson.node_monitors.<A HREF="hudson/node_monitors/TemporarySpaceMonitor.GetTempSpace.html" title="class in hudson.node_monitors"><B>TemporarySpaceMonitor.GetTempSpace</B></A> (implements hudson.<A HREF="hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>&lt;T&gt;)
 <LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/TestAction.html" title="class in hudson.tasks.junit"><B>TestAction</B></A> (implements hudson.model.<A HREF="hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit"><B>TestDataPublisher</B></A> (implements hudson.model.<A HREF="hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TestEnvironment.html" title="class in org.jvnet.hudson.test"><B>TestEnvironment</B></A><LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/TestResultAction.Data.html" title="class in hudson.tasks.junit"><B>TestResultAction.Data</B></A><LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test"><B>TestResultProjectAction</B></A> (implements hudson.model.<A HREF="hudson/model/Action.html" title="interface in hudson.model">Action</A>)
+<LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TestEnvironment.html" title="class in org.jvnet.hudson.test"><B>TestEnvironment</B></A><LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/TestResultAction.Data.html" title="class in hudson.tasks.junit"><B>TestResultAction.Data</B></A><LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test"><B>TestResultParser</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<UL>
+<LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/DefaultTestResultParserImpl.html" title="class in hudson.tasks.test"><B>DefaultTestResultParserImpl</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+<LI TYPE="circle">hudson.tasks.junit.<A HREF="hudson/tasks/junit/JUnitParser.html" title="class in hudson.tasks.junit"><B>JUnitParser</B></A></UL>
+<LI TYPE="circle">hudson.tasks.test.<A HREF="hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test"><B>TestResultProjectAction</B></A> (implements hudson.model.<A HREF="hudson/model/Action.html" title="interface in hudson.model">Action</A>)
 <LI TYPE="circle">junit.framework.TestSuite (implements junit.framework.Test)
 <UL>
 <LI TYPE="circle">org.jvnet.hudson.test.junit.<A HREF="org/jvnet/hudson/test/junit/GroupedTest.html" title="class in org.jvnet.hudson.test.junit"><B>GroupedTest</B></A></UL>

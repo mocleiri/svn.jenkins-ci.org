@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MatrixTestResult (Hudson main module 1.342 API)
+MatrixTestResult (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MatrixTestResult (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MatrixTestResult (Hudson main module 1.342 API)";
+        parent.document.title="MatrixTestResult (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.RunListenerImpl.html" title="class in hudson.tasks.test"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../hudson/tasks/test/DefaultTestResultParserImpl.html" title="class in hudson.tasks.test"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../hudson/tasks/test/Messages.html" title="class in hudson.tasks.test"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/test/MatrixTestResult.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -203,10 +203,10 @@ Class MatrixTestResult</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/test/MatrixTestResult.html#getTestResultPath(hudson.tasks.junit.CaseResult)">getTestResultPath</A></B>(<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&nbsp;it)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/MatrixTestResult.html#getTestResultPath(hudson.tasks.test.TestResult)">getTestResultPath</A></B>(<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&nbsp;it)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a full path down to a test result</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -223,7 +223,7 @@ Class MatrixTestResult</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.test.<A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html" title="class in hudson.tasks.test">AggregatedTestResultAction</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#add(hudson.tasks.test.AbstractTestResultAction)">add</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getChildReport(hudson.tasks.test.AggregatedTestResultAction.Child)">getChildReport</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getChildReports()">getChildReports</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getFailCount()">getFailCount</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getFailedTests()">getFailedTests</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getResult()">getResult</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getSkipCount()">getSkipCount</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getTotalCount()">getTotalCount</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#update(java.util.List)">update</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#add(hudson.tasks.test.AbstractTestResultAction)">add</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getChildReport(hudson.tasks.test.AggregatedTestResultAction.Child)">getChildReport</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getChildReports()">getChildReports</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getDescription(hudson.tasks.test.TestObject)">getDescription</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getFailCount()">getFailCount</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getFailedTests()">getFailedTests</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getResult()">getResult</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getSkipCount()">getSkipCount</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#getTotalCount()">getTotalCount</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#setDescription(hudson.tasks.test.TestObject, java.lang.String)">setDescription</A>, <A HREF="../../../hudson/tasks/test/AggregatedTestResultAction.html#update(java.util.List)">update</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.test.AbstractTestResultAction"><!-- --></A>
@@ -232,7 +232,7 @@ Class MatrixTestResult</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.tasks.test.<A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#doGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doGraph</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#doGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doGraphMap</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getApi()">getApi</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getBuildHealth()">getBuildHealth</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getDisplayName()">getDisplayName</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getFailureDiffString()">getFailureDiffString</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getIconFileName()">getIconFileName</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getPreviousResult()">getPreviousResult</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getUrlName()">getUrlName</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#doGraph(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doGraph</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#doGraphMap(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doGraphMap</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#findCorrespondingResult(java.lang.String)">findCorrespondingResult</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#findPreviousCorresponding(hudson.tasks.test.TestResult)">findPreviousCorresponding</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getApi()">getApi</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getBuildHealth()">getBuildHealth</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getDisplayName()">getDisplayName</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getFailureDiffString()">getFailureDiffString</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getIconFileName()">getIconFileName</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getPreviousResult()">getPreviousResult</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getUrlName()">getUrlName</A>, <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#readResolve()">readResolve</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -304,13 +304,16 @@ public <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson
 </DL>
 <HR>
 
-<A NAME="getTestResultPath(hudson.tasks.junit.CaseResult)"><!-- --></A><H3>
+<A NAME="getTestResultPath(hudson.tasks.test.TestResult)"><!-- --></A><H3>
 getTestResultPath</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTestResultPath</B>(<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&nbsp;it)</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTestResultPath</B>(<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&nbsp;it)</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getTestResultPath(hudson.tasks.test.TestResult)">AbstractTestResultAction</A></CODE></B></DD>
+<DD>Returns a full path down to a test result
+<P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getTestResultPath(hudson.tasks.junit.CaseResult)">getTestResultPath</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getTestResultPath(hudson.tasks.test.TestResult)">getTestResultPath</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -347,7 +350,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.RunListenerImpl.html" title="class in hudson.tasks.test"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../hudson/tasks/test/DefaultTestResultParserImpl.html" title="class in hudson.tasks.test"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../../hudson/tasks/test/Messages.html" title="class in hudson.tasks.test"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/test/MatrixTestResult.html" target="_top"><B>FRAMES</B></A>  &nbsp;

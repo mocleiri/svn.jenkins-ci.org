@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.ExtensionPoint (Hudson main module 1.342 API)
+Uses of Interface hudson.ExtensionPoint (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.ExtensionPoint (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson main module 1.342 API)";
+        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -133,6 +133,10 @@ Packages that use <A HREF="../../hudson/ExtensionPoint.html" title="interface in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model.listeners"><B>hudson.model.listeners</B></A></TD>
 <TD>Listener interfaces for various events that occur inside the server.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.model.queue"><B>hudson.model.queue</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.node_monitors"><B>hudson.node_monitors</B></A></TD>
@@ -1220,14 +1224,6 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point for sorting buildable items</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run&lt;JobT extends Job&lt;JobT,RunT&gt;,RunT extends Run&lt;JobT,RunT&gt;&gt;</A></B></CODE>
 
@@ -1413,6 +1409,39 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receives notifications about SCM activities in Hudson.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.model.queue"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A> in <A HREF="../../hudson/model/queue/package-summary.html">hudson.model.queue</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../hudson/model/queue/package-summary.html">hudson.model.queue</A> that implement <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue">AbstractQueueSorterImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial implementation of <A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A> in terms of <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util"><CODE>Comparator</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue">QueueSorter</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Singleton extension point for sorting buildable items</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -2179,6 +2208,15 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/junit/JUnitParser.html" title="class in hudson.tasks.junit">JUnitParser</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parse some JUnit xml files and generate a TestResult containing all the
+ results parsed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit">JUnitResultArchiver</A></B></CODE>
 
 <BR>
@@ -2230,11 +2268,28 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/test/DefaultTestResultParserImpl.html" title="class in hudson.tasks.test">DefaultTestResultParserImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default partial implementation of <A HREF="../../hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test"><CODE>TestResultParser</CODE></A> that handles GLOB dereferencing
+ and other checks for user errors, such as misconfigured GLOBs, up-to-date checks on test reports.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/test/TestResultAggregator.html" title="class in hudson.tasks.test">TestResultAggregator</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aggregates <A HREF="../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test"><CODE>AbstractTestResultAction</CODE></A>s of <A HREF="../../hudson/matrix/MatrixRun.html" title="class in hudson.matrix"><CODE>MatrixRun</CODE></A>s
  into <A HREF="../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix"><CODE>MatrixBuild</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test">TestResultParser</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parses test result files and builds in-memory representation of it as <A HREF="../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test"><CODE>TestResult</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -2685,6 +2740,14 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A crumb issuer that issues a constant crumb value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../org/jvnet/hudson/test/TouchBuilder.html" title="class in org.jvnet.hudson.test">TouchBuilder</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

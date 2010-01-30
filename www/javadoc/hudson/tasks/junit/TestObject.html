@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TestObject (Hudson main module 1.342 API)
+TestObject (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TestObject (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TestObject (Hudson main module 1.342 API)";
+        parent.document.title="TestObject (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -101,16 +101,20 @@ Class TestObject</H2>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>, <A HREF="../../../hudson/tasks/junit/TabulatedResult.html" title="class in hudson.tasks.junit">TabulatedResult</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></DD>
 </DL>
 <HR>
+<B>Deprecated.</B>
+<P>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
 </FONT>public abstract class <B>TestObject</B><DT>extends <A HREF="../../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DL>
 </PRE>
 
 <P>
-Base class for all test result objects.
+Stub of base class for all test result objects. The real implementation of
+ the TestObject is in hudson.tasks.test.TestObject. This class simply
+ defines abstract methods so that legacy code will continue to compile.
 <P>
 
 <P>
@@ -134,7 +138,7 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#TestObject()">TestObject</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -148,27 +152,19 @@ Base class for all test result objects.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#doSubmitDescription(java.lang.String)">doSubmitDescription</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getApi()">getApi</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes this object through the remote API.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Exposes this object through the remote API.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getDescription()">getDescription</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -176,26 +172,16 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getDuration()">getDuration</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time took to run this test.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Time took to run this test.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getDurationString()">getDurationString</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the string representation of the <A HREF="../../../hudson/tasks/junit/TestObject.html#getDuration()"><CODE>getDuration()</CODE></A>, in a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Returns the string representation of the <A HREF="../../../hudson/tasks/junit/TestObject.html#getDuration()"><CODE>getDuration()</CODE></A>, in a
  human readable format.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;token,
-           org.kohsuke.stapler.StaplerRequest&nbsp;req,
-           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -203,39 +189,39 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getFailCount()">getFailCount</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the total number of failed tests.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the total number of failed tests.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit">History</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit">History</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getHistory()">getHistory</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getId()">getId</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getName()">getName</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the name of this object.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the name of this object.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;</CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getOwner()">getOwner</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -243,7 +229,7 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getParent()">getParent</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reverse pointer of <A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getChildren()"><CODE>TabulatedResult.getChildren()</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -251,7 +237,7 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getPassCount()">getPassCount</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the total number of passed tests.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the total number of passed tests.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -259,7 +245,7 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getPreviousResult()">getPreviousResult</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the counter part of this <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the counter part of this <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -267,23 +253,23 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getResultInBuild(hudson.model.AbstractBuild)">getResultInBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()">getSafeName</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the version of <A HREF="../../../hudson/tasks/junit/TestObject.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the version of <A HREF="../../../hudson/tasks/junit/TestObject.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getSearchUrl()">getSearchUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this item relative to the parent <A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Returns the URL of this item relative to the parent <A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -291,11 +277,11 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getSkipCount()">getSkipCount</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the total number of skipped tests.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the total number of skipped tests.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>
+<CODE>abstract 
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
@@ -306,72 +292,55 @@ Base class for all test result objects.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getTestAction(java.lang.Class)">getTestAction</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;klazz)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/junit/TestAction.html" title="class in hudson.tasks.junit">TestAction</A>&gt;</CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/junit/TestAction.html" title="class in hudson.tasks.junit">TestAction</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getTestActions()">getTestActions</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getTestResult()">getTestResult</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/TestResultAction.html" title="class in hudson.tasks.junit">TestResultAction</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getTestResultAction()">getTestResultAction</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;int</CODE></FONT></TD>
+<CODE>abstract &nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getTotalCount()">getTotalCount</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the total number of tests.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the total number of tests.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#getUrl()">getUrl</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns url relative to TestResult</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Returns url relative to TestResult</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#safe(java.lang.String)">safe</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;s)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces URL-unsafe characters.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
+<CODE>abstract &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#setDescription(java.lang.String)">setDescription</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestObject.html#uniquifyName(java.util.Collection, java.lang.String)">uniquifyName</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;&nbsp;siblings,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;base)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#2988: uniquifies a <A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()"><CODE>getSafeName()</CODE></A> amongst children of the parent.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -419,7 +388,7 @@ TestObject</H3>
 <PRE>
 public <B>TestObject</B>()</PRE>
 <DL>
-</DL>
+<DD><B>Deprecated.</B>&nbsp;</DL>
 
 <!-- ============ METHOD DETAIL ========== -->
 
@@ -434,9 +403,9 @@ public <B>TestObject</B>()</PRE>
 <A NAME="getOwner()"><!-- --></A><H3>
 getOwner</H3>
 <PRE>
-public <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt; <B>getOwner</B>()</PRE>
+public abstract <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt; <B>getOwner</B>()</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -450,9 +419,7 @@ getParent</H3>
 <PRE>
 public abstract <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A> <B>getParent</B>()</PRE>
 <DL>
-<DD>Reverse pointer of <A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getChildren()"><CODE>TabulatedResult.getChildren()</CODE></A>.
-<P>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -464,9 +431,9 @@ public abstract <A HREF="../../../hudson/tasks/junit/TestObject.html" title="cla
 <A NAME="getId()"><!-- --></A><H3>
 getId</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getId</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getId</B>()</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -478,9 +445,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getUrl()"><!-- --></A><H3>
 getUrl</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getUrl</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getUrl</B>()</PRE>
 <DL>
-<DD>Returns url relative to TestResult
+<DD><B>Deprecated.</B>&nbsp;<DD>Returns url relative to TestResult
 <P>
 <DD><DL>
 </DL>
@@ -494,9 +461,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getTestResult()"><!-- --></A><H3>
 getTestResult</H3>
 <PRE>
-public <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A> <B>getTestResult</B>()</PRE>
+public abstract <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A> <B>getTestResult</B>()</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -508,9 +475,9 @@ public <A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hud
 <A NAME="getTestResultAction()"><!-- --></A><H3>
 getTestResultAction</H3>
 <PRE>
-public <A HREF="../../../hudson/tasks/junit/TestResultAction.html" title="class in hudson.tasks.junit">TestResultAction</A> <B>getTestResultAction</B>()</PRE>
+public abstract <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test">AbstractTestResultAction</A> <B>getTestResultAction</B>()</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -522,9 +489,9 @@ public <A HREF="../../../hudson/tasks/junit/TestResultAction.html" title="class 
 <A NAME="getTestActions()"><!-- --></A><H3>
 getTestActions</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/junit/TestAction.html" title="class in hudson.tasks.junit">TestAction</A>&gt; <B>getTestActions</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/junit/TestAction.html" title="class in hudson.tasks.junit">TestAction</A>&gt; <B>getTestActions</B>()</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -536,9 +503,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-e
 <A NAME="getTestAction(java.lang.Class)"><!-- --></A><H3>
 getTestAction</H3>
 <PRE>
-public &lt;T&gt; T <B>getTestAction</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;klazz)</PRE>
+public abstract &lt;T&gt; T <B>getTestAction</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;klazz)</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -552,7 +519,7 @@ getPreviousResult</H3>
 <PRE>
 public abstract <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A> <B>getPreviousResult</B>()</PRE>
 <DL>
-<DD>Gets the counter part of this <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the counter part of this <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.
 <P>
 <DD><DL>
 </DL>
@@ -569,7 +536,7 @@ getResultInBuild</H3>
 <PRE>
 public abstract <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A> <B>getResultInBuild</B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -583,7 +550,7 @@ getDuration</H3>
 <PRE>
 public abstract float <B>getDuration</B>()</PRE>
 <DL>
-<DD>Time took to run this test. In seconds.
+<DD><B>Deprecated.</B>&nbsp;<DD>Time took to run this test. In seconds.
 <P>
 <DD><DL>
 </DL>
@@ -597,9 +564,9 @@ public abstract float <B>getDuration</B>()</PRE>
 <A NAME="getDurationString()"><!-- --></A><H3>
 getDurationString</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getDurationString</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getDurationString</B>()</PRE>
 <DL>
-<DD>Returns the string representation of the <A HREF="../../../hudson/tasks/junit/TestObject.html#getDuration()"><CODE>getDuration()</CODE></A>, in a
+<DD><B>Deprecated.</B>&nbsp;<DD>Returns the string representation of the <A HREF="../../../hudson/tasks/junit/TestObject.html#getDuration()"><CODE>getDuration()</CODE></A>, in a
  human readable format.
 <P>
 <DD><DL>
@@ -614,9 +581,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getDescription()"><!-- --></A><H3>
 getDescription</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getDescription</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getDescription</B>()</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -628,9 +595,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="setDescription(java.lang.String)"><!-- --></A><H3>
 setDescription</H3>
 <PRE>
-public void <B>setDescription</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</PRE>
+public abstract void <B>setDescription</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
@@ -642,9 +609,9 @@ public void <B>setDescription</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/a
 <A NAME="getApi()"><!-- --></A><H3>
 getApi</H3>
 <PRE>
-public <A HREF="../../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
+public abstract <A HREF="../../../hudson/model/Api.html" title="class in hudson.model">Api</A> <B>getApi</B>()</PRE>
 <DL>
-<DD>Exposes this object through the remote API.
+<DD><B>Deprecated.</B>&nbsp;<DD>Exposes this object through the remote API.
 <P>
 <DD><DL>
 </DL>
@@ -658,9 +625,9 @@ public <A HREF="../../../hudson/model/Api.html" title="class in hudson.model">Ap
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getName</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getName</B>()</PRE>
 <DL>
-<DD>Gets the name of this object.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the name of this object.
 <P>
 <DD><DL>
 </DL>
@@ -674,9 +641,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getSafeName()"><!-- --></A><H3>
 getSafeName</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSafeName</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSafeName</B>()</PRE>
 <DL>
-<DD>Gets the version of <A HREF="../../../hudson/tasks/junit/TestObject.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the version of <A HREF="../../../hudson/tasks/junit/TestObject.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.
 <P>
 <DD><DL>
 </DL>
@@ -690,9 +657,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getSearchUrl()"><!-- --></A><H3>
 getSearchUrl</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSearchUrl</B>()</PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSearchUrl</B>()</PRE>
 <DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../../hudson/search/SearchItem.html#getSearchUrl()">SearchItem</A></CODE></B></DD>
+<DD><B>Deprecated.</B>&nbsp;<DD><B>Description copied from interface: <CODE><A HREF="../../../hudson/search/SearchItem.html#getSearchUrl()">SearchItem</A></CODE></B></DD>
 <DD>Returns the URL of this item relative to the parent <A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.
 <P>
 <DD><DL>
@@ -707,45 +674,12 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 </DL>
 <HR>
 
-<A NAME="uniquifyName(java.util.Collection, java.lang.String)"><!-- --></A><H3>
-uniquifyName</H3>
-<PRE>
-protected final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>uniquifyName</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;&nbsp;siblings,
-                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;base)</PRE>
-<DL>
-<DD>#2988: uniquifies a <A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()"><CODE>getSafeName()</CODE></A> amongst children of the parent.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="safe(java.lang.String)"><!-- --></A><H3>
-safe</H3>
-<PRE>
-protected static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>safe</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;s)</PRE>
-<DL>
-<DD>Replaces URL-unsafe characters.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="getPassCount()"><!-- --></A><H3>
 getPassCount</H3>
 <PRE>
 public abstract int <B>getPassCount</B>()</PRE>
 <DL>
-<DD>Gets the total number of passed tests.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the total number of passed tests.
 <P>
 <DD><DL>
 </DL>
@@ -761,7 +695,7 @@ getFailCount</H3>
 <PRE>
 public abstract int <B>getFailCount</B>()</PRE>
 <DL>
-<DD>Gets the total number of failed tests.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the total number of failed tests.
 <P>
 <DD><DL>
 </DL>
@@ -777,7 +711,7 @@ getSkipCount</H3>
 <PRE>
 public abstract int <B>getSkipCount</B>()</PRE>
 <DL>
-<DD>Gets the total number of skipped tests.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the total number of skipped tests.
 <P>
 <DD><DL>
 </DL>
@@ -791,9 +725,9 @@ public abstract int <B>getSkipCount</B>()</PRE>
 <A NAME="getTotalCount()"><!-- --></A><H3>
 getTotalCount</H3>
 <PRE>
-public final int <B>getTotalCount</B>()</PRE>
+public abstract int <B>getTotalCount</B>()</PRE>
 <DL>
-<DD>Gets the total number of tests.
+<DD><B>Deprecated.</B>&nbsp;<DD>Gets the total number of tests.
 <P>
 <DD><DL>
 </DL>
@@ -807,49 +741,13 @@ public final int <B>getTotalCount</B>()</PRE>
 <A NAME="getHistory()"><!-- --></A><H3>
 getHistory</H3>
 <PRE>
-public <A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit">History</A> <B>getHistory</B>()</PRE>
+public abstract <A HREF="../../../hudson/tasks/junit/History.html" title="class in hudson.tasks.junit">History</A> <B>getHistory</B>()</PRE>
 <DL>
-<DD><DL>
+<DD><B>Deprecated.</B>&nbsp;<DD><DL>
 </DL>
 </DD>
 <DD><DL>
 </DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
-getDynamic</H3>
-<PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>getDynamic</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;token,
-                         org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                         org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doSubmitDescription(java.lang.String)"><!-- --></A><H3>
-doSubmitDescription</H3>
-<PRE>
-public org.kohsuke.stapler.HttpResponse <B>doSubmitDescription</B>(<FONT SIZE="-1">@QueryParameter</FONT>
-                                                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)
-                                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                                                            javax.servlet.ServletException</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

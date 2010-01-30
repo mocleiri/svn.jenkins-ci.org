@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue (Hudson main module 1.342 API)
+Queue (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson main module 1.342 API)";
+        parent.document.title="Queue (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -237,14 +237,6 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point for sorting buildable items</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;interface</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></B></CODE>
 
@@ -275,14 +267,6 @@ Build queue.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.html#sortingHandler">sortingHandler</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -481,6 +465,14 @@ Build queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue">QueueSorter</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#getSorter()">getSorter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.html#init(hudson.model.Hudson)">init</A></B>(<A HREF="../../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;h)</CODE>
 
@@ -580,6 +572,14 @@ Build queue.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#setSorter(hudson.model.queue.QueueSorter)">setSorter</A></B>(<A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue">QueueSorter</A>&nbsp;sorter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ResourceController"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -611,16 +611,6 @@ Build queue.
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="sortingHandler"><!-- --></A><H3>
-sortingHandler</H3>
-<PRE>
-public volatile <A HREF="../../hudson/model/Queue.QueueSortingHandler.html" title="class in hudson.model">Queue.QueueSortingHandler</A> <B>sortingHandler</B></PRE>
-<DL>
-<DL>
-</DL>
-</DL>
-<HR>
 
 <A NAME="XSTREAM"><!-- --></A><H3>
 XSTREAM</H3>
@@ -678,6 +668,34 @@ public <A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.mod
 setLoadBalancer</H3>
 <PRE>
 public void <B>setLoadBalancer</B>(<A HREF="../../hudson/model/LoadBalancer.html" title="class in hudson.model">LoadBalancer</A>&nbsp;loadBalancer)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSorter()"><!-- --></A><H3>
+getSorter</H3>
+<PRE>
+public <A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue">QueueSorter</A> <B>getSorter</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSorter(hudson.model.queue.QueueSorter)"><!-- --></A><H3>
+setSorter</H3>
+<PRE>
+public void <B>setSorter</B>(<A HREF="../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue">QueueSorter</A>&nbsp;sorter)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -946,6 +964,9 @@ getItems</H3>
 </FONT>public <A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>[] <B>getItems</B>()</PRE>
 <DL>
 <DD>Gets a snapshot of items in the queue.
+
+ Generally speaking the array is sorted such that the items that are most likely built sooner are
+ at the end.
 <P>
 <DD><DL>
 </DL>

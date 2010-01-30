@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Item (Hudson main module 1.342 API)
+Queue.Item (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Item (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Item (Hudson main module 1.342 API)";
+        parent.document.title="Queue.Item (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -201,6 +201,14 @@ Item in a queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets an object that describes why this item is in the queue.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Item.html#getCauses()">getCauses</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method that returns a read only view of the <A HREF="../../hudson/model/Cause.html" title="class in hudson.model"><CODE>Cause</CODE></A>s associated with this item in the queue.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -444,6 +452,22 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Fut
  Just like <A HREF="../../hudson/model/Queue.Item.html#id"><CODE>id</CODE></A>, the same object tracks various stages of the queue.
 <P>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCauses()"><!-- --></A><H3>
+getCauses</H3>
+<PRE>
+public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&gt; <B>getCauses</B>()</PRE>
+<DL>
+<DD>Convenience method that returns a read only view of the <A HREF="../../hudson/model/Cause.html" title="class in hudson.model"><CODE>Cause</CODE></A>s associated with this item in the queue.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>can be empty but never null<DT><B>Since:</B></DT>
+  <DD>1.343</DD>
 </DL>
 </DD>
 </DL>

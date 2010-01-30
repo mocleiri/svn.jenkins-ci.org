@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.tasks.test (Hudson main module 1.342 API)
+hudson.tasks.test (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.tasks.test (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.tasks.test (Hudson main module 1.342 API)";
+        parent.document.title="hudson.tasks.test (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -132,6 +132,11 @@ action (such as the built-in JUnit one).
 <TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/DefaultTestResultParserImpl.html" title="class in hudson.tasks.test">DefaultTestResultParserImpl</A></B></TD>
+<TD>Default partial implementation of <A HREF="../../../hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test"><CODE>TestResultParser</CODE></A> that handles GLOB dereferencing
+ and other checks for user errors, such as misconfigured GLOBs, up-to-date checks on test reports.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/MatrixTestResult.html" title="class in hudson.tasks.test">MatrixTestResult</A></B></TD>
 <TD><A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> that aggregates all the test results from <A HREF="../../../hudson/matrix/MatrixRun.html" title="class in hudson.matrix"><CODE>MatrixRun</CODE></A>s.</TD>
 </TR>
@@ -140,9 +145,35 @@ action (such as the built-in JUnit one).
 <TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/MetaTabulatedResult.html" title="class in hudson.tasks.test">MetaTabulatedResult</A></B></TD>
+<TD>The purpose of this class is to provide a good place for the
+ jelly to bind to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/SimpleCaseResult.html" title="class in hudson.tasks.test">SimpleCaseResult</A></B></TD>
+<TD>The simplest possible case result, with no language ties.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/TabulatedResult.html" title="class in hudson.tasks.test">TabulatedResult</A></B></TD>
+<TD>Cumulated result of multiple tests.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></B></TD>
+<TD>Base class for all test result objects.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></B></TD>
+<TD>A class that represents a general concept of a test result, without any
+ language or implementation specifics.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/TestResultAggregator.html" title="class in hudson.tasks.test">TestResultAggregator</A></B></TD>
 <TD>Aggregates <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test"><CODE>AbstractTestResultAction</CODE></A>s of <A HREF="../../../hudson/matrix/MatrixRun.html" title="class in hudson.matrix"><CODE>MatrixRun</CODE></A>s
  into <A HREF="../../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix"><CODE>MatrixBuild</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test">TestResultParser</A></B></TD>
+<TD>Parses test result files and builds in-memory representation of it as <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test"><CODE>TestResult</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test">TestResultProjectAction</A></B></TD>

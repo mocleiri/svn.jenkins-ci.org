@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.342 API)
+Deprecated List (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.342 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -232,6 +232,11 @@ function windowTitle()
      Use <A HREF="hudson/util/HeapSpaceStringConverter.html" title="class in hudson.util"><CODE>HeapSpaceStringConverter</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">hudson.tasks.junit.TestObject</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/triggers/Triggers.html" title="class in hudson.triggers">hudson.triggers.Triggers</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
@@ -435,6 +440,12 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.281
       Use <A HREF="hudson/model/listeners/RunListener.html#all()"><CODE>RunListener.all()</CODE></A> for read access, and use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/UpdateCenter.html#neverUpdate">hudson.model.UpdateCenter.neverUpdate</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.333
+      Use <A HREF="hudson/model/UpdateSite.html#neverUpdate"><CODE>UpdateSite.neverUpdate</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Jobs.html#PROPERTIES">hudson.model.Jobs.PROPERTIES</A>
@@ -794,7 +805,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getConnectionCheckUrl()">hudson.model.UpdateCenter.UpdateCenterConfiguration.getConnectionCheckUrl()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.MULTIUPDATE
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.333
       With the introduction of multiple update center capability, this information
       is now a part of the <tt>update-center.json</tt> file. See
       <tt>http://hudson-ci.org/update-center.json</tt> as an example.</I>&nbsp;</TD>
@@ -813,6 +824,16 @@ function windowTitle()
     in need of accessing the information from <A HREF="hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A>,
     instead copy them in <A HREF="hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>ParameterDefinition.createValue(StaplerRequest, JSONObject)</CODE></A>
     into <A HREF="hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/test/AggregatedTestResultAction.html#getDescription(hudson.tasks.test.TestObject)">hudson.tasks.test.AggregatedTestResultAction.getDescription(TestObject)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>so that IDE warns you if you accidentally try to call it.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#getDescription(hudson.tasks.test.TestObject)">hudson.tasks.test.AggregatedTestResultPublisher.TestResultAction.getDescription(TestObject)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>so that IDE warns you if you accidentally try to call it.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Run.html#getEnvironment()">hudson.model.Run.getEnvironment()</A>
@@ -911,7 +932,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getPluginRepositoryBaseUrl()">hudson.model.UpdateCenter.UpdateCenterConfiguration.getPluginRepositoryBaseUrl()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.MULTIUPDATE
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.333
       <tt>update-center.json</tt> is now signed, so we don't have to further make sure that
       we aren't downloading from anywhere unsecure.</I>&nbsp;</TD>
 </TR>
@@ -965,6 +986,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/Hudson.html#getNodes()"><CODE>Hudson.getNodes()</CODE></A>. Since 1.252.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/test/TestObject.html#getTestResult()">hudson.tasks.test.TestObject.getTestResult()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>This method returns a JUnit specific class. Use
+ <A HREF="hudson/tasks/test/TestObject.html#getTopLevelTestResult()"><CODE>TestObject.getTopLevelTestResult()</CODE></A> instead for a more general interface.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">hudson.tools.ToolLocationNodeProperty.getToolHome(Node, ToolInstallation, TaskListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2009-04-09.
@@ -973,7 +1000,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/UpdateCenter.UpdateCenterConfiguration.html#getUpdateCenterUrl()">hudson.model.UpdateCenter.UpdateCenterConfiguration.getUpdateCenterUrl()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.MULTIUPDATE
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.333
       With the introduction of multiple update center capability, this information
       is now moved to <A HREF="hudson/model/UpdateSite.html" title="class in hudson.model"><CODE>UpdateSite</CODE></A>.</I>&nbsp;</TD>
 </TR>
@@ -1312,6 +1339,16 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.297
       Instead of calling this method explicitly, just return the <A HREF="hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object
       from the <code>doXYZ</code> method and let Stapler generate a response for you.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/test/AggregatedTestResultAction.html#setDescription(hudson.tasks.test.TestObject, java.lang.String)">hudson.tasks.test.AggregatedTestResultAction.setDescription(TestObject, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>so that IDE warns you if you accidentally try to call it.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/test/AggregatedTestResultPublisher.TestResultAction.html#setDescription(hudson.tasks.test.TestObject, java.lang.String)">hudson.tasks.test.AggregatedTestResultPublisher.TestResultAction.setDescription(TestObject, String)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>so that IDE warns you if you accidentally try to call it.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#setJDK(hudson.model.JDK)">hudson.matrix.MatrixConfiguration.setJDK(JDK)</A>

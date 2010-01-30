@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-History (Hudson main module 1.342 API)
+History (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ History (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="History (Hudson main module 1.342 API)";
+        parent.document.title="History (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../hudson/tasks/junit/ClassResult.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../hudson/tasks/junit/JUnitParser.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/junit/History.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="History.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -102,7 +102,7 @@ Class History</H2>
 </PRE>
 
 <P>
-History of <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> over time.
+History of <A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test"><CODE>TestObject</CODE></A> over time.
 <P>
 
 <P>
@@ -123,7 +123,7 @@ History of <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/History.html#History(hudson.tasks.junit.TestObject)">History</A></B>(<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;testObject)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/History.html#History(hudson.tasks.test.TestObject)">History</A></B>(<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A>&nbsp;testObject)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -156,7 +156,7 @@ History of <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/History.html#getList()">getList</A></B>()</CODE>
 
 <BR>
@@ -164,8 +164,16 @@ History of <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/History.html#getTestObject()">getTestObject</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/History.html#historyAvailable()">historyAvailable</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -193,10 +201,10 @@ History of <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in
 </TR>
 </TABLE>
 
-<A NAME="History(hudson.tasks.junit.TestObject)"><!-- --></A><H3>
+<A NAME="History(hudson.tasks.test.TestObject)"><!-- --></A><H3>
 History</H3>
 <PRE>
-public <B>History</B>(<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;testObject)</PRE>
+public <B>History</B>(<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A>&nbsp;testObject)</PRE>
 <DL>
 </DL>
 
@@ -213,7 +221,18 @@ public <B>History</B>(<A HREF="../../../hudson/tasks/junit/TestObject.html" titl
 <A NAME="getTestObject()"><!-- --></A><H3>
 getTestObject</H3>
 <PRE>
-public <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A> <B>getTestObject</B>()</PRE>
+public <A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A> <B>getTestObject</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="historyAvailable()"><!-- --></A><H3>
+historyAvailable</H3>
+<PRE>
+public boolean <B>historyAvailable</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -224,7 +243,7 @@ public <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hud
 <A NAME="getList()"><!-- --></A><H3>
 getList</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt; <B>getList</B>()</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt; <B>getList</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -288,7 +307,7 @@ public <A HREF="../../../hudson/util/Graph.html" title="class in hudson.util">Gr
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../hudson/tasks/junit/ClassResult.html" title="class in hudson.tasks.junit"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../hudson/tasks/junit/JUnitParser.html" title="class in hudson.tasks.junit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/tasks/junit/History.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="History.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

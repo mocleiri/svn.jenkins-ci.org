@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.tasks.junit.TestObject (Hudson main module 1.342 API)
+Uses of Class hudson.tasks.junit.TestObject (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.tasks.junit.TestObject (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.tasks.junit.TestObject (Hudson main module 1.342 API)";
+        parent.document.title="Uses of Class hudson.tasks.junit.TestObject (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -94,6 +94,11 @@ Packages that use <A HREF="../../../../hudson/tasks/junit/TestObject.html" title
 <TD><A HREF="#hudson.tasks.junit"><B>hudson.tasks.junit</B></A></TD>
 <TD>Model objects that represent JUnit test reports.&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks.test"><B>hudson.tasks.test</B></A></TD>
+<TD>Defines contracts that need to be implemented by a test reporting
+action (such as the built-in JUnit one).&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -135,22 +140,6 @@ Uses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cumulative test result for a package.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../hudson/tasks/junit/TabulatedResult.html" title="class in hudson.tasks.junit">TabulatedResult</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cumulated result of multiple tests.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;class</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root of all the test results for one build.</TD>
-</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -165,15 +154,7 @@ Uses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in
 <TD><CODE><B>TestObject.</B><B><A HREF="../../../../hudson/tasks/junit/TestObject.html#getParent()">getParent</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reverse pointer of <A HREF="../../../../hudson/tasks/junit/TabulatedResult.html#getChildren()"><CODE>TabulatedResult.getChildren()</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></FONT></TD>
-<TD><CODE><B>TestResult.</B><B><A HREF="../../../../hudson/tasks/junit/TestResult.html#getParent()">getParent</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -181,7 +162,7 @@ Uses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in
 <TD><CODE><B>TestObject.</B><B><A HREF="../../../../hudson/tasks/junit/TestObject.html#getPreviousResult()">getPreviousResult</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the counter part of this <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;Gets the counter part of this <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -189,39 +170,7 @@ Uses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in
 <TD><CODE><B>TestObject.</B><B><A HREF="../../../../hudson/tasks/junit/TestObject.html#getResultInBuild(hudson.model.AbstractBuild)">getResultInBuild</A></B>(<A HREF="../../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></FONT></TD>
-<TD><CODE><B>History.</B><B><A HREF="../../../../hudson/tasks/junit/History.html#getTestObject()">getTestObject</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> that return types with arguments of type <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>TabulatedResult.</B><B><A HREF="../../../../hudson/tasks/junit/TabulatedResult.html#getChildren()">getChildren</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the child test result objects.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>History.</B><B><A HREF="../../../../hudson/tasks/junit/History.html#getList()">getList</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -233,52 +182,20 @@ Uses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../hudson/tasks/junit/TestAction.html" title="class in hudson.tasks.junit">TestAction</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>TestResultAction.</B><B><A HREF="../../../../hudson/tasks/junit/TestResultAction.html#getActions(hudson.tasks.junit.TestObject)">getActions</A></B>(<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;object)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B>TestResultAction.</B><B><A HREF="../../../../hudson/tasks/junit/TestResultAction.html#getDescription(hudson.tasks.junit.TestObject)">getDescription</A></B>(<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;object)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B>ClassResult.</B><B><A HREF="../../../../hudson/tasks/junit/ClassResult.html#getRelativePathFrom(hudson.tasks.junit.TestObject)">getRelativePathFrom</A></B>(<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;it)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the relative path to this test case from the given object.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B>CaseResult.</B><B><A HREF="../../../../hudson/tasks/junit/CaseResult.html#getRelativePathFrom(hudson.tasks.junit.TestObject)">getRelativePathFrom</A></B>(<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;it)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the relative path to this test case from the given object.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../../hudson/tasks/junit/TestAction.html" title="class in hudson.tasks.junit">TestAction</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>TestResultAction.Data.</B><B><A HREF="../../../../hudson/tasks/junit/TestResultAction.Data.html#getTestAction(hudson.tasks.junit.TestObject)">getTestAction</A></B>(<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;testObject)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all TestActions for the testObject.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>TestResultAction.</B><B><A HREF="../../../../hudson/tasks/junit/TestResultAction.html#setDescription(hudson.tasks.junit.TestObject, java.lang.String)">setDescription</A></B>(<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;object,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A> in <A HREF="../../../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A></FONT></TH>
 </TR>
 </TABLE>
 &nbsp;
@@ -286,30 +203,49 @@ Uses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Method parameters in <A HREF="../../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> with type arguments of type <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></FONT></TH>
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A> in <A HREF="../../../../hudson/tasks/test/package-summary.html">hudson.tasks.test</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B>TestObject.</B><B><A HREF="../../../../hudson/tasks/junit/TestObject.html#uniquifyName(java.util.Collection, java.lang.String)">uniquifyName</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&gt;&nbsp;siblings,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;base)</CODE>
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../hudson/tasks/test/MetaTabulatedResult.html" title="class in hudson.tasks.test">MetaTabulatedResult</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#2988: uniquifies a <A HREF="../../../../hudson/tasks/junit/TestObject.html#getSafeName()"><CODE>getSafeName()</CODE></A> amongst children of the parent.</TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> with parameters of type <A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></FONT></TH>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The purpose of this class is to provide a good place for the
+ jelly to bind to.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../hudson/tasks/junit/History.html#History(hudson.tasks.junit.TestObject)">History</A></B>(<A HREF="../../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;testObject)</CODE>
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../hudson/tasks/test/SimpleCaseResult.html" title="class in hudson.tasks.test">SimpleCaseResult</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The simplest possible case result, with no language ties.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../hudson/tasks/test/TabulatedResult.html" title="class in hudson.tasks.test">TabulatedResult</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cumulated result of multiple tests.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for all test result objects.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A class that represents a general concept of a test result, without any
+ language or implementation specifics.</TD>
 </TR>
 </TABLE>
 &nbsp;

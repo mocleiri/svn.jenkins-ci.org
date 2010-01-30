@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CaseResult (Hudson main module 1.342 API)
+CaseResult (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CaseResult (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CaseResult (Hudson main module 1.342 API)";
+        parent.document.title="CaseResult (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -96,14 +96,16 @@ Class CaseResult</H2>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
       <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">hudson.tasks.junit.TestObject</A>
-          <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.junit.CaseResult</B>
+          <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">hudson.tasks.test.TestObject</A>
+              <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">hudson.tasks.test.TestResult</A>
+                  <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.junit.CaseResult</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&gt;</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>CaseResult</B><DT>extends <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&gt;</DL>
+<DT><PRE>public final class <B>CaseResult</B><DT>extends <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&gt;</DL>
 </PRE>
 
 <P>
@@ -146,19 +148,19 @@ One test result.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#annotate(java.lang.String)">annotate</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;text)</CODE>
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#compareTo(hudson.tasks.junit.CaseResult)">compareTo</A></B>(<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&nbsp;that)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#compareTo(hudson.tasks.junit.CaseResult)">compareTo</A></B>(<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&nbsp;that)</CODE>
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#findCorrespondingResult(java.lang.String)">findCorrespondingResult</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Case results have no children</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -240,7 +242,16 @@ One test result.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getFailedSinceRun()">getFailedSinceRun</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this test failed, then return the run
+ when this test started failing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getFailedTests()">getFailedTests</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the "children" of this test result that failed</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -280,7 +291,7 @@ One test result.
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getParent()">getParent</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reverse pointer of <A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getChildren()"><CODE>TabulatedResult.getChildren()</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reverse pointer of <A HREF="../../../hudson/tasks/test/TabulatedResult.html#getChildren()"><CODE>TabulatedResult.getChildren()</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -292,27 +303,19 @@ One test result.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getPassedTests()">getPassedTests</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the "children" of this test result that passed</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getPreviousResult()">getPreviousResult</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the counter part of this <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getRelativePathFrom(hudson.tasks.junit.TestObject)">getRelativePathFrom</A></B>(<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;it)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the relative path to this test case from the given object.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getResultInBuild(hudson.model.AbstractBuild)">getResultInBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the counter part of this <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test"><CODE>TestResult</CODE></A> in the previous run.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -337,6 +340,14 @@ One test result.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the total number of skipped tests.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getSkippedTests()">getSkippedTests</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the "children" of this test result that were skipped</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -372,6 +383,14 @@ One test result.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#getTitle()">getTitle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the human readable title of this result object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#isPassed()">isPassed</A></B>()</CODE>
 
@@ -386,14 +405,31 @@ One test result.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tests whether the test was skipped or not.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/CaseResult.html#setParentSuiteResult(hudson.tasks.junit.SuiteResult)">setParentSuiteResult</A></B>(<A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.junit.TestObject"><!-- --></A>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.test.TestResult"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class hudson.tasks.junit.<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class hudson.tasks.test.<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#doSubmitDescription(java.lang.String)">doSubmitDescription</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getApi()">getApi</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getDescription()">getDescription</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getDurationString()">getDurationString</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getHistory()">getHistory</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getId()">getId</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getTestAction(java.lang.Class)">getTestAction</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getTestActions()">getTestActions</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getTestResult()">getTestResult</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getTestResultAction()">getTestResultAction</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getTotalCount()">getTotalCount</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#getUrl()">getUrl</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#safe(java.lang.String)">safe</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../../hudson/tasks/junit/TestObject.html#uniquifyName(java.util.Collection, java.lang.String)">uniquifyName</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#annotate(java.lang.String)">annotate</A>, <A HREF="../../../hudson/tasks/test/TestResult.html#getBuildResult()">getBuildResult</A>, <A HREF="../../../hudson/tasks/test/TestResult.html#getParentAction()">getParentAction</A>, <A HREF="../../../hudson/tasks/test/TestResult.html#getResultInBuild(hudson.model.AbstractBuild)">getResultInBuild</A>, <A HREF="../../../hudson/tasks/test/TestResult.html#setParent(hudson.tasks.test.TestObject)">setParent</A>, <A HREF="../../../hudson/tasks/test/TestResult.html#setParentAction(hudson.tasks.test.AbstractTestResultAction)">setParentAction</A>, <A HREF="../../../hudson/tasks/test/TestResult.html#tally()">tally</A>, <A HREF="../../../hudson/tasks/test/TestResult.html#toPrettyString()">toPrettyString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.tasks.test.TestObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.tasks.test.<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/tasks/test/TestObject.html#doSubmitDescription(java.lang.String)">doSubmitDescription</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getApi()">getApi</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getDescription()">getDescription</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getDurationString()">getDurationString</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getHistory()">getHistory</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getId()">getId</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getRelativePathFrom(hudson.tasks.test.TestObject)">getRelativePathFrom</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getTestAction(java.lang.Class)">getTestAction</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getTestActions()">getTestActions</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getTestResult()">getTestResult</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getTestResultAction()">getTestResultAction</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getTopLevelTestResult()">getTopLevelTestResult</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getTotalCount()">getTotalCount</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#getUrl()">getUrl</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#safe(java.lang.String)">safe</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../../hudson/tasks/test/TestObject.html#uniquifyName(java.util.Collection, java.lang.String)">uniquifyName</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -432,11 +468,11 @@ getParent</H3>
 <PRE>
 public <A HREF="../../../hudson/tasks/junit/ClassResult.html" title="class in hudson.tasks.junit">ClassResult</A> <B>getParent</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getParent()">TestObject</A></CODE></B></DD>
-<DD>Reverse pointer of <A HREF="../../../hudson/tasks/junit/TabulatedResult.html#getChildren()"><CODE>TabulatedResult.getChildren()</CODE></A>.
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/test/TestObject.html#getParent()">TestObject</A></CODE></B></DD>
+<DD>Reverse pointer of <A HREF="../../../hudson/tasks/test/TabulatedResult.html#getChildren()"><CODE>TabulatedResult.getChildren()</CODE></A>.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getParent()">getParent</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestObject.html#getParent()">getParent</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -470,7 +506,23 @@ getName</H3>
  Note that this may contain any URL-unfriendly character.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getName()">getName</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestObject.html#getName()">getName</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTitle()"><!-- --></A><H3>
+getTitle</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTitle</B>()</PRE>
+<DL>
+<DD>Gets the human readable title of this result object.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getTitle()">getTitle</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -487,7 +539,7 @@ getDuration</H3>
 <DD>Gets the duration of the test, in seconds
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getDuration()">getDuration</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getDuration()">getDuration</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -503,7 +555,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DD>Gets the version of <A HREF="../../../hudson/tasks/junit/CaseResult.html#getName()"><CODE>getName()</CODE></A> that's URL-safe.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getSafeName()">getSafeName</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestObject.html#getSafeName()">getSafeName</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -579,11 +631,11 @@ getFailCount</H3>
 <PRE>
 public int <B>getFailCount</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getFailCount()">TestObject</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getFailCount()">TestResult</A></CODE></B></DD>
 <DD>Gets the total number of failed tests.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getFailCount()">getFailCount</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getFailCount()">getFailCount</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -596,11 +648,11 @@ getSkipCount</H3>
 <PRE>
 public int <B>getSkipCount</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getSkipCount()">TestObject</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getSkipCount()">TestResult</A></CODE></B></DD>
 <DD>Gets the total number of skipped tests.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getSkipCount()">getSkipCount</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getSkipCount()">getSkipCount</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -613,11 +665,11 @@ getPassCount</H3>
 <PRE>
 public int <B>getPassCount</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getPassCount()">TestObject</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getPassCount()">TestResult</A></CODE></B></DD>
 <DD>Gets the total number of passed tests.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getPassCount()">getPassCount</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getPassCount()">getPassCount</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -635,7 +687,7 @@ getFailedSince</H3>
  when this test started failing.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getFailedSince()">getFailedSince</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -648,8 +700,12 @@ getFailedSinceRun</H3>
 <PRE>
 public <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;?,?&gt; <B>getFailedSinceRun</B>()</PRE>
 <DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getFailedSinceRun()">TestResult</A></CODE></B></DD>
+<DD>If this test failed, then return the run
+ when this test started failing.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getFailedSinceRun()">getFailedSinceRun</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -693,7 +749,7 @@ getStdout</H3>
  If you need to know which is the case, compare this output from <A HREF="../../../hudson/tasks/junit/SuiteResult.html#getStdout()"><CODE>SuiteResult.getStdout()</CODE></A>.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getStdout()">getStdout</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Since:</B></DT>
@@ -712,7 +768,7 @@ getStderr</H3>
 <DD>The stderr of this test.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getStderr()">getStderr</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Since:</B></DT>
@@ -727,11 +783,11 @@ getPreviousResult</H3>
 <PRE>
 public <A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A> <B>getPreviousResult</B>()</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getPreviousResult()">TestObject</A></CODE></B></DD>
-<DD>Gets the counter part of this <A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit"><CODE>TestObject</CODE></A> in the previous run.
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getPreviousResult()">TestResult</A></CODE></B></DD>
+<DD>Gets the counter part of this <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test"><CODE>TestResult</CODE></A> in the previous run.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getPreviousResult()">getPreviousResult</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getPreviousResult()">getPreviousResult</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 
@@ -740,16 +796,70 @@ public <A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hud
 </DL>
 <HR>
 
-<A NAME="getResultInBuild(hudson.model.AbstractBuild)"><!-- --></A><H3>
-getResultInBuild</H3>
+<A NAME="findCorrespondingResult(java.lang.String)"><!-- --></A><H3>
+findCorrespondingResult</H3>
 <PRE>
-public <A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A> <B>getResultInBuild</B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</PRE>
+public <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A> <B>findCorrespondingResult</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</PRE>
 <DL>
+<DD>Case results have no children
+<P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getResultInBuild(hudson.model.AbstractBuild)">getResultInBuild</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestObject.html#findCorrespondingResult(java.lang.String)">findCorrespondingResult</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></CODE></DL>
 </DD>
 <DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - The path to the original test result
+<DT><B>Returns:</B><DD>null</DL>
+</DD>
 </DL>
+<HR>
+
+<A NAME="getFailedTests()"><!-- --></A><H3>
+getFailedTests</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt; <B>getFailedTests</B>()</PRE>
+<DL>
+<DD>Gets the "children" of this test result that failed
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getFailedTests()">getFailedTests</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the children of this test result, if any, or an empty collection</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPassedTests()"><!-- --></A><H3>
+getPassedTests</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt; <B>getPassedTests</B>()</PRE>
+<DL>
+<DD>Gets the "children" of this test result that passed
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getPassedTests()">getPassedTests</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the children of this test result, if any, or an empty collection</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSkippedTests()"><!-- --></A><H3>
+getSkippedTests</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&gt; <B>getSkippedTests</B>()</PRE>
+<DL>
+<DD>Gets the "children" of this test result that were skipped
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getSkippedTests()">getSkippedTests</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the children of this test result, if any, or an empty list</DL>
 </DD>
 </DL>
 <HR>
@@ -763,7 +873,7 @@ getErrorStackTrace</H3>
 <DD>If there was an error or a failure, this is the stack trace, or otherwise null.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getErrorStackTrace()">getErrorStackTrace</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -780,7 +890,7 @@ getErrorDetails</H3>
 <DD>If there was an error or a failure, this is the text from the message.
 <P>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#getErrorDetails()">getErrorDetails</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -794,7 +904,7 @@ isPassed</H3>
 public boolean <B>isPassed</B>()</PRE>
 <DL>
 <DD><DL>
-</DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestResult.html#isPassed()">isPassed</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></DL>
 </DD>
 <DD><DL>
 
@@ -837,27 +947,13 @@ public <A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hu
 </DL>
 <HR>
 
-<A NAME="annotate(java.lang.String)"><!-- --></A><H3>
-annotate</H3>
-<PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>annotate</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;text)</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="getOwner()"><!-- --></A><H3>
 getOwner</H3>
 <PRE>
 public <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt; <B>getOwner</B>()</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/tasks/junit/TestObject.html#getOwner()">getOwner</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/tasks/test/TestObject.html#getOwner()">getOwner</A></CODE> in class <CODE><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -865,13 +961,11 @@ public <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson
 </DL>
 <HR>
 
-<A NAME="getRelativePathFrom(hudson.tasks.junit.TestObject)"><!-- --></A><H3>
-getRelativePathFrom</H3>
+<A NAME="setParentSuiteResult(hudson.tasks.junit.SuiteResult)"><!-- --></A><H3>
+setParentSuiteResult</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getRelativePathFrom</B>(<A HREF="../../../hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">TestObject</A>&nbsp;it)</PRE>
+public void <B>setParentSuiteResult</B>(<A HREF="../../../hudson/tasks/junit/SuiteResult.html" title="class in hudson.tasks.junit">SuiteResult</A>&nbsp;parent)</PRE>
 <DL>
-<DD>Gets the relative path to this test case from the given object.
-<P>
 <DD><DL>
 </DL>
 </DD>

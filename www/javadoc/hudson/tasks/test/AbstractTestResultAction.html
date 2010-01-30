@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractTestResultAction (Hudson main module 1.342 API)
+AbstractTestResultAction (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractTestResultAction (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractTestResultAction (Hudson main module 1.342 API)";
+        parent.document.title="AbstractTestResultAction (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -188,6 +188,22 @@ Common base class for recording test result.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#findCorrespondingResult(java.lang.String)">findCorrespondingResult</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#findPreviousCorresponding(hudson.tasks.test.TestResult)">findPreviousCorresponding</A></B>(<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&nbsp;test)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Api.html" title="class in hudson.model">Api</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getApi()">getApi</A></B>()</CODE>
 
@@ -201,6 +217,16 @@ Common base class for recording test result.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get this <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>'s <A HREF="../../../hudson/model/HealthReport.html" title="class in hudson.model"><CODE>HealthReport</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getDescription(hudson.tasks.test.TestObject)">getDescription</A></B>(<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A>&nbsp;object)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test"><CODE>TestObject</CODE></A>s do not have their own persistence mechanism, so updatable data of <A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test"><CODE>TestObject</CODE></A>s
+ need to be persisted by the owning <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test"><CODE>AbstractTestResultAction</CODE></A>, and this method and
+ <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#setDescription(hudson.tasks.test.TestObject, java.lang.String)"><CODE>setDescription(TestObject, String)</CODE></A> provides that logic.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -269,10 +295,10 @@ Common base class for recording test result.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getTestResultPath(hudson.tasks.junit.CaseResult)">getTestResultPath</A></B>(<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&nbsp;it)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#getTestResultPath(hudson.tasks.test.TestResult)">getTestResultPath</A></B>(<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&nbsp;it)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a full path down to a test result</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -289,6 +315,23 @@ Common base class for recording test result.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the URL path name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#readResolve()">readResolve</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#setDescription(hudson.tasks.test.TestObject, java.lang.String)">setDescription</A></B>(<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A>&nbsp;object,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -577,6 +620,34 @@ public <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title=
 </DL>
 <HR>
 
+<A NAME="findPreviousCorresponding(hudson.tasks.test.TestResult)"><!-- --></A><H3>
+findPreviousCorresponding</H3>
+<PRE>
+public <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A> <B>findPreviousCorresponding</B>(<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&nbsp;test)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findCorrespondingResult(java.lang.String)"><!-- --></A><H3>
+findCorrespondingResult</H3>
+<PRE>
+public <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A> <B>findCorrespondingResult</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getFailedTests()"><!-- --></A><H3>
 getFailedTests</H3>
 <PRE>
@@ -634,10 +705,62 @@ public void <B>doGraphMap</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="getTestResultPath(hudson.tasks.junit.CaseResult)"><!-- --></A><H3>
+<A NAME="getTestResultPath(hudson.tasks.test.TestResult)"><!-- --></A><H3>
 getTestResultPath</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTestResultPath</B>(<A HREF="../../../hudson/tasks/junit/CaseResult.html" title="class in hudson.tasks.junit">CaseResult</A>&nbsp;it)</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTestResultPath</B>(<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>&nbsp;it)</PRE>
+<DL>
+<DD>Returns a full path down to a test result
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescription(hudson.tasks.test.TestObject)"><!-- --></A><H3>
+getDescription</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getDescription</B>(<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A>&nbsp;object)</PRE>
+<DL>
+<DD><A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test"><CODE>TestObject</CODE></A>s do not have their own persistence mechanism, so updatable data of <A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test"><CODE>TestObject</CODE></A>s
+ need to be persisted by the owning <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html" title="class in hudson.tasks.test"><CODE>AbstractTestResultAction</CODE></A>, and this method and
+ <A HREF="../../../hudson/tasks/test/AbstractTestResultAction.html#setDescription(hudson.tasks.test.TestObject, java.lang.String)"><CODE>setDescription(TestObject, String)</CODE></A> provides that logic.
+
+ <p>
+ The default implementation stores information in the 'this' object.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../hudson/tasks/test/TestObject.html#getDescription()"><CODE>TestObject.getDescription()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDescription(hudson.tasks.test.TestObject, java.lang.String)"><!-- --></A><H3>
+setDescription</H3>
+<PRE>
+protected void <B>setDescription</B>(<A HREF="../../../hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test">TestObject</A>&nbsp;object,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="readResolve()"><!-- --></A><H3>
+readResolve</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>readResolve</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

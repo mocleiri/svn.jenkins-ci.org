@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase.WebClient (Hudson main module 1.342 API)
+HudsonTestCase.WebClient (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase.WebClient (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.342 API)";
+        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -289,6 +289,14 @@ Extends <CODE>WebClient</CODE> and provide convenience methods
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;com.gargoylesoftware.htmlunit.xml.XmlPage</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#goToXml(java.lang.String)">goToXml</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a page as XML.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -606,6 +614,26 @@ public com.gargoylesoftware.htmlunit.Page <B>goTo</B>(<A HREF="http://java.sun.c
 <DL>
 <DD><DL>
 
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXException.html?is-external=true" title="class or interface in org.xml.sax">SAXException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="goToXml(java.lang.String)"><!-- --></A><H3>
+goToXml</H3>
+<PRE>
+public com.gargoylesoftware.htmlunit.xml.XmlPage <B>goToXml</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path)
+                                                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXException.html?is-external=true" title="class or interface in org.xml.sax">SAXException</A></PRE>
+<DL>
+<DD>Loads a page as XML. Useful for testing Hudson's xml api, in concert with
+ assertXPath(DomNode page, String xpath)
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>path</CODE> - the path part of the url to visit
+<DT><B>Returns:</B><DD>the XmlPage found at that url
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXException.html?is-external=true" title="class or interface in org.xml.sax">SAXException</A></CODE></DL>

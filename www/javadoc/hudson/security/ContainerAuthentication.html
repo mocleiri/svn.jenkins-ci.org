@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ContainerAuthentication (Hudson main module 1.342 API)
+ContainerAuthentication (Hudson main module 1.343 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-22">
+<META NAME="date" CONTENT="2010-01-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ContainerAuthentication (Hudson main module 1.342 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ContainerAuthentication (Hudson main module 1.342 API)";
+        parent.document.title="ContainerAuthentication (Hudson main module 1.343 API)";
     }
 }
 </SCRIPT>
@@ -134,7 +134,9 @@ Class ContainerAuthentication</H2>
 <TD><CODE><B><A HREF="../../hudson/security/ContainerAuthentication.html#ContainerAuthentication(javax.servlet.http.HttpServletRequest)">ContainerAuthentication</A></B>(javax.servlet.http.HttpServletRequest&nbsp;request)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Servlet container can tie a <CODE>ServletRequest</CODE> to the request handling thread,
+ so we need to capture all the information upfront to allow <CODE>Authentication</CODE>
+ to be passed to other threads, like update center does.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -239,6 +241,10 @@ ContainerAuthentication</H3>
 <PRE>
 public <B>ContainerAuthentication</B>(javax.servlet.http.HttpServletRequest&nbsp;request)</PRE>
 <DL>
+<DD>Servlet container can tie a <CODE>ServletRequest</CODE> to the request handling thread,
+ so we need to capture all the information upfront to allow <CODE>Authentication</CODE>
+ to be passed to other threads, like update center does. See HUDSON-5382.
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
