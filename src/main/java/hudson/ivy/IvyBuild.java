@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,24 +25,20 @@ package hudson.ivy;
 
 import hudson.AbortException;
 import hudson.FilePath;
-import hudson.remoting.Channel;
-import hudson.slaves.WorkspaceList;
-import hudson.slaves.WorkspaceList.Lease;
 import hudson.model.BuildListener;
+import hudson.model.Environment;
 import hudson.model.Executor;
+import hudson.model.Node;
 import hudson.model.Result;
 import hudson.model.Run;
-import hudson.model.Environment;
-import hudson.model.Node;
+import hudson.remoting.Channel;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
+import hudson.slaves.WorkspaceList;
+import hudson.slaves.WorkspaceList.Lease;
 import hudson.tasks.Ant;
 import hudson.tasks.BuildWrapper;
-
-import org.apache.tools.ant.BuildEvent;
-import org.kohsuke.stapler.Ancestor;
-import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerRequest;
+import hudson.tasks.Publisher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,10 +51,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.tools.ant.BuildEvent;
+import org.kohsuke.stapler.Ancestor;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
+
 /**
- * {@link Run} for {@link MavenModule}.
- * 
- * @author Kohsuke Kawaguchi
+ * {@link Run} for {@link IvyModule}.
+ *
+ * @author Timothy Bingaman
  */
 public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
     /**
@@ -104,7 +105,7 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
             for (int i = 1; i < ancs.size(); i++) {
                 if (ancs.get(i).getObject() == this) {
                     if (ancs.get(i - 1).getObject() instanceof IvyModuleSetBuild) {
-                        // if under MavenModuleSetBuild, display the module name
+                        // if under IvyModuleSetBuild, display the module name
                         return getParent().getDisplayName();
                     }
                 }
@@ -115,7 +116,7 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
 
     /**
      * Gets the {@link IvyModuleSetBuild} that has the same build number.
-     * 
+     *
      * @return null if no such build exists, which happens when the module build
      *         is manually triggered.
      * @see #getModuleSetBuild()
@@ -125,9 +126,9 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
     }
 
     /**
-     * Gets the "governing" {@link MavenModuleSet} that has set the workspace
+     * Gets the "governing" {@link IvyModuleSet} that has set the workspace
      * for this build.
-     * 
+     *
      * @return null if no such build exists, which happens if the build is
      *         manually removed.
      * @see #getParentBuild()
@@ -243,10 +244,11 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
          * This method is implemented by the remote proxy before the invocation
          * gets to this. So correct code shouldn't be invoking this method on
          * the master ever.
-         * 
+         *
          * @deprecated This helps IDE find coding mistakes when someone tries to
          *             call this method.
          */
+        @Deprecated
         public final void executeAsync(BuildCallable<?, ?> program) throws IOException {
             throw new AssertionError();
         }
@@ -365,14 +367,17 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
                 // aggregated build
                 // failed before it didn't even get to this module.
                 run(new Runner() {
+                    @Override
                     public Result run(BuildListener listener) {
                         listener.getLogger().println(Messages.IvyBuild_FailedEarlier());
                         return Result.NOT_BUILT;
                     }
 
+                    @Override
                     public void post(BuildListener listener) {
                     }
 
+                    @Override
                     public void cleanUp(BuildListener listener) {
                     }
                 });
@@ -394,16 +399,17 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
     }
 
     private class RunnerImpl extends AbstractRunner {
-        private List<IvyReporter> reporters;
+        private List<Publisher> reporters;
 
         @Override
         protected Lease decideWorkspace(Node n, WorkspaceList wsl) throws InterruptedException, IOException {
             return wsl.allocate(getModuleSetBuild().getModuleRoot().child(getProject().getRelativePathToModuleRoot()));
         }
 
+        @Override
         protected Result doRun(BuildListener listener) throws Exception {
             // pick up a list of reporters to run
-            reporters = getProject().createReporters();
+            reporters = getProject().createModulePublishers();
             IvyModuleSet mms = getProject().getParent();
             if (debug)
                 listener.getLogger().println("Reporters=" + reporters);
@@ -424,13 +430,16 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
             return Result.FAILURE;
         }
 
+        @Override
         public void post2(BuildListener listener) throws Exception {
-            for (IvyReporter reporter : reporters)
-                reporter.end(IvyBuild.this, launcher, listener);
+            performAllBuildStep(listener, reporters,true);
+            performAllBuildStep(listener, project.getProperties(),true);
         }
 
         @Override
         public void cleanUp(BuildListener listener) throws Exception {
+            performAllBuildStep(listener, reporters,false);
+            performAllBuildStep(listener, project.getProperties(),false);
             scheduleDownstreamBuilds(listener);
         }
     }

@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Jorg Heymans, Peter Hayes, Red Hat, Inc., Stephen Connolly, id:cactusman
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,44 +23,72 @@
  */
 package hudson.ivy;
 
-import hudson.*;
-import hudson.model.*;
-import hudson.model.Descriptor.FormException;
+import static hudson.Util.fixEmpty;
 import static hudson.model.ItemGroupMixIn.loadChildren;
+import hudson.CopyOnWrite;
+import hudson.Extension;
+import hudson.FilePath;
+import hudson.Util;
+import hudson.model.AbstractProject;
+import hudson.model.Action;
+import hudson.model.BuildableItemWithBuildWrappers;
+import hudson.model.DependencyGraph;
+import hudson.model.Descriptor;
+import hudson.model.Executor;
+import hudson.model.Hudson;
+import hudson.model.Item;
+import hudson.model.ItemGroup;
+import hudson.model.Job;
 import hudson.model.Queue;
+import hudson.model.ResourceActivity;
+import hudson.model.SCMedItem;
+import hudson.model.Saveable;
+import hudson.model.TopLevelItem;
+import hudson.model.TopLevelItemDescriptor;
+import hudson.model.Descriptor.FormException;
 import hudson.model.Queue.Task;
 import hudson.search.CollectionSearchIndex;
 import hudson.search.SearchIndexBuilder;
-import hudson.tasks.*;
+import hudson.tasks.Ant;
+import hudson.tasks.BuildStep;
+import hudson.tasks.BuildStepDescriptor;
+import hudson.tasks.BuildWrapper;
+import hudson.tasks.BuildWrappers;
+import hudson.tasks.Publisher;
 import hudson.tasks.Ant.AntInstallation;
-import hudson.tasks.junit.JUnitResultArchiver;
-import static hudson.Util.fixEmpty;
 import hudson.util.CopyOnWriteMap;
 import hudson.util.DescribableList;
-import hudson.util.Function1;
 import hudson.util.FormValidation;
+import hudson.util.Function1;
 
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.QueryParameter;
-
-import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+import javax.servlet.ServletException;
 
 import net.sf.json.JSONObject;
+
+import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
 
 /**
  * Group of {@link IvyModule}s.
  *
  * <p>
- * This corresponds to the group of Maven POMs that constitute a single
- * tree of projects. This group serves as the grouping of those related
- * modules.
+ * This corresponds to the group of Ivy module descriptors that constitute a single
+ * branch of projects.
  *
- * @author Kohsuke Kawaguchi
+ * @author Timothy Bingaman
  */
 public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModuleSetBuild> implements TopLevelItem, ItemGroup<IvyModule>, SCMedItem, Saveable, BuildableItemWithBuildWrappers {
     /**
@@ -78,7 +106,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     private String ivyFilePattern;
 
     private String targets;
-    
+
     private String relativePathToDescriptorFromModuleRoot;
 
     private String alternateSettings;
@@ -105,27 +133,24 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     private String antProperties;
 
     /**
-     * If true, the build will be aggregator style, meaning
-     * all the modules are executed in a single Maven invocation, as in CLI.
-     * False otherwise, meaning each module is built separately and possibly in parallel.
-     *
-     * @since 1.133
+     * If true, the build will be aggregator style, meaning all the modules are
+     * executed in a single Ant invocation, as in CLI. False otherwise, meaning
+     * each module is built separately and possibly in parallel.
      */
     private boolean aggregatorStyleBuild = true;
 
     /**
-     * If true, and if aggregatorStyleBuild is false and we are using Maven 2.1 or later, the build will
-     * check the changeset before building, and if there are changes, only those modules which have changes
-     * or those modules which failed or were unstable in the previous build will be built directly, using
-     * Maven's make-like reactor mode. Any modules depending on the directly built modules will also be built,
-     * but that's controlled by Maven.
-     *
-     * @since 1.318
+     * If true, and if aggregatorStyleBuild is false, the build will check the
+     * changeset before building, and if there are changes, only those modules
+     * which have changes or those modules which failed or were unstable in the
+     * previous build will be built directly. Any modules depending on the
+     * directly built modules will also be built.
      */
     private boolean incrementalBuild = false;
 
     /**
-     * If true, do not automatically schedule a build when one of the project dependencies is built.
+     * If true, do not automatically schedule a build when one of the project
+     * dependencies is built.
      */
     private boolean ignoreUpstreamChanges = false;
 
@@ -135,21 +160,13 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     private boolean archivingDisabled = false;
 
     /**
-     * Reporters configured at {@link MavenModuleSet} level. Applies to all {@link MavenModule} builds.
-     */
-    private DescribableList<IvyReporter,Descriptor<IvyReporter>> reporters =
-        new DescribableList<IvyReporter,Descriptor<IvyReporter>>(this);
-
-    /**
      * List of active {@link Publisher}s configured for this project.
-     * @since 1.176
      */
     private DescribableList<Publisher,Descriptor<Publisher>> publishers =
         new DescribableList<Publisher,Descriptor<Publisher>>(this);
 
     /**
      * List of active {@link BuildWrapper}s configured for this project.
-     * @since 1.212
      */
     private DescribableList<BuildWrapper,Descriptor<BuildWrapper>> buildWrappers =
         new DescribableList<BuildWrapper, Descriptor<BuildWrapper>>(this);
@@ -163,6 +180,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         return ".";
     }
 
+    @Override
     public Hudson getParent() {
         return Hudson.getInstance();
     }
@@ -184,27 +202,28 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         return getItem(name);
     }
 
+    @Override
     protected void updateTransientActions() {
         super.updateTransientActions();
-        // Fix for ISSUE-1149
         for (IvyModule module: modules.values()) {
             module.updateTransientActions();
         }
         if(publishers!=null)    // this method can be loaded from within the onLoad method, where this might be null
             for (BuildStep step : publishers) {
-                Action a = step.getProjectAction(this);
+                Collection<? extends Action> a = step.getProjectActions(this);
                 if(a!=null)
-                    transientActions.add(a);
+                    transientActions.addAll(a);
             }
 
         if (buildWrappers!=null)
 	        for (BuildWrapper step : buildWrappers) {
-	            Action a = step.getProjectAction(this);
+	            Collection<? extends Action> a = step.getProjectActions(this);
 	            if(a!=null)
-	                transientActions.add(a);
+	                transientActions.addAll(a);
 	        }
     }
 
+    @Override
     protected void addTransientActionsFromBuild(IvyModuleSetBuild build, Set<Class> added) {
         if(build==null)    return;
 
@@ -225,7 +244,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     }
 
     /**
-     * Called by {@link MavenModule#doDoDelete(StaplerRequest, StaplerResponse)}.
+     * Called by {@link IvyModule#doDoDelete(StaplerRequest, StaplerResponse)}.
      * Real deletion is done by the caller, and this method only adjusts the
      * data structure the parent maintains.
      */
@@ -301,10 +320,10 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     }
 
     /**
-     * List of active {@link MavenReporter}s that should be applied to all module builds.
+     * List of active {@link Publisher}s that should be applied to all module builds.
      */
-    public DescribableList<IvyReporter, Descriptor<IvyReporter>> getReporters() {
-        return reporters;
+    public DescribableList<Publisher, Descriptor<Publisher>> getModulePublishers() {
+        return aggregatorStyleBuild ? new DescribableList<Publisher, Descriptor<Publisher>>(this) : publishers;
     }
 
     /**
@@ -329,10 +348,12 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
      * @deprecated as of 1.335
      *      Use {@link #getBuildWrappersList()} to be consistent with other subtypes of {@link AbstractProject}.
      */
+    @Deprecated
     public DescribableList<BuildWrapper, Descriptor<BuildWrapper>> getBuildWrappers() {
         return buildWrappers;
     }
 
+    @Override
     public Object getDynamic(String token, StaplerRequest req, StaplerResponse rsp) {
         if (ModuleName.isValid(token))
             return getModule(token);
@@ -343,6 +364,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         return new File(getModulesDir(),child.getModuleName().toFileSystemName());
     }
 
+    @Override
     public Collection<Job> getAllJobs() {
         Set<Job> jobs = new HashSet<Job>(getItems());
         jobs.add(this);
@@ -358,6 +380,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     protected SearchIndexBuilder makeSearchIndex() {
         return super.makeSearchIndex()
             .add(new CollectionSearchIndex<IvyModule>() {// for computers
+                @Override
                 protected IvyModule get(String key) {
                     for (IvyModule m : modules.values()) {
                         if(m.getDisplayName().equals(key))
@@ -365,9 +388,11 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
                     }
                     return null;
                 }
+                @Override
                 protected Collection<IvyModule> all() {
                     return modules.values();
                 }
+                @Override
                 protected String getName(IvyModule o) {
                     return o.getName();
                 }
@@ -379,6 +404,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         return true;
     }
 
+    @Override
     public void onLoad(ItemGroup<? extends Item> parent, String name) throws IOException {
         modules = Collections.emptyMap(); // needed during load
         super.onLoad(parent, name);
@@ -388,32 +414,6 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
                 return module.getModuleName();
             }
         });
-        // update the transient nest level field.
-//        IvyModule root = getRootModule();
-//        if(root!=null && root.getChildren()!=null) {
-//            List<MavenModule> sortedList = new ArrayList<MavenModule>();
-//            Stack<MavenModule> q = new Stack<MavenModule>();
-//            root.nestLevel = 0;
-//            q.push(root);
-//            while(!q.isEmpty()) {
-//                MavenModule p = q.pop();
-//                sortedList.add(p);
-//                List<MavenModule> children = p.getChildren();
-//                if(children!=null) {
-//                    for (MavenModule m : children)
-//                        m.nestLevel = p.nestLevel+1;
-//                    for( int i=children.size()-1; i>=0; i--)    // add them in the reverse order
-//                        q.push(children.get(i));
-//                }
-//            }
-//            this.sortedActiveModules = sortedList;
-//        } else {
-//            this.sortedActiveModules = getDisabledModules(false);
-//        }
-
-        if(reporters==null)
-            reporters = new DescribableList<IvyReporter, Descriptor<IvyReporter>>(this);
-        reporters.setOwner(this);
         if(publishers==null)
             publishers = new DescribableList<Publisher,Descriptor<Publisher>>(this);
         publishers.setOwner(this);
@@ -438,6 +438,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
      * and because of the mutual exclusion among {@link IvyModuleSetBuild}
      * and {@link IvyBuild}, we can safely touch all the modules.
      */
+    @Override
     public synchronized int assignBuildNumber() throws IOException {
         // determine the next value
         updateNextBuildNumber();
@@ -445,6 +446,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         return super.assignBuildNumber();
     }
 
+    @Override
     public void logRotate() throws IOException, InterruptedException {
         super.logRotate();
         // perform the log rotation of modules
@@ -453,7 +455,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     }
 
     /**
-     * The next build of {@link MavenModuleSet} must have
+     * The next build of {@link IvyModuleSet} must have
      * the build number newer than any of the current module build.
      */
     /*package*/ void updateNextBuildNumber() throws IOException {
@@ -467,11 +469,8 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         }
     }
 
+    @Override
     protected void buildDependencyGraph(DependencyGraph graph) {
-    	Collection<IvyModule> modules = getModules();
-    	for (IvyModule m : modules) {
-    		m.buildDependencyGraph(graph);
-    	}
         publishers.buildDependencyGraph(this,graph);
         buildWrappers.buildDependencyGraph(this,graph);
     }
@@ -505,7 +504,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     public void setTargets(String targets) {
         this.targets = targets;
     }
-	
+
     public String getRelativePathToDescriptorFromModuleRoot() {
         return relativePathToDescriptorFromModuleRoot;
     }
@@ -528,7 +527,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
      * If antOpts is null or empty, we'll return the globally-defined ANT_OPTS.
      */
     public String getAntOpts() {
-        if ((antOpts!=null) && (antOpts.trim().length()>0)) { 
+        if ((antOpts!=null) && (antOpts.trim().length()>0)) {
             return antOpts;
         }
         else {
@@ -598,10 +597,11 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 //
 //
 
+    @Override
     protected void submit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, FormException {
         super.submit(req,rsp);
         JSONObject json = req.getSubmittedForm();
-        
+
         ivyFilePattern = Util.fixEmptyAndTrim(json.getString("ivyFilePattern"));
         if (ivyFilePattern == null)
             ivyFilePattern = "**/ivy.xml";
@@ -614,11 +614,15 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         antOpts = Util.fixEmptyAndTrim(json.getString("antOpts"));
         antProperties = Util.fixEmptyAndTrim(json.getString("antProperties"));
         aggregatorStyleBuild = !req.hasParameter("perModuleBuild");
-        
+
         publishers.rebuild(req,json,BuildStepDescriptor.filter(Publisher.all(),this.getClass()));
         buildWrappers.rebuild(req,json,BuildWrappers.getFor(this));
 
         updateTransientActions(); // to pick up transient actions from builder, publisher, etc.
+    }
+
+    public Class<? extends AbstractProject> getModuleClass() {
+        return IvyModule.class;
     }
 
     /**
@@ -630,7 +634,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
             m.delete();
         rsp.sendRedirect2(".");
     }
-    
+
     /**
      * Check the location of the ivy descriptor file, alternate settings file, etc - any file.
      */
@@ -656,7 +660,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         if ((v.startsWith("/")) || (v.startsWith("\\")) || (v.matches("^\\w\\:\\\\.*"))) {
             return FormValidation.error("Alternate settings file must be a relative path.");
         }
-        
+
         IvyModuleSetBuild lb = getLastBuild();
         if (lb!=null) {
             FilePath ws = lb.getModuleRoot();
@@ -688,10 +692,12 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
             save();
         }
 
+        @Override
         public String getDisplayName() {
             return Messages.IvyModuleSet_DiplayName();
         }
 
+        @Override
         public IvyModuleSet newInstance(String name) {
             return new IvyModuleSet(name);
         }

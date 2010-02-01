@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Red Hat, Inc., Victor Glushenkov
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,10 +24,9 @@
 package hudson.ivy;
 
 import hudson.AbortException;
+import hudson.EnvVars;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.EnvVars;
-import hudson.scm.ChangeLogSet;
 import hudson.FilePath.FileCallable;
 import hudson.ivy.IvyBuild.ProxyImpl2;
 import hudson.model.AbstractProject;
@@ -45,14 +44,16 @@ import hudson.model.TaskListener;
 import hudson.model.Cause.UpstreamCause;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
+import hudson.scm.ChangeLogSet;
 import hudson.tasks.BuildWrapper;
+import hudson.tasks.Publisher;
 import hudson.tasks.Ant.AntInstallation;
 import hudson.util.StreamTaskListener;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.InterruptedIOException;
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.text.ParseException;
@@ -82,19 +83,19 @@ import org.kohsuke.stapler.StaplerResponse;
 
 /**
  * {@link Build} for {@link IvyModuleSet}.
- * 
+ *
  * <p>
  * A "build" of {@link IvyModuleSet} consists of:
- * 
+ *
  * <ol>
  * <li>Update the workspace.
  * <li>Parse ivy.xml files
  * <li>Trigger module builds.
  * </ol>
- * 
+ *
  * This object remembers the changelog and what {@link IvyBuild}s are done on
  * this.
- * 
+ *
  * @author Timothy Bingaman
  */
 public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleSetBuild> {
@@ -114,7 +115,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 
     /**
      * Exposes {@code ANT_OPTS} to forked processes.
-     * 
+     *
      * When we fork Ant, we do so directly by executing Java, thus this
      * environment variable is pointless (we have to tweak JVM launch option
      * correctly instead, which can be seen in {@link IvyProcessFactory}), but
@@ -276,6 +277,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
         return r;
     }
 
+    @Override
     public void run() {
         run(new RunnerImpl());
         getProject().updateTransientActions();
@@ -356,6 +358,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
     private class RunnerImpl extends AbstractRunner {
         private Map<ModuleName,IvyBuild.ProxyImpl2> proxies;
 
+        @Override
         protected Result doRun(final BuildListener listener) throws Exception {
             PrintStream logger = listener.getLogger();
             try {
@@ -375,7 +378,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                         // Don't trigger builds if we've already triggered one
                         // of their dependencies.
                         // It's safe to just get the direct dependencies since
-                        // the modules are sorted in dependency order. 
+                        // the modules are sorted in dependency order.
                         List<AbstractProject> ups = module.getUpstreamProjects();
                         boolean triggerBuild = true;
                         for (AbstractProject upstreamDep : ups) {
@@ -514,7 +517,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                     sortedModules.add(mm);
                     mm.save();
                 }
-                
+
                 // at this point the list contains all the live modules
                 project.sortedActiveModules = sortedModules;
 
@@ -536,6 +539,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                 m.updateNextBuildNumber(getNumber());
         }
 
+        @Override
         protected void post2(BuildListener listener) throws Exception {
             // asynchronous executions from the build might have left some
             // unsaved state,
@@ -543,7 +547,9 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             for (IvyBuild b : getModuleLastBuilds().values())
                 b.save();
 
-            performAllBuildStep(listener, project.getPublishers(), true);
+            if (project.isAggregatorStyleBuild()) {
+                performAllBuildStep(listener, project.getPublishers(), true);
+            }
             performAllBuildStep(listener, project.getProperties(), true);
 
             // aggregate all module fingerprints to us,
@@ -561,22 +567,22 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                 // schedule downstream builds. for non aggregator style builds,
                 // this is done by each module
                 scheduleDownstreamBuilds(listener);
+                performAllBuildStep(listener, project.getPublishers(), false);
             }
 
-            performAllBuildStep(listener, project.getPublishers(), false);
             performAllBuildStep(listener, project.getProperties(), false);
         }
     }
 
     /**
      * Runs Ant and builds the project.
-     * 
+     *
      * This is only used for {@link IvyModuleSet#isAggregatorStyleBuild() the
      * aggregator style build}.
      */
     private static final class Builder extends IvyBuilder {
         private final Map<ModuleName,IvyBuildProxy2> proxies;
-        private final Map<ModuleName,List<IvyReporter>> reporters = new HashMap<ModuleName,List<IvyReporter>>();
+        private final Map<ModuleName,List<Publisher>> modulePublishers = new HashMap<ModuleName,List<Publisher>>();
 
         private IvyBuildProxy2 lastProxy;
 
@@ -593,7 +599,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                 e.setValue(new FilterImpl(e.getValue()));
 
             for (IvyModule m : modules)
-                reporters.put(m.getModuleName(),m.createReporters());
+                modulePublishers.put(m.getModuleName(),m.createModulePublishers());
         }
 
         private class FilterImpl extends IvyBuildProxy2.Filter<IvyBuildProxy2> implements Serializable {
@@ -615,10 +621,10 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
         void end(Launcher launcher) throws IOException, InterruptedException {
             for (Map.Entry<ModuleName,ProxyImpl2> e : sourceProxies.entrySet()) {
                 ProxyImpl2 p = e.getValue();
-                for (IvyReporter r : reporters.get(e.getKey())) {
+                for (Publisher publisher : modulePublishers.get(e.getKey())) {
                     // we'd love to do this when the module build ends, but doing so requires
                     // we know how many task segments are in the current build.
-                    r.end(p.owner(),launcher,listener);
+                    publisher.perform(p.owner(),launcher,listener);
                     p.appendLastLog();
                 }
                 p.close();
@@ -635,14 +641,17 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             }
         }
 
+        @Override
         void preBuild(BuildEvent event) throws IOException, InterruptedException {
             // TODO
         }
 
+        @Override
         void postBuild(BuildEvent event) throws IOException, InterruptedException {
             // TODO
         }
 
+        @Override
         void preModule(BuildEvent event) throws InterruptedException, IOException, AbortException {
             File baseDir = event.getProject().getBaseDir();
             // TODO: find the module that contains this path?
@@ -655,6 +664,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 //                    throw new AbortException(r+" failed");
         }
 
+        @Override
         void postModule(BuildEvent event) throws InterruptedException, IOException, AbortException {
 //            ModuleName name = new ModuleName(project);
 //            IvyBuildProxy2 proxy = proxies.get(name);
@@ -740,7 +750,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                 });
                 moduleDescriptors.put(module, ivyFilePath);
             }
-            
+
             List<IvyModuleInfo> infos = new ArrayList<IvyModuleInfo>();
             List<ModuleDescriptor> sortedModuleDescriptors = ivy.sortModuleDescriptors(moduleDescriptors.keySet(), SortOptions.DEFAULT);
             for (ModuleDescriptor moduleDescriptor : sortedModuleDescriptors) {
@@ -751,9 +761,9 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
         }
 
         /**
-         * 
+         *
          * @return the Ivy instance based on the {@link #ivyConfName}
-         * 
+         *
          * @throws ParseException
          * @throws IOException
          */

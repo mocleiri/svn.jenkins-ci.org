@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, id:cactusman
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,15 +24,12 @@
 package hudson.ivy;
 
 import hudson.CopyOnWrite;
-import hudson.Util;
 import hudson.Functions;
+import hudson.Util;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import hudson.model.DependencyGraph;
-import hudson.model.DependencyGraph.Dependency;
 import hudson.model.Descriptor;
-import hudson.model.Descriptor.FormException;
-import hudson.model.queue.CauseOfBlockage;
 import hudson.model.Hudson;
 import hudson.model.Item;
 import hudson.model.ItemGroup;
@@ -43,16 +40,13 @@ import hudson.model.Node;
 import hudson.model.Resource;
 import hudson.model.Result;
 import hudson.model.Saveable;
+import hudson.model.Descriptor.FormException;
+import hudson.model.queue.CauseOfBlockage;
+import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.LogRotator;
 import hudson.tasks.Publisher;
 import hudson.util.DescribableList;
 
-import org.apache.commons.lang.StringUtils;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
-import org.kohsuke.stapler.export.Exported;
-
-import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,13 +57,21 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletException;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.ivy.core.module.id.ModuleRevisionId;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.export.Exported;
+
 /**
  * {@link Job} that builds projects based on Ivy.
- * 
+ *
  * @author Timothy Bingaman
  */
 public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> implements Saveable {
-    private DescribableList<IvyReporter, Descriptor<IvyReporter>> reporters = new DescribableList<IvyReporter, Descriptor<IvyReporter>>(this);
+    private DescribableList<Publisher, Descriptor<Publisher>> publishers = new DescribableList<Publisher, Descriptor<Publisher>>(this);
 
     /**
      * Name taken from {@link ModuleRevisionId#getName()}.
@@ -79,7 +81,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /**
      * Revision number of this module as of the last build, taken from
      * {@link ModuleRevisionId#getRevision()}.
-     * 
+     *
      * This field can be null if Hudson loaded old data that didn't record this
      * information, so that situation needs to be handled gracefully.
      */
@@ -90,7 +92,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /**
      * Relative path from the workspace to the ivy descriptor file for this
      * module.
-     * 
+     *
      * Strings like "ivy.xml" (if the ivy.xml file is checked out directly in
      * the workspace), "abc/ivy.xml", "foo/bar/zot/ivy.xml".
      */
@@ -106,7 +108,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /**
      * Relative path from the workspace to the ivy descriptor file for this
      * module.
-     * 
+     *
      * Strings like "ivy.xml" (if the ivy.xml file is directly in
      * the module root), "ivy/ivy.xml", "build/ivy.xml".
      */
@@ -135,6 +137,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /**
      * @deprecated Not allowed to configure log rotation per module.
      */
+    @Deprecated
     @Override
     public void setLogRotator(LogRotator logRotator) {
         throw new UnsupportedOperationException();
@@ -168,9 +171,9 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     @Override
     public void onLoad(ItemGroup<? extends Item> parent, String name) throws IOException {
         super.onLoad(parent, name);
-        if (reporters == null)
-            reporters = new DescribableList<IvyReporter, Descriptor<IvyReporter>>(this);
-        reporters.setOwner(this);
+        if (publishers == null)
+            publishers = new DescribableList<Publisher, Descriptor<Publisher>>(this);
+        publishers.setOwner(this);
         if (dependencies == null) {
             dependencies = Collections.emptySet();
         }
@@ -179,7 +182,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /**
      * Relative path to this module's root directory from the workspace of a
      * {@link IvyModuleSet}.
-     * 
+     *
      * The path separator is normalized to '/'.
      */
     public String getRelativePath() {
@@ -188,7 +191,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
 
     /**
      * Gets the revision number in the ivy.xml file as of the last build.
-     * 
+     *
      * @return This method can return null if Hudson loaded old data that didn't
      *         record this information, so that situation needs to be handled
      *         gracefully.
@@ -215,7 +218,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     public String getUserConfiguredRelativePathToDescriptorFromModuleRoot() {
         return relativePathToDescriptorFromModuleRoot;
     }
-    
+
     public String getRelativePathToModuleRoot() {
         return StringUtils.removeEnd(relativePathToDescriptorFromWorkspace, getRelativePathToDescriptorFromModuleRoot());
     }
@@ -223,7 +226,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /**
      * Gets the list of targets specified by the user, without taking
      * inheritance and into account.
-     * 
+     *
      * <p>
      * This is only used to present the UI screen, and in all the other cases
      * {@link #getTargets()} should be used.
@@ -232,9 +235,9 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
         return targets;
     }
 
+    @Override
     public DescribableList<Publisher, Descriptor<Publisher>> getPublishersList() {
-        // TODO
-        return new DescribableList<Publisher, Descriptor<Publisher>>(this);
+        return publishers;
     }
 
     @Override
@@ -308,9 +311,10 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
      * That is, {@Link IvyModuleSet} builds are incompatible with any
      * {@link IvyModule} builds, whereas {@link IvyModule} builds are compatible
      * with each other.
-     * 
+     *
      * @deprecated as of 1.319 in {@link AbstractProject}.
      */
+    @Deprecated
     @Override
     public Resource getWorkspaceResource() {
         return new Resource(getParent().getWorkspaceResource(), getDisplayName() + " workspace");
@@ -321,6 +325,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
         return true;
     }
 
+    @Override
     protected void buildDependencyGraph(DependencyGraph graph) {
         if (isDisabled() || getParent().ignoreUpstreamChanges())
             return;
@@ -375,7 +380,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
                         return new BecauseOfUpstreamModuleBuildInProgress(tup);
             }
         }
-        
+
         return null;
     }
 
@@ -389,6 +394,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
             this.up = up;
         }
 
+        @Override
         public String getShortDescription() {
             return Messages.IvyModule_UpstreamModuleBuildInProgress(up.getName());
         }
@@ -416,10 +422,10 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     }
 
     /**
-     * List of active {@link IvyReporter}s configured for this module.
+     * List of active {@link Publisher}s configured for this module.
      */
-    public DescribableList<IvyReporter, Descriptor<IvyReporter>> getReporters() {
-        return reporters;
+    public DescribableList<Publisher, Descriptor<Publisher>> getPublishers() {
+        return publishers;
     }
 
     @Override
@@ -427,6 +433,8 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
         super.submit(req, rsp);
 
         targets = Util.fixEmpty(req.getParameter("targets").trim());
+
+        publishers.rebuild(req,req.getSubmittedForm(),BuildStepDescriptor.filter(Publisher.all(),this.getClass()));
 
         // dependency setting might have been changed by the user, so rebuild.
         Hudson.getInstance().rebuildDependencyGraph();
@@ -439,23 +447,17 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     }
 
     /**
-     * Creates a list of {@link IvyReporter}s to be used for a build of this project.
+     * Creates a list of {@link Publisher}s to be used for a build of this project.
      */
-    protected final List<IvyReporter> createReporters() {
-        List<IvyReporter> reporterList = new ArrayList<IvyReporter>();
+    protected final List<Publisher> createModulePublishers() {
+        List<Publisher> modulePublisherList = new ArrayList<Publisher>();
 
-        getReporters().addAllTo(reporterList);
-        getParent().getReporters().addAllTo(reporterList);
-
-        for (IvyReporterDescriptor d : IvyReporterDescriptor.all()) {
-            if(getReporters().contains(d))
-                continue;   // already configured
-            IvyReporter auto = d.newAutoInstance(this);
-            if(auto!=null)
-                reporterList.add(auto);
+        getPublishers().addAllTo(modulePublisherList);
+        if (!getParent().isAggregatorStyleBuild()) {
+            getParent().getPublishers().addAllTo(modulePublisherList);
         }
 
-        return reporterList;
+        return modulePublisherList;
     }
 
     private static final Logger LOGGER = Logger.getLogger(IvyModule.class.getName());
