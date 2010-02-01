@@ -40,6 +40,7 @@ import hudson.model.Node;
 import hudson.model.Resource;
 import hudson.model.Result;
 import hudson.model.Saveable;
+import hudson.model.DependencyGraph.Dependency;
 import hudson.model.Descriptor.FormException;
 import hudson.model.queue.CauseOfBlockage;
 import hudson.tasks.BuildStepDescriptor;
@@ -357,12 +358,20 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
         for (ModuleDependency d : dependencies) {
             IvyModule src = modules.get(d);
             if (src != null) {
-                if(src.getParent().isAggregatorStyleBuild())
+                if(src.getParent().isAggregatorStyleBuild() && !hasDependency(graph, src.getParent(), dest))
                     graph.addDependency(new IvyDependency(src.getParent(), dest, Result.SUCCESS));
-                else
+                else if (!graph.getDownstream(src).contains(dest))
                     graph.addDependency(new IvyDependency(src, dest, Result.SUCCESS));
             }
         }
+    }
+
+    private boolean hasDependency(DependencyGraph graph, AbstractProject parent, AbstractProject dest) {
+        for (Dependency dep : graph.getDownstreamDependencies(parent)) {
+            if (dep instanceof IvyDependency && dep.getDownstreamProject().equals(dest))
+                return true;
+        }
+        return false;
     }
 
     @Override
