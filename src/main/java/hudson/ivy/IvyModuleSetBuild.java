@@ -45,6 +45,7 @@ import hudson.model.Cause.UpstreamCause;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
 import hudson.scm.ChangeLogSet;
+import hudson.tasks.Ant;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.Publisher;
 import hudson.tasks.Ant.AntInstallation;
@@ -363,8 +364,8 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             PrintStream logger = listener.getLogger();
             try {
                 EnvVars envVars = getEnvironment(listener);
-                AntInstallation ant = project.getAnt();
-                if (ant == null)
+                AntInstallation antInstallation = project.getAnt();
+                if (antInstallation == null)
                     throw new AbortException("An Ant installation needs to be available for this project to be built.\n"
                             + "Either your server has no Ant installations defined, or the requested Ant version does not exist.");
 
@@ -416,32 +417,41 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                         if (!preBuild(listener, project.getPublishers()))
                             return Result.FAILURE;
 
-                        SplittableBuildListener slistener = new SplittableBuildListener(listener);
-                        proxies = new HashMap<ModuleName, ProxyImpl2>();
-                        List<String> changedModules = new ArrayList<String>();
+                        // TODO: uncomment when proxying stuff is done
+//                        SplittableBuildListener slistener = new SplittableBuildListener(listener);
+//                        proxies = new HashMap<ModuleName, ProxyImpl2>();
+//                        List<String> changedModules = new ArrayList<String>();
+//
+//                        for (IvyModule m : project.sortedActiveModules) {
+//                            IvyBuild mb = m.newBuild();
+//
+//                            // Check if incrementalBuild is selected and that
+//                            // there are changes -
+//                            // we act as if incrementalBuild is not set if there
+//                            // are no changes.
+//                            if (!IvyModuleSetBuild.this.getChangeSet().isEmptySet() && project.isIncrementalBuild()) {
+//                                // If there are changes for this module, add it.
+//                                // Also add it if we've never seen this module
+//                                // before,
+//                                // or if the previous build of this module
+//                                // failed or was unstable.
+//                                if ((mb.getPreviousBuiltBuild() == null) || (!getChangeSetFor(m).isEmpty())
+//                                        || (mb.getPreviousBuiltBuild().getResult().isWorseThan(Result.SUCCESS))) {
+//                                    changedModules.add(m.getModuleName().toString());
+//                                }
+//                            }
+//
+//                            mb.setWorkspace(getModuleRoot().child(m.getRelativePathToModuleRoot()));
+//                            proxies.put(m.getModuleName(), mb.new ProxyImpl2(IvyModuleSetBuild.this,slistener));
+//                        }
 
-                        for (IvyModule m : project.sortedActiveModules) {
-                            IvyBuild mb = m.newBuild();
+                        // TODO: remove once the proxying support is finished.
+                        Ant ant = new Ant(getProject().getTargets(), antInstallation.getName(), project.getAntOpts(), getModuleRoot().child(project.getBuildFile())
+                                .getName(), project.getAntProperties());
+                        if (ant.perform(IvyModuleSetBuild.this, launcher, listener))
+                            return Result.SUCCESS;
 
-                            // Check if incrementalBuild is selected and that
-                            // there are changes -
-                            // we act as if incrementalBuild is not set if there
-                            // are no changes.
-                            if (!IvyModuleSetBuild.this.getChangeSet().isEmptySet() && project.isIncrementalBuild()) {
-                                // If there are changes for this module, add it.
-                                // Also add it if we've never seen this module
-                                // before,
-                                // or if the previous build of this module
-                                // failed or was unstable.
-                                if ((mb.getPreviousBuiltBuild() == null) || (!getChangeSetFor(m).isEmpty())
-                                        || (mb.getPreviousBuiltBuild().getResult().isWorseThan(Result.SUCCESS))) {
-                                    changedModules.add(m.getModuleName().toString());
-                                }
-                            }
-
-                            mb.setWorkspace(getModuleRoot().child(m.getRelativePathToModuleRoot()));
-                            proxies.put(m.getModuleName(), mb.new ProxyImpl2(IvyModuleSetBuild.this,slistener));
-                        }
+                        return Result.FAILURE;
                     } finally {
                         // tear down in reverse order
                         boolean failed = false;
@@ -544,8 +554,9 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             // asynchronous executions from the build might have left some
             // unsaved state,
             // so just to be safe, save them all.
-            for (IvyBuild b : getModuleLastBuilds().values())
-                b.save();
+            // TODO: uncomment when proxying stuff is done
+//            for (IvyBuild b : getModuleLastBuilds().values())
+//                b.save();
 
             if (project.isAggregatorStyleBuild()) {
                 performAllBuildStep(listener, project.getPublishers(), true);
