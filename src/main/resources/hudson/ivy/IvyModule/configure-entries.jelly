@@ -29,13 +29,10 @@ THE SOFTWARE.
   <p:config-trigger />
 
   <f:section title="${%Ivy Module Configuration}">
-    <f:entry title="${%Relative path to module root directory}" field="relPathToModuleRootDir">
-      <f:textbox />
+    <f:entry title="${%Relative path to descriptor from module root}">
+      <f:textbox name="relativePathToDescriptorFromModuleRoot" value="${it.userConfiguredRelativePathToDescriptorFromModuleRoot}"/>
     </f:entry>
-    <f:entry title="${%Relative path to module root directory}" field="relPathToModuleRootDir">
-      <f:textbox name="relPathToModuleRootDir" value="${it.userConfiguredRelPathToModuleRootDir}"/>
-    </f:entry>
-    <f:entry title="${%Targets}" field="targets">
+    <f:entry title="${%Targets}">
       <f:textbox name="targets" value="${it.userConfiguredTargets}"/>
     </f:entry>
   </f:section>
