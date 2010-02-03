@@ -42,7 +42,6 @@ import hudson.model.Result;
 import hudson.model.Saveable;
 import hudson.model.DependencyGraph.Dependency;
 import hudson.model.Descriptor.FormException;
-import hudson.model.queue.CauseOfBlockage;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.LogRotator;
 import hudson.tasks.Publisher;
@@ -72,6 +71,8 @@ import org.kohsuke.stapler.export.Exported;
  * @author Timothy Bingaman
  */
 public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> implements Saveable {
+    private static final String IVY_XML_PATH = "ivy.xml";
+
     private DescribableList<Publisher, Descriptor<Publisher>> publishers = new DescribableList<Publisher, Descriptor<Publisher>>(this);
 
     /**
@@ -221,7 +222,8 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     }
 
     public String getRelativePathToModuleRoot() {
-        return StringUtils.removeEnd(relativePathToDescriptorFromWorkspace, getRelativePathToDescriptorFromModuleRoot());
+        return StringUtils.removeEnd(relativePathToDescriptorFromWorkspace, StringUtils.defaultString(getRelativePathToDescriptorFromModuleRoot(),
+                IVY_XML_PATH));
     }
 
     /**
@@ -238,7 +240,17 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
 
     @Override
     public DescribableList<Publisher, Descriptor<Publisher>> getPublishersList() {
-        return publishers;
+        if (getParent().isAggregatorStyleBuild()) {
+            return publishers;
+        }
+
+        DescribableList<Publisher, Descriptor<Publisher>> publishersList = new DescribableList<Publisher, Descriptor<Publisher>>(Saveable.NOOP);
+        try {
+            publishersList.addAll(createModulePublishers());
+        } catch (IOException e) {
+            LOGGER.warning("Failed to load module publisher list");
+        }
+        return publishersList;
     }
 
     @Override
@@ -375,41 +387,6 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     }
 
     @Override
-    public CauseOfBlockage getCauseOfBlockage() {
-        CauseOfBlockage cob = super.getCauseOfBlockage();
-        if (cob != null)
-            return cob;
-
-        if (!getParent().isAggregatorStyleBuild()) {
-            DependencyGraph graph = Hudson.getInstance().getDependencyGraph();
-            Set<AbstractProject> tups = graph.getTransitiveUpstream(this);
-            tups.add(this);
-            for (AbstractProject tup : tups) {
-                if(tup!=this && this.getParent() == tup.getParent() && (tup.isBuilding() || tup.isInQueue()))
-                        return new BecauseOfUpstreamModuleBuildInProgress(tup);
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Because the upstream module build is in progress, and we are configured to wait for that.
-     */
-    public static class BecauseOfUpstreamModuleBuildInProgress extends CauseOfBlockage {
-        public final AbstractProject<?,?> up;
-
-        public BecauseOfUpstreamModuleBuildInProgress(AbstractProject<?,?> up) {
-            this.up = up;
-        }
-
-        @Override
-        public String getShortDescription() {
-            return Messages.IvyModule_UpstreamModuleBuildInProgress(up.getName());
-        }
-    }
-
-    @Override
     protected void addTransientActionsFromBuild(IvyBuild build, Set<Class> added) {
         if (build == null)
             return;
@@ -441,7 +418,8 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     protected void submit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, FormException {
         super.submit(req, rsp);
 
-        targets = Util.fixEmpty(req.getParameter("targets").trim());
+        targets = Util.fixEmptyAndTrim(req.getParameter("targets"));
+        relativePathToDescriptorFromModuleRoot = Util.fixEmptyAndTrim(req.getParameter("relativePathToDescriptorFromModuleRoot"));
 
         publishers.rebuild(req,req.getSubmittedForm(),BuildStepDescriptor.filter(Publisher.all(),this.getClass()));
 

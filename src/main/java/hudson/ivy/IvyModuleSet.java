@@ -105,6 +105,8 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 
     private String ivyFilePattern;
 
+    private String ivyFileExcludesPattern;
+
     private String targets;
 
     private String relativePathToDescriptorFromModuleRoot;
@@ -305,6 +307,14 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 
     public void setIvyFilePattern(String ivyFilePattern) {
         this.ivyFilePattern = ivyFilePattern;
+    }
+
+    public String getIvyFileExcludesPattern() {
+        return ivyFileExcludesPattern;
+    }
+
+    public void setIvyFileExcludesPattern(String ivyFileExcludesPattern) {
+        this.ivyFileExcludesPattern = ivyFileExcludesPattern;
     }
 
     public void setAggregatorStyleBuild(boolean aggregatorStyleBuild) {
@@ -603,17 +613,15 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         JSONObject json = req.getSubmittedForm();
 
         ivyFilePattern = Util.fixEmptyAndTrim(json.getString("ivyFilePattern"));
-        if (ivyFilePattern == null)
-            ivyFilePattern = "**/ivy.xml";
+        ivyFileExcludesPattern = Util.fixEmptyAndTrim(json.getString("ivyFileExcludesPattern"));
         targets = Util.fixEmptyAndTrim(json.getString("targets"));
         relativePathToDescriptorFromModuleRoot = Util.fixEmptyAndTrim(json.getString("relativePathToDescriptorFromModuleRoot"));
-        if (relativePathToDescriptorFromModuleRoot == null)
-            relativePathToDescriptorFromModuleRoot = "ivy.xml";
         antName = Util.fixEmptyAndTrim(json.getString("antName"));
         buildFile = Util.fixEmptyAndTrim(json.getString("buildFile"));
         antOpts = Util.fixEmptyAndTrim(json.getString("antOpts"));
         antProperties = Util.fixEmptyAndTrim(json.getString("antProperties"));
         aggregatorStyleBuild = !req.hasParameter("perModuleBuild");
+        incrementalBuild = req.hasParameter("incrementalBuild");
 
         publishers.rebuild(req,json,BuildStepDescriptor.filter(Publisher.all(),this.getClass()));
         buildWrappers.rebuild(req,json,BuildWrappers.getFor(this));

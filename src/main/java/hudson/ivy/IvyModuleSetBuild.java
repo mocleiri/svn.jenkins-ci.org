@@ -375,24 +375,56 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                     // start module builds
                     DependencyGraph graph = Hudson.getInstance().getDependencyGraph();
                     Set<IvyModule> triggeredModules = new HashSet<IvyModule>();
-                    for (IvyModule module : project.sortedActiveModules) {
-                        // Don't trigger builds if we've already triggered one
-                        // of their dependencies.
-                        // It's safe to just get the direct dependencies since
-                        // the modules are sorted in dependency order.
-                        List<AbstractProject> ups = module.getUpstreamProjects();
-                        boolean triggerBuild = true;
-                        for (AbstractProject upstreamDep : ups) {
-                            if (triggeredModules.contains(upstreamDep)) {
-                                triggerBuild = false;
-                                break;
+                    if (!project.isIncrementalBuild() || IvyModuleSetBuild.this.getChangeSet().isEmptySet()) {
+                        for (IvyModule module : project.sortedActiveModules) {
+                            // Don't trigger builds if we've already triggered
+                            // one
+                            // of their dependencies.
+                            // It's safe to just get the direct dependencies
+                            // since
+                            // the modules are sorted in dependency order.
+                            List<AbstractProject> ups = module.getUpstreamProjects();
+                            boolean triggerBuild = true;
+                            for (AbstractProject upstreamDep : ups) {
+                                if (triggeredModules.contains(upstreamDep)) {
+                                    triggerBuild = false;
+                                    break;
+                                }
+                            }
+
+                            if (triggerBuild) {
+                                logger.println("Triggering " + module.getModuleName());
+                                module.scheduleBuild(new UpstreamCause((Run<?, ?>) IvyModuleSetBuild.this));
+                            }
+                            triggeredModules.add(module);
+                        }
+                    } else {
+                        for (IvyModule module : project.sortedActiveModules) {
+                            // If there are changes for this module, add it.
+                            // Also add it if we've never seen this module
+                            // before,
+                            // or if the previous build of this module
+                            // failed or was unstable.
+                            boolean triggerBuild = false;
+                            if ((module.getLastBuild() == null) || (!getChangeSetFor(module).isEmpty())
+                                    || (module.getLastBuild().getResult().isWorseThan(Result.SUCCESS))) {
+                                triggerBuild = true;
+                                List<AbstractProject> ups = module.getUpstreamProjects();
+                                for (AbstractProject upstreamDep : ups) {
+                                    if (triggeredModules.contains(upstreamDep)) {
+                                        triggerBuild = false;
+                                        triggeredModules.add(module);
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (triggerBuild) {
+                                logger.println("Triggering " + module.getModuleName());
+                                module.scheduleBuild(new UpstreamCause((Run<?, ?>) IvyModuleSetBuild.this));
+                                triggeredModules.add(module);
                             }
                         }
-                        if (triggerBuild) {
-                            logger.println("Triggering "+module.getModuleName());
-                            module.scheduleBuild(new UpstreamCause((Run<?,?>)IvyModuleSetBuild.this));
-                        }
-                        triggeredModules.add(module);
                     }
                 } else {
                     // do builds here
@@ -715,6 +747,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
      * {@link IvyModuleInfo}, which will be then brought back to the master.
      */
     private static final class IvyXmlParser implements FileCallable<List<IvyModuleInfo>> {
+        private static final String IVY_XML_PATTERN = "**/ivy.xml";
         private final BuildListener listener;
         /**
          * Capture the value of the static field so that the debug flag takes an
@@ -723,6 +756,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
         private final boolean verbose = debug;
         private final AntInstallation antHome;
         private final String ivyFilePattern;
+        private final String ivyFileExcludePattern;
         private final String alternateSettings;
 
         public IvyXmlParser(BuildListener listener, AntInstallation antHome, IvyModuleSet project) {
@@ -730,12 +764,15 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             // properties need to be captured now.
             this.listener = listener;
             this.antHome = antHome;
-            this.ivyFilePattern = project.getIvyFilePattern();
+            this.ivyFilePattern = project.getIvyFilePattern() == null ? IVY_XML_PATTERN : project.getIvyFilePattern();
+            this.ivyFileExcludePattern = project.getIvyFileExcludesPattern();
             this.alternateSettings = project.getAlternateSettings();
         }
 
         public List<IvyModuleInfo> invoke(File ws, VirtualChannel channel) throws IOException {
-            FileSet ivyFiles = Util.createFileSet(ws, ivyFilePattern);
+            FileSet ivyFiles = Util.createFileSet(ws, ivyFilePattern, ivyFileExcludePattern);
+
+            final PrintStream logger = listener.getLogger();
 
             Ivy ivy = getIvy();
             HashMap<ModuleDescriptor, String> moduleDescriptors = new HashMap<ModuleDescriptor, String>();
@@ -748,13 +785,13 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                             return ModuleDescriptorParserRegistry.getInstance().parseDescriptor(ivy.getSettings(), ivyFile.toURI().toURL(),
                                     ivy.getSettings().doValidate());
                         } catch (MalformedURLException e) {
-                            LOGGER.log(Level.WARNING, "The URL is malformed : " + ivyFile, e);
+                            logger.println("The URL is malformed : " + ivyFile);
                             return null;
                         } catch (ParseException e) {
-                            LOGGER.log(Level.WARNING, "Parsing error while reading the ivy file " + ivyFile, e);
+                            logger.println("Parsing error while reading the ivy file " + ivyFile);
                             return null;
                         } catch (IOException e) {
-                            LOGGER.log(Level.WARNING, "I/O error while reading the ivy file " + ivyFile, e);
+                            logger.println("I/O error while reading the ivy file " + ivyFile);
                             return null;
                         }
                     }
@@ -766,6 +803,12 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             List<ModuleDescriptor> sortedModuleDescriptors = ivy.sortModuleDescriptors(moduleDescriptors.keySet(), SortOptions.DEFAULT);
             for (ModuleDescriptor moduleDescriptor : sortedModuleDescriptors) {
                 infos.add(new IvyModuleInfo(moduleDescriptor, moduleDescriptors.get(moduleDescriptor)));
+            }
+
+            if (verbose) {
+                for (IvyModuleInfo moduleInfo : infos) {
+                    logger.printf("Discovered module %s at %s.\n", moduleInfo.displayName, moduleInfo.relativePathToDescriptor);
+                }
             }
 
             return infos;
