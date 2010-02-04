@@ -758,6 +758,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
         private final String ivyFilePattern;
         private final String ivyFileExcludePattern;
         private final String alternateSettings;
+        private final String ivyBranch;
 
         public IvyXmlParser(BuildListener listener, AntInstallation antHome, IvyModuleSet project) {
             // project cannot be shipped to the remote JVM, so all the relevant
@@ -767,6 +768,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             this.ivyFilePattern = project.getIvyFilePattern() == null ? IVY_XML_PATTERN : project.getIvyFilePattern();
             this.ivyFileExcludePattern = project.getIvyFileExcludesPattern();
             this.alternateSettings = project.getAlternateSettings();
+            this.ivyBranch = project.getIvyBranch();
         }
 
         public List<IvyModuleInfo> invoke(File ws, VirtualChannel channel) throws IOException {
@@ -774,7 +776,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 
             final PrintStream logger = listener.getLogger();
 
-            Ivy ivy = getIvy();
+            Ivy ivy = getIvy(logger);
             HashMap<ModuleDescriptor, String> moduleDescriptors = new HashMap<ModuleDescriptor, String>();
             for (String ivyFilePath : ivyFiles.getDirectoryScanner().getIncludedFiles()) {
                 final File ivyFile = new File(ws, ivyFilePath);
@@ -821,16 +823,19 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
          * @throws ParseException
          * @throws IOException
          */
-        public Ivy getIvy() {
+        public Ivy getIvy(PrintStream logger) {
             Message.setDefaultLogger(new IvyMessageImpl());
             Ivy ivy = Ivy.newInstance();
             Ivy configured = null;
             try {
                 ivy.configureDefault();
-                LOGGER.fine("Configured Ivy using default 2.0 settings");
+                if (verbose)
+                    logger.println("Configured Ivy using default 2.1 settings");
+                if (ivyBranch != null)
+                    ivy.getSettings().setDefaultBranch(ivyBranch);
                 configured = ivy;
             } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Error while reading the default Ivy 2.0 settings", e);
+                logger.println("Error while reading the default Ivy 2.1 settings");
             }
             return configured;
         }

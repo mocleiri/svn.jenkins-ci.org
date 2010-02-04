@@ -89,6 +89,15 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
      */
     private String revision;
 
+    /**
+     * Ivy branch of this module as of the last build, taken from
+     * {@link ModuleRevisionId#getBranch()}.
+     *
+     * This field can be null if Hudson loaded old data that didn't record this
+     * information, so that situation needs to be handled gracefully.
+     */
+    private String ivyBranch;
+
     private transient ModuleName moduleName;
 
     /**
@@ -159,6 +168,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     /* package */final void reconfigure(IvyModuleInfo moduleInfo) {
         this.displayName = moduleInfo.displayName;
         this.revision = moduleInfo.revision;
+        this.ivyBranch = moduleInfo.branch;
         this.relativePathToDescriptorFromWorkspace = moduleInfo.relativePathToDescriptor;
         this.dependencies = moduleInfo.dependencies;
         disabled = false;
@@ -200,6 +210,17 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
      */
     public String getRevision() {
         return revision;
+    }
+
+    /**
+     * Gets the Ivy branch in the ivy.xml file as of the last build.
+     *
+     * @return This method can return null if Hudson loaded old data that didn't
+     *         record this information, so that situation needs to be handled
+     *         gracefully.
+     */
+    public String getIvyBranch() {
+        return ivyBranch;
     }
 
     /**
@@ -277,7 +298,8 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
      * Gets organisation+name+revision as {@link ModuleDependency}.
      */
     public ModuleDependency asDependency() {
-        return new ModuleDependency(moduleName, Functions.defaulted(revision, ModuleDependency.UNKNOWN));
+        return new ModuleDependency(moduleName, Functions.defaulted(revision, ModuleDependency.UNKNOWN), Functions.defaulted(ivyBranch,
+                ModuleDependency.UNKNOWN));
     }
 
     @Override
@@ -349,7 +371,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
             if (m.isDisabled())
                 continue;
             modules.put(m.asDependency(), m);
-            modules.put(m.asDependency().withUnknownVersion(), m);
+            modules.put(m.asDependency().withUnknownRevision(), m);
         }
 
         // in case two modules with the same name is defined, modules in the
@@ -359,7 +381,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
             if (m.isDisabled())
                 continue;
             modules.put(m.asDependency(), m);
-            modules.put(m.asDependency().withUnknownVersion(), m);
+            modules.put(m.asDependency().withUnknownRevision(), m);
         }
 
         // if the build style is the aggregator build, define dependencies
@@ -369,6 +391,8 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
 
         for (ModuleDependency d : dependencies) {
             IvyModule src = modules.get(d);
+            if (src == null)
+                src = modules.get(d.withUnknownRevision());
             if (src != null) {
                 if(src.getParent().isAggregatorStyleBuild() && !hasDependency(graph, src.getParent(), dest))
                     graph.addDependency(new IvyDependency(src.getParent(), dest, Result.SUCCESS));

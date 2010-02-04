@@ -109,6 +109,8 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 
     private String targets;
 
+    private String ivyBranch;
+
     private String relativePathToDescriptorFromModuleRoot;
 
     private String alternateSettings;
@@ -315,6 +317,14 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 
     public void setIvyFileExcludesPattern(String ivyFileExcludesPattern) {
         this.ivyFileExcludesPattern = ivyFileExcludesPattern;
+    }
+
+    public String getIvyBranch() {
+        return ivyBranch;
+    }
+
+    public void setIvyBranch(String ivyBranch) {
+        this.ivyBranch = ivyBranch;
     }
 
     public void setAggregatorStyleBuild(boolean aggregatorStyleBuild) {
@@ -615,6 +625,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
         ivyFilePattern = Util.fixEmptyAndTrim(json.getString("ivyFilePattern"));
         ivyFileExcludesPattern = Util.fixEmptyAndTrim(json.getString("ivyFileExcludesPattern"));
         targets = Util.fixEmptyAndTrim(json.getString("targets"));
+        ivyBranch = Util.fixEmptyAndTrim(json.getString("ivyBranch"));
         relativePathToDescriptorFromModuleRoot = Util.fixEmptyAndTrim(json.getString("relativePathToDescriptorFromModuleRoot"));
         antName = Util.fixEmptyAndTrim(json.getString("antName"));
         buildFile = Util.fixEmptyAndTrim(json.getString("buildFile"));

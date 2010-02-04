@@ -44,6 +44,9 @@ THE SOFTWARE.
     <f:entry title="${%Relative path to descriptor from module root}" field="relativePathToDescriptorFromModuleRoot">
       <f:textbox />
     </f:entry>
+    <f:entry title="${%Ivy branch}" field="ivyBranch">
+      <f:textbox />
+    </f:entry>
     <j:set var="ants" value="${it.descriptor.antDescriptor.installations}" />
     <j:if test="${empty(ants)}">
       <!-- no Ant installation is configured. this will be an error, so warn the user now -->

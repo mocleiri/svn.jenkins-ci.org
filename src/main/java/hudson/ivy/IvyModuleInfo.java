@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,11 +34,11 @@ import org.apache.ivy.core.module.id.ModuleRevisionId;
 /**
  * Serializable representation of the key information obtained from an ivy
  * descriptor file.
- * 
+ *
  * <p>
  * This is used for the master to introspect the ivy descriptor file, which is
  * only available as {@link ModuleDescriptor} object on slaves.
- * 
+ *
  * @author Timothy Bingaman
  */
 final class IvyModuleInfo implements Serializable {
@@ -48,7 +48,7 @@ final class IvyModuleInfo implements Serializable {
     /**
      * This is a human readable name of the Ivy module. Not necessarily unique
      * or file system safe.
-     * 
+     *
      * @see ModuleRevisionId#getName()
      */
     public final String displayName;
@@ -56,7 +56,7 @@ final class IvyModuleInfo implements Serializable {
     /**
      * Relative path from the workspace to the ivy descriptor file for this
      * module.
-     * 
+     *
      * Strings like "ivy.xml" (if the ivy.xml file is checked out directly in
      * the workspace), "abc/ivy.xml", "foo/bar/zot/ivy.xml".
      */
@@ -64,10 +64,17 @@ final class IvyModuleInfo implements Serializable {
 
     /**
      * Revision number taken from ivy descriptor file.
-     * 
+     *
      * @see ModuleRevisionId#getRevision()
      */
     public final String revision;
+
+    /**
+     * Ivy branch taken from ivy descriptor file.
+     *
+     * @see ModuleRevisionId#getBranch()
+     */
+    public final String branch;
 
     /**
      * Dependency of this project.
@@ -76,8 +83,10 @@ final class IvyModuleInfo implements Serializable {
 
     public IvyModuleInfo(ModuleDescriptor module, String relativePathToDescriptor) {
         this.name = new ModuleName(module);
-        this.revision = module.getModuleRevisionId().getRevision();
-        this.displayName = module.getModuleRevisionId().getName();
+        ModuleRevisionId mrid = module.getModuleRevisionId();
+        this.revision = mrid.getRevision();
+        this.branch = mrid.getBranch();
+        this.displayName = mrid.getName();
         this.relativePathToDescriptor = relativePathToDescriptor;
 
         for (DependencyDescriptor dep : module.getDependencies())
