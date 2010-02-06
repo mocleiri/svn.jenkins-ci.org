@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JobParameterValue (Hudson main module 1.343 API)
+JobParameterValue (Hudson main module 1.344 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-29">
+<META NAME="date" CONTENT="2010-02-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JobParameterValue (Hudson main module 1.343 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JobParameterValue (Hudson main module 1.343 API)";
+        parent.document.title="JobParameterValue (Hudson main module 1.344 API)";
     }
 }
 </SCRIPT>
@@ -166,8 +166,8 @@ Class JobParameterValue</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/JobParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/JobParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
@@ -179,7 +179,7 @@ Class JobParameterValue</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/ParameterValue.html#createBuildWrapper(hudson.model.AbstractBuild)">createBuildWrapper</A>, <A HREF="../../hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A>, <A HREF="../../hudson/model/ParameterValue.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/ParameterValue.html#getDefinition()">getDefinition</A>, <A HREF="../../hudson/model/ParameterValue.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A>, <A HREF="../../hudson/model/ParameterValue.html#getShortDescription()">getShortDescription</A>, <A HREF="../../hudson/model/ParameterValue.html#hashCode()">hashCode</A>, <A HREF="../../hudson/model/ParameterValue.html#setDescription(java.lang.String)">setDescription</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A>, <A HREF="../../hudson/model/ParameterValue.html#createBuildWrapper(hudson.model.AbstractBuild)">createBuildWrapper</A>, <A HREF="../../hudson/model/ParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A>, <A HREF="../../hudson/model/ParameterValue.html#equals(java.lang.Object)">equals</A>, <A HREF="../../hudson/model/ParameterValue.html#getDefinition()">getDefinition</A>, <A HREF="../../hudson/model/ParameterValue.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/ParameterValue.html#getName()">getName</A>, <A HREF="../../hudson/model/ParameterValue.html#getShortDescription()">getShortDescription</A>, <A HREF="../../hudson/model/ParameterValue.html#hashCode()">hashCode</A>, <A HREF="../../hudson/model/ParameterValue.html#setDescription(java.lang.String)">setDescription</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -242,16 +242,16 @@ JobParameterValue</H3>
 </TR>
 </TABLE>
 
-<A NAME="buildEnvVars(hudson.model.AbstractBuild, java.util.Map)"><!-- --></A><H3>
+<A NAME="buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)"><!-- --></A><H3>
 buildEnvVars</H3>
 <PRE>
 public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</PRE>
+                         <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</PRE>
 <DL>
 <DD>Exposes the name/value as an environment variable.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.<DD><CODE>env</CODE> - never null.</DL>

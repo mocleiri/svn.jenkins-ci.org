@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateSite (Hudson main module 1.343 API)
+UpdateSite (Hudson main module 1.344 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-29">
+<META NAME="date" CONTENT="2010-02-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateSite (Hudson main module 1.343 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateSite (Hudson main module 1.343 API)";
+        parent.document.title="UpdateSite (Hudson main module 1.344 API)";
     }
 }
 </SCRIPT>
@@ -206,7 +206,7 @@ Source of the update center information, like "http://hudson-ci.org/update-cente
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.html#doPostBack(java.lang.String)">doPostBack</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;json)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.html#doPostBack(org.kohsuke.stapler.StaplerRequest)">doPostBack</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the endpoint that receives the update center data file from the browser.</TD>
@@ -388,11 +388,10 @@ public long <B>getDataTimestamp</B>()</PRE>
 </DL>
 <HR>
 
-<A NAME="doPostBack(java.lang.String)"><!-- --></A><H3>
+<A NAME="doPostBack(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
 doPostBack</H3>
 <PRE>
-public void <B>doPostBack</B>(<FONT SIZE="-1">@QueryParameter</FONT>
-                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;json)
+public void <B>doPostBack</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/security/GeneralSecurityException.html?is-external=true" title="class or interface in java.security">GeneralSecurityException</A></PRE>
 <DL>

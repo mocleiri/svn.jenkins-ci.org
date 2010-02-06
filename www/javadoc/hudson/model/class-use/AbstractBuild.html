@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.AbstractBuild (Hudson main module 1.343 API)
+Uses of Class hudson.model.AbstractBuild (Hudson main module 1.344 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-29">
+<META NAME="date" CONTENT="2010-02-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.AbstractBuild (Hudson main module 1.343 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.AbstractBuild (Hudson main module 1.343 API)";
+        parent.document.title="Uses of Class hudson.model.AbstractBuild (Hudson main module 1.344 API)";
     }
 }
 </SCRIPT>
@@ -635,8 +635,8 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>BooleanParameterValue.</B><B><A HREF="../../../hudson/model/BooleanParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</CODE>
+<TD><CODE><B>BooleanParameterValue.</B><B><A HREF="../../../hudson/model/BooleanParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
@@ -644,8 +644,8 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>RunParameterValue.</B><B><A HREF="../../../hudson/model/RunParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</CODE>
+<TD><CODE><B>RunParameterValue.</B><B><A HREF="../../../hudson/model/RunParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
@@ -653,8 +653,8 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>JobParameterValue.</B><B><A HREF="../../../hudson/model/JobParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</CODE>
+<TD><CODE><B>JobParameterValue.</B><B><A HREF="../../../hudson/model/JobParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
@@ -662,11 +662,29 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>StringParameterValue.</B><B><A HREF="../../../hudson/model/StringParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</CODE>
+<TD><CODE><B>PasswordParameterValue.</B><B><A HREF="../../../hudson/model/PasswordParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>StringParameterValue.</B><B><A HREF="../../../hudson/model/StringParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ParameterValue.</B><B><A HREF="../../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds environmental variables for the builds to the given map.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -675,7 +693,8 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds environmental variables for the builds to the given map.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.344
+      Use <A HREF="../../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)"><CODE>ParameterValue.buildEnvVars(AbstractBuild, EnvVars)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -726,6 +745,14 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>BooleanParameterValue.</B><B><A HREF="../../../hudson/model/BooleanParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>PasswordParameterValue.</B><B><A HREF="../../../hudson/model/PasswordParameterValue.html#createVariableResolver(hudson.model.AbstractBuild)">createVariableResolver</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1345,6 +1372,18 @@ Uses of <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudso
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs after the <A HREF="../../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A> completes, and performs a tear down.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Maven.</B><B><A HREF="../../../hudson/tasks/Maven.html#wrapUpArguments(hudson.util.ArgumentListBuilder, java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">wrapUpArguments</A></B>(<A HREF="../../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>&nbsp;args,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;normalizedTarget,
+                <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the derived type to make additional modifications to the arguments list.</TD>
 </TR>
 </TABLE>
 &nbsp;

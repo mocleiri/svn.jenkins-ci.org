@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ParameterValue (Hudson main module 1.343 API)
+ParameterValue (Hudson main module 1.344 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-29">
+<META NAME="date" CONTENT="2010-02-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ParameterValue (Hudson main module 1.343 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ParameterValue (Hudson main module 1.343 API)";
+        parent.document.title="ParameterValue (Hudson main module 1.344 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ Class ParameterValue</H2>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/BooleanParameterValue.html" title="class in hudson.model">BooleanParameterValue</A>, <A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>, <A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model">JobParameterValue</A>, <A HREF="../../hudson/model/RunParameterValue.html" title="class in hudson.model">RunParameterValue</A>, <A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/BooleanParameterValue.html" title="class in hudson.model">BooleanParameterValue</A>, <A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>, <A HREF="../../hudson/model/JobParameterValue.html" title="class in hudson.model">JobParameterValue</A>, <A HREF="../../hudson/model/PasswordParameterValue.html" title="class in hudson.model">PasswordParameterValue</A>, <A HREF="../../hudson/model/RunParameterValue.html" title="class in hudson.model">RunParameterValue</A>, <A HREF="../../hudson/model/StringParameterValue.html" title="class in hudson.model">StringParameterValue</A></DD>
 </DL>
 <HR>
 <DL>
@@ -197,11 +197,21 @@ A value for a parameter in a build.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds environmental variables for the builds to the given map.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, java.util.Map)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds environmental variables for the builds to the given map.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.344
+      Use <A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)"><CODE>buildEnvVars(AbstractBuild, EnvVars)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -403,6 +413,9 @@ buildEnvVars</H3>
 public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.344
+      Use <A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)"><CODE>buildEnvVars(AbstractBuild, EnvVars)</CODE></A> instead.</I>
+<P>
 <DD>Adds environmental variables for the builds to the given map.
 
  <p>
@@ -415,10 +428,36 @@ public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" 
  expected to add more values to this map (or do nothing)
 
  <p>
- Environment variables should be by convention all upper case.
- (This is so that a Windows/Unix heterogenous environment
+ <strike>Environment variables should be by convention all upper case.
+ (This is so that a Windows/Unix heterogeneous environment
  won't get inconsistent result depending on which platform to
- execute.)
+ execute.)</strike> (see <A HREF="../../hudson/EnvVars.html" title="class in hudson"><CODE>EnvVars</CODE></A> why upper casing is a bad idea.)
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>env</CODE> - never null.<DD><CODE>build</CODE> - The build for which this parameter is being used. Never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)"><!-- --></A><H3>
+buildEnvVars</H3>
+<PRE>
+public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                         <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</PRE>
+<DL>
+<DD>Adds environmental variables for the builds to the given map.
+
+ <p>
+ This provides a means for a parameter to pass the parameter
+ values to the build to be performed.
+
+ <p>
+ When this method is invoked, the map already contains the
+ current "planned export" list. The implementation is
+ expected to add more values to this map (or do nothing)
 <P>
 <DD><DL>
 </DL>

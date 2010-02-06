@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-EnvVars (Hudson main module 1.343 API)
+EnvVars (Hudson main module 1.344 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-29">
+<META NAME="date" CONTENT="2010-02-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ EnvVars (Hudson main module 1.343 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="EnvVars (Hudson main module 1.343 API)";
+        parent.document.title="EnvVars (Hudson main module 1.344 API)";
     }
 }
 </SCRIPT>
@@ -110,6 +110,20 @@ Class EnvVars</H2>
 Environment variables.
 
  <p>
+ While all the platforms I tested (Linux 2.6, Solaris, and Windows XP) have the case sensitive
+ environment variable table, Windows batch script handles environment variable in the case preserving
+ but case <b>insensitive</b> way (that is, cmd.exe can get both FOO and foo as environment variables
+ when it's launched, and the "set" command will display it accordingly, but "echo %foo%" results in
+ echoing the value of "FOO", not "foo" &mdash; this is presumably caused by the behavior of the underlying
+ Win32 API <tt>GetEnvironmentVariable</tt> acting in case insensitive way.) Windows users are also
+ used to write environment variable case-insensitively (like %Path% vs %PATH%), and you can see many
+ documents on the web that claims Windows environment variables are case insensitive.
+
+ <p>
+ So for a consistent cross platform behavior, it creates the least confusion to make the table
+ case insensitive but case preserving.
+
+ <p>
  In Hudson, often we need to build up "environment variable overrides"
  on master, then to execute the process on slaves. This causes a problem
  when working with variables like <tt>PATH</tt>. So to make this work,
@@ -193,7 +207,7 @@ Environment variables.
 <TD><CODE><B><A HREF="../hudson/EnvVars.html#EnvVars(java.lang.String...)">EnvVars</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>...&nbsp;keyValuePairs)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Builds an environment variables from an array of the form <tt>"key","value","key","value"...</tt></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -372,6 +386,8 @@ EnvVars</H3>
 <PRE>
 public <B>EnvVars</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>...&nbsp;keyValuePairs)</PRE>
 <DL>
+<DD>Builds an environment variables from an array of the form <tt>"key","value","key","value"...</tt>
+<P>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

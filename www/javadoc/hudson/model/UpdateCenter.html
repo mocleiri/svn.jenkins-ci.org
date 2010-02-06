@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateCenter (Hudson main module 1.343 API)
+UpdateCenter (Hudson main module 1.344 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-29">
+<META NAME="date" CONTENT="2010-02-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateCenter (Hudson main module 1.343 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateCenter (Hudson main module 1.343 API)";
+        parent.document.title="UpdateCenter (Hudson main module 1.344 API)";
     }
 }
 </SCRIPT>
@@ -338,6 +338,22 @@ Controls update center capability.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getHudsonJob()">getHudsonJob</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns latest Hudson upgrade job.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getJob(hudson.model.UpdateSite.Plugin)">getJob</A></B>(<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&nbsp;plugin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns latest install/upgrade job for the given plugin.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/UpdateCenter.html#getJobs()">getJobs</A></B>()</CODE>
 
@@ -518,6 +534,40 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-e
 <DD><DL>
 
 <DT><B>Returns:</B><DD>can be empty but never null. Oldest entries first.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJob(hudson.model.UpdateSite.Plugin)"><!-- --></A><H3>
+getJob</H3>
+<PRE>
+public <A HREF="../../hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A> <B>getJob</B>(<A HREF="../../hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>&nbsp;plugin)</PRE>
+<DL>
+<DD>Returns latest install/upgrade job for the given plugin.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>InstallationJob or null if not found</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHudsonJob()"><!-- --></A><H3>
+getHudsonJob</H3>
+<PRE>
+public <A HREF="../../hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A> <B>getHudsonJob</B>()</PRE>
+<DL>
+<DD>Returns latest Hudson upgrade job.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>HudsonUpgradeJob or null if not found</DL>
 </DD>
 </DL>
 <HR>

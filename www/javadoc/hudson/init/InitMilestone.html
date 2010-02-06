@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-InitMilestone (Hudson main module 1.343 API)
+InitMilestone (Hudson main module 1.344 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-01-29">
+<META NAME="date" CONTENT="2010-02-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ InitMilestone (Hudson main module 1.343 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="InitMilestone (Hudson main module 1.343 API)";
+        parent.document.title="InitMilestone (Hudson main module 1.344 API)";
     }
 }
 </SCRIPT>
@@ -162,7 +162,8 @@ Various key milestone in the initialization process of Hudson.
 <TD><CODE><B><A HREF="../../hudson/init/InitMilestone.html#PLUGINS_STARTED">PLUGINS_STARTED</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By this milestone, all plugins start executing.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By this milestone, all plugins start executing, all extension points loaded, descriptors instantiated
+ and loaded.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/init/InitMilestone.html#STARTED">STARTED</A></B></CODE>
@@ -288,7 +289,8 @@ PLUGINS_STARTED</H3>
 <PRE>
 public static final <A HREF="../../hudson/init/InitMilestone.html" title="enum in hudson.init">InitMilestone</A> <B>PLUGINS_STARTED</B></PRE>
 <DL>
-<DD>By this milestone, all plugins start executing.
+<DD>By this milestone, all plugins start executing, all extension points loaded, descriptors instantiated
+ and loaded.
 
  <p>
  This is a separate milestone from <A HREF="../../hudson/init/InitMilestone.html#PLUGINS_PREPARED"><CODE>PLUGINS_PREPARED</CODE></A> since the execution
