@@ -260,9 +260,9 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
      * Calculates the {@link SCMRevisionState} that represents the state of the workspace of the given build.
      *
      * <p>
-     * The returned object is then compared against the {@link SCMRevisionState} returned from
-     * {@link #compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)} to determine
-     * if the build is necessary.
+     * The returned object is then fed into the
+     * {@link #compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)} method
+     * as the baseline {@link SCMRevisionState} to determine if the build is necessary.
      *
      * <p>
      * This method is called after source code is checked out for the given build (that is, after
