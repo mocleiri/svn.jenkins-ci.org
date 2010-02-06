@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import hudson.FilePath;
+import hudson.model.AbstractProject;
 import hudson.slaves.DumbSlave;
 import hudson.model.Cause;
 import hudson.model.FreeStyleBuild;
@@ -71,16 +72,15 @@ import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNCommitClient;
 import org.tmatesoft.svn.core.wc.SVNStatus;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+import sun.misc.Launcher;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -235,7 +235,7 @@ public class SubversionSCMTest extends HudsonTestCase {
     }
 
     /**
-     * {@link SubversionSCM#pollChanges(AbstractProject, Launcher, FilePath, TaskListener)} should notice
+     * {@link SubversionSCM#pollChanges(AbstractProject , Launcher , FilePath, TaskListener)} should notice
      * if the workspace and the current configuration is inconsistent and schedule a new build.
      */
     @Email("http://www.nabble.com/Proper-way-to-switch---relocate-SVN-tree---tt21173306.html")
@@ -283,31 +283,21 @@ public class SubversionSCMTest extends HudsonTestCase {
         // fetch the current workspaces
         FreeStyleProject p = createFreeStyleProject();
         String svnBase = "file://" + new CopyExisting(getClass().getResource("/svn-repo.zip")).allocate().toURI().toURL().getPath();
-        p.setScm(new SubversionSCM(
-        		Arrays.asList(new ModuleLocation(svnBase + "trunk/a", null), new ModuleLocation(svnBase + "branches", null)), 
-        		false, null, null, null, null, null));
+        SubversionSCM scm = new SubversionSCM(
+                Arrays.asList(new ModuleLocation(svnBase + "trunk", null), new ModuleLocation(svnBase + "branches", null)),
+                false, false, null, null, null, null, null);
+        p.setScm(scm);
         FreeStyleBuild build = p.scheduleBuild2(0, new Cause.UserCause()).get();
 
         // as a baseline, this shouldn't detect any change
         TaskListener listener = createTaskListener();
         assertFalse(p.pollSCMChanges(listener));
 
-        // Force older "current revision" for each repository, make sure both are detected
-        Map<String,Long> revInfo = SubversionSCM.parseRevisionFile(build);
-        for (String outOfDateItem : new String[] { "branches", "trunk/a" }) {
-            FileWriter out = new FileWriter(SubversionSCM.getRevisionFile(build));
-            for (Map.Entry<String,Long> entry : revInfo.entrySet()) {
-                out.write(entry.getKey());
-                out.write('/');
-                out.write(Long.toString(
-                    entry.getValue().longValue() - (entry.getKey().endsWith(outOfDateItem) ? 1 : 0)));
-                out.write('\n');
-            }
-            out.close();
-
-            // now the polling should indicate that we need a new build
-            assertTrue("change was not detected!", p.pollSCMChanges(listener));
-        }
+        createCommit(scm,"branches/foo");
+        assertTrue("any change in any of the repository should be detected", p.pollSCMChanges(listener));
+        assertFalse("no change since the last polling",p.pollSCMChanges(listener));
+        createCommit(scm,"trunk/foo");
+        assertTrue("another change in the repo should be detected separately", p.pollSCMChanges(listener));
     }
 
     public void testConfigRoundtrip() throws Exception {
@@ -433,25 +423,39 @@ public class SubversionSCMTest extends HudsonTestCase {
         FreeStyleProject p = createFreeStyleProject();
         p.setScm(scm);
         p.setAssignedLabel(createSlave().getSelfLabel());
-        assertBuildStatusSuccess(p.scheduleBuild2(2).get());
+        assertBuildStatusSuccess(p.scheduleBuild2(0).get());
 
         // initial polling on the slave for the code path that doesn't find any change
         assertFalse(p.pollSCMChanges(new StreamTaskListener(System.out)));
 
-        // create a commit
+        createCommit(scm, "foo");
+
+        // polling on the slave for the code path that doesn't find any change
+        assertTrue(p.pollSCMChanges(new StreamTaskListener(System.out)));
+    }
+
+    /**
+     * Manufactures commits by adding files in the given names.
+     */
+    private void createCommit(SubversionSCM scm, String... paths) throws Exception {
         FreeStyleProject forCommit = createFreeStyleProject();
         forCommit.setScm(scm);
         forCommit.setAssignedLabel(hudson.getSelfLabel());
         FreeStyleBuild b = assertBuildStatusSuccess(forCommit.scheduleBuild2(0).get());
-        FilePath newFile = b.getWorkspace().child("foo");
-        newFile.touch(System.currentTimeMillis());
         SVNClientManager svnm = SubversionSCM.createSvnClientManager();
-        svnm.getWCClient().doAdd(new File(newFile.getRemote()),false,false,false, SVNDepth.INFINITY, false,false);
-        SVNCommitClient cc = svnm.getCommitClient();
-        cc.doCommit(new File[]{new File(newFile.getRemote())},false,"added",null,null,false,false,SVNDepth.EMPTY);
 
-        // polling on the slave for the code path that doesn't find any change
-        assertTrue(p.pollSCMChanges(new StreamTaskListener(System.out)));
+        List<File> added = new ArrayList<File>();
+        for (String path : paths) {
+            FilePath newFile = b.getWorkspace().child(path);
+            added.add(new File(newFile.getRemote()));
+            if (!newFile.exists()) {
+                newFile.touch(System.currentTimeMillis());
+                svnm.getWCClient().doAdd(new File(newFile.getRemote()),false,false,false, SVNDepth.INFINITY, false,false);
+            } else
+                newFile.write("random content","UTF-8");
+        }
+        SVNCommitClient cc = svnm.getCommitClient();
+        cc.doCommit(added.toArray(new File[added.size()]),false,"added",null,null,false,false,SVNDepth.EMPTY);
     }
 
     public void testCompareSVNAuthentications() {
