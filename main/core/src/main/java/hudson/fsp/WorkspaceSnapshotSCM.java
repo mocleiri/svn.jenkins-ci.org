@@ -23,11 +23,11 @@
  */
 package hudson.fsp;
 
+import hudson.scm.PollingResult;
 import hudson.scm.SCM;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCMDescriptor;
 import hudson.scm.SCMRevisionState;
-import hudson.scm.PollingResult;
 import hudson.model.AbstractProject;
 import hudson.model.TaskListener;
 import hudson.model.AbstractBuild;

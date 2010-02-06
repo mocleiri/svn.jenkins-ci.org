@@ -47,6 +47,7 @@ import hudson.org.apache.tools.ant.taskdefs.cvslib.ChangeLogTask;
 import hudson.remoting.Future;
 import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
+import hudson.scm.PollingResult.Change;
 import hudson.security.Permission;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.ForkOutputStream;
@@ -316,19 +317,12 @@ public class CVSSCM extends SCM implements Serializable {
             this.changedFiles = changedFiles;
         }
 
-        public PartialOrder compareTo(SCMRevisionState o) {
-            CVSState that = (CVSState) o;
-            return PartialOrder.from(setCompare(that,this),setCompare(this,that));
-        }
-
-        /**
-         * Is 'a' bigger than 'b'?
-         */
-        private static boolean setCompare(CVSState a, CVSState b) {
-            for (String s : a.changedFiles)
-                if (!b.changedFiles.contains(s))
-                    return true;
-            return false;
+        public Change compareTo(SCMRevisionState that) {
+            if (that instanceof CVSState) {
+                CVSState cs = (CVSState) that;
+                return this.changedFiles.equals(cs.changedFiles) ? Change.SIGNIFICANT : Change.NONE;
+            }
+            return Change.INCOMPARABLE;
         }
     }
 
@@ -342,13 +336,13 @@ public class CVSSCM extends SCM implements Serializable {
         String why = isUpdatable(dir);
         if(why!=null) {
             listener.getLogger().println(Messages.CVSSCM_WorkspaceInconsistent(why));
-            return PollingResult.BUILD_NOW;
+            return new PollingResult(baseline,BASELINE,Change.INCOMPARABLE);
         }
 
         Set<String> changedFiles = update(true, launcher, dir, listener, new Date());
 
         if (changedFiles==null || changedFiles.isEmpty())
-            return new PollingResult(baseline,BASELINE);
+            return new PollingResult(baseline,BASELINE, Change.NONE);
 
          Pattern[] patterns = getExcludedRegionsPatterns();
          if (patterns != null)
@@ -365,7 +359,8 @@ public class CVSSCM extends SCM implements Serializable {
              }
          }
 
-        return new PollingResult(baseline,new CVSState(changedFiles));
+        CVSState s = new CVSState(changedFiles);
+        return new PollingResult(baseline,s,s.compareTo(baseline));
     }
 
     private void configureDate(ArgumentListBuilder cmd, Date date) { // #192

@@ -238,7 +238,7 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
      *
      * @see #supportsPolling()
      *
-     * @deprecated as of 1.337
+     * @deprecated as of 1.HUDSON-2180
      *      Override {@link #calcRevisionsFromBuild(AbstractBuild, Launcher, TaskListener)} and
      *      {@link #compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)} for implementation.
      *
@@ -251,7 +251,9 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
         // up until 1.336, this method was abstract, so everyone should have overridden this method
         // without calling super.pollChanges. So the compatibility implementation is purely for
         // new implementations that doesn't override this method.
-        return poll(project,launcher,workspace,listener,null).hasChanges();
+
+        // not sure if this can be implemented any better
+        return false;
     }
 
     /**
@@ -281,6 +283,8 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
      *      this parameter is null. Otherwise never null.
      * @param listener
      *      Logs during the polling should be sent here.
+     *
+     * @return can be null.
      *
      * @throws InterruptedException
      *      interruption is usually caused by the user aborting the computation.
@@ -315,7 +319,7 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
      *      {@link PollingResult#baseline} should be the value of the baseline parameter, {@link PollingResult#remote}
      *      is the current state of the remote repository (this object only needs to be understandable to the future
      *      invocations of this method),
-     *      and {@link PollingResult#change} that indicates the degree of changes found during the comparison. 
+     *      and {@link PollingResult#change} that indicates the degree of changes found during the comparison.
      *
      * @throws InterruptedException
      *      interruption is usually caused by the user aborting the computation.
@@ -324,13 +328,13 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
     protected abstract PollingResult compareRemoteRevisionWith(AbstractProject<?,?> project, Launcher launcher, FilePath workspace, TaskListener listener, SCMRevisionState baseline) throws IOException, InterruptedException;
 
     /**
-     * Convenience method for the caller to handle the backward compatibility between pre 1.337 SCMs.
+     * Convenience method for the caller to handle the backward compatibility between pre 1.HUDSON-2180 SCMs.
      */
     public final PollingResult poll(AbstractProject<?,?> project, Launcher launcher, FilePath workspace, TaskListener listener, SCMRevisionState baseline) throws IOException, InterruptedException {
         try {
             return compareRemoteRevisionWith(project,launcher,workspace,listener,baseline);
-        } catch (AbstractMethodError e) {// pre 1.337 SCM that doesn't implement new polling methods
-            return new PollingResult(pollChanges(project,launcher,workspace,listener));
+        } catch (AbstractMethodError e) {// pre 1.HUDSON-2180 SCM that doesn't implement new polling methods
+            return pollChanges(project,launcher,workspace,listener) ? PollingResult.SIGNIFICANT : PollingResult.NO_CHANGES;
         }
     }
 

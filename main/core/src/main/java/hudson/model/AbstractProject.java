@@ -1026,7 +1026,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
             try {
                 baseline = getScm().calcRevisionsFromBuild(build, launcher, listener);
             } catch (AbstractMethodError e) {
-                baseline = SCMRevisionState.NONE; // pre-1.337 SCM implementations, which doesn't use the baseline in polling
+                baseline = SCMRevisionState.NONE; // pre-1.HUDSON-2180 SCM implementations, which doesn't use the baseline in polling
             }
         }
         build.addAction(baseline);
@@ -1051,7 +1051,7 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * The caller is responsible for coordinating the mutual exclusion between
      * a build and polling, as both touches the workspace.
      *
-     * @since 1.337
+     * @since 1.HUDSON-2180
      */
     public PollingResult poll( TaskListener listener ) {
         SCM scm = getScm();

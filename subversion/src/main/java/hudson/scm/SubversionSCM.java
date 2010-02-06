@@ -36,6 +36,7 @@ import hudson.XmlFile;
 import hudson.Functions;
 import hudson.Extension;
 import static hudson.Util.fixEmptyAndTrim;
+import hudson.scm.PollingResult.Change;
 import hudson.security.csrf.CrumbIssuer;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
@@ -53,9 +54,6 @@ import hudson.remoting.DelegatingCallable;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
 import hudson.scm.subversion.Messages;
-import static hudson.scm.PollingResult.BUILD_NOW;
-import static hudson.scm.PollingResult.NO_CHANGES;
-import hudson.scm.PollingResult.Change;
 import hudson.triggers.SCMTrigger;
 import hudson.util.EditDistance;
 import hudson.util.IOException2;
@@ -145,6 +143,9 @@ import java.util.UUID;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static hudson.scm.PollingResult.BUILD_NOW;
+import static hudson.scm.PollingResult.NO_CHANGES;
 import static java.util.logging.Level.FINE;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -1029,7 +1030,8 @@ public class SubversionSCM extends SCM implements Serializable {
         private static final long serialVersionUID = 1L;
     }
 
-    public SCMRevisionState getLocalRevision(AbstractBuild<?, ?> build, Launcher launcher, TaskListener listener) throws IOException, InterruptedException {
+    @Override
+    public SCMRevisionState calcRevisionsFromBuild(AbstractBuild<?, ?> build, Launcher launcher, TaskListener listener) throws IOException, InterruptedException {
         // exclude locations that are svn:external-ed with a fixed revision.
         Map<String,Long> wsRev = parseRevisionFile(build,true);
         for (External e : parseExternalsFile(build.getProject()))
@@ -1039,8 +1041,9 @@ public class SubversionSCM extends SCM implements Serializable {
         return new SVNRevisionState(wsRev);
     }
 
+    @Override
     protected PollingResult compareRemoteRevisionWith(AbstractProject<?,?> project, Launcher launcher, FilePath workspace, final TaskListener listener, SCMRevisionState _baseline) throws IOException, InterruptedException {
-        SVNRevisionState baseline = (SVNRevisionState)_baseline;
+        final SVNRevisionState baseline = (SVNRevisionState)_baseline;
         if (project.getLastBuild() == null) {
             listener.getLogger().println("No existing build. Starting a new one");
             return BUILD_NOW;
@@ -1076,7 +1079,7 @@ public class SubversionSCM extends SCM implements Serializable {
         }
         if (ch==null)   ch= MasterComputer.localChannel;
 
-        final SVNRevisionState base = baseline;
+        final SVNLogHandler logHandler = new SVNLogHandler(listener);
         // figure out the remote revisions
         return ch.call(new DelegatingCallable<PollingResult,IOException> () {
             final ISVNAuthenticationProvider authProvider = getDescriptor().createAuthenticationProvider();
@@ -1091,9 +1094,10 @@ public class SubversionSCM extends SCM implements Serializable {
              */
             public PollingResult call() throws IOException {
                 final Map<String,Long> revs = new HashMap<String,Long>();
-                boolean effectiveChanges = false;
+                boolean changes = false;
+                boolean significantChanges = false;
 
-                for (Map.Entry<String,Long> baselineInfo : base.revisions.entrySet()) {
+                for (Map.Entry<String,Long> baselineInfo : baseline.revisions.entrySet()) {
                     String url = baselineInfo.getKey();
                     long baseRev = baselineInfo.getValue();
 
@@ -1101,20 +1105,23 @@ public class SubversionSCM extends SCM implements Serializable {
                         final SVNURL svnurl = SVNURL.parseURIDecoded(url);
                         long nowRev = new SvnInfo(parseSvnInfo(svnurl,authProvider)).revision;
 
+                        changes |= (nowRev>baseRev);
+
                         listener.getLogger().println(Messages.SubversionSCM_pollChanges_remoteRevisionAt(url, nowRev));
                         revs.put(url, nowRev);
                         // make sure there's a change and it isn't excluded
-                        if (new SVNLogHandler(listener).findNonExcludedChanges(svnurl,
+                        if (logHandler.findNonExcludedChanges(svnurl,
                                 baseRev+1, nowRev, authProvider)) {
                             listener.getLogger().println(Messages.SubversionSCM_pollChanges_changedFrom(baseRev));
-                            effectiveChanges = true;
+                            significantChanges = true;
                         }
                     } catch (SVNException e) {
                         e.printStackTrace(listener.error("Failed to check repository revision for "+ url));
                     }
                 }
-                assert revs.size()==base.revisions.size();
-                return new PollingResult(base,new SVNRevisionState(revs), Change.fromBool(effectiveChanges));
+                assert revs.size()== baseline.revisions.size();
+                return new PollingResult(baseline,new SVNRevisionState(revs),
+                        significantChanges ? Change.SIGNIFICANT : changes ? Change.INSIGNIFICANT : Change.NONE);
             }
         });
     }
@@ -1123,7 +1130,7 @@ public class SubversionSCM extends SCM implements Serializable {
      * Goes through the changes between two revisions and see if all the changes
      * are excluded.
      */
-    private final class SVNLogHandler implements ISVNLogEntryHandler {
+    private final class SVNLogHandler implements ISVNLogEntryHandler, Serializable {
         private boolean changesFound = false;
 
         private final TaskListener listener;
@@ -1255,6 +1262,8 @@ public class SubversionSCM extends SCM implements Serializable {
             // Otherwise, a change is a change
             return true;
         }
+
+        private static final long serialVersionUID = 1L;
     }
 
     public ChangeLogParser createChangeLogParser() {

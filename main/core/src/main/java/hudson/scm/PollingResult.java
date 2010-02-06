@@ -4,7 +4,6 @@ import hudson.model.AbstractProject;
 import hudson.model.TaskListener;
 import hudson.Launcher;
 import hudson.FilePath;
-import hudson.util.PartialOrder;
 
 import java.io.Serializable;
 
@@ -16,7 +15,7 @@ import java.io.Serializable;
  * doesn't persist this object.
  *
  * @author Kohsuke Kawaguchi
- * @since 1.337
+ * @since 1.HUDSON-2180
  */
 public final class PollingResult implements Serializable {
     /**
@@ -42,17 +41,26 @@ public final class PollingResult implements Serializable {
      */
     public final Change change;
 
+    /**
+     * Degree of changes between the previous state and this state.
+     */
     public enum Change {
         /**
-         * No change between the baseline and remote. No build will be scheduled.
+         * No change. Two {@link SCMRevisionState}s point to the same state of the same repository / the same commit.
          */
         NONE,
         /**
-         * Changes are detected between the baseline and remote. Hudson will eventually
+         * There are some changes between states, but those changes are not significant enough to consider
+         * a new build. For example, some SCMs allow certain commits to be marked as excluded, and this is how
+         * you can do it.
+         */
+        INSIGNIFICANT,
+        /**
+         * There are changes between states that warrant a new build. Hudson will eventually
          * schedule a new build for this change, subject to other considerations
          * such as the quiet period.
          */
-        SOME,
+        SIGNIFICANT,
         /**
          * The state as of baseline is so different from the current state that they are incomparable
          * (for example, the workspace and the remote repository points to two unrelated repositories
@@ -66,11 +74,7 @@ public final class PollingResult implements Serializable {
          * This constant is not to be confused with the errors encountered during polling, which
          * should result in an exception and eventual retry by Hudson.
          */
-        INCOMPARABLE;
-
-        /*package*/ static Change fromBool(boolean b) {
-            return b? SOME : NONE;
-        }
+        INCOMPARABLE
     }
 
     public PollingResult(SCMRevisionState baseline, SCMRevisionState remote, Change change) {
@@ -80,30 +84,25 @@ public final class PollingResult implements Serializable {
         this.change = change;
     }
 
-    public PollingResult(SCMRevisionState baseline, SCMRevisionState remote) {
-        // SCMRevisions are often partial order, not full order. So to make the comparison robust
-        // any difference is considered as a change, even if it's younger than the baseline
-        // (which could mean a remote rollback, etc.)
-        this(baseline,remote, Change.fromBool(baseline==null || remote.compareTo(baseline)!=PartialOrder.EQUAL));
-    }
-
-    public PollingResult(boolean hasChanges) {
-        this(null,null,Change.fromBool(hasChanges));
+    public PollingResult(Change change) {
+        this(null,null,change);
     }
 
     public boolean hasChanges() {
-        return change.ordinal()>Change.NONE.ordinal();
+        return change.ordinal() > Change.INCOMPARABLE.ordinal();
     }
 
     /**
      * Constant to indicate no changes in the remote repository.
      */
-    public static final PollingResult NO_CHANGES = new PollingResult(false);
+    public static final PollingResult NO_CHANGES = new PollingResult(Change.NONE);
+
+    public static final PollingResult SIGNIFICANT = new PollingResult(Change.SIGNIFICANT);
 
     /**
      * Constant that uses {@link Change#INCOMPARABLE} which forces an immediate build.
      */
-    public static final PollingResult BUILD_NOW = new PollingResult(null,null, Change.INCOMPARABLE);
+    public static final PollingResult BUILD_NOW = new PollingResult(Change.INCOMPARABLE);
 
     private static final long serialVersionUID = 1L;
 }

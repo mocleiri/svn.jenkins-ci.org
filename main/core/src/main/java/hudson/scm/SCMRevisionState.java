@@ -1,6 +1,7 @@
 package hudson.scm;
 
 import hudson.model.AbstractProject;
+import hudson.model.InvisibleAction;
 import hudson.model.TaskListener;
 import hudson.model.Action;
 import hudson.model.AbstractBuild;
@@ -15,46 +16,26 @@ import hudson.util.PartialOrder;
  *
  * <p>
  * This object is used so that the successive polling can compare the tip of the repository now vs
- * what it was when it was last time polled. (Before 1.337, Hudson was only able to compare the tip
+ * what it was when it was last polled. (Before 1.HUDSON-2180, Hudson was only able to compare the tip
  * of the repository vs the state of the workspace, which resulted in a problem like HUDSON-2180.
  *
  * <p>
  * {@link SCMRevisionState} is persisted as an action to {@link AbstractBuild}.
  *
  * @author Kohsuke Kawaguchi
- * @since 1.337
+ * @since 1.HUDSON-2180g
  */
-public abstract class SCMRevisionState implements Action {
-    /**
-     * Compares this state with another state to determine which is newer (=greater.)
-     * <p>
-     * Revision state normally consists of multiple values, so as a whole they result in a partial order.
+public abstract class SCMRevisionState extends InvisibleAction {
+    /*
+      I can't really make this comparable because comparing two revision states often requires
+      non-trivial computation and conversations with the repository (mainly to figure out
+      which changes are insignificant and which are not.)
+
+      So instead, here we opt to a design where we tell SCM upfront about what we are comparing
+      against (baseline), and have it give us the new state and degree of change in PollingResult.
      */
-    public abstract PartialOrder compareTo(SCMRevisionState that);
 
-//
-// implemented as an invisible action by default
-//
-    public String getIconFileName() {
-        return null;
-    }
-
-    public String getDisplayName() {
-        return null;
-    }
-
-    public String getUrlName() {
-        return null;
-    }
-
-    /**
-     * Constant that represents no revision state, which is used with pre-1.337 {@link SCM} implementation.
-     */
     public static SCMRevisionState NONE = new None();
 
-    private static final class None extends SCMRevisionState {
-        public PartialOrder compareTo(SCMRevisionState that) {
-            return PartialOrder.INCOMPARABLE;
-        }
-    }
+    private static final class None extends SCMRevisionState {}
 }
