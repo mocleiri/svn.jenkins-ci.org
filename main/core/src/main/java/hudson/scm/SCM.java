@@ -296,6 +296,13 @@ public abstract class SCM implements Describable<SCM>, ExtensionPoint {
      * Compares the current state of the remote repository against the given baseline {@link SCMRevisionState}.
      *
      * <p>
+     * Conceptually, the act of polling is to take two states of the repository and to compare them to see
+     * if there's any difference. In practice, however, comparing two arbitrary repository states is an expensive
+     * operation, so in this abstraction, we chose to mix (1) the act of building up a repository state and
+     * (2) the act of comparing it with the earlier state, so that SCM implementations can implement this
+     * more easily. 
+     *
+     * <p>
      * Multiple invocations of this method may happen over time to make sure that the remote repository
      * is "quiet" before Hudson schedules a new build.
      *
