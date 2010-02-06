@@ -89,7 +89,7 @@ public final class PollingResult implements Serializable {
     }
 
     public boolean hasChanges() {
-        return change.ordinal() > Change.INCOMPARABLE.ordinal();
+        return change.ordinal() > Change.INSIGNIFICANT.ordinal();
     }
 
     /**
