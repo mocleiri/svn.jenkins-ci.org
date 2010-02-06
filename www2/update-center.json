@@ -2768,18 +2768,21 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/MSBuild+Plugin"
     },
     "mstest":     {
-      "buildDate": "Jun 16, 2009",
+      "buildDate": "Feb 06, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "antonio"}],
-      "excerpt": "This plugin allows you publish MSTest test results",
+      "developers": [      {
+        "developerId": "acmarques",
+        "name": "Antonio Marques"
+      }],
+      "excerpt": "This plugin converts <a href='http://msdn.microsoft.com/en-us/library/ms182486.aspx'>MSTest<\/a> TRX test reports into JUnit XML reports  so it can be integrated with Hudson's JUnit features.",
       "labels": ["report"],
       "name": "mstest",
-      "previousTimestamp": "2009-02-06T08:36:12.00Z",
-      "releaseTimestamp": "2009-06-17T05:00:42.00Z",
-      "requiredCore": "1.310",
+      "previousTimestamp": "2009-06-17T05:00:42.00Z",
+      "releaseTimestamp": "2010-02-06T17:41:08.00Z",
+      "requiredCore": "1.319",
       "title": "MSTest Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mstest/0.4/mstest.hpi",
-      "version": "0.4",
+      "url": "http://hudson-ci.org/download/plugins/mstest/0.5/mstest.hpi",
+      "version": "0.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/MSTest+Plugin"
     },
     "nabaztag":     {
@@ -4155,18 +4158,24 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Testability+Explorer+Plugin"
     },
     "text-finder":     {
-      "buildDate": "May 04, 2009",
+      "buildDate": "Feb 06, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "kohsuke"}],
+      "developers":       [
+                {
+          "developerId": "kohsuke",
+          "name": "Kohsuke Kawaguchi"
+        },
+        {"name": "Santiago Pericas-Geertsen"}
+      ],
       "excerpt": "This plugin lets you search keywords in the files you specified and use that to mark the build as success or a failure.",
       "labels": ["post-build"],
       "name": "text-finder",
-      "previousTimestamp": "2008-11-07T13:54:40.00Z",
-      "releaseTimestamp": "2009-05-05T04:48:48.00Z",
-      "requiredCore": "1.303",
+      "previousTimestamp": "2009-05-05T04:48:48.00Z",
+      "releaseTimestamp": "2010-02-06T17:17:58.00Z",
+      "requiredCore": "1.319",
       "title": "Text-finder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/text-finder/1.7/text-finder.hpi",
-      "version": "1.7",
+      "url": "http://hudson-ci.org/download/plugins/text-finder/1.8/text-finder.hpi",
+      "version": "1.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Text-finder+Plugin"
     },
     "tfs":     {
@@ -4480,15 +4489,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/WebTest+Presenter+Plugin"
     },
     "windmill":     {
-      "buildDate": "Jun 25, 2009",
+      "buildDate": "Feb 06, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "adam"}],
+      "developers": [      {
+        "developerId": "admc",
+        "name": "Adam Christian"
+      }],
+      "excerpt": "This plugin allows you to configure and run <a href='http://www.getwindmill.com/'>Windmill<\/a> functional tests.",
+      "labels": ["external"],
       "name": "windmill",
-      "previousTimestamp": "2009-05-28T21:58:24.00Z",
-      "releaseTimestamp": "2009-06-25T23:40:46.00Z",
-      "requiredCore": "1.312",
-      "url": "http://hudson-ci.org/download/plugins/windmill/1.4/windmill.hpi",
-      "version": "1.4"
+      "previousTimestamp": "2009-06-25T23:40:46.00Z",
+      "releaseTimestamp": "2010-02-06T16:59:22.00Z",
+      "requiredCore": "1.319",
+      "title": "Windmill Plugin",
+      "url": "http://hudson-ci.org/download/plugins/windmill/1.5/windmill.hpi",
+      "version": "1.5",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Windmill+Plugin"
     },
     "xfpanel":     {
       "buildDate": "Jan 09, 2010",
@@ -4569,8 +4585,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "H4I+UTTlOK1ZwqzX6qoCbrgPiEk=",
-    "signature": "g7G206aSGV3V4LqNyz8GWPZS7i/4mgC2d3UKDfpwTVWBipa6LDUniC+eTrduLpKR8eDiQ1/30LU88iUvda1BQ3NyGdnMY9RkSkE5wNILmh0rgOpMk+o54YWO+l0IIZdlF4E1bcIl01fh1SF3EtG+Gib9YyXhwrvo3S1ISa/Omw6x2hnqD0XdIaE5rwdZUQzRpRgVSuDAQtT1WwoRhobhubuR1OHp/oKY0EyeXNAgpTxWeARQbTfgm1cRMcdgi1++GNUplFjMDymDOxiqoY+oTFlYgMd7Bs529Us+UbYcrUxmRFeoWEXEZ8wujyKitmSpS3OQI7KIgEASHi9x2I4rKQ=="
+    "digest": "EvZ6GV6YjMnXKGUKpv+V4wrytcE=",
+    "signature": "eqow6B8BcmUJV0KdbjOUxe3Humbu5se7ZXKgh+RgJrljni4K6eIknLEhMaNep5owN1bpCGTKnYIWGL4GMKXUdbM6AIWVEVd3LyMmGL7LNOtqGhg0f+NUaKS18W6lXBbeP6IKFTygh36Ypj1suB2vopCXci+xgUmfPn/Dy4r/4swG9RLUmZDIRqiaEN1xs/aRBSGWZBHfobv+M3WL7ZFkDrYlMyx7ioVnpgg9tvPA/eX9kTKEyQVtpDoXDU4a2CsN0BQANDhX4QqA5ebcsvDSx3EM8k/8Le2KXsnIf9mX69A5jdHPr0WPFlVOS7i8nPJbjboL9+Kt2XdBRZFP8nJujQ=="
   },
   "updateCenterVersion": "1"
 }
