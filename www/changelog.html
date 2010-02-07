@@ -17,18 +17,21 @@
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
   <li class=bug>
-    Show better error message for missing view type selection when creating a view.
-    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5469">issue 5469</a>)
+    Fixed the broken quiet period implementation when polling interval is shorter than
+    the quiet period.  (Changes in SCM impls are needed for this to take effect.) 
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-2180">issue 2180</a>)
+  <li class=bug>
+    Fix sidepanel link for People to be visible and show view-specific info when appropriate.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5443">issue 5443</a>)
   <li class=bug>
     Improved HTML rendering, not using closing tags that do not exist in HTML.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-5458">issue 5458</a>)
   <li class=bug>
+    Show better error message for missing view type selection when creating a view.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5469">issue 5469</a>)
+  <li class=bug>
     Hudson wasn't properly streaming a large external build submission,
     which can result in OOME and unresponsiveness.
-  <li class=bug>
-    Fixed the broken quiet period implementation when polling interval is shorter than the quiet period.
-    (Changes in SCM impls are needed for this to take effect.) 
-    (<a href="http://issues.hudson-ci.org/browse/HUDSON-2180">issue 2180</a>)
   <li class=rfe>
     Use fixed-width font in text area for shell/batch build steps.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-5471">issue 5471</a>)
