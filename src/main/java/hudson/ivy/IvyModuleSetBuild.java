@@ -27,7 +27,6 @@ import hudson.AbortException;
 import hudson.EnvVars;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.FilePath.FileCallable;
 import hudson.ivy.IvyBuild.ProxyImpl2;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
@@ -44,7 +43,6 @@ import hudson.model.TaskListener;
 import hudson.model.Cause.UpstreamCause;
 import hudson.remoting.Callable;
 import hudson.remoting.Channel;
-import hudson.remoting.VirtualChannel;
 import hudson.scm.ChangeLogSet;
 import hudson.tasks.Ant;
 import hudson.tasks.BuildWrapper;
@@ -531,24 +529,17 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 
             List<IvyModuleInfo> ivyDescriptors;
             try {
-            	boolean preload = getModuleRoot().act(new Callable<Boolean, IOException>() {
-					private static final long serialVersionUID = 1L;
-
-					public Boolean call() throws IOException {
-						try {
-							return Channel.current().preloadJar(this, Ivy.class);
-						} catch (InterruptedException e) {
-						}
-						return false;
-					}
-            	});
-            	logger.println("Preloading of ivy jar succeeded? - " + preload);
-                ivyDescriptors = getModuleRoot().act(new IvyXmlParser(listener, null, project));
+            	IvyXmlParser parser = new IvyXmlParser(listener, null, project, getModuleRoot().getRemote());
+            	if (getModuleRoot().getChannel() instanceof Channel)
+            		((Channel) getModuleRoot().getChannel()).preloadJar(parser, Ivy.class);
+                ivyDescriptors = getModuleRoot().act(parser);
             } catch (IOException e) {
                 if (e.getCause() instanceof AbortException)
                     throw (AbortException) e.getCause();
                 throw e;
-            }
+            } catch (Throwable e) {
+				throw new IOException("Unable to parse ivy descriptors", e);
+			}
 
             // update the module list
             Map<ModuleName, IvyModule> modules = project.modules;
@@ -759,7 +750,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
      * Executed on the slave to parse ivy.xml files and extract information into
      * {@link IvyModuleInfo}, which will be then brought back to the master.
      */
-    private static final class IvyXmlParser implements FileCallable<List<IvyModuleInfo>> {
+    private static final class IvyXmlParser implements Callable<List<IvyModuleInfo>, Throwable> {
         private static final String IVY_XML_PATTERN = "**/ivy.xml";
         private final BuildListener listener;
         /**
@@ -772,8 +763,9 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
         private final String ivyFileExcludePattern;
         private final String alternateSettings;
         private final String ivyBranch;
+        private final String workspace;
 
-        public IvyXmlParser(BuildListener listener, AntInstallation antHome, IvyModuleSet project) {
+        public IvyXmlParser(BuildListener listener, AntInstallation antHome, IvyModuleSet project, String workspace) {
             // project cannot be shipped to the remote JVM, so all the relevant
             // properties need to be captured now.
             this.listener = listener;
@@ -782,9 +774,11 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
             this.ivyFileExcludePattern = project.getIvyFileExcludesPattern();
             this.alternateSettings = project.getAlternateSettings();
             this.ivyBranch = project.getIvyBranch();
+            this.workspace = workspace;
         }
 
-        public List<IvyModuleInfo> invoke(File ws, VirtualChannel channel) throws IOException {
+		public List<IvyModuleInfo> call() throws Throwable {
+			File ws = new File(workspace);
             FileSet ivyFiles = Util.createFileSet(ws, ivyFilePattern, ivyFileExcludePattern);
             final PrintStream logger = listener.getLogger();
 
@@ -867,4 +861,16 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
     public IvyModuleSet getParent() {// don't know why, but javac wants this
         return super.getParent();
     }
+    
+    private static final class IvyPreloadTask implements Callable<Boolean, IOException> {
+		private static final long serialVersionUID = 1L;
+
+		public Boolean call() throws IOException {
+			try {
+				return Channel.current().preloadJar(this, Ivy.class);
+			} catch (InterruptedException e) {
+			}
+			return false;
+		}
+	}
 }
