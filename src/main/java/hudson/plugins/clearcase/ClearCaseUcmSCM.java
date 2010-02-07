@@ -26,7 +26,11 @@ package hudson.plugins.clearcase;
 
 import static hudson.Util.fixEmpty;
 import hudson.Extension;
+import hudson.model.AbstractBuild;
+import hudson.model.Hudson;
 import hudson.model.ModelObject;
+import hudson.model.ViewDescriptor;
+import hudson.plugins.clearcase.ClearCaseSCM.ClearCaseScmDescriptor;
 import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.SaveChangeLogAction;
 import hudson.plugins.clearcase.action.UcmDynamicCheckoutAction;
@@ -41,6 +45,8 @@ import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.util.VariableResolver;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,7 +62,7 @@ import org.kohsuke.stapler.StaplerRequest;
 public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 
     private final String stream;
-    private final String overrideBranchName;
+    private final String overrideBranchName;    
     
     @DataBoundConstructor
     public ClearCaseUcmSCM(String stream, String loadrules, String viewname,
@@ -64,10 +70,13 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
                            String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
                            boolean useUpdate, boolean rmviewonrename,
                            String excludedRegions, String multiSitePollBuffer,
-                           String overrideBranchName, boolean createDynView) {
+                           String overrideBranchName, boolean createDynView,
+                           String winDynStorageDir, String unixDynStorageDir, 
+                           boolean freezeCode, boolean recreateView) {
         super(viewname, mkviewoptionalparam, filterOutDestroySubBranchEvent,
               useUpdate, rmviewonrename, excludedRegions, usedynamicview, 
-              viewdrive, loadrules, multiSitePollBuffer, createDynView, "", "");
+              viewdrive, loadrules, multiSitePollBuffer, createDynView,
+              winDynStorageDir, unixDynStorageDir, freezeCode, recreateView);
         this.stream = shortenStreamName(stream);
         if ((overrideBranchName!=null) && (!overrideBranchName.equals(""))) {
             this.overrideBranchName = overrideBranchName;
@@ -83,7 +92,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
                            String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
                            boolean useUpdate, boolean rmviewonrename) {
         this(stream, loadrules, viewname, usedynamicview, viewdrive, mkviewoptionalparam,
-             filterOutDestroySubBranchEvent, useUpdate, rmviewonrename, "", null, "", false);
+             filterOutDestroySubBranchEvent, useUpdate, rmviewonrename, "", null, "", false, null, null, false, false);
     }
 
     /**
@@ -132,13 +141,17 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 
     @Override
     protected CheckOutAction createCheckOutAction(
-                                                  VariableResolver variableResolver, ClearToolLauncher launcher) {
+                                                  VariableResolver variableResolver, ClearToolLauncher launcher,
+                                                  AbstractBuild build) {
         CheckOutAction action;
         if (isUseDynamicView()) {
             action = new UcmDynamicCheckoutAction(createClearTool(
                                                                   variableResolver, launcher),
                                                   getStream(),
-                                                  isCreateDynView());
+                                                  isCreateDynView(), 
+                                                  getNormalizedWinDynStorageDir(variableResolver), 
+                                                  getNormalizedUnixDynStorageDir(variableResolver), 
+                                                  build, isFreezeCode(), isRecreateView());
         } else {
             action = new UcmSnapshotCheckoutAction(createClearTool(
                                                                    variableResolver, launcher), getStream(), getViewPaths(),
@@ -155,9 +168,12 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     //  }
 
     @Override
-    protected HistoryAction createHistoryAction(VariableResolver variableResolver, ClearToolLauncher launcher) {
+    protected HistoryAction createHistoryAction(VariableResolver variableResolver, ClearToolLauncher launcher
+    		,AbstractBuild build) {
         ClearTool ct = createClearTool(variableResolver, launcher);
-        UcmHistoryAction action = new UcmHistoryAction(ct,isUseDynamicView(),configureFilters(launcher));
+        //String viewName, String stream, String unixDynStorageDir, String winDynStorageDir, String viewDrive
+        UcmHistoryAction action = new UcmHistoryAction(ct,isUseDynamicView(),configureFilters(launcher), 
+        		stream, getViewDrive(), build, isFreezeCode());
 
         try {
             String pwv = ct.pwv(generateNormalizedViewName((BuildVariableResolver) variableResolver));
@@ -255,6 +271,22 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
         public boolean configure(StaplerRequest req, JSONObject json) {
             return true;
         }
+        
+        public String getDefaultWinDynStorageDir() {
+        	ClearCaseSCM.ClearCaseScmDescriptor ccDesc = Hudson.getInstance().getDescriptorByType(ClearCaseScmDescriptor.class);
+        	if (ccDesc != null)
+        		return ccDesc.getDefaultWinDynStorageDir();
+        	
+        	return null;      				
+		}
+
+		public String getDefaultUnixDynStorageDir() {
+	       	ClearCaseSCM.ClearCaseScmDescriptor ccDesc = Hudson.getInstance().getDescriptorByType(ClearCaseScmDescriptor.class);
+        	if (ccDesc != null)
+        		return ccDesc.getDefaultUnixDynStorageDir();
+        	
+        	return null;
+		}        
 
         @Override
         public SCM newInstance(StaplerRequest req, JSONObject formData) throws FormException {
@@ -271,7 +303,11 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
                                                       req.getParameter("ucm.excludedRegions"),
                                                       fixEmpty(req.getParameter("ucm.multiSitePollBuffer")),
                                                       req.getParameter("ucm.overrideBranchName"),
-                                                      req.getParameter("ucm.createDynView") != null
+                                                      req.getParameter("ucm.createDynView") != null,
+                                                      req.getParameter("ucm.winDynStorageDir"),
+                                                      req.getParameter("ucm.unixDynStorageDir"),
+                                                      req.getParameter("ucm.freezeCode") != null,
+                                                      req.getParameter("ucm.recreateView") != null
                                                       );
             return scm;
         }

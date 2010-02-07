@@ -87,9 +87,17 @@ public abstract class AbstractClearCaseScm extends SCM {
     private final boolean useDynamicView;
     private final String viewDrive;
     private int multiSitePollBuffer;
-    private boolean createDynView;
-    private String winDynStorageDir;
-    private String unixDynStorageDir;
+    private final boolean createDynView;
+    private final String winDynStorageDir;
+    private final String unixDynStorageDir;
+    private final boolean freezeCode;
+    private final boolean recreateView;
+    
+    // The actual config spec of the view the build is running in , 
+    // including time rule or any additional rules configured for the build
+    // This is displayed in the "ClearCase Information" report, displayed if the Post-Build action "ClearCase Information" is chosen
+    private String effectiveConfigSpec;
+    protected transient Launcher launcher;
     
     private synchronized ThreadLocal<String> getNormalizedViewNameThreadLocalWrapper() {
     	if (null == this.normalizedViewName) {
@@ -119,7 +127,9 @@ public abstract class AbstractClearCaseScm extends SCM {
                                 final String multiSitePollBuffer,
                                 final boolean createDynView,
                                 final String winDynStorageDir,
-                                final String unixDynStorageDir) {
+                                final String unixDynStorageDir,
+                                final boolean freezeCode,
+                                final boolean recreateView) {
         this.viewName = viewName;
         this.mkviewOptionalParam = mkviewOptionalParam;
         this.filteringOutDestroySubBranchEvent = filterOutDestroySubBranchEvent;
@@ -143,6 +153,8 @@ public abstract class AbstractClearCaseScm extends SCM {
         this.createDynView = createDynView;
         this.winDynStorageDir = winDynStorageDir;
         this.unixDynStorageDir = unixDynStorageDir;
+        this.freezeCode = freezeCode;
+        this.recreateView = recreateView;
     }
     
     /**
@@ -153,7 +165,7 @@ public abstract class AbstractClearCaseScm extends SCM {
      * @return an action that can check out code from a ClearCase repository.
      */
     protected abstract CheckOutAction createCheckOutAction(
-                                                           VariableResolver variableResolver, ClearToolLauncher launcher);
+                                                           VariableResolver variableResolver, ClearToolLauncher launcher, AbstractBuild build);
     
     // /**
     // * Create a PollAction that will be used by the pollChanges() method.
@@ -179,7 +191,8 @@ public abstract class AbstractClearCaseScm extends SCM {
      */
     protected abstract HistoryAction createHistoryAction(
                                                          VariableResolver variableResolver,
-                                                         ClearToolLauncher launcher);
+                                                         ClearToolLauncher launcher, 
+                                                         AbstractBuild build);
     
     /**
      * Create a SaveChangeLog action that is used to save a change log
@@ -221,6 +234,9 @@ public abstract class AbstractClearCaseScm extends SCM {
      *         constructing the config spec, etc.
      */
     public String[] getViewPaths() {
+    	if (getLoadRules().trim().length() == 0)
+    		return null;
+    	
         String[] rules = getLoadRules().split("[\\r\\n]+");
         for (int i = 0; i < rules.length; i++) {
             String rule = rules[i];
@@ -308,9 +324,17 @@ public abstract class AbstractClearCaseScm extends SCM {
 	public String getNormalizedUnixDynStorageDir(VariableResolver variableResolver) {
         String res = Util.replaceMacro(getUnixDynStorageDir(), variableResolver);        
         return res;	
-	}    
+	}	
 
-    /**
+    public boolean isFreezeCode() {
+		return freezeCode;
+	}
+
+	public boolean isRecreateView() {
+		return recreateView;
+	}
+
+	/**
      * Returns the current computer - used in constructor for BuildVariableResolver in place of
      * direct call to Computer.currentComputer() so we can mock it in unit tests.
      */
@@ -414,9 +438,11 @@ public abstract class AbstractClearCaseScm extends SCM {
         VariableResolver variableResolver = new BuildVariableResolver(build, getCurrentComputer());
         
         CheckOutAction checkoutAction = createCheckOutAction(variableResolver,
-                                                             clearToolLauncher);
+                                                             clearToolLauncher,
+                                                             build);
         HistoryAction historyAction = createHistoryAction(variableResolver,
-                                                          clearToolLauncher);
+                                                          clearToolLauncher,
+                                                          build);
         SaveChangeLogAction saveChangeLogAction = createSaveChangeLogAction(clearToolLauncher);
 
         // Checkout code
@@ -477,7 +503,8 @@ public abstract class AbstractClearCaseScm extends SCM {
         VariableResolver variableResolver = new BuildVariableResolver((AbstractBuild<?, ?>) lastBuild, getBuildComputer((AbstractBuild<?,?>) lastBuild));
 
         HistoryAction historyAction = createHistoryAction(variableResolver,
-                                                          createClearToolLauncher(listener, workspace, launcher));
+                                                          createClearToolLauncher(listener, workspace, launcher),
+                                                          (AbstractBuild)lastBuild);
 
         String poNormalizedViewName = generateNormalizedViewName((BuildVariableResolver) variableResolver);
 
@@ -624,7 +651,9 @@ public abstract class AbstractClearCaseScm extends SCM {
             }
         }
 
-        String filterRegexp = getViewPathsRegexp(getViewPaths(),ctLauncher.getLauncher().isUnix());
+        String filterRegexp = "";
+        if (getViewPaths() != null)	
+        	filterRegexp = getViewPathsRegexp(getViewPaths(),ctLauncher.getLauncher().isUnix());
 
         if (!filterRegexp.equals("")) {
             filters.add(new FileFilter(FileFilter.Type.ContainsRegxp, filterRegexp));

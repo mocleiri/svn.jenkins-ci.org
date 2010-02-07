@@ -50,8 +50,7 @@
   </f:entry>
   
   <f:entry title="Load rules" help="/plugin/clearcase/loadrules.html">
-    <f:textarea name="ucm.loadrules" value="${scm.loadRules}" 
-                checkUrl="'${rootURL}/scm/ClearCaseSCM/mandatoryCheck?errorText='+escape('Load rules are mandatory')+'&amp;value='+escape(this.value)" />
+    <f:textarea name="ucm.loadrules" value="${scm.loadRules}" />
   </f:entry>
   
   <f:advanced>
@@ -103,10 +102,30 @@
               </j:otherwise>
             </j:choose>
           </f:entry>
-          <f:entry title="Create Dynamic View">
-            <f:checkbox name="ucm.createDynView" checked="${scm.createDynView}"/>
-            If checked, Hudson will create the dynamic view, rather than use an existing one.
+          
+          <f:optionalBlock name="ucm.createDynView" title="Create Dynamic View"
+                         checked="${scm.createDynView}" help="/plugin/clearcase/dynamicview.html">
+                         
+            <f:entry title="Freeze Code">
+				<f:checkbox name="ucm.freezeCode" checked="${scm.freezeCode}"/>
+				If checked, Hudson will create a child stream under the configured stream and will use it for the build, 
+				locking the view contents in as of the beginning of the build, even if files are
+			  	changed on the parent stream during the build.
           </f:entry>
+          	        
+	        <f:entry title="Remove and recreate view on each build">
+					<f:checkbox name="ucm.recreateView" checked="${scm.recreateView}"/>
+	        </f:entry>	                         
+		    
+		    <f:entry title="Windows dynamic view storage directory" help="/plugin/clearcase/dynamicViewStorage.html">
+		      <f:textbox name="ucm.winDynStorageDir" value="${h.defaulted(scm.winDynStorageDir, descriptor.defaultWinDynStorageDir)}" />
+		    </f:entry>  
+		    
+		    <f:entry title="Unix dynamic view storage directory" help="/plugin/clearcase/dynamicViewStorage.html">
+		      <f:textbox name="ucm.unixDynStorageDir" value="${h.defaulted(scm.unixDynStorageDir, descriptor.defaultUnixDynStorageDir)}" />
+		    </f:entry>				                         
+		  </f:optionalBlock>
+
 
         </f:optionalBlock>
       </table>
