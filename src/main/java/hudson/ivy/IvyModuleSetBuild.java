@@ -42,6 +42,7 @@ import hudson.model.Result;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.model.Cause.UpstreamCause;
+import hudson.remoting.Callable;
 import hudson.remoting.Channel;
 import hudson.remoting.VirtualChannel;
 import hudson.scm.ChangeLogSet;
@@ -530,6 +531,18 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 
             List<IvyModuleInfo> ivyDescriptors;
             try {
+            	boolean preload = getModuleRoot().act(new Callable<Boolean, IOException>() {
+					private static final long serialVersionUID = 1L;
+
+					public Boolean call() throws IOException {
+						try {
+							return Channel.current().preloadJar(this, Ivy.class);
+						} catch (InterruptedException e) {
+						}
+						return false;
+					}
+            	});
+            	logger.println("Preloading of ivy jar succeeded? - " + preload);
                 ivyDescriptors = getModuleRoot().act(new IvyXmlParser(listener, null, project));
             } catch (IOException e) {
                 if (e.getCause() instanceof AbortException)
@@ -773,7 +786,6 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 
         public List<IvyModuleInfo> invoke(File ws, VirtualChannel channel) throws IOException {
             FileSet ivyFiles = Util.createFileSet(ws, ivyFilePattern, ivyFileExcludePattern);
-
             final PrintStream logger = listener.getLogger();
 
             Ivy ivy = getIvy(logger);
@@ -835,7 +847,8 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                     ivy.getSettings().setDefaultBranch(ivyBranch);
                 configured = ivy;
             } catch (Exception e) {
-                logger.println("Error while reading the default Ivy 2.1 settings");
+                logger.println("Error while reading the default Ivy 2.1 settings: " + e.getMessage());
+                logger.println(e.getStackTrace());
             }
             return configured;
         }
