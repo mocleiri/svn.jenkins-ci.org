@@ -1,0 +1,27 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+	xmlns:i="jelly:fmt">
+	<j:if test="${job.broken == false}">
+		<p>Tests: ${job.successPercentage} ${job.successCount}/${job.testCount}
+		<j:if test="${job.diff != ''}">
+			(
+			<font color="${job.diffColor}">${job.diff}</font>
+			)
+		</j:if>
+		<j:if test="${job.queued == true}">
+			; Build Queued: #${job.queueNumber}
+		</j:if>
+		</p>
+	</j:if>
+	<j:if test="${!job.getStable()}">
+		<j:if test="${job.getCulprit() != &quot; - &quot;}">
+			<p>Last changed by: ${job.culprit}</p>
+		</j:if>
+		<j:if test="${job.getLastCompletedBuild() != null &amp;&amp; job.queued != true} ">
+			<p>Last Built: ${job.getLastCompletedBuild()}</p>
+		</j:if>
+		<j:if test="${job.getLastStableBuild() != null}">
+			<p>Last Stable: ${job.getLastStableBuild()}</p>
+		</j:if>
+	</j:if>
+</j:jelly>

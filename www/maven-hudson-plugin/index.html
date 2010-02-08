@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+<html>
+  <head>
+    <title>Maven Hudson Plugin - Introduction</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <!-- TODO: move this into JavaScript to patch the skin
+      <div class="xright">  </div>
+    -->
+    <div id="leftColumn">
+      <div id="navcolumn">
+             <dl class=navgroup>
+        <dt>Documentation</dt>
+        <dd><ul>
+              
+    <li class="none">
+              <strong>Introduction</strong>
+        </li>
+          </ul></dd>
+    </dl>
+      <dl class=navgroup>
+        <dt>Project Documentation</dt>
+        <dd><ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+              <a href="project-info.html">Project Information</a>
+              </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+              <a href="project-reports.html">Project Reports</a>
+              </li>
+          </ul></dd>
+    </dl>
+      <dl class=navgroup>
+        <dt>Parent Project</dt>
+        <dd><ul>
+              
+    <li class="none">
+              <a href="https://test-support.dev.java.net/master-project/master-public-java/master-public-maven-plugin/index.html">Master Maven POM for Public Maven Plugins</a>
+        </li>
+          </ul></dd>
+    </dl>
+        </div>
+      <script>
+        // replace the java.net project tools with the navigation bar from Maven.
+        // also get rid of "Get Involved" thingie too, while we are at it
+        var pt = document.getElementById("projecttools");
+        var nv = document.getElementById("navcolumn");
+        
+        while(pt.previousSibling!=null)
+          pt.parentNode.removeChild(pt.previousSibling);
+        
+        pt.parentNode.insertBefore(nv,pt);
+        pt.parentNode.removeChild(pt);
+      </script>
+      <script>
+        // kill "description" h3 bar
+        var ld = document.getElementById("longdescription");
+        if(ld!=null) {
+          for( n=ld.firstChild; n!=null; n=n.nextSibling ) {
+            if(n.nodeType==1 && n.innerHTML=="Description" ) {
+              n.parentNode.removeChild(n);
+              break;
+            }
+          }
+        }
+      </script>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Introduction</h2>
+<p>This plugin exists to create a job on a Hudson build server. It obtains the base Hudson URL either through the <tt>ciManagement</tt> section of the pom or a <tt>hudson.url</tt> property. At the present time, this plugin assumes the use of Subversion.</p>
+<div class="section"><h3>Goals Overview</h3>
+<p>The Hudson Plugin has five goal:</p>
+<ul><li><a href="add-job-mojo.html">hudson:add-job</a> creates the job on Hudson.</li>
+<li><a href="replace-job-mojo.html">hudson:replace-job</a> replaces a job's configuration in Hudson.</li>
+<li><a href="build-all-mojo.html">hudson:build-all</a> builds every job in Hudson.</li>
+<li><a href="adjust-violations-mojo.html">hudson:adjust-violations</a> changes the settings of the Violations plugin.</li>
+<li><a href="add-twitter-mojo.html">hudson:add-twitter</a> adds Twitter notifications.</li>
+</ul>
+</div>
+<div class="section"><h3>Authentication</h3>
+<p>The Hudson plugin supports passing HTTP authentication to the Hudson server. The credentials used are retrieved from the Maven settings.xml file. Since the <tt>ciManagement</tt> element within the pom doesn't support an id attribute, the server id is generated from the Hudson URL. If you have this <tt>ciManagement</tt> section in your pom:</p>
+<div class="source"><pre>&lt;ciManagement&gt;
+  &lt;system&gt;hudson&lt;/system&gt;
+  &lt;url&gt;http://myserver/hudson/&lt;/url&gt;
+&lt;/ciManagement&gt;      </pre>
+</div>
+<p>Then you need to have this in your settings.xml file:</p>
+<div class="source"><pre>&lt;server&gt;
+  &lt;id&gt;myserver&lt;/id&gt;
+  &lt;username&gt;USERNAME&lt;/username&gt;
+  &lt;password&gt;PASSWORD&lt;/password&gt;
+&lt;/server&gt;     </pre>
+</div>
+<p>If your Hudson URL is on a non-default port, e.g.</p>
+<div class="source"><pre>&lt;ciManagement&gt;
+  &lt;system&gt;hudson&lt;/system&gt;
+  &lt;url&gt;http://myserver:81/hudson/&lt;/url&gt;
+&lt;/ciManagement&gt;      </pre>
+</div>
+<p>Then you need to have this in your settings.xml file:</p>
+<div class="source"><pre>&lt;server&gt;
+  &lt;id&gt;myserver:81&lt;/id&gt;
+  &lt;username&gt;USERNAME&lt;/username&gt;
+  &lt;password&gt;PASSWORD&lt;/password&gt;
+&lt;/server&gt;     </pre>
+</div>
+</div>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          1981-2008
+    
+          MTV Networks
+          
+  
+
+  
+  
+  &nbsp;| Last Published: 10/27/2008
+  &nbsp;| Version: 2.0-alpha-2
+</div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
