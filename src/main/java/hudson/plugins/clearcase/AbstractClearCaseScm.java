@@ -452,6 +452,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         // ClearCase report and view deletion mechanism will use this information
         ClearCaseDataAction dataAction = new ClearCaseDataAction();        
         dataAction.getUsedViewNamesList().add(coNormalizedViewName);
+        build.addAction(dataAction);
         
         if (checkoutAction.checkout(launcher, workspace, coNormalizedViewName)) {
             
