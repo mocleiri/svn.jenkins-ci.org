@@ -422,7 +422,8 @@ public class IvyBuild extends AbstractIvyBuild<IvyModule, IvyBuild> {
                 buildEnvironments.add(e);
             }
 
-            Ant ant = new Ant(getProject().getTargets(), mms.getAnt().getName(), mms.getAntOpts(), getModuleRoot().child(mms.getBuildFile())
+            String buildFile = (mms.getBuildFile() == null) ? "build.xml" : mms.getBuildFile();
+            Ant ant = new Ant(getProject().getTargets(), mms.getAnt().getName(), mms.getAntOpts(), getModuleRoot().child(buildFile)
                     .getName(), mms.getAntProperties());
             if (ant.perform(IvyBuild.this, launcher, listener))
                 return Result.SUCCESS;

@@ -477,7 +477,8 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 //                        }
 
                         // TODO: remove once the proxying support is finished.
-                        Ant ant = new Ant(getProject().getTargets(), antInstallation.getName(), project.getAntOpts(), getModuleRoot().child(project.getBuildFile())
+                        String buildFile = (project.getBuildFile() == null) ? "build.xml" : project.getBuildFile();
+                        Ant ant = new Ant(getProject().getTargets(), antInstallation.getName(), project.getAntOpts(), getModuleRoot().child(buildFile)
                                 .getName(), project.getAntProperties());
                         if (ant.perform(IvyModuleSetBuild.this, launcher, listener))
                             return Result.SUCCESS;
@@ -861,7 +862,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
     public IvyModuleSet getParent() {// don't know why, but javac wants this
         return super.getParent();
     }
-    
+
     private static final class IvyPreloadTask implements Callable<Boolean, IOException> {
 		private static final long serialVersionUID = 1L;
 
