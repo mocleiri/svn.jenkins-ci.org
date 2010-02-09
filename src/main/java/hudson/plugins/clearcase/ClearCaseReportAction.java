@@ -4,25 +4,15 @@ import java.util.List;
 
 import hudson.model.Action;
 import hudson.model.AbstractBuild;
-import hudson.plugins.clearcase.ucm.LatestBaselinesAction;
 import hudson.plugins.clearcase.ucm.UcmCommon;
 
 public class ClearCaseReportAction implements Action {
 
 	private AbstractBuild<?,?> build;
-	private String cspec;
-	private String stream;
 	private static String urlName = "clearcaseInformation";
 	
 	public ClearCaseReportAction(AbstractBuild<?,?> build) {
         this.build = build;
-        
-        if (build.getProject().getScm() instanceof ClearCaseSCM) {     
-        	this.cspec = ((ClearCaseSCM) build.getProject().getScm()).getEffectiveConfigSpec();
-        }
-        else {
-        	this.stream = ((ClearCaseUcmSCM) build.getProject().getScm()).getStream();
-        }
 	}
 	
     public String getIconFileName(){
@@ -47,17 +37,18 @@ public class ClearCaseReportAction implements Action {
 	}
 
     public String getConfigSpecHtml() {
-    	String configSpecHtml = cspec;
+    	String configSpecHtml = getCspec();
     	configSpecHtml = configSpecHtml.replaceAll("\n","<br/>");
     	return configSpecHtml;
     }
     
     public boolean isCspec() {
-    	return cspec.length() > 0;
+    	String cspec = getCspec(); 	
+        return (cspec != null && cspec.trim().length() > 0);
     }
     
     public List<UcmCommon.BaselineDesc> getBaselines() {
-    	LatestBaselinesAction baselinesAction = build.getPreviousBuild().getAction(LatestBaselinesAction.class);
+    	ClearCaseDataAction baselinesAction = build.getAction(ClearCaseDataAction.class);
     	
     	if (baselinesAction != null) {
     		return baselinesAction.getLatestBlsOnConfgiuredStream();
@@ -68,12 +59,28 @@ public class ClearCaseReportAction implements Action {
     }
     
     public boolean isBaselineInfo() {
-    	LatestBaselinesAction baselinesAction = build.getPreviousBuild().getAction(LatestBaselinesAction.class);    	
+    	ClearCaseDataAction baselinesAction = build.getAction(ClearCaseDataAction.class);    	
     	return (baselinesAction != null);
     }
 
 	public String getStream() {
-		return stream;
-	}   
+    	String stream = null;
+    	
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        if (dataAction != null)
+        	stream = dataAction.getStream();
+        
+        return stream;
+	}  
+	
+	private String getCspec() {
+    	String cspec = null;
+    	
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        if (dataAction != null)
+        	cspec = dataAction.getCsepc();
+        
+        return cspec;
+	}
     
 }

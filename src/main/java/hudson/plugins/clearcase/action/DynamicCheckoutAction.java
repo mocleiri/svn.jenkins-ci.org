@@ -26,6 +26,8 @@ package hudson.plugins.clearcase.action;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.model.AbstractBuild;
+import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.util.PathUtil;
 
@@ -51,9 +53,11 @@ public class DynamicCheckoutAction implements CheckOutAction {
     private boolean createDynView;
     private String winDynStorageDir;
     private String unixDynStorageDir;
+    private AbstractBuild build;
 
     public DynamicCheckoutAction(ClearTool cleartool, String configSpec, boolean doNotUpdateConfigSpec, boolean useTimeRule,
-                                 boolean createDynView, String winDynStorageDir,String unixDynStorageDir) {
+                                 boolean createDynView, String winDynStorageDir,String unixDynStorageDir,
+                                 AbstractBuild build) {
         this.cleartool = cleartool;
         this.configSpec = configSpec;
         this.doNotUpdateConfigSpec = doNotUpdateConfigSpec;
@@ -61,6 +65,7 @@ public class DynamicCheckoutAction implements CheckOutAction {
         this.createDynView = createDynView;
         this.winDynStorageDir = winDynStorageDir;
         this.unixDynStorageDir = unixDynStorageDir;
+        this.build = build;
     }
 
     public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException { 
@@ -98,6 +103,7 @@ public class DynamicCheckoutAction implements CheckOutAction {
         cleartool.startView(viewName);
         String currentConfigSpec = cleartool.catcs(viewName).trim();
         String tempConfigSpec;
+        String effectiveConfigSpec = "";
 
         if (useTimeRule) {
             tempConfigSpec = PathUtil.convertPathForOS("time " + getTimeRule() + "\n" + configSpec + "\nend time\n",
@@ -110,11 +116,21 @@ public class DynamicCheckoutAction implements CheckOutAction {
         if (!doNotUpdateConfigSpec) {
             if (!tempConfigSpec.trim().replaceAll("\r\n", "\n").equals(currentConfigSpec)) {
                 cleartool.setcs(viewName, tempConfigSpec);
+                effectiveConfigSpec = tempConfigSpec;
             }
             else {
                 cleartool.setcs(viewName, null);
             }
         }
+        else {
+        	effectiveConfigSpec = currentConfigSpec;
+        }
+        
+        // add config spec to dataAction
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        if (dataAction != null)
+        	dataAction.setCsepc(effectiveConfigSpec);
+        
         return true;
     }
 

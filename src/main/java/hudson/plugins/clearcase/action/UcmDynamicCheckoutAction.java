@@ -29,7 +29,7 @@ import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearToolLauncher;
-import hudson.plugins.clearcase.ucm.LatestBaselinesAction;
+import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.ucm.UcmCommon;
 
 import java.io.IOException;
@@ -90,6 +90,11 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
             cleartool.syncronizeViewWithStream(viewName, stream);        	
         }
         
+        // add stream to data action (to be used by ClearCase report)
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        if (dataAction != null)
+        	dataAction.setStream(stream);     
+        
         return true;
     }
     
@@ -116,7 +121,10 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         UcmCommon.rebase(cleartool.getLauncher(), viewName, latestBlsOnConfgiuredStream);
     	
         // add baselines to build - to be later used by getChange 
-        build.addAction(new LatestBaselinesAction(latestBlsOnConfgiuredStream));
+
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        if (dataAction != null)
+        	dataAction.setLatestBlsOnConfgiuredStream(latestBlsOnConfgiuredStream);       
         
     	return true;
     }

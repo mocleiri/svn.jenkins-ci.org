@@ -166,7 +166,8 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
                                                doNotUpdateConfigSpec, useTimeRule,
                                                isCreateDynView(), 
                                                getNormalizedWinDynStorageDir(variableResolver), 
-                                               getNormalizedUnixDynStorageDir(variableResolver));
+                                               getNormalizedUnixDynStorageDir(variableResolver), 
+                                               build);
         } else {
             action = new SnapshotCheckoutAction(createClearTool(
                                                                 variableResolver, launcher), 
@@ -445,4 +446,5 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
             baos.writeTo(rsp.getOutputStream());
         }
     }
+
 }

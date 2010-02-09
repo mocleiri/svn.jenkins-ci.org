@@ -27,6 +27,7 @@ package hudson.plugins.clearcase.ucm;
 import static hudson.plugins.clearcase.util.OutputFormat.*;
 import hudson.model.AbstractBuild;
 import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.action.UcmDynamicCheckoutAction;
 import hudson.plugins.clearcase.history.AbstractHistoryAction;
 import hudson.plugins.clearcase.history.Filter;
@@ -239,7 +240,7 @@ public class UcmHistoryAction extends AbstractHistoryAction {
         
         // get previous build baselines (set as an action on the previous build by the checkout operation)
         List<UcmCommon.BaselineDesc> previousBuildBls = null;
-    	LatestBaselinesAction previousBaselinesAction = build.getAction(LatestBaselinesAction.class);
+    	ClearCaseDataAction previousBaselinesAction = build.getAction(ClearCaseDataAction.class);
         if (previousBaselinesAction != null)
         	previousBuildBls = previousBaselinesAction.getLatestBlsOnConfgiuredStream();        
         
@@ -270,12 +271,12 @@ public class UcmHistoryAction extends AbstractHistoryAction {
     	List<HistoryEntry> entries = new ArrayList<HistoryEntry>();
         
         // get latest baselines on the configured stream (set as an action on the build by the checkout operation)
-    	LatestBaselinesAction latestBaselinesAction = build.getAction(LatestBaselinesAction.class);
+    	ClearCaseDataAction latestBaselinesAction = build.getAction(ClearCaseDataAction.class);
         List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = latestBaselinesAction.getLatestBlsOnConfgiuredStream();
         
         // get previous build baselines (set as an action on the previous build by the checkout operation)
         List<UcmCommon.BaselineDesc> previousBuildBls = null;
-    	LatestBaselinesAction previousBaselinesAction = build.getPreviousBuild().getAction(LatestBaselinesAction.class);
+    	ClearCaseDataAction previousBaselinesAction = build.getPreviousBuild().getAction(ClearCaseDataAction.class);
         if (previousBaselinesAction != null)
         	previousBuildBls = previousBaselinesAction.getLatestBlsOnConfgiuredStream();
 		

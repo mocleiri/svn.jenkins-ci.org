@@ -444,9 +444,14 @@ public abstract class AbstractClearCaseScm extends SCM {
                                                           clearToolLauncher,
                                                           build);
         SaveChangeLogAction saveChangeLogAction = createSaveChangeLogAction(clearToolLauncher);
-
+        
         // Checkout code
         String coNormalizedViewName = generateNormalizedViewName(build);
+        
+        // add ClearCaseDataAction - helper to save scm data such as cspec, baselines, viewname, etc.
+        // ClearCase report and view deletion mechanism will use this information
+        ClearCaseDataAction dataAction = new ClearCaseDataAction();        
+        dataAction.getUsedViewNamesList().add(coNormalizedViewName);
         
         if (checkoutAction.checkout(launcher, workspace, coNormalizedViewName)) {
             
