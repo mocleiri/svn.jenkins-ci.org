@@ -24,14 +24,14 @@
 package hudson.model;
 
 import hudson.Extension;
+import hudson.Util;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import net.sf.json.JSONObject;
 import org.jvnet.localizer.LocaleProvider;
-import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * A UserProperty that remembers user's locale.
@@ -68,18 +68,36 @@ public class UserLocaleProperty extends UserProperty {
         return SUPPORTED_LOCALES.clone();
     }
 
-    private final Locale locale;
+    private final String locale;
 
-    public UserLocaleProperty(Locale locale) {
-        this.locale = locale;
+    @DataBoundConstructor
+    public UserLocaleProperty(String locale) {
+        this.locale = Util.fixEmptyAndTrim(locale);
     }
 
     public Locale getLocale() {
-        return locale;
+        return parse(locale);
     }
 
     public Locale getDisplayLocale() {
-        return locale != null ? locale : LocaleProvider.getLocale();
+        return locale != null ? parse(locale) : LocaleProvider.getLocale();
+    }
+
+    /**
+     * "ja_JP" -> Locale("ja", "JP")
+     */
+    private Locale parse(String value) {
+        String parts[] = value.split("_");
+        switch (parts.length) {
+            case 1:
+                return new Locale(parts[0]);
+            case 2:
+                return new Locale(parts[0], parts[1]);
+            case 3:
+                return new Locale(parts[0], parts[1], parts[2]);
+            default:
+                return null;
+        }
     }
 
     @Extension
@@ -91,29 +109,9 @@ public class UserLocaleProperty extends UserProperty {
         }
 
         @Override
-        public UserProperty newInstance(StaplerRequest req, JSONObject formData) throws FormException {
-            String value = formData.getString("locale");
-            Locale locale = str2Locale(value);
-            return new UserLocaleProperty(locale);
-        }
-
-        @Override
         public UserProperty newInstance(User user) {
             return new UserLocaleProperty(null);
         }
 
-        /**
-         * "ja_JP" -> Locale("ja", "JP"). variant is not supported.
-         */
-        private Locale str2Locale(String value) {
-            if (value == null || value.length() == 0)
-                return null;
-            String parts[] = value.split("_", -1);
-            if (parts.length == 1) 
-                return new Locale(parts[0]);
-            else if (parts.length == 2) 
-                return new Locale(parts[0], parts[1]);
-            return null;
-        }
     }
 }
