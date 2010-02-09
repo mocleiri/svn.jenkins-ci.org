@@ -387,24 +387,29 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
         // if the build style is the aggregator build, define dependencies
         // against project,
         // not module.
-        AbstractProject dest = getParent().isAggregatorStyleBuild() ? getParent() : this;
+        AbstractProject downstream = getParent().isAggregatorStyleBuild() ? getParent() : this;
 
         for (ModuleDependency d : dependencies) {
             IvyModule src = modules.get(d);
             if (src == null)
                 src = modules.get(d.withUnknownRevision());
-            if (src != null) {
-                if(src.getParent().isAggregatorStyleBuild() && !hasDependency(graph, src.getParent(), dest))
-                    graph.addDependency(new IvyDependency(src.getParent(), dest, Result.SUCCESS));
-                else if (!graph.getDownstream(src).contains(dest))
-                    graph.addDependency(new IvyDependency(src, dest, Result.SUCCESS));
-            }
+            if (src == null)
+                continue;
+
+            AbstractProject upstream;
+            if (src.getParent().isAggregatorStyleBuild())
+                upstream = src.getParent();
+            else
+                upstream = src;
+
+            if (!hasDependency(graph, upstream, downstream))
+                graph.addDependency(new IvyDependency(upstream, downstream, Result.SUCCESS));
         }
     }
 
-    private boolean hasDependency(DependencyGraph graph, AbstractProject parent, AbstractProject dest) {
-        for (Dependency dep : graph.getDownstreamDependencies(parent)) {
-            if (dep instanceof IvyDependency && dep.getDownstreamProject().equals(dest))
+    private boolean hasDependency(DependencyGraph graph, AbstractProject upstream, AbstractProject downstream) {
+        for (Dependency dep : graph.getDownstreamDependencies(upstream)) {
+            if (dep instanceof IvyDependency && dep.getDownstreamProject().equals(downstream))
                 return true;
         }
         return false;
