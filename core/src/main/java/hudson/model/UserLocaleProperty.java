@@ -87,7 +87,9 @@ public class UserLocaleProperty extends UserProperty {
      * "ja_JP" -> Locale("ja", "JP")
      */
     private Locale parse(String value) {
-        String parts[] = value.split("_");
+        if (value == null)
+            return null;
+        String parts[] = value.trim().split("_");
         switch (parts.length) {
             case 1:
                 return new Locale(parts[0]);
