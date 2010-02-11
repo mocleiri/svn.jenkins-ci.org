@@ -24,7 +24,7 @@
 package hudson.ivy;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.ivy.core.module.descriptor.DependencyDescriptor;
@@ -79,13 +79,14 @@ final class IvyModuleInfo implements Serializable {
     /**
      * Dependency of this project.
      */
-    public final Set<ModuleDependency> dependencies = new HashSet<ModuleDependency>();
+    public final Set<ModuleDependency> dependencies = new LinkedHashSet<ModuleDependency>();
 
     public IvyModuleInfo(ModuleDescriptor module, String relativePathToDescriptor) {
         this.name = new ModuleName(module);
         ModuleRevisionId mrid = module.getModuleRevisionId();
-        this.revision = mrid.getRevision();
-        this.branch = mrid.getBranch();
+        this.revision = (mrid.getRevision() == null || mrid.getRevision().startsWith("working@") || mrid.getRevision().contains("${")) ? ModuleDependency.UNKNOWN
+                : mrid.getRevision();
+        this.branch = (mrid.getBranch() == null || mrid.getBranch().contains("${")) ? ModuleDependency.UNKNOWN : mrid.getBranch();
         this.displayName = mrid.getName();
         this.relativePathToDescriptor = relativePathToDescriptor;
 
