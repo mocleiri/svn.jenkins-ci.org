@@ -62,14 +62,14 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/URL+SCM"
     },
     "accurev":     {
-      "buildDate": "Jul 19, 2009",
+      "buildDate": "Jul 20, 2009",
       "dependencies": [],
-      "developers": [{"developerId": "hudson"}],
+      "developers": [{"developerId": "statum"}],
       "excerpt": "This plugin allows you to use <a href='http://www.accurev.com/'>AccuRev<\/a> as a SCM.",
       "labels": ["scm"],
       "name": "accurev",
       "previousTimestamp": "2009-01-30T20:39:50.00Z",
-      "releaseTimestamp": "2009-07-20T05:11:28.00Z",
+      "releaseTimestamp": "2009-07-20T07:30:20.00Z",
       "requiredCore": "1.316",
       "title": "Accurev Plugin",
       "url": "http://hudson-ci.org/download/plugins/accurev/0.6.8/accurev.hpi",
@@ -1389,7 +1389,7 @@ updateCenter.post(
       "buildDate": "Nov 20, 2009",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
-      "excerpt": "Allow Hudson to start slaves on <a href='http://aws.amazon.com/ec2/'>EC2<\/a> on demand, and kill them as they get unused.",
+      "excerpt": "Allow Hudson to start slaves on <a href='http://aws.amazon.com/ec2/'>EC2<\/a> or <a href='http://www.ubuntu.com/cloud/private'>Ubuntu Enterprise Cloud<\/a> (Eucalyptus) on demand, and kill them as they get unused.",
       "labels": ["cluster"],
       "name": "ec2",
       "previousTimestamp": "2009-08-06T01:43:10.00Z",
@@ -1619,7 +1619,7 @@ updateCenter.post(
       "excerpt": "This plugin allows use of <a href='http://git.or.cz/'>GIT<\/a> as a build SCM. Git 1.3.3 or newer is required. \\\\  ",
       "labels": ["scm"],
       "name": "git",
-      "previousTimestamp": "2009-05-26T05:47:54.00Z",
+      "previousTimestamp": "2009-05-26T17:37:36.00Z",
       "releaseTimestamp": "2010-01-08T04:59:38.00Z",
       "requiredCore": "1.322",
       "title": "Git Plugin",
@@ -2161,22 +2161,26 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JavaTest+Report+Plugin"
     },
     "jboss":     {
-      "buildDate": "Feb 10, 2010",
+      "buildDate": "Feb 12, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "JulB4",
         "email": "JulB4@dev.java.net",
         "name": "Juliusz Brzostek"
       }],
-      "excerpt": "This plugin allows a job to be run after all the immediate downstream jobs have completed.",
-      "labels": ["trigger"],
+      "excerpt": "This  plugin allows to manage a <a href='http://en.wikipedia.org/wiki/JBoss_application_server'>JBoss Application Server<\/a> during build procedure. ",
+      "labels":       [
+        "misc",
+        "builder"
+      ],
       "name": "jboss",
-      "releaseTimestamp": "2010-02-11T03:34:34.00Z",
+      "previousTimestamp": "2010-02-11T03:34:34.00Z",
+      "releaseTimestamp": "2010-02-12T08:14:32.00Z",
       "requiredCore": "1.341",
-      "title": "Join Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jboss/1.0/jboss.hpi",
-      "version": "1.0",
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Join+Plugin"
+      "title": "JBoss Management Plugin",
+      "url": "http://hudson-ci.org/download/plugins/jboss/1.0.1/jboss.hpi",
+      "version": "1.0.1",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JBoss+Management+Plugin"
     },
     "jdepend":     {
       "buildDate": "Sep 17, 2009",
@@ -2795,21 +2799,18 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/MSBuild+Plugin"
     },
     "mstest":     {
-      "buildDate": "Feb 06, 2010",
+      "buildDate": "Feb 11, 2010",
       "dependencies": [],
-      "developers": [      {
-        "developerId": "acmarques",
-        "name": "Antonio Marques"
-      }],
+      "developers": [{"developerId": "antoniomarques"}],
       "excerpt": "This plugin converts <a href='http://msdn.microsoft.com/en-us/library/ms182486.aspx'>MSTest<\/a> TRX test reports into JUnit XML reports  so it can be integrated with Hudson's JUnit features.",
       "labels": ["report"],
       "name": "mstest",
-      "previousTimestamp": "2009-06-17T05:00:42.00Z",
-      "releaseTimestamp": "2010-02-06T17:41:08.00Z",
+      "previousTimestamp": "2010-02-06T17:41:08.00Z",
+      "releaseTimestamp": "2010-02-12T04:25:58.00Z",
       "requiredCore": "1.319",
       "title": "MSTest Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mstest/0.5/mstest.hpi",
-      "version": "0.5",
+      "url": "http://hudson-ci.org/download/plugins/mstest/0.6/mstest.hpi",
+      "version": "0.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/MSTest+Plugin"
     },
     "nabaztag":     {
@@ -2940,7 +2941,7 @@ updateCenter.post(
       "excerpt": "This plugin allows you to publish <a href='http://www.nunit.org/'>NUnit<\/a> test results.",
       "labels": ["report"],
       "name": "nunit",
-      "previousTimestamp": "2009-04-14T13:58:56.00Z",
+      "previousTimestamp": "2009-04-14T02:51:22.00Z",
       "releaseTimestamp": "2010-01-31T23:33:06.00Z",
       "requiredCore": "1.319",
       "title": "NUnit Plugin",
@@ -4022,7 +4023,7 @@ updateCenter.post(
       "labels": ["scm"],
       "name": "subversion",
       "previousTimestamp": "2010-01-28T06:23:10.00Z",
-      "releaseTimestamp": "2010-02-11T19:43:10.00Z",
+      "releaseTimestamp": "2010-02-11T19:56:20.00Z",
       "requiredCore": "1.340",
       "title": "Subversion Plugin",
       "url": "http://hudson-ci.org/download/plugins/subversion/1.11/subversion.hpi",
@@ -4660,8 +4661,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "x0RXHcXkEP+RO+CwvYgmoAjEyUw=",
-    "signature": "OIMTbB/Rfkkmho31rBAvQp4HW1oFzOtwA2aRAQ5afSbLhc/zN7LJGlOCsq3SbwSyk1jaqSXAePVrMDoWFKB66mH9po5YPbLuAuFNYCoy0GhRGFd/ELKI9ZCoR57kmX4QiX68buQxeFgy/PCzVlf0v5oGO6nnCCLG5DexPqClqjVCRdJYHy/zlauJDbpKMDyD7rltJrLumxXb+pJGTyU66G/B+MW2G5uj/MwF2uHVrhk21/rFEnURMDRRMFeFBsxEvat3j9zVW98lwuWHvkC6avr+lC8qVTNcQujtcXv/WGfcrfG318fC4vI5juzhYSVZHEx+gZ5l8cxOGRg0JJtrKg=="
+    "digest": "+rbGd8BuDiPnyPAl/h/26oWSksc=",
+    "signature": "y/LVSdsIBySQtKpzOwawoeBFa9MKtMX9eMOTH6krMS0HhM37s7mzoVVgVqyZfXLZiZpVyRy0or8ocrmhFHCFaTF43fVjAMfmZf51jdU5R39xGt7/G5XggWH+WQpwNsNFQRaBnrjbCHp+HaL2OiKpNYDABPMJBBQ4FNfxNAAA4xQX1guILWRdP1EYCyNVl3/4/HKRrhwoMkgLZQyKGn5DJwC6CNglVUqJemNmcpGafQyVar09D6hfBqzWWVg8vQG1L+bAjUeDIw2b4j0QQkTLcRJzR/FHPjllnAf6h+icosQi7ola+ifK4Ai9TtpLDjKjr9/2qsHiMsUMTSvnDh5qJA=="
   },
   "updateCenterVersion": "1"
 }
