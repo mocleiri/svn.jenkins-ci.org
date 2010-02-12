@@ -27,7 +27,6 @@ import hudson.model.User;
 import hudson.model.UserLocaleProperty;
 import java.io.IOException;
 import java.util.Locale;
-import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -52,7 +51,6 @@ public class UserLocaleFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        LOGGER.info("doFilter called");
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletRequestWrapper wrapper = new UserLocaleRequestWrapper(req);
         chain.doFilter(wrapper, response);
@@ -83,5 +81,4 @@ public class UserLocaleFilter implements Filter {
         }
     }
 
-    private static final Logger LOGGER = Logger.getLogger(UserLocaleFilter.class.getName());
 }
