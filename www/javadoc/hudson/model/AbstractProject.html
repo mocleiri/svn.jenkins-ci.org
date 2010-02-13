@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.345 API)
+AbstractProject (Hudson main module 1.346 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-08">
+<META NAME="date" CONTENT="2010-02-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.345 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.345 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.346 API)";
     }
 }
 </SCRIPT>
@@ -1001,11 +1001,20 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#poll(hudson.model.TaskListener)">poll</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if there's any update in SCM, and returns true if any is found.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)">pollSCMChanges</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if there's any update in SCM, and returns true if any is found.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.346
+      Use <A HREF="../../hudson/model/AbstractProject.html#poll(hudson.model.TaskListener)"><CODE>poll(TaskListener)</CODE></A> instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1757,7 +1766,7 @@ public boolean <B>hasCustomScmCheckoutRetryCount</B>()</PRE>
 <A NAME="isBuildable()"><!-- --></A><H3>
 isBuildable</H3>
 <PRE>
-public final boolean <B>isBuildable</B>()</PRE>
+public boolean <B>isBuildable</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Job.html#isBuildable()">Job</A></CODE></B></DD>
 <DD>Returns true if we should display "build now" icon
@@ -2648,16 +2657,37 @@ pollSCMChanges</H3>
 <PRE>
 public boolean <B>pollSCMChanges</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.346
+      Use <A HREF="../../hudson/model/AbstractProject.html#poll(hudson.model.TaskListener)"><CODE>poll(TaskListener)</CODE></A> instead.</I>
+<P>
 <DD>Checks if there's any update in SCM, and returns true if any is found.
-
- <p>
- The caller is responsible for coordinating the mutual exclusion between
- a build and polling, as both touches the workspace.
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="poll(hudson.model.TaskListener)"><!-- --></A><H3>
+poll</H3>
+<PRE>
+public <A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A> <B>poll</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</PRE>
+<DL>
+<DD>Checks if there's any update in SCM, and returns true if any is found.
+
+ <p>
+ The implementation is responsible for ensuring mutual exclusion between polling and builds
+ if necessary.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.345</DD>
 </DL>
 </DD>
 </DL>

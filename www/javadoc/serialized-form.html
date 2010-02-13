@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Serialized Form (Hudson main module 1.345 API)
+Serialized Form (Hudson main module 1.346 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-08">
+<META NAME="date" CONTENT="2010-02-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Serialized Form (Hudson main module 1.345 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Serialized Form (Hudson main module 1.345 API)";
+        parent.document.title="Serialized Form (Hudson main module 1.346 API)";
     }
 }
 </SCRIPT>
@@ -2771,6 +2771,68 @@ fileMenu</H3>
 <B>Package</B> <B>hudson.scm</B></FONT></TH>
 </TR>
 </TABLE>
+
+<P>
+<A NAME="hudson.scm.PollingResult"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Class <A HREF="hudson/scm/PollingResult.html" title="class in hudson.scm">hudson.scm.PollingResult</A> extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> implements Serializable</B></FONT></TH>
+</TR>
+</TABLE>
+
+<P>
+<B>serialVersionUID:&nbsp;</B>1L
+
+<P>
+<A NAME="serializedForm"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Serialized Fields</B></FONT></TH>
+</TR>
+</TABLE>
+
+<H3>
+baseline</H3>
+<PRE>
+<A HREF="hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A> <B>baseline</B></PRE>
+<DL>
+<DD>Baseline of the comparison.
+ (This comes from either the workspace, or from the remote repository as of the last polling.
+ Can be null.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+<H3>
+remote</H3>
+<PRE>
+<A HREF="hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A> <B>remote</B></PRE>
+<DL>
+<DD>Current state of the remote repository. To be passed to the next invocation of the polling method.
+ Can be null.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+<H3>
+change</H3>
+<PRE>
+<A HREF="hudson/scm/PollingResult.Change.html" title="enum in hudson.scm">PollingResult.Change</A> <B>change</B></PRE>
+<DL>
+<DD>Degree of the change between baseline and remote. Never null.
+ <p>
+ The fact that this field is independent from <A HREF="hudson/scm/PollingResult.html#baseline"><CODE>PollingResult.baseline</CODE></A> and <A HREF="hudson/scm/PollingResult.html#remote"><CODE>PollingResult.remote</CODE></A> are
+ used to (1) allow the <A HREF="hudson/scm/PollingResult.Change.html#INCOMPARABLE">incomparable</A> state which forces
+ the immediate rebuild, and (2) allow SCM to ignore some changes in the repository to implement
+ exclusion feature.
+<P>
+<DL>
+</DL>
+</DL>
 
 <P>
 <A NAME="hudson.scm.RepositoryBrowser"><!-- --></A>

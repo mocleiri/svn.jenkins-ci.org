@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCM (Hudson main module 1.345 API)
+SCM (Hudson main module 1.346 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-08">
+<META NAME="date" CONTENT="2010-02-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCM (Hudson main module 1.345 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCM (Hudson main module 1.345 API)";
+        parent.document.title="SCM (Hudson main module 1.346 API)";
     }
 }
 </SCRIPT>
@@ -232,6 +232,16 @@ Captures the configuration information in it.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">calcRevisionsFromBuild</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                       <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                       <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculates the <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A> that represents the state of the workspace of the given build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
          <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
@@ -242,6 +252,18 @@ Captures the configuration information in it.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a fresh workspace of the module(s) into the specified directory
  of the specified machine.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;<A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)">compareRemoteRevisionWith</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                          <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                          <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compares the current state of the remote repository against the given baseline <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -329,14 +351,33 @@ Captures the configuration information in it.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)">poll</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+     <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+     <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+     <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+     <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method for the caller to handle the backward compatibility between pre 1.345 SCMs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
             <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
             <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if there has been any changes to this module in the repository.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.345
+      Override <A HREF="../../hudson/scm/SCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)"><CODE>calcRevisionsFromBuild(AbstractBuild, Launcher, TaskListener)</CODE></A> and
+      <A HREF="../../hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for implementation.
+
+      The implementation is now separated in two pieces, one that computes the revision of the current workspace,
+      and the other that computes the revision of the remote repository.
+
+      Call <A HREF="../../hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>poll(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for use instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -363,7 +404,7 @@ Captures the configuration information in it.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this SCM supports
- <A HREF="../../hudson/scm/SCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)"><CODE>polling</CODE></A>.</TD>
+ <A HREF="../../hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>poling</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -520,7 +561,7 @@ supportsPolling</H3>
 public boolean <B>supportsPolling</B>()</PRE>
 <DL>
 <DD>Returns true if this SCM supports
- <A HREF="../../hudson/scm/SCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)"><CODE>polling</CODE></A>.
+ <A HREF="../../hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>poling</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -618,13 +659,22 @@ public boolean <B>processWorkspaceBeforeDeletion</B>(<A HREF="../../hudson/model
 <A NAME="pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)"><!-- --></A><H3>
 pollChanges</H3>
 <PRE>
-public abstract boolean <B>pollChanges</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
-                                    <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
-                                    <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
-                                    <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
-                             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+public boolean <B>pollChanges</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+                           <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                           <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                           <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.345
+      Override <A HREF="../../hudson/scm/SCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)"><CODE>calcRevisionsFromBuild(AbstractBuild, Launcher, TaskListener)</CODE></A> and
+      <A HREF="../../hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for implementation.
+
+      The implementation is now separated in two pieces, one that computes the revision of the current workspace,
+      and the other that computes the revision of the remote repository.
+
+      Call <A HREF="../../hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>poll(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for use instead.</I>
+<P>
 <DD>Checks if there has been any changes to this module in the repository.
 
  TODO: we need to figure out a better way to communicate an error back,
@@ -647,6 +697,120 @@ public abstract boolean <B>pollChanges</B>(<A HREF="../../hudson/model/AbstractP
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - interruption is usually caused by the user aborting the computation.
       this exception should be simply propagated all the way up.
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>See Also:</B><DD><A HREF="../../hudson/scm/SCM.html#supportsPolling()"><CODE>supportsPolling()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)"><!-- --></A><H3>
+calcRevisionsFromBuild</H3>
+<PRE>
+public abstract <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A> <B>calcRevisionsFromBuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                                                        <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                                                        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                                                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD>Calculates the <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A> that represents the state of the workspace of the given build.
+
+ <p>
+ The returned object is then fed into the
+ <A HREF="../../hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> method
+ as the baseline <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A> to determine if the build is necessary.
+
+ <p>
+ This method is called after source code is checked out for the given build (that is, after
+ <A HREF="../../hudson/scm/SCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><CODE>checkout(AbstractBuild, Launcher, FilePath, BuildListener, File)</CODE></A> has finished successfully.)
+
+ <p>
+ The obtained object is added to the build as an <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A> for later retrieval. As an optimization,
+ <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> implementation can choose to compute <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A> and add it as an action
+ during check out, in which case this method will not called.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>build</CODE> - The calculated <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A> is for the files checked out in this build. Never null.
+      If <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()"><CODE>requiresWorkspaceForPolling()</CODE></A> returns true, Hudson makes sure that the workspace of this
+      build is available and accessible by the callee.<DD><CODE>launcher</CODE> - Abstraction of the machine where the polling will take place. If SCM declares
+      that <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">the polling doesn't require a workspace</A>,
+      this parameter is null. Otherwise never null.<DD><CODE>listener</CODE> - Logs during the polling should be sent here.
+<DT><B>Returns:</B><DD>can be null.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - interruption is usually caused by the user aborting the computation.
+      this exception should be simply propagated all the way up.
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><!-- --></A><H3>
+compareRemoteRevisionWith</H3>
+<PRE>
+protected abstract <A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A> <B>compareRemoteRevisionWith</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                                                           <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                                                           <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                                                           <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                                                           <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)
+                                                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD>Compares the current state of the remote repository against the given baseline <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A>.
+
+ <p>
+ Conceptually, the act of polling is to take two states of the repository and to compare them to see
+ if there's any difference. In practice, however, comparing two arbitrary repository states is an expensive
+ operation, so in this abstraction, we chose to mix (1) the act of building up a repository state and
+ (2) the act of comparing it with the earlier state, so that SCM implementations can implement this
+ more easily. 
+
+ <p>
+ Multiple invocations of this method may happen over time to make sure that the remote repository
+ is "quiet" before Hudson schedules a new build.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>project</CODE> - The project to check for updates<DD><CODE>launcher</CODE> - Abstraction of the machine where the polling will take place. If SCM declares
+      that <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">the polling doesn't require a workspace</A>, this parameter is null.<DD><CODE>workspace</CODE> - The workspace directory that contains baseline files. If SCM declares
+      that <A HREF="../../hudson/scm/SCM.html#requiresWorkspaceForPolling()">the polling doesn't require a workspace</A>, this parameter is null.<DD><CODE>listener</CODE> - Logs during the polling should be sent here.<DD><CODE>baseline</CODE> - The baseline of the comparison. This object is the return value from earlier
+      <A HREF="../../hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> or
+      <A HREF="../../hudson/scm/SCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)"><CODE>calcRevisionsFromBuild(AbstractBuild, Launcher, TaskListener)</CODE></A>.
+<DT><B>Returns:</B><DD>This method returns multiple values that are bundled together into the <A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm"><CODE>PollingResult</CODE></A> value type.
+      <A HREF="../../hudson/scm/PollingResult.html#baseline"><CODE>PollingResult.baseline</CODE></A> should be the value of the baseline parameter, <A HREF="../../hudson/scm/PollingResult.html#remote"><CODE>PollingResult.remote</CODE></A>
+      is the current state of the remote repository (this object only needs to be understandable to the future
+      invocations of this method),
+      and <A HREF="../../hudson/scm/PollingResult.html#change"><CODE>PollingResult.change</CODE></A> that indicates the degree of changes found during the comparison.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - interruption is usually caused by the user aborting the computation.
+      this exception should be simply propagated all the way up.
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><!-- --></A><H3>
+poll</H3>
+<PRE>
+public final <A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A> <B>poll</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                                <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                                <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                                <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                                <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)
+                         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD>Convenience method for the caller to handle the backward compatibility between pre 1.345 SCMs.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
