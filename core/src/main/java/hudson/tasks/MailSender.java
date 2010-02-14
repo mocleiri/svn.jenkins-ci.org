@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Bruce Chapman, Daniel Dyer, Jean-Baptiste Quenot
+ * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi, Bruce Chapman, Daniel Dyer, Jean-Baptiste Quenot, Seiji Sogabe
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,12 +38,14 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.AddressException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,27 +80,35 @@ public class MailSender {
 
     public boolean execute(AbstractBuild<?, ?> build, BuildListener listener) throws InterruptedException {
         try {
-            MimeMessage mail = getMail(build, listener);
-            if (mail != null) {
-                // if the previous e-mail was sent for a success, this new e-mail
-                // is not a follow up
-                AbstractBuild<?, ?> pb = build.getPreviousBuild();
-                if(pb!=null && pb.getResult()==Result.SUCCESS) {
-                    mail.removeHeader("In-Reply-To");
-                    mail.removeHeader("References");
-                }
+            Set<InternetAddress> rcps = getRecipients(build, listener);
+            for (InternetAddress rcp : rcps) {
+                try {
+                    MimeMessage mail = getMail(build, rcp, listener);
+                    if (mail != null) {
+                        // if the previous e-mail was sent for a success, this new e-mail
+                        // is not a follow up
+                        AbstractBuild<?, ?> pb = build.getPreviousBuild();
+                        if (pb != null && pb.getResult() == Result.SUCCESS) {
+                            mail.removeHeader("In-Reply-To");
+                            mail.removeHeader("References");
+                        }
 
-                Address[] allRecipients = mail.getAllRecipients();
-                if (allRecipients != null) {
-                    StringBuilder buf = new StringBuilder("Sending e-mails to:");
-                    for (Address a : allRecipients)
-                        buf.append(' ').append(a);
-                    listener.getLogger().println(buf);
-                    Transport.send(mail);
+                        Address[] allRecipients = mail.getAllRecipients();
+                        if (allRecipients != null) {
+                            StringBuilder buf = new StringBuilder("Sending e-mails to:");
+                            for (Address a : allRecipients) {
+                                buf.append(' ').append(a);
+                            }
+                            listener.getLogger().println(buf);
+                            Transport.send(mail);
 
-                    build.addAction(new MailMessageIdAction(mail.getMessageID()));
-                } else {
-                    listener.getLogger().println(Messages.MailSender_ListEmpty());
+                            build.addAction(new MailMessageIdAction(mail.getMessageID()));
+                        } else {
+                            listener.getLogger().println(Messages.MailSender_ListEmpty());
+                        }
+                    }
+                } catch (MessagingException e) {
+                    e.printStackTrace(listener.error(e.getMessage()));
                 }
             }
         } catch (MessagingException e) {
@@ -128,53 +138,71 @@ public class MailSender {
         return b.getResult();
     }
 
-    protected MimeMessage getMail(AbstractBuild<?, ?> build, BuildListener listener) throws MessagingException, InterruptedException {
+    protected MimeMessage getMail(AbstractBuild<?, ?> build, InternetAddress addr, BuildListener listener) throws MessagingException, InterruptedException {
+        Locale locale = getUserLocale(addr);
+
         if (build.getResult() == Result.FAILURE) {
-            return createFailureMail(build, listener);
+            return createFailureMail(build, addr, locale, listener);
         }
 
         if (build.getResult() == Result.UNSTABLE) {
             if (!dontNotifyEveryUnstableBuild)
-                return createUnstableMail(build, listener);
+                return createUnstableMail(build, addr, locale, listener);
             Result prev = findPreviousBuildResult(build);
             if (prev == Result.SUCCESS)
-                return createUnstableMail(build, listener);
+                return createUnstableMail(build, addr, locale, listener);
         }
 
         if (build.getResult() == Result.SUCCESS) {
             Result prev = findPreviousBuildResult(build);
             if (prev == Result.FAILURE)
-                return createBackToNormalMail(build, Messages.MailSender_BackToNormal_Normal(), listener);
+                return createBackToNormalMail(build, addr, locale, Messages._MailSender_BackToNormal_Normal().toString(locale), listener);
             if (prev == Result.UNSTABLE)
-                return createBackToNormalMail(build, Messages.MailSender_BackToNormal_Stable(), listener);
+                return createBackToNormalMail(build, addr, locale, Messages._MailSender_BackToNormal_Stable().toString(locale), listener);
         }
 
         return null;
     }
 
-    private MimeMessage createBackToNormalMail(AbstractBuild<?, ?> build, String subject, BuildListener listener) throws MessagingException {
-        MimeMessage msg = createEmptyMail(build, listener);
+    private Locale getUserLocale(InternetAddress iaddr) {
+        String addr = iaddr.getAddress();
+        Collection<User> users = User.getAll();
+        for (User user : users) {
+            Mailer.UserProperty mup = user.getProperty(Mailer.UserProperty.class);
+            if (mup == null || !addr.equals(mup.getAddress()))
+                    continue;
+            UserLocaleProperty ulp = user.getProperty(UserLocaleProperty.class);
+            if (ulp == null)
+                continue;
+            Locale locale = ulp.getLocale();
+            return (locale != null) ? locale : Locale.getDefault();
+        }
+        return Locale.getDefault();
+    }
 
-        msg.setSubject(getSubject(build, Messages.MailSender_BackToNormalMail_Subject(subject)),MAIL_CHARSET);
+    private MimeMessage createBackToNormalMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, String subject, BuildListener listener) throws MessagingException {
+        MimeMessage msg = createEmptyMail(build, addr, locale, listener);
+
+        msg.setSubject(getSubject(build, Messages._MailSender_BackToNormalMail_Subject(subject).toString(locale)),MAIL_CHARSET);
         StringBuilder buf = new StringBuilder();
-        appendBuildUrl(build, buf);
+        appendBuildUrl(build, locale, buf);
         msg.setText(buf.toString(),MAIL_CHARSET);
 
         return msg;
     }
 
-    private MimeMessage createUnstableMail(AbstractBuild<?, ?> build, BuildListener listener) throws MessagingException {
-        MimeMessage msg = createEmptyMail(build, listener);
+    private MimeMessage createUnstableMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, BuildListener listener) throws MessagingException {
+        MimeMessage msg = createEmptyMail(build, addr, locale, listener);
 
-        String subject = Messages.MailSender_UnstableMail_Subject();
+        String subject = Messages._MailSender_UnstableMail_Subject().toString(locale);
 
         AbstractBuild<?, ?> prev = build.getPreviousBuild();
         boolean still = false;
         if(prev!=null) {
             if(prev.getResult()==Result.SUCCESS)
-                subject =Messages.MailSender_UnstableMail_ToUnStable_Subject();
+                subject =Messages._MailSender_UnstableMail_ToUnStable_Subject().toString(locale);
             else if(prev.getResult()==Result.UNSTABLE) {
-                subject = Messages.MailSender_UnstableMail_StillUnstable_Subject();
+                subject = Messages._MailSender_UnstableMail_StillUnstable_Subject().toString(locale);
                 still = true;
             }
         }
@@ -183,38 +211,38 @@ public class MailSender {
         StringBuilder buf = new StringBuilder();
         // Link to project changes summary for "still unstable" if this or last build has changes
         if (still && !(build.getChangeSet().isEmptySet() && prev.getChangeSet().isEmptySet()))
-            appendUrl(Util.encode(build.getProject().getUrl()) + "changes", buf);
+            appendUrl(Util.encode(build.getProject().getUrl()) + "changes", locale, buf);
         else
-            appendBuildUrl(build, buf);
+            appendBuildUrl(build, locale, buf);
         msg.setText(buf.toString(), MAIL_CHARSET);
 
         return msg;
     }
 
-    private void appendBuildUrl(AbstractBuild<?, ?> build, StringBuilder buf) {
+    private void appendBuildUrl(AbstractBuild<?, ?> build, Locale locale, StringBuilder buf) {
         appendUrl(Util.encode(build.getUrl())
-                  + (build.getChangeSet().isEmptySet() ? "" : "changes"), buf);
+                  + (build.getChangeSet().isEmptySet() ? "" : "changes"), locale, buf);
     }
 
-    private void appendUrl(String url, StringBuilder buf) {
+    private void appendUrl(String url, Locale locale, StringBuilder buf) {
         String baseUrl = Mailer.descriptor().getUrl();
         if (baseUrl != null)
-            buf.append(Messages.MailSender_Link(baseUrl, url)).append("\n\n");
+            buf.append(Messages._MailSender_Link(baseUrl, url).toString(locale)).append("\n\n");
     }
 
-    private MimeMessage createFailureMail(AbstractBuild<?, ?> build, BuildListener listener) throws MessagingException, InterruptedException {
-        MimeMessage msg = createEmptyMail(build, listener);
+    private MimeMessage createFailureMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, BuildListener listener) throws MessagingException, InterruptedException {
+        MimeMessage msg = createEmptyMail(build, addr, locale, listener);
 
-        msg.setSubject(getSubject(build, Messages.MailSender_FailureMail_Subject()),MAIL_CHARSET);
+        msg.setSubject(getSubject(build, Messages._MailSender_FailureMail_Subject().toString(locale)),MAIL_CHARSET);
 
         StringBuilder buf = new StringBuilder();
-        appendBuildUrl(build, buf);
+        appendBuildUrl(build, locale, buf);
 
         boolean firstChange = true;
         for (ChangeLogSet.Entry entry : build.getChangeSet()) {
             if (firstChange) {
                 firstChange = false;
-                buf.append(Messages.MailSender_FailureMail_Changes()).append("\n\n");
+                buf.append(Messages._MailSender_FailureMail_Changes().toString(locale)).append("\n\n");
             }
             buf.append('[');
             buf.append(entry.getAuthor().getFullName());
@@ -277,7 +305,7 @@ public class MailSender {
             }
         } catch (IOException e) {
             // somehow failed to read the contents of the log
-            buf.append(Messages.MailSender_FailureMail_FailedToAccessBuildLog()).append("\n\n").append(Functions.printThrowable(e));
+            buf.append(Messages._MailSender_FailureMail_FailedToAccessBuildLog().toString(locale)).append("\n\n").append(Functions.printThrowable(e));
         }
 
         msg.setText(buf.toString(),MAIL_CHARSET);
@@ -285,7 +313,7 @@ public class MailSender {
         return msg;
     }
 
-    private MimeMessage createEmptyMail(AbstractBuild<?, ?> build, BuildListener listener) throws MessagingException {
+    private MimeMessage createEmptyMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, BuildListener listener) throws MessagingException {
         MimeMessage msg = new MimeMessage(Mailer.descriptor().createSession());
         // TODO: I'd like to put the URL to the page in here,
         // but how do I obtain that?
@@ -293,6 +321,21 @@ public class MailSender {
         msg.setFrom(new InternetAddress(Mailer.descriptor().getAdminAddress()));
         msg.setSentDate(new Date());
 
+        msg.setRecipient(Message.RecipientType.TO, addr);
+
+        AbstractBuild<?, ?> pb = build.getPreviousBuild();
+        if(pb!=null) {
+            MailMessageIdAction b = pb.getAction(MailMessageIdAction.class);
+            if(b!=null) {
+                msg.setHeader("In-Reply-To",b.messageId);
+                msg.setHeader("References",b.messageId);
+            }
+        }
+
+        return msg;
+    }
+
+    private Set<InternetAddress> getRecipients(AbstractBuild<?, ?> build, BuildListener listener) throws MessagingException {
         Set<InternetAddress> rcp = new LinkedHashSet<InternetAddress>();
         StringTokenizer tokens = new StringTokenizer(recipients);
         while (tokens.hasMoreTokens()) {
@@ -300,7 +343,7 @@ public class MailSender {
             if(address.startsWith("upstream-individuals:")) {
                 // people who made a change in the upstream
                 String projectName = address.substring("upstream-individuals:".length());
-                AbstractProject up = Hudson.getInstance().getItemByFullName(projectName,AbstractProject.class);
+                AbstractProject<?,?> up = Hudson.getInstance().getItemByFullName(projectName,AbstractProject.class);
                 if(up==null) {
                     listener.getLogger().println("No such project exist: "+projectName);
                     continue;
@@ -337,18 +380,7 @@ public class MailSender {
 
             rcp.addAll(buildCulpritList(listener,culprits));
         }
-        msg.setRecipients(Message.RecipientType.TO, rcp.toArray(new InternetAddress[rcp.size()]));
-
-        AbstractBuild<?, ?> pb = build.getPreviousBuild();
-        if(pb!=null) {
-            MailMessageIdAction b = pb.getAction(MailMessageIdAction.class);
-            if(b!=null) {
-                msg.setHeader("In-Reply-To",b.messageId);
-                msg.setHeader("References",b.messageId);
-            }
-        }
-
-        return msg;
+        return rcp;
     }
 
     private Set<InternetAddress> buildCulpritList(BuildListener listener, Set<User> culprits) throws AddressException {
