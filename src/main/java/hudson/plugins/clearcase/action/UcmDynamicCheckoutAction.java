@@ -31,9 +31,11 @@ import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearToolLauncher;
 import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.ucm.UcmCommon;
+import hudson.plugins.clearcase.ucm.UcmCommon.BaselineDesc;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -117,7 +119,29 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool.getLauncher(), 
         		stream, getConfiguredStreamViewName());
         
-        // rebase build stream6
+		// fix Not labeled baselines        
+		for (BaselineDesc baseLineDesc : latestBlsOnConfgiuredStream) {
+			if (baseLineDesc.isNotLabeled() && baseLineDesc.getComponentDesc().isModifiable()) {
+				// if the base is not labeled create identical one				
+				List<String> readWriteCompList = new ArrayList<String>();
+				readWriteCompList.add(baseLineDesc.getComponentDesc().getName());				
+ 
+				List<BaselineDesc> baseLineDescList = UcmCommon.makeBaseline(cleartool.getLauncher(), 
+						true, 
+						getConfiguredStreamViewName(), 
+						null, 
+		        		BASELINE_NAME + dateStr, 
+						BASELINE_COMMENT + dateStr, 
+						true, false, readWriteCompList);				
+
+				String newBaseline = baseLineDescList.get(0).getBaselineName() + "@" +
+					UcmCommon.getVob(baseLineDesc.getComponentDesc().getName());
+				
+				baseLineDesc.setBaselineName(newBaseline);
+			}
+		}        
+        
+        // rebase build stream
         UcmCommon.rebase(cleartool.getLauncher(), viewName, latestBlsOnConfgiuredStream);
     	
         // add baselines to build - to be later used by getChange 

@@ -48,12 +48,9 @@ import org.kohsuke.stapler.StaplerRequest;
  *  @author Rinat Ailon
  */
 public class ClearCasePublisher extends Publisher implements Serializable {
-    
-	//private ClearCaseSCM.ClearCaseScmDescriptor scmDescriptor;
-	
     @DataBoundConstructor
     public ClearCasePublisher() {
-    	//this.scmDescriptor = scmDescriptor;
+
    }
 
     public boolean prebuild(AbstractBuild<?,?> build, BuildListener listener) {
@@ -112,11 +109,11 @@ public class ClearCasePublisher extends Publisher implements Serializable {
         }
         
         public String getDisplayName() {
-            return "ClearCase Information";
+            return "Create ClearCase report";
         }
 
         public String getHelpFile() {
-            return "/plugin/clearcase/help.html";
+            return "/plugin/clearcase/publisher.html";
         }
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {

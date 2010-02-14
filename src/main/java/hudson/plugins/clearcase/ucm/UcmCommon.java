@@ -156,8 +156,8 @@ public class UcmCommon {
         		String baselineNameTrimmed = baselineName.trim();
         		if (!baselineNameTrimmed.equals("")) {
         			// Retrict to baseline bind to read/write component
-        			String blComp = getComponentforBaseline(clearToolLauncher,
-                                               filePath, baselineNameTrimmed);
+        			String blComp = getDataforBaseline(clearToolLauncher,
+                                               filePath, baselineNameTrimmed).getBaselineName();
         			if (readWriteComponents == null || readWriteComponents.contains(blComp))
         				baselineNames.add(baselineNameTrimmed);
         		}
@@ -189,19 +189,19 @@ public class UcmCommon {
     	
     	// loop through baselines
     	for (String blName : baselinesNames) {
-    		String component = getComponentforBaseline(clearToolLauncher, filePath, blName);
+    		BaselineDesc baseLineDesc = getDataforBaseline(clearToolLauncher, filePath, blName);
     		ComponentDesc matchComponentDesc = null;
     		
     		// find the equivalent componentDesc element 
     		for (ComponentDesc componentDesc : componentsList) {
-    			if (getNoVob(componentDesc.getName()).equals(getNoVob(component))) {
+    			if (getNoVob(componentDesc.getName()).equals(getNoVob(baseLineDesc.getComponentName()))) {
     				matchComponentDesc = componentDesc;
     				break;
     			}
     				
     		}
     		
-    		baselinesDescList.add(new BaselineDesc(blName, matchComponentDesc));    		
+    		baselinesDescList.add(new BaselineDesc(blName, matchComponentDesc, baseLineDesc.isNotLabeled));    		
     	}
     	
     	return baselinesDescList;
@@ -219,19 +219,19 @@ public class UcmCommon {
      * @throws InterruptedException
      * @throws IOException
      */
-    public static String getComponentforBaseline(
+    public static BaselineDesc getDataforBaseline(
     									   ClearToolLauncher clearToolLauncher, 
                                            FilePath filePath, 
                                            String blName) throws InterruptedException,
                                                                                     IOException {
 
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-
+        
         FilePath clearToolLauncherPath = filePath;
 
         cmd.add("lsbl");
         cmd.add("-fmt");
-        cmd.add("%[component]Xp");
+        cmd.add("%[label_status]p|%[component]Xp");
         cmd.add(blName);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -239,11 +239,15 @@ public class UcmCommon {
                               clearToolLauncherPath);
         baos.close();
         String cleartoolResult = baos.toString();
-
+        String [] arr = cleartoolResult.split("\\|");
+        boolean isNotLabeled = arr[0].contains("Not Labeled");
+        
         String prefix = "component:";
-        return cleartoolResult.substring(cleartoolResult
-                                         .indexOf(cleartoolResult)
-                                         + prefix.length());
+        String componentName = arr[1].substring(cleartoolResult
+                .indexOf(cleartoolResult)
+                + prefix.length()); 
+        
+        return new BaselineDesc(componentName, isNotLabeled); 
     }    
     
 	/**
@@ -483,6 +487,10 @@ public class UcmCommon {
 	public static String getNoVob(String element) {
 		return element.split("@")[0];
 	}
+	
+	public static String getVob(String element) {
+		return element.split("@")[1];
+	}
     
     /**
      * @author kyosi
@@ -492,7 +500,14 @@ public class UcmCommon {
     	private String baselineName;
     	private String componentName;
     	private ComponentDesc componentDesc;
+    	private boolean isNotLabeled;	
     	
+		public BaselineDesc(String componentName, boolean isNotLabeled) {
+			super();
+			this.componentName = componentName;
+			this.isNotLabeled = isNotLabeled;
+		}
+
 		public BaselineDesc(String baselineName, String componentName) {
 			super();
 			this.baselineName = baselineName;
@@ -506,6 +521,14 @@ public class UcmCommon {
 			this.componentDesc = componentDesc;		
 		}
 		
+		public BaselineDesc(String baselineName, ComponentDesc componentDesc,
+				boolean isNotLabeled) {
+			super();
+			this.baselineName = baselineName;
+			this.componentDesc = componentDesc;
+			this.isNotLabeled = isNotLabeled;
+		}
+
 		public String getBaselineName() {
 			return baselineName;
 		}
@@ -529,7 +552,14 @@ public class UcmCommon {
 		public void setComponentDesc(ComponentDesc componentDesc) {
 			this.componentDesc = componentDesc;
 		}
-		
+
+		public boolean isNotLabeled() {
+			return isNotLabeled;
+		}
+
+		public void setNotLabeled(boolean isNotLabeled) {
+			this.isNotLabeled = isNotLabeled;
+		}		
     }
     
     /**
