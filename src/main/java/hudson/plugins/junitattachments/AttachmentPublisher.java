@@ -44,53 +44,8 @@ public class AttachmentPublisher extends TestDataPublisher {
     public Data getTestData(AbstractBuild<?, ?> build, Launcher launcher,
             BuildListener listener, TestResult testResult) throws IOException,
             InterruptedException {
-
-        // build a map of className -> result xml file
-        final Map<String, String> reports = new HashMap<String, String>();
-        for (SuiteResult suiteResult : testResult.getSuites()) {
-            String f = suiteResult.getFile();
-            if (f != null) {
-                for (String className : suiteResult.getClassNames()) {
-                    reports.put(className, f);
-                }
-            }
-        }
-
-        final FilePath attachmentsStorage = getAttachmentPath(build);
-
-        Map<String, List<String>> attachments = new HashMap<String, List<String>>();
-        System.err.println("YYYYYYYYYYYYY" + reports);
-        for (Map.Entry<String, String> report : reports.entrySet()) {
-            String className = report.getKey();
-            FilePath target = attachmentsStorage.child(className);
-            FilePath testDir = build.getWorkspace().child(report.getValue())
-            .getParent().child(className);
-            if (testDir.exists()) {
-                target.mkdirs();
-                if (testDir.copyRecursiveTo(target) > 0) {
-                    DirectoryScanner d = new DirectoryScanner();
-                    d.setBasedir(target.getRemote());
-                    d.scan();
-                    attachments.put(className, Arrays.asList(d
-                            .getIncludedFiles()));
-                }
-            }
-            FilePath stdInAndOut = build.getWorkspace().child(report.getValue()).getParent().child(
-                    className + "-output.txt");
-            System.err.println("XXXXXXXXXXXX" + stdInAndOut.absolutize());
-            if (stdInAndOut.exists()) {
-                target.mkdirs();
-                final FilePath stdInAndOutTarget = new FilePath(target, "stdin-stdout.txt");
-                stdInAndOut.copyTo(stdInAndOutTarget);
-                if (attachments.containsKey(className)) {
-                    final List<String> list = new ArrayList<String>(attachments.get(className));
-                    list.add(stdInAndOutTarget.getName());
-                    attachments.put(className, list);
-                } else {
-                    attachments.put(className, Arrays.asList(stdInAndOutTarget.getName()));
-                }
-            }
-        }
+        final GetTestDataMethodObject methodObject = new GetTestDataMethodObject(build, launcher, listener, testResult);
+        Map<String, List<String>> attachments = methodObject.getAttachments();
 
         if (attachments.isEmpty()) {
             return null;
