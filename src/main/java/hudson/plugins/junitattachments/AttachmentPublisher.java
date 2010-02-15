@@ -17,6 +17,7 @@ import hudson.tasks.junit.TestResultAction;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,103 +29,118 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 public class AttachmentPublisher extends TestDataPublisher {
 
-	@DataBoundConstructor
-	public AttachmentPublisher() {
-	}
+    @DataBoundConstructor
+    public AttachmentPublisher() {
+    }
 
-	public static FilePath getAttachmentPath(AbstractBuild<?, ?> build) {
-		// return new FilePath(Hudson.MasterComputer.localChannel,
-		// build.getRootDir().getAbsolutePath()).child("junit-attachments");
-		return new FilePath(new File(build.getRootDir().getAbsolutePath()))
-				.child("junit-attachments");
-	}
+    public static FilePath getAttachmentPath(AbstractBuild<?, ?> build) {
+        // return new FilePath(Hudson.MasterComputer.localChannel,
+        // build.getRootDir().getAbsolutePath()).child("junit-attachments");
+        return new FilePath(new File(build.getRootDir().getAbsolutePath()))
+                .child("junit-attachments");
+    }
 
-	@Override
-	public Data getTestData(AbstractBuild<?, ?> build, Launcher launcher,
-			BuildListener listener, TestResult testResult) throws IOException,
-			InterruptedException {
+    @Override
+    public Data getTestData(AbstractBuild<?, ?> build, Launcher launcher,
+            BuildListener listener, TestResult testResult) throws IOException,
+            InterruptedException {
 
-		// build a map of className -> result xml file
-		final Map<String, String> reports = new HashMap<String, String>();
-		for (SuiteResult suiteResult : testResult.getSuites()) {
-			String f = suiteResult.getFile();
-			if (f != null) {
-				for (String className : suiteResult.getClassNames()) {
-					reports.put(className, f);
-				}
-			}
-		}
+        // build a map of className -> result xml file
+        final Map<String, String> reports = new HashMap<String, String>();
+        for (SuiteResult suiteResult : testResult.getSuites()) {
+            String f = suiteResult.getFile();
+            if (f != null) {
+                for (String className : suiteResult.getClassNames()) {
+                    reports.put(className, f);
+                }
+            }
+        }
 
-		final FilePath attachmentsStorage = getAttachmentPath(build);
+        final FilePath attachmentsStorage = getAttachmentPath(build);
 
-		Map<String, List<String>> attachments = new HashMap<String, List<String>>();
+        Map<String, List<String>> attachments = new HashMap<String, List<String>>();
+        System.err.println("YYYYYYYYYYYYY" + reports);
+        for (Map.Entry<String, String> report : reports.entrySet()) {
+            String className = report.getKey();
+            FilePath target = attachmentsStorage.child(className);
+            FilePath testDir = build.getWorkspace().child(report.getValue())
+            .getParent().child(className);
+            if (testDir.exists()) {
+                target.mkdirs();
+                if (testDir.copyRecursiveTo(target) > 0) {
+                    DirectoryScanner d = new DirectoryScanner();
+                    d.setBasedir(target.getRemote());
+                    d.scan();
+                    attachments.put(className, Arrays.asList(d
+                            .getIncludedFiles()));
+                }
+            }
+            FilePath stdInAndOut = build.getWorkspace().child(report.getValue()).getParent().child(
+                    className + "-output.txt");
+            System.err.println("XXXXXXXXXXXX" + stdInAndOut.absolutize());
+            if (stdInAndOut.exists()) {
+                target.mkdirs();
+                final FilePath stdInAndOutTarget = new FilePath(target, "stdin-stdout.txt");
+                stdInAndOut.copyTo(stdInAndOutTarget);
+                if (attachments.containsKey(className)) {
+                    final List<String> list = new ArrayList<String>(attachments.get(className));
+                    list.add(stdInAndOutTarget.getName());
+                    attachments.put(className, list);
+                } else {
+                    attachments.put(className, Arrays.asList(stdInAndOutTarget.getName()));
+                }
+            }
+        }
 
-		for (Map.Entry<String, String> report : reports.entrySet()) {
-			String className = report.getKey();
-			FilePath testDir = build.getWorkspace().child(report.getValue())
-					.getParent().child(className);
-			FilePath target = attachmentsStorage.child(className);
-			if (testDir.exists()) {
-				target.mkdirs();
-				if (testDir.copyRecursiveTo(target) > 0) {
-					DirectoryScanner d = new DirectoryScanner();
-					d.setBasedir(target.getRemote());
-					d.scan();
-					attachments.put(className, Arrays.asList(d
-							.getIncludedFiles()));
-				}
-			}
-		}
+        if (attachments.isEmpty()) {
+            return null;
+        }
 
-		if (attachments.isEmpty()) {
-			return null;
-		}
+        return new Data(attachments);
 
-		return new Data(attachments);
+    }
 
-	}
+    public static class Data extends TestResultAction.Data {
 
-	public static class Data extends TestResultAction.Data {
+        private final Map<String, List<String>> attachments;
 
-		private final Map<String, List<String>> attachments;
+        public Data(Map<String, List<String>> attachments) {
+            this.attachments = attachments;
+        }
 
-		public Data(Map<String, List<String>> attachments) {
-			this.attachments = attachments;
-		}
+        @Override
+        public List<TestAction> getTestAction(TestObject testObject) {
+            ClassResult cr;
+            if (testObject instanceof ClassResult) {
+                cr = (ClassResult) testObject;
+            } else if (testObject instanceof CaseResult) {
+                cr = (ClassResult) testObject.getParent();
+            } else {
+                return Collections.emptyList();
+            }
 
-		@Override
-		public List<TestAction> getTestAction(TestObject testObject) {
-			ClassResult cr;
-			if (testObject instanceof ClassResult) {
-				cr = (ClassResult) testObject;
-			} else if (testObject instanceof CaseResult) {
-				cr = (ClassResult) testObject.getParent();
-			} else {
-				return Collections.emptyList();
-			}
+            String className = cr.getParent().getName() + "." + cr.getName();
+            List<String> attachments = this.attachments.get(className);
+            if (attachments != null) {
+                return Collections
+                        .<TestAction> singletonList(new AttachmentTestAction(
+                                cr, getAttachmentPath(testObject.getOwner())
+                                        .child(className), attachments));
+            } else {
+                return Collections.emptyList();
+            }
 
-			String className = cr.getParent().getName() + "." + cr.getName();
-			List<String> attachments = this.attachments.get(className);
-			if (attachments != null) {
-				return Collections
-						.<TestAction> singletonList(new AttachmentTestAction(
-								cr, getAttachmentPath(testObject.getOwner())
-										.child(className), attachments));
-			} else {
-				return Collections.emptyList();
-			}
+        }
+    }
 
-		}
-	}
+    @Extension
+    public static class DescriptorImpl extends Descriptor<TestDataPublisher> {
 
-	@Extension
-	public static class DescriptorImpl extends Descriptor<TestDataPublisher> {
+        @Override
+        public String getDisplayName() {
+            return "Publish test attachments";
+        }
 
-		@Override
-		public String getDisplayName() {
-			return "Publish test attachments";
-		}
-
-	}
+    }
 
 }
