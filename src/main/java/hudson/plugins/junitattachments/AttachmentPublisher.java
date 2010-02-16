@@ -8,7 +8,6 @@ import hudson.model.BuildListener;
 import hudson.model.Descriptor;
 import hudson.tasks.junit.CaseResult;
 import hudson.tasks.junit.ClassResult;
-import hudson.tasks.junit.SuiteResult;
 import hudson.tasks.junit.TestAction;
 import hudson.tasks.junit.TestDataPublisher;
 import hudson.tasks.junit.TestObject;
@@ -17,17 +16,15 @@ import hudson.tasks.junit.TestResultAction;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.tools.ant.DirectoryScanner;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 public class AttachmentPublisher extends TestDataPublisher {
+
+
 
     @DataBoundConstructor
     public AttachmentPublisher() {
