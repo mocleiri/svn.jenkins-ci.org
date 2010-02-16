@@ -10,11 +10,11 @@ import java.io.Writer;
  */
 public final class ConsoleAnnotationWriter extends Writer {
     private final Writer base;
-    private final AbstractBuild<?,?> build;
+    private final Run<?,?> build;
     private StringBuilder buf = new StringBuilder();
     private ConsoleAnnotator ann;
 
-    public ConsoleAnnotationWriter(Writer base, ConsoleAnnotator ann, AbstractBuild<?, ?> build) {
+    public ConsoleAnnotationWriter(Writer base, ConsoleAnnotator ann, Run<?, ?> build) {
         this.base = base;
         this.ann = ann;
         this.build = build;

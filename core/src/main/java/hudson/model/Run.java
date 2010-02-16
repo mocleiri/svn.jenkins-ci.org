@@ -1504,7 +1504,13 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * Handles incremental log output.
      */
     public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
-        new LargeText(getLogFile(),getCharset(),!isLogUpdated()).doProgressText(req,rsp);
+        new LargeText(getLogFile(),getCharset(),!isLogUpdated()) {
+            @Override
+            protected Writer createWriter(StaplerRequest req, StaplerResponse rsp, long size) throws IOException {
+                return new ConsoleAnnotationWriter(super.createWriter(req, rsp, size),
+                        ConsoleAnnotator.initial(), Run.this);
+            }
+        }.doProgressText(req,rsp);
     }
 
     public void doToggleLogKeep( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
