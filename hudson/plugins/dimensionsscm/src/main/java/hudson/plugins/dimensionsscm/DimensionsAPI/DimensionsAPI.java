@@ -303,9 +303,9 @@ public class DimensionsAPI implements Serializable {
      */
     public final DimensionsConnection getCon(long key) {
         Logger.Debug("Looking for key "+key);
-		if (conns == null) {
-			return null;
-		}
+        if (conns == null) {
+            return null;
+        }
         if (conns.containsKey(key)) {
             ConnectionCache cc = (ConnectionCache)this.conns.get(key);
             DimensionsConnection con = cc.getCon();
@@ -369,10 +369,10 @@ public class DimensionsAPI implements Serializable {
         DimensionsConnection connection = null;
         long key = Calendar.getInstance().getTimeInMillis();
 
-		if (conns == null) {
-		    conns = new HashMap();
-		}
-				
+        if (conns == null) {
+            conns = new HashMap();
+        }
+
         dmServer = server;
         dmDb = database;
         dmUser = userID;
@@ -404,46 +404,46 @@ public class DimensionsAPI implements Serializable {
             if (connection!=null) {
                 Logger.Debug("Storing details for key "+key+"...");
                 conns.put(key, new ConnectionCache(connection));
-				if (version < 0) {
-					version = 2009;
-					// Get the server version
-					List inf = connection.getObjectFactory().getServerVersion(2);
-					if (inf == null)
-						Logger.Debug("Detection of server information failed");
-					
-					if (inf != null) {
-						Logger.Debug("Server information detected -" + inf.size());
-						for (int i = 0; i < inf.size(); ++i) {
-							String prop = (String) inf.get(i);
-							Logger.Debug(i + " - " + prop);
-						}
-						
-						// Try and locate the server version.
-						// If not found, then get the schema version and use that
-						String serverx = (String)inf.get(2);
-						if (serverx == null)
-							serverx = (String)inf.get(0);
-						
-						if (serverx != null)
-						{
-							Logger.Debug("Detected server version: " + serverx);
-							String[] tokens = serverx.split(" ");
-							serverx = tokens[0];
-							if (serverx.startsWith("10."))
-								version = 10;
-							else if (serverx.startsWith("2009"))
-								version = 2009;
-							else if (serverx.startsWith("201"))
-								version = 2010;
-							else
-								version = 2009;
-							Logger.Debug("Version to process set to " + version);
-						}
-						else
-							Logger.Debug("No server information found");
-					}
-				}
-			}
+                if (version < 0) {
+                    version = 2009;
+                    // Get the server version
+                    List inf = connection.getObjectFactory().getServerVersion(2);
+                    if (inf == null)
+                        Logger.Debug("Detection of server information failed");
+
+                    if (inf != null) {
+                        Logger.Debug("Server information detected -" + inf.size());
+                        for (int i = 0; i < inf.size(); ++i) {
+                            String prop = (String) inf.get(i);
+                            Logger.Debug(i + " - " + prop);
+                        }
+
+                        // Try and locate the server version.
+                        // If not found, then get the schema version and use that
+                        String serverx = (String)inf.get(2);
+                        if (serverx == null)
+                            serverx = (String)inf.get(0);
+
+                        if (serverx != null)
+                        {
+                            Logger.Debug("Detected server version: " + serverx);
+                            String[] tokens = serverx.split(" ");
+                            serverx = tokens[0];
+                            if (serverx.startsWith("10."))
+                                version = 10;
+                            else if (serverx.startsWith("2009"))
+                                version = 2009;
+                            else if (serverx.startsWith("201"))
+                                version = 2010;
+                            else
+                                version = 2009;
+                            Logger.Debug("Version to process set to " + version);
+                        }
+                        else
+                            Logger.Debug("No server information found");
+                    }
+                }
+            }
         } catch(Exception e) {
             throw new DimensionsRuntimeException("Login to Dimensions failed - " + e.getMessage());
         }
@@ -458,10 +458,10 @@ public class DimensionsAPI implements Serializable {
      * Disconnects from the Dimensions repository
      */
     public final void logout(long key) {
-		if (conns == null) {
-			return;
-		}
-		
+        if (conns == null) {
+            return;
+        }
+
         DimensionsConnection connection = getCon(key);
         if (connection != null) {
             try {
@@ -589,6 +589,7 @@ public class DimensionsAPI implements Serializable {
      *      @param final String baseline
      *      @param final String requests
      *      @param final boolean doRevert
+     *      @param final String permissions
      *  Return:
      *      @return boolean
      *-----------------------------------------------------------------
@@ -600,7 +601,8 @@ public class DimensionsAPI implements Serializable {
                             StringBuffer cmdOutput,
                             final String baseline,
                             final String requests,
-                            final boolean doRevert)
+                            final boolean doRevert,
+                            final String permissions)
                     throws IOException, InterruptedException
     {
         boolean bRet = false;
@@ -637,6 +639,12 @@ public class DimensionsAPI implements Serializable {
                     cmd += "/BASELINE=\"" + baseline + "\"";
                 } else {
                     cmd += "/WORKSET=\"" + projectName + "\" ";
+                }
+
+                if (permissions != null && permissions.length() > 0) {
+                    if (!permissions.equals("DEFAULT")) {
+                        cmd += "/PERMS="+permissions;
+                    }
                 }
 
                 cmd += "/USER_DIR=\"" + workspaceName.getRemote() + "\" ";
@@ -718,7 +726,7 @@ public class DimensionsAPI implements Serializable {
             File tmpFile = null;
 
             Logger.Debug("CM Url : " + ((url != null) ? url : "(null)"));
-            getLogger().println("[DIMENSIONS] Calculating change set for directory '"+((projectDir!=null) ? projectDir.toString() : "/")+"'...");
+            getLogger().println("[DIMENSIONS] Calculating change set for directory '"+((projectDir!=null) ? projectDir.getRemote() : "/")+"'...");
             getLogger().flush();
 
             if (items != null) {
@@ -1156,7 +1164,9 @@ public class DimensionsAPI implements Serializable {
      * @return DimensionsResult
      * @throws DimensionsRuntimeException
      */
-    public DimensionsResult UploadFiles(long key, FilePath rootDir, String projectId, File cmdFile, AbstractBuild build, String requests)
+    public DimensionsResult UploadFiles(long key, FilePath rootDir, String projectId, File cmdFile,
+                                        AbstractBuild build, String requests,
+                                        boolean forceCheckIn, boolean forceTip, String owningPart)
                             throws DimensionsRuntimeException
     {
         DimensionsConnection connection = getCon(key);
@@ -1164,8 +1174,9 @@ public class DimensionsAPI implements Serializable {
             throw new DimensionsRuntimeException("Not connected to an SCM repository");
 
         try {
+            boolean isStream = isStream(connection,projectId);
             String ciCmd = "DELIVER /BRIEF /ADD /UPDATE /DELETE ";
-            if (version == 10)
+            if (version == 10 || !isStream)
                 ciCmd = "UPLOAD ";
 
             if (projectId != null && build != null) {
@@ -1178,6 +1189,17 @@ public class DimensionsAPI implements Serializable {
                         ciCmd += "/CHANGE_DOC_IDS=(\"" + requests + "\") ";
                     } else {
                         ciCmd += "/CHANGE_DOC_IDS=("+ requests +") ";
+                    }
+                }
+                if (owningPart != null && owningPart.length() > 0) {
+                    ciCmd += "/PART=\"" + owningPart + "\"";
+                }
+                if (!isStream) {
+                    if (forceCheckIn) {
+                        ciCmd += "/FORCE_CHECKIN ";
+                    }
+                    if (forceTip) {
+                        ciCmd += "/FORCE_TIP ";
                     }
                 }
                 DimensionsResult res = run(connection,ciCmd);
@@ -1867,5 +1889,30 @@ public class DimensionsAPI implements Serializable {
     static Date parseDatabaseDate(String date, TimeZone timeZone) {
 
         return (timeZone == null) ? DateUtils.parse(date) : DateUtils.parse(date, timeZone);
+    }
+
+    /**
+     * Query what type of object a project is
+     *
+     * @param connection
+     *            Dimensions connection
+     * @param projectName
+     *            Name of the project
+     * @return boolean
+     */
+    private boolean isStream(DimensionsConnection connection,
+                             final String projectId) {
+        if (connection != null) {
+            DimensionsObjectFactory fc = connection.getObjectFactory();
+            Project proj = fc.getProject(projectId.toUpperCase());
+            if (proj != null) {
+                proj.queryAttribute(SystemAttributes.WSET_IS_STREAM);
+                Boolean isStream = (Boolean)proj.getAttribute(SystemAttributes.WSET_IS_STREAM);
+                if (isStream != null) {
+                    return isStream.booleanValue();
+                }
+            }
+        }
+        return false;
     }
 }

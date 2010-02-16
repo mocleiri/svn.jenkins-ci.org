@@ -10,8 +10,14 @@
 	<artifactId>dependencyanalyzer</artifactId>
 	<name>Hudson Dependency Analyzer Plugin</name>
 	<packaging>hpi</packaging>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.6-SNAPSHOT</version>
 	<url>http://wiki.hudson-ci.org/display/HUDSON/Dependency+Analyzer+Plugin</url>
+	<developers>
+	   <developer>
+	      <id>vsellier</id>
+	      <name>Vincent Sellier</name>
+	   </developer>
+	</developers>
 
 	<dependencies>
 	   <dependency>
@@ -20,4 +26,11 @@
 		   <version>${project.parent.version}</version>
 	   </dependency>
 	</dependencies>
+
+	<!-- artifactId doesn't match plugin directory -->
+	<scm>
+	  <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/trunk/hudson/plugins/dependency-analyzer</connection>
+	  <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/dependency-analyzer</developerConnection>
+	  <url>https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/dependency-analyzer</url>
+	</scm>
 </project>

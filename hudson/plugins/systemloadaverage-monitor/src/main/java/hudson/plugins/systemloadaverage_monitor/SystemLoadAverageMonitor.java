@@ -3,7 +3,6 @@ package hudson.plugins.systemloadaverage_monitor;
 import hudson.Extension;
 import hudson.model.Computer;
 import hudson.model.Hudson;
-
 import hudson.node_monitors.AbstractNodeMonitorDescriptor;
 import hudson.node_monitors.NodeMonitor;
 import hudson.remoting.Callable;
@@ -22,8 +21,13 @@ import org.kohsuke.stapler.StaplerRequest;
  * @author Stefan Brausch
  */
 
+/**
+ * This class provides an additional SystemLoadAverage column in the node page.
+ * It may only be seen by administrators.
+ */
 public class SystemLoadAverageMonitor extends NodeMonitor {
 
+    /** {@inheritDoc} */
     @Override
     public final String getColumnCaption() {
         // Hide this column from non-admins
@@ -31,25 +35,33 @@ public class SystemLoadAverageMonitor extends NodeMonitor {
                 .getColumnCaption() : null;
     }
 
+    /**
+     * Descriptor for the Monitor.
+     */
     @Extension
     public static final AbstractNodeMonitorDescriptor<String> DESCRIPTOR = new AbstractNodeMonitorDescriptor<String>() {
+
+        /** {@inheritDoc} */
         protected String monitor(Computer c) throws IOException,
                 InterruptedException {
             return c.getChannel().call(new MonitorTask());
         }
 
-        public SystemLoadAverageMonitor newInstance(StaplerRequest req,
-                JSONObject formData) throws FormException {
+        /** {@inheritDoc} */
+        public SystemLoadAverageMonitor newInstance(StaplerRequest req, JSONObject formData) throws FormException {
             return new SystemLoadAverageMonitor();
         }
 
+        /** {@inheritDoc} */
         public String getDisplayName() {
             return "System Load Average";
         }
     };
 
-    final static class MonitorTask implements
-            Callable<String, RuntimeException>{
+    /**
+     * Task which returns the SystemLoadAverage.
+     */
+    static final class MonitorTask implements Callable<String, RuntimeException> {
         private static final long serialVersionUID = 1L;
 
         /**
@@ -58,8 +70,7 @@ public class SystemLoadAverageMonitor extends NodeMonitor {
         public String call() {
             final OperatingSystemMXBean opsysMXbean = ManagementFactory
                     .getOperatingSystemMXBean();
-            return new Long((long) opsysMXbean.getSystemLoadAverage())
-                    .toString();
+            return String.format("%04.1f", opsysMXbean.getSystemLoadAverage());
         }
     }
 }

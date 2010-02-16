@@ -10,7 +10,7 @@
     </parent>
 
   <artifactId>systemloadaverage-monitor</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>hpi</packaging>
 
   <name>Slave Monitor for system load average</name>
@@ -97,12 +97,16 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>test-compile</phase>
+                        <phase>site</phase>
                         <goals>
                             <goal>tree</goal>
                             <goal>analyze-only</goal>
                             <goal>analyze-dep-mgt</goal>
                         </goals>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <ignoreDirect>false</ignoreDirect>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

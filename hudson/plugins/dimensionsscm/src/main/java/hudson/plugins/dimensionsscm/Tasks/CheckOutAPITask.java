@@ -116,7 +116,6 @@ import hudson.scm.ChangeLogParser;
 import hudson.scm.RepositoryBrowsers;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
-import hudson.util.FormFieldValidator;
 import hudson.util.Scrambler;
 import hudson.util.VariableResolver;
 import hudson.FilePath;
@@ -178,6 +177,7 @@ public class CheckOutAPITask implements FileCallable<Boolean> {
     String passwd = "";
     String database = "";
     String server = "";
+    String permissions = "";
 
     String workarea = "";
     String projectId = "";
@@ -209,6 +209,7 @@ public class CheckOutAPITask implements FileCallable<Boolean> {
         isRevert = parent.isCanJobRevert();
         isForce = parent.isCanJobForce();
         folders = parent.getFolders();
+        permissions = parent.getPermissions();
 
         // Build details
         bFreshBuild = (build.getPreviousBuild() == null);
@@ -312,7 +313,7 @@ public class CheckOutAPITask implements FileCallable<Boolean> {
                     // Checkout the folder
                     bRet = dmSCM.checkout(key,projectId,dname,wa,
                                           cmdOutput,baseline,requests,
-                                          isRevert);
+                                          isRevert,permissions);
                     Logger.Debug("SCM checkout returned " + bRet);
 
                     if (!bRet && isForce)

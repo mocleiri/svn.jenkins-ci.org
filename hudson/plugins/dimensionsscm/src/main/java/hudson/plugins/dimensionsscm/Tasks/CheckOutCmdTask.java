@@ -111,6 +111,7 @@ import hudson.remoting.VirtualChannel;
 import hudson.model.TaskListener;
 import hudson.Launcher;
 import hudson.model.StreamBuildListener;
+import hudson.Launcher.ProcStarter;
 
 // General imports
 import java.io.BufferedOutputStream;
@@ -158,6 +159,7 @@ public class CheckOutCmdTask implements FileCallable<Boolean> {
     private String projectId = "";
     private String baseline = null;
     private String requests = null;
+    private String permissions = null;
 
     private String[] folders;
 
@@ -290,6 +292,12 @@ public class CheckOutCmdTask implements FileCallable<Boolean> {
             if (isRevert)
                 cmd += " /OVERWRITE";
 
+            if (permissions != null && permissions.length() > 0) {
+                if (!permissions.equals("DEFAULT")) {
+                    cmd += "/PERMS="+permissions;
+                }
+            }
+
             fmtWriter.println(cmd);
             fmtWriter.flush();
         } catch (Exception e) {
@@ -310,7 +318,8 @@ public class CheckOutCmdTask implements FileCallable<Boolean> {
                              String requestId, boolean isDelete,
                              boolean isRevert, boolean isForce,
                              boolean freshBuild, String[] folders,
-                             int version, FilePath workspace,
+                             int version, String permissions,
+                             FilePath workspace,
                              TaskListener listener) {
 
         this.workspace = workspace;
@@ -331,6 +340,7 @@ public class CheckOutCmdTask implements FileCallable<Boolean> {
         this.folders = folders;
         this.requests = requestId;
         this.baseline = baselineId;
+        this.permissions = permissions;
 
         // Build details
         this.bFreshBuild = freshBuild;
@@ -482,8 +492,12 @@ public class CheckOutCmdTask implements FileCallable<Boolean> {
                     StreamBuildListener os = new StreamBuildListener(fos);
 
                     try {
-                        int cmdResult = proc.launch(cmd, new String[0], null,
-                                                    os.getLogger(), wa).join();
+                        Launcher.ProcStarter ps = proc.launch();
+                        ps.cmds(cmd);
+                        ps.stdout(os.getLogger());
+                        ps.stdin(null);
+                        ps.pwd(wa);
+                        int cmdResult = ps.join();
                         cmdFile.delete();
                         if (cmdResult != 0) {
                             listener.fatalError("Execution of checkout failed with exit code " + cmdResult);

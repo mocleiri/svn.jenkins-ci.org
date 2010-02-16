@@ -108,32 +108,31 @@ import hudson.plugins.dimensionsscm.GetHostDetailsTask;
 
 // Hudson imports
 import hudson.Extension;
+import hudson.FilePath.FileCallable;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
-import hudson.model.Hudson;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
+import hudson.model.Hudson.MasterComputer;
+import hudson.model.Hudson;
 import hudson.model.ModelObject;
+import hudson.model.Node;
 import hudson.model.Run;
 import hudson.model.TaskListener;
+import hudson.remoting.Callable;
+import hudson.remoting.Channel;
+import hudson.remoting.DelegatingCallable;
+import hudson.remoting.VirtualChannel;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.RepositoryBrowsers;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
-import hudson.util.FormFieldValidator;
+import hudson.util.FormValidation;
 import hudson.util.Scrambler;
 import hudson.util.VariableResolver;
-import hudson.FilePath;
-import hudson.FilePath.FileCallable;
-import hudson.model.Node;
-import hudson.model.Computer;
-import hudson.model.Hudson.MasterComputer;
-import hudson.remoting.Callable;
-import hudson.remoting.DelegatingCallable;
-import hudson.remoting.Channel;
-import hudson.remoting.VirtualChannel;
 
 // General imports
 import java.io.File;
@@ -188,6 +187,7 @@ public class DimensionsSCM extends SCM implements Serializable
     private String project;
     private String directory;
     private String workarea;
+    private String permissions;
 
     private String jobUserName;
     private String jobPasswd;
@@ -231,6 +231,13 @@ public class DimensionsSCM extends SCM implements Serializable
         return this.directory;
     }
 
+    /*
+     * Gets the permissions .
+     * @return the permissions
+     */
+    public String getPermissions() {
+        return this.permissions;
+    }
 
     /*
      * Gets the project paths.
@@ -423,7 +430,7 @@ public class DimensionsSCM extends SCM implements Serializable
              jobUserName,jobPasswd,
              jobServer,jobDatabase,
              canJobUpdate,jobTimeZone,
-             jobWebUrl,directory);
+             jobWebUrl,directory,"DEFAULT");
     }
 
     /*
@@ -443,6 +450,7 @@ public class DimensionsSCM extends SCM implements Serializable
      *      @param String jobPasswd
      *      @param String jobDatabase
      *      @param String directory
+     *      @param String permissions
      *  Return:
      *      @return void
      *-----------------------------------------------------------------
@@ -461,7 +469,8 @@ public class DimensionsSCM extends SCM implements Serializable
                          boolean canJobUpdate,
                          String jobTimeZone,
                          String jobWebUrl,
-                         String directory)
+                         String directory,
+                         String permissions)
     {
         // Check the folders specified have data specified
         if (folders != null) {
@@ -488,6 +497,7 @@ public class DimensionsSCM extends SCM implements Serializable
         this.project = (Util.fixEmptyAndTrim(project) == null ? "${JOB_NAME}" : project);
         this.workarea = (Util.fixEmptyAndTrim(workarea) == null ? null : workarea);
         this.directory = (Util.fixEmptyAndTrim(directory) == null ? null : directory);
+        this.permissions = (Util.fixEmptyAndTrim(permissions) == null ? null : permissions);
 
         this.jobServer = (Util.fixEmptyAndTrim(jobServer) == null ? getDescriptor().getServer() : jobServer);
         this.jobUserName = (Util.fixEmptyAndTrim(jobUserName) == null ? getDescriptor().getUserName() : jobUserName);
@@ -609,6 +619,7 @@ public class DimensionsSCM extends SCM implements Serializable
                                                                    isCanJobRevert(), isCanJobForce(),
                                                                    (build.getPreviousBuild() == null),
                                                                    getFolders(),version,
+                                                                   permissions,
                                                                    workspace,listener);
                         bRet = workspace.act(task);
                     }
@@ -918,6 +929,7 @@ public class DimensionsSCM extends SCM implements Serializable
         private String webUrl;
 
         private boolean canUpdate;
+        private String permissions;
 
         /*
          * Loads the SCM descriptor
@@ -946,8 +958,13 @@ public class DimensionsSCM extends SCM implements Serializable
             server = req.getParameter("dimensionsscm.server");
             database = req.getParameter("dimensionsscm.database");
 
+            permissions = req.getParameter("dimensionsscm.permissions");
+
             timeZone = req.getParameter("dimensionsscm.timeZone");
             webUrl = req.getParameter("dimensionsscm.webUrl");
+
+            if (permissions != null)
+                permissions = Util.fixNull(req.getParameter("dimensionsscm.permissions").trim());
 
             if (userName != null)
                 userName = Util.fixNull(req.getParameter("dimensionsscm.userName").trim());
@@ -981,6 +998,7 @@ public class DimensionsSCM extends SCM implements Serializable
             String project = req.getParameter("dimensionsscm.project");
             String directory = req.getParameter("dimensionsscm.directory");
             String workarea = req.getParameter("dimensionsscm.workarea");
+            String permissions = req.getParameter("dimensionsscm.permissions");
 
             Boolean canJobDelete = Boolean.valueOf("on".equalsIgnoreCase(req.getParameter("dimensionsscm.canJobDelete")));
             Boolean canJobForce = Boolean.valueOf("on".equalsIgnoreCase(req.getParameter("dimensionsscm.canJobForce")));
@@ -999,7 +1017,7 @@ public class DimensionsSCM extends SCM implements Serializable
                                                   jobUserName,jobPasswd,
                                                   jobServer,jobDatabase,
                                                   canJobUpdate,jobTimeZone,
-                                                  jobWebUrl,directory);
+                                                  jobWebUrl,directory,permissions);
 
             scm.browser = RepositoryBrowsers.createInstance(DimensionsSCMRepositoryBrowser.class,req,formData,"browser");
             if (scm.dmSCM == null)
@@ -1013,6 +1031,14 @@ public class DimensionsSCM extends SCM implements Serializable
          */
         public String getTimeZone() {
             return this.timeZone;
+        }
+
+        /*
+         * Gets the permissions for the connection.
+         * @return the permissions
+         */
+        public String getPermissions() {
+            return this.permissions;
         }
 
         /*
@@ -1112,117 +1138,79 @@ public class DimensionsSCM extends SCM implements Serializable
             this.webUrl = x;
         }
 
-        private void doCheck(StaplerRequest req, StaplerResponse rsp)
-                            throws IOException, ServletException
-        {
-            new FormFieldValidator(req, rsp, false)
+        public FormValidation doCheck(StaplerRequest req, StaplerResponse rsp)
+                throws IOException, ServletException {
+            String value = Util.fixEmpty(req.getParameter("value"));
+            String nullText = null;
+            if (value == null)
             {
-                @Override
-                protected void check() throws IOException, ServletException
-                {
-                    String value = Util.fixEmpty(request.getParameter("value"));
-                    String nullText = null;
-                    if (value == null)
-                    {
-                        if (nullText == null)
-                            ok();
-                        else
-                            error(nullText);
-
-                        return;
-                    }
-                    else
-                    {
-                        ok();
-                        return;
-                    }
-                }
-            }.process();
+                if (nullText == null)
+                    return FormValidation.ok();
+                else
+                    return FormValidation.error(nullText);
+            }
+            else
+            {
+                return FormValidation.ok();
+            }
         }
 
-        public void domanadatoryFieldCheck(StaplerRequest req, StaplerResponse rsp)
-                            throws IOException, ServletException
-        {
-            new FormFieldValidator(req, rsp, false)
+        public FormValidation domanadatoryFieldCheck(StaplerRequest req, StaplerResponse rsp)
+                            throws IOException, ServletException {
+            String value = Util.fixEmpty(req.getParameter("value"));
+            String errorTxt = "This value is manadatory.";
+            if (value == null)
             {
-                @Override
-                protected void check() throws IOException, ServletException
-                {
-                    String value = Util.fixEmpty(request.getParameter("value"));
-                    String errorTxt = "This value is manadatory.";
-                    if (value == null)
-                    {
-                        error(errorTxt);
-                        return;
-                    }
-                    else
-                    {
-                        // Some processing
-                        ok();
-                        return;
-                    }
-                }
-            }.process();
+                return FormValidation.error(errorTxt);
+            }
+            else
+            {
+                // Some processing
+                return FormValidation.ok();
+            }
         }
 
-        public void domanadatoryJobFieldCheck(StaplerRequest req, StaplerResponse rsp)
-                            throws IOException, ServletException
-        {
-            new FormFieldValidator(req, rsp, false)
-            {
-                @Override
-                protected void check() throws IOException, ServletException
-                {
-                    String value = Util.fixEmpty(request.getParameter("value"));
-                    String errorTxt = "This value is manadatory.";
-                    // Some processing in the future
-                    ok();
-                    return;
-                }
-            }.process();
+        public FormValidation domanadatoryJobFieldCheck(StaplerRequest req, StaplerResponse rsp)
+                            throws IOException, ServletException {
+            String value = Util.fixEmpty(req.getParameter("value"));
+            String errorTxt = "This value is manadatory.";
+            // Some processing in the future
+            return FormValidation.ok();
         }
 
         /*
          * Check if the specified Dimensions server is valid
          */
-        public void docheckTz(StaplerRequest req, StaplerResponse rsp,
+        public FormValidation docheckTz(StaplerRequest req, StaplerResponse rsp,
                                 @QueryParameter("dimensionsscm.timeZone") final String timezone,
                                 @QueryParameter("dimensionsscm.jobTimeZone") final String jobtimezone)
                             throws IOException, ServletException
         {
-            new FormFieldValidator(req, rsp, false)
+            try
             {
-                @Override
-                protected void check() throws IOException, ServletException
-                {
-                    try
-                    {
-                        String xtz = (jobtimezone != null) ? jobtimezone : timezone;
-                        Logger.Debug("Invoking docheckTz - " + xtz);
-                        TimeZone ctz = TimeZone.getTimeZone(xtz);
-                        String  lmt = ctz.getID();
-                        if (lmt.equalsIgnoreCase("GMT") && !(xtz.equalsIgnoreCase("GMT") ||
-                                             xtz.equalsIgnoreCase("Greenwich Mean Time") ||
-                                             xtz.equalsIgnoreCase("UTC") ||
-                                             xtz.equalsIgnoreCase("Coordinated Universal Time")))
-                            error("Timezone specified is not valid.");
-                        else
-                            ok("Timezone test succeeded!");
+                String xtz = (jobtimezone != null) ? jobtimezone : timezone;
+                Logger.Debug("Invoking docheckTz - " + xtz);
+                TimeZone ctz = TimeZone.getTimeZone(xtz);
+                String  lmt = ctz.getID();
+                if (lmt.equalsIgnoreCase("GMT") && !(xtz.equalsIgnoreCase("GMT") ||
+                                     xtz.equalsIgnoreCase("Greenwich Mean Time") ||
+                                     xtz.equalsIgnoreCase("UTC") ||
+                                     xtz.equalsIgnoreCase("Coordinated Universal Time")))
+                    return FormValidation.error("Timezone specified is not valid.");
+                else
+                    return FormValidation.ok("Timezone test succeeded!");
 
-                        return;
-                    }
-                    catch (Exception e)
-                    {
-                        error("timezone check error:" + e.getMessage());
-                    }
-                }
-            }.process();
+            }
+            catch (Exception e)
+            {
+                return FormValidation.error("timezone check error:" + e.getMessage());
+            }
         }
 
         /*
          * Check if the specified Dimensions server is valid
          */
-        public void docheckServer(StaplerRequest req, StaplerResponse rsp,
+        public FormValidation docheckServer(StaplerRequest req, StaplerResponse rsp,
                                 @QueryParameter("dimensionsscm.userName") final String user,
                                 @QueryParameter("dimensionsscm.passwd") final String passwd,
                                 @QueryParameter("dimensionsscm.server") final String server,
@@ -1233,44 +1221,36 @@ public class DimensionsSCM extends SCM implements Serializable
                                 @QueryParameter("dimensionsscm.jobDatabase") final String jobDatabase)
                             throws IOException, ServletException
         {
-            new FormFieldValidator(req, rsp, false)
-            {
-                @Override
-                protected void check() throws IOException, ServletException
-                {
-                    if (connectionCheck == null)
-                        connectionCheck = new DimensionsAPI();
+            if (connectionCheck == null)
+                connectionCheck = new DimensionsAPI();
 
-                    try
-                    {
-                        String xserver = (jobServer != null) ? jobServer : server;
-                        String xuser = (jobuser != null) ? jobuser : user;
-                        String xpasswd = (jobPasswd != null) ? jobPasswd : passwd;
-                        String xdatabase = (jobDatabase != null) ? jobDatabase : database;
-                        long key = -1;
-                        String dmS = xserver + "-" + xuser + ":" + xdatabase;
-                        Logger.Debug("Invoking serverCheck - " + dmS);
-                        key = connectionCheck.login(xuser,
-                                                  xpasswd,
-                                                  xdatabase,
-                                                  xserver);
-                        if (key<1)
-                        {
-                            error("Connection test failed");
-                        }
-                        else
-                        {
-                            ok("Connection test succeeded!");
-                            connectionCheck.logout(key);
-                        }
-                        return;
-                    }
-                    catch (Exception e)
-                    {
-                        error("Server connection error:" + e.getMessage());
-                    }
+            try
+            {
+                String xserver = (jobServer != null) ? jobServer : server;
+                String xuser = (jobuser != null) ? jobuser : user;
+                String xpasswd = (jobPasswd != null) ? jobPasswd : passwd;
+                String xdatabase = (jobDatabase != null) ? jobDatabase : database;
+                long key = -1;
+                String dmS = xserver + "-" + xuser + ":" + xdatabase;
+                Logger.Debug("Invoking serverCheck - " + dmS);
+                key = connectionCheck.login(xuser,
+                                          xpasswd,
+                                          xdatabase,
+                                          xserver);
+                if (key<1)
+                {
+                    return FormValidation.error("Connection test failed");
                 }
-            }.process();
+                else
+                {
+                    connectionCheck.logout(key);
+                    return FormValidation.ok("Connection test succeeded!");
+                }
+            }
+            catch (Exception e)
+            {
+                return FormValidation.error("Server connection error:" + e.getMessage());
+            }
         }
     }
 }

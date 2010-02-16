@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.FilePath (Hudson main module 1.345 API)
+Uses of Class hudson.FilePath (Hudson main module 1.346 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-08">
+<META NAME="date" CONTENT="2010-02-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.FilePath (Hudson main module 1.345 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.FilePath (Hudson main module 1.345 API)";
+        parent.document.title="Uses of Class hudson.FilePath (Hudson main module 1.346 API)";
     }
 }
 </SCRIPT>
@@ -716,11 +716,12 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>WorkspaceSnapshotSCM.</B><B><A HREF="../../hudson/fsp/WorkspaceSnapshotSCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
-            <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
-            <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
-            <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<CODE>protected &nbsp;<A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A></CODE></FONT></TD>
+<TD><CODE><B>WorkspaceSnapshotSCM.</B><B><A HREF="../../hudson/fsp/WorkspaceSnapshotSCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)">compareRemoteRevisionWith</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+                          <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                          <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1170,6 +1171,30 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;<A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A></CODE></FONT></TD>
+<TD><CODE><B>SCM.</B><B><A HREF="../../hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)">compareRemoteRevisionWith</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+                          <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                          <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compares the current state of the remote repository against the given baseline <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A></CODE></FONT></TD>
+<TD><CODE><B>NullSCM.</B><B><A HREF="../../hudson/scm/NullSCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)">compareRemoteRevisionWith</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
+                          <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                          <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                          <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                          <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
 <TD><CODE><B>SCM.</B><B><A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)">getModuleRoot</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</CODE>
 
@@ -1186,25 +1211,33 @@ Uses of <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>NullSCM.</B><B><A HREF="../../hudson/scm/NullSCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
-            <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
-            <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;dir,
-            <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/scm/PollingResult.html" title="class in hudson.scm">PollingResult</A></CODE></FONT></TD>
+<TD><CODE><B>SCM.</B><B><A HREF="../../hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)">poll</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
+     <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+     <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+     <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+     <A HREF="../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A>&nbsp;baseline)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method for the caller to handle the backward compatibility between pre 1.345 SCMs.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>SCM.</B><B><A HREF="../../hudson/scm/SCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">pollChanges</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&nbsp;project,
             <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
             <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
             <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if there has been any changes to this module in the repository.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.345
+      Override <A HREF="../../hudson/scm/SCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)"><CODE>SCM.calcRevisionsFromBuild(AbstractBuild, Launcher, TaskListener)</CODE></A> and
+      <A HREF="../../hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>SCM.compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for implementation.
+
+      The implementation is now separated in two pieces, one that computes the revision of the current workspace,
+      and the other that computes the revision of the remote repository.
+
+      Call <A HREF="../../hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>SCM.poll(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for use instead.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

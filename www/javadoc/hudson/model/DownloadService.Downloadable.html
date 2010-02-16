@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DownloadService.Downloadable (Hudson main module 1.345 API)
+DownloadService.Downloadable (Hudson main module 1.346 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-08">
+<META NAME="date" CONTENT="2010-02-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DownloadService.Downloadable (Hudson main module 1.345 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DownloadService.Downloadable (Hudson main module 1.345 API)";
+        parent.document.title="DownloadService.Downloadable (Hudson main module 1.346 API)";
     }
 }
 </SCRIPT>
@@ -202,7 +202,8 @@ Represents a periodically updated JSON data file obtained from a remote URL.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/DownloadService.Downloadable.html#doPostBack(org.kohsuke.stapler.StaplerRequest)">doPostBack</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/DownloadService.Downloadable.html#doPostBack(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doPostBack</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is where the browser sends us the data.</TD>
@@ -439,10 +440,11 @@ public net.sf.json.JSONObject <B>getData</B>()
 </DL>
 <HR>
 
-<A NAME="doPostBack(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+<A NAME="doPostBack(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doPostBack</H3>
 <PRE>
-public void <B>doPostBack</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)
+public void <B>doPostBack</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                       org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>This is where the browser sends us the data.

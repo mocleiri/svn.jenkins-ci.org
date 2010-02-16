@@ -2,10 +2,10 @@ updateCenter.post(
 {
   "connectionCheckUrl": "http://www.google.com/",
   "core":   {
-    "buildDate": "Feb 08, 2010",
+    "buildDate": "Feb 12, 2010",
     "name": "core",
-    "url": "http://hudson-ci.org/download/war/1.345/hudson.war",
-    "version": "1.345"
+    "url": "http://hudson-ci.org/download/war/1.346/hudson.war",
+    "version": "1.346"
   },
   "id": "default",
   "plugins":   {
@@ -1109,25 +1109,28 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/dbCharts+Plugin"
     },
     "dependencyanalyzer":     {
-      "buildDate": "Sep 16, 2009",
+      "buildDate": "Feb 15, 2010",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
-        "version": "1.318"
+        "version": "1.319"
       }],
-      "developers": [{"developerId": "vincent"}],
-      "excerpt": "This plugin parses dependency:analyze goal from maven build logs and generate a dependency report",
+      "developers": [      {
+        "developerId": "vsellier",
+        "name": "Vincent Sellier"
+      }],
+      "excerpt": "This plugin parses dependency:analyze goal from maven build logs and generates a dependency report",
       "labels":       [
         "maven",
         "report"
       ],
       "name": "dependencyanalyzer",
-      "previousTimestamp": "2009-08-25T08:28:52.00Z",
-      "releaseTimestamp": "2009-09-16T07:39:26.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-09-16T07:39:26.00Z",
+      "releaseTimestamp": "2010-02-15T17:23:26.00Z",
+      "requiredCore": "1.319",
       "title": "Dependency Analyzer Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dependencyanalyzer/0.4/dependencyanalyzer.hpi",
-      "version": "0.4",
+      "url": "http://hudson-ci.org/download/plugins/dependencyanalyzer/0.5/dependencyanalyzer.hpi",
+      "version": "0.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dependency+Analyzer+Plugin"
     },
     "deploy":     {
@@ -1161,9 +1164,9 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Description+Setter+Plugin"
     },
     "dimensionsscm":     {
-      "buildDate": "Jan 08, 2010",
+      "buildDate": "Feb 12, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "TPayne"}],
+      "developers": [{"developerId": "tpayne"}],
       "excerpt": "This plugin integrates Hudson with <a href='http://www.serena.com/products/dimensions-cm-configuration-management/index.html'>Dimensions<\/a>, the Serena SCM solution.",
       "labels":       [
         "post-build",
@@ -1172,12 +1175,12 @@ updateCenter.post(
         "scm"
       ],
       "name": "dimensionsscm",
-      "previousTimestamp": "2010-01-08T08:04:20.00Z",
-      "releaseTimestamp": "2010-01-09T06:26:20.00Z",
+      "previousTimestamp": "2010-01-09T06:26:20.00Z",
+      "releaseTimestamp": "2010-02-13T01:39:56.00Z",
       "requiredCore": "1.313",
       "title": "Dimensions Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.6.6/dimensionsscm.hpi",
-      "version": "0.6.6",
+      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.6.7/dimensionsscm.hpi",
+      "version": "0.6.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dimensions+Plugin"
     },
     "disk-usage":     {
@@ -1216,25 +1219,29 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DistFork+Plugin"
     },
     "doclinks":     {
-      "buildDate": "Jul 25, 2009",
+      "buildDate": "Feb 15, 2010",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": true,
-        "version": "1.317"
+        "version": "1.319"
       }],
-      "developers": [{"developerId": "sogabe"}],
+      "developers": [      {
+        "developerId": "sogabe",
+        "email": "sogabe@dev.java.net",
+        "name": "Seiji Sogabe"
+      }],
       "excerpt": "This plugin allows you to publish your documents that are created in the build steps.",
       "labels":       [
         "ui",
         "post-build"
       ],
       "name": "doclinks",
-      "previousTimestamp": "2009-07-21T06:40:24.00Z",
-      "releaseTimestamp": "2009-07-25T17:54:58.00Z",
-      "requiredCore": "1.317",
+      "previousTimestamp": "2009-07-25T17:54:58.00Z",
+      "releaseTimestamp": "2010-02-15T17:28:20.00Z",
+      "requiredCore": "1.319",
       "title": "DocLinks Plugin",
-      "url": "http://hudson-ci.org/download/plugins/doclinks/0.2.2/doclinks.hpi",
-      "version": "0.2.2",
+      "url": "http://hudson-ci.org/download/plugins/doclinks/0.3/doclinks.hpi",
+      "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DocLinks+Plugin"
     },
     "dos-trigger":     {
@@ -1386,18 +1393,18 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/EasyAnt+Plugin"
     },
     "ec2":     {
-      "buildDate": "Nov 20, 2009",
+      "buildDate": "Feb 15, 2010",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
       "excerpt": "Allow Hudson to start slaves on <a href='http://aws.amazon.com/ec2/'>EC2<\/a> or <a href='http://www.ubuntu.com/cloud/private'>Ubuntu Enterprise Cloud<\/a> (Eucalyptus) on demand, and kill them as they get unused.",
       "labels": ["cluster"],
       "name": "ec2",
-      "previousTimestamp": "2009-08-06T01:43:10.00Z",
-      "releaseTimestamp": "2009-11-20T16:45:12.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-11-20T16:45:12.00Z",
+      "releaseTimestamp": "2010-02-15T19:51:22.00Z",
+      "requiredCore": "1.346",
       "title": "Amazon EC2 Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ec2/1.5/ec2.hpi",
-      "version": "1.5",
+      "url": "http://hudson-ci.org/download/plugins/ec2/1.6/ec2.hpi",
+      "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Amazon+EC2+Plugin"
     },
     "email-ext":     {
@@ -1719,18 +1726,21 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gradle+Plugin"
     },
     "grails":     {
-      "buildDate": "Sep 25, 2009",
+      "buildDate": "Feb 15, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "jeff"}],
+      "developers": [      {
+        "developerId": "jeffg2one",
+        "name": "Jeff Brown"
+      }],
       "excerpt": "This plugin allows Hudson to invoke Grails tasks as build steps.",
       "labels": ["builder"],
       "name": "grails",
-      "previousTimestamp": "2009-05-06T04:49:42.00Z",
-      "releaseTimestamp": "2009-09-25T17:08:08.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-09-25T17:08:08.00Z",
+      "releaseTimestamp": "2010-02-15T17:36:08.00Z",
+      "requiredCore": "1.319",
       "title": "Grails Plugin",
-      "url": "http://hudson-ci.org/download/plugins/grails/1.0.5/grails.hpi",
-      "version": "1.0.5",
+      "url": "http://hudson-ci.org/download/plugins/grails/1.1/grails.hpi",
+      "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Grails+Plugin"
     },
     "greenballs":     {
@@ -2198,7 +2208,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JDepend+Plugin"
     },
     "jira":     {
-      "buildDate": "Jan 27, 2010",
+      "buildDate": "Feb 12, 2010",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
@@ -2211,12 +2221,12 @@ updateCenter.post(
         "external"
       ],
       "name": "jira",
-      "previousTimestamp": "2010-01-10T23:04:40.00Z",
-      "releaseTimestamp": "2010-01-28T00:09:26.00Z",
+      "previousTimestamp": "2010-01-28T00:09:26.00Z",
+      "releaseTimestamp": "2010-02-13T03:40:58.00Z",
       "requiredCore": "1.319",
       "title": "JIRA Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jira/1.18/jira.hpi",
-      "version": "1.18",
+      "url": "http://hudson-ci.org/download/plugins/jira/1.19/jira.hpi",
+      "version": "1.19",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JIRA+Plugin"
     },
     "jmeter":     {
@@ -2266,7 +2276,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Job+Exporter+Plugin"
     },
     "jobConfigHistory":     {
-      "buildDate": "Feb 01, 2010",
+      "buildDate": "Feb 12, 2010",
       "dependencies": [],
       "developers":       [
                 {
@@ -2283,11 +2293,12 @@ updateCenter.post(
       "excerpt": "Saves copies of all job configurations.",
       "labels": ["ui"],
       "name": "jobConfigHistory",
-      "releaseTimestamp": "2010-02-02T06:02:20.00Z",
+      "previousTimestamp": "2010-02-02T06:02:20.00Z",
+      "releaseTimestamp": "2010-02-13T01:49:44.00Z",
       "requiredCore": "1.338",
       "title": "JobConfigHistory Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jobConfigHistory/1.1/jobConfigHistory.hpi",
-      "version": "1.1",
+      "url": "http://hudson-ci.org/download/plugins/jobConfigHistory/1.2/jobConfigHistory.hpi",
+      "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JobConfigHistory+Plugin"
     },
     "jobrevision":     {
@@ -2706,15 +2717,15 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Maven+Info+Plugin"
     },
     "maven-plugin":     {
-      "buildDate": "Feb 08, 2010",
+      "buildDate": "Feb 12, 2010",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
       "name": "maven-plugin",
-      "previousTimestamp": "2010-02-06T00:47:34.00Z",
-      "releaseTimestamp": "2010-02-08T20:49:04.00Z",
-      "requiredCore": "1.345",
-      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.345/maven-plugin.hpi",
-      "version": "1.345"
+      "previousTimestamp": "2010-02-08T20:49:04.00Z",
+      "releaseTimestamp": "2010-02-13T01:11:48.00Z",
+      "requiredCore": "1.346",
+      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.346/maven-plugin.hpi",
+      "version": "1.346"
     },
     "mercurial":     {
       "buildDate": "Nov 30, 2009",
@@ -2975,7 +2986,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Parameterized+Trigger+Plugin"
     },
     "perforce":     {
-      "buildDate": "Feb 01, 2010",
+      "buildDate": "Feb 13, 2010",
       "dependencies": [],
       "developers":       [
                 {
@@ -2992,12 +3003,12 @@ updateCenter.post(
       "excerpt": "Integrates Hudson with <a href='http://perforce.com'>Perforce<\/a> SCM Repositories. ",
       "labels": ["scm"],
       "name": "perforce",
-      "previousTimestamp": "2010-01-20T17:44:00.00Z",
-      "releaseTimestamp": "2010-02-01T16:33:58.00Z",
+      "previousTimestamp": "2010-02-01T16:33:58.00Z",
+      "releaseTimestamp": "2010-02-13T21:58:44.00Z",
       "requiredCore": "1.339",
       "title": "Perforce Plugin",
-      "url": "http://hudson-ci.org/download/plugins/perforce/1.0.18/perforce.hpi",
-      "version": "1.0.18",
+      "url": "http://hudson-ci.org/download/plugins/perforce/1.0.19/perforce.hpi",
+      "version": "1.0.19",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Perforce+Plugin"
     },
     "performance":     {
@@ -3594,7 +3605,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Script+Security+Realm"
     },
     "secret":     {
-      "buildDate": "Nov 06, 2009",
+      "buildDate": "Feb 15, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "jglick",
@@ -3604,12 +3615,12 @@ updateCenter.post(
       "excerpt": "Lets you upload secret files to be used by a build.",
       "labels": ["buildwrapper"],
       "name": "secret",
-      "previousTimestamp": "2009-09-25T18:26:08.00Z",
-      "releaseTimestamp": "2009-11-06T23:53:42.00Z",
+      "previousTimestamp": "2009-11-06T23:53:42.00Z",
+      "releaseTimestamp": "2010-02-16T02:13:44.00Z",
       "requiredCore": "1.324",
       "title": "Build Secret Plugin",
-      "url": "http://hudson-ci.org/download/plugins/secret/1.4/secret.hpi",
-      "version": "1.4",
+      "url": "http://hudson-ci.org/download/plugins/secret/1.5/secret.hpi",
+      "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Build+Secret+Plugin"
     },
     "sectioned-view":     {
@@ -4150,6 +4161,24 @@ updateCenter.post(
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Synergy+Plugin"
     },
+    "systemloadaverage-monitor":     {
+      "buildDate": "Feb 12, 2010",
+      "dependencies": [],
+      "developers": [      {
+        "developerId": "stefanbrausch",
+        "email": "stefanbrausch@dev.java.net",
+        "name": "Stefan Brausch"
+      }],
+      "excerpt": "Use to display the System Load Average of unix nodes.",
+      "labels": ["slaves"],
+      "name": "systemloadaverage-monitor",
+      "releaseTimestamp": "2010-02-13T01:17:58.00Z",
+      "requiredCore": "1.338",
+      "title": "System Load Average Monitor Plugin",
+      "url": "http://hudson-ci.org/download/plugins/systemloadaverage-monitor/1.1/systemloadaverage-monitor.hpi",
+      "version": "1.1",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/System+Load+Average+Monitor+Plugin"
+    },
     "tasks":     {
       "buildDate": "Jan 27, 2010",
       "dependencies":       [
@@ -4192,7 +4221,7 @@ updateCenter.post(
       "excerpt": "This plugin lets you use builders, publishers and SCM settings from another project.",
       "labels":       [
         "scm",
-        "buildwrapper",
+        "notifier",
         "builder"
       ],
       "name": "template-project",
@@ -4601,23 +4630,23 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/eXtreme+Feedback+Panel+Plugin"
     },
     "xunit":     {
-      "buildDate": "Jan 26, 2010",
+      "buildDate": "Feb 14, 2010",
       "compatibleSinceVersion": "0.2",
       "dependencies": [],
       "developers": [      {
         "developerId": "gbois",
-        "email": "gregory.boissinot@gmail.com",
+        "email": "gbois@dev.java.net",
         "name": "Gregory Boissinot"
       }],
       "excerpt": "This plugin allows you to publish testing tools test result report.",
       "labels": ["report"],
       "name": "xunit",
-      "previousTimestamp": "2010-01-21T17:14:22.00Z",
-      "releaseTimestamp": "2010-01-27T07:46:32.00Z",
-      "requiredCore": "1.342",
+      "previousTimestamp": "2010-01-27T07:46:32.00Z",
+      "releaseTimestamp": "2010-02-15T07:55:16.00Z",
+      "requiredCore": "1.340",
       "title": "xUnit Plugin",
-      "url": "http://hudson-ci.org/download/plugins/xunit/0.5.1/xunit.hpi",
-      "version": "0.5.1",
+      "url": "http://hudson-ci.org/download/plugins/xunit/0.5.2/xunit.hpi",
+      "version": "0.5.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/xUnit+Plugin"
     },
     "xvnc":     {
@@ -4661,8 +4690,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "kt8+bjhwsjK2j2FSN3rVtiRDD7M=",
-    "signature": "sXAKrXdQzikG7AsIifqoV7MD7duPQWRD2k+yfZw2JwF2KQ+DYD3QDpilxEkIWe3UY/OKL9qZcMSDNrAGiCk6Or09wa3XqD4R4o0DSI78S3K+TWILT508iTNm96IfM4FiHF6M0jYU0v0RGXrMP+qXT803u/cUyTgp2eg2uTw8y8wa6cgQ6XMYLRhND4WbROyo7yz1dltEeFKyfRhGKXfUuxlH4iubiZgEe/li2+yNWQ109pCTTjpCPjahBHrDP1KHAaC3Z9wqkn4z68vPE2f7PoUvjO61tiIdIuXgXrm/ow9FNjqFOOPh4nizi4f9ExbWnEDpY61WIo1xBzLb4xI6+w=="
+    "digest": "yu+5KdaAR4AmCDNnAAqTRWaxF9M=",
+    "signature": "mZ2aUpzHhg3StXjeXmfXfei9dquPHlQwmqX06RvJh3ECQwUem9QKbrSSl41Qt1ZlvbTVXjsRXMltbLFLRAG6M1L0tU3VBlNm1gJvR9cbRiCvSHHpS3ItK9IeyGGzS7hVOytJiLu0w3UpLi45+whK+6YcqPPCRKomDujM3DuhFTIxniY5XOC44Rmu76WSTe2GdI2JOfdIgFCZAgvjF/zXx+YMgHAKIKSXdgg+/Qvv4DXTC/52I43OEoaK91kf81Lx+Pxf1LWaKUUh7k35pXUsy6vglppK7C7V1p/1UD92Ci6idb8ec9fSP8Awv0kcifNTy5a1wqx+BNQdcYcL5Hy5lQ=="
   },
   "updateCenterVersion": "1"
 }

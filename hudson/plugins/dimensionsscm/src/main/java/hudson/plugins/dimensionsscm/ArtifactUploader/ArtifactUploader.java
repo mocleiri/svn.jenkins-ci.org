@@ -115,6 +115,7 @@ import hudson.util.FormValidation;
 import hudson.Util;
 import hudson.FilePath;
 import hudson.util.VariableResolver;
+import hudson.tasks.BuildStepMonitor;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -237,14 +238,24 @@ public class ArtifactUploader extends Notifier implements Serializable {
         }
     }
 
+
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
+    }
+
     private static DimensionsSCM scm = null;
     private String[] patterns = new String[0];
+    private boolean forceCheckIn = false;
+    private boolean forceTip = false;
+    private String owningPart = null;
+
+
 
     /**
      * Default constructor.
      */
     @DataBoundConstructor
-    public ArtifactUploader(String[] patterns) {
+    public ArtifactUploader(String[] patterns, boolean fTip, boolean fMerge, String part) {
         // Check the folders specified have data specified
         if (patterns != null) {
             Logger.Debug("patterns are populated");
@@ -258,6 +269,10 @@ public class ArtifactUploader extends Notifier implements Serializable {
         else {
             this.patterns[0] = ".*";
         }
+
+        this.forceCheckIn = fTip;
+        this.forceTip = fMerge;
+        this.owningPart = part;
     }
 
     /*
@@ -267,6 +282,31 @@ public class ArtifactUploader extends Notifier implements Serializable {
     public String[] getPatterns() {
         return this.patterns;
     }
+
+    /*
+     * Gets the owning part
+     * @return patterns
+     */
+    public String getOwningPart() {
+        return this.owningPart;
+    }
+
+    /*
+     * Gets force tip
+     * @return forceTip
+     */
+    public boolean isForceCheckIn() {
+        return this.forceCheckIn;
+    }
+
+    /*
+     * Gets force merge
+     * @return forceMerge
+     */
+    public boolean isForceTip() {
+        return this.forceTip;
+    }
+
 
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
@@ -283,7 +323,7 @@ public class ArtifactUploader extends Notifier implements Serializable {
                 listener.getLogger().println("[DIMENSIONS] Scanning workspace for files to be saved into Dimensions...");
                 listener.getLogger().flush();
                 ArtifactFilter af = new ArtifactFilter(patterns);
-                FilePath wd = build.getProject().getWorkspace();
+                FilePath wd = build.getWorkspace();
                 Logger.Debug("Scanning directory for files that match patterns '" + wd.getRemote() + "'");
                 File dir = new File (wd.getRemote());
                 FileScanner fs = new FileScanner(dir,af,-1);
@@ -334,7 +374,8 @@ public class ArtifactUploader extends Notifier implements Serializable {
                             requests = requests.toUpperCase();
                         }
 
-                        DimensionsResult res = scm.getAPI().UploadFiles(key,wd,scm.getProject(),tmpFile,build,requests);
+                        DimensionsResult res = scm.getAPI().UploadFiles(key,wd,scm.getProject(),tmpFile,build,requests,
+                                                                        forceCheckIn,forceTip,owningPart);
                         if (res==null) {
                             listener.getLogger().println("[DIMENSIONS] New artifacts failed to get loaded into Dimensions");
                             listener.getLogger().flush();
@@ -415,8 +456,15 @@ public class ArtifactUploader extends Notifier implements Serializable {
         public Notifier newInstance(StaplerRequest req, JSONObject formData) throws FormException {
             // Get variables and then construct a new object
             String[] patterns = req.getParameterValues("artifactuploader.patterns");
+            Boolean fTip = Boolean.valueOf("on".equalsIgnoreCase(req.getParameter("artifactuploader.forceCheckIn")));
+            Boolean fMerge = Boolean.valueOf("on".equalsIgnoreCase(req.getParameter("artifactuploader.forceTip")));
 
-            ArtifactUploader artifactor = new ArtifactUploader(patterns);
+            String oPart = req.getParameter("artifactuploader.owningPart");
+
+            if (oPart != null)
+                oPart = Util.fixNull(req.getParameter("artifactuploader.owningPart").trim());
+
+            ArtifactUploader artifactor = new ArtifactUploader(patterns,fTip,fMerge,oPart);
 
             return artifactor;
         }

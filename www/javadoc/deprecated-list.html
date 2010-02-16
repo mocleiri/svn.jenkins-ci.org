@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.345 API)
+Deprecated List (Hudson main module 1.346 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-08">
+<META NAME="date" CONTENT="2010-02-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.345 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.345 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.346 API)";
     }
 }
 </SCRIPT>
@@ -1249,6 +1249,30 @@ function windowTitle()
 <TD><A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.Build, hudson.Launcher, hudson.model.BuildListener)">hudson.tasks.BuildStepCompatibilityLayer.perform(Build<?, ?>, Launcher, BuildListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)"><CODE>BuildStepCompatibilityLayer.perform(AbstractBuild, Launcher, BuildListener)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/SCM.html#pollChanges(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)">hudson.scm.SCM.pollChanges(AbstractProject, Launcher, FilePath, TaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.345
+      Override <A HREF="hudson/scm/SCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)"><CODE>SCM.calcRevisionsFromBuild(AbstractBuild, Launcher, TaskListener)</CODE></A> and
+      <A HREF="hudson/scm/SCM.html#compareRemoteRevisionWith(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>SCM.compareRemoteRevisionWith(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for implementation.
+
+      The implementation is now separated in two pieces, one that computes the revision of the current workspace,
+      and the other that computes the revision of the remote repository.
+
+      Call <A HREF="hudson/scm/SCM.html#poll(hudson.model.AbstractProject, hudson.Launcher, hudson.FilePath, hudson.model.TaskListener, hudson.scm.SCMRevisionState)"><CODE>SCM.poll(AbstractProject, Launcher, FilePath, TaskListener, SCMRevisionState)</CODE></A> for use instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/SCMedItem.html#pollSCMChanges(hudson.model.TaskListener)">hudson.model.SCMedItem.pollSCMChanges(TaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.346
+      Use <A HREF="hudson/model/SCMedItem.html#poll(hudson.model.TaskListener)"><CODE>SCMedItem.poll(TaskListener)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/AbstractProject.html#pollSCMChanges(hudson.model.TaskListener)">hudson.model.AbstractProject.pollSCMChanges(TaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.346
+      Use <A HREF="hudson/model/AbstractProject.html#poll(hudson.model.TaskListener)"><CODE>AbstractProject.poll(TaskListener)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildStepCompatibilityLayer.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">hudson.tasks.BuildStepCompatibilityLayer.prebuild(Build<?, ?>, BuildListener)</A>
