@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -48,12 +48,12 @@ import org.apache.tools.ant.BuildEvent;
  * <p>
  * {@link IvyReporter} is first instanciated on the master.
  * Then during the build, it is serialized and sent over into
- * the maven process by serialization. Reporters will then receive
- * event callbacks as mojo execution progresses. Those event callbacks
+ * the Ant process by serialization. Reporters will then receive
+ * event callbacks as Ant build events. Those event callbacks
  * are the ones that take {@link IvyBuildProxy}.
  *
  * <p>
- * Once the maven build completes normally or abnormally, the reporters
+ * Once the Ant build completes normally or abnormally, the reporters
  * will be sent back to the master by serialization again, then
  * have its {@link #end(IvyBuild, Launcher, BuildListener)} method invoked.
  * This is a good opportunity to perform the post-build action.
@@ -70,8 +70,7 @@ import org.apache.tools.ant.BuildEvent;
  *
  * <pre>
  * SEQUENCE := preBuild MODULE* postBuild end
- * MODULE   := enterModule MOJO+ leaveModule
- * MOJO     := preExecute postExecute
+ * MODULE   := enterModule leaveModule
  * </pre>
  *
  * <p>
@@ -105,7 +104,7 @@ public abstract class IvyReporter implements Describable<IvyReporter>, Extension
      *      and the build needs to be aborted.
      * @throws InterruptedException
      *      If the build is interrupted by the user (in an attempt to abort the build.)
-     *      Normally the {@link MavenReporter} implementations may simply forward the exception
+     *      Normally the {@link IvyReporter} implementations may simply forward the exception
      *      it got from its lower-level functions.
      * @throws IOException
      *      If the implementation wants to abort the processing when an {@link IOException}

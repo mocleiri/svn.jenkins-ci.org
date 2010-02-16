@@ -549,16 +549,16 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
                 List<IvyModule> sortedModules = new ArrayList<IvyModule>();
 
                 modules.clear();
-                for (IvyModuleInfo pom : ivyDescriptors) {
-                    IvyModule mm = old.get(pom.name);
+                for (IvyModuleInfo ivyDescriptor : ivyDescriptors) {
+                    IvyModule mm = old.get(ivyDescriptor.name);
                     if (mm != null) {// found an existing matching module
                         if (debug)
                             logger.println("Reconfiguring " + mm);
-                        mm.reconfigure(pom);
-                        modules.put(pom.name, mm);
+                        mm.reconfigure(ivyDescriptor);
+                        modules.put(ivyDescriptor.name, mm);
                     } else {// this looks like a new module
-                        logger.println(Messages.IvyModuleSetBuild_DiscoveredModule(pom.name, pom.displayName));
-                        mm = new IvyModule(project, pom, getNumber());
+                        logger.println(Messages.IvyModuleSetBuild_DiscoveredModule(ivyDescriptor.name, ivyDescriptor.displayName));
+                        mm = new IvyModule(project, ivyDescriptor, getNumber());
                         modules.put(mm.getModuleName(), mm);
                     }
                     sortedModules.add(mm);
@@ -664,7 +664,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
         }
 
         /**
-         * Invoked after the maven has finished running, and in the master, not in the maven process.
+         * Invoked after the Ant has finished running, and in the master, not in the Ant process.
          */
         void end(Launcher launcher) throws IOException, InterruptedException {
             for (Map.Entry<ModuleName,ProxyImpl2> e : sourceProxies.entrySet()) {

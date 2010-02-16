@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,7 +28,7 @@ package hudson.ivy;
  * for aggregated build. Fired and consumed internally and
  * not exposed to plugins.
  *
- * @author Kohsuke Kawaguchi
+ * @author Timothy Bingaman
  */
 public interface IvyBuildProxy2 extends IvyBuildProxy {
     /**
@@ -42,9 +42,9 @@ public interface IvyBuildProxy2 extends IvyBuildProxy {
     void end();
 
     /**
-     * Maven produces additional error message after the module build is done.
+     * Ant produces additional error message after the module build is done.
      * So to catch those messages, invoke this method on the last module that was built
-     * after all the Maven processing is done, to append last messages to the console
+     * after all the Ant processing is done, to append last messages to the console
      * output of the module.
      */
     void appendLastLog();

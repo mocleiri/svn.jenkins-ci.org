@@ -534,7 +534,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     }
 
     /**
-     * Gets the workspace-relative path to an alternative Maven settings.xml file.
+     * Gets the workspace-relative path to an alternative Ivy settings.xml file.
      */
     public String getAlternateSettings() {
         return alternateSettings;
@@ -556,7 +556,7 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
     }
 
     /**
-     * Set mavenOpts.
+     * Set ANT_OPTS.
      */
     public void setAntOpts(String antOpts) {
         this.antOpts = antOpts;

@@ -1,18 +1,18 @@
 /*
  * The MIT License
- * 
+ *
  * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,6 +23,7 @@
  */
 package hudson.ivy;
 
+import hudson.maven.agent.PluginManagerListener;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Result;
@@ -31,16 +32,17 @@ import hudson.remoting.DelegatingCallable;
 import hudson.remoting.Future;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.text.NumberFormat;
 
+import org.apache.maven.lifecycle.LifecycleExecutorListener;
 import org.apache.tools.ant.BuildEvent;
 
 /**
- * {@link Callable} that invokes Ivy CLI (in process) and drives a build.
+ * {@link Callable} that invokes Ant CLI (in process) and drives a build.
  *
  * <p>
  * As a callable, this function returns the build result.
@@ -49,16 +51,15 @@ import org.apache.tools.ant.BuildEvent;
  * This class defines a series of event callbacks, which are invoked during the build.
  * This allows subclass to monitor the progress of a build.
  *
- * @author Kohsuke Kawaguchi
- * @since 1.133
+ * @author Timothy Bingaman
  */
 public abstract class IvyBuilder implements DelegatingCallable<Result,IOException> {
     /**
-     * Goals to be executed in this Maven execution.
+     * Goals to be executed in this Ant execution.
      */
     private final List<String> goals;
     /**
-     * Hudson-defined system properties. These will be made available to Maven,
+     * Hudson-defined system properties. These will be made available to Ant,
      * and accessible as if they are specified as -Dkey=value
      */
     private final Map<String,String> systemProps;
@@ -71,7 +72,7 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
      * Flag needs to be set at the constructor, so that this reflects
      * the setting at master.
      */
-//    private final boolean profile = MavenProcessFactory.profile;
+//    private final boolean profile = AntProcessFactory.profile;
 
     /**
      * Record all asynchronous executions as they are scheduled,
@@ -106,7 +107,7 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
     abstract void postModule(BuildEvent event) throws InterruptedException, IOException;
 
     /**
-     * This code is executed inside the maven jail process.
+     * This code is executed inside the Ant jail process.
      */
     public Result call() throws IOException {
         try {
@@ -151,7 +152,7 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
 //                logger.println("Total overhead was "+format(n,a.overheadTime)+"ms");
 //                Channel ch = Channel.current();
 //                logger.println("Class loading "   +format(n,ch.classLoadingTime.get())   +"ms, "+ch.classLoadingCount+" classes");
-//                logger.println("Resource loading "+format(n,ch.resourceLoadingTime.get())+"ms, "+ch.resourceLoadingCount+" times");                
+//                logger.println("Resource loading "+format(n,ch.resourceLoadingTime.get())+"ms, "+ch.resourceLoadingCount+" times");
 //            }
 
 //            if(r==0)    return Result.SUCCESS;
@@ -169,7 +170,7 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
     }
 
     private String formatArgs(List<String> args) {
-        StringBuilder buf = new StringBuilder("Executing Maven: ");
+        StringBuilder buf = new StringBuilder("Executing Ant: ");
         for (String arg : args)
             buf.append(' ').append(arg);
         return buf.toString();
@@ -186,14 +187,14 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
 
     /**
      * Receives {@link PluginManagerListener} and {@link LifecycleExecutorListener} events
-     * and converts them to {@link MavenBuilder} events.
+     * and converts them to Ant {@link BuildEvent}s.
      */
     private static final class Adapter implements org.apache.tools.ant.BuildListener {
 
         private final IvyBuilder listener;
 
         /**
-         * Number of total nanoseconds {@link MavenBuilder} spent.
+         * Number of total nanoseconds {@link IvyBuilder} spent.
          */
         long overheadTime;
 
@@ -231,49 +232,29 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
 
         public void messageLogged(BuildEvent event) {
             // TODO Auto-generated method stub
-            
+
         }
 
         public void targetFinished(BuildEvent event) {
             // TODO Auto-generated method stub
-            
+
         }
 
         public void targetStarted(BuildEvent event) {
             // TODO Auto-generated method stub
-            
+
         }
 
         public void taskFinished(BuildEvent event) {
             // TODO Auto-generated method stub
-            
+
         }
 
         public void taskStarted(BuildEvent event) {
             // TODO Auto-generated method stub
-            
+
         }
     }
-
-    /**
-     * Used by selected {@link MavenReporter}s to notify the maven build agent
-     * that even though Maven is going to fail, we should report the build as
-     * success.
-     *
-     * <p>
-     * This rather ugly hook is necessary to mark builds as unstable, since
-     * maven considers a test failure to be a build failure, which will otherwise
-     * mark the build as FAILED.
-     *
-     * <p>
-     * It's OK for this field to be static, because the JVM where this is actually
-     * used is in the Maven JVM, so only one build is going on for the whole JVM.
-     *
-     * <p>
-     * Even though this field is public, please consider this field reserved
-     * for {@link SurefireArchiver}. Subject to change without notice.
-     */
-    public static boolean markAsSuccess;
 
     private static final long serialVersionUID = 1L;
 }
