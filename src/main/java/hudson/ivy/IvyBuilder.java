@@ -23,7 +23,6 @@
  */
 package hudson.ivy;
 
-import hudson.maven.agent.PluginManagerListener;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Result;
@@ -38,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import org.apache.maven.lifecycle.LifecycleExecutorListener;
 import org.apache.tools.ant.BuildEvent;
 
 /**
@@ -116,7 +114,7 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
 //            PluginManagerInterceptor.setListener(a);
 //            LifecycleExecutorInterceptor.setListener(a);
 
-            markAsSuccess = false;
+//            markAsSuccess = false;
 
             System.getProperties().putAll(systemProps);
 
@@ -157,9 +155,9 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
 
 //            if(r==0)    return Result.SUCCESS;
 
-            if(markAsSuccess) {
-                return Result.SUCCESS;
-            }
+//            if(markAsSuccess) {
+//                return Result.SUCCESS;
+//            }
 
             listener.getLogger().println(Messages.IvyBuilder_Failed());
             return Result.FAILURE;
@@ -186,8 +184,7 @@ public abstract class IvyBuilder implements DelegatingCallable<Result,IOExceptio
     }
 
     /**
-     * Receives {@link PluginManagerListener} and {@link LifecycleExecutorListener} events
-     * and converts them to Ant {@link BuildEvent}s.
+     * Receives various events and converts them to Ant {@link BuildEvent}s.
      */
     private static final class Adapter implements org.apache.tools.ant.BuildListener {
 
