@@ -132,7 +132,8 @@ public class MailSender {
         return b.getResult();
     }
 
-    protected MimeMessage getMail(AbstractBuild<?, ?> build, InternetAddress addr, BuildListener listener) throws MessagingException, InterruptedException {
+    protected MimeMessage getMail(AbstractBuild<?, ?> build, InternetAddress addr,
+            BuildListener listener) throws MessagingException, InterruptedException {
         Locale locale = getUserLocale(addr);
 
         if (build.getResult() == Result.FAILURE) {
@@ -158,8 +159,8 @@ public class MailSender {
         return null;
     }
 
-    private Locale getUserLocale(InternetAddress iaddr) {
-        String addr = iaddr.getAddress();
+    private Locale getUserLocale(InternetAddress address) {
+        String addr = address.getAddress();
         Collection<User> users = User.getAll();
         for (User user : users) {
             Mailer.UserProperty mup = user.getProperty(Mailer.UserProperty.class);
@@ -174,7 +175,8 @@ public class MailSender {
         return Locale.getDefault();
     }
 
-    private MimeMessage createBackToNormalMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, String subject, BuildListener listener) throws MessagingException {
+    private MimeMessage createBackToNormalMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale,
+            String subject, BuildListener listener) throws MessagingException {
         MimeMessage msg = createEmptyMail(build, addr, locale, listener);
 
         msg.setSubject(getSubject(build, Messages._MailSender_BackToNormalMail_Subject(subject).toString(locale)),MAIL_CHARSET);
@@ -185,7 +187,8 @@ public class MailSender {
         return msg;
     }
 
-    private MimeMessage createUnstableMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, BuildListener listener) throws MessagingException {
+    private MimeMessage createUnstableMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale,
+            BuildListener listener) throws MessagingException {
         MimeMessage msg = createEmptyMail(build, addr, locale, listener);
 
         String subject = Messages._MailSender_UnstableMail_Subject().toString(locale);
@@ -224,7 +227,8 @@ public class MailSender {
             buf.append(Messages._MailSender_Link(baseUrl, url).toString(locale)).append("\n\n");
     }
 
-    private MimeMessage createFailureMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, BuildListener listener) throws MessagingException, InterruptedException {
+    private MimeMessage createFailureMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale,
+            BuildListener listener) throws MessagingException, InterruptedException {
         MimeMessage msg = createEmptyMail(build, addr, locale, listener);
 
         msg.setSubject(getSubject(build, Messages._MailSender_FailureMail_Subject().toString(locale)),MAIL_CHARSET);
@@ -307,7 +311,8 @@ public class MailSender {
         return msg;
     }
 
-    private MimeMessage createEmptyMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale, BuildListener listener) throws MessagingException {
+    private MimeMessage createEmptyMail(AbstractBuild<?, ?> build, InternetAddress addr, Locale locale,
+            BuildListener listener) throws MessagingException {
         MimeMessage msg = new MimeMessage(Mailer.descriptor().createSession());
         // TODO: I'd like to put the URL to the page in here,
         // but how do I obtain that?
@@ -328,8 +333,8 @@ public class MailSender {
                 else if (b.messageIds != null) 
                     messageId = b.messageIds.get(addr.getAddress());
                 if (messageId!=null) {
-                    msg.setHeader("In-Reply-To",b.messageId);
-                    msg.setHeader("References",b.messageId);
+                    msg.setHeader("In-Reply-To",messageId);
+                    msg.setHeader("References",messageId);
                 }
             }
         }

@@ -37,7 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * Filter which enables request to get user's locale in user configuration.
+ * Filter which enables request to return user's locale in user configuration.
  * @author Seiji Sogabe
  */
 public class UserLocaleFilter implements Filter {
