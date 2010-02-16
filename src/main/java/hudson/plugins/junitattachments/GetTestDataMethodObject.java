@@ -81,6 +81,7 @@ public class GetTestDataMethodObject {
     public Map<String, List<String>> getAttachments() throws IllegalStateException, IOException, InterruptedException {
         // build a map of className -> result xml file
         final FilePath attachmentsStorage = AttachmentPublisher.getAttachmentPath(build);
+        getReports();
         LOG.info("reports: " + reports);
         for (Map.Entry<String, String> report : reports.entrySet()) {
             final String className = report.getKey();
