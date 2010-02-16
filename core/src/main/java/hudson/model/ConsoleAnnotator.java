@@ -28,7 +28,10 @@ import hudson.ExtensionList;
 import hudson.ExtensionPoint;
 import hudson.MarkupText;
 
+import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
@@ -36,7 +39,7 @@ import java.util.ListIterator;
 /**
  * @author Kohsuke Kawaguchi
  */
-public abstract class ConsoleAnnotator implements ExtensionPoint {
+public abstract class ConsoleAnnotator implements ExtensionPoint, Serializable {
     /**
      * Annotates one line.
      */
@@ -45,9 +48,13 @@ public abstract class ConsoleAnnotator implements ExtensionPoint {
     /**
      * Bundles all the given {@link ConsoleAnnotator} into a single annotator.
      */
-    public static ConsoleAnnotator combine(final Collection<? extends ConsoleAnnotator> all) {
+    public static ConsoleAnnotator combine(Collection<? extends ConsoleAnnotator> all) {
         class Aggregator extends ConsoleAnnotator {
-            List<ConsoleAnnotator> list = new ArrayList<ConsoleAnnotator>(all);
+            List<ConsoleAnnotator> list;
+
+            Aggregator(Collection<? extends ConsoleAnnotator> list) {
+                this.list = new ArrayList<ConsoleAnnotator>(list);
+            }
 
             public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
                 ListIterator<ConsoleAnnotator> itr = list.listIterator();
@@ -59,10 +66,15 @@ public abstract class ConsoleAnnotator implements ExtensionPoint {
                         else            itr.set(b);
                     }
                 }
-                return list.isEmpty() ? null : this;
+
+                switch (list.size()) {
+                case 0:     return null;    // no more annotator left
+                case 1:     return list.get(0); // no point in aggregating
+                default:    return this;
+                }
             }
         }
-        return new Aggregator();
+        return new Aggregator(all);
     }
     
     public static ConsoleAnnotator initial() {
@@ -83,9 +95,39 @@ public abstract class ConsoleAnnotator implements ExtensionPoint {
     @Extension
     public static class DemoConsoleAnnotator extends ConsoleAnnotator {
         public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
-            if (text.length()>2)
-                text.addMarkup(0,2,"<font color=red>","</font>");
+            return combine(Arrays.asList(new RotatingAnnotator(0,3),new RotatingAnnotator(4,4))).annotate(build,text);
+        }
+
+        private static final long serialVersionUID = 1L;
+    }
+
+    public static class RotatingAnnotator extends ConsoleAnnotator {
+        private int counter;
+        private final int cycle;
+        private final int start;
+
+        public RotatingAnnotator(int start,int cycle) {
+            this.start = start;
+            this.cycle = cycle;
+        }
+
+        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
+            counter = (counter+1)%cycle;
+            if (text.length()>start+4)
+                text.addMarkup(start,start+4,"<font color="+color()+">","</font>");
             return this;
         }
+
+        private String color() {
+            switch (counter) {
+            case 0:     return "blue";
+            case 1:     return "red";
+            case 2:     return "green";
+            case 3:     return "yellow";
+            }
+            return "gray";
+        }
     }
+
+    private static final long serialVersionUID = 1L;
 }

@@ -23,6 +23,7 @@
  */
 package hudson.model;
 
+import com.trilead.ssh2.crypto.Base64;
 import hudson.AbortException;
 import hudson.BulkChange;
 import hudson.CloseProofOutputStream;
@@ -37,6 +38,7 @@ import hudson.matrix.MatrixBuild;
 import hudson.matrix.MatrixRun;
 import hudson.model.listeners.RunListener;
 import hudson.model.listeners.SaveableListener;
+import hudson.remoting.ObjectInputStreamEx;
 import hudson.search.SearchIndexBuilder;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
@@ -49,10 +51,12 @@ import hudson.tasks.BuildStep;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.IOException2;
 import hudson.util.LogTaskListener;
+import hudson.util.TimeUnit2;
 import hudson.util.XStream2;
 import hudson.util.ProcessTree;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -60,11 +64,17 @@ import java.io.FileReader;
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,10 +96,17 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.jvnet.hudson.crypto.SignatureOutputStream;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -99,6 +116,8 @@ import org.kohsuke.stapler.framework.io.LargeText;
 import org.apache.commons.io.IOUtils;
 
 import com.thoughtworks.xstream.XStream;
+
+import static java.lang.Math.abs;
 
 /**
  * A particular execution of {@link Job}.
@@ -1504,12 +1523,53 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * Handles incremental log output.
      */
     public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
+        // TODO: move this subtype elsewhere for better reuse (e.g., slave log)
         new LargeText(getLogFile(),getCharset(),!isLogUpdated()) {
-            @Override
-            protected Writer createWriter(StaplerRequest req, StaplerResponse rsp, long size) throws IOException {
-                return new ConsoleAnnotationWriter(super.createWriter(req, rsp, size),
-                        ConsoleAnnotator.initial(), Run.this);
+            private ConsoleAnnotator createAnnotator(StaplerRequest req) throws IOException {
+                try {
+                    String base64 = req.getHeader("X-ConsoleAnnotator");
+                    if (base64!=null) {
+                        Cipher sym = Cipher.getInstance("AES");
+                        sym.init(Cipher.DECRYPT_MODE,Hudson.getInstance().getSecretKeyAsAES128());
+
+                        ObjectInputStream ois = new ObjectInputStreamEx(new GZIPInputStream(
+                                new CipherInputStream(new ByteArrayInputStream(Base64.decode(base64.toCharArray())),sym)),
+                                Hudson.getInstance().pluginManager.uberClassLoader);
+                        long timestamp = ois.readLong();
+                        if (TimeUnit2.HOURS.toMillis(1) > abs(System.currentTimeMillis()-timestamp))
+                            // don't deserialize something too old to prevent a replay attack
+                            return (ConsoleAnnotator)ois.readObject();
+                    }
+                } catch (GeneralSecurityException e) {
+                    throw new IOException2(e);
+                } catch (ClassNotFoundException e) {
+                    throw new IOException2(e);
+                }
+                // start from scratch
+                return ConsoleAnnotator.initial();
             }
+
+            @Override
+            protected Writer createSpoolFilter(Writer w, StaplerRequest req, final StaplerResponse rsp) throws IOException {
+                return new ConsoleAnnotationWriter(w,createAnnotator(req), Run.this) {
+                    public void close() throws IOException {
+                        try {
+                            super.close();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            Cipher sym = Cipher.getInstance("AES");
+                            sym.init(Cipher.ENCRYPT_MODE,Hudson.getInstance().getSecretKeyAsAES128());
+                            ObjectOutputStream oos = new ObjectOutputStream(new GZIPOutputStream(new CipherOutputStream(baos,sym)));
+                            oos.writeLong(System.currentTimeMillis()); // send timestamp to prevent a replay attack
+                            oos.writeObject(getConsoleAnnotator());
+                            oos.close();
+                            rsp.setHeader("X-ConsoleAnnotator",new String(Base64.encode(baos.toByteArray())));
+                        } catch (GeneralSecurityException e) {
+                            throw new IOException2(e);
+                        }
+                    }
+                };
+            }
+
         }.doProgressText(req,rsp);
     }
 

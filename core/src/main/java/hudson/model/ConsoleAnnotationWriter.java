@@ -31,7 +31,7 @@ import java.io.Writer;
 /**
  * @author Kohsuke Kawaguchi
  */
-public final class ConsoleAnnotationWriter extends Writer {
+public class ConsoleAnnotationWriter extends Writer {
     private final Writer base;
     private final Run<?,?> build;
     private StringBuilder buf = new StringBuilder();
@@ -41,6 +41,10 @@ public final class ConsoleAnnotationWriter extends Writer {
         this.base = base;
         this.ann = ann;
         this.build = build;
+    }
+
+    public ConsoleAnnotator getConsoleAnnotator() {
+        return ann;
     }
 
     private void eol() throws IOException {
@@ -82,7 +86,13 @@ public final class ConsoleAnnotationWriter extends Writer {
 
     @Override
     public void close() throws IOException {
-        eol();
+        if (buf.length()>0) {
+            /*
+                because LargeText cuts output at the line end boundary, this is
+                possible only for the very end of the console output, if the output ends without NL.
+             */
+            eol();
+        }
         base.close();
     }
 
