@@ -50,7 +50,9 @@ THE SOFTWARE.
               var stickToBottom = scroller.isSticking();
               var text = rsp.responseText;
               if(text!="") {
-                e.appendChild(document.createTextNode(text));
+                var p = document.createElement("DIV");
+                p.innerHTML = text;
+                e.appendChild(p);
                 if(stickToBottom) scroller.scrollToBottom();
               }
 
