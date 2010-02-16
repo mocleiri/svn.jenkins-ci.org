@@ -9,19 +9,21 @@ import java.io.Writer;
  * @author Kohsuke Kawaguchi
  */
 public final class ConsoleAnnotationWriter extends Writer {
+    private final Writer base;
+    private final AbstractBuild<?,?> build;
     private StringBuilder buf = new StringBuilder();
-    private Writer base;
+    private ConsoleAnnotator ann;
 
-    public ConsoleAnnotationWriter(Writer base) {
+    public ConsoleAnnotationWriter(Writer base, ConsoleAnnotator ann, AbstractBuild<?, ?> build) {
         this.base = base;
+        this.ann = ann;
+        this.build = build;
     }
 
     private void eol() throws IOException {
         MarkupText mt = new MarkupText(buf.toString());
-        {// test
-            if (mt.length()>2)
-                mt.addMarkup(0,2,"<font color=red>","</font>");
-        }
+        if (ann!=null)
+            ann = ann.annotate(build,mt);
         base.write(mt.toString());
 
         // reuse the buffer under normal circumstances, but don't let the line buffer grow unbounded
