@@ -21,24 +21,29 @@ import hudson.tasks.junit.SuiteResult;
 import hudson.tasks.junit.TestResult;
 
 /**
- * @author mfriedenhagen
+ * This class is a helper for hudson.tasks.junit.TestDataPublisher.getTestData(AbstractBuild<?, ?>, Launcher, BuildListener, TestResult).
  *
+ * @author mfriedenhagen
  */
 public class GetTestDataMethodObject {
 
+    /** the build to inspect. */
     private final AbstractBuild<?, ?> build;
 
+    /** the launcher of the build. */
     private final Launcher launcher;
 
+    /** the listener which triggered the invocation. */
     private final BuildListener listener;
 
+    /** the test results associated with the build. */
     private final TestResult testResult;
 
     /**
-     * @param build
-     * @param launcher
-     * @param listener
-     * @param testResult
+     * @param build see {@link GetTestDataMethodObject#build}
+     * @param launcher see {@link GetTestDataMethodObject#launcher}
+     * @param listener see {@link GetTestDataMethodObject#listener}
+     * @param testResult see {@link GetTestDataMethodObject#testResult}
      */
     public GetTestDataMethodObject(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener,
             TestResult testResult) {
@@ -49,7 +54,9 @@ public class GetTestDataMethodObject {
     }
 
     /**
-     * @return
+     * Returns a Map of classname vs. the stored attachments in a directory called as the test class.
+     *
+     * @return the map
      * @throws InterruptedException
      * @throws IOException
      * @throws IllegalStateException
