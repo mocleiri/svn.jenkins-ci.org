@@ -24,6 +24,7 @@
 package hudson.tasks;
 
 import hudson.model.Action;
+import java.util.Map;
 
 /**
  * Remembers the message ID of the e-mail that was sent for the build.
@@ -39,8 +40,23 @@ public class MailMessageIdAction implements Action {
      */
     public final String messageId;
 
+    /**
+     * Message IDs of the e-mails send for the build.
+     * @since 1.347
+     */
+    public final Map<String, String> messageIds;
+
     public MailMessageIdAction(String messageId) {
         this.messageId = messageId;
+        this.messageIds = null;
+    }
+
+    /**
+     * @since 1.347
+     */
+    public MailMessageIdAction(Map<String, String> messageIds) {
+        this.messageId = null;
+        this.messageIds = messageIds;
     }
 
     public String getIconFileName() {

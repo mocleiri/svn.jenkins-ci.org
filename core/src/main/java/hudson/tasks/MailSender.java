@@ -29,7 +29,6 @@ import hudson.Functions;
 import hudson.model.*;
 import hudson.scm.ChangeLogSet;
 
-import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
@@ -40,12 +39,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,37 +81,30 @@ public class MailSender {
 
     public boolean execute(AbstractBuild<?, ?> build, BuildListener listener) throws InterruptedException {
         try {
+            Map<String, String> messageIds = new HashMap<String, String>();
             Set<InternetAddress> rcps = getRecipients(build, listener);
             for (InternetAddress rcp : rcps) {
                 try {
                     MimeMessage mail = getMail(build, rcp, listener);
-                    if (mail != null) {
-                        // if the previous e-mail was sent for a success, this new e-mail
-                        // is not a follow up
-                        AbstractBuild<?, ?> pb = build.getPreviousBuild();
-                        if (pb != null && pb.getResult() == Result.SUCCESS) {
-                            mail.removeHeader("In-Reply-To");
-                            mail.removeHeader("References");
-                        }
-
-                        Address[] allRecipients = mail.getAllRecipients();
-                        if (allRecipients != null) {
-                            StringBuilder buf = new StringBuilder("Sending e-mails to:");
-                            for (Address a : allRecipients) {
-                                buf.append(' ').append(a);
-                            }
-                            listener.getLogger().println(buf);
-                            Transport.send(mail);
-
-                            build.addAction(new MailMessageIdAction(mail.getMessageID()));
-                        } else {
-                            listener.getLogger().println(Messages.MailSender_ListEmpty());
-                        }
+                    if (mail == null)
+                        continue;
+                    // if the previous e-mail was sent for a success, this new e-mail
+                    // is not a follow up
+                    AbstractBuild<?, ?> pb = build.getPreviousBuild();
+                    if (pb != null && pb.getResult() == Result.SUCCESS) {
+                        mail.removeHeader("In-Reply-To");
+                        mail.removeHeader("References");
                     }
+                    listener.getLogger().println("Sending e-mail to:" + rcp.getAddress());
+                    Transport.send(mail);
+                    messageIds.put(rcp.getAddress(), mail.getMessageID());
                 } catch (MessagingException e) {
                     e.printStackTrace(listener.error(e.getMessage()));
                 }
             }
+            if (rcps.isEmpty())
+                listener.getLogger().println(Messages.MailSender_ListEmpty());
+            build.addAction(new MailMessageIdAction(messageIds));
         } catch (MessagingException e) {
             e.printStackTrace(listener.error(e.getMessage()));
         } finally {
@@ -170,7 +164,7 @@ public class MailSender {
         for (User user : users) {
             Mailer.UserProperty mup = user.getProperty(Mailer.UserProperty.class);
             if (mup == null || !addr.equals(mup.getAddress()))
-                    continue;
+                continue;
             UserLocaleProperty ulp = user.getProperty(UserLocaleProperty.class);
             if (ulp == null)
                 continue;
@@ -327,8 +321,16 @@ public class MailSender {
         if(pb!=null) {
             MailMessageIdAction b = pb.getAction(MailMessageIdAction.class);
             if(b!=null) {
-                msg.setHeader("In-Reply-To",b.messageId);
-                msg.setHeader("References",b.messageId);
+                String messageId = null;
+                if (b.messageId != null)
+                    // backward compatibility
+                    messageId = b.messageId;
+                else if (b.messageIds != null) 
+                    messageId = b.messageIds.get(addr.getAddress());
+                if (messageId!=null) {
+                    msg.setHeader("In-Reply-To",b.messageId);
+                    msg.setHeader("References",b.messageId);
+                }
             }
         }
 
