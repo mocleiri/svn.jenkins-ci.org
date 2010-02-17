@@ -27,6 +27,7 @@ import hudson.XmlFile;
 import hudson.BulkChange;
 import hudson.Util;
 import static hudson.Util.singleQuote;
+import hudson.diagnosis.OldDataMonitor;
 import hudson.model.listeners.SaveableListener;
 import hudson.views.ListViewColumn;
 import net.sf.json.JSONArray;
@@ -740,4 +741,10 @@ public abstract class Descriptor<T extends Describable<T>> implements Saveable {
      * Used in {@link #checkMethods} to indicate that there's no check method.
      */
     private static final String NONE = "\u0000";
+
+    private Object readResolve() {
+        if (properties!=null)
+            OldDataMonitor.report(this, "1.62");
+        return this;
+    }
 }
