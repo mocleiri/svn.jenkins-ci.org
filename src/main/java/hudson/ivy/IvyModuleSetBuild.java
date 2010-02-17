@@ -530,7 +530,7 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
 
             List<IvyModuleInfo> ivyDescriptors;
             try {
-            	IvyXmlParser parser = new IvyXmlParser(listener, null, project, getModuleRoot().getRemote());
+            	IvyXmlParser parser = new IvyXmlParser(listener, project, getModuleRoot().getRemote());
             	if (getModuleRoot().getChannel() instanceof Channel)
             		((Channel) getModuleRoot().getChannel()).preloadJar(parser, Ivy.class);
                 ivyDescriptors = getModuleRoot().act(parser);
@@ -759,21 +759,17 @@ public class IvyModuleSetBuild extends AbstractIvyBuild<IvyModuleSet, IvyModuleS
          * effect even when {@link IvyXmlParser} runs in a slave.
          */
         private final boolean verbose = debug;
-        private final AntInstallation antHome;
         private final String ivyFilePattern;
         private final String ivyFileExcludePattern;
-        private final String alternateSettings;
         private final String ivyBranch;
         private final String workspace;
 
-        public IvyXmlParser(BuildListener listener, AntInstallation antHome, IvyModuleSet project, String workspace) {
+        public IvyXmlParser(BuildListener listener, IvyModuleSet project, String workspace) {
             // project cannot be shipped to the remote JVM, so all the relevant
             // properties need to be captured now.
             this.listener = listener;
-            this.antHome = antHome;
             this.ivyFilePattern = project.getIvyFilePattern() == null ? IVY_XML_PATTERN : project.getIvyFilePattern();
             this.ivyFileExcludePattern = project.getIvyFileExcludesPattern();
-            this.alternateSettings = project.getAlternateSettings();
             this.ivyBranch = project.getIvyBranch();
             this.workspace = workspace;
         }

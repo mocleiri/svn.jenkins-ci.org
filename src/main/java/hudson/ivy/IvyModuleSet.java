@@ -113,8 +113,6 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 
     private String relativePathToDescriptorFromModuleRoot;
 
-    private String alternateSettings;
-
     /**
      * Identifies {@link AntInstallation} to be used.
      */
@@ -531,13 +529,6 @@ public final class IvyModuleSet extends AbstractIvyProject<IvyModuleSet,IvyModul
 
     public void setRelativePathToDescriptorFromModuleRoot(String relativePathToDescriptorFromModuleRoot) {
         this.relativePathToDescriptorFromModuleRoot = relativePathToDescriptorFromModuleRoot;
-    }
-
-    /**
-     * Gets the workspace-relative path to an alternative Ivy settings.xml file.
-     */
-    public String getAlternateSettings() {
-        return alternateSettings;
     }
 
     /**
