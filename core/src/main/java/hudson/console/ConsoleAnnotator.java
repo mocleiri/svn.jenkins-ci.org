@@ -50,6 +50,11 @@ public abstract class ConsoleAnnotator implements ExtensionPoint, Serializable {
      * Bundles all the given {@link ConsoleAnnotator} into a single annotator.
      */
     public static ConsoleAnnotator combine(Collection<? extends ConsoleAnnotator> all) {
+        switch (all.size()) {
+        case 0:     return null;    // none
+        case 1:     return all.iterator().next(); // just one
+        }
+
         class Aggregator extends ConsoleAnnotator {
             List<ConsoleAnnotator> list;
 

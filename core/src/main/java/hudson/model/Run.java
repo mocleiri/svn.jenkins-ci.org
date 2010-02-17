@@ -26,7 +26,6 @@ package hudson.model;
 import com.trilead.ssh2.crypto.Base64;
 import hudson.AbortException;
 import hudson.BulkChange;
-import hudson.CloseProofOutputStream;
 import hudson.EnvVars;
 import hudson.ExtensionPoint;
 import hudson.FeedAdapter;
@@ -34,7 +33,7 @@ import hudson.FilePath;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.cli.declarative.CLIMethod;
-import hudson.console.ConsoleAnnotationWriter;
+import hudson.console.ConsoleAnnotationOutputStream;
 import hudson.console.ConsoleAnnotator;
 import hudson.console.FileAnnotationStore;
 import hudson.matrix.MatrixBuild;
@@ -62,14 +61,12 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
@@ -106,6 +103,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
@@ -1546,24 +1544,24 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
             }
 
             @Override
-            protected Writer createSpoolFilter(Writer w, StaplerRequest req, final StaplerResponse rsp) throws IOException {
-                return new ConsoleAnnotationWriter(w,createAnnotator(req), Run.this) {
-                    public void close() throws IOException {
-                        try {
-                            super.close();
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            Cipher sym = Cipher.getInstance("AES");
-                            sym.init(Cipher.ENCRYPT_MODE,Hudson.getInstance().getSecretKeyAsAES128());
-                            ObjectOutputStream oos = new ObjectOutputStream(new GZIPOutputStream(new CipherOutputStream(baos,sym)));
-                            oos.writeLong(System.currentTimeMillis()); // send timestamp to prevent a replay attack
-                            oos.writeObject(getConsoleAnnotator());
-                            oos.close();
-                            rsp.setHeader("X-ConsoleAnnotator",new String(Base64.encode(baos.toByteArray())));
-                        } catch (GeneralSecurityException e) {
-                            throw new IOException2(e);
-                        }
-                    }
-                };
+            public long writeLogTo(long start, Writer w) throws IOException {
+                ConsoleAnnotationOutputStream caw = new ConsoleAnnotationOutputStream(
+                        w, FileAnnotationStore.read(getLogFile()), start, createAnnotator(Stapler.getCurrentRequest()), Run.this, getCharset());
+                long r = super.writeLogTo(start,caw);
+
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    Cipher sym = Cipher.getInstance("AES");
+                    sym.init(Cipher.ENCRYPT_MODE,Hudson.getInstance().getSecretKeyAsAES128());
+                    ObjectOutputStream oos = new ObjectOutputStream(new GZIPOutputStream(new CipherOutputStream(baos,sym)));
+                    oos.writeLong(System.currentTimeMillis()); // send timestamp to prevent a replay attack
+                    oos.writeObject(caw.getConsoleAnnotator());
+                    oos.close();
+                    Stapler.getCurrentResponse().setHeader("X-ConsoleAnnotator",new String(Base64.encode(baos.toByteArray())));
+                } catch (GeneralSecurityException e) {
+                    throw new IOException2(e);
+                }
+                return r;
             }
 
         }.doProgressText(req,rsp);
