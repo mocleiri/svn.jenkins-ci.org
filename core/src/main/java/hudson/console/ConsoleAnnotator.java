@@ -94,46 +94,5 @@ public abstract class ConsoleAnnotator implements ExtensionPoint, Serializable {
         return Hudson.getInstance().getExtensionList(ConsoleAnnotator.class);
     }
 
-    /**
-     * {@link ConsoleAnnotator} for testing this feature, during the development.
-     * To be removed when this branch is merged to the trunk.
-     */
-    @Extension
-    public static class DemoConsoleAnnotator extends ConsoleAnnotator {
-        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
-            return combine(Arrays.asList(new RotatingAnnotator(0,3),new RotatingAnnotator(4,4))).annotate(build,text);
-        }
-
-        private static final long serialVersionUID = 1L;
-    }
-
-    public static class RotatingAnnotator extends ConsoleAnnotator {
-        private int counter;
-        private final int cycle;
-        private final int start;
-
-        public RotatingAnnotator(int start,int cycle) {
-            this.start = start;
-            this.cycle = cycle;
-        }
-
-        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
-            counter = (counter+1)%cycle;
-            if (text.length()>start+4)
-                text.addMarkup(start,start+4,"<font color="+color()+">","</font>");
-            return this;
-        }
-
-        private String color() {
-            switch (counter) {
-            case 0:     return "blue";
-            case 1:     return "red";
-            case 2:     return "green";
-            case 3:     return "yellow";
-            }
-            return "gray";
-        }
-    }
-
     private static final long serialVersionUID = 1L;
 }
