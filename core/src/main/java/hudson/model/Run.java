@@ -34,6 +34,9 @@ import hudson.FilePath;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.cli.declarative.CLIMethod;
+import hudson.console.ConsoleAnnotationWriter;
+import hudson.console.ConsoleAnnotator;
+import hudson.console.FileAnnotationStore;
 import hudson.matrix.MatrixBuild;
 import hudson.matrix.MatrixRun;
 import hudson.model.listeners.RunListener;
@@ -72,9 +75,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.Signature;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -101,12 +101,10 @@ import java.util.zip.GZIPOutputStream;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.jvnet.hudson.crypto.SignatureOutputStream;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -1189,8 +1187,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         if(result!=null)
             return;     // already built.
 
-        BuildListener listener=null;
-        PrintStream log = null;
+        StreamBuildListener listener=null;
 
         runner = job;
         onStartBuilding();
@@ -1202,10 +1199,9 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
             try {
                 try {
-                    log = new PrintStream(new FileOutputStream(getLogFile()));
                     Charset charset = Computer.currentComputer().getDefaultCharset();
                     this.charset = charset.name();
-                    listener = new StreamBuildListener(new PrintStream(new CloseProofOutputStream(log)),charset);
+                    listener = new StreamBuildListener(getLogFile(),charset);
 
                     listener.started(getCauses());
 
@@ -1266,8 +1262,8 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
 
                 if(listener!=null)
                     listener.finished(result);
-                if(log!=null)
-                    log.close();
+                if(listener!=null)
+                    listener.closeQuietly();
 
                 try {
                     save();

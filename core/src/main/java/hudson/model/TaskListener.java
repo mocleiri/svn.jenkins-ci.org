@@ -23,9 +23,11 @@
  */
 package hudson.model;
 
+import hudson.console.ConsoleAnnotation;
 import hudson.util.NullStream;
 import hudson.util.StreamTaskListener;
 
+import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Formatter;
@@ -59,6 +61,12 @@ public interface TaskListener {
      *      must be non-null.
      */
     PrintStream getLogger();
+
+    /**
+     * Annotates the current position in the output log by using the given annotation.
+     * If the implementation doesn't support annotated output log, this method might be no-op.
+     */
+    void annotate(ConsoleAnnotation ann) throws IOException;
 
     /**
      * An error in the build.

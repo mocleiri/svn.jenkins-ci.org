@@ -23,6 +23,7 @@
  */
 package hudson.maven;
 
+import hudson.console.ConsoleAnnotation;
 import hudson.model.BuildListener;
 import hudson.model.Cause;
 import hudson.model.Result;
@@ -131,7 +132,12 @@ final class SplittableBuildListener implements BuildListener, Serializable {
         return new PrintWriter(logger);
     }
 
-    private Object writeReplace() {
+    public void annotate(ConsoleAnnotation ann) throws IOException {
+        core.annotate(ann);
+    }
+
+    private Object writeReplace() throws IOException {
+        // TODO: fix this before HUDSON-2137 integration
         return new StreamBuildListener(logger);
     }
 

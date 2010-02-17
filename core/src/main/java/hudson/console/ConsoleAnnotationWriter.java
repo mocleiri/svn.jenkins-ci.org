@@ -21,9 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.model;
+package hudson.console;
 
 import hudson.MarkupText;
+import hudson.model.Run;
 
 import java.io.IOException;
 import java.io.Writer;

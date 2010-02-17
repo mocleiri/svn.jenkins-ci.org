@@ -214,10 +214,10 @@ public class MarkupText extends AbstractMarkupText {
         if(startPos>endPos) throw new IndexOutOfBoundsException();
 
         // when multiple tags are added to the same range, we want them to show up like
-        // <b><i>abc</i></b>, not <b><i>abc</b></i>. Do this by inserting them to different
-        // places.
-        tags.add(0,new Tag(startPos, startTag));
-        tags.add(new Tag(endPos,endTag));
+        // <b><i>abc</i></b>, not <b><i>abc</b></i>. Also, we'd like <b>abc</b><i>def</i>,
+        // not <b>abc<i></b>def</i>. Do this by inserting them to different places.
+        tags.add(new Tag(startPos, startTag));
+        tags.add(0,new Tag(endPos,endTag));
     }
 
     private void rangeCheck(int pos) {
