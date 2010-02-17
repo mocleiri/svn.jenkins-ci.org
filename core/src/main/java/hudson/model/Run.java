@@ -23,7 +23,6 @@
  */
 package hudson.model;
 
-import com.trilead.ssh2.crypto.Base64;
 import hudson.AbortException;
 import hudson.BulkChange;
 import hudson.EnvVars;
@@ -33,15 +32,12 @@ import hudson.FilePath;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.cli.declarative.CLIMethod;
+import hudson.console.AnnotatedLargeText;
 import hudson.console.ConsoleAnnotation.Demo;
-import hudson.console.ConsoleAnnotationOutputStream;
-import hudson.console.ConsoleAnnotator;
-import hudson.console.FileAnnotationStore;
 import hudson.matrix.MatrixBuild;
 import hudson.matrix.MatrixRun;
 import hudson.model.listeners.RunListener;
 import hudson.model.listeners.SaveableListener;
-import hudson.remoting.ObjectInputStreamEx;
 import hudson.search.SearchIndexBuilder;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
@@ -53,26 +49,22 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildStep;
 import hudson.tasks.test.AbstractTestResultAction;
 import hudson.util.IOException2;
+import hudson.util.IOUtils;
 import hudson.util.LogTaskListener;
-import hudson.util.TimeUnit2;
 import hudson.util.XStream2;
 import hudson.util.ProcessTree;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.Charset;
-import java.security.GeneralSecurityException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -94,27 +86,19 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.commons.io.input.NullInputStream;
+import org.apache.commons.jelly.XMLOutput;
 import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
-import org.kohsuke.stapler.framework.io.LargeText;
-import org.apache.commons.io.IOUtils;
 
 import com.thoughtworks.xstream.XStream;
-
-import static java.lang.Math.abs;
 
 /**
  * A particular execution of {@link Job}.
@@ -986,24 +970,37 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * @throws IOException 
      * @return a reader from the log file, or null if none exists
      */
-    public Reader getLogReader() throws IOException {
+    public InputStream getLogInputStream() throws IOException {
     	File logFile = getLogFile();
     	if (logFile.exists() ) {
-            if (charset==null)  return new FileReader(logFile); // fall back
-    		return new InputStreamReader(new FileInputStream(logFile),charset);
-    	} 
+            return new FileInputStream(logFile);
+    	}
 
     	File compressedLogFile = new File(logFile.getParentFile(), logFile.getName()+ ".gz");
     	if (compressedLogFile.exists()) {
-            GZIPInputStream is = new GZIPInputStream(new FileInputStream(compressedLogFile));
-
-            if (charset==null)  return new InputStreamReader(is);
-            else                return new InputStreamReader(is,charset);
-    	} 
+            return new GZIPInputStream(new FileInputStream(compressedLogFile));
+    	}
     	
-    	return null;
+    	return new NullInputStream(0);
     }
-    
+
+    public Reader getLogReader() throws IOException {
+        if (charset==null)  return new InputStreamReader(getLogInputStream());
+        else                return new InputStreamReader(getLogInputStream(),charset);
+    }
+
+    /**
+     * Used from <tt>console.jelly</tt> to write annotated log to the given output.
+     */
+    public void writeLogTo(long offset, XMLOutput out) throws IOException {
+        // TODO: resurrect compressed log file support
+        createAnnotatedLargeText().writeLogTo(offset,out.asWriter());
+    }
+
+    private AnnotatedLargeText createAnnotatedLargeText() {
+        return new AnnotatedLargeText(getLogFile(),getCharset(),!isLogUpdated(),this);
+    }
+
     @Override
     protected SearchIndexBuilder makeSearchIndex() {
         SearchIndexBuilder builder = super.makeSearchIndex()
@@ -1524,54 +1521,7 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
      * Handles incremental log output.
      */
     public void doProgressiveLog( StaplerRequest req, StaplerResponse rsp) throws IOException {
-        // TODO: move this subtype elsewhere for better reuse (e.g., slave log)
-        new LargeText(getLogFile(),getCharset(),!isLogUpdated()) {
-            private ConsoleAnnotator createAnnotator(StaplerRequest req) throws IOException {
-                try {
-                    String base64 = req.getHeader("X-ConsoleAnnotator");
-                    if (base64!=null) {
-                        Cipher sym = Cipher.getInstance("AES");
-                        sym.init(Cipher.DECRYPT_MODE,Hudson.getInstance().getSecretKeyAsAES128());
-
-                        ObjectInputStream ois = new ObjectInputStreamEx(new GZIPInputStream(
-                                new CipherInputStream(new ByteArrayInputStream(Base64.decode(base64.toCharArray())),sym)),
-                                Hudson.getInstance().pluginManager.uberClassLoader);
-                        long timestamp = ois.readLong();
-                        if (TimeUnit2.HOURS.toMillis(1) > abs(System.currentTimeMillis()-timestamp))
-                            // don't deserialize something too old to prevent a replay attack
-                            return (ConsoleAnnotator)ois.readObject();
-                    }
-                } catch (GeneralSecurityException e) {
-                    throw new IOException2(e);
-                } catch (ClassNotFoundException e) {
-                    throw new IOException2(e);
-                }
-                // start from scratch
-                return ConsoleAnnotator.initial();
-            }
-
-            @Override
-            public long writeLogTo(long start, Writer w) throws IOException {
-                ConsoleAnnotationOutputStream caw = new ConsoleAnnotationOutputStream(
-                        w, FileAnnotationStore.read(getLogFile()), start, createAnnotator(Stapler.getCurrentRequest()), Run.this, getCharset());
-                long r = super.writeLogTo(start,caw);
-
-                try {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    Cipher sym = Cipher.getInstance("AES");
-                    sym.init(Cipher.ENCRYPT_MODE,Hudson.getInstance().getSecretKeyAsAES128());
-                    ObjectOutputStream oos = new ObjectOutputStream(new GZIPOutputStream(new CipherOutputStream(baos,sym)));
-                    oos.writeLong(System.currentTimeMillis()); // send timestamp to prevent a replay attack
-                    oos.writeObject(caw.getConsoleAnnotator());
-                    oos.close();
-                    Stapler.getCurrentResponse().setHeader("X-ConsoleAnnotator",new String(Base64.encode(baos.toByteArray())));
-                } catch (GeneralSecurityException e) {
-                    throw new IOException2(e);
-                }
-                return r;
-            }
-
-        }.doProgressText(req,rsp);
+        createAnnotatedLargeText().doProgressText(req,rsp);
     }
 
     public void doToggleLogKeep( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {

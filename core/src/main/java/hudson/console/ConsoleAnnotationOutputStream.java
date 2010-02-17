@@ -102,7 +102,6 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
             {// perform byte[]->char[] while figuring out the char positions of the BLOBs
                 byte[] bytes = buf.toByteArray();
                 int written = 0;
-                int n = 0;
                 for (Blob blob : tags) {
                     try {
                         ConsoleAnnotation a = readBlobFrom(blob);
@@ -118,7 +117,6 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
                 }
                 // finish the remaining bytes->chars conversion
                 lineOut.write(bytes,written,bytes.length-written);
-                lineOut.flush();
             }
 
             // aggregate newly retrieved ConsoleAnnotators into the current one.
@@ -126,6 +124,7 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
             ann = ConsoleAnnotator.combine(annotators);
         }
 
+        lineOut.flush();
         MarkupText mt = new MarkupText(strBuf.toString());
         if (ann!=null)
             ann = ann.annotate(build,mt);
