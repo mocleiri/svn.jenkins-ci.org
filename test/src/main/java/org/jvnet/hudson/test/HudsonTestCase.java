@@ -158,7 +158,7 @@ import java.util.concurrent.CountDownLatch;
 public abstract class HudsonTestCase extends TestCase implements RootAction {
     public Hudson hudson;
 
-    protected final TestEnvironment env = new TestEnvironment();
+    protected final TestEnvironment env = new TestEnvironment(this);
     protected HudsonHomeLoader homeLoader = HudsonHomeLoader.NEW;
     /**
      * TCP/IP port that the server is listening on.
