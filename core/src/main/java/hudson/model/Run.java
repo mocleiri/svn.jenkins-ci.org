@@ -33,6 +33,7 @@ import hudson.FilePath;
 import hudson.Util;
 import hudson.XmlFile;
 import hudson.cli.declarative.CLIMethod;
+import hudson.console.ConsoleAnnotation.Demo;
 import hudson.console.ConsoleAnnotationOutputStream;
 import hudson.console.ConsoleAnnotator;
 import hudson.console.FileAnnotationStore;
@@ -1202,6 +1203,12 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
                     listener = new StreamBuildListener(getLogFile(),charset);
 
                     listener.started(getCauses());
+
+                    // test hook up
+                    listener.getLogger().print("test");
+                    listener.annotate(new Demo());
+                    listener.getLogger().println("ing");
+
 
                     RunListener.fireStarted(this,listener);
 
