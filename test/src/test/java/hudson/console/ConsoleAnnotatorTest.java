@@ -1,5 +1,7 @@
 package hudson.console;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import hudson.Launcher;
 import hudson.MarkupText;
@@ -9,10 +11,15 @@ import hudson.model.FreeStyleBuild;
 import hudson.model.FreeStyleProject;
 import hudson.model.Run;
 import org.jvnet.hudson.test.HudsonTestCase;
+import org.jvnet.hudson.test.SequenceLock;
 import org.jvnet.hudson.test.TestBuilder;
 import org.jvnet.hudson.test.TestExtension;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * @author Kohsuke Kawaguchi
@@ -45,7 +52,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     /**
      * Only annotates the first occurrence of "ooo".
      */
-    @TestExtension
+    @TestExtension("testCompletedStatelessLogAnnotation")
     public static class DemoAnnotator extends ConsoleAnnotator {
         @Override
         public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
@@ -53,6 +60,90 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
                 text.addMarkup(0,3,"<b class=demo>","</b>");
                 return null;
             }
+            return this;
+        }
+    }
+
+
+    class ProgressiveLogClient {
+        WebClient wc;
+        Run run;
+
+        String consoleAnnotator;
+        String start;
+        private Page p;
+
+        ProgressiveLogClient(WebClient wc, Run r) {
+            this.wc = wc;
+            this.run = r;
+        }
+
+        String next() throws IOException {
+            WebRequestSettings req = new WebRequestSettings(new URL(getURL() + run.getUrl() + "/progressiveLog"+(start!=null?"?start="+start:"")));
+            Map headers = new HashMap();
+            if (consoleAnnotator!=null)
+                headers.put("X-ConsoleAnnotator",consoleAnnotator);
+            req.setAdditionalHeaders(headers);
+
+            p = wc.getPage(req);
+            consoleAnnotator = p.getWebResponse().getResponseHeaderValue("X-ConsoleAnnotator");
+            start = p.getWebResponse().getResponseHeaderValue("X-Text-Size");
+            return p.getWebResponse().getContentAsString();
+        }
+
+    }
+
+    /**
+     * Tests the progressive output by making sure that the state of {@link ConsoleAnnotator}s are
+     * maintained across different progressiveLog calls.
+     */
+    public void testProgressiveOutput() throws Exception {
+        final SequenceLock lock = new SequenceLock();
+        WebClient wc = createWebClient();
+        FreeStyleProject p = createFreeStyleProject();
+        p.getBuildersList().add(new TestBuilder() {
+            public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
+                lock.phase(0);
+                // make sure the build is now properly started
+                lock.phase(2);
+                listener.getLogger().println("line1");
+                lock.phase(4);
+                listener.getLogger().println("line2");
+                lock.done();
+                return true;
+            }
+        });
+        Future<FreeStyleBuild> f = p.scheduleBuild2(0);
+
+
+        lock.phase(1);
+        FreeStyleBuild b = p.getBuildByNumber(1);
+        ProgressiveLogClient plc = new ProgressiveLogClient(wc,b);
+        // the page should contain some output indicating the build has started why and etc.
+        plc.next();
+
+        lock.phase(3);
+        assertEquals("<b tag=1>line1</b>\r\n",plc.next());
+
+        // the new invocation should start from where the previous call left off
+        lock.phase(5);
+        assertEquals("<b tag=2>line2</b>\r\n",plc.next());
+
+        // should complete successfully
+        assertBuildStatusSuccess(f.get());
+    }
+
+    @TestExtension("testProgressiveOutput")
+    public static ConsoleAnnotator create() {
+        return new StatefulAnnotator();
+    }
+
+    public static class StatefulAnnotator extends ConsoleAnnotator {
+        private int n=1;
+
+        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
+            if (text.getText().startsWith("line"))
+                text.addMarkup(0,5,"<b tag="+(n++)+">","</b>");
             return this;
         }
     }
