@@ -23,6 +23,8 @@
  */
 package hudson.console;
 
+import hudson.model.TaskListener;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -41,6 +43,7 @@ import java.io.OutputStream;
  *
  * @author Kohsuke Kawaguchi
  * @see FileAnnotationStore
+ * @see TaskListener#annotate(ConsoleAnnotation) 
  */
 public interface AnnotationStore extends Closeable {
     /**
