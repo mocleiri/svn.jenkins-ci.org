@@ -65,6 +65,11 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     }
 
 
+
+
+
+
+
     class ProgressiveLogClient {
         WebClient wc;
         Run run;
@@ -139,12 +144,74 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     }
 
     public static class StatefulAnnotator extends ConsoleAnnotator {
-        private int n=1;
+        int n=1;
 
         public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
             if (text.getText().startsWith("line"))
                 text.addMarkup(0,5,"<b tag="+(n++)+">","</b>");
             return this;
+        }
+    }
+
+
+    /**
+     * Place {@link ConsoleAnnotation}s and make sure it works.
+     */
+    public void testConsoleAnnotation() throws Exception {
+        final SequenceLock lock = new SequenceLock();
+        WebClient wc = createWebClient();
+        FreeStyleProject p = createFreeStyleProject();
+        p.getBuildersList().add(new TestBuilder() {
+            public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
+                lock.phase(0);
+                // make sure the build is now properly started
+
+                lock.phase(2);
+                listener.getLogger().print("abc");
+                listener.annotate(new DollarMark());
+                listener.getLogger().println("def");
+
+                lock.phase(4);
+                listener.getLogger().print("123");
+                listener.annotate(new DollarMark());
+                listener.getLogger().print("456");
+                listener.annotate(new DollarMark());
+                listener.getLogger().println("789");
+
+                lock.done();
+                return true;
+            }
+        });
+        Future<FreeStyleBuild> f = p.scheduleBuild2(0);
+
+        // discard the initial header portion
+        lock.phase(1);
+        FreeStyleBuild b = p.getBuildByNumber(1);
+        ProgressiveLogClient plc = new ProgressiveLogClient(wc,b);
+        plc.next();
+
+        lock.phase(3);
+        assertEquals("abc$$$def\r\n",plc.next());
+
+        lock.phase(5);
+        assertEquals("123$$$456$$$789\r\n",plc.next());
+
+        // should complete successfully
+        assertBuildStatusSuccess(f.get());
+    }
+
+    /**
+     * Places a triple dollar mark at the specified position.
+     */
+    private static final class DollarMark extends ConsoleAnnotation {
+        @Override
+        public ConsoleAnnotator createAnnotator(final int charPos) {
+            return new ConsoleAnnotator() {
+                public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
+                    text.addMarkup(charPos,"$$$");
+                    return null;
+                }
+            };
         }
     }
 }

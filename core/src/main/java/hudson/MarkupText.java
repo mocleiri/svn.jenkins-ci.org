@@ -220,6 +220,11 @@ public class MarkupText extends AbstractMarkupText {
         tags.add(0,new Tag(endPos,endTag));
     }
 
+    public void addMarkup(int pos, String tag) {
+        rangeCheck(pos);
+        tags.add(new Tag(pos,tag));
+    }
+
     private void rangeCheck(int pos) {
         if(pos<0 || pos>text.length())
             throw new IndexOutOfBoundsException();
