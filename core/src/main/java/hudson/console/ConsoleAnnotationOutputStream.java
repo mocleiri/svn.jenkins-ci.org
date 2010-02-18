@@ -24,7 +24,6 @@
 package hudson.console;
 
 import hudson.MarkupText;
-import hudson.model.Run;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.io.output.ProxyWriter;
 import org.jvnet.hudson.Blob;
@@ -45,13 +44,16 @@ import java.util.logging.Logger;
 import static hudson.console.FileAnnotationStore.readBlobFrom;
 
 /**
+ *
+ * @param <T>
+ *      Context type.
  * @author Kohsuke Kawaguchi
  */
-public class ConsoleAnnotationOutputStream extends OutputStream {
+public class ConsoleAnnotationOutputStream<T> extends OutputStream {
     private final Writer base;
-    private final Run<?,?> build;
+    private final T context;
     private ByteArrayOutputStream buf = new ByteArrayOutputStream();
-    private ConsoleAnnotator ann;
+    private ConsoleAnnotator<T> ann;
     private BlobTreeReader blobs;
     private long pos;
 
@@ -69,10 +71,10 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
      * @param pos
      *      If 'blobs' is non-null, this parameter specifies the initial byte position index.
      */
-    public ConsoleAnnotationOutputStream(Writer base, BlobTreeReader blobs, long pos, ConsoleAnnotator ann, Run<?, ?> build, Charset charset) {
+    public ConsoleAnnotationOutputStream(Writer base, BlobTreeReader blobs, long pos, ConsoleAnnotator<? super T> ann, T context, Charset charset) {
         this.base = base;
-        this.ann = ann;
-        this.build = build;
+        this.ann = ann.cast();
+        this.context = context;
         this.blobs = blobs;
         this.pos = pos;
         this.lineOut = new WriterOutputStream(line,charset);
@@ -97,7 +99,7 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
         } else {
             // if there are tags, add them as ConsoleAnnotators.
 
-            List<ConsoleAnnotator> annotators = new ArrayList<ConsoleAnnotator>(tags.size());
+            List<ConsoleAnnotator<T>> annotators = new ArrayList<ConsoleAnnotator<T>>(tags.size());
 
             {// perform byte[]->char[] while figuring out the char positions of the BLOBs
                 byte[] bytes = buf.toByteArray();
@@ -110,9 +112,9 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
                         lineOut.flush();
                         written += len;
                         final int charPos = strBuf.length();
-                        annotators.add(new ConsoleAnnotator() {
-                            public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
-                                return a.annotate(build,text,charPos);
+                        annotators.add(new ConsoleAnnotator<T>() {
+                            public ConsoleAnnotator annotate(T context, MarkupText text) {
+                                return a.annotate(context,text,charPos);
                             }
                         });
                     } catch (IOException e) {
@@ -132,7 +134,7 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
         lineOut.flush();
         MarkupText mt = new MarkupText(strBuf.toString());
         if (ann!=null)
-            ann = ann.annotate(build,mt);
+            ann = ann.annotate(context,mt);
         base.write(mt.toString());
 
         // reuse the buffer under normal circumstances, but don't let the line buffer grow unbounded

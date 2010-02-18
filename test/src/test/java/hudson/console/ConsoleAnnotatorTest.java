@@ -53,9 +53,9 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
      * Only annotates the first occurrence of "ooo".
      */
     @TestExtension("testCompletedStatelessLogAnnotation")
-    public static class DemoAnnotator extends ConsoleAnnotator {
+    public static class DemoAnnotator extends ConsoleAnnotator<Object> {
         @Override
-        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
+        public ConsoleAnnotator annotate(Object build, MarkupText text) {
             if (text.getText().equals("ooo\n")) {
                 text.addMarkup(0,3,"<b class=demo>","</b>");
                 return null;
@@ -143,10 +143,10 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
         return new StatefulAnnotator();
     }
 
-    public static class StatefulAnnotator extends ConsoleAnnotator {
+    public static class StatefulAnnotator extends ConsoleAnnotator<Object> {
         int n=1;
 
-        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
+        public ConsoleAnnotator annotate(Object build, MarkupText text) {
             if (text.getText().startsWith("line"))
                 text.addMarkup(0,5,"<b tag="+(n++)+">","</b>");
             return this;
@@ -203,8 +203,8 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     /**
      * Places a triple dollar mark at the specified position.
      */
-    private static final class DollarMark extends ConsoleAnnotation {
-        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text, int charPos) {
+    private static final class DollarMark extends ConsoleAnnotation<Run> {
+        public ConsoleAnnotator annotate(Run build, MarkupText text, int charPos) {
             text.addMarkup(charPos,"$$$");
             return null;
         }

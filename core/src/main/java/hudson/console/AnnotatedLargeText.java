@@ -25,7 +25,6 @@ package hudson.console;
 
 import com.trilead.ssh2.crypto.Base64;
 import hudson.model.Hudson;
-import hudson.model.Run;
 import hudson.remoting.ObjectInputStreamEx;
 import hudson.util.IOException2;
 import hudson.util.TimeUnit2;
@@ -51,14 +50,16 @@ import java.util.zip.GZIPOutputStream;
 import static java.lang.Math.abs;
 
 /**
+ *
+ * @param <T>
+ *      Context type.
  * @author Kohsuke Kawaguchi
  */
-public class AnnotatedLargeText extends LargeText {
+public class AnnotatedLargeText<T> extends LargeText {
     private final File logFile;
-    // TODO: think about how to do typing here
-    private Run<?,?> context;
+    private T context;
 
-    public AnnotatedLargeText(File file, Charset charset, boolean completed, Run<?, ?> context) {
+    public AnnotatedLargeText(File file, Charset charset, boolean completed, T context) {
         super(file, charset, completed);
         this.logFile = file;
         this.context = context;
@@ -85,7 +86,7 @@ public class AnnotatedLargeText extends LargeText {
             throw new IOException2(e);
         }
         // start from scratch
-        return ConsoleAnnotator.initial();
+        return ConsoleAnnotator.initial(context.getClass());
     }
 
     @Override

@@ -31,11 +31,14 @@ import java.io.Serializable;
 /**
  *
  *
+ * @param <T>
+ *      Contextual model object that this console is associated with, such as {@link Run}.
+ *
  * @author Kohsuke Kawaguchi
  */
-public abstract class ConsoleAnnotation implements Serializable {
+public abstract class ConsoleAnnotation<T> implements Serializable {
     // TODO: if ConsoleAnnotator is just for build output, how does this work with other kinds of console output?
-    public abstract ConsoleAnnotator annotate(Run<?,?> build, MarkupText text, int charPos);
+    public abstract ConsoleAnnotator annotate(T context, MarkupText text, int charPos);
 
     private static final long serialVersionUID = 1L;
 }
