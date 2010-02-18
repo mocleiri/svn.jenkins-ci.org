@@ -41,22 +41,32 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
- * Stores {@link ConsoleAnnotation}
+ * Persisted {@link AnnotationStore} backed by {@link BlobTreeWriter}.
  *
  * @author Kohsuke Kawaguchi
  */
 public class FileAnnotationStore implements AnnotationStore {
     private final BlobTreeWriter w;
+    /**
+     * Used to figure out the byte position of the paired stream whenever we write a new annotation.
+     */
     private CountingOutputStream counter;
 
     /**
      * @param _for
-     *      The file for which annotations are attached.
+     *      Should be the file that stores the data sent to the paired {@link OutputStream}.
+     *      Annotation storage file name is inferred from this name.
      */
     public FileAnnotationStore(File _for) throws IOException {
         w = new BlobTreeWriter(getAnnotationFileName(_for));
     }
 
+    /**
+     * Associate a paired {@link OutputStream} with this store,
+     * @return
+     *      for annotations to be correlated with the stream, rest of the world needs to write
+     *      to the paird stream through this returned {@link OutputStream}.
+     */
     public OutputStream hook(OutputStream out) {
         if (counter!=null)
             throw new IllegalStateException();
@@ -73,6 +83,14 @@ public class FileAnnotationStore implements AnnotationStore {
         oos.close();
     }
 
+    /**
+     * Creates {@link BlobTreeReader} for reading {@link ConsoleAnnotation}s stored by this annotation store.
+     *
+     * @param _for
+     *      The same file passed to {@link #FileAnnotationStore(File)}.
+     * @return
+     *      null if the annotations don't exist at all.
+     */
     public static BlobTreeReader read(File _for) throws IOException {
         try {
             return new BlobTreeReader(getAnnotationFileName(_for));
@@ -82,6 +100,9 @@ public class FileAnnotationStore implements AnnotationStore {
         }
     }
 
+    /**
+     * Read {@link ConsoleAnnotation} stored as a {@link Blob} by this annotation store.
+     */
     public static ConsoleAnnotation readBlobFrom(Blob blob) throws IOException {
         try {
             ObjectInputStream ois = new ObjectInputStreamEx(

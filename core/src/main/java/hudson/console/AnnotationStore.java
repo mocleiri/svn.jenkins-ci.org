@@ -25,10 +25,26 @@ package hudson.console;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
+ * Storage of {@link ConsoleAnnotation}s.
+ *
+ * <p>
+ * {@link AnnotationStore} is always associated with an {@link OutputStream},
+ * and stored annotations are used to annotate the text in that {@link OutputStream}.  
+ *
+ * <p>
+ * There's really only one concrete implementation of annotation store, that is
+ * {@link FileAnnotationStore}s, but defining it as an interface lets us use
+ * this as a remoting proxy.
+ *
  * @author Kohsuke Kawaguchi
+ * @see FileAnnotationStore
  */
 public interface AnnotationStore extends Closeable {
+    /**
+     * Adds a new annotation at the current position of the paired stream.
+     */
     void add(ConsoleAnnotation a) throws IOException;
 }
