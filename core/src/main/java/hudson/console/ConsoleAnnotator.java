@@ -49,8 +49,8 @@ public abstract class ConsoleAnnotator<T> implements ExtensionPoint, Serializabl
     /**
      * Cast operation that restricts T.
      */
-    public <U extends T> ConsoleAnnotator<U> cast() {
-        return (ConsoleAnnotator)this;
+    public static <T> ConsoleAnnotator<T> cast(ConsoleAnnotator<? super T> a) {
+        return (ConsoleAnnotator)a;
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract class ConsoleAnnotator<T> implements ExtensionPoint, Serializabl
     public static <T> ConsoleAnnotator<T> combine(Collection<? extends ConsoleAnnotator<? super T>> all) {
         switch (all.size()) {
         case 0:     return null;    // none
-        case 1:     return all.iterator().next().cast(); // just one
+        case 1:     return  cast(all.iterator().next()); // just one
         }
 
         class Aggregator extends ConsoleAnnotator<T> {
@@ -122,7 +122,7 @@ public abstract class ConsoleAnnotator<T> implements ExtensionPoint, Serializabl
     public static <T> List<ConsoleAnnotator<T>> _for(Class<T> contextType) {
         List<ConsoleAnnotator<T>> r  = new ArrayList<ConsoleAnnotator<T>>();
         for (ConsoleAnnotator ca : all()) {
-            if (contextType.isAssignableFrom(ca.type()))
+            if (ca.type().isAssignableFrom(contextType))
                 r.add(ca);
         }
         return r;

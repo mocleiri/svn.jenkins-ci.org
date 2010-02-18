@@ -73,7 +73,7 @@ public class ConsoleAnnotationOutputStream<T> extends OutputStream {
      */
     public ConsoleAnnotationOutputStream(Writer base, BlobTreeReader blobs, long pos, ConsoleAnnotator<? super T> ann, T context, Charset charset) {
         this.base = base;
-        this.ann = ann.cast();
+        this.ann = ConsoleAnnotator.cast(ann);
         this.context = context;
         this.blobs = blobs;
         this.pos = pos;
