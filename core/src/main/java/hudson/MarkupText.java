@@ -52,8 +52,13 @@ public class MarkupText extends AbstractMarkupText {
      * Represents one mark up inserted into text.
      */
     private static final class Tag implements Comparable<Tag> {
+        /**
+         * Char position of this tag in {@link MarkupText#text}.
+         * This tag is placed in front of the character of this index.
+         */
         private final int pos;
         private final String markup;
+
 
         public Tag(int pos, String markup) {
             this.pos = pos;
