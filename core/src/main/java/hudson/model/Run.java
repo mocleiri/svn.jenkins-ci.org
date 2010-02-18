@@ -33,7 +33,6 @@ import hudson.Util;
 import hudson.XmlFile;
 import hudson.cli.declarative.CLIMethod;
 import hudson.console.AnnotatedLargeText;
-import hudson.console.ConsoleAnnotation.Demo;
 import hudson.matrix.MatrixBuild;
 import hudson.matrix.MatrixRun;
 import hudson.model.listeners.RunListener;
@@ -1200,12 +1199,6 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
                     listener = new StreamBuildListener(getLogFile(),charset);
 
                     listener.started(getCauses());
-
-                    // test hook up
-                    listener.getLogger().print("test");
-                    listener.annotate(new Demo());
-                    listener.getLogger().println("ing");
-
 
                     RunListener.fireStarted(this,listener);
 
