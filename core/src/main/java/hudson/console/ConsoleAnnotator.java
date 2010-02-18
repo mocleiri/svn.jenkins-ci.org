@@ -23,7 +23,6 @@
  */
 package hudson.console;
 
-import hudson.Extension;
 import hudson.ExtensionList;
 import hudson.ExtensionPoint;
 import hudson.MarkupText;
@@ -32,7 +31,6 @@ import hudson.model.Run;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;

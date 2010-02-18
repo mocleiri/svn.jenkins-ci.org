@@ -204,14 +204,9 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
      * Places a triple dollar mark at the specified position.
      */
     private static final class DollarMark extends ConsoleAnnotation {
-        @Override
-        public ConsoleAnnotator createAnnotator(final int charPos) {
-            return new ConsoleAnnotator() {
-                public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
-                    text.addMarkup(charPos,"$$$");
-                    return null;
-                }
-            };
+        public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text, int charPos) {
+            text.addMarkup(charPos,"$$$");
+            return null;
         }
     }
 }

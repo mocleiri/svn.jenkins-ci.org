@@ -104,12 +104,17 @@ public class ConsoleAnnotationOutputStream extends OutputStream {
                 int written = 0;
                 for (Blob blob : tags) {
                     try {
-                        ConsoleAnnotation a = readBlobFrom(blob);
+                        final ConsoleAnnotation a = readBlobFrom(blob);
                         int len = (int)(blob.tag - pos) - written;
                         lineOut.write(bytes,written,len);
                         lineOut.flush();
                         written += len;
-                        annotators.add(a.createAnnotator(strBuf.length()));
+                        final int charPos = strBuf.length();
+                        annotators.add(new ConsoleAnnotator() {
+                            public ConsoleAnnotator annotate(Run<?, ?> build, MarkupText text) {
+                                return a.annotate(build,text,charPos);
+                            }
+                        });
                     } catch (IOException e) {
                         // if we failed to resurrect an annotation, ignore it.
                         LOGGER.log(Level.FINE,"Failed to resurrect annotation",e);

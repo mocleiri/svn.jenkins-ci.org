@@ -23,6 +23,9 @@
  */
 package hudson.console;
 
+import hudson.MarkupText;
+import hudson.model.Run;
+
 import java.io.Serializable;
 
 /**
@@ -32,7 +35,7 @@ import java.io.Serializable;
  */
 public abstract class ConsoleAnnotation implements Serializable {
     // TODO: if ConsoleAnnotator is just for build output, how does this work with other kinds of console output?
-    public abstract ConsoleAnnotator createAnnotator(int charPos);
+    public abstract ConsoleAnnotator annotate(Run<?,?> build, MarkupText text, int charPos);
 
     private static final long serialVersionUID = 1L;
 }
