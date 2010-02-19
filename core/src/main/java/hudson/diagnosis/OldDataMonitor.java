@@ -32,6 +32,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -85,10 +86,30 @@ public class OldDataMonitor extends AdministrativeMonitor {
             try {
                 VersionRange vr = odm.data.get(obj);
                 if (vr != null) vr.add(version);
-                else            odm.data.put(obj, new VersionRange(version));
+                else            odm.data.put(obj, new VersionRange(version, null));
             } catch (IllegalArgumentException ex) {
                 LOGGER.log(Level.WARNING, "Bad parameter given to OldDataMonitor", ex);
             }
+        }
+    }
+
+    /**
+     * Inform monitor that some unreadable data was found while loading.
+     * @param obj Saveable object; calling save() on this object will discard the unreadable data.
+     * @param errors Exception(s) thrown while loading, regarding the unreadable classes/fields.
+     */
+    public static void report(Saveable obj, Collection<Throwable> errors) {
+        StringBuilder buf = new StringBuilder();
+        int i = 0;
+        for (Throwable e : errors) {
+            if (++i > 1) buf.append(", ");
+            buf.append(e.getClass().getSimpleName()).append(": ").append(e.getMessage());
+        }
+        OldDataMonitor odm = (OldDataMonitor)Hudson.getInstance().getAdministrativeMonitor("OldData");
+        synchronized (odm) {
+            VersionRange vr = odm.data.get(obj);
+            if (vr != null) vr.extra = buf.toString();
+            else            odm.data.put(obj, new VersionRange(null, buf.toString()));
         }
     }
 
@@ -97,20 +118,25 @@ public class OldDataMonitor extends AdministrativeMonitor {
 
         VersionNumber min, max;
         boolean single = true;
+        public String extra;
 
-        public VersionRange(String version) {
-            min = max = new VersionNumber(version);
+        public VersionRange(String version, String extra) {
+            min = max = version != null ? new VersionNumber(version) : null;
+            this.extra = extra;
         }
 
         public void add(String version) {
             VersionNumber ver = new VersionNumber(version);
-            if (ver.isOlderThan(min)) { min = ver; single = false; }
-            if (ver.isNewerThan(max)) { max = ver; single = false; }
+            if (min==null) { min = max = ver; }
+            else {
+                if (ver.isOlderThan(min)) { min = ver; single = false; }
+                if (ver.isNewerThan(max)) { max = ver; single = false; }
+            }
         }
 
         @Override
         public String toString() {
-            return min.toString() + (single ? "" : " - " + max.toString());
+            return min==null ? "" : min.toString() + (single ? "" : " - " + max.toString());
         }
 
         /**
@@ -119,9 +145,9 @@ public class OldDataMonitor extends AdministrativeMonitor {
          * @return True if the major version# differs or the minor# differs by >= threshold
          */
         public boolean isOld(int threshold) {
-            if (currentVersion.digit(0) > min.digit(0)
-                    || (currentVersion.digit(0) == min.digit(0)
-                        && currentVersion.digit(1) - min.digit(1) >= threshold))
+            if (min!=null && (currentVersion.digit(0) > min.digit(0)
+                              || (currentVersion.digit(0) == min.digit(0)
+                                  && currentVersion.digit(1) - min.digit(1) >= threshold)))
                 return true;
             return false;
         }
@@ -132,7 +158,8 @@ public class OldDataMonitor extends AdministrativeMonitor {
      */
     public synchronized Iterator<VersionNumber> getVersionList() {
         TreeSet<VersionNumber> set = new TreeSet<VersionNumber>();
-        for (VersionRange vr : data.values()) set.add(vr.max);
+        for (VersionRange vr : data.values())
+            if (vr.max!=null) set.add(vr.max);
         return set.iterator();
     }
 
@@ -157,7 +184,23 @@ public class OldDataMonitor extends AdministrativeMonitor {
         VersionNumber thruVer = thruVerParam.equals("all") ? null : new VersionNumber(thruVerParam);
         for (Iterator<Map.Entry<Saveable,VersionRange>> it = data.entrySet().iterator(); it.hasNext();) {
             Map.Entry<Saveable,VersionRange> entry = it.next();
-            if (thruVer == null || !entry.getValue().max.isNewerThan(thruVer)) {
+            VersionNumber version = entry.getValue().max;
+            if (version != null && (thruVer == null || !version.isNewerThan(thruVer))) {
+                entry.getKey().save();
+                it.remove();
+            }
+        }
+        return HttpResponses.forwardToPreviousPage();
+    }
+
+    /**
+     * Save all files containing only unreadable data (no data upgrades), which discards this data.
+     * Remove those items from the data map.
+     */
+    public synchronized HttpResponse doDiscard(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        for (Iterator<Map.Entry<Saveable,VersionRange>> it = data.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<Saveable,VersionRange> entry = it.next();
+            if (entry.getValue().max == null) {
                 entry.getKey().save();
                 it.remove();
             }

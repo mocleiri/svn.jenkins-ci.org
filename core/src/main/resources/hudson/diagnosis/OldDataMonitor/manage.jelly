@@ -28,17 +28,29 @@ THE SOFTWARE.
   <l:main-panel>
     <h1>${%Manage Old Data}</h1>
     <p>${%blurb.1}</p>
+    <p>${%blurb.2}</p>
     <table class="pane bigtable" style="width:auto">
-      <tr><th>${%Type}</th><th>${%Name}</th><th>${%Version}</th></tr>
+      <tr><th>${%Type}</th><th>${%Name}</th><th>${%Version}</th><th></th></tr>
       <j:forEach var="item" items="${it.data.entrySet()}">
         <j:set var="range" value="${item.value}"/>
-        <j:if test="${item.value.isOld(100)}"><j:set var="range"><b>${range}</b></j:set></j:if>
-        <tr><td>${item.key.class.name}</td><td>${item.key.displayName?:item.key.name}</td>
-            <td>${range}</td></tr>
+        <j:choose>
+          <j:when test="${range!=''}">
+            <j:if test="${item.value.isOld(100)}"><j:set var="range"><b>${range}</b></j:set></j:if>
+            <tr>
+              <td>${item.key.class.name}</td>
+              <td>${item.key.fullDisplayName?:item.key.displayName?:item.key.name}</td>
+              <td>${range}</td>
+              <td style="white-space:normal">${item.value.extra}</td>
+            </tr>
+          </j:when>
+          <j:otherwise>
+            <j:if test="${item.value.extra!=null}"><j:set var="hasExtra" value="${true}"/></j:if>
+          </j:otherwise>
+        </j:choose>
       </j:forEach>
     </table>
-    <p>${%blurb.2}</p>
     <p>${%blurb.3}</p>
+    <p>${%blurb.4}</p>
     <j:set var="vers" value="${it.versionList}"/>
     <j:choose>
       <j:when test="${vers.hasNext()}">
@@ -49,7 +61,7 @@ THE SOFTWARE.
               <f:option>${ver}</f:option>
             </j:forEach>
           </select>
-          ${%blurb.4}
+          ${%blurb.5}
           <br/>
           <f:submit value="${%Upgrade}"/>
         </form>
@@ -58,6 +70,27 @@ THE SOFTWARE.
         ${%No old data was found.}
       </j:otherwise>
     </j:choose>
+    <j:if test="${hasExtra}">
+      <br/>
+      <h4>${%Unreadable Data}</h4>
+      <p>${%blurb.6}</p>
+      <table class="pane bigtable" style="width:auto">
+        <tr><th>${%Type}</th><th>${%Name}</th><th>${%Error}</th></tr>
+        <j:forEach var="item" items="${it.data.entrySet()}">
+          <j:if test="${item.value.extra!=null and item.value==''}">
+            <tr>
+              <td>${item.key.class.name}</td>
+              <td>${item.key.fullDisplayName?:item.key.displayName?:item.key.name}</td>
+              <td style="white-space:normal">${item.value.extra}</td>
+            </tr>
+          </j:if>
+        </j:forEach>
+      </table>
+      <br/>
+      <form action="discard" method="POST" name="discardUnreadable">
+        <f:submit value="${%Discard Unreadable Data}"/>
+      </form>
+    </j:if>
   </l:main-panel>
 </l:layout>
 </j:jelly>
