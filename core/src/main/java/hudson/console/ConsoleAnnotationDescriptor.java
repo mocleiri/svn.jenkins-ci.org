@@ -23,29 +23,24 @@
  */
 package hudson.console;
 
-import hudson.MarkupText;
-import hudson.model.Describable;
-import hudson.model.Hudson;
-import hudson.model.Run;
-
-import java.io.Serializable;
+import hudson.ExtensionPoint;
+import hudson.model.Descriptor;
 
 /**
- *
- *
- * @param <T>
- *      Contextual model object that this console is associated with, such as {@link Run}.
+ * Descriptor for {@link ConsoleAnnotation}.
  *
  * @author Kohsuke Kawaguchi
- * @see ConsoleAnnotationDescriptor
  */
-public abstract class ConsoleAnnotation<T> implements Serializable, Describable<ConsoleAnnotation<?>> {
-    // TODO: if ConsoleAnnotator is just for build output, how does this work with other kinds of console output?
-    public abstract ConsoleAnnotator annotate(T context, MarkupText text, int charPos);
-
-    public ConsoleAnnotationDescriptor getDescriptor() {
-        return (ConsoleAnnotationDescriptor)Hudson.getInstance().getDescriptorOrDie(getClass());
+public abstract class ConsoleAnnotationDescriptor extends Descriptor<ConsoleAnnotation<?>> implements ExtensionPoint {
+    public ConsoleAnnotationDescriptor(Class<? extends ConsoleAnnotation<?>> clazz) {
+        super(clazz);
     }
 
-    private static final long serialVersionUID = 1L;
+    public ConsoleAnnotationDescriptor() {
+    }
+
+    /**
+     * Users use this name to enable/disable annotations.
+     */
+    public abstract String getDisplayName();
 }

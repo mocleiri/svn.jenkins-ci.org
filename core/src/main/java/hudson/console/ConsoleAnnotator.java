@@ -40,7 +40,7 @@ import java.util.ListIterator;
 /**
  * @author Kohsuke Kawaguchi
  */
-public abstract class ConsoleAnnotator<T> implements ExtensionPoint, Serializable {
+public abstract class ConsoleAnnotator<T> implements Serializable {
     /**
      * Annotates one line.
      */
@@ -51,17 +51,6 @@ public abstract class ConsoleAnnotator<T> implements ExtensionPoint, Serializabl
      */
     public static <T> ConsoleAnnotator<T> cast(ConsoleAnnotator<? super T> a) {
         return (ConsoleAnnotator)a;
-    }
-
-    /**
-     * For which context type does this annotator work?
-     */
-    public Class type() {
-        Type type = Types.getBaseClass(getClass(), ConsoleAnnotator.class);
-        if (type instanceof ParameterizedType)
-            return Types.erasure(Types.getTypeArgument(type,0));
-        else
-            return Object.class;
     }
 
     /**
@@ -105,25 +94,21 @@ public abstract class ConsoleAnnotator<T> implements ExtensionPoint, Serializabl
      * Returns the all {@link ConsoleAnnotator}s for the given context type aggregated into a single
      * annotator.
      */
-    public static <T> ConsoleAnnotator<T> initial(Class<T> contextType) {
-        return combine(_for(contextType));
-    }
-
-    /**
-     * All the registered instances.
-     */
-    public static ExtensionList<ConsoleAnnotator> all() {
-        return Hudson.getInstance().getExtensionList(ConsoleAnnotator.class);
+    public static <T> ConsoleAnnotator<T> initial(T context) {
+        return combine(_for(context));
     }
 
     /**
      * List all the console annotators that can work for the specified context type.
      */
-    public static <T> List<ConsoleAnnotator<T>> _for(Class<T> contextType) {
+    public static <T> List<ConsoleAnnotator<T>> _for(T context) {
         List<ConsoleAnnotator<T>> r  = new ArrayList<ConsoleAnnotator<T>>();
-        for (ConsoleAnnotator ca : all()) {
-            if (ca.type().isAssignableFrom(contextType))
-                r.add(ca);
+        for (ConsoleAnnotatorFactory f : ConsoleAnnotatorFactory.all()) {
+            if (f.type().isInstance(context)) {
+                ConsoleAnnotator ca = f.newInstance(context);
+                if (ca!=null)
+                    r.add(ca);
+            }
         }
         return r;
     }

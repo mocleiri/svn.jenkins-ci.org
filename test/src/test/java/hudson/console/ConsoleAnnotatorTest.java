@@ -53,6 +53,12 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
      * Only annotates the first occurrence of "ooo".
      */
     @TestExtension("testCompletedStatelessLogAnnotation")
+    public static ConsoleAnnotatorFactory DEMO_ANNOTATOR = new ConsoleAnnotatorFactory() {
+        public ConsoleAnnotator newInstance(Object context) {
+            return new DemoAnnotator();
+        }
+    };
+
     public static class DemoAnnotator extends ConsoleAnnotator<Object> {
         @Override
         public ConsoleAnnotator annotate(Object build, MarkupText text) {
@@ -139,9 +145,11 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     }
 
     @TestExtension("testProgressiveOutput")
-    public static ConsoleAnnotator create() {
-        return new StatefulAnnotator();
-    }
+    public static ConsoleAnnotatorFactory STATEFUL_ANNOTATOR = new ConsoleAnnotatorFactory() {
+        public ConsoleAnnotator newInstance(Object context) {
+            return new StatefulAnnotator();
+        }
+    };
 
     public static class StatefulAnnotator extends ConsoleAnnotator<Object> {
         int n=1;
@@ -203,10 +211,17 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     /**
      * Places a triple dollar mark at the specified position.
      */
-    private static final class DollarMark extends ConsoleAnnotation<Run> {
+    public static final class DollarMark extends ConsoleAnnotation<Run> {
         public ConsoleAnnotator annotate(Run build, MarkupText text, int charPos) {
             text.addMarkup(charPos,"$$$");
             return null;
+        }
+
+        @TestExtension
+        public static final class DescriptorImpl extends ConsoleAnnotationDescriptor {
+            public String getDisplayName() {
+                return "Dollar mark";
+            }
         }
     }
 }

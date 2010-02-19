@@ -23,29 +23,35 @@
  */
 package hudson.console;
 
-import hudson.MarkupText;
-import hudson.model.Describable;
+import hudson.ExtensionList;
+import hudson.ExtensionPoint;
 import hudson.model.Hudson;
-import hudson.model.Run;
+import org.jvnet.tiger_types.Types;
 
-import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
- *
- *
- * @param <T>
- *      Contextual model object that this console is associated with, such as {@link Run}.
- *
  * @author Kohsuke Kawaguchi
- * @see ConsoleAnnotationDescriptor
  */
-public abstract class ConsoleAnnotation<T> implements Serializable, Describable<ConsoleAnnotation<?>> {
-    // TODO: if ConsoleAnnotator is just for build output, how does this work with other kinds of console output?
-    public abstract ConsoleAnnotator annotate(T context, MarkupText text, int charPos);
-
-    public ConsoleAnnotationDescriptor getDescriptor() {
-        return (ConsoleAnnotationDescriptor)Hudson.getInstance().getDescriptorOrDie(getClass());
+public abstract class ConsoleAnnotatorFactory<T> implements ExtensionPoint {
+    /**
+     * For which context type does this annotator work?
+     */
+    public Class type() {
+        Type type = Types.getBaseClass(getClass(), ConsoleAnnotator.class);
+        if (type instanceof ParameterizedType)
+            return Types.erasure(Types.getTypeArgument(type,0));
+        else
+            return Object.class;
     }
 
-    private static final long serialVersionUID = 1L;
+    public abstract ConsoleAnnotator newInstance(T context);
+
+    /**
+     * All the registered instances.
+     */
+    public static ExtensionList<ConsoleAnnotatorFactory> all() {
+        return Hudson.getInstance().getExtensionList(ConsoleAnnotatorFactory.class);
+    }
 }
