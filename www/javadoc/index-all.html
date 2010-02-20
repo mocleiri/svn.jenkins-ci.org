@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.346 API)
+Index (Hudson main module 1.347 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-12">
+<META NAME="date" CONTENT="2010-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.346 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.346 API)";
+        parent.document.title="Index (Hudson main module 1.347 API)";
     }
 }
 </SCRIPT>
@@ -568,10 +568,6 @@ Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" tit
 <DT><A HREF="./hudson/EnvVars.html#addLine(java.lang.String)"><B>addLine(String)</B></A> - 
 Method in class hudson.<A HREF="./hudson/EnvVars.html" title="class in hudson">EnvVars</A>
 <DD>Takes a string that looks like "a=b" and adds that to this map.
-<DT><A HREF="./hudson/model/Hudson.html#addListener(hudson.model.listeners.JobListener)"><B>addListener(JobListener)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
-<DD><B>Deprecated.</B>&nbsp;<I>since 2007-01-04.
-      Use <code>getJobListeners().add(l)</code> instead.</I>
 <DT><A HREF="./hudson/remoting/Channel.html#addListener(hudson.remoting.Channel.Listener)"><B>addListener(Channel.Listener)</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A>
 <DD>Registers a new <A HREF="./hudson/remoting/Channel.Listener.html" title="class in hudson.remoting"><CODE>Channel.Listener</CODE></A>.
@@ -2938,9 +2934,6 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.DescriptorIm
 <DT><A HREF="./hudson/model/Computer.html#CONFIGURE"><B>CONFIGURE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Permission to configure slaves.
-<DT><A HREF="./hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)"><B>configure(HttpServletRequest)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
-<DD><B>Deprecated.</B>&nbsp;<I>As of 1.64. Use <A HREF="./hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><CODE>Descriptor.configure(StaplerRequest)</CODE></A>.</I>
 <DT><A HREF="./hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><B>configure(StaplerRequest)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
 <DD><B>Deprecated.</B>&nbsp;<I>As of 1.239, use <A HREF="./hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Descriptor.configure(StaplerRequest, JSONObject)</CODE></A>.</I>
@@ -3107,23 +3100,6 @@ Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.html" ti
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Result.html#conv"><B>conv</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Result.html" title="class in hudson.model">Result</A>
-<DD>&nbsp;
-<DT><A HREF="./hudson/model/Descriptor.html#convert(java.util.Map)"><B>convert(Map&lt;String, Object&gt;)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>
-<DD><A HREF="./hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s that has existed &lt;= 1.61 needs to
- be able to read in the old configuration in a property bag
- and reflect that into the new layout.
-<DT><A HREF="./hudson/tasks/Ant.DescriptorImpl.html#convert(java.util.Map)"><B>convert(Map&lt;String, Object&gt;)</B></A> - 
-Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.DescriptorImpl.html" title="class in hudson.tasks">Ant.DescriptorImpl</A>
-<DD>&nbsp;
-<DT><A HREF="./hudson/tasks/Mailer.DescriptorImpl.html#convert(java.util.Map)"><B>convert(Map&lt;String, Object&gt;)</B></A> - 
-Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html" title="class in hudson.tasks">Mailer.DescriptorImpl</A>
-<DD>For backward compatibility.
-<DT><A HREF="./hudson/tasks/Maven.DescriptorImpl.html#convert(java.util.Map)"><B>convert(Map&lt;String, Object&gt;)</B></A> - 
-Method in class hudson.tasks.<A HREF="./hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks">Maven.DescriptorImpl</A>
-<DD>&nbsp;
-<DT><A HREF="./hudson/tasks/Shell.DescriptorImpl.html#convert(java.util.Map)"><B>convert(Map&lt;String, Object&gt;)</B></A> - 
-Method in class hudson.tasks.<A HREF="./hudson/tasks/Shell.DescriptorImpl.html" title="class in hudson.tasks">Shell.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/EnumConverter.html#convert(java.lang.Class, java.lang.Object)"><B>convert(Class, Object)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/EnumConverter.html" title="class in hudson.util">EnumConverter</A>
@@ -4412,11 +4388,7 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/JavadocArchiver.JavadocActi
 <DT><A HREF="./hudson/tasks/JavadocArchiver.JavadocBuildAction.html#dir()"><B>dir()</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/JavadocArchiver.JavadocBuildAction.html" title="class in hudson.tasks">JavadocArchiver.JavadocBuildAction</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><B>DirectoryBrowserSupport</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Has convenience methods to serve file system.<DT><A HREF="./hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject)"><B>DirectoryBrowserSupport(ModelObject)</B></A> - 
-Constructor for class hudson.model.<A HREF="./hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A>
-<DD><B>Deprecated.</B>&nbsp;<I>since 2007-08-12.
-      Use <A HREF="./hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><CODE>DirectoryBrowserSupport.DirectoryBrowserSupport(ModelObject, FilePath, String, String, boolean)</CODE></A></I>
-<DT><A HREF="./hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)"><B>DirectoryBrowserSupport(ModelObject, String)</B></A> - 
+<DT><A HREF="./hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><B>DirectoryBrowserSupport</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Has convenience methods to serve file system.<DT><A HREF="./hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)"><B>DirectoryBrowserSupport(ModelObject, String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model">DirectoryBrowserSupport</A>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.297
       Use <A HREF="./hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><CODE>DirectoryBrowserSupport.DirectoryBrowserSupport(ModelObject, FilePath, String, String, boolean)</CODE></A></I>
@@ -5618,9 +5590,6 @@ Method in class hudson.model.<A HREF="./hudson/model/FileParameterValue.html" ti
 <DT><A HREF="./hudson/model/Label.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Label.html" title="class in hudson.model">Label</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html" title="class in hudson.model.listeners">JobListener.JobListenerAdapter</A>
-<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/model/ParameterValue.html#equals(java.lang.Object)"><B>equals(Object)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>
 <DD>&nbsp;
@@ -5740,6 +5709,9 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <DT><A HREF="./hudson/matrix/Combination.html#evalGroovyExpression(hudson.matrix.AxisList, java.lang.String)"><B>evalGroovyExpression(AxisList, String)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/Combination.html" title="class in hudson.matrix">Combination</A>
 <DD>Evaluates the given Groovy expression with values bound from this combination.
+<DT><A HREF="./hudson/maven/RedeployPublisher.html#evenIfUnstable"><B>evenIfUnstable</B></A> - 
+Variable in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/security/ACL.html#EVERYONE"><B>EVERYONE</B></A> - 
 Static variable in class hudson.security.<A HREF="./hudson/security/ACL.html" title="class in hudson.security">ACL</A>
 <DD>Special <CODE>Sid</CODE> that represents "everyone", even including anonymous users.
@@ -12542,6 +12514,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Run.ArtifactList.html" titl
 <DT><A HREF="./hudson/model/Run.Artifact.html#getTreeNodeId()"><B>getTreeNodeId()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.Artifact.html" title="class in hudson.model">Run.Artifact</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/RedeployPublisher.html#getTreshold()"><B>getTreshold()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractProject.html#getTrigger(java.lang.Class)"><B>getTrigger(Class&lt;T&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Gets the specific trigger, or null if the propert is not configured for this job.
@@ -13264,9 +13239,6 @@ Method in class hudson.model.<A HREF="./hudson/model/FileParameterValue.html" ti
 <DT><A HREF="./hudson/model/Label.html#hashCode()"><B>hashCode()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Label.html" title="class in hudson.model">Label</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html#hashCode()"><B>hashCode()</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html" title="class in hudson.model.listeners">JobListener.JobListenerAdapter</A>
-<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/model/ParameterValue.html#hashCode()"><B>hashCode()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>
 <DD>&nbsp;
@@ -14858,7 +14830,7 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Hudson.html#isWindows()"><B>isWindows()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
-<DD>&nbsp;
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="./hudson/Functions.html#isWindows()"><CODE>Functions.isWindows()</CODE></A>.</I>
 <DT><A HREF="./hudson/remoting/Launcher.html#isWindows()"><B>isWindows()</B></A> - 
 Static method in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title="class in hudson.remoting">Launcher</A>
 <DD>&nbsp;
@@ -15107,13 +15079,6 @@ Constructor for class hudson.views.<A HREF="./hudson/views/JobColumn.DescriptorI
 <DT><A HREF="./hudson/views/Messages.html#JobColumn_DisplayName()"><B>JobColumn_DisplayName()</B></A> - 
 Static method in class hudson.views.<A HREF="./hudson/views/Messages.html" title="class in hudson.views">Messages</A>
 <DD>Job
-<DT><A HREF="./hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners"><B>JobListener</B></A> - Class in <A HREF="./hudson/model/listeners/package-summary.html">hudson.model.listeners</A><DD><B>Deprecated.</B>&nbsp;<I>since 2007-10-09.
-     <A HREF="./hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A> is the generalized form of this.</I><DT><A HREF="./hudson/model/listeners/JobListener.html#JobListener()"><B>JobListener()</B></A> - 
-Constructor for class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>
-<DD><B>Deprecated.</B>&nbsp;&nbsp;
-<DT><A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html" title="class in hudson.model.listeners"><B>JobListener.JobListenerAdapter</B></A> - Class in <A HREF="./hudson/model/listeners/package-summary.html">hudson.model.listeners</A><DD><B>Deprecated.</B>&nbsp;&nbsp;<DT><A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html#JobListener.JobListenerAdapter(hudson.model.listeners.JobListener)"><B>JobListener.JobListenerAdapter(JobListener)</B></A> - 
-Constructor for class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html" title="class in hudson.model.listeners">JobListener.JobListenerAdapter</A>
-<DD><B>Deprecated.</B>&nbsp;&nbsp;
 <DT><A HREF="./hudson/fsp/WorkspaceSnapshotSCM.html#jobName"><B>jobName</B></A> - 
 Variable in class hudson.fsp.<A HREF="./hudson/fsp/WorkspaceSnapshotSCM.html" title="class in hudson.fsp">WorkspaceSnapshotSCM</A>
 <DD>The job name from which we inherit the workspace.
@@ -16122,9 +16087,21 @@ Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Mailer.UserProperty.h
 <DT><A HREF="./hudson/tasks/Mailer.UserProperty.DescriptorImpl.html" title="class in hudson.tasks"><B>Mailer.UserProperty.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tasks/package-summary.html">hudson.tasks</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/Mailer.UserProperty.DescriptorImpl.html#Mailer.UserProperty.DescriptorImpl()"><B>Mailer.UserProperty.DescriptorImpl()</B></A> - 
 Constructor for class hudson.tasks.<A HREF="./hudson/tasks/Mailer.UserProperty.DescriptorImpl.html" title="class in hudson.tasks">Mailer.UserProperty.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/Messages.html#Mailer_Address_Not_Configured()"><B>Mailer_Address_Not_Configured()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>address not configured yet &lt;nobody@nowhere>
 <DT><A HREF="./hudson/tasks/Messages.html#Mailer_DisplayName()"><B>Mailer_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>E-mail Notification
+<DT><A HREF="./hudson/tasks/Messages.html#Mailer_Localhost_Error()"><B>Mailer_Localhost_Error()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>Please set a valid host name, instead of localhost
+<DT><A HREF="./hudson/tasks/Messages.html#Mailer_Suffix_Error()"><B>Mailer_Suffix_Error()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>This field should be ''@'' followed by a domain name.
+<DT><A HREF="./hudson/tasks/Messages.html#Mailer_Unknown_Host_Name()"><B>Mailer_Unknown_Host_Name()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>Unknown host name:
 <DT><A HREF="./hudson/tasks/Messages.html#Mailer_UserProperty_DisplayName()"><B>Mailer_UserProperty_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>E-mail
@@ -17750,12 +17727,6 @@ Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in h
 <DT><A HREF="./hudson/model/listeners/ItemListener.html#onCreated(hudson.model.Item)"><B>onCreated(Item)</B></A> - 
 Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners">ItemListener</A>
 <DD>Called after a new job is created and added to <A HREF="./hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
-<DT><A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html#onCreated(hudson.model.Item)"><B>onCreated(Item)</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html" title="class in hudson.model.listeners">JobListener.JobListenerAdapter</A>
-<DD><B>Deprecated.</B>&nbsp;&nbsp;
-<DT><A HREF="./hudson/model/listeners/JobListener.html#onCreated(hudson.model.Job)"><B>onCreated(Job)</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>
-<DD><B>Deprecated.</B>&nbsp;Called after a new job is created and added to <A HREF="./hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
 <DT><A HREF="./hudson/remoting/PingThread.html#onDead()"><B>onDead()</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/PingThread.html" title="class in hudson.remoting">PingThread</A>
 <DD>Called when ping failed.
@@ -17765,12 +17736,6 @@ Method in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhi
 <DT><A HREF="./hudson/model/listeners/ItemListener.html#onDeleted(hudson.model.Item)"><B>onDeleted(Item)</B></A> - 
 Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners">ItemListener</A>
 <DD>Called right before a job is going to be deleted.
-<DT><A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html#onDeleted(hudson.model.Item)"><B>onDeleted(Item)</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html" title="class in hudson.model.listeners">JobListener.JobListenerAdapter</A>
-<DD><B>Deprecated.</B>&nbsp;&nbsp;
-<DT><A HREF="./hudson/model/listeners/JobListener.html#onDeleted(hudson.model.Job)"><B>onDeleted(Job)</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>
-<DD><B>Deprecated.</B>&nbsp;Called right before a job is going to be deleted.
 <DT><A HREF="./hudson/model/listeners/RunListener.html#onDeleted(R)"><B>onDeleted(R)</B></A> - 
 Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunListener.html" title="class in hudson.model.listeners">RunListener</A>
 <DD>Called right before a build is going to be deleted.
@@ -17868,12 +17833,6 @@ Method in class hudson.model.<A HREF="./hudson/model/ViewJob.html" title="class 
 Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners">ItemListener</A>
 <DD>Called after all the jobs are loaded from disk into <A HREF="./hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>
  object.
-<DT><A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html#onLoaded()"><B>onLoaded()</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.JobListenerAdapter.html" title="class in hudson.model.listeners">JobListener.JobListenerAdapter</A>
-<DD><B>Deprecated.</B>&nbsp;&nbsp;
-<DT><A HREF="./hudson/model/listeners/JobListener.html#onLoaded()"><B>onLoaded()</B></A> - 
-Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">JobListener</A>
-<DD><B>Deprecated.</B>&nbsp;Called after all the jobs are loaded from disk into <A HREF="./hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> object.
 <DT><A HREF="./hudson/model/Hudson.CloudList.html#onModified()"><B>onModified()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.CloudList.html" title="class in hudson.model">Hudson.CloudList</A>
 <DD>&nbsp;
@@ -19269,6 +19228,9 @@ Static variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporter
 <DT><A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven"><B>RedeployPublisher</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><A HREF="./hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> for <A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven"><CODE>MavenModuleSetBuild</CODE></A> to deploy artifacts
  after a build is fully succeeded.<DT><A HREF="./hudson/maven/RedeployPublisher.html#RedeployPublisher(java.lang.String, java.lang.String, boolean)"><B>RedeployPublisher(String, String, boolean)</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>
+<DD>For backward compatibility
+<DT><A HREF="./hudson/maven/RedeployPublisher.html#RedeployPublisher(java.lang.String, java.lang.String, boolean, boolean)"><B>RedeployPublisher(String, String, boolean, boolean)</B></A> - 
+Constructor for class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.html" title="class in hudson.maven">RedeployPublisher</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven"><B>RedeployPublisher.DescriptorImpl</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>&nbsp;<DT><A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html#RedeployPublisher.DescriptorImpl()"><B>RedeployPublisher.DescriptorImpl()</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven">RedeployPublisher.DescriptorImpl</A>
@@ -19547,10 +19509,6 @@ Static method in class hudson.util.<A HREF="./hudson/util/PluginServletFilter.ht
 <DT><A HREF="./hudson/model/AbstractProject.html#removeFromList(hudson.model.Descriptor, java.util.List)"><B>removeFromList(Descriptor&lt;T&gt;, List&lt;T&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Hudson.html#removeListener(hudson.model.listeners.JobListener)"><B>removeListener(JobListener)</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
-<DD><B>Deprecated.</B>&nbsp;<I>since 2007-01-04.
-      Use <code>getJobListeners().remove(l)</code> instead.</I>
 <DT><A HREF="./hudson/remoting/Channel.html#removeListener(hudson.remoting.Channel.Listener)"><B>removeListener(Channel.Listener)</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A>
 <DD>Removes a listener.
@@ -21226,6 +21184,9 @@ Method in class hudson.model.<A HREF="./hudson/model/DependencyGraph.Dependency.
 <DT><A HREF="./hudson/Proc.html#SHOW_PID"><B>SHOW_PID</B></A> - 
 Static variable in class hudson.<A HREF="./hudson/Proc.html" title="class in hudson">Proc</A>
 <DD>Debug switch to have the thread display the process it's waiting for.
+<DT><A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html#showEvenIfUnstableOption()"><B>showEvenIfUnstableOption()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/RedeployPublisher.DescriptorImpl.html" title="class in hudson.maven">RedeployPublisher.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/BuildTrigger.DescriptorImpl.html#showEvenIfUnstableOption(java.lang.Class)"><B>showEvenIfUnstableOption(Class&lt;? extends AbstractProject&gt;)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildTrigger.DescriptorImpl.html" title="class in hudson.tasks">BuildTrigger.DescriptorImpl</A>
 <DD>&nbsp;
@@ -24759,9 +24720,21 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/logging/Messages.html#_LogRecorderManager_init()"><B>_LogRecorderManager_init()</B></A> - 
 Static method in class hudson.logging.<A HREF="./hudson/logging/Messages.html" title="class in hudson.logging">Messages</A>
 <DD>Initialing log recorders
+<DT><A HREF="./hudson/tasks/Messages.html#_Mailer_Address_Not_Configured()"><B>_Mailer_Address_Not_Configured()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>address not configured yet &lt;nobody@nowhere>
 <DT><A HREF="./hudson/tasks/Messages.html#_Mailer_DisplayName()"><B>_Mailer_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>E-mail Notification
+<DT><A HREF="./hudson/tasks/Messages.html#_Mailer_Localhost_Error()"><B>_Mailer_Localhost_Error()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>Please set a valid host name, instead of localhost
+<DT><A HREF="./hudson/tasks/Messages.html#_Mailer_Suffix_Error()"><B>_Mailer_Suffix_Error()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>This field should be ''@'' followed by a domain name.
+<DT><A HREF="./hudson/tasks/Messages.html#_Mailer_Unknown_Host_Name()"><B>_Mailer_Unknown_Host_Name()</B></A> - 
+Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
+<DD>Unknown host name:
 <DT><A HREF="./hudson/tasks/Messages.html#_Mailer_UserProperty_DisplayName()"><B>_Mailer_UserProperty_DisplayName()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>E-mail

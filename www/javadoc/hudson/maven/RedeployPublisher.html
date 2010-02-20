@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-RedeployPublisher (Hudson main module 1.346 API)
+RedeployPublisher (Hudson main module 1.347 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-12">
+<META NAME="date" CONTENT="2010-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ RedeployPublisher (Hudson main module 1.346 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="RedeployPublisher (Hudson main module 1.346 API)";
+        parent.document.title="RedeployPublisher (Hudson main module 1.347 API)";
     }
 }
 </SCRIPT>
@@ -179,6 +179,14 @@ Class RedeployPublisher</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/RedeployPublisher.html#evenIfUnstable">evenIfUnstable</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/maven/RedeployPublisher.html#id">id</A></B></CODE>
 
@@ -226,6 +234,15 @@ Class RedeployPublisher</H2>
                   boolean&nbsp;uniqueVersion)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For backward compatibility</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/maven/RedeployPublisher.html#RedeployPublisher(java.lang.String, java.lang.String, boolean, boolean)">RedeployPublisher</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url,
+                  boolean&nbsp;uniqueVersion,
+                  boolean&nbsp;evenIfUnstable)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -253,6 +270,14 @@ Class RedeployPublisher</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Declares the scope of the synchronization monitor this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> expects from outside.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/RedeployPublisher.html#getTreshold()">getTreshold</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -355,6 +380,16 @@ public final boolean <B>uniqueVersion</B></PRE>
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="evenIfUnstable"><!-- --></A><H3>
+evenIfUnstable</H3>
+<PRE>
+public final boolean <B>evenIfUnstable</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -369,11 +404,28 @@ public final boolean <B>uniqueVersion</B></PRE>
 <A NAME="RedeployPublisher(java.lang.String, java.lang.String, boolean)"><!-- --></A><H3>
 RedeployPublisher</H3>
 <PRE>
+public <B>RedeployPublisher</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url,
+                         boolean&nbsp;uniqueVersion)</PRE>
+<DL>
+<DD>For backward compatibility
+<P>
+</DL>
+<HR>
+
+<A NAME="RedeployPublisher(java.lang.String, java.lang.String, boolean, boolean)"><!-- --></A><H3>
+RedeployPublisher</H3>
+<PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>RedeployPublisher</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;id,
                                               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url,
-                                              boolean&nbsp;uniqueVersion)</PRE>
+                                              boolean&nbsp;uniqueVersion,
+                                              boolean&nbsp;evenIfUnstable)</PRE>
 <DL>
+<DL>
+<DT><B>Since:</B></DT>
+  <DD>1.347</DD>
+</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -504,6 +556,17 @@ public <A HREF="../../hudson/tasks/BuildStepMonitor.html" title="enum in hudson.
  For plugins written against earlier versions of Hudson, calling this method results in
  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/AbstractMethodError.html?is-external=true" title="class or interface in java.lang"><CODE>AbstractMethodError</CODE></A>.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTreshold()"><!-- --></A><H3>
+getTreshold</H3>
+<PRE>
+protected <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A> <B>getTreshold</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

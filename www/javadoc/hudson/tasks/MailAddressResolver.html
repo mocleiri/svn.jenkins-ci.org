@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MailAddressResolver (Hudson main module 1.346 API)
+MailAddressResolver (Hudson main module 1.347 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-12">
+<META NAME="date" CONTENT="2010-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MailAddressResolver (Hudson main module 1.346 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MailAddressResolver (Hudson main module 1.346 API)";
+        parent.document.title="MailAddressResolver (Hudson main module 1.347 API)";
     }
 }
 </SCRIPT>
@@ -120,6 +120,17 @@ Infers e-mail addresses for the user when none is specified.
    ...
  }
  </pre>
+
+ <h2>Techniques</h2>
+ <p>
+ User identity in Hudson is global, and not specific to a particular job. As a result, mail address resolution
+ only receives <A HREF="../../hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A>, which by itself doesn't really have that much information in it.
+
+ <p>
+ So the common technique for a mail address resolution is to define your own <A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model"><CODE>UserProperty</CODE></A> types and
+ add it to <A HREF="../../hudson/model/User.html" title="class in hudson.model"><CODE>User</CODE></A> objects where more context is available. For example, an <A HREF="../../hudson/scm/SCM.html" title="class in hudson.scm"><CODE>SCM</CODE></A> implementation
+ can have a lot more information about a particular user during a check out, so that would be a good place
+ to capture information as <A HREF="../../hudson/model/UserProperty.html" title="class in hudson.model"><CODE>UserProperty</CODE></A>, which then later used by a <A HREF="../../hudson/tasks/MailAddressResolver.html" title="class in hudson.tasks"><CODE>MailAddressResolver</CODE></A>.
 <P>
 
 <P>

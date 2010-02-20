@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.346 API)
+Deprecated List (Hudson main module 1.347 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-12">
+<META NAME="date" CONTENT="2010-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.346 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.346 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.347 API)";
     }
 }
 </SCRIPT>
@@ -198,12 +198,6 @@ function windowTitle()
 <TD><A HREF="hudson/util/FormFieldValidator.WorkspaceFilePath.html" title="class in hudson.util">hudson.util.FormFieldValidator.WorkspaceFilePath</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.294. Use <A HREF="hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>FilePath.validateRelativePath(String, boolean, boolean)</CODE></A></I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/listeners/JobListener.html" title="class in hudson.model.listeners">hudson.model.listeners.JobListener</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-10-09.
-     <A HREF="hudson/model/listeners/ItemListener.html" title="class in hudson.model.listeners"><CODE>ItemListener</CODE></A> is the generalized form of this.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Jobs.html" title="class in hudson.model">hudson.model.Jobs</A>
@@ -560,12 +554,6 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.341</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/Hudson.html#addListener(hudson.model.listeners.JobListener)">hudson.model.Hudson.addListener(JobListener)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-01-04.
-      Use <code>getJobListeners().add(l)</code> instead.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Project.html#addPublisher(hudson.tasks.Publisher)">hudson.model.Project.addPublisher(Publisher)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.290
@@ -612,11 +600,6 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use individual localization methods instead. 
    See <A HREF="hudson/Messages.html#Util_year(java.lang.Object)"><CODE>Messages.Util_year(Object)</CODE></A> for an example.
    Deprecated since 2009-06-24, remove method after 2009-12-24.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">hudson.model.Descriptor.configure(HttpServletRequest)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.64. Use <A HREF="hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><CODE>Descriptor.configure(StaplerRequest)</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/Plugin.html#configure(net.sf.json.JSONObject)">hudson.Plugin.configure(JSONObject)</A>
@@ -1108,6 +1091,11 @@ function windowTitle()
       accidentally call this method.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Hudson.html#isWindows()">hudson.model.Hudson.isWindows()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/Functions.html#isWindows()"><CODE>Functions.isWindows()</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/ProcessTreeKiller.html#kill(java.util.Map)">hudson.util.ProcessTreeKiller.kill(Map<String, String>)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/util/ProcessTree.html#killAll(java.util.Map)"><CODE>ProcessTree.killAll(Map)</CODE></A></I>&nbsp;</TD>
@@ -1321,12 +1309,6 @@ function windowTitle()
       Prefer automatic registration via <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/Hudson.html#removeListener(hudson.model.listeners.JobListener)">hudson.model.Hudson.removeListener(JobListener)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-01-04.
-      Use <code>getJobListeners().remove(l)</code> instead.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Project.html#removePublisher(hudson.model.Descriptor)">hudson.model.Project.removePublisher(Descriptor<Publisher>)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.290
@@ -1475,12 +1457,6 @@ function windowTitle()
 <TD><A HREF="hudson/util/DescriptorList.html#DescriptorList(hudson.model.Descriptor...)">hudson.util.DescriptorList(Descriptor<T>...)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>As of 1.286. Use <A HREF="hudson/util/DescriptorList.html#DescriptorList(java.lang.Class)"><CODE>DescriptorList.DescriptorList(Class)</CODE></A> instead.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject)">hudson.model.DirectoryBrowserSupport(ModelObject)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-08-12.
-      Use <A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, hudson.FilePath, java.lang.String, java.lang.String, boolean)"><CODE>DirectoryBrowserSupport.DirectoryBrowserSupport(ModelObject, FilePath, String, String, boolean)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/DirectoryBrowserSupport.html#DirectoryBrowserSupport(hudson.model.ModelObject, java.lang.String)">hudson.model.DirectoryBrowserSupport(ModelObject, String)</A>

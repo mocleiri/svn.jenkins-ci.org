@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Descriptor (Hudson main module 1.346 API)
+Descriptor (Hudson main module 1.347 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-12">
+<META NAME="date" CONTENT="2010-02-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Descriptor (Hudson main module 1.346 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Descriptor (Hudson main module 1.346 API)";
+        parent.document.title="Descriptor (Hudson main module 1.347 API)";
     }
 }
 </SCRIPT>
@@ -249,14 +249,6 @@ Metadata about a configurable instance.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#configure(javax.servlet.http.HttpServletRequest)">configure</A></B>(javax.servlet.http.HttpServletRequest&nbsp;req)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>As of 1.64. Use <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><CODE>configure(StaplerRequest)</CODE></A>.</I></TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)">configure</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
@@ -270,16 +262,6 @@ Metadata about a configurable instance.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invoked when the global configuration page is submitted.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Descriptor.html#convert(java.util.Map)">convert</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&gt;&nbsp;oldPropertyBag)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s that has existed &lt;= 1.61 needs to
- be able to read in the old configuration in a property bag
- and reflect that into the new layout.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -608,7 +590,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DD>If the field "xyz" of a <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> has the corresponding "doCheckXyz" method,
  return the form-field validation string. Otherwise null.
  <p>
- This method is used to hook up the form validation method to
+ This method is used to hook up the form validation method to the corresponding HTML input element.
 <P>
 <DD><DL>
 </DL>
@@ -795,26 +777,6 @@ public final boolean <B>isSubTypeOf</B>(<A HREF="http://java.sun.com/j2se/1.5.0/
 </DL>
 <HR>
 
-<A NAME="configure(javax.servlet.http.HttpServletRequest)"><!-- --></A><H3>
-configure</H3>
-<PRE>
-<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
-</FONT>public boolean <B>configure</B>(javax.servlet.http.HttpServletRequest&nbsp;req)
-                  throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
-<DL>
-<DD><B>Deprecated.</B>&nbsp;<I>As of 1.64. Use <A HREF="../../hudson/model/Descriptor.html#configure(org.kohsuke.stapler.StaplerRequest)"><CODE>configure(StaplerRequest)</CODE></A>.</I>
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="configure(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
 configure</H3>
 <PRE>
@@ -929,24 +891,6 @@ public void <B>load</B>()</PRE>
  The constructor of the derived class must call this method.
  (If we do that in the base class, the derived class won't
  get a chance to set default values.)
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="convert(java.util.Map)"><!-- --></A><H3>
-convert</H3>
-<PRE>
-protected void <B>convert</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&gt;&nbsp;oldPropertyBag)</PRE>
-<DL>
-<DD><A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>s that has existed &lt;= 1.61 needs to
- be able to read in the old configuration in a property bag
- and reflect that into the new layout.
 <P>
 <DD><DL>
 </DL>
