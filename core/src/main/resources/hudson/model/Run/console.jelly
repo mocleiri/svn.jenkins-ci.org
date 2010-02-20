@@ -48,6 +48,9 @@ THE SOFTWARE.
           <j:set var="offset" value="${0}" />
         </j:otherwise>
       </j:choose>
+
+      <j:out value="${h.generateConsoleAnnotationScript()}"/>
+
       <j:choose>
         <!-- Do progressive console output -->
         <j:when test="${it.isLogUpdated()}">

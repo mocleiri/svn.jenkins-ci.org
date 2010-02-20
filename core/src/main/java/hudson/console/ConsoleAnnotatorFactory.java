@@ -26,15 +26,41 @@ package hudson.console;
 import hudson.ExtensionList;
 import hudson.ExtensionPoint;
 import hudson.model.Hudson;
+import hudson.model.Run;
+import hudson.util.TimeUnit2;
 import org.jvnet.tiger_types.Types;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.WebMethod;
 
+import javax.servlet.ServletException;
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.URL;
 
 /**
+ * Entry point to the {@link ConsoleAnnotator} extension point. This class creates a new instance
+ * of {@link ConsoleAnnotator} that starts a new console annotation session.
+ *
  * @author Kohsuke Kawaguchi
  */
 public abstract class ConsoleAnnotatorFactory<T> implements ExtensionPoint {
+    /**
+     * Called when a console output page is requested to create a stateful {@link ConsoleAnnotator}.
+     *
+     * <p>
+     * This method can be invoked concurrently by multiple threads.
+     *
+     * @param context
+     *      The model object that owns the console output, such as {@link Run}.
+     *      This method is only called when the context object if assignable to
+     *      {@linkplain #type() the advertised type}.
+     * @return
+     *      null if this factory is not going to participate in the annotation of this console.
+     */
+    public abstract ConsoleAnnotator newInstance(T context);
+
     /**
      * For which context type does this annotator work?
      */
@@ -46,7 +72,22 @@ public abstract class ConsoleAnnotatorFactory<T> implements ExtensionPoint {
             return Object.class;
     }
 
-    public abstract ConsoleAnnotator newInstance(T context);
+    /**
+     * Returns true if this descriptor has a JavaScript to be inserted on applicable console page.
+     */
+    public boolean hasScript() {
+        return getScriptJs() !=null;
+    }
+
+    private URL getScriptJs() {
+        Class c = getClass();
+        return c.getClassLoader().getResource(c.getName().replace('.','/').replace('$','/')+"/script.js");
+    }
+
+    @WebMethod(name="script.js")
+    public void doScriptJs(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        rsp.serveFile(req,getScriptJs(), TimeUnit2.DAYS.toMillis(1));
+    }
 
     /**
      * All the registered instances.

@@ -23,8 +23,18 @@
  */
 package hudson.console;
 
+import hudson.DescriptorExtensionList;
 import hudson.ExtensionPoint;
 import hudson.model.Descriptor;
+import hudson.model.Hudson;
+import hudson.util.TimeUnit2;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.WebMethod;
+
+import javax.servlet.ServletException;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Descriptor for {@link ConsoleAnnotation}.
@@ -43,4 +53,27 @@ public abstract class ConsoleAnnotationDescriptor extends Descriptor<ConsoleAnno
      * Users use this name to enable/disable annotations.
      */
     public abstract String getDisplayName();
+
+    /**
+     * Returns true if this descriptor has a JavaScript to be inserted on applicable console page.
+     */
+    public boolean hasScript() {
+        return getScriptJs()!=null;
+    }
+
+    private URL getScriptJs() {
+        return clazz.getClassLoader().getResource(clazz.getName().replace('.','/').replace('$','/')+"/script.js");
+    }
+
+    @WebMethod(name="script.js")
+    public void doScriptJs(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        rsp.serveFile(req, getScriptJs(), TimeUnit2.DAYS.toMillis(1));
+    }
+
+    /**
+     * Returns all the registered {@link ConsoleAnnotationDescriptor} descriptors.
+     */
+    public static DescriptorExtensionList<ConsoleAnnotation<?>,ConsoleAnnotationDescriptor> all() {
+        return (DescriptorExtensionList)Hudson.getInstance().getDescriptorList(ConsoleAnnotation.class);
+    }
 }

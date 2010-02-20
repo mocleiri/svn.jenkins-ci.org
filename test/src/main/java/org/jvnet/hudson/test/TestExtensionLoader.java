@@ -58,9 +58,7 @@ public class TestExtensionLoader extends ExtensionFinder {
                 Class<?> extType;
                 if (e instanceof Class) {
                     extType = (Class) e;
-                    Class<?> outer = extType.getEnclosingClass();
-                    if (outer==null || !outer.isInstance(env.testCase))
-                        continue;      // not executing the enclosing test
+                    if (!isActive(env, extType)) continue;
                 } else
                 if (e instanceof Field) {
                     Field f = (Field) e;
@@ -91,6 +89,13 @@ public class TestExtensionLoader extends ExtensionFinder {
         }
 
         return result;
+    }
+
+    private boolean isActive(TestEnvironment env, Class<?> extType) {
+        for (Class<?> outer = extType; outer!=null; outer=outer.getEnclosingClass())
+            if (outer.isInstance(env.testCase))
+                return true;      // enclosed
+        return false;
     }
 
     private static final Logger LOGGER = Logger.getLogger(TestExtensionLoader.class.getName());

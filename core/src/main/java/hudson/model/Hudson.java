@@ -862,7 +862,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
      * this just doesn't scale.
      *
      * @param className
-     *      Either fully qualified class name (recommended) or the short name.
+     *      Either fully qualified class name (recommended) or the short name of a {@link Describable} subtype.
      */
     public Descriptor getDescriptor(String className) {
         // legacy descriptors that are reigstered manually doesn't show up in getExtensionList, so check them explicitly.
@@ -1789,6 +1789,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     @SuppressWarnings({"unchecked"})
     public <T> ExtensionList<T> getExtensionList(Class<T> extensionType) {
         return extensionLists.get(extensionType);
+    }
+
+    /**
+     * Used to bind {@link ExtensionList}s to URLs.
+     */
+    public ExtensionList getExtensionList(String extensionType) throws ClassNotFoundException {
+        return getExtensionList(pluginManager.uberClassLoader.loadClass(extensionType));
     }
 
     /**

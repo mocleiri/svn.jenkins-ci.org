@@ -53,7 +53,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
      * Only annotates the first occurrence of "ooo".
      */
     @TestExtension("testCompletedStatelessLogAnnotation")
-    public static ConsoleAnnotatorFactory DEMO_ANNOTATOR = new ConsoleAnnotatorFactory() {
+    public static final ConsoleAnnotatorFactory DEMO_ANNOTATOR = new ConsoleAnnotatorFactory() {
         public ConsoleAnnotator newInstance(Object context) {
             return new DemoAnnotator();
         }
@@ -145,7 +145,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     }
 
     @TestExtension("testProgressiveOutput")
-    public static ConsoleAnnotatorFactory STATEFUL_ANNOTATOR = new ConsoleAnnotatorFactory() {
+    public static final ConsoleAnnotatorFactory STATEFUL_ANNOTATOR = new ConsoleAnnotatorFactory() {
         public ConsoleAnnotator newInstance(Object context) {
             return new StatefulAnnotator();
         }
@@ -222,6 +222,40 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
             public String getDisplayName() {
                 return "Dollar mark";
             }
+        }
+    }
+
+
+    /**
+     * script.js defined in the annotator needs to be incorporated into the console page.
+     */
+    public void testScriptInclusion() throws Exception {
+        FreeStyleProject p = createFreeStyleProject();
+        FreeStyleBuild b = assertBuildStatusSuccess(p.scheduleBuild2(0).get());
+
+        HtmlPage html = createWebClient().getPage(b, "console");
+        // verify that there's an element inserted by the script
+        assertNotNull(html.getElementById("inserted-by-test1"));
+        assertNotNull(html.getElementById("inserted-by-test2"));
+    }
+
+    public static final class JustToIncludeScript extends ConsoleAnnotation<Object> {
+        public ConsoleAnnotator annotate(Object build, MarkupText text, int charPos) {
+            return null;
+        }
+
+        @TestExtension("testScriptInclusion")
+        public static final class DescriptorImpl extends ConsoleAnnotationDescriptor {
+            public String getDisplayName() {
+                return "just to include a script";
+            }
+        }
+    }
+
+    @TestExtension("testScriptInclusion")
+    public static final class JustToIncludeScriptAnnotator extends ConsoleAnnotatorFactory {
+        public ConsoleAnnotator newInstance(Object context) {
+            return null;
         }
     }
 }
