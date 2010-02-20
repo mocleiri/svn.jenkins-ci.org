@@ -23,10 +23,17 @@
  */
 package hudson.diagnosis;
 
+import hudson.XmlFile;
 import hudson.model.AdministrativeMonitor;
 import hudson.model.Hudson;
 import hudson.Extension;
+import hudson.model.Item;
+import hudson.model.Job;
+import hudson.model.Run;
 import hudson.model.Saveable;
+import hudson.model.listeners.ItemListener;
+import hudson.model.listeners.RunListener;
+import hudson.model.listeners.SaveableListener;
 import hudson.util.VersionNumber;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -72,6 +79,39 @@ public class OldDataMonitor extends AdministrativeMonitor {
     public synchronized Map<Saveable,VersionRange> getData() {
         return Collections.unmodifiableMap(data);
     }
+
+    private synchronized void remove(Saveable obj) {
+        data.remove(obj);
+        if (obj instanceof Job<?,?>)
+            for (Run r : ((Job<?,?>)obj).getBuilds())
+                data.remove(r);
+    }
+
+    // Listeners to remove data here if resaved or deleted in regular Hudson usage
+
+    @Extension
+    public static final SaveableListener changeListener = new SaveableListener() {
+        @Override
+        public void onChange(Saveable obj, XmlFile file) {
+            ((OldDataMonitor)Hudson.getInstance().getAdministrativeMonitor("OldData")).remove(obj);
+        }
+    };
+
+    @Extension
+    public static final ItemListener itemDeleteListener = new ItemListener() {
+        @Override
+        public void onDeleted(Item item) {
+            ((OldDataMonitor)Hudson.getInstance().getAdministrativeMonitor("OldData")).remove(item);
+        }
+    };
+
+    @Extension
+    public static final RunListener<Run> runDeleteListener = new RunListener<Run>(Run.class) {
+        @Override
+        public void onDeleted(Run run) {
+            ((OldDataMonitor)Hudson.getInstance().getAdministrativeMonitor("OldData")).remove(run);
+        }
+    };
 
     /**
      * Inform monitor that some data in a deprecated format has been loaded,
