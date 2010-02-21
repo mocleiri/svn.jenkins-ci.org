@@ -86,14 +86,14 @@ public class XUnitTransformerTest extends AbstractWorkspaceTest {
 
     @Test
     public void wrongPattern() throws Exception {
-        XUnitType[] types = new XUnitType[]{new TextXUnitType("*.txt", "cppunit-to-junit.xsl")};
+        XUnitType[] types = new XUnitType[]{new TextXUnitType("*.txt", "boosttest-to-junit.xsl")};
         workspace.createTextTempFile("report", ".xml", "content");
         Assert.assertFalse("With a wrong pattern, it have to be false", processTransformer(types));
     }
 
     @Test
     public void oneMatchWithWrongContent() throws Exception {
-        XUnitType[] types = new XUnitType[]{new TextXUnitType("*.xml", "cppunit-to-junit.xsl")};
+        XUnitType[] types = new XUnitType[]{new TextXUnitType("*.xml", "boosttest-to-junit.xsl")};
         workspace.createTextTempFile("report", ".xml", "content");
         try {
             processTransformer(types);
@@ -106,8 +106,8 @@ public class XUnitTransformerTest extends AbstractWorkspaceTest {
 
     @Test
     public void oneMatchWithValidContent() throws Exception {
-        XUnitType[] types = new XUnitType[]{new TextXUnitType("*.xml", "cppunit-to-junit.xsl")};
-        String content = XUnitXSLUtil.readXmlAsString("cppunit/testcase1/cppunit-successAndFailure.xml");
+        XUnitType[] types = new XUnitType[]{new TextXUnitType("*.xml", "boostest-to-junit.xsl")};
+        String content = XUnitXSLUtil.readXmlAsString("boosttest/autotest/testlog.xml");
         File reportFile = new File(new File(workspace.toURI()), "report.xml");
         FileWriter fw = new FileWriter(reportFile);
         fw.write(content);
