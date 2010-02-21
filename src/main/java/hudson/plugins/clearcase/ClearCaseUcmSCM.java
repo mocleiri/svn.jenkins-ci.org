@@ -47,6 +47,8 @@ import hudson.util.VariableResolver;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,8 +62,9 @@ import org.kohsuke.stapler.StaplerRequest;
  * a list of load rules to it.
  */
 public class ClearCaseUcmSCM extends AbstractClearCaseScm {
-
+	
     private final String stream;
+    private String paramStream; 
     private final String overrideBranchName;    
     
     @DataBoundConstructor
@@ -78,6 +81,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
               viewdrive, loadrules, multiSitePollBuffer, createDynView,
               winDynStorageDir, unixDynStorageDir, freezeCode, recreateView);
         this.stream = shortenStreamName(stream);
+        this.paramStream = "";
         if ((overrideBranchName!=null) && (!overrideBranchName.equals(""))) {
             this.overrideBranchName = overrideBranchName;
         }
@@ -101,6 +105,9 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
      * @return string containing the stream selector.
      */
     public String getStream() {
+    	if (paramStream != null && paramStream.length() > 0)
+    		return paramStream;
+    	
         return stream;
     }
 
@@ -142,8 +149,11 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     @Override
     protected CheckOutAction createCheckOutAction(
                                                   VariableResolver variableResolver, ClearToolLauncher launcher,
-                                                  AbstractBuild build) {
-        CheckOutAction action;
+                                                  AbstractBuild build) {    	
+    	// set value in paramStream
+    	paramStream = (String)build.getBuildVariables().get("STREAM");
+    	
+    	CheckOutAction action;
         if (isUseDynamicView()) {
             action = new UcmDynamicCheckoutAction(createClearTool(
                                                                   variableResolver, launcher),

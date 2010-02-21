@@ -3,15 +3,26 @@ package hudson.plugins.clearcase;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
+
 import hudson.model.Action;
 import hudson.plugins.clearcase.ucm.UcmCommon;
 
+@ExportedBean
 public class ClearCaseDataAction implements Action{
 
-	private List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream;
-	private String csepc;
-	private String stream;
+	@Exported(visibility=3)
+	public List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream;
+	
+	@Exported(visibility=3)
+	public String csepc;
+	
+	@Exported(visibility=3)
+	public String stream;
+	
 	private List<String> usedViewNamesList;
+	
 	private boolean deleteViewsWhenBuildEnds;
 	
 	public ClearCaseDataAction() {

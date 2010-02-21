@@ -63,6 +63,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -381,6 +382,13 @@ public abstract class AbstractClearCaseScm extends SCM {
         
         generatedNormalizedViewName = generatedNormalizedViewName.replaceAll(
                                                                              "[\\s\\\\\\/:\\?\\*\\|]+", "_");
+        
+        // support concurrent builds - need to add some unique identifier to the view name      
+        if (recreateView) {
+        	Integer rndNum = new Random().nextInt();
+        	generatedNormalizedViewName += "_" + rndNum.toString();        	
+        }
+        
         setNormalizedViewName(generatedNormalizedViewName);
         return generatedNormalizedViewName;
     }

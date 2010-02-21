@@ -20,6 +20,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.kohsuke.stapler.export.Exported;
+import org.kohsuke.stapler.export.ExportedBean;
+
 /**
  * @author kyosi
  *
@@ -496,10 +499,19 @@ public class UcmCommon {
      * @author kyosi
      *
      */
+	@ExportedBean
     public static class BaselineDesc {
-    	private String baselineName;
-    	private String componentName;
-    	private ComponentDesc componentDesc;
+		
+		@Exported(visibility=3)
+		public String baselineName;    	
+		
+		@Exported(visibility=3)
+		public String componentName;    	
+		
+		@Exported(visibility=3)
+		public ComponentDesc componentDesc;
+		
+		
     	private boolean isNotLabeled;	
     	
 		public BaselineDesc(String componentName, boolean isNotLabeled) {
@@ -518,7 +530,8 @@ public class UcmCommon {
 		public BaselineDesc(String baselineName, ComponentDesc componentDesc) {
 			super();
 			this.baselineName = baselineName;
-			this.componentDesc = componentDesc;		
+			this.componentDesc = componentDesc;	
+			this.componentName = componentDesc.getName();
 		}
 		
 		public BaselineDesc(String baselineName, ComponentDesc componentDesc,
@@ -526,6 +539,7 @@ public class UcmCommon {
 			super();
 			this.baselineName = baselineName;
 			this.componentDesc = componentDesc;
+			this.componentName = componentDesc.getName();
 			this.isNotLabeled = isNotLabeled;
 		}
 
@@ -566,9 +580,14 @@ public class UcmCommon {
      * @author kyosi
      *
      */
+	@ExportedBean
     public static class ComponentDesc {
-    	private String name;
-    	private boolean isModifiable;   	
+		
+		@Exported(visibility=3)
+		public String name;
+		
+		@Exported(visibility=3)
+    	public boolean isModifiable;   	
     	
 		public ComponentDesc(String name, boolean isModifiable) {
 			this.name = name;
