@@ -39,7 +39,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
             }
         });
 
-        FreeStyleBuild b = assertBuildStatusSuccess(p.scheduleBuild2(0).get());
+        FreeStyleBuild b = buildAndAssertSuccess(p);
 
         // make sure we see the annotation
         HtmlPage rsp = createWebClient().getPage(b, "console");
@@ -141,7 +141,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
         assertEquals("<b tag=2>line2</b>\r\n",plc.next());
 
         // should complete successfully
-        assertBuildStatusSuccess(f.get());
+        assertBuildStatusSuccess(f);
     }
 
     @TestExtension("testProgressiveOutput")
@@ -205,7 +205,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
         assertEquals("123$$$456$$$789\r\n",plc.next());
 
         // should complete successfully
-        assertBuildStatusSuccess(f.get());
+        assertBuildStatusSuccess(f);
     }
 
     /**
@@ -231,7 +231,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
      */
     public void testScriptInclusion() throws Exception {
         FreeStyleProject p = createFreeStyleProject();
-        FreeStyleBuild b = assertBuildStatusSuccess(p.scheduleBuild2(0).get());
+        FreeStyleBuild b = buildAndAssertSuccess(p);
 
         HtmlPage html = createWebClient().getPage(b, "console");
         // verify that there's an element inserted by the script

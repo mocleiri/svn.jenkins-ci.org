@@ -34,8 +34,10 @@ import hudson.EnvVars;
 import hudson.ExtensionList;
 import hudson.DescriptorExtensionList;
 import hudson.Util;
+import hudson.model.AbstractBuild;
 import hudson.model.Computer;
 import hudson.model.Executor;
+import hudson.model.Job;
 import hudson.model.Queue.Executable;
 import hudson.tools.ToolProperty;
 import hudson.remoting.Which;
@@ -95,6 +97,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 import java.util.jar.Manifest;
 import java.util.logging.Filter;
 import java.util.logging.Level;
@@ -694,6 +697,14 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
     public <R extends Run> R assertBuildStatusSuccess(R r) throws Exception {
         assertBuildStatus(Result.SUCCESS,r);
         return r;
+    }
+
+    public <R extends Run> R assertBuildStatusSuccess(Future<? extends R> r) throws Exception {
+        return assertBuildStatusSuccess(r.get());
+    }
+
+    public <J extends AbstractProject<J,R>,R extends AbstractBuild<J,R>> R buildAndAssertSuccess(J job) throws Exception {
+        return assertBuildStatusSuccess(job.scheduleBuild2(0));
     }
 
     /**
