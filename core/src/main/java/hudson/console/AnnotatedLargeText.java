@@ -92,7 +92,7 @@ public class AnnotatedLargeText<T> extends LargeText {
     @Override
     public long writeLogTo(long start, Writer w) throws IOException {
         ConsoleAnnotationOutputStream caw = new ConsoleAnnotationOutputStream(
-                w, FileAnnotationStore.read(logFile), start, createAnnotator(Stapler.getCurrentRequest()), context, charset);
+                w, createAnnotator(Stapler.getCurrentRequest()), context, charset);
         long r = super.writeLogTo(start,caw);
 
         try {

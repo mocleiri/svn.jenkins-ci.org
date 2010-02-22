@@ -24,11 +24,8 @@
 package hudson.util;
 
 import hudson.CloseProofOutputStream;
-import hudson.console.AnnotationStore;
 import hudson.console.ConsoleAnnotation;
-import hudson.console.FileAnnotationStore;
 import hudson.model.TaskListener;
-import hudson.remoting.Channel;
 import hudson.remoting.RemoteOutputStream;
 import org.kohsuke.stapler.framework.io.WriterOutputStream;
 
@@ -59,22 +56,23 @@ import java.util.logging.Logger;
  */
 public class StreamTaskListener implements TaskListener, Serializable, Closeable {
     private PrintStream out;
-    private AnnotationStore annotations;
     private Charset charset;
 
+    /**
+     * @deprecated as of 1.HUDSON-2137
+     *      The caller should use {@link #StreamTaskListener(OutputStream, Charset)} to pass in
+     *      the charset and output stream separately, so that this class can handle encoding correctly.
+     */
     public StreamTaskListener(PrintStream out) {
-        this(out,null,null);
+        this(out,null);
     }
 
     public StreamTaskListener(OutputStream out) {
-        this(out,null,null);
+        this(out,null);
     }
 
-    public StreamTaskListener(OutputStream out, FileAnnotationStore annotations, Charset charset) {
+    public StreamTaskListener(OutputStream out, Charset charset) {
         try {
-            this.annotations = annotations;
-            if (annotations!=null)
-                out = annotations.hook(out); // to count # of bytes that go through this output
             this.out = charset==null ? new PrintStream(out,false) : new PrintStream(out,false,charset.name());
             this.charset = charset;
         } catch (UnsupportedEncodingException e) {
@@ -91,7 +89,7 @@ public class StreamTaskListener implements TaskListener, Serializable, Closeable
         // don't do buffering so that what's written to the listener
         // gets reflected to the file immediately, which can then be
         // served to the browser immediately
-        this(new FileOutputStream(out),new FileAnnotationStore(out), charset);
+        this(new FileOutputStream(out),charset);
     }
 
     public StreamTaskListener(Writer w) throws IOException {
@@ -134,26 +132,22 @@ public class StreamTaskListener implements TaskListener, Serializable, Closeable
     }
 
     public void annotate(ConsoleAnnotation ann) throws IOException {
-        annotations.add(ann);
+        ann.encodeTo(out);
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeObject(new RemoteOutputStream(new CloseProofOutputStream(this.out)));
-        out.writeObject(Channel.current().export(AnnotationStore.class,annotations));
         out.writeObject(charset==null? null : charset.name());
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         out = new PrintStream((OutputStream)in.readObject(),true);
-        annotations = (AnnotationStore)in.readObject();
         String name = (String)in.readObject();
         charset = name==null ? null : Charset.forName(name);
     }
 
     public void close() throws IOException {
         out.close();
-        if (annotations!=null)
-            annotations.close();
     }
 
     /**

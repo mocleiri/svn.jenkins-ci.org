@@ -23,7 +23,6 @@
  */
 package hudson.model;
 
-import hudson.console.FileAnnotationStore;
 import hudson.util.StreamTaskListener;
 
 import java.io.File;
@@ -41,8 +40,8 @@ import java.util.List;
  * @author Kohsuke Kawaguchi
  */
 public class StreamBuildListener extends StreamTaskListener implements BuildListener {
-    public StreamBuildListener(OutputStream out, FileAnnotationStore annotations, Charset charset) {
-        super(out, annotations, charset);
+    public StreamBuildListener(OutputStream out, Charset charset) {
+        super(out, charset);
     }
 
     public StreamBuildListener(File out, Charset charset) throws IOException {
@@ -53,12 +52,17 @@ public class StreamBuildListener extends StreamTaskListener implements BuildList
         super(w);
     }
 
+    /**
+     * @deprecated as of 1.HUDSON-2137
+     *      The caller should use {@link #StreamBuildListener(OutputStream, Charset)} to pass in
+     *      the charset and output stream separately, so that this class can handle encoding correctly.
+     */
     public StreamBuildListener(PrintStream w) {
         super(w);
     }
 
     public StreamBuildListener(PrintStream w, Charset charset) {
-        super(w,null,charset);
+        super(w,charset);
     }
 
     public void started(List<Cause> causes) {
