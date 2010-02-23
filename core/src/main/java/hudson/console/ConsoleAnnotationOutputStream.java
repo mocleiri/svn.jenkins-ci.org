@@ -24,7 +24,6 @@
 package hudson.console;
 
 import hudson.MarkupText;
-import hudson.util.ByteArrayOutputStream2;
 import org.apache.commons.io.output.ProxyWriter;
 import org.kohsuke.stapler.framework.io.WriterOutputStream;
 
@@ -47,10 +46,9 @@ import java.util.logging.Logger;
  *      Context type.
  * @author Kohsuke Kawaguchi
  */
-public class ConsoleAnnotationOutputStream<T> extends OutputStream {
+public class ConsoleAnnotationOutputStream<T> extends LineTransformationOutputStream {
     private final Writer out;
     private final T context;
-    private ByteArrayOutputStream2 buf = new ByteArrayOutputStream2();
     private ConsoleAnnotator<T> ann;
 
     /**
@@ -80,68 +78,63 @@ public class ConsoleAnnotationOutputStream<T> extends OutputStream {
      * Called after we read the whole line of plain text, which is stored in {@link #buf}.
      * This method performs annotations and send the result to {@link #out}.
      */
-    private void eol() throws IOException {
-        final byte[] in = buf.getBuffer();
-        final int sz = buf.size();
-
+    protected void eol(byte[] in, int sz) throws IOException {
         line.reset();
         final StringBuffer strBuf = line.getStringBuffer();
 
         int next = ConsoleAnnotation.findPreamble(in,0,sz);
-        if (next<0) {
-            // no embedded annotations at all --- by far the most common case.
-            buf.writeTo(lineOut);
-        } else {
-            // if there are embedded annotations, add them as ConsoleAnnotators.
 
-            List<ConsoleAnnotator<T>> annotators = new ArrayList<ConsoleAnnotator<T>>();
+        List<ConsoleAnnotator<T>> annotators=null;
 
-            {// perform byte[]->char[] while figuring out the char positions of the BLOBs
-                int written = 0;
-                while (next>=0) {
-                    if (next>written) {
-                        lineOut.write(in,written,next-written);
-                        lineOut.flush();
-                        written = next;
-                    } else {
-                        assert next==written;
-                    }
-
-                    // character position of this annotation in this line
-                    final int charPos = strBuf.length();
-
-                    int rest = sz - next;
-                    ByteArrayInputStream b = new ByteArrayInputStream(in, next, rest);
-
-                    try {
-                        final ConsoleAnnotation a = ConsoleAnnotation.readFrom(new DataInputStream(b));
-                        if (a!=null) {
-                            annotators.add(new ConsoleAnnotator<T>() {
-                                public ConsoleAnnotator annotate(T context, MarkupText text) {
-                                    return a.annotate(context,text,charPos);
-                                }
-                            });
-                        }
-                    } catch (IOException e) {
-                        // if we failed to resurrect an annotation, ignore it.
-                        LOGGER.log(Level.FINE,"Failed to resurrect annotation",e);
-                    } catch (ClassNotFoundException e) {
-                        LOGGER.log(Level.FINE,"Failed to resurrect annotation",e);
-                    }
-
-                    int bytesUsed = rest - b.available(); // bytes consumed by annotations
-                    written += bytesUsed;
-
-
-                    next = ConsoleAnnotation.findPreamble(in,written,sz-written);
+        {// perform byte[]->char[] while figuring out the char positions of the BLOBs
+            int written = 0;
+            while (next>=0) {
+                if (next>written) {
+                    lineOut.write(in,written,next-written);
+                    lineOut.flush();
+                    written = next;
+                } else {
+                    assert next==written;
                 }
-                // finish the remaining bytes->chars conversion
-                lineOut.write(in,written,sz-written);
-            }
 
-            // aggregate newly retrieved ConsoleAnnotators into the current one.
-            if (ann!=null)      annotators.add(ann);
-            ann = ConsoleAnnotator.combine(annotators);
+                // character position of this annotation in this line
+                final int charPos = strBuf.length();
+
+                int rest = sz - next;
+                ByteArrayInputStream b = new ByteArrayInputStream(in, next, rest);
+
+                try {
+                    final ConsoleAnnotation a = ConsoleAnnotation.readFrom(new DataInputStream(b));
+                    if (a!=null) {
+                        if (annotators==null)
+                            annotators = new ArrayList<ConsoleAnnotator<T>>();
+                        annotators.add(new ConsoleAnnotator<T>() {
+                            public ConsoleAnnotator annotate(T context, MarkupText text) {
+                                return a.annotate(context,text,charPos);
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    // if we failed to resurrect an annotation, ignore it.
+                    LOGGER.log(Level.FINE,"Failed to resurrect annotation",e);
+                } catch (ClassNotFoundException e) {
+                    LOGGER.log(Level.FINE,"Failed to resurrect annotation",e);
+                }
+
+                int bytesUsed = rest - b.available(); // bytes consumed by annotations
+                written += bytesUsed;
+
+
+                next = ConsoleAnnotation.findPreamble(in,written,sz-written);
+            }
+            // finish the remaining bytes->chars conversion
+            lineOut.write(in,written,sz-written);
+
+            if (annotators!=null) {
+                // aggregate newly retrieved ConsoleAnnotators into the current one.
+                if (ann!=null)      annotators.add(ann);
+                ann = ConsoleAnnotator.combine(annotators);
+            }
         }
 
         lineOut.flush();
@@ -149,25 +142,6 @@ public class ConsoleAnnotationOutputStream<T> extends OutputStream {
         if (ann!=null)
             ann = ann.annotate(context,mt);
         out.write(mt.toString());
-
-        // reuse the buffer under normal circumstances, but don't let the line buffer grow unbounded
-        if (buf.size()>4096)
-            buf = new ByteArrayOutputStream2();
-        else
-            buf.reset();
-    }
-
-    public void write(int b) throws IOException {
-        buf.write(b);
-        if (b==LF)  eol();
-    }
-
-    @Override
-    public void write(byte[] b, int off, int len) throws IOException {
-        int end = off+len;
-
-        for( int i=off; i<end; i++ )
-            write(b[i]);
     }
 
     @Override
@@ -177,17 +151,9 @@ public class ConsoleAnnotationOutputStream<T> extends OutputStream {
 
     @Override
     public void close() throws IOException {
-        if (buf.size()>0) {
-            /*
-                because LargeText cuts output at the line end boundary, this is
-                possible only for the very end of the console output, if the output ends without NL.
-             */
-            eol();
-        }
+        super.close();
         out.close();
     }
-
-    private static final int LF = 0x0A;
 
     /**
      * {@link StringWriter} enhancement that's capable of shrinking the buffer size.

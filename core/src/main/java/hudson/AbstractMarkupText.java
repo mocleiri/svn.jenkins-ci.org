@@ -73,6 +73,19 @@ public abstract class AbstractMarkupText {
     }
 
     /**
+     * Find the first occurrence of the given pattern in this text, or null.
+     */
+    public MarkupText.SubText findToken(Pattern pattern) {
+        String text = getText();
+        Matcher m = pattern.matcher(text);
+
+        if(m.find())
+            return createSubText(m);
+
+        return null;
+    }
+
+    /**
      * Find all "tokens" that match the given pattern in this text.
      *
      * <p>
