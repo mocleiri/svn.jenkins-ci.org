@@ -103,30 +103,30 @@
             </j:choose>
           </f:entry>
           
-          <f:optionalBlock name="ucm.createDynView" title="Create Dynamic View"
-                         checked="${scm.createDynView}" help="/plugin/clearcase/dynamicview.html">
-                         
-            <f:entry title="Freeze Code">
+          <f:entry title="Freeze code">
 				<f:checkbox name="ucm.freezeCode" checked="${scm.freezeCode}"/>
-				If checked, Hudson will create a child stream under the configured stream and will use it for the build, 
-				locking the view contents in as of the beginning of the build, even if files are
-			  	changed on the parent stream during the build.
-          </f:entry>
-          	        
-	        <f:entry title="Remove and recreate view on each build">
-					<f:checkbox name="ucm.recreateView" checked="${scm.recreateView}"/>
-	        </f:entry>	                         
-		    
-		    <f:entry title="Windows dynamic view storage directory" help="/plugin/clearcase/dynamicViewStorage.html">
-		      <f:textbox name="ucm.winDynStorageDir" value="${h.defaulted(scm.winDynStorageDir, descriptor.defaultWinDynStorageDir)}" />
-		    </f:entry>  
-		    
-		    <f:entry title="Unix dynamic view storage directory" help="/plugin/clearcase/dynamicViewStorage.html">
-		      <f:textbox name="ucm.unixDynStorageDir" value="${h.defaulted(scm.unixDynStorageDir, descriptor.defaultUnixDynStorageDir)}" />
-		    </f:entry>				                         
-		  </f:optionalBlock>
+				If checked, Hudson will create a child stream under the configured stream and will use it for the build. 
+				When a build starts, Hudson will rebase the build stream with the latest baselines found on the configured stream.				  
+          </f:entry>          
 
+          <f:optionalBlock name="ucm.createDynView" title="Create view if view doesn't exist"
+                         checked="${scm.createDynView}">
+	          	        
+		      <f:entry title="Remove and recreate view on each build">
+						<f:checkbox name="ucm.recreateView" checked="${scm.recreateView}"/>
+						If checked, Hudson will remove the view and recreate it in order to allow clean build.
+						Hudson will also override the view name set in the configuration by an auto created name.
+		      </f:entry>	                         
+			    
+			  <f:entry title="Windows dynamic view storage directory" help="/plugin/clearcase/dynamicViewStorage.html">
+			     <f:textbox name="ucm.winDynStorageDir" value="${h.defaulted(scm.winDynStorageDir, descriptor.defaultWinDynStorageDir)}" />
+			  </f:entry>  
+			    
+			  <f:entry title="Unix dynamic view storage directory" help="/plugin/clearcase/dynamicViewStorage.html">
+			     <f:textbox name="ucm.unixDynStorageDir" value="${h.defaulted(scm.unixDynStorageDir, descriptor.defaultUnixDynStorageDir)}" />
+			  </f:entry>
 
+        	</f:optionalBlock>
         </f:optionalBlock>
       </table>
     </f:block>
