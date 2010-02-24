@@ -103,6 +103,12 @@ public class DynamicCheckoutAction implements CheckOutAction {
             		cleartool.logRedundantCleartoolError(null, ex);
             	}
             	
+                try {
+                    cleartool.rmviewtag(viewName);
+        		} catch (Exception ex) {
+        			cleartool.logRedundantCleartoolError(null, ex);
+        		}             	
+            	
             	// remove storage directory
             	try {
     				FilePath storageDirFile = new FilePath(build.getWorkspace().getChannel(), storageDir);
