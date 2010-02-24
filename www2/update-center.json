@@ -304,18 +304,18 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Batch+Task+Plugin"
     },
     "bazaar":     {
-      "buildDate": "Oct 20, 2009",
+      "buildDate": "Feb 24, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "trond"}],
+      "developers": [{"developerId": "mordred"}],
       "excerpt": "This plugin integrates <a href='http://bazaar-vcs.org/'>Bazaar<\/a> version control system to Hudson. The plugin requires the Bazaar binary (bzr) to be installed on the target machine.",
       "labels": ["scm"],
       "name": "bazaar",
-      "previousTimestamp": "2009-08-04T07:51:40.00Z",
-      "releaseTimestamp": "2009-10-21T05:34:42.00Z",
+      "previousTimestamp": "2010-02-24T19:40:20.00Z",
+      "releaseTimestamp": "2010-02-24T19:55:24.00Z",
       "requiredCore": "1.318",
       "title": "Bazaar Plugin",
-      "url": "http://hudson-ci.org/download/plugins/bazaar/1.1/bazaar.hpi",
-      "version": "1.1",
+      "url": "http://hudson-ci.org/download/plugins/bazaar/1.3/bazaar.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Bazaar+Plugin"
     },
     "bitkeeper":     {
@@ -664,7 +664,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ClearCase+Release+Plugin"
     },
     "clearcase-ucm-baseline":     {
-      "buildDate": "Feb 08, 2010",
+      "buildDate": "Feb 24, 2010",
       "dependencies": [      {
         "name": "clearcase",
         "optional": false,
@@ -674,12 +674,12 @@ updateCenter.post(
       "excerpt": "Allows using ClearCase UCM baselines as the input of builds: When using this SCM, users will be asked at build-time to select the baseline on which the job has to work.",
       "labels": ["scm"],
       "name": "clearcase-ucm-baseline",
-      "previousTimestamp": "2010-01-22T22:14:44.00Z",
-      "releaseTimestamp": "2010-02-09T00:01:52.00Z",
+      "previousTimestamp": "2010-02-09T00:01:52.00Z",
+      "releaseTimestamp": "2010-02-24T19:47:22.00Z",
       "requiredCore": "1.312",
       "title": "ClearCase UCM Baseline Plugin",
-      "url": "http://hudson-ci.org/download/plugins/clearcase-ucm-baseline/1.2/clearcase-ucm-baseline.hpi",
-      "version": "1.2",
+      "url": "http://hudson-ci.org/download/plugins/clearcase-ucm-baseline/1.3/clearcase-ucm-baseline.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ClearCase+UCM+Baseline+Plugin"
     },
     "clover":     {
@@ -1169,7 +1169,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Description+Setter+Plugin"
     },
     "dimensionsscm":     {
-      "buildDate": "Feb 16, 2010",
+      "buildDate": "Feb 24, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "TPayne",
@@ -1184,12 +1184,12 @@ updateCenter.post(
         "scm"
       ],
       "name": "dimensionsscm",
-      "previousTimestamp": "2010-02-13T01:39:56.00Z",
-      "releaseTimestamp": "2010-02-17T01:09:34.00Z",
+      "previousTimestamp": "2010-02-17T01:09:34.00Z",
+      "releaseTimestamp": "2010-02-25T02:18:08.00Z",
       "requiredCore": "1.342",
       "title": "Dimensions Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.6.8/dimensionsscm.hpi",
-      "version": "0.6.8",
+      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.6.9/dimensionsscm.hpi",
+      "version": "0.6.9",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dimensions+Plugin"
     },
     "disk-usage":     {
@@ -1571,21 +1571,33 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FTP-Publisher+Plugin"
     },
     "gallio":     {
-      "buildDate": "Jan 31, 2010",
-      "dependencies": [],
-      "developers": [      {
-        "developerId": "pmiossec",
-        "name": "Philippe Miossec"
+      "buildDate": "Feb 21, 2010",
+      "compatibleSinceVersion": "0.70",
+      "dependencies": [      {
+        "name": "xunit",
+        "optional": false,
+        "version": "0.6"
       }],
+      "developers":       [
+                {
+          "developerId": "pmiossec",
+          "name": "Philippe Miossec"
+        },
+                {
+          "developerId": "gbois",
+          "email": "gbois@dev.java.net",
+          "name": "Gregory Boissinot"
+        }
+      ],
       "excerpt": "This plugin allows you publish <a href='http://www.gallio.org/'>Gallio<\/a>/<a href='http://www.mbunit.com/'>MbUnit<\/a> test results",
       "labels": ["report"],
       "name": "gallio",
-      "previousTimestamp": "2009-04-19T06:50:46.00Z",
-      "releaseTimestamp": "2010-01-31T17:18:36.00Z",
-      "requiredCore": "1.319",
+      "previousTimestamp": "2010-01-31T17:18:36.00Z",
+      "releaseTimestamp": "2010-02-22T06:01:44.00Z",
+      "requiredCore": "1.347",
       "title": "Gallio Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gallio/0.60/gallio.hpi",
-      "version": "0.60",
+      "url": "http://hudson-ci.org/download/plugins/gallio/0.70/gallio.hpi",
+      "version": "0.70",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gallio+Plugin"
     },
     "gant":     {
@@ -1720,18 +1732,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Google+Code+Plugin"
     },
     "gradle":     {
-      "buildDate": "Feb 07, 2009",
+      "buildDate": "Feb 23, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "S0011918"}],
+      "developers": [      {
+        "developerId": "gbois",
+        "email": "gregory.boissinot@gmail.com",
+        "name": "Gregory Boissinot"
+      }],
       "excerpt": "This plugin allows Hudson to invoke <a href='http://www.gradle.org/'>Gradle<\/a> build script as the main build step.",
       "labels": ["builder"],
       "name": "gradle",
-      "previousTimestamp": "2008-11-08T07:57:36.00Z",
-      "releaseTimestamp": "2009-02-08T06:55:02.00Z",
-      "requiredCore": "1.281",
+      "previousTimestamp": "2009-02-08T06:55:02.00Z",
+      "releaseTimestamp": "2010-02-23T18:00:44.00Z",
+      "requiredCore": "1.347",
       "title": "Gradle Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gradle/1.2/gradle.hpi",
-      "version": "1.2",
+      "url": "http://hudson-ci.org/download/plugins/gradle/1.3/gradle.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gradle+Plugin"
     },
     "grails":     {
@@ -3634,7 +3650,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Build+Secret+Plugin"
     },
     "sectioned-view":     {
-      "buildDate": "Jan 28, 2010",
+      "buildDate": "Feb 23, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "tbingaman",
@@ -3644,12 +3660,12 @@ updateCenter.post(
       "excerpt": "This plugin provides a new view implementation that can be divided into sections. Each section can display different information about the selected jobs.  An extension point is also provided to define new types of sections.",
       "labels": ["ui"],
       "name": "sectioned-view",
-      "previousTimestamp": "2010-01-24T00:03:30.00Z",
-      "releaseTimestamp": "2010-01-28T19:28:26.00Z",
+      "previousTimestamp": "2010-02-23T01:54:14.00Z",
+      "releaseTimestamp": "2010-02-23T19:02:42.00Z",
       "requiredCore": "1.342",
       "title": "Sectioned View Plugin",
-      "url": "http://hudson-ci.org/download/plugins/sectioned-view/1.8/sectioned-view.hpi",
-      "version": "1.8",
+      "url": "http://hudson-ci.org/download/plugins/sectioned-view/1.10/sectioned-view.hpi",
+      "version": "1.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Sectioned+View+Plugin"
     },
     "selenium":     {
@@ -3729,7 +3745,7 @@ updateCenter.post(
         "email": "michael.couck@gmail.com",
         "name": "Michael Couck"
       }],
-      "excerpt": "This plugin generates code metrics for coverage, complexity and dependency and presents the data in a friendly way in the ui in Hudson.",
+      "excerpt": "Serenity is a Java code coverage, complexity and dependency library that uses dynamic instrumentation, with a friendly Hudson ui.",
       "labels": ["report"],
       "name": "serenity",
       "previousTimestamp": "2010-01-18T19:18:34.00Z",
@@ -3860,11 +3876,11 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SLOCCount+Plugin"
     },
     "sonar":     {
-      "buildDate": "Feb 03, 2010",
+      "buildDate": "Feb 23, 2010",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
-        "version": "1.341"
+        "version": "1.344"
       }],
       "developers":       [
                 {
@@ -3891,12 +3907,12 @@ updateCenter.post(
       "excerpt": "Quickly benefit from <a href='http://sonar.codehaus.org'>Sonar<\/a>, an open-source Code Quality Management Platform based on many well known analysis tools like Checkstyle, PMD, Findbugs, Cobertura, ....",
       "labels": ["external"],
       "name": "sonar",
-      "previousTimestamp": "2010-02-02T11:24:04.00Z",
-      "releaseTimestamp": "2010-02-03T22:54:36.00Z",
-      "requiredCore": "1.341",
+      "previousTimestamp": "2010-02-03T22:54:36.00Z",
+      "releaseTimestamp": "2010-02-24T00:32:56.00Z",
+      "requiredCore": "1.344",
       "title": "Sonar plugin",
-      "url": "http://hudson-ci.org/download/plugins/sonar/1.2.2/sonar.hpi",
-      "version": "1.2.2",
+      "url": "http://hudson-ci.org/download/plugins/sonar/1.3/sonar.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Sonar+plugin"
     },
     "sounds":     {
@@ -3936,6 +3952,22 @@ updateCenter.post(
       "url": "http://hudson-ci.org/download/plugins/speaks/0.1.1/speaks.hpi",
       "version": "0.1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Speaks%21+Plugin"
+    },
+    "ssh":     {
+      "buildDate": "Feb 24, 2010",
+      "dependencies": [],
+      "developers": [      {
+        "developerId": "edmund_wagner",
+        "name": "Edmund Wagner"
+      }],
+      "labels": ["buildwrapper"],
+      "name": "ssh",
+      "releaseTimestamp": "2010-02-25T02:08:26.00Z",
+      "requiredCore": "1.347",
+      "title": "SSH plugin",
+      "url": "http://hudson-ci.org/download/plugins/ssh/1.0/ssh.hpi",
+      "version": "1.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SSH+plugin"
     },
     "ssh-slaves":     {
       "buildDate": "Dec 09, 2009",
@@ -4658,7 +4690,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/eXtreme+Feedback+Panel+Plugin"
     },
     "xunit":     {
-      "buildDate": "Feb 21, 2010",
+      "buildDate": "Feb 22, 2010",
       "compatibleSinceVersion": "0.6",
       "dependencies": [],
       "developers": [      {
@@ -4669,12 +4701,12 @@ updateCenter.post(
       "excerpt": "This plugin allows you to publish testing tools test result report.",
       "labels": ["report"],
       "name": "xunit",
-      "previousTimestamp": "2010-02-21T06:52:42.00Z",
-      "releaseTimestamp": "2010-02-22T03:25:26.00Z",
+      "previousTimestamp": "2010-02-22T03:25:26.00Z",
+      "releaseTimestamp": "2010-02-23T04:55:24.00Z",
       "requiredCore": "1.347",
       "title": "xUnit Plugin",
-      "url": "http://hudson-ci.org/download/plugins/xunit/0.6/xunit.hpi",
-      "version": "0.6",
+      "url": "http://hudson-ci.org/download/plugins/xunit/0.6.1/xunit.hpi",
+      "version": "0.6.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/xUnit+Plugin"
     },
     "xvnc":     {
@@ -4718,8 +4750,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "AwNB1E0fSQUksLVhkTwTVqa7lCw=",
-    "signature": "oVSZqktwx47hKxMoKScfMxgmy51M4EUUIKGrsRzLVLdkhQ3rB+yyd9/ejWT4C/cNVVw7FqcnGz9pV1D+XiW2MSK/m0hVbib+kAbgAfraAvFZnqGyHIMu0aF11SPC7hTcuRx+bfgp9Pjutb0+aT/xLBwU6h52LWJ8brGrZ2dswh9c8d4tpTeRkbztyqeVd4zQLUilXF6S3iWXPrYdZKFNJTBvkaqZoEEr6qeXyZE4z5t5g1DjLIqbcObrEcozblCxtunk5IgVhCxRFxNkqBdAIOavxivMBYZSGipCETEvXML6XVTn0Ep0p3/cqQu68a1jrv2TJ3U0Icq79NQ2j97rmw=="
+    "digest": "rC83WV1P7SdpeLouVj4rEbAQc9o=",
+    "signature": "sMqyEUU4jCwKY43+UPsBk1hL+mmIahIyHcgnXC8PbRJP0zxLViPUDZZqrxfQoAIQE3bnMRVI2pvp3Syw2deJ6eQhnGUZjYR2RQx9ZrR7ER4GG7ebPImr8DJoMeZNz39nUlkw5h4O9kggFezxJWKgeGwgqMK5Y3COyhBxguIwDVa2qzanYi2A3O2hWqYdD7dt11kpWnVdV46QBuAvDArlU3E0Eg59yFNzxDhngmGDZ672ramkf00D0SqsM8bhfnsEfQIpxoDcfDSkkNAQ1/WHYiZX6wnE95iG/cXIHkfgV3Np+cJr+s0MCZ74ZXlfFPz3Q4F1Akao0pW2OTbAaQ1icA=="
   },
   "updateCenterVersion": "1"
 }
