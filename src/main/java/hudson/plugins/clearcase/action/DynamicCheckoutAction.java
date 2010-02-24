@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.TimeZone;
 
 /**
@@ -70,15 +71,24 @@ public class DynamicCheckoutAction implements CheckOutAction {
 
     public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException { 
         if (createDynView) {
-            // Clean out the workspace first - deleting the files will probably be faster than 
-            workspace.deleteContents();
             // Mount all VOBs before we get started.
             cleartool.mountVobs();
-            // Get the view UUID.
-            String uuid = cleartool.getViewUuid(viewName);
+
+            // Get the view UUID and storage directory
+        	Properties viewDataPrp = cleartool.getViewData(viewName);
+            String uuid = viewDataPrp.getProperty("UUID");
+            String storageDir = viewDataPrp.getProperty("STORAGE_DIR");
+
             // If we don't find a UUID, then the view tag must not exist, in which case we don't
             // have to delete it anyway.
-            if (!uuid.equals("")) {
+            if (uuid != null && !uuid.equals("")) {
+            	try {
+            		cleartool.endView(viewName);	
+            	}
+            	catch (Exception ex) {
+            		cleartool.logRedundantCleartoolError(null, ex);
+            	}        	
+            	
             	try {
             		cleartool.rmviewUuid(uuid);	
             	}
@@ -91,9 +101,15 @@ public class DynamicCheckoutAction implements CheckOutAction {
             	}
             	catch (Exception ex) {
             		cleartool.logRedundantCleartoolError(null, ex);
-            	}            	               
-                
-                cleartool.rmviewtag(viewName);
+            	}
+            	
+            	// remove storage directory
+            	try {
+    				FilePath storageDirFile = new FilePath(build.getWorkspace().getChannel(), storageDir);
+    				storageDirFile.deleteRecursive();
+    			} catch (Exception ex) {
+    				cleartool.logRedundantCleartoolError(null, ex);
+    			} 
             }
             // Now, make the view.
             String dynStorageDir = cleartool.getLauncher().getLauncher().isUnix() ? unixDynStorageDir : winDynStorageDir; 
@@ -129,7 +145,7 @@ public class DynamicCheckoutAction implements CheckOutAction {
         // add config spec to dataAction
         ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
         if (dataAction != null)
-        	dataAction.setCsepc(effectiveConfigSpec);
+        	dataAction.setCspec(effectiveConfigSpec);
         
         return true;
     }

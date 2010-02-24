@@ -13,22 +13,16 @@ import hudson.plugins.clearcase.ucm.UcmCommon;
 public class ClearCaseDataAction implements Action{
 
 	@Exported(visibility=3)
-	public List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream;
+	public List<UcmCommon.BaselineDesc> latestBlsOnConfiguredStream;
 	
 	@Exported(visibility=3)
-	public String csepc;
+	public String cspec;
 	
 	@Exported(visibility=3)
 	public String stream;
 	
-	private List<String> usedViewNamesList;
-	
-	private boolean deleteViewsWhenBuildEnds;
-	
 	public ClearCaseDataAction() {
 		super();
-		this.deleteViewsWhenBuildEnds = false;
-		this.usedViewNamesList = new ArrayList<String>();
 	}
 
 	@Override
@@ -44,14 +38,23 @@ public class ClearCaseDataAction implements Action{
 	@Override
 	public String getUrlName() {
 		return null;
-	}	
-
-	public String getCsepc() {
-		return csepc;
 	}
 
-	public void setCsepc(String csepc) {
-		this.csepc = csepc;
+	public List<UcmCommon.BaselineDesc> getLatestBlsOnConfiguredStream() {
+		return latestBlsOnConfiguredStream;
+	}
+
+	public void setLatestBlsOnConfiguredStream(
+			List<UcmCommon.BaselineDesc> latestBlsOnConfiguredStream) {
+		this.latestBlsOnConfiguredStream = latestBlsOnConfiguredStream;
+	}
+
+	public String getCspec() {
+		return cspec;
+	}
+
+	public void setCspec(String cspec) {
+		this.cspec = cspec;
 	}
 
 	public String getStream() {
@@ -60,31 +63,6 @@ public class ClearCaseDataAction implements Action{
 
 	public void setStream(String stream) {
 		this.stream = stream;
-	}
-
-	public List<String> getUsedViewNamesList() {
-		return usedViewNamesList;
-	}
-
-	public void setUsedViewNamesList(List<String> usedViewNamesList) {
-		this.usedViewNamesList = usedViewNamesList;
-	}
-
-	public void setLatestBlsOnConfgiuredStream(
-			List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream) {
-		this.latestBlsOnConfgiuredStream = latestBlsOnConfgiuredStream;
-	}
-
-	public List<UcmCommon.BaselineDesc> getLatestBlsOnConfgiuredStream() {
-		return latestBlsOnConfgiuredStream;
-	}
-
-	public boolean isDeleteViewsWhenBuildEnds() {
-		return deleteViewsWhenBuildEnds;
-	}
-
-	public void setDeleteViewsWhenBuildEnds(boolean deleteViewsWhenBuildEnds) {
-		this.deleteViewsWhenBuildEnds = deleteViewsWhenBuildEnds;
 	}	
 	
 

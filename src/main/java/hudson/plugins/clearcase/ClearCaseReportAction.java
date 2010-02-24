@@ -48,10 +48,10 @@ public class ClearCaseReportAction implements Action {
     }
     
     public List<UcmCommon.BaselineDesc> getBaselines() {
-    	ClearCaseDataAction baselinesAction = build.getAction(ClearCaseDataAction.class);
+    	ClearCaseDataAction clearCaseDataAction = build.getAction(ClearCaseDataAction.class);
     	
-    	if (baselinesAction != null) {
-    		return baselinesAction.getLatestBlsOnConfgiuredStream();
+    	if (clearCaseDataAction != null) {
+    		return clearCaseDataAction.getLatestBlsOnConfiguredStream();
     	}
     	else {
     		return null;
@@ -78,7 +78,7 @@ public class ClearCaseReportAction implements Action {
     	
         ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
         if (dataAction != null)
-        	cspec = dataAction.getCsepc();
+        	cspec = dataAction.getCspec();
         
         return cspec;
 	}

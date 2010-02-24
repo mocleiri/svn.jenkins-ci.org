@@ -26,6 +26,7 @@ package hudson.plugins.clearcase.ucm;
 
 import static hudson.plugins.clearcase.util.OutputFormat.*;
 import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.action.UcmDynamicCheckoutAction;
@@ -229,20 +230,31 @@ public class UcmHistoryAction extends AbstractHistoryAction {
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         String dateStr = formatter.format(new Date()).toLowerCase(); 
         
-        UcmCommon.makeBaseline(cleartool.getLauncher(), true, UcmDynamicCheckoutAction.getConfiguredStreamViewName(stream), null, 
+        UcmCommon.makeBaseline(cleartool.getLauncher(), true, UcmDynamicCheckoutAction.getConfiguredStreamViewName(build.getProject().getName(), stream), null, 
         		BASELINE_NAME + dateStr, 
 				BASELINE_COMMENT + dateStr, 
 				false, false, null);
         
         // get latest baselines on the configured stream
         List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool.getLauncher(), 
-        		stream, UcmDynamicCheckoutAction.getConfiguredStreamViewName(stream));        
+        		stream, UcmDynamicCheckoutAction.getConfiguredStreamViewName(build.getProject().getName(), stream));        
+        
+        // find the previous build running on the same stream
+        ClearCaseDataAction clearcaseDataAction = null;
+        Run previousBuild = build.getPreviousBuild();
+        while (previousBuild != null && clearcaseDataAction == null) {
+        	clearcaseDataAction = build.getAction(ClearCaseDataAction.class);
+        	
+        	if (clearcaseDataAction == null || !clearcaseDataAction.getStream().equals(stream))        	
+        		clearcaseDataAction = null;
+        	
+        	previousBuild = previousBuild.getPreviousBuild();
+        }
         
         // get previous build baselines (set as an action on the previous build by the checkout operation)
         List<UcmCommon.BaselineDesc> previousBuildBls = null;
-    	ClearCaseDataAction previousBaselinesAction = build.getAction(ClearCaseDataAction.class);
-        if (previousBaselinesAction != null)
-        	previousBuildBls = previousBaselinesAction.getLatestBlsOnConfgiuredStream();        
+        if (clearcaseDataAction != null)
+        	previousBuildBls = clearcaseDataAction.getLatestBlsOnConfiguredStream();        
         
         // check if any baselines added/removed/changed
         if (latestBlsOnConfgiuredStream != null && previousBuildBls != null) {
@@ -272,14 +284,26 @@ public class UcmHistoryAction extends AbstractHistoryAction {
         
         // get latest baselines on the configured stream (set as an action on the build by the checkout operation)
     	ClearCaseDataAction latestBaselinesAction = build.getAction(ClearCaseDataAction.class);
-        List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = latestBaselinesAction.getLatestBlsOnConfgiuredStream();
+        List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = latestBaselinesAction.getLatestBlsOnConfiguredStream();
+        
+        // find the previous build running on the same stream
+        ClearCaseDataAction clearcaseDataAction = null;
+        Run previousBuild = build.getPreviousBuild();
+        while (previousBuild != null && clearcaseDataAction == null) {
+        	clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
+        	
+        	if (clearcaseDataAction == null || !clearcaseDataAction.getStream().equals(stream))        	
+        		clearcaseDataAction = null;
+        	
+        	previousBuild = previousBuild.getPreviousBuild();
+        }
         
         // get previous build baselines (set as an action on the previous build by the checkout operation)
         List<UcmCommon.BaselineDesc> previousBuildBls = null;
-    	ClearCaseDataAction previousBaselinesAction = build.getPreviousBuild().getAction(ClearCaseDataAction.class);
-        if (previousBaselinesAction != null)
-        	previousBuildBls = previousBaselinesAction.getLatestBlsOnConfgiuredStream();
+        if (clearcaseDataAction != null)
+        	previousBuildBls = clearcaseDataAction.getLatestBlsOnConfiguredStream();
 		
+        // compare
         if (latestBlsOnConfgiuredStream != null && previousBuildBls != null) {
     		// calculate changed versions
     		List<String> changedVerionsList = getChangedVersions(latestBlsOnConfgiuredStream, previousBuildBls);
@@ -330,7 +354,7 @@ public class UcmHistoryAction extends AbstractHistoryAction {
 			
 			// check if baselines changed
 			if (previousBl != null && ! previousBl.equals(blDesc.getBaselineName())) {
-				String viewName = UcmDynamicCheckoutAction.getConfiguredStreamViewName(stream);
+				String viewName = UcmDynamicCheckoutAction.getConfiguredStreamViewName(build.getProject().getName(), stream);
 				
 				// run diffbl
 				List<String> changedVersionListPerBl = UcmCommon.getDiffBlVersions(cleartool.getLauncher(), 

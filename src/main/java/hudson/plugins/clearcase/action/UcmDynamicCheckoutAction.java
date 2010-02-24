@@ -27,6 +27,7 @@ package hudson.plugins.clearcase.action;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearToolLauncher;
 import hudson.plugins.clearcase.ClearCaseDataAction;
@@ -38,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.TimeZone;
 
 /**
@@ -46,8 +48,8 @@ import java.util.TimeZone;
  * It only makes sure the view is started as config specs don't exist in UCM
  */
 public class UcmDynamicCheckoutAction implements CheckOutAction {
-	private static final String CONFIGURED_STREAM_VIEW_SUFFIX = "_hudson_auto_view";
-	private static final String BUILD_STREAM_PREFIX = "hudsonbuild_auto_stream.";	
+	private static final String CONFIGURED_STREAM_VIEW_SUFFIX = "_hudson_view";
+	private static final String BUILD_STREAM_PREFIX = "hudson_stream.";	
 	private static final String BASELINE_NAME = "hudson_co_";
 	private static final String BASELINE_COMMENT = "hudson_co_";  
 	
@@ -74,7 +76,17 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         this.recreateView = recreateView;
     }
 
-    public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {        
+    public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
+        // add stream to data action (to be used by ClearCase report)
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        if (dataAction != null) {        	
+        	// sync the project in order to allow other builds to safely check if there is  
+        	// already a build running on the same stream
+        	synchronized (build.getProject()) {
+        		dataAction.setStream(stream);	
+			}        	
+        }        
+    	
         if (createDynView) {
         	if (freezeCode) {
         		checkoutCodeFreeze(viewName);
@@ -92,15 +104,25 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
             cleartool.syncronizeViewWithStream(viewName, stream);        	
         }
         
-        // add stream to data action (to be used by ClearCase report)
-        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
-        if (dataAction != null)
-        	dataAction.setStream(stream);     
-        
         return true;
     }
     
     public boolean checkoutCodeFreeze(String viewName) throws IOException, InterruptedException {
+    	// validate no other build is running on the same stream
+    	synchronized (build.getProject()) {
+            ClearCaseDataAction clearcaseDataAction = null;
+            Run previousBuild = build.getPreviousBuild();
+            while (previousBuild != null) {
+            	clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
+            	
+            	if (previousBuild.isBuilding() && clearcaseDataAction != null && 
+            			clearcaseDataAction.getStream().equals(stream))        	
+            		throw new IOException("Can't run build on stream " + stream + " when build " + 
+            				previousBuild.getNumber() +  " is currently running on the same stream.");
+            		
+            	previousBuild = previousBuild.getPreviousBuild();
+            }
+		}    	
     	
         // prepare stream and views
         prepareBuildStreamAndViews(viewName, stream);    
@@ -145,10 +167,9 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         UcmCommon.rebase(cleartool.getLauncher(), viewName, latestBlsOnConfgiuredStream);
     	
         // add baselines to build - to be later used by getChange 
-
         ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
         if (dataAction != null)
-        	dataAction.setLatestBlsOnConfgiuredStream(latestBlsOnConfgiuredStream);       
+        	dataAction.setLatestBlsOnConfiguredStream(latestBlsOnConfgiuredStream);       
         
     	return true;
     }
@@ -159,8 +180,8 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
 		cleartool.mountVobs();
 		
 		// verify that view exists on the configured stream and start it
-		String uuid = cleartool.getViewUuid(getConfiguredStreamViewName());
-        if (uuid.equals("")) {
+		String uuid = cleartool.getViewData(getConfiguredStreamViewName()).getProperty("UUID");
+        if (uuid == null || uuid.equals("")) {
         	String dynStorageDir = cleartool.getLauncher().getLauncher().isUnix() ? unixDynStorageDir : winDynStorageDir;
         	cleartool.mkview(getConfiguredStreamViewName(), stream, dynStorageDir);
         }	
@@ -168,8 +189,8 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         cleartool.startView(getConfiguredStreamViewName());
         
 		// do we have build stream? if not create it
-        if (! UcmCommon.isStreamExists(cleartool.getLauncher(), getBuildStreamName(stream)))
-        	UcmCommon.mkstream(cleartool.getLauncher(), stream, getBuildStreamName(stream));
+        if (! UcmCommon.isStreamExists(cleartool.getLauncher(), getBuildStream()))
+        	UcmCommon.mkstream(cleartool.getLauncher(), stream, getBuildStream());
         
         // create view on build stream
         recreateView(viewName);
@@ -177,10 +198,20 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
 	}
 	
 	private void recreateView(String viewName) throws IOException, InterruptedException {
-            String uuid = cleartool.getViewUuid(viewName);
-            // If we don't find a UUID, then the view tag must not exist, in which case we don't
-            // have to delete it anyway.
-        if (!uuid.equals("") && recreateView) {
+		Properties viewDataPrp = cleartool.getViewData(viewName);
+        String uuid = viewDataPrp.getProperty("UUID");
+        String storageDir = viewDataPrp.getProperty("STORAGE_DIR");
+		
+		// If we don't find a UUID, then the view tag must not exist, in which case we don't
+        // have to delete it anyway.
+        if (uuid != null && !uuid.equals("") && recreateView) {
+        	try {
+        		cleartool.endView(viewName);	
+        	}
+        	catch (Exception ex) {
+        		cleartool.logRedundantCleartoolError(null, ex);
+        	}        	
+        	
         	try {
         		cleartool.rmviewUuid(uuid);	
         	}
@@ -193,7 +224,15 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         	}
         	catch (Exception ex) {
         		cleartool.logRedundantCleartoolError(null, ex);
-        	}            
+        	}
+        	
+        	// remove storage directory
+        	try {
+				FilePath storageDirFile = new FilePath(build.getWorkspace().getChannel(), storageDir);
+				storageDirFile.deleteRecursive();
+			} catch (Exception ex) {
+				cleartool.logRedundantCleartoolError(null, ex);
+			}        	
         }
         
         // try to remove the view tag in any case. might help in overcoming corrupted views
@@ -203,25 +242,30 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
     		} catch (Exception ex) {
     			cleartool.logRedundantCleartoolError(null, ex);
     		}        	
-            }
+        }
         
-            // Now, make the view.
-        if (uuid.equals("") || recreateView) {
+        // Now, make the view.
+        if (recreateView || uuid == null || uuid.equals("")) {
             String dynStorageDir = cleartool.getLauncher().getLauncher().isUnix() ? unixDynStorageDir : winDynStorageDir; 
-            cleartool.mkview(viewName, getBuildStreamName(stream), dynStorageDir);        	
+            cleartool.mkview(viewName, getBuildStream(), dynStorageDir);        	
         }
 	}
         
-	public static String getConfiguredStreamViewName(String stream) {		
-		return UcmCommon.getNoVob(stream) + CONFIGURED_STREAM_VIEW_SUFFIX;	
+	public static String getConfiguredStreamViewName(String jobName, String stream) {
+		jobName = jobName.replace(" ", "");
+		return UcmCommon.getNoVob(stream) + "_" + jobName + "_" + CONFIGURED_STREAM_VIEW_SUFFIX;	
 	}	
 	
 	private String getConfiguredStreamViewName() {		
-		return getConfiguredStreamViewName(stream);	
+		return getConfiguredStreamViewName(build.getProject().getName(), stream);	
     }
 	
-	private String getBuildStreamName(String stream) {
-		return BUILD_STREAM_PREFIX + stream;
+	/**
+	 * @return unique build stream name
+	 */
+	private String getBuildStream() {
+		String jobName = build.getProject().getName().replace(" ", "");
+		return BUILD_STREAM_PREFIX + jobName + "." + stream;
 	}
 
 

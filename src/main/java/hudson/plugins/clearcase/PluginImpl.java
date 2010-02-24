@@ -40,7 +40,7 @@ public class PluginImpl extends Plugin {
     @Extension
     public static final ClearCaseUcmSCM.ClearCaseUcmScmDescriptor UCM_DESCRIPTOR = new ClearCaseUcmSCM.ClearCaseUcmScmDescriptor();   
     @Extension
-    public static final ClearCasePublisher.DescriptorImpl CLEARCASE_PUBLISHER = new ClearCasePublisher.DescriptorImpl(); 
+    public static final ClearCasePublisher.DescriptorImpl PUBLISHER_DESCRIPTOR = ClearCasePublisher.DescriptorImpl.DESCRIPTOR; 
     
     public static ClearCaseSCM.ClearCaseScmDescriptor getDescriptor() {
         return BASE_DESCRIPTOR;

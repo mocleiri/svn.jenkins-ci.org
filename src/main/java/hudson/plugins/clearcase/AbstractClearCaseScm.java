@@ -77,7 +77,7 @@ public abstract class AbstractClearCaseScm extends SCM {
     public static final String CLEARCASE_VIEWNAME_ENVSTR = "CLEARCASE_VIEWNAME";
     public static final String CLEARCASE_VIEWPATH_ENVSTR = "CLEARCASE_VIEWPATH";
     
-    private final String viewName;
+    private String viewName;
     private final String mkviewOptionalParam;
     private final boolean filteringOutDestroySubBranchEvent;
     private transient ThreadLocal<String> normalizedViewName;
@@ -309,6 +309,10 @@ public abstract class AbstractClearCaseScm extends SCM {
         }
     }
     
+    protected void setViewName(String viewName) {
+    	this.viewName = viewName;
+    }
+    
 	public String getWinDynStorageDir() {
 		return winDynStorageDir;
 	}
@@ -383,12 +387,6 @@ public abstract class AbstractClearCaseScm extends SCM {
         generatedNormalizedViewName = generatedNormalizedViewName.replaceAll(
                                                                              "[\\s\\\\\\/:\\?\\*\\|]+", "_");
         
-        // support concurrent builds - need to add some unique identifier to the view name      
-        if (recreateView) {
-        	Integer rndNum = new Random().nextInt();
-        	generatedNormalizedViewName += "_" + rndNum.toString();        	
-        }
-        
         setNormalizedViewName(generatedNormalizedViewName);
         return generatedNormalizedViewName;
     }
@@ -456,10 +454,8 @@ public abstract class AbstractClearCaseScm extends SCM {
         // Checkout code
         String coNormalizedViewName = generateNormalizedViewName(build);
         
-        // add ClearCaseDataAction - helper to save scm data such as cspec, baselines, viewname, etc.
-        // ClearCase report and view deletion mechanism will use this information
+        // add ClearCaseDataAction - helper to save scm data such as cspec, baselines
         ClearCaseDataAction dataAction = new ClearCaseDataAction();        
-        dataAction.getUsedViewNamesList().add(coNormalizedViewName);
         build.addAction(dataAction);
         
         if (checkoutAction.checkout(launcher, workspace, coNormalizedViewName)) {
@@ -592,7 +588,7 @@ public abstract class AbstractClearCaseScm extends SCM {
                                 // Create a variable resolver using the last build's computer - HUDSON-5364
                                 BuildVariableResolver variableResolver = new BuildVariableResolver(project.getLastBuild(), ccScm.getBuildComputer(project.getLastBuild()));
                                 // Get the view UUID.
-                                String uuid = ct.getViewUuid(ccScm.generateNormalizedViewName(variableResolver));
+                                String uuid = ct.getViewData(ccScm.generateNormalizedViewName(variableResolver)).getProperty("UUID");
                                 if ((uuid!=null) && (!uuid.equals(""))) {
                                     ct.rmviewUuid(uuid);
                                     ct.unregisterView(uuid);
@@ -619,7 +615,7 @@ public abstract class AbstractClearCaseScm extends SCM {
                                                                      .getParent(), launcher));
         try {
             // Get the view UUID.
-            String uuid = ct.getViewUuid(generateNormalizedViewName(project.getLastBuild()));
+            String uuid = ct.getViewData(generateNormalizedViewName(project.getLastBuild())).getProperty("UUID");
             ct.rmviewUuid(uuid);
             ct.unregisterView(uuid);
             ct.rmviewtag(generateNormalizedViewName(project.getLastBuild()));

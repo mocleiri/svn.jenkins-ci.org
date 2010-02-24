@@ -26,6 +26,7 @@ package hudson.plugins.clearcase;
 
 import static hudson.Util.fixEmpty;
 import hudson.Extension;
+import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.Hudson;
 import hudson.model.ModelObject;
@@ -37,6 +38,7 @@ import hudson.plugins.clearcase.action.UcmDynamicCheckoutAction;
 import hudson.plugins.clearcase.action.UcmSnapshotCheckoutAction;
 import hudson.plugins.clearcase.history.HistoryAction;
 import hudson.plugins.clearcase.ucm.UcmChangeLogParser;
+import hudson.plugins.clearcase.ucm.UcmCommon;
 import hudson.plugins.clearcase.ucm.UcmHistoryAction;
 import hudson.plugins.clearcase.ucm.UcmSaveChangeLogAction;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
@@ -105,11 +107,13 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
      * @return string containing the stream selector.
      */
     public String getStream() {
-    	if (paramStream != null && paramStream.length() > 0)
+    	if (paramStream != null && paramStream.length() > 0) {
     		return paramStream;
-    	
-        return stream;
-    }
+    	}
+    	else {
+    		return stream;	
+    	}
+    }    
 
     /**
      * Return the branch type used for changelog and polling. By default this will be the empty string, and the stream
@@ -144,13 +148,23 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
             return new String[] { branch };
         }
     }
-
+    
+    @Override
+    public String generateNormalizedViewName(BuildVariableResolver variableResolver) {
+    	// Modify the view name in order to support concurrent builds
+    	if (isRecreateView()) {
+    		String modViewName = UcmCommon.getNoVob(getStream()) + "_" + "${JOB_NAME}_bs_hudson_view";
+    		setViewName(modViewName);
+    	}
+    	
+    	return super.generateNormalizedViewName(variableResolver);
+    }
 
     @Override
     protected CheckOutAction createCheckOutAction(
                                                   VariableResolver variableResolver, ClearToolLauncher launcher,
                                                   AbstractBuild build) {    	
-    	// set value in paramStream
+    	// set value in paramStream (if build is parameteraized support changing the build stream)
     	paramStream = (String)build.getBuildVariables().get("STREAM");
     	
     	CheckOutAction action;
