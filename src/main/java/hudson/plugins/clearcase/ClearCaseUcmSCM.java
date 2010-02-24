@@ -65,9 +65,12 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 	
+	private final static String AUTO_ALLOCATE_VIEW_NAME = "${STREAM}_${JOB_NAME}_bs_hudson_view";
+	
     private final String stream;
     private String paramStream; 
     private final String overrideBranchName;    
+    private boolean allocateViewName;
     
     @DataBoundConstructor
     public ClearCaseUcmSCM(String stream, String loadrules, String viewname,
@@ -77,12 +80,13 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
                            String excludedRegions, String multiSitePollBuffer,
                            String overrideBranchName, boolean createDynView,
                            String winDynStorageDir, String unixDynStorageDir, 
-                           boolean freezeCode, boolean recreateView) {
+                           boolean freezeCode, boolean recreateView, boolean allocateViewName) {
         super(viewname, mkviewoptionalparam, filterOutDestroySubBranchEvent,
               useUpdate, rmviewonrename, excludedRegions, usedynamicview, 
               viewdrive, loadrules, multiSitePollBuffer, createDynView,
               winDynStorageDir, unixDynStorageDir, freezeCode, recreateView);
         this.stream = shortenStreamName(stream);
+        this.allocateViewName = allocateViewName;
         this.paramStream = "";
         if ((overrideBranchName!=null) && (!overrideBranchName.equals(""))) {
             this.overrideBranchName = overrideBranchName;
@@ -98,7 +102,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
                            String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent,
                            boolean useUpdate, boolean rmviewonrename) {
         this(stream, loadrules, viewname, usedynamicview, viewdrive, mkviewoptionalparam,
-             filterOutDestroySubBranchEvent, useUpdate, rmviewonrename, "", null, "", false, null, null, false, false);
+             filterOutDestroySubBranchEvent, useUpdate, rmviewonrename, "", null, "", false, null, null, false, false, false);
     }
 
     /**
@@ -150,14 +154,12 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     }
     
     @Override
-    public String generateNormalizedViewName(BuildVariableResolver variableResolver) {
+    public String generateNormalizedViewName(BuildVariableResolver variableResolver, String modViewName) {   	
     	// Modify the view name in order to support concurrent builds
-    	if (isRecreateView()) {
-    		String modViewName = UcmCommon.getNoVob(getStream()) + "_" + "${JOB_NAME}_bs_hudson_view";
-    		setViewName(modViewName);
-    	}
+    	if (allocateViewName) 
+    		modViewName = AUTO_ALLOCATE_VIEW_NAME.replace("${STREAM}", UcmCommon.getNoVob(getStream()));
     	
-    	return super.generateNormalizedViewName(variableResolver);
+    	return super.generateNormalizedViewName(variableResolver, modViewName);
     }
 
     @Override
@@ -331,7 +333,8 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
                                                       req.getParameter("ucm.winDynStorageDir"),
                                                       req.getParameter("ucm.unixDynStorageDir"),
                                                       req.getParameter("ucm.freezeCode") != null,
-                                                      req.getParameter("ucm.recreateView") != null
+                                                      req.getParameter("ucm.recreateView") != null,
+                                                      req.getParameter("ucm.allocateViewName") != null
                                                       );
             return scm;
         }

@@ -116,7 +116,13 @@
 						<f:checkbox name="ucm.recreateView" checked="${scm.recreateView}"/>
 						If checked, Hudson will remove the view and recreate it in order to allow clean build.
 						Hudson will also override the view name set in the configuration by an auto created name.
-		      </f:entry>	                         
+		      </f:entry>	
+		      
+		      <f:entry title="Dynamically allocate view name">
+						<f:checkbox name="ucm.allocateViewName" checked="${scm.allocateViewName}"/>
+						If checked, Hudson will assign unique view name overriding the view name set in the configuration. 
+						This is necessary for running concurrent builds on different streams (using STREAM parameter).
+		      </f:entry>		                               
 			    
 			  <f:entry title="Windows dynamic view storage directory" help="/plugin/clearcase/dynamicViewStorage.html">
 			     <f:textbox name="ucm.winDynStorageDir" value="${h.defaulted(scm.winDynStorageDir, descriptor.defaultWinDynStorageDir)}" />

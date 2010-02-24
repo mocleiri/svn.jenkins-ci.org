@@ -368,6 +368,27 @@ public abstract class AbstractClearCaseScm extends SCM {
     public String generateNormalizedViewName(AbstractBuild<?, ?> build) {
         return generateNormalizedViewName(new BuildVariableResolver(build, getCurrentComputer()));
     }
+    
+    /**
+     * Returns a normalized view name that will be used in cleartool commands.
+     * It will replace ${JOB_NAME} with the name of the job, * ${USER_NAME} with
+     * the name of the user. This way it will be easier to add new jobs without
+     * trying to find an unique view name. It will also replace invalid chars
+     * from a view name.
+     * 
+     * @param build
+     *            the project to get the name from
+     * @return a string containing no invalid chars.
+     */   
+    public String generateNormalizedViewName(BuildVariableResolver variableResolver, String modViewName) {
+        String generatedNormalizedViewName = Util.replaceMacro(modViewName, variableResolver);
+        
+        generatedNormalizedViewName = generatedNormalizedViewName.replaceAll(
+                                                                             "[\\s\\\\\\/:\\?\\*\\|]+", "_");
+        
+        setNormalizedViewName(generatedNormalizedViewName);
+        return generatedNormalizedViewName;
+    }    
 
     /**
      * Returns a normalized view name that will be used in cleartool commands.
@@ -382,13 +403,7 @@ public abstract class AbstractClearCaseScm extends SCM {
      */
     
     public String generateNormalizedViewName(BuildVariableResolver variableResolver) {
-        String generatedNormalizedViewName = Util.replaceMacro(viewName, variableResolver);
-        
-        generatedNormalizedViewName = generatedNormalizedViewName.replaceAll(
-                                                                             "[\\s\\\\\\/:\\?\\*\\|]+", "_");
-        
-        setNormalizedViewName(generatedNormalizedViewName);
-        return generatedNormalizedViewName;
+    	return generateNormalizedViewName(variableResolver, viewName);
     }
     
     /**
