@@ -9,6 +9,9 @@ import java.util.regex.Pattern;
 /**
  * Placed on the beginning of the exception stack trace, and annotates the stack trace of an exception.
  *
+ * TODO: rename this to indicate that it's marking exception caused inside Hudson, not in the application,
+ * as those things refer to very different places.
+ *
  * @author Kohsuke Kawaguchi
  */
 public class ExceptionAnnotation extends ConsoleAnnotation<Object> {
