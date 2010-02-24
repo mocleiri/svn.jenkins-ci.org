@@ -40,6 +40,9 @@ public final class AntTargetAnnotation extends ConsoleAnnotation {
 
     @Override
     public ConsoleAnnotator annotate(Object context, MarkupText text, int charPos) {
+        // still under development. too early to put into production
+        if (!ENABLED)   return null;
+
         MarkupText.SubText t = text.findToken(Pattern.compile("^[^:]+(?=:)"));
         if (t!=null)
             t.addMarkup(0,t.length(),"<b class=ant-target>","</b>");
@@ -52,4 +55,6 @@ public final class AntTargetAnnotation extends ConsoleAnnotation {
             return "Ant targets";
         }
     }
+
+    public static boolean ENABLED = Boolean.getBoolean(AntTargetAnnotation.class.getName()+".enabled");
 }
