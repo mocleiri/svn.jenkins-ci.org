@@ -68,7 +68,7 @@ public class HudsonClearToolLauncher implements ClearToolLauncher {
     
     public boolean run(String[] cmd, InputStream inputStream, OutputStream outputStream, 
     		FilePath filePath) throws IOException, InterruptedException {
-    	return run(cmd, inputStream, outputStream, filePath, true);
+    	return run(cmd, inputStream, outputStream, filePath, false);
     }
 
     public boolean run(String[] cmd, InputStream inputStream, OutputStream outputStream, 
