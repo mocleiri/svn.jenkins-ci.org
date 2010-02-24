@@ -50,6 +50,8 @@ public abstract class ConsoleAnnotationDescriptor extends Descriptor<ConsoleAnno
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Users use this name to enable/disable annotations.
      */
     public abstract String getDisplayName();

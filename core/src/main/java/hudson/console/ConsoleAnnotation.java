@@ -59,7 +59,21 @@ import java.util.zip.GZIPOutputStream;
  * @see ConsoleAnnotationDescriptor
  */
 public abstract class ConsoleAnnotation<T> implements Serializable, Describable<ConsoleAnnotation<?>> {
-    // TODO: if ConsoleAnnotator is just for build output, how does this work with other kinds of console output?
+    /**
+     * When the line of a console output that this annotation is attached is read by someone,
+     * a new {@link ConsoleAnnotation} is de-serialized and this method is invoked to annotate that line.
+     *
+     * @param context
+     *      The object that owns the console output in question.
+     * @param text
+     *      Represents a line of the console output being annotated.
+     * @param charPos
+     *      The character position in 'text' where this annotation is attached.
+     *
+     * @return
+     *      if non-null value is returned, this annotator will handle the next line.
+     *      this mechanism can be used to annotate multiple lines starting at the annotated position. 
+     */
     public abstract ConsoleAnnotator annotate(T context, MarkupText text, int charPos);
 
     public ConsoleAnnotationDescriptor getDescriptor() {

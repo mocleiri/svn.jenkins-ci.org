@@ -65,6 +65,10 @@ public abstract class AbstractMarkupText {
      */
     public abstract void addMarkup( int startPos, int endPos, String startTag, String endTag );
 
+    public void addHyperlink( int startPos, int endPos, String url ) {
+        addMarkup(startPos,endPos,"<a href='"+url+"'>","</a>");
+    }
+
     /**
      * Adds a start tag and end tag around the entire text
      */
