@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Bruce Chapman, Erik Ramfelt, Jean-Baptiste Quenot, Luca Domenico Milanesio
+ * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi, Bruce Chapman, Erik Ramfelt, Jean-Baptiste Quenot, Luca Domenico Milanesio
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,7 @@ import hudson.Launcher;
 import hudson.Functions;
 import hudson.Extension;
 import hudson.Util;
+import hudson.diagnosis.OldDataMonitor;
 import static hudson.Util.fixEmptyAndTrim;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
@@ -36,10 +37,12 @@ import hudson.model.UserPropertyDescriptor;
 import hudson.model.Hudson;
 import hudson.util.FormValidation;
 import hudson.util.Secret;
+import hudson.util.XStream2;
 import org.apache.tools.ant.types.selectors.SelectorUtils;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.export.Exported;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -87,7 +90,7 @@ public class Mailer extends Notifier {
     public boolean sendToIndividuals;
 
     // TODO: left so that XStream won't get angry. figure out how to set the error handling behavior
-    // in XStream.
+    // in XStream.  Deprecated since 2005-04-23.
     private transient String from;
     private transient String subject;
     private transient boolean failureOnly;
@@ -497,4 +500,13 @@ public class Mailer extends Notifier {
      * Debug probe point to be activated by the scripting console.
      */
     public static boolean debug = false;
+
+    public static void registerConverter(XStream2 xstream) {
+        xstream.new PassthruConverter<Mailer>() {
+            @Override protected void callback(Mailer m, UnmarshallingContext context) {
+                if (m.from != null || m.subject != null || m.failureOnly)
+                    OldDataMonitor.report(context, "1.10");
+            }
+        };
+    }
 }

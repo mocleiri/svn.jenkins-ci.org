@@ -181,6 +181,9 @@ public class RobustReflectionConverter implements Converter {
     public Object doUnmarshal(final Object result, final HierarchicalStreamReader reader, final UnmarshallingContext context) {
         final SeenFields seenFields = new SeenFields();
         Iterator it = reader.getAttributeNames();
+        // Remember outermost Saveable encountered, for reporting below
+        if (result instanceof Saveable && context.get("Saveable") == null)
+            context.put("Saveable", result);
 
         // Process attributes before recursing into child elements.
         while (it.hasNext()) {
@@ -259,14 +262,14 @@ public class RobustReflectionConverter implements Converter {
         }
 
         // Report any class/field errors in Saveable objects
-        if (context.get("ReadError") != null && result instanceof Saveable) {
+        if (context.get("ReadError") != null && context.get("Saveable") == result) {
             OldDataMonitor.report((Saveable)result, (ArrayList<Throwable>)context.get("ReadError"));
             context.put("ReadError", null);
         }
         return result;
     }
 
-    static void addErrorInContext(UnmarshallingContext context, Throwable e) {
+    public static void addErrorInContext(UnmarshallingContext context, Throwable e) {
         ArrayList<Throwable> list = (ArrayList<Throwable>)context.get("ReadError");
         if (list == null)
             context.put("ReadError", list = new ArrayList<Throwable>());

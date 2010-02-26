@@ -34,9 +34,11 @@ import hudson.model.Saveable;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.RunListener;
 import hudson.model.listeners.SaveableListener;
+import hudson.util.RobustReflectionConverter;
 import hudson.util.VersionNumber;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import com.thoughtworks.xstream.converters.UnmarshallingContext;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -134,6 +136,23 @@ public class OldDataMonitor extends AdministrativeMonitor {
     }
 
     /**
+     * Inform monitor that some data in a deprecated format has been loaded, during
+     * XStream unmarshalling when the Saveable containing this object is not available.
+     * @param context XStream unmarshalling context
+     * @param version Hudson release when the data structure changed.
+     */
+    public static void report(UnmarshallingContext context, String version) {
+        RobustReflectionConverter.addErrorInContext(context, new ReportException(version));
+    }
+
+    private static class ReportException extends Exception {
+        private String version;
+        private ReportException(String version) {
+            this.version = version;
+        }
+    }
+
+    /**
      * Inform monitor that some unreadable data was found while loading.
      * @param obj Saveable object; calling save() on this object will discard the unreadable data.
      * @param errors Exception(s) thrown while loading, regarding the unreadable classes/fields.
@@ -142,9 +161,14 @@ public class OldDataMonitor extends AdministrativeMonitor {
         StringBuilder buf = new StringBuilder();
         int i = 0;
         for (Throwable e : errors) {
-            if (++i > 1) buf.append(", ");
-            buf.append(e.getClass().getSimpleName()).append(": ").append(e.getMessage());
+            if (e instanceof ReportException) {
+                report(obj, ((ReportException)e).version);
+            } else {
+                if (++i > 1) buf.append(", ");
+                buf.append(e.getClass().getSimpleName()).append(": ").append(e.getMessage());
+            }
         }
+        if (buf.length() == 0) return;
         OldDataMonitor odm = (OldDataMonitor)Hudson.getInstance().getAdministrativeMonitor("OldData");
         synchronized (odm) {
             VersionRange vr = odm.data.get(obj);

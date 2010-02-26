@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
+ * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -43,6 +43,7 @@ import hudson.model.Result;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 
 /**
  * {@link XStream} enhanced for additional Java5 support and improved robustness.
@@ -156,5 +157,41 @@ public class XStream2 extends XStream {
         public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
             return findConverter(context.getRequiredType()).unmarshal(reader,context);
         }
+    }
+
+    /**
+     * Extend this class to run some callback code just after a type is unmarshalled.
+     * Example: <pre> myxstream2.new PassthruConverter<MyType>() {
+     *   @Override protected void callback(MyType obj, UnmarshallingContext context) {
+     *     ...
+     * </pre>
+     * Note that the constructor registers this converter automatically.
+     */
+    public abstract class PassthruConverter<T> implements Converter {
+        private Class clazz;
+        private Converter defaultConverter;
+
+        public PassthruConverter() {
+            clazz = (Class)
+                    ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            defaultConverter = getConverterLookup().lookupConverterForType(clazz);
+            registerConverter(this);
+        }
+
+        public boolean canConvert(Class type) {
+            return type == clazz;
+        }
+
+        public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+            defaultConverter.marshal(source, writer, context);
+        }
+
+        public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+            Object obj = defaultConverter.unmarshal(reader, context);
+            callback((T)obj, context);
+            return obj;
+        }
+
+        protected abstract void callback(T obj, UnmarshallingContext context);
     }
 }
