@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi
+ * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi, Alan Harder
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ import hudson.model.Result;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * {@link XStream} enhanced for additional Java5 support and improved robustness.
@@ -106,12 +106,18 @@ public class XStream2 extends XStream {
      */
     private static final class AssociatedConverterImpl implements Converter {
         private final XStream xstream;
+        private final ConcurrentHashMap<Class,Converter> cache =
+                new ConcurrentHashMap<Class,Converter>();
 
         private AssociatedConverterImpl(XStream xstream) {
             this.xstream = xstream;
         }
 
         private Converter findConverter(Class t) {
+            Converter result = cache.get(t);
+            if (result != null)
+                // ConcurrentHashMap does not allow null, so use this object to represent null
+                return result == this ? null : result;
             try {
                 if(t==null || t.getClassLoader()==null)
                     return null;
@@ -130,10 +136,13 @@ public class XStream2 extends XStream {
 
                 }
                 ConverterMatcher cm = (ConverterMatcher)c.newInstance(args);
-                return cm instanceof SingleValueConverter
+                result = cm instanceof SingleValueConverter
                         ? new SingleValueConverterWrapper((SingleValueConverter)cm)
                         : (Converter)cm;
+                cache.put(t, result);
+                return result;
             } catch (ClassNotFoundException e) {
+                cache.put(t, this);  // See above.. this object in cache represents null
                 return null;
             } catch (IllegalAccessException e) {
                 IllegalAccessError x = new IllegalAccessError();
