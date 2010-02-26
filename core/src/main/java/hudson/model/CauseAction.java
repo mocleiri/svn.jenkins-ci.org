@@ -105,16 +105,15 @@ public class CauseAction implements FoldableAction {
         item.getActions().add(new CauseAction(this));
     }
 
-    public static void registerConverter(XStream2 xstream) {
-        xstream.new PassthruConverter<CauseAction>() {
-            @Override protected void callback(CauseAction ca, UnmarshallingContext context) {
-                // if we are being read in from an older version
-                if (ca.cause != null) {
-                    if (ca.causes == null) ca.causes = new ArrayList<Cause>();
-                    ca.causes.add(ca.cause);
-                    OldDataMonitor.report(context, "1.288");
-                }
+    public static class ConverterImpl extends XStream2.PassthruConverter<CauseAction> {
+        public ConverterImpl(XStream2 xstream) { super(xstream); }
+        @Override protected void callback(CauseAction ca, UnmarshallingContext context) {
+            // if we are being read in from an older version
+            if (ca.cause != null) {
+                if (ca.causes == null) ca.causes = new ArrayList<Cause>();
+                ca.causes.add(ca.cause);
+                OldDataMonitor.report(context, "1.288");
             }
-        };
+        }
     }
 }

@@ -501,12 +501,11 @@ public class Mailer extends Notifier {
      */
     public static boolean debug = false;
 
-    public static void registerConverter(XStream2 xstream) {
-        xstream.new PassthruConverter<Mailer>() {
-            @Override protected void callback(Mailer m, UnmarshallingContext context) {
-                if (m.from != null || m.subject != null || m.failureOnly)
-                    OldDataMonitor.report(context, "1.10");
-            }
-        };
+    public static class ConverterImpl extends XStream2.PassthruConverter<Mailer> {
+        public ConverterImpl(XStream2 xstream) { super(xstream); }
+        @Override protected void callback(Mailer m, UnmarshallingContext context) {
+            if (m.from != null || m.subject != null || m.failureOnly)
+                OldDataMonitor.report(context, "1.10");
+        }
     }
 }

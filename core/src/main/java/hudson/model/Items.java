@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,10 +27,10 @@ import com.thoughtworks.xstream.XStream;
 import hudson.XmlFile;
 import hudson.DescriptorExtensionList;
 import hudson.Extension;
+import hudson.scm.RepositoryBrowser;
 import hudson.matrix.MatrixProject;
 import hudson.matrix.MatrixConfiguration;
 import hudson.matrix.Axis;
-import hudson.tasks.Mailer;
 import hudson.util.XStream2;
 import hudson.util.DescriptorList;
 
@@ -135,6 +135,5 @@ public class Items {
         XSTREAM.alias("matrix-project",MatrixProject.class);
         XSTREAM.alias("axis", Axis.class);
         XSTREAM.alias("matrix-config",MatrixConfiguration.class);
-        Mailer.registerConverter((XStream2)XSTREAM);
     }
 }

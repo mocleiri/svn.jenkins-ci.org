@@ -329,18 +329,6 @@ public class HudsonPrivateSecurityRealm extends SecurityRealm implements ModelOb
         public String errorMessage;
     }
 
-    public static void registerConverter(XStream2 xstream) {
-        xstream.new PassthruConverter<Details>() {
-            @Override protected void callback(Details d, UnmarshallingContext context) {
-                // Convert to hashed password and report to monitor if we load old data
-                if (d.password!=null && d.passwordHash==null) {
-                    d.passwordHash = PASSWORD_ENCODER.encodePassword(Scrambler.descramble(d.password),null);
-                    OldDataMonitor.report(context, "1.283");
-                }
-            }
-        };
-    }
-
     /**
      * {@link UserProperty} that provides the {@link UserDetails} view of the User object.
      *
@@ -418,6 +406,17 @@ public class HudsonPrivateSecurityRealm extends SecurityRealm implements ModelOb
 
         public boolean isInvalid() {
             return user==null;
+        }
+
+        public static class ConverterImpl extends XStream2.PassthruConverter<Details> {
+            public ConverterImpl(XStream2 xstream) { super(xstream); }
+            @Override protected void callback(Details d, UnmarshallingContext context) {
+                // Convert to hashed password and report to monitor if we load old data
+                if (d.password!=null && d.passwordHash==null) {
+                    d.passwordHash = PASSWORD_ENCODER.encodePassword(Scrambler.descramble(d.password),null);
+                    OldDataMonitor.report(context, "1.283");
+                }
+            }
         }
 
         @Extension

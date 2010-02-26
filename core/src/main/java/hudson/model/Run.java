@@ -1654,8 +1654,6 @@ public abstract class Run <JobT extends Job<JobT,RunT>,RunT extends Run<JobT,Run
         XSTREAM.alias("matrix-build",MatrixBuild.class);
         XSTREAM.alias("matrix-run",MatrixRun.class);
         XSTREAM.registerConverter(Result.conv);
-        CauseAction.registerConverter((XStream2)XSTREAM);
-        Cause.registerConverter((XStream2)XSTREAM);
     }
 
     private static final Logger LOGGER = Logger.getLogger(Run.class.getName());

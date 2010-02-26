@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Tom Huybrechts
+ * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt, Tom Huybrechts
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 package hudson.model;
 
+import com.thoughtworks.xstream.XStream;
 import hudson.CopyOnWrite;
 import hudson.FeedAdapter;
 import hudson.Util;
@@ -33,7 +34,6 @@ import hudson.model.Descriptor.FormException;
 import hudson.model.listeners.SaveableListener;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
-import hudson.security.HudsonPrivateSecurityRealm;
 import hudson.security.Permission;
 import hudson.util.RunList;
 import hudson.util.XStream2;
@@ -501,13 +501,12 @@ public class User extends AbstractModelObject implements AccessControlled, Savea
     /**
      * Used to load/save user configuration.
      */
-    private static final XStream2 XSTREAM = new XStream2();
+    private static final XStream XSTREAM = new XStream2();
 
     private static final Logger LOGGER = Logger.getLogger(User.class.getName());
 
     static {
         XSTREAM.alias("user",User.class);
-        HudsonPrivateSecurityRealm.registerConverter(XSTREAM);
     }
 
     /**

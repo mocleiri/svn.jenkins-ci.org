@@ -50,6 +50,8 @@ import java.lang.reflect.ParameterizedType;
  * @author Kohsuke Kawaguchi
  */
 public class XStream2 extends XStream {
+    private Converter reflectionConverter;
+
     public XStream2() {
         init();
     }
@@ -86,7 +88,8 @@ public class XStream2 extends XStream {
         registerConverter(new AssociatedConverterImpl(this),-10);
 
         // replace default reflection converter
-        registerConverter(new RobustReflectionConverter(getMapper(),new JVM().bestReflectionProvider()),-19);
+        reflectionConverter = new RobustReflectionConverter(getMapper(),new JVM().bestReflectionProvider());
+        registerConverter(reflectionConverter,-19);
     }
 
     @Override
@@ -99,6 +102,7 @@ public class XStream2 extends XStream {
 
     /**
      * If a class defines a nested {@code ConverterImpl} subclass, use that as a {@link Converter}.
+     * Its constructor may have XStream/XStream2 and/or Mapper parameters (or no params).
      */
     private static final class AssociatedConverterImpl implements Converter {
         private final XStream xstream;
@@ -117,7 +121,7 @@ public class XStream2 extends XStream {
                 Class<?>[] p = c.getParameterTypes();
                 Object[] args = new Object[p.length];
                 for (int i = 0; i < p.length; i++) {
-                    if(p[i]==XStream.class)
+                    if(p[i]==XStream.class || p[i]==XStream2.class)
                         args[i] = xstream;
                     else if(p[i]== Mapper.class)
                         args[i] = xstream.getMapper();
@@ -160,34 +164,32 @@ public class XStream2 extends XStream {
     }
 
     /**
-     * Extend this class to run some callback code just after a type is unmarshalled.
-     * Example: <pre> myxstream2.new PassthruConverter<MyType>() {
+     * Create a nested {@code ConverterImpl} subclass that extends this class to run some
+     * callback code just after a type is unmarshalled by RobustReflectionConverter.
+     * Example: <pre> public static class ConverterImpl extends XStream2.PassthruConverter&lt;MyType&gt; {
+     *   public ConverterImpl(XStream2 xstream) { super(xstream); }
      *   @Override protected void callback(MyType obj, UnmarshallingContext context) {
      *     ...
      * </pre>
-     * Note that the constructor registers this converter automatically.
      */
-    public abstract class PassthruConverter<T> implements Converter {
-        private Class clazz;
-        private Converter defaultConverter;
+    public static abstract class PassthruConverter<T> implements Converter {
+        private Converter converter;
 
-        public PassthruConverter() {
-            clazz = (Class)
-                    ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-            defaultConverter = getConverterLookup().lookupConverterForType(clazz);
-            registerConverter(this);
+        public PassthruConverter(XStream2 xstream) {
+            converter = xstream.reflectionConverter;
         }
 
         public boolean canConvert(Class type) {
-            return type == clazz;
+            // marshal/unmarshal called directly from AssociatedConverterImpl
+            return false;
         }
 
         public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
-            defaultConverter.marshal(source, writer, context);
+            converter.marshal(source, writer, context);
         }
 
         public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
-            Object obj = defaultConverter.unmarshal(reader, context);
+            Object obj = converter.unmarshal(reader, context);
             callback((T)obj, context);
             return obj;
         }

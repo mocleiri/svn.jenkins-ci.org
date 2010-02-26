@@ -125,10 +125,9 @@ public abstract class Cause {
         public String getShortDescription() {
             return Messages.Cause_UpstreamCause_ShortDescription(upstreamProject, Integer.toString(upstreamBuild));
         }
-    }
 
-    public static void registerConverter(XStream2 xstream) {
-        xstream.new PassthruConverter<UpstreamCause>() {
+        public static class ConverterImpl extends XStream2.PassthruConverter<UpstreamCause> {
+            public ConverterImpl(XStream2 xstream) { super(xstream); }
             @Override protected void callback(UpstreamCause uc, UnmarshallingContext context) {
                 if (uc.upstreamCause != null) {
                     if (uc.upstreamCauses == null) uc.upstreamCauses = new ArrayList<Cause>();
@@ -137,7 +136,7 @@ public abstract class Cause {
                     OldDataMonitor.report(context, "1.288");
                 }
             }
-        };
+        }
     }
 
     /**
