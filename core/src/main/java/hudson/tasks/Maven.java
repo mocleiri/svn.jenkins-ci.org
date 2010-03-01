@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Jene Jasper, Stephen Connolly, Tom Huybrechts
+ * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi, Jene Jasper, Stephen Connolly, Tom Huybrechts
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -59,7 +59,6 @@ import org.kohsuke.stapler.QueryParameter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.List;
@@ -272,6 +271,8 @@ public class Maven extends Builder {
 
     /**
      * Allows the derived type to make additional modifications to the arguments list.
+     *
+     * @since 1.344
      */
     protected void wrapUpArguments(ArgumentListBuilder args, String normalizedTarget, AbstractBuild<?,?> build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
     }
@@ -325,12 +326,6 @@ public class Maven extends Builder {
 
         public boolean isApplicable(Class<? extends AbstractProject> jobType) {
             return true;
-        }
-
-        @Override
-        protected void convert(Map<String, Object> oldPropertyBag) {
-            if(oldPropertyBag.containsKey("installations"))
-                installations = (MavenInstallation[]) oldPropertyBag.get("installations");
         }
 
         @Override
