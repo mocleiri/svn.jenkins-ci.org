@@ -23,15 +23,9 @@
  */
 package hudson.console;
 
-import hudson.ExtensionList;
-import hudson.ExtensionPoint;
 import hudson.MarkupText;
-import hudson.model.Hudson;
-import org.jvnet.tiger_types.Types;
 
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
