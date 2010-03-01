@@ -39,8 +39,10 @@ import com.thoughtworks.xstream.io.HierarchicalStreamDriver;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.mapper.CannotResolveClassException;
+import hudson.diagnosis.OldDataMonitor;
 import hudson.model.Hudson;
 import hudson.model.Result;
+import hudson.model.Saveable;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -52,6 +54,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class XStream2 extends XStream {
     private Converter reflectionConverter;
+    private ThreadLocal<Boolean> oldData = new ThreadLocal<Boolean>();
 
     public XStream2() {
         init();
@@ -71,7 +74,12 @@ public class XStream2 extends XStream {
             setClassLoader(h.pluginManager.uberClassLoader);
         }
 
-        return super.unmarshal(reader,root,dataHolder);
+        Object o = super.unmarshal(reader,root,dataHolder);
+        if (oldData.get()!=null) {
+            oldData.remove();
+            if (o instanceof Saveable) OldDataMonitor.report((Saveable)o, "1.106");
+        }
+        return o;
     }
 
     private void init() {
@@ -115,7 +123,9 @@ public class XStream2 extends XStream {
             } catch (CannotResolveClassException e) {
                 // If a "-" is found, retry with mapping this to "$"
                 if (elementName.indexOf('-') >= 0) try {
-                    return super.realClass(elementName.replace('-', '$'));
+                    Class c = super.realClass(elementName.replace('-', '$'));
+                    oldData.set(Boolean.TRUE);
+                    return c;
                 } catch (CannotResolveClassException e2) { }
                 // Throw original exception
                 throw e;
