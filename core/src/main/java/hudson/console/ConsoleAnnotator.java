@@ -32,11 +32,51 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
+ * Annotates one line of console output.
+ *
+ * <p>
+ * In Hudson, console output annotation is done line by line, and
+ * we model this as a state machine &mdash;
+ * the code encapsulates some state, and it uses that to annotate one line (and possibly update the state.)
+ *
+ * <p>
+ * A {@link ConsoleAnnotator} instance encapsulates this state, and the {@link #annotate(Object, MarkupText)}
+ * method is used to annotate the next line based on the current state. The method returns another
+ * {@link ConsoleAnnotator} instance that represents the altered state for annotating the next line.
+ *
+ * <p>
+ * {@link ConsoleAnnotator}s are run when a browser requests console output, and the above-mentioned chain
+ * invocation is done for each client request separately. Therefore, logically you can think of this process as:
+ *
+ * <pre>
+ * ConsoleAnnotator ca = ...;
+ * ca.annotate(context,line1).annotate(context,line2)...
+ * </pre>
+ *
+ * <p>
+ * Because of a browser can request console output incrementally, in addition to above a console annotator
+ * can be serialized at any point and deserialized back later to continue annotation where it left off.
+ *
+ * <p>
+ * {@link ConsoleAnnotator} instances can be created in a few different ways. See {@link ConsoleNote}
+ * and {@link ConsoleAnnotatorFactory}.
+ *
  * @author Kohsuke Kawaguchi
+ * @see ConsoleAnnotatorFactory
+ * @see ConsoleNote
  */
 public abstract class ConsoleAnnotator<T> implements Serializable {
     /**
      * Annotates one line.
+     *
+     * @param context
+     *      The object that owns the console output. Never null.
+     * @param text
+     *      Contains a single line of console output, and defines convenient methods to add markup.
+     *      The callee should put markup into this object. Never null.
+     * @return
+     *      The {@link ConsoleAnnotator} object that will annotate the next line of the console output.
+     *      To indicate that you are not interested in the following lines, return null.
      */
     public abstract ConsoleAnnotator annotate(T context, MarkupText text );
 

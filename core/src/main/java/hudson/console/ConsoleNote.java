@@ -33,6 +33,7 @@ import hudson.util.FlushProofOutputStream;
 import hudson.util.UnbufferedBase64InputStream;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.tools.ant.BuildListener;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -47,7 +48,57 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 /**
+ * Data that hangs off from a console output.
  *
+ * <p>
+ * A {@link ConsoleNote} can be put into a console output while it's being written, and it represents
+ * a machine readable information about a particular position of the console output.
+ *
+ * <p>
+ * When Hudson is reading back a console output for display, a {@link ConsoleNote} is used
+ * to trigger {@link ConsoleAnnotator}, which in turn uses the information in the note to
+ * generate markup. In this way, we can overlay richer information on top of the console output.
+ *
+ * <h2>Comparison with {@link ConsoleAnnotatorFactory}</h2>
+ * <p>
+ * Compared to {@link ConsoleAnnotatorFactory}, the main advantage of {@link ConsoleNote} is that
+ * it can be emitted into the output by the producer of the output (or by a filter), which can
+ * have a much better knowledge about the context of what's being executed.
+ *
+ * <ol>
+ * <li>
+ * For example, when your plugin is about to report an error message, you can emit a {@link ConsoleNote}
+ * that indicates an error, instead of printing an error message as plain text. The {@link #annotate(Object, MarkupText, int)}
+ * method will then generate the proper error message, with all the HTML markup that makes error message
+ * more user friendly.
+ *
+ * <li>
+ * Or consider annotating output from Ant. A modified {@link BuildListener} can place a {@link ConsoleNote}
+ * every time a new target execution starts. These notes can be then later used to build the outline
+ * that shows what targets are executed, hyperlinked to their corresponding locations in the build output.
+ * </ol>
+ *
+ * <p>
+ * Doing these things by {@link ConsoleAnnotatorFactory} would be a lot harder, as they can only rely
+ * on the pattern matching of the output.
+ *
+ * <h2>Persistence</h2>
+ * <p>
+ * {@link ConsoleNote}s are serialized and gzip compressed into a byte sequence and then embedded into the
+ * console output text file, with a bit of preamble/postamble to allow tools to ignore them. In this way
+ * {@link ConsoleNote} always sticks to a particular point in the console output.
+ *
+ * <p>
+ * This design allows descendant processes of Hudson to emit {@link ConsoleNote}s. For example, Ant forked
+ * by a shell forked by Hudson can put an encoded note in its stdout, and Hudson will correctly understands that.
+ * The preamble and postamble includes a certain ANSI escape sequence designed in such a way to minimize garbage
+ * if this output is observed by a human being directly.
+ *
+ * <p>
+ * Because of this persistence mechanism, {@link ConsoleNote}s need to be serializable, and care should be taken
+ * to reduce footprint of the notes, if you are putting a lot of notes. Serialization format compatibility
+ * is also important, although {@link ConsoleNote}s that failed to deserialize will be simply ignored, so the
+ * worst thing that can happen is that you just lose some notes.
  *
  * @param <T>
  *      Contextual model object that this console is associated with, such as {@link Run}.
@@ -55,10 +106,10 @@ import java.util.zip.GZIPOutputStream;
  * @author Kohsuke Kawaguchi
  * @see ConsoleAnnotationDescriptor
  */
-public abstract class ConsoleAnnotation<T> implements Serializable, Describable<ConsoleAnnotation<?>> {
+public abstract class ConsoleNote<T> implements Serializable, Describable<ConsoleNote<?>> {
     /**
      * When the line of a console output that this annotation is attached is read by someone,
-     * a new {@link ConsoleAnnotation} is de-serialized and this method is invoked to annotate that line.
+     * a new {@link ConsoleNote} is de-serialized and this method is invoked to annotate that line.
      *
      * @param context
      *      The object that owns the console output in question.
@@ -77,6 +128,14 @@ public abstract class ConsoleAnnotation<T> implements Serializable, Describable<
         return (ConsoleAnnotationDescriptor)Hudson.getInstance().getDescriptorOrDie(getClass());
     }
 
+    /**
+     * Prints this note into a stream.
+     *
+     * <p>
+     * The most typical use of this is {@code n.encodedTo(System.out)} where stdout is connected to Hudson.
+     * The encoded form doesn't include any new line character to work better in the line-oriented nature
+     * of {@link ConsoleAnnotator}.
+     */
     public void encodeTo(OutputStream out) throws IOException {
         out.write(PREAMBLE);
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
@@ -94,7 +153,15 @@ public abstract class ConsoleAnnotation<T> implements Serializable, Describable<
         out.write(POSTAMBLE);
     }
 
-    public static ConsoleAnnotation readFrom(DataInputStream in) throws IOException, ClassNotFoundException {
+    /**
+     * Reads a note back from {@linkplain #encodeTo(OutputStream) its encoded form}.
+     *
+     * @param in
+     *      Must point to the beginning of a preamble.
+     *
+     * @return null if the encoded form is malformed.
+     */
+    public static ConsoleNote readFrom(DataInputStream in) throws IOException, ClassNotFoundException {
         byte[] preamble = new byte[PREAMBLE.length];
         in.readFully(preamble);
         if (!Arrays.equals(preamble,PREAMBLE))
@@ -112,12 +179,19 @@ public abstract class ConsoleAnnotation<T> implements Serializable, Describable<
 
         ObjectInputStream ois = new ObjectInputStreamEx(
                 new GZIPInputStream(new ByteArrayInputStream(buf)), Hudson.getInstance().pluginManager.uberClassLoader);
-        return (ConsoleAnnotation) ois.readObject();
+        return (ConsoleNote) ois.readObject();
     }
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Preamble of the encoded form. ANSI escape sequence to stop echo back
+     * plus a few magic characters.
+     */
     public static final byte[] PREAMBLE = "\u001B[8mha:".getBytes();
+    /**
+     * Post amble is the ANSI escape sequence that brings back the echo.
+     */
     public static final byte[] POSTAMBLE = "\u001B[0m".getBytes();
 
     /**

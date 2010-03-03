@@ -15,7 +15,7 @@ public class AntTargetAnnotationTest extends HudsonTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        AntTargetAnnotation.ENABLED = true;
+        AntTargetNote.ENABLED = true;
     }
 
     public void test1() throws Exception {
@@ -24,7 +24,7 @@ public class AntTargetAnnotationTest extends HudsonTestCase {
         p.setScm(new SingleFileSCM("build.xml",getClass().getResource("simple-build.xml")));
         FreeStyleBuild b = buildAndAssertSuccess(p);
 
-        AntTargetAnnotation.ENABLED = true;
+        AntTargetNote.ENABLED = true;
         try {
             HtmlPage c = createWebClient().getPage(b, "console");
             System.out.println(c.asText());
@@ -32,7 +32,7 @@ public class AntTargetAnnotationTest extends HudsonTestCase {
             HtmlElement o = c.getElementById("console-outline");
             assertEquals(2,o.selectNodes("LI").size());
         } finally {
-            AntTargetAnnotation.ENABLED = false;
+            AntTargetNote.ENABLED = false;
         }
     }
 }

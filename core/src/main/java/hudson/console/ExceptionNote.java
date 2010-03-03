@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  *
  * @author Kohsuke Kawaguchi
  */
-public class ExceptionAnnotation extends ConsoleAnnotation<Object> {
+public class ExceptionNote extends ConsoleNote<Object> {
 
     @Override
     public ConsoleAnnotator annotate(Object context, MarkupText text, int charPos) {

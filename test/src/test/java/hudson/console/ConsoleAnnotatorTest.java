@@ -163,7 +163,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
 
 
     /**
-     * Place {@link ConsoleAnnotation}s and make sure it works.
+     * Place {@link ConsoleNote}s and make sure it works.
      */
     public void testConsoleAnnotation() throws Exception {
         final SequenceLock lock = new SequenceLock();
@@ -211,7 +211,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
     /**
      * Places a triple dollar mark at the specified position.
      */
-    public static final class DollarMark extends ConsoleAnnotation<Run> {
+    public static final class DollarMark extends ConsoleNote<Run> {
         public ConsoleAnnotator annotate(Run build, MarkupText text, int charPos) {
             text.addMarkup(charPos,"$$$");
             return null;
@@ -239,7 +239,7 @@ public class ConsoleAnnotatorTest extends HudsonTestCase {
         assertNotNull(html.getElementById("inserted-by-test2"));
     }
 
-    public static final class JustToIncludeScript extends ConsoleAnnotation<Object> {
+    public static final class JustToIncludeScript extends ConsoleNote<Object> {
         public ConsoleAnnotator annotate(Object build, MarkupText text, int charPos) {
             return null;
         }

@@ -11,7 +11,7 @@
         if (!loading) {
             loading = true;
             var u = new Ajax.Updater(document.getElementById("side-panel"),
-                rootURL+"/descriptor/hudson.tasks._ant.AntTargetAnnotation/outline",
+                rootURL+"/descriptor/hudson.tasks._ant.AntTargetNote/outline",
                 {insertion: Insertion.Bottom, onComplete: function() {
                     if (!u.success())   return; // we can't us onSuccess because that kicks in before onComplete
                     outline = document.getElementById("console-outline-body");

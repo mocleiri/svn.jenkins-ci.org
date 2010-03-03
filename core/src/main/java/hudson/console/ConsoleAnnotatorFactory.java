@@ -43,6 +43,16 @@ import java.net.URL;
  * Entry point to the {@link ConsoleAnnotator} extension point. This class creates a new instance
  * of {@link ConsoleAnnotator} that starts a new console annotation session.
  *
+ * <p>
+ * {@link ConsoleAnnotatorFactory}s are used whenever a browser requests console output (as opposed to when
+ * the console output is being produced &mdash; for that see {@link ConsoleNote}.)
+ *
+ * <p>
+ * {@link ConsoleAnnotator}s returned by {@link ConsoleAnnotatorFactory} are asked to start from
+ * an arbitrary line of the output, because typically browsers do not request the entire console output.
+ * Because of this, {@link ConsoleAnnotatorFactory} is generally suitable for peep-hole local annotation
+ * that only requires a small contextual information, such as keyword coloring, URL hyperlinking, and so on.
+ *
  * @author Kohsuke Kawaguchi
  */
 public abstract class ConsoleAnnotatorFactory<T> implements ExtensionPoint {
@@ -84,6 +94,9 @@ public abstract class ConsoleAnnotatorFactory<T> implements ExtensionPoint {
         return c.getClassLoader().getResource(c.getName().replace('.','/').replace('$','/')+"/script.js");
     }
 
+    /**
+     * Serves the JavaScript file associated with this console annotator factory.
+     */
     @WebMethod(name="script.js")
     public void doScriptJs(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
         rsp.serveFile(req,getScriptJs(), TimeUnit2.DAYS.toMillis(1));

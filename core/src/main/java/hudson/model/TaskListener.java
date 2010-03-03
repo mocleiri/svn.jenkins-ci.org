@@ -23,7 +23,7 @@
  */
 package hudson.model;
 
-import hudson.console.ConsoleAnnotation;
+import hudson.console.ConsoleNote;
 import hudson.util.NullStream;
 import hudson.util.StreamTaskListener;
 
@@ -66,7 +66,7 @@ public interface TaskListener {
      * Annotates the current position in the output log by using the given annotation.
      * If the implementation doesn't support annotated output log, this method might be no-op.
      */
-    void annotate(ConsoleAnnotation ann) throws IOException;
+    void annotate(ConsoleNote ann) throws IOException;
 
     /**
      * An error in the build.

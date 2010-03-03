@@ -24,8 +24,8 @@
 package hudson.util;
 
 import hudson.CloseProofOutputStream;
-import hudson.console.ConsoleAnnotation;
-import hudson.console.ExceptionAnnotation;
+import hudson.console.ConsoleNote;
+import hudson.console.ExceptionNote;
 import hudson.model.TaskListener;
 import hudson.remoting.RemoteOutputStream;
 import org.kohsuke.stapler.framework.io.WriterOutputStream;
@@ -115,9 +115,9 @@ public class StreamTaskListener implements TaskListener, Serializable, Closeable
 
         // the idiom in Hudson is to use the returned writer for writing stack trace,
         // so put the marker here to indicate an exception. if the stack trace isn't actually written,
-        // ExceptionAnnotation.annotate recovers gracefully.
+        // ExceptionNote.annotate recovers gracefully.
         try {
-            annotate(new ExceptionAnnotation());
+            annotate(new ExceptionNote());
         } catch (IOException e) {
             // for signature compatibility, we have to swallow this error
         }
@@ -141,7 +141,7 @@ public class StreamTaskListener implements TaskListener, Serializable, Closeable
         return fatalError(String.format(format,args));
     }
 
-    public void annotate(ConsoleAnnotation ann) throws IOException {
+    public void annotate(ConsoleNote ann) throws IOException {
         ann.encodeTo(out);
     }
 

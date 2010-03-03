@@ -25,7 +25,7 @@ package hudson.tasks._ant;
 
 import hudson.Extension;
 import hudson.MarkupText;
-import hudson.console.ConsoleAnnotation;
+import hudson.console.ConsoleNote;
 import hudson.console.ConsoleAnnotationDescriptor;
 import hudson.console.ConsoleAnnotator;
 
@@ -34,8 +34,8 @@ import java.util.regex.Pattern;
 /**
  * Marks the log line "TARGET:" that And uses to mark the beginning of the new target.
  */
-public final class AntTargetAnnotation extends ConsoleAnnotation {
-    public AntTargetAnnotation() {
+public final class AntTargetNote extends ConsoleNote {
+    public AntTargetNote() {
     }
 
     @Override
@@ -56,5 +56,5 @@ public final class AntTargetAnnotation extends ConsoleAnnotation {
         }
     }
 
-    public static boolean ENABLED = Boolean.getBoolean(AntTargetAnnotation.class.getName()+".enabled");
+    public static boolean ENABLED = Boolean.getBoolean(AntTargetNote.class.getName()+".enabled");
 }

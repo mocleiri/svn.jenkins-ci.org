@@ -82,7 +82,7 @@ public class ConsoleAnnotationOutputStream<T> extends LineTransformationOutputSt
         line.reset();
         final StringBuffer strBuf = line.getStringBuffer();
 
-        int next = ConsoleAnnotation.findPreamble(in,0,sz);
+        int next = ConsoleNote.findPreamble(in,0,sz);
 
         List<ConsoleAnnotator<T>> annotators=null;
 
@@ -104,7 +104,7 @@ public class ConsoleAnnotationOutputStream<T> extends LineTransformationOutputSt
                 ByteArrayInputStream b = new ByteArrayInputStream(in, next, rest);
 
                 try {
-                    final ConsoleAnnotation a = ConsoleAnnotation.readFrom(new DataInputStream(b));
+                    final ConsoleNote a = ConsoleNote.readFrom(new DataInputStream(b));
                     if (a!=null) {
                         if (annotators==null)
                             annotators = new ArrayList<ConsoleAnnotator<T>>();
@@ -125,7 +125,7 @@ public class ConsoleAnnotationOutputStream<T> extends LineTransformationOutputSt
                 written += bytesUsed;
 
 
-                next = ConsoleAnnotation.findPreamble(in,written,sz-written);
+                next = ConsoleNote.findPreamble(in,written,sz-written);
             }
             // finish the remaining bytes->chars conversion
             lineOut.write(in,written,sz-written);

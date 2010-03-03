@@ -37,12 +37,12 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Descriptor for {@link ConsoleAnnotation}.
+ * Descriptor for {@link ConsoleNote}.
  *
  * @author Kohsuke Kawaguchi
  */
-public abstract class ConsoleAnnotationDescriptor extends Descriptor<ConsoleAnnotation<?>> implements ExtensionPoint {
-    public ConsoleAnnotationDescriptor(Class<? extends ConsoleAnnotation<?>> clazz) {
+public abstract class ConsoleAnnotationDescriptor extends Descriptor<ConsoleNote<?>> implements ExtensionPoint {
+    public ConsoleAnnotationDescriptor(Class<? extends ConsoleNote<?>> clazz) {
         super(clazz);
     }
 
@@ -75,7 +75,7 @@ public abstract class ConsoleAnnotationDescriptor extends Descriptor<ConsoleAnno
     /**
      * Returns all the registered {@link ConsoleAnnotationDescriptor} descriptors.
      */
-    public static DescriptorExtensionList<ConsoleAnnotation<?>,ConsoleAnnotationDescriptor> all() {
-        return (DescriptorExtensionList)Hudson.getInstance().getDescriptorList(ConsoleAnnotation.class);
+    public static DescriptorExtensionList<ConsoleNote<?>,ConsoleAnnotationDescriptor> all() {
+        return (DescriptorExtensionList)Hudson.getInstance().getDescriptorList(ConsoleNote.class);
     }
 }
