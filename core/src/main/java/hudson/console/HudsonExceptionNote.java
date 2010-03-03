@@ -7,14 +7,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Placed on the beginning of the exception stack trace, and annotates the stack trace of an exception.
+ * Placed on the beginning of the exception stack trace produced by Hudson, which in turn produces hyperlinked stack trace.
  *
- * TODO: rename this to indicate that it's marking exception caused inside Hudson, not in the application,
- * as those things refer to very different places.
+ * <p>
+ * Exceptions in the user code (like junit etc) should be handled differently. This is only for exceptions
+ * that occur inside Hudson.
  *
  * @author Kohsuke Kawaguchi
  */
-public class ExceptionNote extends ConsoleNote<Object> {
+public class HudsonExceptionNote extends ConsoleNote<Object> {
 
     @Override
     public ConsoleAnnotator annotate(Object context, MarkupText text, int charPos) {
