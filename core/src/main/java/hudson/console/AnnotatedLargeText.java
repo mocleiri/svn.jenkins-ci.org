@@ -50,6 +50,16 @@ import java.util.zip.GZIPOutputStream;
 import static java.lang.Math.abs;
 
 /**
+ * Extension to {@link LargeText} that handles annotations by {@link ConsoleAnnotator}.
+ *
+ * <p>
+ * In addition to run each line through {@link ConsoleAnnotationOutputStream} for adding markup,
+ * this class persists {@link ConsoleAnnotator} into a byte sequence and send it to the client
+ * as an HTTP header. The client JavaScript sends it back next time it fetches the following output.
+ *
+ * <p>
+ * The serialized {@link ConsoleAnnotator} is encrypted to avoid malicious clients from instantiating
+ * arbitrary {@link ConsoleAnnotator}s.
  *
  * @param <T>
  *      Context type.

@@ -40,7 +40,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Used to convert plain text console output (as byte sequence) + embedded annotations into HTML (as char sequence).
+ * Used to convert plain text console output (as byte sequence) + embedded annotations into HTML (as char sequence),
+ * by using {@link ConsoleAnnotator}.
  *
  * @param <T>
  *      Context type.
