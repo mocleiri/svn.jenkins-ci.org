@@ -72,8 +72,8 @@ public class HudsonClearToolLauncher implements ClearToolLauncher {
     }
 
     public boolean run(String[] cmd, InputStream inputStream, OutputStream outputStream, 
-    		FilePath filePath, boolean logCommand) throws IOException,
-                                                                                                                   InterruptedException {
+    		FilePath filePath, boolean logCommand) throws IOException, InterruptedException {   	
+    	logCommand = logCommand || System.getenv("HUDSON_CLEARCASE_VERBOSE").equals("1");    	
         OutputStream out = outputStream;
         FilePath path = filePath;
         String[] env = new String[0];

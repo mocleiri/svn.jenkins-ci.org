@@ -239,17 +239,9 @@ public class UcmHistoryAction extends AbstractHistoryAction {
         List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool.getLauncher(), 
         		stream, UcmDynamicCheckoutAction.getConfiguredStreamViewName(build.getProject().getName(), stream));        
         
-        // find the previous build running on the same stream
-        ClearCaseDataAction clearcaseDataAction = null;
+        // find the previous build running on the same stream        
         Run previousBuild = build.getPreviousBuild();
-        while (previousBuild != null && clearcaseDataAction == null) {
-        	clearcaseDataAction = build.getAction(ClearCaseDataAction.class);
-        	
-        	if (clearcaseDataAction == null || !clearcaseDataAction.getStream().equals(stream))        	
-        		clearcaseDataAction = null;
-        	
-        	previousBuild = previousBuild.getPreviousBuild();
-        }
+        ClearCaseDataAction clearcaseDataAction = build.getAction(ClearCaseDataAction.class);;
         
         // get previous build baselines (set as an action on the previous build by the checkout operation)
         List<UcmCommon.BaselineDesc> previousBuildBls = null;
@@ -290,18 +282,25 @@ public class UcmHistoryAction extends AbstractHistoryAction {
         ClearCaseDataAction clearcaseDataAction = null;
         Run previousBuild = build.getPreviousBuild();
         while (previousBuild != null && clearcaseDataAction == null) {
-        	clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
+        	clearcaseDataAction = build.getAction(ClearCaseDataAction.class);
         	
-        	if (clearcaseDataAction == null || !clearcaseDataAction.getStream().equals(stream))        	
-        		clearcaseDataAction = null;
-        	
-        	previousBuild = previousBuild.getPreviousBuild();
+        	if (clearcaseDataAction != null && !(clearcaseDataAction.getStream().equals(stream)) ) {      	
+        		clearcaseDataAction = null;        	
+        		previousBuild = previousBuild.getPreviousBuild();
+        	}
         }
         
         // get previous build baselines (set as an action on the previous build by the checkout operation)
         List<UcmCommon.BaselineDesc> previousBuildBls = null;
-        if (clearcaseDataAction != null)
+        if (clearcaseDataAction != null) {
+        	cleartool.getLauncher().getListener().getLogger().println("Checking changes by comparing this build and the last build (" + 
+        			previousBuild.getNumber() + ") that ran on stream " + stream);
+        	
         	previousBuildBls = clearcaseDataAction.getLatestBlsOnConfiguredStream();
+        }
+        else {
+        	cleartool.getLauncher().getListener().getLogger().println("Found no previous build that ran on stream " + stream);        	
+        }
 		
         // compare
         if (latestBlsOnConfgiuredStream != null && previousBuildBls != null) {

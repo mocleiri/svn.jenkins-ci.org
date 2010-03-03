@@ -26,7 +26,9 @@ package hudson.plugins.clearcase.action;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.Util;
 import hudson.model.AbstractBuild;
+import hudson.model.Computer;
 import hudson.model.Run;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearToolLauncher;
@@ -41,6 +43,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.TimeZone;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Check out action for dynamic views.
@@ -253,7 +257,10 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         
 	public static String getConfiguredStreamViewName(String jobName, String stream) {
 		jobName = jobName.replace(" ", "");
-		return UcmCommon.getNoVob(stream) + "_" + jobName + "_" + CONFIGURED_STREAM_VIEW_SUFFIX;	
+		Computer computer = Computer.currentComputer();
+		String nodeName = (Util.fixEmpty(StringUtils.isEmpty(computer.getName()) ? "master"
+                : computer.getName()));
+		return UcmCommon.getNoVob(stream) + "_" + jobName + "_" + nodeName + "_" + CONFIGURED_STREAM_VIEW_SUFFIX;	
 	}	
 	
 	private String getConfiguredStreamViewName() {		
@@ -267,6 +274,7 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
 		String jobName = build.getProject().getName().replace(" ", "");
 		return BUILD_STREAM_PREFIX + jobName + "." + stream;
 	}
+
 
 
 }
