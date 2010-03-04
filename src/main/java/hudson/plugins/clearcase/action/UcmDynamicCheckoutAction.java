@@ -257,10 +257,7 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         
 	public static String getConfiguredStreamViewName(String jobName, String stream) {
 		jobName = jobName.replace(" ", "");
-		Computer computer = Computer.currentComputer();
-		String nodeName = (Util.fixEmpty(StringUtils.isEmpty(computer.getName()) ? "master"
-                : computer.getName()));
-		return UcmCommon.getNoVob(stream) + "_" + jobName + "_" + nodeName + "_" + CONFIGURED_STREAM_VIEW_SUFFIX;	
+		return UcmCommon.getNoVob(stream) + "_" + jobName + "_" + CONFIGURED_STREAM_VIEW_SUFFIX;	
 	}	
 	
 	private String getConfiguredStreamViewName() {		
