@@ -117,9 +117,17 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     	else {
     		return stream;	
     	}
-    }    
+    }
 
-    /**
+    public boolean isAllocateViewName() {
+		return allocateViewName;
+	}
+
+	public void setAllocateViewName(boolean allocateViewName) {
+		this.allocateViewName = allocateViewName;
+	}
+
+	/**
      * Return the branch type used for changelog and polling. By default this will be the empty string, and the stream
      * will be split to get the branch.
      * 
