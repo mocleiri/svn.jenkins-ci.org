@@ -65,7 +65,7 @@ import org.kohsuke.stapler.StaplerRequest;
  */
 public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 	
-	private final static String AUTO_ALLOCATE_VIEW_NAME = "${STREAM}_${JOB_NAME}_${NODE_NAME}_bs_hudson_view";
+	private final static String AUTO_ALLOCATE_VIEW_NAME = "${STREAM}_${JOB_NAME}_bs_hudson_view";
 	
     private final String stream;
     private String paramStream; 
