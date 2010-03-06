@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.348 API)
+Hudson (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.348 API)";
+        parent.document.title="Hudson (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -1217,6 +1217,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getExtensionList(java.lang.String)">getExtensionList</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;extensionType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to bind <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>s to URLs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getFingerprint(java.lang.String)">getFingerprint</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;md5sum)</CODE>
 
@@ -1858,6 +1866,15 @@ P</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the user of the given name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getVersion()">getVersion</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parses <A HREF="../../hudson/model/Hudson.html#VERSION"><CODE>VERSION</CODE></A> into <A HREF="../../hudson/util/VersionNumber.html" title="class in hudson.util"><CODE>VersionNumber</CODE></A>, or null if it's not parseable as a version number
+ (such as when Hudson is run with "mvn hudson-dev:run")</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2957,7 +2974,7 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>className</CODE> - Either fully qualified class name (recommended) or the short name.</DL>
+<DT><B>Parameters:</B><DD><CODE>className</CODE> - Either fully qualified class name (recommended) or the short name of a <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A> subtype.</DL>
 </DD>
 </DL>
 <HR>
@@ -4312,6 +4329,27 @@ public &lt;T&gt; <A HREF="../../hudson/ExtensionList.html" title="class in hudso
 <DT><B>Parameters:</B><DD><CODE>extensionType</CODE> - The base type that represents the extension point. Normally <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A> subtype
       but that's not a hard requirement.
 <DT><B>Returns:</B><DD>Can be an empty list but never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExtensionList(java.lang.String)"><!-- --></A><H3>
+getExtensionList</H3>
+<PRE>
+public <A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A> <B>getExtensionList</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;extensionType)
+                               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassNotFoundException.html?is-external=true" title="class or interface in java.lang">ClassNotFoundException</A></PRE>
+<DL>
+<DD>Used to bind <A HREF="../../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>s to URLs.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassNotFoundException.html?is-external=true" title="class or interface in java.lang">ClassNotFoundException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.349</DD>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -6081,6 +6119,23 @@ public static boolean <B>isAdmin</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req
 <DD><B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
       Define a custom <A HREF="../../hudson/security/Permission.html" title="class in hudson.security"><CODE>Permission</CODE></A> and check against ACL.
       See <A HREF="../../hudson/model/Hudson.html#isAdmin()"><CODE>isAdmin()</CODE></A> for more instructions.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVersion()"><!-- --></A><H3>
+getVersion</H3>
+<PRE>
+public static <A HREF="../../hudson/util/VersionNumber.html" title="class in hudson.util">VersionNumber</A> <B>getVersion</B>()</PRE>
+<DL>
+<DD>Parses <A HREF="../../hudson/model/Hudson.html#VERSION"><CODE>VERSION</CODE></A> into <A HREF="../../hudson/util/VersionNumber.html" title="class in hudson.util"><CODE>VersionNumber</CODE></A>, or null if it's not parseable as a version number
+ (such as when Hudson is run with "mvn hudson-dev:run")
 <P>
 <DD><DL>
 </DL>

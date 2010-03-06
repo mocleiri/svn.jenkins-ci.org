@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LogTaskListener (Hudson main module 1.348 API)
+LogTaskListener (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LogTaskListener (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LogTaskListener (Hudson main module 1.348 API)";
+        parent.document.title="LogTaskListener (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -155,6 +155,14 @@ Class LogTaskListener</H2>
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/LogTaskListener.html#annotate(hudson.console.ConsoleNote)">annotate</A></B>(<A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>&nbsp;ann)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Annotates the current position in the output log by using the given annotation.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -330,6 +338,24 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintWriter.html
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/TaskListener.html#fatalError(java.lang.String, java.lang.Object...)">fatalError</A></CODE> in interface <CODE><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="annotate(hudson.console.ConsoleNote)"><!-- --></A><H3>
+annotate</H3>
+<PRE>
+public void <B>annotate</B>(<A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>&nbsp;ann)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/TaskListener.html#annotate(hudson.console.ConsoleNote)">TaskListener</A></CODE></B></DD>
+<DD>Annotates the current position in the output log by using the given annotation.
+ If the implementation doesn't support annotated output log, this method might be no-op.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/TaskListener.html#annotate(hudson.console.ConsoleNote)">annotate</A></CODE> in interface <CODE><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

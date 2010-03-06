@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.MarkupText (Hudson main module 1.348 API)
+Uses of Class hudson.MarkupText (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.MarkupText (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.MarkupText (Hudson main module 1.348 API)";
+        parent.document.title="Uses of Class hudson.MarkupText (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -91,8 +91,63 @@ function windowTitle()
 Packages that use <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.console"><B>hudson.console</B></A></TD>
+<TD>Beef up the plain text console output by adding HTML markup.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.scm"><B>hudson.scm</B></A></TD>
 <TD>Hudson's interface with source code management systems.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks._ant"><B>hudson.tasks._ant</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.console"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A> in <A HREF="../../hudson/console/package-summary.html">hudson.console</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/console/package-summary.html">hudson.console</A> with parameters of type <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/console/ConsoleAnnotator.html" title="class in hudson.console">ConsoleAnnotator</A></CODE></FONT></TD>
+<TD><CODE><B>HudsonExceptionNote.</B><B><A HREF="../../hudson/console/HudsonExceptionNote.html#annotate(java.lang.Object, hudson.MarkupText, int)">annotate</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;context,
+         <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A>&nbsp;text,
+         int&nbsp;charPos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/console/ConsoleAnnotator.html" title="class in hudson.console">ConsoleAnnotator</A></CODE></FONT></TD>
+<TD><CODE><B>ConsoleAnnotator.</B><B><A HREF="../../hudson/console/ConsoleAnnotator.html#annotate(T, hudson.MarkupText)">annotate</A></B>(<A HREF="../../hudson/console/ConsoleAnnotator.html" title="type parameter in ConsoleAnnotator">T</A>&nbsp;context,
+         <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A>&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Annotates one line.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../hudson/console/ConsoleAnnotator.html" title="class in hudson.console">ConsoleAnnotator</A></CODE></FONT></TD>
+<TD><CODE><B>ConsoleNote.</B><B><A HREF="../../hudson/console/ConsoleNote.html#annotate(T, hudson.MarkupText, int)">annotate</A></B>(<A HREF="../../hudson/console/ConsoleNote.html" title="type parameter in ConsoleNote">T</A>&nbsp;context,
+         <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A>&nbsp;text,
+         int&nbsp;charPos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When the line of a console output that this annotation is attached is read by someone,
+ a new <A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console"><CODE>ConsoleNote</CODE></A> is de-serialized and this method is invoked to annotate that line.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -120,6 +175,33 @@ Uses of <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupTex
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by Hudson to allow markups to be added to the changelog text.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks._ant"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A> in <A HREF="../../hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A> with parameters of type <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/console/ConsoleAnnotator.html" title="class in hudson.console">ConsoleAnnotator</A></CODE></FONT></TD>
+<TD><CODE><B>AntTargetNote.</B><B><A HREF="../../hudson/tasks/_ant/AntTargetNote.html#annotate(java.lang.Object, hudson.MarkupText, int)">annotate</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;context,
+         <A HREF="../../hudson/MarkupText.html" title="class in hudson">MarkupText</A>&nbsp;text,
+         int&nbsp;charPos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;

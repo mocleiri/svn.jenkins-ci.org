@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.348 API)
+AbstractProject (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.348 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -1142,6 +1142,14 @@ void</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#setAssignedNode(hudson.model.Node)">setAssignedNode</A></B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;l)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assigns this job to the given node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#setBlockBuildWhenUpstreamBuilding(boolean)">setBlockBuildWhenUpstreamBuilding</A></B>(boolean&nbsp;b)</CODE>
 
 <BR>
@@ -1529,6 +1537,25 @@ public void <B>setAssignedLabel</B>(<A HREF="../../hudson/model/Label.html" titl
                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Sets the assigned label.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAssignedNode(hudson.model.Node)"><!-- --></A><H3>
+setAssignedNode</H3>
+<PRE>
+public void <B>setAssignedNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;l)
+                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Assigns this job to the given node. A convenience method over <A HREF="../../hudson/model/AbstractProject.html#setAssignedLabel(hudson.model.Label)"><CODE>setAssignedLabel(Label)</CODE></A>.
 <P>
 <DD><DL>
 </DL>

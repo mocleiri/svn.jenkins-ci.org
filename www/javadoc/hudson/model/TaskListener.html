@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TaskListener (Hudson main module 1.348 API)
+TaskListener (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskListener (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskListener (Hudson main module 1.348 API)";
+        parent.document.title="TaskListener (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -159,6 +159,14 @@ Receives events that happen during some lengthy operation
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TaskListener.html#annotate(hudson.console.ConsoleNote)">annotate</A></B>(<A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>&nbsp;ann)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Annotates the current position in the output log by using the given annotation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintWriter.html?is-external=true" title="class or interface in java.io">PrintWriter</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/TaskListener.html#error(java.lang.String)">error</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;msg)</CODE>
 
@@ -244,6 +252,25 @@ getLogger</H3>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>must be non-null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="annotate(hudson.console.ConsoleNote)"><!-- --></A><H3>
+annotate</H3>
+<PRE>
+void <B>annotate</B>(<A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>&nbsp;ann)
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Annotates the current position in the output log by using the given annotation.
+ If the implementation doesn't support annotated output log, this method might be no-op.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.349</DD>
+</DL>
 </DD>
 </DL>
 <HR>

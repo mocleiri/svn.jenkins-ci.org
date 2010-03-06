@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractMarkupText (Hudson main module 1.348 API)
+AbstractMarkupText (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractMarkupText (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractMarkupText (Hudson main module 1.348 API)";
+        parent.document.title="AbstractMarkupText (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -132,6 +132,16 @@ Common part between <A HREF="../hudson/MarkupText.html" title="class in hudson">
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/AbstractMarkupText.html#addHyperlink(int, int, java.lang.String)">addHyperlink</A></B>(int&nbsp;startPos,
+             int&nbsp;endPos,
+             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserts an A tag that surrounds the given position.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/AbstractMarkupText.html#addMarkup(int, int, java.lang.String, java.lang.String)">addMarkup</A></B>(int&nbsp;startPos,
           int&nbsp;endPos,
@@ -148,6 +158,14 @@ Common part between <A HREF="../hudson/MarkupText.html" title="class in hudson">
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/AbstractMarkupText.html#findToken(java.util.regex.Pattern)">findToken</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/Pattern.html?is-external=true" title="class or interface in java.util.regex">Pattern</A>&nbsp;pattern)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find the first occurrence of the given pattern in this text, or null.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -253,6 +271,23 @@ public abstract void <B>addMarkup</B>(int&nbsp;startPos,
 </DL>
 <HR>
 
+<A NAME="addHyperlink(int, int, java.lang.String)"><!-- --></A><H3>
+addHyperlink</H3>
+<PRE>
+public void <B>addHyperlink</B>(int&nbsp;startPos,
+                         int&nbsp;endPos,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url)</PRE>
+<DL>
+<DD>Inserts an A tag that surrounds the given position.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.349</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="wrapBy(java.lang.String, java.lang.String)"><!-- --></A><H3>
 wrapBy</H3>
 <PRE>
@@ -262,6 +297,21 @@ public final void <B>wrapBy</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api
 <DD>Adds a start tag and end tag around the entire text
 <P>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findToken(java.util.regex.Pattern)"><!-- --></A><H3>
+findToken</H3>
+<PRE>
+public <A HREF="../hudson/MarkupText.SubText.html" title="class in hudson">MarkupText.SubText</A> <B>findToken</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/Pattern.html?is-external=true" title="class or interface in java.util.regex">Pattern</A>&nbsp;pattern)</PRE>
+<DL>
+<DD>Find the first occurrence of the given pattern in this text, or null.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.349</DD>
 </DL>
 </DD>
 </DL>

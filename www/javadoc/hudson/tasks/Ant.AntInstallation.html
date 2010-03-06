@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Ant.AntInstallation (Hudson main module 1.348 API)
+Ant.AntInstallation (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.AntInstallation (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.AntInstallation (Hudson main module 1.348 API)";
+        parent.document.title="Ant.AntInstallation (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tasks/Ant.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.ConverterImpl.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/Ant.AntInstallation.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Ant.AntInstallation.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -129,13 +129,31 @@ Represents the Ant installation on the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.ConverterImpl.html" title="class in hudson.tasks">Ant.AntInstallation.ConverterImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks">Ant.AntInstallation.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
+&nbsp;<A NAME="nested_classes_inherited_from_class_hudson.tools.ToolInstallation"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.ToolConverter.html" title="class in hudson.tools">ToolInstallation.ToolConverter</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<A NAME="nested_classes_inherited_from_class_hudson.ExtensionPoint"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from interface hudson.<A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></B></TH>
@@ -203,7 +221,7 @@ Represents the Ant installation on the system.
 <TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#getAntHome()">getAntHome</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I></TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -221,14 +239,6 @@ Represents the Ant installation on the system.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if the executable exists.</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#getHome()">getHome</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the home directory of this tool.</TD>
-</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.tools.ToolInstallation"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -236,7 +246,7 @@ Represents the Ant installation on the system.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getHome()">getHome</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -298,32 +308,12 @@ getAntHome</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getAntHome</B>()</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>getHome()</CODE></A>.</I>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A>.</I>
 <P>
 <DD>install directory.
 <P>
 <DD><DL>
 </DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getHome()"><!-- --></A><H3>
-getHome</H3>
-<PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getHome</B>()</PRE>
-<DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../hudson/tools/ToolInstallation.html#getHome()">ToolInstallation</A></CODE></B></DD>
-<DD>Gets the home directory of this tool.
- 
- The path can be in Unix format as well as in Windows format.
- Must be absolute.
-<P>
-<DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#getHome()">getHome</A></CODE> in class <CODE><A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -443,7 +433,7 @@ public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hud
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/tasks/Ant.html" title="class in hudson.tasks"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.DescriptorImpl.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.ConverterImpl.html" title="class in hudson.tasks"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/tasks/Ant.AntInstallation.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="Ant.AntInstallation.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-IOUtils (Hudson main module 1.348 API)
+IOUtils (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ IOUtils (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="IOUtils (Hudson main module 1.348 API)";
+        parent.document.title="IOUtils (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -185,6 +185,15 @@ Adds more to commons-io.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ensures that the given directory exists (if not, it's created, including all the parent directories.)</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/IOUtils.html#skip(java.io.InputStream, long)">skip</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+     long&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fully skips the specified size from the given input stream</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.commons.io.IOUtils"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -277,6 +286,25 @@ public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html
 <DT><B>Returns:</B><DD>This method returns the 'dir' parameter so that the method call flows better.
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="skip(java.io.InputStream, long)"><!-- --></A><H3>
+skip</H3>
+<PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A> <B>skip</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+                               long&nbsp;size)
+                        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Fully skips the specified size from the given input stream
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.349</DD>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

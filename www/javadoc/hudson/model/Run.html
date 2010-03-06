@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.348 API)
+Run (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.348 API)";
+        parent.document.title="Run (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -812,11 +812,19 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getLogInputStream()">getLogInputStream</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an input stream that reads from the log file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getLogReader()">getLogReader</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a Reader that reads from the log file.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1098,6 +1106,15 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#writeLogTo(long, org.apache.commons.jelly.XMLOutput)">writeLogTo</A></B>(long&nbsp;offset,
+           org.apache.commons.jelly.XMLOutput&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used from <tt>console.jelly</tt> to write annotated log to the given output.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
@@ -2227,13 +2244,13 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-ext
 </DL>
 <HR>
 
-<A NAME="getLogReader()"><!-- --></A><H3>
-getLogReader</H3>
+<A NAME="getLogInputStream()"><!-- --></A><H3>
+getLogInputStream</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A> <B>getLogReader</B>()
-                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A> <B>getLogInputStream</B>()
+                              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD>Returns a Reader that reads from the log file.
+<DD>Returns an input stream that reads from the log file.
  It will use a gzip-compressed log file (log.gz) if that exists.
 <P>
 <DD><DL>
@@ -2241,9 +2258,50 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Reader.html?is-e
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>a reader from the log file, or null if none exists
+<DT><B>Returns:</B><DD>an input stream from the log file, or null if none exists
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.349</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLogReader()"><!-- --></A><H3>
+getLogReader</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A> <B>getLogReader</B>()
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeLogTo(long, org.apache.commons.jelly.XMLOutput)"><!-- --></A><H3>
+writeLogTo</H3>
+<PRE>
+public void <B>writeLogTo</B>(long&nbsp;offset,
+                       org.apache.commons.jelly.XMLOutput&nbsp;out)
+                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Used from <tt>console.jelly</tt> to write annotated log to the given output.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.349</DD>
+</DL>
 </DD>
 </DL>
 <HR>

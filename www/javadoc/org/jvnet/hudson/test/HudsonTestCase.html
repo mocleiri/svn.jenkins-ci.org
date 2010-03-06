@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.348 API)
+HudsonTestCase (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.348 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -320,6 +320,23 @@ R</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(java.util.concurrent.Future)">assertBuildStatusSuccess</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Future.html?is-external=true" title="class or interface in java.util.concurrent">Future</A>&lt;? extends R&gt;&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;R extends <A HREF="../../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt; 
+<BR>
+R</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertBuildStatusSuccess(R)">assertBuildStatusSuccess</A></B>(R&nbsp;r)</CODE>
 
 <BR>
@@ -422,6 +439,23 @@ R</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;J extends <A HREF="../../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;J,R&gt;,R extends <A HREF="../../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;J,R&gt;&gt; 
+<BR>
+R</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(J)">buildAndAssertSuccess</A></B>(J&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="../../../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configureDefaultAnt()">configureDefaultAnt</A></B>()</CODE>
 
@@ -460,6 +494,14 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configures a security realm for a test.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves">CommandLauncher</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createComputerLauncher(hudson.EnvVars)">createComputerLauncher</A></B>(<A HREF="../../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../../../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves"><CODE>CommandLauncher</CODE></A> for launching a slave locally.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -544,6 +586,14 @@ R</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new slave on the local host and wait for it to come online
  before returning</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/jvnet/hudson/test/PretendSlave.html" title="class in org.jvnet.hudson.test">PretendSlave</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#createPretendSlave(org.jvnet.hudson.test.FakeLauncher)">createPretendSlave</A></B>(<A HREF="../../../../org/jvnet/hudson/test/FakeLauncher.html" title="interface in org.jvnet.hudson.test">FakeLauncher</A>&nbsp;faker)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -701,14 +751,6 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blocks until the ENTER key is hit.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;org.mozilla.javascript.tools.debugger.Dim</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#interactiveJavaScriptDebugger()">interactiveJavaScriptDebugger</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts an interactive JavaScript debugger, and break at the next JavaScript execution.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1598,6 +1640,44 @@ public <A HREF="../../../../hudson/slaves/DumbSlave.html" title="class in hudson
 </DL>
 <HR>
 
+<A NAME="createPretendSlave(org.jvnet.hudson.test.FakeLauncher)"><!-- --></A><H3>
+createPretendSlave</H3>
+<PRE>
+public <A HREF="../../../../org/jvnet/hudson/test/PretendSlave.html" title="class in org.jvnet.hudson.test">PretendSlave</A> <B>createPretendSlave</B>(<A HREF="../../../../org/jvnet/hudson/test/FakeLauncher.html" title="interface in org.jvnet.hudson.test">FakeLauncher</A>&nbsp;faker)
+                                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createComputerLauncher(hudson.EnvVars)"><!-- --></A><H3>
+createComputerLauncher</H3>
+<PRE>
+public <A HREF="../../../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves">CommandLauncher</A> <B>createComputerLauncher</B>(<A HREF="../../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)
+                                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URISyntaxException.html?is-external=true" title="class or interface in java.net">URISyntaxException</A>,
+                                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/MalformedURLException.html?is-external=true" title="class or interface in java.net">MalformedURLException</A></PRE>
+<DL>
+<DD>Creates a <A HREF="../../../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves"><CODE>CommandLauncher</CODE></A> for launching a slave locally.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>env</CODE> - Environment variables to add to the slave process. Can be null.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URISyntaxException.html?is-external=true" title="class or interface in java.net">URISyntaxException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/MalformedURLException.html?is-external=true" title="class or interface in java.net">MalformedURLException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="createOnlineSlave()"><!-- --></A><H3>
 createOnlineSlave</H3>
 <PRE>
@@ -1675,29 +1755,6 @@ public void <B>interactiveBreak</B>()
 
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="interactiveJavaScriptDebugger()"><!-- --></A><H3>
-interactiveJavaScriptDebugger</H3>
-<PRE>
-public org.mozilla.javascript.tools.debugger.Dim <B>interactiveJavaScriptDebugger</B>()</PRE>
-<DL>
-<DD>Starts an interactive JavaScript debugger, and break at the next JavaScript execution.
-
- <p>
- This is useful during debugging a test so that you can step execute and inspect state of JavaScript.
- This will launch a Swing GUI, and the method returns immediately.
-
- <p>
- Note that installing a debugger appears to make an execution of JavaScript substantially slower.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <HR>
@@ -1817,6 +1874,40 @@ assertBuildStatusSuccess</H3>
 <PRE>
 public &lt;R extends <A HREF="../../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt; R <B>assertBuildStatusSuccess</B>(R&nbsp;r)
                                        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertBuildStatusSuccess(java.util.concurrent.Future)"><!-- --></A><H3>
+assertBuildStatusSuccess</H3>
+<PRE>
+public &lt;R extends <A HREF="../../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt; R <B>assertBuildStatusSuccess</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Future.html?is-external=true" title="class or interface in java.util.concurrent">Future</A>&lt;? extends R&gt;&nbsp;r)
+                                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildAndAssertSuccess(hudson.model.AbstractProject)"><!-- --></A><A NAME="buildAndAssertSuccess(J)"><!-- --></A><H3>
+buildAndAssertSuccess</H3>
+<PRE>
+public &lt;J extends <A HREF="../../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;J,R&gt;,R extends <A HREF="../../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;J,R&gt;&gt; R <B>buildAndAssertSuccess</B>(J&nbsp;job)
+                                                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
 <DL>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.348 API)
+Deprecated List (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.348 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -752,7 +752,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Ant.AntInstallation.html#getAntHome()">hudson.tasks.Ant.AntInstallation.getAntHome()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.307. Use <A HREF="hudson/tasks/Ant.AntInstallation.html#getHome()"><CODE>Ant.AntInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.307. Use <A HREF="hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/triggers/Triggers.html#getApplicableTriggers(hudson.model.Item)">hudson.triggers.Triggers.getApplicableTriggers(Item)</A>
@@ -845,7 +845,7 @@ function windowTitle()
 <TD><A HREF="hudson/model/JDK.html#getJavaHome()">hudson.model.JDK.getJavaHome()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.304
-      Use <A HREF="hudson/model/JDK.html#getHome()"><CODE>JDK.getHome()</CODE></A></I>&nbsp;</TD>
+      Use <A HREF="hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixProject.html#getJDK()">hudson.matrix.MatrixProject.getJDK()</A>
@@ -891,7 +891,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Maven.MavenInstallation.html#getMavenHome()">hudson.tasks.Maven.MavenInstallation.getMavenHome()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308. Use <A HREF="hudson/tasks/Maven.MavenInstallation.html#getHome()"><CODE>Maven.MavenInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.308. Use <A HREF="hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#getModuleRoot()">hudson.model.AbstractProject.getModuleRoot()</A>
@@ -1533,6 +1533,26 @@ function windowTitle()
 <TD><A HREF="hudson/model/Slave.html#Slave(java.lang.String, java.lang.String, java.lang.String, int, hudson.model.Node.Mode, java.lang.String, hudson.slaves.ComputerLauncher, hudson.slaves.RetentionStrategy)">hudson.model.Slave(String, String, String, int, Node.Mode, String, ComputerLauncher, RetentionStrategy)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2009-02-20.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/StreamBuildListener.html#StreamBuildListener(java.io.PrintStream)">hudson.model.StreamBuildListener(PrintStream)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.349
+      The caller should use <A HREF="hudson/model/StreamBuildListener.html#StreamBuildListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamBuildListener.StreamBuildListener(OutputStream, Charset)</CODE></A> to pass in
+      the charset and output stream separately, so that this class can handle encoding correctly.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/StreamTaskListener.html#StreamTaskListener()">hudson.util.StreamTaskListener()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.349
+      Use <A HREF="hudson/model/TaskListener.html#NULL"><CODE>TaskListener.NULL</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.PrintStream)">hudson.util.StreamTaskListener(PrintStream)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.349
+      The caller should use <A HREF="hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamTaskListener.StreamTaskListener(OutputStream, Charset)</CODE></A> to pass in
+      the charset and output stream separately, so that this class can handle encoding correctly.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String)">hudson.tools.ToolInstallation(String, String)</A>

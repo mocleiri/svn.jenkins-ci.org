@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StreamTaskListener (Hudson main module 1.348 API)
+StreamTaskListener (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StreamTaskListener (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StreamTaskListener (Hudson main module 1.348 API)";
+        parent.document.title="StreamTaskListener (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -97,11 +97,14 @@ Class StreamTaskListener</H2>
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.StreamTaskListener</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>StreamTaskListener</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DL>
+<DT><PRE>public class <B>StreamTaskListener</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A></DL>
 </PRE>
 
 <P>
@@ -150,10 +153,18 @@ Class StreamTaskListener</H2>
 <TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener()">StreamTaskListener</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><CODE>StreamTaskListener</CODE></A> that swallows the result.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.349
+      Use <A HREF="../../hudson/model/TaskListener.html#NULL"><CODE>TaskListener.NULL</CODE></A></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.File)">StreamTaskListener</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.File, java.nio.charset.Charset)">StreamTaskListener</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;out,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset">Charset</A>&nbsp;charset)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -165,10 +176,19 @@ Class StreamTaskListener</H2>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.PrintStream)">StreamTaskListener</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;out)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)">StreamTaskListener</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset">Charset</A>&nbsp;charset)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.PrintStream)">StreamTaskListener</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.349
+      The caller should use <A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamTaskListener(OutputStream, Charset)</CODE></A> to pass in
+      the charset and output stream separately, so that this class can handle encoding correctly.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.Writer)">StreamTaskListener</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)</CODE>
@@ -189,10 +209,26 @@ Class StreamTaskListener</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#annotate(hudson.console.ConsoleNote)">annotate</A></B>(<A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>&nbsp;ann)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Annotates the current position in the output log by using the given annotation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#close()">close</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#closeQuietly()">closeQuietly</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Closes this listener and swallows any exceptions, if raised.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -264,6 +300,10 @@ StreamTaskListener</H3>
 <PRE>
 public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;out)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.349
+      The caller should use <A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamTaskListener(OutputStream, Charset)</CODE></A> to pass in
+      the charset and output stream separately, so that this class can handle encoding correctly.</I>
+<P>
 </DL>
 <HR>
 
@@ -275,34 +315,68 @@ public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/ap
 </DL>
 <HR>
 
+<A NAME="StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><!-- --></A><H3>
+StreamTaskListener</H3>
+<PRE>
+public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset">Charset</A>&nbsp;charset)</PRE>
+<DL>
+</DL>
+<HR>
+
 <A NAME="StreamTaskListener(java.io.File)"><!-- --></A><H3>
 StreamTaskListener</H3>
 <PRE>
 public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;out)
-                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileNotFoundException.html?is-external=true" title="class or interface in java.io">FileNotFoundException</A></PRE>
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileNotFoundException.html?is-external=true" title="class or interface in java.io">FileNotFoundException</A></CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DL>
+<HR>
+
+<A NAME="StreamTaskListener(java.io.File, java.nio.charset.Charset)"><!-- --></A><H3>
+StreamTaskListener</H3>
+<PRE>
+public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;out,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/nio/charset/Charset.html?is-external=true" title="class or interface in java.nio.charset">Charset</A>&nbsp;charset)
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DL>
 <HR>
 
 <A NAME="StreamTaskListener(java.io.Writer)"><!-- --></A><H3>
 StreamTaskListener</H3>
 <PRE>
-public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)</PRE>
+public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DL>
 <HR>
 
 <A NAME="StreamTaskListener()"><!-- --></A><H3>
 StreamTaskListener</H3>
 <PRE>
-public <B>StreamTaskListener</B>()</PRE>
+public <B>StreamTaskListener</B>()
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD>Creates <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><CODE>StreamTaskListener</CODE></A> that swallows the result.
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.349
+      Use <A HREF="../../hudson/model/TaskListener.html#NULL"><CODE>TaskListener.NULL</CODE></A></I>
 <P>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -405,15 +479,57 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintWriter.html
 </DL>
 <HR>
 
+<A NAME="annotate(hudson.console.ConsoleNote)"><!-- --></A><H3>
+annotate</H3>
+<PRE>
+public void <B>annotate</B>(<A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>&nbsp;ann)
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/TaskListener.html#annotate(hudson.console.ConsoleNote)">TaskListener</A></CODE></B></DD>
+<DD>Annotates the current position in the output log by using the given annotation.
+ If the implementation doesn't support annotated output log, this method might be no-op.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/TaskListener.html#annotate(hudson.console.ConsoleNote)">annotate</A></CODE> in interface <CODE><A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="close()"><!-- --></A><H3>
 close</H3>
 <PRE>
-public void <B>close</B>()</PRE>
+public void <B>close</B>()
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true#close()" title="class or interface in java.io">close</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="closeQuietly()"><!-- --></A><H3>
+closeQuietly</H3>
+<PRE>
+public void <B>closeQuietly</B>()</PRE>
+<DL>
+<DD>Closes this listener and swallows any exceptions, if raised.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.349</DD>
 </DL>
 </DD>
 </DL>

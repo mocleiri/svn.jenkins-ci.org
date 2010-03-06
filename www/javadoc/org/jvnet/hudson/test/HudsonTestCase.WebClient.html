@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase.WebClient (Hudson main module 1.348 API)
+HudsonTestCase.WebClient (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase.WebClient (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.348 API)";
+        parent.document.title="HudsonTestCase.WebClient (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -297,6 +297,14 @@ Extends <CODE>WebClient</CODE> and provide convenience methods
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a page as XML.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.mozilla.javascript.tools.debugger.Dim</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.WebClient.html#interactiveJavaScriptDebugger()">interactiveJavaScriptDebugger</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts an interactive JavaScript debugger, and break at the next JavaScript execution.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -701,6 +709,32 @@ public com.gargoylesoftware.htmlunit.html.HtmlPage <B>eval</B>(<A HREF="http://j
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXException.html?is-external=true" title="class or interface in org.xml.sax">SAXException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="interactiveJavaScriptDebugger()"><!-- --></A><H3>
+interactiveJavaScriptDebugger</H3>
+<PRE>
+public org.mozilla.javascript.tools.debugger.Dim <B>interactiveJavaScriptDebugger</B>()</PRE>
+<DL>
+<DD>Starts an interactive JavaScript debugger, and break at the next JavaScript execution.
+
+ <p>
+ This is useful during debugging a test so that you can step execute and inspect state of JavaScript.
+ This will launch a Swing GUI, and the method returns immediately.
+
+ <p>
+ Note that installing a debugger appears to make an execution of JavaScript substantially slower.
+
+ <p>
+ TODO: because each script block evaluation in HtmlUnit is done in a separate Rhino context,
+ if you step over from one script block, the debugger fails to kick in on the beginning of the next script block.
+ This makes it difficult to set a break point on arbitrary script block in the HTML page. We need to fix this
+ by tweaking <CODE>Dim.StackFrame#onLineChange(Context, int)</CODE>.
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

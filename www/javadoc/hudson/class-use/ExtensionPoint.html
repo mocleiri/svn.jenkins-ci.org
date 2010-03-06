@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.ExtensionPoint (Hudson main module 1.348 API)
+Uses of Interface hudson.ExtensionPoint (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.ExtensionPoint (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson main module 1.348 API)";
+        parent.document.title="Uses of Interface hudson.ExtensionPoint (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -103,6 +103,10 @@ Packages that use <A HREF="../../hudson/ExtensionPoint.html" title="interface in
 <TD>Code for supporting declarative CLI commands, which are annotated methods on model objects.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.console"><B>hudson.console</B></A></TD>
+<TD>Beef up the plain text console output by adding HTML markup.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.diagnosis"><B>hudson.diagnosis</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
@@ -170,6 +174,10 @@ Packages that use <A HREF="../../hudson/ExtensionPoint.html" title="interface in
 <TD><A HREF="#hudson.tasks"><B>hudson.tasks</B></A></TD>
 <TD>Built-in <a href="../../hudson/tasks/Builder.html"><tt>Builder</tt></a>s and <a href="../../hudson/tasks/Publisher.html"><tt>Publisher</tt></a>s
 that perform the actual heavy-lifting of a build.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks._ant"><B>hudson.tasks._ant</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.tasks.junit"><B>hudson.tasks.junit</B></A></TD>
@@ -476,6 +484,47 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.console"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A> in <A HREF="../../hudson/console/package-summary.html">hudson.console</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../hudson/console/package-summary.html">hudson.console</A> that implement <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotationDescriptor.html" title="class in hudson.console">ConsoleAnnotationDescriptor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Descriptor for <A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console"><CODE>ConsoleNote</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console">ConsoleAnnotatorFactory&lt;T&gt;</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entry point to the <A HREF="../../hudson/console/ConsoleAnnotator.html" title="class in hudson.console"><CODE>ConsoleAnnotator</CODE></A> extension point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/HudsonExceptionNote.DescriptorImpl.html" title="class in hudson.console">HudsonExceptionNote.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.diagnosis"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -522,6 +571,15 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Monitors the memory usage of the system in OS specific way.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/diagnosis/OldDataMonitor.html" title="class in hudson.diagnosis">OldDataMonitor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tracks whether any data structure changes were corrected when loading XML,
+ that could be resaved to migrate that data to the new format.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -847,6 +905,14 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records the javadoc and archives it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/reporters/MavenJunitPluginArchiver.html" title="class in hudson.maven.reporters">MavenJunitPluginArchiver</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records the maven-junit-plugin test result.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2174,6 +2240,31 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.tasks._ant"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A> in <A HREF="../../hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A> that implement <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/_ant/AntTargetNote.DescriptorImpl.html" title="class in hudson.tasks._ant">AntTargetNote.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.tasks.junit"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -2695,6 +2786,14 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../org/jvnet/hudson/test/PretendSlave.html" title="class in org.jvnet.hudson.test">PretendSlave</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Slave that pretends to fork processes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../org/jvnet/hudson/test/SingleFileSCM.html" title="class in org.jvnet.hudson.test">SingleFileSCM</A></B></CODE>
 
 <BR>
@@ -2723,6 +2822,14 @@ Uses of <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">E
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A crumb issuer that issues a constant crumb value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../org/jvnet/hudson/test/TestExtensionLoader.html" title="class in org.jvnet.hudson.test">TestExtensionLoader</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads <A HREF="../../org/jvnet/hudson/test/TestExtension.html" title="annotation in org.jvnet.hudson.test"><CODE>TestExtension</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

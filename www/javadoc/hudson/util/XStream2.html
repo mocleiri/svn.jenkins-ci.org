@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-XStream2 (Hudson main module 1.348 API)
+XStream2 (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ XStream2 (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="XStream2 (Hudson main module 1.348 API)";
+        parent.document.title="XStream2 (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/WriterOutputStream.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../hudson/util/XStream2.PassthruConverter.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/XStream2.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="XStream2.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,7 +77,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_com.thoughtworks.xstream.XStream">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_com.thoughtworks.xstream.XStream">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_com.thoughtworks.xstream.XStream">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -121,6 +121,15 @@ Class XStream2</H2>
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/XStream2.PassthruConverter.html" title="class in hudson.util">XStream2.PassthruConverter</A>&lt;<A HREF="../../hudson/util/XStream2.PassthruConverter.html" title="type parameter in XStream2.PassthruConverter">T</A>&gt;</B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a nested <code>ConverterImpl</code> subclass that extends this class to run some
+ callback code just after a type is unmarshalled by RobustReflectionConverter.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="nested_classes_inherited_from_class_com.thoughtworks.xstream.XStream"><!-- --></A>
@@ -184,18 +193,18 @@ Class XStream2</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/XStream2.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, java.lang.Object, com.thoughtworks.xstream.converters.DataHolder)">unmarshal</A></B>(com.thoughtworks.xstream.io.HierarchicalStreamReader&nbsp;reader,
-          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;root,
-          com.thoughtworks.xstream.converters.DataHolder&nbsp;dataHolder)</CODE>
+<CODE>protected &nbsp;com.thoughtworks.xstream.converters.Converter</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/XStream2.html#createDefaultConverter()">createDefaultConverter</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/XStream2.html#useXStream11XmlFriendlyMapper()">useXStream11XmlFriendlyMapper</A></B>()</CODE>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/XStream2.html#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, java.lang.Object, com.thoughtworks.xstream.converters.DataHolder)">unmarshal</A></B>(com.thoughtworks.xstream.io.HierarchicalStreamReader&nbsp;reader,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;root,
+          com.thoughtworks.xstream.converters.DataHolder&nbsp;dataHolder)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -215,7 +224,7 @@ Class XStream2</H2>
 <TH ALIGN="left"><B>Methods inherited from class com.thoughtworks.xstream.XStream</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>addDefaultImplementation, addImmutableType, addImplicitCollection, addImplicitCollection, addImplicitCollection, alias, alias, aliasAttribute, aliasAttribute, aliasField, aliasPackage, aliasSystemAttribute, aliasType, autodetectAnnotations, createObjectInputStream, createObjectInputStream, createObjectInputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, fromXML, fromXML, fromXML, fromXML, fromXML, fromXML, getClassLoader, getClassMapper, getConverterLookup, getMapper, getReflectionProvider, marshal, marshal, newDataHolder, omitField, processAnnotations, processAnnotations, registerConverter, registerConverter, registerConverter, registerConverter, registerLocalConverter, registerLocalConverter, setClassLoader, setMarshallingStrategy, setMode, setupAliases, setupConverters, setupDefaultImplementations, setupImmutableTypes, toXML, toXML, toXML, unmarshal, unmarshal, useAttributeFor, useAttributeFor, useAttributeFor</CODE></TD>
+<TD><CODE>addDefaultImplementation, addImmutableType, addImplicitCollection, addImplicitCollection, addImplicitCollection, alias, alias, aliasAttribute, aliasAttribute, aliasField, aliasPackage, aliasSystemAttribute, aliasType, autodetectAnnotations, createObjectInputStream, createObjectInputStream, createObjectInputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, createObjectOutputStream, fromXML, fromXML, fromXML, fromXML, fromXML, fromXML, getClassLoader, getClassMapper, getConverterLookup, getMapper, getReflectionProvider, marshal, marshal, newDataHolder, omitField, processAnnotations, processAnnotations, registerConverter, registerConverter, registerConverter, registerConverter, registerLocalConverter, registerLocalConverter, setClassLoader, setMarshallingStrategy, setMode, setupAliases, setupConverters, setupDefaultImplementations, setupImmutableTypes, toXML, toXML, toXML, unmarshal, unmarshal, useAttributeFor, useAttributeFor, useAttributeFor, useXStream11XmlFriendlyMapper</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -281,13 +290,13 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is
 </DL>
 <HR>
 
-<A NAME="useXStream11XmlFriendlyMapper()"><!-- --></A><H3>
-useXStream11XmlFriendlyMapper</H3>
+<A NAME="createDefaultConverter()"><!-- --></A><H3>
+createDefaultConverter</H3>
 <PRE>
-protected boolean <B>useXStream11XmlFriendlyMapper</B>()</PRE>
+protected com.thoughtworks.xstream.converters.Converter <B>createDefaultConverter</B>()</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE>useXStream11XmlFriendlyMapper</CODE> in class <CODE>com.thoughtworks.xstream.XStream</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE>createDefaultConverter</CODE> in class <CODE>com.thoughtworks.xstream.XStream</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -339,7 +348,7 @@ protected com.thoughtworks.xstream.mapper.MapperWrapper <B>wrapMapper</B>(com.th
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/util/WriterOutputStream.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../hudson/util/XStream2.PassthruConverter.html" title="class in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/XStream2.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="XStream2.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -359,7 +368,7 @@ protected com.thoughtworks.xstream.mapper.MapperWrapper <B>wrapMapper</B>(com.th
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_com.thoughtworks.xstream.XStream">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_com.thoughtworks.xstream.XStream">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_com.thoughtworks.xstream.XStream">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>

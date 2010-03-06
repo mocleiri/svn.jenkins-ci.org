@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Main (Hudson main module 1.348 API)
+Main (Hudson main module 1.349 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-02-26">
+<META NAME="date" CONTENT="2010-03-05">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Main (Hudson main module 1.348 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Main (Hudson main module 1.348 API)";
+        parent.document.title="Main (Hudson main module 1.349 API)";
     }
 }
 </SCRIPT>
@@ -132,6 +132,14 @@ Entry point to Hudson from command line.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if we are running unit tests.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Main.html#TIMEOUT">TIMEOUT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time out for socket connection to Hudson.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -211,6 +219,18 @@ isUnitTest</H3>
 public static boolean <B>isUnitTest</B></PRE>
 <DL>
 <DD>Set to true if we are running unit tests.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TIMEOUT"><!-- --></A><H3>
+TIMEOUT</H3>
+<PRE>
+public static final int <B>TIMEOUT</B></PRE>
+<DL>
+<DD>Time out for socket connection to Hudson.
 <P>
 <DL>
 </DL>
