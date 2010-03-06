@@ -400,7 +400,7 @@ var hudsonRules = {
             var nc = document.createElement("div");
             nc.className = "repeated-chunk";
             nc.setAttribute("name",t.name);
-            nc.innerHTML = t.html;
+            nc.innerHTML = replaceIdTokens(t.html);
             insertionPoint.parentNode.insertBefore(nc, insertionPoint);
             if(withDragDrop)    prepareDD(nc);
             
@@ -806,6 +806,25 @@ function xor(a,b) {
     return !a != !b;
 }
 
+// Used by hetero-list and repeatable to uniquify id attributes in duplicated content
+// Each @ID@ gets a unique value.  To repeat the same id value, add a positive number:
+// The first @ID1@ will get a new unique value and subsequent @ID1@ get that same value.
+function replaceIdTokens(html) {
+    var x, y, z, map = new Array();
+    while ((x = html.search(/@ID\d*@/)) >= 0) {
+        y = html.indexOf('@', x+3);
+        z = html.substring(x+3, y);
+        if (z > 0) {
+            if (!map[z]) map[z] = iota++;
+            z = map[z];
+        } else {
+            z = iota++;
+        }
+        html = html.substring(0, x) + z + html.substring(y+1);
+    }
+    return html;
+}
+
 // used by editableDescription.jelly to replace the description field with a form
 function replaceDescription() {
     var d = document.getElementById("description");
@@ -1129,7 +1148,7 @@ var repeatableSupport = {
         var nc = document.createElement("div");
         nc.className = "repeated-chunk";
         nc.setAttribute("name",this.name);
-        nc.innerHTML = this.blockHTML;
+        nc.innerHTML = replaceIdTokens(this.blockHTML);
         this.insertionPoint.parentNode.insertBefore(nc, this.insertionPoint);
 
         Behaviour.applySubtree(nc);

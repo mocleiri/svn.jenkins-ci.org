@@ -96,7 +96,8 @@ THE SOFTWARE.
       <j:set var="descriptor" value="${i.descriptor}" />
       <j:set var="instance" value="${i}" />
       <div name="${attrs.name}" class="repeated-chunk">
-        <local:body deleteCaption="${attrs.deleteCaption}" />
+        <j:set var="out"><local:body deleteCaption="${attrs.deleteCaption}" />
+        </j:set>${h.replaceIdTokens(out)}
       </div>
     </j:forEach>
 

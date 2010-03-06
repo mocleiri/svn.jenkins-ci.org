@@ -117,17 +117,16 @@ THE SOFTWARE.
     <j:forEach var="loop" varStatus="loopStatus" items="${items}">
       <div class="repeated-chunk" name="${name}">
         <j:set var="${var}" value="${loop}" />
-        <d:invokeBody />
+        <j:set var="out"><d:invokeBody /></j:set>${h.replaceIdTokens(out)}
       </div>
     </j:forEach>
     <j:remove var="${var}" />
 
     <j:if test="${minimum}">
+      <j:set var="${var}" value="${null}" />
+      <j:set var="out"><d:invokeBody /></j:set>
       <j:forEach begin="${h.size2(items)}" end="${minimum-1}" var="i">
-        <j:set var="${var}" value="${null}" />
-        <div class="repeated-chunk" name="${name}">
-          <d:invokeBody />
-        </div>
+        <div class="repeated-chunk" name="${name}">${h.replaceIdTokens(out)}</div>
       </j:forEach>
     </j:if>
 

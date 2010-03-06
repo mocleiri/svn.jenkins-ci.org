@@ -111,6 +111,7 @@ import java.util.TreeMap;
 import java.util.Date;
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -1137,6 +1138,34 @@ public class Functions {
     }
 
     /**
+     * Used by hetero-list and repeatable to uniquify id attributes in duplicated content
+     * Each @ID@ gets a unique value.  To repeat the same id value, add a positive number:
+     * The first @ID1@ will get a new unique value and subsequent @ID1@ get that same value.
+     */
+    public String replaceIdTokens(String html) {
+        Matcher m = ID_TOKEN.matcher(html);
+        StringBuilder buf = null;
+        HashMap<String,String> map = null;
+        String num, id;
+        int i = 0;
+        for (; m.find(i); i = m.end()) {
+            if (buf == null) {
+                buf = new StringBuilder();
+                map = new HashMap<String,String>();
+            }
+            num = m.group(1);
+            if (num.length() == 0) id = generateId();
+            else {
+                id = map.get(num);
+                if (id == null) map.put(num, id = generateId());
+            }
+            buf.append(html.substring(i, m.start()))
+               .append(id);
+        }
+        return (buf != null) ? buf.append(html.substring(i)).toString() : html;
+    }
+
+    /**
      * Generate a series of &lt;script> tags to include <tt>script.js</tt>
      * from {@link ConsoleAnnotatorFactory}s and {@link ConsoleAnnotationDescriptor}s.
      */
@@ -1154,7 +1183,8 @@ public class Functions {
         return buf.toString();
     }
     
-    private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+");
+    private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+"),
+            ID_TOKEN = Pattern.compile("@ID(\\d*)@");
 
     /**
      * Returns true if we are running unit tests.
