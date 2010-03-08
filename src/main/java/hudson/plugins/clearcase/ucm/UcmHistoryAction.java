@@ -282,7 +282,7 @@ public class UcmHistoryAction extends AbstractHistoryAction {
         ClearCaseDataAction clearcaseDataAction = null;
         Run previousBuild = build.getPreviousBuild();
         while (previousBuild != null && clearcaseDataAction == null) {
-        	clearcaseDataAction = build.getAction(ClearCaseDataAction.class);
+        	clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
         	
         	if (clearcaseDataAction != null && !(clearcaseDataAction.getStream().equals(stream)) ) {      	
         		clearcaseDataAction = null;        	
