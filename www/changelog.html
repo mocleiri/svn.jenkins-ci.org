@@ -28,6 +28,9 @@
   <li class=bug>
     If content is captured using <tt>&lt;j:set var=".."&gt;..content..&lt;/j:set&gt;,
     fixed this to use proper HTML rendering when appropiate.
+  <li class=bug>
+    '&lt;' and '&amp;' in the console output was not escaped since 1.349
+      (<a href="http://issues.hudson-ci.org/browse/HUDSON-5852">issue 5852</a>)
   <li class=rfe>
     Added advanced option to LogRotator to allow for removing artifacts from old builds
     without removing the logs, history, etc.
