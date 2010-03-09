@@ -23,8 +23,8 @@
  */
 package hudson.security;
 
-import org.acegisecurity.Authentication;
-import org.acegisecurity.acls.sid.Sid;
+import org.springframework.security.Authentication;
+import org.springframework.security.acls.sid.Sid;
 
 import java.util.ArrayList;
 import java.util.List;

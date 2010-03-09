@@ -25,8 +25,8 @@ package hudson.security;
 
 import hudson.cli.CLICommand;
 import hudson.model.Hudson;
-import org.acegisecurity.Authentication;
-import org.acegisecurity.AuthenticationException;
+import org.springframework.security.Authentication;
+import org.springframework.security.AuthenticationException;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;

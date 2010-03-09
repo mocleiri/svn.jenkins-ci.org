@@ -25,10 +25,10 @@
     Configure Unix authentication realm.
     The 'instance' object refers to the instance of PAMSecurityRealm.
 */
-import org.acegisecurity.providers.ProviderManager
+import org.springframework.security.providers.ProviderManager
 import hudson.security.PAMSecurityRealm.PAMAuthenticationProvider
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider
-import org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider
+import org.springframework.security.providers.anonymous.AnonymousAuthenticationProvider
+import org.springframework.security.providers.rememberme.RememberMeAuthenticationProvider
 import hudson.model.Hudson
 
 authenticationManager(ProviderManager) {

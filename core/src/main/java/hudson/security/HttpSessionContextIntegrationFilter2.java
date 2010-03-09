@@ -23,15 +23,16 @@
  */
 package hudson.security;
 
-import org.acegisecurity.context.HttpSessionContextIntegrationFilter;
-import org.acegisecurity.context.SecurityContext;
-import org.acegisecurity.Authentication;
+import org.springframework.security.context.HttpSessionContextIntegrationFilter;
+import org.springframework.security.context.SecurityContext;
+import org.springframework.security.Authentication;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -43,13 +44,14 @@ import java.io.IOException;
  */
 public class HttpSessionContextIntegrationFilter2 extends HttpSessionContextIntegrationFilter {
     public HttpSessionContextIntegrationFilter2() throws ServletException {
-        setContext(NotSerilizableSecurityContext.class);
+        setContextClass(NotSerilizableSecurityContext.class);
     }
 
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+    @Override
+    public void doFilterHttp(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpSession session = ((HttpServletRequest) req).getSession(false);
         if(session!=null) {
-            SecurityContext o = (SecurityContext)session.getAttribute(ACEGI_SECURITY_CONTEXT_KEY);
+            SecurityContext o = (SecurityContext)session.getAttribute(SPRING_SECURITY_CONTEXT_KEY);
             if(o!=null) {
                 Authentication a = o.getAuthentication();
                 if(a!=null) {
@@ -57,12 +59,12 @@ public class HttpSessionContextIntegrationFilter2 extends HttpSessionContextInte
                         InvalidatableUserDetails ud = (InvalidatableUserDetails) a.getPrincipal();
                         if(ud.isInvalid())
                             // don't let Acegi see invalid security context
-                            session.setAttribute(ACEGI_SECURITY_CONTEXT_KEY,null);
+                            session.setAttribute(SPRING_SECURITY_CONTEXT_KEY,null);
                     }
                 }
             }
         }
 
-        super.doFilter(req, res, chain);
+        super.doFilterHttp(req, res, chain);
     }
 }

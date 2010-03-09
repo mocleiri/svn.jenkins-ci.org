@@ -23,8 +23,8 @@
  */
 package hudson.security;
 
-import org.acegisecurity.userdetails.UsernameNotFoundException;
-import org.acegisecurity.userdetails.UserDetailsService;
+import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.userdetails.UserDetailsService;
 
 /**
  * Thrown from {@link UserDetailsService#loadUserByUsername(String)}

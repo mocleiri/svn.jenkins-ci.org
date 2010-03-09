@@ -21,10 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.acegisecurity.providers.ldap.authenticator;
+package org.springframework.security.providers.ldap.authenticator;
 
-import org.acegisecurity.ldap.InitialDirContextFactory;
-import org.acegisecurity.userdetails.ldap.LdapUserDetails;
+import org.springframework.ldap.core.DirContextOperations;
+import org.springframework.security.Authentication;
+import org.springframework.security.ldap.SpringSecurityContextSource;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -40,19 +41,19 @@ public class BindAuthenticator2 extends BindAuthenticator {
      */
     private boolean hadSuccessfulAuthentication;
 
-    public BindAuthenticator2(InitialDirContextFactory initialDirContextFactory) {
+    public BindAuthenticator2(SpringSecurityContextSource initialDirContextFactory) {
         super(initialDirContextFactory);
     }
 
     @Override
-    public LdapUserDetails authenticate(String username, String password) {
-        LdapUserDetails user = super.authenticate(username, password);
+    public DirContextOperations authenticate(Authentication authentication) {
+        DirContextOperations user = super.authenticate(authentication);
         hadSuccessfulAuthentication = true;
         return user;
     }
 
     @Override
-    void handleBindException(String userDn, String username, Throwable cause) {
+    protected void handleBindException(String userDn, String username, Throwable cause) {
         LOGGER.log(hadSuccessfulAuthentication? Level.FINE : Level.WARNING,
             "Failed to bind to LDAP: userDn"+userDn+"  username="+username,cause);
         super.handleBindException(userDn, username, cause);

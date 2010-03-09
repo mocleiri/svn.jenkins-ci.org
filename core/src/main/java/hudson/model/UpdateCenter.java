@@ -43,7 +43,7 @@ import hudson.util.DaemonThreadFactory;
 import hudson.util.IOException2;
 import hudson.util.PersistedList;
 import hudson.util.XStream2;
-import org.acegisecurity.Authentication;
+import org.springframework.security.Authentication;
 import org.apache.commons.io.input.CountingInputStream;
 import org.apache.commons.io.output.NullOutputStream;
 import org.kohsuke.stapler.StaplerResponse;
@@ -72,7 +72,7 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.acegisecurity.context.SecurityContextHolder;
+import org.springframework.security.context.SecurityContextHolder;
 
 /**
  * Controls update center capability.

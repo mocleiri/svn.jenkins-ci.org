@@ -64,7 +64,7 @@ import hudson.util.Area;
 import hudson.util.Iterators;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
+import org.springframework.security.providers.anonymous.AnonymousAuthenticationToken;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
 import org.apache.commons.jelly.Script;

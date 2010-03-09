@@ -49,7 +49,7 @@ import java.io.IOException;
 
 import net.sf.json.JSONObject;
 
-import org.acegisecurity.acls.sid.Sid;
+import org.springframework.security.acls.sid.Sid;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.AncestorInPath;

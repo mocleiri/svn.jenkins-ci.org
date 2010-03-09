@@ -23,7 +23,7 @@
  */
 package hudson.security;
 
-import org.acegisecurity.AccessDeniedException;
+import org.springframework.security.AccessDeniedException;
 
 /**
  * Object that has an {@link ACL}

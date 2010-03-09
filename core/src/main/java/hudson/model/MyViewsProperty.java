@@ -44,7 +44,7 @@ import javax.servlet.ServletException;
 
 import net.sf.json.JSONObject;
 
-import org.acegisecurity.AccessDeniedException;
+import org.springframework.security.AccessDeniedException;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.HttpRedirect;
 import org.kohsuke.stapler.HttpResponse;

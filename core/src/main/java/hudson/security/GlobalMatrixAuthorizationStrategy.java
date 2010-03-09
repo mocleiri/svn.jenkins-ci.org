@@ -39,12 +39,12 @@ import hudson.util.RobustReflectionConverter;
 import hudson.Functions;
 import hudson.Extension;
 import net.sf.json.JSONObject;
-import org.acegisecurity.userdetails.UsernameNotFoundException;
-import org.acegisecurity.acls.sid.Sid;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.QueryParameter;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.acls.sid.Sid;
+import org.springframework.security.userdetails.UsernameNotFoundException;
 
 import javax.servlet.ServletException;
 import java.util.ArrayList;

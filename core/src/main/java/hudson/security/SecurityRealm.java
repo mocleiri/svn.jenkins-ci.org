@@ -36,17 +36,17 @@ import hudson.model.Hudson;
 import hudson.util.DescriptorList;
 import hudson.util.PluginServletFilter;
 import hudson.util.spring.BeanBuilder;
-import org.acegisecurity.Authentication;
-import org.acegisecurity.AuthenticationManager;
-import org.acegisecurity.GrantedAuthorityImpl;
-import org.acegisecurity.GrantedAuthority;
-import org.acegisecurity.context.SecurityContext;
-import org.acegisecurity.context.SecurityContextHolder;
-import org.acegisecurity.ui.rememberme.RememberMeServices;
-import static org.acegisecurity.ui.rememberme.TokenBasedRememberMeServices.ACEGI_SECURITY_HASHED_REMEMBER_ME_COOKIE_KEY;
-import org.acegisecurity.userdetails.UserDetailsService;
-import org.acegisecurity.userdetails.UserDetails;
-import org.acegisecurity.userdetails.UsernameNotFoundException;
+import org.springframework.security.Authentication;
+import org.springframework.security.AuthenticationManager;
+import org.springframework.security.GrantedAuthorityImpl;
+import org.springframework.security.GrantedAuthority;
+import org.springframework.security.context.SecurityContext;
+import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.security.ui.rememberme.RememberMeServices;
+import static org.springframework.security.ui.rememberme.TokenBasedRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY;
+import org.springframework.security.userdetails.UserDetailsService;
+import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.userdetails.UsernameNotFoundException;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -245,7 +245,7 @@ public abstract class SecurityRealm implements Describable<SecurityRealm>, Exten
         SecurityContextHolder.clearContext();
 
         // reset remember-me cookie
-        Cookie cookie = new Cookie(ACEGI_SECURITY_HASHED_REMEMBER_ME_COOKIE_KEY,"");
+        Cookie cookie = new Cookie(SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY,"");
         cookie.setPath(req.getContextPath().length()>0 ? req.getContextPath() : "/");
         rsp.addCookie(cookie);
 

@@ -1,6 +1,6 @@
 package hudson;
 
-import org.acegisecurity.AcegiSecurityException;
+import org.springframework.security.SpringSecurityException;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyException;
 import org.apache.commons.jelly.expression.Expression;
@@ -70,7 +70,7 @@ final class ExpressionFactory2 implements ExpressionFactory {
                 CURRENT_CONTEXT.set(context);
                 JexlContext jexlContext = new JellyJexlContext( context );
                 return expression.evaluate(jexlContext);
-            } catch (AcegiSecurityException e) {
+            } catch (SpringSecurityException e) {
                 // let the security exception pass through
                 throw e;
             } catch (Exception e) {

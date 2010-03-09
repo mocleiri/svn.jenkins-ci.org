@@ -24,8 +24,8 @@
 package hudson.security;
 
 import hudson.model.Hudson;
-import org.acegisecurity.AccessDeniedException;
-import org.acegisecurity.ui.AccessDeniedHandler;
+import org.springframework.security.AccessDeniedException;
+import org.springframework.security.ui.AccessDeniedHandler;
 import org.kohsuke.stapler.Stapler;
 
 import javax.servlet.ServletException;

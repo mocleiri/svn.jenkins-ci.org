@@ -23,11 +23,11 @@
  */
 package hudson.security;
 
-import org.acegisecurity.Authentication;
-import org.acegisecurity.GrantedAuthority;
-import org.acegisecurity.acls.sid.PrincipalSid;
-import org.acegisecurity.acls.sid.GrantedAuthoritySid;
-import org.acegisecurity.acls.sid.Sid;
+import org.springframework.security.Authentication;
+import org.springframework.security.GrantedAuthority;
+import org.springframework.security.acls.sid.PrincipalSid;
+import org.springframework.security.acls.sid.GrantedAuthoritySid;
+import org.springframework.security.acls.sid.Sid;
 
 import java.util.logging.Logger;
 import static java.util.logging.Level.FINE;

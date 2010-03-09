@@ -23,8 +23,8 @@
  */
 package hudson.security;
 
-import org.acegisecurity.ui.rememberme.RememberMeServices;
-import org.acegisecurity.Authentication;
+import org.springframework.security.ui.rememberme.RememberMeServices;
+import org.springframework.security.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

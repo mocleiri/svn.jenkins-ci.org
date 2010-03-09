@@ -23,7 +23,7 @@
  */
 package hudson.triggers;
 
-import org.acegisecurity.context.SecurityContextHolder;
+import org.springframework.security.context.SecurityContextHolder;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -23,10 +23,10 @@
  */
 package hudson.security;
 
-import org.acegisecurity.AuthenticationManager;
-import org.acegisecurity.Authentication;
-import org.acegisecurity.AuthenticationException;
-import org.acegisecurity.DisabledException;
+import org.springframework.security.AuthenticationManager;
+import org.springframework.security.Authentication;
+import org.springframework.security.AuthenticationException;
+import org.springframework.security.DisabledException;
 
 /**
  * {@link AuthenticationManager} proxy that delegates to another instance.

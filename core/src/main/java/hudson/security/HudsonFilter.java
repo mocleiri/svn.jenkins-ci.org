@@ -37,9 +37,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.acegisecurity.AuthenticationManager;
-import org.acegisecurity.ui.rememberme.RememberMeServices;
-import org.acegisecurity.userdetails.UserDetailsService;
+import org.springframework.security.AuthenticationManager;
+import org.springframework.security.ui.rememberme.RememberMeServices;
+import org.springframework.security.userdetails.UserDetailsService;
 
 /**
  * {@link Filter} that Hudson uses to implement security support.

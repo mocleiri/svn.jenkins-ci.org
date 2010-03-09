@@ -39,8 +39,8 @@ import hudson.util.RunList;
 import hudson.util.XStream2;
 import net.sf.json.JSONObject;
 
-import org.acegisecurity.Authentication;
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
+import org.springframework.security.Authentication;
+import org.springframework.security.providers.anonymous.AnonymousAuthenticationToken;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.export.Exported;

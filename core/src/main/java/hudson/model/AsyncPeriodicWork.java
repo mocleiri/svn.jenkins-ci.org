@@ -2,7 +2,7 @@ package hudson.model;
 
 import hudson.security.ACL;
 import hudson.util.StreamTaskListener;
-import org.acegisecurity.context.SecurityContextHolder;
+import org.springframework.security.context.SecurityContextHolder;
 
 import java.io.File;
 import java.io.IOException;

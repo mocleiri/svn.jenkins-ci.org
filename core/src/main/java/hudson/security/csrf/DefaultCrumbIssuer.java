@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONObject;
 
-import org.acegisecurity.Authentication;
+import org.springframework.security.Authentication;
 import org.kohsuke.stapler.StaplerRequest;
 
 /**

@@ -25,9 +25,8 @@ package hudson.security;
 
 import hudson.model.Hudson;
 import hudson.util.Scrambler;
-import org.acegisecurity.Authentication;
-import org.acegisecurity.GrantedAuthorityImpl;
-import org.acegisecurity.context.SecurityContextHolder;
+import org.springframework.security.GrantedAuthorityImpl;
+import org.springframework.security.context.SecurityContextHolder;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -164,6 +163,4 @@ public class BasicAuthenticationFilter implements Filter {
 
     public void destroy() {
     }
-
-    private static final GrantedAuthorityImpl[] EMPTY_AUTHORITIES = {new GrantedAuthorityImpl("")};
 }

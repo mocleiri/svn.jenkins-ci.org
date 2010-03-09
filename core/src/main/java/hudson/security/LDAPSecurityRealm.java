@@ -35,25 +35,26 @@ import hudson.tasks.MailAddressResolver;
 import hudson.util.FormValidation;
 import hudson.util.Scrambler;
 import hudson.util.spring.BeanBuilder;
-import org.acegisecurity.AuthenticationManager;
-import org.acegisecurity.GrantedAuthority;
-import org.acegisecurity.AcegiSecurityException;
-import org.acegisecurity.ldap.InitialDirContextFactory;
-import org.acegisecurity.ldap.LdapDataAccessException;
-import org.acegisecurity.ldap.LdapTemplate;
-import org.acegisecurity.ldap.LdapUserSearch;
-import org.acegisecurity.ldap.search.FilterBasedLdapUserSearch;
-import org.acegisecurity.providers.ldap.LdapAuthoritiesPopulator;
-import org.acegisecurity.providers.ldap.populator.DefaultLdapAuthoritiesPopulator;
-import org.acegisecurity.userdetails.UserDetails;
-import org.acegisecurity.userdetails.UserDetailsService;
-import org.acegisecurity.userdetails.UsernameNotFoundException;
-import org.acegisecurity.userdetails.ldap.LdapUserDetails;
-import org.acegisecurity.userdetails.ldap.LdapUserDetailsImpl;
+import org.springframework.dao.DataAccessException;
+import org.springframework.ldap.core.DirContextOperations;
+import org.springframework.security.AuthenticationManager;
+import org.springframework.security.GrantedAuthority;
+import org.springframework.security.SpringSecurityException;
+import org.springframework.security.ldap.LdapDataAccessException;
+import org.springframework.security.ldap.LdapUserSearch;
+import org.springframework.security.ldap.SpringSecurityContextSource;
+import org.springframework.security.ldap.SpringSecurityLdapTemplate;
+import org.springframework.security.ldap.populator.DefaultLdapAuthoritiesPopulator;
+import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
+import org.springframework.security.ldap.LdapAuthoritiesPopulator;
+import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.userdetails.UserDetailsService;
+import org.springframework.security.userdetails.UsernameNotFoundException;
+import org.springframework.security.userdetails.ldap.LdapUserDetails;
+import org.springframework.security.userdetails.ldap.LdapUserDetailsImpl;
+import org.springframework.web.context.WebApplicationContext;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
-import org.springframework.dao.DataAccessException;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -271,7 +272,7 @@ public class LDAPSecurityRealm extends SecurityRealm {
     /**
      * Created in {@link #createSecurityComponents()}. Can be used to connect to LDAP.
      */
-    private transient LdapTemplate ldapTemplate;
+    private transient SpringSecurityLdapTemplate ldapTemplate;
 
     @DataBoundConstructor
     public LDAPSecurityRealm(String server, String rootDN, String userSearchBase, String userSearch, String groupSearchBase, String managerDN, String managerPassword) {
@@ -339,7 +340,7 @@ public class LDAPSecurityRealm extends SecurityRealm {
         builder.parse(Hudson.getInstance().servletContext.getResourceAsStream("/WEB-INF/security/LDAPBindSecurityRealm.groovy"),binding);
         final WebApplicationContext appContext = builder.createApplicationContext();
 
-        ldapTemplate = new LdapTemplate(findBean(InitialDirContextFactory.class, appContext));
+        ldapTemplate = new SpringSecurityLdapTemplate(findBean(SpringSecurityContextSource.class, appContext));
 
         return new SecurityComponents(
             findBean(AuthenticationManager.class, appContext),
@@ -393,18 +394,18 @@ public class LDAPSecurityRealm extends SecurityRealm {
         }
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
             try {
-                LdapUserDetails ldapUser = ldapSearch.searchForUser(username);
+                DirContextOperations ldapUser = ldapSearch.searchForUser(username);
                 // LdapUserSearch does not populate granted authorities (group search).
                 // Add those, as done in LdapAuthenticationProvider.createUserDetails().
-                if (ldapUser != null) {
-                    LdapUserDetailsImpl.Essence user = new LdapUserDetailsImpl.Essence(ldapUser);
-                    GrantedAuthority[] extraAuthorities = authoritiesPopulator.getGrantedAuthorities(ldapUser);
-                    for (int i = 0; i < extraAuthorities.length; i++) {
-                        user.addAuthority(extraAuthorities[i]);
-                    }
-                    ldapUser = user.createUserDetails();
+                if (null == ldapUser)
+                    return null;
+                LdapUserDetailsImpl.Essence user = new LdapUserDetailsImpl.Essence(ldapUser);
+                user.setUsername(username);
+                GrantedAuthority[] extraAuthorities = authoritiesPopulator.getGrantedAuthorities(ldapUser, username);
+                for (int i = 0; i < extraAuthorities.length; i++) {
+                    user.addAuthority(extraAuthorities[i]);
                 }
-                return ldapUser;
+                return user.createUserDetails();
             } catch (LdapDataAccessException e) {
                 LOGGER.log(Level.WARNING, "Failed to search LDAP for username="+username,e);
                 throw new UserMayOrMayNotExistException(e.getMessage(),e);
@@ -436,7 +437,7 @@ public class LDAPSecurityRealm extends SecurityRealm {
             } catch (NamingException e) {
                 LOGGER.log(Level.FINE, "Failed to look up LDAP for e-mail address",e);
                 return null;
-            } catch (AcegiSecurityException e) {
+            } catch (SpringSecurityException e) {
                 LOGGER.log(Level.FINE, "Failed to look up LDAP for e-mail address",e);
                 return null;
             }
@@ -450,15 +451,15 @@ public class LDAPSecurityRealm extends SecurityRealm {
         // Make these available (private in parent class and no get methods!)
         String rolePrefix;
         boolean convertToUpperCase;
-        public AuthoritiesPopulatorImpl(InitialDirContextFactory initialDirContextFactory, String groupSearchBase) {
-            super(initialDirContextFactory, fixNull(groupSearchBase));
+        public AuthoritiesPopulatorImpl(SpringSecurityContextSource springSecurityContextSource, String groupSearchBase) {
+            super(springSecurityContextSource, fixNull(groupSearchBase));
             // These match the defaults in acegi 1.0.5; set again to store in non-private fields:
             setRolePrefix("ROLE_");
             setConvertToUpperCase(true);
         }
 
         @Override
-        protected Set getAdditionalRoles(LdapUserDetails ldapUser) {
+        protected Set getAdditionalRoles(DirContextOperations user, String username) {
             return Collections.singleton(AUTHENTICATED_AUTHORITY);
         }
 

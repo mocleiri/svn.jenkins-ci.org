@@ -23,8 +23,8 @@
  */
 package hudson.security;
 
-import org.acegisecurity.AuthenticationException;
-import org.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint;
+import org.springframework.security.AuthenticationException;
+import org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;

@@ -23,9 +23,9 @@
  */
 package hudson.security;
 
-import org.acegisecurity.ui.rememberme.TokenBasedRememberMeServices;
-import org.acegisecurity.userdetails.UserDetails;
-import org.acegisecurity.Authentication;
+import org.springframework.security.ui.rememberme.TokenBasedRememberMeServices;
+import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.Authentication;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -40,9 +40,9 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class TokenBasedRememberMeServices2 extends TokenBasedRememberMeServices {
     @Override
-    protected String makeTokenSignature(long tokenExpiryTime, UserDetails userDetails) {
-        String expectedTokenSignature = DigestUtils.md5Hex(userDetails.getUsername() + ":" + tokenExpiryTime + ":"
-                + "N/A" + ":" + getKey());
+    protected String makeTokenSignature(long tokenExpiryTime, String username, String password) {
+        String expectedTokenSignature = DigestUtils.md5Hex(username + ":" +
+            tokenExpiryTime + ":" + "N/A" + ":" + getKey());
         return expectedTokenSignature;
     }
 

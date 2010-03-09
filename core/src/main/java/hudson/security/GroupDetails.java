@@ -23,7 +23,7 @@
  */
 package hudson.security;
 
-import org.acegisecurity.userdetails.UserDetails;
+import org.springframework.security.userdetails.UserDetails;
 
 /**
  * Represents the details of a group.

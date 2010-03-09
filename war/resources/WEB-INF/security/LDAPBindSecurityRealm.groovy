@@ -21,16 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import org.acegisecurity.providers.ProviderManager
-import org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider
-import org.acegisecurity.providers.ldap.LdapAuthenticationProvider
-import org.acegisecurity.providers.ldap.authenticator.BindAuthenticator2
-import org.acegisecurity.ldap.DefaultInitialDirContextFactory
-import org.acegisecurity.ldap.search.FilterBasedLdapUserSearch
-import org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider
+import org.springframework.security.providers.ProviderManager
+import org.springframework.security.providers.anonymous.AnonymousAuthenticationProvider
+import org.springframework.security.providers.ldap.LdapAuthenticationProvider
+import org.springframework.security.providers.ldap.authenticator.BindAuthenticator2
+import org.springframework.security.ldap.DefaultInitialDirContextFactory
+import org.springframework.security.ldap.search.FilterBasedLdapUserSearch
+import org.springframework.security.providers.rememberme.RememberMeAuthenticationProvider
 import hudson.model.Hudson
 import hudson.security.LDAPSecurityRealm.AuthoritiesPopulatorImpl
-import hudson.Util
 import javax.naming.Context
 
 /*
