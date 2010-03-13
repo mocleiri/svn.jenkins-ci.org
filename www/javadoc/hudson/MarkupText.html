@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MarkupText (Hudson main module 1.349 API)
+MarkupText (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MarkupText (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MarkupText (Hudson main module 1.349 API)";
+        parent.document.title="MarkupText (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -206,12 +206,21 @@ Mutable representation of string with HTML mark up.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the plain text portion of this <A HREF="../hudson/MarkupText.html" title="class in hudson"><CODE>MarkupText</CODE></A> without
- any markup.</TD>
+ any markup, nor any escape.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/MarkupText.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.350.
+      Use <A HREF="../hudson/MarkupText.html#toString(boolean)"><CODE>toString(boolean)</CODE></A> to be explicit about the escape mode.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/MarkupText.html#toString(boolean)">toString</A></B>(boolean&nbsp;preEscape)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the fully marked-up text.</TD>
@@ -253,6 +262,8 @@ MarkupText</H3>
 <PRE>
 public <B>MarkupText</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;text)</PRE>
 <DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - Plain text. This shouldn't include any markup nor escape. Those are done later in <A HREF="../hudson/MarkupText.html#toString(boolean)"><CODE>toString(boolean)</CODE></A>.</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -272,7 +283,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../hudson/AbstractMarkupText.html#getText()">AbstractMarkupText</A></CODE></B></DD>
 <DD>Returns the plain text portion of this <A HREF="../hudson/MarkupText.html" title="class in hudson"><CODE>MarkupText</CODE></A> without
- any markup.
+ any markup, nor any escape.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/AbstractMarkupText.html#getText()">getText</A></CODE> in class <CODE><A HREF="../hudson/AbstractMarkupText.html" title="class in hudson">AbstractMarkupText</A></CODE></DL>
@@ -324,6 +335,9 @@ toString</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toString</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.350.
+      Use <A HREF="../hudson/MarkupText.html#toString(boolean)"><CODE>toString(boolean)</CODE></A> to be explicit about the escape mode.</I>
+<P>
 <DD>Returns the fully marked-up text.
 <P>
 <DD><DL>
@@ -331,6 +345,20 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString(boolean)"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toString</B>(boolean&nbsp;preEscape)</PRE>
+<DL>
+<DD>Returns the fully marked-up text.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>preEscape</CODE> - If true, the escaping is for the &lt;PRE> context. This leave SP and CR/LF intact.
+      If false, the escape is for the normal HTML, thus SP becomes &amp;nbsp; and CR/LF becomes &lt;BR></DL>
 </DD>
 </DL>
 <HR>

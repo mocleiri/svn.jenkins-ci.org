@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.349 API)
+AbstractProject (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.349 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -1052,6 +1052,14 @@ void</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#resolveForCLI(java.lang.String)">resolveForCLI</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used for CLI binding.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#scheduleBuild()">scheduleBuild</A></B>()</CODE>
 
@@ -1221,7 +1229,7 @@ void</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSetName(java.lang.String)">doSetName</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getParent()">getParent</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#resolveForCLI(java.lang.String)">resolveForCLI</A>, <A HREF="../../hudson/model/AbstractItem.html#save()">save</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSetName(java.lang.String)">doSetName</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getParent()">getParent</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#save()">save</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
@@ -1379,7 +1387,8 @@ protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?i
 <A NAME="transientActions"><!-- --></A><H3>
 transientActions</H3>
 <PRE>
-protected transient <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>transientActions</B></PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/CopyOnWrite.html" title="annotation in hudson">@CopyOnWrite</A>
+</FONT>protected transient volatile <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>transientActions</B></PRE>
 <DL>
 <DD><A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s contributed from subsidiary objects associated with
  <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model"><CODE>AbstractProject</CODE></A>, such as from triggers, builders, publishers, etc.
@@ -3327,6 +3336,26 @@ public static <A HREF="../../hudson/model/AbstractProject.html" title="class in 
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="resolveForCLI(java.lang.String)"><!-- --></A><H3>
+resolveForCLI</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIResolver.html" title="annotation in hudson.cli.declarative">@CLIResolver</A>
+</FONT>public static <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A> <B>resolveForCLI</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)
+                                     throws org.kohsuke.args4j.CmdLineException</PRE>
+<DL>
+<DD>Used for CLI binding.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.kohsuke.args4j.CmdLineException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

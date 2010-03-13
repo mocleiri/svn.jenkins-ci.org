@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLICommand (Hudson main module 1.349 API)
+CLICommand (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson main module 1.349 API)";
+        parent.document.title="CLICommand (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -297,6 +297,20 @@ Base class for Hudson CLI.
      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.350
+      Use <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)"><CODE>main(List, Locale, InputStream, PrintStream, PrintStream, Authentication)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)">main</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;args,
+     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Locale.html?is-external=true" title="class or interface in java.util">Locale</A>&nbsp;locale,
+     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;stdin,
+     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stdout,
+     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr,
+     org.acegisecurity.Authentication&nbsp;auth)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -323,6 +337,14 @@ Base class for Hudson CLI.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes the command, and return the exit code.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#shouldPerformAuthentication(org.acegisecurity.Authentication)">shouldPerformAuthentication</A></B>(org.acegisecurity.Authentication&nbsp;auth)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines if the user authentication is attempted through CLI before running this command.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -499,11 +521,59 @@ public int <B>main</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/uti
                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stdout,
                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.350
+      Use <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)"><CODE>main(List, Locale, InputStream, PrintStream, PrintStream, Authentication)</CODE></A></I>
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)"><!-- --></A><H3>
+main</H3>
+<PRE>
+public int <B>main</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;args,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Locale.html?is-external=true" title="class or interface in java.util">Locale</A>&nbsp;locale,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;stdin,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stdout,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr,
+                org.acegisecurity.Authentication&nbsp;auth)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="shouldPerformAuthentication(org.acegisecurity.Authentication)"><!-- --></A><H3>
+shouldPerformAuthentication</H3>
+<PRE>
+protected boolean <B>shouldPerformAuthentication</B>(org.acegisecurity.Authentication&nbsp;auth)</PRE>
+<DL>
+<DD>Determines if the user authentication is attempted through CLI before running this command.
+
+ <p>
+ If your command doesn't require any authentication whatsoever, and if you don't even want to let the user
+ authenticate, then override this method to always return false &mdash; doing so will result in all the commands
+ running as anonymous user credential.
+
+ <p>
+ Note that even if this method returns true, the user can still skip aut
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>auth</CODE> - Always non-null.
+      If the underlying transport had already performed authentication, this object is something other than
+      <A HREF="../../hudson/model/Hudson.html#ANONYMOUS"><CODE>Hudson.ANONYMOUS</CODE></A>.</DL>
 </DD>
 </DL>
 <HR>

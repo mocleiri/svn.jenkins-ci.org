@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.349 API)
+Deprecated List (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.349 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -683,6 +683,18 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.341; use <A HREF="hudson/tasks/BuildTrigger.html#execute(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildTrigger.execute(AbstractBuild,BuildListener)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/TaskThread.ListenerAndText.html#forFile(java.io.File)">hudson.model.TaskThread.ListenerAndText.forFile(File)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of Hudson 1.350
+      Use <A HREF="hudson/model/TaskThread.ListenerAndText.html#forFile(java.io.File, hudson.model.TaskThread)"><CODE>TaskThread.ListenerAndText.forFile(File, TaskThread)</CODE></A> and pass in the calling <A HREF="hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/TaskThread.ListenerAndText.html#forMemory()">hudson.model.TaskThread.ListenerAndText.forMemory()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of Hudson 1.350
+      Use <A HREF="hudson/model/TaskThread.ListenerAndText.html#forMemory(hudson.model.TaskThread)"><CODE>TaskThread.ListenerAndText.forMemory(TaskThread)</CODE></A> and pass in the calling <A HREF="hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">hudson.slaves.Channels.forProcess(String, ExecutorService, InputStream, OutputStream, Proc)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2009-04-13.
@@ -880,6 +892,12 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286.
       Use <A HREF="hudson/model/listeners/ItemListener.html#all()"><CODE>ItemListener.all()</CODE></A>.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/TaskAction.html#getLog()">hudson.model.TaskAction.getLog()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.350
+      Use <A HREF="hudson/model/TaskAction.html#obtainLog()"><CODE>TaskAction.obtainLog()</CODE></A>, which returns the same object in a more type-safe signature.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Run.html#getLog()">hudson.model.Run.getLog()</A>
@@ -1194,6 +1212,12 @@ function windowTitle()
       Use <A HREF="hudson/Launcher.html#launch()"><CODE>Launcher.launch()</CODE></A> and its associated builder pattern</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)">hudson.cli.CLICommand.main(List<String>, Locale, InputStream, PrintStream, PrintStream)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.350
+      Use <A HREF="hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)"><CODE>CLICommand.main(List, Locale, InputStream, PrintStream, PrintStream, Authentication)</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer)">hudson.node_monitors.AbstractNodeMonitorDescriptor.markOffline(Computer)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.320
@@ -1412,10 +1436,26 @@ function windowTitle()
       Use <A HREF="hudson/views/ListViewColumnDescriptor.html#shownByDefault()"><CODE>ListViewColumnDescriptor.shownByDefault()</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/FileSystemProvisioner.Default.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">hudson.FileSystemProvisioner.Default.snapshot(AbstractBuild<?, ?>, FilePath, TaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.350</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/os/solaris/ZFSProvisioner.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">hudson.os.solaris.ZFSProvisioner.snapshot(AbstractBuild<?, ?>, FilePath, TaskListener)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.350</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.Build, hudson.model.BuildListener)">hudson.tasks.BuildWrapper.Environment.tearDown(Build, BuildListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-10-28.
       Use <A HREF="hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildWrapper.Environment.tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/MarkupText.html#toString()">hudson.MarkupText.toString()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.350.
+      Use <A HREF="hudson/MarkupText.html#toString(boolean)"><CODE>MarkupText.toString(boolean)</CODE></A> to be explicit about the escape mode.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/FilePath.html#toString()">hudson.FilePath.toString()</A>
@@ -1471,6 +1511,12 @@ function windowTitle()
       Use <CODE>#DumbSlave(String, String, String, String, Mode, String, ComputerLauncher, RetentionStrategy, List)</CODE></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/remoting/FastPipedOutputStream.html#FastPipedOutputStream(hudson.remoting.FastPipedInputStream, int)">hudson.remoting.FastPipedOutputStream(FastPipedInputStream, int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.350
+      bufferSize parameter is ignored.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/FormFieldValidator.html#FormFieldValidator(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.security.AccessControlled, hudson.security.Permission)">hudson.util.FormFieldValidator(StaplerRequest, StaplerResponse, AccessControlled, Permission)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/util/FormFieldValidator.html#FormFieldValidator(hudson.security.AccessControlled, hudson.security.Permission)"><CODE>FormFieldValidator.FormFieldValidator(AccessControlled,Permission)</CODE></A> and remove <CODE>StaplerRequest</CODE> and <CODE>StaplerResponse</CODE>
@@ -1498,6 +1544,11 @@ function windowTitle()
 <TD><A HREF="hudson/tasks/junit/JUnitResultArchiver.html#JUnitResultArchiver(java.lang.String)">hudson.tasks.junit.JUnitResultArchiver(String)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2009-08-09.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/LogRotator.html#LogRotator(int, int)">hudson.tasks.LogRotator(int, int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.350</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)">hudson.tasks.Maven.MavenInstallation(String, String)</A>

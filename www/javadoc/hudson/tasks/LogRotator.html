@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LogRotator (Hudson main module 1.349 API)
+LogRotator (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LogRotator (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LogRotator (Hudson main module 1.349 API)";
+        parent.document.title="LogRotator (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -167,11 +167,22 @@ Deletes old log files.
            int&nbsp;numToKeep)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.350</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#LogRotator(int, int, int, int)">LogRotator</A></B>(int&nbsp;daysToKeep,
+           int&nbsp;numToKeep,
+           int&nbsp;artifactDaysToKeep,
+           int&nbsp;artifactNumToKeep)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#LogRotator(java.lang.String, java.lang.String)">LogRotator</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_days,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_nums)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#LogRotator(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">LogRotator</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_days,
+           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_nums,
+           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_artifact_days,
+           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_artifact_nums)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -185,6 +196,38 @@ Deletes old log files.
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#getArtifactDaysToKeep()">getArtifactDaysToKeep</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#getArtifactDaysToKeepStr()">getArtifactDaysToKeepStr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#getArtifactNumToKeep()">getArtifactNumToKeep</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/LogRotator.html#getArtifactNumToKeepStr()">getArtifactNumToKeepStr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -284,12 +327,14 @@ public static final <A HREF="../../hudson/tasks/LogRotator.LRDescriptor.html" ti
 </TR>
 </TABLE>
 
-<A NAME="LogRotator(java.lang.String, java.lang.String)"><!-- --></A><H3>
+<A NAME="LogRotator(java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 LogRotator</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
 </FONT>public <B>LogRotator</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_days,
-                                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_nums)</PRE>
+                                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_nums,
+                                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_artifact_days,
+                                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;logrotate_artifact_nums)</PRE>
 <DL>
 </DL>
 <HR>
@@ -299,6 +344,19 @@ LogRotator</H3>
 <PRE>
 public <B>LogRotator</B>(int&nbsp;daysToKeep,
                   int&nbsp;numToKeep)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.350</I>
+<P>
+</DL>
+<HR>
+
+<A NAME="LogRotator(int, int, int, int)"><!-- --></A><H3>
+LogRotator</H3>
+<PRE>
+public <B>LogRotator</B>(int&nbsp;daysToKeep,
+                  int&nbsp;numToKeep,
+                  int&nbsp;artifactDaysToKeep,
+                  int&nbsp;artifactNumToKeep)</PRE>
 <DL>
 </DL>
 
@@ -373,6 +431,34 @@ public int <B>getNumToKeep</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="getArtifactDaysToKeep()"><!-- --></A><H3>
+getArtifactDaysToKeep</H3>
+<PRE>
+public int <B>getArtifactDaysToKeep</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getArtifactNumToKeep()"><!-- --></A><H3>
+getArtifactNumToKeep</H3>
+<PRE>
+public int <B>getArtifactNumToKeep</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getDaysToKeepStr()"><!-- --></A><H3>
 getDaysToKeepStr</H3>
 <PRE>
@@ -391,6 +477,34 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 getNumToKeepStr</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getNumToKeepStr</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getArtifactDaysToKeepStr()"><!-- --></A><H3>
+getArtifactDaysToKeepStr</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getArtifactDaysToKeepStr</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getArtifactNumToKeepStr()"><!-- --></A><H3>
+getArtifactNumToKeepStr</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getArtifactNumToKeepStr</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

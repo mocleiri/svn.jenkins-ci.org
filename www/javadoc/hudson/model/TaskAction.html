@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TaskAction (Hudson main module 1.349 API)
+TaskAction (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskAction (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskAction (Hudson main module 1.349 API)";
+        parent.document.title="TaskAction (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -136,7 +136,7 @@ Partial <A HREF="../../hudson/model/Action.html" title="interface in hudson.mode
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ref/WeakReference.html?is-external=true" title="class or interface in java.lang.ref">WeakReference</A>&lt;org.kohsuke.stapler.framework.io.LargeText&gt;</CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ref/WeakReference.html?is-external=true" title="class or interface in java.lang.ref">WeakReference</A>&lt;<A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/TaskAction.html#log">log</A></B></CODE>
 
 <BR>
@@ -209,7 +209,8 @@ Partial <A HREF="../../hudson/model/Action.html" title="interface in hudson.mode
 <TD><CODE><B><A HREF="../../hudson/model/TaskAction.html#getLog()">getLog</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the log file.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.350
+      Use <A HREF="../../hudson/model/TaskAction.html#obtainLog()"><CODE>obtainLog()</CODE></A>, which returns the same object in a more type-safe signature.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -234,6 +235,14 @@ Partial <A HREF="../../hudson/model/Action.html" title="interface in hudson.mode
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TaskAction.html#obtainLog()">obtainLog</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the log file.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -292,7 +301,7 @@ protected transient volatile <A HREF="../../hudson/model/TaskThread.html" title=
 <A NAME="log"><!-- --></A><H3>
 log</H3>
 <PRE>
-protected transient <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ref/WeakReference.html?is-external=true" title="class or interface in java.lang.ref">WeakReference</A>&lt;org.kohsuke.stapler.framework.io.LargeText&gt; <B>log</B></PRE>
+protected transient <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ref/WeakReference.html?is-external=true" title="class or interface in java.lang.ref">WeakReference</A>&lt;<A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A>&gt; <B>log</B></PRE>
 <DL>
 <DD>Hold the log of the tagging operation.
 <P>
@@ -363,6 +372,23 @@ protected abstract <A HREF="../../hudson/security/ACL.html" title="class in huds
 getLog</H3>
 <PRE>
 public org.kohsuke.stapler.framework.io.LargeText <B>getLog</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.350
+      Use <A HREF="../../hudson/model/TaskAction.html#obtainLog()"><CODE>obtainLog()</CODE></A>, which returns the same object in a more type-safe signature.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="obtainLog()"><!-- --></A><H3>
+obtainLog</H3>
+<PRE>
+public <A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A> <B>obtainLog</B>()</PRE>
 <DL>
 <DD>Obtains the log file.
 

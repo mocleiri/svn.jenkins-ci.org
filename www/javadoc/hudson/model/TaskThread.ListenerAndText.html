@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TaskThread.ListenerAndText (Hudson main module 1.349 API)
+TaskThread.ListenerAndText (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskThread.ListenerAndText (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskThread.ListenerAndText (Hudson main module 1.349 API)";
+        parent.document.title="TaskThread.ListenerAndText (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -105,7 +105,7 @@ Class TaskThread.ListenerAndText</H2>
 </PRE>
 
 <P>
-Tuple of <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> and <A HREF="../../hudson/model/LargeText.html" title="class in hudson.model"><CODE>LargeText</CODE></A>, representing
+Tuple of <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> and <A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console"><CODE>AnnotatedLargeText</CODE></A>, representing
  the interface for producing output and how to retrieve it later.
 <P>
 
@@ -123,8 +123,8 @@ Tuple of <A HREF="../../hudson/model/TaskListener.html" title="interface in huds
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/TaskThread.ListenerAndText.html#TaskThread.ListenerAndText(hudson.model.TaskListener, org.kohsuke.stapler.framework.io.LargeText)">TaskThread.ListenerAndText</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-                           org.kohsuke.stapler.framework.io.LargeText&nbsp;text)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/TaskThread.ListenerAndText.html#TaskThread.ListenerAndText(hudson.model.TaskListener, hudson.console.AnnotatedLargeText)">TaskThread.ListenerAndText</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                           <A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A>&lt;<A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>&gt;&nbsp;text)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -145,12 +145,31 @@ Tuple of <A HREF="../../hudson/model/TaskListener.html" title="interface in huds
 <TD><CODE><B><A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forFile(java.io.File)">forFile</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;f)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of Hudson 1.350
+      Use <A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forFile(java.io.File, hudson.model.TaskThread)"><CODE>forFile(File, TaskThread)</CODE></A> and pass in the calling <A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forFile(java.io.File, hudson.model.TaskThread)">forFile</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;f,
+        <A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>&nbsp;context)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates one that's backed by a file.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forMemory()">forMemory</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of Hudson 1.350
+      Use <A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forMemory(hudson.model.TaskThread)"><CODE>forMemory(TaskThread)</CODE></A> and pass in the calling <A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forMemory(hudson.model.TaskThread)">forMemory</A></B>(<A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>&nbsp;context)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates one that's backed by memory.</TD>
@@ -178,11 +197,11 @@ Tuple of <A HREF="../../hudson/model/TaskListener.html" title="interface in huds
 </TR>
 </TABLE>
 
-<A NAME="TaskThread.ListenerAndText(hudson.model.TaskListener, org.kohsuke.stapler.framework.io.LargeText)"><!-- --></A><H3>
+<A NAME="TaskThread.ListenerAndText(hudson.model.TaskListener, hudson.console.AnnotatedLargeText)"><!-- --></A><H3>
 TaskThread.ListenerAndText</H3>
 <PRE>
 public <B>TaskThread.ListenerAndText</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-                                  org.kohsuke.stapler.framework.io.LargeText&nbsp;text)</PRE>
+                                  <A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A>&lt;<A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>&gt;&nbsp;text)</PRE>
 <DL>
 </DL>
 
@@ -201,7 +220,8 @@ forMemory</H3>
 <PRE>
 public static <A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A> <B>forMemory</B>()</PRE>
 <DL>
-<DD>Creates one that's backed by memory.
+<DD><B>Deprecated.</B>&nbsp;<I>as of Hudson 1.350
+      Use <A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forMemory(hudson.model.TaskThread)"><CODE>forMemory(TaskThread)</CODE></A> and pass in the calling <A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A></I>
 <P>
 <DD><DL>
 </DL>
@@ -213,6 +233,37 @@ public static <A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title
 forFile</H3>
 <PRE>
 public static <A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A> <B>forFile</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;f)
+                                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of Hudson 1.350
+      Use <A HREF="../../hudson/model/TaskThread.ListenerAndText.html#forFile(java.io.File, hudson.model.TaskThread)"><CODE>forFile(File, TaskThread)</CODE></A> and pass in the calling <A HREF="../../hudson/model/TaskAction.html" title="class in hudson.model"><CODE>TaskAction</CODE></A></I>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="forMemory(hudson.model.TaskThread)"><!-- --></A><H3>
+forMemory</H3>
+<PRE>
+public static <A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A> <B>forMemory</B>(<A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>&nbsp;context)</PRE>
+<DL>
+<DD>Creates one that's backed by memory.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="forFile(java.io.File, hudson.model.TaskThread)"><!-- --></A><H3>
+forFile</H3>
+<PRE>
+public static <A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model">TaskThread.ListenerAndText</A> <B>forFile</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;f,
+                                                 <A HREF="../../hudson/model/TaskThread.html" title="class in hudson.model">TaskThread</A>&nbsp;context)
                                           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Creates one that's backed by a file.

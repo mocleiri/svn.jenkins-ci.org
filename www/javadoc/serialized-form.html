@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Serialized Form (Hudson main module 1.349 API)
+Serialized Form (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Serialized Form (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Serialized Form (Hudson main module 1.349 API)";
+        parent.document.title="Serialized Form (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -268,7 +268,8 @@ auth</H3>
 <PRE>
 org.acegisecurity.Authentication <B>auth</B></PRE>
 <DL>
-<DD>CLI should be executed under this credential.
+<DD>If the transport has already authenticated this CLI command execution, a valid <CODE>Authentication</CODE> object.
+ Otherwise <A HREF="hudson/model/Hudson.html#ANONYMOUS"><CODE>Hudson.ANONYMOUS</CODE></A>
 <P>
 <DL>
 </DL>

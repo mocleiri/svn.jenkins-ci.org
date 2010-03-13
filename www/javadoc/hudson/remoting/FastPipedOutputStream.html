@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FastPipedOutputStream (Hudson main module 1.349 API)
+FastPipedOutputStream (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FastPipedOutputStream (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FastPipedOutputStream (Hudson main module 1.349 API)";
+        parent.document.title="FastPipedOutputStream (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -148,8 +148,8 @@ This class is equivalent to <code>java.io.PipedOutputStream</code>. In the
                       int&nbsp;bufferSize)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a PipedOutputStream with buffer size <code>bufferSize</code> and
- connects it to <code>sink</code>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.350
+      bufferSize parameter is ignored.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -275,6 +275,9 @@ public <B>FastPipedOutputStream</B>(<A HREF="../../hudson/remoting/FastPipedInpu
                              int&nbsp;bufferSize)
                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.350
+      bufferSize parameter is ignored.</I>
+<P>
 <DD>Creates a PipedOutputStream with buffer size <code>bufferSize</code> and
  connects it to <code>sink</code>.
 <P>

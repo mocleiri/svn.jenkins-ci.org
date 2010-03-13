@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FileSystemProvisioner.Default (Hudson main module 1.349 API)
+FileSystemProvisioner.Default (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileSystemProvisioner.Default (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileSystemProvisioner.Default (Hudson main module 1.349 API)";
+        parent.document.title="FileSystemProvisioner.Default (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -230,12 +230,23 @@ Default implementation that doesn't rely on any file system specific capability,
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.Default.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, java.lang.String, hudson.model.TaskListener)">snapshot</A></B>(<A HREF="../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+         <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob,
+         <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a tar ball.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FileSystemProvisioner.Default.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">snapshot</A></B>(<A HREF="../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
          <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a tar ball.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.350</I></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.FileSystemProvisioner"><!-- --></A>
@@ -302,7 +313,7 @@ public void <B>prepareWorkspace</B>(<A HREF="../hudson/model/AbstractBuild.html"
 
  <p>
  This method can prepare the underlying file system in preparation
- for the later <A HREF="../hudson/FileSystemProvisioner.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)"><CODE>FileSystemProvisioner.snapshot(AbstractBuild, FilePath, TaskListener)</CODE></A>.
+ for the later <CODE>#snapshot(AbstractBuild, FilePath, TaskListener)</CODE>.
 
  TODO : the method needs to be able to see the snapshot would
  be later needed. In fact, perhaps we should only call this method
@@ -355,14 +366,36 @@ public <A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson">Worksp
                            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.350</I>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="snapshot(hudson.model.AbstractBuild, hudson.FilePath, java.lang.String, hudson.model.TaskListener)"><!-- --></A><H3>
+snapshot</H3>
+<PRE>
+public <A HREF="../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A> <B>snapshot</B>(<A HREF="../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                                  <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+                                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob,
+                                  <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
+                           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
 <DD>Creates a tar ball.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/FileSystemProvisioner.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)">snapshot</A></CODE> in class <CODE><A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../hudson/FileSystemProvisioner.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, java.lang.String, hudson.model.TaskListener)">snapshot</A></CODE> in class <CODE><A HREF="../hudson/FileSystemProvisioner.html" title="class in hudson">FileSystemProvisioner</A></CODE></DL>
 </DD>
 <DD><DL>
 <DD><CODE>ws</CODE> - New workspace should be prepared in this location. This is the same value as
-      <code>build.getProject().getWorkspace()</code> but passed separately for convenience.
+      <code>build.getProject().getWorkspace()</code> but passed separately for convenience.<DD><CODE>glob</CODE> - Ant-style file glob for files to include in the snapshot. May not be pertinent for all
+      implementations.
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>

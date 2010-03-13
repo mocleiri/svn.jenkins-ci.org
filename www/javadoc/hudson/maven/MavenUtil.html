@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenUtil (Hudson main module 1.349 API)
+MavenUtil (Hudson main module 1.350 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-05">
+<META NAME="date" CONTENT="2010-03-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenUtil (Hudson main module 1.349 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenUtil (Hudson main module 1.349 API)";
+        parent.document.title="MavenUtil (Hudson main module 1.350 API)";
     }
 }
 </SCRIPT>
@@ -150,6 +150,15 @@ Class MavenUtil</H2>
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;hudson.maven.MavenEmbedder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, hudson.model.AbstractBuild)">createEmbedder</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+               <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This version tries to infer mavenHome and other options by looking at a build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -324,6 +333,27 @@ public static hudson.maven.MavenEmbedder <B>createEmbedder</B>(<A HREF="../../hu
                                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>This version tries to infer mavenHome by looking at a project.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.maven.embedder.MavenEmbedderException</CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>See Also:</B><DD><A HREF="../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String)"><CODE>createEmbedder(TaskListener, File, String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createEmbedder(hudson.model.TaskListener, hudson.model.AbstractBuild)"><!-- --></A><H3>
+createEmbedder</H3>
+<PRE>
+public static hudson.maven.MavenEmbedder <B>createEmbedder</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+                                                        <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build)
+                                                 throws org.apache.maven.embedder.MavenEmbedderException,
+                                                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD>This version tries to infer mavenHome and other options by looking at a build.
 <P>
 <DD><DL>
 
