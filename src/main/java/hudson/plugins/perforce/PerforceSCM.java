@@ -325,18 +325,17 @@ public class PerforceSCM extends SCM {
 
             // Now we can actually do the sync process...
             StringBuilder sbMessage = new StringBuilder("Sync'ing workspace to ");
-            StringBuilder sbSyncPath = new StringBuilder("//" + client.getName() + "/...");
-            sbSyncPath.append("@");
+            String syncPathSuffix;
 
             if (p4Label != null) {
                 sbMessage.append("label ");
                 sbMessage.append(p4Label);
-                sbSyncPath.append(p4Label);
+                syncPathSuffix = "@" + p4Label;
             }
             else {
                 sbMessage.append("changelist ");
                 sbMessage.append(newestChange);
-                sbSyncPath.append(newestChange);
+                syncPathSuffix = "@" + newestChange;
             }
 
             if (forceSync)
@@ -345,12 +344,11 @@ public class PerforceSCM extends SCM {
                 sbMessage.append(".");
 
             log.println(sbMessage.toString());
-            String syncPath = sbSyncPath.toString();
 
             long startTime = System.currentTimeMillis();
 
             PerforcePasswordEncryptor encryptor = new PerforcePasswordEncryptor();
-            workspace.act(new SyncTask(clientName, syncPath, forceSync, listener,
+            workspace.act(new SyncTask(clientName, syncPathSuffix, forceSync, listener,
                     p4Port, p4User, encryptor.decryptString(p4Passwd)));
 
             long endTime = System.currentTimeMillis();
@@ -394,18 +392,18 @@ public class PerforceSCM extends SCM {
     private static class SyncTask implements FileCallable<Boolean> {
 
         private final String clientName;
-        private final String syncPath;
+        private final String syncPathSuffix;
         private final boolean forceSync;
         private final BuildListener listener;
         private final String p4port;
         private final String p4user;
         private final String p4passwd;
 
-        public SyncTask(String clientName, String syncPath, boolean forceSync, 
+        public SyncTask(String clientName, String syncPathSuffix, boolean forceSync, 
                 BuildListener listener, String p4port,
                 String p4user, String p4passwd) {
             this.clientName = clientName;
-            this.syncPath = syncPath;
+            this.syncPathSuffix = syncPathSuffix;
             this.forceSync = forceSync;
             this.listener = listener;
             this.p4port = p4port;
@@ -422,7 +420,7 @@ public class PerforceSCM extends SCM {
                 server = P4jUtil.newServer(p4port, "hudson", "sync", p4user, p4passwd);
                 IClient client = server.getClient(clientName);
                 server.setCurrentClient(client);
-                P4jUtil.sync(client, syncPath, forceSync);
+                P4jUtil.sync(client, syncPathSuffix, forceSync);
                 // Logout and disconnect since this is a new connection
                 server.logout();
                 server.disconnect();

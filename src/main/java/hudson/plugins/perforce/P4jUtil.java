@@ -110,18 +110,45 @@ public final class P4jUtil {
         return server.getChangelist(id);
     }
 
+    private static List<IFileSpec> generateFileSpecArr(IClient client, String pathSuffix)
+    {
+      if (pathSuffix == null) pathSuffix = "";
+      List<String> strList = new ArrayList<String>();
+      //P4JClientView view = client.getClientView();
+      //List<P4JClientView.P4JClientViewMapping> mappingList = view.getMapping();
+      
+      List<IClientViewMapping> mappingList = client.getClientView().getEntryList();
+      
+      for (IClientViewMapping mapping : mappingList)
+      {
+        String depotSpec = mapping.getDepotSpec();
+        if (depotSpec != null)
+        {
+          depotSpec = depotSpec.trim();
+          if (depotSpec.length() > 0)
+          {
+            if (depotSpec.charAt(0) == '+') depotSpec = depotSpec.substring(1);
+            strList.add(depotSpec + pathSuffix);
+          }
+        }
+      }
+
+      String[] strArr = new String[strList.size()];
+      strArr = strList.toArray(strArr);
+      return FileSpecBuilder.makeFileSpecList(strArr);
+    }
+
     /**
      * Returns all of the changelists within a given id range (inclusive) submitted by any user,
      * visible under a given client.
      */
     static List<IChangelist> changesInRange(IClient client, int from, int to)
             throws P4JavaException {
-        List<IFileSpec> specs = FileSpecBuilder.makeFileSpecList(
-                new String[] { "//" + client.getName() + "/...@" + from + ",@" + to });
+        List<IFileSpec> specs = generateFileSpecArr(client, "@" + from + ",@" + to);
         // Perforce decided (annoyingly) to remove the ability to fetch full
         // changelists. Instead, we have to pull them out one by one after getting
         // the list of client summaries.
-        List<IChangelistSummary> summaries = client.getServer().getChangelists(-1, specs, /*client.getName()*/null, null,
+        List<IChangelistSummary> summaries = client.getServer().getChangelists(-1, specs, /*clieht.getName()*/null, null,
                 /*integ=*/true, /*subm=*/true, /*pend=*/false, /*long=*/true);
         List<IChangelist> changelists = new ArrayList<IChangelist>();
         for(IChangelistSummary summary : summaries){
@@ -225,15 +252,30 @@ public final class P4jUtil {
      * is reasonably fast, but the changelist will have only a short description.
      */
     static int latestChangeId(IClient client) {
-        List<IFileSpec> specs = FileSpecBuilder.makeFileSpecList(
-                new String[] { "//" + client.getName() + "/..." });
+        List<IFileSpec> specs = generateFileSpecArr(client, null);
         try {
             List<IChangelistSummary> changes =
-                    client.getServer().getChangelists(1, specs, client.getName(), null, true, IChangelist.Type.SUBMITTED, false);
-            return (changes != null && changes.size() >= 1) ? changes.get(0).getId() : -1;
+                    client.getServer().getChangelists(1, specs, null, null, true, IChangelist.Type.SUBMITTED, false);
+            if (changes == null) 
+            {
+                System.err.println("Null changelist list for client " + client.getName());
+                return -1;
+            }
+            else if (changes.size() == 0) 
+            {
+                System.err.println("Empty changelist list for client " + client.getName());
+                return -1;
+            }
+            
+            int max = -1;
+            for (IChangelistSummary s : changes)
+            {
+              if (s.getId() > max) max = s.getId(); 
+            }
+            return max;
         } catch (P4JavaException e) {
             // ignore
-            //e.printStackTrace();
+            e.printStackTrace();
             return -1;
         }
     }
@@ -265,15 +307,20 @@ public final class P4jUtil {
      */
     static void addViewMapping(ILabel label, String depotSpec) {
         ViewMap<ILabelMapping> mapping = label.getViewMapping();
+        if (mapping == null) //The javadocs claim this should always return non-null but this is not true in practice
+        {
+          mapping = new ViewMap<ILabelMapping>(); 
+          label.setViewMapping(mapping);
+        }
         mapping.addEntry(new Label.LabelMapping(mapping.getSize(), depotSpec));
     }
 
     /**
      * Returns true iff syncing the given client to head would make changes.
      */
-    static boolean wouldSync(IClient client, String path)
+    private static boolean wouldSync(IClient client, String pathSuffix)
             throws ConnectionException, RequestException, AccessException {
-        List<IFileSpec> specs = FileSpecBuilder.makeFileSpecList(new String[] { path });
+        List<IFileSpec> specs = generateFileSpecArr(client, pathSuffix); 
         List<IFileSpec> what = client.sync(specs, false, true, false, false);
         //for (IFileSpec fs : what) {
         //    System.out.println(" " + fs.getOpStatus() + ": " + fs.getDisplayPath());
@@ -287,7 +334,7 @@ public final class P4jUtil {
      */
     static boolean wouldSyncAtHead(IClient client)
             throws ConnectionException, RequestException, AccessException {
-        return wouldSync(client, "//" + client.getName() + "/...");
+        return wouldSync(client, null);
     }
 
     /**
@@ -295,15 +342,15 @@ public final class P4jUtil {
      */
     static boolean wouldSyncAtChangeId(IClient client, int id)
             throws ConnectionException, RequestException, AccessException {
-        return wouldSync(client, "//" + client.getName() + "/...@" + id);
+        return wouldSync(client, "@" + id);
     }
 
     /**
      * Synchronizes the given client workspace.
      */
-    static List<IFileSpec> sync(IClient client, String path, boolean force)
+    static List<IFileSpec> sync(IClient client, String pathSuffix, boolean force)
             throws ConnectionException, RequestException, AccessException {
-        List<IFileSpec> specs = FileSpecBuilder.makeFileSpecList(new String[] { path });
+        List<IFileSpec> specs = generateFileSpecArr(client, pathSuffix); 
         return client.sync(specs, force, false, false, false);
     }
 
@@ -312,7 +359,7 @@ public final class P4jUtil {
      */
     static List<IFileSpec> syncToHead(IClient client, boolean force)
             throws ConnectionException, RequestException, AccessException {
-        return sync(client, "//" + client.getName() + "/...", force);
+        return sync(client, null, force);
     }
 
     /**
@@ -320,7 +367,7 @@ public final class P4jUtil {
      */
     static List<IFileSpec> syncToChangeId(IClient client, int id, boolean force)
             throws ConnectionException, RequestException, AccessException {
-        return sync(client, "//" + client.getName() + "/...@" + id, force);
+        return sync(client, "@" + id, force);
     }
 
     /**
@@ -328,7 +375,7 @@ public final class P4jUtil {
      */
     static List<IFileSpec> syncToLabel(IClient client, String label, boolean force)
             throws ConnectionException, RequestException, AccessException {
-        return sync(client, "//" + client.getName() + "/...@" + label, force);
+        return sync(client, "@" + label, force);
     }
 
     static ILabel newLabel(IServer server, String tag, String desc, int id, String[] mappings) {
