@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.mtvi</groupId>
 		<artifactId>master-public-maven-plugin</artifactId>
-		<version>15</version>
+		<version>21</version>
 	</parent>
 	<groupId>org.jvnet.hudson.tools</groupId>
 	<artifactId>maven-hudson-plugin</artifactId>
@@ -70,6 +70,11 @@
 	</dependencies>
 
 	<distributionManagement>
+	    <repository>
+            <id>java.net-m2-repository</id>
+            <url>java-net:/maven2-repository/trunk/repository/</url>
+        </repository>
+        
         <site>
             <id>java.net</id>
             <url>
@@ -108,6 +113,13 @@
 				</configuration>
 			</plugin>
 		</plugins>
+        <extensions>
+          <extension>
+            <groupId>org.jvnet.wagon-svn</groupId>
+            <artifactId>wagon-svn</artifactId>
+            <version>RELEASE</version>
+          </extension>
+        </extensions>
 	</build>
 
   <repositories>
