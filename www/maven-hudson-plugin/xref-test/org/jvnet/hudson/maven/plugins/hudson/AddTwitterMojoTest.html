@@ -16,14 +16,14 @@
 <a name="6" href="#6">6</a>   <strong class="jxr_keyword">import</strong> javax.servlet.http.HttpServletRequest;
 <a name="7" href="#7">7</a>   <strong class="jxr_keyword">import</strong> javax.servlet.http.HttpServletResponse;
 <a name="8" href="#8">8</a>   
-<a name="9" href="#9">9</a>   <strong class="jxr_keyword">import</strong> org.codehaus.plexus.util.IOUtil;
-<a name="10" href="#10">10</a>  <strong class="jxr_keyword">import</strong> org.custommonkey.xmlunit.XMLAssert;
-<a name="11" href="#11">11</a>  <strong class="jxr_keyword">import</strong> org.ddsteps.mock.httpserver.JettyMockServer;
-<a name="12" href="#12">12</a>  <strong class="jxr_keyword">import</strong> org.ddsteps.mock.httpserver.JettyMockServer.Callback;
-<a name="13" href="#13">13</a>  <strong class="jxr_keyword">import</strong> org.jvnet.hudson.maven.plugins.hudson.AddTwitterMojo;
-<a name="14" href="#14">14</a>  <strong class="jxr_keyword">import</strong> org.xml.sax.InputSource;
-<a name="15" href="#15">15</a>  
-<a name="16" href="#16">16</a>  <strong class="jxr_keyword">import</strong> com.mtvi.plateng.testing.ReflectionHelper;
+<a name="9" href="#9">9</a>   <strong class="jxr_keyword">import</strong> junitx.util.PrivateAccessor;
+<a name="10" href="#10">10</a>  
+<a name="11" href="#11">11</a>  <strong class="jxr_keyword">import</strong> org.codehaus.plexus.util.IOUtil;
+<a name="12" href="#12">12</a>  <strong class="jxr_keyword">import</strong> org.custommonkey.xmlunit.XMLAssert;
+<a name="13" href="#13">13</a>  <strong class="jxr_keyword">import</strong> org.ddsteps.mock.httpserver.JettyMockServer;
+<a name="14" href="#14">14</a>  <strong class="jxr_keyword">import</strong> org.ddsteps.mock.httpserver.JettyMockServer.Callback;
+<a name="15" href="#15">15</a>  <strong class="jxr_keyword">import</strong> org.jvnet.hudson.maven.plugins.hudson.AddTwitterMojo;
+<a name="16" href="#16">16</a>  <strong class="jxr_keyword">import</strong> org.xml.sax.InputSource;
 <a name="17" href="#17">17</a>  
 <a name="18" href="#18">18</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/jvnet/hudson/maven/plugins/hudson/AddTwitterMojoTest.html">AddTwitterMojoTest</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../org/jvnet/hudson/maven/plugins/hudson/AbstractWithServerTestCase.html">AbstractWithServerTestCase</a> {
 <a name="19" href="#19">19</a>      <strong class="jxr_keyword">private</strong> String version;
@@ -37,8 +37,8 @@
 <a name="27" href="#27">27</a>          mockserver.expect(<span class="jxr_string">"/hudson/job/job2/config.xml"</span>, createConfigPostCallback(<span class="jxr_string">"job2"</span>));
 <a name="28" href="#28">28</a>          AddTwitterMojo mojo = <strong class="jxr_keyword">new</strong> AddTwitterMojo();
 <a name="29" href="#29">29</a>          assertNotNull(mojo);
-<a name="30" href="#30">30</a>          ReflectionHelper.setField(mojo, <span class="jxr_string">"hudsonURL"</span>, <strong class="jxr_keyword">new</strong> URL(<span class="jxr_string">"http://localhost:3434/hudson"</span>));
-<a name="31" href="#31">31</a>          ReflectionHelper.setField(mojo, <span class="jxr_string">"doAll"</span>, <strong class="jxr_keyword">true</strong>);
+<a name="30" href="#30">30</a>          PrivateAccessor.setField(mojo, <span class="jxr_string">"hudsonURL"</span>, <strong class="jxr_keyword">new</strong> URL(<span class="jxr_string">"http://localhost:3434/hudson"</span>));
+<a name="31" href="#31">31</a>          PrivateAccessor.setField(mojo, <span class="jxr_string">"doAll"</span>, <strong class="jxr_keyword">true</strong>);
 <a name="32" href="#32">32</a>          mojo.execute();
 <a name="33" href="#33">33</a>          mockserver.verify();
 <a name="34" href="#34">34</a>      }
@@ -50,8 +50,8 @@
 <a name="40" href="#40">40</a>          mockserver.expect(<span class="jxr_string">"/hudson/job/job1/config.xml"</span>, createConfigPostCallback(<span class="jxr_string">"job1"</span>));
 <a name="41" href="#41">41</a>          AddTwitterMojo mojo = <strong class="jxr_keyword">new</strong> AddTwitterMojo();
 <a name="42" href="#42">42</a>          assertNotNull(mojo);
-<a name="43" href="#43">43</a>          ReflectionHelper.setField(mojo, <span class="jxr_string">"hudsonURL"</span>, <strong class="jxr_keyword">new</strong> URL(<span class="jxr_string">"http://localhost:3434/hudson"</span>));
-<a name="44" href="#44">44</a>          ReflectionHelper.setField(mojo, <span class="jxr_string">"doAll"</span>, <strong class="jxr_keyword">true</strong>);
+<a name="43" href="#43">43</a>          PrivateAccessor.setField(mojo, <span class="jxr_string">"hudsonURL"</span>, <strong class="jxr_keyword">new</strong> URL(<span class="jxr_string">"http://localhost:3434/hudson"</span>));
+<a name="44" href="#44">44</a>          PrivateAccessor.setField(mojo, <span class="jxr_string">"doAll"</span>, <strong class="jxr_keyword">true</strong>);
 <a name="45" href="#45">45</a>          mojo.execute();
 <a name="46" href="#46">46</a>          mockserver.verify();
 <a name="47" href="#47">47</a>      }
@@ -62,8 +62,8 @@
 <a name="52" href="#52">52</a>          mockserver.expect(<span class="jxr_string">"/hudson/job/job1/config.xml"</span>, createConfigPostCallback(<span class="jxr_string">"job1"</span>));
 <a name="53" href="#53">53</a>          AddTwitterMojo mojo = <strong class="jxr_keyword">new</strong> AddTwitterMojo();
 <a name="54" href="#54">54</a>          assertNotNull(mojo);
-<a name="55" href="#55">55</a>          ReflectionHelper.setField(mojo, <span class="jxr_string">"hudsonURL"</span>, <strong class="jxr_keyword">new</strong> URL(<span class="jxr_string">"http://localhost:3434/hudson"</span>));
-<a name="56" href="#56">56</a>          ReflectionHelper.setField(mojo, <span class="jxr_string">"jobName"</span>, <span class="jxr_string">"job1"</span>);
+<a name="55" href="#55">55</a>          PrivateAccessor.setField(mojo, <span class="jxr_string">"hudsonURL"</span>, <strong class="jxr_keyword">new</strong> URL(<span class="jxr_string">"http://localhost:3434/hudson"</span>));
+<a name="56" href="#56">56</a>          PrivateAccessor.setField(mojo, <span class="jxr_string">"jobName"</span>, <span class="jxr_string">"job1"</span>);
 <a name="57" href="#57">57</a>          mojo.execute();
 <a name="58" href="#58">58</a>          mockserver.verify();
 <a name="59" href="#59">59</a>      }
