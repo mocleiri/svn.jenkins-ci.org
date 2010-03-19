@@ -1,0 +1,74 @@
+<html>
+<head>
+	<style>
+		dt {
+			font-weight: bold;
+			margin-left: 1em;
+		}
+		pre {
+			background-color: lightgray;
+			padding: 0.5em;
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Monitoring External Jobs in Hudson</h1>
+
+<script>
+window.location.replace("http://hudson.gotdns.com/wiki/display/HUDSON/Monitoring+external+jobs");
+</script>
+
+<p>
+	Hudson is useful for monitoring the non-interactive execution of processes, such as cron jobs, procmail, inetd-launched processes.
+
+<h3>Setting up a project</h3>
+<p>
+	Create a new job and choose "monitoring an external job".
+
+<h3>Monitoring an execution</h3>
+<p>
+	Once you set up a project, you can monitor an execution by running a command like this:
+<pre>
+$ export HUDSON_HOME=<i>http://myserver.acme.org/path/to/hudson/</i>
+$ java -jar /path/to/hudson.jar "<i>job name</i>" <i>&lt;program arg1 arg2...></i>
+</pre>
+<p>
+	The HUDSON_HOME variable is used to locate the server Hudson is running, so this must be set. You can copy <tt>hudson.jar</tt> to other machines if you want to monitor jobs that are run on a different machine. When you do that, you also need <tt>ant.jar</tt> for now.
+<p>
+	stdout and stderr of the program will be recorded, and the non-0 exit code will be considered as a failure.
+
+
+
+<h3>Monitoring cron jobs</h3>
+<p>
+	To monitor a cron job, simply run the above set up from your cron script. To avoid receiving e-mails from cron daemon, you might want to write something like:
+<pre>
+HUDSON_HOME=<i>/hudson/home/directory</i>
+0 * * * *     export HUDSON_HOME=$HUDSON_HOME; java -jar hudson.jar "backup" backup.sh 2>&1 > /dev/null
+</pre>
+
+
+
+<h3>Submit a run programatically</h3>
+<p>
+	The above command submits the execution and its result by sending XML to HTTP. This means you can submit an execution record from any program, as long as you follow the same XML format.
+
+<p>
+	The format is explained below:
+
+<pre>&lt;run>
+  &lt;log encoding='hexBinary'>...hex binary encoded console output...&lt;/log>
+  &lt;result>... integer indicating the error code. 0 is success and everything else is failure&lt;/result>
+  &lt;duration>... milliseconds it took to execute this run ...&lt;/duration>
+&lt;/run></pre>
+
+<p>
+	The <tt>duration</tt> element is optional. Console output is hexBinary encoded so that you can pass in any control characters that are otherwise disallowed in XML. Elements must be in this order.
+</p><p>
+	The above XML needs to be sent to <tt>http://myhost/hudson/job/<i>jobName</i>/postBuildResult</tt>.
+</p>
+
+</div></body>
+</html>

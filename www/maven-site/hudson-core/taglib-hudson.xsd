@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="/lib/hudson" elementFormDefault="qualified">
+    <xsd:annotation>
+<xsd:documentation>/lib/hudson</xsd:documentation>
+</xsd:annotation>
+    <xsd:element name="buildLink">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="queue">
+<xsd:annotation>
+<xsd:documentation>
+    Displays the build queue as &lt;l:pane&gt;
+
+    
+  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:attribute name="items" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      Queue items to be displayed. Normally you should specify ${app.queue.items},
+      but for example yuo can specify a sublist after some filtering to narrow down
+      the list.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="progressBar">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="actions">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="ballColorTd">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="rssBar-with-iconSize">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="buildListTable">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="test-result">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="node">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="summary">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:sequence>
+<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="projectViewNested">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="editTypeIcon">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="executors">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="projectViewRow">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="propertyTable">
+<xsd:annotation>
+<xsd:documentation>
+    Dispaly sortable table of properties.
+
+    
+  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:attribute name="items" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      A Map object that gets rendered as a table.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="help">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="buildHealth">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="editableDescription">
+<xsd:annotation>
+<xsd:documentation>
+    Renders ${it.description} and then allow it to be editable in place,
+    if the current user has the specified permission.
+
+    
+  </xsd:documentation>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:attribute name="permission" use="required">
+<xsd:annotation>
+<xsd:documentation>
+      If the current user doesn't have this permission, the description
+      is not editable.
+    </xsd:documentation>
+</xsd:annotation>
+</xsd:attribute>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="progressiveText">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="listScmBrowsers">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="buildProgressBar">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="projectView">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:sequence>
+<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="setIconSize">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="rssBar">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="buildRangeLink">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="artifactList">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true"/>
+</xsd:element>
+    <xsd:element name="scriptConsole">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:sequence>
+<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+    <xsd:element name="buildCaption">
+<xsd:annotation>
+<xsd:documentation/>
+</xsd:annotation>
+<xsd:complexType mixed="true">
+<xsd:sequence>
+<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+  </xsd:schema>

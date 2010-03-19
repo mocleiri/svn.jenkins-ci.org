@@ -1,0 +1,597 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Maven Tools for Hudson - Surefire Report</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          </head>
+  <body class="composite">
+    <div id="banner">
+                    <span id="bannerLeft">
+    
+            Maven Tools for Hudson
+    
+            </span>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2010-03-16
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>Documentation</h5>
+            <ul>
+              
+    <li class="none">
+                    <a href="index.html">Introduction</a>
+          </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+            
+            
+      
+            
+      
+            
+      
+              
+            <li class="expanded">
+                    <a href="project-reports.html">Project Reports</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="changelog.html">Change Log</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="changes-report.html">Changes Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="checkstyle.html">Checkstyle</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="clirr-report.html">Clirr</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cobertura/index.html">Cobertura Test Coverage</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cpd.html">CPD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="dev-activity.html">Developer Activity</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="file-activity.html">File Activity</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="findbugs.html">FindBugs Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="apidocs/index.html">JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="javancss.html">JavaNCSS Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="jdepend-report.html">JDepend</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="plugin-info.html">Plugin Documentation</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="pmd.html">PMD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="xref/index.html">Source Xref</a>
+          </li>
+                  
+    <li class="none">
+              <strong>Surefire Report</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="taglist.html">Tag List</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="testapidocs/index.html">Test JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="xref-test/index.html">Test Source Xref</a>
+          </li>
+              </ul>
+        </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <script type="text/javascript">
+function toggleDisplay(elementId) {
+ var elm = document.getElementById(elementId + 'error');
+ if (elm && typeof elm.style != "undefined") {
+ if (elm.style.display == "none") {
+ elm.style.display = "";
+ document.getElementById(elementId + 'off').style.display = "none";
+ document.getElementById(elementId + 'on').style.display = "inline";
+ } else if (elm.style.display == "") { elm.style.display = "none";
+ document.getElementById(elementId + 'off').style.display = "inline";
+ document.getElementById(elementId + 'on').style.display = "none";
+ } 
+ } 
+ }
+</script><div class="section"><h2>Surefire Report</h2>
+</div>
+<div class="section"><h2><a name="Summary"></a>Summary</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<br />
+<table class="bodyTable"><tr class="a"><th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td>35</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>2.797</td>
+</tr>
+</table>
+<br />
+Note: failures are anticipated and checked for with assertions while errors are unanticipated.<br />
+</div>
+<div class="section"><h2><a name="Package_List"></a>Package List</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<br />
+<table class="bodyTable"><tr class="a"><th>Package</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#org.jvnet.hudson.maven.plugins.hudson">org.jvnet.hudson.maven.plugins.hudson</a></td>
+<td>35</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>2.797</td>
+</tr>
+</table>
+<br />
+Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudson"></a>org.jvnet.hudson.maven.plugins.hudson</h3>
+<table class="bodyTable"><tr class="a"><th></th>
+<th>Class</th>
+<th>Tests</th>
+<th>Errors </th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Success Rate</th>
+<th>Time</th>
+</tr>
+<tr class="b"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonAddTwitterMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonAddTwitterMojoTest">AddTwitterMojoTest</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.464</td>
+</tr>
+<tr class="a"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonAdjustViolationsXMLTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonAdjustViolationsXMLTest">AdjustViolationsXMLTest</a></td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.113</td>
+</tr>
+<tr class="b"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonBuildAllTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonBuildAllTest">BuildAllTest</a></td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.101</td>
+</tr>
+<tr class="a"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonCreatePayloadMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonCreatePayloadMojoTest">CreatePayloadMojoTest</a></td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.498</td>
+</tr>
+<tr class="b"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonCreatePostURLMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonCreatePostURLMojoTest">CreatePostURLMojoTest</a></td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.273</td>
+</tr>
+<tr class="a"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonExecuteTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonExecuteTest">ExecuteTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>1.128</td>
+</tr>
+<tr class="b"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonExecuteWithAuthTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonExecuteWithAuthTest">ExecuteWithAuthTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.124</td>
+</tr>
+<tr class="a"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonFindServerTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonFindServerTest">FindServerTest</a></td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.003</td>
+</tr>
+<tr class="b"><td><a href="#org.jvnet.hudson.maven.plugins.hudsonJobExistsMojoTest"><img src="images/icon_success_sml.gif" /></a></td>
+<td><a href="#org.jvnet.hudson.maven.plugins.hudsonJobExistsMojoTest">JobExistsMojoTest</a></td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>100%</td>
+<td>0.093</td>
+</tr>
+</table>
+</div>
+<br />
+</div>
+<div class="section"><h2><a name="Test_Cases"></a>Test Cases</h2>
+<div class="section">[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonAddTwitterMojoTest"></a>AddTwitterMojoTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testMultiProject</td>
+<td>0.34</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSingleProject</td>
+<td>0.077</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSingleProjectByName</td>
+<td>0.04</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonAdjustViolationsXMLTest"></a>AdjustViolationsXMLTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testOne</td>
+<td>0.112</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonBuildAllTest"></a>BuildAllTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testMultiProject</td>
+<td>0.041</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testSingleProject</td>
+<td>0.036</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateJobBuildURL</td>
+<td>0.022</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonCreatePayloadMojoTest"></a>CreatePayloadMojoTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateFullPayload</td>
+<td>0.134</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateWithGit</td>
+<td>0.024</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoCoberturaPayload</td>
+<td>0.04</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoEmailPayload</td>
+<td>0.1</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoJavadocPayload</td>
+<td>0.045</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoJunitPayload</td>
+<td>0.042</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoTwitterPayload</td>
+<td>0.043</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreateNoViolationsPayload</td>
+<td>0.025</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePayloadWithAdditionalGoals</td>
+<td>0.005</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePayloadWithMultiplePortAllocation</td>
+<td>0.015</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePayloadWithSinglePortAllocation</td>
+<td>0.023</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonCreatePostURLMojoTest"></a>CreatePostURLMojoTest</h3>
+<table class="bodyTable"><tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromCI</td>
+<td>0.059</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromCIAndProperty</td>
+<td>0.023</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromCIForReplace</td>
+<td>0.035</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromOtherCI</td>
+<td>0.063</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromProperty</td>
+<td>0.026</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLFromPropertyWithExtraSlash</td>
+<td>0.029</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testCreatePostURLWithNothing</td>
+<td>0.029</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonExecuteTest"></a>ExecuteTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testNoJob</td>
+<td>0.966</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testYesJob</td>
+<td>0.142</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonExecuteWithAuthTest"></a>ExecuteWithAuthTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testNoJob</td>
+<td>0.077</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testYesJob</td>
+<td>0.044</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonFindServerTest"></a>FindServerTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerHostAndPort</td>
+<td>0.001</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerJustHost</td>
+<td>0.001</td>
+</tr>
+<tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerJustHost2</td>
+<td>0</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testFindServerNull</td>
+<td>0</td>
+</tr>
+</table>
+</div>
+<div class="section"><h3><a name="org.jvnet.hudson.maven.plugins.hudsonJobExistsMojoTest"></a>JobExistsMojoTest</h3>
+<table class="bodyTable"><tr class="b"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testNoJob</td>
+<td>0.04</td>
+</tr>
+<tr class="a"><td><img src="images/icon_success_sml.gif" /></td>
+<td>testYesJob</td>
+<td>0.041</td>
+</tr>
+</table>
+</div>
+<br />
+</div>
+<br />
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          1981-2010
+    
+          MTV Networks
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>
