@@ -1,7 +1,7 @@
 /*
  * The MIT License
  * 
- * Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
+ * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
@@ -538,6 +539,39 @@ public class Channel implements VirtualChannel, IChannel {
         for (int i = 0; i < classesInJar.length; i++)
             jars[i] = Which.jarFile(classesInJar[i]).toURI().toURL();
         return call(new PreloadJarTask(jars,local));
+    }
+
+    /**
+     * Preloads all JARs that contain the resource name.
+     * 
+     * @param local The local classloader to use on the server side.
+     * @param resourceName The name of the resource to find.
+     * 
+     * @return False is no resources are found with the given name. Otherwise, return false if all
+     * jars found were previously preloaded or true otherwise.
+     *
+     * @throws IOException When some kind of IOException occurs, such as a problem using the
+     * channel.
+     * @throws InterruptedException When the preloading is interrupted. The preloading occurs in a 
+     * task that is executed on a remote process.
+     */
+    public boolean preloadJar(ClassLoader local, String resourceName) throws IOException,
+            InterruptedException {
+        Enumeration<URL> resources = local.getResources(resourceName);
+
+        if (resources == null) {
+            return false;
+        }
+
+        Vector<URL> vector = new Vector<URL>();
+        while (resources.hasMoreElements()) {
+            vector.add(resources.nextElement());
+        }
+
+        URL[] jars = new URL[vector.size()];
+        for (int i = 0; i < vector.size(); i++)
+            jars[i] = Which.jarFile(vector.get(i)).toURI().toURL();
+        return call(new PreloadJarTask(jars, local));
     }
 
     /**
