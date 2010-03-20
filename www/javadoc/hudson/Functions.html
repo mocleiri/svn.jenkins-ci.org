@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Functions (Hudson main module 1.351 API)
+Functions (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson main module 1.351 API)";
+        parent.document.title="Functions (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -132,6 +132,14 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;URL decomposed for easier computation of relevant URLs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.ThreadGroupMap.html" title="class in hudson">Functions.ThreadGroupMap</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<!-- =========== FIELD SUMMARY =========== -->
@@ -311,7 +319,8 @@ Utility functions used in views.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Functions.html#dumpThreadInfo(java.lang.management.ThreadInfo)">dumpThreadInfo</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/management/ThreadInfo.html?is-external=true" title="class or interface in java.lang.management">ThreadInfo</A>&nbsp;ti)</CODE>
+<TD><CODE><B><A HREF="../hudson/Functions.html#dumpThreadInfo(java.lang.management.ThreadInfo, hudson.Functions.ThreadGroupMap)">dumpThreadInfo</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/management/ThreadInfo.html?is-external=true" title="class or interface in java.lang.management">ThreadInfo</A>&nbsp;ti,
+               <A HREF="../hudson/Functions.ThreadGroupMap.html" title="class in hudson">Functions.ThreadGroupMap</A>&nbsp;map)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -960,6 +969,14 @@ Utility functions used in views.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like JSTL build-in size(x) function,
  but handle null gracefully.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../hudson/Functions.ThreadGroupMap.html" title="class in hudson">Functions.ThreadGroupMap</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#sortThreadsAndGetGroupMap(java.lang.management.ThreadInfo[])">sortThreadsAndGetGroupMap</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/management/ThreadInfo.html?is-external=true" title="class or interface in java.lang.management">ThreadInfo</A>[]&nbsp;list)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1842,6 +1859,17 @@ getThreadInfos</H3>
 </DL>
 <HR>
 
+<A NAME="sortThreadsAndGetGroupMap(java.lang.management.ThreadInfo[])"><!-- --></A><H3>
+sortThreadsAndGetGroupMap</H3>
+<PRE>
+public static <A HREF="../hudson/Functions.ThreadGroupMap.html" title="class in hudson">Functions.ThreadGroupMap</A> <B>sortThreadsAndGetGroupMap</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/management/ThreadInfo.html?is-external=true" title="class or interface in java.lang.management">ThreadInfo</A>[]&nbsp;list)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="isMustangOrAbove()"><!-- --></A><H3>
 isMustangOrAbove</H3>
 <PRE>
@@ -1856,11 +1884,12 @@ isMustangOrAbove</H3>
 </DL>
 <HR>
 
-<A NAME="dumpThreadInfo(java.lang.management.ThreadInfo)"><!-- --></A><H3>
+<A NAME="dumpThreadInfo(java.lang.management.ThreadInfo, hudson.Functions.ThreadGroupMap)"><!-- --></A><H3>
 dumpThreadInfo</H3>
 <PRE>
 <FONT SIZE="-1">@IgnoreJRERequirement
-</FONT>public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>dumpThreadInfo</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/management/ThreadInfo.html?is-external=true" title="class or interface in java.lang.management">ThreadInfo</A>&nbsp;ti)</PRE>
+</FONT>public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>dumpThreadInfo</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/management/ThreadInfo.html?is-external=true" title="class or interface in java.lang.management">ThreadInfo</A>&nbsp;ti,
+                                                         <A HREF="../hudson/Functions.ThreadGroupMap.html" title="class in hudson">Functions.ThreadGroupMap</A>&nbsp;map)</PRE>
 <DL>
 <DD><DL>
 </DL>

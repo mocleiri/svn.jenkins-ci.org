@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TaskAction (Hudson main module 1.351 API)
+TaskAction (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskAction (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskAction (Hudson main module 1.351 API)";
+        parent.document.title="TaskAction (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -185,6 +185,15 @@ Partial <A HREF="../../hudson/model/Action.html" title="interface in hudson.mode
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clears the error status.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TaskAction.html#doProgressiveHtml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveHtml</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles incremental log output.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -449,6 +458,26 @@ doProgressiveLog</H3>
 public void <B>doProgressiveLog</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Handles incremental log output.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doProgressiveHtml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doProgressiveHtml</H3>
+<PRE>
+public void <B>doProgressiveHtml</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Handles incremental log output.
 <P>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLICommand (Hudson main module 1.351 API)
+CLICommand (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson main module 1.351 API)";
+        parent.document.title="CLICommand (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/cli/CLI.html" title="class in hudson.cli"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/cli/CliEntryPoint.html" title="interface in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/cli/ClientAuthenticationCache.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLICommand.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="CLICommand.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -100,7 +100,7 @@ Class CLICommand</H2>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A>, <A HREF="../../hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>, <A HREF="../../hudson/cli/CloneableCLICommand.html" title="class in hudson.cli">CloneableCLICommand</A>, <A HREF="../../hudson/cli/CopyJobCommand.html" title="class in hudson.cli">CopyJobCommand</A>, <A HREF="../../hudson/cli/CreateJobCommand.html" title="class in hudson.cli">CreateJobCommand</A>, <A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli">GroovyCommand</A>, <A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/InstallPluginCommand.html" title="class in hudson.cli">InstallPluginCommand</A>, <A HREF="../../hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>, <A HREF="../../hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A>, <A HREF="../../hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>, <A HREF="../../hudson/cli/CloneableCLICommand.html" title="class in hudson.cli">CloneableCLICommand</A>, <A HREF="../../hudson/cli/CopyJobCommand.html" title="class in hudson.cli">CopyJobCommand</A>, <A HREF="../../hudson/cli/CreateJobCommand.html" title="class in hudson.cli">CreateJobCommand</A>, <A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli">GroovyCommand</A>, <A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/InstallPluginCommand.html" title="class in hudson.cli">InstallPluginCommand</A>, <A HREF="../../hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>, <A HREF="../../hudson/cli/LoginCommand.html" title="class in hudson.cli">LoginCommand</A>, <A HREF="../../hudson/cli/LogoutCommand.html" title="class in hudson.cli">LogoutCommand</A>, <A HREF="../../hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
 </DL>
 <HR>
 <DL>
@@ -273,6 +273,14 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#getClientSystemProperty(java.lang.String)">getClientSystemProperty</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method for subtypes to obtain the system property of the client.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#getName()">getName</A></B>()</CODE>
 
@@ -289,26 +297,20 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.acegisecurity.Authentication</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#loadStoredAuthentication()">loadStoredAuthentication</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads the persisted authentication information from <A HREF="../../hudson/cli/ClientAuthenticationCache.html" title="class in hudson.cli"><CODE>ClientAuthenticationCache</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream)">main</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;args,
      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Locale.html?is-external=true" title="class or interface in java.util">Locale</A>&nbsp;locale,
      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;stdin,
      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stdout,
      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.350
-      Use <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)"><CODE>main(List, Locale, InputStream, PrintStream, PrintStream, Authentication)</CODE></A></I></TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)">main</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;args,
-     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Locale.html?is-external=true" title="class or interface in java.util">Locale</A>&nbsp;locale,
-     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;stdin,
-     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stdout,
-     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr,
-     org.acegisecurity.Authentication&nbsp;auth)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -521,9 +523,6 @@ public int <B>main</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/uti
                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stdout,
                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr)</PRE>
 <DL>
-<DD><B>Deprecated.</B>&nbsp;<I>as of 1.350
-      Use <A HREF="../../hudson/cli/CLICommand.html#main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)"><CODE>main(List, Locale, InputStream, PrintStream, PrintStream, Authentication)</CODE></A></I>
-<P>
 <DD><DL>
 </DL>
 </DD>
@@ -533,21 +532,21 @@ public int <B>main</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/uti
 </DL>
 <HR>
 
-<A NAME="main(java.util.List, java.util.Locale, java.io.InputStream, java.io.PrintStream, java.io.PrintStream, org.acegisecurity.Authentication)"><!-- --></A><H3>
-main</H3>
+<A NAME="loadStoredAuthentication()"><!-- --></A><H3>
+loadStoredAuthentication</H3>
 <PRE>
-public int <B>main</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;args,
-                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Locale.html?is-external=true" title="class or interface in java.util">Locale</A>&nbsp;locale,
-                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;stdin,
-                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stdout,
-                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A>&nbsp;stderr,
-                org.acegisecurity.Authentication&nbsp;auth)</PRE>
+protected org.acegisecurity.Authentication <B>loadStoredAuthentication</B>()
+                                                             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
+<DD>Loads the persisted authentication information from <A HREF="../../hudson/cli/ClientAuthenticationCache.html" title="class in hudson.cli"><CODE>ClientAuthenticationCache</CODE></A>.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -634,6 +633,27 @@ protected void <B>printUsageSummary</B>(<A HREF="http://java.sun.com/j2se/1.5.0/
 </DL>
 <HR>
 
+<A NAME="getClientSystemProperty(java.lang.String)"><!-- --></A><H3>
+getClientSystemProperty</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getClientSystemProperty</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)
+                                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD>Convenience method for subtypes to obtain the system property of the client.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="createClone()"><!-- --></A><H3>
 createClone</H3>
 <PRE>
@@ -712,7 +732,7 @@ public static <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../hudson/cli/CLI.html" title="class in hudson.cli"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../hudson/cli/CliEntryPoint.html" title="interface in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../hudson/cli/ClientAuthenticationCache.html" title="class in hudson.cli"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/cli/CLICommand.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="CLICommand.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;

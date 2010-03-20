@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.351 API)
+Run (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.351 API)";
+        parent.document.title="Run (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -480,8 +480,7 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Run.html#doBuildNumber(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doBuildNumber</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#doBuildNumber(org.kohsuke.stapler.StaplerResponse)">doBuildNumber</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the build number in the body.</TD>
@@ -530,7 +529,8 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles incremental log output.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.352
+      Use <code>getLogText().doProgressiveText(req,rsp)</code></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -833,6 +833,14 @@ A particular execution of <A HREF="../../hudson/model/Job.html" title="class in 
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getLogText()">getLogText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to URL-bind <A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console"><CODE>AnnotatedLargeText</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2314,6 +2322,22 @@ public void <B>writeLogTo</B>(long&nbsp;offset,
 </DL>
 <HR>
 
+<A NAME="getLogText()"><!-- --></A><H3>
+getLogText</H3>
+<PRE>
+public <A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A> <B>getLogText</B>()</PRE>
+<DL>
+<DD>Used to URL-bind <A HREF="../../hudson/console/AnnotatedLargeText.html" title="class in hudson.console"><CODE>AnnotatedLargeText</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="makeSearchIndex()"><!-- --></A><H3>
 makeSearchIndex</H3>
 <PRE>
@@ -2612,11 +2636,10 @@ public <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in
 </DL>
 <HR>
 
-<A NAME="doBuildNumber(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doBuildNumber(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doBuildNumber</H3>
 <PRE>
-public void <B>doBuildNumber</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+public void <B>doBuildNumber</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Returns the build number in the body.
@@ -2681,6 +2704,9 @@ public void <B>doProgressiveLog</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.352
+      Use <code>getLogText().doProgressiveText(req,rsp)</code></I>
+<P>
 <DD>Handles incremental log output.
 <P>
 <DD><DL>

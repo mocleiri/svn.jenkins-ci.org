@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CliAuthenticator (Hudson main module 1.351 API)
+CliAuthenticator (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CliAuthenticator (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CliAuthenticator (Hudson main module 1.351 API)";
+        parent.document.title="CliAuthenticator (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -225,14 +225,20 @@ public <B>CliAuthenticator</B>()</PRE>
 authenticate</H3>
 <PRE>
 public abstract org.acegisecurity.Authentication <B>authenticate</B>()
-                                                       throws org.acegisecurity.AuthenticationException</PRE>
+                                                       throws org.acegisecurity.AuthenticationException,
+                                                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Authenticates the CLI invocation. See class javadoc for the semantics.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>org.acegisecurity.AuthenticationException</CODE></DL>
+<DD><CODE>org.acegisecurity.AuthenticationException</CODE> - If the authentication failed and hence the processing shouldn't proceed.
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - Can be thrown if the <A HREF="../../hudson/security/CliAuthenticator.html" title="class in hudson.security"><CODE>CliAuthenticator</CODE></A> fails to interact with the client.
+      This exception is treated as a failure of authentication. It's just that allowing this
+      would often simplify the callee.
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - Same motivation as <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><CODE>IOException</CODE></A>. Treated as an authentication failure.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

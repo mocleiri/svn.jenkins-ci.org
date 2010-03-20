@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ListBoxModel (Hudson main module 1.351 API)
+ListBoxModel (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListBoxModel (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListBoxModel (Hudson main module 1.351 API)";
+        parent.document.title="ListBoxModel (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -100,12 +100,12 @@ Class ListBoxModel</H2>
               <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.ListBoxModel</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/RandomAccess.html?is-external=true" title="class or interface in java.util">RandomAccess</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/RandomAccess.html?is-external=true" title="class or interface in java.util">RandomAccess</A>, org.kohsuke.stapler.HttpResponse</DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public class <B>ListBoxModel</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util">ArrayList</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;</DL>
+</FONT>public class <B>ListBoxModel</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/ArrayList.html?is-external=true" title="class or interface in java.util">ArrayList</A>&lt;<A HREF="../../hudson/util/ListBoxModel.Option.html" title="class in hudson.util">ListBoxModel.Option</A>&gt;<DT>implements org.kohsuke.stapler.HttpResponse</DL>
 </PRE>
 
 <P>
@@ -142,20 +142,20 @@ Model object of dynamically filled list box.
 
  <p>
  The first argument is the SELECT element or the ID of it (see Prototype.js <tt>$(...)</tt> function.)
- The second arugment is the URL that returns the options list.
+ The second argument is the URL that returns the options list.
 
  <p>
  The URL usually maps to the <tt>doXXX</tt> method on the server, which uses <A HREF="../../hudson/util/ListBoxModel.html" title="class in hudson.util"><CODE>ListBoxModel</CODE></A>
  for producing option values. See the following example:
 
  <pre>
- public void doOptionValues(StaplerRequest req, StaplerResponse rsp, @QueryParameter("value") String value) throws IOException, ServletException {
+ public ListBoxModel doOptionValues(@QueryParameter("value") String value) throws IOException, ServletException {
    ListBoxModel m = new ListBoxModel();
    for(int i=0; i<5; i++)
      m.add(value+i,value+i);
    // make the third option selected initially
    m.get(3).selected = true;
-   m.writeTo(req,rsp);
+   return m;
  }
  </pre>
 <P>
@@ -250,9 +250,27 @@ Model object of dynamically filled list box.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/ListBoxModel.html" title="class in hudson.util">ListBoxModel</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ListBoxModel.html#add(java.lang.String)">add</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;nameAndValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A version of the <A HREF="../../hudson/util/ListBoxModel.html#add(java.lang.String, java.lang.String)"><CODE>add(String, String)</CODE></A> method where the display name and the value are the same.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/ListBoxModel.html#add(java.lang.String, java.lang.String)">add</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+<TD><CODE><B><A HREF="../../hudson/util/ListBoxModel.html#add(java.lang.String, java.lang.String)">add</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;displayName,
     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ListBoxModel.html#generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)">generateResponse</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;node)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -377,9 +395,28 @@ public <B>ListBoxModel</B>(<A HREF="../../hudson/util/ListBoxModel.Option.html" 
 <A NAME="add(java.lang.String, java.lang.String)"><!-- --></A><H3>
 add</H3>
 <PRE>
-public void <B>add</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+public void <B>add</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;displayName,
                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="add(java.lang.String)"><!-- --></A><H3>
+add</H3>
+<PRE>
+public <A HREF="../../hudson/util/ListBoxModel.html" title="class in hudson.util">ListBoxModel</A> <B>add</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;nameAndValue)</PRE>
+<DL>
+<DD>A version of the <A HREF="../../hudson/util/ListBoxModel.html#add(java.lang.String, java.lang.String)"><CODE>add(String, String)</CODE></A> method where the display name and the value are the same.
+<P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -394,6 +431,30 @@ public void <B>writeTo</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                     javax.servlet.ServletException</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)"><!-- --></A><H3>
+generateResponse</H3>
+<PRE>
+public void <B>generateResponse</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;node)
+                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                             javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>generateResponse</CODE> in interface <CODE>org.kohsuke.stapler.HttpResponse</CODE></DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -411,6 +472,9 @@ values</H3>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>Exposed for stapler. Not meant for programatic consumption.</I>
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

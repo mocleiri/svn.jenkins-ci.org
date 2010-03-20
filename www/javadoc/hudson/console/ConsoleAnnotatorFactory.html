@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ConsoleAnnotatorFactory (Hudson main module 1.351 API)
+ConsoleAnnotatorFactory (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ConsoleAnnotatorFactory (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ConsoleAnnotatorFactory (Hudson main module 1.351 API)";
+        parent.document.title="ConsoleAnnotatorFactory (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,9 @@ Class ConsoleAnnotatorFactory&lt;T&gt;</H2>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DD>
 </DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/console/UrlAnnotator.html" title="class in hudson.console">UrlAnnotator</A></DD>
+</DL>
 <HR>
 <DL>
 <DT><PRE>public abstract class <B>ConsoleAnnotatorFactory&lt;T&gt;</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
@@ -117,6 +120,9 @@ Entry point to the <A HREF="../../hudson/console/ConsoleAnnotator.html" title="c
  an arbitrary line of the output, because typically browsers do not request the entire console output.
  Because of this, <A HREF="../../hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console"><CODE>ConsoleAnnotatorFactory</CODE></A> is generally suitable for peep-hole local annotation
  that only requires a small contextual information, such as keyword coloring, URL hyperlinking, and so on.
+
+ <p>
+ To register, put @<A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your <A HREF="../../hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console"><CODE>ConsoleAnnotatorFactory</CODE></A> subtype.
 <P>
 
 <P>

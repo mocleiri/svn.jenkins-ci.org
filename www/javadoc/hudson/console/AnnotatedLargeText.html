@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AnnotatedLargeText (Hudson main module 1.351 API)
+AnnotatedLargeText (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AnnotatedLargeText (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AnnotatedLargeText (Hudson main module 1.351 API)";
+        parent.document.title="AnnotatedLargeText (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -184,6 +184,41 @@ Extension to <CODE>LargeText</CODE> that handles annotations by <A HREF="../../h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/AnnotatedLargeText.html#doProgressiveHtml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveHtml</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/AnnotatedLargeText.html#doProgressiveText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doProgressiveText</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aliasing what I think was a wrong name in <CODE>LargeText</CODE></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/AnnotatedLargeText.html#setContentType(org.kohsuke.stapler.StaplerResponse)">setContentType</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/AnnotatedLargeText.html#writeHtmlTo(long, java.io.Writer)">writeHtmlTo</A></B>(long&nbsp;start,
+            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;long</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/console/AnnotatedLargeText.html#writeLogTo(long, java.io.Writer)">writeLogTo</A></B>(long&nbsp;start,
            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)</CODE>
@@ -254,6 +289,52 @@ public <B>AnnotatedLargeText</B>(org.kohsuke.stapler.framework.io.ByteBuffer&nbs
 </TR>
 </TABLE>
 
+<A NAME="doProgressiveHtml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doProgressiveHtml</H3>
+<PRE>
+public void <B>doProgressiveHtml</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doProgressiveText(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doProgressiveText</H3>
+<PRE>
+public void <B>doProgressiveText</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Aliasing what I think was a wrong name in <CODE>LargeText</CODE>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setContentType(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+setContentType</H3>
+<PRE>
+protected void <B>setContentType</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>setContentType</CODE> in class <CODE>org.kohsuke.stapler.framework.io.LargeText</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="writeLogTo(long, java.io.Writer)"><!-- --></A><H3>
 writeLogTo</H3>
 <PRE>
@@ -264,6 +345,21 @@ public long <B>writeLogTo</B>(long&nbsp;start,
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE>writeLogTo</CODE> in class <CODE>org.kohsuke.stapler.framework.io.LargeText</CODE></DL>
 </DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeHtmlTo(long, java.io.Writer)"><!-- --></A><H3>
+writeHtmlTo</H3>
+<PRE>
+public long <B>writeHtmlTo</B>(long&nbsp;start,
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)
+                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
 <DD><DL>
 
 <DT><B>Throws:</B>

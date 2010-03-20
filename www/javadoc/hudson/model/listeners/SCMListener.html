@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCMListener (Hudson main module 1.351 API)
+SCMListener (Hudson main module 1.352 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-15">
+<META NAME="date" CONTENT="2010-03-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMListener (Hudson main module 1.351 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMListener (Hudson main module 1.351 API)";
+        parent.document.title="SCMListener (Hudson main module 1.352 API)";
     }
 }
 </SCRIPT>
@@ -246,7 +246,7 @@ public void <B>onChangeLogParsed</B>(<A HREF="../../../hudson/model/AbstractBuil
 
  <p>
  During a build, Hudson fetches the update of the workspace from SCM,
- and determines the changelog (see <A HREF="../../../hudson/scm/SCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><CODE>SCM.checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)</CODE></A>). Immediately
+ and determines the changelog (see <A HREF="../../../hudson/scm/SCM.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)"><CODE>SCM.checkout(hudson.model.AbstractBuild<?, ?>, hudson.Launcher, hudson.FilePath, hudson.model.BuildListener, java.io.File)</CODE></A>). Immediately
  after that, a build will invoke this method on all registered
  <A HREF="../../../hudson/model/listeners/SCMListener.html" title="class in hudson.model.listeners"><CODE>SCMListener</CODE></A>s.
 
