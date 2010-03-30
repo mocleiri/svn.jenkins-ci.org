@@ -30,6 +30,7 @@ import org.jivesoftware.smack.ConnectionListener;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.Roster.SubscriptionMode;
@@ -86,6 +87,7 @@ class JabberIMConnection extends AbstractIMConnection {
 	private IMPresence impresence;
 
     private String imStatusMessage;
+    private boolean enableSASL;
 
     private final JabberPublisherDescriptor desc;
     private final Authentication authentication;
@@ -101,6 +103,7 @@ class JabberIMConnection extends AbstractIMConnection {
 		this.port = desc.getPort();
 		this.nick = JabberUtil.getUserPart(desc.getJabberId());
 		this.passwd = desc.getPassword();
+        this.enableSASL = desc.isEnableSASL();
 		this.groupChatNick = desc.getGroupChatNickname() != null ?
 				desc.getGroupChatNickname() : this.nick;
 		this.botCommandPrefix = desc.getCommandPrefix();
@@ -217,7 +220,15 @@ class JabberIMConnection extends AbstractIMConnection {
 		// Maybe we should change it in the future, but currently I'm
 		// not sure what Smack's reconnect feature really does.
 		cfg.setReconnectionAllowed(false);
-		
+
+		// try workaround for SASL error in Smack 3.1.0
+		// See: HUDSON-6032
+		// http://www.igniterealtime.org/community/message/198558
+		// and also http://www.igniterealtime.org/community/message/201908#201908
+		SASLAuthentication.unregisterSASLMechanism("DIGEST-MD5");
+
+        cfg.setSASLAuthenticationEnabled(this.enableSASL);
+
 		this.connection = new XMPPConnection(cfg);
 		this.connection.connect();
 

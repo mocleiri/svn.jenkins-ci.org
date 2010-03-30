@@ -21,8 +21,10 @@ import org.junit.Test;
  * Tests the class {@link ParserRegistry}.
  */
 public class ParserRegistryTest {
+    /** Filename with all warnings. */
+    private static final String FILE_NAME = "all.txt";
     /** Total number of expected warnings. */
-    private static final int TOTAL_WARNINGS = 237;
+    private static final int TOTAL_WARNINGS = 280;
     /** Error message. */
     private static final String WRONG_NUMBER_OF_ANNOTATIONS_PARSED = "Wrong number of annotations parsed";
 
@@ -33,7 +35,7 @@ public class ParserRegistryTest {
      */
     @Test
     public void testAllParsersOnOneFile() throws IOException {
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", StringUtils.EMPTY, StringUtils.EMPTY, new ArrayList<WarningsParser>());
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, StringUtils.EMPTY, StringUtils.EMPTY, new ArrayList<WarningsParser>());
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
         Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, TOTAL_WARNINGS, annotations.size());
@@ -55,7 +57,7 @@ public class ParserRegistryTest {
     public void testOracleInvalidsParser() throws IOException {
         List<WarningsParser> parsers = new ArrayList<WarningsParser>();
         parsers.add(new InvalidsParser());
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", StringUtils.EMPTY, StringUtils.EMPTY, parsers);
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, StringUtils.EMPTY, StringUtils.EMPTY, parsers);
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
         Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 2, annotations.size());
@@ -78,7 +80,7 @@ public class ParserRegistryTest {
         List<WarningsParser> parsers = new ArrayList<WarningsParser>();
         parsers.add(new InvalidsParser());
         parsers.add(new JavaDocParser());
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", StringUtils.EMPTY, StringUtils.EMPTY, parsers);
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, StringUtils.EMPTY, StringUtils.EMPTY, parsers);
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
         Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 10, annotations.size());
@@ -102,10 +104,10 @@ public class ParserRegistryTest {
      */
     @Test
     public void issue2359() throws IOException {
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", StringUtils.EMPTY, "/tmp/clover*/**", new ArrayList<WarningsParser>());
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, StringUtils.EMPTY, "/tmp/clover*/**", new ArrayList<WarningsParser>());
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
-        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, TOTAL_WARNINGS - 8, annotations.size());
+        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, TOTAL_WARNINGS - 9, annotations.size());
     }
 
     /**
@@ -118,10 +120,10 @@ public class ParserRegistryTest {
      */
     @Test
     public void multiplePatternsIssue2359() throws IOException {
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", StringUtils.EMPTY, "/tmp/clover*/**, **/renderers/*", new ArrayList<WarningsParser>());
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, StringUtils.EMPTY, "/tmp/clover*/**, **/renderers/*", new ArrayList<WarningsParser>());
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
-        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, TOTAL_WARNINGS - 18 + 3, annotations.size());
+        Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, TOTAL_WARNINGS - (18 - 3) * 2, annotations.size());
     }
 
     /**
@@ -135,7 +137,7 @@ public class ParserRegistryTest {
      */
     @Test
     public void issue3866() throws IOException {
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", "/tmp/clover*/**", StringUtils.EMPTY, new ArrayList<WarningsParser>());
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, "/tmp/clover*/**", StringUtils.EMPTY, new ArrayList<WarningsParser>());
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
         Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 8, annotations.size());
@@ -151,7 +153,9 @@ public class ParserRegistryTest {
      */
     @Test
     public void multiplePatternsIssue3866() throws IOException {
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", "/tmp/clover*/**, **/renderers/*", StringUtils.EMPTY, new ArrayList<WarningsParser>());
+        ArrayList<WarningsParser> parsers = new ArrayList<WarningsParser>();
+        parsers.add(new AntJavacParser());
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, "/tmp/clover*/**, **/renderers/*", StringUtils.EMPTY, parsers);
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
         Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 15, annotations.size());
@@ -167,7 +171,9 @@ public class ParserRegistryTest {
      */
     @Test
     public void complexFilterIssue3866() throws IOException {
-        ParserRegistry parserRegistry = createRegistryUnderTest("all.txt", "/tmp/clover*/**", "**/renderers/*", new ArrayList<WarningsParser>());
+        ArrayList<WarningsParser> parsers = new ArrayList<WarningsParser>();
+        parsers.add(new AntJavacParser());
+        ParserRegistry parserRegistry = createRegistryUnderTest(FILE_NAME, "/tmp/clover*/**", "**/renderers/*", parsers);
 
         Collection<FileAnnotation> annotations = parserRegistry.parse(new File(""));
         Assert.assertEquals(WRONG_NUMBER_OF_ANNOTATIONS_PARSED, 1, annotations.size());

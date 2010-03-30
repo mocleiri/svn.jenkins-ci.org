@@ -23,6 +23,7 @@ package hudson.plugins.sitemonitor;
 
 import hudson.Extension;
 import hudson.model.AbstractProject;
+import hudson.plugins.sitemonitor.model.Site;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
 import hudson.util.FormValidation;
@@ -35,6 +36,7 @@ import java.util.logging.Logger;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -54,7 +56,7 @@ public class SiteMonitorDescriptor extends BuildStepDescriptor<Builder> {
     /**
      * The form validator.
      */
-    private Validator mValidator;
+    protected SiteMonitorValidator mValidator;
 
     /**
      * The response codes used to indicate that the web site is up.
@@ -64,7 +66,7 @@ public class SiteMonitorDescriptor extends BuildStepDescriptor<Builder> {
     /**
      * The HTTP connection timeout value (in seconds).
      */
-    private Integer timeout;
+    private Integer mTimeout;
 
     /**
      * Constructs {@link SiteMonitorDescriptor}.
@@ -72,7 +74,7 @@ public class SiteMonitorDescriptor extends BuildStepDescriptor<Builder> {
     public SiteMonitorDescriptor() {
         super(SiteMonitorBuilder.class);
         load();
-        mValidator = new Validator();
+        mValidator = new SiteMonitorValidator();
     }
 
     /**
@@ -99,19 +101,19 @@ public class SiteMonitorDescriptor extends BuildStepDescriptor<Builder> {
      * @return the success response codes
      */
     public final List<Integer> getSuccessResponseCodes() {
-        return mSuccessResponseCodes;
-    }
-    
-    /**
-     * @return the success response codes in comma-separated value format
-     */
-    public final String getSuccessResponseCodesCsv() {
         if (mSuccessResponseCodes == null) {
             mSuccessResponseCodes = new ArrayList<Integer>();
             mSuccessResponseCodes.add(HttpURLConnection.HTTP_OK);
         }
+        return mSuccessResponseCodes;
+    }
+
+    /**
+     * @return the success response codes in comma-separated value format
+     */
+    public final String getSuccessResponseCodesCsv() {
         StringBuffer sb = new StringBuffer();
-        for (Integer successResponseCode : mSuccessResponseCodes) {
+        for (Integer successResponseCode : getSuccessResponseCodes()) {
             sb.append(successResponseCode).append(",");
         }
         return sb.toString().replaceFirst(",$", "");
@@ -121,10 +123,10 @@ public class SiteMonitorDescriptor extends BuildStepDescriptor<Builder> {
      * @return the timeout value in seconds
      */
     public final Integer getTimeout() {
-        if (timeout == null) {
-            timeout = new Integer(30);
+        if (mTimeout == null) {
+            mTimeout = new Integer(30);
         }
-        return timeout;
+        return mTimeout;
     }
 
     /**
@@ -171,11 +173,15 @@ public class SiteMonitorDescriptor extends BuildStepDescriptor<Builder> {
     public boolean configure(StaplerRequest request, JSONObject json) {
         LOGGER.fine("json: " + json);
 
-        for (String responseCode : json.getString("successResponseCodes")
-                .split(",")) {
-            mSuccessResponseCodes.add(Integer.parseInt(responseCode.trim()));
+        if (!StringUtils.isBlank(json.getString("successResponseCodes"))) {
+            mSuccessResponseCodes.clear();
+            for (String responseCode : json.getString("successResponseCodes")
+                    .split(",")) {
+                mSuccessResponseCodes
+                        .add(Integer.parseInt(responseCode.trim()));
+            }
         }
-        timeout = json.getInt("timeout");
+        mTimeout = json.getInt("timeout");
         save();
         return true;
     }

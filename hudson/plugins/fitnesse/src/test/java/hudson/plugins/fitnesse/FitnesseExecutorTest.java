@@ -190,16 +190,23 @@ public class FitnesseExecutorTest {
 		Assert.assertTrue(stdout.toString().startsWith("Waited ")); // log entry 
 	}
 	
+	private boolean resetWasCalled;
+
 	@Test
-	public void getHttpBytesShouldReturnContentFromUrlAndWriteToLog() throws Exception {
+	public void getHttpBytesShouldReturnContentFromUrlWriteToLogAndCallReset() throws Exception {
 		executor = getExecutorForBuilder(new String[] {}, new String[] {});
 		ByteArrayOutputStream logBucket = new ByteArrayOutputStream();
-		byte[] bytes = executor.getHttpBytes(new PrintStream(logBucket), new URL("http://hudson-ci.org/"));
+		resetWasCalled = false;
+		Resettable resettable = new Resettable() {
+			public void reset() { resetWasCalled = true; }
+		};
+		byte[] bytes = executor.getHttpBytes(new PrintStream(logBucket), new URL("http://hudson-ci.org/"), resettable);
 		Assert.assertTrue(bytes.length > 0);
 		Assert.assertTrue(new String(bytes).contains("<html"));
 		Assert.assertTrue(new String(bytes).contains("</html>"));
 		Assert.assertTrue(logBucket.toString().startsWith("Connnecting to http://hudson-ci.org/"));
 		Assert.assertTrue(logBucket.toString().contains("Connected: 200/OK"));
+		Assert.assertTrue(resetWasCalled);
 	}
 	
 	@Test

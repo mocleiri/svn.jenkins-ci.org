@@ -49,6 +49,7 @@ import java.io.StringWriter;
 import java.net.InetAddress;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -166,6 +167,11 @@ public class PerforceSCM extends SCM {
      */
     private String changelogFilename = null;
 
+    /**
+     * The value of the LineEnd field in the perforce Client spec.
+     */
+    private String lineEndValue = "local";
+
     @DataBoundConstructor
     public PerforceSCM(
             String p4User,
@@ -179,6 +185,7 @@ public class PerforceSCM extends SCM {
             String p4SysDrive,
             String p4Label,
             String p4Counter,
+            String lineEndValue,
             boolean updateCounterValue,
             boolean forceSync,
             boolean alwaysForceSync,
@@ -258,6 +265,7 @@ public class PerforceSCM extends SCM {
             }
         }
 
+        this.lineEndValue = lineEndValue;
         this.forceSync = forceSync;
         this.alwaysForceSync = alwaysForceSync;
         this.disableAutoSync = disableAutoSync;
@@ -359,27 +367,21 @@ public class PerforceSCM extends SCM {
      * @throws InterruptedException
      */
     private String getLocalPathName(FilePath path, boolean isUnix) throws IOException, InterruptedException {
-        String uriString = path.toURI().toString();
-        // Get rid of URI prefix
-        // NOTE: this won't handle remote files, is that a problem?
-        uriString = uriString.replaceAll("file:/", "");
-        // It seems there is a /./ to denote the root in the path on my test instance.
-        // I don't know if this is in production, or how it works on other platforms (non win32)
-        // but I am removing it here because perforce doesn't like it.
-        uriString = uriString.replaceAll("/./", "/");
-        // The URL is also escaped.  We need to unescape it because %20 in path names isn't cool for perforce.
-        uriString = URLDecoder.decode(uriString, "UTF-8");
+        return processPathName(path.getRemote(), isUnix);
+    }
 
-        // Last but not least, we need to convert this to local path separators.
-        if (isUnix) {
-            // on unixen we need to prepend with /
-            uriString = "/" + uriString;
+    public static String processPathName(String path, boolean isUnix){
+        String pathName = new String(path);
+        pathName = pathName.replaceAll("\\\\+", "\\\\");
+        pathName = pathName.replaceAll("/\\./", "/");
+        pathName = pathName.replaceAll("\\\\\\.\\\\", "\\\\");
+        pathName = pathName.replaceAll("/+", "/");
+        if(isUnix){
+            pathName = pathName.replaceAll("\\\\", "/");
         } else {
-            //just replace with sep doesn't work because java's foobar regexp replaceAll
-            uriString = uriString.replaceAll("/", "\\\\");
+            pathName = pathName.replaceAll("/", "\\\\");
         }
-
-        return uriString;
+        return pathName;
     }
 
     /*
@@ -407,17 +409,16 @@ public class PerforceSCM extends SCM {
         String p4Label = substituteParameters(this.p4Label, build.getBuildVariables());
         Depot depot = getDepot(launcher,workspace);
 
-        //always force sync when doing a Matrix Build so we don't have to create
-        //a workspace for every combination. (which would result in hundreds of workspaces.)
+        //If we're doing a matrix build, we should always force sync.
         if((Object)build instanceof MatrixBuild || (Object)build instanceof MatrixRun){
-            log.println("This is a matrix build; Using force sync.");
-            forceSync = true;
+            if(!alwaysForceSync && !wipeBeforeBuild)
+                log.println("This is a matrix build; It is HIGHLY recommended that you enable the " +
+                            "'Always Force Sync' or 'Clean Workspace' options. " +
+                            "Failing to do so will likely result in child builds not being synced properly.");
         }
 
         try {
             Workspace p4workspace = getPerforceWorkspace(projectPath, depot, build.getBuiltOn(), launcher, workspace, listener, false);
-
-            
 
             saveWorkspaceIfDirty(depot, p4workspace, log);
 
@@ -845,6 +846,9 @@ public class PerforceSCM extends SCM {
         if (projectOptions != null)
             p4workspace.setOptions(projectOptions);
 
+        // Set the line ending option according to the configuration
+        p4workspace.setLineEnd(lineEndValue);
+        
         // Ensure that the root is appropriate (it might be wrong if the user
         // created it, or if we previously built on another node).
 
@@ -906,7 +910,13 @@ public class PerforceSCM extends SCM {
         String p4Client = this.p4Client;
 
         if (nodeIsRemote(buildNode) && !getSlaveClientNameFormat().equals("")) {
-            String host = workspace.act(new GetHostname());
+            String host = "UNKNOWNHOST";
+            try{
+                host = workspace.act(new GetHostname());
+            } catch (Exception e) {
+                LOGGER.warning("Could not get hostname for slave " + buildNode.getDisplayName());
+            }
+
             if (host.contains(".")) {
                 host = String.valueOf(host.subSequence(0, host.indexOf('.')));
             }
@@ -1138,6 +1148,7 @@ public class PerforceSCM extends SCM {
             }
             return FormValidation.ok();
         }
+
     }
 
     /* Regular expressions for parsing view mappings.
@@ -1525,6 +1536,34 @@ public class PerforceSCM extends SCM {
 
     public void setDontUpdateClient(boolean dontUpdateClient) {
         this.dontUpdateClient = dontUpdateClient;
+    }
+
+    public String getLineEndValue() {
+        return lineEndValue;
+    }
+
+    public void setLineEndValue(String lineEndValue) {
+        this.lineEndValue = lineEndValue;
+    }
+
+    public List<String> getAllLineEndChoices(){
+        List<String> allChoices = Arrays.asList(new String[]{
+            "local",
+            "unix",
+            "mac",
+            "win",
+            "share",
+        });
+        ArrayList<String> choices = new ArrayList<String>();
+        //Order choices so that the current one is first in the list
+        //This is required in order for tests to work, unfortunately
+        choices.add(lineEndValue);
+        for(String choice : allChoices){
+            if(!choice.equals(lineEndValue)){
+                choices.add(choice);
+            }
+        }
+        return choices;
     }
 
     /**

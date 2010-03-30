@@ -24,15 +24,21 @@ package hudson.plugins.sitemonitor;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
+import hudson.plugins.sitemonitor.model.Result;
+import hudson.plugins.sitemonitor.model.Site;
+import hudson.plugins.sitemonitor.model.Status;
 import hudson.tasks.Builder;
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import org.w3c.tidy.Report;
 
 /**
  * Performs the web site monitoring process.
@@ -50,6 +56,8 @@ public class SiteMonitorBuilder extends Builder {
      * The list of web sites to monitor.
      */
     private List<Site> mSites;
+
+    private Report mReport;
 
     /**
      * Construct {@link SiteMonitorBuilder}.
@@ -85,15 +93,15 @@ public class SiteMonitorBuilder extends Builder {
     @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher,
             BuildListener listener) throws InterruptedException, IOException {
-
         List<Result> results = new ArrayList<Result>();
         SiteMonitorDescriptor descriptor = (SiteMonitorDescriptor) getDescriptor();
 
         boolean hasFailure = false;
         for (Site site : mSites) {
 
-            int responseCode = -1;
-            String note;
+            Integer responseCode = null;
+            Status status;
+            String note = "";
 
             try {
                 HttpURLConnection connection = (HttpURLConnection) (new URL(
@@ -101,38 +109,36 @@ public class SiteMonitorBuilder extends Builder {
                 connection.setConnectTimeout(descriptor.getTimeout() * 1000);
                 responseCode = connection.getResponseCode();
 
-                if (!descriptor.getSuccessResponseCodes().contains(
-                        new Integer(responseCode))) {
-                    hasFailure = true;
-                    note = "FAILURE";
+                if (descriptor.getSuccessResponseCodes().contains(responseCode)) {
+                    status = Status.UP;
                 } else {
-                    note = "SUCCESS";
+                    status = Status.ERROR;
                 }
+            } catch (UnknownHostException uhe) {
+                listener.getLogger().println(uhe + " - " + uhe.getMessage());
+                status = Status.DOWN;
+            } catch (SocketTimeoutException ste) {
+                listener.getLogger().println(ste + " - " + ste.getMessage());
+                status = Status.DOWN;
             } catch (Exception e) {
-                note = "ERROR " + e.getMessage();
+                note = e + " - " + e.getMessage();
+                listener.getLogger().println(note);
+                status = Status.EXCEPTION;
+            }
+            note = "[" + status + "] " + note;
+            listener.getLogger().println(
+                    "URL: " + site.getUrl() + ", response code: "
+                            + responseCode + ", status: " + status);
+
+            if (!hasFailure && status != Status.UP) {
+                hasFailure = true;
             }
 
-            Result result = new Result(site, responseCode, note);
+            Result result = new Result(site, responseCode, status, note);
             results.add(result);
         }
 
-        log(results, listener.getLogger());
+        build.addAction(new SiteMonitorRootAction(results));
         return !hasFailure;
-    }
-
-    private void log(final List<Result> results, final PrintStream logger) {
-        logger
-                .println("\t--------------------------------------------------------------------------------");
-        logger.println("\tCODE\tURL\t\t\t\tNOTE");
-        logger
-                .println("\t--------------------------------------------------------------------------------");
-        for (Result result : results) {
-            logger
-                    .println("\t" + result.getResponseCode() + "\t"
-                            + result.getSite().getUrl() + "\t\t\t\t"
-                            + result.getNote());
-        }
-        logger
-                .println("\t--------------------------------------------------------------------------------\n\n");
     }
 }

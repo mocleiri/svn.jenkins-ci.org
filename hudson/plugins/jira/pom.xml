@@ -9,7 +9,7 @@
   </parent>
   
   <artifactId>jira</artifactId>
-  <version>1.21-SNAPSHOT</version>
+  <version>1.22-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>Hudson JIRA plugin</name>
   <description>Integrates Hudson to JIRA</description>
@@ -18,6 +18,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <developers>
+    <developer>
+      <id>olamy</id>
+      <name>Olivier Lamy</name>
+    </developer>
+  </developers>
 
   <build>
     <plugins>
@@ -60,11 +67,6 @@
   </build>
   
   <pluginRepositories>
-    <pluginRepository>
-      <id>jira-libs</id>
-      <url>file:${project.basedir}/lib</url>
-      <layout>legacy</layout>
-    </pluginRepository>
     <pluginRepository>
       <id>jira-libs-m2</id>
       <url>file:${project.basedir}/lib</url>

@@ -13,10 +13,10 @@ import org.apache.commons.lang.StringUtils;
 import hudson.FilePath;
 import hudson.Launcher;
 
-import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
-import hudson.model.Project;
 import hudson.model.Result;
+import hudson.model.AbstractBuild;
+import hudson.model.Project;
 
 import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.analysis.util.model.AbstractAnnotation;
@@ -27,12 +27,12 @@ import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.analysis.util.model.WorkspaceFile;
 
 import hudson.remoting.VirtualChannel;
-import hudson.tasks.Ant;
 import hudson.tasks.BuildStep;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Builder;
-import hudson.tasks.Maven;
 import hudson.tasks.Recorder;
+import hudson.tasks.Ant;
+import hudson.tasks.Maven;
 
 /**
  * A base class for publishers with the following two characteristics:
@@ -49,6 +49,7 @@ import hudson.tasks.Recorder;
  * @author Ulli Hafner
  */
 // CHECKSTYLE:COUPLING-OFF
+@SuppressWarnings("PMD.TooManyFields")
 public abstract class HealthAwarePublisher extends Recorder implements HealthDescriptor {
     /** Unique ID of this class. */
     private static final long serialVersionUID = -7945220365563528457L;
@@ -114,6 +115,7 @@ public abstract class HealthAwarePublisher extends Recorder implements HealthDes
      *            the name of the plug-in
      */
     // CHECKSTYLE:OFF
+    @SuppressWarnings("PMD")
     public HealthAwarePublisher(final String threshold, final String newThreshold,
             final String failureThreshold, final String newFailureThreshold, final String healthy,
             final String unHealthy, final String thresholdLimit,
@@ -193,10 +195,8 @@ public abstract class HealthAwarePublisher extends Recorder implements HealthDes
             final VirtualChannel channel, final Collection<FileAnnotation> annotations) throws IOException,
             FileNotFoundException, InterruptedException {
         File directory = new File(rootDir, AbstractAnnotation.WORKSPACE_FILES);
-        if (!directory.exists()) {
-            if (!directory.mkdir()) {
-                throw new IOException("Can't create directory for workspace files that contain annotations: " + directory.getAbsolutePath());
-            }
+        if (!directory.exists() && !directory.mkdir()) {
+            throw new IOException("Can't create directory for workspace files that contain annotations: " + directory.getAbsolutePath());
         }
         AnnotationContainer container = new DefaultAnnotationContainer(annotations);
         for (WorkspaceFile file : container.getFiles()) {
@@ -216,7 +216,6 @@ public abstract class HealthAwarePublisher extends Recorder implements HealthDes
 
     /**
      * Logs the specified exception in the specified file.
-     *
      * @param exception
      *            the exception
      * @param masterFile
@@ -228,10 +227,25 @@ public abstract class HealthAwarePublisher extends Recorder implements HealthDes
         FileOutputStream outputStream = null;
         try {
             outputStream = new FileOutputStream(masterFile);
-            String message = "Can't copy file from workspace to build folder: workspace=" + slaveFileName
-                    + ", build folder=" + masterFile.getAbsolutePath();
+            IOUtils.write(String.format(
+                    "Copying the source file '%s' from the workspace to the build folder '%s' on the Hudson master failed.\n",
+                    slaveFileName, masterFile.getAbsolutePath()), outputStream);
+            if (!slaveFileName.startsWith("/") && !slaveFileName.contains(":")) {
+                IOUtils.write("Seems that the path is relative, however an absolute path is required when copying the sources.\n", outputStream);
+                String base;
+                if (slaveFileName.contains("/")) {
+                    base = StringUtils.substringAfterLast(slaveFileName, "/");
+                }
+                else {
+                    base = slaveFileName;
+                }
+                IOUtils.write(String.format("Is the file '%s' contained more than once in your workspace?\n",
+                        base), outputStream);
+            }
+            IOUtils.write(String.format("Is the file '%s' a valid filename?\n", slaveFileName), outputStream);
+            IOUtils.write(String.format("If you are building on a slave: please check if the file is accessible under '$HUDSON_HOME/[job-name]/%s'\n", slaveFileName), outputStream);
+            IOUtils.write(String.format("If you are building on the master: please check if the file is accessible under '$HUDSON_HOME/[job-name]/workspace/%s'\n", slaveFileName), outputStream);
             exception.printStackTrace(new PrintStream(outputStream));
-            IOUtils.write(message, outputStream);
         }
         catch (IOException error) {
             // ignore

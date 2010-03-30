@@ -108,4 +108,5 @@ public class NativePageCountsParserTest {
 		}
 		return new ByteArrayInputStream(all);
 	}
+	
 }

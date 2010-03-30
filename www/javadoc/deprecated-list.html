@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.352 API)
+Deprecated List (Hudson main module 1.353 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-19">
+<META NAME="date" CONTENT="2010-03-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.352 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.352 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.353 API)";
     }
 }
 </SCRIPT>
@@ -300,10 +300,12 @@ function windowTitle()
       <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/tasks/Mailer.html#DESCRIPTOR">hudson.tasks.Mailer.DESCRIPTOR</A>
+<TD><A HREF="hudson/tasks/Maven.html#DESCRIPTOR">hudson.tasks.Maven.DESCRIPTOR</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
-      Use <A HREF="hudson/tasks/Mailer.html#descriptor()"><CODE>Mailer.descriptor()</CODE></A> to obtain the current instance.</I>&nbsp;</TD>
+      Use <A HREF="hudson/model/Hudson.html#getDescriptorByType(java.lang.Class)"><CODE>Hudson.getDescriptorByType(Class)</CODE></A> to obtain the current instance.
+      For compatibility, this field retains the last created <A HREF="hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks"><CODE>Maven.DescriptorImpl</CODE></A>.
+      TODO: fix sonar plugin that depends on this. That's the only plugin that depends on this field.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/ArtifactArchiver.html#DESCRIPTOR">hudson.tasks.ArtifactArchiver.DESCRIPTOR</A>
@@ -313,12 +315,10 @@ function windowTitle()
       Use <A HREF="hudson/model/Hudson.html#getDescriptorByType(java.lang.Class)"><CODE>Hudson.getDescriptorByType(Class)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/tasks/Maven.html#DESCRIPTOR">hudson.tasks.Maven.DESCRIPTOR</A>
+<TD><A HREF="hudson/tasks/Mailer.html#DESCRIPTOR">hudson.tasks.Mailer.DESCRIPTOR</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
-      Use <A HREF="hudson/model/Hudson.html#getDescriptorByType(java.lang.Class)"><CODE>Hudson.getDescriptorByType(Class)</CODE></A> to obtain the current instance.
-      For compatibility, this field retains the last created <A HREF="hudson/tasks/Maven.DescriptorImpl.html" title="class in hudson.tasks"><CODE>Maven.DescriptorImpl</CODE></A>.
-      TODO: fix sonar plugin that depends on this. That's the only plugin that depends on this field.</I>&nbsp;</TD>
+      Use <A HREF="hudson/tasks/Mailer.html#descriptor()"><CODE>Mailer.descriptor()</CODE></A> to obtain the current instance.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/security/Permission.html#FULL_CONTROL">hudson.security.Permission.FULL_CONTROL</A>
@@ -339,16 +339,10 @@ function windowTitle()
       Access <A HREF="hudson/model/Hudson.html#PERMISSIONS"><CODE>Hudson.PERMISSIONS</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/Items.html#LIST">hudson.model.Items.LIST</A>
+<TD><A HREF="hudson/views/ListViewColumn.html#LIST">hudson.views.ListViewColumn.LIST</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
-      Use <A HREF="hudson/model/Items.html#all()"><CODE>Items.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/ManagementLink.html#LIST">hudson.model.ManagementLink.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
-      Use <A HREF="hudson/model/ManagementLink.html#all()"><CODE>ManagementLink.all()</CODE></A> for read access and put <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.281
+      Use <A HREF="hudson/views/ListViewColumn.html#all()"><CODE>ListViewColumn.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/UserProperties.html#LIST">hudson.model.UserProperties.LIST</A>
@@ -363,10 +357,40 @@ function windowTitle()
       Use <A HREF="hudson/model/ParameterDefinition.html#all()"><CODE>ParameterDefinition.all()</CODE></A> for read access, and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/ManagementLink.html#LIST">hudson.model.ManagementLink.LIST</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
+      Use <A HREF="hudson/model/ManagementLink.html#all()"><CODE>ManagementLink.all()</CODE></A> for read access and put <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/Items.html#LIST">hudson.model.Items.LIST</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
+      Use <A HREF="hudson/model/Items.html#all()"><CODE>Items.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/View.html#LIST">hudson.model.View.LIST</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
       Use <A HREF="hudson/model/View.html#all()"><CODE>View.all()</CODE></A> for read access, and use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/MailAddressResolver.html#LIST">hudson.tasks.MailAddressResolver.LIST</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
+      Use <A HREF="hudson/tasks/MailAddressResolver.html#all()"><CODE>MailAddressResolver.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/tasks/UserNameResolver.html#LIST">hudson.tasks.UserNameResolver.LIST</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2009-02-24.
+      Use <A HREF="hudson/tasks/UserNameResolver.html#all()"><CODE>UserNameResolver.all()</CODE></A> for read access, and use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/slaves/RetentionStrategy.html#LIST">hudson.slaves.RetentionStrategy.LIST</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
+      Use <A HREF="hudson/slaves/RetentionStrategy.html#all()"><CODE>RetentionStrategy.all()</CODE></A> for read access, and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/slaves/ComputerLauncher.html#LIST">hudson.slaves.ComputerLauncher.LIST</A>
@@ -376,40 +400,10 @@ function windowTitle()
       <A HREF="hudson/model/Hudson.html#getDescriptorList(java.lang.Class)"><CODE>Hudson.getDescriptorList(Class)</CODE></A> for read access.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/slaves/RetentionStrategy.html#LIST">hudson.slaves.RetentionStrategy.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
-      Use <A HREF="hudson/slaves/RetentionStrategy.html#all()"><CODE>RetentionStrategy.all()</CODE></A> for read access, and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/scm/RepositoryBrowsers.html#LIST">hudson.scm.RepositoryBrowsers.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286.
-      Use <A HREF="hudson/scm/RepositoryBrowser.html#all()"><CODE>RepositoryBrowser.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/tasks/UserNameResolver.html#LIST">hudson.tasks.UserNameResolver.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2009-02-24.
-      Use <A HREF="hudson/tasks/UserNameResolver.html#all()"><CODE>UserNameResolver.all()</CODE></A> for read access, and use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/tasks/MailAddressResolver.html#LIST">hudson.tasks.MailAddressResolver.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
-      Use <A HREF="hudson/tasks/MailAddressResolver.html#all()"><CODE>MailAddressResolver.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/node_monitors/NodeMonitor.html#LIST">hudson.node_monitors.NodeMonitor.LIST</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286.
       Use <A HREF="hudson/node_monitors/NodeMonitor.html#all()"><CODE>NodeMonitor.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/views/ListViewColumn.html#LIST">hudson.views.ListViewColumn.LIST</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.281
-      Use <A HREF="hudson/views/ListViewColumn.html#all()"><CODE>ListViewColumn.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/security/AuthorizationStrategy.html#LIST">hudson.security.AuthorizationStrategy.LIST</A>
@@ -422,6 +416,12 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286
       Use <A HREF="hudson/security/SecurityRealm.html#all()"><CODE>SecurityRealm.all()</CODE></A> for read access, and use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/RepositoryBrowsers.html#LIST">hudson.scm.RepositoryBrowsers.LIST</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.286.
+      Use <A HREF="hudson/scm/RepositoryBrowser.html#all()"><CODE>RepositoryBrowser.all()</CODE></A> for read access and <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/maven/MavenReporters.html#LIST">hudson.maven.MavenReporters.LIST</A>
@@ -1224,16 +1224,16 @@ function windowTitle()
       Use <A HREF="hudson/node_monitors/AbstractNodeMonitorDescriptor.html#markOffline(hudson.model.Computer, hudson.slaves.OfflineCause)"><CODE>AbstractNodeMonitorDescriptor.markOffline(Computer, OfflineCause)</CODE></A> to specify the cause.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/TopLevelItemDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.TopLevelItemDescriptor.newInstance(StaplerRequest)</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-01-19.
-      This is not a valid operation for <A HREF="hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.Descriptor.newInstance(StaplerRequest)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Implement <A HREF="hudson/model/Descriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>Descriptor.newInstance(StaplerRequest, JSONObject)</CODE></A> method instead.
       Deprecated as of 1.145.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/TopLevelItemDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.model.TopLevelItemDescriptor.newInstance(StaplerRequest)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2007-01-19.
+      This is not a valid operation for <A HREF="hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>s.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/maven/MavenReporterDescriptor.html#newInstance(org.kohsuke.stapler.StaplerRequest)">hudson.maven.MavenReporterDescriptor.newInstance(StaplerRequest)</A>
@@ -1303,13 +1303,13 @@ function windowTitle()
       Use <A HREF="hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)"><CODE>DescribableList.rebuild(StaplerRequest, JSONObject, List)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/listeners/RunListener.html#register()">hudson.model.listeners.RunListener.register()</A>
+<TD><A HREF="hudson/model/listeners/SaveableListener.html#register()">hudson.model.listeners.SaveableListener.register()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.281
       Put <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/listeners/SaveableListener.html#register()">hudson.model.listeners.SaveableListener.register()</A>
+<TD><A HREF="hudson/model/listeners/RunListener.html#register()">hudson.model.listeners.RunListener.register()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.281
       Put <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your class to get it auto-registered.</I>&nbsp;</TD>
@@ -1345,24 +1345,24 @@ function windowTitle()
       Use <A HREF="hudson/model/UpdateCenter.UpdateCenterJob.html#submit()"><CODE>UpdateCenter.UpdateCenterJob.submit()</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild()">hudson.model.AbstractProject.scheduleBuild()</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild(Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/BuildableItem.html#scheduleBuild()">hudson.model.BuildableItem.scheduleBuild()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/BuildableItem.html#scheduleBuild(hudson.model.Cause)"><CODE>BuildableItem.scheduleBuild(Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild(int)">hudson.model.AbstractProject.scheduleBuild(int)</A>
+<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild()">hudson.model.AbstractProject.scheduleBuild()</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild(int, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild(hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild(Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/BuildableItem.html#scheduleBuild(int)">hudson.model.BuildableItem.scheduleBuild(int)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/BuildableItem.html#scheduleBuild(int, hudson.model.Cause)"><CODE>BuildableItem.scheduleBuild(int, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/AbstractProject.html#scheduleBuild(int)">hudson.model.AbstractProject.scheduleBuild(int)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/model/AbstractProject.html#scheduleBuild(int, hudson.model.Cause)"><CODE>AbstractProject.scheduleBuild(int, Cause)</CODE></A>.  Since 1.283</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/matrix/MatrixConfiguration.html#scheduleBuild(hudson.model.ParametersAction)">hudson.matrix.MatrixConfiguration.scheduleBuild(ParametersAction)</A>
@@ -1452,15 +1452,15 @@ function windowTitle()
       Use <A HREF="hudson/tasks/BuildWrapper.Environment.html#tearDown(hudson.model.AbstractBuild, hudson.model.BuildListener)"><CODE>BuildWrapper.Environment.tearDown(AbstractBuild, BuildListener)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/FilePath.html#toString()">hudson.FilePath.toString()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/MarkupText.html#toString()">hudson.MarkupText.toString()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.350.
       Use <A HREF="hudson/MarkupText.html#toString(boolean)"><CODE>MarkupText.toString(boolean)</CODE></A> to be explicit about the escape mode.</I>&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><A HREF="hudson/FilePath.html#toString()">hudson.FilePath.toString()</A>
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/ListBoxModel.html#values()">hudson.util.ListBoxModel.values()</A>

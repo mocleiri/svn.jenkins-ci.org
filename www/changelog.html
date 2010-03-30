@@ -17,22 +17,43 @@
 <div style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
   <li class=bug>
-    Better escaping of test case names in test results pages.
-    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5982">issue 5982</a>)
+    POM parsing was still using the module root as the base for relative paths for alternate settings files.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6080">issue 6080</a>)
   <li class=bug>
-    Fixed the handling of verifying that the POM path entered for Maven projects exists.
-    (<a href="http://issues.hudson-ci.org/browse/HUDSON-4693">issue 4693</a>)
-  <li class=bug
-    Added link to builds in buildTimeTrend
-    (<a href="http://issues.hudson-ci.org/browse/HUDSON-3993">issue 3993</a>)
+    Fix dynamic updates of build history table when CSRF protection is turned on.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6072">issue 6072</a>)
+  <li class=bug>
+    Improved the error reporting mechanism in LDAP setting.
+  <li class=bug>
+    Relaxed the LDAP search a bit so that it also matches the 'cn' and 'mail' attributes.
 </ul>
 </div><!--=TRUNK-END=-->
 
 <!-- these changes are controlled by the release process. DO NOT MODIFY -->
 <div style="display:none;"><!--=BEGIN=-->
-<h3><a name=v1.353>What's new in 1.353</a> <!--=DATE=--></h3>
+<h3><a name=v1.354>What's new in 1.354</a> <!--=DATE=--></h3>
 <!--=RC-CHANGES=-->
 </div><!--=END=-->
+<h3><a name=v1.353>What's new in 1.353</a> (2010/03/29)</h3>
+<ul class=image>
+  <li class=bug>
+    Tagging a repository can result in NPE. 
+  <li class=bug>
+    Fix possible form submission error when using multiple combobox elements.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6025">issue 6025</a>)
+  <li class=bug>
+    Better escaping of test case names in test results pages.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5982">issue 5982</a>)
+  <li class=bug>
+    Make radio buttons work in repeatable content, such as a build step.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5028">issue 5028</a>)
+  <li class=bug>
+    Fixed the handling of verifying that the POM path entered for Maven projects exists.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-4693">issue 4693</a>)
+  <li class=rfe>
+    Added link to builds in buildTimeTrend
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-3993">issue 3993</a>)
+</ul>
 <h3><a name=v1.352>What's new in 1.352</a> (2010/03/19)</h3>
 <ul class=image>
   <li class=bug>

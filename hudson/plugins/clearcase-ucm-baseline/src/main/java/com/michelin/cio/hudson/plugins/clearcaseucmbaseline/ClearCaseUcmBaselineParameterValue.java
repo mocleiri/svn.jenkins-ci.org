@@ -1,7 +1,8 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2010, Manufacture Française des Pneumatiques Michelin, Romain Seguy
+ * Copyright (c) 2010, Manufacture Française des Pneumatiques Michelin, Romain Seguy,
+ *                     Amadeus SAS, Vincent Latombe
  * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
  *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer
  *
@@ -32,6 +33,7 @@ import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
 import hudson.model.Computer;
+import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.ParameterValue;
 import hudson.model.ParametersAction;
@@ -41,10 +43,14 @@ import hudson.plugins.clearcase.AbstractClearCaseScm;
 import hudson.plugins.clearcase.ClearToolLauncher;
 import hudson.plugins.clearcase.HudsonClearToolLauncher;
 import hudson.plugins.clearcase.PluginImpl;
+import hudson.plugins.clearcase.ucm.UcmMakeBaseline;
+import hudson.plugins.clearcase.ucm.UcmMakeBaselineComposite;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
+import hudson.plugins.clearcase.util.PathUtil;
 import hudson.tasks.BuildWrapper;
+import hudson.tasks.Publisher;
+import hudson.util.DescribableList;
 import hudson.util.VariableResolver;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +86,11 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
     @Exported(visibility=3) private String pvob;            // this att comes from ClearCaseUcmBaselineParameterDefinition
     private List<String> restrictions;                      // this att comes from ClearCaseUcmBaselineParameterDefinition
     @Exported(visibility=3) private boolean snapshotView;   // this att comes from ClearCaseUcmBaselineParameterDefinition
+    @Exported(visibility=3) private String stream;          // this att comes from ClearCaseUcmBaselineParameterDefinition
+    @Exported(visibility=3) private boolean useUpdate;      // this att comes from ClearCaseUcmBaselineParameterDefinition
     @Exported(visibility=3) private String viewName;        // this att comes from ClearCaseUcmBaselineParameterDefinition
+
+    private StringBuffer fatalErrorMessage = new StringBuffer();
 
     // I have to have two constructors: If I use only one (the most complete one),
     // I get an exception in ClearCaseUcmBaselineParameterDefinition.createValue(StaplerRequest, JSONObject)
@@ -88,16 +98,21 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
     // Is it because of the two booleans? No time to investigate, sorry.
     @DataBoundConstructor
     public ClearCaseUcmBaselineParameterValue(String name, String baseline, boolean forceRmview) {
-        this(name, null, null, null, null, baseline, forceRmview, false);
+        this(name, null, null, null, null, null, baseline, false, forceRmview, false);
     }
 
-    public ClearCaseUcmBaselineParameterValue(String name, String pvob, String component, String promotionLevel, String viewName, String baseline, boolean forceRmview, boolean snapshotView) {
+    public ClearCaseUcmBaselineParameterValue(
+            String name, String pvob, String component, String promotionLevel,
+            String stream, String viewName, String baseline,
+            boolean useUpdate, boolean forceRmview, boolean snapshotView) {
         super(name);
-        this.pvob = ClearCaseUcmBaselineUtils.prefixWithSlash(pvob);
+        this.pvob = ClearCaseUcmBaselineUtils.prefixWithSeparator(pvob);
         this.component = component;
         this.promotionLevel = promotionLevel;
+        this.stream = stream;
         this.viewName = viewName;
         this.baseline = baseline;
+        this.useUpdate = useUpdate;
         this.forceRmview = forceRmview;
         this.snapshotView = snapshotView;
     }
@@ -114,14 +129,29 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
     public BuildWrapper createBuildWrapper(AbstractBuild<?, ?> build) {
         // let's ensure that a baseline has been really provided
         if(baseline == null || baseline.length() == 0) {
+            fatalErrorMessage.append("The value '" + baseline + "' is not a valid ClearCase UCM baseline.");
+        }
+
+        // HUDSON-5877: let's ensure the job has no publishers/notifiers coming
+        // from the ClearCase plugin
+        DescribableList<Publisher, Descriptor<Publisher>> publishersList = build.getProject().getPublishersList();
+        for(Publisher publisher : publishersList) {
+            if(publisher instanceof UcmMakeBaseline || publisher instanceof UcmMakeBaselineComposite) {
+                if(fatalErrorMessage.length() > 0) {
+                    fatalErrorMessage.append('\n');
+                }
+                fatalErrorMessage.append("This job is set up to use a '").append(publisher.getDescriptor().getDisplayName()).append(
+                        "' publisher which is not compatible with the ClearCase UCM baseline SCM mode. Please remove this publisher.");
+            }
+        }
+        if(fatalErrorMessage.length() > 0) {
             return new BuildWrapper() {
                 /**
-                 * This method makes the build fail when baseline value is {@code
-                 * null} or empty.
+                 * This method just makes the build fail for various reasons.
                  */
                 @Override
                 public Environment setUp(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
-                    listener.fatalError("The value '" + baseline + "' is not a valid ClearCase UCM baseline.");
+                    listener.fatalError(fatalErrorMessage.toString());
                     return null;
                 }
             };
@@ -161,7 +191,7 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
                  * button appearing on the parameters page.</p>
                  */
                 @Override
-                public Environment setUp(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
+                public Environment setUp(AbstractBuild build, final Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
                     VariableResolver variableResolver = null;
                     try {
                         // this plugin is built against ClearCase plugin 1.0...
@@ -175,7 +205,7 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
                             listener.fatalError("No variable resolver has been instantiated: The build will surely crash, but let's make a try...");
                         }
                     }
-                    
+
                     ClearToolLauncher clearToolLauncher = createClearToolLauncher(listener, build.getProject().getWorkspace(), launcher);
                     ClearToolUcmBaseline cleartool = new ClearToolUcmBaseline(variableResolver, clearToolLauncher);
 
@@ -229,64 +259,62 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
                         }
                     }
 
+                    final String newlineForOS = launcher.isUnix() ? "\n" : "\r\n";
+                    // we assume that the slave OS file separator is the same as the server
+                    // since we have no way of determining the OS of the Clearcase server
+                    final String fileSepForOS = PathUtil.fileSepForOS(launcher.isUnix());
+
                     if(forceRmview || !lastBuildUsedSameBaseline || !viewPath.exists()) {
                         // --- 1. We remove the view if it already exists ---
 
                         if(viewPath.exists()) {
-                            cleartool.rmview(viewName);
+                            if(!useUpdate || forceRmview) {
+                                cleartool.rmview(viewName);
+
+                                // --- 2. We create the view to be loaded ---
+
+                                // cleartool mkview -tag <tag> <view path>
+                                cleartool.mkview(viewName, snapshotView, null);
+                            }
+                        } else {
+                            cleartool.mkview(viewName, snapshotView, null);
                         }
-
-                        // --- 2. We first create the view to be loaded ---
-
-                        // cleartool mkview -tag <tag> <view path>
-                        cleartool.mkview(viewName, snapshotView, null);
 
                         // --- 3. We create the configspec ---
 
-                        configSpec.append("element * CHECKEDOUT\n");
-                        configSpec.append("element ").append(rootDir).append("/... ").append(baseline).append('\n');
+                        configSpec.append("element * CHECKEDOUT").append(newlineForOS);
+
+                        StringBuilder loadRules = new StringBuilder();
 
                         // cleartool lsbl -fmt "%[depends_on_closure]p" <baseline>@<pvob>
                         String[] dependentBaselines = cleartool.getDependentBaselines(pvob, baseline);
 
                         for(String dependentBaselineSelector: dependentBaselines) {
-                            String dependentBaseline = dependentBaselineSelector.split("@")[0];
-                            String component = cleartool.getComponentFromBaseline(pvob, dependentBaseline);
-                            rootDir = cleartool.getComponentRootDir(pvob, component);
-                            configSpec.append("element ").append(rootDir).append("/... ").append(dependentBaseline).append('\n');
-                        }
-
-                        configSpec.append("element * /main/0\n");
-
-                        // is any download restriction defined?
-                        if(restrictions != null && restrictions.size() > 0) {
-                            for(String restriction: restrictions) {
-                                if(restriction.startsWith(rootDir)) {
-                                    configSpec.append("load ").append(restriction).append('\n');
-                                }
+                            int indexOfSeparator = dependentBaselineSelector.indexOf('@');
+                            if(indexOfSeparator == -1) {
+                                continue;
                             }
-                        }
-                        else {
-                            configSpec.append("load ").append(rootDir).append('\n');
-                        }
-
-                        for(String dependentBaselineSelector: dependentBaselines) {
-                            String dependentBaseline = dependentBaselineSelector.split("@")[0];
+                            String dependentBaseline = dependentBaselineSelector.substring(0, indexOfSeparator);
                             String component = cleartool.getComponentFromBaseline(pvob, dependentBaseline);
                             rootDir = cleartool.getComponentRootDir(pvob, component);
 
+                            configSpec.append("element \"").append(rootDir).append(fileSepForOS + "...\" ").append(dependentBaseline).append(" -nocheckout").append(newlineForOS);
                             // is any download restriction defined?
                             if(restrictions != null && restrictions.size() > 0) {
                                 for(String restriction: restrictions) {
                                     if(restriction.startsWith(rootDir)) {
-                                        configSpec.append("load ").append(restriction).append('\n');
+                                        loadRules.append("load ").append(restriction).append(newlineForOS);
                                     }
                                 }
                             }
                             else {
-                                configSpec.append("load ").append(rootDir).append('\n');
+                                loadRules.append("load ").append(rootDir).append(newlineForOS);
                             }
                         }
+                        configSpec.append(newlineForOS);
+                        configSpec.append("element * /main/0 -ucm -nocheckout").append(newlineForOS);
+                        configSpec.append(newlineForOS);
+                        configSpec.append(loadRules).append(newlineForOS);
 
                         listener.getLogger().println("The view will be created based on the following config spec:");
                         listener.getLogger().println("--- config spec start ---");
@@ -296,7 +324,7 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
                         // --- 4. We actually load the view based on the configspec ---
 
                         // cleartool setcs <configspec>
-                        cleartool.setcs(viewName, configSpec.toString());
+                        //cleartool.setcs(viewName, configSpec.toString());
                     }
                     else {
                         listener.getLogger().println("The requested ClearCase UCM baseline is the same as previous build: Reusing previously loaded view");
@@ -311,8 +339,9 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
                                     baseline);
                             env.put(AbstractClearCaseScm.CLEARCASE_VIEWNAME_ENVSTR,
                                     viewName);
+
                             env.put(AbstractClearCaseScm.CLEARCASE_VIEWPATH_ENVSTR,
-                                    env.get("WORKSPACE") + File.separator + viewName);
+                                    env.get("WORKSPACE") + fileSepForOS + viewName);
                         }
                     };
                 }
@@ -393,6 +422,22 @@ public class ClearCaseUcmBaselineParameterValue extends ParameterValue {
 
     public void setSnapshotView(boolean snapshotView) {
         this.snapshotView = snapshotView;
+    }
+
+    public String getStream() {
+        return stream;
+    }
+
+    public void setStream(String stream) {
+        this.stream = stream;
+    }
+
+    public boolean getUseUpdate() {
+        return useUpdate;
+    }
+
+    public void setUseUpdate(boolean useUpdate) {
+        this.useUpdate = useUpdate;
     }
 
     public String getViewName() {

@@ -25,7 +25,7 @@ public class LatestBuilds extends DashboardPortlet{
 	/**
 	 * Number of latest builds which will be displayed on the screen
 	 */
-	private static final int N_LATEST_JOBS = 10;
+	private static final int N_LATEST_BUILDS = 10;
 	
 	/**
 	 * Last <code>N_LATEST_BUILDS</code> builds
@@ -36,16 +36,18 @@ public class LatestBuilds extends DashboardPortlet{
 		List<Run> allBuilds = new ArrayList<Run>();
 		for (TopLevelItem job : jobs) {
 			if (job instanceof Job) {
-				List<Run> builds = ((Job) job).getBuilds();
-				allBuilds.addAll(builds);
-			}
+        if (getDashboard().HasItem(job)) {
+          List<Run> builds = ((Job) job).getBuilds();
+          allBuilds.addAll(builds);
+        }
+      }
 		}
 		Collections.sort(allBuilds, Run.ORDER_BY_DATE);
 		List<Run> recentBuilds = new ArrayList<Run>();
-		if(allBuilds.size() < N_LATEST_JOBS)
+		if(allBuilds.size() < N_LATEST_BUILDS)
 			recentBuilds = allBuilds;
 		else
-			recentBuilds = allBuilds.subList(0,N_LATEST_JOBS);
+			recentBuilds = allBuilds.subList(0,N_LATEST_BUILDS);
 			
 		return recentBuilds;
 	}		
@@ -55,7 +57,7 @@ public class LatestBuilds extends DashboardPortlet{
 
 		@Override
 		public String getDisplayName() {
-			return "Last " + N_LATEST_JOBS + " jobs";
+			return "Last " + N_LATEST_BUILDS + " builds";
 		}
 	}
 	

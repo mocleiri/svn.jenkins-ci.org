@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.TaskListener (Hudson main module 1.352 API)
+Uses of Interface hudson.model.TaskListener (Hudson main module 1.353 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-19">
+<META NAME="date" CONTENT="2010-03-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.TaskListener (Hudson main module 1.352 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson main module 1.352 API)";
+        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson main module 1.353 API)";
     }
 }
 </SCRIPT>
@@ -222,22 +222,13 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Util.</B><B><A HREF="../../../hudson/Util.html#createSymlink(java.io.File, java.lang.String, java.lang.String, hudson.model.TaskListener)">createSymlink</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;baseDir,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;targetPath,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;symlinkPath,
+<TD><CODE><B>Util.</B><B><A HREF="../../../hudson/Util.html#createSymlink(java.io.File, java.lang.String, java.lang.String, hudson.model.TaskListener)">createSymlink</A></B>(java.io.File&nbsp;baseDir,
+              java.lang.String&nbsp;targetPath,
+              java.lang.String&nbsp;symlinkPath,
               <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a symlink to baseDir+targetPath at baseDir+symlinkPath.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>FileSystemProvisionerDescriptor.</B><B><A HREF="../../../hudson/FileSystemProvisionerDescriptor.html#discard(hudson.FilePath, hudson.model.TaskListener)">discard</A></B>(<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
-        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to clean up a workspace that may potentially belong to this <A HREF="../../../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -250,8 +241,17 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>FileSystemProvisionerDescriptor.</B><B><A HREF="../../../hudson/FileSystemProvisionerDescriptor.html#discard(hudson.FilePath, hudson.model.TaskListener)">discard</A></B>(<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
+        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to clean up a workspace that may potentially belong to this <A HREF="../../../hudson/FileSystemProvisioner.html" title="class in hudson"><CODE>FileSystemProvisioner</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Util.</B><B><A HREF="../../../hudson/Util.html#displayIOException(java.io.IOException, hudson.model.TaskListener)">displayIOException</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>&nbsp;e,
+<TD><CODE><B>Util.</B><B><A HREF="../../../hudson/Util.html#displayIOException(java.io.IOException, hudson.model.TaskListener)">displayIOException</A></B>(java.io.IOException&nbsp;e,
                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -260,9 +260,9 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>FilePath.</B><B><A HREF="../../../hudson/FilePath.html#installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)">installIfNecessaryFrom</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;archive,
+<TD><CODE><B>FilePath.</B><B><A HREF="../../../hudson/FilePath.html#installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)">installIfNecessaryFrom</A></B>(java.net.URL&nbsp;archive,
                        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;message)</CODE>
+                       java.lang.String&nbsp;message)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given a tgz/zip file, extracts it to the given target directory, if necessary.</TD>
@@ -291,8 +291,8 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B>Util.</B><B><A HREF="../../../hudson/Util.html#resolveSymlink(java.io.File, hudson.model.TaskListener)">resolveSymlink</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;link,
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>Util.</B><B><A HREF="../../../hudson/Util.html#resolveSymlink(java.io.File, hudson.model.TaskListener)">resolveSymlink</A></B>(java.io.File&nbsp;link,
                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -323,7 +323,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <CODE>abstract &nbsp;<A HREF="../../../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A></CODE></FONT></TD>
 <TD><CODE><B>FileSystemProvisioner.</B><B><A HREF="../../../hudson/FileSystemProvisioner.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, java.lang.String, hudson.model.TaskListener)">snapshot</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob,
+         java.lang.String&nbsp;glob,
          <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -334,7 +334,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <CODE>&nbsp;<A HREF="../../../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A></CODE></FONT></TD>
 <TD><CODE><B>FileSystemProvisioner.Default.</B><B><A HREF="../../../hudson/FileSystemProvisioner.Default.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, java.lang.String, hudson.model.TaskListener)">snapshot</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob,
+         java.lang.String&nbsp;glob,
          <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -464,7 +464,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <CODE>static&nbsp;hudson.maven.MavenEmbedder</CODE></FONT></TD>
 <TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, hudson.model.AbstractProject, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
                <A HREF="../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;profiles)</CODE>
+               java.lang.String&nbsp;profiles)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This version tries to infer mavenHome by looking at a project.</TD>
@@ -473,8 +473,8 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;hudson.maven.MavenEmbedder</CODE></FONT></TD>
 <TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;mavenHome,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;profiles)</CODE>
+               java.io.File&nbsp;mavenHome,
+               java.lang.String&nbsp;profiles)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -483,9 +483,9 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;hudson.maven.MavenEmbedder</CODE></FONT></TD>
 <TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;mavenHome,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;profiles,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</A>&nbsp;systemProperties)</CODE>
+               java.io.File&nbsp;mavenHome,
+               java.lang.String&nbsp;profiles,
+               java.util.Properties&nbsp;systemProperties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -494,10 +494,10 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;hudson.maven.MavenEmbedder</CODE></FONT></TD>
 <TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;mavenHome,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;profiles,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</A>&nbsp;systemProperties,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;privateRepository)</CODE>
+               java.io.File&nbsp;mavenHome,
+               java.lang.String&nbsp;profiles,
+               java.util.Properties&nbsp;systemProperties,
+               java.lang.String&nbsp;privateRepository)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -506,11 +506,11 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;hudson.maven.MavenEmbedder</CODE></FONT></TD>
 <TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties, java.lang.String, java.io.File)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;mavenHome,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;profiles,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</A>&nbsp;systemProperties,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;privateRepository,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;alternateSettings)</CODE>
+               java.io.File&nbsp;mavenHome,
+               java.lang.String&nbsp;profiles,
+               java.util.Properties&nbsp;systemProperties,
+               java.lang.String&nbsp;privateRepository,
+               java.io.File&nbsp;alternateSettings)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a fresh <CODE>MavenEmbedder</CODE> instance.</TD>
@@ -519,7 +519,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;hudson.maven.MavenEmbedder</CODE></FONT></TD>
 <TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.lang.String)">createEmbedder</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;profiles)</CODE>
+               java.lang.String&nbsp;profiles)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../hudson/maven/MavenUtil.html#createEmbedder(hudson.model.TaskListener, java.io.File, java.lang.String, java.util.Properties)"><CODE>MavenUtil.createEmbedder(TaskListener, File, String, Properties)</CODE></A>  
@@ -585,16 +585,6 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>MavenAbstractArtifactRecord.</B><B><A HREF="../../../hudson/maven/reporters/MavenAbstractArtifactRecord.html#deploy(hudson.maven.MavenEmbedder, org.apache.maven.artifact.repository.ArtifactRepository, hudson.model.TaskListener)">deploy</A></B>(hudson.maven.MavenEmbedder&nbsp;embedder,
-       org.apache.maven.artifact.repository.ArtifactRepository&nbsp;deploymentRepository,
-       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deploys the artifacts to the specified <CODE>ArtifactRepository</CODE>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>MavenAggregatedArtifactRecord.</B><B><A HREF="../../../hudson/maven/reporters/MavenAggregatedArtifactRecord.html#deploy(hudson.maven.MavenEmbedder, org.apache.maven.artifact.repository.ArtifactRepository, hudson.model.TaskListener)">deploy</A></B>(hudson.maven.MavenEmbedder&nbsp;embedder,
        org.apache.maven.artifact.repository.ArtifactRepository&nbsp;deploymentRepository,
@@ -612,6 +602,16 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>MavenAbstractArtifactRecord.</B><B><A HREF="../../../hudson/maven/reporters/MavenAbstractArtifactRecord.html#deploy(hudson.maven.MavenEmbedder, org.apache.maven.artifact.repository.ArtifactRepository, hudson.model.TaskListener)">deploy</A></B>(hudson.maven.MavenEmbedder&nbsp;embedder,
+       org.apache.maven.artifact.repository.ArtifactRepository&nbsp;deploymentRepository,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deploys the artifacts to the specified <CODE>ArtifactRepository</CODE>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -652,7 +652,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TD><CODE><B><A HREF="../../../hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model"><CODE>BuildListener</CODE></A> that writes to an <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model"><CODE>BuildListener</CODE></A> that writes to an <CODE>OutputStream</CODE>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -688,19 +688,19 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
-<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#createLauncher(hudson.model.TaskListener)">createLauncher</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for executing programs on this node.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
 <TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#createLauncher(hudson.model.TaskListener)">createLauncher</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
+<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#createLauncher(hudson.model.TaskListener)">createLauncher</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for executing programs on this node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -738,19 +738,19 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../../hudson/model/AbstractBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
 <TD><CODE><B>Run.</B><B><A HREF="../../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables to be used for launching
  processes for this build.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
-<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../../hudson/model/AbstractBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -799,7 +799,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>DependencyGraph.Dependency.</B><B><A HREF="../../../hudson/model/DependencyGraph.Dependency.html#shouldTriggerBuild(hudson.model.AbstractBuild, hudson.model.TaskListener, java.util.List)">shouldTriggerBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+                   java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decide whether build should be triggered and provide any Actions for the build.</TD>
@@ -895,15 +895,15 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
-<CODE>&lt;V,T extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&gt; 
+<CODE>&lt;V,T extends java.lang.Throwable&gt; 
 <BR>
 V</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B>SU.</B><B><A HREF="../../../hudson/os/SU.html#execute(hudson.model.TaskListener, java.lang.String, java.lang.String, hudson.remoting.Callable)">execute</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rootUsername,
-        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rootPassword,
+        java.lang.String&nbsp;rootUsername,
+        java.lang.String&nbsp;rootPassword,
         <A HREF="../../../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;closure)</CODE>
 
 <BR>
@@ -913,8 +913,8 @@ V</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
 <TD><CODE><B>SU.</B><B><A HREF="../../../hudson/os/SU.html#start(hudson.model.TaskListener, java.lang.String, java.lang.String)">start</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rootUsername,
-      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rootPassword)</CODE>
+      java.lang.String&nbsp;rootUsername,
+      java.lang.String&nbsp;rootPassword)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that's connected to the priviledge-escalated environment.</TD>
@@ -960,7 +960,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <CODE>&nbsp;<A HREF="../../../hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A></CODE></FONT></TD>
 <TD><CODE><B>ZFSProvisioner.</B><B><A HREF="../../../hudson/os/solaris/ZFSProvisioner.html#snapshot(hudson.model.AbstractBuild, hudson.FilePath, java.lang.String, hudson.model.TaskListener)">snapshot</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;ws,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob,
+         java.lang.String&nbsp;glob,
          <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -1040,16 +1040,6 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A></CODE></FONT></TD>
-<TD><CODE><B>NullSCM.</B><B><A HREF="../../../hudson/scm/NullSCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">calcRevisionsFromBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-                       <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
-                       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A></CODE></FONT></TD>
 <TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">calcRevisionsFromBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                        <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
@@ -1057,6 +1047,16 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calculates the <A HREF="../../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm"><CODE>SCMRevisionState</CODE></A> that represents the state of the workspace of the given build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/scm/SCMRevisionState.html" title="class in hudson.scm">SCMRevisionState</A></CODE></FONT></TD>
+<TD><CODE><B>NullSCM.</B><B><A HREF="../../../hudson/scm/NullSCM.html#calcRevisionsFromBuild(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">calcRevisionsFromBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+                       <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+                       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1132,6 +1132,15 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
                 <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
@@ -1141,8 +1150,8 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+                 <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1155,15 +1164,6 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows the <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to prepare for a disconnect.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-                 <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1185,20 +1185,20 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
-       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches the slave agent for the given <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>ComputerLauncherFilter.</B><B><A HREF="../../../hudson/slaves/ComputerLauncherFilter.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ComputerLauncher.</B><B><A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">launch</A></B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>&nbsp;computer,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches the slave agent for the given <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1221,11 +1221,11 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
-<TD><CODE><B>Channels.</B><B><A HREF="../../../hudson/slaves/Channels.html#newJVM(java.lang.String, hudson.model.TaskListener, hudson.FilePath, hudson.util.ClasspathBuilder, java.util.Map)">newJVM</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;displayName,
+<TD><CODE><B>Channels.</B><B><A HREF="../../../hudson/slaves/Channels.html#newJVM(java.lang.String, hudson.model.TaskListener, hudson.FilePath, hudson.util.ClasspathBuilder, java.util.Map)">newJVM</A></B>(java.lang.String&nbsp;displayName,
        <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
        <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
        <A HREF="../../../hudson/util/ClasspathBuilder.html" title="class in hudson.util">ClasspathBuilder</A>&nbsp;classpath,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;systemProperties)</CODE>
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;systemProperties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a new JVM with the given classpath and system properties, establish a communication channel,
@@ -1254,8 +1254,8 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>SlaveComputer.</B><B><A HREF="../../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, hudson.model.TaskListener, hudson.remoting.Channel.Listener)">setChannel</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+<TD><CODE><B>SlaveComputer.</B><B><A HREF="../../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, hudson.model.TaskListener, hudson.remoting.Channel.Listener)">setChannel</A></B>(java.io.InputStream&nbsp;in,
+           java.io.OutputStream&nbsp;out,
            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;taskListener,
            <A HREF="../../../hudson/remoting/Channel.Listener.html" title="class in hudson.remoting">Channel.Listener</A>&nbsp;listener)</CODE>
 
@@ -1281,8 +1281,8 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
-<TD><CODE><B>Ant.AntInstallation.</B><B><A HREF="../../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Maven.MavenInstallation.</B><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
         <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
@@ -1290,8 +1290,8 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
-<TD><CODE><B>Maven.MavenInstallation.</B><B><A HREF="../../../hudson/tasks/Maven.MavenInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Ant.AntInstallation.</B><B><A HREF="../../../hudson/tasks/Ant.AntInstallation.html#forNode(hudson.model.Node, hudson.model.TaskListener)">forNode</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
         <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
@@ -1327,7 +1327,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A></CODE></FONT></TD>
-<TD><CODE><B>JUnitParser.</B><B><A HREF="../../../hudson/tasks/junit/JUnitParser.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;testResultLocations,
+<TD><CODE><B>JUnitParser.</B><B><A HREF="../../../hudson/tasks/junit/JUnitParser.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(java.lang.String&nbsp;testResultLocations,
       <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
       <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
@@ -1364,7 +1364,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected abstract &nbsp;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></FONT></TD>
-<TD><CODE><B>DefaultTestResultParserImpl.</B><B><A HREF="../../../hudson/tasks/test/DefaultTestResultParserImpl.html#parse(java.util.List, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&gt;&nbsp;reportFiles,
+<TD><CODE><B>DefaultTestResultParserImpl.</B><B><A HREF="../../../hudson/tasks/test/DefaultTestResultParserImpl.html#parse(java.util.List, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(java.util.List&lt;java.io.File&gt;&nbsp;reportFiles,
       <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
@@ -1373,25 +1373,25 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></FONT></TD>
-<TD><CODE><B>DefaultTestResultParserImpl.</B><B><A HREF="../../../hudson/tasks/test/DefaultTestResultParserImpl.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;testResultLocations,
-      <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
-      <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
-      <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></FONT></TD>
-<TD><CODE><B>TestResultParser.</B><B><A HREF="../../../hudson/tasks/test/TestResultParser.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;testResultLocations,
+<TD><CODE><B>TestResultParser.</B><B><A HREF="../../../hudson/tasks/test/TestResultParser.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(java.lang.String&nbsp;testResultLocations,
       <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
       <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parses the specified set of files and builds a <A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test"><CODE>TestResult</CODE></A> object that represents them.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A></CODE></FONT></TD>
+<TD><CODE><B>DefaultTestResultParserImpl.</B><B><A HREF="../../../hudson/tasks/test/DefaultTestResultParserImpl.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.TaskListener)">parse</A></B>(java.lang.String&nbsp;testResultLocations,
+      <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+      <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
+      <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -1412,28 +1412,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B>ToolLocationNodeProperty.</B><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
-            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2009-04-09.
-      Use <A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node,TaskListener)</CODE></A></I></TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B>InstallerTranslator.</B><B><A HREF="../../../hudson/tools/InstallerTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
-            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B>ToolLocationTranslator.</B><B><A HREF="../../../hudson/tools/ToolLocationTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
             <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
             <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
@@ -1445,26 +1424,57 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>InstallerTranslator.</B><B><A HREF="../../../hudson/tools/InstallerTranslator.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B>ToolLocationNodeProperty.</B><B><A HREF="../../../hudson/tools/ToolLocationNodeProperty.html#getToolHome(hudson.model.Node, hudson.tools.ToolInstallation, hudson.model.TaskListener)">getToolHome</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+            <A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;installation,
+            <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2009-04-09.
+      Use <A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)"><CODE>ToolInstallation.translateFor(Node,TaskListener)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>JDKInstaller.</B><B><A HREF="../../../hudson/tools/JDKInstaller.html#install(hudson.Launcher, hudson.tools.JDKInstaller.Platform, hudson.tools.JDKInstaller.FileSystem, hudson.model.TaskListener, java.lang.String, java.lang.String)">install</A></B>(<A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
         <A HREF="../../../hudson/tools/JDKInstaller.Platform.html" title="enum in hudson.tools">JDKInstaller.Platform</A>&nbsp;p,
         <A HREF="../../../hudson/tools/JDKInstaller.FileSystem.html" title="interface in hudson.tools">JDKInstaller.FileSystem</A>&nbsp;fs,
         <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log,
-        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;expectedLocation,
-        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;jdkBundle)</CODE>
+        java.lang.String&nbsp;expectedLocation,
+        java.lang.String&nbsp;jdkBundle)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs the JDK installation to a system, provided that the bundle was already downloaded.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A></CODE></FONT></TD>
+<CODE>&nbsp;java.net.URL</CODE></FONT></TD>
 <TD><CODE><B>JDKInstaller.</B><B><A HREF="../../../hudson/tools/JDKInstaller.html#locate(hudson.model.TaskListener, hudson.tools.JDKInstaller.Platform, hudson.tools.JDKInstaller.CPU)">locate</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log,
        <A HREF="../../../hudson/tools/JDKInstaller.Platform.html" title="enum in hudson.tools">JDKInstaller.Platform</A>&nbsp;platform,
        <A HREF="../../../hudson/tools/JDKInstaller.CPU.html" title="enum in hudson.tools">JDKInstaller.CPU</A>&nbsp;cpu)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a license click through and obtains the one-time URL for downloading bits.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B>JDKInstaller.</B><B><A HREF="../../../hudson/tools/JDKInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1479,7 +1489,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>ZipExtractionInstaller.</B><B><A HREF="../../../hudson/tools/ZipExtractionInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+<TD><CODE><B>DownloadFromUrlInstaller.</B><B><A HREF="../../../hudson/tools/DownloadFromUrlInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
                     <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
                     <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
@@ -1489,7 +1499,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>DownloadFromUrlInstaller.</B><B><A HREF="../../../hudson/tools/DownloadFromUrlInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
+<TD><CODE><B>ZipExtractionInstaller.</B><B><A HREF="../../../hudson/tools/ZipExtractionInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
                     <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
                     <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
@@ -1508,17 +1518,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B>JDKInstaller.</B><B><A HREF="../../../hudson/tools/JDKInstaller.html#performInstallation(hudson.tools.ToolInstallation, hudson.model.Node, hudson.model.TaskListener)">performInstallation</A></B>(<A HREF="../../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&nbsp;tool,
-                    <A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
-                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B>ToolInstallation.</B><B><A HREF="../../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
              <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
@@ -1548,7 +1548,7 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TD><CODE><B><A HREF="../../../hudson/util/LogTaskListener.html" title="class in hudson.util">LogTaskListener</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> which sends messages to a <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/logging/Logger.html?is-external=true" title="class or interface in java.util.logging"><CODE>Logger</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A> which sends messages to a <CODE>Logger</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

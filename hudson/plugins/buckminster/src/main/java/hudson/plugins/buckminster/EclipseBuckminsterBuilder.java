@@ -2,11 +2,14 @@ package hudson.plugins.buckminster;
 
 import hudson.CopyOnWrite;
 import hudson.Extension;
+import hudson.FilePath;
 import hudson.Launcher;
+import hudson.Proc;
 import hudson.matrix.MatrixProject;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
 import hudson.model.FreeStyleProject;
@@ -18,6 +21,7 @@ import hudson.plugins.buckminster.targetPlatform.TargetPlatformReference;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
+import hudson.tools.ToolProperty;
 import hudson.util.DescribableList;
 import hudson.util.FormValidation;
 
@@ -25,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,7 +37,9 @@ import javax.servlet.ServletException;
 
 import net.sf.json.JSONObject;
 
+import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundConstructor;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -55,15 +62,19 @@ import org.kohsuke.stapler.StaplerResponse;
  */
 public class EclipseBuckminsterBuilder extends Builder {
 
-	private final String installationName, commands, logLevel, params, targetPlatformName;
+	private final String installationName, commands, logLevel, params, targetPlatformName, userTemp, userOutput, userCommand, userWorkspace;
 
 	@DataBoundConstructor
-	public EclipseBuckminsterBuilder(String installationName, String commands, String logLevel, String params, String targetPlatformName) {
+	public EclipseBuckminsterBuilder(String installationName, String commands, String logLevel, String params, String targetPlatformName, String userTemp, String userOutput, String userCommand, String userWorkspace) {
 		this.installationName = installationName;
 		this.commands = commands;
 		this.logLevel = logLevel;
 		this.params = params;
 		this.targetPlatformName = targetPlatformName;
+		this.userTemp = userTemp;
+		this.userOutput = userOutput;
+		this.userCommand = userCommand;
+		this.userWorkspace = userWorkspace;
 	}
 
 	/**
@@ -80,6 +91,10 @@ public class EclipseBuckminsterBuilder extends Builder {
 	public String getParams() {
 		return params;
 	}
+	
+	public String getUserWorkspace() {
+		return userWorkspace;
+	}
 
 	public String getLogLevel(){
 		if(logLevel!=null && logLevel.length()!=0)
@@ -91,8 +106,8 @@ public class EclipseBuckminsterBuilder extends Builder {
 		return getLogLevel().equals(item);
 	}
 	
-	public EclipseInstallation getInstallation() {
-		for (EclipseInstallation si : DESCRIPTOR.getInstallations()) {
+	public BuckminsterInstallation getInstallation() {
+		for (BuckminsterInstallation si : DESCRIPTOR.getBuckminsterInstallations()) {
 			if (installationName != null
 					&& si.getName().equals(installationName)) {
 				return si;
@@ -102,6 +117,18 @@ public class EclipseBuckminsterBuilder extends Builder {
 		return null;
 	}
 	
+	public String getUserTemp() {
+		return userTemp;
+	}
+
+	public String getUserOutput() {
+		return userOutput;
+	}
+
+	public String getUserCommand() {
+		return userCommand;
+	}
+
 	public TargetPlatformReference getTargetPlatform() {
 		for (TargetPlatformReference reference : DESCRIPTOR.getTargetPlatforms()) {
 			if (targetPlatformName != null
@@ -118,12 +145,25 @@ public class EclipseBuckminsterBuilder extends Builder {
 			BuildListener listener) {
 		//TODO: make this behave in master/slave scenario
 		try {
+			BuckminsterInstallation installation = getInstallation();
+			if(installation==null)
+			{
+
+				installation = pickDefault(listener);
+				if(installation==null)
+				{
+					listener.error("No Buckminster Tool Installation has been configured.");
+					return false;
+				}
+			}
+	        installation = installation.forNode(Computer.currentComputer().getNode(), listener);
+	        installation = installation.forEnvironment(build.getEnvironment(listener));
 			String modifiedCommands = getCommands();
 			TargetPlatformReference targetPlatform = getTargetPlatform();
 			if(targetPlatform!=null && targetPlatform.getPath()!=null){
 				modifiedCommands = "setpref targetPlatformPath=\""+targetPlatform.getPath()+"\"" +"\n" + modifiedCommands;
 			}
-			CommandLineBuilder cmdBuilder = new CommandLineBuilder(getInstallation(),modifiedCommands,getLogLevel(),getParams());
+			CommandLineBuilder cmdBuilder = new CommandLineBuilder(installation,modifiedCommands,getLogLevel(),getParams(),getUserWorkspace(),getUserTemp(),getUserOutput(), getUserCommand());
 			List<String> buildCommands = cmdBuilder.buildCommands(build,listener);
 			listener.getLogger().println("Commandline: ");
 			for (Iterator iterator = buildCommands.iterator(); iterator.hasNext();) {
@@ -132,28 +172,26 @@ public class EclipseBuckminsterBuilder extends Builder {
 				listener.getLogger().print(" ");
 				
 			}
-//			launcher.launch().cmds(buildCommands.toArray(new String[buildCommands.size()])).stdout(out).pwd(workDir)
-			ProcessBuilder builder = new ProcessBuilder(buildCommands);
-			
-			builder.directory(new File(getEclipseHome()));
-			builder.redirectErrorStream(true);
+			Proc proc = launcher.launch().pwd(build.getWorkspace()).cmds(buildCommands).stdout(listener).start();
+			return proc.join()==0;
 
-			Process process = builder.start();
-			ProcessStreamLogger streamLogger = new ProcessStreamLogger(process, listener);
-			streamLogger.start();
-			try{
-				return process.waitFor() == 0;
-			}catch(InterruptedException e){
-				listener.getLogger().println("Build Interrupted");
-				process.destroy();
-				return false;
-			}
 		} 
 		catch (Exception e) {
 			listener.error(e.getLocalizedMessage());
 			return false;
 		}
 
+	}
+
+	private BuckminsterInstallation pickDefault(BuildListener listener) {
+		String oldName = installationName;
+		BuckminsterInstallation[] available = DESCRIPTOR.getBuckminsterInstallations();
+		if(available==null || available.length==0)
+			return null;
+		String message = "The selected Buckminster Tool Installation \"{0}\" has not been found, using \"{1}\" instead!";
+		message = MessageFormat.format(message, installationName,available[0].getName());
+		listener.error(message);
+		return available[0];
 	}
 
 	/**
@@ -170,8 +208,12 @@ public class EclipseBuckminsterBuilder extends Builder {
 	 * See <tt>views/hudson/plugins/hello_world/HelloWorldBuilder/*.jelly</tt>
 	 * for the actual HTML fragment for the configuration screen.
 	 */
+    @SuppressWarnings("deprecation")
 	public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
 
+		@CopyOnWrite
+		private volatile BuckminsterInstallation[] buckminsterInstallations = new BuckminsterInstallation[0];
+		
 		@CopyOnWrite
 		private volatile EclipseInstallation[] installations = new EclipseInstallation[0];
 
@@ -179,7 +221,7 @@ public class EclipseBuckminsterBuilder extends Builder {
 			super(EclipseBuckminsterBuilder.class);
 			load();
 		}
-
+		
 		/**
 		 * Asks hudson for all available {@link AbstractProject}s and iterates over their {@link PublisherList}.
 		 * <p>
@@ -210,8 +252,25 @@ public class EclipseBuckminsterBuilder extends Builder {
 			
 		}
 
+		
 		public EclipseInstallation[] getInstallations() {
 			return installations;
+		}
+		
+		public BuckminsterInstallation[] getBuckminsterInstallations() {
+			if(installations!=null && installations.length>0)
+			{
+				//convert the old installations and reset the installations field
+				List<BuckminsterInstallation> converted = convertLegacyInstallations(installations);
+				
+				if(buckminsterInstallations!=null && buckminsterInstallations.length>0)
+				{
+					Collections.addAll(converted, buckminsterInstallations);
+				}
+				buckminsterInstallations = converted.toArray(new BuckminsterInstallation[converted.size()]);
+				installations = new EclipseInstallation[0];
+			}
+			return buckminsterInstallations;
 		}
 
 		/**
@@ -251,7 +310,18 @@ public class EclipseBuckminsterBuilder extends Builder {
 
 			return FormValidation.ok();
 		}
-
+		
+        /**
+         * Performs on-the-fly validation on the file mask wildcard.
+         */
+        public FormValidation doCheckUserCommand(@AncestorInPath AbstractProject<?,?> project, @QueryParameter String value) throws IOException {
+            FilePath path = project.getSomeWorkspace();
+            if(path==null)
+            	//we tried, but we couldn't get a workspace
+            	return FormValidation.ok();
+        	return path.validateRelativePath(value, true, true);
+        }
+		
 
 		/**
 		 * This human readable name is used in the configuration screen.
@@ -263,16 +333,21 @@ public class EclipseBuckminsterBuilder extends Builder {
 		@Override
 		public boolean configure(StaplerRequest req, JSONObject o)
 				throws FormException {
-			// to persist global configuration information,
-			// set that to properties and call save().
-			installations = req.bindParametersToList(EclipseInstallation.class,
-					"eclipse.").toArray(new EclipseInstallation[0]);
 			save();
 			return super.configure(req, o);
 		}
 
 
-		
+		private List<BuckminsterInstallation> convertLegacyInstallations(
+				EclipseInstallation[] installations) {
+			List<BuckminsterInstallation> convertedInstallations = new ArrayList<BuckminsterInstallation>(installations.length);
+			for (EclipseInstallation eclipseInstallation : installations) {
+				BuckminsterInstallation inst = new BuckminsterInstallation(eclipseInstallation.getName(), eclipseInstallation.getHome(), eclipseInstallation.getVersion(), eclipseInstallation.getParams(), Collections.<ToolProperty<?>>emptyList());
+				convertedInstallations.add(inst);
+			}
+			return convertedInstallations;
+		}
+
 		@Override
 		public Builder newInstance(StaplerRequest req, JSONObject formData)
 				throws hudson.model.Descriptor.FormException {
@@ -285,5 +360,13 @@ public class EclipseBuckminsterBuilder extends Builder {
 		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
 			return FreeStyleProject.class.isAssignableFrom(jobType) || MatrixProject.class.isAssignableFrom(jobType);
 		}
+
+		public void setBuckminsterInstallations(
+				BuckminsterInstallation... installations) {
+            this.buckminsterInstallations = installations;
+            save();
+			
+		}
 	}
+    
 }

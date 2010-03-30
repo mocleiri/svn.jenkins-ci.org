@@ -14,6 +14,7 @@ import hudson.model.AbstractBuild;
 
 import hudson.plugins.analysis.core.BuildResult;
 import hudson.plugins.analysis.core.ResultAction;
+import hudson.plugins.analysis.util.model.Priority;
 
 /**
  * Plots a graph.
@@ -31,7 +32,7 @@ public class Main extends ApplicationFrame {
     public Main() {
         super("Hello Graph");
 
-        DifferenceGraph graph = new DifferenceGraph();
+        BuildResultGraph graph = new PriorityGraph();
 
         GraphConfiguration configuration = new GraphConfiguration(new ArrayList<BuildResultGraph>());
         BuildResult result1 = createResult(1, 5, 10);
@@ -59,16 +60,22 @@ public class Main extends ApplicationFrame {
     /**
      * Creates a mock {@link BuildResult}.
      *
+     * @param buildNumber
+     *            current build number
      * @param fixedWarnings
      *            number of fixed warnings
      * @param newWarnings
      *            number of new warnings
      * @return a {@link ResultAction} mock.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private BuildResult createResult(final int buildNumber, final int fixedWarnings, final int newWarnings) {
         BuildResult result = mock(BuildResult.class);
 
+        when(result.getNumberOfWarnings()).thenReturn(newWarnings);
+        when(result.getNumberOfAnnotations(Priority.HIGH)).thenReturn(newWarnings);
+        when(result.getNumberOfAnnotations(Priority.HIGH)).thenReturn(fixedWarnings);
+        when(result.getNumberOfAnnotations(Priority.HIGH)).thenReturn(Math.abs(newWarnings - fixedWarnings));
         when(result.getNumberOfFixedWarnings()).thenReturn(fixedWarnings);
         when(result.getNumberOfNewWarnings()).thenReturn(newWarnings);
 
@@ -76,6 +83,7 @@ public class Main extends ApplicationFrame {
 
         when(build.getTimestamp()).thenReturn(Calendar.getInstance());
         when(build.getNumber()).thenReturn(buildNumber);
+        when(build.getDisplayName()).thenReturn("#" + buildNumber);
 
         when(result.getOwner()).thenReturn(build);
 
