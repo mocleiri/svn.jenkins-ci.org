@@ -2,10 +2,10 @@ updateCenter.post(
 {
   "connectionCheckUrl": "http://www.google.com/",
   "core":   {
-    "buildDate": "Mar 19, 2010",
+    "buildDate": "Mar 29, 2010",
     "name": "core",
-    "url": "http://hudson-ci.org/download/war/1.352/hudson.war",
-    "version": "1.352"
+    "url": "http://hudson-ci.org/download/war/1.353/hudson.war",
+    "version": "1.353"
   },
   "id": "default",
   "plugins":   {
@@ -92,12 +92,12 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Active+Directory+plugin"
     },
     "analysis-collector":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.4"
+          "version": "1.5"
         },
                 {
           "name": "maven-plugin",
@@ -107,12 +107,12 @@ updateCenter.post(
                 {
           "name": "checkstyle",
           "optional": true,
-          "version": "3.3"
+          "version": "3.4"
         },
                 {
           "name": "dry",
           "optional": true,
-          "version": "2.3"
+          "version": "2.4"
         },
                 {
           "name": "findbugs",
@@ -122,17 +122,17 @@ updateCenter.post(
                 {
           "name": "pmd",
           "optional": true,
-          "version": "3.3"
+          "version": "3.4"
         },
                 {
           "name": "tasks",
           "optional": true,
-          "version": "4.3"
+          "version": "4.4"
         },
                 {
           "name": "warnings",
           "optional": true,
-          "version": "3.3"
+          "version": "3.4"
         },
                 {
           "name": "dashboard-view",
@@ -150,21 +150,28 @@ updateCenter.post(
         "report"
       ],
       "name": "analysis-collector",
-      "previousTimestamp": "2010-03-16T15:41:30.00Z",
-      "releaseTimestamp": "2010-03-17T03:52:04.00Z",
+      "previousTimestamp": "2010-03-17T03:52:04.00Z",
+      "releaseTimestamp": "2010-03-30T23:44:28.00Z",
       "requiredCore": "1.350",
       "title": "Analysis Collector Plugin",
-      "url": "http://hudson-ci.org/download/plugins/analysis-collector/1.2/analysis-collector.hpi",
-      "version": "1.2",
+      "url": "http://hudson-ci.org/download/plugins/analysis-collector/1.3/analysis-collector.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Analysis+Collector+Plugin"
     },
     "analysis-core":     {
-      "buildDate": "Mar 15, 2010",
-      "dependencies": [      {
-        "name": "maven-plugin",
-        "optional": false,
-        "version": "1.350"
-      }],
+      "buildDate": "Mar 30, 2010",
+      "dependencies":       [
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.350"
+        },
+                {
+          "name": "dashboard-view",
+          "optional": true,
+          "version": "1.3"
+        }
+      ],
       "developers": [      {
         "developerId": "drulli",
         "name": "Ulli Hafner"
@@ -175,12 +182,12 @@ updateCenter.post(
         "report"
       ],
       "name": "analysis-core",
-      "previousTimestamp": "2010-01-27T23:12:24.00Z",
-      "releaseTimestamp": "2010-03-16T04:31:36.00Z",
+      "previousTimestamp": "2010-03-16T04:31:36.00Z",
+      "releaseTimestamp": "2010-03-30T17:39:16.00Z",
       "requiredCore": "1.350",
       "title": "Static Code Analysis Plug-ins",
-      "url": "http://hudson-ci.org/download/plugins/analysis-core/1.4/analysis-core.hpi",
-      "version": "1.4",
+      "url": "http://hudson-ci.org/download/plugins/analysis-core/1.5/analysis-core.hpi",
+      "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Static+Code+Analysis+Plug-ins"
     },
     "artifactory":     {
@@ -483,7 +490,7 @@ updateCenter.post(
       "excerpt": "This plugin lets Hudson authenticate users via your organization's Central Authentication Service (<a href='http://www.jasig.org/cas'>CAS<\/a>), for single-sign-on. ",
       "labels": ["user"],
       "name": "cas1",
-      "previousTimestamp": "2010-02-27T02:13:22.00Z",
+      "previousTimestamp": "2010-03-01T18:47:18.00Z",
       "releaseTimestamp": "2010-03-09T17:55:46.00Z",
       "requiredCore": "1.349",
       "title": "CAS1 Plugin",
@@ -522,17 +529,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Change+Log+History+Plugin"
     },
     "checkstyle":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.4"
+          "version": "1.5"
         },
                 {
           "name": "maven-plugin",
           "optional": false,
           "version": "1.350"
+        },
+                {
+          "name": "dashboard-view",
+          "optional": true,
+          "version": "1.3"
         }
       ],
       "developers": [      {
@@ -545,12 +557,12 @@ updateCenter.post(
         "report"
       ],
       "name": "checkstyle",
-      "previousTimestamp": "2010-01-28T00:03:26.00Z",
-      "releaseTimestamp": "2010-03-16T07:13:48.00Z",
+      "previousTimestamp": "2010-03-16T07:13:48.00Z",
+      "releaseTimestamp": "2010-03-30T18:21:06.00Z",
       "requiredCore": "1.350",
       "title": "Checkstyle Plugin",
-      "url": "http://hudson-ci.org/download/plugins/checkstyle/3.3/checkstyle.hpi",
-      "version": "3.3",
+      "url": "http://hudson-ci.org/download/plugins/checkstyle/3.4/checkstyle.hpi",
+      "version": "3.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Checkstyle+Plugin"
     },
     "chucknorris":     {
@@ -745,14 +757,14 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Clover+Plugin"
     },
     "cmakebuilder":     {
-      "buildDate": "Mar 26, 2010",
+      "buildDate": "Mar 28, 2010",
       "dependencies": [],
       "developers": [{"developerId": "vvk"}],
       "excerpt": "This plugin can be used to build <a href='http://cmake.org/'>cmake<\/a> based projects within Hudson.",
       "labels": ["builder"],
       "name": "cmakebuilder",
       "previousTimestamp": "2009-12-22T20:36:52.00Z",
-      "releaseTimestamp": "2010-03-27T00:28:06.00Z",
+      "releaseTimestamp": "2010-03-29T02:28:48.00Z",
       "requiredCore": "1.343",
       "title": "cmakebuilder Plugin",
       "url": "http://hudson-ci.org/download/plugins/cmakebuilder/1.2/cmakebuilder.hpi",
@@ -821,7 +833,7 @@ updateCenter.post(
       "excerpt": "This plugin generates the trend report for <a href='http://carbidehelp.nokia.com/help/index.jsp?topic=/com.nokia.carbide.cpp.codescanner/html/codescanner.htm'>Codescanner<\/a>, a tool which uses static analysis to look for bugs, hints and other useful information in Symbian C++ source code. ",
       "labels": ["report"],
       "name": "codescanner",
-      "previousTimestamp": "2010-02-03T19:55:20.00Z",
+      "previousTimestamp": "2010-02-05T08:40:44.00Z",
       "releaseTimestamp": "2010-03-19T00:26:20.00Z",
       "requiredCore": "1.350",
       "title": "CodeScanner Plugin",
@@ -1436,17 +1448,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Drools+Plugin"
     },
     "dry":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.4"
+          "version": "1.5"
         },
                 {
           "name": "maven-plugin",
           "optional": false,
           "version": "1.350"
+        },
+                {
+          "name": "dashboard-view",
+          "optional": true,
+          "version": "1.3"
         }
       ],
       "developers": [      {
@@ -1459,12 +1476,12 @@ updateCenter.post(
         "report"
       ],
       "name": "dry",
-      "previousTimestamp": "2010-01-28T00:12:26.00Z",
-      "releaseTimestamp": "2010-03-16T07:23:14.00Z",
+      "previousTimestamp": "2010-03-16T07:23:14.00Z",
+      "releaseTimestamp": "2010-03-30T18:39:44.00Z",
       "requiredCore": "1.350",
       "title": "DRY Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dry/2.3/dry.hpi",
-      "version": "2.3",
+      "url": "http://hudson-ci.org/download/plugins/dry/2.4/dry.hpi",
+      "version": "2.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DRY+Plugin"
     },
     "easyant":     {
@@ -1608,17 +1625,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/File+System+SCM"
     },
     "findbugs":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.4"
+          "version": "1.5"
         },
                 {
           "name": "maven-plugin",
           "optional": false,
           "version": "1.350"
+        },
+                {
+          "name": "dashboard-view",
+          "optional": true,
+          "version": "1.3"
         }
       ],
       "developers": [      {
@@ -1631,12 +1653,12 @@ updateCenter.post(
         "report"
       ],
       "name": "findbugs",
-      "previousTimestamp": "2010-02-02T05:19:52.00Z",
-      "releaseTimestamp": "2010-03-16T14:44:42.00Z",
+      "previousTimestamp": "2010-03-30T23:55:02.00Z",
+      "releaseTimestamp": "2010-03-31T01:58:30.00Z",
       "requiredCore": "1.350",
       "title": "FindBugs Plugin",
-      "url": "http://hudson-ci.org/download/plugins/findbugs/4.4/findbugs.hpi",
-      "version": "4.4",
+      "url": "http://hudson-ci.org/download/plugins/findbugs/4.6/findbugs.hpi",
+      "version": "4.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FindBugs+Plugin"
     },
     "fitnesse":     {
@@ -1757,7 +1779,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Google+Calendar+Plugin"
     },
     "gerrit":     {
-      "buildDate": "Mar 23, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "jyrkiput",
@@ -1768,12 +1790,12 @@ updateCenter.post(
         "external"
       ],
       "name": "gerrit",
-      "previousTimestamp": "2010-03-23T04:41:02.00Z",
-      "releaseTimestamp": "2010-03-24T02:35:22.00Z",
-      "requiredCore": "1.352",
+      "previousTimestamp": "2010-03-24T02:35:22.00Z",
+      "releaseTimestamp": "2010-03-31T03:11:44.00Z",
+      "requiredCore": "1.346",
       "title": "Gerrit Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gerrit/0.1.1/gerrit.hpi",
-      "version": "0.1.1",
+      "url": "http://hudson-ci.org/download/plugins/gerrit/0.2/gerrit.hpi",
+      "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gerrit+Plugin"
     },
     "git":     {
@@ -2008,7 +2030,7 @@ updateCenter.post(
       "dependencies": [],
       "developers": [      {
         "developerId": "gliptak",
-        "name": "G√°bor Lipt√°k"
+        "name": "G·bor Lipt·k"
       }],
       "excerpt": "This plugin allows you to use <a href='http://www.ca.com/us/products/product.aspx?id=255'>CA Harvest<\/a> as a SCM.",
       "labels": ["scm"],
@@ -2774,7 +2796,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/LDAP+Email+Plugin"
     },
     "libvirt-slave":     {
-      "buildDate": "Mar 25, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "mmornati",
@@ -2784,12 +2806,12 @@ updateCenter.post(
       "excerpt": "Add Libvirt Hypervisor support to Hudson ",
       "labels": ["slaves"],
       "name": "libvirt-slave",
-      "previousTimestamp": "2010-03-20T15:53:16.00Z",
-      "releaseTimestamp": "2010-03-25T17:24:34.00Z",
+      "previousTimestamp": "2010-03-25T17:24:34.00Z",
+      "releaseTimestamp": "2010-03-30T18:22:16.00Z",
       "requiredCore": "1.347",
       "title": "Libvirt Slaves Plugin",
-      "url": "http://hudson-ci.org/download/plugins/libvirt-slave/1.4/libvirt-slave.hpi",
-      "version": "1.4",
+      "url": "http://hudson-ci.org/download/plugins/libvirt-slave/1.5/libvirt-slave.hpi",
+      "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Libvirt+Slaves+Plugin"
     },
     "locale":     {
@@ -2974,18 +2996,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Maven+Info+Plugin"
     },
     "maven-plugin":     {
-      "buildDate": "Mar 19, 2010",
+      "buildDate": "Mar 29, 2010",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
-      "labels": [],
+      "excerpt": "Hudson's Maven 2 project type",
+      "labels": ["builder"],
       "name": "maven-plugin",
-      "previousTimestamp": "2010-03-15T18:05:44.00Z",
-      "releaseTimestamp": "2010-03-20T02:02:28.00Z",
-      "requiredCore": "1.352",
-      "title": "Building a maven2 project",
-      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.352/maven-plugin.hpi",
-      "version": "1.352",
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Building+a+maven2+project"
+      "previousTimestamp": "2010-03-20T02:02:28.00Z",
+      "releaseTimestamp": "2010-03-30T01:31:40.00Z",
+      "requiredCore": "1.353",
+      "title": "Maven 2 Project Plugin",
+      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.353/maven-plugin.hpi",
+      "version": "1.353",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Maven+2+Project+Plugin"
     },
     "mercurial":     {
       "buildDate": "Mar 29, 2010",
@@ -3415,17 +3438,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Plot+Plugin"
     },
     "pmd":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.4"
+          "version": "1.5"
         },
                 {
           "name": "maven-plugin",
           "optional": false,
           "version": "1.350"
+        },
+                {
+          "name": "dashboard-view",
+          "optional": true,
+          "version": "1.3"
         }
       ],
       "developers": [      {
@@ -3438,12 +3466,12 @@ updateCenter.post(
         "report"
       ],
       "name": "pmd",
-      "previousTimestamp": "2010-01-28T00:41:40.00Z",
-      "releaseTimestamp": "2010-03-16T07:32:36.00Z",
+      "previousTimestamp": "2010-03-16T07:32:36.00Z",
+      "releaseTimestamp": "2010-03-30T21:38:38.00Z",
       "requiredCore": "1.350",
       "title": "PMD Plugin",
-      "url": "http://hudson-ci.org/download/plugins/pmd/3.3/pmd.hpi",
-      "version": "3.3",
+      "url": "http://hudson-ci.org/download/plugins/pmd/3.4/pmd.hpi",
+      "version": "3.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PMD+Plugin"
     },
     "polarion":     {
@@ -3469,7 +3497,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Polarion+Plugin"
     },
     "port-allocator":     {
-      "buildDate": "Dec 28, 2009",
+      "buildDate": "Mar 29, 2010",
       "dependencies": [],
       "developers":       [
                 {
@@ -3484,12 +3512,12 @@ updateCenter.post(
       "excerpt": "Assigns unique TCP port addresses to jobs so that jobs executed concurrently won't collide with each other. Also performs clean ups to kill off daemons that are forked by jobs.",
       "labels": ["misc"],
       "name": "port-allocator",
-      "previousTimestamp": "2008-07-10T23:24:34.00Z",
-      "releaseTimestamp": "2009-12-29T04:39:04.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2009-12-29T04:39:04.00Z",
+      "releaseTimestamp": "2010-03-30T01:34:08.00Z",
+      "requiredCore": "1.324",
       "title": "Port Allocator Plugin",
-      "url": "http://hudson-ci.org/download/plugins/port-allocator/1.4/port-allocator.hpi",
-      "version": "1.4",
+      "url": "http://hudson-ci.org/download/plugins/port-allocator/1.5/port-allocator.hpi",
+      "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Port+Allocator+Plugin"
     },
     "postbuild-task":     {
@@ -3637,21 +3665,21 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/RAD+Builder+Plugin"
     },
     "radiatorviewplugin":     {
-      "buildDate": "Jan 06, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "ashlux"}],
+      "developers": [{"developerId": "markh"}],
       "excerpt": "Provides a job view displaying project status in a highly visible manner. This is ideal for displaying on a screen on the office wall as a form of Extreme Feedback Device.",
       "labels":       [
         "report",
         "ui"
       ],
       "name": "radiatorviewplugin",
-      "previousTimestamp": "2009-12-22T19:06:22.00Z",
-      "releaseTimestamp": "2010-01-07T03:52:10.00Z",
+      "previousTimestamp": "2010-01-07T03:52:10.00Z",
+      "releaseTimestamp": "2010-03-31T02:47:40.00Z",
       "requiredCore": "1.337",
       "title": "Radiator View Plugin",
-      "url": "http://hudson-ci.org/download/plugins/radiatorviewplugin/1.5/radiatorviewplugin.hpi",
-      "version": "1.5",
+      "url": "http://hudson-ci.org/download/plugins/radiatorviewplugin/1.6/radiatorviewplugin.hpi",
+      "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Radiator+View+Plugin"
     },
     "rake":     {
@@ -4486,17 +4514,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/System+Load+Average+Monitor+Plugin"
     },
     "tasks":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.4"
+          "version": "1.5"
         },
                 {
           "name": "maven-plugin",
           "optional": false,
           "version": "1.350"
+        },
+                {
+          "name": "dashboard-view",
+          "optional": true,
+          "version": "1.3"
         }
       ],
       "developers": [      {
@@ -4509,12 +4542,12 @@ updateCenter.post(
         "maven"
       ],
       "name": "tasks",
-      "previousTimestamp": "2010-01-28T01:05:04.00Z",
-      "releaseTimestamp": "2010-03-16T07:44:06.00Z",
+      "previousTimestamp": "2010-03-16T07:44:06.00Z",
+      "releaseTimestamp": "2010-03-30T20:56:32.00Z",
       "requiredCore": "1.350",
       "title": "Task Scanner Plugin",
-      "url": "http://hudson-ci.org/download/plugins/tasks/4.3/tasks.hpi",
-      "version": "4.3",
+      "url": "http://hudson-ci.org/download/plugins/tasks/4.4/tasks.hpi",
+      "version": "4.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Task+Scanner+Plugin"
     },
     "template-project":     {
@@ -4739,14 +4772,15 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Twitter+Plugin"
     },
     "ui-samples-plugin":     {
-      "buildDate": "Mar 19, 2010",
+      "buildDate": "Mar 29, 2010",
       "dependencies": [],
       "developers": [{"developerId": "kohsuke"}],
       "name": "ui-samples-plugin",
-      "releaseTimestamp": "2010-03-20T02:03:24.00Z",
-      "requiredCore": "1.352",
-      "url": "http://hudson-ci.org/download/plugins/ui-samples-plugin/1.352/ui-samples-plugin.hpi",
-      "version": "1.352"
+      "previousTimestamp": "2010-03-20T02:03:24.00Z",
+      "releaseTimestamp": "2010-03-30T01:33:12.00Z",
+      "requiredCore": "1.353",
+      "url": "http://hudson-ci.org/download/plugins/ui-samples-plugin/1.353/ui-samples-plugin.hpi",
+      "version": "1.353"
     },
     "url-change-trigger":     {
       "buildDate": "Dec 29, 2009",
@@ -4872,17 +4906,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Visual+SourceSafe+Plugin"
     },
     "warnings":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.4"
+          "version": "1.5"
         },
                 {
           "name": "maven-plugin",
           "optional": false,
           "version": "1.350"
+        },
+                {
+          "name": "dashboard-view",
+          "optional": true,
+          "version": "1.3"
         }
       ],
       "developers": [      {
@@ -4895,27 +4934,27 @@ updateCenter.post(
         "report"
       ],
       "name": "warnings",
-      "previousTimestamp": "2010-01-28T01:27:56.00Z",
-      "releaseTimestamp": "2010-03-16T07:55:38.00Z",
+      "previousTimestamp": "2010-03-16T07:55:38.00Z",
+      "releaseTimestamp": "2010-03-30T20:47:40.00Z",
       "requiredCore": "1.350",
       "title": "Warnings Plugin",
-      "url": "http://hudson-ci.org/download/plugins/warnings/3.3/warnings.hpi",
-      "version": "3.3",
+      "url": "http://hudson-ci.org/download/plugins/warnings/3.4/warnings.hpi",
+      "version": "3.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Warnings+Plugin"
     },
     "was-builder":     {
-      "buildDate": "Jan 24, 2010",
+      "buildDate": "Mar 30, 2010",
       "dependencies": [],
       "developers": [{"developerId": "F276977"}],
       "excerpt": "This plugin allows Hudson to invoke IBM WebSphere Application Server's *wsadmin* as a build step. ",
       "labels": ["builder"],
       "name": "was-builder",
-      "previousTimestamp": "2009-12-18T16:04:20.00Z",
-      "releaseTimestamp": "2010-01-24T22:37:24.00Z",
+      "previousTimestamp": "2010-01-24T22:37:24.00Z",
+      "releaseTimestamp": "2010-03-30T22:12:24.00Z",
       "requiredCore": "1.312",
       "title": "WAS Builder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/was-builder/1.0.1/was-builder.hpi",
-      "version": "1.0.1",
+      "url": "http://hudson-ci.org/download/plugins/was-builder/1.1/was-builder.hpi",
+      "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/WAS+Builder+Plugin"
     },
     "webtestpresenter":     {
@@ -5056,8 +5095,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "P7O0BOfxEIOl7tDm51GRNHlSk0E=",
-    "signature": "uYeV9RJjJ6rFx8zR6tePByUMDaVcgsXngGKRKgAXIQ3jvSBCOKytg6AxUUfeO25xd3Oqxi6eG5xMkem2AJ6EvaRTU2kKpxN9WoL6veSq3RH/Qxb5u8OSxu5JfZ/r87CbPywY3MICjY6B3czxg+Sb24yXEJ4MOPg6V55+nhUgpPVtTV9fwC2XTBMiTEnVd7sGnAFKuX8Q6kZ02h3TtdXZ7OHVeUVh18fNiFOJbWWS3EQ0ysDp+5vjYkffh18oCVy+HKwQ+142U8OSq2c321LQqEVNlJKbKrdsWGybuLNrTwUw5hO3XV508Z3lwDIsn5WA3U52mgX+/JtRkqRp1mx/Ug=="
+    "digest": "GSN70NQNDn8wDLqBPlCvO9p5hic=",
+    "signature": "a18OjTrlDMay1zM96B4Z+gyUUfVpyxXiLUh4Ll4HODXsNr6zdVDaxwQf23jTes/NVj0d2I0j9w/wHIIoJMj2n7xdP6KGEW1AB+v51ihB0qcs93OjXp+JY7g+dLjVLdq8rd36PIWNGLDnfVyIN6Dyw0huDBGFoEnTz+FmkXlUjffPvM/wSQA49s3VR2v7TdwFDnShuLFNHXXVZf4uHWjDVklTh9RgqcEObm51rKFRN5BR1ZDHy7zSRZzFoahlvu7x3eObP73dBsKHHRLbq/kYqXkkPgTLSPK2Y5YIBA20X5RwyUrqf08ttHqJNN0iJnCEYvAg9zHDEDMLn7B4s5EIfg=="
   },
   "updateCenterVersion": "1"
 }
