@@ -24,26 +24,17 @@
  */
 package hudson.plugins.clearcase;
 
+import hudson.FilePath;
+import hudson.Launcher;
+import hudson.Proc;
+import hudson.model.BuildListener;
+import hudson.model.TaskListener;
+
 import java.io.ByteArrayOutputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-
-import hudson.FilePath;
-import hudson.Launcher;
-import hudson.Proc;
-import hudson.Util;
-import hudson.model.BuildListener;
-import hudson.model.TaskListener;
-import hudson.util.ForkOutputStream;
-import hudson.util.ArgumentListBuilder;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
