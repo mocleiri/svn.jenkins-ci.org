@@ -45,6 +45,8 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+
 public abstract class ClearToolExec implements ClearTool {
 
     private transient Pattern viewListPattern;
@@ -74,8 +76,7 @@ public abstract class ClearToolExec implements ClearTool {
         cmd.add("-all");
         cmd.add("-since", formatter.format(lastBuildDate).toLowerCase());
         cmd.add("-fmt", format);
-        //              cmd.addQuoted(format);
-        if ((branch != null) && (branch.length() > 0)) {
+        if (StringUtils.isNotEmpty(branch)) {
             cmd.add("-branch", "brtype:" + branch);
         }
         cmd.add("-nco");
@@ -287,18 +288,19 @@ public abstract class ClearToolExec implements ClearTool {
         boolean res = true;
         IOException exception = null;
         
-        try {        	
-        	res = launcher.run(cmd.toCommandArray(), null, baos, null);
+        try {
+            res = launcher.run(cmd.toCommandArray(), null, baos, null);
         }
         catch (IOException ex) {
-        	exception = ex;
+            exception = ex;
         }
         
         // handle the use case in which view doesn't exist and therefore error is thrown
         String output = getOutputString(baos);
         baos.close();
-        if (exception != null && ! output.contains("No matching entries found for view"))
-        	throw exception;        
+        if (exception != null && ! output.contains("No matching entries found for view")) {
+            throw exception;
+        }
         
         if (res && exception == null) {
         	String [] lines = output.split("\n");
@@ -309,7 +311,7 @@ public abstract class ClearToolExec implements ClearTool {
                 
                 matcher = globalPathPattern.matcher(line);
                 if (matcher.find() && matcher.groupCount() == 1) 
-                	resPrp.put("STORAGE_DIR", matcher.group(1));                
+                	resPrp.put("STORAGE_DIR", matcher.group(1));
         	}
         }
 
@@ -338,7 +340,7 @@ public abstract class ClearToolExec implements ClearTool {
         
         if (builder.toString().contains("cleartool: Error")) {
             throw new IOException("Failed to end view tag: " + builder.toString());
-        }    	
+        }
     }
 
     public void rmviewtag(String viewName) throws IOException, InterruptedException {
@@ -366,7 +368,7 @@ public abstract class ClearToolExec implements ClearTool {
             throw new IOException("Failed to remove view tag: " + builder.toString());
         }
         
-    }    
+    }
 
     public void unregisterView(String uuid) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
@@ -425,28 +427,27 @@ public abstract class ClearToolExec implements ClearTool {
         
     }
     
-    private String getOutputString(ByteArrayOutputStream baos) throws IOException {       	
-    	BufferedReader reader = new BufferedReader(new InputStreamReader(
-                new ByteArrayInputStream(baos.toByteArray())));
-    	StringBuilder builder = new StringBuilder();
-    	String line;
-    	while ((line = reader.readLine()) != null) { 
-    		if (builder.length() > 0)
-    			builder.append("\n");
-    		
-    		builder.append(line);
-    	}
-		reader.close();
-    	
-    	return builder.toString();
+    private String getOutputString(ByteArrayOutputStream baos) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
+        StringBuilder builder = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) { 
+            if (builder.length() > 0)
+                builder.append("\n");
+            
+            builder.append(line);
+        }
+        reader.close();
+        
+        return builder.toString();
     }
     
     public void logRedundantCleartoolError(String [] cmd, Exception ex) {
-    	getLauncher().getListener().getLogger().println("Redundant Cleartool Error ");
-    	
-    	if (cmd != null) 
-    		getLauncher().getListener().getLogger().println("command: " + getLauncher().getCmdString(cmd));
+        getLauncher().getListener().getLogger().println("Redundant Cleartool Error ");
+        
+        if (cmd != null) 
+            getLauncher().getListener().getLogger().println("command: " + getLauncher().getCmdString(cmd));
        	
-    	getLauncher().getListener().getLogger().println(ex.getMessage());
+        getLauncher().getListener().getLogger().println(ex.getMessage());
     }
 }
