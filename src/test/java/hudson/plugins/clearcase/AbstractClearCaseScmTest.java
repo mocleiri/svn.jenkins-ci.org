@@ -45,6 +45,7 @@ import hudson.model.TaskListener;
 
 import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.SaveChangeLogAction;
+import hudson.plugins.clearcase.util.BuildVariableResolver;
 import hudson.plugins.clearcase.util.EventRecordFilter;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCMDescriptor;
@@ -87,6 +88,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
     //    public ChangeLogAction changeLogAction;
     public SaveChangeLogAction saveChangeLogAction;
     private VariableResolver resolver;
+    private View view;
     
     @Before
     public void setUp() throws Exception {
@@ -108,6 +110,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         build = classContext.mock(Build.class);
         computer = classContext.mock(Computer.class);
         envVars = classContext.mock(EnvVars.class);
+        view = classContext.mock(View.class);
         Map systemProperties = new HashMap();
         systemProperties.put("user.name", "henrik");
         resolver = context.mock(VariableResolver.class);
@@ -202,7 +205,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "vob", "", false, "excludedone\nexcludedtwo");
         assertArrayEquals("The excluded regions array is incorrect", new String[]{"excludedone", "excludedtwo"}, scm.getExcludedRegionsNormalized());
     }
-
+    
     @Test
     public void assertViewNameMacrosAreWorking() throws IOException,InterruptedException{
         classContext.checking(new Expectations() {
@@ -312,7 +315,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         classContext.checking(new Expectations() {
                 {
                     atLeast(1).of(build).getParent(); will(returnValue(project));
-                    one(project).getName(); will(returnValue("CCHudson"));
+                    atLeast(1).of(project).getName(); will(returnValue("CCHudson"));
                     allowing(computer).getName(); will(returnValue("test-node"));
                 }
             });
@@ -329,13 +332,15 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
     public void testFirstBuild() throws Exception {
         context.checking(new Expectations() {
                 {
-                    one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(true));
+                    one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(view));
                 }
             });
         classContext.checking(new Expectations() {
                 {
+                    one(build).addAction(with(any(ClearCaseDataAction.class)));
                     one(build).getPreviousBuild(); will(returnValue(null));
                     ignoring(build).getParent(); will(returnValue(project));
+                    one(view).getConfigSpec(); will(returnValue(""));
                 }
             });
 
@@ -365,11 +370,13 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
                 {
-                    one(checkOutAction).checkout(launcher, workspace, "viewname"); 
-                    will(returnValue(true));
+                    one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(view));
                     
                     // normal changelog
-                    one(historyAction).getChanges(with(equal(mockedCalendar.getTime())), with(equal("viewname")), with(equal(new String[] {"branch"})), with(equal(new String[]{"vob"})));
+                    one(historyAction).getChanges(with(equal(mockedCalendar.getTime())),
+                                                  with(equal("viewname")),
+                                                  with(equal(new String[] {"branch"})),
+                                                  with(equal(new String[]{"vob"})));
                     will(returnValue(list));
                     one(saveChangeLogAction).saveChangeLog(changelogFile, list);
                     
@@ -378,10 +385,11 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         classContext.checking(new Expectations() {
                 {
                     // normal changelog
+                    one(build).addAction(with(any(ClearCaseDataAction.class)));
                     exactly(2).of(build).getPreviousBuild(); will(returnValue(build));
                     one(build).getTimestamp(); will(returnValue(mockedCalendar));
                     ignoring(build).getParent(); will(returnValue(project));
-                    
+                    one(view).getConfigSpec(); will(returnValue(""));
                 }
             });
 
@@ -409,11 +417,13 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
                 {
-                    one(checkOutAction).checkout(launcher, workspace, "viewname"); 
-                    will(returnValue(true));
+                    one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(view));
                     
                     // normal changelog
-                    one(historyAction).getChanges(with(equal(bufferedDate)), with(equal("viewname")), with(equal(new String[] {"branch"})), with(equal(new String[]{"vob"})));
+                    one(historyAction).getChanges(with(equal(bufferedDate)),
+                                                  with(equal("viewname")),
+                                                  with(equal(new String[] {"branch"})),
+                                                  with(equal(new String[]{"vob"})));
                     will(returnValue(list));
                     one(saveChangeLogAction).saveChangeLog(changelogFile, list);
                     
@@ -422,10 +432,11 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         classContext.checking(new Expectations() {
                 {
                     // normal changelog
+                    one(build).addAction(with(any(ClearCaseDataAction.class)));
                     exactly(2).of(build).getPreviousBuild(); will(returnValue(build));
                     allowing(build).getTimestamp(); will(returnValue(mockedCalendar));
                     ignoring(build).getParent(); will(returnValue(project));
-                    
+                    one(view).getConfigSpec(); will(returnValue(""));
                 }
             });
 
@@ -446,8 +457,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
                 {
-                    one(checkOutAction).checkout(launcher, workspace, "viewname-CCHudson-test-node"); 
-                    will(returnValue(true));
+                    one(checkOutAction).checkout(launcher, workspace, "viewname-CCHudson-test-node"); will(returnValue(view));
                     
                     ignoring(historyAction).getChanges(with(any(Date.class)), with(equal("viewname-CCHudson-test-node")),
                                                        with(any(String[].class)), with(any(String[].class)));
@@ -458,12 +468,13 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         classContext.checking(new Expectations() {
                 {
                     // normal changelog
+                    one(build).addAction(with(any(ClearCaseDataAction.class)));
                     ignoring(build).getPreviousBuild(); will(returnValue(build));
                     ignoring(build).getTimestamp(); will(returnValue(Calendar.getInstance()));
                     ignoring(build).getParent(); will(returnValue(project));
                     allowing(computer).getName(); will(returnValue("test-node"));
                     ignoring(project).getName(); will(returnValue("CCHudson"));
-                    
+                    one(view).getConfigSpec(); will(returnValue(""));
                 }
             });
 
@@ -484,8 +495,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
                 {   
-                    one(checkOutAction).checkout(launcher, workspace, "viewname"); 
-                    will(returnValue(true));
+                    one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(view));
                     one(historyAction).getChanges(with(equal(mockedCalendar.getTime())),
                                                   with(equal("viewname")), 
                                                   with(equal(new String[] {"branch"})), 
@@ -495,9 +505,11 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
+                    one(build).addAction(with(any(ClearCaseDataAction.class)));
                     exactly(2).of(build).getPreviousBuild(); will(returnValue(build));
                     one(build).getTimestamp(); will(returnValue(mockedCalendar));
                     ignoring(build).getParent(); will(returnValue(project));
+                    one(view).getConfigSpec(); will(returnValue(""));
                 }
             });
 
@@ -521,7 +533,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
                 {   
-                    one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(true));
+                    one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(view));
                     one(historyAction).getChanges(with(equal(mockedCalendar.getTime())),
                                                   with(equal("viewname")), 
                                                   with(equal(new String[] {"branchone", "branchtwo"})), 
@@ -531,9 +543,11 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
+                    one(build).addAction(with(any(ClearCaseDataAction.class)));
                     ignoring(build).getPreviousBuild(); will(returnValue(build));
                     ignoring(build).getTimestamp(); will(returnValue(mockedCalendar));
                     ignoring(build).getParent(); will(returnValue(project));
+                    one(view).getConfigSpec(); will(returnValue(""));
                 }
             });
 
@@ -757,7 +771,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                     one(historyAction).hasChanges(with(equal(mockedCalendar.getTime())),
                                                   with(equal("viewname")), 
                                                   with(equal(new String[]{""})), 
-                                                  with(equal(new String[]{""}))); 
+                                                  with(aNull(String[].class))); 
                     will(returnValue(false));
                 }
             });
@@ -785,7 +799,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                     one(historyAction).hasChanges(with(equal(mockedCalendar.getTime())),
                                                   with(equal("viewname")), 
                                                   with(equal(new String[]{"branch"})), 
-                                                  with(equal(new String[]{""}))); 
+                                                  with(aNull(String[].class))); 
                     will(returnValue(true));
                 }
             });

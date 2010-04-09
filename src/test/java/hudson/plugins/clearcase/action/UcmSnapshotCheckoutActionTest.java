@@ -27,22 +27,23 @@ package hudson.plugins.clearcase.action;
 import hudson.Launcher;
 import hudson.model.BuildListener;
 import hudson.plugins.clearcase.AbstractWorkspaceTest;
-import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.ClearToolLauncher;
+import hudson.plugins.clearcase.ClearToolSnapshot;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertFalse;
 
 public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
 
     private Mockery context;
     private Mockery classContext;
 
-    private ClearTool clearTool;
+    private ClearToolSnapshot clearTool;
 
     private BuildListener taskListener;
     private Launcher launcher;
@@ -51,13 +52,13 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
     public void setUp() throws Exception {
         createWorkspace();
         context = new Mockery();
-        clearTool = context.mock(ClearTool.class);
         classContext = new Mockery() {
                 {
                     setImposteriser(ClassImposteriser.INSTANCE);
                 }
             };
 
+        clearTool = classContext.mock(ClearToolSnapshot.class);
         launcher = classContext.mock(Launcher.class);
         taskListener = context.mock(BuildListener.class);
     }
@@ -68,183 +69,251 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
     }
 
     @Test
-    public void testFirstTime() throws Exception {
+    public void testFirstTimeOneLoadRule() throws Exception {
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(false));
-                    one(clearTool).mkview("viewname", "stream");
-                    one(clearTool).update("viewname", "/loadrule");
-                }
-            });
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                }
-            });
+            {
+                allowing(launcher).isUnix(); will(returnValue(true));
+                one(clearTool).setViewPath("viewname");
+                exactly(2).of(clearTool).catcs("viewname");
+                one(clearTool).doesViewExist("viewname"); will(returnValue(false));
+                one(clearTool).mkview("viewname", "stream@/pvob");
+                one(clearTool).update("viewname", "loadrule");
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"loadrule"}, true);
+                                                              "stream@/pvob", new String[]{"loadrule"}, true);
         action.checkout(launcher, workspace, "viewname");
 
         context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
+    }
+    
+    @Test
+    public void testFirstTimeMultipleLoadRules() throws Exception {
+        context.checking(new Expectations() {
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
+        classContext.checking(new Expectations() {
+            {
+                exactly(2).of(clearTool).catcs("viewname");
+                one(clearTool).doesViewExist("viewname"); will(returnValue(false));
+                one(clearTool).setViewPath("viewname");
+                one(clearTool).mkview("viewname", "stream@/pvob");
+                one(clearTool).update("viewname", "loadrule;another\t loadrule");
+                allowing(launcher).isUnix(); will(returnValue(true));
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
+        
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
+                                                              "stream@/pvob", new String[]{"loadrule", "another\t loadrule"}, true);
+        action.checkout(launcher, workspace, "viewname");
+
+        context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
     }
 
     @Test
     public void testFirstTimeViewTagExists() throws Exception {
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    atLeast(1).of(taskListener).fatalError(with(any(String.class)));
-                }
-            });
+            {
+                atLeast(1).of(taskListener).fatalError(with(any(String.class)));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                    atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
-                }
-            });
+            {
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                one(clearTool).setViewPath("viewname");
+                allowing(launcher).isUnix(); will(returnValue(true));
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"loadrule"}, true);
-        action.checkout(launcher, workspace, "viewname");
-
-        context.assertIsSatisfied();
-    }
-
-    @Test
-    public void testSecondTime() throws Exception {
-        workspace.child("viewname").mkdirs();
-
-        context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    atLeast(1).of(clearTool).catcs("viewname"); will(returnValue("ucm configspec"));
-                    one(clearTool).setcs("viewname", "ucm configspec\nload /loadrule\n");
-                }
-            });
-
-        classContext.checking(new Expectations() {
-                {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
-                }
-            });
-
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"loadrule"}, true);
+                                                              "stream@/pvob", new String[]{"loadrule"}, true);
         action.checkout(launcher, workspace, "viewname");
 
         context.assertIsSatisfied();
         classContext.assertIsSatisfied();
     }
+    
+    @Test
+    public void testFirstTimeViewPathExists() throws Exception {
+        workspace.child("viewname").mkdirs();
+        context.checking(new Expectations() {
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
+        classContext.checking(new Expectations() {
+            {
+                exactly(2).of(clearTool).catcs("viewname");
+                one(clearTool).doesViewExist("viewname"); will(returnValue(false));
+                one(clearTool).setViewPath("viewname");
+                one(clearTool).mkview("viewname", "stream@/pvob");
+                one(clearTool).update("viewname", "loadrule");
+                allowing(launcher).isUnix(); will(returnValue(true));
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
+                                                          "stream@/pvob", new String[]{"loadrule"}, true);
+        action.checkout(launcher, workspace, "viewname");
+        Assert.assertTrue(workspace.child("viewname.keep").exists());
+        context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
+    }
 
     @Test
-    public void testSecondTimeWithLoadRulesSatisfied() throws Exception {
+    public void testSecondTimeNewLoadRule() throws Exception {
+        workspace.child("viewname").mkdirs();
+        context.checking(new Expectations() {
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
+        classContext.checking(new Expectations() {
+            {
+                atLeast(1).of(clearTool).catcs("viewname"); will(returnValue("ucm configspec"));
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                one(clearTool).setViewPath("viewname");
+                one(clearTool).update("viewname", "loadrule");
+                atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                one(clearTool).update("viewname", null);
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
+
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
+                                                              "stream@/pvob", new String[]{"loadrule"}, true);
+        action.checkout(launcher, workspace, "viewname");
+        context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
+    }
+
+    @Test
+    public void testSecondTimeSameOneLoadRule() throws Exception {
         final String viewName = "viewname";
         final String loadRules = "/abc/";
         workspace.child(viewName).mkdirs();
-
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    one(clearTool).catcs(viewName);
-                    will(returnValue("load " + loadRules));
-                    one(clearTool).update(viewName, loadRules);
-                }
-            });
-
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
-                }
-            });
+            {
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                exactly(2).of(clearTool).catcs(viewName); will(returnValue("load " + loadRules));
+                one(clearTool).setViewPath("viewname");
+                atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                one(clearTool).update("viewname", null);
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{loadRules}, true);
+                                                              "stream@/pvob", new String[]{loadRules}, true);
         action.checkout(launcher, workspace, viewName);
-
         context.assertIsSatisfied();
         classContext.assertIsSatisfied();
     }
 
     @Test
-    public void testSecondTimeWithMultipleLoadRulesSatisfied() throws Exception {
+    public void testSecondTimeSameMultipleLoadRules() throws Exception {
         final String viewName = "viewname";
 
         workspace.child(viewName).mkdirs();
-
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    one(clearTool).catcs(viewName);
-                    will(returnValue("load abc/\nload abcd"));
-                    one(clearTool).update(viewName, "/abc/");
-                    one(clearTool).update(viewName, "/abcd");
-                }
-            });
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
-                }
-            });
+            {
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                exactly(2).of(clearTool).catcs(viewName); will(returnValue("load abc/\nload abcd"));
+                atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                one(clearTool).update("viewname", null);
+                one(clearTool).setViewPath("viewname");
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"abc/", "abcd"}, true);
+                                                              "stream@/pvob", new String[]{"abc/", "abcd"}, true);
         action.checkout(launcher, workspace, viewName);
-
         context.assertIsSatisfied();
         classContext.assertIsSatisfied();
     }
 
     @Test
-    public void testSecondTimeWithMultipleLoadRulesNotSatisfied()
+    public void testSecondTimeOneExistingLoadRuleAndOneNew()
         throws Exception {
         final String viewName = "viewname";
         workspace.child(viewName).mkdirs();
-
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    one(clearTool).catcs(viewName); will(returnValue("ucm configspec\nload abc/\n"));
-                    one(clearTool).setcs(viewName, "ucm configspec\nload /abc/\nload /abcd\n");
-                }
-            });
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
-                }
-            });
+            {
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                exactly(2).of(clearTool).catcs(viewName); will(returnValue("ucm configspec\nload abc/\n"));
+                one(clearTool).update(viewName, "abcd");
+                one(clearTool).setViewPath("viewname");
+                atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                one(clearTool).update("viewname", null);
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"abc/","abcd"}, true);
+                                                              "stream@/pvob", new String[]{"abc/","abcd"}, true);
         action.checkout(launcher, workspace, viewName);
+        context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
+    }
+    
+    @Test
+    public void testSecondTimeOneSameLoadRuleAndOneRemoved()
+        throws Exception {
+        final String viewName = "viewname";
+        workspace.child(viewName).mkdirs();
+        context.checking(new Expectations() {
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
+        classContext.checking(new Expectations() {
+            {
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                exactly(2).of(clearTool).catcs(viewName); will(returnValue("ucm configspec\nload abc/\nload abcd\n"));
+                one(clearTool).setcs(viewName, "ucm configspec\nload /abc/\n");
+                atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                one(clearTool).update("viewname", null);
+                one(clearTool).setViewPath("viewname");
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
+                                                              "stream@/pvob", new String[]{"abc/"}, true);
+        action.checkout(launcher, workspace, viewName);
         context.assertIsSatisfied();
         classContext.assertIsSatisfied();
     }
 
     @Test
-    public void testMultipleLoadRules() throws Exception {
-        context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(false));
-                    one(clearTool).mkview("viewname", "stream");
-                    one(clearTool).update("viewname", "/loadrule");
-                    one(clearTool).update("viewname", "/another\t loadrule");
-                }
-            });
-        classContext.checking(new Expectations() {
-                {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                }
-            });
-        
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"loadrule", "another\t loadrule"}, true);
-        action.checkout(launcher, workspace, "viewname");
-
-        context.assertIsSatisfied();
-    }
-
-    @Test
-    public void testSecondTimeWithRealMultipleLoadRulesSatisfied()
+    public void testSecondTimeWithRealSameMultipleLoadRules()
         throws Exception {
         final String viewName = "viewname";
 
@@ -259,25 +328,25 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             + "load /vobs/base";
 
         workspace.child(viewName).mkdirs();
-
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    one(clearTool).catcs(viewName);
-                    will(returnValue(catcsOutput));
-                    one(clearTool).update(viewName, "/vobs/base");
-                }
-            });
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
-                }
-            });
+            {
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                exactly(2).of(clearTool).catcs(viewName); will(returnValue(catcsOutput));
+                atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                one(clearTool).setViewPath("viewname");
+                one(clearTool).update("viewname",null);
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"vobs/base"}, true);
+                                                              "stream@/pvob", new String[]{"vobs/base"}, true);
         action.checkout(launcher, workspace, viewName);
-
         context.assertIsSatisfied();
         classContext.assertIsSatisfied();
     }
@@ -285,78 +354,86 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
     @Test
     public void testMultipleWindowsLoadRules() throws Exception {
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(false));
-                    one(clearTool).mkview("viewname", "stream");
-                    one(clearTool).update("viewname", "\\ \\Windows");
-                    one(clearTool).update("viewname", "\\\\C:\\System32");
-                }
-            });
-
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    allowing(launcher).isUnix(); will(returnValue(false));
-                }
-            });
+            {
+                exactly(2).of(clearTool).catcs("viewname");
+                one(clearTool).doesViewExist("viewname"); will(returnValue(false));
+                one(clearTool).mkview("viewname", "stream@\\pvob");
+                one(clearTool).update("viewname", " \\Windows;\\C:\\System32");
+                one(clearTool).setViewPath("viewname");
+                allowing(launcher).isUnix(); will(returnValue(false));
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"\\ \\Windows","\\\\C:\\System32"}, true);
+                                                              "stream@\\pvob", new String[]{"\\ \\Windows","\\\\C:\\System32"}, true);
         action.checkout(launcher, workspace, "viewname");
-
         context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
     }
     
 
     @Test
-    public void testFirstTimeWithNoUpdate() throws Exception {
+    public void testFirstTimeWithoutUseUpdate() throws Exception {
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(false));
-                    one(clearTool).mkview("viewname", "stream");
-                    atLeast(1).of(clearTool).update(with(any(String.class)), with(any(String.class)));
-                }
-            });
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                }
-            });
+            {
+                exactly(2).of(clearTool).catcs("viewname");
+                one(clearTool).doesViewExist("viewname"); will(returnValue(false));
+                one(clearTool).mkview("viewname", "stream@/pvob");
+                one(clearTool).setViewPath("viewname");
+                one(clearTool).update("viewname", "loadrule");
+                allowing(launcher).isUnix(); will(returnValue(true));
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
         
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"loadrule"}, false);
+                                                              "stream@/pvob", new String[]{"loadrule"}, false);
         action.checkout(launcher, workspace, "viewname");
-
         context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
     }
 
     @Test
-    public void testSecondTimeWithNoUpdate() throws Exception {
+    public void testSecondTimeWithoutUseUpdate() throws Exception {
         workspace.child("viewname").mkdirs();
-
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    one(clearTool).rmview("viewname");
-                    one(clearTool).mkview("viewname", "stream");
-                    atLeast(1).of(clearTool).update(with(any(String.class)), with(any(String.class)));
-                }
-            });
-
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                }
-            });
+            {
+                exactly(2).of(clearTool).catcs("viewname");
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                one(clearTool).rmview("viewname");
+                one(clearTool).mkview("viewname", "stream@/pvob");
+                one(clearTool).update("viewname", "loadrule");
+                one(clearTool).setViewPath("viewname");
+                allowing(launcher).isUnix(); will(returnValue(true));
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"loadrule"}, false);
+                                                              "stream@/pvob", new String[]{"loadrule"}, false);
         action.checkout(launcher, workspace, "viewname");
-
         context.assertIsSatisfied();
+        classContext.assertIsSatisfied();
     }
 
     @Test
-    public void testCrossOSLoadRulesOnWindows() throws Exception {
+    public void testSecondTimeSameMultipleCrossOSLoadRulesOnWindows() throws Exception {
         final String catcsOutput = "ucm\r\nidentity UCM.Stream oid:19c4bc38.514b4432.b8a6.65:da:92:41:9f:df@vobuuid:a10d9aff.8c1349a8.829e.24:09:ef:18:ad:e6 16\r\n\r\n"
             + "# ONLY EDIT THIS CONFIG SPEC IN THE INDICATED \"CUSTOM\" AREAS\r\n"
             + "#\r\n\r\n# This config spec was automatically generated by the UCM stream\r\n# \"WindowsForms_Int\" at 8/1/2007 12:36:35 PM.\r\n"
@@ -379,28 +456,27 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             + "#UCMCustomLoadBegin - DO NOT REMOVE - ADD CUSTOM LOAD RULES AFTER THIS LINE\r\n"
             + "load \\PRODUCT\r\n"
             + "load \\COTS\\NUnit\r\n";
-
         context.checking(new Expectations() {
-                {
-                    one(clearTool).doesViewExist("viewname"); will(returnValue(true));
-                    one(clearTool).catcs("viewname");
-                    will(returnValue(catcsOutput));
-                    one(clearTool).update("viewname", "\\PRODUCT");
-                    one(clearTool).update("viewname", "\\COTS\\NUnit");
-                }
-            });
+            {
+                atLeast(1).of(taskListener).getLogger(); will(returnValue(System.out));
+            }
+        });
         classContext.checking(new Expectations() {
-                {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(false));
-                }
-            });
+            {
+                one(clearTool).doesViewExist("viewname"); will(returnValue(true));
+                one(clearTool).setViewPath("viewname");
+                exactly(2).of(clearTool).catcs("viewname"); will(returnValue(catcsOutput));
+                atLeast(1).of(launcher).isUnix(); will(returnValue(false));
+                one(clearTool).update("viewname", null);
+                atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+            }
+        });
 
         workspace.child("viewname").mkdirs();
 
         CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool,
-                                                              "stream", new String[]{"PRODUCT","COTS\\NUnit"}, true);
+                                                              "stream@/pvob", new String[]{"PRODUCT","COTS\\NUnit"}, true);
         action.checkout(launcher, workspace, "viewname");
-
         context.assertIsSatisfied();
         classContext.assertIsSatisfied();
     }

@@ -44,6 +44,18 @@
       </f:entry>
     </j:otherwise>
   </j:choose>
+  
+  <j:choose>
+    <j:when test="${descriptor.defaultViewPath!=''}">
+      <input name="ucm.viewpath" type="hidden" value="${descriptor.defaultViewPath}" />
+    </j:when>
+    <j:otherwise>
+      <f:entry title="View path" help="/plugin/clearcase/viewpath.html">
+        <f:textbox name="ucm.viewpath" value="${h.defaulted(scm.viewPath, '')}"/>
+      </f:entry>
+    </j:otherwise>
+  </j:choose>
+  
   <f:entry title="Stream selector" help="/plugin/clearcase/stream.html">
     <f:textbox name="ucm.stream" value="${scm.stream}" 
                checkUrl="'${rootURL}/scm/ClearCaseSCM/mandatoryCheck?errorText='+escape('Stream selector is mandatory')+'&amp;value='+escape(this.value)" />

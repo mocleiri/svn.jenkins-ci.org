@@ -43,7 +43,7 @@ public interface ClearTool {
      * Updates the elements in the view
      * 
      * @param viewName the name of the view
-     * @param loadRules optional load rules, null if not used.
+     * @param loadRules optional load rules semicolon-separated, null if not used.
      */
     void update(String viewName, String loadRules) throws IOException, InterruptedException;
     
@@ -121,7 +121,7 @@ public interface ClearTool {
      * Returns Reader containing output from lshistory.
      * @param format format that should be used by the lshistory command
      * @param lastBuildDate lists events recorded since (that is, at or after) the specified date-time
-     * @param viewName the name of the view
+     * @param viewPath the path of the view inside the workspace
      * @param branch the name of the branch to get history events for; if null then history events for all branches are
      *                listed
      * @param pathsInView view paths that should be added to the lshistory command. The view paths
@@ -129,7 +129,7 @@ public interface ClearTool {
      * 
      * @return Reader containing output from command
      */
-    Reader lshistory(String format, Date lastBuildDate, String viewName, String branch, String[] pathsInView) throws IOException, InterruptedException;
+    Reader lshistory(String format, Date lastBuildDate, String viewPath, String branch, String[] pathsInView) throws IOException, InterruptedException;
 
     /**
      * Lists activities .......(?)

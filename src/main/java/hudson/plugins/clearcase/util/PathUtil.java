@@ -28,6 +28,8 @@ import hudson.Launcher;
 
 public abstract class PathUtil {
     
+    private static final char COMMENT_SEPARATOR = '#';
+
     public static String convertPathForOS(String path, Launcher launcher) {
         return convertPathForOS(path, launcher.isUnix());
     }
@@ -35,18 +37,37 @@ public abstract class PathUtil {
     public static String convertPathForOS(String path,
                                           boolean isUnix) {
         String tempPath = path;
-        if (isUnix) {
-            tempPath = tempPath.replaceAll("\r\n", "\n");
-        } else {
-            tempPath = tempPath.replaceAll("\n", "\r\n");
-            tempPath = tempPath.replaceAll("\r\r\n", "\r\n");
+        String rightSep = fileSepForOSAsRegexp(isUnix);
+        String wrongSep = fileSepForOSAsRegexp(!isUnix);
+        tempPath = tempPath.replaceAll(newLineForOS(!isUnix), newLineForOS(isUnix));
+        tempPath = tempPath.replaceAll("\r\r", "\r");
+        StringBuilder finalPath = new StringBuilder();
+        String[] rows = tempPath.split(newLineForOS(isUnix));
+        for(int i = 0; i < rows.length; i++) {
+            if (i > 0) {
+                finalPath.append(newLineForOS(isUnix));
+            }
+            int indexOfDash = rows[i].indexOf(COMMENT_SEPARATOR);
+            if (indexOfDash > -1) {
+                finalPath.append(rows[i].substring(0, indexOfDash).replaceAll(wrongSep, rightSep));
+                finalPath.append(rows[i].substring(indexOfDash));
+            } else {
+                finalPath.append(rows[i].replaceAll(wrongSep, rightSep));
+            }
         }
-        if (isUnix) {
-            tempPath = tempPath.replaceAll("\\\\", "/");
-        } else {
-            tempPath = tempPath.replaceAll("/", "\\\\");
+        if (tempPath.endsWith(newLineForOS(isUnix))) {
+            finalPath.append(newLineForOS(isUnix));
         }
-        return tempPath;
+        
+        return finalPath.toString();
+    }
+    
+    public static String newLineForOS(boolean isUnix) {
+        if (isUnix) {
+            return "\n";
+        } else {
+            return "\r\n";
+        }
     }
     
     public static String fileSepForOS(boolean isUnix) {
@@ -55,6 +76,15 @@ public abstract class PathUtil {
         }
         else {
             return "\\";
+        }
+    }
+    
+    public static String fileSepForOSAsRegexp(boolean isUnix) {
+        if (isUnix) {
+            return "/";
+        }
+        else {
+            return "\\\\";
         }
     }
 

@@ -50,14 +50,14 @@ public abstract class DefaultPollAction implements PollAction {
     }
 
     @Override
-    public boolean getChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
+    public boolean getChanges(Date time, String viewPath, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
         boolean hasChanges = false;
         ClearToolFormatHandler historyHandler = getHistoryFormatHandler();
 
         for (int i = 0; (i < branchNames.length) && (!hasChanges); i++) {
             String branchName = branchNames[i];
 
-            Reader lshistoryOutput = cleartool.lshistory(historyHandler.getFormat(), time, viewName, branchName, viewPaths);
+            Reader lshistoryOutput = cleartool.lshistory(historyHandler.getFormat(), time, viewPath, branchName, viewPaths);
 
             if (parseHistoryOutputForChanges(new BufferedReader(lshistoryOutput))) {
                 hasChanges = true;

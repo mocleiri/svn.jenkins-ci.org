@@ -24,21 +24,25 @@
  */
 package hudson.plugins.clearcase; 
 
-import hudson.model.Computer;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import hudson.Launcher;
 import hudson.model.AbstractProject;
 import hudson.model.Build;
-import hudson.util.VariableResolver;
-import hudson.plugins.clearcase.base.BaseChangeLogAction;
+import hudson.model.Computer;
 import hudson.plugins.clearcase.base.BaseHistoryAction;
-import hudson.plugins.clearcase.history.HistoryAction;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
+import hudson.util.VariableResolver;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -46,7 +50,6 @@ import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.kohsuke.stapler.StaplerRequest;
 
 public class ClearCaseSCMTest extends AbstractWorkspaceTest {
 
@@ -59,6 +62,7 @@ public class ClearCaseSCMTest extends AbstractWorkspaceTest {
     private ClearToolLauncher clearToolLauncher;
     private ClearCaseSCM.ClearCaseScmDescriptor clearCaseScmDescriptor;
     private Computer computer;
+    private BuildVariableResolver buildVariableResolver;
     @Before
     public void setUp() throws Exception {
         createWorkspace();
@@ -75,6 +79,7 @@ public class ClearCaseSCMTest extends AbstractWorkspaceTest {
         context = new Mockery();
         cleartool = context.mock(ClearTool.class);
         clearToolLauncher = context.mock(ClearToolLauncher.class);
+        buildVariableResolver = classContext.mock(BuildVariableResolver.class);
         
     }
     @After
@@ -94,6 +99,7 @@ public class ClearCaseSCMTest extends AbstractWorkspaceTest {
         classContext.checking(new Expectations() {
                 {
                     ignoring(build).getParent(); will(returnValue(project));
+                    ignoring(build).getBuildVariableResolver(); will(returnValue(buildVariableResolver));
                 }
             });
         AbstractClearCaseScm scm = new ClearCaseSCMDummy("branch", "configspec", "viewname", true, "", false, "",
@@ -112,6 +118,7 @@ public class ClearCaseSCMTest extends AbstractWorkspaceTest {
         classContext.checking(new Expectations() {
                 {
                     ignoring(build).getParent(); will(returnValue(project));
+                    ignoring(build).getBuildVariableResolver(); will(returnValue(buildVariableResolver));
                 }
             });
         AbstractClearCaseScm scm = new ClearCaseSCMDummy("branch", "configspec", "viewname", true, "", true, "/views",
@@ -129,6 +136,7 @@ public class ClearCaseSCMTest extends AbstractWorkspaceTest {
         classContext.checking(new Expectations() {
                 {
                     ignoring(build).getParent(); will(returnValue(project));
+                    ignoring(build).getBuildVariableResolver(); will(returnValue(buildVariableResolver));
                 }
             });
         AbstractClearCaseScm scm = new ClearCaseSCMDummy("branch", "configspec", "viewname", true, "", true, null,

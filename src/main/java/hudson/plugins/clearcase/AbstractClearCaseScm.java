@@ -47,6 +47,7 @@ import hudson.plugins.clearcase.history.DestroySubBranchFilter;
 import hudson.plugins.clearcase.history.Filter;
 import hudson.plugins.clearcase.history.FileFilter;
 import hudson.plugins.clearcase.history.HistoryAction;
+import hudson.plugins.clearcase.ucm.UcmCommon;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
 import hudson.plugins.clearcase.util.PathUtil;
 import hudson.scm.ChangeLogSet;
@@ -67,6 +68,8 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Abstract class for ClearCase SCM. The class contains the logic around
  * checkout and polling, the deriving classes only have to implement the
@@ -76,8 +79,10 @@ public abstract class AbstractClearCaseScm extends SCM {
     
     public static final String CLEARCASE_VIEWNAME_ENVSTR = "CLEARCASE_VIEWNAME";
     public static final String CLEARCASE_VIEWPATH_ENVSTR = "CLEARCASE_VIEWPATH";
+    private static final String CLEARCASE_VIEWTAG_ENVSTR = "CLEARCASE_VIEWTAG";
     
     private String viewName;
+    private String viewPath;
     private final String mkviewOptionalParam;
     private final boolean filteringOutDestroySubBranchEvent;
     private transient ThreadLocal<String> normalizedViewName;
@@ -94,7 +99,7 @@ public abstract class AbstractClearCaseScm extends SCM {
     private final boolean freezeCode;
     private final boolean recreateView;
     
-    private synchronized ThreadLocal<String> getNormalizedViewNameThreadLocalWrapper() {
+    private synchronized ThreadLocal<String> getEffectiveViewPathThreadLocalWrapper() {
     	if (null == this.normalizedViewName) {
             this.normalizedViewName = new ThreadLocal<String>();
     	}
@@ -102,12 +107,12 @@ public abstract class AbstractClearCaseScm extends SCM {
     	return this.normalizedViewName;
     }
     
-    protected void setNormalizedViewName(String normalizedViewName) {
-        getNormalizedViewNameThreadLocalWrapper().set(normalizedViewName);
+    protected void setEffectiveViewPath(String normalizedViewName) {
+        getEffectiveViewPathThreadLocalWrapper().set(normalizedViewName);
     }
     
-    protected String getNormalizedViewName() {
-        return getNormalizedViewNameThreadLocalWrapper().get();
+    protected String getEffectiveViewPath() {
+        return getEffectiveViewPathThreadLocalWrapper().get();
     }
     
     public AbstractClearCaseScm(final String viewName,
@@ -124,8 +129,10 @@ public abstract class AbstractClearCaseScm extends SCM {
                                 final String winDynStorageDir,
                                 final String unixDynStorageDir,
                                 final boolean freezeCode,
-                                final boolean recreateView) {
+                                final boolean recreateView,
+                                final String viewPath) {
         this.viewName = viewName;
+        this.viewPath = viewPath;
         this.mkviewOptionalParam = mkviewOptionalParam;
         this.filteringOutDestroySubBranchEvent = filterOutDestroySubBranchEvent;
         this.useUpdate = useUpdate;
@@ -152,6 +159,17 @@ public abstract class AbstractClearCaseScm extends SCM {
         this.recreateView = recreateView;
     }
     
+    public AbstractClearCaseScm(String viewName, String mkviewOptionalParam,
+            boolean filterOutDestroySubBranchEvent, boolean useUpdate,
+            boolean rmviewonrename, String excludedRegions,
+            boolean useDynamicView, String viewDrive, String loadRules,
+            String multiSitePollBuffer, boolean createDynView, String winDynStorageDir,
+            String unixDynStorageDir, boolean freezeCode, boolean recreateView) {
+        this(viewName, mkviewOptionalParam, filterOutDestroySubBranchEvent, useUpdate,
+                rmviewonrename, excludedRegions, useDynamicView, viewDrive, loadRules,
+                multiSitePollBuffer, createDynView, winDynStorageDir, unixDynStorageDir, freezeCode, recreateView, null);
+    }
+
     /**
      * Create a CheckOutAction that will be used by the checkout method.
      * 
@@ -161,17 +179,6 @@ public abstract class AbstractClearCaseScm extends SCM {
      */
     protected abstract CheckOutAction createCheckOutAction(
                                                            VariableResolver variableResolver, ClearToolLauncher launcher, AbstractBuild build);
-    
-    // /**
-    // * Create a PollAction that will be used by the pollChanges() method.
-    // *
-    // * @param launcher
-    // * the command line launcher
-    // * @return an action that can poll if there are any changes a ClearCase
-    // * repository.
-    // */
-    // protected abstract PollAction createPollAction(VariableResolver
-    // variableResolver, ClearToolLauncher launcher,List<Filter> filters);
     
     /**
      * Create a HistoryAction that will be used by the pollChanges() and
@@ -198,20 +205,6 @@ public abstract class AbstractClearCaseScm extends SCM {
      */
     protected abstract SaveChangeLogAction createSaveChangeLogAction(
                                                                      ClearToolLauncher launcher);
-    
-    // /**
-    // * Create a ChangeLogAction that will be used to get the change logs for a
-    // * CC repository
-    // *
-    // * @param launcher
-    // * the command line launcher
-    // * @param build
-    // * the current build
-    // * @return an action that returns the change logs for a CC repository
-    // */
-    // protected abstract ChangeLogAction createChangeLogAction(
-    // ClearToolLauncher launcher, AbstractBuild<?, ?> build,
-    // Launcher baseLauncher,List<Filter> filters);
     
     /**
      * Return string array containing the branch names that should be used when
@@ -284,13 +277,13 @@ public abstract class AbstractClearCaseScm extends SCM {
     @Override
     public FilePath getModuleRoot(FilePath workspace) {
         if (useDynamicView) {
-            return new FilePath(workspace.getChannel(), viewDrive).child(getNormalizedViewName());
+            return new FilePath(workspace.getChannel(), viewDrive).child(getEffectiveViewPath());
         }
         else {
-            if (getNormalizedViewName() == null) {
+            if (getEffectiveViewPath() == null) {
                 return super.getModuleRoot(workspace);
             } else {
-                return workspace.child(getNormalizedViewName());
+                return workspace.child(getEffectiveViewPath());
             }
         }
     }
@@ -308,7 +301,7 @@ public abstract class AbstractClearCaseScm extends SCM {
 	}
 	
 	public String getNormalizedWinDynStorageDir(VariableResolver variableResolver) {
-        String res = Util.replaceMacro(getWinDynStorageDir(), variableResolver);        
+        String res = Util.replaceMacro(getWinDynStorageDir(), variableResolver);
         return res;		
 	}
 
@@ -317,7 +310,7 @@ public abstract class AbstractClearCaseScm extends SCM {
 	}    
 	
 	public String getNormalizedUnixDynStorageDir(VariableResolver variableResolver) {
-        String res = Util.replaceMacro(getUnixDynStorageDir(), variableResolver);        
+        String res = Util.replaceMacro(getUnixDynStorageDir(), variableResolver);
         return res;	
 	}	
 
@@ -371,12 +364,14 @@ public abstract class AbstractClearCaseScm extends SCM {
      * @return a string containing no invalid chars.
      */   
     public String generateNormalizedViewName(BuildVariableResolver variableResolver, String modViewName) {
+        if (modViewName == null) {
+            return null;
+        }
         String generatedNormalizedViewName = Util.replaceMacro(modViewName, variableResolver);
         
         generatedNormalizedViewName = generatedNormalizedViewName.replaceAll(
                                                                              "[\\s\\\\\\/:\\?\\*\\|]+", "_");
         
-        setNormalizedViewName(generatedNormalizedViewName);
         return generatedNormalizedViewName;
     }    
 
@@ -427,14 +422,16 @@ public abstract class AbstractClearCaseScm extends SCM {
      */
     @Override
     public void buildEnvVars(AbstractBuild build, Map<String, String> env) {
-        if (getNormalizedViewName() != null) {
+        String viewPath = generateEffectiveViewPath(new BuildVariableResolver(build, getCurrentComputer()));
+        if (viewPath != null) {
 
-            env.put(CLEARCASE_VIEWNAME_ENVSTR, getNormalizedViewName());
+            env.put(CLEARCASE_VIEWNAME_ENVSTR, viewPath);
+            env.put(CLEARCASE_VIEWTAG_ENVSTR, getEffectiveViewPath());
 
             String workspace = env.get("WORKSPACE");
             if (workspace != null) {
                 env.put(CLEARCASE_VIEWPATH_ENVSTR, workspace + File.separator
-                        + getNormalizedViewName());
+                        + viewPath);
             }
         }
     }
@@ -459,11 +456,12 @@ public abstract class AbstractClearCaseScm extends SCM {
         // Checkout code
         String coNormalizedViewName = generateNormalizedViewName(build);
         
-        // add ClearCaseDataAction - helper to save scm data such as cspec, baselines
-        ClearCaseDataAction dataAction = new ClearCaseDataAction();        
-        build.addAction(dataAction);
-        
-        if (checkoutAction.checkout(launcher, workspace, coNormalizedViewName)) {
+        View view = checkoutAction.checkout(launcher, workspace, coNormalizedViewName);
+        if (view != null) {
+            // add ClearCaseDataAction - helper to save scm data such as cspec, baselines
+            ClearCaseDataAction dataAction = new ClearCaseDataAction(view);
+            build.addAction(dataAction);
+            
             
             // Gather change log
             List<? extends ChangeLogSet.Entry> changelogEntries = null;
@@ -478,7 +476,7 @@ public abstract class AbstractClearCaseScm extends SCM {
                 }
                 
                 changelogEntries = historyAction.getChanges(lastBuildTime,
-                                                            coNormalizedViewName, getBranchNames(),
+                                                            generateEffectiveViewPath((BuildVariableResolver) variableResolver), getBranchNames(),
                                                             getViewPaths());
             }
             
@@ -521,9 +519,7 @@ public abstract class AbstractClearCaseScm extends SCM {
                                                           createClearToolLauncher(listener, workspace, launcher),
                                                           (AbstractBuild)lastBuild);
 
-        String poNormalizedViewName = generateNormalizedViewName((BuildVariableResolver) variableResolver);
-
-        return historyAction.hasChanges(buildTime, poNormalizedViewName,
+        return historyAction.hasChanges(buildTime, generateEffectiveViewPath((BuildVariableResolver) variableResolver),
                                         getBranchNames(), getViewPaths());
     }
 
@@ -706,5 +702,20 @@ public abstract class AbstractClearCaseScm extends SCM {
         }
 
         return filterRegexp;
+    }
+    
+    public String generateEffectiveViewPath(BuildVariableResolver variableResolver) {
+        String ret;
+        if (StringUtils.isNotEmpty(viewPath)) {
+            ret = Util.replaceMacro(viewPath, variableResolver);
+        } else {
+            ret = generateNormalizedViewName(variableResolver, viewName);
+        }
+        setEffectiveViewPath(ret);
+        return ret;
+    }
+
+    public String getViewPath() {
+        return viewPath;
     }
 }

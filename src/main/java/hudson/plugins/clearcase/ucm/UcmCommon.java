@@ -1,22 +1,13 @@
 package hudson.plugins.clearcase.ucm;
 
 import hudson.FilePath;
-import hudson.Util;
-import hudson.model.AbstractBuild;
-import hudson.plugins.clearcase.ClearCaseUcmSCM;
 import hudson.plugins.clearcase.ClearToolLauncher;
-import hudson.plugins.clearcase.HudsonClearToolLauncher;
 import hudson.util.ArgumentListBuilder;
-import hudson.util.LogTaskListener;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,8 +34,7 @@ public class UcmCommon {
      * @throws IOException
      * @throws InterruptedException
      */
-    @SuppressWarnings("unchecked")
-    public static List<BaselineDesc> makeBaseline(ClearToolLauncher clearToolLauncher, 
+    public static List<Baseline> makeBaseline(ClearToolLauncher clearToolLauncher, 
                                       boolean isUseDynamicView,
                                       String viewName,
                                       FilePath filePath, 
@@ -54,7 +44,7 @@ public class UcmCommon {
                                       boolean fullBaseline,
                                       List<String> readWriteComponents) throws IOException, InterruptedException  {
 
-        List<BaselineDesc> createdBaselinesList = new ArrayList<BaselineDesc>();
+        List<Baseline> createdBaselinesList = new ArrayList<Baseline>();
 
         ArgumentListBuilder cmd = new ArgumentListBuilder();
 
@@ -107,10 +97,10 @@ public class UcmCommon {
             String match = matcher.group();
             String [] parts = match.split("\"");
             String newBaseline = parts[1];
-            String componentName = parts[3];            
+            String componentName = parts[3];
             
             
-            createdBaselinesList.add(new BaselineDesc(newBaseline, componentName));
+            createdBaselinesList.add(new Baseline(newBaseline, new Component(componentName)));
         }
 
         return createdBaselinesList;
@@ -160,7 +150,7 @@ public class UcmCommon {
         		if (!baselineNameTrimmed.equals("")) {
         			// Retrict to baseline bind to read/write component
         			String blComp = getDataforBaseline(clearToolLauncher,
-                                               filePath, baselineNameTrimmed).getBaselineName();
+                                               filePath, baselineNameTrimmed).getName();
         			if (readWriteComponents == null || readWriteComponents.contains(blComp))
         				baselineNames.add(baselineNameTrimmed);
         		}
@@ -181,33 +171,28 @@ public class UcmCommon {
      * @throws InterruptedException
      * @throws IOException
      */
-    public static List<BaselineDesc> getComponentsForBaselines(
-    		ClearToolLauncher clearToolLauncher, 
-    		List<ComponentDesc> componentsList,
-    		boolean isUseDynamicView,
-    		String viewName,
-            FilePath filePath, 
-            List<String> baselinesNames) throws InterruptedException, IOException {
-    	List<BaselineDesc> baselinesDescList = new ArrayList<BaselineDesc>();
-    	
-    	// loop through baselines
-    	for (String blName : baselinesNames) {
-    		BaselineDesc baseLineDesc = getDataforBaseline(clearToolLauncher, filePath, blName);
-    		ComponentDesc matchComponentDesc = null;
-    		
-    		// find the equivalent componentDesc element 
-    		for (ComponentDesc componentDesc : componentsList) {
-    			if (getNoVob(componentDesc.getName()).equals(getNoVob(baseLineDesc.getComponentName()))) {
-    				matchComponentDesc = componentDesc;
-    				break;
-    			}
-    				
-    		}
-    		
-    		baselinesDescList.add(new BaselineDesc(blName, matchComponentDesc, baseLineDesc.isNotLabeled));    		
-    	}
-    	
-    	return baselinesDescList;
+    public static List<Baseline> getComponentsForBaselines(
+            ClearToolLauncher clearToolLauncher,
+            List<Component> componentsList, boolean isUseDynamicView,
+            String viewName, FilePath filePath, List<String> baselinesNames)
+            throws InterruptedException, IOException {
+        List<Baseline> baselines = new ArrayList<Baseline>();
+
+        // loop through baselines
+        for (String baselineName : baselinesNames) {
+            Baseline baseline = getDataforBaseline(clearToolLauncher, filePath, baselineName);
+            // find the equivalent componentDesc element
+            for (Component component : componentsList) {
+                if (getNoVob(component.getName()).equals(
+                        getNoVob(baseline.getComponent().getName()))) {
+                    baselines.add(new Baseline(baselineName, component));
+                    break;
+                }
+            }
+
+        }
+
+        return baselines;
     }
 	
     /**
@@ -222,7 +207,7 @@ public class UcmCommon {
      * @throws InterruptedException
      * @throws IOException
      */
-    public static BaselineDesc getDataforBaseline(
+    public static Baseline getDataforBaseline(
     									   ClearToolLauncher clearToolLauncher, 
                                            FilePath filePath, 
                                            String blName) throws InterruptedException,
@@ -243,14 +228,13 @@ public class UcmCommon {
         baos.close();
         String cleartoolResult = baos.toString();
         String [] arr = cleartoolResult.split("\\|");
-        boolean isNotLabeled = arr[0].contains("Not Labeled");
         
         String prefix = "component:";
         String componentName = arr[1].substring(cleartoolResult
                 .indexOf(cleartoolResult)
                 + prefix.length()); 
         
-        return new BaselineDesc(componentName, isNotLabeled); 
+        return new Baseline(null, new Component(componentName)); 
     }    
     
 	/**
@@ -308,9 +292,9 @@ public class UcmCommon {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static List<ComponentDesc> getStreamComponentsDesc(ClearToolLauncher clearToolLauncher,
+    public static List<Component> getStreamComponentsDesc(ClearToolLauncher clearToolLauncher,
     		String streamName) throws IOException, InterruptedException {
-    	List<ComponentDesc> componentsDescList = new ArrayList<ComponentDesc>();
+    	List<Component> componentsDescList = new ArrayList<Component>();
         ArgumentListBuilder cmd = new ArgumentListBuilder();
 
         cmd.add("desc");
@@ -340,7 +324,7 @@ public class UcmCommon {
 				idx2 = cleartoolResult.indexOf(")", idx1);
 				
 				// add to the result				
-				ComponentDesc componentDesc = new ComponentDesc(cleartoolResult.substring(idx1 + 1, idx2), componentState.equals("modifiable"));
+				Component componentDesc = new Component(cleartoolResult.substring(idx1 + 1, idx2), componentState.equals("modifiable"));
 				componentsDescList.add(componentDesc);
 			}
 		}      
@@ -354,34 +338,36 @@ public class UcmCommon {
      * @throws IOException 
      * @throws Exception
      */
-    public static List<BaselineDesc> getLatestBlsWithCompOnStream(ClearToolLauncher clearToolLauncher,
-    		String stream, 	String view) throws IOException, InterruptedException {
-    	// get the components on the build stream
-    	List<ComponentDesc> componentsList = getStreamComponentsDesc(clearToolLauncher, stream);
-		
-		// get latest baselines on the stream (name only)
-		List<String> latestBlsOnBuildStream = getLatestBaselineNames(clearToolLauncher, 
-				true, view, null, null);
-		
-		// add component information to baselines
-		List<BaselineDesc> latestBlsWithComp = getComponentsForBaselines(
-				clearToolLauncher, componentsList, true, view, null, latestBlsOnBuildStream);
-		
-		return latestBlsWithComp;
+    public static List<Baseline> getLatestBlsWithCompOnStream(
+            ClearToolLauncher clearToolLauncher, String stream, String view)
+            throws IOException, InterruptedException {
+        // get the components on the build stream
+        List<Component> componentsList = getStreamComponentsDesc(
+                clearToolLauncher, stream);
+
+        // get latest baselines on the stream (name only)
+        List<String> latestBlsOnBuildStream = getLatestBaselineNames(
+                clearToolLauncher, true, view, null, null);
+
+        // add component information to baselines
+        List<Baseline> latestBlsWithComp = getComponentsForBaselines(
+                clearToolLauncher, componentsList, true, view, null,
+                latestBlsOnBuildStream);
+
+        return latestBlsWithComp;
     }
     
     /**
-     * @param componentsDesc
+     * @param components
      * @return list of read-write components out of components list (removing read-only components)
      */
-    public static List<String> getReadWriteComponents(List<ComponentDesc> componentsDesc) {
-		List<String> res = new ArrayList<String>();
-		
-		for (ComponentDesc comp : componentsDesc)
-			res.add(comp.getName());
-		
-		return res;
-	}
+    public static List<String> getReadWriteComponents(List<Component> components) {
+        List<String> res = new ArrayList<String>();
+        for (Component comp : components) {
+            res.add(comp.getName());
+        }
+        return res;
+    }
     
     /**
      * @param clearToolLauncher
@@ -418,7 +404,7 @@ public class UcmCommon {
         		line = line.replaceAll(">>", "");
         		versionList.add(line.trim());
         	}
-        }        	
+        }
     	
     	return versionList;
     }
@@ -456,17 +442,17 @@ public class UcmCommon {
      * @throws InterruptedException
      */
     public static void rebase(ClearToolLauncher clearToolLauncher,
-    		String viewName, List<UcmCommon.BaselineDesc> baselines) throws IOException, InterruptedException {
+    		String viewName, List<UcmCommon.Baseline> baselines) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         
         cmd.add("rebase");
         
         cmd.add("-base");
         String baselineStr = "";        
-        for (UcmCommon.BaselineDesc bl : baselines) {
+        for (UcmCommon.Baseline bl : baselines) {
         	if (baselineStr.length() > 0)
         		baselineStr += ",";
-        	baselineStr += bl.getBaselineName();
+        	baselineStr += bl.getName();
         }
         cmd.add(baselineStr);
         
@@ -482,11 +468,6 @@ public class UcmCommon {
         baos.close();  	
     }
 	
-	/**
-	 * @param clearToolLauncher
-	 * @param element
-	 * @return
-	 */
 	public static String getNoVob(String element) {
 		return element.split("@")[0];
 	}
@@ -497,83 +478,37 @@ public class UcmCommon {
     
     /**
      * @author kyosi
-     *
+     * 
      */
-	@ExportedBean
-    public static class BaselineDesc {
-		
-		@Exported(visibility=3)
-		public String baselineName;    	
-		
-		@Exported(visibility=3)
-		public String componentName;    	
-		
-		@Exported(visibility=3)
-		public ComponentDesc componentDesc;
-		
-		
-    	private boolean isNotLabeled;	
-    	
-		public BaselineDesc(String componentName, boolean isNotLabeled) {
-			super();
-			this.componentName = componentName;
-			this.isNotLabeled = isNotLabeled;
-		}
+    @ExportedBean
+    public static class Baseline {
 
-		public BaselineDesc(String baselineName, String componentName) {
-			super();
-			this.baselineName = baselineName;
-			this.componentName = componentName;
-			this.componentDesc = null;
-		}    	
-    	
-		public BaselineDesc(String baselineName, ComponentDesc componentDesc) {
-			super();
-			this.baselineName = baselineName;
-			this.componentDesc = componentDesc;	
-			this.componentName = componentDesc.getName();
-		}
-		
-		public BaselineDesc(String baselineName, ComponentDesc componentDesc,
-				boolean isNotLabeled) {
-			super();
-			this.baselineName = baselineName;
-			this.componentDesc = componentDesc;
-			this.componentName = componentDesc.getName();
-			this.isNotLabeled = isNotLabeled;
-		}
+        @Exported(visibility = 3)
+        public String name;
 
-		public String getBaselineName() {
-			return baselineName;
-		}
-		
-		public void setBaselineName(String baselineName) {
-			this.baselineName = baselineName;
-		}
-		
-		public String getComponentName() {
-			return (componentDesc != null ? componentDesc.getName() : componentName);
-		}
-		
-		public void setComponentName(String componentName) {
-			this.componentName = componentName;
-		}
-		
-		public ComponentDesc getComponentDesc() {
-			return componentDesc;
-		}
-		
-		public void setComponentDesc(ComponentDesc componentDesc) {
-			this.componentDesc = componentDesc;
-		}
+        @Exported(visibility = 3)
+        public Component component;
 
-		public boolean isNotLabeled() {
-			return isNotLabeled;
-		}
+        public Baseline(String name, Component component) {
+            this.name = name;
+            this.component = component;
+        }
 
-		public void setNotLabeled(boolean isNotLabeled) {
-			this.isNotLabeled = isNotLabeled;
-		}		
+        public String getName() {
+            return name;
+        }
+
+        public Component getComponent() {
+            return component;
+        }
+
+        public boolean isLabeled() {
+            return name != null;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
     
     /**
@@ -581,34 +516,38 @@ public class UcmCommon {
      *
      */
 	@ExportedBean
-    public static class ComponentDesc {
-		
-		@Exported(visibility=3)
-		public String name;
-		
-		@Exported(visibility=3)
-    	public boolean isModifiable;   	
-    	
-		public ComponentDesc(String name, boolean isModifiable) {
-			this.name = name;
-			this.isModifiable = isModifiable;
-		}
-		
-		public String getName() {
-			return name;
-		}
-		
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-		public boolean isModifiable() {
-			return isModifiable;
-		}
-		
-		public void setModifiable(boolean isModifiable) {
-			this.isModifiable = isModifiable;
-		}
+    public static class Component {
+
+        @Exported(visibility = 3)
+        public String name;
+
+        @Exported(visibility = 3)
+        public boolean isModifiable;
+        
+        public Component(String name) {
+            this(name, false);
+        }
+
+        public Component(String name, boolean isModifiable) {
+            this.name = name;
+            this.isModifiable = isModifiable;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public boolean isModifiable() {
+            return isModifiable;
+        }
+
+        public void setModifiable(boolean isModifiable) {
+            this.isModifiable = isModifiable;
+        }
     }	
     
 }

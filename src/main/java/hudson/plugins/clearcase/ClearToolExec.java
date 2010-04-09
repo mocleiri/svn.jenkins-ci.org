@@ -26,7 +26,6 @@ package hudson.plugins.clearcase;
 
 import hudson.AbortException;
 import hudson.FilePath;
-import hudson.plugins.clearcase.util.PathUtil;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.VariableResolver;
 
@@ -40,9 +39,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.TimeZone;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,7 +63,7 @@ public abstract class ClearToolExec implements ClearTool {
 
     protected abstract FilePath getRootViewPath(ClearToolLauncher launcher);
 
-    public Reader lshistory(String format, Date lastBuildDate, String viewName,
+    public Reader lshistory(String format, Date lastBuildDate, String viewPath,
                             String branch, String[] viewPaths) throws IOException,
                                                                       InterruptedException {
         SimpleDateFormat formatter = new SimpleDateFormat("d-MMM-yy.HH:mm:ss'UTC'Z", Locale.US);
@@ -81,7 +80,7 @@ public abstract class ClearToolExec implements ClearTool {
         }
         cmd.add("-nco");
         
-        FilePath viewPath = getRootViewPath(launcher).child(viewName);
+        FilePath viewFilePath = getRootViewPath(launcher).child(viewPath);
         
         for (String path : viewPaths) {
             path = path.replace("\n","").replace("\r","");
@@ -94,7 +93,7 @@ public abstract class ClearToolExec implements ClearTool {
         }
         Reader returnReader = null;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        if (launcher.run(cmd.toCommandArray(), null, baos, viewPath)) {
+        if (launcher.run(cmd.toCommandArray(), null, baos, viewFilePath)) {
             returnReader = new InputStreamReader(new ByteArrayInputStream(baos
                                                                           .toByteArray()));
         }

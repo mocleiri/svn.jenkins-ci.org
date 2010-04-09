@@ -25,8 +25,6 @@
 package hudson.plugins.clearcase.action;
 
 
-import hudson.plugins.clearcase.util.EventRecordFilter;
-
 import java.io.IOException;
 import java.util.Date;
 

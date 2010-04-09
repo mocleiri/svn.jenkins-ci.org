@@ -24,13 +24,15 @@
  */
 package hudson.plugins.clearcase.action;
 
-import java.io.IOException;
-import java.util.Set;
-
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.ClearToolSnapshot;
+import hudson.plugins.clearcase.View;
 import hudson.plugins.clearcase.util.PathUtil;
+
+import java.io.IOException;
+import java.util.Set;
 
 /**
  * Check out action that will check out files into a snapshot view.
@@ -39,23 +41,28 @@ public class SnapshotCheckoutAction extends AbstractCheckoutAction {
 
     private final String configSpec;
     private final boolean useUpdate;
-    private final ClearTool cleartool;
+    private final ClearToolSnapshot cleartool;
     private final String[] loadRules;
+    private final String viewPath;
+    
+    public SnapshotCheckoutAction(ClearToolSnapshot clearTool, String configSpec, String[] loadRules, boolean useUpdate) {
+        this(clearTool, configSpec, loadRules, null, useUpdate);
+    }
 
-    public SnapshotCheckoutAction(ClearTool clearTool, String configSpec, String[] loadRules, boolean useUpdate) {
+    public SnapshotCheckoutAction(ClearToolSnapshot clearTool, String configSpec, String[] loadRules, String viewPath, boolean useUpdate) {
         this.cleartool = clearTool;
         this.configSpec = configSpec;
         this.loadRules = loadRules;
-        this.useUpdate = useUpdate;        
+        this.useUpdate = useUpdate;
+        this.viewPath = viewPath;
     }
 
-    public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
-
-        boolean updateView = useUpdate;        
-        boolean localViewPathExists = new FilePath(workspace, viewName).exists();
+    public View checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
+        boolean updateView = useUpdate;
+        String effectiveViewPath = viewPath != null ? viewPath : viewName;
+        boolean localViewPathExists = new FilePath(workspace, effectiveViewPath).exists();
         String jobConfigSpec = PathUtil.convertPathForOS(configSpec, launcher);
         boolean viewTagExists = cleartool.doesViewExist(viewName);
-        
         if (localViewPathExists) {
             if (updateView) {
                 String currentConfigSpec = getLoadRuleFreeConfigSpec(cleartool.catcs(viewName).trim());
@@ -66,19 +73,18 @@ public class SnapshotCheckoutAction extends AbstractCheckoutAction {
                 if (loadRulesNeedUpdating(configSpecLoadRules)) {
                     updateView = false;
                 }
-            }
-            else {
+            } else {
                 cleartool.rmview(viewName);
                 localViewPathExists = false;
                 viewTagExists = false;
-            }                
+            }
         }
-
+        cleartool.setViewPath(effectiveViewPath);
         if (!localViewPathExists) {
             if (viewTagExists) {
-                launcher.getListener().fatalError("View path for " + viewName + " does not exist, but the view tag does.\n"
+                launcher.getListener().fatalError("View path " + effectiveViewPath + " does not exist, but the view tag " + viewName + " does.\n"
                                                   + "View cannot be created - build aborting.");
-                return false;
+                return null;
             }
             else {
                 cleartool.mkview(viewName, null);
@@ -91,7 +97,7 @@ public class SnapshotCheckoutAction extends AbstractCheckoutAction {
                 cleartool.setcs(viewName, null);
             } catch (IOException e) {
                 launcher.getListener().fatalError(e.toString());
-                return false;
+                return null;
             }
         }
         else {
@@ -109,11 +115,10 @@ public class SnapshotCheckoutAction extends AbstractCheckoutAction {
                 cleartool.setcs(viewName, PathUtil.convertPathForOS(newConfigSpec, launcher));
             } catch (IOException e) {
                 launcher.getListener().fatalError(e.toString());
-                return false;
+                return null;
             }
         }
-
-        return true;
+        return new View(viewName, configSpec, effectiveViewPath);
     }
 
     private boolean loadRulesNeedUpdating(Set<String> configSpecLoadRules) {

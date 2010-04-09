@@ -26,15 +26,14 @@ package hudson.plugins.clearcase.action;
 
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.Util;
 import hudson.model.AbstractBuild;
-import hudson.model.Computer;
 import hudson.model.Run;
-import hudson.plugins.clearcase.ClearTool;
-import hudson.plugins.clearcase.ClearToolLauncher;
 import hudson.plugins.clearcase.ClearCaseDataAction;
+import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.UcmView;
+import hudson.plugins.clearcase.View;
 import hudson.plugins.clearcase.ucm.UcmCommon;
-import hudson.plugins.clearcase.ucm.UcmCommon.BaselineDesc;
+import hudson.plugins.clearcase.ucm.UcmCommon.Baseline;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -58,7 +57,7 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
 	private static final String BASELINE_COMMENT = "hudson_co_";  
 	
     private ClearTool cleartool;
-    private String stream;
+    private String streamSelector;
     private boolean createDynView;
     private String winDynStorageDir;
     private String unixDynStorageDir;
@@ -66,12 +65,12 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
     private boolean freezeCode;
     private boolean recreateView;
     
-    public UcmDynamicCheckoutAction(ClearTool cleartool, String stream, boolean createDynView,
+    public UcmDynamicCheckoutAction(ClearTool cleartool, String streamSelector, boolean createDynView,
     		String winDynStorageDir, String unixDynStorageDir, AbstractBuild build, 
     		boolean freezeCode, boolean recreateView) {
         super();
         this.cleartool = cleartool;
-        this.stream = stream;
+        this.streamSelector = streamSelector;
         this.createDynView = createDynView;
         this.winDynStorageDir = winDynStorageDir;
         this.unixDynStorageDir = unixDynStorageDir;
@@ -80,35 +79,21 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         this.recreateView = recreateView;
     }
 
-    public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
-        // add stream to data action (to be used by ClearCase report)
-        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
-        if (dataAction != null) {        	
-        	// sync the project in order to allow other builds to safely check if there is  
-        	// already a build running on the same stream
-        	synchronized (build.getProject()) {
-        		dataAction.setStream(stream);	
-			}        	
-        }        
-    	
+    public View checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
         if (createDynView) {
-        	if (freezeCode) {
-        		checkoutCodeFreeze(viewName);
-        	}
-        	else {
-            cleartool.mountVobs();
-        		recreateView(viewName);
+            if (freezeCode) {
+                checkoutCodeFreeze(viewName);
+            } else {
+                cleartool.mountVobs();
+                recreateView(viewName);
                 cleartool.startView(viewName);
-                cleartool.syncronizeViewWithStream(viewName, stream);        		
-        	}
-        		
-        }
-        else {
+                cleartool.syncronizeViewWithStream(viewName, streamSelector);
+            }
+        } else {
             cleartool.startView(viewName);
-            cleartool.syncronizeViewWithStream(viewName, stream);        	
+            cleartool.syncronizeViewWithStream(viewName, streamSelector);
         }
-        
-        return true;
+        return new UcmView(viewName, null, cleartool.catcs(viewName), streamSelector, null);
     }
     
     public boolean checkoutCodeFreeze(String viewName) throws IOException, InterruptedException {
@@ -117,19 +102,16 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
             ClearCaseDataAction clearcaseDataAction = null;
             Run previousBuild = build.getPreviousBuild();
             while (previousBuild != null) {
-            	clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
-            	
-            	if (previousBuild.isBuilding() && clearcaseDataAction != null && 
-            			clearcaseDataAction.getStream().equals(stream))        	
-            		throw new IOException("Can't run build on stream " + stream + " when build " + 
-            				previousBuild.getNumber() +  " is currently running on the same stream.");
-            		
-            	previousBuild = previousBuild.getPreviousBuild();
+                clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
+                if (previousBuild.isBuilding() && clearcaseDataAction != null && clearcaseDataAction.getStreamSelector().equals(streamSelector)) {
+                    throw new IOException("Can't run build on stream " + streamSelector + " when build " + previousBuild.getNumber() +  " is currently running on the same stream.");
+                }
+                previousBuild = previousBuild.getPreviousBuild();
             }
-		}    	
-    	
+        }
+        
         // prepare stream and views
-        prepareBuildStreamAndViews(viewName, stream);    
+        prepareBuildStreamAndViews(viewName, streamSelector);
         
         // make baselines
         SimpleDateFormat formatter = new SimpleDateFormat("d-MMM-yy_HH_mm_ss", Locale.US);
@@ -137,43 +119,43 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         String dateStr = formatter.format(build.getTimestamp().getTime()).toLowerCase(); 
         
         UcmCommon.makeBaseline(cleartool.getLauncher(), true, getConfiguredStreamViewName(), null, 
-        		BASELINE_NAME + dateStr, 
-				BASELINE_COMMENT + dateStr, 
-				false, false, null);
+                BASELINE_NAME + dateStr, 
+                BASELINE_COMMENT + dateStr, 
+                false, false, null);
         
         // get latest baselines on the configured stream
-        List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool.getLauncher(), 
-        		stream, getConfiguredStreamViewName());
+        List<UcmCommon.Baseline> latestBaselinesOnConfiguredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool.getLauncher(), 
+                 streamSelector, getConfiguredStreamViewName());
         
-		// fix Not labeled baselines        
-		for (BaselineDesc baseLineDesc : latestBlsOnConfgiuredStream) {
-			if (baseLineDesc.isNotLabeled() && baseLineDesc.getComponentDesc().isModifiable()) {
-				// if the base is not labeled create identical one				
-				List<String> readWriteCompList = new ArrayList<String>();
-				readWriteCompList.add(baseLineDesc.getComponentDesc().getName());				
- 
-				List<BaselineDesc> baseLineDescList = UcmCommon.makeBaseline(cleartool.getLauncher(), 
-						true, 
-						getConfiguredStreamViewName(), 
-						null, 
-		        		BASELINE_NAME + dateStr, 
-						BASELINE_COMMENT + dateStr, 
-						true, false, readWriteCompList);				
+        // fix Not labeled baselines
+        for (Baseline baseLine : latestBaselinesOnConfiguredStream) {
+            if (!baseLine.isLabeled() && baseLine.getComponent().isModifiable()) {
+                // if the base is not labeled create identical one
+                List<String> readWriteCompList = new ArrayList<String>();
+                readWriteCompList.add(baseLine.getComponent().getName());
 
-				String newBaseline = baseLineDescList.get(0).getBaselineName() + "@" +
-					UcmCommon.getVob(baseLineDesc.getComponentDesc().getName());
-				
-				baseLineDesc.setBaselineName(newBaseline);
-			}
-		}        
+                List<Baseline> baseLineDescList = UcmCommon.makeBaseline(
+                        cleartool.getLauncher(), true,
+                        getConfiguredStreamViewName(), null, BASELINE_NAME
+                                + dateStr, BASELINE_COMMENT + dateStr, true,
+                        false, readWriteCompList);
+
+                String newBaseline = baseLineDescList.get(0).getName()
+                        + "@"
+                        + UcmCommon.getVob(baseLine.getComponent()
+                                .getName());
+
+                baseLine.setName(newBaseline);
+            }
+        }
         
         // rebase build stream
-        UcmCommon.rebase(cleartool.getLauncher(), viewName, latestBlsOnConfgiuredStream);
+        UcmCommon.rebase(cleartool.getLauncher(), viewName, latestBaselinesOnConfiguredStream);
     	
         // add baselines to build - to be later used by getChange 
         ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
         if (dataAction != null)
-        	dataAction.setLatestBlsOnConfiguredStream(latestBlsOnConfgiuredStream);       
+        	dataAction.setLatestBlsOnConfiguredStream(latestBaselinesOnConfiguredStream);       
         
     	return true;
     }
@@ -193,8 +175,9 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         cleartool.startView(getConfiguredStreamViewName());
         
 		// do we have build stream? if not create it
-        if (! UcmCommon.isStreamExists(cleartool.getLauncher(), getBuildStream()))
+        if (! UcmCommon.isStreamExists(cleartool.getLauncher(), getBuildStream())) {
         	UcmCommon.mkstream(cleartool.getLauncher(), stream, getBuildStream());
+        }
         
         // create view on build stream
         recreateView(viewName);
@@ -202,7 +185,7 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
 	}
 	
 	private void recreateView(String viewName) throws IOException, InterruptedException {
-		Properties viewDataPrp = cleartool.getViewData(viewName);
+        Properties viewDataPrp = cleartool.getViewData(viewName);
         String uuid = viewDataPrp.getProperty("UUID");
         String storageDir = viewDataPrp.getProperty("STORAGE_DIR");
 		
@@ -232,36 +215,36 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         	
         	// remove storage directory
         	try {
-				FilePath storageDirFile = new FilePath(build.getWorkspace().getChannel(), storageDir);
-				storageDirFile.deleteRecursive();
-			} catch (Exception ex) {
-				cleartool.logRedundantCleartoolError(null, ex);
-			}        	
+                FilePath storageDirFile = new FilePath(build.getWorkspace().getChannel(), storageDir);
+                storageDirFile.deleteRecursive();
+            } catch (Exception ex) {
+                cleartool.logRedundantCleartoolError(null, ex);
+            }
         }
         
         // try to remove the view tag in any case. might help in overcoming corrupted views
         if (recreateView) {
             try {
                 cleartool.rmviewtag(viewName);
-    		} catch (Exception ex) {
-    			cleartool.logRedundantCleartoolError(null, ex);
-    		}        	
+            } catch (Exception ex) {
+                cleartool.logRedundantCleartoolError(null, ex);
+            }
         }
         
         // Now, make the view.
-        if (recreateView || uuid == null || uuid.equals("")) {
-            String dynStorageDir = cleartool.getLauncher().getLauncher().isUnix() ? unixDynStorageDir : winDynStorageDir; 
-            cleartool.mkview(viewName, getBuildStream(), dynStorageDir);        	
+        if (recreateView || StringUtils.isEmpty(uuid)) {
+            String dynStorageDir = cleartool.getLauncher().getLauncher().isUnix() ? unixDynStorageDir : winDynStorageDir;
+            cleartool.mkview(viewName, getBuildStream(), dynStorageDir);
         }
 	}
-        
+	
 	public static String getConfiguredStreamViewName(String jobName, String stream) {
 		jobName = jobName.replace(" ", "");
 		return UcmCommon.getNoVob(stream) + "_" + jobName + "_" + CONFIGURED_STREAM_VIEW_SUFFIX;	
 	}	
 	
 	private String getConfiguredStreamViewName() {		
-		return getConfiguredStreamViewName(build.getProject().getName(), stream);	
+		return getConfiguredStreamViewName(build.getProject().getName(), streamSelector);	
     }
 	
 	/**
@@ -269,7 +252,7 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
 	 */
 	private String getBuildStream() {
 		String jobName = build.getProject().getName().replace(" ", "");
-		return BUILD_STREAM_PREFIX + jobName + "." + stream;
+		return BUILD_STREAM_PREFIX + jobName + "." + streamSelector;
 	}
 
 

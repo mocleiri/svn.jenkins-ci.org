@@ -1,69 +1,81 @@
 package hudson.plugins.clearcase;
 
-import java.util.ArrayList;
+import hudson.model.Action;
+import hudson.plugins.clearcase.ucm.UcmCommon;
+
 import java.util.List;
 
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
 
-import hudson.model.Action;
-import hudson.plugins.clearcase.ucm.UcmCommon;
-
 @ExportedBean
-public class ClearCaseDataAction implements Action{
+public class ClearCaseDataAction implements Action {
 
-	@Exported(visibility=3)
-	public List<UcmCommon.BaselineDesc> latestBlsOnConfiguredStream;
-	
-	@Exported(visibility=3)
-	public String cspec;
-	
-	@Exported(visibility=3)
-	public String stream;
-	
-	public ClearCaseDataAction() {
-		super();
-	}
+    @Exported(visibility = 3)
+    public List<UcmCommon.Baseline> latestBlsOnConfiguredStream;
 
-	@Override
-	public String getDisplayName() {
-		return null;
-	}
+    @Exported(visibility = 3)
+    public String configSpec;
 
-	@Override
-	public String getIconFileName() {
-		return null;
-	}
+    @Exported(visibility = 3)
+    public String streamSelector;
 
-	@Override
-	public String getUrlName() {
-		return null;
-	}
+    public ClearCaseDataAction() {
+        super();
+    }
 
-	public List<UcmCommon.BaselineDesc> getLatestBlsOnConfiguredStream() {
-		return latestBlsOnConfiguredStream;
-	}
+    public ClearCaseDataAction(View view) {
+        if (view != null) {
+            configSpec = view.getConfigSpec();
+            if (view instanceof UcmView) {
+                UcmView ucmView = (UcmView) view;
+                streamSelector = ucmView.getStreamSelector();
+            }
+        }
+    }
 
-	public void setLatestBlsOnConfiguredStream(
-			List<UcmCommon.BaselineDesc> latestBlsOnConfiguredStream) {
-		this.latestBlsOnConfiguredStream = latestBlsOnConfiguredStream;
-	}
+    public String getConfigSpec() {
+        return configSpec;
+    }
 
-	public String getCspec() {
-		return cspec;
-	}
+    @Override
+    public String getDisplayName() {
+        return null;
+    }
 
-	public void setCspec(String cspec) {
-		this.cspec = cspec;
-	}
+    @Override
+    public String getIconFileName() {
+        return null;
+    }
 
-	public String getStream() {
-		return stream;
-	}
+    public List<UcmCommon.Baseline> getLatestBlsOnConfiguredStream() {
+        return latestBlsOnConfiguredStream;
+    }
 
-	public void setStream(String stream) {
-		this.stream = stream;
-	}	
-	
+    public String getStreamSelector() {
+        return streamSelector;
+    }
+
+    @Override
+    public String getUrlName() {
+        return null;
+    }
+
+    public boolean hasBaselinesInformation() {
+        return latestBlsOnConfiguredStream != null && !latestBlsOnConfiguredStream.isEmpty();
+    }
+    
+    public void setConfigSpec(String configSpec) {
+        this.configSpec = configSpec;
+    }
+
+    public void setLatestBlsOnConfiguredStream(
+            List<UcmCommon.Baseline> latestBlsOnConfiguredStream) {
+        this.latestBlsOnConfiguredStream = latestBlsOnConfiguredStream;
+    }
+
+    public void setStreamSelector(String streamSelector) {
+        this.streamSelector = streamSelector;
+    }
 
 }

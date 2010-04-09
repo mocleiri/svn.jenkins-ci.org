@@ -25,30 +25,24 @@
 package hudson.plugins.clearcase.action;
 
 
-import hudson.FilePath;
-import hudson.Launcher;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 public abstract class AbstractCheckoutAction implements CheckOutAction {
-    public AbstractCheckoutAction() {
+	public AbstractCheckoutAction() {
         
     }
     
-    public abstract boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException;
-
     protected Set<String> extractLoadRules(String configSpec) {
         Set<String> rules = new HashSet<String>();
         for (String row : configSpec.split("[\\r\\n]+")) {
             String trimmedRow = row.trim();
             if (trimmedRow.startsWith("load")) {
                 String rule = row.trim().substring("load".length()).trim();
-                rules.add(rule);
-                if ((!rule.startsWith("/")) && (!rule.startsWith("\\"))) {
-                    rules.add(rule);
-                } else {
+                if (rule.startsWith("/") || rule.startsWith("\\")) {
                     rules.add(rule.substring(1));
+                } else {
+                    rules.add(rule);
                 }
             }
         }
@@ -57,15 +51,6 @@ public abstract class AbstractCheckoutAction implements CheckOutAction {
     
     
     protected String getLoadRuleFreeConfigSpec(String configSpec) {
-        String lrFreeCS = "";
-
-        for (String row : configSpec.split("[\\r\\n]+")) {
-            if (!row.startsWith("load")) {
-                lrFreeCS += row + "\n";
-            }
-        }
-
-        return lrFreeCS.trim();
+        return configSpec.replaceAll("\n?load.*\n?", "\n").trim();
     }
-
 }

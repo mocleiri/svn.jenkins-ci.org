@@ -55,8 +55,8 @@ public abstract class AbstractHistoryAction implements HistoryAction {
     }
     
     @Override
-    public boolean hasChanges(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
-        List<HistoryEntry> entries = runLsHistory(time,viewName,branchNames,viewPaths); 
+    public boolean hasChanges(Date time, String viewPath, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
+        List<HistoryEntry> entries = runLsHistory(time,viewPath,branchNames,viewPaths); 
         List<HistoryEntry> filtered = filterEntries(entries);
 
         return filtered.size() > 0;
@@ -73,9 +73,10 @@ public abstract class AbstractHistoryAction implements HistoryAction {
     }
 
 
-    protected List<HistoryEntry> runLsHistory(Date time, String viewName, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
+    protected List<HistoryEntry> runLsHistory(Date time, String viewPath, String[] branchNames, String[] viewPaths) throws IOException, InterruptedException {
         if (isDynamicView) {
-            cleartool.startView(viewName);
+            // FIXME: It should be viewTag here
+            cleartool.startView(viewPath);
             cleartool.mountVobs();
         }
         
@@ -84,7 +85,7 @@ public abstract class AbstractHistoryAction implements HistoryAction {
 
         try {
             for (String branchName : branchNames) {
-                BufferedReader reader = new BufferedReader(cleartool.lshistory(historyHandler.getFormat() + COMMENT + LINEEND, time, viewName, branchName, viewPaths));
+                BufferedReader reader = new BufferedReader(cleartool.lshistory(historyHandler.getFormat() + COMMENT + LINEEND, time, viewPath, branchName, viewPaths));
                 fullList.addAll(parseLsHistory(reader));
                 reader.close();
             }
@@ -92,8 +93,6 @@ public abstract class AbstractHistoryAction implements HistoryAction {
             /* empty by design */
         }
         return fullList;
-        //ChangeLogEntryMerger entryMerger = new ChangeLogEntryMerger(maxTimeDifferenceMillis);
-        //return entryMerger.getMergedList(fullList);
     }
 
     protected List<HistoryEntry> parseLsHistory(BufferedReader reader) throws IOException, InterruptedException, ParseException{
@@ -173,7 +172,7 @@ public abstract class AbstractHistoryAction implements HistoryAction {
      * Sets the extended view path.
      * The extended view path will be removed from file paths in the event.
      * The extended view path is for example the view root + view name; and this
-     * path shows up in the history and can be conusing for users.
+     * path shows up in the history and can be confusing for users.
      * @param path the new extended view path.
      */
     public void setExtendedViewPath(String path) {

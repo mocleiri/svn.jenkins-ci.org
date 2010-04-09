@@ -27,11 +27,17 @@ package hudson.plugins.clearcase.action;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.ClearToolSnapshot;
+import hudson.plugins.clearcase.UcmView;
+import hudson.plugins.clearcase.View;
 import hudson.plugins.clearcase.util.PathUtil;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Check out action that will check out files into a UCM snapshot view. Checking
@@ -39,100 +45,127 @@ import java.util.Set;
  */
 public class UcmSnapshotCheckoutAction extends AbstractCheckoutAction {
 
-    private ClearTool cleartool;
+	private ClearToolSnapshot cleartool;
     
-    private String stream;
+    private String streamSelector;
     
     private String[] loadRules;
     
     private boolean useUpdate;
     
-    public UcmSnapshotCheckoutAction(ClearTool cleartool, String stream,
-                                     String[] loadRules, boolean useUpdate) {
+    private String viewPath;
+    
+    public UcmSnapshotCheckoutAction(ClearToolSnapshot cleartool, String streamSelector,
+            String[] loadRules, boolean useUpdate) {
+        this(cleartool, streamSelector, loadRules, useUpdate, null);
+    }
+    
+    public UcmSnapshotCheckoutAction(ClearToolSnapshot cleartool, String streamSelector,
+                                     String[] loadRules, boolean useUpdate, String viewPath) {
         super();
         this.cleartool = cleartool;
-        this.stream = stream;
+        this.streamSelector = streamSelector;
         this.loadRules = loadRules;
         this.useUpdate = useUpdate;
+        this.viewPath = viewPath;
     }
     
-    public boolean checkout(Launcher launcher, FilePath workspace,
+    public View checkout(Launcher launcher, FilePath workspace,
                             String viewName) throws IOException, InterruptedException {
-        
-        boolean localViewPathExists = new FilePath(workspace, viewName)
-            .exists();
-        boolean viewTagExists = cleartool.doesViewExist(viewName);
-        
-        boolean updateLoadRules = true;
-        
-        if (localViewPathExists) {
-            if (this.useUpdate) {
-                String configSpec = PathUtil.convertPathForOS(cleartool.catcs(viewName), launcher);
-                Set<String> configSpecLoadRules = extractLoadRules(configSpec);
-                if (configSpecNeedsUpdating(configSpecLoadRules)) {
-                    String newConfigSpec = getLoadRuleFreeConfigSpec(configSpec) + "\n";
-                    
-                    for (String loadRule : loadRules) {
-                        // Make sure the load rule starts with \ or /, as appropriate
-                        if (!(loadRule.startsWith("\\")) && !(loadRule.startsWith("/"))) {
-                            loadRule = PathUtil.fileSepForOS(launcher.isUnix()) + loadRule;
-                        }
-
-                        newConfigSpec += "load " + loadRule.trim() + "\n";
-                    }
-                    try {
-                        cleartool.setcs(viewName, PathUtil.convertPathForOS(newConfigSpec, launcher));
-                    } catch (IOException e) {
-                        launcher.getListener().fatalError(e.toString());
-                        return false;
-                    }
-                    updateLoadRules = false;
-                }
-            } else {
-                cleartool.rmview(viewName);
-                cleartool.mkview(viewName, stream);
+        String path = getViewPath(viewName);
+        this.cleartool.setViewPath(path);
+    	boolean viewTagExists = cleartool.doesViewExist(viewName);
+        FilePath viewPathFilePath = new FilePath(workspace, path);
+        boolean viewCreatedDuringThisAction = false;
+		if (viewPathFilePath.exists()) {
+            if (!viewTagExists) {
+                launcher.getListener().getLogger().println("\"" + viewPathFilePath + "\" exists, but not the view tag \"" + viewName + "\". Moving the existing path to \"" + viewPathFilePath + ".keep\"");
+                viewPathFilePath.renameTo(getKeepPath(workspace, viewName));
+                cleartool.mkview(viewName, streamSelector);
+                viewCreatedDuringThisAction = true;
             }
-            
+            if (!this.useUpdate) {
+                cleartool.rmview(viewName);
+                cleartool.mkview(viewName, streamSelector);
+                viewCreatedDuringThisAction = true;
+            }
         } else {
             if (viewTagExists) {
-                launcher.getListener().fatalError("View path for " + viewName + " does not exist, but the view tag does.\n"
+                launcher.getListener().fatalError("View path " + viewPathFilePath + " does not exist, but the view tag " + viewName + " does.\n"
                                                   + "View cannot be created - build aborting.");
-                return false;
-            }
-            else {
-                cleartool.mkview(viewName, stream);
+                return null;
+            } else {
+                cleartool.mkview(viewName, streamSelector);
+                viewCreatedDuringThisAction = true;
             }
         }
-        if (updateLoadRules) {
-            for (String loadRule : loadRules) {
+        // If the view was created during this run, its config spec is already in sync with the stream
+        if (!viewCreatedDuringThisAction) {
+            // Full update in order to get the new config spec
+            cleartool.update(path, null);
+        }
+        launcher.getListener().getLogger().println("Here is the PREVIOUS config specification used for this view");
+        String configSpec = cleartool.catcs(viewName);
+        StringBuilder newConfigSpecSb = new StringBuilder();
+        newConfigSpecSb.append(getLoadRuleFreeConfigSpec(configSpec)).append(PathUtil.newLineForOS(launcher.isUnix()));
+        Set<String> oldLoadRules = extractLoadRules(configSpec);
+        Set<String> newLoadRules = new LinkedHashSet<String>();
+        Set<String> addedLoadRules = new LinkedHashSet<String>();
+        Set<String> removedLoadRules = new HashSet<String>();
+        for(String loadRule : loadRules) {
+            if (loadRule.startsWith("\\") || loadRule.startsWith("/")) {
+                loadRule = loadRule.substring(1);
+            }
+            newLoadRules.add(loadRule);
+            if (!oldLoadRules.contains(loadRule)) {
+                addedLoadRules.add(loadRule);
+            }
+        }
+        for(String loadRule : oldLoadRules) {
+            if (!newLoadRules.contains(loadRule)) {
+                removedLoadRules.add(loadRule);
+            }
+        }
+        if (!removedLoadRules.isEmpty()) {
+            // If at least one load rule is removed we must call setcs with a new config spec to remove it
+            for (String loadRule : newLoadRules) {
                 // Make sure the load rule starts with \ or /, as appropriate
-                if (!(loadRule.startsWith("\\")) && !(loadRule.startsWith("/"))) {
-                    loadRule = PathUtil.fileSepForOS(launcher.isUnix()) + loadRule;
-                }
+                loadRule = PathUtil.fileSepForOS(launcher.isUnix()) + loadRule;
+                newConfigSpecSb.append("load ").append(loadRule.trim()).append(PathUtil.newLineForOS(launcher.isUnix()));
+            }
+            try {
+                // This will remove defect load rules, and add the new ones
+                cleartool.setcs(viewName, newConfigSpecSb.toString());
+            } catch (IOException e) {
+                launcher.getListener().fatalError(e.toString());
+                return null;
+            }
+        } else if (!addedLoadRules.isEmpty()) {
+            // If there are only new load rules, we can add them using cleartool update -add_loadrules 
+            cleartool.update(viewName, StringUtils.join(addedLoadRules, ";"));
+        }
+        // Get the latest config spec and print it
+        launcher.getListener().getLogger().println("Here is the CURRENT config specification used for this view");
+        configSpec = cleartool.catcs(viewName);
+        
+        return new UcmView(viewName, path, configSpec, streamSelector, null);
+    }
 
-                try {
-                    cleartool.update(viewName, loadRule.trim());
-                } catch (IOException e) {
-                    launcher.getListener().fatalError(e.toString());
-                    return false;
-                }
-            }
+    private String getViewPath(String viewName) {
+        if (StringUtils.isNotEmpty(this.viewPath)) {
+            return viewPath;
+        } else {
+            return viewName;
         }
-        return true;
     }
-    
-    private boolean configSpecNeedsUpdating(Set<String> configSpecLoadRules) {
-        boolean recreate = false;
-        for (String loadRule : loadRules) {
-            if (!configSpecLoadRules.contains(loadRule)) {
-                System.out
-                    .println("Load rule: "
-                             + loadRule
-                             + " not found in current config spec, resetting config spec or recreating view");
-                recreate = true;
-            }
+
+    private FilePath getKeepPath(FilePath workspace, String viewName)
+            throws IOException, InterruptedException {
+        FilePath keepPath = new FilePath(workspace, viewName + ".keep");
+        int i = 0;
+        while(keepPath.exists() && i < Integer.MAX_VALUE) {
+            keepPath = new FilePath(workspace, viewName + ".keep." + ++i);
         }
-        return recreate;
+        return keepPath;
     }
-    
 }

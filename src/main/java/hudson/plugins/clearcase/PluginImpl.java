@@ -26,7 +26,6 @@ package hudson.plugins.clearcase;
 
 import hudson.Extension;
 import hudson.Plugin;
-import hudson.tasks.BuildStep;
 
 /**
  * ClearCase plugin.

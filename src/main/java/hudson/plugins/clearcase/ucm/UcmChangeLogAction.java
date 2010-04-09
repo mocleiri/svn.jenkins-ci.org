@@ -83,8 +83,8 @@ public class UcmChangeLogAction implements ChangeLogAction {
     }
 
     @Override
-    public List<UcmActivity> getChanges(Date time, String viewName,
-                                        String[] branchNames, String[] viewPaths) throws IOException,
+    public List<UcmActivity> getChanges(Date time, String viewPath,
+                                        String[] branchNames, String[] relativePaths) throws IOException,
                                                                                          InterruptedException {
         // ISSUE-3097
         // Patched since this command must allow paths that do not contain
@@ -93,17 +93,17 @@ public class UcmChangeLogAction implements ChangeLogAction {
         List<UcmActivity> history = new ArrayList<UcmActivity>();
         boolean ok = false;
         IOException exception = null;
-        for (String path : viewPaths) {
+        for (String path : relativePaths) {
             try {
                 // Added the view name as part of the path (as the
-                // currentdirectory
+                // current directory
                 // is the workspace root and the view will be checked out in a
                 // directory with the name of the view)
-                String fullpath = viewName + File.separator + path;
+                String fullpath = viewPath + File.separator + path;
                 BufferedReader reader = new BufferedReader(cleartool.lshistory(
                                                                                historyHandler.getFormat() + COMMENT + LINEEND, time,
-                                                                               viewName, branchNames[0], new String[] { fullpath }));
-                history.addAll(parseHistory(reader, viewName));
+                                                                               viewPath, branchNames[0], new String[] { fullpath }));
+                history.addAll(parseHistory(reader, viewPath));
                 reader.close();
                 ok = true; // At least one path was successful
             } catch (IOException e) {

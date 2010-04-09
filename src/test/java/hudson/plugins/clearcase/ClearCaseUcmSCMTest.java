@@ -24,25 +24,24 @@
  */
 package hudson.plugins.clearcase;
 
-import hudson.model.Computer;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import hudson.Launcher;
 import hudson.model.AbstractProject;
 import hudson.model.Build;
-import hudson.util.VariableResolver;
-import hudson.plugins.clearcase.ucm.UcmChangeLogAction;
+import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.ucm.UcmHistoryAction;
-import hudson.plugins.clearcase.history.HistoryAction;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
-
-import java.io.IOException;
-
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,8 +54,8 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     private Build build;
     private Launcher launcher;
     private ClearToolLauncher clearToolLauncher;
-    private Computer computer;
     private ClearCaseUcmSCM.ClearCaseUcmScmDescriptor clearCaseUcmScmDescriptor;
+    private BuildVariableResolver buildVariableResolver;
     
     @Before
     public void setUp() throws Exception {
@@ -69,11 +68,11 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
         project = classContext.mock(AbstractProject.class);
         build = classContext.mock(Build.class);
         launcher = classContext.mock(Launcher.class);
-        computer = classContext.mock(Computer.class);
         clearCaseUcmScmDescriptor = classContext.mock(ClearCaseUcmSCM.ClearCaseUcmScmDescriptor.class);
         context = new Mockery();
         cleartool = context.mock(ClearTool.class);
         clearToolLauncher = context.mock(ClearToolLauncher.class);
+        buildVariableResolver = classContext.mock(BuildVariableResolver.class);
         
     }
     @After
@@ -192,14 +191,13 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
                                                   "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false);
         assertEquals("stream name not shortenen correctly", "mystream",scm.getStream());
     }
-
+    
     @Test
     public void assertExtendedViewPathUsesNormalizedViewName() throws Exception {
         classContext.checking(new Expectations() {
                 {
-                    atLeast(2).of(build).getParent(); will(returnValue(project));
-                    one(project).getName(); will(returnValue("ClearCase"));
                     allowing(launcher).isUnix(); will(returnValue(true));
+                    one(buildVariableResolver).resolve("JOB_NAME"); will(returnValue("ClearCase"));
                 }
             });
         context.checking(new Expectations() {
@@ -215,9 +213,9 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
                                                        null, true, false, false, null, null, null, false, cleartool,
                                                        clearCaseUcmScmDescriptor);
         // Create actions
-        VariableResolver variableResolver = new BuildVariableResolver(build, scm.getCurrentComputer());
-        UcmHistoryAction action = (UcmHistoryAction) scm.createHistoryAction(variableResolver, clearToolLauncher, build);
+        UcmHistoryAction action = (UcmHistoryAction) scm.createHistoryAction(buildVariableResolver, clearToolLauncher, build);
         assertEquals("The extended view path is incorrect", "/view/viewname-ClearCase/", action.getExtendedViewPath());
+        context.assertIsSatisfied();
         classContext.assertIsSatisfied();
     }
 }

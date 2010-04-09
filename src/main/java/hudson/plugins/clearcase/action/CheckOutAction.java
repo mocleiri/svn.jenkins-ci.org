@@ -26,6 +26,7 @@ package hudson.plugins.clearcase.action;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.plugins.clearcase.View;
 
 import java.io.IOException;
 
@@ -33,6 +34,16 @@ import java.io.IOException;
  * Action for performing check outs from ClearCase.
  */
 public interface CheckOutAction {
-    
-    boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException;
+    /**
+     * Perform the checkout
+     * 
+     * @param launcher
+     * @param workspace
+     * @param viewName The view tag of the view. It must be unique on the whole ClearCase server
+     * @return a View object, containing all view parameters
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    View checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException;
+
 }

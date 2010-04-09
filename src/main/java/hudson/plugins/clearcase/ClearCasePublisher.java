@@ -54,19 +54,17 @@ public class ClearCasePublisher extends Publisher implements Serializable {
    }
 
     public boolean prebuild(AbstractBuild<?,?> build, BuildListener listener) {
-    	return true;
+        return true;
     }
     
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-    	try {
-    		ClearCaseReportAction action = new ClearCaseReportAction(build);
-    		build.getActions().add(action);
-
-    	} catch (Exception e) {
-    		// failure to parse should not fail the build
-    		e.printStackTrace();
-    	}
-        
+        try {
+            ClearCaseReportAction action = new ClearCaseReportAction(build);
+            build.getActions().add(action);
+        } catch (Exception e) {
+            // failure to parse should not fail the build
+            e.printStackTrace();
+        }
         return true;
     }
 
@@ -98,14 +96,14 @@ public class ClearCasePublisher extends Publisher implements Serializable {
         public DescriptorImpl() {
             super(ClearCasePublisher.class);
             // This makes sure any existing global configuration is read from the persistence file <Hudson work dir>/hudson.plugins.logparser.LogParserPublisher.xml
-			load();
+            load();
         }
         
         public DescriptorImpl(ClearCaseSCM.ClearCaseScmDescriptor scmDescriptor) {
             super(ClearCasePublisher.class);
             // This makes sure any existing global configuration is read from the persistence file <Hudson work dir>/hudson.plugins.logparser.LogParserPublisher.xml
-			load();
-        	this.scmDescriptor = scmDescriptor;
+            load();
+            this.scmDescriptor = scmDescriptor;
         }
         
         public String getDisplayName() {
@@ -124,20 +122,17 @@ public class ClearCasePublisher extends Publisher implements Serializable {
         /*
          * This method is invoked when the global configuration "save" is pressed
          */
-		@Override
-		public boolean configure(StaplerRequest req) throws FormException {
-			save();			
-	        return true;
-		}
-		
-		
-
+        @Override
+        public boolean configure(StaplerRequest req) throws FormException {
+            save();
+            return true;
+        }
     }
 
     private static final long serialVersionUID = 1L;
 
-	public BuildStepMonitor getRequiredMonitorService() {
-		return BuildStepMonitor.NONE ;
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE ;
 	}
 	
 	

@@ -35,11 +35,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import org.apache.commons.lang.StringUtils;
 
 public class ClearToolSnapshot extends ClearToolExec {
 
     private String optionalMkviewParameters;
+    private String viewPath;
     
     public ClearToolSnapshot(VariableResolver variableResolver, ClearToolLauncher launcher) {
         super(variableResolver, launcher);
@@ -56,41 +60,33 @@ public class ClearToolSnapshot extends ClearToolExec {
      */
     public void setcs(String viewName, String configSpec) throws IOException,
                                                                  InterruptedException {
-        if (configSpec==null) {
-            configSpec = "";
-        }
-        
+        String path = getViewPath(viewName);
         FilePath workspace = launcher.getWorkspace();
-        FilePath configSpecFile = workspace.createTextTempFile("configspec", ".txt", configSpec);
-        String csLocation = "";
-        
-        if (!configSpec.equals("")) {
-            csLocation = ".." + File.separatorChar + configSpecFile.getName();
-            csLocation = PathUtil.convertPathForOS(csLocation, launcher.getLauncher());
-        }
-        
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("setcs");
-        if (!csLocation.equals("")) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        if (configSpec != null) {
+            FilePath configSpecFile = workspace.createTextTempFile("configspec", ".txt", configSpec);
+            String csLocation = ".." + File.separatorChar + configSpecFile.getName();
+            csLocation = PathUtil.convertPathForOS(csLocation, launcher.getLauncher());
             cmd.add(csLocation);
-        }
-        else {
+            InputStream in = new ByteArrayInputStream("yes".getBytes());
+            // Answer yes if there are load rules to remove
+            launcher.run(cmd.toCommandArray(), in, baos, workspace.child(path));
+            configSpecFile.delete();
+        } else {
             cmd.add("-current");
+            launcher.run(cmd.toCommandArray(), null, baos, workspace.child(path));
         }
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-        launcher.run(cmd.toCommandArray(), null, baos, workspace.child(viewName));
-
-        configSpecFile.delete();
+        
         BufferedReader reader = new BufferedReader( new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
         baos.close();
-        String line = reader.readLine();
         StringBuilder builder = new StringBuilder();
-        while (line != null) {
-        if (builder.length() > 0) {
+        for(String line; (line = reader.readLine()) != null ; ) {
+            if (builder.length() > 0) {
                 builder.append("\n");
             }
             builder.append(line);
-            line = reader.readLine();
         }
         reader.close();
         
@@ -99,18 +95,27 @@ public class ClearToolSnapshot extends ClearToolExec {
         }
     }
 
+    private String getViewPath(String viewName) {
+        if (StringUtils.isNotEmpty(this.viewPath)) {
+            return viewPath;
+        } else {
+            return viewName;
+        }
+    }
+
     /**
      * To set the config spec of a snapshot view, you must be in or under the snapshot view root directory.
      * @see http://www.ipnom.com/ClearCase-Commands/setcs.html
      */
-    public void setcsCurrent(String viewName) throws IOException,
+    public void setcsStream(String viewName) throws IOException,
                                                      InterruptedException {
+        String path = getViewPath(viewName);
         FilePath workspace = launcher.getWorkspace();
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("setcs");
-        cmd.add("-current");
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-        launcher.run(cmd.toCommandArray(), null, baos, workspace.child(viewName));
+        cmd.add("-stream");
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        launcher.run(cmd.toCommandArray(), null, baos, workspace.child(path));
         BufferedReader reader = new BufferedReader( new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
         baos.close();
         String line = reader.readLine();
@@ -130,8 +135,9 @@ public class ClearToolSnapshot extends ClearToolExec {
     }
 
     public void mkview(String viewName, String streamSelector) throws IOException, InterruptedException {
-    	boolean isOptionalParamContainsHost = false;
-    	ArgumentListBuilder cmd = new ArgumentListBuilder();
+        String path = getViewPath(viewName);
+        boolean isOptionalParamContainsHost = false;
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("mkview");
         cmd.add("-snapshot");
         if (streamSelector != null) {
@@ -147,8 +153,9 @@ public class ClearToolSnapshot extends ClearToolExec {
             isOptionalParamContainsHost = optionalMkviewParameters.contains("-host");
         }
         
-        if (! isOptionalParamContainsHost)
-        	cmd.add(viewName);
+        if (!isOptionalParamContainsHost) {
+            cmd.add(path);
+        }
         
         launcher.run(cmd.toCommandArray(), null, null, null);
     }
@@ -192,28 +199,28 @@ public class ClearToolSnapshot extends ClearToolExec {
     }
 
     public void update(String viewName, String loadRules) throws IOException, InterruptedException {
+        String path = getViewPath(viewName);
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("update");
         cmd.add("-force");
         cmd.add("-overwrite");
         cmd.add("-log", "NUL");
-        if (loadRules == null) {
-            cmd.add(viewName);
-        } else {
+        if (loadRules != null) {
             cmd.add("-add_loadrules");
             // We're assuming loadRules already has a leading slash or backslash, since the only place
             // I can find where it's called like this is in UcmSnapshotCheckoutAction, where we
             // definitely put the slash/backslash.
-            String loadRulesLocation = PathUtil.convertPathForOS(viewName + loadRules, getLauncher().getLauncher());
-            if (loadRulesLocation.matches(".*\\s.*")) {
-                cmd.addQuoted(loadRulesLocation);
-            }
-            else {
-                cmd.add(loadRulesLocation);
+            for(String loadRule : loadRules.split(";")) {
+                if (loadRule.contains(" ")) {
+                    cmd.addQuoted(loadRule);
+                } else {
+                    cmd.add(loadRule);
+                }
             }
         }
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
-        launcher.run(cmd.toCommandArray(), null, baos, null);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        
+        launcher.run(cmd.toCommandArray(), null, baos, launcher.getWorkspace().child(path));
         BufferedReader reader = new BufferedReader( new InputStreamReader(new ByteArrayInputStream(baos.toByteArray())));
         baos.close();
         String line = reader.readLine();
@@ -244,5 +251,9 @@ public class ClearToolSnapshot extends ClearToolExec {
     
     public void syncronizeViewWithStream(String viewName, String stream) throws IOException, InterruptedException {
         launcher.getListener().fatalError("Snapshot view does not support syncronize");
+    }
+
+    public void setViewPath(String viewPath) {
+        this.viewPath = viewPath;
     }
 }
