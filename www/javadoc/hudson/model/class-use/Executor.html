@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Executor (Hudson main module 1.353 API)
+Uses of Class hudson.model.Executor (Hudson main module 1.354 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-03-29">
+<META NAME="date" CONTENT="2010-04-12">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Executor (Hudson main module 1.353 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Executor (Hudson main module 1.353 API)";
+        parent.document.title="Uses of Class hudson.model.Executor (Hudson main module 1.354 API)";
     }
 }
 </SCRIPT>
@@ -174,7 +174,7 @@ Uses of <A HREF="../../../hudson/model/Executor.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getExecutors()">getExecutors</A></B>()</CODE>
 
 <BR>
@@ -191,15 +191,6 @@ Uses of <A HREF="../../../hudson/model/Executor.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
-             <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is accepted by an executor.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
              <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
 
@@ -209,12 +200,11 @@ Uses of <A HREF="../../../hudson/model/Executor.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)">taskCompleted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
-              <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
-              long&nbsp;durationMS)</CODE>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskAccepted(hudson.model.Executor, hudson.model.Queue.Task)">taskAccepted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+             <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is accepted by an executor.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -229,10 +219,9 @@ Uses of <A HREF="../../../hudson/model/Executor.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
-                          <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
-                          long&nbsp;durationMS,
-                          java.lang.Throwable&nbsp;problems)</CODE>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskCompleted(hudson.model.Executor, hudson.model.Queue.Task, long)">taskCompleted</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+              <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+              long&nbsp;durationMS)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
@@ -243,7 +232,18 @@ Uses of <A HREF="../../../hudson/model/Executor.html" title="class in hudson.mod
 <TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
                           <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                           long&nbsp;durationMS,
-                          java.lang.Throwable&nbsp;problems)</CODE>
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;problems)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
+                          <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+                          long&nbsp;durationMS,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;problems)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
@@ -290,7 +290,7 @@ Uses of <A HREF="../../../hudson/model/Executor.html" title="class in hudson.mod
 <TD><CODE><B>SlaveComputer.</B><B><A HREF="../../../hudson/slaves/SlaveComputer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
                           <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                           long&nbsp;durationMS,
-                          java.lang.Throwable&nbsp;problems)</CODE>
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;problems)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
