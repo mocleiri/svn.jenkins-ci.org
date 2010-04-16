@@ -5,8 +5,12 @@ import hudson.tasks.test.AbstractTestResultAction;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Represents a job to be shown in a view. Based heavily on the XFPanelEntry in
@@ -248,14 +252,30 @@ public final class ViewEntry
     {
         Run<?, ?> run = this.job.getLastBuild();
         String culprit = " - ";
-        if (run instanceof AbstractBuild<?, ?>)
+        Set<String> culprits = new HashSet<String>();
+        while (run != null)
         {
-            AbstractBuild<?, ?> build = (AbstractBuild<?, ?>) run;
-            Iterator<User> it = build.getCulprits().iterator();
-            while (it.hasNext())
+            if (run instanceof AbstractBuild<?, ?>)
             {
-                culprit = it.next().getFullName();
+
+                AbstractBuild<?, ?> build = (AbstractBuild<?, ?>) run;
+
+                Iterator<User> it = build.getCulprits().iterator();
+                while (it.hasNext())
+                {
+                    culprits.add(it.next().getFullName());
+                }
             }
+            run = run.getPreviousBuild();
+            if (Result.SUCCESS.equals(run.getResult()))
+            {
+                // don't look for culprits in successful builds.
+                run = null;
+            }
+        }
+        if (!culprits.isEmpty())
+        {
+            culprit = StringUtils.join(culprits, ", ");
         }
         return culprit;
     }
