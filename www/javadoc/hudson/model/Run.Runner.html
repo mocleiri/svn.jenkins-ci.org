@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run.Runner (Hudson main module 1.354 API)
+Run.Runner (Hudson main module 1.355 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-12">
+<META NAME="date" CONTENT="2010-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run.Runner (Hudson main module 1.354 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run.Runner (Hudson main module 1.354 API)";
+        parent.document.title="Run.Runner (Hudson main module 1.355 API)";
     }
 }
 </SCRIPT>
@@ -236,7 +236,7 @@ public abstract void <B>post</B>(<A HREF="../../hudson/model/BuildListener.html"
 <DL>
 <DD>Performs the post-build action.
  <p>
- This method is called after the status of the build is determined.
+ This method is called after <A HREF="../../hudson/model/Run.Runner.html#run(hudson.model.BuildListener)">the main portion of the build is completed.</A>
  This is a good opportunity to do notifications based on the result
  of the build. When this method is called, the build is not really
  finalized yet, and the build is still considered in progress --- for example,

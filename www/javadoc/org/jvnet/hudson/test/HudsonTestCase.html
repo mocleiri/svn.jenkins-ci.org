@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.354 API)
+HudsonTestCase (Hudson main module 1.355 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-12">
+<META NAME="date" CONTENT="2010-04-17">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.354 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.354 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.355 API)";
     }
 }
 </SCRIPT>
@@ -360,6 +360,15 @@ R</CODE></FONT></TD>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Assert that the specifed page can be served with a "good" HTTP status,
  eg, the page is not missing and can be served without a server error</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertHelpExists(java.lang.Class, java.lang.String)">assertHelpExists</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;properties)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that help files exist for the specified properties of the given instance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2099,6 +2108,26 @@ public void <B>assertStringContains</B>(<A HREF="http://java.sun.com/j2se/1.5.0/
 </DL>
 <HR>
 
+<A NAME="assertHelpExists(java.lang.Class, java.lang.String)"><!-- --></A><H3>
+assertHelpExists</H3>
+<PRE>
+public void <B>assertHelpExists</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&gt;&nbsp;type,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;properties)
+                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Asserts that help files exist for the specified properties of the given instance.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - The describable class type that should have the associated help files.<DD><CODE>properties</CODE> - ','-separated list of properties whose help files should exist.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="submit(com.gargoylesoftware.htmlunit.html.HtmlForm)"><!-- --></A><H3>
 submit</H3>
 <PRE>
@@ -2106,6 +2135,8 @@ public com.gargoylesoftware.htmlunit.html.HtmlPage <B>submit</B>(com.gargoylesof
                                                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
 <DL>
 <DD>Submits the form.
+
+ Plain <CODE>HtmlForm.submit()</CODE> doesn't work correctly due to the use of YUI in Hudson.
 <P>
 <DD><DL>
 </DL>
