@@ -4,11 +4,40 @@ updateCenter.post(
   "core":   {
     "buildDate": "Apr 17, 2010",
     "name": "core",
-    "url": "http://hudson-ci.org/download/war/1.355/hudson.war",
+    "url": "http://updates.hudson-labs.org/download/war/1.355/hudson.war",
     "version": "1.355"
   },
   "id": "default",
   "plugins":   {
+    "PerfPublisher":     {
+      "buildDate": "Apr 18, 2010",
+      "dependencies":       [
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.1"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.354"
+        }
+      ],
+      "developers": [      {
+        "email": "gbossert@gmail.com",
+        "name": "Georges Bossert"
+      }],
+      "excerpt": "This plugin generates global and trend reports for tests results analysis. Based on an open XML tests results format, the plugin parses the generated files and publish statistics, reports and analysis on the current health of the project.",
+      "labels": ["report"],
+      "name": "PerfPublisher",
+      "previousTimestamp": "2010-04-18T20:51:00.00Z",
+      "releaseTimestamp": "2010-04-18T20:33:24.00Z",
+      "requiredCore": "1.354",
+      "title": "PerfPublisher Plugin",
+      "url": "http://updates.hudson-labs.org/download/plugins/PerfPublisher/7.98/PerfPublisher.hpi",
+      "version": "7.98",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PerfPublisher+Plugin"
+    },
     "SCTMExecutor":     {
       "buildDate": "Mar 06, 2010",
       "dependencies": [],
@@ -24,7 +53,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-07T04:47:22.00Z",
       "requiredCore": "1.345",
       "title": "SCTMExecutor",
-      "url": "http://hudson-ci.org/download/plugins/SCTMExecutor/1.5.1/SCTMExecutor.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/SCTMExecutor/1.5.1/SCTMExecutor.hpi",
       "version": "1.5.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SCTMExecutor"
     },
@@ -39,7 +68,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-15T19:01:08.00Z",
       "requiredCore": "1.337",
       "title": "Schmant Plugin",
-      "url": "http://hudson-ci.org/download/plugins/Schmant/1.1.4/Schmant.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/Schmant/1.1.4/Schmant.hpi",
       "version": "1.1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Schmant+Plugin"
     },
@@ -57,7 +86,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-27T17:48:14.00Z",
       "requiredCore": "1.318",
       "title": "URL SCM",
-      "url": "http://hudson-ci.org/download/plugins/URLSCM/1.5/URLSCM.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/URLSCM/1.5/URLSCM.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/URL+SCM"
     },
@@ -72,7 +101,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-02T18:28:30.00Z",
       "requiredCore": "1.345",
       "title": "Accurev Plugin",
-      "url": "http://hudson-ci.org/download/plugins/accurev/0.6.11/accurev.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/accurev/0.6.11/accurev.hpi",
       "version": "0.6.11",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Accurev+Plugin"
     },
@@ -87,17 +116,17 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-08T19:53:50.00Z",
       "requiredCore": "1.318",
       "title": "Active Directory plugin",
-      "url": "http://hudson-ci.org/download/plugins/active-directory/1.16/active-directory.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/active-directory/1.16/active-directory.hpi",
       "version": "1.16",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Active+Directory+plugin"
     },
     "analysis-collector":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 29, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.5"
+          "version": "1.6"
         },
                 {
           "name": "maven-plugin",
@@ -150,16 +179,16 @@ updateCenter.post(
         "report"
       ],
       "name": "analysis-collector",
-      "previousTimestamp": "2010-03-17T03:52:04.00Z",
-      "releaseTimestamp": "2010-03-30T23:44:28.00Z",
+      "previousTimestamp": "2010-03-30T23:44:28.00Z",
+      "releaseTimestamp": "2010-04-30T05:36:30.00Z",
       "requiredCore": "1.350",
       "title": "Analysis Collector Plugin",
-      "url": "http://hudson-ci.org/download/plugins/analysis-collector/1.3/analysis-collector.hpi",
-      "version": "1.3",
+      "url": "http://updates.hudson-labs.org/download/plugins/analysis-collector/1.4/analysis-collector.hpi",
+      "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Analysis+Collector+Plugin"
     },
     "analysis-core":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 29, 2010",
       "dependencies":       [
                 {
           "name": "maven-plugin",
@@ -182,12 +211,12 @@ updateCenter.post(
         "report"
       ],
       "name": "analysis-core",
-      "previousTimestamp": "2010-03-16T04:31:36.00Z",
-      "releaseTimestamp": "2010-03-30T17:39:16.00Z",
+      "previousTimestamp": "2010-03-30T17:39:16.00Z",
+      "releaseTimestamp": "2010-04-30T02:31:36.00Z",
       "requiredCore": "1.350",
       "title": "Static Code Analysis Plug-ins",
-      "url": "http://hudson-ci.org/download/plugins/analysis-core/1.5/analysis-core.hpi",
-      "version": "1.5",
+      "url": "http://updates.hudson-labs.org/download/plugins/analysis-core/1.6/analysis-core.hpi",
+      "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Static+Code+Analysis+Plug-ins"
     },
     "android-emulator":     {
@@ -209,7 +238,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-06T20:14:20.00Z",
       "requiredCore": "1.340",
       "title": "Android Emulator Plugin",
-      "url": "http://hudson-ci.org/download/plugins/android-emulator/1.0.3/android-emulator.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/android-emulator/1.0.3/android-emulator.hpi",
       "version": "1.0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Android+Emulator+Plugin"
     },
@@ -239,7 +268,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-05T02:24:06.00Z",
       "requiredCore": "1.336",
       "title": "Artifactory Plugin",
-      "url": "http://hudson-ci.org/download/plugins/artifactory/1.0.7/artifactory.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/artifactory/1.0.7/artifactory.hpi",
       "version": "1.0.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Artifactory+Plugin"
     },
@@ -254,7 +283,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-22T03:24:06.00Z",
       "requiredCore": "1.318",
       "title": "Audit Trail Plugin",
-      "url": "http://hudson-ci.org/download/plugins/audit-trail/1.4/audit-trail.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/audit-trail/1.4/audit-trail.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Audit+Trail+Plugin"
     },
@@ -275,7 +304,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-29T01:32:12.00Z",
       "requiredCore": "1.318",
       "title": "Backlog Plugin",
-      "url": "http://hudson-ci.org/download/plugins/backlog/1.1/backlog.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/backlog/1.1/backlog.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Backlog+Plugin"
     },
@@ -290,12 +319,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-22T00:46:08.00Z",
       "requiredCore": "1.318",
       "title": "Backup Plugin",
-      "url": "http://hudson-ci.org/download/plugins/backup/1.4.1/backup.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/backup/1.4.1/backup.hpi",
       "version": "1.4.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Backup+Plugin"
     },
     "bamboo-notifier":     {
-      "buildDate": "Dec 30, 2009",
+      "buildDate": "Apr 22, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "asgeirn",
@@ -305,11 +334,12 @@ updateCenter.post(
       "excerpt": "Trigger a Bamboo build upon successful completion of a Hudson job.",
       "labels": ["notifier"],
       "name": "bamboo-notifier",
-      "releaseTimestamp": "2009-12-31T00:05:20.00Z",
-      "requiredCore": "1.339",
+      "previousTimestamp": "2009-12-31T00:05:20.00Z",
+      "releaseTimestamp": "2010-04-23T06:49:02.00Z",
+      "requiredCore": "1.355",
       "title": "Bamboo Notifier",
-      "url": "http://hudson-ci.org/download/plugins/bamboo-notifier/1.0/bamboo-notifier.hpi",
-      "version": "1.0",
+      "url": "http://updates.hudson-labs.org/download/plugins/bamboo-notifier/1.1/bamboo-notifier.hpi",
+      "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Bamboo+Notifier"
     },
     "batch-task":     {
@@ -335,7 +365,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-10T19:37:50.00Z",
       "requiredCore": "1.341",
       "title": "Batch Task Plugin",
-      "url": "http://hudson-ci.org/download/plugins/batch-task/1.13/batch-task.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/batch-task/1.13/batch-task.hpi",
       "version": "1.13",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Batch+Task+Plugin"
     },
@@ -360,7 +390,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-01T23:21:16.00Z",
       "requiredCore": "1.351",
       "title": "Bazaar Plugin",
-      "url": "http://hudson-ci.org/download/plugins/bazaar/1.6/bazaar.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/bazaar/1.6/bazaar.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Bazaar+Plugin"
     },
@@ -378,7 +408,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-27T18:40:32.00Z",
       "requiredCore": "1.318",
       "title": "BitKeeper Plugin",
-      "url": "http://hudson-ci.org/download/plugins/bitkeeper/1.5/bitkeeper.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/bitkeeper/1.5/bitkeeper.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/BitKeeper+Plugin"
     },
@@ -397,7 +427,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-21T20:26:24.00Z",
       "requiredCore": "1.323",
       "title": "Blame Upstream Committers Plugin",
-      "url": "http://hudson-ci.org/download/plugins/blame-upstream-commiters/1.1/blame-upstream-commiters.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/blame-upstream-commiters/1.1/blame-upstream-commiters.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Blame+Upstream+Committers+Plugin"
     },
@@ -415,7 +445,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-10-15T23:24:54.00Z",
       "requiredCore": "1.328",
       "title": "BruceSchneier Plugin",
-      "url": "http://hudson-ci.org/download/plugins/bruceschneier/0.1/bruceschneier.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/bruceschneier/0.1/bruceschneier.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/BruceSchneier+Plugin"
     },
@@ -434,7 +464,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-07T06:05:34.00Z",
       "requiredCore": "1.352",
       "title": "Buckminster PlugIn",
-      "url": "http://hudson-ci.org/download/plugins/buckminster/1.0.2/buckminster.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/buckminster/1.0.2/buckminster.hpi",
       "version": "1.0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Buckminster+PlugIn"
     },
@@ -449,12 +479,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T01:33:34.00Z",
       "requiredCore": "1.318",
       "title": "Bugzilla Plugin",
-      "url": "http://hudson-ci.org/download/plugins/bugzilla/1.4/bugzilla.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/bugzilla/1.4/bugzilla.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Bugzilla+Plugin"
     },
     "build-publisher":     {
-      "buildDate": "Dec 28, 2009",
+      "buildDate": "Dec 29, 2009",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
@@ -468,10 +498,10 @@ updateCenter.post(
       "labels": ["upload"],
       "name": "build-publisher",
       "previousTimestamp": "2009-08-30T03:46:12.00Z",
-      "releaseTimestamp": "2009-12-29T02:09:34.00Z",
+      "releaseTimestamp": "2009-12-29T17:21:10.00Z",
       "requiredCore": "1.323",
       "title": "Build Publisher Plugin",
-      "url": "http://hudson-ci.org/download/plugins/build-publisher/1.8/build-publisher.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/build-publisher/1.8/build-publisher.hpi",
       "version": "1.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Build+Publisher+Plugin"
     },
@@ -489,7 +519,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T01:15:16.00Z",
       "requiredCore": "1.318",
       "title": "Build-timeout Plugin",
-      "url": "http://hudson-ci.org/download/plugins/build-timeout/1.6/build-timeout.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/build-timeout/1.6/build-timeout.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Build-timeout+Plugin"
     },
@@ -505,10 +535,10 @@ updateCenter.post(
       "labels": ["notifier"],
       "name": "campfire",
       "previousTimestamp": "2009-10-19T19:10:54.00Z",
-      "releaseTimestamp": "2009-12-22T22:12:10.00Z",
+      "releaseTimestamp": "2009-12-23T00:01:06.00Z",
       "requiredCore": "1.319",
       "title": "Campfire Plugin",
-      "url": "http://hudson-ci.org/download/plugins/campfire/1.1/campfire.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/campfire/1.1/campfire.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Campfire+Plugin"
     },
@@ -523,11 +553,11 @@ updateCenter.post(
       "excerpt": "This plugin lets Hudson authenticate users via your organization's Central Authentication Service (<a href='http://www.jasig.org/cas'>CAS<\/a>), for single-sign-on. ",
       "labels": ["user"],
       "name": "cas1",
-      "previousTimestamp": "2010-02-27T02:13:22.00Z",
+      "previousTimestamp": "2010-03-05T20:23:56.00Z",
       "releaseTimestamp": "2010-03-09T17:55:46.00Z",
       "requiredCore": "1.349",
       "title": "CAS1 Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cas1/1.0.1/cas1.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cas1/1.0.1/cas1.hpi",
       "version": "1.0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CAS1+Plugin"
     },
@@ -542,7 +572,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-04-16T05:28:52.00Z",
       "requiredCore": "1.299",
       "title": "CCCC Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cccc/0.2/cccc.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cccc/0.2/cccc.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CCCC+Plugin"
     },
@@ -557,17 +587,17 @@ updateCenter.post(
       "releaseTimestamp": "2009-08-19T22:38:54.00Z",
       "requiredCore": "1.292",
       "title": "Change Log History Plugin",
-      "url": "http://hudson-ci.org/download/plugins/changelog-history/1.1/changelog-history.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/changelog-history/1.1/changelog-history.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Change+Log+History+Plugin"
     },
     "checkstyle":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 29, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.5"
+          "version": "1.6"
         },
                 {
           "name": "maven-plugin",
@@ -590,12 +620,12 @@ updateCenter.post(
         "report"
       ],
       "name": "checkstyle",
-      "previousTimestamp": "2010-03-16T07:13:48.00Z",
-      "releaseTimestamp": "2010-03-30T18:21:06.00Z",
+      "previousTimestamp": "2010-03-30T18:21:06.00Z",
+      "releaseTimestamp": "2010-04-30T03:04:36.00Z",
       "requiredCore": "1.350",
       "title": "Checkstyle Plugin",
-      "url": "http://hudson-ci.org/download/plugins/checkstyle/3.4/checkstyle.hpi",
-      "version": "3.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/checkstyle/3.5/checkstyle.hpi",
+      "version": "3.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Checkstyle+Plugin"
     },
     "chucknorris":     {
@@ -609,7 +639,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-22T06:36:38.00Z",
       "requiredCore": "1.319",
       "title": "ChuckNorris Plugin",
-      "url": "http://hudson-ci.org/download/plugins/chucknorris/0.4/chucknorris.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/chucknorris/0.4/chucknorris.hpi",
       "version": "0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ChuckNorris+Plugin"
     },
@@ -672,7 +702,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-24T22:00:50.00Z",
       "requiredCore": "1.339",
       "title": "The Continuous Integration Game plugin",
-      "url": "http://hudson-ci.org/download/plugins/ci-game/1.17/ci-game.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ci-game/1.17/ci-game.hpi",
       "version": "1.17",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/The+Continuous+Integration+Game+plugin"
     },
@@ -687,7 +717,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-29T06:34:58.00Z",
       "requiredCore": "1.334",
       "title": "Claim plugin",
-      "url": "http://hudson-ci.org/download/plugins/claim/1.6/claim.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/claim/1.6/claim.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Claim+plugin"
     },
@@ -707,7 +737,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-16T17:38:54.00Z",
       "requiredCore": "1.324",
       "title": "ClearCase Plugin",
-      "url": "http://hudson-ci.org/download/plugins/clearcase/1.1.1/clearcase.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/clearcase/1.1.1/clearcase.hpi",
       "version": "1.1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ClearCase+Plugin"
     },
@@ -729,7 +759,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-07T08:39:28.00Z",
       "requiredCore": "1.336",
       "title": "ClearCase Release Plugin",
-      "url": "http://hudson-ci.org/download/plugins/clearcase-release/0.1/clearcase-release.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/clearcase-release/0.1/clearcase-release.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ClearCase+Release+Plugin"
     },
@@ -748,7 +778,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-02T18:39:40.00Z",
       "requiredCore": "1.312",
       "title": "ClearCase UCM Baseline Plugin",
-      "url": "http://hudson-ci.org/download/plugins/clearcase-ucm-baseline/1.5.1/clearcase-ucm-baseline.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/clearcase-ucm-baseline/1.5.1/clearcase-ucm-baseline.hpi",
       "version": "1.5.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ClearCase+UCM+Baseline+Plugin"
     },
@@ -767,7 +797,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-14T16:30:42.00Z",
       "requiredCore": "1.350",
       "title": "Clone Workspace SCM Plugin",
-      "url": "http://hudson-ci.org/download/plugins/clone-workspace-scm/0.2/clone-workspace-scm.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/clone-workspace-scm/0.2/clone-workspace-scm.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Clone+Workspace+SCM+Plugin"
     },
@@ -785,23 +815,23 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-08T16:56:42.00Z",
       "requiredCore": "1.348",
       "title": "Clover Plugin",
-      "url": "http://hudson-ci.org/download/plugins/clover/3.0.1/clover.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/clover/3.0.1/clover.hpi",
       "version": "3.0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Clover+Plugin"
     },
     "cmakebuilder":     {
-      "buildDate": "Mar 26, 2010",
+      "buildDate": "Apr 25, 2010",
       "dependencies": [],
       "developers": [{"developerId": "vvk"}],
       "excerpt": "This plugin can be used to build <a href='http://cmake.org/'>cmake<\/a> based projects within Hudson.",
       "labels": ["builder"],
       "name": "cmakebuilder",
-      "previousTimestamp": "2009-12-22T20:36:52.00Z",
-      "releaseTimestamp": "2010-03-27T00:28:06.00Z",
+      "previousTimestamp": "2010-04-17T20:07:56.00Z",
+      "releaseTimestamp": "2010-04-25T18:21:34.00Z",
       "requiredCore": "1.343",
       "title": "cmakebuilder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cmakebuilder/1.2/cmakebuilder.hpi",
-      "version": "1.2",
+      "url": "http://updates.hudson-labs.org/download/plugins/cmakebuilder/1.4/cmakebuilder.hpi",
+      "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/cmakebuilder+Plugin"
     },
     "cmvc":     {
@@ -819,7 +849,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T23:19:14.00Z",
       "requiredCore": "1.318",
       "title": "CMVC Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cmvc/0.3/cmvc.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cmvc/0.3/cmvc.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CMVC+Plugin"
     },
@@ -841,7 +871,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-22T19:06:54.00Z",
       "requiredCore": "1.319",
       "title": "Cobertura Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cobertura/0.8.11/cobertura.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cobertura/0.8.11/cobertura.hpi",
       "version": "0.8.11",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cobertura+Plugin"
     },
@@ -866,16 +896,16 @@ updateCenter.post(
       "excerpt": "This plugin generates the trend report for <a href='http://carbidehelp.nokia.com/help/index.jsp?topic=/com.nokia.carbide.cpp.codescanner/html/codescanner.htm'>Codescanner<\/a>, a tool which uses static analysis to look for bugs, hints and other useful information in Symbian C++ source code. ",
       "labels": ["report"],
       "name": "codescanner",
-      "previousTimestamp": "2010-02-03T19:55:20.00Z",
+      "previousTimestamp": "2010-02-05T08:40:44.00Z",
       "releaseTimestamp": "2010-03-19T00:26:20.00Z",
       "requiredCore": "1.350",
       "title": "CodeScanner Plugin",
-      "url": "http://hudson-ci.org/download/plugins/codescanner/0.10/codescanner.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/codescanner/0.10/codescanner.hpi",
       "version": "0.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CodeScanner+Plugin"
     },
     "collabnet":     {
-      "buildDate": "Mar 26, 2010",
+      "buildDate": "Apr 22, 2010",
       "dependencies":       [
                 {
           "name": "promoted-builds",
@@ -897,12 +927,12 @@ updateCenter.post(
       "excerpt": "The CollabNet Plugin is an integration with <a href='http://www.open.collab.net/products/sfee/'>CollabNet TeamForge<\/a>.",
       "labels": ["external"],
       "name": "collabnet",
-      "previousTimestamp": "2010-02-26T18:12:16.00Z",
-      "releaseTimestamp": "2010-03-26T21:13:38.00Z",
+      "previousTimestamp": "2010-03-26T21:13:38.00Z",
+      "releaseTimestamp": "2010-04-22T16:23:52.00Z",
       "requiredCore": "1.338",
       "title": "CollabNet Plugin",
-      "url": "http://hudson-ci.org/download/plugins/collabnet/1.1.4/collabnet.hpi",
-      "version": "1.1.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/collabnet/1.1.5/collabnet.hpi",
+      "version": "1.1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CollabNet+Plugin"
     },
     "configurationslicing":     {
@@ -920,7 +950,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-07T18:53:10.00Z",
       "requiredCore": "1.341",
       "title": "Configuration Slicing Plugin",
-      "url": "http://hudson-ci.org/download/plugins/configurationslicing/1.16/configurationslicing.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/configurationslicing/1.16/configurationslicing.hpi",
       "version": "1.16",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Configuration+Slicing+Plugin"
     },
@@ -939,7 +969,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-08T19:26:00.00Z",
       "requiredCore": "1.312",
       "title": "Copy To Slave Plugin",
-      "url": "http://hudson-ci.org/download/plugins/copy-to-slave/1.2/copy-to-slave.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/copy-to-slave/1.2/copy-to-slave.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Copy+To+Slave+Plugin"
     },
@@ -962,12 +992,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-15T07:53:30.00Z",
       "requiredCore": "1.349",
       "title": "CopyArchiver Plugin",
-      "url": "http://hudson-ci.org/download/plugins/copyarchiver/0.4.3/copyarchiver.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/copyarchiver/0.4.3/copyarchiver.hpi",
       "version": "0.4.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CopyArchiver+Plugin"
     },
     "copyartifact":     {
-      "buildDate": "Mar 18, 2010",
+      "buildDate": "Apr 17, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "mindless",
@@ -977,12 +1007,12 @@ updateCenter.post(
       "excerpt": "Adds a build step to copy artifacts from another project.",
       "labels": ["builder"],
       "name": "copyartifact",
-      "previousTimestamp": "2010-03-08T05:11:32.00Z",
-      "releaseTimestamp": "2010-03-18T15:53:58.00Z",
-      "requiredCore": "1.326",
+      "previousTimestamp": "2010-03-18T15:53:58.00Z",
+      "releaseTimestamp": "2010-04-17T15:49:10.00Z",
+      "requiredCore": "1.355",
       "title": "Copy Artifact Plugin",
-      "url": "http://hudson-ci.org/download/plugins/copyartifact/1.1/copyartifact.hpi",
-      "version": "1.1",
+      "url": "http://updates.hudson-labs.org/download/plugins/copyartifact/1.2/copyartifact.hpi",
+      "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Copy+Artifact+Plugin"
     },
     "cppcheck":     {
@@ -1001,7 +1031,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-29T07:54:16.00Z",
       "requiredCore": "1.352",
       "title": "Cppcheck Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cppcheck/0.10/cppcheck.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cppcheck/0.10/cppcheck.hpi",
       "version": "0.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cppcheck+Plugin"
     },
@@ -1019,31 +1049,50 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-03T15:45:58.00Z",
       "requiredCore": "1.318",
       "title": "CPPNCSS+Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cppncss/1.0-beta-4/cppncss.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cppncss/1.0-beta-4/cppncss.hpi",
       "version": "1.0-beta-4",
       "wiki": "http://wiki.hudson-ci.org//pages/viewpage.action?pageId=42467768"
     },
     "cpptest":     {
-      "buildDate": "Feb 25, 2010",
-      "dependencies": [      {
-        "name": "xunit",
-        "optional": false,
-        "version": "0.6.1"
-      }],
-      "developers": [      {
-        "developerId": "gbois",
-        "email": "gbois@dev.java.net",
-        "name": "Gregory Boissinot"
-      }],
+      "buildDate": "Apr 23, 2010",
+      "dependencies":       [
+                {
+          "name": "xunit",
+          "optional": false,
+          "version": "0.6.1"
+        },
+                {
+          "name": "analysis-core",
+          "optional": false,
+          "version": "1.5"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.350"
+        }
+      ],
+      "developers":       [
+                {
+          "developerId": "gbois",
+          "email": "gbois@dev.java.net",
+          "name": "Gregory Boissinot"
+        },
+                {
+          "developerId": "NQH",
+          "email": "quanghuycvut@yahoo.com",
+          "name": "N. Q. Huy"
+        }
+      ],
       "excerpt": "This plugin allows you publish <a href='http://www.parasoft.com/jsp/products/home.jsp?product=Wizard&'>Parasoft C++test<\/a> test results.  This plugin makes it possible to import Parasoft C++test reports from each build into Hudson so they are displayed with a trend graph and details about which tests that failed. ",
       "labels": ["report"],
       "name": "cpptest",
-      "previousTimestamp": "2009-11-25T06:08:44.00Z",
-      "releaseTimestamp": "2010-02-25T10:14:26.00Z",
-      "requiredCore": "1.347",
+      "previousTimestamp": "2010-02-25T10:14:26.00Z",
+      "releaseTimestamp": "2010-04-23T16:43:22.00Z",
+      "requiredCore": "1.350",
       "title": "Cpptest Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cpptest/0.3/cpptest.hpi",
-      "version": "0.3",
+      "url": "http://updates.hudson-labs.org/download/plugins/cpptest/0.4/cpptest.hpi",
+      "version": "0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cpptest+Plugin"
     },
     "cppunit":     {
@@ -1066,7 +1115,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-29T04:52:56.00Z",
       "requiredCore": "1.352",
       "title": "CppUnit Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cppunit/1.4/cppunit.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cppunit/1.4/cppunit.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CppUnit+Plugin"
     },
@@ -1084,7 +1133,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T17:49:48.00Z",
       "requiredCore": "1.319",
       "title": "Crap4J Plugin",
-      "url": "http://hudson-ci.org/download/plugins/crap4j/0.7/crap4j.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/crap4j/0.7/crap4j.hpi",
       "version": "0.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Crap4J+Plugin"
     },
@@ -1103,7 +1152,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-09T00:57:30.00Z",
       "requiredCore": "1.353",
       "title": "Create Job Advanced Plugin",
-      "url": "http://hudson-ci.org/download/plugins/createjobadvanced/1.3/createjobadvanced.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/createjobadvanced/1.3/createjobadvanced.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Create+Job+Advanced+Plugin"
     },
@@ -1121,7 +1170,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-16T22:51:28.00Z",
       "requiredCore": "1.350",
       "title": "Cron Column Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cron_column/1.002/cron_column.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cron_column/1.002/cron_column.hpi",
       "version": "1.002",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cron+Column+Plugin"
     },
@@ -1145,7 +1194,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T01:58:06.00Z",
       "requiredCore": "1.318",
       "title": "Crowd Plugin",
-      "url": "http://hudson-ci.org/download/plugins/crowd/1.1/crowd.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/crowd/1.1/crowd.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Crowd+Plugin"
     },
@@ -1160,7 +1209,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-26T00:05:36.00Z",
       "requiredCore": "1.338",
       "title": "CVS Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cvs/1.1/cvs.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cvs/1.1/cvs.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CVS+Plugin"
     },
@@ -1189,7 +1238,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-29T01:44:12.00Z",
       "requiredCore": "1.319",
       "title": "CVS Tagging Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cvs-tag/1.5/cvs-tag.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cvs-tag/1.5/cvs-tag.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CVS+Tagging+Plugin"
     },
@@ -1207,7 +1256,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T18:41:40.00Z",
       "requiredCore": "1.318",
       "title": "Cygpath Plugin",
-      "url": "http://hudson-ci.org/download/plugins/cygpath/1.3/cygpath.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/cygpath/1.3/cygpath.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Cygpath+Plugin"
     },
@@ -1233,7 +1282,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-02T16:26:52.00Z",
       "requiredCore": "1.347",
       "title": "Dashboard View",
-      "url": "http://hudson-ci.org/download/plugins/dashboard-view/1.5/dashboard-view.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/dashboard-view/1.5/dashboard-view.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dashboard+View"
     },
@@ -1256,7 +1305,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-16T00:07:28.00Z",
       "requiredCore": "1.324",
       "title": "dbCharts Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dbCharts/0.3/dbCharts.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/dbCharts/0.3/dbCharts.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/dbCharts+Plugin"
     },
@@ -1281,7 +1330,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-15T17:23:26.00Z",
       "requiredCore": "1.319",
       "title": "Dependency Analyzer Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dependencyanalyzer/0.5/dependencyanalyzer.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/dependencyanalyzer/0.5/dependencyanalyzer.hpi",
       "version": "0.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dependency+Analyzer+Plugin"
     },
@@ -1296,7 +1345,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-17T01:27:52.00Z",
       "requiredCore": "1.319",
       "title": "Deploy Plugin",
-      "url": "http://hudson-ci.org/download/plugins/deploy/1.5/deploy.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/deploy/1.5/deploy.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Deploy+Plugin"
     },
@@ -1311,12 +1360,12 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-02T04:02:52.00Z",
       "requiredCore": "1.335",
       "title": "Description Setter Plugin",
-      "url": "http://hudson-ci.org/download/plugins/description-setter/1.6/description-setter.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/description-setter/1.6/description-setter.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Description+Setter+Plugin"
     },
     "dimensionsscm":     {
-      "buildDate": "Apr 14, 2010",
+      "buildDate": "Apr 30, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "TPayne",
@@ -1331,12 +1380,12 @@ updateCenter.post(
         "scm"
       ],
       "name": "dimensionsscm",
-      "previousTimestamp": "2010-04-08T22:31:38.00Z",
-      "releaseTimestamp": "2010-04-14T22:06:30.00Z",
+      "previousTimestamp": "2010-04-27T01:31:38.00Z",
+      "releaseTimestamp": "2010-05-01T00:59:22.00Z",
       "requiredCore": "1.344",
       "title": "Dimensions Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dimensionsscm/0.7.3/dimensionsscm.hpi",
-      "version": "0.7.3",
+      "url": "http://updates.hudson-labs.org/download/plugins/dimensionsscm/0.7.6/dimensionsscm.hpi",
+      "version": "0.7.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dimensions+Plugin"
     },
     "disk-usage":     {
@@ -1353,7 +1402,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-10T19:53:50.00Z",
       "requiredCore": "1.339",
       "title": "Disk Usage Plugin",
-      "url": "http://hudson-ci.org/download/plugins/disk-usage/0.10/disk-usage.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/disk-usage/0.10/disk-usage.hpi",
       "version": "0.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Disk+Usage+Plugin"
     },
@@ -1370,7 +1419,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-07-15T19:05:02.00Z",
       "requiredCore": "1.315",
       "title": "DistFork Plugin",
-      "url": "http://hudson-ci.org/download/plugins/distfork/1.0/distfork.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/distfork/1.0/distfork.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DistFork+Plugin"
     },
@@ -1396,7 +1445,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-15T17:28:20.00Z",
       "requiredCore": "1.319",
       "title": "DocLinks Plugin",
-      "url": "http://hudson-ci.org/download/plugins/doclinks/0.3/doclinks.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/doclinks/0.3/doclinks.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DocLinks+Plugin"
     },
@@ -1410,7 +1459,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-09T04:53:02.00Z",
       "requiredCore": "1.323",
       "title": "DOS Trigger",
-      "url": "http://hudson-ci.org/download/plugins/dos-trigger/1.0/dos-trigger.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/dos-trigger/1.0/dos-trigger.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DOS+Trigger"
     },
@@ -1439,7 +1488,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-27T02:51:46.00Z",
       "requiredCore": "1.335",
       "title": "Downstream buildview plugin",
-      "url": "http://hudson-ci.org/download/plugins/downstream-buildview/1.4/downstream-buildview.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/downstream-buildview/1.4/downstream-buildview.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Downstream+buildview+plugin"
     },
@@ -1458,7 +1507,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-28T20:08:36.00Z",
       "requiredCore": "1.341",
       "title": "Downstream-Ext Plugin",
-      "url": "http://hudson-ci.org/download/plugins/downstream-ext/1.6/downstream-ext.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/downstream-ext/1.6/downstream-ext.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Downstream-Ext+Plugin"
     },
@@ -1480,7 +1529,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-30T06:58:30.00Z",
       "requiredCore": "1.352",
       "title": "Doxygen Plugin",
-      "url": "http://hudson-ci.org/download/plugins/doxygen/0.6/doxygen.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/doxygen/0.6/doxygen.hpi",
       "version": "0.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Doxygen+Plugin"
     },
@@ -1494,17 +1543,17 @@ updateCenter.post(
       "releaseTimestamp": "2009-05-27T05:33:24.00Z",
       "requiredCore": "1.307",
       "title": "Drools Plugin",
-      "url": "http://hudson-ci.org/download/plugins/drools/0.1/drools.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/drools/0.1/drools.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Drools+Plugin"
     },
     "dry":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 29, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.5"
+          "version": "1.6"
         },
                 {
           "name": "maven-plugin",
@@ -1527,12 +1576,12 @@ updateCenter.post(
         "report"
       ],
       "name": "dry",
-      "previousTimestamp": "2010-03-16T07:23:14.00Z",
-      "releaseTimestamp": "2010-03-30T18:39:44.00Z",
+      "previousTimestamp": "2010-03-30T18:39:44.00Z",
+      "releaseTimestamp": "2010-04-30T03:22:32.00Z",
       "requiredCore": "1.350",
       "title": "DRY Plugin",
-      "url": "http://hudson-ci.org/download/plugins/dry/2.4/dry.hpi",
-      "version": "2.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/dry/2.5/dry.hpi",
+      "version": "2.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DRY+Plugin"
     },
     "easyant":     {
@@ -1549,7 +1598,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T16:49:56.00Z",
       "requiredCore": "1.319",
       "title": "EasyAnt Plugin",
-      "url": "http://hudson-ci.org/download/plugins/easyant/1.1/easyant.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/easyant/1.1/easyant.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/EasyAnt+Plugin"
     },
@@ -1564,7 +1613,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-10T08:40:24.00Z",
       "requiredCore": "1.346",
       "title": "Amazon EC2 Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ec2/1.8/ec2.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ec2/1.8/ec2.hpi",
       "version": "1.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Amazon+EC2+Plugin"
     },
@@ -1579,7 +1628,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-21T05:15:26.00Z",
       "requiredCore": "1.319",
       "title": "Email-ext plugin",
-      "url": "http://hudson-ci.org/download/plugins/email-ext/2.5/email-ext.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/email-ext/2.5/email-ext.hpi",
       "version": "2.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Email-ext+plugin"
     },
@@ -1594,7 +1643,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-19T08:37:20.00Z",
       "requiredCore": "1.319",
       "title": "Emma Plugin",
-      "url": "http://hudson-ci.org/download/plugins/emma/1.20/emma.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/emma/1.20/emma.hpi",
       "version": "1.20",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Emma+Plugin"
     },
@@ -1612,7 +1661,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-16T23:32:40.00Z",
       "requiredCore": "1.319",
       "title": "Emotional Hudson Plugin",
-      "url": "http://hudson-ci.org/download/plugins/emotional-hudson/1.2/emotional-hudson.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/emotional-hudson/1.2/emotional-hudson.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Emotional+Hudson+Plugin"
     },
@@ -1627,7 +1676,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-25T19:35:52.00Z",
       "requiredCore": "1.323",
       "title": "Envfile Plugin",
-      "url": "http://hudson-ci.org/download/plugins/envfile/1.0/envfile.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/envfile/1.0/envfile.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Envfile+Plugin"
     },
@@ -1646,7 +1695,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-15T19:02:54.00Z",
       "requiredCore": "1.347",
       "title": "Exclusive Execution Plugin",
-      "url": "http://hudson-ci.org/download/plugins/exclusive-execution/0.2/exclusive-execution.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/exclusive-execution/0.2/exclusive-execution.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Exclusive+Execution+Plugin"
     },
@@ -1663,12 +1712,12 @@ updateCenter.post(
       "releaseTimestamp": "2009-10-05T23:45:22.00Z",
       "requiredCore": "1.324",
       "title": "Extended Read Permission Plugin",
-      "url": "http://hudson-ci.org/download/plugins/extended-read-permission/1.0/extended-read-permission.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/extended-read-permission/1.0/extended-read-permission.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Extended+Read+Permission+Plugin"
     },
     "files-found-trigger":     {
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "Apr 25, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "stevengbrown",
@@ -1677,11 +1726,12 @@ updateCenter.post(
       }],
       "labels": ["trigger"],
       "name": "files-found-trigger",
-      "releaseTimestamp": "2010-03-17T05:37:40.00Z",
+      "previousTimestamp": "2010-04-24T00:16:12.00Z",
+      "releaseTimestamp": "2010-04-26T00:45:08.00Z",
       "requiredCore": "1.350",
       "title": "Files Found Trigger",
-      "url": "http://hudson-ci.org/download/plugins/files-found-trigger/1.0/files-found-trigger.hpi",
-      "version": "1.0",
+      "url": "http://updates.hudson-labs.org/download/plugins/files-found-trigger/1.1/files-found-trigger.hpi",
+      "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Files+Found+Trigger"
     },
     "filesystem_scm":     {
@@ -1695,17 +1745,17 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-27T23:41:44.00Z",
       "requiredCore": "1.318",
       "title": "File System SCM",
-      "url": "http://hudson-ci.org/download/plugins/filesystem_scm/1.8/filesystem_scm.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/filesystem_scm/1.8/filesystem_scm.hpi",
       "version": "1.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/File+System+SCM"
     },
     "findbugs":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 29, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.5"
+          "version": "1.6"
         },
                 {
           "name": "maven-plugin",
@@ -1728,16 +1778,16 @@ updateCenter.post(
         "report"
       ],
       "name": "findbugs",
-      "previousTimestamp": "2010-03-30T23:55:02.00Z",
-      "releaseTimestamp": "2010-03-31T01:58:30.00Z",
+      "previousTimestamp": "2010-03-31T01:58:30.00Z",
+      "releaseTimestamp": "2010-04-30T03:32:14.00Z",
       "requiredCore": "1.350",
       "title": "FindBugs Plugin",
-      "url": "http://hudson-ci.org/download/plugins/findbugs/4.6/findbugs.hpi",
-      "version": "4.6",
+      "url": "http://updates.hudson-labs.org/download/plugins/findbugs/4.7/findbugs.hpi",
+      "version": "4.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FindBugs+Plugin"
     },
     "fitnesse":     {
-      "buildDate": "Mar 22, 2010",
+      "buildDate": "Apr 25, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "prime8",
@@ -1747,12 +1797,12 @@ updateCenter.post(
       "excerpt": "This plugin can be used to both execute and report on <a href='http://fitnesse.org'>Fitnesse<\/a> tests so that they can be integrated into a Hudson build.",
       "labels": [],
       "name": "fitnesse",
-      "previousTimestamp": "2010-03-21T19:08:50.00Z",
-      "releaseTimestamp": "2010-03-23T04:08:24.00Z",
-      "requiredCore": "1.351",
+      "previousTimestamp": "2010-03-23T04:08:24.00Z",
+      "releaseTimestamp": "2010-04-26T03:44:12.00Z",
+      "requiredCore": "1.353",
       "title": "Fitnesse Plugin",
-      "url": "http://hudson-ci.org/download/plugins/fitnesse/1.3.1/fitnesse.hpi",
-      "version": "1.3.1",
+      "url": "http://updates.hudson-labs.org/download/plugins/fitnesse/1.4/fitnesse.hpi",
+      "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Fitnesse+Plugin"
     },
     "fortify360":     {
@@ -1769,7 +1819,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-07T04:09:46.00Z",
       "requiredCore": "1.323",
       "title": "Fortify 360 Plugin",
-      "url": "http://hudson-ci.org/download/plugins/fortify360/1.3/fortify360.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/fortify360/1.3/fortify360.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Fortify+360+Plugin"
     },
@@ -1783,7 +1833,7 @@ updateCenter.post(
       "releaseTimestamp": "2008-08-07T00:30:10.00Z",
       "requiredCore": "1.238",
       "title": "FTP-Publisher Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ftppublisher/0.9/ftppublisher.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ftppublisher/0.9/ftppublisher.hpi",
       "version": "0.9",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FTP-Publisher+Plugin"
     },
@@ -1813,7 +1863,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-22T06:01:44.00Z",
       "requiredCore": "1.347",
       "title": "Gallio Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gallio/0.70/gallio.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/gallio/0.70/gallio.hpi",
       "version": "0.70",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gallio+Plugin"
     },
@@ -1831,7 +1881,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-30T05:34:50.00Z",
       "requiredCore": "1.319",
       "title": "Gant Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gant/1.2/gant.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/gant/1.2/gant.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gant+Plugin"
     },
@@ -1849,7 +1899,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T03:04:52.00Z",
       "requiredCore": "1.319",
       "title": "Google Calendar Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gcal/0.3/gcal.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/gcal/0.3/gcal.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Google+Calendar+Plugin"
     },
@@ -1865,27 +1915,43 @@ updateCenter.post(
         "external"
       ],
       "name": "gerrit",
-      "previousTimestamp": "2010-04-07T01:35:16.00Z",
       "releaseTimestamp": "2010-04-09T03:58:20.00Z",
       "requiredCore": "1.353",
       "title": "Gerrit Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gerrit/0.4/gerrit.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/gerrit/0.4/gerrit.hpi",
       "version": "0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gerrit+Plugin"
     },
+    "girls":     {
+      "buildDate": "Apr 27, 2010",
+      "dependencies": [],
+      "developers": [      {
+        "developerId": "jessicayk",
+        "name": "Jessica Yoshie Kussuda"
+      }],
+      "excerpt": "This plugin allows use of <a href='http://git.or.cz/'>GIT<\/a> as a build SCM. Git 1.3.3 or newer is required. \\\\  ",
+      "labels": ["scm"],
+      "name": "girls",
+      "releaseTimestamp": "2010-04-28T03:30:10.00Z",
+      "requiredCore": "1.353",
+      "title": "Git Plugin",
+      "url": "http://updates.hudson-labs.org/download/plugins/girls/1.0.0/girls.hpi",
+      "version": "1.0.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Git+Plugin"
+    },
     "git":     {
-      "buildDate": "Apr 01, 2010",
+      "buildDate": "Apr 20, 2010",
       "dependencies": [],
       "developers": [{"developerId": "magnayn"}],
       "excerpt": "This plugin allows use of <a href='http://git.or.cz/'>GIT<\/a> as a build SCM. Git 1.3.3 or newer is required. \\\\  ",
       "labels": ["scm"],
       "name": "git",
-      "previousTimestamp": "2010-03-26T17:40:18.00Z",
-      "releaseTimestamp": "2010-04-01T15:39:46.00Z",
+      "previousTimestamp": "2010-04-01T15:39:46.00Z",
+      "releaseTimestamp": "2010-04-20T16:48:34.00Z",
       "requiredCore": "1.322",
       "title": "Git Plugin",
-      "url": "http://hudson-ci.org/download/plugins/git/0.8.2/git.hpi",
-      "version": "0.8.2",
+      "url": "http://updates.hudson-labs.org/download/plugins/git/0.8.3/git.hpi",
+      "version": "0.8.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Git+Plugin"
     },
     "github":     {
@@ -1903,7 +1969,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-06-26T01:31:16.00Z",
       "requiredCore": "1.312",
       "title": "Github Plugin",
-      "url": "http://hudson-ci.org/download/plugins/github/0.2/github.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/github/0.2/github.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Github+Plugin"
     },
@@ -1917,30 +1983,30 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-14T00:05:24.00Z",
       "requiredCore": "1.321",
       "title": "Global Build Stats Plugin",
-      "url": "http://hudson-ci.org/download/plugins/global-build-stats/0.1-alpha4/global-build-stats.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/global-build-stats/0.1-alpha4/global-build-stats.hpi",
       "version": "0.1-alpha4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Global+Build+Stats+Plugin"
     },
     "gnat":     {
-      "buildDate": "Dec 09, 2009",
+      "buildDate": "Apr 17, 2010",
       "dependencies": [      {
         "name": "xunit",
         "optional": false,
-        "version": "0.4"
+        "version": "0.6.1"
       }],
       "developers": [      {
         "developerId": "gbois",
-        "email": "gregory.boissinot@gmail.com",
+        "email": "gbois@dev.java.net",
         "name": "Gregory Boissinot"
       }],
       "excerpt": "This plugin allows Hudson to integrate <a href='http://www.adacore.com/home/products/gnatpro/toolsuite/tool_partners/'>Gnat<\/a> features for ADA languages.",
       "labels": ["report"],
       "name": "gnat",
       "previousTimestamp": "2010-03-26T16:16:46.00Z",
-      "releaseTimestamp": "2009-12-10T07:47:36.00Z",
-      "requiredCore": "1.336",
+      "releaseTimestamp": "2010-04-17T07:39:52.00Z",
+      "requiredCore": "1.347",
       "title": "Gnat Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gnat/0.3/gnat.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/gnat/0.3/gnat.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gnat+Plugin"
     },
@@ -1955,7 +2021,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-08-25T07:44:02.00Z",
       "requiredCore": "1.318",
       "title": "Google Analytics Plugin",
-      "url": "http://hudson-ci.org/download/plugins/googleanalytics/1.2/googleanalytics.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/googleanalytics/1.2/googleanalytics.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Google+Analytics+Plugin"
     },
@@ -1974,7 +2040,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-08-13T15:31:22.00Z",
       "requiredCore": "1.318",
       "title": "Google Code Plugin",
-      "url": "http://hudson-ci.org/download/plugins/googlecode/1.5/googlecode.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/googlecode/1.5/googlecode.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Google+Code+Plugin"
     },
@@ -1993,7 +2059,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-23T18:00:44.00Z",
       "requiredCore": "1.347",
       "title": "Gradle Plugin",
-      "url": "http://hudson-ci.org/download/plugins/gradle/1.3/gradle.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/gradle/1.3/gradle.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gradle+Plugin"
     },
@@ -2011,7 +2077,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-15T17:36:08.00Z",
       "requiredCore": "1.319",
       "title": "Grails Plugin",
-      "url": "http://hudson-ci.org/download/plugins/grails/1.1/grails.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/grails/1.1/grails.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Grails+Plugin"
     },
@@ -2030,7 +2096,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-01T23:47:00.00Z",
       "requiredCore": "1.334",
       "title": "Green Balls",
-      "url": "http://hudson-ci.org/download/plugins/greenballs/1.6/greenballs.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/greenballs/1.6/greenballs.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Green+Balls"
     },
@@ -2045,7 +2111,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-15T19:45:28.00Z",
       "requiredCore": "1.319",
       "title": "Grinder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/grinder/1.4/grinder.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/grinder/1.4/grinder.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Grinder+Plugin"
     },
@@ -2063,7 +2129,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T20:46:26.00Z",
       "requiredCore": "1.319",
       "title": "Groovy plugin",
-      "url": "http://hudson-ci.org/download/plugins/groovy/1.4/groovy.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/groovy/1.4/groovy.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Groovy+plugin"
     },
@@ -2081,7 +2147,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-30T08:14:22.00Z",
       "requiredCore": "1.343",
       "title": "Groovy Postbuild Plugin",
-      "url": "http://hudson-ci.org/download/plugins/groovy-postbuild/1.3/groovy-postbuild.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/groovy-postbuild/1.3/groovy-postbuild.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Groovy+Postbuild+Plugin"
     },
@@ -2096,7 +2162,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-09-02T21:44:44.00Z",
       "requiredCore": "1.318",
       "title": "Hadoop Plugin",
-      "url": "http://hudson-ci.org/download/plugins/hadoop/1.3/hadoop.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/hadoop/1.3/hadoop.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hadoop+Plugin"
     },
@@ -2114,7 +2180,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-03T17:35:42.00Z",
       "requiredCore": "1.318",
       "title": "Harvest Plugin",
-      "url": "http://hudson-ci.org/download/plugins/harvest/0.3/harvest.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/harvest/0.3/harvest.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Harvest+Plugin"
     },
@@ -2133,7 +2199,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-05T22:12:36.00Z",
       "requiredCore": "1.324",
       "title": "HGCA Plugin",
-      "url": "http://hudson-ci.org/download/plugins/hgca/1.2/hgca.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/hgca/1.2/hgca.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/HGCA+Plugin"
     },
@@ -2148,7 +2214,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-17T23:14:50.00Z",
       "requiredCore": "1.341",
       "title": "HTML Publisher Plugin",
-      "url": "http://hudson-ci.org/download/plugins/htmlpublisher/0.2.2/htmlpublisher.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/htmlpublisher/0.2.2/htmlpublisher.hpi",
       "version": "0.2.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/HTML+Publisher+Plugin"
     },
@@ -2166,7 +2232,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-05T18:28:54.00Z",
       "requiredCore": "1.318",
       "title": "Hudson Centralized Job(Re)Action plugin",
-      "url": "http://hudson-ci.org/download/plugins/hudson-logaction-plugin/1.1/hudson-logaction-plugin.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/hudson-logaction-plugin/1.1/hudson-logaction-plugin.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Centralized+Job%28Re%29Action+plugin"
     },
@@ -2188,7 +2254,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-13T07:51:14.00Z",
       "requiredCore": "1.334",
       "title": "Hudson Personal View",
-      "url": "http://hudson-ci.org/download/plugins/hudson-pview-plugin/1.7/hudson-pview-plugin.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/hudson-pview-plugin/1.7/hudson-pview-plugin.hpi",
       "version": "1.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Personal+View"
     },
@@ -2203,7 +2269,7 @@ updateCenter.post(
       "name": "hudson-startup-trigger",
       "releaseTimestamp": "2009-12-31T03:34:40.00Z",
       "requiredCore": "1.339",
-      "url": "http://hudson-ci.org/download/plugins/hudson-startup-trigger/0.1/hudson-startup-trigger.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/hudson-startup-trigger/0.1/hudson-startup-trigger.hpi",
       "version": "0.1"
     },
     "hudson-wsclean-plugin":     {
@@ -2220,7 +2286,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-07T05:51:32.00Z",
       "requiredCore": "1.328",
       "title": "Hudson Distributed Workspace Clean plugin",
-      "url": "http://hudson-ci.org/download/plugins/hudson-wsclean-plugin/1.0.4/hudson-wsclean-plugin.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/hudson-wsclean-plugin/1.0.4/hudson-wsclean-plugin.hpi",
       "version": "1.0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Distributed+Workspace+Clean+plugin"
     },
@@ -2237,7 +2303,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-10T18:15:24.00Z",
       "requiredCore": "1.318",
       "title": "Hudson Tray Application",
-      "url": "http://hudson-ci.org/download/plugins/hudsontrayapp/0.7.3/hudsontrayapp.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/hudsontrayapp/0.7.3/hudsontrayapp.hpi",
       "version": "0.7.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Tray+Application"
     },
@@ -2256,7 +2322,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-15T06:44:50.00Z",
       "requiredCore": "1.327",
       "title": "Instant Messaging Plugin",
-      "url": "http://hudson-ci.org/download/plugins/instant-messaging/1.7/instant-messaging.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/instant-messaging/1.7/instant-messaging.hpi",
       "version": "1.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Instant+Messaging+Plugin"
     },
@@ -2275,7 +2341,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-28T02:42:02.00Z",
       "requiredCore": "1.352",
       "title": "iPhoneView Plugin",
-      "url": "http://hudson-ci.org/download/plugins/iphoneview/0.2/iphoneview.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/iphoneview/0.2/iphoneview.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/iPhoneView+Plugin"
     },
@@ -2308,12 +2374,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-15T07:04:04.00Z",
       "requiredCore": "1.327",
       "title": "IRC Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ircbot/2.3/ircbot.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ircbot/2.3/ircbot.hpi",
       "version": "2.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/IRC+Plugin"
     },
     "ivy":     {
-      "buildDate": "Apr 01, 2010",
+      "buildDate": "Apr 27, 2010",
       "dependencies": [],
       "developers":       [
         {"developerId": "hibou"},
@@ -2330,12 +2396,12 @@ updateCenter.post(
       "excerpt": "This plugin automatically configures a build to trigger other builds based on dependency configuration via <a href='http://ant.apache.org/ivy'>Apache Ivy<\/a>.",
       "labels": ["trigger"],
       "name": "ivy",
-      "previousTimestamp": "2010-03-22T17:43:36.00Z",
-      "releaseTimestamp": "2010-04-01T21:09:10.00Z",
+      "previousTimestamp": "2010-04-01T21:09:10.00Z",
+      "releaseTimestamp": "2010-04-27T15:22:40.00Z",
       "requiredCore": "1.347",
       "title": "Ivy Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ivy/1.5/ivy.hpi",
-      "version": "1.5",
+      "url": "http://updates.hudson-labs.org/download/plugins/ivy/1.6/ivy.hpi",
+      "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ivy+Plugin"
     },
     "jabber":     {
@@ -2368,7 +2434,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-15T06:54:30.00Z",
       "requiredCore": "1.327",
       "title": "Jabber Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jabber/1.9/jabber.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jabber/1.9/jabber.hpi",
       "version": "1.9",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Jabber+Plugin"
     },
@@ -2386,7 +2452,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T20:14:18.00Z",
       "requiredCore": "1.319",
       "title": "Japex Plugin",
-      "url": "http://hudson-ci.org/download/plugins/japex/1.6/japex.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/japex/1.6/japex.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Japex+Plugin"
     },
@@ -2400,7 +2466,7 @@ updateCenter.post(
       "releaseTimestamp": "2008-09-11T15:48:48.00Z",
       "requiredCore": "1.252",
       "title": "JavaNCSS+Plugin",
-      "url": "http://hudson-ci.org/download/plugins/javancss/1.0-alpha-1/javancss.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/javancss/1.0-alpha-1/javancss.hpi",
       "version": "1.0-alpha-1",
       "wiki": "http://wiki.hudson-ci.org//pages/viewpage.action?pageId=36603031"
     },
@@ -2422,7 +2488,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T23:35:06.00Z",
       "requiredCore": "1.325",
       "title": "Java.net Plugin",
-      "url": "http://hudson-ci.org/download/plugins/javanet/1.3/javanet.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/javanet/1.3/javanet.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Java.net+Plugin"
     },
@@ -2443,7 +2509,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T00:02:46.00Z",
       "requiredCore": "1.319",
       "title": "java.net uploader Plugin",
-      "url": "http://hudson-ci.org/download/plugins/javanet-uploader/1.7/javanet-uploader.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/javanet-uploader/1.7/javanet-uploader.hpi",
       "version": "1.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/java.net+uploader+Plugin"
     },
@@ -2461,12 +2527,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T20:12:44.00Z",
       "requiredCore": "1.319",
       "title": "JavaTest Report Plugin",
-      "url": "http://hudson-ci.org/download/plugins/javatest-report/1.3/javatest-report.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/javatest-report/1.3/javatest-report.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JavaTest+Report+Plugin"
     },
     "jboss":     {
-      "buildDate": "Feb 18, 2010",
+      "buildDate": "Apr 20, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "JulB4",
@@ -2479,12 +2545,12 @@ updateCenter.post(
         "builder"
       ],
       "name": "jboss",
-      "previousTimestamp": "2010-02-12T08:14:32.00Z",
-      "releaseTimestamp": "2010-02-19T03:48:36.00Z",
-      "requiredCore": "1.341",
+      "previousTimestamp": "2010-02-19T03:48:36.00Z",
+      "releaseTimestamp": "2010-04-20T10:06:18.00Z",
+      "requiredCore": "1.355",
       "title": "JBoss Management Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jboss/1.0.2/jboss.hpi",
-      "version": "1.0.2",
+      "url": "http://updates.hudson-labs.org/download/plugins/jboss/1.0.3/jboss.hpi",
+      "version": "1.0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JBoss+Management+Plugin"
     },
     "jdepend":     {
@@ -2498,12 +2564,12 @@ updateCenter.post(
       "releaseTimestamp": "2009-09-17T22:18:24.00Z",
       "requiredCore": "1.322",
       "title": "JDepend Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jdepend/1.2.2/jdepend.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jdepend/1.2.2/jdepend.hpi",
       "version": "1.2.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JDepend+Plugin"
     },
     "jira":     {
-      "buildDate": "Apr 10, 2010",
+      "buildDate": "May 01, 2010",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
@@ -2519,12 +2585,12 @@ updateCenter.post(
         "external"
       ],
       "name": "jira",
-      "previousTimestamp": "2010-03-22T21:46:26.00Z",
-      "releaseTimestamp": "2010-04-11T06:33:42.00Z",
+      "previousTimestamp": "2010-04-11T06:33:42.00Z",
+      "releaseTimestamp": "2010-05-01T21:11:50.00Z",
       "requiredCore": "1.351",
       "title": "JIRA Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jira/1.22/jira.hpi",
-      "version": "1.22",
+      "url": "http://updates.hudson-labs.org/download/plugins/jira/1.23/jira.hpi",
+      "version": "1.23",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JIRA+Plugin"
     },
     "jmeter":     {
@@ -2555,7 +2621,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-19T16:01:16.00Z",
       "requiredCore": "1.332",
       "title": "JMeter Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jmeter/0.3.0/jmeter.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jmeter/0.3.0/jmeter.hpi",
       "version": "0.3.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JMeter+Plugin"
     },
@@ -2569,7 +2635,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-02T06:52:58.00Z",
       "requiredCore": "1.315",
       "title": "Job Exporter Plugin",
-      "url": "http://hudson-ci.org/download/plugins/job-exporter/0.1.0/job-exporter.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/job-exporter/0.1.0/job-exporter.hpi",
       "version": "0.1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Job+Exporter+Plugin"
     },
@@ -2595,7 +2661,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-05T07:21:56.00Z",
       "requiredCore": "1.353",
       "title": "JobConfigHistory Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jobConfigHistory/1.3/jobConfigHistory.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jobConfigHistory/1.3/jobConfigHistory.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JobConfigHistory+Plugin"
     },
@@ -2614,7 +2680,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-09T05:59:24.00Z",
       "requiredCore": "1.330",
       "title": "JobRevision Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jobrevision/0.2/jobrevision.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jobrevision/0.2/jobrevision.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JobRevision+Plugin"
     },
@@ -2628,7 +2694,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-22T03:05:48.00Z",
       "requiredCore": "1.318",
       "title": "Job Type Column Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jobtype-column/1.0/jobtype-column.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jobtype-column/1.0/jobtype-column.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Job+Type+Column+Plugin"
     },
@@ -2667,7 +2733,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-09T05:09:04.00Z",
       "requiredCore": "1.324",
       "title": "Join Plugin",
-      "url": "http://hudson-ci.org/download/plugins/join/1.8/join.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/join/1.8/join.hpi",
       "version": "1.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Join+Plugin"
     },
@@ -2690,7 +2756,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-22T22:16:20.00Z",
       "requiredCore": "1.335",
       "title": "JSUnit plugin",
-      "url": "http://hudson-ci.org/download/plugins/jsunit/0.4/jsunit.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jsunit/0.4/jsunit.hpi",
       "version": "0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JSUnit+plugin"
     },
@@ -2709,7 +2775,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-05T08:45:20.00Z",
       "requiredCore": "1.353",
       "title": "JSWidgets Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jswidgets/1.4/jswidgets.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jswidgets/1.4/jswidgets.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JSWidgets+Plugin"
     },
@@ -2723,7 +2789,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-28T07:01:00.00Z",
       "requiredCore": "1.320",
       "title": "JUnit Attachments Plugin",
-      "url": "http://hudson-ci.org/download/plugins/junit-attachments/1.0/junit-attachments.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/junit-attachments/1.0/junit-attachments.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JUnit+Attachments+Plugin"
     },
@@ -2742,7 +2808,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T05:27:44.00Z",
       "requiredCore": "1.319",
       "title": "Jython Plugin",
-      "url": "http://hudson-ci.org/download/plugins/jython/1.1/jython.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/jython/1.1/jython.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Jython+Plugin"
     },
@@ -2757,7 +2823,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T08:16:58.00Z",
       "requiredCore": "1.324",
       "title": "Kagemai Plugin",
-      "url": "http://hudson-ci.org/download/plugins/kagemai/1.3/kagemai.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/kagemai/1.3/kagemai.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Kagemai+Plugin"
     },
@@ -2776,7 +2842,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-19T23:42:24.00Z",
       "requiredCore": "1.337",
       "title": "Klaros-Testmanagement Plugin",
-      "url": "http://hudson-ci.org/download/plugins/klaros-testmanagement/1.1/klaros-testmanagement.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/klaros-testmanagement/1.1/klaros-testmanagement.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Klaros-Testmanagement+Plugin"
     },
@@ -2794,7 +2860,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T20:35:30.00Z",
       "requiredCore": "1.319",
       "title": "Kundo Plugin",
-      "url": "http://hudson-ci.org/download/plugins/kundo/0.2/kundo.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/kundo/0.2/kundo.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Kundo+Plugin"
     },
@@ -2808,7 +2874,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-20T21:56:44.00Z",
       "requiredCore": "1.343",
       "title": "LabeledTestGroupsPublisher Plugin",
-      "url": "http://hudson-ci.org/download/plugins/labeled-test-groups-publisher/1.2.6/labeled-test-groups-publisher.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/labeled-test-groups-publisher/1.2.6/labeled-test-groups-publisher.hpi",
       "version": "1.2.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/LabeledTestGroupsPublisher+Plugin"
     },
@@ -2821,7 +2887,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-25T18:12:18.00Z",
       "requiredCore": "1.318",
       "title": "Last Failure Version Column Plugin",
-      "url": "http://hudson-ci.org/download/plugins/lastfailureversioncolumn/1.0/lastfailureversioncolumn.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/lastfailureversioncolumn/1.0/lastfailureversioncolumn.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Last+Failure+Version+Column+Plugin"
     },
@@ -2836,7 +2902,7 @@ updateCenter.post(
       "name": "lastsuccessdescriptioncolumn",
       "releaseTimestamp": "2010-03-29T19:03:02.00Z",
       "requiredCore": "1.352",
-      "url": "http://hudson-ci.org/download/plugins/lastsuccessdescriptioncolumn/1.0/lastsuccessdescriptioncolumn.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/lastsuccessdescriptioncolumn/1.0/lastsuccessdescriptioncolumn.hpi",
       "version": "1.0"
     },
     "lastsuccessversioncolumn":     {
@@ -2848,7 +2914,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-25T18:15:48.00Z",
       "requiredCore": "1.318",
       "title": "Last Success Version Column Plugin",
-      "url": "http://hudson-ci.org/download/plugins/lastsuccessversioncolumn/1.0/lastsuccessversioncolumn.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/lastsuccessversioncolumn/1.0/lastsuccessversioncolumn.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Last+Success+Version+Column+Plugin"
     },
@@ -2866,7 +2932,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T23:19:28.00Z",
       "requiredCore": "1.318",
       "title": "LDAP Email Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ldapemail/0.6/ldapemail.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ldapemail/0.6/ldapemail.hpi",
       "version": "0.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/LDAP+Email+Plugin"
     },
@@ -2885,7 +2951,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-01T16:31:26.00Z",
       "requiredCore": "1.347",
       "title": "Libvirt Slaves Plugin",
-      "url": "http://hudson-ci.org/download/plugins/libvirt-slave/1.6/libvirt-slave.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/libvirt-slave/1.6/libvirt-slave.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Libvirt+Slaves+Plugin"
     },
@@ -2903,7 +2969,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T23:34:04.00Z",
       "requiredCore": "1.318",
       "title": "Locale Plugin",
-      "url": "http://hudson-ci.org/download/plugins/locale/1.1/locale.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/locale/1.1/locale.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Locale+Plugin"
     },
@@ -2918,7 +2984,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-10-07T00:07:28.00Z",
       "requiredCore": "1.319",
       "title": "Locked Files Report Plugin",
-      "url": "http://hudson-ci.org/download/plugins/locked-files-report/1.1/locked-files-report.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/locked-files-report/1.1/locked-files-report.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Locked+Files+Report+Plugin"
     },
@@ -2936,7 +3002,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-16T21:46:48.00Z",
       "requiredCore": "1.318",
       "title": "Locks and Latches plugin",
-      "url": "http://hudson-ci.org/download/plugins/locks-and-latches/0.6/locks-and-latches.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/locks-and-latches/0.6/locks-and-latches.hpi",
       "version": "0.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Locks+and+Latches+plugin"
     },
@@ -2954,7 +3020,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-14T18:46:26.00Z",
       "requiredCore": "1.340",
       "title": "Log Parser Plugin",
-      "url": "http://hudson-ci.org/download/plugins/log-parser/1.0.4/log-parser.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/log-parser/1.0.4/log-parser.hpi",
       "version": "1.0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Log+Parser+Plugin"
     },
@@ -2980,7 +3046,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-21T22:54:48.00Z",
       "requiredCore": "1.326",
       "title": "M2 Extra Steps Plugin",
-      "url": "http://hudson-ci.org/download/plugins/m2-extra-steps/1.1.3/m2-extra-steps.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/m2-extra-steps/1.1.3/m2-extra-steps.hpi",
       "version": "1.1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/M2+Extra+Steps+Plugin"
     },
@@ -2999,7 +3065,7 @@ updateCenter.post(
       "name": "m2-repo-reaper",
       "releaseTimestamp": "2009-10-05T01:36:20.00Z",
       "requiredCore": "1.326",
-      "url": "http://hudson-ci.org/download/plugins/m2-repo-reaper/1.0/m2-repo-reaper.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/m2-repo-reaper/1.0/m2-repo-reaper.hpi",
       "version": "1.0"
     },
     "m2release":     {
@@ -3023,7 +3089,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T05:00:42.00Z",
       "requiredCore": "1.318",
       "title": "M2 Release Plugin",
-      "url": "http://hudson-ci.org/download/plugins/m2release/0.3.4/m2release.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/m2release/0.3.4/m2release.hpi",
       "version": "0.3.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/M2+Release+Plugin"
     },
@@ -3063,7 +3129,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-05T02:36:20.00Z",
       "requiredCore": "1.353",
       "title": "Mantis Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mantis/0.10/mantis.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/mantis/0.10/mantis.hpi",
       "version": "0.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Mantis+Plugin"
     },
@@ -3089,7 +3155,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T01:52:10.00Z",
       "requiredCore": "1.319",
       "title": "Maven Info Plugin",
-      "url": "http://hudson-ci.org/download/plugins/maven-info/0.0.3/maven-info.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/maven-info/0.0.3/maven-info.hpi",
       "version": "0.0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Maven+Info+Plugin"
     },
@@ -3104,7 +3170,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-17T11:42:56.00Z",
       "requiredCore": "1.355",
       "title": "Maven 2 Project Plugin",
-      "url": "http://hudson-ci.org/download/plugins/maven-plugin/1.355/maven-plugin.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/maven-plugin/1.355/maven-plugin.hpi",
       "version": "1.355",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Maven+2+Project+Plugin"
     },
@@ -3125,7 +3191,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-07T18:51:46.00Z",
       "requiredCore": "1.353",
       "title": "Measurement Plots Plugin",
-      "url": "http://hudson-ci.org/download/plugins/measurement-plots/0.1/measurement-plots.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/measurement-plots/0.1/measurement-plots.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Measurement+Plots+Plugin"
     },
@@ -3151,7 +3217,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-30T05:36:52.00Z",
       "requiredCore": "1.351",
       "title": "Mercurial Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mercurial/1.28/mercurial.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/mercurial/1.28/mercurial.hpi",
       "version": "1.28",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Mercurial+Plugin"
     },
@@ -3166,7 +3232,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-06T06:36:34.00Z",
       "requiredCore": "1.319",
       "title": "Monitoring",
-      "url": "http://hudson-ci.org/download/plugins/monitoring/1.14.0/monitoring.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/monitoring/1.14.0/monitoring.hpi",
       "version": "1.14.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Monitoring"
     },
@@ -3184,7 +3250,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-03T17:53:58.00Z",
       "requiredCore": "1.319",
       "title": "Mozmill Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mozmill/1.3/mozmill.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/mozmill/1.3/mozmill.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Mozmill+Plugin"
     },
@@ -3210,7 +3276,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T00:20:54.00Z",
       "requiredCore": "1.319",
       "title": "MSBuild Plugin",
-      "url": "http://hudson-ci.org/download/plugins/msbuild/1.3/msbuild.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/msbuild/1.3/msbuild.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/MSBuild+Plugin"
     },
@@ -3225,7 +3291,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-12T04:25:58.00Z",
       "requiredCore": "1.319",
       "title": "MSTest Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mstest/0.6/mstest.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/mstest/0.6/mstest.hpi",
       "version": "0.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/MSTest+Plugin"
     },
@@ -3242,7 +3308,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-16T21:53:42.00Z",
       "requiredCore": "1.324",
       "title": "MySQL Authentication Plugin",
-      "url": "http://hudson-ci.org/download/plugins/mysql-auth/1.0/mysql-auth.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/mysql-auth/1.0/mysql-auth.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/MySQL+Authentication+Plugin"
     },
@@ -3266,7 +3332,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-24T07:46:42.00Z",
       "requiredCore": "1.352",
       "title": "Nabaztag Plugin",
-      "url": "http://hudson-ci.org/download/plugins/nabaztag/1.9/nabaztag.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/nabaztag/1.9/nabaztag.hpi",
       "version": "1.9",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Nabaztag+Plugin"
     },
@@ -3285,7 +3351,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-07T17:02:04.00Z",
       "requiredCore": "1.335",
       "title": "Naginator Plugin",
-      "url": "http://hudson-ci.org/download/plugins/naginator/1.5/naginator.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/naginator/1.5/naginator.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Naginator+Plugin"
     },
@@ -3304,7 +3370,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-04T10:17:04.00Z",
       "requiredCore": "1.347",
       "title": "NAnt Plugin",
-      "url": "http://hudson-ci.org/download/plugins/nant/1.4.1/nant.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/nant/1.4.1/nant.hpi",
       "version": "1.4.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/NAnt+Plugin"
     },
@@ -3322,7 +3388,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-03T18:19:58.00Z",
       "requiredCore": "1.319",
       "title": "NCover Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ncover/0.3/ncover.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ncover/0.3/ncover.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/NCover+Plugin"
     },
@@ -3341,7 +3407,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-23T04:55:44.00Z",
       "requiredCore": "1.334",
       "title": "Nested View Plugin",
-      "url": "http://hudson-ci.org/download/plugins/nested-view/1.1/nested-view.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/nested-view/1.1/nested-view.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Nested+View+Plugin"
     },
@@ -3358,12 +3424,12 @@ updateCenter.post(
       "releaseTimestamp": "2009-10-12T19:47:52.00Z",
       "requiredCore": "1.327",
       "title": "Next Build Number Plugin",
-      "url": "http://hudson-ci.org/download/plugins/next-build-number/1.0/next-build-number.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/next-build-number/1.0/next-build-number.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Next+Build+Number+Plugin"
     },
     "nodenamecolumn":     {
-      "buildDate": "Feb 01, 2010",
+      "buildDate": "Apr 17, 2010",
       "dependencies": [      {
         "name": "maven-plugin",
         "optional": false,
@@ -3373,11 +3439,12 @@ updateCenter.post(
       "excerpt": "Adds column showing node name and can be configured in views.",
       "labels": ["ui"],
       "name": "nodenamecolumn",
-      "releaseTimestamp": "2010-02-02T01:09:02.00Z",
+      "previousTimestamp": "2010-02-02T01:09:02.00Z",
+      "releaseTimestamp": "2010-04-17T07:59:30.00Z",
       "requiredCore": "1.323",
       "title": "Node Name Column Plugin",
-      "url": "http://hudson-ci.org/download/plugins/nodenamecolumn/1.0/nodenamecolumn.hpi",
-      "version": "1.0",
+      "url": "http://updates.hudson-labs.org/download/plugins/nodenamecolumn/1.1/nodenamecolumn.hpi",
+      "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Node+Name+Column+Plugin"
     },
     "nunit":     {
@@ -3391,7 +3458,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-18T18:46:44.00Z",
       "requiredCore": "1.323",
       "title": "NUnit Plugin",
-      "url": "http://hudson-ci.org/download/plugins/nunit/0.10/nunit.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/nunit/0.10/nunit.hpi",
       "version": "0.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/NUnit+Plugin"
     },
@@ -3416,12 +3483,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-16T06:28:22.00Z",
       "requiredCore": "1.341",
       "title": "Parameterized Trigger Plugin",
-      "url": "http://hudson-ci.org/download/plugins/parameterized-trigger/2.3/parameterized-trigger.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/parameterized-trigger/2.3/parameterized-trigger.hpi",
       "version": "2.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Parameterized+Trigger+Plugin"
     },
     "perforce":     {
-      "buildDate": "Apr 09, 2010",
+      "buildDate": "Apr 19, 2010",
       "dependencies": [],
       "developers":       [
                 {
@@ -3438,12 +3505,12 @@ updateCenter.post(
       "excerpt": "Integrates Hudson with <a href='http://perforce.com'>Perforce<\/a> SCM Repositories. ",
       "labels": ["scm"],
       "name": "perforce",
-      "previousTimestamp": "2010-04-05T21:07:06.00Z",
-      "releaseTimestamp": "2010-04-10T03:58:34.00Z",
+      "previousTimestamp": "2010-04-10T03:58:34.00Z",
+      "releaseTimestamp": "2010-04-19T23:04:02.00Z",
       "requiredCore": "1.339",
       "title": "Perforce Plugin",
-      "url": "http://hudson-ci.org/download/plugins/perforce/1.0.28/perforce.hpi",
-      "version": "1.0.28",
+      "url": "http://updates.hudson-labs.org/download/plugins/perforce/1.0.29/perforce.hpi",
+      "version": "1.0.29",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Perforce+Plugin"
     },
     "performance":     {
@@ -3474,12 +3541,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-22T17:16:38.00Z",
       "requiredCore": "1.332",
       "title": "Performance Plugin",
-      "url": "http://hudson-ci.org/download/plugins/performance/1.2/performance.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/performance/1.2/performance.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Performance+Plugin"
     },
     "perfpublisher":     {
-      "buildDate": "Mar 05, 2010",
+      "buildDate": "Apr 18, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
@@ -3489,22 +3556,22 @@ updateCenter.post(
                 {
           "name": "maven-plugin",
           "optional": false,
-          "version": "1.337"
+          "version": "1.354"
         }
       ],
       "developers": [      {
-        "email": "georges.bossert@caps-entreprise.com",
+        "email": "gbossert@gmail.com",
         "name": "Georges Bossert"
       }],
       "excerpt": "This plugin generates global and trend reports for tests results analysis. Based on an open XML tests results format, the plugin parses the generated files and publish statistics, reports and analysis on the current health of the project.",
       "labels": ["report"],
       "name": "perfpublisher",
-      "previousTimestamp": "2010-02-06T00:28:54.00Z",
-      "releaseTimestamp": "2010-03-05T16:44:04.00Z",
-      "requiredCore": "1.337",
+      "previousTimestamp": "2010-03-05T16:44:04.00Z",
+      "releaseTimestamp": "2010-04-18T20:59:00.00Z",
+      "requiredCore": "1.354",
       "title": "PerfPublisher Plugin",
-      "url": "http://hudson-ci.org/download/plugins/perfpublisher/7.96/perfpublisher.hpi",
-      "version": "7.96",
+      "url": "http://updates.hudson-labs.org/download/plugins/perfpublisher/7.97/perfpublisher.hpi",
+      "version": "7.97",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PerfPublisher+Plugin"
     },
     "phing":     {
@@ -3522,7 +3589,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-10-18T23:39:54.00Z",
       "requiredCore": "1.329",
       "title": "Phing Plugin",
-      "url": "http://hudson-ci.org/download/plugins/phing/0.4/phing.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/phing/0.4/phing.hpi",
       "version": "0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Phing+Plugin"
     },
@@ -3536,7 +3603,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-07T06:11:44.00Z",
       "requiredCore": "1.319",
       "title": "Piwik Analytics Plugin",
-      "url": "http://hudson-ci.org/download/plugins/piwikanalytics/1.0/piwikanalytics.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/piwikanalytics/1.0/piwikanalytics.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Piwik+Analytics+Plugin"
     },
@@ -3551,7 +3618,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-03T02:48:24.00Z",
       "requiredCore": "1.323",
       "title": "PlatformLabeler Plugin",
-      "url": "http://hudson-ci.org/download/plugins/platformlabeler/1.1/platformlabeler.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/platformlabeler/1.1/platformlabeler.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PlatformLabeler+Plugin"
     },
@@ -3569,17 +3636,17 @@ updateCenter.post(
       "releaseTimestamp": "2008-09-25T04:26:40.00Z",
       "requiredCore": "1.252",
       "title": "Plot Plugin",
-      "url": "http://hudson-ci.org/download/plugins/plot/1.2/plot.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/plot/1.2/plot.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Plot+Plugin"
     },
     "pmd":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 29, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.5"
+          "version": "1.6"
         },
                 {
           "name": "maven-plugin",
@@ -3602,12 +3669,12 @@ updateCenter.post(
         "report"
       ],
       "name": "pmd",
-      "previousTimestamp": "2010-03-16T07:32:36.00Z",
-      "releaseTimestamp": "2010-03-30T21:38:38.00Z",
+      "previousTimestamp": "2010-03-30T21:38:38.00Z",
+      "releaseTimestamp": "2010-04-30T03:42:50.00Z",
       "requiredCore": "1.350",
       "title": "PMD Plugin",
-      "url": "http://hudson-ci.org/download/plugins/pmd/3.4/pmd.hpi",
-      "version": "3.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/pmd/3.5/pmd.hpi",
+      "version": "3.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PMD+Plugin"
     },
     "polarion":     {
@@ -3628,7 +3695,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-30T01:17:40.00Z",
       "requiredCore": "1.318",
       "title": "Polarion Plugin",
-      "url": "http://hudson-ci.org/download/plugins/polarion/1.2/polarion.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/polarion/1.2/polarion.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Polarion+Plugin"
     },
@@ -3652,7 +3719,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-30T01:34:08.00Z",
       "requiredCore": "1.324",
       "title": "Port Allocator Plugin",
-      "url": "http://hudson-ci.org/download/plugins/port-allocator/1.5/port-allocator.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/port-allocator/1.5/port-allocator.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Port+Allocator+Plugin"
     },
@@ -3670,7 +3737,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-09-17T00:26:14.00Z",
       "requiredCore": "1.300",
       "title": "Post build task",
-      "url": "http://hudson-ci.org/download/plugins/postbuild-task/1.6/postbuild-task.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/postbuild-task/1.6/postbuild-task.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Post+build+task"
     },
@@ -3685,7 +3752,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-08-06T01:56:08.00Z",
       "requiredCore": "1.318",
       "title": "PowerShell Plugin",
-      "url": "http://hudson-ci.org/download/plugins/powershell/1.2/powershell.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/powershell/1.2/powershell.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PowerShell+Plugin"
     },
@@ -3711,26 +3778,34 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-29T23:07:54.00Z",
       "requiredCore": "1.325",
       "title": "Promoted Builds Plugin",
-      "url": "http://hudson-ci.org/download/plugins/promoted-builds/1.7/promoted-builds.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/promoted-builds/1.7/promoted-builds.hpi",
       "version": "1.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Promoted+Builds+Plugin"
     },
     "promoted-builds-simple":     {
-      "buildDate": "Apr 13, 2010",
-      "dependencies": [],
-      "developers": [{"developerId": "sogabe"}],
+      "buildDate": "Apr 17, 2010",
+      "dependencies": [      {
+        "name": "copyartifact",
+        "optional": true,
+        "version": "1.2"
+      }],
+      "developers": [      {
+        "developerId": "mindless",
+        "email": "alan.harder@sun.com",
+        "name": "Alan Harder"
+      }],
       "excerpt": "Simpler version of [Promoted Builds Plugin], with only manual promotion of builds.",
       "labels":       [
         "misc",
         "ui"
       ],
       "name": "promoted-builds-simple",
-      "previousTimestamp": "2010-02-11T06:51:06.00Z",
-      "releaseTimestamp": "2010-04-14T06:14:32.00Z",
-      "requiredCore": "1.318",
+      "previousTimestamp": "2010-04-14T06:14:32.00Z",
+      "releaseTimestamp": "2010-04-17T20:12:40.00Z",
+      "requiredCore": "1.324",
       "title": "Promoted Builds Simple Plugin",
-      "url": "http://hudson-ci.org/download/plugins/promoted-builds-simple/1.3/promoted-builds-simple.hpi",
-      "version": "1.3",
+      "url": "http://updates.hudson-labs.org/download/plugins/promoted-builds-simple/1.4/promoted-builds-simple.hpi",
+      "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Promoted+Builds+Simple+Plugin"
     },
     "pvcs_scm":     {
@@ -3743,7 +3818,7 @@ updateCenter.post(
       "releaseTimestamp": "2008-11-05T15:36:58.00Z",
       "requiredCore": "1.259",
       "title": "PVCS SCM",
-      "url": "http://hudson-ci.org/download/plugins/pvcs_scm/1.0/pvcs_scm.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/pvcs_scm/1.0/pvcs_scm.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PVCS+SCM"
     },
@@ -3758,7 +3833,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-03T00:45:18.00Z",
       "requiredCore": "1.322",
       "title": "PXE Plugin",
-      "url": "http://hudson-ci.org/download/plugins/pxe/1.5/pxe.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/pxe/1.5/pxe.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PXE+Plugin"
     },
@@ -3777,7 +3852,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-11T06:45:24.00Z",
       "requiredCore": "1.318",
       "title": "Python Plugin",
-      "url": "http://hudson-ci.org/download/plugins/python/1.1/python.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/python/1.1/python.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Python+Plugin"
     },
@@ -3792,26 +3867,26 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-28T06:05:30.00Z",
       "requiredCore": "1.312",
       "title": "RAD Builder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/rad-builder/1.1.2/rad-builder.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/rad-builder/1.1.2/rad-builder.hpi",
       "version": "1.1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/RAD+Builder+Plugin"
     },
     "radiatorviewplugin":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 18, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "markh"}],
+      "developers": [{"developerId": "olamy"}],
       "excerpt": "Provides a job view displaying project status in a highly visible manner. This is ideal for displaying on a screen on the office wall as a form of Extreme Feedback Device.",
       "labels":       [
         "report",
         "ui"
       ],
       "name": "radiatorviewplugin",
-      "previousTimestamp": "2010-01-07T03:52:10.00Z",
-      "releaseTimestamp": "2010-03-31T02:47:40.00Z",
-      "requiredCore": "1.337",
+      "previousTimestamp": "2010-03-31T02:47:40.00Z",
+      "releaseTimestamp": "2010-04-19T03:28:42.00Z",
+      "requiredCore": "1.351",
       "title": "Radiator View Plugin",
-      "url": "http://hudson-ci.org/download/plugins/radiatorviewplugin/1.6/radiatorviewplugin.hpi",
-      "version": "1.6",
+      "url": "http://updates.hudson-labs.org/download/plugins/radiatorviewplugin/1.7/radiatorviewplugin.hpi",
+      "version": "1.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Radiator+View+Plugin"
     },
     "rake":     {
@@ -3825,7 +3900,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-17T03:36:46.00Z",
       "requiredCore": "1.319",
       "title": "Rake plugin",
-      "url": "http://hudson-ci.org/download/plugins/rake/1.6.3/rake.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/rake/1.6.3/rake.hpi",
       "version": "1.6.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Rake+plugin"
     },
@@ -3843,11 +3918,10 @@ updateCenter.post(
       "excerpt": "This plugin integrates <a href='http://www.redmine.org/'>Redmine<\/a> into Hudson (there's a <a href='http://d.hatena.ne.jp/couger/20090727'>plugin for Redmine<\/a> that integrates Hudson from the Redmine side, too.)",
       "labels": ["external"],
       "name": "redmine",
-      "previousTimestamp": "2009-03-08T06:17:12.00Z",
       "releaseTimestamp": "2009-12-29T05:00:24.00Z",
       "requiredCore": "1.324",
       "title": "Redmine Plugin",
-      "url": "http://hudson-ci.org/download/plugins/redmine/0.8/redmine.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/redmine/0.8/redmine.hpi",
       "version": "0.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Redmine+Plugin"
     },
@@ -3865,7 +3939,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T23:41:44.00Z",
       "requiredCore": "1.318",
       "title": "RegEx Email Plugin",
-      "url": "http://hudson-ci.org/download/plugins/regexemail/0.3/regexemail.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/regexemail/0.3/regexemail.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/RegEx+Email+Plugin"
     },
@@ -3895,9 +3969,31 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-16T06:40:14.00Z",
       "requiredCore": "1.332",
       "title": "Release Plugin",
-      "url": "http://hudson-ci.org/download/plugins/release/1.9/release.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/release/1.9/release.hpi",
       "version": "1.9",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Release+Plugin"
+    },
+    "reviewboard":     {
+      "buildDate": "Apr 30, 2010",
+      "dependencies": [      {
+        "name": "perforce",
+        "optional": false,
+        "version": "1.0.28"
+      }],
+      "developers": [      {
+        "developerId": "rshelley",
+        "email": "ryan@12gaugemedia.com",
+        "name": "Ryan Shelley"
+      }],
+      "excerpt": "This plugin connects to <a href='http://www.reviewboard.org'>Reviewboard<\/a> to create and update Review Requests.  Reviewboard is a tool for conducting code reviews and this plugin will allow you to link your SCM updates, when they are pulled for a Hudson build, to Reviewboard.  Note that currently, only the <a href='http://wiki.hudson-ci.org/display/HUDSON/Perforce+Plugin'>Perforce SCM<\/a> is supported.",
+      "labels": ["notifier"],
+      "name": "reviewboard",
+      "releaseTimestamp": "2010-04-30T16:18:30.00Z",
+      "requiredCore": "1.355",
+      "title": "Reviewboard Plugin",
+      "url": "http://updates.hudson-labs.org/download/plugins/reviewboard/1.0/reviewboard.hpi",
+      "version": "1.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Reviewboard+Plugin"
     },
     "ruby":     {
       "buildDate": "Jan 31, 2010",
@@ -3913,7 +4009,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T23:49:38.00Z",
       "requiredCore": "1.318",
       "title": "Ruby Plugin",
-      "url": "http://hudson-ci.org/download/plugins/ruby/1.2/ruby.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ruby/1.2/ruby.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ruby+Plugin"
     },
@@ -3939,7 +4035,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-06T03:56:12.00Z",
       "requiredCore": "1.319",
       "title": "Ruby metrics plugin",
-      "url": "http://hudson-ci.org/download/plugins/rubyMetrics/1.4/rubyMetrics.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/rubyMetrics/1.4/rubyMetrics.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ruby+metrics+plugin"
     },
@@ -3957,7 +4053,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T05:41:02.00Z",
       "requiredCore": "1.324",
       "title": "Retry Failed Builds Plugin",
-      "url": "http://hudson-ci.org/download/plugins/schedule-failed-builds/1.1/schedule-failed-builds.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/schedule-failed-builds/1.1/schedule-failed-builds.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Retry+Failed+Builds+Plugin"
     },
@@ -3969,7 +4065,7 @@ updateCenter.post(
       "previousTimestamp": "2009-09-24T23:40:22.00Z",
       "releaseTimestamp": "2009-11-10T00:33:24.00Z",
       "requiredCore": "1.319",
-      "url": "http://hudson-ci.org/download/plugins/scis-ad/1.2/scis-ad.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/scis-ad/1.2/scis-ad.hpi",
       "version": "1.2"
     },
     "scons":     {
@@ -3987,7 +4083,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-29T06:55:26.00Z",
       "requiredCore": "1.342",
       "title": "SCons Plugin",
-      "url": "http://hudson-ci.org/download/plugins/scons/0.2/scons.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/scons/0.2/scons.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SCons+Plugin"
     },
@@ -4005,7 +4101,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-02T17:02:06.00Z",
       "requiredCore": "1.319",
       "title": "SCP plugin",
-      "url": "http://hudson-ci.org/download/plugins/scp/1.6/scp.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/scp/1.6/scp.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SCP+plugin"
     },
@@ -4023,7 +4119,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-02T05:06:30.00Z",
       "requiredCore": "1.335",
       "title": "Screenshot Plugin",
-      "url": "http://hudson-ci.org/download/plugins/screenshot/1.1/screenshot.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/screenshot/1.1/screenshot.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Screenshot+Plugin"
     },
@@ -4038,7 +4134,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-08T12:45:18.00Z",
       "requiredCore": "1.330",
       "title": "Script Security Realm",
-      "url": "http://hudson-ci.org/download/plugins/script-realm/1.1/script-realm.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/script-realm/1.1/script-realm.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Script+Security+Realm"
     },
@@ -4057,7 +4153,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-16T02:13:44.00Z",
       "requiredCore": "1.324",
       "title": "Build Secret Plugin",
-      "url": "http://hudson-ci.org/download/plugins/secret/1.5/secret.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/secret/1.5/secret.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Build+Secret+Plugin"
     },
@@ -4076,7 +4172,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-23T19:02:42.00Z",
       "requiredCore": "1.342",
       "title": "Sectioned View Plugin",
-      "url": "http://hudson-ci.org/download/plugins/sectioned-view/1.10/sectioned-view.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/sectioned-view/1.10/sectioned-view.hpi",
       "version": "1.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Sectioned+View+Plugin"
     },
@@ -4091,7 +4187,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-26T03:56:56.00Z",
       "requiredCore": "1.322",
       "title": "Selenium Plugin",
-      "url": "http://hudson-ci.org/download/plugins/selenium/1.3/selenium.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/selenium/1.3/selenium.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Selenium+Plugin"
     },
@@ -4109,7 +4205,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-05T17:56:38.00Z",
       "requiredCore": "1.318",
       "title": "Selenium AES Plugin",
-      "url": "http://hudson-ci.org/download/plugins/selenium-aes/0.3/selenium-aes.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/selenium-aes/0.3/selenium-aes.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Selenium+AES+Plugin"
     },
@@ -4127,7 +4223,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-05-28T17:47:32.00Z",
       "requiredCore": "1.307",
       "title": "Seleniumhq Plugin",
-      "url": "http://hudson-ci.org/download/plugins/seleniumhq/0.2/seleniumhq.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/seleniumhq/0.2/seleniumhq.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Seleniumhq+Plugin"
     },
@@ -4145,7 +4241,7 @@ updateCenter.post(
       "releaseTimestamp": "2008-08-18T21:50:54.00Z",
       "requiredCore": "1.226",
       "title": "Serenitec Plugin",
-      "url": "http://hudson-ci.org/download/plugins/serenitec/0.14/serenitec.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/serenitec/0.14/serenitec.hpi",
       "version": "0.14",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Serenitec+Plugin"
     },
@@ -4164,7 +4260,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-16T19:31:58.00Z",
       "requiredCore": "1.350",
       "title": "Serenity Plugin",
-      "url": "http://hudson-ci.org/download/plugins/serenity/0.3/serenity.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/serenity/0.3/serenity.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Serenity+Plugin"
     },
@@ -4183,7 +4279,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T01:36:02.00Z",
       "requiredCore": "1.323",
       "title": "Setenv Plugin",
-      "url": "http://hudson-ci.org/download/plugins/setenv/1.1/setenv.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/setenv/1.1/setenv.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Setenv+Plugin"
     },
@@ -4206,7 +4302,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-10-19T19:57:10.00Z",
       "requiredCore": "1.319",
       "title": "SFEE Plugin",
-      "url": "http://hudson-ci.org/download/plugins/sfee/1.0.3/sfee.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/sfee/1.0.3/sfee.hpi",
       "version": "1.0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SFEE+Plugin"
     },
@@ -4228,7 +4324,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-28T02:51:02.00Z",
       "requiredCore": "1.336",
       "title": "Shelve Project Plugin",
-      "url": "http://hudson-ci.org/download/plugins/shelve-project-plugin/0.3/shelve-project-plugin.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/shelve-project-plugin/0.3/shelve-project-plugin.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Shelve+Project+Plugin"
     },
@@ -4247,7 +4343,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-09T00:05:08.00Z",
       "requiredCore": "1.318",
       "title": "Sidebar-Link Plugin",
-      "url": "http://hudson-ci.org/download/plugins/sidebar-link/1.4/sidebar-link.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/sidebar-link/1.4/sidebar-link.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Sidebar-Link+Plugin"
     },
@@ -4261,7 +4357,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-08T00:49:46.00Z",
       "requiredCore": "1.319",
       "title": "SiteMonitor Plugin",
-      "url": "http://hudson-ci.org/download/plugins/sitemonitor/0.1/sitemonitor.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/sitemonitor/0.1/sitemonitor.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SiteMonitor+Plugin"
     },
@@ -4279,7 +4375,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-11T00:44:00.00Z",
       "requiredCore": "1.318",
       "title": "slave-status",
-      "url": "http://hudson-ci.org/download/plugins/slave-status/1.4/slave-status.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/slave-status/1.4/slave-status.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/slave-status"
     },
@@ -4301,7 +4397,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-11T00:54:04.00Z",
       "requiredCore": "1.319",
       "title": "SLOCCount Plugin",
-      "url": "http://hudson-ci.org/download/plugins/sloccount/1.4/sloccount.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/sloccount/1.4/sloccount.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SLOCCount+Plugin"
     },
@@ -4345,7 +4441,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-23T02:43:28.00Z",
       "requiredCore": "1.344",
       "title": "Sonar plugin",
-      "url": "http://hudson-ci.org/download/plugins/sonar/1.5/sonar.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/sonar/1.5/sonar.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Sonar+plugin"
     },
@@ -4364,7 +4460,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-07T06:38:48.00Z",
       "requiredCore": "1.324",
       "title": "Hudson Sounds plugin",
-      "url": "http://hudson-ci.org/download/plugins/sounds/0.2/sounds.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/sounds/0.2/sounds.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Sounds+plugin"
     },
@@ -4383,7 +4479,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-03T01:00:12.00Z",
       "requiredCore": "1.324",
       "title": "Hudson Speaks! Plugin",
-      "url": "http://hudson-ci.org/download/plugins/speaks/0.1.1/speaks.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/speaks/0.1.1/speaks.hpi",
       "version": "0.1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Speaks%21+Plugin"
     },
@@ -4399,7 +4495,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-25T02:08:26.00Z",
       "requiredCore": "1.347",
       "title": "SSH plugin",
-      "url": "http://hudson-ci.org/download/plugins/ssh/1.0/ssh.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ssh/1.0/ssh.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SSH+plugin"
     },
@@ -4414,7 +4510,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-09T14:21:20.00Z",
       "requiredCore": "1.335",
       "title": "SSH Slaves plugin",
-      "url": "http://hudson-ci.org/download/plugins/ssh-slaves/0.9/ssh-slaves.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ssh-slaves/0.9/ssh-slaves.hpi",
       "version": "0.9",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SSH+Slaves+plugin"
     },
@@ -4432,7 +4528,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-10T04:50:36.00Z",
       "requiredCore": "1.339",
       "title": "STAF - STAX Plugin",
-      "url": "http://hudson-ci.org/download/plugins/staf/0.1/staf.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/staf/0.1/staf.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/STAF+-+STAX+Plugin"
     },
@@ -4462,7 +4558,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-11T02:19:42.00Z",
       "requiredCore": "1.318",
       "title": "StarTeam",
-      "url": "http://hudson-ci.org/download/plugins/starteam/0.2/starteam.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/starteam/0.2/starteam.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/StarTeam"
     },
@@ -4480,7 +4576,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-06T04:20:20.00Z",
       "requiredCore": "1.339",
       "title": "Startup Trigger",
-      "url": "http://hudson-ci.org/download/plugins/startup-trigger-plugin/0.1/startup-trigger-plugin.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/startup-trigger-plugin/0.1/startup-trigger-plugin.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Startup+Trigger"
     },
@@ -4495,12 +4591,12 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-01T01:46:00.00Z",
       "requiredCore": "1.320",
       "title": "Status Monitor Plugin",
-      "url": "http://hudson-ci.org/download/plugins/statusmonitor/1.2/statusmonitor.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/statusmonitor/1.2/statusmonitor.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Status+Monitor+Plugin"
     },
     "subversion":     {
-      "buildDate": "Mar 23, 2010",
+      "buildDate": "Apr 21, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "kohsuke abayer dodok1 dty huybrechts mindless pgweiss stephenconnolly etc",
@@ -4509,12 +4605,12 @@ updateCenter.post(
       "excerpt": "This plugin adds the Subversion support (via SVNKit) to Hudson.",
       "labels": ["scm"],
       "name": "subversion",
-      "previousTimestamp": "2010-03-23T03:45:10.00Z",
-      "releaseTimestamp": "2010-03-24T00:44:12.00Z",
-      "requiredCore": "1.347",
+      "previousTimestamp": "2010-03-24T00:44:12.00Z",
+      "releaseTimestamp": "2010-04-22T04:00:12.00Z",
+      "requiredCore": "1.355",
       "title": "Subversion Plugin",
-      "url": "http://hudson-ci.org/download/plugins/subversion/1.16/subversion.hpi",
-      "version": "1.16",
+      "url": "http://updates.hudson-labs.org/download/plugins/subversion/1.17/subversion.hpi",
+      "version": "1.17",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Subversion+Plugin"
     },
     "svn-release-mgr":     {
@@ -4536,7 +4632,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-02T16:27:22.00Z",
       "requiredCore": "1.318",
       "title": "Subversion Release Manager",
-      "url": "http://hudson-ci.org/download/plugins/svn-release-mgr/1.1/svn-release-mgr.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/svn-release-mgr/1.1/svn-release-mgr.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Subversion+Release+Manager"
     },
@@ -4562,7 +4658,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-27T05:32:06.00Z",
       "requiredCore": "1.319",
       "title": "Subversion Tagging Plugin",
-      "url": "http://hudson-ci.org/download/plugins/svn-tag/1.14/svn-tag.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/svn-tag/1.14/svn-tag.hpi",
       "version": "1.14",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Subversion+Tagging+Plugin"
     },
@@ -4576,7 +4672,7 @@ updateCenter.post(
       "releaseTimestamp": "2008-07-29T04:13:00.00Z",
       "requiredCore": "1.238",
       "title": "SVNCompat13 Plugin",
-      "url": "http://hudson-ci.org/download/plugins/svncompat13/1.1/svncompat13.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/svncompat13/1.1/svncompat13.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SVNCompat13+Plugin"
     },
@@ -4590,7 +4686,7 @@ updateCenter.post(
       "releaseTimestamp": "2008-07-30T21:11:24.00Z",
       "requiredCore": "1.238",
       "title": "SVNCompat14 Plugin",
-      "url": "http://hudson-ci.org/download/plugins/svncompat14/1.0/svncompat14.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/svncompat14/1.0/svncompat14.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SVNCompat14+Plugin"
     },
@@ -4611,7 +4707,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-11T02:16:52.00Z",
       "requiredCore": "1.319",
       "title": "SVN Publisher",
-      "url": "http://hudson-ci.org/download/plugins/svnpublisher/0.1/svnpublisher.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/svnpublisher/0.1/svnpublisher.hpi",
       "version": "0.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SVN+Publisher"
     },
@@ -4626,7 +4722,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-14T23:13:28.00Z",
       "requiredCore": "1.318",
       "title": "Swarm Plugin",
-      "url": "http://hudson-ci.org/download/plugins/swarm/1.3/swarm.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/swarm/1.3/swarm.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Swarm+Plugin"
     },
@@ -4641,7 +4737,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-06-03T07:48:10.00Z",
       "requiredCore": "1.244",
       "title": "Synergy Plugin",
-      "url": "http://hudson-ci.org/download/plugins/synergy/1.5/synergy.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/synergy/1.5/synergy.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Synergy+Plugin"
     },
@@ -4659,17 +4755,17 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-13T01:17:58.00Z",
       "requiredCore": "1.338",
       "title": "System Load Average Monitor Plugin",
-      "url": "http://hudson-ci.org/download/plugins/systemloadaverage-monitor/1.1/systemloadaverage-monitor.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/systemloadaverage-monitor/1.1/systemloadaverage-monitor.hpi",
       "version": "1.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/System+Load+Average+Monitor+Plugin"
     },
     "tasks":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 30, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.5"
+          "version": "1.6"
         },
                 {
           "name": "maven-plugin",
@@ -4692,12 +4788,12 @@ updateCenter.post(
         "maven"
       ],
       "name": "tasks",
-      "previousTimestamp": "2010-03-16T07:44:06.00Z",
-      "releaseTimestamp": "2010-03-30T20:56:32.00Z",
+      "previousTimestamp": "2010-04-30T06:36:36.00Z",
+      "releaseTimestamp": "2010-04-30T16:12:22.00Z",
       "requiredCore": "1.350",
       "title": "Task Scanner Plugin",
-      "url": "http://hudson-ci.org/download/plugins/tasks/4.4/tasks.hpi",
-      "version": "4.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/tasks/4.6/tasks.hpi",
+      "version": "4.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Task+Scanner+Plugin"
     },
     "template-project":     {
@@ -4718,7 +4814,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-12T07:53:04.00Z",
       "requiredCore": "1.319",
       "title": "Template Project Plugin",
-      "url": "http://hudson-ci.org/download/plugins/template-project/1.2/template-project.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/template-project/1.2/template-project.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Template+Project+Plugin"
     },
@@ -4740,7 +4836,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T00:48:38.00Z",
       "requiredCore": "1.319",
       "title": "Testability Explorer Plugin",
-      "url": "http://hudson-ci.org/download/plugins/testabilityexplorer/0.3/testabilityexplorer.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/testabilityexplorer/0.3/testabilityexplorer.hpi",
       "version": "0.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Testability+Explorer+Plugin"
     },
@@ -4761,7 +4857,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-06T17:17:58.00Z",
       "requiredCore": "1.319",
       "title": "Text-finder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/text-finder/1.8/text-finder.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/text-finder/1.8/text-finder.hpi",
       "version": "1.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Text-finder+Plugin"
     },
@@ -4776,7 +4872,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-01T21:45:36.00Z",
       "requiredCore": "1.320",
       "title": "Team Foundation Server Plugin",
-      "url": "http://hudson-ci.org/download/plugins/tfs/1.11/tfs.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/tfs/1.11/tfs.hpi",
       "version": "1.11",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Team+Foundation+Server+Plugin"
     },
@@ -4798,7 +4894,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-02T06:46:56.00Z",
       "requiredCore": "1.343",
       "title": "Tmp Cleaner Plugin",
-      "url": "http://hudson-ci.org/download/plugins/tmpcleaner/1.0/tmpcleaner.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/tmpcleaner/1.0/tmpcleaner.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Tmp+Cleaner+Plugin"
     },
@@ -4816,7 +4912,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-16T05:24:08.00Z",
       "requiredCore": "1.346",
       "title": "Tool Environment Plugin",
-      "url": "http://hudson-ci.org/download/plugins/toolenv/1.0/toolenv.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/toolenv/1.0/toolenv.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Tool+Environment+Plugin"
     },
@@ -4848,7 +4944,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-03T18:39:10.00Z",
       "requiredCore": "1.318",
       "title": "Trac Plugin",
-      "url": "http://hudson-ci.org/download/plugins/trac/1.10/trac.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/trac/1.10/trac.hpi",
       "version": "1.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Trac+Plugin"
     },
@@ -4869,7 +4965,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-11-28T23:43:08.00Z",
       "requiredCore": "1.335",
       "title": "Tracking SVN Plugin",
-      "url": "http://hudson-ci.org/download/plugins/tracking-svn/1.0/tracking-svn.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/tracking-svn/1.0/tracking-svn.hpi",
       "version": "1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Tracking+SVN+Plugin"
     },
@@ -4884,7 +4980,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-23T04:13:08.00Z",
       "requiredCore": "1.318",
       "title": "Translation Assistance Plugin",
-      "url": "http://hudson-ci.org/download/plugins/translation/1.4/translation.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/translation/1.4/translation.hpi",
       "version": "1.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Translation+Assistance+Plugin"
     },
@@ -4902,7 +4998,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-11T04:34:02.00Z",
       "requiredCore": "1.319",
       "title": "TuxDroid Plugin",
-      "url": "http://hudson-ci.org/download/plugins/tuxdroid/1.6/tuxdroid.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/tuxdroid/1.6/tuxdroid.hpi",
       "version": "1.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/TuxDroid+Plugin"
     },
@@ -4917,7 +5013,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-10-31T09:59:18.00Z",
       "requiredCore": "1.319",
       "title": "Twitter Plugin",
-      "url": "http://hudson-ci.org/download/plugins/twitter/0.4/twitter.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/twitter/0.4/twitter.hpi",
       "version": "0.4",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Twitter+Plugin"
     },
@@ -4929,7 +5025,7 @@ updateCenter.post(
       "previousTimestamp": "2010-04-13T06:26:24.00Z",
       "releaseTimestamp": "2010-04-17T11:44:12.00Z",
       "requiredCore": "1.355",
-      "url": "http://hudson-ci.org/download/plugins/ui-samples-plugin/1.355/ui-samples-plugin.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/ui-samples-plugin/1.355/ui-samples-plugin.hpi",
       "version": "1.355"
     },
     "url-change-trigger":     {
@@ -4943,7 +5039,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T01:06:32.00Z",
       "requiredCore": "1.318",
       "title": "URL Change Trigger",
-      "url": "http://hudson-ci.org/download/plugins/url-change-trigger/1.2/url-change-trigger.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/url-change-trigger/1.2/url-change-trigger.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/URL+Change+Trigger"
     },
@@ -4958,7 +5054,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-08-30T03:25:24.00Z",
       "requiredCore": "1.321",
       "title": "Validating String Parameter Plugin",
-      "url": "http://hudson-ci.org/download/plugins/validating-string-parameter/1.2/validating-string-parameter.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/validating-string-parameter/1.2/validating-string-parameter.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Validating+String+Parameter+Plugin"
     },
@@ -4977,7 +5073,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-21T21:14:36.00Z",
       "requiredCore": "1.324",
       "title": "Version Number Plugin",
-      "url": "http://hudson-ci.org/download/plugins/versionnumber/1.3.1/versionnumber.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/versionnumber/1.3.1/versionnumber.hpi",
       "version": "1.3.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Version+Number+Plugin"
     },
@@ -4996,7 +5092,7 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-29T17:41:40.00Z",
       "requiredCore": "1.318",
       "title": "ViewVC Plugin",
-      "url": "http://hudson-ci.org/download/plugins/viewVC/1.3/viewVC.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/viewVC/1.3/viewVC.hpi",
       "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ViewVC+Plugin"
     },
@@ -5021,12 +5117,12 @@ updateCenter.post(
       "releaseTimestamp": "2009-12-30T01:49:32.00Z",
       "requiredCore": "1.319",
       "title": "Violations",
-      "url": "http://hudson-ci.org/download/plugins/violations/0.7.5/violations.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/violations/0.7.5/violations.hpi",
       "version": "0.7.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Violations"
     },
     "virtualbox":     {
-      "buildDate": "Apr 12, 2010",
+      "buildDate": "Apr 27, 2010",
       "dependencies": [],
       "developers": [      {
         "developerId": "godin",
@@ -5038,11 +5134,12 @@ updateCenter.post(
         "buildwrapper"
       ],
       "name": "virtualbox",
-      "releaseTimestamp": "2010-04-12T08:45:52.00Z",
+      "previousTimestamp": "2010-04-19T03:34:24.00Z",
+      "releaseTimestamp": "2010-04-28T03:36:10.00Z",
       "requiredCore": "1.346",
       "title": "VirtualBox Plugin",
-      "url": "http://hudson-ci.org/download/plugins/virtualbox/0.1/virtualbox.hpi",
-      "version": "0.1",
+      "url": "http://updates.hudson-labs.org/download/plugins/virtualbox/0.2.1/virtualbox.hpi",
+      "version": "0.2.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/VirtualBox+Plugin"
     },
     "vmware":     {
@@ -5056,7 +5153,7 @@ updateCenter.post(
       "releaseTimestamp": "2008-04-09T16:15:54.00Z",
       "requiredCore": "1.206",
       "title": "VMware plugin",
-      "url": "http://hudson-ci.org/download/plugins/vmware/0.8/vmware.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/vmware/0.8/vmware.hpi",
       "version": "0.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/VMware+plugin"
     },
@@ -5071,17 +5168,17 @@ updateCenter.post(
       "releaseTimestamp": "2009-04-24T02:13:00.00Z",
       "requiredCore": "1.300",
       "title": "Visual SourceSafe Plugin",
-      "url": "http://hudson-ci.org/download/plugins/vss/1.7/vss.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/vss/1.7/vss.hpi",
       "version": "1.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Visual+SourceSafe+Plugin"
     },
     "warnings":     {
-      "buildDate": "Mar 30, 2010",
+      "buildDate": "Apr 29, 2010",
       "dependencies":       [
                 {
           "name": "analysis-core",
           "optional": false,
-          "version": "1.5"
+          "version": "1.6"
         },
                 {
           "name": "maven-plugin",
@@ -5104,27 +5201,27 @@ updateCenter.post(
         "report"
       ],
       "name": "warnings",
-      "previousTimestamp": "2010-03-16T07:55:38.00Z",
-      "releaseTimestamp": "2010-03-30T20:47:40.00Z",
+      "previousTimestamp": "2010-03-30T20:47:40.00Z",
+      "releaseTimestamp": "2010-04-30T04:32:48.00Z",
       "requiredCore": "1.350",
       "title": "Warnings Plugin",
-      "url": "http://hudson-ci.org/download/plugins/warnings/3.4/warnings.hpi",
-      "version": "3.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/warnings/3.5/warnings.hpi",
+      "version": "3.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Warnings+Plugin"
     },
     "was-builder":     {
-      "buildDate": "Apr 13, 2010",
+      "buildDate": "Apr 23, 2010",
       "dependencies": [],
       "developers": [{"developerId": "F276977"}],
       "excerpt": "This plugin allows Hudson to invoke IBM WebSphere Application Server's *wsadmin* as a build step. ",
       "labels": ["builder"],
       "name": "was-builder",
-      "previousTimestamp": "2010-04-13T19:47:46.00Z",
-      "releaseTimestamp": "2010-04-13T21:41:20.00Z",
+      "previousTimestamp": "2010-04-13T21:41:20.00Z",
+      "releaseTimestamp": "2010-04-23T16:28:26.00Z",
       "requiredCore": "1.312",
       "title": "WAS Builder Plugin",
-      "url": "http://hudson-ci.org/download/plugins/was-builder/1.4/was-builder.hpi",
-      "version": "1.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/was-builder/1.5/was-builder.hpi",
+      "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/WAS+Builder+Plugin"
     },
     "webtestpresenter":     {
@@ -5141,7 +5238,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-16T06:53:06.00Z",
       "requiredCore": "1.319",
       "title": "WebTest Presenter Plugin",
-      "url": "http://hudson-ci.org/download/plugins/webtestpresenter/0.23/webtestpresenter.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/webtestpresenter/0.23/webtestpresenter.hpi",
       "version": "0.23",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/WebTest+Presenter+Plugin"
     },
@@ -5159,7 +5256,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-06T16:59:22.00Z",
       "requiredCore": "1.319",
       "title": "Windmill Plugin",
-      "url": "http://hudson-ci.org/download/plugins/windmill/1.5/windmill.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/windmill/1.5/windmill.hpi",
       "version": "1.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Windmill+Plugin"
     },
@@ -5181,7 +5278,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-09T21:59:46.00Z",
       "requiredCore": "1.326",
       "title": "eXtreme Feedback Panel Plugin",
-      "url": "http://hudson-ci.org/download/plugins/xfpanel/1.0.7/xfpanel.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/xfpanel/1.0.7/xfpanel.hpi",
       "version": "1.0.7",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/eXtreme+Feedback+Panel+Plugin"
     },
@@ -5200,7 +5297,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-26T19:51:38.00Z",
       "requiredCore": "1.347",
       "title": "XShell Plugin",
-      "url": "http://hudson-ci.org/download/plugins/xshell/0.2/xshell.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/xshell/0.2/xshell.hpi",
       "version": "0.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/XShell+Plugin"
     },
@@ -5220,7 +5317,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-23T04:55:24.00Z",
       "requiredCore": "1.347",
       "title": "xUnit Plugin",
-      "url": "http://hudson-ci.org/download/plugins/xunit/0.6.1/xunit.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/xunit/0.6.1/xunit.hpi",
       "version": "0.6.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/xUnit+Plugin"
     },
@@ -5239,7 +5336,7 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-09T23:46:16.00Z",
       "requiredCore": "1.324",
       "title": "Xvnc Plugin",
-      "url": "http://hudson-ci.org/download/plugins/xvnc/1.8/xvnc.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/xvnc/1.8/xvnc.hpi",
       "version": "1.8",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Xvnc+Plugin"
     },
@@ -5258,15 +5355,15 @@ updateCenter.post(
       "releaseTimestamp": "2010-02-11T04:47:24.00Z",
       "requiredCore": "1.342",
       "title": "ZenTimestamp Plugin",
-      "url": "http://hudson-ci.org/download/plugins/zentimestamp/1.2/zentimestamp.hpi",
+      "url": "http://updates.hudson-labs.org/download/plugins/zentimestamp/1.2/zentimestamp.hpi",
       "version": "1.2",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ZenTimestamp+Plugin"
     }
   },
   "signature":   {
-    "certificates": ["MIIFBDCCA+ygAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0wOTEwMjcyMzU2MDJaFw0xMDEwMjcyMzU2MDJaMIGnMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEUMBIGA1UEBxMLU2FudGEgQ2xhcmExFzAVBgNVBAoTDkh1ZHNvbiBwcm9qZWN0MTUwMwYDVQQDEyxodHRwOi8vaHVkc29uLWNpLm9yZy8gb2ZmaWNpYWwgdXBkYXRlIGNlbnRlcjEdMBsGCSqGSIb3DQEJARYOaHVkc29uQHN1bi5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDPqZ3Jwx2GelRCDQ2oJlIb3fdCrEPlhNLCFzTrqfU+Uud93QfTQUZw/6D338E2xvGgZ8GzL8f6YLDeQWV7aIVXeR8vHnMmAuS+0a8n//FQaNoGZG+JsiTXQE+U7j5EtRHtlWwlRgWB2D93F/pDnoAmDOqL9UatfwZ65Cw9wWWNmLuAjhTqyiMWv7s5cyHFzz7snezdXICU+tyUsgp4SgiLydZOH26C91yDgnL/KMNO9Ys1V0KpFSDrV5P5P7TVN8JVolUttMKFvH82xB2uLK8N359jRy+1ud8zJKTLFFN7aypjNQEbNueZ8kVi+lQN9OMxTBxCgrcsnZWsaUjwZlThAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBQeN09z6az3zSPieMowcCs5PCjvFTCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEAG6heWNuhAxlZTPObuD6uHU3k/OeRwZJUtNQWSvT2OgFxXR6SXCE/VvqvnSJnZth8GEvUztg1buQSnddfk5JJIszv2LR8+kMw4aDNNKaRphCF8IFxQ3TM9HCNCdYQwq0qrOIkSVvXNOyph/p4+MhmqWMo9PbtObgtxFtDfmBtsw0nMgDdRHQyl+Fp5bpjjyB1ohVOkTMXNzLFgyuYh2G235SdtqIUr4xXIAHAYjHrxBdqZXy2EMghwz2Qmcubft82CNzcuE49Vq1x950TmxiwBW4R6MWU+qqKg+SCr3F5yE5lBJu+Pr95Utaxu0W3fz/DQKg0OZTxuEUZprP+GnfIng=="],
-    "digest": "bYR4DZxirsvD8RUhzZmn7YPwwYk=",
-    "signature": "sAohCopDjM+syj8b4NvPppSkGNeuWghJWaRGq3i7Zruy4XPd1ncZN1YOuLWU0DnOXonVc1nusxIISxRsiTeV8dg5iiHHU7exARIkpiK4S3TYg5Us/wtr6mWnocwOduJkyOo9M4qjQnjiiPoCBEK5yNDsVPRC8nZWc8+l3NtuVqgvvblotNPOBQz/lLeG9dO7ZzZ27HIXoXg27DSvIl9bEWo5/ZApyN5AbGtGvN3kebTbV+K0+p6PzV7vIpFzfz9JS/UqZ2IsEzXzpojxUL5LJPDcKqQcnQjORp20fhwx6pkcUZ7ubFo1LUPHRPwW9mijJCIrQDKXsXMp9Ito6A8FHg=="
+    "certificates": ["MIIE8jCCA9qgAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0xMDA0MTgyMzQzMzhaFw0xMTA0MTgyMzQzMzhaMIGVMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxDzANBgNVBAoTBkh1ZHNvbjEPMA0GA1UECxMGSHVkc29uMR0wGwYDVQQDExRIdWRzb24gVXBkYXRlIENlbnRlcjEdMBsGCSqGSIb3DQEJARYOa2tAa29oc3VrZS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDUQ7uN/ZQvyHvi5UONr2CAmWfWiAPPqaF4SS7dTIaLM/sxRgnZY1k7zt/8MTce7gNOd2EyCru93EgMVY1ivEH4b9fYSlzSnu8Lx2RdMulW0iqinLY17Jv+J1qxq+tRUyMa9y3DN28sf7ydLcpEJog3Of6KL+zJlKQS0oNcgsju9LdfzccmMu8Qq3lNhtcdsPkcRWpHyGiyva99xXBR/pqxM0GR8aMZYNwLi59Vg8/fpkTLwhBGVOgEIdO4ARvH/HTlfaLdr2pJ5BfsODk7A3VHV2ObDYIa+skEy1PPvtLv3/TfI/nD9Owt/TlpyI5aAbd1lboUrsPNyKjiR6GIfOcFAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBSMP/tadXU+XdrmlxxDSCZeyMAcbDCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEADs3NHx8j+x45msMgjHPoMb4yvz42vI1ea4UyYHrDZGlEsK7kfVbNHNpt+UGZaws0b+f6brL/3DA9w0niCTucHMd+ZqqFGpXHvV/IVVrR7omLgQ6EdinYYDXzIl/1Z97jeRDmL4/kckxxGyTyw/Y4/YatmVSM8ZESY3W9lYS9P90I+Jmo0e4W6tY+ztPrsw3C3ixmvfqG++YQTjZivr/5sCUd6UJHAz7XuX9Eqgyz2Od1wOazmtP7TEsQVEwiJXGB5HFLw7qtC51K3VdAj43nm+qgKe0U3yOw57EYKlntQzCWF24ucOZ1QhpvrIlzcD1q4AlIdlTD0OtuP9uGIYCTjA=="],
+    "digest": "sXRlozWjEDrU6dvSGU33xhcinYU=",
+    "signature": "SEYNTCQyhZJjTFXlVm6MBhQFGFOrZKkQCfj1IunItFtAV/2jKCPC9sA4VX7A0btAxFQlro6+HLWpzn+lN/8HdUXhN+Vtrrb/6MULKPlth/1R7esP+aDMJZ1GA2zZzzrWTs+E0UGu+Kks8FXzEGzii33BGa3DIPV2IdPbElQD4bMB3QKTgiBnGaIhGkJ8Jq2sgdIOj8EIKAunxr6zJGFdozgu3+Tt/tvssRuPioEZ2vbUb+2F7ci5BTX5GF9A/DLw+4MtwJkepZ0sr8HpBbvp9B3Vp34beqgLHm+/vXAI5Q/AGR2IUfAE8AeMD3nCcSiwdBK5JqImgdYmi9NOhd1LZA=="
   },
   "updateCenterVersion": "1"
 }
