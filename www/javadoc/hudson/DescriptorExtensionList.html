@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DescriptorExtensionList (Hudson main module 1.355 API)
+DescriptorExtensionList (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescriptorExtensionList (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescriptorExtensionList (Hudson main module 1.355 API)";
+        parent.document.title="DescriptorExtensionList (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -247,7 +247,7 @@ Class DescriptorExtensionList&lt;T extends <A HREF="../hudson/model/Describable.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A>&gt;</CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A>&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#load()">load</A></B>()</CODE>
 
 <BR>
@@ -279,7 +279,7 @@ Class DescriptorExtensionList&lt;T extends <A HREF="../hudson/model/Describable.
 <TH ALIGN="left"><B>Methods inherited from class hudson.<A HREF="../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../hudson/ExtensionList.html#add(int, T)">add</A>, <A HREF="../hudson/ExtensionList.html#add(T)">add</A>, <A HREF="../hudson/ExtensionList.html#finders()">finders</A>, <A HREF="../hudson/ExtensionList.html#get(java.lang.Class)">get</A>, <A HREF="../hudson/ExtensionList.html#get(int)">get</A>, <A HREF="../hudson/ExtensionList.html#getDynamic(java.lang.String)">getDynamic</A>, <A HREF="../hudson/ExtensionList.html#iterator()">iterator</A>, <A HREF="../hudson/ExtensionList.html#remove(int)">remove</A>, <A HREF="../hudson/ExtensionList.html#remove(java.lang.Object)">remove</A>, <A HREF="../hudson/ExtensionList.html#size()">size</A>, <A HREF="../hudson/ExtensionList.html#sort(java.util.List)">sort</A></CODE></TD>
+<TD><CODE><A HREF="../hudson/ExtensionList.html#add(int, T)">add</A>, <A HREF="../hudson/ExtensionList.html#add(T)">add</A>, <A HREF="../hudson/ExtensionList.html#finders()">finders</A>, <A HREF="../hudson/ExtensionList.html#get(java.lang.Class)">get</A>, <A HREF="../hudson/ExtensionList.html#get(int)">get</A>, <A HREF="../hudson/ExtensionList.html#getComponents()">getComponents</A>, <A HREF="../hudson/ExtensionList.html#getDynamic(java.lang.String)">getDynamic</A>, <A HREF="../hudson/ExtensionList.html#iterator()">iterator</A>, <A HREF="../hudson/ExtensionList.html#remove(int)">remove</A>, <A HREF="../hudson/ExtensionList.html#remove(java.lang.Object)">remove</A>, <A HREF="../hudson/ExtensionList.html#size()">size</A>, <A HREF="../hudson/ExtensionList.html#sort(java.util.List)">sort</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractList"><!-- --></A>
@@ -441,7 +441,7 @@ public <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">D
 <A NAME="load()"><!-- --></A><H3>
 load</H3>
 <PRE>
-protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A>&gt; <B>load</B>()</PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A>&gt;&gt; <B>load</B>()</PRE>
 <DL>
 <DD>Loading the descriptors in this case means filtering the descriptor from the master <A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A>.
 <P>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginWrapper (Hudson main module 1.355 API)
+PluginWrapper (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson main module 1.355 API)";
+        parent.document.title="PluginWrapper (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -154,6 +154,14 @@ Represents a Hudson plug-in and associated control information
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang"><CODE>ClassLoader</CODE></A> for loading classes from this plugin.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../hudson/PluginManager.html" title="class in hudson">PluginManager</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#parent">parent</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/PluginManager.html" title="class in hudson"><CODE>PluginManager</CODE></A> to which this belongs to.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -165,7 +173,8 @@ Represents a Hudson plug-in and associated control information
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#PluginWrapper(java.io.File, java.util.jar.Manifest, java.net.URL, java.lang.ClassLoader, java.io.File, java.util.List, java.util.List)">PluginWrapper</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;archive,
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#PluginWrapper(hudson.PluginManager, java.io.File, java.util.jar.Manifest, java.net.URL, java.lang.ClassLoader, java.io.File, java.util.List, java.util.List)">PluginWrapper</A></B>(<A HREF="../hudson/PluginManager.html" title="class in hudson">PluginManager</A>&nbsp;parent,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;archive,
               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/jar/Manifest.html?is-external=true" title="class or interface in java.util.jar">Manifest</A>&nbsp;manifest,
               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;baseResourceURL,
               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;classLoader,
@@ -383,10 +392,26 @@ Represents a Hudson plug-in and associated control information
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#releaseClassLoader()">releaseClassLoader</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginWrapper.html#setPlugin(hudson.Plugin)">setPlugin</A></B>(<A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A>&nbsp;plugin)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#stop()">stop</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminates the plugin.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -418,6 +443,18 @@ Represents a Hudson plug-in and associated control information
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="parent"><!-- --></A><H3>
+parent</H3>
+<PRE>
+public final <A HREF="../hudson/PluginManager.html" title="class in hudson">PluginManager</A> <B>parent</B></PRE>
+<DL>
+<DD><A HREF="../hudson/PluginManager.html" title="class in hudson"><CODE>PluginManager</CODE></A> to which this belongs to.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
 
 <A NAME="classLoader"><!-- --></A><H3>
 classLoader</H3>
@@ -455,10 +492,11 @@ public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?
 </TR>
 </TABLE>
 
-<A NAME="PluginWrapper(java.io.File, java.util.jar.Manifest, java.net.URL, java.lang.ClassLoader, java.io.File, java.util.List, java.util.List)"><!-- --></A><H3>
+<A NAME="PluginWrapper(hudson.PluginManager, java.io.File, java.util.jar.Manifest, java.net.URL, java.lang.ClassLoader, java.io.File, java.util.List, java.util.List)"><!-- --></A><H3>
 PluginWrapper</H3>
 <PRE>
-public <B>PluginWrapper</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;archive,
+public <B>PluginWrapper</B>(<A HREF="../hudson/PluginManager.html" title="class in hudson">PluginManager</A>&nbsp;parent,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;archive,
                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/jar/Manifest.html?is-external=true" title="class or interface in java.util.jar">Manifest</A>&nbsp;manifest,
                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;baseResourceURL,
                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;classLoader,
@@ -617,6 +655,30 @@ public boolean <B>isOlderThan</B>(<A HREF="../hudson/util/VersionNumber.html" ti
 <DL>
 <DD>Returns true if the version of this plugin is older than the given version.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="stop()"><!-- --></A><H3>
+stop</H3>
+<PRE>
+public void <B>stop</B>()</PRE>
+<DL>
+<DD>Terminates the plugin.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="releaseClassLoader()"><!-- --></A><H3>
+releaseClassLoader</H3>
+<PRE>
+public void <B>releaseClassLoader</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

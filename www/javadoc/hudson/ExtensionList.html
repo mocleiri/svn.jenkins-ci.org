@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ExtensionList (Hudson main module 1.355 API)
+ExtensionList (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ExtensionList (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ExtensionList (Hudson main module 1.355 API)";
+        parent.document.title="ExtensionList (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -193,7 +193,7 @@ Retains the known extension instances for the given type 'T'.
 <CODE>protected </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ExtensionList.html#ExtensionList(hudson.model.Hudson, java.lang.Class, java.util.concurrent.CopyOnWriteArrayList)">ExtensionList</A></B>(<A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;extensionType,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CopyOnWriteArrayList.html?is-external=true" title="class or interface in java.util.concurrent">CopyOnWriteArrayList</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;legacyStore)</CODE>
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CopyOnWriteArrayList.html?is-external=true" title="class or interface in java.util.concurrent">CopyOnWriteArrayList</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt;&nbsp;legacyStore)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -286,6 +286,14 @@ U</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ExtensionList.html#getComponents()">getComponents</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the same thing as the 'this' list represents, except as <A HREF="../hudson/ExtensionComponent.html" title="class in hudson"><CODE>ExtensionComponent</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ExtensionList.html#getDynamic(java.lang.String)">getDynamic</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;className)</CODE>
 
@@ -302,7 +310,7 @@ U</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;</CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ExtensionList.html#load()">load</A></B>()</CODE>
 
 <BR>
@@ -334,8 +342,8 @@ U</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/ExtensionList.html#sort(java.util.List)">sort</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;r)</CODE>
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ExtensionList.html#sort(java.util.List)">sort</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt;&nbsp;r)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the <A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> implementation requires sorting extensions,
@@ -434,7 +442,7 @@ ExtensionList</H3>
 <PRE>
 protected <B>ExtensionList</B>(<A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;extensionType,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CopyOnWriteArrayList.html?is-external=true" title="class or interface in java.util.concurrent">CopyOnWriteArrayList</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;legacyStore)</PRE>
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/CopyOnWriteArrayList.html?is-external=true" title="class or interface in java.util.concurrent">CopyOnWriteArrayList</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt;&nbsp;legacyStore)</PRE>
 <DL>
 <DL>
 <DT><B>Parameters:</B><DD><CODE>legacyStore</CODE> - Place to store manually registered instances. The version of the constructor that
@@ -474,6 +482,19 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Iterator.html?
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true#iterator()" title="class or interface in java.lang">iterator</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true#iterator()" title="class or interface in java.util">iterator</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true#iterator()" title="class or interface in java.util">iterator</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractList.html?is-external=true#iterator()" title="class or interface in java.util">iterator</A></CODE> in class <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/AbstractList.html?is-external=true" title="class or interface in java.util">AbstractList</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;</CODE></DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComponents()"><!-- --></A><H3>
+getComponents</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt; <B>getComponents</B>()</PRE>
+<DL>
+<DD>Gets the same thing as the 'this' list represents, except as <A HREF="../hudson/ExtensionComponent.html" title="class in hudson"><CODE>ExtensionComponent</CODE></A>s.
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -601,7 +622,7 @@ protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.ht
 <A NAME="load()"><!-- --></A><H3>
 load</H3>
 <PRE>
-protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt; <B>load</B>()</PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt; <B>load</B>()</PRE>
 <DL>
 <DD>Loads all the extensions.
 <P>
@@ -614,7 +635,7 @@ protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?i
 <A NAME="sort(java.util.List)"><!-- --></A><H3>
 sort</H3>
 <PRE>
-protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt; <B>sort</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&nbsp;r)</PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt; <B>sort</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;&gt;&nbsp;r)</PRE>
 <DL>
 <DD>If the <A HREF="../hudson/ExtensionList.html" title="class in hudson"><CODE>ExtensionList</CODE></A> implementation requires sorting extensions,
  override this method to do so.

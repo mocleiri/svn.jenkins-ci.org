@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.security.GroupDetails (Hudson main module 1.355 API)
+Uses of Class hudson.security.GroupDetails (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.security.GroupDetails (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.security.GroupDetails (Hudson main module 1.355 API)";
+        parent.document.title="Uses of Class hudson.security.GroupDetails (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -114,6 +114,15 @@ Uses of <A HREF="../../../hudson/security/GroupDetails.html" title="class in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></CODE></FONT></TD>
+<TD><CODE><B>SecurityRealm.</B><B><A HREF="../../../hudson/security/SecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;groupname)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this <A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports a look up of <A HREF="../../../hudson/security/GroupDetails.html" title="class in hudson.security"><CODE>GroupDetails</CODE></A> by their names, override this method
+ to provide the look up.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></CODE></FONT></TD>
 <TD><CODE><B>PAMSecurityRealm.</B><B><A HREF="../../../hudson/security/PAMSecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;groupname)</CODE>
 
 <BR>
@@ -130,15 +139,6 @@ Uses of <A HREF="../../../hudson/security/GroupDetails.html" title="class in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></CODE></FONT></TD>
-<TD><CODE><B>LDAPSecurityRealm.</B><B><A HREF="../../../hudson/security/LDAPSecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;groupname)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lookup a group; given input must match the configured syntax for group names
- in WEB-INF/security/LDAPBindSecurityRealm.groovy's authoritiesPopulator entry.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></CODE></FONT></TD>
 <TD><CODE><B>HudsonPrivateSecurityRealm.</B><B><A HREF="../../../hudson/security/HudsonPrivateSecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;groupname)</CODE>
 
 <BR>
@@ -147,11 +147,11 @@ Uses of <A HREF="../../../hudson/security/GroupDetails.html" title="class in hud
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/security/GroupDetails.html" title="class in hudson.security">GroupDetails</A></CODE></FONT></TD>
-<TD><CODE><B>SecurityRealm.</B><B><A HREF="../../../hudson/security/SecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;groupname)</CODE>
+<TD><CODE><B>LDAPSecurityRealm.</B><B><A HREF="../../../hudson/security/LDAPSecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;groupname)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this <A HREF="../../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports a look up of <A HREF="../../../hudson/security/GroupDetails.html" title="class in hudson.security"><CODE>GroupDetails</CODE></A> by their names, override this method
- to provide the look up.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lookup a group; given input must match the configured syntax for group names
+ in WEB-INF/security/LDAPBindSecurityRealm.groovy's authoritiesPopulator entry.</TD>
 </TR>
 </TABLE>
 &nbsp;

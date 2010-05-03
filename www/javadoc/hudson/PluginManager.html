@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginManager (Hudson main module 1.355 API)
+PluginManager (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson main module 1.355 API)";
+        parent.document.title="PluginManager (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -100,9 +100,12 @@ Class PluginManager</H2>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></DD>
 </DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../hudson/LocalPluginManager.html" title="class in hudson">LocalPluginManager</A>, <A HREF="../org/jvnet/hudson/test/TestPluginManager.html" title="class in org.jvnet.hudson.test">TestPluginManager</A></DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>PluginManager</B><DT>extends <A HREF="../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></DL>
+<DT><PRE>public abstract class <B>PluginManager</B><DT>extends <A HREF="../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></DL>
 </PRE>
 
 <P>
@@ -144,11 +147,37 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#activePlugins">activePlugins</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All active plugins.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;javax.servlet.ServletContext</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginManager.html#context">context</A></B></CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.355
+      <A HREF="../hudson/PluginManager.html" title="class in hudson"><CODE>PluginManager</CODE></A> can now live longer than <A HREF="../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance, so
+      use <code>Hudson.getInstance().servletContext</code> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/PluginManager.FailedPlugin.html" title="class in hudson">PluginManager.FailedPlugin</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#failedPlugins">failedPlugins</A></B></CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#plugins">plugins</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All discovered plugins.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -186,7 +215,8 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/PluginManager.html#PluginManager(javax.servlet.ServletContext)">PluginManager</A></B>(javax.servlet.ServletContext&nbsp;context)</CODE>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#PluginManager(javax.servlet.ServletContext, java.io.File)">PluginManager</A></B>(javax.servlet.ServletContext&nbsp;context,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;rootDir)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -200,6 +230,16 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#copyBundledPlugin(java.net.URL, java.lang.String)">copyBundledPlugin</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;src,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copies the bundled plugin from the given URL to the destination of the given file name (like 'abc.hpi'),
+ with a reasonable up-to-date check.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -337,6 +377,14 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#loadBundledPlugins()">loadBundledPlugins</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the war file has any "/WEB-INF/plugins/*.hpi", extract them into the plugin directory.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginManager.html#stop()">stop</A></B>()</CODE>
 
@@ -375,6 +423,40 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 </TABLE>
 
+<A NAME="plugins"><!-- --></A><H3>
+plugins</H3>
+<PRE>
+protected final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt; <B>plugins</B></PRE>
+<DL>
+<DD>All discovered plugins.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="activePlugins"><!-- --></A><H3>
+activePlugins</H3>
+<PRE>
+protected final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt; <B>activePlugins</B></PRE>
+<DL>
+<DD>All active plugins.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="failedPlugins"><!-- --></A><H3>
+failedPlugins</H3>
+<PRE>
+protected final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/PluginManager.FailedPlugin.html" title="class in hudson">PluginManager.FailedPlugin</A>&gt; <B>failedPlugins</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
 <A NAME="rootDir"><!-- --></A><H3>
 rootDir</H3>
 <PRE>
@@ -392,7 +474,9 @@ context</H3>
 <PRE>
 public final javax.servlet.ServletContext <B>context</B></PRE>
 <DL>
-<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.355
+      <A HREF="../hudson/PluginManager.html" title="class in hudson"><CODE>PluginManager</CODE></A> can now live longer than <A HREF="../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance, so
+      use <code>Hudson.getInstance().servletContext</code> instead.</I><DL>
 </DL>
 </DL>
 <HR>
@@ -433,10 +517,11 @@ public volatile boolean <B>pluginUploaded</B></PRE>
 </TR>
 </TABLE>
 
-<A NAME="PluginManager(javax.servlet.ServletContext)"><!-- --></A><H3>
+<A NAME="PluginManager(javax.servlet.ServletContext, java.io.File)"><!-- --></A><H3>
 PluginManager</H3>
 <PRE>
-public <B>PluginManager</B>(javax.servlet.ServletContext&nbsp;context)</PRE>
+public <B>PluginManager</B>(javax.servlet.ServletContext&nbsp;context,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;rootDir)</PRE>
 <DL>
 </DL>
 
@@ -461,6 +546,41 @@ public org.jvnet.hudson.reactor.TaskBuilder <B>initTasks</B>(<A HREF="../hudson/
 <P>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="loadBundledPlugins()"><!-- --></A><H3>
+loadBundledPlugins</H3>
+<PRE>
+protected abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>loadBundledPlugins</B>()
+                                                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>If the war file has any "/WEB-INF/plugins/*.hpi", extract them into the plugin directory.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>File names of the bundled plugins. Like {"ssh-slaves.hpi","subvesrion.hpi"}
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE> - Any exception will be reported and halt the startup.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copyBundledPlugin(java.net.URL, java.lang.String)"><!-- --></A><H3>
+copyBundledPlugin</H3>
+<PRE>
+protected void <B>copyBundledPlugin</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;src,
+                                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileName)
+                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Copies the bundled plugin from the given URL to the destination of the given file name (like 'abc.hpi'),
+ with a reasonable up-to-date check. A convenience method to be used by the <A HREF="../hudson/PluginManager.html#loadBundledPlugins()"><CODE>loadBundledPlugins()</CODE></A>.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

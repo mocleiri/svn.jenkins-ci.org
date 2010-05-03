@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateSite (Hudson main module 1.355 API)
+UpdateSite (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateSite (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateSite (Hudson main module 1.355 API)";
+        parent.document.title="UpdateSite (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -293,6 +293,14 @@ Source of the update center information, like "http://hudson-ci.org/update-cente
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if it's time for us to check for new version.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.html#isLegacyDefault()">isLegacyDefault</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is this the legacy default update center site?</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -510,6 +518,19 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DL>
 <DD>Exposed to get rid of hardcoding of the URL that serves up update-center.json
  in Javascript.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isLegacyDefault()"><!-- --></A><H3>
+isLegacyDefault</H3>
+<PRE>
+public boolean <B>isLegacyDefault</B>()</PRE>
+<DL>
+<DD>Is this the legacy default update center site?
 <P>
 <DD><DL>
 </DL>

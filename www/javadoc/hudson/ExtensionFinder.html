@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ExtensionFinder (Hudson main module 1.355 API)
+ExtensionFinder (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ExtensionFinder (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ExtensionFinder (Hudson main module 1.355 API)";
+        parent.document.title="ExtensionFinder (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/Extension.html" title="annotation in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/ExtensionFinder.Sezpoz.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/ExtensionFinder.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -183,7 +183,39 @@ Discovers the implementations of an extension point.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;T&gt;&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ExtensionFinder.html#_find(java.lang.Class, hudson.model.Hudson)">_find</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
+      <A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A pointless function to work around what appears to be a HotSpot problem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;T&gt;&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ExtensionFinder.html#find(java.lang.Class, hudson.model.Hudson)">find</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
+     <A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discover extensions of the given type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
@@ -195,7 +227,8 @@ Discovers the implementations of an extension point.
                <A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discover extensions of the given type.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.356
+      Use and implement <A HREF="../hudson/ExtensionFinder.html#find(java.lang.Class, hudson.model.Hudson)"><CODE>find(Class, Hudson)</CODE></A> that allows us to put some metadata.</I></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -240,8 +273,27 @@ public <B>ExtensionFinder</B>()</PRE>
 <A NAME="findExtensions(java.lang.Class, hudson.model.Hudson)"><!-- --></A><H3>
 findExtensions</H3>
 <PRE>
-public abstract &lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;T&gt; <B>findExtensions</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
-                                                 <A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</PRE>
+<FONT SIZE="-1">@Restricted(value=org.kohsuke.accmod.restrictions.NoExternalUse.class)
+</FONT>public &lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;T&gt; <B>findExtensions</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
+                                                                                                      <A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.356
+      Use and implement <A HREF="../hudson/ExtensionFinder.html#find(java.lang.Class, hudson.model.Hudson)"><CODE>find(Class, Hudson)</CODE></A> that allows us to put some metadata.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="find(java.lang.Class, hudson.model.Hudson)"><!-- --></A><H3>
+find</H3>
+<PRE>
+public abstract &lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;T&gt;&gt; <B>find</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
+                                                           <A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</PRE>
 <DL>
 <DD>Discover extensions of the given type.
 
@@ -256,7 +308,28 @@ public abstract &lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/
 <DT><B>Type Parameters:</B><DD><CODE>T</CODE> - The type of the extension points. This is not bound to <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A> because
       of <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>, which by itself doesn't implement <A HREF="../hudson/ExtensionPoint.html" title="interface in hudson"><CODE>ExtensionPoint</CODE></A> for
       a historical reason.<DT><B>Parameters:</B><DD><CODE>hudson</CODE> - Hudson whose behalf this extension finder is performing lookup.
-<DT><B>Returns:</B><DD>Can be empty but never null.</DL>
+<DT><B>Returns:</B><DD>Can be empty but never null.<DT><B>Since:</B></DT>
+  <DD>1.356
+      Older implementations provide <A HREF="../hudson/ExtensionFinder.html#findExtensions(java.lang.Class, hudson.model.Hudson)"><CODE>findExtensions(Class, Hudson)</CODE></A></DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_find(java.lang.Class, hudson.model.Hudson)"><!-- --></A><H3>
+_find</H3>
+<PRE>
+public &lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson">ExtensionComponent</A>&lt;T&gt;&gt; <B>_find</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
+                                                   <A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson)</PRE>
+<DL>
+<DD>A pointless function to work around what appears to be a HotSpot problem. See HUDSON-5756 and bug 6933067
+ on BugParade for more details.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -290,7 +363,7 @@ public abstract &lt;T&gt; <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../hudson/Extension.html" title="annotation in hudson"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../hudson/ExtensionComponent.html" title="class in hudson"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../hudson/ExtensionFinder.Sezpoz.html" title="class in hudson"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../index.html?hudson/ExtensionFinder.html" target="_top"><B>FRAMES</B></A>  &nbsp;

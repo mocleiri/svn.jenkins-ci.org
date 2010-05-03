@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.EnvVars (Hudson main module 1.355 API)
+Uses of Class hudson.EnvVars (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.EnvVars (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.EnvVars (Hudson main module 1.355 API)";
+        parent.document.title="Uses of Class hudson.EnvVars (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -195,7 +195,7 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
-<TD><CODE><B>MavenModuleSetBuild.</B><B><A HREF="../../hudson/maven/MavenModuleSetBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+<TD><CODE><B>MavenBuild.</B><B><A HREF="../../hudson/maven/MavenBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <code>MAVEN_OPTS</code> to forked processes.</TD>
@@ -203,7 +203,7 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
-<TD><CODE><B>MavenBuild.</B><B><A HREF="../../hudson/maven/MavenBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+<TD><CODE><B>MavenModuleSetBuild.</B><B><A HREF="../../hudson/maven/MavenModuleSetBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes <code>MAVEN_OPTS</code> to forked processes.</TD>
@@ -253,19 +253,19 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
-<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../hudson/model/AbstractBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
 <TD><CODE><B>Run.</B><B><A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the map that contains environmental variables to be used for launching
  processes for this build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></CODE></FONT></TD>
+<TD><CODE><B>AbstractBuild.</B><B><A HREF="../../hudson/model/AbstractBuild.html#getEnvironment(hudson.model.TaskListener)">getEnvironment</A></B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -274,6 +274,24 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>ParametersAction.</B><B><A HREF="../../hudson/model/ParametersAction.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>RunParameterValue.</B><B><A HREF="../../hudson/model/RunParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+             <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -296,20 +314,20 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>BooleanParameterValue.</B><B><A HREF="../../hudson/model/BooleanParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+<TD><CODE><B>EnvironmentContributingAction.</B><B><A HREF="../../hudson/model/EnvironmentContributingAction.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
              <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A> to allow plugins to contribute environment variables.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ParametersAction.</B><B><A HREF="../../hudson/model/ParametersAction.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+<TD><CODE><B>ParameterValue.</B><B><A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
              <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds environmental variables for the builds to the given map.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -323,29 +341,11 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>EnvironmentContributingAction.</B><B><A HREF="../../hudson/model/EnvironmentContributingAction.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-             <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A> to allow plugins to contribute environment variables.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>RunParameterValue.</B><B><A HREF="../../hudson/model/RunParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
+<TD><CODE><B>BooleanParameterValue.</B><B><A HREF="../../hudson/model/BooleanParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
              <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exposes the name/value as an environment variable.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>ParameterValue.</B><B><A HREF="../../hudson/model/ParameterValue.html#buildEnvVars(hudson.model.AbstractBuild, hudson.EnvVars)">buildEnvVars</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
-             <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;env)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds environmental variables for the builds to the given map.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -439,16 +439,16 @@ Uses of <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
-<TD><CODE><B>Ant.AntInstallation.</B><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#forEnvironment(hudson.EnvVars)">forEnvironment</A></B>(<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;environment)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Maven.MavenInstallation.</B><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#forEnvironment(hudson.EnvVars)">forEnvironment</A></B>(<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;environment)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A></CODE></FONT></TD>
-<TD><CODE><B>Maven.MavenInstallation.</B><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#forEnvironment(hudson.EnvVars)">forEnvironment</A></B>(<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;environment)</CODE>
+<CODE>&nbsp;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A></CODE></FONT></TD>
+<TD><CODE><B>Ant.AntInstallation.</B><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#forEnvironment(hudson.EnvVars)">forEnvironment</A></B>(<A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A>&nbsp;environment)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

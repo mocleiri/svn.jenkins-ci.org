@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractBuild.AbstractRunner (Hudson main module 1.355 API)
+AbstractBuild.AbstractRunner (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractBuild.AbstractRunner (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractBuild.AbstractRunner (Hudson main module 1.355 API)";
+        parent.document.title="AbstractBuild.AbstractRunner (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -218,10 +218,32 @@ Class AbstractBuild.AbstractRunner</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.lang.Iterable, boolean)">performAllBuildStep</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
                     boolean&nbsp;phase)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.356
+      Use <A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.lang.Iterable, boolean)"><CODE>performAllBuildSteps(BuildListener, Iterable, boolean)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.util.Map, boolean)">performAllBuildStep</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                    boolean&nbsp;phase)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.356
+      Use <A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.util.Map, boolean)"><CODE>performAllBuildSteps(BuildListener, Map, boolean)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.lang.Iterable, boolean)">performAllBuildSteps</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                     boolean&nbsp;phase)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runs all the given build steps, even if one of them fail.</TD>
@@ -229,9 +251,9 @@ Class AbstractBuild.AbstractRunner</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.util.Map, boolean)">performAllBuildStep</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
-                    boolean&nbsp;phase)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.util.Map, boolean)">performAllBuildSteps</A></B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                     boolean&nbsp;phase)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -534,11 +556,32 @@ public void <B>cleanUp</B>(<A HREF="../../hudson/model/BuildListener.html" title
 <A NAME="performAllBuildStep(hudson.model.BuildListener, java.util.Map, boolean)"><!-- --></A><H3>
 performAllBuildStep</H3>
 <PRE>
-protected final boolean <B>performAllBuildStep</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
-                                            boolean&nbsp;phase)
-                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
-                                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+protected final void <B>performAllBuildStep</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                                         boolean&nbsp;phase)
+                                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.356
+      Use <A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.util.Map, boolean)"><CODE>performAllBuildSteps(BuildListener, Map, boolean)</CODE></A></I>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="performAllBuildSteps(hudson.model.BuildListener, java.util.Map, boolean)"><!-- --></A><H3>
+performAllBuildSteps</H3>
+<PRE>
+protected final boolean <B>performAllBuildSteps</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                                             boolean&nbsp;phase)
+                                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
+                                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 
@@ -552,11 +595,32 @@ protected final boolean <B>performAllBuildStep</B>(<A HREF="../../hudson/model/B
 <A NAME="performAllBuildStep(hudson.model.BuildListener, java.lang.Iterable, boolean)"><!-- --></A><H3>
 performAllBuildStep</H3>
 <PRE>
-protected final boolean <B>performAllBuildStep</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
-                                            boolean&nbsp;phase)
-                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
-                                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+protected final void <B>performAllBuildStep</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                                         boolean&nbsp;phase)
+                                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
+                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.356
+      Use <A HREF="../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.lang.Iterable, boolean)"><CODE>performAllBuildSteps(BuildListener, Iterable, boolean)</CODE></A></I>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="performAllBuildSteps(hudson.model.BuildListener, java.lang.Iterable, boolean)"><!-- --></A><H3>
+performAllBuildSteps</H3>
+<PRE>
+protected final boolean <B>performAllBuildSteps</B>(<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
+                                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                                             boolean&nbsp;phase)
+                                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
+                                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Runs all the given build steps, even if one of them fail.
 <P>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.355 API)
+Hudson (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.355 API)";
+        parent.document.title="Hudson (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -270,6 +270,14 @@ Root object of the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/Lookup.html" title="class in hudson">Lookup</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#lookup">lookup</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stores various objects scoped to <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/OverallLoadStatistics.html" title="class in hudson.model">OverallLoadStatistics</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#overallLoad">overallLoad</A></B></CODE>
 
@@ -419,6 +427,14 @@ Root object of the system.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#Hudson(java.io.File, javax.servlet.ServletContext)">Hudson</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;root,
        javax.servlet.ServletContext&nbsp;context)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#Hudson(java.io.File, javax.servlet.ServletContext, hudson.PluginManager)">Hudson</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;root,
+       javax.servlet.ServletContext&nbsp;context,
+       <A HREF="../../hudson/PluginManager.html" title="class in hudson">PluginManager</A>&nbsp;pluginManager)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2012,6 +2028,21 @@ P</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#lookup(java.lang.Class)">lookup</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shortcut for <code>Hudson.getInstance().lookup.get(type)</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/search/SearchIndexBuilder.html" title="class in hudson.search">SearchIndexBuilder</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#makeSearchIndex()">makeSearchIndex</A></B>()</CODE>
 
@@ -2198,6 +2229,18 @@ P</CODE></FONT></TD>
 <B>Field Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="lookup"><!-- --></A><H3>
+lookup</H3>
+<PRE>
+public final transient <A HREF="../../hudson/Lookup.html" title="class in hudson">Lookup</A> <B>lookup</B></PRE>
+<DL>
+<DD>Stores various objects scoped to <A HREF="../../hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A>.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
 
 <A NAME="root"><!-- --></A><H3>
 root</H3>
@@ -2531,6 +2574,25 @@ public <B>Hudson</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Fi
 <DL>
 <DL>
 
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE>
+<DD><CODE>org.jvnet.hudson.reactor.ReactorException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="Hudson(java.io.File, javax.servlet.ServletContext, hudson.PluginManager)"><!-- --></A><H3>
+Hudson</H3>
+<PRE>
+public <B>Hudson</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;root,
+              javax.servlet.ServletContext&nbsp;context,
+              <A HREF="../../hudson/PluginManager.html" title="class in hudson">PluginManager</A>&nbsp;pluginManager)
+       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
+              org.jvnet.hudson.reactor.ReactorException</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>pluginManager</CODE> - If non-null, use existing plugin manager. Otherwise create a new one.
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE>
@@ -5998,6 +6060,22 @@ public <A HREF="../../hudson/model/View.html" title="class in hudson.model">View
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE>getStaplerFallback</CODE> in interface <CODE>org.kohsuke.stapler.StaplerFallback</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="lookup(java.lang.Class)"><!-- --></A><H3>
+lookup</H3>
+<PRE>
+public static &lt;T&gt; T <B>lookup</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Shortcut for <code>Hudson.getInstance().lookup.get(type)</code>
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>

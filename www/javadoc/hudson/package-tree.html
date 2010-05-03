@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson Class Hierarchy (Hudson main module 1.355 API)
+hudson Class Hierarchy (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson Class Hierarchy (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson Class Hierarchy (Hudson main module 1.355 API)";
+        parent.document.title="hudson Class Hierarchy (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -114,7 +114,9 @@ Class Hierarchy
 <LI TYPE="circle">hudson.<A HREF="../hudson/MarkupText.html" title="class in hudson"><B>MarkupText</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/MarkupText.SubText.html" title="class in hudson"><B>MarkupText.SubText</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="../hudson/model/AbstractModelObject.html" title="class in hudson.model"><B>AbstractModelObject</B></A> (implements hudson.search.<A HREF="../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>)
 <UL>
-<LI TYPE="circle">hudson.<A HREF="../hudson/PluginManager.html" title="class in hudson"><B>PluginManager</B></A></UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/PluginManager.html" title="class in hudson"><B>PluginManager</B></A><UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/LocalPluginManager.html" title="class in hudson"><B>LocalPluginManager</B></A></UL>
+</UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/BulkChange.html" title="class in hudson"><B>BulkChange</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/ClassicPluginStrategy.html" title="class in hudson"><B>ClassicPluginStrategy</B></A> (implements hudson.<A HREF="../hudson/PluginStrategy.html" title="interface in hudson">PluginStrategy</A>)
 <LI TYPE="circle">hudson.<A HREF="../hudson/DependencyRunner.html" title="class in hudson"><B>DependencyRunner</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>)
 <LI TYPE="circle">hudson.model.<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model"><B>Descriptor</B></A>&lt;T&gt; (implements hudson.model.<A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
@@ -123,6 +125,7 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/FileSystemProvisioner.Default.DescriptorImpl.html" title="class in hudson"><B>FileSystemProvisioner.Default.DescriptorImpl</B></A></UL>
 </UL>
+<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionComponent.html" title="class in hudson"><B>ExtensionComponent</B></A>&lt;T&gt; (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;T&gt;)
 <LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionFinder.html" title="class in hudson"><B>ExtensionFinder</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionFinder.Sezpoz.html" title="class in hudson"><B>ExtensionFinder.Sezpoz</B></A></UL>
@@ -134,7 +137,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.<A HREF="../hudson/Indenter.html" title="class in hudson"><B>Indenter</B></A>&lt;J&gt;<LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.html" title="class in hudson"><B>Launcher</B></A><UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.LocalLauncher.html" title="class in hudson"><B>Launcher.LocalLauncher</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.RemoteLauncher.html" title="class in hudson"><B>Launcher.RemoteLauncher</B></A></UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson"><B>Launcher.ProcStarter</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/LauncherDecorator.html" title="class in hudson"><B>LauncherDecorator</B></A> (implements hudson.<A HREF="../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">hudson.<A HREF="../hudson/Main.html" title="class in hudson"><B>Main</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Messages.html" title="class in hudson"><B>Messages</B></A><LI TYPE="circle">java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><B>OutputStream</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A>, java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Flushable.html?is-external=true" title="class or interface in java.io">Flushable</A>)
+<LI TYPE="circle">hudson.<A HREF="../hudson/Lookup.html" title="class in hudson"><B>Lookup</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Main.html" title="class in hudson"><B>Main</B></A><LI TYPE="circle">hudson.<A HREF="../hudson/Messages.html" title="class in hudson"><B>Messages</B></A><LI TYPE="circle">java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><B>OutputStream</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A>, java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Flushable.html?is-external=true" title="class or interface in java.io">Flushable</A>)
 <UL>
 <LI TYPE="circle">hudson.util.<A HREF="../hudson/util/DelegatingOutputStream.html" title="class in hudson.util"><B>DelegatingOutputStream</B></A><UL>
 <LI TYPE="circle">hudson.<A HREF="../hudson/CloseProofOutputStream.html" title="class in hudson"><B>CloseProofOutputStream</B></A></UL>
@@ -176,10 +179,10 @@ Interface Hierarchy
 Annotation Type Hierarchy
 </H2>
 <UL>
-<LI TYPE="circle">hudson.<A HREF="../hudson/RestrictedSince.html" title="annotation in hudson"><B>RestrictedSince</B></A> (implements java.lang.annotation.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Annotation.html?is-external=true" title="class or interface in java.lang.annotation">Annotation</A>)
+<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson"><B>ExtensionPoint.LegacyInstancesAreScopedToHudson</B></A> (implements java.lang.annotation.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Annotation.html?is-external=true" title="class or interface in java.lang.annotation">Annotation</A>)
 <LI TYPE="circle">hudson.<A HREF="../hudson/CopyOnWrite.html" title="annotation in hudson"><B>CopyOnWrite</B></A> (implements java.lang.annotation.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Annotation.html?is-external=true" title="class or interface in java.lang.annotation">Annotation</A>)
 <LI TYPE="circle">hudson.<A HREF="../hudson/Extension.html" title="annotation in hudson"><B>Extension</B></A> (implements java.lang.annotation.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Annotation.html?is-external=true" title="class or interface in java.lang.annotation">Annotation</A>)
-<LI TYPE="circle">hudson.<A HREF="../hudson/ExtensionPoint.LegacyInstancesAreScopedToHudson.html" title="annotation in hudson"><B>ExtensionPoint.LegacyInstancesAreScopedToHudson</B></A> (implements java.lang.annotation.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Annotation.html?is-external=true" title="class or interface in java.lang.annotation">Annotation</A>)
+<LI TYPE="circle">hudson.<A HREF="../hudson/RestrictedSince.html" title="annotation in hudson"><B>RestrictedSince</B></A> (implements java.lang.annotation.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Annotation.html?is-external=true" title="class or interface in java.lang.annotation">Annotation</A>)
 </UL>
 <H2>
 Enum Hierarchy

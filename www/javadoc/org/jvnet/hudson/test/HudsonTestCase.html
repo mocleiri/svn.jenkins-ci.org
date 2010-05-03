@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.355 API)
+HudsonTestCase (Hudson main module 1.356 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-04-17">
+<META NAME="date" CONTENT="2010-05-03">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.355 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.355 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.356 API)";
     }
 }
 </SCRIPT>
@@ -254,6 +254,14 @@ Base class for all Hudson test cases.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A>s to be invoked at <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#tearDown()"><CODE>tearDown()</CODE></A>.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#useLocalPluginManager">useLocalPluginManager</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this test case has additional <A HREF="../../../../org/jvnet/hudson/test/recipes/WithPlugin.html" title="annotation in org.jvnet.hudson.test.recipes"><CODE>WithPlugin</CODE></A> annotations, set to true.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -445,6 +453,14 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/model/FreeStyleBuild.html" title="class in hudson.model">FreeStyleBuild</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(hudson.model.FreeStyleProject)">buildAndAssertSuccess</A></B>(<A HREF="../../../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should be unnecessary, but otherwise IntelliJ complains.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1081,6 +1097,21 @@ protected <A HREF="../../../../org/jvnet/hudson/test/rhino/JavaScriptDebugger.ht
  Unlike Java debugger, which you as a human interfaces directly and interactively,
  this JavaScript debugger is to be interfaced by your program (or through the
  expression evaluation capability of your Java debugger.)
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="useLocalPluginManager"><!-- --></A><H3>
+useLocalPluginManager</H3>
+<PRE>
+public boolean <B>useLocalPluginManager</B></PRE>
+<DL>
+<DD>If this test case has additional <A HREF="../../../../org/jvnet/hudson/test/recipes/WithPlugin.html" title="annotation in org.jvnet.hudson.test.recipes"><CODE>WithPlugin</CODE></A> annotations, set to true.
+ This will cause a fresh <A HREF="../../../../hudson/PluginManager.html" title="class in hudson"><CODE>PluginManager</CODE></A> to be created for this test.
+ Leaving this to false enables the test harness to use a pre-loaded plugin manager,
+ which runs faster.
 <P>
 <DL>
 </DL>
@@ -1942,6 +1973,25 @@ buildAndAssertSuccess</H3>
 public &lt;J extends <A HREF="../../../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;J,R&gt;,R extends <A HREF="../../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;J,R&gt;&gt; R <B>buildAndAssertSuccess</B>(J&nbsp;job)
                                                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildAndAssertSuccess(hudson.model.FreeStyleProject)"><!-- --></A><H3>
+buildAndAssertSuccess</H3>
+<PRE>
+public <A HREF="../../../../hudson/model/FreeStyleBuild.html" title="class in hudson.model">FreeStyleBuild</A> <B>buildAndAssertSuccess</B>(<A HREF="../../../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>&nbsp;job)
+                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Should be unnecessary, but otherwise IntelliJ complains.
+<P>
 <DD><DL>
 </DL>
 </DD>
