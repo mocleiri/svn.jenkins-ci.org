@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JDK (Hudson main module 1.356 API)
+JDK (Hudson main module 1.357 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-03">
+<META NAME="date" CONTENT="2010-05-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JDK (Hudson main module 1.356 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JDK (Hudson main module 1.356 API)";
+        parent.document.title="JDK (Hudson main module 1.357 API)";
     }
 }
 </SCRIPT>
@@ -94,8 +94,9 @@ hudson.model</FONT>
 Class JDK</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">hudson.tools.ToolInstallation</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JDK</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">hudson.model.AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">hudson.tools.ToolInstallation</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.JDK</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;, <A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;, <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/model/JDK.html" title="class in hudson.model">JDK</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
@@ -261,7 +262,16 @@ Information about JDK installation.
 <TH ALIGN="left"><B>Methods inherited from class hudson.tools.<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getHome()">getHome</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/tools/ToolInstallation.html#all()">all</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getHome()">getHome</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getName()">getName</A>, <A HREF="../../hudson/tools/ToolInstallation.html#getProperties()">getProperties</A>, <A HREF="../../hudson/tools/ToolInstallation.html#translateFor(hudson.model.Node, hudson.model.TaskListener)">translateFor</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractDescribableImpl"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">AbstractDescribableImpl</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractDescribableImpl.html#getDescriptor()">getDescriptor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>

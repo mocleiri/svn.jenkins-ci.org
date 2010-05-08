@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DescriptorExtensionList (Hudson main module 1.356 API)
+DescriptorExtensionList (Hudson main module 1.357 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-03">
+<META NAME="date" CONTENT="2010-05-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescriptorExtensionList (Hudson main module 1.356 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescriptorExtensionList (Hudson main module 1.356 API)";
+        parent.document.title="DescriptorExtensionList (Hudson main module 1.357 API)";
     }
 }
 </SCRIPT>
@@ -207,8 +207,8 @@ Class DescriptorExtensionList&lt;T extends <A HREF="../hudson/model/Describable.
 </TR>
 </TABLE>
 </CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A></B>(<A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;describableType)</CODE>
+<TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#createDescriptorList(hudson.model.Hudson, java.lang.Class)">createDescriptorList</A></B>(<A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;describableType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance.</TD>
@@ -279,7 +279,7 @@ Class DescriptorExtensionList&lt;T extends <A HREF="../hudson/model/Describable.
 <TH ALIGN="left"><B>Methods inherited from class hudson.<A HREF="../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../hudson/ExtensionList.html#add(int, T)">add</A>, <A HREF="../hudson/ExtensionList.html#add(T)">add</A>, <A HREF="../hudson/ExtensionList.html#finders()">finders</A>, <A HREF="../hudson/ExtensionList.html#get(java.lang.Class)">get</A>, <A HREF="../hudson/ExtensionList.html#get(int)">get</A>, <A HREF="../hudson/ExtensionList.html#getComponents()">getComponents</A>, <A HREF="../hudson/ExtensionList.html#getDynamic(java.lang.String)">getDynamic</A>, <A HREF="../hudson/ExtensionList.html#iterator()">iterator</A>, <A HREF="../hudson/ExtensionList.html#remove(int)">remove</A>, <A HREF="../hudson/ExtensionList.html#remove(java.lang.Object)">remove</A>, <A HREF="../hudson/ExtensionList.html#size()">size</A>, <A HREF="../hudson/ExtensionList.html#sort(java.util.List)">sort</A></CODE></TD>
+<TD><CODE><A HREF="../hudson/ExtensionList.html#add(int, T)">add</A>, <A HREF="../hudson/ExtensionList.html#add(T)">add</A>, <A HREF="../hudson/ExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A>, <A HREF="../hudson/ExtensionList.html#finders()">finders</A>, <A HREF="../hudson/ExtensionList.html#get(java.lang.Class)">get</A>, <A HREF="../hudson/ExtensionList.html#get(int)">get</A>, <A HREF="../hudson/ExtensionList.html#getComponents()">getComponents</A>, <A HREF="../hudson/ExtensionList.html#getDynamic(java.lang.String)">getDynamic</A>, <A HREF="../hudson/ExtensionList.html#iterator()">iterator</A>, <A HREF="../hudson/ExtensionList.html#remove(int)">remove</A>, <A HREF="../hudson/ExtensionList.html#remove(java.lang.Object)">remove</A>, <A HREF="../hudson/ExtensionList.html#size()">size</A>, <A HREF="../hudson/ExtensionList.html#sort(java.util.List)">sort</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractList"><!-- --></A>
@@ -349,11 +349,11 @@ protected <B>DescriptorExtensionList</B>(<A HREF="../hudson/model/Hudson.html" t
 </TR>
 </TABLE>
 
-<A NAME="create(hudson.model.Hudson, java.lang.Class)"><!-- --></A><H3>
-create</H3>
+<A NAME="createDescriptorList(hudson.model.Hudson, java.lang.Class)"><!-- --></A><H3>
+createDescriptorList</H3>
 <PRE>
-public static &lt;T extends <A HREF="../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;,D extends <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt; <A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;T,D&gt; <B>create</B>(<A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
-                                                                                                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;describableType)</PRE>
+public static &lt;T extends <A HREF="../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;T&gt;,D extends <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;T&gt;&gt; <A HREF="../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;T,D&gt; <B>createDescriptorList</B>(<A HREF="../hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>&nbsp;hudson,
+                                                                                                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;describableType)</PRE>
 <DL>
 <DD>Creates a new instance.
 <P>

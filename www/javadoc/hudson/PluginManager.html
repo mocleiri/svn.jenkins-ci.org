@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginManager (Hudson main module 1.356 API)
+PluginManager (Hudson main module 1.357 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-03">
+<META NAME="date" CONTENT="2010-05-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson main module 1.356 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson main module 1.356 API)";
+        parent.document.title="PluginManager (Hudson main module 1.357 API)";
     }
 }
 </SCRIPT>
@@ -268,12 +268,11 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/PluginManager.html#doProxyConfigure(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.kohsuke.stapler.StaplerResponse)">doProxyConfigure</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;server,
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.html#doProxyConfigure(java.lang.String, java.lang.String, java.lang.String, java.lang.String)">doProxyConfigure</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;server,
                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;port,
                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;userName,
-                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password,
-                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -761,19 +760,18 @@ public void <B>doInstall</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doProxyConfigure(java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doProxyConfigure(java.lang.String, java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 doProxyConfigure</H3>
 <PRE>
-public void <B>doProxyConfigure</B>(<FONT SIZE="-1">@QueryParameter(value="proxy.server")</FONT>
-                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;server,
-                             <FONT SIZE="-1">@QueryParameter(value="proxy.port")</FONT>
-                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;port,
-                             <FONT SIZE="-1">@QueryParameter(value="proxy.userName")</FONT>
-                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;userName,
-                             <FONT SIZE="-1">@QueryParameter(value="proxy.password")</FONT>
-                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password,
-                             org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public org.kohsuke.stapler.HttpResponse <B>doProxyConfigure</B>(<FONT SIZE="-1">@QueryParameter(value="proxy.server")</FONT>
+                                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;server,
+                                                         <FONT SIZE="-1">@QueryParameter(value="proxy.port")</FONT>
+                                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;port,
+                                                         <FONT SIZE="-1">@QueryParameter(value="proxy.userName")</FONT>
+                                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;userName,
+                                                         <FONT SIZE="-1">@QueryParameter(value="proxy.password")</FONT>
+                                                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password)
+                                                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 

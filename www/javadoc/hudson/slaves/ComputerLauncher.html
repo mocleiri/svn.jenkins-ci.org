@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ComputerLauncher (Hudson main module 1.356 API)
+ComputerLauncher (Hudson main module 1.357 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-03">
+<META NAME="date" CONTENT="2010-05-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerLauncher (Hudson main module 1.356 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerLauncher (Hudson main module 1.356 API)";
+        parent.document.title="ComputerLauncher (Hudson main module 1.357 API)";
     }
 }
 </SCRIPT>
@@ -94,7 +94,8 @@ hudson.slaves</FONT>
 Class ComputerLauncher</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.ComputerLauncher</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">hudson.model.AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.ComputerLauncher</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</DD>
@@ -104,7 +105,7 @@ Class ComputerLauncher</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>ComputerLauncher</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;, <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
+<DT><PRE>public abstract class <B>ComputerLauncher</B><DT>extends <A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;<DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
 </PRE>
 
 <P>
@@ -233,14 +234,6 @@ Extension point to allow control over how <A HREF="../../hudson/model/Computer.h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/slaves/ComputerLauncher.html#getDescriptor()">getDescriptor</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the descriptor for this instance.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/slaves/ComputerLauncher.html#isLaunchSupported()">isLaunchSupported</A></B>()</CODE>
 
@@ -266,6 +259,15 @@ Extension point to allow control over how <A HREF="../../hudson/model/Computer.h
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches the slave agent for the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractDescribableImpl"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">AbstractDescribableImpl</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractDescribableImpl.html#getDescriptor()">getDescriptor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -358,7 +360,7 @@ public void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title
 <DD>Launches the slave agent for the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 
  <p>
- If the slave agent is launched successfully, <CODE>SlaveComputer#setChannel(InputStream, OutputStream, OutputStream, Listener)</CODE>
+ If the slave agent is launched successfully, <A HREF="../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.remoting.Channel.Listener)"><CODE>SlaveComputer.setChannel(InputStream, OutputStream, OutputStream, Channel.Listener)</CODE></A>
  should be invoked in the end to notify Hudson of the established connection.
  The operation could also fail, in which case there's no need to make any callback notification,
  (except to notify the user of the failure through <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><CODE>StreamTaskListener</CODE></A>.)
@@ -467,28 +469,6 @@ public void <B>beforeDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.h
 <P>
 <DD><DL>
 </DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getDescriptor()"><!-- --></A><H3>
-getDescriptor</H3>
-<PRE>
-public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt; <B>getDescriptor</B>()</PRE>
-<DL>
-<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">Describable</A></CODE></B></DD>
-<DD>Gets the descriptor for this instance.
-
- <p>
- <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> is a singleton for every concrete <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
- implementation, so if <tt>a.getClass()==b.getClass()</tt> then
- <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
-<P>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ComputerLauncherFilter (Hudson main module 1.356 API)
+ComputerLauncherFilter (Hudson main module 1.357 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-03">
+<META NAME="date" CONTENT="2010-05-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerLauncherFilter (Hudson main module 1.356 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerLauncherFilter (Hudson main module 1.356 API)";
+        parent.document.title="ComputerLauncherFilter (Hudson main module 1.357 API)";
     }
 }
 </SCRIPT>
@@ -94,8 +94,9 @@ hudson.slaves</FONT>
 Class ComputerLauncherFilter</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">hudson.slaves.ComputerLauncher</A>
-      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.ComputerLauncherFilter</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">hudson.model.AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">hudson.slaves.ComputerLauncher</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.slaves.ComputerLauncherFilter</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</DD>
@@ -354,7 +355,7 @@ public void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title
 <DD>Launches the slave agent for the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 
  <p>
- If the slave agent is launched successfully, <CODE>SlaveComputer#setChannel(InputStream, OutputStream, OutputStream, Listener)</CODE>
+ If the slave agent is launched successfully, <A HREF="../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.remoting.Channel.Listener)"><CODE>SlaveComputer.setChannel(InputStream, OutputStream, OutputStream, Channel.Listener)</CODE></A>
  should be invoked in the end to notify Hudson of the established connection.
  The operation could also fail, in which case there's no need to make any callback notification,
  (except to notify the user of the failure through <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><CODE>StreamTaskListener</CODE></A>.)
@@ -427,7 +428,7 @@ public <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model
  <tt>a.getDescriptor()==b.getDescriptor()</tt> must hold.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/slaves/ComputerLauncher.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Describable.html#getDescriptor()">getDescriptor</A></CODE> in interface <CODE><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractDescribableImpl.html#getDescriptor()">getDescriptor</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

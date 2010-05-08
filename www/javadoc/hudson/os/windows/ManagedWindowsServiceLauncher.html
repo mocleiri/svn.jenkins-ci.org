@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ManagedWindowsServiceLauncher (Hudson main module 1.356 API)
+ManagedWindowsServiceLauncher (Hudson main module 1.357 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-03">
+<META NAME="date" CONTENT="2010-05-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ManagedWindowsServiceLauncher (Hudson main module 1.356 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ManagedWindowsServiceLauncher (Hudson main module 1.356 API)";
+        parent.document.title="ManagedWindowsServiceLauncher (Hudson main module 1.357 API)";
     }
 }
 </SCRIPT>
@@ -94,8 +94,9 @@ hudson.os.windows</FONT>
 Class ManagedWindowsServiceLauncher</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">hudson.slaves.ComputerLauncher</A>
-      <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.os.windows.ManagedWindowsServiceLauncher</B>
+  <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">hudson.model.AbstractDescribableImpl</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;
+      <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">hudson.slaves.ComputerLauncher</A>
+          <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.os.windows.ManagedWindowsServiceLauncher</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A>&gt;</DD>
@@ -229,7 +230,16 @@ Windows slave installed/managed as a service entirely remotely
 <TH ALIGN="left"><B>Methods inherited from class hudson.slaves.<A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">afterDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">beforeDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#getDescriptor()">getDescriptor</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#isLaunchSupported()">isLaunchSupported</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">afterDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">beforeDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#isLaunchSupported()">isLaunchSupported</A>, <A HREF="../../../hudson/slaves/ComputerLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.util.StreamTaskListener)">launch</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractDescribableImpl"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">AbstractDescribableImpl</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/model/AbstractDescribableImpl.html#getDescriptor()">getDescriptor</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -316,7 +326,7 @@ public void <B>launch</B>(<A HREF="../../../hudson/slaves/SlaveComputer.html" ti
 <DD>Launches the slave agent for the given <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 
  <p>
- If the slave agent is launched successfully, <CODE>SlaveComputer#setChannel(InputStream, OutputStream, OutputStream, Listener)</CODE>
+ If the slave agent is launched successfully, <A HREF="../../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.remoting.Channel.Listener)"><CODE>SlaveComputer.setChannel(InputStream, OutputStream, OutputStream, Channel.Listener)</CODE></A>
  should be invoked in the end to notify Hudson of the established connection.
  The operation could also fail, in which case there's no need to make any callback notification,
  (except to notify the user of the failure through <A HREF="../../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><CODE>StreamTaskListener</CODE></A>.)

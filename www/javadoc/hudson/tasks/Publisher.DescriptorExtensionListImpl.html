@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Publisher.DescriptorExtensionListImpl (Hudson main module 1.356 API)
+Publisher.DescriptorExtensionListImpl (Hudson main module 1.357 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-03">
+<META NAME="date" CONTENT="2010-05-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Publisher.DescriptorExtensionListImpl (Hudson main module 1.356 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Publisher.DescriptorExtensionListImpl (Hudson main module 1.356 API)";
+        parent.document.title="Publisher.DescriptorExtensionListImpl (Hudson main module 1.357 API)";
     }
 }
 </SCRIPT>
@@ -117,7 +117,7 @@ Class Publisher.DescriptorExtensionListImpl</H2>
 
 <P>
 <DL>
-<DT><B>See Also:</B><DD><A HREF="../../hudson/DescriptorExtensionList.html#create(hudson.model.Hudson, java.lang.Class)"><CODE>DescriptorExtensionList.create(Hudson, Class)</CODE></A></DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/DescriptorExtensionList.html#createDescriptorList(hudson.model.Hudson, java.lang.Class)"><CODE>DescriptorExtensionList.createDescriptorList(Hudson, Class)</CODE></A></DL>
 <HR>
 
 <P>
@@ -198,7 +198,7 @@ Class Publisher.DescriptorExtensionListImpl</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.<A HREF="../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/DescriptorExtensionList.html#clearLegacyInstances()">clearLegacyInstances</A>, <A HREF="../../hudson/DescriptorExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A>, <A HREF="../../hudson/DescriptorExtensionList.html#find(java.lang.Class)">find</A>, <A HREF="../../hudson/DescriptorExtensionList.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/DescriptorExtensionList.html#findByName(java.lang.String)">findByName</A>, <A HREF="../../hudson/DescriptorExtensionList.html#listLegacyInstances()">listLegacyInstances</A>, <A HREF="../../hudson/DescriptorExtensionList.html#load()">load</A>, <A HREF="../../hudson/DescriptorExtensionList.html#newInstanceFromRadioList(net.sf.json.JSONObject)">newInstanceFromRadioList</A>, <A HREF="../../hudson/DescriptorExtensionList.html#newInstanceFromRadioList(net.sf.json.JSONObject, java.lang.String)">newInstanceFromRadioList</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/DescriptorExtensionList.html#clearLegacyInstances()">clearLegacyInstances</A>, <A HREF="../../hudson/DescriptorExtensionList.html#createDescriptorList(hudson.model.Hudson, java.lang.Class)">createDescriptorList</A>, <A HREF="../../hudson/DescriptorExtensionList.html#find(java.lang.Class)">find</A>, <A HREF="../../hudson/DescriptorExtensionList.html#find(java.lang.String)">find</A>, <A HREF="../../hudson/DescriptorExtensionList.html#findByName(java.lang.String)">findByName</A>, <A HREF="../../hudson/DescriptorExtensionList.html#listLegacyInstances()">listLegacyInstances</A>, <A HREF="../../hudson/DescriptorExtensionList.html#load()">load</A>, <A HREF="../../hudson/DescriptorExtensionList.html#newInstanceFromRadioList(net.sf.json.JSONObject)">newInstanceFromRadioList</A>, <A HREF="../../hudson/DescriptorExtensionList.html#newInstanceFromRadioList(net.sf.json.JSONObject, java.lang.String)">newInstanceFromRadioList</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.ExtensionList"><!-- --></A>
@@ -207,7 +207,7 @@ Class Publisher.DescriptorExtensionListImpl</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.<A HREF="../../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/ExtensionList.html#add(int, T)">add</A>, <A HREF="../../hudson/ExtensionList.html#add(T)">add</A>, <A HREF="../../hudson/ExtensionList.html#finders()">finders</A>, <A HREF="../../hudson/ExtensionList.html#get(java.lang.Class)">get</A>, <A HREF="../../hudson/ExtensionList.html#get(int)">get</A>, <A HREF="../../hudson/ExtensionList.html#getComponents()">getComponents</A>, <A HREF="../../hudson/ExtensionList.html#getDynamic(java.lang.String)">getDynamic</A>, <A HREF="../../hudson/ExtensionList.html#iterator()">iterator</A>, <A HREF="../../hudson/ExtensionList.html#remove(int)">remove</A>, <A HREF="../../hudson/ExtensionList.html#remove(java.lang.Object)">remove</A>, <A HREF="../../hudson/ExtensionList.html#size()">size</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/ExtensionList.html#add(int, T)">add</A>, <A HREF="../../hudson/ExtensionList.html#add(T)">add</A>, <A HREF="../../hudson/ExtensionList.html#create(hudson.model.Hudson, java.lang.Class)">create</A>, <A HREF="../../hudson/ExtensionList.html#finders()">finders</A>, <A HREF="../../hudson/ExtensionList.html#get(java.lang.Class)">get</A>, <A HREF="../../hudson/ExtensionList.html#get(int)">get</A>, <A HREF="../../hudson/ExtensionList.html#getComponents()">getComponents</A>, <A HREF="../../hudson/ExtensionList.html#getDynamic(java.lang.String)">getDynamic</A>, <A HREF="../../hudson/ExtensionList.html#iterator()">iterator</A>, <A HREF="../../hudson/ExtensionList.html#remove(int)">remove</A>, <A HREF="../../hudson/ExtensionList.html#remove(java.lang.Object)">remove</A>, <A HREF="../../hudson/ExtensionList.html#size()">size</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractList"><!-- --></A>
