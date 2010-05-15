@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Extension (Hudson main module 1.357 API)
+Extension (Hudson main module 1.358 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Extension (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Extension (Hudson main module 1.357 API)";
+        parent.document.title="Extension (Hudson main module 1.358 API)";
     }
 }
 </SCRIPT>
@@ -149,6 +149,14 @@ Marks a field, a method, or a class for automatic discovery, so that Hudson can 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Extension.html#optional()">optional</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If an extension is optional, don't log any class loading errors when reading it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;double</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Extension.html#ordinal()">ordinal</A></B></CODE>
 
@@ -177,6 +185,26 @@ public abstract double <B>ordinal</B></PRE>
 </DL>
 <DL>
 <DT><B>Default:</B><DD>0.0</DD>
+</DL>
+</DL>
+<HR>
+
+<A NAME="optional()"><!-- --></A><H3>
+optional</H3>
+<PRE>
+public abstract boolean <B>optional</B></PRE>
+<DL>
+<DD>If an extension is optional, don't log any class loading errors when reading it.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.358</DD>
+</DL>
+<DL>
+<DT><B>Default:</B><DD>false</DD>
 </DL>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

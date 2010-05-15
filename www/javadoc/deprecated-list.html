@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.357 API)
+Deprecated List (Hudson main module 1.358 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.357 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.358 API)";
     }
 }
 </SCRIPT>
@@ -1636,7 +1636,8 @@ function windowTitle()
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.349
       The caller should use <A HREF="hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamTaskListener.StreamTaskListener(OutputStream, Charset)</CODE></A> to pass in
-      the charset and output stream separately, so that this class can handle encoding correctly.</I>&nbsp;</TD>
+      the charset and output stream separately, so that this class can handle encoding correctly,
+      or use <A HREF="hudson/util/StreamTaskListener.html#fromStdout()"><CODE>StreamTaskListener.fromStdout()</CODE></A> or <A HREF="hudson/util/StreamTaskListener.html#fromStderr()"><CODE>StreamTaskListener.fromStderr()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tools/ToolInstallation.html#ToolInstallation(java.lang.String, java.lang.String)">hudson.tools.ToolInstallation(String, String)</A>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SimpleParameterDefinition (Hudson main module 1.357 API)
+SimpleParameterDefinition (Hudson main module 1.358 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SimpleParameterDefinition (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SimpleParameterDefinition (Hudson main module 1.357 API)";
+        parent.document.title="SimpleParameterDefinition (Hudson main module 1.358 API)";
     }
 }
 </SCRIPT>
@@ -218,7 +218,7 @@ Convenient base class for <A HREF="../../hudson/model/ParameterDefinition.html" 
 <TD><CODE><B><A HREF="../../hudson/model/SimpleParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from a GET (with query string) or POST.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a parameter value from a GET with query string.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -305,15 +305,23 @@ createValue</H3>
 public final <A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A> <B>createValue</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">ParameterDefinition</A></CODE></B></DD>
-<DD>Create a parameter value from a GET (with query string) or POST.
+<DD>Create a parameter value from a GET with query string.
  If no value is available in the request, it returns a default value if possible, or null.
+
+ <p>
+ Unlike <A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><CODE>ParameterDefinition.createValue(StaplerRequest, JSONObject)</CODE></A>, this method is intended to support
+ the programmatic POST-ing of the build URL. This form is less expressive (as it doesn't support
+ the tree form), but it's more scriptable.
+
+ <p>
+ If a <A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model"><CODE>ParameterDefinition</CODE></A> can't really support this mode of creating a value,
+ you may just always return null.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)">createValue</A></CODE> in class <CODE><A HREF="../../hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A></CODE></DL>
 </DD>
 <DD><DL>
-
-<DT><B>Returns:</B><DD></DL>
+</DL>
 </DD>
 </DL>
 <HR>

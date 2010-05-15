@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.357 API)
+Index (Hudson main module 1.358 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.357 API)";
+        parent.document.title="Index (Hudson main module 1.358 API)";
     }
 }
 </SCRIPT>
@@ -3985,10 +3985,10 @@ Method in class hudson.model.<A HREF="./hudson/model/JobParameterDefinition.html
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject)"><B>createValue(StaplerRequest, JSONObject)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>
-<DD>Create a parameter value from a form submission
+<DD>Create a parameter value from a form submission.
 <DT><A HREF="./hudson/model/ParameterDefinition.html#createValue(org.kohsuke.stapler.StaplerRequest)"><B>createValue(StaplerRequest)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>
-<DD>Create a parameter value from a GET (with query string) or POST.
+<DD>Create a parameter value from a GET with query string.
 <DT><A HREF="./hudson/model/ParameterDefinition.html#createValue(hudson.cli.CLICommand, java.lang.String)"><B>createValue(CLICommand, String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterDefinition.html" title="class in hudson.model">ParameterDefinition</A>
 <DD>Create a parameter value from the string given in the CLI.
@@ -7038,6 +7038,12 @@ Static method in class hudson.model.<A HREF="./hudson/model/Items.html" title="c
 <DT><A HREF="./hudson/util/RunList.html#fromRuns(java.util.Collection)"><B>fromRuns(Collection&lt;? extends Run&gt;)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/RunList.html" title="class in hudson.util">RunList</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/StreamTaskListener.html#fromStderr()"><B>fromStderr()</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/StreamTaskListener.html#fromStdout()"><B>fromStdout()</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/matrix/Combination.html#fromString(java.lang.String)"><B>fromString(String)</B></A> - 
 Static method in class hudson.matrix.<A HREF="./hudson/matrix/Combination.html" title="class in hudson.matrix">Combination</A>
 <DD>Reverse operation of <A HREF="./hudson/matrix/Combination.html#toString()"><CODE>Combination.toString()</CODE></A>.
@@ -8183,6 +8189,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ChoiceParameterDefinition.h
 <DT><A HREF="./hudson/model/ChoiceParameterDefinition.html#getChoicesText()"><B>getChoicesText()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ChoiceParameterDefinition.html" title="class in hudson.model">ChoiceParameterDefinition</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/Secret.html#getCipher(java.lang.String)"><B>getCipher(String)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/Secret.html" title="class in hudson.util">Secret</A>
+<DD>Workaround for HUDSON-6459 / https://glassfish.dev.java.net/issues/show_bug.cgi?id=11862 .
 <DT><A HREF="./hudson/plugins/ui_samples/DynamicDropDownListBox.html#getCity()"><B>getCity()</B></A> - 
 Method in class hudson.plugins.ui_samples.<A HREF="./hudson/plugins/ui_samples/DynamicDropDownListBox.html" title="class in hudson.plugins.ui_samples">DynamicDropDownListBox</A>
 <DD>&nbsp;
@@ -22473,7 +22482,8 @@ Constructor for class hudson.util.<A HREF="./hudson/util/StreamResource.html" ti
 Constructor for class hudson.util.<A HREF="./hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.349
       The caller should use <A HREF="./hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamTaskListener.StreamTaskListener(OutputStream, Charset)</CODE></A> to pass in
-      the charset and output stream separately, so that this class can handle encoding correctly.</I>
+      the charset and output stream separately, so that this class can handle encoding correctly,
+      or use <A HREF="./hudson/util/StreamTaskListener.html#fromStdout()"><CODE>StreamTaskListener.fromStdout()</CODE></A> or <A HREF="./hudson/util/StreamTaskListener.html#fromStderr()"><CODE>StreamTaskListener.fromStderr()</CODE></A>.</I>
 <DT><A HREF="./hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream)"><B>StreamTaskListener(OutputStream)</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A>
 <DD>&nbsp;

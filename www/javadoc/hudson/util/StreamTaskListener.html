@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StreamTaskListener (Hudson main module 1.357 API)
+StreamTaskListener (Hudson main module 1.358 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-05-14">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ StreamTaskListener (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StreamTaskListener (Hudson main module 1.357 API)";
+        parent.document.title="StreamTaskListener (Hudson main module 1.358 API)";
     }
 }
 </SCRIPT>
@@ -188,7 +188,8 @@ Class StreamTaskListener</H2>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.349
       The caller should use <A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamTaskListener(OutputStream, Charset)</CODE></A> to pass in
-      the charset and output stream separately, so that this class can handle encoding correctly.</I></TD>
+      the charset and output stream separately, so that this class can handle encoding correctly,
+      or use <A HREF="../../hudson/util/StreamTaskListener.html#fromStdout()"><CODE>fromStdout()</CODE></A> or <A HREF="../../hudson/util/StreamTaskListener.html#fromStderr()"><CODE>fromStderr()</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.Writer)">StreamTaskListener</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)</CODE>
@@ -266,6 +267,22 @@ Class StreamTaskListener</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#fromStderr()">fromStderr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#fromStdout()">fromStdout</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/StreamTaskListener.html#getLogger()">getLogger</A></B>()</CODE>
 
@@ -302,7 +319,8 @@ public <B>StreamTaskListener</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/ap
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.349
       The caller should use <A HREF="../../hudson/util/StreamTaskListener.html#StreamTaskListener(java.io.OutputStream, java.nio.charset.Charset)"><CODE>StreamTaskListener(OutputStream, Charset)</CODE></A> to pass in
-      the charset and output stream separately, so that this class can handle encoding correctly.</I>
+      the charset and output stream separately, so that this class can handle encoding correctly,
+      or use <A HREF="../../hudson/util/StreamTaskListener.html#fromStdout()"><CODE>fromStdout()</CODE></A> or <A HREF="../../hudson/util/StreamTaskListener.html#fromStderr()"><CODE>fromStderr()</CODE></A>.</I>
 <P>
 </DL>
 <HR>
@@ -388,6 +406,34 @@ public <B>StreamTaskListener</B>()
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="fromStdout()"><!-- --></A><H3>
+fromStdout</H3>
+<PRE>
+public static <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A> <B>fromStdout</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="fromStderr()"><!-- --></A><H3>
+fromStderr</H3>
+<PRE>
+public static <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A> <B>fromStderr</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getLogger()"><!-- --></A><H3>
 getLogger</H3>
