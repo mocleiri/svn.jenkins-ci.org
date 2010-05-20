@@ -18,6 +18,7 @@ import java.util.Map;
 public class ProcessTreeRemoting {
     public interface IProcessTree {
         void killAll(Map<String, String> modelEnvVars);
+        void setPrivilegedKill(PrivilegedKill privilegedKill);
     }
 
     public interface IOSProcess {

@@ -23,6 +23,7 @@
  */
 package hudson.util;
 
+import com.sun.jna.LastErrorException;
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import static com.sun.jna.Pointer.NULL;
@@ -89,6 +90,8 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
      */
     protected final Map<Integer/*pid*/, OSProcess> processes = new HashMap<Integer, OSProcess>();
 
+    protected PrivilegedKill privilegedKill;
+
     // instantiation only allowed for subtypes in this class
     private ProcessTree() {}
 
@@ -104,6 +107,14 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
      */
     public final Iterator<OSProcess> iterator() {
         return processes.values().iterator();
+    }
+
+    /**
+     * optional PrivilegedKill implementation to use when killing processes
+     * @param privilegedKill
+     */
+    public void setPrivilegedKill(PrivilegedKill privilegedKill) {
+        this.privilegedKill = privilegedKill;
     }
 
     /**
@@ -307,6 +318,14 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
         return DEFAULT;
     }
 
+    /**
+     * get the implementation class backing this ProcessTree
+     * @return implementation class
+     */
+    public static Class<? extends ProcessTree> getImplementationClass() {
+        return get().getClass();
+    }
+
 //
 //
 // implementation follows
@@ -422,6 +441,7 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
     }
 
     static abstract class Unix extends ProcessTree {
+
         @Override
         public OSProcess get(Process proc) {
             try {
@@ -437,6 +457,7 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
             for (OSProcess p : this)
                 if(p.hasMatchingEnvVars(modelEnvVars))
                     p.killRecursively();
+
         }
     }
     /**
@@ -472,11 +493,11 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
 
         protected abstract OSProcess createProcess(int pid) throws IOException;
     }
-
     /**
      * A process.
      */
     public abstract class UnixProcess extends OSProcess {
+
         protected UnixProcess(int pid) {
             super(pid);
         }
@@ -485,27 +506,41 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
             return new File(new File("/proc/"+getPid()),relativePath);
         }
 
-        /**
-         * Tries to kill this process.
-         */
         public void kill() {
+            LOGGER.log(Level.INFO, "killing process [" + getPid() + "]");
+
+            //Yahoo! BUG 3493686 : attempt to kill process via 1) JNA 2) forked sudo process if JNA error and 3) fallback to original UnixReflection code if JNA unavailable
+            int exitValue = -1;
             try {
-                int pid = getPid();
-                LOGGER.fine("Killing pid="+pid);
-                UnixReflection.DESTROY_PROCESS.invoke(null, pid);
-            } catch (IllegalAccessException e) {
-                // this is impossible
-                IllegalAccessError x = new IllegalAccessError();
-                x.initCause(e);
-                throw x;
-            } catch (InvocationTargetException e) {
-                // tunnel serious errors
-                if(e.getTargetException() instanceof Error)
-                    throw (Error)e.getTargetException();
-                // otherwise log and let go. I need to see when this happens
-                LOGGER.log(Level.INFO, "Failed to terminate pid="+getPid(),e);
+                exitValue = LIBC.kill(getPid(), 15);
+            } catch (LastErrorException lee) {
+                //JNA attempt failed, log reason and attempt privileged kill
+                LOGGER.log(Level.INFO, "failed to terminate process [" + getPid() + "] via JNA", lee);
+                if (privilegedKill != null) {
+                   exitValue = privilegedKill.execute(this);
+                }
+            } catch (LinkageError le) {
+                //JNA not available, continue on and attempt kill via UnixRelection
             }
 
+            if (exitValue != 0) {
+                //fall back if JNA is not available or forked kill failed
+                try {
+                    UnixReflection.DESTROY_PROCESS.invoke(null, getPid());
+                } catch (IllegalAccessException e) {
+                    // this is impossible
+                    IllegalAccessError x = new IllegalAccessError();
+                    x.initCause(e);
+                    throw x;
+                } catch (InvocationTargetException e) {
+                    // tunnel serious errors
+                    if (e.getTargetException() instanceof Error) {
+                        throw (Error) e.getTargetException();
+                    }
+                    // otherwise log and let go. I need to see when this happens
+                    LOGGER.log(Level.INFO, "failed to terminate process [" + getPid() + "]", e);
+                }
+            }
         }
 
         public void killRecursively() {
@@ -514,6 +549,7 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
                 p.killRecursively();
             kill();
         }
+
 
         /**
          * Obtains the argument list of this process.
@@ -1149,3 +1185,4 @@ public abstract class ProcessTree implements Iterable<OSProcess>, IProcessTree, 
     public static boolean enabled = !Boolean.getBoolean(ProcessTreeKiller.class.getName()+".disable")
                                  && !Boolean.getBoolean(ProcessTree.class.getName()+".disable");
 }
+

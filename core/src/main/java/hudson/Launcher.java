@@ -37,8 +37,8 @@ import hudson.remoting.RemoteOutputStream;
 import hudson.remoting.VirtualChannel;
 import hudson.util.StreamCopyThread;
 import hudson.util.ArgumentListBuilder;
+import hudson.util.PrivilegedKill;
 import hudson.util.ProcessTree;
-import org.apache.commons.io.input.NullInputStream;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -49,8 +49,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
-
-import static org.apache.commons.io.output.NullOutputStream.NULL_OUTPUT_STREAM;
 
 /**
  * Starts a process.
@@ -78,9 +76,12 @@ public abstract class Launcher {
 
     protected final VirtualChannel channel;
 
+    protected PrivilegedKill privilegedKill;
+
     public Launcher(TaskListener listener, VirtualChannel channel) {
         this.listener = listener;
         this.channel = channel;
+        this.privilegedKill = getPrivilegedKill(listener, channel);
     }
 
     /**
@@ -108,6 +109,27 @@ public abstract class Launcher {
      */
     public TaskListener getListener() {
         return listener;
+    }
+
+    private static PrivilegedKill getPrivilegedKill(TaskListener listener, VirtualChannel channel) {
+        PrivilegedKill privilegedKill = null;
+        try {
+            //if we are running master/slave in the same JVM, this will work, otherwise connect over channel
+            privilegedKill = PrivilegedKill.filter(ProcessTree.get().getClass());
+            if (privilegedKill == null) {
+                privilegedKill = PrivilegedKill.filter(channel.call(new Callable<Class<? extends ProcessTree>, RuntimeException>() {
+                    public Class<? extends ProcessTree> call() throws RuntimeException {
+                        return ProcessTree.getImplementationClass();
+                    }
+                }
+                ));
+            }
+        } catch (InterruptedException e) {
+        } catch (IOException e) {
+            Util.displayIOException(e, listener);
+            e.printStackTrace(listener.error("error determining privileged kill implementation"));
+        }
+        return privilegedKill;
     }
 
     /**
@@ -141,8 +163,8 @@ public abstract class Launcher {
         protected List<String> commands;
         protected boolean[] masks;
         protected FilePath pwd;
-        protected OutputStream stdout = NULL_OUTPUT_STREAM, stderr;
-        protected InputStream stdin = new NullInputStream(0);
+        protected OutputStream stdout,stderr;
+        protected InputStream stdin;
         protected String[] envs;
 
         public ProcStarter cmds(String... args) {
@@ -615,7 +637,8 @@ public abstract class Launcher {
      */
     public static class LocalLauncher extends Launcher {
         public LocalLauncher(TaskListener listener) {
-            this(listener,Hudson.MasterComputer.localChannel);
+
+           this(listener,Hudson.MasterComputer.localChannel);
         }
 
         public LocalLauncher(TaskListener listener, VirtualChannel channel) {
@@ -633,7 +656,7 @@ public abstract class Launcher {
             for ( int idx = 0 ; idx < jobCmd.length; idx++ )
             	jobCmd[idx] = jobEnv.expand(ps.commands.get(idx));
 
-            return new LocalProc(jobCmd, Util.mapToEnv(jobEnv), ps.stdin, ps.stdout, ps.stderr, toFile(ps.pwd));
+            return new LocalProc(jobCmd, Util.mapToEnv(jobEnv), ps.stdin, ps.stdout, ps.stderr, toFile(ps.pwd), privilegedKill);
         }
 
         private File toFile(FilePath f) {
@@ -652,7 +675,9 @@ public abstract class Launcher {
 
         @Override
         public void kill(Map<String, String> modelEnvVars) {
-            ProcessTree.get().killAll(modelEnvVars);
+            ProcessTree processTree = ProcessTree.get();
+            processTree.setPrivilegedKill(privilegedKill);
+            processTree.killAll(modelEnvVars);
         }
 
         /**
@@ -678,6 +703,7 @@ public abstract class Launcher {
                 protected synchronized void terminate(IOException e) {
                     super.terminate(e);
                     ProcessTree pt = ProcessTree.get();
+                    pt.setPrivilegedKill(privilegedKill);
                     pt.killAll(proc,cookie);
                 }
 
@@ -703,8 +729,8 @@ public abstract class Launcher {
         private final boolean isUnix;
 
         public RemoteLauncher(TaskListener listener, VirtualChannel channel, boolean isUnix) {
-            super(listener, channel);
-            this.isUnix = isUnix;
+           super(listener, channel);
+           this.isUnix = isUnix;
         }
 
         public Proc launch(ProcStarter ps) throws IOException {
@@ -713,7 +739,7 @@ public abstract class Launcher {
             final InputStream  in  = ps.stdin==null ? null : new RemoteInputStream(ps.stdin);
             final String workDir = ps.pwd==null ? null : ps.pwd.getRemote();
 
-            return new RemoteProc(getChannel().callAsync(new RemoteLaunchCallable(ps.commands, ps.masks, ps.envs, in, out, err, workDir, listener)));
+            return new RemoteProc(getChannel().callAsync(new RemoteLaunchCallable(ps.commands, ps.envs, in, out, err, workDir, listener, privilegedKill)));
         }
 
         public Channel launchChannel(String[] cmd, OutputStream err, FilePath _workDir, Map<String,String> envOverrides) throws IOException, InterruptedException {
@@ -735,18 +761,22 @@ public abstract class Launcher {
 
         @Override
         public void kill(final Map<String,String> modelEnvVars) throws IOException, InterruptedException {
-            getChannel().call(new KillTask(modelEnvVars));
+            getChannel().call(new KillTask(modelEnvVars, privilegedKill));
         }
 
         private static final class KillTask implements Callable<Void,RuntimeException> {
             private final Map<String, String> modelEnvVars;
+            private final PrivilegedKill privilegedKill;
 
-            public KillTask(Map<String, String> modelEnvVars) {
+            public KillTask(Map<String, String> modelEnvVars, PrivilegedKill privilegedKill) {
                 this.modelEnvVars = modelEnvVars;
+                this.privilegedKill = privilegedKill;
             }
 
             public Void call() throws RuntimeException {
-                ProcessTree.get().killAll(modelEnvVars);
+                ProcessTree processTree = ProcessTree.get();
+                processTree.setPrivilegedKill(privilegedKill);
+                processTree.killAll(modelEnvVars);
                 return null;
             }
 
@@ -756,28 +786,32 @@ public abstract class Launcher {
 
     private static class RemoteLaunchCallable implements Callable<Integer,IOException> {
         private final List<String> cmd;
-        private final boolean[] masks;
         private final String[] env;
         private final InputStream in;
         private final OutputStream out;
         private final OutputStream err;
         private final String workDir;
         private final TaskListener listener;
+        private final PrivilegedKill privilegedKill;
 
-        RemoteLaunchCallable(List<String> cmd, boolean[] masks, String[] env, InputStream in, OutputStream out, OutputStream err, String workDir, TaskListener listener) {
+        RemoteLaunchCallable(List<String> cmd, String[] env, InputStream in, OutputStream out, OutputStream err, String workDir, TaskListener listener, PrivilegedKill privilegedKill) {
             this.cmd = new ArrayList<String>(cmd);
-            this.masks = masks;
             this.env = env;
             this.in = in;
             this.out = out;
             this.err = err;
             this.workDir = workDir;
             this.listener = listener;
+            this.privilegedKill = privilegedKill;
         }
 
         public Integer call() throws IOException {
-            Launcher.ProcStarter ps = new LocalLauncher(listener).launch();
-            ps.cmds(cmd).masks(masks).envs(env).stdin(in).stdout(out).stderr(err);
+            LocalLauncher localLauncher =new LocalLauncher(listener, Hudson.MasterComputer.localChannel);
+            if (privilegedKill != null) {
+                localLauncher.privilegedKill = privilegedKill;
+            }
+            Launcher.ProcStarter ps = localLauncher.launch();
+            ps.cmds(cmd).envs(env).stdin(in).stdout(out).stderr(err);
             if(workDir!=null)   ps.pwd(workDir);
 
             Proc p = ps.start();

@@ -23,12 +23,13 @@
  */
 package hudson.util.jna;
 
+import com.sun.jna.LastErrorException;
 import com.sun.jna.Library;
-import com.sun.jna.StringArray;
-import com.sun.jna.Pointer;
-import com.sun.jna.Native;
 import com.sun.jna.Memory;
+import com.sun.jna.Native;
 import com.sun.jna.NativeLong;
+import com.sun.jna.Pointer;
+import com.sun.jna.StringArray;
 import com.sun.jna.ptr.IntByReference;
 import org.jvnet.libpam.impl.CLibrary.passwd;
 
@@ -43,7 +44,7 @@ import org.jvnet.libpam.impl.CLibrary.passwd;
  */
 public interface GNUCLibrary extends Library {
     int fork();
-    int kill(int pid, int signum);
+    int kill(int pid, int signum) throws LastErrorException;
     int setsid();
     int umask(int mask);
     int getpid();

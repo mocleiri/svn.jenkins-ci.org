@@ -25,8 +25,9 @@ package hudson;
 
 import hudson.remoting.Channel;
 import hudson.util.IOException2;
-import hudson.util.StreamCopyThread;
+import hudson.util.PrivilegedKill;
 import hudson.util.ProcessTree;
+import hudson.util.StreamCopyThread;
 
 import java.io.File;
 import java.io.IOException;
@@ -88,6 +89,7 @@ public abstract class Proc {
         private final OutputStream out;
         private final EnvVars cookie;
         private final String name;
+        private final PrivilegedKill privilegedKill;
 
         public LocalProc(String cmd, Map<String,String> env, OutputStream out, File workDir) throws IOException {
             this(cmd,Util.mapToEnv(env),out,workDir);
@@ -110,17 +112,17 @@ public abstract class Proc {
         }
 
         public LocalProc(String[] cmd,String[] env,InputStream in,OutputStream out, File workDir) throws IOException {
-            this(cmd,env,in,out,null,workDir);
+            this(cmd,env,in,out,null,workDir, null);
         }
 
         /**
          * @param err
          *      null to redirect stderr to stdout.
          */
-        public LocalProc(String[] cmd,String[] env,InputStream in,OutputStream out,OutputStream err,File workDir) throws IOException {
+        public LocalProc(String[] cmd,String[] env,InputStream in,OutputStream out,OutputStream err,File workDir, PrivilegedKill privilegedKill) throws IOException {
             this( calcName(cmd),
                   stderr(environment(new ProcessBuilder(cmd),env).directory(workDir),err),
-                  in, out, err );
+                  in, out, err, privilegedKill );
         }
 
         private static ProcessBuilder stderr(ProcessBuilder pb, OutputStream stderr) {
@@ -140,9 +142,10 @@ public abstract class Proc {
             return pb;
         }
 
-        private LocalProc( String name, ProcessBuilder procBuilder, InputStream in, OutputStream out, OutputStream err ) throws IOException {
+        private LocalProc( String name, ProcessBuilder procBuilder, InputStream in, OutputStream out, OutputStream err, PrivilegedKill privilegedKill) throws IOException {
             Logger.getLogger(Proc.class.getName()).log(Level.FINE, "Running: {0}", name);
             this.name = name;
+            this.privilegedKill = privilegedKill;
             this.out = out;
             this.cookie = EnvVars.createCookie();
             procBuilder.environment().putAll(cookie);
@@ -236,7 +239,9 @@ public abstract class Proc {
          * Destroys the child process without join.
          */
         private void destroy() {
-            ProcessTree.get().killAll(proc,cookie);
+            ProcessTree processTree = ProcessTree.get();
+            processTree.setPrivilegedKill(privilegedKill);
+            processTree.killAll(proc,cookie);
         }
 
         /**
@@ -304,7 +309,7 @@ public abstract class Proc {
                 return process.get();
             } catch (InterruptedException e) {
                 // aborting. kill the process
-                process.cancel(true);
+                kill();
                 throw e;
             } catch (ExecutionException e) {
                 if(e.getCause() instanceof IOException)
