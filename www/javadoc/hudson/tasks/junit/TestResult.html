@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TestResult (Hudson main module 1.358 API)
+TestResult (Hudson main module 1.359 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-14">
+<META NAME="date" CONTENT="2010-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TestResult (Hudson main module 1.358 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TestResult (Hudson main module 1.358 API)";
+        parent.document.title="TestResult (Hudson main module 1.359 API)";
     }
 }
 </SCRIPT>
@@ -140,6 +140,14 @@ Root of all the test results for one build.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestResult.html#TestResult(long, org.apache.tools.ant.DirectoryScanner)">TestResult</A></B>(long&nbsp;buildTime,
            org.apache.tools.ant.DirectoryScanner&nbsp;results)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/TestResult.html#TestResult(long, org.apache.tools.ant.DirectoryScanner, boolean)">TestResult</A></B>(long&nbsp;buildTime,
+           org.apache.tools.ant.DirectoryScanner&nbsp;results,
+           boolean&nbsp;keepLongStdio)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Collect reports from the given <CODE>DirectoryScanner</CODE>, while
@@ -508,17 +516,37 @@ public <B>TestResult</B>()</PRE>
 <A NAME="TestResult(long, org.apache.tools.ant.DirectoryScanner)"><!-- --></A><H3>
 TestResult</H3>
 <PRE>
+<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
+</FONT>public <B>TestResult</B>(long&nbsp;buildTime,
+                             org.apache.tools.ant.DirectoryScanner&nbsp;results)
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DL>
+<HR>
+
+<A NAME="TestResult(long, org.apache.tools.ant.DirectoryScanner, boolean)"><!-- --></A><H3>
+TestResult</H3>
+<PRE>
 public <B>TestResult</B>(long&nbsp;buildTime,
-                  org.apache.tools.ant.DirectoryScanner&nbsp;results)
+                  org.apache.tools.ant.DirectoryScanner&nbsp;results,
+                  boolean&nbsp;keepLongStdio)
            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Collect reports from the given <CODE>DirectoryScanner</CODE>, while
  filtering out all files that were created before the given time.
 <P>
 <DL>
-
+<DT><B>Parameters:</B><DD><CODE>keepLongStdio</CODE> - if true, retain a suite's complete stdout/stderr even if this is huge and the suite passed
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
+  <DD>1.358</DD>
+</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

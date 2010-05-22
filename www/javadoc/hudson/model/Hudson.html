@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.358 API)
+Hudson (Hudson main module 1.359 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-14">
+<META NAME="date" CONTENT="2010-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.358 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.358 API)";
+        parent.document.title="Hudson (Hudson main module 1.359 API)";
     }
 }
 </SCRIPT>
@@ -816,6 +816,15 @@ T</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown()">doQuietDown</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown(boolean, int)">doQuietDown</A></B>(boolean&nbsp;block,
+            int&nbsp;timeout)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -5051,14 +5060,34 @@ public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 <A NAME="doQuietDown()"><!-- --></A><H3>
 doQuietDown</H3>
 <PRE>
-<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="quiet-down")
-</FONT>public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()</PRE>
+public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doQuietDown(boolean, int)"><!-- --></A><H3>
+doQuietDown</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="quiet-down")
+</FONT>public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                                                  boolean&nbsp;block,
+                                                                  <FONT SIZE="-1">@QueryParameter</FONT>
+                                                                  int&nbsp;timeout)
+                                             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

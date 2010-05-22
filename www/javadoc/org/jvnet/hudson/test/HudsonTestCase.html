@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.358 API)
+HudsonTestCase (Hudson main module 1.359 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-14">
+<META NAME="date" CONTENT="2010-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.358 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.358 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.359 API)";
     }
 }
 </SCRIPT>
@@ -478,6 +478,58 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;B extends <A HREF="../../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt; 
+<BR>
+B</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configRoundtrip(B)">configRoundtrip</A></B>(B&nbsp;before)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a configuration round-trip testing for a builder.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;P extends <A HREF="../../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt; 
+<BR>
+P</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configRoundtrip(P)">configRoundtrip</A></B>(P&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a configuration page and submits it without any modifications, to
+ perform a round-trip configuration test.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;P extends <A HREF="../../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt; 
+<BR>
+P</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configRoundtrip(P)">configRoundtrip</A></B>(P&nbsp;before)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a configuration round-trip testing for a publisher.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1868,6 +1920,64 @@ protected com.gargoylesoftware.htmlunit.Page <B>search</B>(<A HREF="http://java.
                                              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
 <DL>
 <DD>Performs a search from the search box.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configRoundtrip(hudson.model.Job)"><!-- --></A><A NAME="configRoundtrip(P)"><!-- --></A><H3>
+configRoundtrip</H3>
+<PRE>
+protected &lt;P extends <A HREF="../../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt; P <B>configRoundtrip</B>(P&nbsp;job)
+                                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Loads a configuration page and submits it without any modifications, to
+ perform a round-trip configuration test.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE><DT><B>See Also:</B><DD><CODE>http://wiki.hudson-ci.org/display/HUDSON/Unit+Test#UnitTest-Configurationroundtriptesting</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configRoundtrip(hudson.tasks.Builder)"><!-- --></A><A NAME="configRoundtrip(B)"><!-- --></A><H3>
+configRoundtrip</H3>
+<PRE>
+protected &lt;B extends <A HREF="../../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt; B <B>configRoundtrip</B>(B&nbsp;before)
+                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Performs a configuration round-trip testing for a builder.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configRoundtrip(hudson.tasks.Publisher)"><!-- --></A><A NAME="configRoundtrip(P)"><!-- --></A><H3>
+configRoundtrip</H3>
+<PRE>
+protected &lt;P extends <A HREF="../../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt; P <B>configRoundtrip</B>(P&nbsp;before)
+                                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Performs a configuration round-trip testing for a publisher.
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ReflectionUtils (Hudson main module 1.358 API)
+ReflectionUtils (Hudson main module 1.359 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-14">
+<META NAME="date" CONTENT="2010-05-21">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ReflectionUtils (Hudson main module 1.358 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ReflectionUtils (Hudson main module 1.358 API)";
+        parent.document.title="ReflectionUtils (Hudson main module 1.359 API)";
     }
 }
 </SCRIPT>
@@ -203,6 +203,14 @@ Utility code for reflection.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a public method of the given name, regardless of its parameter definitions,</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ReflectionUtils.html#getVmDefaultValueForPrimitiveType(java.lang.Class)">getVmDefaultValueForPrimitiveType</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;?&gt;&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given the primitive type, returns the VM default value for that type in a boxed form.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.springframework.util.ReflectionUtils"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -272,6 +280,19 @@ getParameters</H3>
 public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/util/ReflectionUtils.Parameter.html" title="class in hudson.util">ReflectionUtils.Parameter</A>&gt; <B>getParameters</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</A>&nbsp;m)</PRE>
 <DL>
 <DD>Returns an object-oriented view of parameters of each type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVmDefaultValueForPrimitiveType(java.lang.Class)"><!-- --></A><H3>
+getVmDefaultValueForPrimitiveType</H3>
+<PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>getVmDefaultValueForPrimitiveType</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;?&gt;&nbsp;type)</PRE>
+<DL>
+<DD>Given the primitive type, returns the VM default value for that type in a boxed form.
 <P>
 <DD><DL>
 </DL>
