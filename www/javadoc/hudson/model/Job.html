@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.359 API)
+Job (Hudson main module 1.360 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-21">
+<META NAME="date" CONTENT="2010-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.359 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.359 API)";
+        parent.document.title="Job (Hudson main module 1.360 API)";
     }
 }
 </SCRIPT>
@@ -527,6 +527,22 @@ A job is an runnable entity under the monitoring of Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last successful build, if any.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getLastUnstableBuild()">getLastUnstableBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last unstable build, if any.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getLastUnsuccessfulBuild()">getLastUnsuccessfulBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last build that was anything but stable, if any.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1728,6 +1744,40 @@ getLastSuccessfulBuild</H3>
 </DD>
 <DD><DL>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/model/Job.html#getLastStableBuild()"><CODE>getLastStableBuild()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLastUnsuccessfulBuild()"><!-- --></A><H3>
+getLastUnsuccessfulBuild</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getLastUnsuccessfulBuild</B>()</PRE>
+<DL>
+<DD>Returns the last build that was anything but stable, if any. Otherwise null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()"><CODE>getLastSuccessfulBuild()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLastUnstableBuild()"><!-- --></A><H3>
+getLastUnstableBuild</H3>
+<PRE>
+<FONT SIZE="-1">@Exported
+</FONT>public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A> <B>getLastUnstableBuild</B>()</PRE>
+<DL>
+<DD>Returns the last unstable build, if any. Otherwise null.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/model/Job.html#getLastSuccessfulBuild()"><CODE>getLastSuccessfulBuild()</CODE></A></DL>
 </DD>
 </DL>
 <HR>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Node (Hudson main module 1.359 API)
+Node (Hudson main module 1.360 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-21">
+<META NAME="date" CONTENT="2010-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Node (Hudson main module 1.359 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Node (Hudson main module 1.359 API)";
+        parent.document.title="Node (Hudson main module 1.360 API)";
     }
 }
 </SCRIPT>
@@ -194,6 +194,15 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Node.html#canTake(hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the <A HREF="../../hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> to determine whether or not this node can
+ take the given task.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -776,6 +785,29 @@ public <A HREF="../../hudson/model/Label.html" title="class in hudson.model">Lab
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="canTake(hudson.model.Queue.Task)"><!-- --></A><H3>
+canTake</H3>
+<PRE>
+public <A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A> <B>canTake</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</PRE>
+<DL>
+<DD>Called by the <A HREF="../../hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> to determine whether or not this node can
+ take the given task. The default checks include whether or not this node
+ is part of the task's assigned label, whether this node is in
+ <A HREF="../../hudson/model/Node.Mode.html#EXCLUSIVE"><CODE>Node.Mode.EXCLUSIVE</CODE></A> mode if it is not in the task's assigned label,
+ and whether or not any of this node's <A HREF="../../hudson/slaves/NodeProperty.html" title="class in hudson.slaves"><CODE>NodeProperty</CODE></A>s say that the
+ task cannot be run.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.360</DD>
 </DL>
 </DD>
 </DL>

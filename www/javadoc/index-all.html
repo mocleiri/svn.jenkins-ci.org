@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.359 API)
+Index (Hudson main module 1.360 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-21">
+<META NAME="date" CONTENT="2010-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.359 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.359 API)";
+        parent.document.title="Index (Hudson main module 1.360 API)";
     }
 }
 </SCRIPT>
@@ -261,6 +261,10 @@ Constructor for class hudson.cli.handlers.<A HREF="./hudson/cli/handlers/Abstrac
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue"><B>AbstractQueueSorterImpl</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Partial implementation of <A HREF="./hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A> in terms of <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util"><CODE>Comparator</CODE></A>.<DT><A HREF="./hudson/model/queue/AbstractQueueSorterImpl.html#AbstractQueueSorterImpl()"><B>AbstractQueueSorterImpl()</B></A> - 
 Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue">AbstractQueueSorterImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/AbstractQueueTask.html" title="class in hudson.model.queue"><B>AbstractQueueTask</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Abstract base class for <CODE>Queue.Task</CODE> to protect plugins
+ from new additions to the interface.<DT><A HREF="./hudson/model/queue/AbstractQueueTask.html#AbstractQueueTask()"><B>AbstractQueueTask()</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/AbstractQueueTask.html" title="class in hudson.model.queue">AbstractQueueTask</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm"><B>AbstractScmTagAction</B></A> - Class in <A HREF="./hudson/scm/package-summary.html">hudson.scm</A><DD>Common part of <CODE>CVSSCM.TagAction</CODE> and <CODE>SubversionTagAction</CODE>.<DT><A HREF="./hudson/scm/AbstractScmTagAction.html#AbstractScmTagAction(hudson.model.AbstractBuild)"><B>AbstractScmTagAction(AbstractBuild)</B></A> - 
 Constructor for class hudson.scm.<A HREF="./hudson/scm/AbstractScmTagAction.html" title="class in hudson.scm">AbstractScmTagAction</A>
@@ -842,6 +846,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Queue.QueueDecisionH
 <DT><A HREF="./hudson/model/queue/QueueSorter.html#all()"><B>all()</B></A> - 
 Static method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue">QueueSorter</A>
 <DD>All registered <A HREF="./hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A>s.
+<DT><A HREF="./hudson/model/queue/QueueTaskDispatcher.html#all()"><B>all()</B></A> - 
+Static method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskDispatcher.html" title="class in hudson.model.queue">QueueTaskDispatcher</A>
+<DD>All registered <A HREF="./hudson/model/queue/QueueTaskDispatcher.html" title="class in hudson.model.queue"><CODE>QueueTaskDispatcher</CODE></A>s.
 <DT><A HREF="./hudson/model/TopLevelItemDescriptor.html#all()"><B>all()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/TopLevelItemDescriptor.html" title="class in hudson.model">TopLevelItemDescriptor</A>
 <DD>Returns all the registered <A HREF="./hudson/model/TopLevelItem.html" title="interface in hudson.model"><CODE>TopLevelItem</CODE></A> descriptors.
@@ -1102,7 +1109,7 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title
 <DT><A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html" title="class in hudson.tasks._ant"><B>AntConsoleAnnotator</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>Filter <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A> that places an annotation that marks Ant target execution.<DT><A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html#AntConsoleAnnotator(java.io.OutputStream, java.nio.charset.Charset)"><B>AntConsoleAnnotator(OutputStream, Charset)</B></A> - 
 Constructor for class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html" title="class in hudson.tasks._ant">AntConsoleAnnotator</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant"><B>AntTargetNote</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>Marks the log line "TARGET:" that And uses to mark the beginning of the new target.<DT><A HREF="./hudson/tasks/_ant/AntTargetNote.html#AntTargetNote()"><B>AntTargetNote()</B></A> - 
+<DT><A HREF="./hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant"><B>AntTargetNote</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>Marks the log line "TARGET:" that Ant uses to mark the beginning of the new target.<DT><A HREF="./hudson/tasks/_ant/AntTargetNote.html#AntTargetNote()"><B>AntTargetNote()</B></A> - 
 Constructor for class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant">AntTargetNote</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/_ant/AntTargetNote.DescriptorImpl.html" title="class in hudson.tasks._ant"><B>AntTargetNote.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/_ant/AntTargetNote.DescriptorImpl.html#AntTargetNote.DescriptorImpl()"><B>AntTargetNote.DescriptorImpl()</B></A> - 
@@ -2082,9 +2089,20 @@ Method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/Lifecycle.html" tit
 Method in class hudson.model.<A HREF="./hudson/model/ResourceController.html" title="class in hudson.model">ResourceController</A>
 <DD>Checks if an activity that requires the given resource list
  can run immediately.
+<DT><A HREF="./hudson/model/Node.html#canTake(hudson.model.Queue.Task)"><B>canTake(Queue.Task)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Node.html" title="class in hudson.model">Node</A>
+<DD>Called by the <A HREF="./hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> to determine whether or not this node can
+ take the given task.
 <DT><A HREF="./hudson/model/Queue.JobOffer.html#canTake(hudson.model.Queue.Task)"><B>canTake(Queue.Task)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A>
 <DD>Verifies that the <A HREF="./hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> represented by this object is capable of executing the given task.
+<DT><A HREF="./hudson/model/queue/QueueTaskDispatcher.html#canTake(hudson.model.Node, hudson.model.Queue.Task)"><B>canTake(Node, Queue.Task)</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskDispatcher.html" title="class in hudson.model.queue">QueueTaskDispatcher</A>
+<DD>Called whenever <A HREF="./hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> is considering to execute the given task on a given node.
+<DT><A HREF="./hudson/slaves/NodeProperty.html#canTake(hudson.model.Queue.Task)"><B>canTake(Queue.Task)</B></A> - 
+Method in class hudson.slaves.<A HREF="./hudson/slaves/NodeProperty.html" title="class in hudson.slaves">NodeProperty</A>
+<DD>Called by the <A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> to help determine whether or not it should
+ take the given task.
 <DT><A HREF="./hudson/model/UpdateSite.Data.html#canUpgrade()"><B>canUpgrade()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateSite.Data.html" title="class in hudson.model">UpdateSite.Data</A>
 <DD>Do we support upgrade?
@@ -2330,6 +2348,9 @@ Method in class hudson.util.<A HREF="./hudson/util/FormValidation.URLCheck.html"
 <DD>Implement the actual form validation logic, by using other convenience methosd defined in this class.
 <DT><A HREF="./hudson/model/AbstractProject.html#checkAbortPermission()"><B>checkAbortPermission()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#checkAbortPermission()"><B>checkAbortPermission()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#checkAbortPermission()"><B>checkAbortPermission()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
@@ -3043,6 +3064,9 @@ Variable in class hudson.model.<A HREF="./hudson/model/UpdateSite.Plugin.html" t
 <DT><A HREF="./hudson/model/CheckPoint.html#COMPLETED"><B>COMPLETED</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/CheckPoint.html" title="class in hudson.model">CheckPoint</A>
 <DD><A HREF="./hudson/model/CheckPoint.html" title="class in hudson.model"><CODE>CheckPoint</CODE></A> that indicates that the build is completed.
+<DT><A HREF="./hudson/model/Queue.html#completePop(hudson.model.Queue.Item)"><B>completePop(Queue.Item)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
+<DD>Queue maintenance.
 <DT><A HREF="./hudson/FilePath.TarCompression.html#compress(java.io.OutputStream)"><B>compress(OutputStream)</B></A> - 
 Method in enum hudson.<A HREF="./hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>
 <DD>&nbsp;
@@ -3730,6 +3754,9 @@ Method in class hudson.scm.<A HREF="./hudson/scm/SCM.html" title="class in hudso
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractProject.html#createExecutable()"><B>createExecutable()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#createExecutable()"><B>createExecutable()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#createExecutable()"><B>createExecutable()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
@@ -4676,6 +4703,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AdministrativeMonitor.html"
 <DT><A HREF="./hudson/PluginWrapper.html#disable()"><B>disable()</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
 <DD>Disables this plugin next time Hudson runs.
+<DT><A HREF="./hudson/DNSMultiCast.html#disabled"><B>disabled</B></A> - 
+Static variable in class hudson.<A HREF="./hudson/DNSMultiCast.html" title="class in hudson">DNSMultiCast</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractProject.html#disabled"><B>disabled</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>True to suspend new builds.
@@ -7730,6 +7760,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MavenModule.html" title="cl
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>If this project is configured to be always built on this node,
  return that <A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>.
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getAssignedLabel()"><B>getAssignedLabel()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getAssignedLabel()"><B>getAssignedLabel()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>If this task needs to be run on a node with a particular label,
@@ -8096,6 +8129,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.BuildableItem.html" t
 <DT><A HREF="./hudson/model/Queue.Item.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>
 <DD>Gets an object that describes why this item is in the queue.
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getCauseOfBlockage()"><B>getCauseOfBlockage()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>If the execution of this task should be blocked for temporary reasons,
@@ -9095,6 +9131,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ProxyView.DescriptorImpl.ht
 <DT><A HREF="./hudson/model/Queue.Item.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/ResourceActivity.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A>
 <DD>Used for rendering HTML.
@@ -9663,6 +9702,9 @@ Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/TestResult.html" 
 <DT><A HREF="./hudson/model/AbstractProject.html#getEstimatedDuration()"><B>getEstimatedDuration()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getEstimatedDuration()"><B>getEstimatedDuration()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getEstimatedDuration()"><B>getEstimatedDuration()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>Estimate of how long will it take to execute this task.
@@ -9922,6 +9964,9 @@ Method in interface hudson.model.<A HREF="./hudson/model/Item.html" title="inter
  of the ancestors.
 <DT><A HREF="./hudson/model/ItemGroup.html#getFullDisplayName()"><B>getFullDisplayName()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getFullDisplayName()"><B>getFullDisplayName()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getFullDisplayName()"><B>getFullDisplayName()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
@@ -10644,6 +10689,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in h
 <DT><A HREF="./hudson/model/AbstractProject.html#getLastBuiltOn()"><B>getLastBuiltOn()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Gets the <A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> where this project was last built on.
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getLastBuiltOn()"><B>getLastBuiltOn()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getLastBuiltOn()"><B>getLastBuiltOn()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>If the previous execution of this task run on a certain node
@@ -10672,6 +10720,12 @@ Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in h
 <DT><A HREF="./hudson/tasks/test/TestResultProjectAction.html#getLastTestResultAction()"><B>getLastTestResultAction()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test">TestResultProjectAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Job.html#getLastUnstableBuild()"><B>getLastUnstableBuild()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>Returns the last unstable build, if any.
+<DT><A HREF="./hudson/model/Job.html#getLastUnsuccessfulBuild()"><B>getLastUnsuccessfulBuild()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>Returns the last build that was anything but stable, if any.
 <DT><A HREF="./hudson/model/UpdateCenter.html#getLastUpdatedString()"><B>getLastUpdatedString()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
 <DD>Gets the string representing how long ago the data was obtained.
@@ -11007,6 +11061,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ParameterDefinition.html" t
 <DT><A HREF="./hudson/model/ParameterValue.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model">ParameterValue</A>
 <DD>Name of the parameter.
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getName()"><B>getName()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getName()"><B>getName()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>Unique name of this task.
@@ -12077,6 +12134,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Project.html" title="class 
 <DT><A HREF="./hudson/model/AbstractProject.html#getResourceList()"><B>getResourceList()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>List of necessary resources to perform the build of this project.
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getResourceList()"><B>getResourceList()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/ResourceActivity.html#getResourceList()"><B>getResourceList()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A>
 <DD>Gets the list of <A HREF="./hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A>s that this task requires.
@@ -13184,6 +13244,9 @@ Method in class hudson.model.<A HREF="./hudson/model/MyViewsProperty.html" title
 <DT><A HREF="./hudson/model/PageDecorator.html#getUrl()"><B>getUrl()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/PageDecorator.html" title="class in hudson.model">PageDecorator</A>
 <DD>Obtains the URL of this object, excluding the context path.
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getUrl()"><B>getUrl()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getUrl()"><B>getUrl()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>Returns the URL of this task relative to the context root of the application.
@@ -13480,6 +13543,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.Item.html" title="cla
 <DT><A HREF="./hudson/model/AbstractProject.html#getWhyBlocked()"><B>getWhyBlocked()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getWhyBlocked()"><B>getWhyBlocked()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#getWhyBlocked()"><B>getWhyBlocked()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.330
@@ -13703,6 +13769,9 @@ Method in class hudson.util.<A HREF="./hudson/util/FormValidation.URLCheck.html"
 <DD>Calls the <A HREF="./hudson/util/FormValidation.html#error(java.lang.String)"><CODE>FormValidation.error(String)</CODE></A> method with a reasonable error message.
 <DT><A HREF="./hudson/model/AbstractProject.html#hasAbortPermission()"><B>hasAbortPermission()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#hasAbortPermission()"><B>hasAbortPermission()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#hasAbortPermission()"><B>hasAbortPermission()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
@@ -14880,6 +14949,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ViewJob.html" title="class 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Returns true if the execution should be blocked
  for temporary reasons.
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#isBuildBlocked()"><B>isBuildBlocked()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#isBuildBlocked()"><B>isBuildBlocked()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>Returns true if the execution should be blocked
@@ -14930,6 +15002,9 @@ Method in class hudson.model.<A HREF="./hudson/model/LargeText.html" title="clas
 <DT><A HREF="./hudson/model/AbstractProject.html#isConcurrentBuild()"><B>isConcurrentBuild()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Does this project perform concurrent builds?
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#isConcurrentBuild()"><B>isConcurrentBuild()</B></A> - 
+Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html#isConcurrentBuild()"><B>isConcurrentBuild()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>
 <DD>True if the task allows concurrent builds
@@ -18179,7 +18254,13 @@ Variable in class hudson.slaves.<A HREF="./hudson/slaves/NodeProperty.html" titl
 <DT><A HREF="./hudson/util/RunList.html#node(hudson.model.Node)"><B>node(Node)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/RunList.html" title="class in hudson.util">RunList</A>
 <DD>Filter the list to builds on a single node only
-<DT><A HREF="./hudson/model/Node.Mode.html" title="enum in hudson.model"><B>Node.Mode</B></A> - Enum in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Constants that control how Hudson allocates jobs to slaves.<DT><A HREF="./hudson/model/Messages.html#Node_Mode_EXCLUSIVE()"><B>Node_Mode_EXCLUSIVE()</B></A> - 
+<DT><A HREF="./hudson/model/Node.Mode.html" title="enum in hudson.model"><B>Node.Mode</B></A> - Enum in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Constants that control how Hudson allocates jobs to slaves.<DT><A HREF="./hudson/model/Messages.html#Node_BecauseNodeIsReserved(java.lang.Object)"><B>Node_BecauseNodeIsReserved(Object)</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>{0} is reserved for jobs tied to it
+<DT><A HREF="./hudson/model/Messages.html#Node_LabelMissing(java.lang.Object, java.lang.Object)"><B>Node_LabelMissing(Object, Object)</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>{0} doesn''t have label {1}
+<DT><A HREF="./hudson/model/Messages.html#Node_Mode_EXCLUSIVE()"><B>Node_Mode_EXCLUSIVE()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Leave this machine for tied jobs only
 <DT><A HREF="./hudson/model/Messages.html#Node_Mode_NORMAL()"><B>Node_Mode_NORMAL()</B></A> - 
@@ -19084,6 +19165,12 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#Permalink_LastSuccessfulBuild()"><B>Permalink_LastSuccessfulBuild()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Last successful build
+<DT><A HREF="./hudson/model/Messages.html#Permalink_LastUnstableBuild()"><B>Permalink_LastUnstableBuild()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Last unstable build
+<DT><A HREF="./hudson/model/Messages.html#Permalink_LastUnsuccessfulBuild()"><B>Permalink_LastUnsuccessfulBuild()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Last unsuccessful build
 <DT><A HREF="./hudson/PermalinkList.html" title="class in hudson"><B>PermalinkList</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util"><CODE>List</CODE></A> of <A HREF="./hudson/model/PermalinkProjectAction.Permalink.html" title="class in hudson.model"><CODE>PermalinkProjectAction.Permalink</CODE></A>s with some convenience methods.<DT><A HREF="./hudson/PermalinkList.html#PermalinkList(java.util.Collection)"><B>PermalinkList(Collection&lt;? extends PermalinkProjectAction.Permalink&gt;)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/PermalinkList.html" title="class in hudson">PermalinkList</A>
 <DD>&nbsp;
@@ -19778,6 +19865,12 @@ Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/QueueSort
 <DT><A HREF="./hudson/model/queue/Messages.html#QueueSorter_installDefaultQueueSorter()"><B>QueueSorter_installDefaultQueueSorter()</B></A> - 
 Static method in class hudson.model.queue.<A HREF="./hudson/model/queue/Messages.html" title="class in hudson.model.queue">Messages</A>
 <DD>Installing default queue sorter
+<DT><A HREF="./hudson/model/queue/QueueTaskDispatcher.html" title="class in hudson.model.queue"><B>QueueTaskDispatcher</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Vetos the execution of a task on a node<DT><A HREF="./hudson/model/queue/QueueTaskDispatcher.html#QueueTaskDispatcher()"><B>QueueTaskDispatcher()</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskDispatcher.html" title="class in hudson.model.queue">QueueTaskDispatcher</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue"><B>QueueTaskFilter</B></A> - Class in <A HREF="./hudson/model/queue/package-summary.html">hudson.model.queue</A><DD>Base class for defining filter <CODE>Queue.Task</CODE>.<DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#QueueTaskFilter(hudson.model.Queue.Task)"><B>QueueTaskFilter(Queue.Task)</B></A> - 
+Constructor for class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/slaves/WorkspaceList.Entry.html#quick"><B>quick</B></A> - 
 Variable in class hudson.slaves.<A HREF="./hudson/slaves/WorkspaceList.Entry.html" title="class in hudson.slaves">WorkspaceList.Entry</A>
 <DD>True makes the caller of <A HREF="./hudson/slaves/WorkspaceList.html#allocate(hudson.FilePath)"><CODE>WorkspaceList.allocate(FilePath)</CODE></A> wait
@@ -25970,6 +26063,12 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_MyViewsProperty_ViewExistsCheck_NotExist(java.lang.Object)"><B>_MyViewsProperty_ViewExistsCheck_NotExist(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>A view with name {0} does not exist
+<DT><A HREF="./hudson/model/Messages.html#_Node_BecauseNodeIsReserved(java.lang.Object)"><B>_Node_BecauseNodeIsReserved(Object)</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>{0} is reserved for jobs tied to it
+<DT><A HREF="./hudson/model/Messages.html#_Node_LabelMissing(java.lang.Object, java.lang.Object)"><B>_Node_LabelMissing(Object, Object)</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>{0} doesn''t have label {1}
 <DT><A HREF="./hudson/model/Messages.html#_Node_Mode_EXCLUSIVE()"><B>_Node_Mode_EXCLUSIVE()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Leave this machine for tied jobs only
@@ -26042,6 +26141,12 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_Permalink_LastSuccessfulBuild()"><B>_Permalink_LastSuccessfulBuild()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Last successful build
+<DT><A HREF="./hudson/model/Messages.html#_Permalink_LastUnstableBuild()"><B>_Permalink_LastUnstableBuild()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Last unstable build
+<DT><A HREF="./hudson/model/Messages.html#_Permalink_LastUnsuccessfulBuild()"><B>_Permalink_LastUnsuccessfulBuild()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Last unsuccessful build
 <DT><A HREF="./hudson/security/Messages.html#_Permission_Permissions_Title()"><B>_Permission_Permissions_Title()</B></A> - 
 Static method in class hudson.security.<A HREF="./hudson/security/Messages.html" title="class in hudson.security">Messages</A>
 <DD>N/A

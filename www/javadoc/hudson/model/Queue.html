@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue (Hudson main module 1.359 API)
+Queue (Hudson main module 1.360 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-21">
+<META NAME="date" CONTENT="2010-05-28">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue (Hudson main module 1.359 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue (Hudson main module 1.359 API)";
+        parent.document.title="Queue (Hudson main module 1.360 API)";
     }
 }
 </SCRIPT>
@@ -374,6 +374,14 @@ Build queue.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wipes out all the items currently in the queue, as if all of them are cancelled at once.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.html#completePop(hudson.model.Queue.Item)">completePop</A></B>(<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&nbsp;i)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queue maintenance.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1125,6 +1133,25 @@ public void <B>scheduleMaintenance</B>()</PRE>
  When conditions are changed, this method should be invoked.
  <p>
  This wakes up one <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> so that it will maintain a queue.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="completePop(hudson.model.Queue.Item)"><!-- --></A><H3>
+completePop</H3>
+<PRE>
+public void <B>completePop</B>(<A HREF="../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&nbsp;i)</PRE>
+<DL>
+<DD>Queue maintenance.
+ <p>
+ Tell the Queue that a popped item has been started, so we don't have to track
+ it in the Queue anymore.
 <P>
 <DD><DL>
 </DL>
