@@ -20,6 +20,12 @@ Upcoming changes</a>
 <div id="trunk" style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
   <li class=bug>
+    Fixed a bug where IE shows empty client cert dialog when connecting to HTTPS site run by Winstone.
+    (<a href="http://hudson.361315.n4.nabble.com/winstone-container-and-ssl-td383501.html">report</a>)
+  <li class=bug>
+    "java -jar hudson.war" with AJP was broken.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5753">issue 5753</a>)
+  <li class=bug>
     Safe restart stopped working on protected Hudson since 1.359.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-6667">issue 6667</a>)
   <li class=bug>
@@ -54,6 +60,8 @@ Upcoming changes</a>
   <li class=rfe>
     Copied jobs are now disabled until configuration is saved, so they don't start building before ready.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-2494">issue 2494</a>)
+  <li class=rfe>
+    Reduced logging from jmDNS.
 </ul>
 </div><!--=TRUNK-END=-->
 
