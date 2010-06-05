@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.360 API)
+HudsonTestCase (Hudson main module 1.361 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-28">
+<META NAME="date" CONTENT="2010-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.360 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.360 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.361 API)";
     }
 }
 </SCRIPT>
@@ -359,6 +359,16 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asserts that two JavaBeans are equal as far as the given list of properties are concerned.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertEqualDataBoundBeans(java.lang.Object, java.lang.Object)">assertEqualDataBoundBeans</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;lhs,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;rhs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><CODE>assertEqualBeans(Object, Object, String)</CODE></A> but figure out the properties
+ via <CODE>DataBoundConstructor</CODE></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1940,6 +1950,8 @@ protected &lt;P extends <A HREF="../../../../hudson/model/Job.html" title="class
 <DL>
 <DD>Loads a configuration page and submits it without any modifications, to
  perform a round-trip configuration test.
+ <p>
+ See http://wiki.hudson-ci.org/display/HUDSON/Unit+Test#UnitTest-Configurationroundtriptesting
 <P>
 <DD><DL>
 </DL>
@@ -1947,7 +1959,7 @@ protected &lt;P extends <A HREF="../../../../hudson/model/Job.html" title="class
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE><DT><B>See Also:</B><DD><CODE>http://wiki.hudson-ci.org/display/HUDSON/Unit+Test#UnitTest-Configurationroundtriptesting</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2406,6 +2418,27 @@ public void <B>assertEqualBeans</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE><DT><B>Since:</B></DT>
   <DD>1.297</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertEqualDataBoundBeans(java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+assertEqualDataBoundBeans</H3>
+<PRE>
+public void <B>assertEqualDataBoundBeans</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;lhs,
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;rhs)
+                               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Works like <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><CODE>assertEqualBeans(Object, Object, String)</CODE></A> but figure out the properties
+ via <CODE>DataBoundConstructor</CODE>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
 </DD>
 </DL>
 <HR>

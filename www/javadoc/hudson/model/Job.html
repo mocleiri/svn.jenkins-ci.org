@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.360 API)
+Job (Hudson main module 1.361 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-28">
+<META NAME="date" CONTENT="2010-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.360 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.360 API)";
+        parent.document.title="Job (Hudson main module 1.361 API)";
     }
 }
 </SCRIPT>
@@ -653,6 +653,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#isHoldOffBuildUntilSave()">isHoldOffBuildUntilSave</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#isInQueue()">isInQueue</A></B>()</CODE>
 
@@ -762,6 +770,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#save()">save</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the settings to a file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#saveNextBuildNumber()">saveNextBuildNumber</A></B>()</CODE>
 
@@ -809,7 +825,7 @@ T</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSetName(java.lang.String)">doSetName</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getParent()">getParent</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#resolveForCLI(java.lang.String)">resolveForCLI</A>, <A HREF="../../hudson/model/AbstractItem.html#save()">save</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSetName(java.lang.String)">doSetName</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getParent()">getParent</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#resolveForCLI(java.lang.String)">resolveForCLI</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
@@ -936,6 +952,26 @@ protected <B>Job</B>(<A HREF="../../hudson/model/ItemGroup.html" title="interfac
 </TR>
 </TABLE>
 
+<A NAME="save()"><!-- --></A><H3>
+save</H3>
+<PRE>
+public void <B>save</B>()
+          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractItem.html#save()">AbstractItem</A></CODE></B></DD>
+<DD>Save the settings to a file.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Item.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Saveable.html#save()">save</A></CODE> in interface <CODE><A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractItem.html#save()">save</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the persistence failed.</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="onLoad(hudson.model.ItemGroup, java.lang.String)"><!-- --></A><H3>
 onLoad</H3>
 <PRE>
@@ -998,6 +1034,20 @@ protected void <B>performDelete</B>()
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isHoldOffBuildUntilSave()"><!-- --></A><H3>
+isHoldOffBuildUntilSave</H3>
+<PRE>
+protected boolean <B>isHoldOffBuildUntilSave</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
@@ -1164,7 +1214,7 @@ public void <B>updateNextBuildNumber</B>(int&nbsp;next)
  <p>
  Much of Hudson assumes that the build number is unique and monotonic, so
  this method can only accept a new value that's bigger than
- <A HREF="../../hudson/model/Job.html#getNextBuildNumber()"><CODE>getNextBuildNumber()</CODE></A> returns. Otherwise it'll be no-op.
+ <A HREF="../../hudson/model/Job.html#getLastBuild()"><CODE>getLastBuild()</CODE></A> returns. Otherwise it'll be no-op.
 <P>
 <DD><DL>
 </DL>

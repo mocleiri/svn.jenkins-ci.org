@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.360 API)
+Index (Hudson main module 1.361 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-28">
+<META NAME="date" CONTENT="2010-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.360 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.360 API)";
+        parent.document.title="Index (Hudson main module 1.361 API)";
     }
 }
 </SCRIPT>
@@ -1277,6 +1277,10 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTes
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><B>assertEqualBeans(Object, Object, String)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Asserts that two JavaBeans are equal as far as the given list of properties are concerned.
+<DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertEqualDataBoundBeans(java.lang.Object, java.lang.Object)"><B>assertEqualDataBoundBeans(Object, Object)</B></A> - 
+Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
+<DD>Works like <A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><CODE>HudsonTestCase.assertEqualBeans(Object, Object, String)</CODE></A> but figure out the properties
+ via <CODE>DataBoundConstructor</CODE>
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#assertGoodStatus(com.gargoylesoftware.htmlunit.Page)"><B>assertGoodStatus(Page)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Assert that the specifed page can be served with a "good" HTTP status,
@@ -3098,6 +3102,9 @@ Method in class hudson.model.<A HREF="./hudson/model/OverallLoadStatistics.html"
 <DT><A HREF="./hudson/model/Computer.html" title="class in hudson.model"><B>Computer</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents the running state of a remote computer that holds <A HREF="./hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.<DT><A HREF="./hudson/model/Computer.html#Computer(hudson.model.Node)"><B>Computer(Node)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Messages.html#Computer_BadChannel()"><B>Computer_BadChannel()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Slave node offline or not a remote channel (such as master node).
 <DT><A HREF="./hudson/model/Messages.html#Computer_Caption(java.lang.Object)"><B>Computer_Caption(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Slave {0}
@@ -7327,6 +7334,9 @@ Static method in class hudson.<A HREF="./hudson/StructuredForm.html" title="clas
 <DT><A HREF="./hudson/tasks/BuildStep.PublisherList.html#get(int)"><B>get(int)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildStep.PublisherList.html" title="class in hudson.tasks">BuildStep.PublisherList</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/CopyOnWriteList.html#get(int)"><B>get(int)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteList.html" title="class in hudson.util">CopyOnWriteList</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/CopyOnWriteMap.html#get(java.lang.Object)"><B>get(Object)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteMap.html" title="class in hudson.util">CopyOnWriteMap</A>
 <DD>&nbsp;
@@ -7351,6 +7361,9 @@ Method in class hudson.util.<A HREF="./hudson/util/Memoizer.html" title="class i
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/MultipartFormDataParser.html#get(java.lang.String)"><B>get(String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/MultipartFormDataParser.html" title="class in hudson.util">MultipartFormDataParser</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/util/PersistedList.html#get(int)"><B>get(int)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/PersistedList.html#get(java.lang.Class)"><B>get(Class&lt;U&gt;)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A>
@@ -11900,6 +11913,9 @@ Method in class hudson.model.<A HREF="./hudson/model/ProxyView.html" title="clas
 <DT><A HREF="./hudson/util/ReflectionUtils.html#getPublicMethodNamed(java.lang.Class, java.lang.String)"><B>getPublicMethodNamed(Class, String)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/ReflectionUtils.html" title="class in hudson.util">ReflectionUtils</A>
 <DD>Finds a public method of the given name, regardless of its parameter definitions,
+<DT><A HREF="./hudson/util/ReflectionUtils.html#getPublicProperty(java.lang.Object, java.lang.String)"><B>getPublicProperty(Object, String)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/ReflectionUtils.html" title="class in hudson.util">ReflectionUtils</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/matrix/MatrixConfiguration.html#getPublisher(hudson.model.Descriptor)"><B>getPublisher(Descriptor&lt;Publisher&gt;)</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>
 <DD>&nbsp;
@@ -15142,6 +15158,9 @@ Method in class hudson.model.<A HREF="./hudson/model/UpdateSite.Plugin.html" tit
 <DT><A HREF="./org/jvnet/hudson/test/HudsonTestCase.html#isGoodHttpStatus(int)"><B>isGoodHttpStatus(int)</B></A> - 
 Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/HudsonTestCase.html" title="class in org.jvnet.hudson.test">HudsonTestCase</A>
 <DD>Determines whether the specifed HTTP status code is generally "good"
+<DT><A HREF="./hudson/model/Job.html#isHoldOffBuildUntilSave()"><B>isHoldOffBuildUntilSave()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/Node.html#isHoldOffLaunchUntilSave()"><B>isHoldOffLaunchUntilSave()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Node.html" title="class in hudson.model">Node</A>
 <DD>&nbsp;
@@ -21164,6 +21183,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class i
 <DT><A HREF="./hudson/model/Item.html#save()"><B>save()</B></A> - 
 Method in interface hudson.model.<A HREF="./hudson/model/Item.html" title="interface in hudson.model">Item</A>
 <DD>Save the settings to a file.
+<DT><A HREF="./hudson/model/Job.html#save()"><B>save()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/ListView.html#save()"><B>save()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/ListView.html" title="class in hudson.model">ListView</A>
 <DD>&nbsp;
@@ -23308,7 +23330,7 @@ Static method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" tit
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/DescribableList.html#toMap()"><B>toMap()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>
-<DD>&nbsp;
+<DD>Creates a detached map from the current snapshot of the data, keyed from a descriptor to an instance.
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html#toMaskArray()"><B>toMaskArray()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
 <DD>Returns an array of booleans where the masked arguments are marked as true
@@ -23726,6 +23748,9 @@ Constructor for class hudson.util.<A HREF="./hudson/util/UnbufferedBase64InputSt
 <DT><A HREF="./hudson/util/ExceptionCatchingThreadFactory.html#uncaughtException(java.lang.Thread, java.lang.Throwable)"><B>uncaughtException(Thread, Throwable)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ExceptionCatchingThreadFactory.html" title="class in hudson.util">ExceptionCatchingThreadFactory</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/util/FileVisitor.html#understandsSymlink()"><B>understandsSymlink()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/FileVisitor.html" title="class in hudson.util">FileVisitor</A>
+<DD>Some visitors can handle symlinks as symlinks.
 <DT><A HREF="./hudson/remoting/UnexportCommand.html" title="class in hudson.remoting"><B>UnexportCommand</B></A> - Class in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD><CODE>Command</CODE> that unexports an object.<DT><A HREF="./hudson/remoting/UnexportCommand.html#UnexportCommand(int)"><B>UnexportCommand(int)</B></A> - 
 Constructor for class hudson.remoting.<A HREF="./hudson/remoting/UnexportCommand.html" title="class in hudson.remoting">UnexportCommand</A>
 <DD>&nbsp;
@@ -24493,6 +24518,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/ViewJob.html" title="
 <DT><A HREF="./hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><B>VirtualChannel</B></A> - Interface in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>Virtualized <A HREF="./hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that allows different implementations.<DT><A HREF="./hudson/util/FileVisitor.html#visit(java.io.File, java.lang.String)"><B>visit(File, String)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/FileVisitor.html" title="class in hudson.util">FileVisitor</A>
 <DD>Called for each file and directory that matches the criteria implied by <A HREF="./hudson/util/DirScanner.html" title="class in hudson.util"><CODE>DirScanner</CODE></A>
+<DT><A HREF="./hudson/util/FileVisitor.html#visitSymlink(java.io.File, java.lang.String, java.lang.String)"><B>visitSymlink(File, String, String)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/FileVisitor.html" title="class in hudson.util">FileVisitor</A>
+<DD>Some visitors can handle symlinks as symlinks.
 <DT><A HREF="./hudson/slaves/JNLPLauncher.html#vmargs"><B>vmargs</B></A> - 
 Variable in class hudson.slaves.<A HREF="./hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves">JNLPLauncher</A>
 <DD>Additional JVM arguments.
@@ -25395,6 +25423,9 @@ Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" tit
 <DT><A HREF="./hudson/slaves/Messages.html#_CommandLauncher_NoLaunchCommand()"><B>_CommandLauncher_NoLaunchCommand()</B></A> - 
 Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" title="class in hudson.slaves">Messages</A>
 <DD>No launch command specified
+<DT><A HREF="./hudson/model/Messages.html#_Computer_BadChannel()"><B>_Computer_BadChannel()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>Slave node offline or not a remote channel (such as master node).
 <DT><A HREF="./hudson/model/Messages.html#_Computer_Caption(java.lang.Object)"><B>_Computer_Caption(Object)</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Slave {0}

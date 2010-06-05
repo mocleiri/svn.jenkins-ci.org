@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FileVisitor (Hudson main module 1.360 API)
+FileVisitor (Hudson main module 1.361 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-28">
+<META NAME="date" CONTENT="2010-06-04">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileVisitor (Hudson main module 1.360 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileVisitor (Hudson main module 1.360 API)";
+        parent.document.title="FileVisitor (Hudson main module 1.361 API)";
     }
 }
 </SCRIPT>
@@ -143,12 +143,30 @@ Visits files in a directory recursively.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FileVisitor.html#understandsSymlink()">understandsSymlink</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some visitors can handle symlinks as symlinks.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/FileVisitor.html#visit(java.io.File, java.lang.String)">visit</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;f,
       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;relativePath)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called for each file and directory that matches the criteria implied by <A HREF="../../hudson/util/DirScanner.html" title="class in hudson.util"><CODE>DirScanner</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/FileVisitor.html#visitSymlink(java.io.File, java.lang.String, java.lang.String)">visitSymlink</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;link,
+             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;target,
+             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;relativePath)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some visitors can handle symlinks as symlinks.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -211,6 +229,43 @@ public abstract void <B>visit</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/a
 <DT><B>Parameters:</B><DD><CODE>f</CODE> - Either a file or a directory.<DD><CODE>relativePath</CODE> - The file/directory name in question
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="visitSymlink(java.io.File, java.lang.String, java.lang.String)"><!-- --></A><H3>
+visitSymlink</H3>
+<PRE>
+public void <B>visitSymlink</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;link,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;target,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;relativePath)
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Some visitors can handle symlinks as symlinks. Those visitors should implement
+ this method to provide a different handling for symlink.
+ <p>
+ This method is invoked by those <A HREF="../../hudson/util/DirScanner.html" title="class in hudson.util"><CODE>DirScanner</CODE></A>s that can handle symlinks as symlinks
+ (not every <A HREF="../../hudson/util/DirScanner.html" title="class in hudson.util"><CODE>DirScanner</CODE></A>s are capable of doing that, as proper symlink handling requires
+ letting visitors decide whether or not to descend into a symlink directory.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="understandsSymlink()"><!-- --></A><H3>
+understandsSymlink</H3>
+<PRE>
+public boolean <B>understandsSymlink</B>()</PRE>
+<DL>
+<DD>Some visitors can handle symlinks as symlinks. Those visitors should implement
+ this method and return true to have callers invoke <A HREF="../../hudson/util/FileVisitor.html#visitSymlink(java.io.File, java.lang.String, java.lang.String)"><CODE>visitSymlink(File, String, String)</CODE></A>
+<P>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
