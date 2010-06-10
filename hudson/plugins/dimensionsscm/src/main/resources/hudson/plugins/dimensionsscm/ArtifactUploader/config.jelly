@@ -1,0 +1,34 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+    xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:u="/util">
+    <f:entry title="${%Patterns to use}" help="/plugin/dimensionsscm/helpbuploaded.html">
+       <f:repeatable var="patterns" items="${instance.patterns}" noAddButton="true" minimum="1">
+         <table width="98%" cellpadding="2" cellspacing="2">
+            <f:entry title="Pattern">
+              <f:textbox name="artifactuploader.patterns" value="${h.defaulted(patterns, '.*')}"/>
+            </f:entry>
+            <f:entry>
+                  <div align="right">
+                    <input type="button" value="${%Add Pattern...}" class="repeatable-add show-if-last" />
+                    <input type="button" value="${%Delete}" class="repeatable-delete show-if-not-only" style="margin-left: 1em;" />
+                  </div>
+            </f:entry>
+         </table>
+       </f:repeatable>
+    </f:entry>
+    <f:advanced>
+      <f:entry title="${%Force files to be checked onto the tip}" help="/plugin/dimensionsscm/forceCheckIn.html">
+      <f:checkbox name="artifactuploader.forceCheckIn" default="false" checked="${instance.forceCheckIn}"/>
+      </f:entry>
+      <f:entry title="${%Force files to be recorded as merged}" help="/plugin/dimensionsscm/forceTip.html">
+      <f:checkbox name="artifactuploader.forceTip" default="false" checked="${instance.forceTip}"/>
+      </f:entry>
+      <f:entry>
+         <p>
+         (Note - The above options are only applicable to projects. If they are specified for a stream, they will be ignored).
+         </p>
+      </f:entry>
+      <f:entry title="Owning part for files">
+       <f:textbox name="artifactuploader.owningPart" value="${instance.owningPart}" />
+      </f:entry>
+    </f:advanced>
+</j:jelly>

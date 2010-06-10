@@ -1,0 +1,12 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:section title="${%Global Change Log Annotations}">
+    <st:include page="list.jelly" class="${instance.clazz}"/>
+    <local:list items="${instance.globalAnnotations.entrySet()}"
+                help="help-patterns.html" xmlns:local="local"/>
+    <f:entry title=""
+     description="${%If unchecked, global patterns are only used when selected for a project.}">
+      <f:checkbox name="alwaysApply" checked="${instance.alwaysApply}"/>
+      ${%Apply global patterns to all projects}
+    </f:entry>
+  </f:section>
+</j:jelly>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.jvnet.hudson</groupId>
+  <artifactId>hudson</artifactId>
+  <version>1.7</version>
+  <packaging>pom</packaging>
+
+  <name>Hudson</name>
+  <url>https://hudson.dev.java.net/</url>
+  
+  <issueManagement>
+      <system>JIRA</system>
+      <url>http://issues.hudson-ci.org/secure/Dashboard.jspa</url>
+  </issueManagement>
+  <ciManagement>
+      <system>Hudson</system>
+      <url>http://hudson.glassfish.org/job/hudson</url>
+  </ciManagement>
+  <mailingLists>
+      <mailingList>
+          <name>Hudson developer discussion list</name>
+          <subscribe>dev-subscribe@hudson.dev.java.net</subscribe>
+          <unsubscribe>dev-unsubscribe@hudson.dev.java.net</unsubscribe>
+          <post>dev@hudson.dev.java.net</post>
+          <archive>http://www.nabble.com/Hudson-dev-f25543.html</archive>
+      </mailingList>
+      <mailingList>
+          <name>Hudson user discussion list</name>
+          <subscribe>users-subscribe@hudson.dev.java.net</subscribe>
+          <unsubscribe>users-unsubscribe@hudson.dev.java.net</unsubscribe>
+          <post>users@hudson.dev.java.net</post>
+          <archive>http://www.nabble.com/Hudson-users-f16872.html</archive>
+      </mailingList>
+      <mailingList>
+          <name>Hudson Japanese user discussion list</name>
+          <subscribe>ja-subscribe@hudson.dev.java.net</subscribe>
+          <unsubscribe>ja-unsubscribe@hudson.dev.java.net</unsubscribe>
+          <post>ja@hudson.dev.java.net</post>
+          <archive>http://www.nabble.com/Hudson-ja-f29991.html</archive>
+      </mailingList>
+  </mailingLists>
+ 
+  <scm>
+    <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/trunk/hudson/</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/trunk/hudson</url>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>java.net-m2-repository</id>
+      <!--url>svn:https://svn.dev.java.net/svn/maven2-repository/trunk/www/repository/</url-->
+      <url>java-net:/maven2-repository/trunk/repository/</url>
+    </repository>
+    <snapshotRepository>
+      <!-- prevent accidental deployment of SNAPSHOTS to repository -->
+      <id>local</id>
+      <url>file:.</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+	<version>1.0-beta-1</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>display-info</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-idea-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <jdkName>JDK1.5</jdkName>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
+    </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.jvnet.wagon-svn</groupId>
+        <artifactId>wagon-svn</artifactId>
+        <version>1.8</version>
+      </extension>
+    </extensions>
+  </build>
+
+  <modules>
+    <module>main</module>
+    <module>tools</module>
+    <module>plugins</module>
+    <module>pxeboot</module>
+  </modules>
+  
+  <profiles>
+    <profile>
+      <id>always-check-remote-repositories</id>
+      <properties>
+        <maven.repository.update.freqency>always</maven.repository.update.freqency>
+      </properties>
+    </profile>
+  </profiles>
+  <properties>
+    <!-- by default only check remote repositories once per week -->
+    <maven.repository.update.freqency>interval:10080</maven.repository.update.freqency>
+
+    <!-- the version of Maven that we embed in Hudson -->
+    <maven.version>2.0.4</maven.version>
+  </properties>
+</project>
