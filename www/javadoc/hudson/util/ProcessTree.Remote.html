@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ProcessTree.Remote (Hudson main module 1.361 API)
+ProcessTree.Remote (Hudson main module 1.362 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-04">
+<META NAME="date" CONTENT="2010-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProcessTree.Remote (Hudson main module 1.361 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProcessTree.Remote (Hudson main module 1.361 API)";
+        parent.document.title="ProcessTree.Remote (Hudson main module 1.362 API)";
     }
 }
 </SCRIPT>
@@ -133,7 +133,7 @@ Represents a process tree over a channel.
 <TH ALIGN="left"><B>Nested classes/interfaces inherited from class hudson.util.<A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util">ProcessTree</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A>, <A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="interface in hudson.util">ProcessTree.ProcessCallable</A>&lt;<A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="type parameter in ProcessTree.ProcessCallable">T</A>&gt;, <A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A>, <A HREF="../../hudson/util/ProcessTree.UnixProcess.html" title="class in hudson.util">ProcessTree.UnixProcess</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/util/ProcessTree.Local.html" title="class in hudson.util">ProcessTree.Local</A>, <A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hudson.util">ProcessTree.OSProcess</A>, <A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="interface in hudson.util">ProcessTree.ProcessCallable</A>&lt;<A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="type parameter in ProcessTree.ProcessCallable">T</A>&gt;, <A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A>, <A HREF="../../hudson/util/ProcessTree.UnixProcess.html" title="class in hudson.util">ProcessTree.UnixProcess</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -271,7 +271,8 @@ public <A HREF="../../hudson/util/ProcessTree.OSProcess.html" title="class in hu
 <A NAME="killAll(java.util.Map)"><!-- --></A><H3>
 killAll</H3>
 <PRE>
-public void <B>killAll</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;modelEnvVars)</PRE>
+public void <B>killAll</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;modelEnvVars)
+             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/util/ProcessTree.html#killAll(java.util.Map)">ProcessTree</A></CODE></B></DD>
 <DD>Kills all the processes that have matching environment variables.
@@ -289,7 +290,9 @@ public void <B>killAll</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html#killAll(java.util.Map)">killAll</A></CODE> in interface <CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IProcessTree.html" title="interface in hudson.util">ProcessTreeRemoting.IProcessTree</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTree.html#killAll(java.util.Map)">killAll</A></CODE> in class <CODE><A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util">ProcessTree</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

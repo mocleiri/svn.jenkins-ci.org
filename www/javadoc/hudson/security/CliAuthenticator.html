@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CliAuthenticator (Hudson main module 1.361 API)
+CliAuthenticator (Hudson main module 1.362 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-04">
+<META NAME="date" CONTENT="2010-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CliAuthenticator (Hudson main module 1.361 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CliAuthenticator (Hudson main module 1.361 API)";
+        parent.document.title="CliAuthenticator (Hudson main module 1.362 API)";
     }
 }
 </SCRIPT>
@@ -126,6 +126,11 @@ Handles authentication for CLI commands.
  To authenticate, the method can use parsed argument/option values, as well as interacting with the client
  via <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"><CODE>CLICommand</CODE></A> by using its stdin/stdout and its channel (for example, if you want to interactively prompt
  a password, you can do so by using <A HREF="../../hudson/cli/CLICommand.html#channel"><CODE>CLICommand.channel</CODE></A>.)
+
+ <p>
+ If no explicit credential is provided, or if the <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> depends on a mode of authentication
+ that doesn't involve in explicit password (such as Kerberos), it's also often useful to fall back to
+ <A HREF="../../hudson/cli/CLICommand.html#getTransportAuthentication()"><CODE>CLICommand.getTransportAuthentication()</CODE></A>, in case the user is authenticated at the transport level.
 
  <p>
  Many commands do not require any authentication (for example, the "help" command), and still more commands

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TaskListener (Hudson main module 1.361 API)
+TaskListener (Hudson main module 1.362 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-04">
+<META NAME="date" CONTENT="2010-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TaskListener (Hudson main module 1.361 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TaskListener (Hudson main module 1.361 API)";
+        parent.document.title="TaskListener (Hudson main module 1.362 API)";
     }
 }
 </SCRIPT>
@@ -99,7 +99,7 @@ Interface TaskListener</H2>
 <DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A></DD>
 </DL>
 <DL>
-<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/util/LogTaskListener.html" title="class in hudson.util">LogTaskListener</A>, <A HREF="../../hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A>, <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A></DD>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/util/AbstractTaskListener.html" title="class in hudson.util">AbstractTaskListener</A>, <A HREF="../../hudson/util/LogTaskListener.html" title="class in hudson.util">LogTaskListener</A>, <A HREF="../../hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A>, <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util">StreamTaskListener</A></DD>
 </DL>
 <HR>
 <DL>
@@ -131,7 +131,7 @@ Receives events that happen during some lengthy operation
 <DL>
 <DT><B>Author:</B></DT>
   <DD>Kohsuke Kawaguchi</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../hudson/util/AbstractTaskListener.html" title="class in hudson.util"><CODE>AbstractTaskListener</CODE></A></DL>
 <HR>
 
 <P>
@@ -209,7 +209,16 @@ Receives events that happen during some lengthy operation
 <TD><CODE><B><A HREF="../../hudson/model/TaskListener.html#getLogger()">getLogger</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This writer will receive the output of the build.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This writer will receive the output of the build</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TaskListener.html#hyperlink(java.lang.String, java.lang.String)">hyperlink</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Places a <A HREF="../../hudson/console/HyperlinkNote.html" title="class in hudson.console"><CODE>HyperlinkNote</CODE></A> on the given text.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -251,7 +260,7 @@ getLogger</H3>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/PrintStream.html?is-external=true" title="class or interface in java.io">PrintStream</A> <B>getLogger</B>()</PRE>
 <DL>
-<DD>This writer will receive the output of the build.
+<DD>This writer will receive the output of the build
 <P>
 <DD><DL>
 </DL>
@@ -281,6 +290,26 @@ void <B>annotate</B>(<A HREF="../../hudson/console/ConsoleNote.html" title="clas
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.349</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hyperlink(java.lang.String, java.lang.String)"><!-- --></A><H3>
+hyperlink</H3>
+<PRE>
+void <B>hyperlink</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;text)
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Places a <A HREF="../../hudson/console/HyperlinkNote.html" title="class in hudson.console"><CODE>HyperlinkNote</CODE></A> on the given text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

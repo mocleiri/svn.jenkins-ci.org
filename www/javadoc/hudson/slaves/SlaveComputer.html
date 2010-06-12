@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SlaveComputer (Hudson main module 1.361 API)
+SlaveComputer (Hudson main module 1.362 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-04">
+<META NAME="date" CONTENT="2010-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SlaveComputer (Hudson main module 1.361 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SlaveComputer (Hudson main module 1.361 API)";
+        parent.document.title="SlaveComputer (Hudson main module 1.362 API)";
     }
 }
 </SCRIPT>
@@ -202,6 +202,14 @@ Class SlaveComputer</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the channel that can be used to run a program on this computer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/slaves/SlaveComputer.html#getChannelToMaster()">getChannelToMaster</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that allows some computation to be performed on the master.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -972,6 +980,25 @@ protected <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hu
 <P>
 <DD><DL>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves"><CODE>ComputerLauncherFilter</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getChannelToMaster()"><!-- --></A><H3>
+getChannelToMaster</H3>
+<PRE>
+public static <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A> <B>getChannelToMaster</B>()</PRE>
+<DL>
+<DD>Obtains a <A HREF="../../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting"><CODE>VirtualChannel</CODE></A> that allows some computation to be performed on the master.
+ This method can be called from any thread on the master, or from slave (more precisely,
+ it only works from the remoting request-handling thread in slaves, which means if you've started
+ separate thread on slaves, that'll fail.)
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>null if the calling thread doesn't have any trace of where its master is.<DT><B>Since:</B></DT>
+  <DD>1.362</DD>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

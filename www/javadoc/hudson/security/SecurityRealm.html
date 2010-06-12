@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SecurityRealm (Hudson main module 1.361 API)
+SecurityRealm (Hudson main module 1.362 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-04">
+<META NAME="date" CONTENT="2010-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SecurityRealm (Hudson main module 1.361 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SecurityRealm (Hudson main module 1.361 API)";
+        parent.document.title="SecurityRealm (Hudson main module 1.362 API)";
     }
 }
 </SCRIPT>
@@ -542,7 +542,7 @@ public <A HREF="../../hudson/security/CliAuthenticator.html" title="class in hud
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>command</CODE> - The command about to be executed.
 <DT><B>Returns:</B><DD>never null. By default, this method returns a no-op authenticator that always authenticates
-      the session as an anonymous user.</DL>
+      the session as authenticated by the transport (which is often just <A HREF="../../hudson/model/Hudson.html#ANONYMOUS"><CODE>Hudson.ANONYMOUS</CODE></A>.)</DL>
 </DD>
 </DL>
 <HR>

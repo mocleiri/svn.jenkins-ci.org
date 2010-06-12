@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginWrapper (Hudson main module 1.361 API)
+PluginWrapper (Hudson main module 1.362 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-04">
+<META NAME="date" CONTENT="2010-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson main module 1.361 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson main module 1.361 API)";
+        parent.document.title="PluginWrapper (Hudson main module 1.362 API)";
     }
 }
 </SCRIPT>
@@ -96,9 +96,12 @@ Class PluginWrapper</H2>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.PluginWrapper</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt;</DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>PluginWrapper</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+<DT><PRE>public final class <B>PluginWrapper</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt;</DL>
 </PRE>
 
 <P>
@@ -194,6 +197,14 @@ Represents a Hudson plug-in and associated control information
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#compareTo(hudson.PluginWrapper)">compareTo</A></B>(<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&nbsp;pw)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sort by short name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -528,6 +539,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-ext
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -539,6 +553,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-e
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -547,6 +564,9 @@ getOptionalDependencies</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;hudson.PluginWrapper.Dependency&gt; <B>getOptionalDependencies</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -563,6 +583,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -576,6 +599,9 @@ public <A HREF="../hudson/Plugin.html" title="class in hudson">Plugin</A> <B>get
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -586,6 +612,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DL>
 <DD>Gets the URL that shows more information about this plugin.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Returns:</B><DD>null if this information is unavailable.<DT><B>Since:</B></DT>
@@ -619,6 +648,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -629,6 +661,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DL>
 <DD>Returns the version number of this plugin
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -645,6 +680,9 @@ public <A HREF="../hudson/util/VersionNumber.html" title="class in hudson.util">
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -655,6 +693,9 @@ public boolean <B>isOlderThan</B>(<A HREF="../hudson/util/VersionNumber.html" ti
 <DL>
 <DD>Returns true if the version of this plugin is older than the given version.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -671,6 +712,9 @@ public void <B>stop</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -679,6 +723,9 @@ releaseClassLoader</H3>
 <PRE>
 public void <B>releaseClassLoader</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -693,6 +740,9 @@ public void <B>enable</B>()
 <DL>
 <DD>Enables this plugin next time Hudson runs.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -709,6 +759,9 @@ public void <B>disable</B>()
 <DL>
 <DD>Disables this plugin next time Hudson runs.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -727,6 +780,9 @@ public boolean <B>isActive</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -735,6 +791,9 @@ isBundled</H3>
 <PRE>
 public boolean <B>isBundled</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -752,6 +811,9 @@ public boolean <B>isEnabled</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -760,6 +822,9 @@ getManifest</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/jar/Manifest.html?is-external=true" title="class or interface in java.util.jar">Manifest</A> <B>getManifest</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -774,6 +839,9 @@ public void <B>setPlugin</B>(<A HREF="../hudson/Plugin.html" title="class in hud
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -782,6 +850,9 @@ getPluginClass</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getPluginClass</B>()</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -797,6 +868,9 @@ public <A HREF="../hudson/model/UpdateSite.Plugin.html" title="class in hudson.m
  returns the <CODE>UpdateSite.Plugin</CODE> object.
 <P>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Returns:</B><DD>This method may return null &mdash; for example,
       the user may have installed a plugin locally developed.</DL>
@@ -811,6 +885,9 @@ public <A HREF="../hudson/model/UpdateSite.Plugin.html" title="class in hudson.m
 <DL>
 <DD>returns the <CODE>UpdateSite.Plugin</CODE> object, or null.
 <P>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -831,6 +908,25 @@ public boolean <B>hasUpdate</B>()</PRE>
 <DD><DL>
 </DL>
 </DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="compareTo(hudson.PluginWrapper)"><!-- --></A><H3>
+compareTo</H3>
+<PRE>
+public int <B>compareTo</B>(<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&nbsp;pw)</PRE>
+<DL>
+<DD>Sort by short name.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true#compareTo(T)" title="class or interface in java.lang">compareTo</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <HR>
 
@@ -840,6 +936,9 @@ doMakeEnabled</H3>
 public org.kohsuke.stapler.HttpResponse <B>doMakeEnabled</B>()
                                                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
@@ -855,6 +954,9 @@ public org.kohsuke.stapler.HttpResponse <B>doMakeDisabled</B>()
                                                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
@@ -869,6 +971,9 @@ public org.kohsuke.stapler.HttpResponse <B>doPin</B>()
                                        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
+</DL>
+</DD>
+<DD><DL>
 
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
@@ -882,6 +987,9 @@ doUnpin</H3>
 public org.kohsuke.stapler.HttpResponse <B>doUnpin</B>()
                                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
 <DD><DL>
 
 <DT><B>Throws:</B>

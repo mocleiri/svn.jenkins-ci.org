@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.util (Hudson main module 1.361 API)
+hudson.util (Hudson main module 1.362 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-04">
+<META NAME="date" CONTENT="2010-06-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.util (Hudson main module 1.361 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.util (Hudson main module 1.361 API)";
+        parent.document.title="hudson.util (Hudson main module 1.362 API)";
     }
 }
 </SCRIPT>
@@ -141,6 +141,10 @@ Other miscellaneous utility code
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/AbstractTaskListener.html" title="class in hudson.util">AbstractTaskListener</A></B></TD>
+<TD>Partial default implementation of <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/AdaptedIterator.html" title="class in hudson.util">AdaptedIterator&lt;T,U&gt;</A></B></TD>
@@ -479,6 +483,10 @@ Other miscellaneous utility code
 <TD>Indicates that JNA is already loaded in another class loader.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/JVMBuilder.html" title="class in hudson.util">JVMBuilder</A></B></TD>
+<TD>Used to build up launch parameters for a Java virtual machine.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/KeyedDataStorage.html" title="class in hudson.util">KeyedDataStorage&lt;T,P&gt;</A></B></TD>
 <TD>Convenient base class for implementing data storage.</TD>
 </TR>
@@ -552,8 +560,17 @@ Other miscellaneous utility code
 <TD>Servlet <CODE>Filter</CODE> that chains multiple <CODE>Filter</CODE>s, provided by plugins</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessKiller.html" title="class in hudson.util">ProcessKiller</A></B></TD>
+<TD>Extension point that defines more elaborate way of killing processes, such as
+ sudo or pfexec, for <A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util"><CODE>ProcessTree</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util">ProcessTree</A></B></TD>
 <TD>Represents a snapshot of the process tree of the current system.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTree.Local.html" title="class in hudson.util">ProcessTree.Local</A></B></TD>
+<TD>Represents a local process tree, where this JVM and the process tree run on the same system.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A></B></TD>
