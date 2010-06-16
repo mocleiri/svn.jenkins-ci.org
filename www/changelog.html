@@ -20,6 +20,10 @@ Upcoming changes</a>
 <div id="trunk" style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
   <li class=bug>
+    Fix queue handling to close locking gap between removing job from queue and starting build,
+    to prevent unintended concurrent builds (refactor of change first made in 1.360).
+    (<a href="http://hudson.361315.n4.nabble.com/Patch-to-fix-concurrent-build-problem-td2229136.html">report</a>)
+  <li class=bug>
     Allow multiple dependencies between same two projects, as they may trigger under
     different conditions and with different parameters.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-5708">issue 5708</a>)
