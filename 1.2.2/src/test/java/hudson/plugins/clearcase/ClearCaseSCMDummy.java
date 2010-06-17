@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package hudson.plugins.clearcase; 
+package hudson.plugins.clearcase;
 
 import hudson.model.AbstractBuild;
 import hudson.model.Computer;
@@ -64,7 +64,7 @@ public class ClearCaseSCMDummy extends ClearCaseSCM {
                              Computer overrideComputer) {
         super(branch, configspec, viewname, useupdate, loadRules, usedynamicview,
               viewdrive, mkviewoptionalparam, filterOutDestroySubBranchEvent, doNotUpdateConfigSpec,
-              rmviewonrename, excludedRegions, multiSitePollBuffer, useTimeRule, createDynView, "", "");
+              rmviewonrename, excludedRegions, multiSitePollBuffer, useTimeRule, createDynView, "", "", false);
         this.cleartool = cleartool;
         this.clearCaseScmDescriptor = clearCaseScmDescriptor;
         this.overrideComputer = overrideComputer;

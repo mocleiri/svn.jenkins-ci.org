@@ -55,6 +55,12 @@ public interface ClearTool {
     void endView(String viewName) throws IOException, InterruptedException;
 
     /**
+     * Ends the view along with the server process.
+     * @param viewName The name of the view to end.
+     */
+    void endViewAndServer(String viewName) throws IOException, InterruptedException;
+
+    /**
      * Removes the view from a VOB
      * 
      * @param viewName the name of the view
@@ -84,9 +90,43 @@ public interface ClearTool {
     void rmviewtag(String viewName) throws IOException, InterruptedException;
 
     /**
+     * Tries to remove all trace of a view, even if the view is corrupted.
+     * 
+     * @param viewName The name of the view to remove.
+     */
+    void wipeView(String viewName) throws InterruptedException, IOException;
+
+    /**
+     * Creates or re-creates the view on the specified stream.
+     * Uses the SCM configured setting for deciding if a fresh view
+     * should be created, or to reuse an existing view.
+     * For dynamic views, ensures the view starts without issue.
+     * 
+     * @param viewName
+     * @param stream
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    void prepareView(String viewName, String stream) throws InterruptedException, IOException;
+
+    /**
+     * Creates or re-creates the view on the specified stream.
+     * Uses the parameter {@code createNewView} to override the configured SCM setting.
+     * For dynamic views, ensures the view starts without issue.
+     * 
+     * @param viewName View tag to create.
+     * @param stream Stream to create view on.
+     * @param createNewView set true if we want to remove old view first, if it exists
+     *                      before creating a new view.
+     * 
+     * @throws InterruptedException
+     * @throws IOException
+     */
+    void prepareView(String viewName, String stream, boolean createNewView) throws InterruptedException, IOException;
+
+    /**
      * Creates and registers a view
      * 
-     * @param launcher launcher for launching the command
      * @param viewName the name of the view
      * @param streamSelector optional stream selector, null if not used.
      */
@@ -95,9 +135,9 @@ public interface ClearTool {
     /**
      * Creates and registers a view
      * 
-     * @param launcher launcher for launching the command
      * @param viewName the name of the view
      * @param streamSelector optional stream selector, null if not used.
+     * @param defaultStorageDir view storage directory.
      */
     void mkview(String viewName, String streamSelector, String defaultStorageDir) throws IOException, InterruptedException;
 
@@ -200,7 +240,7 @@ public interface ClearTool {
     void mountVobs() throws IOException, InterruptedException;
 
     /**
-     * Syncronizes the Dynamic UCM view with the streams recomended baseline
+     * Synchronizes the Dynamic UCM view with the stream's recommended baseline.
      * 
      * @param viewName
      * @param stream

@@ -26,6 +26,7 @@ package hudson.plugins.clearcase;
 
 import hudson.FilePath;
 import hudson.Util;
+import hudson.model.Computer;
 import hudson.plugins.clearcase.util.PathUtil;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.VariableResolver;
@@ -33,20 +34,23 @@ import hudson.util.VariableResolver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.commons.lang.ArrayUtils;
 
 public class ClearToolSnapshot extends ClearToolExec {
 
     private String optionalMkviewParameters;
+    private boolean useUpdate;
 
     public ClearToolSnapshot(VariableResolver<String> variableResolver, ClearToolLauncher launcher) {
         super(variableResolver, launcher);
     }
 
-    public ClearToolSnapshot(VariableResolver<String> variableResolver, ClearToolLauncher launcher, String optionalParameters) {
+    public ClearToolSnapshot(VariableResolver<String> variableResolver, ClearToolLauncher launcher, String optionalParameters, final boolean useUpdate) {
         this(variableResolver, launcher);
         this.optionalMkviewParameters = optionalParameters;
+        this.useUpdate = useUpdate;
     }
 
     /**
@@ -113,13 +117,18 @@ public class ClearToolSnapshot extends ClearToolExec {
         cmd.add(viewName);
 
         if ((optionalMkviewParameters != null) && (optionalMkviewParameters.length() > 0)) {
-            String variabledResolvedParams = Util.replaceMacro(optionalMkviewParameters, this.variableResolver);
-            cmd.addTokenized(variabledResolvedParams);
-            isOptionalParamContainsHost = optionalMkviewParameters.contains("-host");
-        }
 
-        if (!isOptionalParamContainsHost)
+            // Somewhat a hack here, since this method may be called more than once with a
+            // different viewName each time, we need to do the viewname substitution at usage time.
+
+            final String params = optionalMkviewParameters.replaceAll("\\$\\{CLEARCASE_VIEWNAME\\}", viewName);
+            String variabledResolvedParams = Util.replaceMacro(params, this.variableResolver);
+            cmd.addTokenized(variabledResolvedParams);
+            isOptionalParamContainsHost = optionalMkviewParameters.contains("-host");  
+        }
+        if (!isOptionalParamContainsHost) {
             cmd.add(viewName);
+        }
 
         launcher.run(cmd.toCommandArray(), null, null, null);
     }
@@ -193,5 +202,105 @@ public class ClearToolSnapshot extends ClearToolExec {
 
     public void syncronizeViewWithStream(String viewName, String stream) throws IOException, InterruptedException {
         launcher.getListener().fatalError("Snapshot view does not support syncronize");
+    }
+
+    /**
+     * Tries to remove all trace of a view, even if the view is corrupted. 
+     *
+     * Takes the following steps: 
+     *
+     * <li>rmviewUuid(uuid) 
+     * <li>unregisterView(uuid) 
+     * <li>rmviewtag(viewName) 
+     * <li>attempts to remove storage directory, in addition to the view root
+     */
+    @Override
+    public void wipeView(final String viewName) throws InterruptedException, IOException {
+        Properties viewDataPrp = null;
+
+        try {
+            // Get the view UUID and storage directory
+            viewDataPrp = getViewData(viewName);
+        } catch (IOException e) {
+            logRedundantCleartoolError(null, e);
+            return;
+        }
+        // Get the view UUID and storage directory
+        final String uuid = viewDataPrp.getProperty(ClearToolViewProp.UUID.name());
+        final String globalPath = viewDataPrp.getProperty(ClearToolViewProp.GLOBAL_PATH.name()).replace("[\\\\/]?\\.view\\.stg", "");
+
+        if (doesViewExist(viewName)) {
+            boolean removed = false;
+            // try removing the view the 'easy' way first
+            try {
+                rmview(viewName);
+                removed = true;
+            } catch (IOException ex) {
+                logRedundantCleartoolError(null, ex);
+            }
+            if (!removed) {
+                try {
+                    rmviewUuid(uuid);
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+                try {
+                    unregisterView(uuid);
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+                try {
+                    rmviewtag(viewName);
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+            }
+            // remove storage directory, if exists
+            try {
+                final FilePath viewStorageDir = new FilePath(Computer.currentComputer().getChannel(), globalPath);
+                if (viewStorageDir.exists()) {
+                    viewStorageDir.deleteRecursive();
+                }
+            } catch (Exception ex) {
+                logRedundantCleartoolError(null, ex);
+            }
+            // Remove the view root dir, assuming it is created in the workspace as a directory with the view name.
+            // There seems no way to otherwise determine the view root location, so some hope is required here.
+            // reference:
+            // http://www-01.ibm.com/support/docview.wss?rs=0&uid=swg21148996
+            final FilePath viewRootDir = launcher.getWorkspace().child(viewName);
+            if (viewRootDir.exists()) {
+                try {
+                    viewRootDir.deleteRecursive();
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void prepareView(String viewName, String stream, boolean createNewView) throws InterruptedException, IOException {
+        if (createNewView && doesViewExist(viewName)) {
+            try {
+                wipeView(viewName);
+            } catch (IOException e) {
+                // nothing much to do here, still want to try to create the view.
+            }
+        }
+        if (!doesViewExist(viewName)) {
+            mkview(viewName, stream);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void prepareView(String viewName, String stream) throws InterruptedException, IOException {
+        prepareView(viewName, stream, !useUpdate);
     }
 }

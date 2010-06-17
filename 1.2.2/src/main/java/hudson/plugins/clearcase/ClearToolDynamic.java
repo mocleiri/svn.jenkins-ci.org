@@ -41,11 +41,26 @@ public class ClearToolDynamic extends ClearToolExec {
 
     private transient String viewDrive;
     private String optionalMkviewParameters;
+    private String unixDynamicViewStorage;
+    private String windowsDynamicViewStorage;
+    private boolean createDynView;
+    private boolean recreateView;
 
-    public ClearToolDynamic(VariableResolver<String> variableResolver, ClearToolLauncher launcher, String viewDrive, String optionalMkviewParameters) {
+    public ClearToolDynamic(final VariableResolver<String> variableResolver,
+    		final ClearToolLauncher launcher,
+    		final String viewDrive,
+            final String optionalMkviewParameters,
+            final String unixDynamicViewStorage,
+            final String windowsDynamicViewStorage,
+            final boolean createDynView,
+            final boolean recreateView) {
         super(variableResolver, launcher);
         this.viewDrive = viewDrive;
         this.optionalMkviewParameters = optionalMkviewParameters;
+        this.unixDynamicViewStorage = unixDynamicViewStorage;
+        this.windowsDynamicViewStorage = windowsDynamicViewStorage;
+        this.createDynView = createDynView;
+        this.recreateView = recreateView;
     }
 
     @Override
@@ -162,6 +177,41 @@ public class ClearToolDynamic extends ClearToolExec {
         cmd.add("startview");
         cmd.addTokenized(viewTags);
         launcher.run(cmd.toCommandArray(), null, null, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void prepareView(final String viewName, final String stream, final boolean createNewView) throws InterruptedException, IOException {
+        final String storageDir = launcher.getLauncher().isUnix() ? unixDynamicViewStorage : windowsDynamicViewStorage;
+        boolean triedToCreateView = false;
+        if (createNewView) {
+            wipeView(viewName);
+        }
+        if (!doesViewExist(viewName)) {
+            mkview(viewName, stream, storageDir);
+            triedToCreateView = true;
+        }
+        try {
+            startView(viewName);
+        } catch (IOException e) {
+        	// if we didn't already try creating a new view, and we are configured
+        	// to create one if it doesn't already exist, try one time...
+        	if (createDynView && !createNewView && !triedToCreateView) {
+        		prepareView(viewName, stream, true);
+        	} else {
+        		throw(e);
+        	}
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void prepareView(final String viewName, final String stream) throws InterruptedException, IOException {
+        prepareView(viewName, stream, recreateView);
     }
 
 }

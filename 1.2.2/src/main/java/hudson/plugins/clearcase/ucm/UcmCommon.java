@@ -1,13 +1,20 @@
 package hudson.plugins.clearcase.ucm;
 
 import hudson.FilePath;
+import hudson.model.AbstractBuild;
+import hudson.model.Run;
+import hudson.plugins.clearcase.ClearCaseDataAction;
+import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearToolLauncher;
 import hudson.util.ArgumentListBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +25,11 @@ import org.kohsuke.stapler.export.ExportedBean;
  * @author kyosi
  */
 public class UcmCommon {
+    
+    private static final String CONFIGURED_STREAM_VIEW_SUFFIX = "_hudson_freeze_view";
+    private static final String BUILD_STREAM_PREFIX = "hudson_freeze_stream";
+    private static final String BASELINE_NAME = "hudson_co_";
+    private static final String BASELINE_COMMENT = "hudson_co_";
 
     /**
      * @param clearToolLauncher
@@ -105,83 +117,71 @@ public class UcmCommon {
 
     /**
      * @param clearToolLauncher
-     * @param isUseDynamicView
      * @param viewName
-     * @param filePath
      * @param readWriteComponents . if null both baselines on read and read-write components will be returned
      * @return List of latest baselines on read write components (only)
      * @throws InterruptedException
      * @throws IOException
      * @throws Exception
      */
-    public static List<String> getLatestBaselineNames(ClearToolLauncher clearToolLauncher, boolean isUseDynamicView, String viewName, FilePath filePath,
-            List<String> readWriteComponents) throws IOException, InterruptedException {
-
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-        FilePath clearToolLauncherPath = filePath;
-        List<String> baselineNames = new ArrayList<String>();
+    public static List<String> getLatestBaselineNames(final ClearToolLauncher clearToolLauncher, final String viewName, final List<String> readWriteComponents) throws IOException, InterruptedException {
+        final ArgumentListBuilder cmd = new ArgumentListBuilder();
+        final List<String> baselineNames = new ArrayList<String>();
 
         cmd.add("lsstream");
-        if (isUseDynamicView) {
-            cmd.add("-view");
-            cmd.add(viewName);
-            clearToolLauncherPath = clearToolLauncher.getWorkspace();
-        }
+        cmd.add("-view");
+        cmd.add(viewName);
         cmd.add("-fmt");
         cmd.add("%[latest_bls]Xp");
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, clearToolLauncherPath);
+
+        clearToolLauncher.run(cmd.toCommandArray(), null, baos, null);
         baos.close();
-        String cleartoolResult = baos.toString();
-        String prefix = "baseline:";
+        final String cleartoolResult = baos.toString();
+        final String prefix = "baseline:";
         if (cleartoolResult != null && cleartoolResult.startsWith(prefix)) {
-            String[] baselineNamesSplit = cleartoolResult.split("baseline:");
-            for (String baselineName : baselineNamesSplit) {
-                String baselineNameTrimmed = baselineName.trim();
+            final String[] baselineNamesSplit = cleartoolResult.split(prefix);
+            for (final String baselineName : baselineNamesSplit) {
+                final String baselineNameTrimmed = baselineName.trim();
                 if (!baselineNameTrimmed.equals("")) {
                     // Retrict to baseline bind to read/write component
-                    String blComp = getDataforBaseline(clearToolLauncher, filePath, baselineNameTrimmed).getBaselineName();
-                    if (readWriteComponents == null || readWriteComponents.contains(blComp))
+                    final String blComp = getDataforBaseline(clearToolLauncher, baselineNameTrimmed).getComponentName();
+                    if (readWriteComponents == null || readWriteComponents.contains(blComp)) {
                         baselineNames.add(baselineNameTrimmed);
+                    }
                 }
             }
-
         }
-
         return baselineNames;
     }
 
     /**
      * @param clearToolLauncher
-     * @param isUseDynamicView
-     * @param viewName
-     * @param filePath
+     * @param componentsList
      * @param baselinesNames
      * @return list of BaselineDesc (baseline name and component name)
      * @throws InterruptedException
      * @throws IOException
      */
-    public static List<BaselineDesc> getComponentsForBaselines(ClearToolLauncher clearToolLauncher, List<ComponentDesc> componentsList,
-            boolean isUseDynamicView, String viewName, FilePath filePath, List<String> baselinesNames) throws InterruptedException, IOException {
-        List<BaselineDesc> baselinesDescList = new ArrayList<BaselineDesc>();
+    public static List<BaselineDesc> getComponentsForBaselines(final ClearToolLauncher clearToolLauncher, final List<ComponentDesc> componentsList,
+            final List<String> baselinesNames) throws InterruptedException, IOException {
+        final List<BaselineDesc> baselinesDescList = new ArrayList<BaselineDesc>();
 
         // loop through baselines
-        for (String blName : baselinesNames) {
-            BaselineDesc baseLineDesc = getDataforBaseline(clearToolLauncher, filePath, blName);
+        for (final String blName : baselinesNames) {
+            final BaselineDesc baseLineDesc = getDataforBaseline(clearToolLauncher, blName);
             ComponentDesc matchComponentDesc = null;
 
             // find the equivalent componentDesc element
-            for (ComponentDesc componentDesc : componentsList) {
+            for (final ComponentDesc componentDesc : componentsList) {
                 if (getNoVob(componentDesc.getName()).equals(getNoVob(baseLineDesc.getComponentName()))) {
                     matchComponentDesc = componentDesc;
                     break;
                 }
-
             }
-
             baselinesDescList.add(new BaselineDesc(blName, matchComponentDesc, baseLineDesc.isNotLabeled));
         }
-
         return baselinesDescList;
     }
 
@@ -189,33 +189,29 @@ public class UcmCommon {
      * Get the component binding to the baseline
      * 
      * @param clearToolLauncher
-     * @param filePath
      * @param blName the baseline name like 'deskCore_3.2-146_2008-11-14_18-07-22.3543@\P_ORC'
-     * @return the component name like 'Desk_Core@\P_ORC'
+     * @return A BaselineDesc object with the component name like 'Desk_Core@\P_ORC'
      * @throws InterruptedException
      * @throws IOException
      */
-    public static BaselineDesc getDataforBaseline(ClearToolLauncher clearToolLauncher, FilePath filePath, String blName) throws InterruptedException,
-            IOException {
+    public static BaselineDesc getDataforBaseline(final ClearToolLauncher clearToolLauncher, final String blName) throws InterruptedException, IOException {
 
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        FilePath clearToolLauncherPath = filePath;
+        final ArgumentListBuilder cmd = new ArgumentListBuilder();
 
         cmd.add("lsbl");
         cmd.add("-fmt");
         cmd.add("%[label_status]p|%[component]Xp");
         cmd.add(blName);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, clearToolLauncherPath);
+        clearToolLauncher.run(cmd.toCommandArray(), null, baos, null);
         baos.close();
-        String cleartoolResult = baos.toString();
-        String[] arr = cleartoolResult.split("\\|");
-        boolean isNotLabeled = arr[0].contains("Not Labeled");
+        final String cleartoolResult = baos.toString();
+        final String[] arr = cleartoolResult.split("\\|");
+        final boolean isNotLabeled = arr[0].contains("Not Labeled");
 
-        String prefix = "component:";
-        String componentName = arr[1].substring(cleartoolResult.indexOf(cleartoolResult) + prefix.length());
+        final String prefix = "component:";
+        final String componentName = arr[1].substring(cleartoolResult.indexOf(cleartoolResult) + prefix.length());
 
         return new BaselineDesc(componentName, isNotLabeled);
     }
@@ -312,22 +308,26 @@ public class UcmCommon {
     }
 
     /**
+     * @param clearToolLauncher the ClearToolLauncher.
+     * @param stream the stream name.
+     * @param view the view name.
+     * 
      * @return List of latest BaseLineDesc (baseline + component) for stream. Only baselines on read-write components
      *         are returned
      * @throws InterruptedException
      * @throws IOException
      * @throws Exception
      */
-    public static List<BaselineDesc> getLatestBlsWithCompOnStream(ClearToolLauncher clearToolLauncher, String stream, String view) throws IOException,
-            InterruptedException {
+    public static List<BaselineDesc> getLatestBlsWithCompOnStream(final ClearToolLauncher clearToolLauncher, final String stream, final String view) throws IOException,
+        InterruptedException {
         // get the components on the build stream
-        List<ComponentDesc> componentsList = getStreamComponentsDesc(clearToolLauncher, stream);
+        final List<ComponentDesc> componentsList = getStreamComponentsDesc(clearToolLauncher, stream);
 
         // get latest baselines on the stream (name only)
-        List<String> latestBlsOnBuildStream = getLatestBaselineNames(clearToolLauncher, true, view, null, null);
+        final List<String> latestBlsOnBuildStream = getLatestBaselineNames(clearToolLauncher, view, null);
 
         // add component information to baselines
-        List<BaselineDesc> latestBlsWithComp = getComponentsForBaselines(clearToolLauncher, componentsList, true, view, null, latestBlsOnBuildStream);
+        final List<BaselineDesc> latestBlsWithComp = getComponentsForBaselines(clearToolLauncher, componentsList, latestBlsOnBuildStream);
 
         return latestBlsWithComp;
     }
@@ -452,6 +452,119 @@ public class UcmCommon {
     public static String getVob(String element) {
         return element.split("@")[1];
     }
+
+    /**
+     * Determines the name of the frozen build stream for the job, 
+     * and creates the stream if it does not already exist.
+     * This is used with the view name configured for the job.
+     * 
+     * @param cleartool The cleartool instance for running commands.
+     * @param build The build we are creating the stream for.
+     * @param stream The stream configured for the job, to be used as the parent stream
+     *               for the frozen build stream.
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public static String prepareFrozenBuildStream(final ClearTool cleartool, final AbstractBuild<?, ?> build, final String stream) throws IOException, InterruptedException {
+        final String frozenStream = BUILD_STREAM_PREFIX + "_" + build.getProject().getName().replace(" ", "") + "." + stream;
+
+        if (!isStreamExists(cleartool.getLauncher(), frozenStream)) {
+            mkstream(cleartool.getLauncher(), stream, frozenStream);
+        }
+        return frozenStream;
+    }
+
+    /**
+     * Returns the name of the view that is based on the configured stream (entered by the user). 
+     * This is needed in the case where we are creating a frozen ucm view for the build.
+     * <p>
+     * We need two streams and two associated views to accomplish this.  The configured view 
+     * name is used for the build, and is based on the frozen substream we create.  The configured
+     * stream has the baselines we build to, and we calculate a view name to use with this stream.
+     * 
+     * @param build The build we are getting the view name for.
+     * @param stream The configured stream entered by the user.
+     * @return The view name to use for this stream.
+     */
+    public static String getConfiguredStreamViewName(final AbstractBuild<?, ?> build, final String stream) {
+        return UcmCommon.getNoVob(stream) + "_" + build.getProject().getName().replace(" ", "") + "_" + CONFIGURED_STREAM_VIEW_SUFFIX;
+    }
+    
+    /**
+     * Creates a frozen build stream and does a checkout of code into the specified view.
+     * @param cleartool
+     * @param build
+     * @param viewName
+     * @param stream
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public static boolean checkoutCodeFreeze(final ClearTool cleartool, final AbstractBuild<?, ?> build, final String viewName, final String stream) throws IOException, InterruptedException {
+        // validate no other build is running on the same stream
+        synchronized (build.getProject()) {
+            ClearCaseDataAction clearcaseDataAction = null;
+            Run previousBuild = build.getPreviousBuild();
+            while (previousBuild != null) {
+                clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
+
+                if (previousBuild.isBuilding() && clearcaseDataAction != null && clearcaseDataAction.getStream().equals(stream))
+                    throw new IOException("Can't run build on stream " + stream + " when build " + previousBuild.getNumber()
+                            + " is currently running on the same stream.");
+
+                previousBuild = previousBuild.getPreviousBuild();
+            }
+        }
+        // prepare stream and views
+        //prepareBuildStreamAndViews(viewName, stream);
+        cleartool.mountVobs();
+
+        final String configuredStreamViewName = getConfiguredStreamViewName(build, stream);        
+        final String frozenBuildStream = prepareFrozenBuildStream(cleartool, build, stream);
+
+        cleartool.prepareView(configuredStreamViewName, stream);
+        cleartool.prepareView(viewName, frozenBuildStream);
+        
+        // make baselines
+        SimpleDateFormat formatter = new SimpleDateFormat("d-MMM-yy_HH_mm_ss", Locale.US);
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String dateStr = formatter.format(build.getTimestamp().getTime()).toLowerCase();
+
+        UcmCommon.makeBaseline(cleartool.getLauncher(), true, configuredStreamViewName, null, BASELINE_NAME + dateStr, BASELINE_COMMENT + dateStr, false,
+                false, null);
+
+        // get latest baselines on the configured stream
+        List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool.getLauncher(), stream,
+                configuredStreamViewName);
+
+        // fix Not labeled baselines
+        for (BaselineDesc baseLineDesc : latestBlsOnConfgiuredStream) {
+            if (baseLineDesc.isNotLabeled() && baseLineDesc.getComponentDesc().isModifiable()) {
+                // if the base is not labeled create identical one
+                List<String> readWriteCompList = new ArrayList<String>();
+                readWriteCompList.add(baseLineDesc.getComponentDesc().getName());
+
+                List<BaselineDesc> baseLineDescList = UcmCommon.makeBaseline(cleartool.getLauncher(), true, configuredStreamViewName, null, BASELINE_NAME
+                        + dateStr, BASELINE_COMMENT + dateStr, true, false, readWriteCompList);
+
+                String newBaseline = baseLineDescList.get(0).getBaselineName() + "@" + UcmCommon.getVob(baseLineDesc.getComponentDesc().getName());
+
+                baseLineDesc.setBaselineName(newBaseline);
+            }
+        }
+
+        // rebase build stream
+        UcmCommon.rebase(cleartool.getLauncher(), viewName, latestBlsOnConfgiuredStream);
+
+        // add baselines to build - to be later used by getChange
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        if (dataAction != null)
+            dataAction.setLatestBlsOnConfiguredStream(latestBlsOnConfgiuredStream);
+
+        return true;
+    }
+
 
     /**
      * @author kyosi

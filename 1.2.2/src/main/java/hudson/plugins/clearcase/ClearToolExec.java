@@ -26,6 +26,7 @@ package hudson.plugins.clearcase;
 
 import hudson.AbortException;
 import hudson.FilePath;
+import hudson.model.Computer;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.VariableResolver;
 
@@ -65,6 +66,10 @@ public abstract class ClearToolExec implements ClearTool {
 
     protected abstract FilePath getRootViewPath(ClearToolLauncher launcher);
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Reader lshistory(String format, Date lastBuildDate, String viewName, String branch, String[] viewPaths) throws IOException, InterruptedException {
         SimpleDateFormat formatter = new SimpleDateFormat("d-MMM-yy.HH:mm:ss'UTC'Z", Locale.US);
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -103,6 +108,10 @@ public abstract class ClearToolExec implements ClearTool {
         return returnReader;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Reader lsactivity(String activity, String commandFormat, String viewname) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("lsactivity");
@@ -119,10 +128,18 @@ public abstract class ClearToolExec implements ClearTool {
         return reader;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void mklabel(String viewName, String label) throws IOException, InterruptedException {
         throw new AbortException();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<String> lsview(boolean onlyActiveDynamicViews) throws IOException, InterruptedException {
         viewListPattern = getListPattern();
         ArgumentListBuilder cmd = new ArgumentListBuilder();
@@ -135,6 +152,9 @@ public abstract class ClearToolExec implements ClearTool {
         return new ArrayList<String>();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String lscurrentview(String viewPath) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
@@ -152,6 +172,10 @@ public abstract class ClearToolExec implements ClearTool {
         return output;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean doesViewExist(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("lsview");
@@ -165,6 +189,10 @@ public abstract class ClearToolExec implements ClearTool {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<String> lsvob(boolean onlyMounted) throws IOException, InterruptedException {
         viewListPattern = getListPattern();
         ArgumentListBuilder cmd = new ArgumentListBuilder();
@@ -177,6 +205,10 @@ public abstract class ClearToolExec implements ClearTool {
         return new ArrayList<String>();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String pwv(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("pwv");
@@ -184,6 +216,10 @@ public abstract class ClearToolExec implements ClearTool {
         return runAndProcessOutput(cmd, null, getRootViewPath(launcher).child(viewName), false, null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String catcs(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("catcs");
@@ -220,6 +256,10 @@ public abstract class ClearToolExec implements ClearTool {
         return viewListPattern;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void mountVobs() throws IOException, InterruptedException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ArgumentListBuilder cmd = new ArgumentListBuilder();
@@ -235,20 +275,26 @@ public abstract class ClearToolExec implements ClearTool {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Properties getViewData(String viewName) throws IOException, InterruptedException {
-        Properties resPrp = new Properties();
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        final Properties resPrp = new Properties();
+        final ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("lsview");
         cmd.add("-l", viewName);
 
-
+        /** some logic and structural problem here - refactor
+         *  what is 'res' used for - it is always true, and
+         *  'exception' is always null
         Pattern uuidPattern = Pattern.compile("View uuid: (.*)");
         Pattern globalPathPattern = Pattern.compile("View server access path: (.*)");
         boolean res = true;
         IOException exception = null;
         List<IOException> exceptions = new ArrayList<IOException>();
         
-        String output = runAndProcessOutput(cmd, null, null, true, exceptions);
+        String output = runAndProcessOutput(cmd, null, true, exceptions);
         // handle the use case in which view doesn't exist and therefore error is thrown
         if (!exceptions.isEmpty() && !output.contains("No matching entries found for view")) {
             throw exceptions.get(0);
@@ -266,10 +312,32 @@ public abstract class ClearToolExec implements ClearTool {
                     resPrp.put("STORAGE_DIR", matcher.group(1));
             }
         }
+        */
 
+        final List<IOException> exceptions = new ArrayList<IOException>();
+        final String output = runAndProcessOutput(cmd, null, null, true, exceptions);
+        if (!exceptions.isEmpty()) {
+            throw exceptions.get(0);
+        } else if (output.contains("No matching entries found for view")) {
+            throw new IOException("No matching entries found for view");
+        }
+        final String[] lines = output.split("\n");
+        for (final String line : lines) {
+            for (final ClearToolViewProp prop : ClearToolViewProp.values()) {
+                final Matcher matcher = prop.getPattern().matcher(line);
+                if (matcher.find() && matcher.groupCount() == 1) {
+                    resPrp.setProperty(prop.name(), matcher.group(1));
+                    break;
+                }
+            }
+        }
         return resPrp;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void endView(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("endview");
@@ -281,11 +349,35 @@ public abstract class ClearToolExec implements ClearTool {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void endViewAndServer(final String viewName) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add("endview");
+        cmd.add("-server");
+        cmd.add(viewName);
+
+        String output = runAndProcessOutput(cmd, null, null, false, null);
+        if (output.contains("cleartool: Error")) {
+            throw new IOException("Failed to end view tag: " + output);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void rmviewtag(String viewName) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add("rmview");
-        cmd.add("-force");
-        cmd.add("-tag");
+        // If this is to really remove the tag, we should do it directly.  Othewise
+        // will fail if there is any problem with the view.
+        //cmd.add("rmview");
+        //cmd.add("-force");
+        //cmd.add("-tag");
+        cmd.add("rmtag");
+        cmd.add("-view");
         cmd.add(viewName);
 
         String output = runAndProcessOutput(cmd, null, null, false, null);
@@ -296,6 +388,10 @@ public abstract class ClearToolExec implements ClearTool {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void unregisterView(String uuid) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("unregister");
@@ -310,6 +406,10 @@ public abstract class ClearToolExec implements ClearTool {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void rmviewUuid(String viewUuid) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("rmview");
@@ -324,7 +424,82 @@ public abstract class ClearToolExec implements ClearTool {
         }
 
     }
-    
+
+    /**
+     * {@inheritDoc}
+     * <p>
+     * Takes the following steps:
+     * <li>endViewAndServer(viewName)</li>
+     * <li>rmviewUuid(uuid)</li>
+     * <li>unregisterView(uuid)</li>
+     * <li>rmviewtag(viewName)</li>
+     * <li>attempts to remove storage directory</li>
+     */
+    @Override
+    public void wipeView(final String viewName) throws InterruptedException, IOException {
+    	Properties viewDataPrp = null;
+
+    	try {
+    		// Get the view UUID and storage directory
+    		viewDataPrp = getViewData(viewName);
+    	} catch (IOException e) {
+    		logRedundantCleartoolError(null, e);
+    		return;
+    	}
+    	// Get the view UUID and storage directory
+    	final String uuid = viewDataPrp.getProperty(ClearToolViewProp.UUID.name());
+    	final String globalPath = viewDataPrp.getProperty(ClearToolViewProp.GLOBAL_PATH.name());
+
+        if (doesViewExist(viewName)) {
+            // try removing the view the 'easy' way first
+            final ArgumentListBuilder cmd = new ArgumentListBuilder();
+            cmd.add("rmview");
+            cmd.add("-tag");
+            cmd.add("-force");
+            cmd.add(viewName);
+
+            boolean removed = false;
+            try {
+                removed = launcher.run(cmd.toCommandArray(), null);
+            } catch (IOException e) {
+                // nothing to see here folks...  need to remove the tedious way
+            }
+            if (!removed) {
+                // now try the tedious way, and don't quit along the path!
+                try {
+                    endViewAndServer(viewName);
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+                try {
+                    rmviewUuid(uuid);
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+                try {
+                    unregisterView(uuid);
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+                try {
+                    rmviewtag(viewName);
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+                // remove storage directory
+                try {
+                    //FilePath storageDirFile = new FilePath(build.getWorkspace().getChannel(), storageDir);
+                    final FilePath storageDirFile = new FilePath(Computer.currentComputer().getChannel(), globalPath);
+                    if (storageDirFile.exists()) {
+                        storageDirFile.deleteRecursive();
+                    }
+                } catch (Exception ex) {
+                    logRedundantCleartoolError(null, ex);
+                }
+            }
+        }
+    }
+
     protected String runAndProcessOutput(ArgumentListBuilder cmd, InputStream in, FilePath workFolder, boolean catchExceptions, List<IOException> exceptions) throws IOException, InterruptedException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
@@ -351,7 +526,11 @@ public abstract class ClearToolExec implements ClearTool {
         reader.close();
         return builder.toString();
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void logRedundantCleartoolError(String[] cmd, Exception ex) {
         getLauncher().getListener().getLogger().println("Redundant Cleartool Error ");
 

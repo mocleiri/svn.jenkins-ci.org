@@ -256,7 +256,11 @@ public abstract class AbstractClearCaseScm extends SCM {
     }
 
     public String getNormalizedWinDynStorageDir(VariableResolver<String> variableResolver) {
-        return Util.replaceMacro(getWinDynStorageDir(), variableResolver);
+        if (variableResolver != null) {
+            return Util.replaceMacro(getWinDynStorageDir(), variableResolver);
+        } else {
+            return getWinDynStorageDir();
+        }
     }
 
     public String getUnixDynStorageDir() {
@@ -264,7 +268,11 @@ public abstract class AbstractClearCaseScm extends SCM {
     }
 
     public String getNormalizedUnixDynStorageDir(VariableResolver<String> variableResolver) {
-        return Util.replaceMacro(getUnixDynStorageDir(), variableResolver);
+        if (variableResolver != null) {
+            return Util.replaceMacro(getUnixDynStorageDir(), variableResolver);
+        } else {
+            return getUnixDynStorageDir();
+        }
     }
 
     public boolean isFreezeCode() {
@@ -440,7 +448,7 @@ public abstract class AbstractClearCaseScm extends SCM {
         return historyAction.hasChanges(buildTime, poNormalizedViewName, getBranchNames(), getViewPaths());
     }
 
-    private Date getBuildTime(Run<?, ?> lastBuild) {
+    protected Date getBuildTime(Run<?, ?> lastBuild) {
         Date buildTime = lastBuild.getTimestamp().getTime();
         if (getMultiSitePollBuffer() != 0) {
             long lastBuildMilliSecs = lastBuild.getTimestamp().getTimeInMillis();
@@ -462,7 +470,7 @@ public abstract class AbstractClearCaseScm extends SCM {
     }
 
     protected ClearTool createClearTool(VariableResolver<String> variableResolver, ClearToolLauncher launcher) {
-        return new ClearToolSnapshot(variableResolver, launcher, mkviewOptionalParam);
+        return new ClearToolSnapshot(variableResolver, launcher, mkviewOptionalParam, useUpdate);
     }
 
     @Extension
@@ -677,7 +685,11 @@ public abstract class AbstractClearCaseScm extends SCM {
 
         // Adding tweak for ignoring leading slashes or Windows drives in case of strange situations using setview.
         if (!tempFilterRules.equals("")) {
-            filterRegexp = "^(?:\\W?|\\w\\:\\\\)(" + tempFilterRules.trim().replaceAll("\\n", "|") + ")";
+            // The reported file changes often have the full absolute path to the file, thus we should not lock
+            // the pattern at the 'start of line'.  Change to find the load rule match 'in the pattern' vs 'start of pattern'
+            
+            //filterRegexp = "^(?:\\W?|\\w\\:\\\\)(" + tempFilterRules.trim().replaceAll("\\n", "|") + ")";
+            filterRegexp = "(" + tempFilterRules.trim().replaceAll("\\n", "|") + ")";
         }
 
         return filterRegexp;

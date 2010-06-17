@@ -377,7 +377,7 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             });
 
         clearToolExec = new ClearToolSnapshot(resolver, clearToolLauncher,
-                                              "-anextraparam -anotherparam");
+                                              "-anextraparam -anotherparam", false);
         clearToolExec.mkview("viewName", null);
     }
 
@@ -397,7 +397,7 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
             });
 
         clearToolExec = new ClearToolSnapshot(resolver, clearToolLauncher,
-                                              "-anextraparam -anotherparam");
+                                              "-anextraparam -anotherparam", false);
         clearToolExec.mkview("viewName", "streamSelector");
     }
 
@@ -423,7 +423,7 @@ public class ClearToolSnapshotTest extends AbstractWorkspaceTest {
                 }
             });
         clearToolExec = new ClearToolSnapshot(resolver, clearToolLauncher,
-                                              "-anextraparam $COMPUTERNAME");
+                                              "-anextraparam $COMPUTERNAME", false);
         clearToolExec.mkview("viewName", null);
     }
 }

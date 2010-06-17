@@ -24,43 +24,40 @@
  */
 package hudson.plugins.clearcase.base;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import hudson.Launcher;
+import hudson.model.AbstractProject;
+import hudson.model.Build;
 import hudson.plugins.clearcase.AbstractClearCaseScm;
 import hudson.plugins.clearcase.ClearCaseChangeLogEntry;
 import hudson.plugins.clearcase.ClearCaseSCM;
+import hudson.plugins.clearcase.ClearCaseSCMDummy;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearToolLauncher;
 import hudson.plugins.clearcase.ClearCaseChangeLogEntry.FileElement;
 import hudson.plugins.clearcase.history.DefaultFilter;
-import hudson.plugins.clearcase.history.FileFilter;
 import hudson.plugins.clearcase.history.DestroySubBranchFilter;
+import hudson.plugins.clearcase.history.FileFilter;
 import hudson.plugins.clearcase.history.Filter;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
-
-import hudson.plugins.clearcase.ClearCaseSCMTest;
-import hudson.plugins.clearcase.ClearCaseSCMDummy;
-
-import org.jvnet.hudson.test.Bug;
-
-import hudson.Launcher;
-import hudson.model.AbstractProject;
-import hudson.model.Build;
 import hudson.util.VariableResolver;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import org.jmock.Expectations;
-import org.jmock.lib.legacy.ClassImposteriser;
 import org.jmock.Mockery;
+import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
+import org.jvnet.hudson.test.Bug;
 
 public class BaseHistoryActionTest {
 

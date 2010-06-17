@@ -87,9 +87,9 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
     @DataBoundConstructor
     public ClearCaseSCM(String branch, String configspec, String viewname, boolean useupdate, String loadRules, boolean usedynamicview, String viewdrive,
             String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent, boolean doNotUpdateConfigSpec, boolean rmviewonrename, String excludedRegions,
-            String multiSitePollBuffer, boolean useTimeRule, boolean createDynView, String winDynStorageDir, String unixDynStorageDir) {
+            String multiSitePollBuffer, boolean useTimeRule, boolean createDynView, String winDynStorageDir, String unixDynStorageDir, boolean recreateView) {
         super(viewname, mkviewoptionalparam, filterOutDestroySubBranchEvent, (!usedynamicview) && useupdate, rmviewonrename, excludedRegions, usedynamicview,
-                viewdrive, loadRules, multiSitePollBuffer, createDynView, winDynStorageDir, unixDynStorageDir, false, false);
+                viewdrive, loadRules, multiSitePollBuffer, createDynView, winDynStorageDir, unixDynStorageDir, false, recreateView);
         this.branch = branch;
         this.configSpec = configspec;
         this.doNotUpdateConfigSpec = doNotUpdateConfigSpec;
@@ -99,7 +99,7 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
     public ClearCaseSCM(String branch, String configspec, String viewname, boolean useupdate, String loadRules, boolean usedynamicview, String viewdrive,
             String mkviewoptionalparam, boolean filterOutDestroySubBranchEvent, boolean doNotUpdateConfigSpec, boolean rmviewonrename) {
         this(branch, configspec, viewname, useupdate, loadRules, usedynamicview, viewdrive, mkviewoptionalparam, filterOutDestroySubBranchEvent,
-                doNotUpdateConfigSpec, rmviewonrename, "", null, false, false, "", "");
+                doNotUpdateConfigSpec, rmviewonrename, "", null, false, false, "", "", false);
     }
 
     public String getBranch() {
@@ -199,7 +199,8 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
     @Override
     protected ClearTool createClearTool(VariableResolver<String> variableResolver, ClearToolLauncher launcher) {
         if (isUseDynamicView()) {
-            return new ClearToolDynamic(variableResolver, launcher, getViewDrive(), getMkviewOptionalParam());
+            return new ClearToolDynamic(variableResolver, launcher, getViewDrive(), getMkviewOptionalParam(),
+                    getNormalizedUnixDynStorageDir(variableResolver), getNormalizedWinDynStorageDir(variableResolver), isCreateDynView(), isRecreateView());
         } else {
             return super.createClearTool(variableResolver, launcher);
         }
@@ -295,7 +296,8 @@ public class ClearCaseSCM extends AbstractClearCaseScm {
                                                         req.getParameter("cc.useTimeRule") != null,
                                                         req.getParameter("cc.createDynView") != null,
                                                         req.getParameter("cc.winDynStorageDir"),
-                                                        req.getParameter("cc.unixDynStorageDir")
+                                                        req.getParameter("cc.unixDynStorageDir"),
+                                                        req.hasParameter("cc.recreateView")
                                                         );
             return scm;
         }

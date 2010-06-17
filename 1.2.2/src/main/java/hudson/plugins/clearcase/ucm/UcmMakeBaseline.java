@@ -214,7 +214,7 @@ public class UcmMakeBaseline extends Notifier {
 
         if (this.lockStream) {
             try {
-                this.streamSuccessfullyLocked = lockStream(scm.getStream(), clearToolLauncher, scm, filePath);
+                this.streamSuccessfullyLocked = lockStream(scm.getBuildStream(), clearToolLauncher, scm, filePath);
             } catch (Exception ex) {
                 listener.getLogger().println("Failed to lock stream: " + ex);
                 return false;
@@ -270,10 +270,10 @@ public class UcmMakeBaseline extends Notifier {
             if (build.getResult().equals(Result.SUCCESS)) {
                 // On success, promote all current baselines in stream
                 for (String baselineName : this.latestBaselines) {
-                    promoteBaselineToBuiltLevel(scm.getStream(), clearToolLauncher, scm, filePath, baselineName);
+                    promoteBaselineToBuiltLevel(scm.getBuildStream(), clearToolLauncher, scm, filePath, baselineName);
                 }
                 if (this.recommend) {
-                    recommedBaseline(scm.getStream(), clearToolLauncher, scm, filePath);
+                    recommedBaseline(scm.getBuildStream(), clearToolLauncher, scm, filePath);
                 }
 
                 // Rebase a dynamic view
@@ -302,14 +302,14 @@ public class UcmMakeBaseline extends Notifier {
                     if (realBaselineName == null) {
                         listener.getLogger().println("Couldn't find baseline name for " + baselineName);
                     } else {
-                        demoteBaselineToRejectedLevel(scm.getStream(), clearToolLauncher, scm, filePath, realBaselineName);
+                        demoteBaselineToRejectedLevel(scm.getBuildStream(), clearToolLauncher, scm, filePath, realBaselineName);
                         alreadyRejected.add(realBaselineName);
                     }
                 }
             }
 
             if (this.lockStream && this.streamSuccessfullyLocked) {
-                unlockStream(scm.getStream(), clearToolLauncher, scm, filePath);
+                unlockStream(scm.getBuildStream(), clearToolLauncher, scm, filePath);
             }
         } else {
             listener.getLogger().println("Not a UCM clearcase SCM, cannot create baseline");

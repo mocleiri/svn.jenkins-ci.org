@@ -283,5 +283,15 @@ public class ClearToolExecTest extends AbstractWorkspaceTest {
         public void update(String viewName, String[] loadRules) throws IOException, InterruptedException {
             throw new IllegalStateException("Not implemented");
         }
+
+        @Override
+        public void prepareView(String viewName, String stream) throws InterruptedException, IOException {
+            throw new IllegalStateException("Not implemented");
+        }
+
+        @Override
+        public void prepareView(String viewName, String stream, boolean createNewView) throws InterruptedException, IOException {
+            throw new IllegalStateException("Not implemented");
+        }
     }
 }

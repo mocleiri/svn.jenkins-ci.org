@@ -26,8 +26,11 @@ package hudson.plugins.clearcase.action;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.model.AbstractBuild;
+import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ConfigSpec;
+import hudson.plugins.clearcase.ucm.UcmCommon;
 
 import java.io.IOException;
 
@@ -36,16 +39,41 @@ import org.apache.commons.lang.ArrayUtils;
 public class UcmSnapshotCheckoutAction extends AbstractCheckoutAction {
 
     private final String streamSelector;
+    private final boolean freezeCode;
+    private final AbstractBuild build;
+    //transient private final FilePath workspace;
 
-    public UcmSnapshotCheckoutAction(ClearTool cleartool, String streamSelector, String[] loadRules, boolean useUpdate) {
+    public UcmSnapshotCheckoutAction(ClearTool cleartool, String streamSelector, String[] loadRules, AbstractBuild build, boolean useUpdate, boolean freezeCode) {
         super(cleartool, loadRules, useUpdate);
         this.streamSelector = streamSelector;
+        this.freezeCode = freezeCode;
+        this.build = build;
+        //this.workspace = build.getWorkspace();
     }
 
     @Override
     public boolean checkout(Launcher launcher, FilePath workspace, String viewName) throws IOException, InterruptedException {
-        boolean viewCreated = cleanAndCreateViewIfNeeded(workspace, viewName, streamSelector);
-        // At this stage, we have a valid view and a valid path
+
+        // add stream to data action (to be used by ClearCase report)
+        ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
+        boolean viewCreated = true;
+
+        if (dataAction != null) {
+            // sync the project in order to allow other builds to safely check if there is
+            // already a build running on the same stream
+            synchronized (build.getProject()) {
+                dataAction.setStream(streamSelector);
+            }
+        }
+
+        if (freezeCode) {
+            //checkoutCodeFreeze(viewName);
+            UcmCommon.checkoutCodeFreeze(cleartool, build, viewName, streamSelector);
+        } else {
+            viewCreated = cleanAndCreateViewIfNeeded(workspace, viewName, streamSelector);
+            // At this stage, we have a valid view and a valid path
+        }
+
         if (viewCreated) {
             // If the view is brand new, we just have to add the load rules
             try {
@@ -87,4 +115,5 @@ public class UcmSnapshotCheckoutAction extends AbstractCheckoutAction {
         }
         return true;
     }
+
 }

@@ -25,8 +25,13 @@
 package hudson.plugins.clearcase;
 
 import static hudson.Util.fixEmpty;
+import hudson.AbortException;
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.model.AbstractBuild;
+import hudson.model.BuildListener;
 import hudson.model.ModelObject;
+import hudson.model.Run;
 import hudson.plugins.clearcase.ClearCaseSCM.ClearCaseScmDescriptor;
 import hudson.plugins.clearcase.action.CheckOutAction;
 import hudson.plugins.clearcase.action.SaveChangeLogAction;
@@ -39,15 +44,21 @@ import hudson.plugins.clearcase.ucm.UcmHistoryAction;
 import hudson.plugins.clearcase.ucm.UcmSaveChangeLogAction;
 import hudson.plugins.clearcase.util.BuildVariableResolver;
 import hudson.scm.ChangeLogParser;
+import hudson.scm.ChangeLogSet;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 import hudson.util.VariableResolver;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.sf.json.JSONObject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
@@ -59,10 +70,10 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 
     private static final String STREAM_PREFIX = "stream:";
 
-    private final static String AUTO_ALLOCATE_VIEW_NAME = "${STREAM}_${JOB_NAME}_bs_hudson_view";
+    //private final static String AUTO_ALLOCATE_VIEW_NAME = "${STREAM}_${JOB_NAME}_bs_hudson_view";
 
     private final String stream;
-    private String paramStream;
+    transient private String paramStream;
     private final String overrideBranchName;
     private boolean allocateViewName;
 
@@ -87,11 +98,21 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     }
 
     /**
-     * Return the stream that is used to create the UCM view.
+     * Return the default stream configured for the project.
      * 
      * @return string containing the stream selector.
      */
     public String getStream() {
+        return stream;
+        //return StringUtils.defaultIfEmpty(paramStream, stream);
+    }
+    
+    /**
+     * Return the stream associated with a build.
+     * 
+     * @return string containing the build stream
+     */
+    public String getBuildStream() {
         return StringUtils.defaultIfEmpty(paramStream, stream);
     }
 
@@ -137,26 +158,82 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
         }
     }
 
+    public String[] getBuildBranchNames() {
+        if (StringUtils.isNotEmpty(overrideBranchName)) {
+            return new String[] { overrideBranchName };
+        } else {
+            String branch = getBuildStream();
+            int indexOfAt = branch.indexOf('@');
+            if (indexOfAt > -1) {
+                branch = branch.substring(1, indexOfAt);
+            }
+            return new String[] { branch };
+        }
+    }
+
+    @Override
+    public boolean checkout(final AbstractBuild build, final Launcher launcher, final FilePath workspace, final BuildListener listener, final File changelogFile) throws IOException,
+            InterruptedException {
+        final ClearToolLauncher clearToolLauncher = createClearToolLauncher(listener, workspace, launcher);
+        // Create actions
+        final VariableResolver<String> variableResolver = new BuildVariableResolver(build, getCurrentComputer());
+
+        final CheckOutAction checkoutAction = createCheckOutAction(variableResolver, clearToolLauncher, build);
+        final UcmHistoryAction historyAction = (UcmHistoryAction) createHistoryAction(variableResolver, clearToolLauncher, build);
+        historyAction.setStream(getBuildStream());
+        final SaveChangeLogAction saveChangeLogAction = createSaveChangeLogAction(clearToolLauncher);
+
+        // Checkout code
+        final String coNormalizedViewName = generateNormalizedViewName(build);
+
+        build.addAction(new ClearCaseDataAction());
+
+        if (checkoutAction.checkout(launcher, workspace, coNormalizedViewName)) {
+
+            // Gather change log
+            List<? extends ChangeLogSet.Entry> changelogEntries = null;
+            if (build.getPreviousBuild() != null) {
+                final Run prevBuild = build.getPreviousBuild();
+                final Date lastBuildTime = getBuildTime(prevBuild);
+
+                changelogEntries = historyAction.getChanges(lastBuildTime, coNormalizedViewName, getBuildBranchNames(), getViewPaths());
+            }
+
+            // Save change log
+            if (CollectionUtils.isEmpty(changelogEntries)) {
+                // no changes
+                return createEmptyChangeLog(changelogFile, listener, "changelog");
+            } else {
+                saveChangeLogAction.saveChangeLog(changelogFile, changelogEntries);
+            }
+
+        } else {
+            throw new AbortException();
+        }
+
+        return true;
+    }
+
     @Override
     public String generateNormalizedViewName(VariableResolver<String> variableResolver, String modViewName) {
         // Modify the view name in order to support concurrent builds
         if (allocateViewName) {
-            modViewName = AUTO_ALLOCATE_VIEW_NAME.replace("${STREAM}", UcmCommon.getNoVob(getStream()));
+            modViewName += "_" + UcmCommon.getNoVob(getBuildStream());
+            //modViewName = AUTO_ALLOCATE_VIEW_NAME.replace("${STREAM}", UcmCommon.getNoVob(getStream()));
         }
         return super.generateNormalizedViewName(variableResolver, modViewName);
     }
 
     @Override
     protected CheckOutAction createCheckOutAction(VariableResolver<String> variableResolver, ClearToolLauncher launcher, AbstractBuild<?, ?> build) {
-        // set value in paramStream (if build is parametrized, support changing the build stream)
-        paramStream = (String) build.getBuildVariables().get("STREAM");
+        // set value in paramStream (if build is parameterized, support changing the build stream)
+        this.paramStream = shortenStreamName((String) build.getBuildVariables().get("STREAM"));
 
-        CheckOutAction action;
+        final CheckOutAction action;
         if (isUseDynamicView()) {
-            action = new UcmDynamicCheckoutAction(createClearTool(variableResolver, launcher), getStream(), isCreateDynView(),
-                    getNormalizedWinDynStorageDir(variableResolver), getNormalizedUnixDynStorageDir(variableResolver), build, isFreezeCode(), isRecreateView());
+            action = new UcmDynamicCheckoutAction(createClearTool(variableResolver, launcher), getBuildStream(), isCreateDynView(), build, isFreezeCode());
         } else {
-            action = new UcmSnapshotCheckoutAction(createClearTool(variableResolver, launcher),getStream(), getViewPaths(), isUseUpdate());
+            action = new UcmSnapshotCheckoutAction(createClearTool(variableResolver, launcher),getBuildStream(), getViewPaths(), build, isUseUpdate(), isFreezeCode());
         }
         return action;
     }
@@ -165,7 +242,12 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     protected HistoryAction createHistoryAction(VariableResolver<String> variableResolver, ClearToolLauncher launcher, AbstractBuild<?, ?> build) {
         ClearTool ct = createClearTool(variableResolver, launcher);
         // String viewName, String stream, String unixDynStorageDir, String winDynStorageDir, String viewDrive
-        UcmHistoryAction action = new UcmHistoryAction(ct, isUseDynamicView(), configureFilters(launcher), getStream(), getViewDrive(), build, isFreezeCode());
+        
+        // The following assumes the view folder will have the same name as the view.  This is not 100% guaranteed, 
+        // as it is possible to use a different folder name by specifying options to the 'mkview' command.
+        // However, the setting of CLEARTOOL_VIEWPATH seems to also rely on this assumption, so we will use it too.
+        final String viewRoot = isUseDynamicView() ? getViewDrive() : launcher.getWorkspace().getRemote();
+        UcmHistoryAction action = new UcmHistoryAction(ct, isUseDynamicView(), configureFilters(launcher), getStream(), viewRoot, build, isFreezeCode());
 
         try {
             String pwv = ct.pwv(generateNormalizedViewName((BuildVariableResolver) variableResolver));
@@ -193,14 +275,15 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
     @Override
     protected ClearTool createClearTool(VariableResolver<String> variableResolver, ClearToolLauncher launcher) {
         if (isUseDynamicView()) {
-            return new ClearToolDynamicUCM(variableResolver, launcher, getViewDrive(), getMkviewOptionalParam());
+            return new ClearToolDynamicUCM(variableResolver, launcher, getViewDrive(), getMkviewOptionalParam(),
+                    getNormalizedUnixDynStorageDir(variableResolver), getNormalizedWinDynStorageDir(variableResolver), isCreateDynView(), isRecreateView());
         } else {
             return super.createClearTool(variableResolver, launcher);
         }
     }
 
-    private String shortenStreamName(String longStream) {
-        if (longStream.startsWith(STREAM_PREFIX)) {
+    private String shortenStreamName(final String longStream) {
+        if (longStream != null && longStream.startsWith(STREAM_PREFIX)) {
             return longStream.substring(STREAM_PREFIX.length());
         } else {
             return longStream;

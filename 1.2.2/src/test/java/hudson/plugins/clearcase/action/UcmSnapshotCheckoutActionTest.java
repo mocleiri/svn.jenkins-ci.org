@@ -26,8 +26,11 @@ package hudson.plugins.clearcase.action;
 
 import hudson.FilePath;
 import hudson.Launcher;
+import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.plugins.clearcase.AbstractWorkspaceTest;
+import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.ClearTool;
 
 import java.util.List;
@@ -51,6 +54,11 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
     private BuildListener taskListener;
     private Launcher launcher;
 
+    
+    private AbstractBuild<?, ?> abstractBuild;
+    private AbstractProject<?, ?> abstractProject;
+    private ClearCaseDataAction clearCaseDataAction;
+
     @Before
     public void setUp() throws Exception {
         createWorkspace();
@@ -64,6 +72,10 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
 
         launcher = classContext.mock(Launcher.class);
         taskListener = context.mock(BuildListener.class);
+        abstractBuild = classContext.mock(AbstractBuild.class);
+        abstractProject = classContext.mock(AbstractProject.class);
+        clearCaseDataAction = classContext.mock(ClearCaseDataAction.class);
+        
     }
 
     @After
@@ -82,10 +94,14 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, true);
+        
+        
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
     
@@ -101,11 +117,13 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                    atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    //atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
     
@@ -121,11 +139,13 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                    atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    //atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"},  abstractBuild, true, false);
         boolean checkout = action.checkout(launcher, workspace, "viewname");
         List<FilePath> directories = workspace.listDirectories();
         boolean foundRenamedDirectory = false;
@@ -153,11 +173,13 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(true));
-                    atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    //atLeast(1).of(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"},  abstractBuild, true, false);
         boolean checkout = action.checkout(launcher, workspace, "viewname");
         List<FilePath> directories = workspace.listDirectories();
         boolean foundRenamedDirectory = false;
@@ -188,11 +210,14 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
 
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(true));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
 
@@ -214,12 +239,15 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
 
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(true));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
 
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"abc/"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"abc/"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, viewName);
     }
 
@@ -240,12 +268,15 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(true));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
 
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"abc/", "abcd"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"abc/", "abcd"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, viewName);
     }
 
@@ -267,12 +298,15 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(true));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
 
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"abc/", "abcd"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"abc/", "abcd"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, viewName);
     }
 
@@ -287,10 +321,12 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule", "another\t loadrule"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule", "another\t loadrule"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
 
@@ -323,12 +359,15 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(true));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
 
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"vobs/base"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"vobs/base"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, viewName);
     }
 
@@ -344,10 +383,13 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
 
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(false));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    //allowing(launcher).isUnix(); will(returnValue(false));
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"\\ \\Windows","\\\\C:\\System32"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"\\ \\Windows","\\\\C:\\System32"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
     
@@ -363,10 +405,13 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    //allowing(launcher).isUnix(); will(returnValue(true));
                 }
             });
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
 
@@ -386,11 +431,14 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
 
         classContext.checking(new Expectations() {
                 {
-                    allowing(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    //allowing(launcher).isUnix(); will(returnValue(true));
                 }
             });
 
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"}, false);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"loadrule"},  abstractBuild, false, false);
         action.checkout(launcher, workspace, "viewname");
     }
     
@@ -409,12 +457,15 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(true));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
 
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"foo", "bar"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"foo", "bar"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
     
@@ -434,12 +485,15 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(true));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(true));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
 
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"bar"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"bar"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
 
@@ -479,14 +533,17 @@ public class UcmSnapshotCheckoutActionTest extends AbstractWorkspaceTest {
             });
         classContext.checking(new Expectations() {
                 {
-                    atLeast(1).of(launcher).isUnix(); will(returnValue(false));
+                    one(abstractBuild).getParent(); will(returnValue(abstractProject));
+                    one(abstractBuild).getAction(ClearCaseDataAction.class); will(returnValue(clearCaseDataAction));
+                    one(clearCaseDataAction).setStream("stream");
+                    one(launcher).isUnix(); will(returnValue(false));
                     allowing(launcher).getListener(); will(returnValue(taskListener));
                 }
             });
 
         workspace.child("viewname").mkdirs();
         
-        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"PRODUCT","COTS\\NUnit"}, true);
+        CheckOutAction action = new UcmSnapshotCheckoutAction(clearTool, "stream", new String[]{"PRODUCT","COTS\\NUnit"},  abstractBuild, true, false);
         action.checkout(launcher, workspace, "viewname");
     }
 
