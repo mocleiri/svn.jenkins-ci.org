@@ -165,7 +165,7 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
             String branch = getBuildStream();
             int indexOfAt = branch.indexOf('@');
             if (indexOfAt > -1) {
-                branch = branch.substring(1, indexOfAt);
+                branch = branch.substring(0, indexOfAt);
             }
             return new String[] { branch };
         }
@@ -192,10 +192,20 @@ public class ClearCaseUcmSCM extends AbstractClearCaseScm {
 
             // Gather change log
             List<? extends ChangeLogSet.Entry> changelogEntries = null;
-            if (build.getPreviousBuild() != null) {
-                final Run prevBuild = build.getPreviousBuild();
-                final Date lastBuildTime = getBuildTime(prevBuild);
 
+            // find the CC data action most recent build run on the configured stream
+            ClearCaseDataAction clearcaseDataAction = null;
+            Run<?, ?> previousBuild = build.getPreviousBuild();
+            while (previousBuild != null && clearcaseDataAction == null) {
+                clearcaseDataAction = previousBuild.getAction(ClearCaseDataAction.class);
+                if (clearcaseDataAction != null && !(clearcaseDataAction.getStream().equals(getBuildStream()))) {
+                    clearcaseDataAction = null;
+                    previousBuild = previousBuild.getPreviousBuild();
+                }
+            }
+
+            if (previousBuild != null) {
+                final Date lastBuildTime = getBuildTime(previousBuild);
                 changelogEntries = historyAction.getChanges(lastBuildTime, coNormalizedViewName, getBuildBranchNames(), getViewPaths());
             }
 
