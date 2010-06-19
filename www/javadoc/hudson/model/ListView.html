@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ListView (Hudson main module 1.362 API)
+ListView (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-11">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ListView (Hudson main module 1.362 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ListView (Hudson main module 1.362 API)";
+        parent.document.title="ListView (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -273,6 +273,14 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/views/ViewJobFilter.html" title="class in hudson.views">ViewJobFilter</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#getJobFilters()">getJobFilters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang">Boolean</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#getStatusFilter()">getStatusFilter</A></B>()</CODE>
 
@@ -281,8 +289,24 @@ Displays <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CO
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#hasJobFilterExtensions()">hasJobFilterExtensions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to determine if we want to display the Add button.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ListView.html#initColumns()">initColumns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ListView.html#initJobFilters()">initJobFilters</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -421,6 +445,20 @@ protected void <B>initColumns</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="initJobFilters()"><!-- --></A><H3>
+initJobFilters</H3>
+<PRE>
+protected void <B>initJobFilters</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getActions()"><!-- --></A><H3>
 getActions</H3>
 <PRE>
@@ -433,6 +471,36 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-e
 </DD>
 <DD><DL>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/model/Hudson.html#getActions()"><CODE>Hudson.getActions()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasJobFilterExtensions()"><!-- --></A><H3>
+hasJobFilterExtensions</H3>
+<PRE>
+public boolean <B>hasJobFilterExtensions</B>()</PRE>
+<DL>
+<DD>Used to determine if we want to display the Add button.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJobFilters()"><!-- --></A><H3>
+getJobFilters</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/views/ViewJobFilter.html" title="class in hudson.views">ViewJobFilter</A>&gt; <B>getJobFilters</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

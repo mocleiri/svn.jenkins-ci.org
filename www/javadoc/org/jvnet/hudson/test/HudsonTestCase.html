@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.362 API)
+HudsonTestCase (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-11">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.362 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.362 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -470,7 +470,7 @@ R</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(hudson.model.FreeStyleProject)">buildAndAssertSuccess</A></B>(<A HREF="../../../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>&nbsp;job)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should be unnecessary, but otherwise IntelliJ complains.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avoids need for cumbersome <code>this.&lt;J,R&gt;buildAndAssertSuccess(...)</code> type hints under JDK 7 javac (and supposedly also IntelliJ).</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -485,6 +485,22 @@ R</CODE></FONT></TD>
 </TABLE>
 </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(J)">buildAndAssertSuccess</A></B>(J&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(hudson.maven.MavenModule)">buildAndAssertSuccess</A></B>(<A HREF="../../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(hudson.maven.MavenModuleSet)">buildAndAssertSuccess</A></B>(<A HREF="../../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;job)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2112,8 +2128,42 @@ buildAndAssertSuccess</H3>
 public <A HREF="../../../../hudson/model/FreeStyleBuild.html" title="class in hudson.model">FreeStyleBuild</A> <B>buildAndAssertSuccess</B>(<A HREF="../../../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>&nbsp;job)
                                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
 <DL>
-<DD>Should be unnecessary, but otherwise IntelliJ complains.
+<DD>Avoids need for cumbersome <code>this.&lt;J,R&gt;buildAndAssertSuccess(...)</code> type hints under JDK 7 javac (and supposedly also IntelliJ).
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildAndAssertSuccess(hudson.maven.MavenModuleSet)"><!-- --></A><H3>
+buildAndAssertSuccess</H3>
+<PRE>
+public <A HREF="../../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A> <B>buildAndAssertSuccess</B>(<A HREF="../../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;job)
+                                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildAndAssertSuccess(hudson.maven.MavenModule)"><!-- --></A><H3>
+buildAndAssertSuccess</H3>
+<PRE>
+public <A HREF="../../../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A> <B>buildAndAssertSuccess</B>(<A HREF="../../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;job)
+                                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
