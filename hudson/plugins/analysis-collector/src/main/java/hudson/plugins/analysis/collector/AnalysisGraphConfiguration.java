@@ -82,5 +82,37 @@ public class AnalysisGraphConfiguration extends GraphConfiguration {
     public String serializeToString() {
         return super.serializeToString() + SEPARATOR + serializeBoolean(canDeactivateGraphs);
     }
+
+    // CHECKSTYLE:OFF
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + (canDeactivateGraphs ? 1231 : 1237);
+        return result;
+    }
+    // CHECKSTYLE-ON
+
+    // CHECKSTYLE-OFF
+    /** {@inheritDoc} */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        AnalysisGraphConfiguration other = (AnalysisGraphConfiguration)obj;
+        if (canDeactivateGraphs != other.canDeactivateGraphs) {
+            return false;
+        }
+        return true;
+    }
+    // CHECKSTYLE-ON
 }
 

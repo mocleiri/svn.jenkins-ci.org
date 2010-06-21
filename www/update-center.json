@@ -1,28 +1,32 @@
 updateCenter.post(
 {
   "core":   {
-    "buildDate": "May 07, 2010",
+    "buildDate": "Jun 11, 2010",
     "previousTimestamp": "1970-01-01T00:00:00.00Z",
-    "url": "https://hudson.dev.java.net/files/documents/2402/150073/hudson.war",
+    "url": "https://hudson.dev.java.net/files/documents/2402/150786/hudson.war",
     "name": "core",
-    "version": "1.357",
-    "releaseTimestamp": "2010-05-08T05:15:39.00Z"
+    "version": "1.362",
+    "releaseTimestamp": "2010-06-12T01:32:29.00Z"
   },
   "updateCenterVersion": "1",
   "plugins":   {
     "javancss":     {
-      "dependencies": [],
-      "buildDate": "Sep 11, 2008",
-      "title": "JavaNCSS+Plugin",
-      "developers": [{"developerId": "stephenconnolly"}],
-      "wiki": "http://wiki.hudson-ci.org//pages/viewpage.action?pageId=36603031",
-      "previousTimestamp": "2008-09-11T08:26:00.00Z",
+      "dependencies": [      {
+        "optional": false,
+        "name": "maven-plugin",
+        "version": "1.324"
+      }],
+      "buildDate": "Jun 01, 2010",
+      "title": "JavaNCSS Plugin",
+      "developers": [{"developerId": "mindless"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JavaNCSS+Plugin",
+      "previousTimestamp": "2010-06-01T23:16:31.00Z",
       "url": "https://hudson.dev.java.net/files/documents/2402/110464/javancss.hpi",
-      "requiredCore": "1.252",
+      "requiredCore": "1.324",
       "excerpt": "This plugin allows you to use <a href='http://www.kclee.de/clemens/java/javancss/'>JavaNCSS<\/a> build reporting tool.",
       "name": "javancss",
-      "releaseTimestamp": "2008-09-11T08:26:00.00Z",
-      "version": "1.0.-2.1"
+      "releaseTimestamp": "2010-06-01T23:16:31.00Z",
+      "version": "1.0"
     },
     "ConfigurationSlicing":     {
       "dependencies": [      {
@@ -48,17 +52,17 @@ updateCenter.post(
         "name": "maven-plugin",
         "version": "1.318"
       }],
-      "buildDate": "Dec 02, 2009",
+      "buildDate": "May 23, 2010",
       "title": "CPPNCSS+Plugin",
       "developers": [{"developerId": "holywen"}],
       "wiki": "http://wiki.hudson-ci.org//pages/viewpage.action?pageId=42467768",
-      "previousTimestamp": "2009-12-03T00:01:52.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/145795/cppncss.hpi",
+      "previousTimestamp": "2010-06-03T08:52:27.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150436/cppncss.hpi",
       "requiredCore": "1.318",
       "excerpt": "This plugin allows you to use <a href='http://cppncss.sourceforge.net/'>CppNCSS<\/a> build reporting tool.",
       "name": "cppncss",
-      "releaseTimestamp": "2009-12-03T00:01:52.00Z",
-      "version": "1.0.-1.4"
+      "releaseTimestamp": "2010-05-24T04:26:34.00Z",
+      "version": "1.0.-1.5"
     },
     "changelog-history":     {
       "dependencies": [],
@@ -236,7 +240,7 @@ updateCenter.post(
     },
     "dashboard-view":     {
       "dependencies": [],
-      "buildDate": "Apr 02, 2010",
+      "buildDate": "May 20, 2010",
       "title": "Dashboard View",
       "developers":       [
                 {
@@ -246,17 +250,17 @@ updateCenter.post(
         },
                 {
           "developerId": "mambu",
-          "email": "marco.ambu@gmail.com",
+          "email": "mambu@dev.java.net",
           "name": "Marco Ambu"
         }
       ],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dashboard+View",
-      "previousTimestamp": "2010-03-25T10:37:58.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149317/dashboard-view.hpi",
+      "previousTimestamp": "2010-04-02T07:38:41.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150367/dashboard-view.hpi",
       "requiredCore": "1.347",
       "name": "dashboard-view",
-      "releaseTimestamp": "2010-04-02T07:38:41.00Z",
-      "version": "1.5"
+      "releaseTimestamp": "2010-05-20T14:50:17.00Z",
+      "version": "1.6"
     },
     "ldapemail":     {
       "dependencies": [],
@@ -309,19 +313,12 @@ updateCenter.post(
       "version": "0.3"
     },
     "artifactory":     {
-      "dependencies":       [
-                {
-          "optional": false,
-          "name": "maven-plugin",
-          "version": "1.336"
-        },
-                {
-          "optional": false,
-          "name": "subversion",
-          "version": "1.7"
-        }
-      ],
-      "buildDate": "Mar 04, 2010",
+      "dependencies": [      {
+        "optional": false,
+        "name": "maven-plugin",
+        "version": "1.336"
+      }],
+      "buildDate": "Jun 09, 2010",
       "title": "Artifactory Plugin",
       "developers": [      {
         "developerId": "yossis",
@@ -329,12 +326,12 @@ updateCenter.post(
         "name": "Yossi Shaul"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Artifactory+Plugin",
-      "previousTimestamp": "2010-02-16T16:00:46.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/148473/artifactory.hpi",
+      "previousTimestamp": "2010-03-04T16:31:09.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150748/artifactory.hpi",
       "requiredCore": "1.336",
       "name": "artifactory",
-      "releaseTimestamp": "2010-03-04T16:31:09.00Z",
-      "version": "1.0.7"
+      "releaseTimestamp": "2010-06-09T13:43:26.00Z",
+      "version": "1.1.0"
     },
     "gcal":     {
       "dependencies": [],
@@ -466,21 +463,21 @@ updateCenter.post(
     },
     "cmakebuilder":     {
       "dependencies": [],
-      "buildDate": "Apr 25, 2010",
+      "buildDate": "May 23, 2010",
       "title": "cmakebuilder Plugin",
       "developers": [{"developerId": "volkai"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/cmakebuilder+Plugin",
-      "previousTimestamp": "2010-04-17T11:13:27.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149777/cmakebuilder.hpi",
+      "previousTimestamp": "2010-04-25T09:35:43.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150425/cmakebuilder.hpi",
       "requiredCore": "1.343",
       "excerpt": "This plugin can be used to build <a href='http://cmake.org/'>cmake<\/a> based projects within Hudson.",
       "name": "cmakebuilder",
-      "releaseTimestamp": "2010-04-25T09:35:43.00Z",
-      "version": "1.4"
+      "releaseTimestamp": "2010-05-23T09:39:03.00Z",
+      "version": "1.5"
     },
     "jobConfigHistory":     {
       "dependencies": [],
-      "buildDate": "May 11, 2010",
+      "buildDate": "May 31, 2010",
       "title": "JobConfigHistory Plugin",
       "developers":       [
                 {
@@ -495,13 +492,13 @@ updateCenter.post(
         }
       ],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JobConfigHistory+Plugin",
-      "previousTimestamp": "2010-04-04T22:30:42.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/150194/jobConfigHistory.hpi",
+      "previousTimestamp": "2010-05-11T16:39:30.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150589/jobConfigHistory.hpi",
       "requiredCore": "1.353",
       "excerpt": "Saves copies of all job configurations.",
       "name": "jobConfigHistory",
-      "releaseTimestamp": "2010-05-11T16:39:30.00Z",
-      "version": "1.4"
+      "releaseTimestamp": "2010-05-31T10:00:15.00Z",
+      "version": "1.5"
     },
     "svncompat14":     {
       "dependencies": [],
@@ -550,30 +547,30 @@ updateCenter.post(
                 {
           "optional": false,
           "name": "analysis-core",
-          "version": "1.6"
+          "version": "1.10"
         },
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "May 03, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "Task Scanner Plugin",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Task+Scanner+Plugin",
-      "previousTimestamp": "2010-04-30T07:23:10.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149933/tasks.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-05-28T21:16:06.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150893/tasks.hpi",
+      "requiredCore": "1.358",
       "excerpt": "This plugin scans the workspace files for open tasks and generates a trend report.",
       "name": "tasks",
-      "releaseTimestamp": "2010-05-03T08:11:17.00Z",
-      "version": "4.7"
+      "releaseTimestamp": "2010-06-17T17:42:09.00Z",
+      "version": "4.9"
     },
     "greenballs":     {
       "dependencies": [],
@@ -612,30 +609,30 @@ updateCenter.post(
                 {
           "optional": false,
           "name": "analysis-core",
-          "version": "1.6"
+          "version": "1.10"
         },
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "Apr 29, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "Warnings Plugin",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Warnings+Plugin",
-      "previousTimestamp": "2010-03-30T11:52:04.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149862/warnings.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-05-28T21:05:49.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150894/warnings.hpi",
+      "requiredCore": "1.358",
       "excerpt": "This plugin generates the trend report for compiler warnings in the console log or in log files. ",
       "name": "warnings",
-      "releaseTimestamp": "2010-04-29T19:38:55.00Z",
-      "version": "3.5"
+      "releaseTimestamp": "2010-06-17T17:49:58.00Z",
+      "version": "3.7"
     },
     "rad-builder":     {
       "dependencies": [],
@@ -649,6 +646,20 @@ updateCenter.post(
       "name": "rad-builder",
       "releaseTimestamp": "2010-03-27T22:11:20.00Z",
       "version": "1.1.2"
+    },
+    "origo-issue-notifier":     {
+      "dependencies": [],
+      "buildDate": "May 18, 2010",
+      "title": "Origo Issue Notifier",
+      "developers": [{"developerId": "butcherch"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Origo+Issue+Notifier",
+      "previousTimestamp": "2010-05-18T18:52:22.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150336/origo-issue-notifier.hpi",
+      "requiredCore": "1.343",
+      "excerpt": "This plugin opens or updates an issue on an <a href='http://origo.ethz.ch'>Origo<\/a> instance based on the build result.",
+      "name": "origo-issue-notifier",
+      "releaseTimestamp": "2010-05-18T19:14:54.00Z",
+      "version": "1.1"
     },
     "hudson-pview-plugin":     {
       "dependencies": [],
@@ -681,7 +692,7 @@ updateCenter.post(
     },
     "copyartifact":     {
       "dependencies": [],
-      "buildDate": "May 08, 2010",
+      "buildDate": "May 12, 2010",
       "title": "Copy Artifact Plugin",
       "developers": [      {
         "developerId": "mindless",
@@ -689,57 +700,68 @@ updateCenter.post(
         "name": "Alan Harder"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Copy+Artifact+Plugin",
-      "previousTimestamp": "2010-05-05T10:59:21.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/150096/copyartifact.hpi",
+      "previousTimestamp": "2010-05-08T15:30:09.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150221/copyartifact.hpi",
       "requiredCore": "1.357",
       "excerpt": "Adds a build step to copy artifacts from another project.",
       "name": "copyartifact",
-      "releaseTimestamp": "2010-05-08T15:30:09.00Z",
-      "version": "1.6"
+      "releaseTimestamp": "2010-05-12T20:09:06.00Z",
+      "version": "1.7"
     },
     "pmd":     {
       "dependencies":       [
                 {
           "optional": false,
           "name": "analysis-core",
-          "version": "1.6"
+          "version": "1.10"
         },
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "May 03, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "PMD Plugin",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/PMD+Plugin",
-      "previousTimestamp": "2010-04-29T18:51:05.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149932/pmd.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-05-28T20:40:20.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150892/pmd.hpi",
+      "requiredCore": "1.358",
       "excerpt": "This plugin generates the trend report for <a href='http://pmd.sourceforge.net/'>PMD<\/a>, an open source static code analysis program.&nbsp; ",
       "name": "pmd",
-      "releaseTimestamp": "2010-05-03T07:57:07.00Z",
-      "version": "3.6"
+      "releaseTimestamp": "2010-06-17T17:26:42.00Z",
+      "version": "3.8"
     },
     "postbuild-task":     {
       "dependencies": [],
-      "buildDate": "Sep 16, 2009",
+      "buildDate": "Jun 03, 2010",
       "title": "Post build task",
-      "developers": [{"developerId": "shinodkm"}],
+      "developers":       [
+                {
+          "developerId": "shinodkm",
+          "email": "shinodkm@gmail.com",
+          "name": "Shinod Mohandas"
+        },
+                {
+          "developerId": "castorpilot",
+          "email": "castorpilot@gmail.com",
+          "name": "Fred"
+        }
+      ],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Post+build+task",
-      "previousTimestamp": "2009-09-16T03:45:02.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/143064/postbuild-task.hpi",
-      "requiredCore": "1.300",
+      "previousTimestamp": "2009-09-16T12:03:20.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150634/postbuild-task.hpi",
+      "requiredCore": "1.318",
       "excerpt": "This plugin allows the user to execute a shell/batch task depending on the build log output.Java regular expression are allowed.",
       "name": "postbuild-task",
-      "releaseTimestamp": "2009-09-16T12:03:20.00Z",
-      "version": "1.6"
+      "releaseTimestamp": "2010-06-03T17:45:13.00Z",
+      "version": "1.7"
     },
     "performance":     {
       "dependencies": [],
@@ -771,9 +793,26 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-22T09:19:55.00Z",
       "version": "1.2"
     },
+    "compact-columns":     {
+      "dependencies": [],
+      "buildDate": "Jun 06, 2010",
+      "title": "Compact Columns",
+      "developers": [      {
+        "developerId": "jacob_robertson",
+        "email": "jacob.robertson.work@gmail.com",
+        "name": "Jacob Robertson"
+      }],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Compact+Columns",
+      "previousTimestamp": "2010-05-26T00:28:11.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150678/compact-columns.hpi",
+      "requiredCore": "1.349",
+      "name": "compact-columns",
+      "releaseTimestamp": "2010-06-06T20:32:12.00Z",
+      "version": "1.1"
+    },
     "nested-view":     {
       "dependencies": [],
-      "buildDate": "Mar 22, 2010",
+      "buildDate": "Jun 16, 2010",
       "title": "Nested View Plugin",
       "developers": [      {
         "developerId": "mindless",
@@ -781,13 +820,13 @@ updateCenter.post(
         "name": "Alan Harder"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Nested+View+Plugin",
-      "previousTimestamp": "2010-01-21T18:55:01.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149035/nested-view.hpi",
-      "requiredCore": "1.334",
+      "previousTimestamp": "2010-05-28T03:13:00.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150866/nested-view.hpi",
+      "requiredCore": "1.342",
       "excerpt": "View type to allow grouping job views into multiple levels instead of one big list of tabs.",
       "name": "nested-view",
-      "releaseTimestamp": "2010-03-22T21:02:56.00Z",
-      "version": "1.1"
+      "releaseTimestamp": "2010-06-16T18:53:05.00Z",
+      "version": "1.3"
     },
     "violations":     {
       "dependencies": [      {
@@ -856,19 +895,19 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-10T01:54:32.00Z",
       "version": "0.1"
     },
-    "ftppublisher":     {
+    "matrixtieparent":     {
       "dependencies": [],
-      "buildDate": "Aug 06, 2008",
-      "title": "FTP-Publisher Plugin",
-      "developers": [{"developerId": "puss_in_boots"}],
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FTP-Publisher+Plugin",
-      "previousTimestamp": "2008-08-06T13:25:07.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/106412/ftppublisher.hpi",
-      "requiredCore": "1.238",
-      "excerpt": "This plugin can be used to upload project artifacts and whole directories to an ftp server.",
-      "name": "ftppublisher",
-      "releaseTimestamp": "2008-08-06T13:25:07.00Z",
-      "version": "0.9"
+      "buildDate": "Jun 08, 2010",
+      "title": "Matrix Tie Parent Plugin",
+      "developers": [{"developerId": "kbertelson"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Matrix+Tie+Parent+Plugin",
+      "previousTimestamp": "2010-06-08T14:26:48.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150722/matrixtieparent.hpi",
+      "requiredCore": "1.361",
+      "excerpt": "Ties the parent build of a multi-configuration project to a node.",
+      "name": "matrixtieparent",
+      "releaseTimestamp": "2010-06-08T14:26:48.00Z",
+      "version": "1.0"
     },
     "Schmant":     {
       "dependencies": [],
@@ -883,6 +922,21 @@ updateCenter.post(
       "name": "Schmant",
       "releaseTimestamp": "2009-12-15T10:03:59.00Z",
       "version": "1.1.4"
+    },
+    "ftppublisher":     {
+      "dependencies": [],
+      "compatibleSinceVersion": "1.0",
+      "buildDate": "May 19, 2010",
+      "title": "FTP-Publisher Plugin",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FTP-Publisher+Plugin",
+      "developers": [{"developerId": "benjaminjaton"}],
+      "requiredCore": "1.319",
+      "version": "1.0",
+      "previousTimestamp": "2008-08-06T13:25:07.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150356/ftppublisher.hpi",
+      "excerpt": "This plugin can be used to upload project artifacts and whole directories to an ftp server.",
+      "name": "ftppublisher",
+      "releaseTimestamp": "2010-05-19T23:35:54.00Z"
     },
     "javanet":     {
       "dependencies": [      {
@@ -1021,17 +1075,6 @@ updateCenter.post(
       "releaseTimestamp": "2010-03-28T11:13:05.00Z",
       "version": "1.6"
     },
-    "schedule-failed-builds":     {
-      "dependencies": [],
-      "buildDate": "Dec 28, 2009",
-      "developers": [{"developerId": "mindless"}],
-      "previousTimestamp": "2008-09-19T05:29:24.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/146500/schedule-failed-builds.hpi",
-      "requiredCore": "1.324",
-      "name": "schedule-failed-builds",
-      "releaseTimestamp": "2009-12-29T04:43:32.00Z",
-      "version": "1.1"
-    },
     "regexemail":     {
       "dependencies": [],
       "buildDate": "Jan 31, 2010",
@@ -1045,6 +1088,17 @@ updateCenter.post(
       "name": "regexemail",
       "releaseTimestamp": "2010-01-31T23:44:03.00Z",
       "version": "0.3"
+    },
+    "schedule-failed-builds":     {
+      "dependencies": [],
+      "buildDate": "Dec 28, 2009",
+      "developers": [{"developerId": "mindless"}],
+      "previousTimestamp": "2008-09-19T05:29:24.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/146500/schedule-failed-builds.hpi",
+      "requiredCore": "1.324",
+      "name": "schedule-failed-builds",
+      "releaseTimestamp": "2009-12-29T04:43:32.00Z",
+      "version": "1.1"
     },
     "sloccount":     {
       "dependencies": [      {
@@ -1066,7 +1120,7 @@ updateCenter.post(
     },
     "mercurial":     {
       "dependencies": [],
-      "buildDate": "Mar 29, 2010",
+      "buildDate": "Jun 10, 2010",
       "title": "Mercurial Plugin",
       "developers":       [
                 {
@@ -1081,43 +1135,43 @@ updateCenter.post(
         }
       ],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Mercurial+Plugin",
-      "previousTimestamp": "2010-03-19T17:56:29.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149228/mercurial.hpi",
+      "previousTimestamp": "2010-05-18T02:54:11.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150774/mercurial.hpi",
       "requiredCore": "1.351",
       "excerpt": "This plugin integrates the <a href='http://selenic.com/mercurial/'>Mercurial version control system<\/a> with Hudson.",
       "name": "mercurial",
-      "releaseTimestamp": "2010-03-29T20:45:12.00Z",
-      "version": "1.28"
+      "releaseTimestamp": "2010-06-10T19:45:55.00Z",
+      "version": "1.31"
     },
     "dry":     {
       "dependencies":       [
                 {
           "optional": false,
           "name": "analysis-core",
-          "version": "1.6"
+          "version": "1.10"
         },
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "May 03, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "DRY Plugin",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/DRY+Plugin",
-      "previousTimestamp": "2010-04-29T18:26:48.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149929/dry.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-05-28T20:24:01.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150889/dry.hpi",
+      "requiredCore": "1.358",
       "excerpt": "This plugin generates the trend report for duplicate code checkers like <a href='http://pmd.sourceforge.net/cpd.html'>CPD<\/a>. ",
       "name": "dry",
-      "releaseTimestamp": "2010-05-03T07:34:06.00Z",
-      "version": "2.6"
+      "releaseTimestamp": "2010-06-17T16:50:13.00Z",
+      "version": "2.8"
     },
     "rubyMetrics":     {
       "dependencies":       [
@@ -1208,7 +1262,7 @@ updateCenter.post(
     },
     "dimensionsscm":     {
       "dependencies": [],
-      "buildDate": "Apr 30, 2010",
+      "buildDate": "May 22, 2010",
       "title": "Dimensions Plugin",
       "developers": [      {
         "developerId": "TPayne",
@@ -1216,13 +1270,13 @@ updateCenter.post(
         "name": "Tim Payne"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Dimensions+Plugin",
-      "previousTimestamp": "2010-04-26T17:46:32.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149880/dimensionsscm.hpi",
+      "previousTimestamp": "2010-04-30T17:03:45.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150408/dimensionsscm.hpi",
       "requiredCore": "1.344",
       "excerpt": "This plugin integrates Hudson with <a href='http://www.serena.com/products/dimensions-cm-configuration-management/index.html'>Dimensions<\/a>, the Serena SCM solution.",
       "name": "dimensionsscm",
-      "releaseTimestamp": "2010-04-30T17:03:45.00Z",
-      "version": "0.7.6"
+      "releaseTimestamp": "2010-05-22T15:29:16.00Z",
+      "version": "0.7.7"
     },
     "collabnet":     {
       "dependencies":       [
@@ -1284,30 +1338,30 @@ updateCenter.post(
                 {
           "optional": false,
           "name": "analysis-core",
-          "version": "1.6"
+          "version": "1.10"
         },
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "May 03, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "Checkstyle Plugin",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Checkstyle+Plugin",
-      "previousTimestamp": "2010-04-29T18:09:25.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149928/checkstyle.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-05-28T19:19:16.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150888/checkstyle.hpi",
+      "requiredCore": "1.358",
       "excerpt": "This plugin generates the trend report for <a href='http://checkstyle.sourceforge.net/'>Checkstyle<\/a>, an open source static code analysis program.&nbsp; ",
       "name": "checkstyle",
-      "releaseTimestamp": "2010-05-03T07:17:07.00Z",
-      "version": "3.6"
+      "releaseTimestamp": "2010-06-17T16:42:51.00Z",
+      "version": "3.8"
     },
     "text-finder":     {
       "dependencies": [],
@@ -1477,6 +1531,24 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-22T13:19:51.00Z",
       "version": "0.4"
     },
+    "throttle-concurrents":     {
+      "dependencies": [],
+      "buildDate": "May 31, 2010",
+      "title": "Throttle Concurrent Builds Plugin",
+      "developers": [      {
+        "developerId": "abayer",
+        "email": "andrew.bayer@gmail.com",
+        "name": "Andrew Bayer"
+      }],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Throttle+Concurrent+Builds+Plugin",
+      "previousTimestamp": "2010-05-31T16:45:23.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150594/throttle-concurrents.hpi",
+      "requiredCore": "1.360",
+      "excerpt": "This plugin allows for throttling the number of concurrent builds of a project running per node or globally.",
+      "name": "throttle-concurrents",
+      "releaseTimestamp": "2010-05-31T16:45:23.00Z",
+      "version": "1.0"
+    },
     "googleanalytics":     {
       "dependencies": [],
       "buildDate": "Aug 24, 2009",
@@ -1578,7 +1650,7 @@ updateCenter.post(
     },
     "serenity":     {
       "dependencies": [],
-      "buildDate": "Mar 16, 2010",
+      "buildDate": "May 13, 2010",
       "title": "Serenity Plugin",
       "developers": [      {
         "developerId": "michael.couck",
@@ -1586,13 +1658,13 @@ updateCenter.post(
         "name": "Michael Couck"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Serenity+Plugin",
-      "previousTimestamp": "2010-01-31T16:17:08.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/148816/serenity.hpi",
+      "previousTimestamp": "2010-03-16T11:41:33.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150235/serenity.hpi",
       "requiredCore": "1.350",
       "excerpt": "Serenity is a Java code coverage, complexity and dependency library that uses dynamic instrumentation, with a friendly Hudson ui.",
       "name": "serenity",
-      "releaseTimestamp": "2010-03-16T11:41:33.00Z",
-      "version": "0.3"
+      "releaseTimestamp": "2010-05-13T11:02:30.00Z",
+      "version": "0.4"
     },
     "statusmonitor":     {
       "dependencies": [],
@@ -1628,20 +1700,20 @@ updateCenter.post(
     },
     "git":     {
       "dependencies": [],
-      "buildDate": "Apr 20, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "Git Plugin",
-      "developers": [{"developerId": "magnayn"}],
+      "developers": [{"developerId": "abayer"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Git+Plugin",
-      "previousTimestamp": "2010-04-01T07:50:04.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149686/git.hpi",
-      "requiredCore": "1.322",
+      "previousTimestamp": "2010-04-20T08:56:30.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150887/git.hpi",
+      "requiredCore": "1.345",
       "name": "git",
-      "releaseTimestamp": "2010-04-20T08:56:30.00Z",
-      "version": "0.8.3"
+      "releaseTimestamp": "2010-06-17T16:39:51.00Z",
+      "version": "0.9"
     },
     "perforce":     {
       "dependencies": [],
-      "buildDate": "Apr 19, 2010",
+      "buildDate": "Jun 14, 2010",
       "title": "Perforce Plugin",
       "developers":       [
                 {
@@ -1656,13 +1728,13 @@ updateCenter.post(
         }
       ],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Perforce+Plugin",
-      "previousTimestamp": "2010-04-10T03:01:59.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149679/perforce.hpi",
+      "previousTimestamp": "2010-06-11T20:32:29.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150840/perforce.hpi",
       "requiredCore": "1.339",
       "excerpt": "Integrates Hudson with <a href='http://perforce.com'>Perforce<\/a> SCM Repositories. ",
       "name": "perforce",
-      "releaseTimestamp": "2010-04-19T22:21:54.00Z",
-      "version": "1.0.29"
+      "releaseTimestamp": "2010-06-14T15:00:27.00Z",
+      "version": "1.1.3"
     },
     "msbuild":     {
       "dependencies": [],
@@ -1721,23 +1793,55 @@ updateCenter.post(
       "releaseTimestamp": "2010-01-31T02:01:03.00Z",
       "version": "1.1"
     },
+    "status-view":     {
+      "dependencies": [],
+      "buildDate": "Jun 04, 2010",
+      "title": "Status View Plugin",
+      "developers": [      {
+        "developerId": "mindless",
+        "email": "mindless@dev.java.net",
+        "name": "Alan Harder"
+      }],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Status+View+Plugin",
+      "previousTimestamp": "2010-06-05T00:06:50.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150649/status-view.hpi",
+      "requiredCore": "1.342",
+      "excerpt": "View type to show jobs filtered by the status of the last completed build.",
+      "name": "status-view",
+      "releaseTimestamp": "2010-06-05T00:06:50.00Z",
+      "version": "1.0"
+    },
     "bamboo-notifier":     {
       "dependencies": [],
       "buildDate": "Apr 22, 2010",
-      "title": "Bamboo Notifier",
       "developers": [      {
         "developerId": "asgeirn",
         "email": "asgeir@twingine.no",
         "name": "Asgeir Storesund Nilsen"
       }],
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Bamboo+Notifier",
       "previousTimestamp": "2009-12-30T15:09:05.00Z",
       "url": "https://hudson.dev.java.net/files/documents/2402/149749/bamboo-notifier.hpi",
       "requiredCore": "1.355",
-      "excerpt": "Trigger a Bamboo build upon successful completion of a Hudson job.",
       "name": "bamboo-notifier",
       "releaseTimestamp": "2010-04-22T21:56:51.00Z",
       "version": "1.1"
+    },
+    "utplsql":     {
+      "dependencies": [],
+      "buildDate": "Jun 11, 2010",
+      "title": "utplsql Plugin",
+      "developers": [      {
+        "developerId": "kusemuckl",
+        "email": "nils@kusemuckl.de",
+        "name": "Nils op den Winkel"
+      }],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/utplsql+Plugin",
+      "previousTimestamp": "2010-06-12T06:42:11.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150791/utplsql.hpi",
+      "requiredCore": "1.359",
+      "name": "utplsql",
+      "releaseTimestamp": "2010-06-12T06:42:11.00Z",
+      "version": "0.3"
     },
     "plot":     {
       "dependencies": [],
@@ -1911,12 +2015,12 @@ updateCenter.post(
                 {
           "optional": false,
           "name": "analysis-core",
-          "version": "1.6"
+          "version": "1.9"
         },
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
@@ -1951,19 +2055,19 @@ updateCenter.post(
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "May 03, 2010",
+      "buildDate": "May 28, 2010",
       "title": "Analysis Collector Plugin",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Analysis+Collector+Plugin",
-      "previousTimestamp": "2010-04-29T20:41:49.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149934/analysis-collector.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-05-03T08:49:04.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150549/analysis-collector.hpi",
+      "requiredCore": "1.358",
       "name": "analysis-collector",
-      "releaseTimestamp": "2010-05-03T08:49:04.00Z",
-      "version": "1.5"
+      "releaseTimestamp": "2010-05-28T21:31:47.00Z",
+      "version": "1.6"
     },
     "selenium-aes":     {
       "dependencies": [],
@@ -2033,6 +2137,23 @@ updateCenter.post(
       "name": "locked-files-report",
       "releaseTimestamp": "2009-10-06T15:13:01.00Z",
       "version": "1.1"
+    },
+    "global-build-stats":     {
+      "dependencies": [],
+      "buildDate": "Jun 13, 2010",
+      "title": "Global Build Stats Plugin",
+      "developers": [      {
+        "developerId": "fcamblor",
+        "email": "fcamblor+wikihudson@gmail.com",
+        "name": "Frederic Camblor"
+      }],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Global+Build+Stats+Plugin",
+      "previousTimestamp": "2010-06-13T12:39:49.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/148161/global-build-stats.hpi",
+      "requiredCore": "1.339",
+      "name": "global-build-stats",
+      "releaseTimestamp": "2010-06-13T12:39:49.00Z",
+      "version": "0.1"
     },
     "starteam":     {
       "dependencies": [],
@@ -2147,7 +2268,7 @@ updateCenter.post(
     },
     "xfpanel":     {
       "dependencies": [],
-      "buildDate": "Jan 09, 2010",
+      "buildDate": "May 24, 2010",
       "title": "eXtreme Feedback Panel Plugin",
       "developers": [      {
         "developerId": "jrenaut",
@@ -2155,13 +2276,13 @@ updateCenter.post(
         "name": "Julien RENAUT"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/eXtreme+Feedback+Panel+Plugin",
-      "previousTimestamp": "2009-10-11T16:06:55.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/146855/xfpanel.hpi",
+      "previousTimestamp": "2010-01-09T22:01:49.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150457/xfpanel.hpi",
       "requiredCore": "1.326",
       "excerpt": "This plugin provides an eXtreme Feedback Panel that can be used to expose the status of a selected number of Jobs.",
       "name": "xfpanel",
-      "releaseTimestamp": "2010-01-09T22:01:49.00Z",
-      "version": "1.0.7"
+      "releaseTimestamp": "2010-05-24T22:13:11.00Z",
+      "version": "1.0.8"
     },
     "android-emulator":     {
       "dependencies": [      {
@@ -2169,20 +2290,20 @@ updateCenter.post(
         "name": "port-allocator",
         "version": "1.5"
       }],
-      "buildDate": "Apr 06, 2010",
+      "buildDate": "Jun 16, 2010",
       "title": "Android Emulator Plugin",
       "developers": [      {
         "developerId": "orrc",
-        "email": "chris@orr.me.uk",
+        "email": "orrc@dev.java.net",
         "name": "Christopher Orr"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Android+Emulator+Plugin",
-      "previousTimestamp": "2010-04-06T09:36:05.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149395/android-emulator.hpi",
+      "previousTimestamp": "2010-05-18T21:55:14.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150867/android-emulator.hpi",
       "requiredCore": "1.340",
       "name": "android-emulator",
-      "releaseTimestamp": "2010-04-06T11:18:24.00Z",
-      "version": "1.0.3"
+      "releaseTimestamp": "2010-06-16T22:32:16.00Z",
+      "version": "1.2"
     },
     "svnpublisher":     {
       "dependencies": [      {
@@ -2221,35 +2342,35 @@ updateCenter.post(
     },
     "disk-usage":     {
       "dependencies": [],
-      "buildDate": "Feb 10, 2010",
+      "buildDate": "Jun 04, 2010",
       "title": "Disk Usage Plugin",
-      "developers": [{"developerId": "mindless"}],
+      "developers": [{"developerId": "vjuranek"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Disk+Usage+Plugin",
       "previousTimestamp": "2010-02-10T19:58:00.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/147824/disk-usage.hpi",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150639/disk-usage.hpi",
       "requiredCore": "1.339",
       "excerpt": "This plugin records disk usage. ",
       "name": "disk-usage",
-      "releaseTimestamp": "2010-02-10T19:58:00.00Z",
-      "version": "0.10"
+      "releaseTimestamp": "2010-06-04T09:23:21.00Z",
+      "version": "0.11"
     },
     "jira":     {
       "dependencies": [      {
         "optional": false,
         "name": "maven-plugin",
-        "version": "1.351"
+        "version": "1.355"
       }],
-      "buildDate": "May 01, 2010",
+      "buildDate": "Jun 18, 2010",
       "title": "JIRA Plugin",
-      "developers": [{"developerId": "kutzi"}],
+      "developers": [{"developerId": "sogabe"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/JIRA+Plugin",
-      "previousTimestamp": "2010-04-10T21:37:22.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149905/jira.hpi",
-      "requiredCore": "1.351",
+      "previousTimestamp": "2010-05-16T17:19:46.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150917/jira.hpi",
+      "requiredCore": "1.355",
       "excerpt": "This plugin integrates <a href='http://www.atlassian.com/software/jira/'>Atlassian JIRA<\/a> to Hudson.",
       "name": "jira",
-      "releaseTimestamp": "2010-05-01T12:16:47.00Z",
-      "version": "1.23"
+      "releaseTimestamp": "2010-06-18T20:08:12.00Z",
+      "version": "1.25"
     },
     "scp":     {
       "dependencies": [],
@@ -2530,10 +2651,10 @@ updateCenter.post(
       "dependencies": [      {
         "optional": false,
         "name": "instant-messaging",
-        "version": "1.7"
+        "version": "1.8"
       }],
       "compatibleSinceVersion": "1.0",
-      "buildDate": "Apr 14, 2010",
+      "buildDate": "Jun 15, 2010",
       "title": "Jabber Plugin",
       "developers":       [
                 {
@@ -2548,12 +2669,12 @@ updateCenter.post(
         }
       ],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Jabber+Plugin",
-      "previousTimestamp": "2010-03-24T20:56:45.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149528/jabber.hpi",
+      "previousTimestamp": "2010-04-14T21:58:41.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150857/jabber.hpi",
       "requiredCore": "1.327",
       "name": "jabber",
-      "releaseTimestamp": "2010-04-14T21:58:41.00Z",
-      "version": "1.9"
+      "releaseTimestamp": "2010-06-15T20:18:43.00Z",
+      "version": "1.10"
     },
     "testabilityexplorer":     {
       "dependencies": [      {
@@ -2575,7 +2696,7 @@ updateCenter.post(
     },
     "sectioned-view":     {
       "dependencies": [],
-      "buildDate": "Feb 22, 2010",
+      "buildDate": "Jun 14, 2010",
       "title": "Sectioned View Plugin",
       "developers": [      {
         "developerId": "tbingaman",
@@ -2583,13 +2704,13 @@ updateCenter.post(
         "name": "Timothy Bingaman"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Sectioned+View+Plugin",
-      "previousTimestamp": "2010-02-22T04:58:25.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/148182/sectioned-view.hpi",
-      "requiredCore": "1.342",
+      "previousTimestamp": "2010-02-22T22:05:42.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150843/sectioned-view.hpi",
+      "requiredCore": "1.345",
       "excerpt": "This plugin provides a new view implementation that can be divided into sections. Each section can display different information about the selected jobs.  An extension point is also provided to define new types of sections.",
       "name": "sectioned-view",
-      "releaseTimestamp": "2010-02-22T22:05:42.00Z",
-      "version": "1.10"
+      "releaseTimestamp": "2010-06-15T04:51:31.00Z",
+      "version": "1.11"
     },
     "tuxdroid":     {
       "dependencies": [],
@@ -2652,21 +2773,21 @@ updateCenter.post(
     },
     "xshell":     {
       "dependencies": [],
-      "buildDate": "Mar 26, 2010",
+      "buildDate": "May 18, 2010",
       "title": "XShell Plugin",
       "developers": [      {
         "developerId": "mambu",
-        "email": "marco.ambu@gmail.com",
+        "email": "mambu@dev.java.net",
         "name": "Marco Ambu"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/XShell+Plugin",
-      "previousTimestamp": "2010-03-25T10:22:37.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149148/xshell.hpi",
+      "previousTimestamp": "2010-03-26T12:13:42.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150326/xshell.hpi",
       "requiredCore": "1.347",
       "excerpt": "This plugin defines a new build type to execute a shell script in a cross-platform environment.",
       "name": "xshell",
-      "releaseTimestamp": "2010-03-26T12:13:42.00Z",
-      "version": "0.2"
+      "releaseTimestamp": "2010-05-18T09:25:03.00Z",
+      "version": "0.3"
     },
     "fitnesse":     {
       "dependencies": [],
@@ -2702,17 +2823,17 @@ updateCenter.post(
     },
     "htmlpublisher":     {
       "dependencies": [],
-      "buildDate": "May 10, 2010",
+      "buildDate": "May 24, 2010",
       "title": "HTML Publisher Plugin",
       "developers": [{"developerId": "mcrooney"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/HTML+Publisher+Plugin",
-      "previousTimestamp": "2010-02-17T22:20:07.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/150176/htmlpublisher.hpi",
+      "previousTimestamp": "2010-05-11T00:01:57.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150456/htmlpublisher.hpi",
       "requiredCore": "1.341",
       "excerpt": "This plugin publishes HTML reports.",
       "name": "htmlpublisher",
-      "releaseTimestamp": "2010-05-11T00:01:57.00Z",
-      "version": "0.3"
+      "releaseTimestamp": "2010-05-24T21:51:20.00Z",
+      "version": "0.4"
     },
     "grinder":     {
       "dependencies": [],
@@ -2734,7 +2855,7 @@ updateCenter.post(
         "name": "copyartifact",
         "version": "1.6"
       }],
-      "buildDate": "May 08, 2010",
+      "buildDate": "May 12, 2010",
       "title": "Promoted Builds Simple Plugin",
       "developers": [      {
         "developerId": "mindless",
@@ -2742,13 +2863,13 @@ updateCenter.post(
         "name": "Alan Harder"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Promoted+Builds+Simple+Plugin",
-      "previousTimestamp": "2010-04-17T20:15:10.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/150133/promoted-builds-simple.hpi",
+      "previousTimestamp": "2010-05-08T23:16:59.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150220/promoted-builds-simple.hpi",
       "requiredCore": "1.339",
       "excerpt": "Simpler version of [Promoted Builds Plugin], with only manual promotion of builds.",
       "name": "promoted-builds-simple",
-      "releaseTimestamp": "2010-05-08T23:16:59.00Z",
-      "version": "1.5"
+      "releaseTimestamp": "2010-05-12T20:01:30.00Z",
+      "version": "1.6"
     },
     "polarion":     {
       "dependencies": [      {
@@ -2985,7 +3106,7 @@ updateCenter.post(
     },
     "gradle":     {
       "dependencies": [],
-      "buildDate": "Feb 23, 2010",
+      "buildDate": "Jun 09, 2010",
       "title": "Gradle Plugin",
       "developers": [      {
         "developerId": "gbois",
@@ -2993,13 +3114,13 @@ updateCenter.post(
         "name": "Gregory Boissinot"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gradle+Plugin",
-      "previousTimestamp": "2009-02-07T21:58:06.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/148190/gradle.hpi",
-      "requiredCore": "1.347",
+      "previousTimestamp": "2010-02-23T09:05:14.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150749/gradle.hpi",
+      "requiredCore": "1.336",
       "excerpt": "This plugin allows Hudson to invoke <a href='http://www.gradle.org/'>Gradle<\/a> build script as the main build step.",
       "name": "gradle",
-      "releaseTimestamp": "2010-02-23T09:05:14.00Z",
-      "version": "1.3"
+      "releaseTimestamp": "2010-06-09T22:45:37.00Z",
+      "version": "1.4"
     },
     "distfork":     {
       "dependencies": [],
@@ -3020,39 +3141,39 @@ updateCenter.post(
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "May 03, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "Static Code Analysis Plug-ins",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Static+Code+Analysis+Plug-ins",
-      "previousTimestamp": "2010-05-03T10:48:51.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149950/analysis-core.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-05-28T17:58:55.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150886/analysis-core.hpi",
+      "requiredCore": "1.358",
       "excerpt": "This plug-in provides utilities for the static code analysis plug-ins.",
       "name": "analysis-core",
-      "releaseTimestamp": "2010-05-03T12:07:59.00Z",
-      "version": "1.8"
+      "releaseTimestamp": "2010-06-17T16:27:46.00Z",
+      "version": "1.10"
     },
     "ivy":     {
       "dependencies": [],
-      "buildDate": "Apr 26, 2010",
+      "buildDate": "May 12, 2010",
       "title": "Ivy Plugin",
       "developers": [{"developerId": "tbingaman"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ivy+Plugin",
-      "previousTimestamp": "2010-04-01T01:22:17.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149797/ivy.hpi",
+      "previousTimestamp": "2010-04-26T20:26:21.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150222/ivy.hpi",
       "requiredCore": "1.347",
       "excerpt": "This plugin automatically configures a build to trigger other builds based on dependency configuration via <a href='http://ant.apache.org/ivy'>Apache Ivy<\/a>.",
       "name": "ivy",
-      "releaseTimestamp": "2010-04-26T20:26:21.00Z",
-      "version": "1.6"
+      "releaseTimestamp": "2010-05-12T20:36:52.00Z",
+      "version": "1.7"
     },
     "pxe":     {
       "dependencies": [],
@@ -3103,17 +3224,17 @@ updateCenter.post(
         "name": "maven-plugin",
         "version": "1.318"
       }],
-      "buildDate": "Dec 29, 2009",
+      "buildDate": "May 26, 2010",
       "title": "M2 Release Plugin",
-      "developers": [{"developerId": "mindless"}],
+      "developers": [{"developerId": "teilo"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/M2+Release+Plugin",
-      "previousTimestamp": "2009-08-21T10:32:45.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/146536/m2release.hpi",
+      "previousTimestamp": "2009-12-30T04:02:45.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150509/m2release.hpi",
       "requiredCore": "1.318",
       "excerpt": "This plugin allows you to perform a release build using the <a href='http://maven.apache.org/plugins/maven-release-plugin/'>maven-release-plugin<\/a> from within Hudson. ",
       "name": "m2release",
-      "releaseTimestamp": "2009-12-30T04:02:45.00Z",
-      "version": "0.3.4"
+      "releaseTimestamp": "2010-05-26T19:39:42.00Z",
+      "version": "0.4.0"
     },
     "accurev":     {
       "dependencies": [],
@@ -3167,17 +3288,17 @@ updateCenter.post(
         "name": "maven-plugin",
         "version": "1.325"
       }],
-      "buildDate": "Mar 29, 2010",
+      "buildDate": "Jun 09, 2010",
       "title": "Promoted Builds Plugin",
-      "developers": [{"developerId": "mindless"}],
+      "developers": [{"developerId": "kohsuke"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Promoted+Builds+Plugin",
-      "previousTimestamp": "2009-12-30T20:35:28.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149231/promoted-builds.hpi",
+      "previousTimestamp": "2010-06-05T10:21:24.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150750/promoted-builds.hpi",
       "requiredCore": "1.325",
       "excerpt": "This plugin allows you to distinguish good builds from bad builds by introducing the notion of 'promotion'.",
       "name": "promoted-builds",
-      "releaseTimestamp": "2010-03-29T23:11:02.00Z",
-      "version": "1.7"
+      "releaseTimestamp": "2010-06-10T01:03:43.00Z",
+      "version": "1.9"
     },
     "xunit":     {
       "dependencies": [],
@@ -3386,34 +3507,21 @@ updateCenter.post(
     },
     "validating-string-parameter":     {
       "dependencies": [],
-      "buildDate": "Aug 29, 2009",
+      "buildDate": "May 22, 2010",
       "title": "Validating String Parameter Plugin",
-      "developers": [{"developerId": "petehayes"}],
+      "developers": [      {
+        "developerId": "petehayes",
+        "email": "petehayes@gmail.com",
+        "name": "Peter Hayes"
+      }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Validating+String+Parameter+Plugin",
-      "previousTimestamp": "2009-08-29T12:57:50.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/142408/validating-string-parameter.hpi",
-      "requiredCore": "1.321",
+      "previousTimestamp": "2009-08-30T00:28:18.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150409/validating-string-parameter.hpi",
+      "requiredCore": "1.353",
       "excerpt": "The validating string parameter plugin contributes a new parameter type to Hudson that supports regular expression validation of the user's entered parameter.",
       "name": "validating-string-parameter",
-      "releaseTimestamp": "2009-08-30T00:28:18.00Z",
-      "version": "1.2"
-    },
-    "instant-messaging":     {
-      "dependencies": [],
-      "buildDate": "Apr 14, 2010",
-      "title": "Instant Messaging Plugin",
-      "developers": [      {
-        "developerId": "kutzi",
-        "email": "kutzi@gmx.de",
-        "name": "Christoph Kutzinski"
-      }],
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Instant+Messaging+Plugin",
-      "previousTimestamp": "2010-03-20T17:17:17.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149527/instant-messaging.hpi",
-      "requiredCore": "1.327",
-      "name": "instant-messaging",
-      "releaseTimestamp": "2010-04-14T21:48:58.00Z",
-      "version": "1.7"
+      "releaseTimestamp": "2010-05-23T00:25:38.00Z",
+      "version": "1.3"
     },
     "mantis":     {
       "dependencies":       [
@@ -3454,19 +3562,38 @@ updateCenter.post(
       "releaseTimestamp": "2010-05-02T01:04:50.00Z",
       "version": "0.10.1"
     },
-    "bitkeeper":     {
-      "dependencies": [],
-      "buildDate": "Jan 27, 2010",
-      "title": "BitKeeper Plugin",
-      "developers": [{"developerId": "mindless"}],
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/BitKeeper+Plugin",
-      "previousTimestamp": "2008-06-25T03:19:39.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/147302/bitkeeper.hpi",
-      "requiredCore": "1.318",
-      "excerpt": "Add BitKeeper support to Hudson",
-      "name": "bitkeeper",
-      "releaseTimestamp": "2010-01-27T17:43:55.00Z",
-      "version": "1.5"
+    "instant-messaging":     {
+      "dependencies":       [
+                {
+          "optional": true,
+          "name": "ci-game",
+          "version": "1.16"
+        },
+                {
+          "optional": true,
+          "name": "analysis-core",
+          "version": "1.0"
+        },
+                {
+          "optional": false,
+          "name": "maven-plugin",
+          "version": "1.327"
+        }
+      ],
+      "buildDate": "Jun 15, 2010",
+      "title": "Instant Messaging Plugin",
+      "developers": [      {
+        "developerId": "kutzi",
+        "email": "kutzi@gmx.de",
+        "name": "Christoph Kutzinski"
+      }],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Instant+Messaging+Plugin",
+      "previousTimestamp": "2010-04-14T21:48:58.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150855/instant-messaging.hpi",
+      "requiredCore": "1.327",
+      "name": "instant-messaging",
+      "releaseTimestamp": "2010-06-15T20:01:04.00Z",
+      "version": "1.8"
     },
     "clover":     {
       "dependencies": [],
@@ -3481,6 +3608,20 @@ updateCenter.post(
       "releaseTimestamp": "2010-04-08T00:01:39.00Z",
       "version": "3.0.1"
     },
+    "bitkeeper":     {
+      "dependencies": [],
+      "buildDate": "Jan 27, 2010",
+      "title": "BitKeeper Plugin",
+      "developers": [{"developerId": "mindless"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/BitKeeper+Plugin",
+      "previousTimestamp": "2008-06-25T03:19:39.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/147302/bitkeeper.hpi",
+      "requiredCore": "1.318",
+      "excerpt": "Add BitKeeper support to Hudson",
+      "name": "bitkeeper",
+      "releaseTimestamp": "2010-01-27T17:43:55.00Z",
+      "version": "1.5"
+    },
     "powershell":     {
       "dependencies": [],
       "buildDate": "Aug 05, 2009",
@@ -3494,6 +3635,37 @@ updateCenter.post(
       "name": "powershell",
       "releaseTimestamp": "2009-08-06T01:55:37.00Z",
       "version": "1.2"
+    },
+    "sauce-ondemand":     {
+      "dependencies": [],
+      "buildDate": "Jun 07, 2010",
+      "title": "Sauce OnDemand Plugin",
+      "developers": [{"developerId": "kohsuke"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Sauce+OnDemand+Plugin",
+      "previousTimestamp": "2010-06-06T00:33:00.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150700/sauce-ondemand.hpi",
+      "requiredCore": "1.359",
+      "excerpt": "This plugin allows you to integrate <a href='https://saucelabs.com/'>Sauce OnDemand<\/a> to Hudson.",
+      "name": "sauce-ondemand",
+      "releaseTimestamp": "2010-06-08T01:27:02.00Z",
+      "version": "1.1"
+    },
+    "deploy-websphere":     {
+      "dependencies": [      {
+        "optional": false,
+        "name": "deploy",
+        "version": "1.5"
+      }],
+      "buildDate": "Jun 02, 2010",
+      "title": "Deploy WebSphere Plugin",
+      "developers": [{"developerId": "asanso"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Deploy+WebSphere+Plugin",
+      "previousTimestamp": "2010-06-02T21:45:09.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150623/deploy-websphere.hpi",
+      "requiredCore": "1.343",
+      "name": "deploy-websphere",
+      "releaseTimestamp": "2010-06-02T21:45:09.00Z",
+      "version": "1.0"
     },
     "extended-read-permission":     {
       "dependencies": [],
@@ -3537,17 +3709,17 @@ updateCenter.post(
     },
     "ssh-slaves":     {
       "dependencies": [],
-      "buildDate": "May 02, 2010",
+      "buildDate": "Jun 01, 2010",
       "title": "SSH Slaves plugin",
       "developers": [{"developerId": "mindless"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SSH+Slaves+plugin",
-      "previousTimestamp": "2009-12-09T14:26:35.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149924/ssh-slaves.hpi",
+      "previousTimestamp": "2010-05-31T04:27:22.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150611/ssh-slaves.hpi",
       "requiredCore": "1.335",
       "excerpt": "This plugin allows you to manage slaves running on \\*nix machines over SSH.",
       "name": "ssh-slaves",
-      "releaseTimestamp": "2010-05-02T23:22:35.00Z",
-      "version": "0.10"
+      "releaseTimestamp": "2010-06-01T21:18:12.00Z",
+      "version": "0.12"
     },
     "crap4j":     {
       "dependencies": [],
@@ -3657,18 +3829,22 @@ updateCenter.post(
       "version": "1.14"
     },
     "radiatorviewplugin":     {
-      "dependencies": [],
-      "buildDate": "Apr 18, 2010",
+      "dependencies": [      {
+        "optional": true,
+        "name": "claim",
+        "version": "1.7"
+      }],
+      "buildDate": "May 17, 2010",
       "title": "Radiator View Plugin",
-      "developers": [{"developerId": "olamy"}],
+      "developers": [{"developerId": "howama"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Radiator+View+Plugin",
-      "previousTimestamp": "2010-03-30T18:52:28.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149649/radiatorviewplugin.hpi",
+      "previousTimestamp": "2010-05-14T12:48:34.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150306/radiatorviewplugin.hpi",
       "requiredCore": "1.351",
       "excerpt": "Provides a job view displaying project status in a highly visible manner. This is ideal for displaying on a screen on the office wall as a form of Extreme Feedback Device.",
       "name": "radiatorviewplugin",
-      "releaseTimestamp": "2010-04-18T18:31:43.00Z",
-      "version": "1.7"
+      "releaseTimestamp": "2010-05-17T11:02:12.00Z",
+      "version": "1.9"
     },
     "locale":     {
       "dependencies": [],
@@ -3714,19 +3890,12 @@ updateCenter.post(
       "version": "1.2"
     },
     "ircbot":     {
-      "dependencies":       [
-                {
-          "optional": false,
-          "name": "instant-messaging",
-          "version": "1.7"
-        },
-                {
-          "optional": false,
-          "name": "maven-plugin",
-          "version": "1.327"
-        }
-      ],
-      "buildDate": "Apr 14, 2010",
+      "dependencies": [      {
+        "optional": false,
+        "name": "instant-messaging",
+        "version": "1.8"
+      }],
+      "buildDate": "Jun 15, 2010",
       "title": "IRC Plugin",
       "developers": [      {
         "developerId": "kutzi",
@@ -3734,13 +3903,13 @@ updateCenter.post(
         "name": "Christoph Kutzinski"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/IRC+Plugin",
-      "previousTimestamp": "2010-03-13T15:34:37.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149529/ircbot.hpi",
+      "previousTimestamp": "2010-05-18T16:46:56.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150856/ircbot.hpi",
       "requiredCore": "1.327",
       "excerpt": "This plugin installs Hudson IRC bot on your choice of IRC channels. You can get notifications via IRC and interact with Hudson via IRC.  Note that you also need to install the <a href='http://wiki.hudson-ci.org/display/HUDSON/Instant+Messaging+Plugin'>instant-messaging plugin<\/a> .",
       "name": "ircbot",
-      "releaseTimestamp": "2010-04-14T22:07:59.00Z",
-      "version": "2.3"
+      "releaseTimestamp": "2010-06-15T20:10:50.00Z",
+      "version": "2.5"
     },
     "xvnc":     {
       "dependencies": [],
@@ -3814,17 +3983,17 @@ updateCenter.post(
     },
     "fortify360":     {
       "dependencies": [],
-      "buildDate": "Apr 06, 2010",
+      "buildDate": "May 24, 2010",
       "title": "Fortify 360 Plugin",
       "developers": [{"developerId": "samngms"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Fortify+360+Plugin",
-      "previousTimestamp": "2010-04-05T09:17:25.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149400/fortify360.hpi",
+      "previousTimestamp": "2010-04-06T13:20:45.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150437/fortify360.hpi",
       "requiredCore": "1.323",
       "excerpt": "Fortify 360 FPR post-processing and uploading to Fortify 360 Server",
       "name": "fortify360",
-      "releaseTimestamp": "2010-04-06T13:20:45.00Z",
-      "version": "1.3"
+      "releaseTimestamp": "2010-05-24T08:17:11.00Z",
+      "version": "1.4"
     },
     "tmpcleaner":     {
       "dependencies": [],
@@ -3856,7 +4025,7 @@ updateCenter.post(
     "clearcase":     {
       "dependencies": [],
       "compatibleSinceVersion": "1.0",
-      "buildDate": "May 04, 2010",
+      "buildDate": "Jun 05, 2010",
       "title": "ClearCase Plugin",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/ClearCase+Plugin",
       "developers": [      {
@@ -3865,12 +4034,12 @@ updateCenter.post(
         "name": "Vincent Latombe"
       }],
       "requiredCore": "1.324",
-      "version": "1.2",
-      "previousTimestamp": "2010-01-16T17:40:25.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149989/clearcase.hpi",
+      "version": "1.2.1",
+      "previousTimestamp": "2010-05-04T22:21:01.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150655/clearcase.hpi",
       "excerpt": "Integrates Hudson with <a href='http://www.ibm.com/software/awdtools/clearcase/'>ClearCase<\/a>.",
       "name": "clearcase",
-      "releaseTimestamp": "2010-05-04T22:21:01.00Z"
+      "releaseTimestamp": "2010-06-05T07:54:51.00Z"
     },
     "deploy":     {
       "dependencies": [],
@@ -4102,30 +4271,30 @@ updateCenter.post(
                 {
           "optional": false,
           "name": "analysis-core",
-          "version": "1.6"
+          "version": "1.10"
         },
                 {
           "optional": false,
           "name": "maven-plugin",
-          "version": "1.350"
+          "version": "1.358"
         },
                 {
           "optional": true,
           "name": "dashboard-view",
-          "version": "1.3"
+          "version": "1.5"
         }
       ],
-      "buildDate": "May 03, 2010",
+      "buildDate": "Jun 17, 2010",
       "title": "FindBugs Plugin",
       "developers": [{"developerId": "drulli"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/FindBugs+Plugin",
-      "previousTimestamp": "2010-04-29T18:38:27.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149953/findbugs.hpi",
-      "requiredCore": "1.350",
+      "previousTimestamp": "2010-06-01T16:48:27.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150890/findbugs.hpi",
+      "requiredCore": "1.358",
       "excerpt": "This plugin generates the trend report for <a href='http://findbugs.sourceforge.net/'>FindBugs<\/a>, an open source program which uses static analysis to  look for bugs in Java code.&nbsp; ",
       "name": "findbugs",
-      "releaseTimestamp": "2010-05-03T16:05:55.00Z",
-      "version": "4.8"
+      "releaseTimestamp": "2010-06-17T17:07:33.00Z",
+      "version": "4.11"
     },
     "lastsuccessversioncolumn":     {
       "dependencies": [],
@@ -4246,16 +4415,16 @@ updateCenter.post(
     },
     "ssh":     {
       "dependencies": [],
-      "buildDate": "Feb 24, 2010",
+      "buildDate": "Jun 02, 2010",
       "title": "SSH plugin",
       "developers": [{"developerId": "edmund_wagner"}],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/SSH+plugin",
       "previousTimestamp": "2010-02-24T17:15:14.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/148243/ssh.hpi",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150614/ssh.hpi",
       "requiredCore": "1.347",
       "name": "ssh",
-      "releaseTimestamp": "2010-02-24T17:15:14.00Z",
-      "version": "1.0"
+      "releaseTimestamp": "2010-06-02T08:04:09.00Z",
+      "version": "1.1"
     },
     "windmill":     {
       "dependencies": [],
@@ -4347,10 +4516,22 @@ updateCenter.post(
       "previousTimestamp": "2009-08-30T09:21:05.00Z",
       "url": "https://hudson.dev.java.net/files/documents/2402/146495/maven-info.hpi",
       "requiredCore": "1.319",
-      "excerpt": "Adds columns configurable in views to show info about Maven jobs.",
       "name": "maven-info",
       "releaseTimestamp": "2009-12-29T00:53:55.00Z",
       "version": "0.0.3"
+    },
+    "ruby":     {
+      "dependencies": [],
+      "buildDate": "Jan 31, 2010",
+      "title": "Ruby Plugin",
+      "developers": [{"developerId": "mindless"}],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ruby+Plugin",
+      "previousTimestamp": "2008-01-26T09:21:21.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/147453/ruby.hpi",
+      "requiredCore": "1.318",
+      "name": "ruby",
+      "releaseTimestamp": "2010-01-31T23:51:34.00Z",
+      "version": "1.2"
     },
     "sametime":     {
       "dependencies": [],
@@ -4365,19 +4546,6 @@ updateCenter.post(
       "name": "sametime",
       "releaseTimestamp": "2008-01-29T08:07:13.00Z",
       "version": "0.1"
-    },
-    "ruby":     {
-      "dependencies": [],
-      "buildDate": "Jan 31, 2010",
-      "title": "Ruby Plugin",
-      "developers": [{"developerId": "mindless"}],
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ruby+Plugin",
-      "previousTimestamp": "2008-01-26T09:21:21.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/147453/ruby.hpi",
-      "requiredCore": "1.318",
-      "name": "ruby",
-      "releaseTimestamp": "2010-01-31T23:51:34.00Z",
-      "version": "1.2"
     },
     "reviewboard":     {
       "dependencies": [      {
@@ -4502,7 +4670,7 @@ updateCenter.post(
     },
     "files-found-trigger":     {
       "dependencies": [],
-      "buildDate": "Apr 25, 2010",
+      "buildDate": "Jun 04, 2010",
       "title": "Files Found Trigger",
       "developers": [      {
         "developerId": "stevengbrown",
@@ -4510,12 +4678,12 @@ updateCenter.post(
         "name": "Steven Brown"
       }],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Files+Found+Trigger",
-      "previousTimestamp": "2010-04-23T09:31:42.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/149778/files-found-trigger.hpi",
+      "previousTimestamp": "2010-04-25T09:59:53.00Z",
+      "url": "https://hudson.dev.java.net/files/documents/2402/150647/files-found-trigger.hpi",
       "requiredCore": "1.350",
       "name": "files-found-trigger",
-      "releaseTimestamp": "2010-04-25T09:59:53.00Z",
-      "version": "1.1"
+      "releaseTimestamp": "2010-06-04T12:41:24.00Z",
+      "version": "1.1.1"
     },
     "viewVC":     {
       "dependencies": [      {

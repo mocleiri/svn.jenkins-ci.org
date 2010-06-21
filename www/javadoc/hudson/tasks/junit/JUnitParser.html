@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JUnitParser (Hudson main module 1.357 API)
+JUnitParser (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JUnitParser (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JUnitParser (Hudson main module 1.357 API)";
+        parent.document.title="JUnitParser (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -147,6 +147,12 @@ Parse some JUnit xml files and generate a TestResult containing all the
 <TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitParser.html#JUnitParser()">JUnitParser</A></B>()</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitParser.html#JUnitParser(boolean)">JUnitParser</A></B>(boolean&nbsp;keepLongStdio)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
@@ -221,8 +227,25 @@ Parse some JUnit xml files and generate a TestResult containing all the
 <A NAME="JUnitParser()"><!-- --></A><H3>
 JUnitParser</H3>
 <PRE>
-public <B>JUnitParser</B>()</PRE>
+<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
+</FONT>public <B>JUnitParser</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD>XXX TestResultParser.all does not seem to ever be called so why must this be an Extension?
+<P>
+</DL>
+<HR>
+
+<A NAME="JUnitParser(boolean)"><!-- --></A><H3>
+JUnitParser</H3>
+<PRE>
+public <B>JUnitParser</B>(boolean&nbsp;keepLongStdio)</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>keepLongStdio</CODE> - if true, retain a suite's complete stdout/stderr even if this is huge and the suite passed<DT><B>Since:</B></DT>
+  <DD>1.358</DD>
+</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->

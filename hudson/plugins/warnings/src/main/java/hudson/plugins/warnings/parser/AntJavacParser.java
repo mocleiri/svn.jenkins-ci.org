@@ -15,14 +15,20 @@ public class AntJavacParser extends RegexpLineParser {
     /** Pattern of javac compiler warnings.
      */
     private static final String ANT_JAVAC_WARNING_PATTERN = "^\\s*(?:\\[.*\\])?\\s*(.*java):(\\d*):\\s*(?:warning|\u8b66\u544a)\\s*:\\s*(?:\\[(\\w*)\\])?\\s*(.*)$"
-        + "|\\s*\\[.*\\]\\s*warning.*\\]\\s*(.*\"(.*)\".*)";
+        + "|^\\s*\\[.*\\]\\s*warning.*\\]\\s*(.*\"(.*)\".*)$";
     // \u8b66\u544a is Japanese l10n
 
     /**
      * Creates a new instance of <code>AntJavacParser</code>.
      */
     public AntJavacParser() {
-        super(ANT_JAVAC_WARNING_PATTERN, WARNING_TYPE);
+        super(ANT_JAVAC_WARNING_PATTERN, WARNING_TYPE, true);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected boolean isLineInteresting(final String line) {
+        return line.contains("warning");
     }
 
     /**

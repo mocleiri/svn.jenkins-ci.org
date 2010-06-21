@@ -26,7 +26,10 @@ import hudson.model.Computer;
 import hudson.model.Descriptor.FormException;
 import hudson.model.Hudson;
 import hudson.model.JobProperty;
+import hudson.model.ParametersDefinitionProperty;
 import hudson.model.Node;
+import hudson.model.ParameterDefinition;
+import hudson.model.ParameterValue;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.remoting.VirtualChannel;
@@ -386,6 +389,25 @@ public class PerforceSCM extends SCM {
         }
     }
 
+    private Hashtable<String, String> getDefaultSubstitutions(AbstractProject project) {
+        Hashtable<String, String> subst = new Hashtable<String, String>();
+        ParametersDefinitionProperty pdp = (ParametersDefinitionProperty) project.getProperty(hudson.model.ParametersDefinitionProperty.class);
+        if(pdp != null) {
+            for (ParameterDefinition pd : pdp.getParameterDefinitions()) {
+                try {
+                    ParameterValue defaultValue = pd.getDefaultParameterValue();
+                    if(defaultValue != null) {
+                        String name = defaultValue.getName();
+                        String value = defaultValue.createVariableResolver(null).resolve(name);
+                        subst.put(name, value);
+                    }
+                } catch (Exception e) {
+                }
+            }
+        }
+        return subst;
+    }
+
     /**
      * Perform some manipulation on the workspace URI to get a valid local path
      * <p>
@@ -437,6 +459,7 @@ public class PerforceSCM extends SCM {
         //keep projectPath local so any modifications for slaves don't get saved
         String projectPath = substituteParameters(this.projectPath, build.getBuildVariables());
         String p4Label = substituteParameters(this.p4Label, build.getBuildVariables());
+        String viewMask = substituteParameters(this.viewMask, build.getBuildVariables());
         Depot depot = getDepot(launcher,workspace);
 
         //If we're doing a matrix build, we should always force sync.
@@ -448,7 +471,7 @@ public class PerforceSCM extends SCM {
         }
 
         try {
-            Workspace p4workspace = getPerforceWorkspace(projectPath, depot, build.getBuiltOn(), launcher, workspace, listener, false);
+            Workspace p4workspace = getPerforceWorkspace(projectPath, depot, build.getBuiltOn(), build, launcher, workspace, listener, false);
 
             saveWorkspaceIfDirty(depot, p4workspace, log);
 
@@ -676,20 +699,13 @@ public class PerforceSCM extends SCM {
 
         PrintStream logger = listener.getLogger();
         logger.println("Looking for changes...");
-
-        if(project.getLastBuild() == null){
-            logger.println("No previous build exists.");
-            return false;
-        }
         
+        Hashtable<String, String> subst = getDefaultSubstitutions(project);
+
         Depot depot = getDepot(launcher,workspace);
-        //Currently we are unable to poll for changes if there are parameters in the view
-        if(projectPath.contains("${")){
-            logger.println("Cannot poll for changes on a view that contains parameter substitutions. Aborting.");
-            return false;
-        }
+        
         try {
-            Workspace p4workspace = getPerforceWorkspace(projectPath, depot, project.getLastBuiltOn(), launcher, workspace, listener, false);
+            Workspace p4workspace = getPerforceWorkspace(substituteParameters(projectPath, subst), depot, project.getLastBuiltOn(), null, launcher, workspace, listener, false);
             if (p4workspace.isNew())
                 return true;
 
@@ -796,7 +812,7 @@ public class PerforceSCM extends SCM {
                     Counter counter = depot.getCounters().getCounter("change");
                     newestChange = counter.getValue();
 
-                    changeNumbers = depot.getChanges().getChangeNumbersInRange(p4workspace, lastChangeNumber, newestChange, viewMask);
+                    changeNumbers = depot.getChanges().getChangeNumbersInRange(p4workspace, lastChangeNumber, newestChange, substituteParameters(viewMask, getDefaultSubstitutions(project)));
                 } else {
                     String root = "//" + p4workspace.getName() + "/...";
                     changeNumbers = depot.getChanges().getChangeNumbers(root, -1, 2);
@@ -804,11 +820,13 @@ public class PerforceSCM extends SCM {
                 if (changeNumbers.isEmpty()) {
                     // Wierd, this shouldn't be!  I suppose it could happen if the
                     // view selects no files (e.g. //depot/non-existent-branch/...).
-                    // Just in case, let's try to build.
-                    return Boolean.TRUE;
+                    // This can also happen when using view masks with polling.
+                    logger.println("No changes found.");
+                    return Boolean.FALSE;
+                } else {
+                    highestSelectedChangeNumber = changeNumbers.get(0).intValue();
+                    logger.println("Latest submitted change selected by workspace is " + highestSelectedChangeNumber);
                 }
-                highestSelectedChangeNumber = changeNumbers.get(0).intValue();
-                logger.println("Latest submitted change selected by workspace is " + highestSelectedChangeNumber);
             }
 
             if (lastChangeNumber >= highestSelectedChangeNumber) {
@@ -870,7 +888,7 @@ public class PerforceSCM extends SCM {
     }
 
     private Workspace getPerforceWorkspace(String projectPath,
-            Depot depot, Node buildNode,
+            Depot depot, Node buildNode, AbstractBuild build,
             Launcher launcher, FilePath workspace, TaskListener listener, boolean dontChangeRoot)
         throws IOException, InterruptedException, PerforceException
     {
@@ -882,7 +900,11 @@ public class PerforceSCM extends SCM {
         // hostname to the end of the client spec
 
         String p4Client = this.p4Client;
-        p4Client = getEffectiveClientName(buildNode, workspace);
+        if (build != null) {
+            p4Client = getEffectiveClientName(build);
+        } else {
+            p4Client = getEffectiveClientName(buildNode, workspace);
+        }
 
         if (!nodeIsRemote(buildNode)) {
             log.print("Using master perforce client: ");
@@ -921,8 +943,18 @@ public class PerforceSCM extends SCM {
         
         // Ensure that the root is appropriate (it might be wrong if the user
         // created it, or if we previously built on another node).
-
-        String localPath = getLocalPathName(workspace, launcher.isUnix());
+        
+        // Both launcher and workspace can be null if requiresWorkspaceForPolling returns true
+        // So provide 'reasonable' default values.
+        boolean isunix = true;
+        if (launcher!= null)
+        	isunix=launcher.isUnix();
+        
+        String localPath = p4workspace.getRoot();
+        
+        if (workspace!=null)
+        	localPath = getLocalPathName(workspace, isunix);
+        
         if (!localPath.equals(p4workspace.getRoot()) && !dontChangeRoot && !dontUpdateClient) {
             log.println("Changing P4 Client Root to: " + localPath);
             forceSync = true;
@@ -967,6 +999,7 @@ public class PerforceSCM extends SCM {
             new StreamTaskListener(System.out).getLogger().println(
                     "Could not get effective client name: " + e.getMessage());
         } finally {
+            p4Client = substituteParameters(p4Client, build.getBuildVariables());
             return p4Client;
         }
     }
@@ -976,6 +1009,10 @@ public class PerforceSCM extends SCM {
 
         String nodeSuffix = "";
         String p4Client = this.p4Client;
+
+        if (workspace == null){
+            workspace = buildNode.getRootPath();
+        }
 
         if (nodeIsRemote(buildNode) && !getSlaveClientNameFormat().equals("")) {
             String host = "UNKNOWNHOST";
@@ -1764,7 +1801,32 @@ public class PerforceSCM extends SCM {
     }
 
     @Override public boolean requiresWorkspaceForPolling() {
-        return true;
+	// If slaveClientNameFormat is empty - not using a host specific name, so can always
+	// use 'master' to calculate poll changes without a local workspace
+	// This allows slaves to be thrown away and still allow polling to work
+
+	if(isSlaveClientNameStatic()) {
+		Logger.getLogger(PerforceSCM.class.getName()).info(
+			"No SlaveClientName supplied - assuming shared clientname - so no Workspace required for Polling");
+		return false;
+	}
+      return true;
+    }
+
+    public boolean isSlaveClientNameStatic() {
+        Map<String,String> testSub1 = new Hashtable<String,String>();
+        testSub1.put("hostname", "HOSTNAME1");
+        testSub1.put("hash", "HASH1");
+        testSub1.put("basename", this.p4Client);
+        String result1 = substituteParameters(getSlaveClientNameFormat(), testSub1);
+
+        Map<String,String> testSub2 = new Hashtable<String,String>();
+        testSub2.put("hostname", "HOSTNAME2");
+        testSub2.put("hash", "HASH2");
+        testSub2.put("basename", this.p4Client);
+        String result2 = substituteParameters(getSlaveClientNameFormat(), testSub2);
+
+        return result1.equals(result2);
     }
 
 }

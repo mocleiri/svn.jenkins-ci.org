@@ -32,6 +32,7 @@ import hudson.util.Scrambler;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.jfrog.hudson.ArtifactoryBuilder;
+import org.jfrog.hudson.ArtifactoryRedeployPublisher;
 import org.jfrog.hudson.ArtifactoryServer;
 import org.jfrog.hudson.BuildInfoResultAction;
 import org.jfrog.hudson.ServerDetails;
@@ -40,7 +41,6 @@ import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -60,17 +60,20 @@ public class ArtifactoryGradleConfigurator extends BuildWrapper {
     public final boolean deployMaven;
     public final boolean deployIvy;
     public final String remotePluginLocation;
+    public final boolean includeEnvVars;
 
 
     @DataBoundConstructor
     public ArtifactoryGradleConfigurator(ServerDetails details, boolean deployMaven, boolean deployIvy,
-            boolean deployArtifacts, String username, String password, String remotePluginLocation) {
+            boolean deployArtifacts, String username, String password, String remotePluginLocation,
+            boolean includeEnvVars) {
         this.details = details;
         this.deployMaven = deployMaven;
         this.deployIvy = deployIvy;
         this.deployArtifacts = deployArtifacts;
         this.username = username;
         this.remotePluginLocation = remotePluginLocation;
+        this.includeEnvVars = includeEnvVars;
         this.scrambledPassword = Scrambler.scramble(password);
     }
 
@@ -80,6 +83,19 @@ public class ArtifactoryGradleConfigurator extends BuildWrapper {
 
     public String getUsername() {
         return username;
+    }
+
+
+    public boolean isIncludeEnvVars() {
+        return includeEnvVars;
+    }
+
+    public String getRepositoryKey() {
+        return details != null ? details.repositoryKey : null;
+    }
+
+    public String getDownloadRepositoryKey() {
+        return details != null ? details.downloadRepositoryKey : null;
     }
 
     public String getArtifactoryName() {
@@ -112,34 +128,38 @@ public class ArtifactoryGradleConfigurator extends BuildWrapper {
             build.setResult(Result.FAILURE);
         }
         GradleInitScriptWriter writer = new GradleInitScriptWriter(this, build.getEnvironment(listener), build);
-        File initScript = null;
-        try {
-            URI initScriptUri = build.getWorkspace().child("init-artifactory.gradle").toURI();
-            initScript = new File(initScriptUri);
-        } catch (Exception e) {
-            listener.getLogger().format("Could not generate new File %s for initialization", "init-artifactory.gradle")
-                    .println();
-            build.setResult(Result.FAILURE);
-        }
+        File initScript = new File(build.getArtifactsDir().getParent(), ("init-artifactory.gradle"));
+        String path = initScript.getAbsolutePath();
+        path = path.replace('\\', '/');
+        initScript = new File(path);
         try {
             FileUtils.writeStringToFile(initScript, writer.generateInitScript(), "UTF-8");
         } catch (Exception e) {
             listener.getLogger().println("Error occurred while writing Gradle Init Script");
             build.setResult(Result.FAILURE);
         }
-        final String initScriptPath = initScript.getAbsolutePath();
+        String filePath = initScript.getAbsolutePath();
+        filePath = filePath.replace('\\', '/');
+        final String finalFilePath = "\"" + filePath + "\"";
         return new Environment() {
             @Override
             public void buildEnvVars(Map<String, String> env) {
-                env.put("GRADLE_EXT_SWITCHES", "--init-script " + initScriptPath);
+                env.put("GRADLE_EXT_SWITCHES", "--init-script " + finalFilePath);
                 env.put("GRADLE_EXT_TASKS", "buildInfo");
             }
 
             @Override
             public boolean tearDown(AbstractBuild build, BuildListener listener)
                     throws IOException, InterruptedException {
-                if (build.getResult().isBetterOrEqualTo(Result.SUCCESS)) {
-                    build.getActions().add(new BuildInfoResultAction(getDetails(), build));
+                Result result = build.getResult();
+                if (result == null) {
+                    return false;
+                }
+                if (result.isBetterOrEqualTo(Result.SUCCESS)) {
+                    ArtifactoryRedeployPublisher publisher =
+                            new ArtifactoryRedeployPublisher(getDetails(), deployArtifacts, username, getPassword(),
+                                    includeEnvVars);
+                    build.getActions().add(new BuildInfoResultAction(publisher, build));
                     return true;
                 }
                 return false;

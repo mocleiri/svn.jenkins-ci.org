@@ -107,6 +107,20 @@ public class Gcc4LinkerParserTest extends ParserTester {
         assertEquals(THERE_ARE_WARNINGS_FOUND, 0, warnings.size());
     }
 
+    /**
+     * Parses a warning log with 1 warning.
+     *
+     * @throws IOException
+     *      if the file could not be read
+     * @see <a href="http://issues.hudson-ci.org/browse/HUDSON-6563">Issue 6563</a>
+     */
+    @Test
+    public void issue6563() throws IOException {
+        Collection<FileAnnotation> warnings = new Gcc4LinkerParser().parse(openFile("issue6563.txt"));
+
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 0, warnings.size());
+    }
+
     /** {@inheritDoc} */
     @Override
     protected String getWarningsFile() {

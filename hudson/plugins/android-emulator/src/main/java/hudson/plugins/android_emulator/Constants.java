@@ -19,7 +19,8 @@ interface Constants {
     static final String REGEX_LOCALE = "[a-z]{2}_[A-Z]{2}";
     static final String REGEX_SCREEN_DENSITY = "[0-9]{2,4}|[hlm]dpi";
     static final String REGEX_SCREEN_RESOLUTION = "[0-9]{3,4}x[0-9]{3,4}";
-    static final String REGEX_SCREEN_RESOLUTION_FULL = "F?[HQW]{1,2}VGA|"+ REGEX_SCREEN_RESOLUTION;
+    static final String REGEX_SCREEN_RESOLUTION_ALIAS = "([HQ]|F?WQ?)VGA";
+    static final String REGEX_SCREEN_RESOLUTION_FULL = REGEX_SCREEN_RESOLUTION_ALIAS +"|"+ REGEX_SCREEN_RESOLUTION;
 
 }
 
@@ -33,8 +34,10 @@ class AndroidPlatform implements Serializable {
     static final AndroidPlatform SDK_2_0 = new AndroidPlatform("2.0", 5);
     static final AndroidPlatform SDK_2_0_1 = new AndroidPlatform("2.0.1", 6);
     static final AndroidPlatform SDK_2_1 = new AndroidPlatform("2.1", 7);
+    static final AndroidPlatform SDK_2_2 = new AndroidPlatform("2.2", 8);
     static final AndroidPlatform[] PRESETS = new AndroidPlatform[] { SDK_1_1, SDK_1_5, SDK_1_6,
-                                                                     SDK_2_0, SDK_2_0_1, SDK_2_1 };
+                                                                     SDK_2_0, SDK_2_0_1, SDK_2_1,
+                                                                     SDK_2_2 };
 
     private final String name;
     private final int level;
@@ -140,7 +143,7 @@ class ScreenDensity implements Serializable {
 
     @Override
     public String toString() {
-        return new Integer(dpi).toString();
+        return Integer.toString(dpi);
     };
 
 }

@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.tools.ant.DirectoryScanner;
 
@@ -76,6 +77,9 @@ public class ParserRegistry {
         parsers.add(new FlexSDKParser());
         parsers.add(new PhpParser());
         parsers.add(new CoolfluxChessccParser());
+        parsers.add(new P4Parser());
+        parsers.add(new RobocopyParser());
+        parsers.add(new DoxygenParser());
 
         return ImmutableList.copyOf(parsers);
     }
@@ -143,7 +147,14 @@ public class ParserRegistry {
     public Collection<FileAnnotation> parse(final File file) throws IOException {
         List<FileAnnotation> allAnnotations = new ArrayList<FileAnnotation>();
         for (WarningsParser parser : parsers) {
-            allAnnotations.addAll(parser.parse(createReader(file)));
+            Reader input = null;
+            try {
+                input = createReader(file);
+                allAnnotations.addAll(parser.parse(input));
+            }
+            finally {
+                IOUtils.closeQuietly(input);
+            }
         }
         return applyExcludeFilter(allAnnotations);
     }
@@ -158,11 +169,16 @@ public class ParserRegistry {
      * @throws IOException Signals that an I/O exception has occurred.
      */
     public Collection<FileAnnotation> parse(final InputStream file) throws IOException {
-        List<FileAnnotation> allAnnotations = new ArrayList<FileAnnotation>();
-        for (WarningsParser parser : parsers) {
-            allAnnotations.addAll(parser.parse(createReader(file)));
+        try {
+            List<FileAnnotation> allAnnotations = new ArrayList<FileAnnotation>();
+            for (WarningsParser parser : parsers) {
+                allAnnotations.addAll(parser.parse(createReader(file)));
+            }
+            return applyExcludeFilter(allAnnotations);
         }
-        return applyExcludeFilter(allAnnotations);
+        finally {
+            IOUtils.closeQuietly(file);
+        }
     }
 
 
@@ -207,6 +223,7 @@ public class ParserRegistry {
      * @return the reader
      * @throws FileNotFoundException if the file does not exist
      */
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings("OBL")
     protected Reader createReader(final File file) throws FileNotFoundException {
         return createReader(new FileInputStream(file));
     }
@@ -226,6 +243,8 @@ public class ParserRegistry {
      * Filters file names based on Ant file-set patterns.
      */
     private static final class FileFilter extends DirectoryScanner {
+        private static final String SEPARATOR = ",\\s*";
+
         /**
          * Creates a new instance of {@link FileFilter}.
          *
@@ -241,13 +260,13 @@ public class ParserRegistry {
                 setIncludes(new String[] {"**/*"});
             }
             else {
-                setIncludes(includePattern.split(",\\s*"));
+                setIncludes(includePattern.split(SEPARATOR));
             }
             if (StringUtils.isEmpty(excludePattern)) {
                 setExcludes(new String[] {});
             }
             else {
-                setExcludes(excludePattern.split(",\\s*"));
+                setExcludes(excludePattern.split(SEPARATOR));
             }
         }
 

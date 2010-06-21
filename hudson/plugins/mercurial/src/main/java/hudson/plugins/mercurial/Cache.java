@@ -1,5 +1,7 @@
 package hudson.plugins.mercurial;
 
+import edu.umd.cs.findbugs.annotations.CheckForNull;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Launcher;
@@ -50,11 +52,12 @@ class Cache {
 
     private static final Map<String, Cache> CACHES = new HashMap<String, Cache>();
 
-    public synchronized static Cache fromURL(String remote) {
+    public synchronized static @NonNull Cache fromURL(String remote) {
         String h = hashSource(remote);
         Cache cache = CACHES.get(h);
-        if (cache==null)
-            CACHES.put(h,cache=new Cache(remote,h));
+        if (cache == null) {
+            CACHES.put(h, cache = new Cache(remote, h));
+        }
         return cache;
     }
 
@@ -68,7 +71,7 @@ class Cache {
      * @return
      *      The file path on the {@code node} to the local repository cache, cloned off from the master cache.
      */
-    FilePath repositoryCache(MercurialSCM config, Node node, Launcher launcher, TaskListener listener, boolean fromPolling)
+    @CheckForNull FilePath repositoryCache(MercurialSCM config, Node node, Launcher launcher, TaskListener listener, boolean fromPolling)
             throws IOException, InterruptedException {
         boolean wasLocked = lock.isLocked();
         if (wasLocked) {
@@ -148,7 +151,7 @@ class Cache {
                 }
                 if (masterTransfer.exists()) {
                     masterTransfer.copyTo(localTransfer);
-                    if (MercurialSCM.joinWithPossibleTimeout(slaveHg.unbundle("xfer.log").pwd(localCache), fromPolling, listener) != 0) {
+                    if (MercurialSCM.joinWithPossibleTimeout(slaveHg.unbundle("xfer.hg").pwd(localCache), fromPolling, listener) != 0) {
                         listener.error("Failed to unbundle " + localTransfer);
                         return null;
                     }

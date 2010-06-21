@@ -13,13 +13,19 @@ public class AcuCobolParser extends RegexpLineParser {
     /** Warning type of this parser. */
     static final String WARNING_TYPE = "AcuCobol Compiler";
     /** Pattern of cobol compiler warnings. */
-    private static final String ACUCOBOL_WARNING_PATTERN = "\\s*(\\[.*\\])?\\s*?(.*), line ([0-9]*): Warning: (.*)";
+    private static final String ACUCOBOL_WARNING_PATTERN = "^\\s*(\\[.*\\])?\\s*?(.*), line ([0-9]*): Warning: (.*)$";
 
     /**
      * Creates a new instance of {@link AcuCobolParser}.
      */
     public AcuCobolParser() {
-        super(ACUCOBOL_WARNING_PATTERN, WARNING_TYPE);
+        super(ACUCOBOL_WARNING_PATTERN, WARNING_TYPE, true);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected boolean isLineInteresting(final String line) {
+        return line.contains("Warning");
     }
 
     /**

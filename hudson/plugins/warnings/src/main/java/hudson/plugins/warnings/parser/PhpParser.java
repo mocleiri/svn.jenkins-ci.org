@@ -19,13 +19,19 @@ public class PhpParser extends RegexpLineParser {
     /** Warning type of this parser. */
     static final String WARNING_TYPE = "PHP Runtime Warning";
     /** Pattern of PHP runtime warnings. */
-    private static final String PHP_WARNING_PATTERN = ".*(PHP Warning|PHP Notice|PHP Fatal error):\\s+(.+ in (.+) on line (\\d+))";
+    private static final String PHP_WARNING_PATTERN = "^.*(PHP Warning|PHP Notice|PHP Fatal error):\\s+(.+ in (.+) on line (\\d+))$";
 
     /**
      * Creates a new instance of {@link PhpParser}.
      */
     public PhpParser() {
-        super(PHP_WARNING_PATTERN, WARNING_TYPE);
+        super(PHP_WARNING_PATTERN, WARNING_TYPE, true);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected boolean isLineInteresting(final String line) {
+        return line.contains("PHP");
     }
 
     /** {@inheritDoc} */

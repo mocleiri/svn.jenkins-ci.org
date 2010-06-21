@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.TaskListener (Hudson main module 1.357 API)
+Uses of Interface hudson.model.TaskListener (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.TaskListener (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson main module 1.357 API)";
+        parent.document.title="Uses of Interface hudson.model.TaskListener (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -266,6 +266,16 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given a tgz/zip file, extracts it to the given target directory, if necessary.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B>Proc.</B><B><A HREF="../../../hudson/Proc.html#joinWithTimeout(long, java.util.concurrent.TimeUnit, hudson.model.TaskListener)">joinWithTimeout</A></B>(long&nbsp;timeout,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/TimeUnit.html?is-external=true" title="class or interface in java.util.concurrent">TimeUnit</A>&nbsp;unit,
+                <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Like <A HREF="../../../hudson/Proc.html#join()"><CODE>Proc.join()</CODE></A> but can be given a maximum time to wait.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -796,6 +806,22 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Cause.</B><B><A HREF="../../../hudson/model/Cause.html#print(hudson.model.TaskListener)">print</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report a line to the listener about this cause.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Cause.UpstreamCause.</B><B><A HREF="../../../hudson/model/Cause.UpstreamCause.html#print(hudson.model.TaskListener)">print</A></B>(<A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>DependencyGraph.Dependency.</B><B><A HREF="../../../hudson/model/DependencyGraph.Dependency.html#shouldTriggerBuild(hudson.model.AbstractBuild, hudson.model.TaskListener, java.util.List)">shouldTriggerBuild</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
                    <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
@@ -1233,6 +1259,19 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
+<TD><CODE><B>Channels.</B><B><A HREF="../../../hudson/slaves/Channels.html#newJVM(java.lang.String, hudson.model.TaskListener, hudson.util.JVMBuilder, hudson.FilePath, hudson.util.ClasspathBuilder)">newJVM</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;displayName,
+       <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
+       <A HREF="../../../hudson/util/JVMBuilder.html" title="class in hudson.util">JVMBuilder</A>&nbsp;vmb,
+       <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
+       <A HREF="../../../hudson/util/ClasspathBuilder.html" title="class in hudson.util">ClasspathBuilder</A>&nbsp;classpath)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a new JVM with the given classpath, establish a communication channel,
+ and return a <A HREF="../../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>ComputerListener.</B><B><A HREF="../../../hudson/slaves/ComputerListener.html#onOnline(hudson.model.Computer, hudson.model.TaskListener)">onOnline</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c,
          <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)</CODE>
@@ -1541,6 +1580,14 @@ Uses of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hu
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/util/package-summary.html">hudson.util</A> that implement <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/util/AbstractTaskListener.html" title="class in hudson.util">AbstractTaskListener</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partial default implementation of <A HREF="../../../hudson/model/TaskListener.html" title="interface in hudson.model"><CODE>TaskListener</CODE></A></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

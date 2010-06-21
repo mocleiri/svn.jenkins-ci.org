@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ComputerSet (Hudson main module 1.357 API)
+ComputerSet (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerSet (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerSet (Hudson main module 1.357 API)";
+        parent.document.title="ComputerSet (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -144,6 +144,14 @@ Serves as the top of <A HREF="../../hudson/model/Computer.html" title="class in 
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ComputerSet.html#checkName(java.lang.String)">checkName</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes sure that the given name is good as a slave name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -570,11 +578,11 @@ doCreateItem</H3>
 <PRE>
 public void <B>doCreateItem</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                          org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                         <FONT SIZE="-1">@QueryParameter(value="name")</FONT>
+                         <FONT SIZE="-1">@QueryParameter</FONT>
                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                         <FONT SIZE="-1">@QueryParameter(value="mode")</FONT>
+                         <FONT SIZE="-1">@QueryParameter</FONT>
                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;mode,
-                         <FONT SIZE="-1">@QueryParameter(value="from")</FONT>
+                         <FONT SIZE="-1">@QueryParameter</FONT>
                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;from)
                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                          javax.servlet.ServletException</PRE>
@@ -611,6 +619,23 @@ public void <B>doDoCreateItem</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="checkName(java.lang.String)"><!-- --></A><H3>
+checkName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>checkName</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)
+                 throws <A HREF="../../hudson/model/Failure.html" title="class in hudson.model">Failure</A></PRE>
+<DL>
+<DD>Makes sure that the given name is good as a slave name.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>trimmed name if valid; throws ParseException if not
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../hudson/model/Failure.html" title="class in hudson.model">Failure</A></CODE></DL>
 </DD>
 </DL>
 <HR>

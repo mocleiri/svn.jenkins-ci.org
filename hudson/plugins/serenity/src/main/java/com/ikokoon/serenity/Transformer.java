@@ -39,10 +39,8 @@ public class Transformer implements ClassFileTransformer, IConstants {
 	private static boolean INITIALISED = false;
 	/** The chain of adapters for analysing the classes. */
 	private static Class<ClassVisitor>[] CLASS_ADAPTER_CLASSES;
-
-	private static Thread shutdownHook = new Thread() {
-
-	};
+	/** The shutdown hook will clean, accumulate and aggregate the data. */
+	private static Thread shutdownHook;
 
 	/**
 	 * This method is called by the JVM at startup. This method will only be called if the command line for starting the JVM has the following on it:
@@ -96,39 +94,52 @@ public class Transformer implements ClassFileTransformer, IConstants {
 			IDataBase ramDataBase = IDataBase.DataBaseManager.getDataBase(DataBaseRam.class, IConstants.DATABASE_FILE_RAM, odbDataBase);
 			DataBaseToolkit.clear(ramDataBase);
 
+			Listener.listen(ramDataBase);
+
 			addShutdownHook(ramDataBase);
 
-			Collector.setDataBase(ramDataBase);
+			// Initialise the collector and the snapshot taker for the profiler
+			Collector.initialize(ramDataBase);
 		}
 	}
 
+	/**
+	 * This method adds the shutdown hook that will clean and accumulate the data when the Jvm shuts down.
+	 *
+	 * @param dataBase
+	 *            the database to get the data from
+	 */
 	private static void addShutdownHook(final IDataBase dataBase) {
 		shutdownHook = new Thread() {
 			public void run() {
 				Date start = new Date();
-				LOGGER.info("Starting accumulation : " + start);
+				LOGGER.warn("Starting accumulation : " + start);
 
 				long processStart = System.currentTimeMillis();
 				new Accumulator(null).execute();
-				LOGGER.info("Accumlulator : " + (System.currentTimeMillis() - processStart));
+				LOGGER.warn("Accumlulator : " + (System.currentTimeMillis() - processStart));
 
 				processStart = System.currentTimeMillis();
 				new Cleaner(null, dataBase).execute();
-				LOGGER.info("Cleaner : " + (System.currentTimeMillis() - processStart));
+				LOGGER.warn("Cleaner : " + (System.currentTimeMillis() - processStart));
 
 				processStart = System.currentTimeMillis();
 				new Aggregator(null, dataBase).execute();
-				LOGGER.info("Aggregator : " + (System.currentTimeMillis() - processStart));
+				LOGGER.warn("Aggregator : " + (System.currentTimeMillis() - processStart));
+
+				processStart = System.currentTimeMillis();
+				Reporter.report(dataBase);
+				LOGGER.warn("Reporter : " + (System.currentTimeMillis() - processStart));
 
 				processStart = System.currentTimeMillis();
 				dataBase.close();
-				LOGGER.info("Close database : " + (System.currentTimeMillis() - processStart));
+				LOGGER.warn("Close database : " + (System.currentTimeMillis() - processStart));
 
 				Date end = new Date();
 				long million = 1000 * 1000;
 				long duration = end.getTime() - start.getTime();
-				LOGGER.info("Finished accumulation : " + end + ", duration : " + duration + " millis");
-				LOGGER.info("Total memory : " + (Runtime.getRuntime().totalMemory() / million) + ", max memory : "
+				LOGGER.warn("Finished accumulation : " + end + ", duration : " + duration + " millis");
+				LOGGER.warn("Total memory : " + (Runtime.getRuntime().totalMemory() / million) + ", max memory : "
 						+ (Runtime.getRuntime().maxMemory() / million) + ", free memory : " + (Runtime.getRuntime().freeMemory() / million));
 			}
 		};
@@ -159,10 +170,11 @@ public class Transformer implements ClassFileTransformer, IConstants {
 			throws IllegalClassFormatException {
 		// Can we implement a classloader here? Would it make things simpler/more robust/faster?
 		// Thread.currentThread().setContextClassLoader(and the custom classloader);
-		if (loader != ClassLoader.getSystemClassLoader()) {
-			LOGGER.debug("No system classloader : " + className);
-			return classBytes;
-		}
+		// We don't need this anymore as we will be profiling servers and they have their own classloaders
+		// if (loader != ClassLoader.getSystemClassLoader()) {
+		// LOGGER.debug("No system classloader : " + className);
+		// return classBytes;
+		// }
 		if (Configuration.getConfiguration().excluded(className)) {
 			LOGGER.debug("Excluded class : " + className);
 			return classBytes;
@@ -183,6 +195,14 @@ public class Transformer implements ClassFileTransformer, IConstants {
 		return classBytes;
 	}
 
+	/**
+	 * This method writes the transformed classes to the file system so they can be viewed later.
+	 *
+	 * @param className
+	 *            the name of the class file
+	 * @param classBytes
+	 *            the bytes of byte code to write
+	 */
 	private void writeClass(String className, byte[] classBytes) {
 		// Write the class so we can check it with JD decompiler visually
 		String directoryPath = Toolkit.dotToSlash(Toolkit.classNameToPackageName(className));

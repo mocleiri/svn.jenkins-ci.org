@@ -113,7 +113,7 @@ public class DuplicateCode extends AbstractAnnotation {
             message.append("<li>");
             message.append(String.format("<a href=\"link.%s.%s/#%s\">%s (%s)</a>",
                     getKey(), duplication.getKey(), duplication.getPrimaryLineNumber(),
-                    duplication.getShortFileName(), duplication.getPrimaryLineNumber()));
+                    duplication.getLinkName(), duplication.getPrimaryLineNumber()));
             message.append("</li>");
         }
         message.append("</ul>");
@@ -186,7 +186,7 @@ public class DuplicateCode extends AbstractAnnotation {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        int prime = 31;
+        int prime = 31; // NOCHECKSTYLE
         int result = super.hashCode();
         result = prime * result + ((sourceCode == null) ? 0 : sourceCode.hashCode());
         return result;

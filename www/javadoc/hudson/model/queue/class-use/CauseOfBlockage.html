@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.queue.CauseOfBlockage (Hudson main module 1.357 API)
+Uses of Class hudson.model.queue.CauseOfBlockage (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.queue.CauseOfBlockage (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.queue.CauseOfBlockage (Hudson main module 1.357 API)";
+        parent.document.title="Uses of Class hudson.model.queue.CauseOfBlockage (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -98,6 +98,10 @@ Packages that use <A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" 
 <TD><A HREF="#hudson.model.queue"><B>hudson.model.queue</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
+<TD>Code related to slaves.&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -138,6 +142,15 @@ Uses of <A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="cla
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../hudson/model/package-summary.html">hudson.model</A> that return <A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B>Node.</B><B><A HREF="../../../../hudson/model/Node.html#canTake(hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the <A HREF="../../../../hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> to determine whether or not this node can
+ take the given task.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -247,11 +260,54 @@ Uses of <A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="cla
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B>QueueTaskDispatcher.</B><B><A HREF="../../../../hudson/model/queue/QueueTaskDispatcher.html#canTake(hudson.model.Node, hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever <A HREF="../../../../hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> is considering to execute the given task on a given node.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
 <TD><CODE><B>CauseOfBlockage.</B><B><A HREF="../../../../hudson/model/queue/CauseOfBlockage.html#fromMessage(org.jvnet.localizer.Localizable)">fromMessage</A></B>(org.jvnet.localizer.Localizable&nbsp;l)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a simple implementation backed by <CODE>Localizable</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B>QueueTaskFilter.</B><B><A HREF="../../../../hudson/model/queue/QueueTaskFilter.html#getCauseOfBlockage()">getCauseOfBlockage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.slaves"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A> in <A HREF="../../../../hudson/slaves/package-summary.html">hudson.slaves</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../../hudson/slaves/package-summary.html">hudson.slaves</A> that return <A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B>NodeProperty.</B><B><A HREF="../../../../hudson/slaves/NodeProperty.html#canTake(hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the <A HREF="../../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> to help determine whether or not it should
+ take the given task.</TD>
 </TR>
 </TABLE>
 &nbsp;

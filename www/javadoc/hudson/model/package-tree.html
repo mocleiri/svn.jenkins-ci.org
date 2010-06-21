@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model Class Hierarchy (Hudson main module 1.357 API)
+hudson.model Class Hierarchy (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model Class Hierarchy (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model Class Hierarchy (Hudson main module 1.357 API)";
+        parent.document.title="hudson.model Class Hierarchy (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -170,6 +170,13 @@ Class Hierarchy
 <LI TYPE="circle">com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter (implements com.thoughtworks.xstream.converters.SingleValueConverter)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/BuildAuthorizationToken.ConverterImpl.html" title="class in hudson.model"><B>BuildAuthorizationToken.ConverterImpl</B></A></UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/AbstractTaskListener.html" title="class in hudson.util"><B>AbstractTaskListener</B></A> (implements hudson.model.<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>)
+<UL>
+<LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><B>StreamTaskListener</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A>, java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
+<UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/StreamBuildListener.html" title="class in hudson.model"><B>StreamBuildListener</B></A> (implements hudson.model.<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>)
+</UL>
+</UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/BuildAuthorizationToken.html" title="class in hudson.model"><B>BuildAuthorizationToken</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Cause.html" title="class in hudson.model"><B>Cause</B></A><UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Cause.LegacyCodeCause.html" title="class in hudson.model"><B>Cause.LegacyCodeCause</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Cause.RemoteCause.html" title="class in hudson.model"><B>Cause.RemoteCause</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Cause.UpstreamCause.html" title="class in hudson.model"><B>Cause.UpstreamCause</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Cause.UserCause.html" title="class in hudson.model"><B>Cause.UserCause</B></A></UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/CauseAction.html" title="class in hudson.model"><B>CauseAction</B></A> (implements hudson.model.queue.<A HREF="../../hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue">FoldableAction</A>)
@@ -257,10 +264,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/FreeStyleBuild.RunnerImpl.html" title="class in hudson.model"><B>FreeStyleBuild.RunnerImpl</B></A></UL>
 </UL>
 </UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Run.Summary.html" title="class in hudson.model"><B>Run.Summary</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model"><B>Slave.JnlpJar</B></A><LI TYPE="circle">hudson.util.<A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><B>StreamTaskListener</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A>, java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>, hudson.model.<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>)
-<UL>
-<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/StreamBuildListener.html" title="class in hudson.model"><B>StreamBuildListener</B></A> (implements hudson.model.<A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>)
-</UL>
+<LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Run.Summary.html" title="class in hudson.model"><B>Run.Summary</B></A><LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model"><B>Slave.JnlpJar</B></A> (implements org.kohsuke.stapler.HttpResponse)
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/TaskThread.ListenerAndText.html" title="class in hudson.model"><B>TaskThread.ListenerAndText</B></A><LI TYPE="circle">java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html?is-external=true" title="class or interface in java.lang"><B>Thread</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>)
 <UL>
 <LI TYPE="circle">hudson.model.<A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><B>Executor</B></A> (implements hudson.model.<A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)

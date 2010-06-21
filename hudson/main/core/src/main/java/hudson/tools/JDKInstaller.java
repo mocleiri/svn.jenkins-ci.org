@@ -29,6 +29,7 @@ import hudson.FilePath;
 import hudson.ProxyConfiguration;
 import hudson.Util;
 import hudson.Launcher;
+import hudson.model.Hudson;
 import hudson.util.FormValidation;
 import hudson.util.ArgumentListBuilder;
 import hudson.util.IOException2;
@@ -38,6 +39,7 @@ import hudson.model.DownloadService.Downloadable;
 import hudson.model.JDK;
 import static hudson.tools.JDKInstaller.Preference.*;
 import hudson.remoting.Callable;
+import org.jvnet.robust_http_client.RetryableHttpStream;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import org.apache.commons.io.IOUtils;
@@ -48,6 +50,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.InputStreamReader;
@@ -57,7 +61,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -108,8 +111,10 @@ public class JDKInstaller extends ToolInstaller {
             }
             // already installed?
             FilePath marker = expectedLocation.child(".installedByHudson");
-            if(marker.exists())
+            if (marker.exists() && marker.readToString().equals(id)) {
                 return expectedLocation;
+            }
+            expectedLocation.deleteRecursive();
             expectedLocation.mkdirs();
 
             Platform p = Platform.of(node);
@@ -124,7 +129,7 @@ public class JDKInstaller extends ToolInstaller {
 
             // successfully installed
             file.delete();
-            marker.touch(System.currentTimeMillis());
+            marker.write(id, null);
 
         } catch (DetectionFailedException e) {
             out.println("JDK installation skipped: "+e.getMessage());
@@ -273,12 +278,39 @@ public class JDKInstaller extends ToolInstaller {
     }
 
     /**
+     * This is where we locally cache this JDK.
+     */
+    private File getLocalCacheFile(Platform platform, CPU cpu) {
+        return new File(Hudson.getInstance().getRootDir(),"cahce/jdks/"+platform+"/"+cpu+"/"+id);
+    }
+
+    /**
      * Performs a license click through and obtains the one-time URL for downloading bits.
      */
     public URL locate(TaskListener log, Platform platform, CPU cpu) throws IOException {
+        File cache = getLocalCacheFile(platform, cpu);
+        if (cache.exists()) return cache.toURL();
+
         HttpURLConnection con = locateStage1(platform, cpu);
         String page = IOUtils.toString(con.getInputStream());
-        return locateStage2(log, page);
+        URL src = locateStage2(log, page);
+
+        // download to a temporary file and rename it in to handle concurrency and failure correctly,
+        File tmp = new File(cache.getPath()+".tmp");
+        tmp.getParentFile().mkdirs();
+        try {
+            FileOutputStream out = new FileOutputStream(tmp);
+            try {
+                IOUtils.copy(new RetryableHttpStream(src), out);
+            } finally {
+                out.close();
+            }
+
+            tmp.renameTo(cache);
+            return cache.toURL();
+        } finally {
+            tmp.delete();
+        }
     }
 
     @SuppressWarnings("unchecked") // dom4j doesn't do generics, apparently... should probably switch to XOM
@@ -361,7 +393,7 @@ public class JDKInstaller extends ToolInstaller {
         }
     }
 
-    private URL locateStage2(TaskListener log, String page) throws MalformedURLException {
+    private URL locateStage2(TaskListener log, String page) throws IOException {
         Pattern HREF = Pattern.compile("<a href=\"(http://cds.sun.com/[^\"]+/VerifyItem-Start[^\"]+)\"");
         Matcher m = HREF.matcher(page);
         // this page contains a missing --> that confuses dom4j/jtidy
@@ -382,6 +414,10 @@ public class JDKInstaller extends ToolInstaller {
 
             urls.add(url);
             LOGGER.fine("Found a download candidate: "+ url);
+        }
+
+        if (urls.isEmpty()) {
+            throw new IOException("found no matches in: " + page);
         }
 
         // prefer the first match because sometimes "optional downloads" follow the main bundle

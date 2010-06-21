@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Util (Hudson main module 1.357 API)
+Util (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Util (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Util (Hudson main module 1.357 API)";
+        parent.document.title="Util (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -515,7 +515,7 @@ Various utility methods that don't have more proper home.
 <TD><CODE><B><A HREF="../hudson/Util.html#getTimeSpanString(long)">getTimeSpanString</A></B>(long&nbsp;duration)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a human readable text of the time duration.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a human readable text of the time duration, for example "3 minutes 40 seconds".</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1307,7 +1307,7 @@ getTimeSpanString</H3>
 <PRE>
 public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getTimeSpanString</B>(long&nbsp;duration)</PRE>
 <DL>
-<DD>Returns a human readable text of the time duration.
+<DD>Returns a human readable text of the time duration, for example "3 minutes 40 seconds".
  This version should be used for representing a duration of some activity (like build)
 <P>
 <DD><DL>

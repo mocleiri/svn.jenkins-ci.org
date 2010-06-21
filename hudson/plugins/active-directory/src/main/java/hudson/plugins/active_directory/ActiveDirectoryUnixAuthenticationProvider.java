@@ -1,29 +1,10 @@
 package hudson.plugins.active_directory;
 
-import static javax.naming.directory.SearchControls.SUBTREE_SCOPE;
-import hudson.plugins.active_directory.ActiveDirectorySecurityRealm.DesciprotrImpl;
 import hudson.security.GroupDetails;
 import hudson.security.SecurityRealm;
 import hudson.security.UserMayOrMayNotExistException;
-
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.naming.Context;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.SearchControls;
-import javax.naming.directory.SearchResult;
-
 import org.acegisecurity.AuthenticationException;
+import org.acegisecurity.AuthenticationServiceException;
 import org.acegisecurity.BadCredentialsException;
 import org.acegisecurity.GrantedAuthority;
 import org.acegisecurity.GrantedAuthorityImpl;
@@ -35,7 +16,21 @@ import org.acegisecurity.userdetails.UserDetailsService;
 import org.acegisecurity.userdetails.UsernameNotFoundException;
 import org.springframework.dao.DataAccessException;
 
-import com.sun.jndi.ldap.LdapCtxFactory;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.Attribute;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static javax.naming.directory.SearchControls.SUBTREE_SCOPE;
 
 /**
  * {@link AuthenticationProvider} with Active Directory, through LDAP.
@@ -47,9 +42,16 @@ public class ActiveDirectoryUnixAuthenticationProvider extends AbstractUserDetai
     implements UserDetailsService, GroupDetailsService {
 
     private final String[] domainNames;
+    private final String site;
+    private final String bindName, bindPassword;
+    private final ActiveDirectorySecurityRealm.DesciprotrImpl descriptor;
 
-    public ActiveDirectoryUnixAuthenticationProvider(String domainName) {
-        this.domainNames = domainName.split(",");
+    public ActiveDirectoryUnixAuthenticationProvider(ActiveDirectorySecurityRealm realm) {
+        this.domainNames = realm.domain.split(",");
+        this.site = realm.site;
+        this.bindName = realm.bindName;
+        this.bindPassword = realm.bindPassword==null ? null : realm.bindPassword.toString();
+        this.descriptor = realm.getDescriptor();
     }
 
     /**
@@ -87,50 +89,87 @@ public class ActiveDirectoryUnixAuthenticationProvider extends AbstractUserDetai
     }
     
     private UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication, String domainName) throws AuthenticationException {
-        String password = null;
-        if(authentication!=null)
-            password = (String) authentication.getCredentials();
-
-        // bind by using the specified username/password
-        Hashtable props = new Hashtable();
-        String principalName = username + '@' + domainName;
-        props.put(Context.SECURITY_PRINCIPAL, principalName);
-        props.put(Context.SECURITY_CREDENTIALS,password);
-        props.put(Context.REFERRAL, "follow");
-        DirContext context;
+        // when we use custom socket factory below, every LDAP operations result in a classloading via context classloader,
+        // so we need it to resolve.
+        ClassLoader ccl = Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
         try {
-            context = LdapCtxFactory.getLdapCtxInstance(
-                    "ldap://" + DesciprotrImpl.INSTANCE.obtainLDAPServer(domainName) + '/',
-                    props);
-        } catch (NamingException e) {
-            LOGGER.log(Level.WARNING,"Failed to bind to LDAP",e);
-            throw new BadCredentialsException("Either no such user '"+principalName+"' or incorrect password",e);
+            String password = null;
+            if(authentication!=null)
+                password = (String) authentication.getCredentials();
+
+            List<SocketInfo> ldapServers;
+            try {
+                ldapServers = descriptor.obtainLDAPServer(domainName,site);
+            } catch (NamingException e) {
+                LOGGER.log(Level.WARNING,"Failed to find the LDAP service",e);
+                throw new AuthenticationServiceException("Failed to find the LDAP service for the domain "+domainName,e);
+            }
+
+            return retrieveUser(username, password, domainName, ldapServers);
+        } finally {
+            Thread.currentThread().setContextClassLoader(ccl);
+        }
+    }
+
+    /**
+     * Retrieves the user by using the given list of available AD LDAP servers.
+     *
+     * @param domainName
+     */
+    public UserDetails retrieveUser(String username, String password, String domainName, List<SocketInfo> ldapServers) {
+        DirContext context;
+        String id;
+        if (bindName!=null) {
+            // two step approach. Use a special credential to obtain DN for the user trying to login,
+            // then authenticate.
+            try {
+                id = username;
+                context = descriptor.bind(bindName, bindPassword, ldapServers);
+            } catch (BadCredentialsException e) {
+                throw new AuthenticationServiceException("Failed to bind to LDAP server with the bind name/password",e);
+            }
+        } else {
+            String principalName = getPrincipalName(username, domainName);
+            id = principalName.substring(0, principalName.indexOf('@'));
+            context = descriptor.bind(principalName, password, ldapServers);
         }
 
         try {
             // locate this user's record
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
-            NamingEnumeration<SearchResult> renum = context.search(toDC(domainName),"(& (userPrincipalName="+principalName+")(objectClass=user))", controls);
+            NamingEnumeration<SearchResult> renum = context.search(toDC(domainName),"(& (userPrincipalName={0})(objectClass=user))",
+                    new Object[]{id}, controls);
             if(!renum.hasMore()) {
                 // failed to find it. Fall back to sAMAccountName.
                 // see http://www.nabble.com/Re%3A-Hudson-AD-plug-in-td21428668.html
-                renum = context.search(toDC(domainName),"(& (sAMAccountName="+username+")(objectClass=user))", controls);
+                LOGGER.fine("Failed to find "+id+" in userPrincipalName. Trying sAMAccountName");
+                renum = context.search(toDC(domainName),"(& (sAMAccountName={0})(objectClass=user))",
+                        new Object[]{id},controls);
                 if(!renum.hasMore()) {
                     throw new BadCredentialsException("Authentication was successful but cannot locate the user information for "+username);
                 }
             }
             SearchResult result = renum.next();
 
+            if (bindName!=null) {
+                // if we've used the credential specifically for the bind, we need to verify the provided password.
+                Object dn = result.getAttributes().get("distinguishedName").get();
+                if (dn==null)
+                    throw new BadCredentialsException("No distinguished name for "+username);
+                LOGGER.fine("Attempting to validate password for DN="+dn);
+                DirContext test = descriptor.bind(dn.toString(), password, ldapServers);
+                test.close();
+            }
 
-            Attribute memberOf = result.getAttributes().get("memberOf");
-            Set<GrantedAuthority> groups = resolveGroups(memberOf, context);
+            Set<GrantedAuthority> groups = resolveGroups(result.getAttributes(), context);
             groups.add(SecurityRealm.AUTHENTICATED_AUTHORITY);
-            
+
             context.close();
 
             return new ActiveDirectoryUserDetail(
-                username, password,
+                id, password,
                 true, true, true, true,
                 groups.toArray(new GrantedAuthority[groups.size()])
             );
@@ -140,23 +179,49 @@ public class ActiveDirectoryUnixAuthenticationProvider extends AbstractUserDetai
         }
     }
 
-    private Set<GrantedAuthority> resolveGroups(Attribute memberOf, DirContext context) throws NamingException {
+    /**
+     * Returns the full user principal name of the form "joe@europe.contoso.com".
+     * 
+     * If people type in 'foo@bar' or 'bar\\foo', it should be treated as 'foo@bar.acme.org'
+     */
+    private String getPrincipalName(String username, String domainName) {
+        String principalName;
+        int slash = username.indexOf('\\');
+        if (slash>0) {
+            principalName = username.substring(slash+1)+'@'+username.substring(0,slash)+'.'+domainName;
+        } else
+        if (username.contains("@"))
+            principalName = username + '.' + domainName;
+        else
+            principalName = username + '@' + domainName;
+        return principalName;
+    }
+
+    /**
+     * Recursively resolve group memberships of the given identity and returns them all as a set.
+     *
+     * @param context
+     *      Used for making queries.
+     */
+    private Set<GrantedAuthority> resolveGroups(Attributes identity, DirContext context) throws NamingException {
         Set<GrantedAuthority> groups = new HashSet<GrantedAuthority>();
-        LinkedList<Attribute> membershipList = new LinkedList<Attribute>();
-        membershipList.add(memberOf);
+        LinkedList<Attributes> membershipList = new LinkedList<Attributes>();
+        membershipList.add(identity);
         while (!membershipList.isEmpty()) {
-            Attribute memberships = membershipList.removeFirst();
-            if (memberships != null) {
-                for (int i=0; i < memberships.size() ; i++) {
-                    Attributes atts = context.getAttributes("\"" + memberships.get(i) + '"', 
-                                                            new String[] {"CN", "memberOf"});
-                    Attribute cn = atts.get("CN");
-                    if (groups.add(new GrantedAuthorityImpl(cn.get().toString()))) {
-                        Attribute members = atts.get("memberOf");
-                        if (members != null) {
-                            membershipList.add(members);
-                        }
-                    }
+            identity = membershipList.removeFirst();
+
+            Attribute memberOf = identity.get("memberOf");
+            if (memberOf == null)    continue;
+
+            for (int i=0; i < memberOf.size() ; i++) {
+                if (LOGGER.isLoggable(Level.FINE))
+                    LOGGER.fine(identity.get("CN").get()+" is a member of "+memberOf.get(i));
+
+                Attributes group = context.getAttributes("\"" + memberOf.get(i) + '"',
+                                                        new String[] {"CN", "memberOf"});
+                Attribute cn = group.get("CN");
+                if (groups.add(new GrantedAuthorityImpl(cn.get().toString()))) {
+                    membershipList.add(group); // recursively look for groups that this group is a member of.
                 }
             }
         }

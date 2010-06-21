@@ -14,6 +14,7 @@ import com.ikokoon.serenity.model.Line;
 import com.ikokoon.serenity.model.Method;
 import com.ikokoon.serenity.model.Package;
 import com.ikokoon.serenity.model.Project;
+import com.ikokoon.serenity.model.Snapshot;
 import com.ikokoon.toolkit.Toolkit;
 
 /**
@@ -58,11 +59,15 @@ public class DataBaseToolkit {
 		for (Composite composite : lines) {
 			dataBase.remove(composite.getClass(), composite.getId());
 		}
+		List<Snapshot> snapshots = dataBase.find(Snapshot.class);
+		for (Snapshot snapshot : snapshots) {
+			dataBase.remove(Snapshot.class, snapshot.getId());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public static synchronized void copyDataBase(IDataBase sourceDataBase, IDataBase targetDataBase) {
-		Collector.setDataBase(targetDataBase);
+		Collector.initialize(targetDataBase);
 		List<Package> sourcePackages = sourceDataBase.find(Package.class);
 		for (Package sourcePackage : sourcePackages) {
 			List<Class> sourceClasses = sourcePackage.getChildren();
@@ -173,8 +178,9 @@ public class DataBaseToolkit {
 						log(criteria, afferent, 4, afferent.getName());
 					}
 					for (Method<?, ?> method : ((List<Method<?, ?>>) klass.getChildren())) {
-						log(criteria, method, 3, method.getId() + " : name : " + method.getName() + " : coverage : " + method.getCoverage()
-								+ ", complexity : " + method.getComplexity());
+						log(criteria, method, 3, method.getId() + " : name : " + method.getName() + " : description : " + method.getDescription()
+								+ " : coverage : " + method.getCoverage() + ", complexity : " + method.getComplexity() + ", start time : "
+								+ method.getStartTime() + ", end time : " + method.getEndTime());
 						for (Line<?, ?> line : ((List<Line<?, ?>>) method.getChildren())) {
 							log(criteria, line, 4, line.getId() + " : number : " + line.getNumber() + ", counter : " + line.getCounter());
 						}
@@ -205,21 +211,12 @@ public class DataBaseToolkit {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
+		// D:/Eclipse/workspace/search/modules/Jar/serenity
+		// D:/Eclipse/workspace/Discovery/modules/Jar/serenity
 		IDataBase dataBase = IDataBase.DataBaseManager.getDataBase(DataBaseOdb.class,
-				"D:/Eclipse/workspace/serenity/work/jobs/Isearch/workspace/isearch/modules/Jar/serenity/serenity.odb", null);
-		DataBaseToolkit.dump(dataBase, new ICriteria() {
-			public boolean satisfied(Composite<?, ?> composite) {
-				if (Class.class.isAssignableFrom(composite.getClass())) {
-					if (((Class) composite).getName().equals("com.ikokoon.search.action.index.crawler.IEvent")) {
-						logger.warn("Composite : " + composite);
-					}
-				}
-				return false;
-			}
-		}, "Data base toolkit dump : ");
-		logger.warn("Class : " + dataBase.find(Class.class, Toolkit.hash("com.ikokoon.search.Search")));
+				"D:/Eclipse/workspace/search/modules/Jar/serenity/serenity.odb", null);
+		DataBaseToolkit.dump(dataBase, null, "Database dump : ");
 		dataBase.close();
 	}
 

@@ -17,6 +17,9 @@ import java.util.Calendar;
 import java.util.Map;
 
 
+/**
+ * This wrapper is used for Hudson configuration set before zentimestamp 2.0
+ */
 public class ZenTimestampFormatBuildWrapper extends BuildWrapper {
 
     private String pattern;
@@ -27,6 +30,7 @@ public class ZenTimestampFormatBuildWrapper extends BuildWrapper {
     }
 
 
+    @SuppressWarnings("unused")
     public String getPattern() {
         return pattern;
     }
@@ -50,37 +54,31 @@ public class ZenTimestampFormatBuildWrapper extends BuildWrapper {
         };
     }
 
-
-    /**
-     * Descriptor for {@link ZenTimestampFormatBuildWrapper}. Used as a singleton.
-     * The class is marked as public so that it can be accessed from views.
-     * <p/>
-     * <p/>
-     * See <tt>views/hudson/plugins/zentimestamp/ZenTimestampFormatBuildWrapper/*.jelly</tt>
-     * for the actual HTML fragment for the configuration screen.
-     */
     @Extension
+    @SuppressWarnings("unused")
     public static final class DescriptorImpl extends BuildWrapperDescriptor {
 
         public DescriptorImpl() {
             super(ZenTimestampFormatBuildWrapper.class);
         }
 
-        /**
-         * This human readable name is used in the configuration screen.
-         */
         public String getDisplayName() {
             return Messages.ZenTimestampFormatBuildWrapper_displayName();
         }
 
         @Override
+        /**
+         *  When set to false, the dedicated UI is not display and the build wrapper is not marshaled
+         * (The method is called before the save() method)
+         *  When set to true, the dedicated UI is display and the build wrapper is marshaled
+         */
         public boolean isApplicable(AbstractProject<?, ?> item) {
-            return true;
+            //When there is an old config.xml with a build wrapper, the backwardCompatibility is set to true at load time
+            //The value is set by the readResolve() method called when there is an old config.xml configured with this object
+            return backwardCompatibility;
         }
 
-        /**
-         * Checks if the provided pattern is valuid
-         */
+        @SuppressWarnings("unused")
         public FormValidation doCheckPattern(@QueryParameter String value) {
 
             if (value == null || value.trim().length() == 0) {
@@ -99,8 +97,22 @@ public class ZenTimestampFormatBuildWrapper extends BuildWrapper {
 
             return FormValidation.ok();
         }
+    }
 
+    /*package*/ static transient boolean backwardCompatibility = false;
 
+    /**
+     * Called at each object access
+     * @return the current wrapper without changes 
+     */
+    @SuppressWarnings("unused")
+    private Object readResolve() {
+        backwardCompatibility = true;
+        return this;
+    }
+
+    /*package*/ static boolean isConfigXMLWithPreviousVersion(){
+        return backwardCompatibility;
     }
 
 }

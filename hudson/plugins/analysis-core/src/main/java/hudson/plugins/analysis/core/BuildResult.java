@@ -22,7 +22,6 @@ import org.kohsuke.stapler.export.ExportedBean;
 
 import com.thoughtworks.xstream.XStream;
 
-import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 import hudson.XmlFile;
 
 import hudson.model.ModelObject;
@@ -53,17 +52,14 @@ import hudson.plugins.analysis.views.DetailFactory;
 @ExportedBean
 @SuppressWarnings({"PMD.TooManyFields", "PMD.ExcessiveClassLength"})
 public abstract class BuildResult implements ModelObject, Serializable, AnnotationProvider {
-    /** Unique ID of this class. */
     private static final long serialVersionUID = 1110545450292087475L;
-    /** Unstable icon. */
+    private static final Logger LOGGER = Logger.getLogger(BuildResult.class.getName());
+
     private static final String UNSTABLE = "yellow.gif";
-    /** Failed icon. */
     private static final String FAILED = "red.gif";
-    /** Success icon. */
     private static final String SUCCESS = "blue.gif";
 
-    /** Logger. */
-    private static final Logger LOGGER = Logger.getLogger(BuildResult.class.getName());
+    private Object projectLock = new Object();
 
     /**
      * Returns the number of days for the specified number of milliseconds.
@@ -335,10 +331,14 @@ public abstract class BuildResult implements ModelObject, Serializable, Annotati
      *
      * @return the created object
      */
+    @SuppressWarnings("PMD")
     protected Object readResolve() {
         if (pluginResult == null) {
             pluginResult = Result.SUCCESS;
             resetSuccessfulState();
+        }
+        if (projectLock == null) {
+            projectLock = new Object();
         }
         if (history == null) {
             history = createHistory(owner);
@@ -733,15 +733,17 @@ public abstract class BuildResult implements ModelObject, Serializable, Annotati
      *
      * @return the associated project of this result.
      */
-    public synchronized JavaProject getProject() {
-        if (project == null) {
-            return loadResult();
+    public JavaProject getProject() {
+        synchronized (projectLock) {
+            if (project == null) {
+                return loadResult();
+            }
+            JavaProject result = project.get();
+            if (result == null) {
+                return loadResult();
+            }
+            return result;
         }
-        JavaProject result = project.get();
-        if (result == null) {
-            return loadResult();
-        }
-        return result;
     }
 
     /**

@@ -1,5 +1,8 @@
 package org.jfrog.hudson;
 
+import com.google.common.collect.MapDifference;
+import com.google.common.collect.Maps;
+import hudson.EnvVars;
 import hudson.maven.MavenBuild;
 import hudson.maven.MavenModule;
 import hudson.maven.MavenModuleSetBuild;
@@ -10,9 +13,12 @@ import hudson.model.Cause;
 import hudson.model.CauseAction;
 import hudson.model.Hudson;
 import hudson.tasks.Fingerprinter;
+import org.apache.commons.lang.StringUtils;
 import org.jfrog.build.api.Agent;
 import org.jfrog.build.api.Artifact;
 import org.jfrog.build.api.Build;
+import org.jfrog.build.api.BuildAgent;
+import org.jfrog.build.api.BuildInfoProperties;
 import org.jfrog.build.api.BuildType;
 import org.jfrog.build.api.builder.ArtifactBuilder;
 import org.jfrog.build.api.builder.BuildInfoBuilder;
@@ -46,17 +52,17 @@ public class BuildInfoDeployer {
         this.listener = listener;
     }
 
-    public void deploy() throws IOException {
+    public void deploy() throws IOException, InterruptedException {
         Build buildInfo = gatherBuildInfo(build);
         listener.getLogger().println("Deploying build info ...");
         client.sendBuildInfo(buildInfo);
     }
 
-    private Build gatherBuildInfo(MavenModuleSetBuild build) {
+    private Build gatherBuildInfo(MavenModuleSetBuild build) throws IOException, InterruptedException {
         BuildInfoBuilder infoBuilder = new BuildInfoBuilder(build.getParent().getDisplayName())
-                .number(build.getNumber())
-                .type(BuildType.MAVEN)
-                .agent(new Agent("hudson", build.getHudsonVersion()));
+                .number(build.getNumber() + "")
+                .buildAgent(new BuildAgent("Maven", build.getParent().getMaven().getName()))
+                .agent(new Agent("hudson", build.getHudsonVersion())).type(BuildType.MAVEN);
 
         if (Hudson.getInstance().getRootUrl() != null) {
             infoBuilder.url(Hudson.getInstance().getRootUrl() + build.getUrl());
@@ -84,14 +90,38 @@ public class BuildInfoDeployer {
         if (parent != null) {
             String parentProject = parent.getUpstreamProject();
             int buildNumber = parent.getUpstreamBuild();
-            infoBuilder.parentBuildId(parentProject + ":" + buildNumber);
+            infoBuilder.parentName(parentProject);
+            infoBuilder.parentNumber(buildNumber + "");
         }
 
         gatherModuleAndDependencyInfo(infoBuilder, build);
-
         gatherSysPropInfo(infoBuilder);
-
-        return infoBuilder.build();
+        addBuildInfoVariables(infoBuilder);
+        EnvVars envVars = build.getEnvironment(listener);
+        String revision = envVars.get("SVN_REVISION");
+        if (StringUtils.isNotBlank(revision)) {
+            infoBuilder.vcsRevision(revision);
+        }
+        if (publisher.isIncludeEnvVars()) {
+            for (Map.Entry<String, String> entry : envVars.entrySet()) {
+                infoBuilder
+                        .addProperty(BuildInfoProperties.BUILD_INFO_ENVIRONMENT_PREFIX + entry.getKey(),
+                                entry.getValue());
+            }
+        } else {
+            MapDifference<String, String> difference = Maps.difference(envVars, System.getenv());
+            Map<String, String> filteredEnvVars = difference.entriesOnlyOnLeft();
+            for (Map.Entry<String, String> entry : filteredEnvVars.entrySet()) {
+                infoBuilder.addProperty(BuildInfoProperties.BUILD_INFO_ENVIRONMENT_PREFIX + entry.getKey(),
+                        entry.getValue());
+            }
+        }
+        Build buildInfo = infoBuilder.build();
+        // for backwards compatibility for Artifactory 2.2.3
+        if (parent != null) {
+            buildInfo.setParentBuildId(parent.getUpstreamProject());
+        }
+        return buildInfo;
     }
 
     private void gatherSysPropInfo(BuildInfoBuilder infoBuilder) {
@@ -103,6 +133,14 @@ public class BuildInfoDeployer {
         infoBuilder.addProperty("java.vm.name", System.getProperty("java.vm.name"));
         infoBuilder.addProperty("java.vm.specification.name", System.getProperty("java.vm.specification.name"));
         infoBuilder.addProperty("java.vm.vendor", System.getProperty("java.vm.vendor"));
+    }
+
+    private void addBuildInfoVariables(BuildInfoBuilder infoBuilder) {
+        Map<String, String> buildVariables = build.getBuildVariables();
+        for (Map.Entry<String, String> entry : buildVariables.entrySet()) {
+            infoBuilder
+                    .addProperty(BuildInfoProperties.BUILD_INFO_ENVIRONMENT_PREFIX + entry.getKey(), entry.getValue());
+        }
     }
 
     private void gatherModuleAndDependencyInfo(BuildInfoBuilder infoBuilder, MavenModuleSetBuild mavenModulesBuild) {

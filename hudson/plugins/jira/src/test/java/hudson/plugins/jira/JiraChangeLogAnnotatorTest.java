@@ -19,6 +19,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.jvnet.hudson.test.Bug;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import com.google.common.collect.Sets;
 
@@ -37,7 +39,14 @@ public class JiraChangeLogAnnotatorTest  {
         
         this.site = mock(JiraSite.class);
         when(site.createSession()).thenReturn(session);
-        when(site.getUrl(Mockito.anyString())).thenReturn(new URL("http://dummy"));
+        when(site.getUrl(Mockito.anyString())).thenAnswer(
+        		new Answer<URL>() {
+					public URL answer(InvocationOnMock invocation)
+							throws Throwable {
+						String id = invocation.getArguments()[0].toString();
+						return new URL("http://dummy/" + id);
+					}
+				});
         when(site.existsIssue(Mockito.anyString())).thenCallRealMethod();
         when(site.getProjectKeys()).thenCallRealMethod();
         when(site.getIssuePattern()).thenCallRealMethod();
@@ -59,6 +68,61 @@ public class JiraChangeLogAnnotatorTest  {
         Assert.assertTrue(text.toString(false).contains(TITLE));
     }
     
+    /**
+     * Hudson's MarkupText#findTokens() doesn't work in our case if
+     * the whole pattern matches the following word boundary character
+     * (but not matching group 1).
+     * 
+     * Regression test for this.
+     */
+    @Test
+    public void testWordBoundaryProblem() throws Exception {
+    	JiraChangeLogAnnotator annotator = spy(new JiraChangeLogAnnotator());
+        doReturn(site).when(annotator).getSiteForProject((AbstractProject<?, ?>) Mockito.any());
+    	
+        FreeStyleBuild b = mock(FreeStyleBuild.class);
+        
+        // old changelog annotator used MarkupText#findTokens
+        // That broke because of the space after the issue id.
+        MarkupText text = new MarkupText("DUMMY-4071 Text ");
+        annotator.annotate(b,null, text);
+        Assert.assertEquals("<a href='http://dummy/DUMMY-4071'>DUMMY-4071</a> Text ", text.toString(false));
+        
+        
+        text = new MarkupText("DUMMY-1,comment");
+        annotator.annotate(b,null, text);
+        Assert.assertEquals("<a href='http://dummy/DUMMY-1'>DUMMY-1</a>,comment", text.toString(false));
+        
+        text = new MarkupText("DUMMY-1.comment");
+        annotator.annotate(b,null, text);
+        Assert.assertEquals("<a href='http://dummy/DUMMY-1'>DUMMY-1</a>.comment", text.toString(false));
+        
+        text = new MarkupText("DUMMY-1!comment");
+        annotator.annotate(b,null, text);
+        Assert.assertEquals("<a href='http://dummy/DUMMY-1'>DUMMY-1</a>!comment", text.toString(false));
+        
+        text = new MarkupText("DUMMY-1\tcomment");
+        annotator.annotate(b,null, text);
+        Assert.assertEquals("<a href='http://dummy/DUMMY-1'>DUMMY-1</a>\tcomment", text.toString(false));
+    }
+    
+    @Test
+    public void testMatchMultipleIssueIds() {
+    	JiraChangeLogAnnotator annotator = spy(new JiraChangeLogAnnotator());
+        doReturn(site).when(annotator).getSiteForProject((AbstractProject<?, ?>) Mockito.any());
+    	
+        FreeStyleBuild b = mock(FreeStyleBuild.class);
+        
+        MarkupText text = new MarkupText("DUMMY-1 Text DUMMY-2,DUMMY-3 DUMMY-4!");
+        annotator.annotate(b, null, text);
+        
+        Assert.assertEquals("<a href='http://dummy/DUMMY-1'>DUMMY-1</a> Text " +
+        		"<a href='http://dummy/DUMMY-2'>DUMMY-2</a>," +
+        		"<a href='http://dummy/DUMMY-3'>DUMMY-3</a> " +
+        		"<a href='http://dummy/DUMMY-4'>DUMMY-4</a>!",
+        		text.toString(false));
+    }
+    
     @Test
     @Bug(4132)
     public void testCaseInsensitiveAnnotate() throws IOException, ServiceException {
@@ -73,7 +137,7 @@ public class JiraChangeLogAnnotatorTest  {
         MarkupText text = new MarkupText("fixed DUMMY-42");
         annotator.annotate(mock(FreeStyleBuild.class), null, text);
         
-        Assert.assertEquals("fixed <a href='http://dummy'>DUMMY-42</a>", text.toString(false));
+        Assert.assertEquals("fixed <a href='http://dummy/DUMMY-42'>DUMMY-42</a>", text.toString(false));
     }
     
     /**
@@ -127,13 +191,13 @@ public class JiraChangeLogAnnotatorTest  {
         MarkupText text = new MarkupText("fixed DUMMY-42abc");
         annotator.annotate(mock(FreeStyleBuild.class), null, text);
         
-        Assert.assertEquals("fixed <a href='http://dummy'>DUMMY-42</a>abc", text.toString(false));
+        Assert.assertEquals("fixed <a href='http://dummy/DUMMY-42'>DUMMY-42</a>abc", text.toString(false));
         
         // check again when issue != null:
         JiraIssue issue = new JiraIssue("DUMMY-42", TITLE);
         when(site.getIssue(Mockito.anyString())).thenReturn(issue);
         text = new MarkupText("fixed DUMMY-42abc");
         annotator.annotate(mock(FreeStyleBuild.class), null, text);
-        Assert.assertEquals("fixed <a href='http://dummy' tooltip='title with $sign to confuse TextMarkup.replace'>DUMMY-42</a>abc", text.toString(false));
+        Assert.assertEquals("fixed <a href='http://dummy/DUMMY-42' tooltip='title with $sign to confuse TextMarkup.replace'>DUMMY-42</a>abc", text.toString(false));
     }
 }

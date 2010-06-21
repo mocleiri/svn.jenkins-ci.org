@@ -23,6 +23,7 @@
 
 package com.thalesgroup.hudson.plugins.xunit.types;
 
+import com.thalesgroup.hudson.library.tusarconversion.TestsTools;
 import hudson.Extension;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -30,11 +31,7 @@ public class PHPUnitType extends XUnitType {
 
     @DataBoundConstructor
     public PHPUnitType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(pattern, faildedIfNotNew, deleteJUnitFiles);
-    }
-
-    public String getXsl() {
-        return "phpunit-to-junit.xsl";
+        super(TestsTools.PHPUNIT, pattern, faildedIfNotNew, deleteJUnitFiles);
     }
 
     public XUnitTypeDescriptor<?> getDescriptor() {
@@ -50,7 +47,7 @@ public class PHPUnitType extends XUnitType {
 
         @Override
         public String getDisplayName() {
-            return Messages.xUnit_phpunitType_label();
+            return TestsTools.PHPUNIT.getLabel();
         }
 
         public String getId() {

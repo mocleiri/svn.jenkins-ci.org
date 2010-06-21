@@ -15,6 +15,7 @@ import hudson.plugins.findbugs.parser.FindBugsParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.maven.project.MavenProject;
@@ -29,7 +30,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
  */
 // CHECKSTYLE:COUPLING-OFF
 public class FindBugsReporter extends HealthAwareMavenReporter {
-    /** Unique identifier of this class. */
     private static final long serialVersionUID = -288391908253344862L;
 
     /** FindBugs filename if maven findbugsXmlOutput is activated. */
@@ -117,7 +117,7 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
         sources.addAll(pom.getTestCompileSourceRoots());
 
         FilesParser findBugsCollector = new FilesParser(logger, determineFileName(mojo),
-                    new FindBugsParser(build.getModuleSetRootDir(), sources), true, false);
+                    new FindBugsParser(sources), getModuleName(pom));
 
         return getTargetPath(pom).act(findBugsCollector);
     }
@@ -154,8 +154,8 @@ public class FindBugsReporter extends HealthAwareMavenReporter {
 
     /** {@inheritDoc} */
     @Override
-    public Action getProjectAction(final MavenModule module) {
-        return new FindBugsProjectAction(module);
+    public List<FindBugsProjectAction> getProjectActions(final MavenModule module) {
+        return Collections.singletonList(new FindBugsProjectAction(module));
     }
 
     /** {@inheritDoc} */

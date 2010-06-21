@@ -15,13 +15,21 @@ public class IntelCParser extends RegexpLineParser {
     /** Warning type of this parser. */
     static final String WARNING_TYPE = "Intel";
     /** Pattern of Intel compiler warnings. */
-    private static final String INTEL_PATTERN = "(.*)\\((\\d*)\\)?:.*((?:remark|warning|error)\\s*#*\\d*)\\s*:\\s*(.*)";
+    private static final String INTEL_PATTERN = "^(.*)\\((\\d*)\\)?:.*((?:remark|warning|error)\\s*#*\\d*)\\s*:\\s*(.*)$";
 
     /**
      * Creates a new instance of <code>InterCParser</code>.
      */
     public IntelCParser() {
-        super(INTEL_PATTERN, "Intel compiler");
+        super(INTEL_PATTERN, "Intel compiler", true);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected boolean isLineInteresting(final String line) {
+        return line.contains("warning")
+                || line.contains("error")
+                || line.contains("remark");
     }
 
     /** {@inheritDoc} */

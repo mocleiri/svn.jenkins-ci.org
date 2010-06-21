@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-HudsonTestCase (Hudson main module 1.357 API)
+HudsonTestCase (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ HudsonTestCase (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="HudsonTestCase (Hudson main module 1.357 API)";
+        parent.document.title="HudsonTestCase (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -363,6 +363,16 @@ R</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertEqualDataBoundBeans(java.lang.Object, java.lang.Object)">assertEqualDataBoundBeans</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;lhs,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;rhs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><CODE>assertEqualBeans(Object, Object, String)</CODE></A> but figure out the properties
+ via <CODE>DataBoundConstructor</CODE></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertGoodStatus(com.gargoylesoftware.htmlunit.Page)">assertGoodStatus</A></B>(com.gargoylesoftware.htmlunit.Page&nbsp;page)</CODE>
 
 <BR>
@@ -460,7 +470,7 @@ R</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(hudson.model.FreeStyleProject)">buildAndAssertSuccess</A></B>(<A HREF="../../../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>&nbsp;job)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should be unnecessary, but otherwise IntelliJ complains.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avoids need for cumbersome <code>this.&lt;J,R&gt;buildAndAssertSuccess(...)</code> type hints under JDK 7 javac (and supposedly also IntelliJ).</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -478,6 +488,74 @@ R</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(hudson.maven.MavenModule)">buildAndAssertSuccess</A></B>(<A HREF="../../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#buildAndAssertSuccess(hudson.maven.MavenModuleSet)">buildAndAssertSuccess</A></B>(<A HREF="../../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;B extends <A HREF="../../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt; 
+<BR>
+B</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configRoundtrip(B)">configRoundtrip</A></B>(B&nbsp;before)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a configuration round-trip testing for a builder.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;P extends <A HREF="../../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt; 
+<BR>
+P</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configRoundtrip(P)">configRoundtrip</A></B>(P&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a configuration page and submits it without any modifications, to
+ perform a round-trip configuration test.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;P extends <A HREF="../../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt; 
+<BR>
+P</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#configRoundtrip(P)">configRoundtrip</A></B>(P&nbsp;before)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a configuration round-trip testing for a publisher.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1880,6 +1958,66 @@ protected com.gargoylesoftware.htmlunit.Page <B>search</B>(<A HREF="http://java.
 </DL>
 <HR>
 
+<A NAME="configRoundtrip(hudson.model.Job)"><!-- --></A><A NAME="configRoundtrip(P)"><!-- --></A><H3>
+configRoundtrip</H3>
+<PRE>
+protected &lt;P extends <A HREF="../../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt; P <B>configRoundtrip</B>(P&nbsp;job)
+                                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Loads a configuration page and submits it without any modifications, to
+ perform a round-trip configuration test.
+ <p>
+ See http://wiki.hudson-ci.org/display/HUDSON/Unit+Test#UnitTest-Configurationroundtriptesting
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configRoundtrip(hudson.tasks.Builder)"><!-- --></A><A NAME="configRoundtrip(B)"><!-- --></A><H3>
+configRoundtrip</H3>
+<PRE>
+protected &lt;B extends <A HREF="../../../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt; B <B>configRoundtrip</B>(B&nbsp;before)
+                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Performs a configuration round-trip testing for a builder.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="configRoundtrip(hudson.tasks.Publisher)"><!-- --></A><A NAME="configRoundtrip(P)"><!-- --></A><H3>
+configRoundtrip</H3>
+<PRE>
+protected &lt;P extends <A HREF="../../../../hudson/tasks/Publisher.html" title="class in hudson.tasks">Publisher</A>&gt; P <B>configRoundtrip</B>(P&nbsp;before)
+                                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Performs a configuration round-trip testing for a publisher.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="assertBuildStatus(hudson.model.Result,hudson.model.Run)"><!-- --></A><A NAME="assertBuildStatus(hudson.model.Result, R)"><!-- --></A><H3>
 assertBuildStatus</H3>
 <PRE>
@@ -1990,8 +2128,42 @@ buildAndAssertSuccess</H3>
 public <A HREF="../../../../hudson/model/FreeStyleBuild.html" title="class in hudson.model">FreeStyleBuild</A> <B>buildAndAssertSuccess</B>(<A HREF="../../../../hudson/model/FreeStyleProject.html" title="class in hudson.model">FreeStyleProject</A>&nbsp;job)
                                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
 <DL>
-<DD>Should be unnecessary, but otherwise IntelliJ complains.
+<DD>Avoids need for cumbersome <code>this.&lt;J,R&gt;buildAndAssertSuccess(...)</code> type hints under JDK 7 javac (and supposedly also IntelliJ).
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildAndAssertSuccess(hudson.maven.MavenModuleSet)"><!-- --></A><H3>
+buildAndAssertSuccess</H3>
+<PRE>
+public <A HREF="../../../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A> <B>buildAndAssertSuccess</B>(<A HREF="../../../../hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>&nbsp;job)
+                                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildAndAssertSuccess(hudson.maven.MavenModule)"><!-- --></A><H3>
+buildAndAssertSuccess</H3>
+<PRE>
+public <A HREF="../../../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A> <B>buildAndAssertSuccess</B>(<A HREF="../../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;job)
+                                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -2296,6 +2468,27 @@ public void <B>assertEqualBeans</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE><DT><B>Since:</B></DT>
   <DD>1.297</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="assertEqualDataBoundBeans(java.lang.Object, java.lang.Object)"><!-- --></A><H3>
+assertEqualDataBoundBeans</H3>
+<PRE>
+public void <B>assertEqualDataBoundBeans</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;lhs,
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;rhs)
+                               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></PRE>
+<DL>
+<DD>Works like <A HREF="../../../../org/jvnet/hudson/test/HudsonTestCase.html#assertEqualBeans(java.lang.Object, java.lang.Object, java.lang.String)"><CODE>assertEqualBeans(Object, Object, String)</CODE></A> but figure out the properties
+ via <CODE>DataBoundConstructor</CODE>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A></CODE></DL>
 </DD>
 </DL>
 <HR>

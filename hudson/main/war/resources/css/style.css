@@ -210,6 +210,7 @@ pre {/* see http://users.tkk.fi/tkarvine/pre-wrap-css3-mozilla-opera-ie.html */
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    margin: 0;
 }
 
 pre.console {
@@ -537,6 +538,24 @@ div.behavior-loading {
   text-align: left;
 }
 
+/* ============================ parameters form ========================== */
+
+table.parameters {
+  border-collapse: collapse;
+}
+
+table.parameters > tbody > tr:first-child > td {
+  padding-top: 4px;
+}
+
+table.parameters .setting-description {
+  padding-bottom: 4px;
+}
+
+table.parameters > tbody:hover {
+  background-color: #f0f0f0;
+}
+
 /* ============================ health report hover ========================== */
 
 .healthReport a {
@@ -695,8 +714,8 @@ TABLE.fingerprint-in-build TD {
   border-top: none;
 }
 
-#plugins tr:hover {
-  background-color: #eeeee8;
+#pluginsAdv tr:hover {
+  background-color: inherit;
 }
 
 #plugins tr.already-upgraded {

@@ -24,6 +24,20 @@ public class Gcc4CompilerParserTest extends ParserTester {
     private static final String WARNING_TYPE = Gcc4CompilerParser.WARNING_TYPE;
 
     /**
+     * Parses a warning log with 1 warning.
+     *
+     * @throws IOException
+     *      if the file could not be read
+     * @see <a href="http://issues.hudson-ci.org/browse/HUDSON-6563">Issue 6563</a>
+     */
+    @Test
+    public void issue6563() throws IOException {
+        Collection<FileAnnotation> warnings = new Gcc4CompilerParser().parse(openFile("issue6563.txt"));
+
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 10, warnings.size());
+    }
+
+    /**
      * Parses a file with GCC warnings.
      *
      * @throws IOException
@@ -38,7 +52,7 @@ public class Gcc4CompilerParserTest extends ParserTester {
         Iterator<FileAnnotation> iterator = warnings.iterator();
         checkWarning(iterator.next(),
                 451,
-                "`void yyunput(int, char*)' defined but not used",
+                "'void yyunput(int, char*)' defined but not used",
                 "testhist.l",
                 WARNING_TYPE, WARNING_CATEGORY, Priority.NORMAL);
         checkWarning(iterator.next(),
@@ -78,12 +92,12 @@ public class Gcc4CompilerParserTest extends ParserTester {
                 WARNING_TYPE, WARNING_CATEGORY, Priority.NORMAL);
         checkWarning(iterator.next(),
                 6,
-                "passing ‘Test’ chooses ‘int’ over ‘unsigned int’",
+                "passing 'Test' chooses 'int' over 'unsigned int'",
                 "warnings.cc",
                 WARNING_TYPE, WARNING_CATEGORY, Priority.NORMAL);
         checkWarning(iterator.next(),
                 6,
-                "in call to ‘std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char, _Traits = std::char_traits<char>]’",
+                "in call to 'std::basic_ostream<_CharT, _Traits>& std::basic_ostream<_CharT, _Traits>::operator<<(int) [with _CharT = char, _Traits = std::char_traits<char>]'",
                 "warnings.cc",
                 WARNING_TYPE, WARNING_CATEGORY, Priority.NORMAL);
         checkWarning(iterator.next(),
@@ -93,12 +107,12 @@ public class Gcc4CompilerParserTest extends ParserTester {
                 WARNING_TYPE, WARNING_CATEGORY, Priority.NORMAL);
         checkWarning(iterator.next(),
                 8,
-                "‘bar’ was not declared in this scope",
+                "'bar' was not declared in this scope",
                 "fo:oo.cpp",
                 WARNING_TYPE, WARNING_CATEGORY, Priority.HIGH);
         checkWarning(iterator.next(),
                 12,
-                "expected ‘;’ before ‘return’",
+                "expected ';' before 'return'",
                 "fo:oo.cpp",
                 WARNING_TYPE, WARNING_CATEGORY, Priority.HIGH);
     }

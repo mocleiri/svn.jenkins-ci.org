@@ -21,6 +21,7 @@ import org.junit.runners.Suite;
 
 import com.ikokoon.serenity.hudson.modeller.ModellerTest;
 import com.ikokoon.serenity.hudson.source.CoverageSourceCodeTest;
+import com.ikokoon.serenity.instrumentation.InstrumentationTest;
 import com.ikokoon.serenity.instrumentation.VisitorFactoryTest;
 import com.ikokoon.serenity.instrumentation.complexity.ComplexityTest;
 import com.ikokoon.serenity.instrumentation.coverage.CoverageTest;
@@ -43,10 +44,11 @@ import com.ikokoon.toolkit.TypeTest;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( {
-		// Adapter functionality tests
+// Adapter functionality tests
 		ComplexityTest.class, // Tests the complexity functionality
 		CoverageTest.class, // Tests that the coverage instructions have been added
 		DependencyTest.class, // Tests that the dependency adapters are collecting the dependency data correctly
+		InstrumentationTest.class,
 
 		// Processors tests
 		AccumulatorTest.class, // Accumulates all the classes on the classpath

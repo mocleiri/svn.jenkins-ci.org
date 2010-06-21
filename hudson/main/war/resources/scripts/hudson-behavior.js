@@ -868,8 +868,8 @@ var hudsonRules = {
 
         e.subForms = [];
         var start = findFollowingTR(e, 'dropdownList-container').firstChild.nextSibling, end;
-        do { start = start.firstChild; } while (start.tagName != 'TR');
-        if (start.className != 'dropdownList-start')
+        do { start = start.firstChild; } while (start && start.tagName != 'TR');
+        if (start && start.className != 'dropdownList-start')
             start = findFollowingTR(start, 'dropdownList-start');
         while (start != null) {
             end = findFollowingTR(start, 'dropdownList-end');
@@ -939,7 +939,13 @@ var hudsonRules = {
         e = null; // avoid memory leak
     },
 
-    "DIV.behavior-loading" : function(e) { e.style.display = 'none' }
+    "DIV.behavior-loading" : function(e) {
+        e.style.display = 'none';
+    },
+
+    ".button-with-dropdown" : function (e) {
+        new YAHOO.widget.Button(e, { type: "menu", menu: e.nextSibling });
+    }
 };
 
 function applyTooltip(e,text) {
@@ -1997,6 +2003,7 @@ function validateButton(checkUrl,paramList,button) {
                 : '<a href="" onclick="document.getElementById(\'valerr' + (i=iota++)
                 + '\').style.display=\'block\';return false">ERROR</a><div id="valerr'
                 + i + '" style="display:none">' + rsp.responseText + '</div>';
+          Behaviour.applySubtree(target);
           var s = rsp.getResponseHeader("script");
           if(s!=null)
             try {

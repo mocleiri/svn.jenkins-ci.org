@@ -8,12 +8,15 @@ import hudson.plugins.analysis.core.BuildResult;
 import hudson.plugins.analysis.core.FilesParser;
 import hudson.plugins.analysis.core.HealthAwarePublisher;
 import hudson.plugins.analysis.core.ParserResult;
+import hudson.plugins.analysis.util.ModuleDetector;
 import hudson.plugins.analysis.util.PluginLogger;
+import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.warnings.parser.FileWarningsParser;
 import hudson.plugins.warnings.parser.ParserRegistry;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -193,10 +196,24 @@ public class WarningsPublisher extends HealthAwarePublisher {
 
         if (!ignoreConsole || StringUtils.isBlank(getPattern())) {
             logger.log("Parsing warnings in console log...");
-            project.addAnnotations(new ParserRegistry(ParserRegistry.getParsers(parserNames),
-                    getDefaultEncoding(), getIncludePattern(), getExcludePattern()).parse(logFile));
+            ParserRegistry registry = new ParserRegistry(ParserRegistry.getParsers(parserNames),
+                    getDefaultEncoding(), getIncludePattern(), getExcludePattern());
+            Collection<FileAnnotation> warnings = registry.parse(logFile);
+            if (!build.getWorkspace().isRemote()) {
+                String workspace = build.getWorkspace().getRemote();
+                ModuleDetector detector = new ModuleDetector(new File(workspace));
+                for (FileAnnotation annotation : warnings) {
+                    String module = detector.guessModuleName(annotation.getFileName());
+                    annotation.setModuleName(module);
+                }
+            }
+
+            project.addAnnotations(warnings);
         }
         project = build.getWorkspace().act(new AnnotationsClassifier(project, getDefaultEncoding()));
+        for (FileAnnotation annotation : project.getAnnotations()) {
+            annotation.setPathName(build.getWorkspace().getRemote());
+        }
 
         WarningsResult result = new WarningsResult(build, getDefaultEncoding(), project);
         build.getActions().add(new WarningsResultAction(build, this, result));

@@ -1,10 +1,14 @@
 package hudson.plugins.selenium;
 
 import com.thoughtworks.selenium.grid.hub.Environment;
+import com.thoughtworks.selenium.grid.hub.NoSuchSessionException;
 import com.thoughtworks.selenium.grid.hub.remotecontrol.DynamicRemoteControlPool;
 import com.thoughtworks.selenium.grid.hub.remotecontrol.RemoteControlProxy;
+import com.thoughtworks.selenium.grid.hub.remotecontrol.RemoteControlSession;
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
@@ -24,7 +28,7 @@ import java.util.logging.Level;
  */
 public class HudsonRemoteControlPool implements DynamicRemoteControlPool {
     private final Set<RemoteControlProxy> all = new HashSet<RemoteControlProxy>();
-    private final Map<String,RemoteControlProxy> sessions = new HashMap<String, RemoteControlProxy>();
+    private final Map<String,RemoteControlSession> sessions = new HashMap<String, RemoteControlSession>();
 
     public synchronized void register(RemoteControlProxy rc) {
         all.add(rc);
@@ -32,6 +36,14 @@ public class HudsonRemoteControlPool implements DynamicRemoteControlPool {
 
     public synchronized boolean unregister(RemoteControlProxy rc) {
         return all.remove(rc);
+    }
+
+    public boolean isRegistered(RemoteControlProxy proxy) {
+        return all.contains(proxy);
+    }
+
+    public List<RemoteControlProxy> allRegisteredRemoteControls() {
+        return new ArrayList<RemoteControlProxy>(all);
     }
 
     public synchronized List<RemoteControlProxy> availableRemoteControls() {
@@ -45,9 +57,27 @@ public class HudsonRemoteControlPool implements DynamicRemoteControlPool {
     public synchronized List<RemoteControlProxy> reservedRemoteControls() {
         List<RemoteControlProxy> r = new ArrayList<RemoteControlProxy>(all.size());
         for (RemoteControlProxy rc : all)
-            if(rc.concurrentSesssionCount() > 0)
+            if(rc.sessionInProgress())
                 r.add(rc);
         return r;
+    }
+
+    public synchronized void unregisterAllUnresponsiveRemoteControls() {
+        for (RemoteControlProxy rc : all.toArray(new RemoteControlProxy[0])) {
+            if (rc.unreliable()) {
+                LOGGER.log(Level.WARNING, "Unregistering unreliable RC " + rc);
+                unregister(rc);
+            }
+        }
+    }
+
+    public synchronized void recycleAllSessionsIdleForTooLong(double maxIdleTimeInSeconds) {
+        final int maxIdleTimeInMilliseconds = (int) (maxIdleTimeInSeconds * 1000);
+
+        for (RemoteControlSession session : sessions.values().toArray(new RemoteControlSession[0])) {
+            if (session.innactiveForMoreThan(maxIdleTimeInMilliseconds))
+                releaseForSession(session.sessionId());
+        }
     }
 
     public synchronized RemoteControlProxy reserve(Environment env) {
@@ -71,7 +101,7 @@ public class HudsonRemoteControlPool implements DynamicRemoteControlPool {
                 if(all.isEmpty())
                     throw new IllegalArgumentException("No RCs available");
                 else
-                    throw new IllegalArgumentException("No RC satisifies the label criteria: "+env.name()+" - "+all);
+                    throw new IllegalArgumentException("No RC satisfies the label criteria: "+env.name()+" - "+all);
             }
 
             try {
@@ -96,18 +126,29 @@ public class HudsonRemoteControlPool implements DynamicRemoteControlPool {
     }
 
     public synchronized void associateWithSession(RemoteControlProxy rc, String sessionId) {
-        RemoteControlProxy old = sessions.put(sessionId, rc);
+        RemoteControlSession old = sessions.put(sessionId, new RemoteControlSession(sessionId,rc));
         if(old!=null)
             throw new IllegalStateException("Session ID "+sessionId+" is already used by "+old);
     }
 
     public synchronized RemoteControlProxy retrieve(String sessionId) {
-        return sessions.get(sessionId);
+        RemoteControlSession session = sessions.get(sessionId);
+        if (session==null)  throw new NoSuchSessionException(sessionId);
+        return session.remoteControl();
     }
 
     public synchronized void releaseForSession(String sessionId) {
-        sessions.remove(sessionId).unregisterSession();
+        RemoteControlProxy rc = retrieve(sessionId);
+        sessions.remove(sessionId);
+        rc.terminateSession(sessionId);
+        rc.unregisterSession();
+        notifyAll();
     }
+
+    public synchronized void updateSessionLastActiveAt(String sessionId) {
+        sessions.get(sessionId).updateLastActiveAt();
+    }
+
 
     private static final Logger LOGGER = Logger.getLogger(HudsonRemoteControlPool.class.getName());
 }

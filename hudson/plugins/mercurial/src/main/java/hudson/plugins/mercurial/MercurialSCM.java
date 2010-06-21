@@ -1,5 +1,6 @@
 package hudson.plugins.mercurial;
 
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 import hudson.EnvVars;
 import hudson.Extension;
@@ -270,6 +271,7 @@ public class MercurialSCM extends SCM implements Serializable {
             cmd.add(forest ? "fincoming" : "incoming", "--style", tmpFile.getRemote());
             cmd.add("--no-merges");
             cmd.add("--rev", getBranch(env));
+            cmd.add("--newest-first");
             String cachedSource = cachedSource(node, launcher, listener, true);
             if (cachedSource != null) {
                 cmd.add(cachedSource);
@@ -308,7 +310,7 @@ public class MercurialSCM extends SCM implements Serializable {
         return Change.SIGNIFICANT;
     }
 
-    // XXX maybe useful enough to make a convenience method on Proc?
+    // XXX use version from hudson-main 1.363 when available
     private static final ExecutorService executor = Executors.newCachedThreadPool();
     private static int joinWithTimeout(final Proc proc, final long timeout, final TimeUnit unit,
             final TaskListener listener) throws IOException, InterruptedException {
@@ -383,7 +385,10 @@ public class MercurialSCM extends SCM implements Serializable {
                 }
 
                 if (id.equals(baseline.id)) {
-                    break; // no need to go beyond this line
+                    // Trim the baseline changeset and earlier.
+                    // HUDSON-6337 uses --newest-first to try to order them;
+                    // --prune would be better but incoming does not support it.
+                    break;
                 }
             }
         }
@@ -639,7 +644,7 @@ public class MercurialSCM extends SCM implements Serializable {
     }
 
     static boolean CACHE_LOCAL_REPOS = false;
-    private String cachedSource(Node node, Launcher launcher, TaskListener listener, boolean fromPolling) {
+    private @CheckForNull String cachedSource(Node node, Launcher launcher, TaskListener listener, boolean fromPolling) {
         if (!CACHE_LOCAL_REPOS && source.matches("(file:|[/\\\\]).+")) {
             return null;
         }
@@ -658,7 +663,13 @@ public class MercurialSCM extends SCM implements Serializable {
             return null;
         }
         try {
-            return Cache.fromURL(source).repositoryCache(this, node, launcher, listener, fromPolling).getRemote();
+            FilePath cache = Cache.fromURL(source).repositoryCache(this, node, launcher, listener, fromPolling);
+            if (cache != null) {
+                return cache.getRemote();
+            } else {
+                listener.error("Failed to use repository cache for " + source);
+                return null;
+            }
         } catch (Exception x) {
             x.printStackTrace(listener.error("Failed to use repository cache for " + source));
             return null;

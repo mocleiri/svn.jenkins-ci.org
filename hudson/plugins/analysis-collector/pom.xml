@@ -4,14 +4,14 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.2</version>
+    <version>1.14</version>
     <relativePath>../analysis-pom/pom.xml</relativePath>
   </parent>
 
   <artifactId>analysis-collector</artifactId>
   <packaging>hpi</packaging>
   <name>Static Analysis Collector Plug-in</name>
-  <version>1.6-SNAPSHOT</version>
+  <version>1.7-SNAPSHOT</version>
   <url>http://wiki.hudson-ci.org/display/HUDSON/Analysis+Collector+Plugin</url>
   <description>
      This plug-in is an add-on for the plug-ins Checkstyle, Dry, FindBugs, PMD, Tasks, and Warnings:
@@ -22,7 +22,7 @@
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-      <version>1.6</version>
+    <version>1.10</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
@@ -72,5 +72,19 @@
     <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/trunk/hudson/plugins/analysis-collector</developerConnection>
     <url>https://hudson.dev.java.net/source/browse/hudson/trunk/hudson/plugins/analysis-collector</url>
   </scm>
+
+  <repositories>
+    <repository>
+      <id>java.net2</id>
+      <url>http://download.java.net/maven/2/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
 </project>

@@ -1,6 +1,9 @@
 package hudson.plugins.collabnet.auth;
 
+import com.collabnet.ce.webservices.CTFProject;
+import com.collabnet.ce.webservices.CTFUser;
 import com.collabnet.ce.webservices.CollabNetApp;
+import hudson.model.Hudson;
 import hudson.security.Permission;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.GrantedAuthority;
@@ -17,8 +20,9 @@ import java.util.logging.Logger;
  */
 public class CNAuthentication implements Authentication {
     public static final String SUPER_USER = "SuperUser";
-    private String principal;
-    private CollabNetApp cna;
+    private final String principal;
+    private final CTFUser myself;
+    private final CollabNetApp cna;
     private GrantedAuthority[] authorities;
     private Collection<String> groups;
     private boolean authenticated = false;
@@ -27,9 +31,10 @@ public class CNAuthentication implements Authentication {
 
     private static Logger log = Logger.getLogger("CNAuthentication");
     
-    public CNAuthentication(Object principal, Object credentials) {
+    public CNAuthentication(Object principal, Object credentials) throws RemoteException {
         this.principal = (String) principal;
         this.cna = (CollabNetApp) credentials;
+        this.myself = cna.getMyself();
         this.setupAuthorities();
         this.setupGroups();
         this.setAuthenticated(true);
@@ -43,7 +48,7 @@ public class CNAuthentication implements Authentication {
     private void setupAuthorities() {
         boolean isSuper = false;
         try {
-            isSuper = this.cna.isUserSuper(this.principal);
+            isSuper = myself.isSuperUser();
         } catch (RemoteException re) {
             log.info("setupAuthoritites: failed with RemoteException: " + 
                      re.getMessage());
@@ -64,7 +69,7 @@ public class CNAuthentication implements Authentication {
     private void setupGroups() {
         this.groups = Collections.emptyList();
         try {
-            this.groups = cna.getUserGroups(this.principal);
+            this.groups = myself.getGroupNames();
         } catch (RemoteException re) {
             // not much we can do
         }
@@ -89,19 +94,19 @@ public class CNAuthentication implements Authentication {
         return authCopy;
     }
     
-    public Object getPrincipal() {
+    public String getPrincipal() {
         return this.principal;
     }
     
     public String getName() {
-        return (String)this.getPrincipal();
+        return this.getPrincipal();
     }
     
     public Object getDetails() {
             return null;
     }
     
-    public Object getCredentials() {
+    public CollabNetApp getCredentials() {
         return this.cna;
     }
 
@@ -134,12 +139,55 @@ public class CNAuthentication implements Authentication {
         this.cnauthed = cnauthed;
     }
 
-    public String getSessionId() {
-        String sessionId = null;
-        if (this.getCredentials() instanceof CollabNetApp) {
-            sessionId = ((CollabNetApp)this.getCredentials()).getSessionId();
+    /**
+     * Determines if the authenticated user is a super user.
+     * This is currently from data that's calculated once (on login).
+     * If this ever turns out to be insufficient, we could change this
+     * method to get the data on the fly.
+     */
+    public boolean isSuperUser() {
+        for (GrantedAuthority authority: getAuthorities()) {
+            if (authority.getAuthority().equals(CNAuthentication.SUPER_USER)) {
+                return true;
+            }
         }
-        return sessionId;
+        return false;
+    }
+
+    /**
+     * Determines if the authenticated user belongs to any of the groups.
+     * This is currently from data that's calculated once (on login).
+     * If this ever turns out to be insufficient, we could change this
+     * method to get the data on the fly.
+     *
+     * @param groups
+     * @return true if the user is a member of any of the groups.
+     */
+    public boolean isMemberOfAny(Collection<String> groups) {
+        for (String group: groups) {
+            if (this.isMember(group)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determines if the authenticated user is a project admin.
+     *
+     * @return true if the user is a project admin.
+     */
+    public boolean isProjectAdmin(CTFProject p) {
+        try {
+            return p.getAdmins().contains(cna.getMyself());
+        } catch (RemoteException re) {
+            log.info("isProjectAdmin: failed with RemoteException: " + re.getMessage());
+            return false;
+        }
+    }
+
+    public String getSessionId() {
+        return this.getCredentials().getSessionId();
     }
 
     /**
@@ -150,5 +198,21 @@ public class CNAuthentication implements Authentication {
      */
     public Set<Permission> getUserProjectPermSet(String username, String projectId) {
         return mAuthCache.getUserProjectPermSet(username, projectId);
+    }
+
+    /**
+     * If the current thread carries the {@link CNAuthentication} object as the context,
+     * returns it. Or else null.
+     */
+    public static CNAuthentication get() {
+        return cast(Hudson.getAuthentication());
+    }
+
+    public static CNAuthentication cast(Authentication a) {
+        if (a instanceof CNAuthentication) {
+            return (CNAuthentication) a;
+        } else {
+            return null;
+        }
     }
 }

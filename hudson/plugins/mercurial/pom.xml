@@ -7,7 +7,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>mercurial</artifactId>
-  <version>1.29-SNAPSHOT</version>
+  <version>1.32-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>Hudson Mercurial plugin</name>
   <description>Integrates Hudson to Mercurial SCM</description>
@@ -123,6 +123,7 @@
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-project-info-reports-plugin</artifactId>
+              <version>2.1.2</version>
               <!--
                   Avoid hanging site generation waiting for 'http://snapshots.maven.codehaus.org/maven2' see
                   http://jira.codehaus.org/browse/MPIR-137
@@ -181,7 +182,7 @@
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>findbugs-maven-plugin</artifactId>
-              <version>2.1</version>
+              <version>2.3.1</version>
               <configuration>
                   <xmlOutput>true</xmlOutput>
                   <threshold>Low</threshold>

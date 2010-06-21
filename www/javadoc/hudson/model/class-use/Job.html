@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Job (Hudson main module 1.357 API)
+Uses of Class hudson.model.Job (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Job (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Job (Hudson main module 1.357 API)";
+        parent.document.title="Uses of Class hudson.model.Job (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -118,6 +118,10 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.util"><B>hudson.util</B></A></TD>
 <TD>Other miscellaneous utility code&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.jvnet.hudson.test"><B>org.jvnet.hudson.test</B></A></TD>
+<TD>Test harness for Hudson and its plugins.&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -483,6 +487,14 @@ Uses of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">J
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Cause.UpstreamCause.</B><B><A HREF="../../../hudson/model/Cause.UpstreamCause.html#pointsTo(hudson.model.Job)">pointsTo</A></B>(<A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;?,?&gt;&nbsp;j)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this cause points to a build in the specified job.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;?,?&gt;</CODE></FONT></TD>
 <TD><CODE><B>PermalinkProjectAction.Permalink.</B><B><A HREF="../../../hudson/model/PermalinkProjectAction.Permalink.html#resolve(hudson.model.Job)">resolve</A></B>(<A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&lt;?,?&gt;&nbsp;job)</CODE>
 
@@ -656,6 +668,41 @@ Uses of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">J
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.jvnet.hudson.test"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A> in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../org/jvnet/hudson/test/package-summary.html">org.jvnet.hudson.test</A> with type parameters of type <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected 
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;P extends <A HREF="../../../hudson/model/Job.html" title="class in hudson.model">Job</A>&gt; 
+<BR>
+P</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>HudsonTestCase.</B><B><A HREF="../../../org/jvnet/hudson/test/HudsonTestCase.html#configRoundtrip(P)">configRoundtrip</A></B>(P&nbsp;job)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a configuration page and submits it without any modifications, to
+ perform a round-trip configuration test.</TD>
 </TR>
 </TABLE>
 &nbsp;

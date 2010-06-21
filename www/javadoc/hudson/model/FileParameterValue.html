@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FileParameterValue (Hudson main module 1.357 API)
+FileParameterValue (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileParameterValue (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileParameterValue (Hudson main module 1.357 API)";
+        parent.document.title="FileParameterValue (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -211,11 +211,28 @@ Class FileParameterValue</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDynamic</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+          org.kohsuke.stapler.StaplerResponse&nbsp;response)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Serve this file parameter in response to a <CODE>StaplerRequest</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#equals(java.lang.Object)">equals</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;obj)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In practice this will always be false, since location should be unique.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#getOriginalFileName()">getOriginalFileName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the name of the originally uploaded file.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -304,6 +321,22 @@ public <B>FileParameterValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/ap
 </TR>
 </TABLE>
 
+<A NAME="getOriginalFileName()"><!-- --></A><H3>
+getOriginalFileName</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getOriginalFileName</B>()</PRE>
+<DL>
+<DD>Get the name of the originally uploaded file. If this
+ <A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model"><CODE>FileParameterValue</CODE></A> was created prior to 1.362, this method will
+ return <code>null</code>.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the name of the originally uploaded file</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="createBuildWrapper(hudson.model.AbstractBuild)"><!-- --></A><H3>
 createBuildWrapper</H3>
 <PRE>
@@ -374,6 +407,25 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doDynamic(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doDynamic</H3>
+<PRE>
+public void <B>doDynamic</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
+                      org.kohsuke.stapler.StaplerResponse&nbsp;response)
+               throws javax.servlet.ServletException,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Serve this file parameter in response to a <CODE>StaplerRequest</CODE>.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>request</CODE> - <DD><CODE>response</CODE> - 
+<DT><B>Throws:</B>
+<DD><CODE>javax.servlet.ServletException</CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

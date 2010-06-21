@@ -17,13 +17,11 @@ import org.jvnet.localizer.LocaleProvider;
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
 public class Bug extends AbstractAnnotation {
-    /** Unique identifier of this class. */
     private static final long serialVersionUID = 5171661552905752370L;
-    /** Origin of the annotation. */
     public static final String ORIGIN = "findbugs";
 
-    /** Bug HTML description. */
     private String tooltip = StringUtils.EMPTY;
+
     /** Unique hash code of this bug. */
     private String instanceHash;
 
@@ -139,10 +137,7 @@ public class Bug extends AbstractAnnotation {
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + ((instanceHash == null) ? 0 : instanceHash.hashCode());
-        return result;
+        return 31 + ((instanceHash == null) ? 0 : instanceHash.hashCode()); // NOCHECKSTYLE
     }
 
     /** {@inheritDoc} */

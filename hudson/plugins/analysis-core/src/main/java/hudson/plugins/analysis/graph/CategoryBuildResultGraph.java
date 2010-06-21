@@ -155,6 +155,9 @@ public abstract class CategoryBuildResultGraph extends BuildResultGraph {
 
             if (current.hasPreviousResult()) {
                 current = current.getPreviousResult();
+                if (current == null) {
+                    break; // see: HUDSON-6613
+                }
             }
             else {
                 break;

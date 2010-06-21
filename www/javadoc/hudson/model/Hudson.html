@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.357 API)
+Hudson (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.357 API)";
+        parent.document.title="Hudson (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -642,8 +642,7 @@ T</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
-                   org.kohsuke.stapler.StaplerResponse&nbsp;response)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest)">doCheckURIEncoding</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;request)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if container uses UTF-8 to decode URLs.</TD>
@@ -787,6 +786,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doJnlpJars(org.kohsuke.stapler.StaplerRequest)">doJnlpJars</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doLoginEntry(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doLoginEntry</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
@@ -816,6 +823,15 @@ T</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown()">doQuietDown</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#doQuietDown(boolean, int)">doQuietDown</A></B>(boolean&nbsp;block,
+            int&nbsp;timeout)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2187,7 +2203,7 @@ P</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getAssignedLabels()">getAssignedLabels</A>, <A HREF="../../hudson/model/Node.html#getChannel()">getChannel</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getLabelCloud()">getLabelCloud</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Node.html#canTake(hudson.model.Queue.Task)">canTake</A>, <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/Node.html#getAssignedLabels()">getAssignedLabels</A>, <A HREF="../../hudson/model/Node.html#getChannel()">getChannel</A>, <A HREF="../../hudson/model/Node.html#getFileSystemProvisioner()">getFileSystemProvisioner</A>, <A HREF="../../hudson/model/Node.html#getLabelCloud()">getLabelCloud</A>, <A HREF="../../hudson/model/Node.html#getNodePropertyDescriptors()">getNodePropertyDescriptors</A>, <A HREF="../../hudson/model/Node.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/Node.html#isHoldOffLaunchUntilSave()">isHoldOffLaunchUntilSave</A>, <A HREF="../../hudson/model/Node.html#toComputer()">toComputer</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
@@ -5051,14 +5067,34 @@ public void <B>doQuietDown</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
 <A NAME="doQuietDown()"><!-- --></A><H3>
 doQuietDown</H3>
 <PRE>
-<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="quiet-down")
-</FONT>public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()</PRE>
+public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doQuietDown(boolean, int)"><!-- --></A><H3>
+doQuietDown</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="quiet-down")
+</FONT>public org.kohsuke.stapler.HttpRedirect <B>doQuietDown</B>(<FONT SIZE="-1">@QueryParameter</FONT>
+                                                                  boolean&nbsp;block,
+                                                                  <FONT SIZE="-1">@QueryParameter</FONT>
+                                                                  int&nbsp;timeout)
+                                             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -5207,7 +5243,7 @@ public void <B>doCreateView</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 checkGoodName</H3>
 <PRE>
 public static void <B>checkGoodName</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)
-                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/text/ParseException.html?is-external=true" title="class or interface in java.text">ParseException</A></PRE>
+                          throws <A HREF="../../hudson/model/Failure.html" title="class in hudson.model">Failure</A></PRE>
 <DL>
 <DD>Check if the given name is suitable as a name
  for job, view, etc.
@@ -5218,7 +5254,8 @@ public static void <B>checkGoodName</B>(<A HREF="http://java.sun.com/j2se/1.5.0/
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/text/ParseException.html?is-external=true" title="class or interface in java.text">ParseException</A></CODE> - if the given name is not good</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/text/ParseException.html?is-external=true" title="class or interface in java.text">ParseException</A></CODE> - if the given name is not good
+<DD><CODE><A HREF="../../hudson/model/Failure.html" title="class in hudson.model">Failure</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -5294,6 +5331,20 @@ public <A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.mo
 <DL>
 <DD>Serves jar files for JNLP slave agents.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doJnlpJars(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
+doJnlpJars</H3>
+<PRE>
+public <A HREF="../../hudson/model/Slave.JnlpJar.html" title="class in hudson.model">Slave.JnlpJar</A> <B>doJnlpJars</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req)</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>
@@ -5890,11 +5941,10 @@ public void <B>doResources</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 </DL>
 <HR>
 
-<A NAME="doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+<A NAME="doCheckURIEncoding(org.kohsuke.stapler.StaplerRequest)"><!-- --></A><H3>
 doCheckURIEncoding</H3>
 <PRE>
-public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckURIEncoding</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
-                                         org.kohsuke.stapler.StaplerResponse&nbsp;response)
+public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckURIEncoding</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request)
                                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Checks if container uses UTF-8 to decode URLs. See

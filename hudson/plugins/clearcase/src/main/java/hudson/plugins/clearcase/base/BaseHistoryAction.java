@@ -49,13 +49,13 @@ public class BaseHistoryAction extends AbstractHistoryAction {
     private ClearToolFormatHandler historyHandler = new ClearToolFormatHandler(HISTORY_FORMAT);
     private int maxTimeDifferenceMillis;
 
-    public BaseHistoryAction(ClearTool cleartool, boolean useDynamicView, List<Filter> filters, int maxTimeDifferenceMillis) {
-        super(cleartool, useDynamicView, filters);
+    public BaseHistoryAction(ClearTool cleartool, boolean useDynamicView, Filter filter, int maxTimeDifferenceMillis) {
+        super(cleartool, useDynamicView, filter);
         this.maxTimeDifferenceMillis = maxTimeDifferenceMillis;
     }
 
     @Override
-    protected List<? extends Entry> buildChangelog(String viewName, List<HistoryEntry> entries) {
+    protected List<? extends Entry> buildChangelog(String viewPath, List<HistoryEntry> entries) {
         List<ClearCaseChangeLogEntry> fullList = new ArrayList<ClearCaseChangeLogEntry>();
 
         for (HistoryEntry entry : entries) {

@@ -1,32 +1,33 @@
 package com.collabnet.ce.webservices;
 
+import com.collabnet.ce.soap50.fault.NoSuchObjectFault;
 import com.collabnet.ce.soap50.webservices.ClientSoapStubFactory;
-
-import com.collabnet.ce.soap50.webservices.cemain.ICollabNetSoap;
-import com.collabnet.ce.soap50.webservices.cemain.GroupSoapList;
-import com.collabnet.ce.soap50.webservices.cemain.GroupSoapRow;
 import com.collabnet.ce.soap50.webservices.cemain.Group2SoapList;
 import com.collabnet.ce.soap50.webservices.cemain.Group2SoapRow;
-import com.collabnet.ce.soap50.webservices.cemain.ProjectMemberSoapList;
-import com.collabnet.ce.soap50.webservices.cemain.ProjectMemberSoapRow;
-import com.collabnet.ce.soap50.webservices.cemain.ProjectSoapDO;
-import com.collabnet.ce.soap50.webservices.cemain.ProjectSoapList;
+import com.collabnet.ce.soap50.webservices.cemain.ICollabNetSoap;
 import com.collabnet.ce.soap50.webservices.cemain.ProjectSoapRow;
 import com.collabnet.ce.soap50.webservices.cemain.UserSoapList;
 import com.collabnet.ce.soap50.webservices.cemain.UserSoapRow;
-
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-
+import com.collabnet.ce.soap50.webservices.docman.IDocumentAppSoap;
+import com.collabnet.ce.soap50.webservices.filestorage.IFileStorageAppSoap;
+import com.collabnet.ce.soap50.webservices.frs.IFrsAppSoap;
+import com.collabnet.ce.soap50.webservices.rbac.IRbacAppSoap;
+import com.collabnet.ce.soap50.webservices.scm.IScmAppSoap;
+import com.collabnet.ce.soap50.webservices.tracker.ITrackerAppSoap;
 import hudson.plugins.collabnet.share.TeamForgeShare;
 import hudson.plugins.collabnet.util.CNHudsonUtil;
 import hudson.plugins.collabnet.util.CommonUtil;
+import org.apache.axis.AxisFault;
 import org.apache.log4j.Logger;
 import org.kohsuke.stapler.QueryParameter;
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import java.io.File;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /***
  * This class represents the connection to the CollabNet webservice.
@@ -40,7 +41,13 @@ public class CollabNetApp {
     private String sessionId;
     private String username;
     private String url;
-    private ICollabNetSoap icns;
+    protected final ICollabNetSoap icns;
+    private volatile IFrsAppSoap ifrs;
+    private volatile IFileStorageAppSoap ifsa;
+    private volatile ITrackerAppSoap itas;
+    private volatile IDocumentAppSoap idas;
+    private volatile IScmAppSoap isas;
+    private volatile IRbacAppSoap iras;
 
     /**
      * Creates a new session to the server at the given url.
@@ -89,6 +96,47 @@ public class CollabNetApp {
         this.icns = this.getICollabNetSoap();
     }
 
+    private <T> T createProxy(Class<T> type, String wsdlLoc) {
+        String soapURL = this.getServerUrl() + SOAP_SERVICE + wsdlLoc + "?wsdl";
+        return type.cast(ClientSoapStubFactory. getSoapStub(type, soapURL));
+    }
+
+    protected ITrackerAppSoap getTrackerSoap() {
+        if (itas==null)
+            itas = createProxy(ITrackerAppSoap.class, "TrackerApp");
+        return itas;
+    }
+
+    protected IDocumentAppSoap getDocumentAppSoap() {
+        if (idas==null)
+            idas = createProxy(IDocumentAppSoap.class, "DocumentApp");
+        return idas;
+    }
+
+    protected IScmAppSoap getScmAppSoap() {
+        if (isas==null)
+            isas = createProxy(IScmAppSoap.class, "ScmApp");
+        return isas;
+    }
+
+    protected IRbacAppSoap getRbacAppSoap() {
+        if (iras==null)
+            iras = createProxy(IRbacAppSoap.class, "RbacApp");
+        return iras;
+    }
+
+    protected IFrsAppSoap getFrsAppSoap() {
+        if (ifrs==null)
+            ifrs = createProxy(IFrsAppSoap.class, "FrsApp");
+        return ifrs;
+    }
+
+    protected IFileStorageAppSoap getFileStorageAppSoap() {
+        if (ifsa==null)
+            ifsa = createProxy(IFileStorageAppSoap.class, "FileStorageApp");
+        return ifsa;
+    }
+
     /**
      * Returns the user name that this connection is set up with.
      */
@@ -114,11 +162,8 @@ public class CollabNetApp {
      * @return client soap stub for the main CollabNet.wsdl.
      */
     private ICollabNetSoap getICollabNetSoap() {
-        String soapURL = this.url + CollabNetApp.SOAP_SERVICE +
-            "CollabNet?wsdl";
-        return (ICollabNetSoap) ClientSoapStubFactory.
-            getSoapStub(ICollabNetSoap.class, soapURL);
-    } 
+        return getICollabNetSoap(url);
+    }
 
     /**
      * @return client soap stub for an arbitrary url.
@@ -166,6 +211,18 @@ public class CollabNetApp {
         this.sessionId = null;
     }
 
+    public CTFFile upload(DataHandler src) throws RemoteException {
+        return new CTFFile(this,this.getFileStorageAppSoap().uploadFile(getSessionId(),src));
+    }
+
+    /**
+     * Uploads a file. The returned file object can be then used as an input
+     * to methods like {@link CTFRelease#addFile(String, String, CTFFile)}.
+     */
+    public CTFFile upload(File src) throws RemoteException {
+        return upload(new DataHandler(new FileDataSource(src)));
+    }
+
     /**
      * @param url of the CollabNet server.
      * @return the API version number string.  This string is in the format 
@@ -197,58 +254,6 @@ public class CollabNetApp {
     }
     
     /**
-     * Find the project that matches the given name, and return it's id.
-     * 
-     * @param projectName
-     * @return id for this project (if a match is found), null otherwise.
-     * @throws RemoteException
-     */
-    public String getProjectId(String projectName) throws RemoteException {
-        this.checkValidSessionId();
-        ProjectSoapList pslist = this.icns.getProjectList(sessionId);
-        ProjectSoapRow[] rows = pslist.getDataRows();
-        for (ProjectSoapRow row : rows) {
-            logger.debug(row.getId() + " " + row.getTitle());
-            if (row.getTitle().equals(projectName)) {
-                return row.getId();
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Find the project that matches the given name, and return it's id.
-     *
-     * @param projectId
-     * @return name for this project (if a match is found), null otherwise.
-     */
-    public String getProjectName(String projectId) {
-        this.checkValidSessionId();
-        try {
-            ProjectSoapDO projectDO = icns.getProjectData(sessionId, projectId);
-            return projectDO.getTitle();
-        } catch (RemoteException e) {
-            return null;
-        }
-    }
-
-    /**
-     * Return the list of project names.
-     *
-     * @return a Collection of project names.
-     * @throws RemoteException
-     */
-    public Collection<String> getProjects() throws RemoteException {
-        this.checkValidSessionId();
-        ProjectSoapList pslist = this.icns.getProjectList(sessionId);
-        Collection<String> names = new ArrayList<String>();
-        for (ProjectSoapRow row: pslist.getDataRows()) {
-            names.add(row.getTitle());
-        }
-        return names;
-    }
-    
-    /**
      * Can the user can be found on the CollabNet server?
      *
      * @param username to check. 
@@ -257,153 +262,9 @@ public class CollabNetApp {
      */
     public boolean isUsernameValid(String username) throws RemoteException {
         this.checkValidSessionId();
-        UserSoapList usList = this.icns.findUsers(this.sessionId, username);
-        for (UserSoapRow row: usList.getDataRows()) {
-            if (row.getUserName().equals(username)) {
-                return true;
-            }
-        }
-        return false;
+        return getUser(username)!=null;
     }
     
-    /**
-     * Is the user a member of the project?
-     *
-     * @param username to check.
-     * @param projectId
-     * @return true, if the user is a member of the project, false otherwise.
-     * @throws RemoteException
-     */
-    public boolean isUserMemberOfProject(String username, String projectId) 
-        throws RemoteException {
-        this.checkValidSessionId();
-        ProjectMemberSoapList pmList = this.icns.
-            getProjectMemberList(this.sessionId, projectId);
-        for (ProjectMemberSoapRow row: pmList.getDataRows()) {
-            if (row.getUserName().equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Is the user a member of the group?
-     *
-     * @param username to check.
-     * @param group
-     * @return true, if the user is a member of the group, false otherwise.
-     * @throws RemoteException
-     */
-    public boolean isUserMemberOfGroup (String username, String group) 
-        throws RemoteException {
-        this.checkValidSessionId();
-        GroupSoapList gList = this.icns.getUserGroupList(this.sessionId, 
-                                                         username);
-        for (GroupSoapRow row: gList.getDataRows()) {
-            if (row.getFullName().equals(group)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Get a list of the groups the user belongs to.  This will only work
-     * if logged in as the user in question, or if the logged in user has
-     * superuser permissions.
-     *
-     * @param username
-     * @return collection of group names.
-     * @throws RemoteException
-     */
-    public Collection<String> getUserGroups(String username) 
-        throws RemoteException {
-        this.checkValidSessionId();
-        Collection<String> groups = new ArrayList<String>();
-        GroupSoapList gList = this.icns.getUserGroupList(this.sessionId, 
-                                                         username);
-        for (GroupSoapRow row: gList.getDataRows()) {
-            groups.add(row.getFullName());
-        }
-        return groups;
-    }
-
-    /**
-     * Is the user a project admin?
-     * @param username to check.
-     * @param projectId
-     * @return true if the user is an admin of this project, false otherwise.
-     * @throws RemoteException
-     */
-    public boolean isUserProjectAdmin(String username, String projectId) 
-        throws RemoteException {
-        this.checkValidSessionId();
-        UserSoapList usList = this.icns.listProjectAdmins(this.sessionId, 
-                                                          projectId);
-        for (UserSoapRow row: usList.getDataRows()) {
-            if (row.getUserName().equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param username
-     * @return true if the user is a super user.  False if not, or if the user
-     *         is not found.
-     * @throws RemoteException
-     */
-    public boolean isUserSuper(String username) throws RemoteException {
-        this.checkValidSessionId();
-        UserSoapList usList = this.icns.findUsers(this.sessionId, username);
-        for (UserSoapRow row: usList.getDataRows()) {
-            if (row.getUserName().equals(username)) {
-                return row.getSuperUser();
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Get the usernames of all users.
-     *
-     * @param projectId the project id
-     * @return collection of usernames
-     * @throws RemoteException
-     */
-    public Collection<String> getUsers(String projectId) 
-        throws RemoteException {
-        this.checkValidSessionId();
-        Collection<String> users = new ArrayList<String>();
-        ProjectMemberSoapList pmList = this.icns.
-            getProjectMemberList(this.sessionId, projectId);
-        for (ProjectMemberSoapRow row: pmList.getDataRows()) {
-            users.add(row.getUserName());
-        }
-        return users;
-    }
-
-    /**
-     * Get the usernames of all project admins.
-     *
-     * @param projectId the project id
-     * @return collection of admin usernames
-     * @throws RemoteException
-     */
-    public Collection<String> getAdmins(String projectId) 
-        throws RemoteException {
-        this.checkValidSessionId();
-        Collection<String> admins = new ArrayList<String>();
-        UserSoapList usList = this.icns.listProjectAdmins(this.sessionId, 
-                                                          projectId);
-        for (UserSoapRow row: usList.getDataRows()) {
-            admins.add(row.getUserName());
-        }
-        return admins;
-    }
-
     /**
      * Get the list of all Groups on the system.
      * Can only be called by SuperUsers.
@@ -411,38 +272,37 @@ public class CollabNetApp {
      * @return a Map of all group name/ids.
      * @throws RemoteException 
      */
-    public Map<String, String> getGroups() throws RemoteException {
+    public CTFList<CTFGroup> getGroups() throws RemoteException {
         this.checkValidSessionId();
-        Map<String, String> nameId = new HashMap<String, String>();
+        CTFList<CTFGroup> r = new CTFList<CTFGroup>();
         Group2SoapList gsList = this.icns.getGroupList2(this.sessionId, null);
         for (Group2SoapRow row: gsList.getDataRows()) {
-            nameId.put(row.getFullName(), row.getId());
+            r.add(new CTFGroup(this,row));
         }
-        return nameId;
-    } 
+        return r;
+    }
+
+    public CTFGroup getGroupByTitle(String fullName) throws RemoteException {
+        return getGroups().byTitle(fullName);
+    }
+
+    public CTFGroup createGroup(String fullName, String description) throws RemoteException {
+        return new CTFGroup(this,icns.createGroup(getSessionId(),fullName,description));
+    }
 
     /**
-     * Given a list of group names, return a list of all unique users that 
-     * are members of any of the groups.  If the group name is not found,
-     * no error is thrown.
-     * Only works for SuperUsers.
+     * Creates a new project and obtains its ID.
      *
-     * @param groupNames collection of group names.
-     * @return a collection of user names.
-     * @throws RemoteException
+     * @param name
+     *      ID of the project. Used as a token in URL. Can be null, in which case
+     *      inferred from the title parameter.
+     * @param title
+     *      Human readable title of the project that can include whitespace and so on.
+     * @param description
+     *      Longer human readable description of the project.
      */
-    public Collection<String> getUsersInGroups(Collection<String> groupNames) 
-        throws RemoteException {
-        this.checkValidSessionId();
-        Map<String, String> groupNameIds = this.getGroups();
-        Collection<String> users = new HashSet<String>();
-        for (String groupName: groupNames) {
-            String id = groupNameIds.get(groupName);
-            if (id != null) {
-                users.addAll(this.getGroupUsers(id));
-            }
-        }
-        return users;
+    public String createProject(String name, String title, String description) throws RemoteException {
+        return this.icns.createProject(this.sessionId,name,title,description).getId();
     }
 
     /**
@@ -473,7 +333,59 @@ public class CollabNetApp {
                                                          "a valid session.");
         }
     }
-    
+
+    public CTFProject getProjectById(String projectId) throws RemoteException {
+        return new CTFProject(this,icns.getProjectData(sessionId,projectId));
+    }
+
+    public List<CTFProject> getProjects() throws RemoteException {
+        List<CTFProject> r = new ArrayList<CTFProject>();
+        for (ProjectSoapRow row : icns.getProjectList(getSessionId()).getDataRows()) {
+            r.add(new CTFProject(this,row));
+        }
+        return r;
+    }
+
+    public CTFProject getProjectByTitle(String title) throws RemoteException {
+        for (CTFProject p : getProjects())
+            if (p.getTitle().equals(title))
+                return p;
+        return null;
+    }
+
+    /**
+     * Returns the current user that's logged in.
+     */
+    public CTFUser getMyself() throws RemoteException {
+        return getUser(username);
+    }
+
+    /**
+     * Retrieves the user, or null if no such user exists.
+     */
+    public CTFUser getUser(String username) throws RemoteException {
+        try {
+            return new CTFUser(this,this.icns.getUserData(getSessionId(),username));
+        } catch (NoSuchObjectFault e) {
+            return null;
+        } catch (AxisFault e) {
+            // somehow Axis is failing to create a strongly typed binding.
+            if (NoSuchObjectFault.FAULT_CODE.equals(e.getFaultCode()))
+                return null;
+            throw e;
+        }
+    }
+
+    /**
+     * @param locale
+     *      Locale of the new user (currently supported locales are "en" for English, "ja" for Japanese).
+     * @param timeZone
+     *      User's time zone. The ID for a TimeZone, either an abbreviation such as "PST", a full name such as "America/Los_Angeles", or a custom ID such as "GMT-8:00".
+     */
+    public CTFUser createUser(String username, String email, String fullName, String locale, String timeZone, boolean isSuperUser, boolean isRestrictedUser, String password) throws RemoteException {
+        return new CTFUser(this,this.icns.createUser(getSessionId(),username,email,fullName,locale,timeZone,isSuperUser,isRestrictedUser,password));
+    }
+
     /**
      * Exception class to throw when something unexpected goes wrong.
      */

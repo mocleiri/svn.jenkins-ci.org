@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Descriptor (Hudson main module 1.357 API)
+Uses of Class hudson.model.Descriptor (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Descriptor (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson main module 1.357 API)";
+        parent.document.title="Uses of Class hudson.model.Descriptor (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -393,6 +393,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/console/HudsonExceptionNote.DescriptorImpl.html" title="class in hudson.console">HudsonExceptionNote.DescriptorImpl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/console/HyperlinkNote.DescriptorImpl.html" title="class in hudson.console">HyperlinkNote.DescriptorImpl</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -2569,11 +2577,19 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 <TH ALIGN="left" COLSPAN="2">Constructor parameters in <A HREF="../../../hudson/tasks/junit/package-summary.html">hudson.tasks.junit</A> with type arguments of type <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#JUnitResultArchiver(java.lang.String, hudson.util.DescribableList)">JUnitResultArchiver</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;testResults,
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#JUnitResultArchiver(java.lang.String, boolean, hudson.util.DescribableList)">JUnitResultArchiver</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;testResults,
+                    boolean&nbsp;keepLongStdio,
                     <A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>&gt;&gt;&nbsp;testDataPublishers)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#JUnitResultArchiver(java.lang.String, hudson.util.DescribableList)">JUnitResultArchiver</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;testResults,
+                    <A HREF="../../../hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/tasks/junit/TestDataPublisher.html" title="class in hudson.tasks.junit">TestDataPublisher</A>&gt;&gt;&nbsp;testDataPublishers)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -3016,6 +3032,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For compatibility reason, this method may not return a <A HREF="../../../hudson/views/ListViewColumnDescriptor.html" title="class in hudson.views"><CODE>ListViewColumnDescriptor</CODE></A>
  and instead return a plain <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A> instance.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ViewJobFilter.html" title="class in hudson.views">ViewJobFilter</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>ViewJobFilter.</B><B><A HREF="../../../hudson/views/ViewJobFilter.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -3031,6 +3055,14 @@ Uses of <A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.m
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/views/ListViewColumn.html" title="class in hudson.views"><CODE>ListViewColumn</CODE></A> descriptors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/views/ViewJobFilter.html" title="class in hudson.views">ViewJobFilter</A>,<A HREF="../../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../../hudson/views/ViewJobFilter.html" title="class in hudson.views">ViewJobFilter</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B>ViewJobFilter.</B><B><A HREF="../../../hudson/views/ViewJobFilter.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/views/ViewJobFilter.html" title="class in hudson.views"><CODE>ViewJobFilter</CODE></A> descriptors.</TD>
 </TR>
 </TABLE>
 &nbsp;

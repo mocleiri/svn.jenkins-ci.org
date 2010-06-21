@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ProcessTreeRemoting.IProcessTree (Hudson main module 1.357 API)
+ProcessTreeRemoting.IProcessTree (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProcessTreeRemoting.IProcessTree (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProcessTreeRemoting.IProcessTree (Hudson main module 1.357 API)";
+        parent.document.title="ProcessTreeRemoting.IProcessTree (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson.util</FONT>
 <BR>
 Interface ProcessTreeRemoting.IProcessTree</H2>
 <DL>
-<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util">ProcessTree</A>, <A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A></DD>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util">ProcessTree</A>, <A HREF="../../hudson/util/ProcessTree.Local.html" title="class in hudson.util">ProcessTree.Local</A>, <A HREF="../../hudson/util/ProcessTree.Remote.html" title="class in hudson.util">ProcessTree.Remote</A></DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/util/ProcessTreeRemoting.html" title="class in hudson.util">ProcessTreeRemoting</A></DD>
@@ -141,10 +141,13 @@ Interface ProcessTreeRemoting.IProcessTree</H2>
 <A NAME="killAll(java.util.Map)"><!-- --></A><H3>
 killAll</H3>
 <PRE>
-void <B>killAll</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;modelEnvVars)</PRE>
+void <B>killAll</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;modelEnvVars)
+             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

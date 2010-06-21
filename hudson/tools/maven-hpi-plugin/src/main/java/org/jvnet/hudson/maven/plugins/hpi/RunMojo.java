@@ -198,6 +198,9 @@ public class RunMojo extends AbstractJetty6Mojo {
                 artifactResolver.resolve(hpi,getProject().getRemoteArtifactRepositories(), localRepository);
 
                 copyFile(hpi.getFile(),new File(pluginsDir,a.getArtifactId()+".hpi"));
+                // pin the dependency plugin, so that even if a different version of the same plugin is bundled to Hudson,
+                // we still use the plugin as specified by the POM of the plugin.
+                FileUtils.writeStringToFile(new File(pluginsDir,a.getArtifactId()+".hpi.pinned"),"pinned");
             }
         } catch (IOException e) {
             throw new MojoExecutionException("Unable to copy dependency plugin",e);

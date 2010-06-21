@@ -62,6 +62,13 @@ public interface FileAnnotation extends Comparable<FileAnnotation> {
     String getFileName();
 
     /**
+     * Returns the name of this annotation that could be used as text in links.
+     *
+     * @return the link name of this duplication
+     */
+    String getLinkName();
+
+    /**
      * Returns a file name for a temporary file that will hold the contents of
      * the source. This temporary file is used in a master - slave scenario
      * where the original file remains on the slave while this temporary file is
@@ -80,6 +87,14 @@ public interface FileAnnotation extends Comparable<FileAnnotation> {
      * @param fileName the value to set
      */
     void setFileName(final String fileName);
+
+    /**
+     * Sets the pathname for this warning.
+     *
+     * @param workspacePath
+     *            the workspace path
+     */
+    void setPathName(final String workspacePath);
 
     /**
      * Checks if the file exists.
@@ -118,6 +133,22 @@ public interface FileAnnotation extends Comparable<FileAnnotation> {
      * @return the name of the package that contains this annotation
      */
     String getPackageName();
+
+    /**
+     * Returns whether a package name is defined for this annotation.
+     *
+     * @return <code>true</code> if this annotation has a package or namespace name,
+     *         <code>false</code> otherwise
+     */
+    boolean hasPackageName();
+
+    /**
+     * Returns the path name of this annotation (relative path to the affected
+     * file).
+     *
+     * @return the path name
+     */
+    String getPathName();
 
     /**
      * Returns the origin of the annotation. Might be an empty string.

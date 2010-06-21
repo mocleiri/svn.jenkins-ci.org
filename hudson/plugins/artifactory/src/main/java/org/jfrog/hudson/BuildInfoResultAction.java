@@ -9,14 +9,23 @@ import hudson.model.Action;
  * @author Yossi Shaul
  */
 public class BuildInfoResultAction implements Action {
-    private ServerDetails serverDetails;
-    private final AbstractBuild build;
 
-    public BuildInfoResultAction(ServerDetails serverDetails, AbstractBuild build) {
-        this.serverDetails = serverDetails;
-        this.build = build;
+    private final String url;
+
+    /**
+     * @deprecated Only here to keep compatibility with version 1.0.7 and below (part of the xstream de-serialization)
+     */
+    @Deprecated
+    private transient ArtifactoryRedeployPublisher artifactoryRedeployPublisher;
+    /**
+     * @deprecated Only here to keep compatibility with version 1.0.7 and below (part of the xstream de-serialization)
+     */
+    @Deprecated
+    private transient AbstractBuild build;
+
+    public BuildInfoResultAction(ArtifactoryRedeployPublisher artifactoryRedeployPublisher, AbstractBuild build) {
+        url = generateUrl(artifactoryRedeployPublisher, build);
     }
-
 
     public String getIconFileName() {
         return "/plugin/artifactory/images/artifactory-icon.png";
@@ -27,7 +36,16 @@ public class BuildInfoResultAction implements Action {
     }
 
     public String getUrlName() {
-        return serverDetails.artifactoryName + "/webapp/builds/"
+        // for backward compatibility if url is empty calculate it from the old structs
+        if (url == null && artifactoryRedeployPublisher != null && build != null) {
+            return generateUrl(artifactoryRedeployPublisher, build);
+        } else {
+            return url;
+        }
+    }
+
+    private String generateUrl(ArtifactoryRedeployPublisher artifactoryRedeployPublisher, AbstractBuild build) {
+        return artifactoryRedeployPublisher.getArtifactoryName() + "/webapp/builds/"
                 + build.getParent().getDisplayName() + "/"
                 + build.getNumber();
     }

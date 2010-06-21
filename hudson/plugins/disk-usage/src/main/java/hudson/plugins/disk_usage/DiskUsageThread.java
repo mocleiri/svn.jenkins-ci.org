@@ -25,8 +25,8 @@ import java.util.logging.Level;
  */
 @Extension
 public class DiskUsageThread extends AsyncPeriodicWork {
-    //trigger disk usage thread each 60 minutes
-    public static final int COUNT_INTERVAL_MINUTES = 60;
+    //trigger disk usage thread each 6 hours
+    public static final int COUNT_INTERVAL_MINUTES = 60*6;
 
 
     public DiskUsageThread() {
@@ -113,15 +113,27 @@ public class DiskUsageThread extends AsyncPeriodicWork {
         AbstractBuild lastBuild = (AbstractBuild) project.getLastBuild();
         if (lastBuild != null) {
             BuildDiskUsageAction bdua = lastBuild.getAction(BuildDiskUsageAction.class);
+            //also recalculate workspace - deleting workspace by e.g. scripts is also quite common
+            boolean updateWs = false;
             if (bdua == null) {
                 bdua = new BuildDiskUsageAction(lastBuild, 0, 0);
                 lastBuild.addAction(bdua);
+                updateWs = true;
             }
             FilePath workspace = project.getSomeWorkspace();
-            //slave might be offline...
-            if ((workspace != null) && (bdua.diskUsage.wsUsage <= 0)) {
+            //slave might be offline...or have been deleted - set to 0
+            if (workspace != null) {
+            	long oldWsUsage = bdua.diskUsage.wsUsage;
                 bdua.diskUsage.wsUsage = workspace.act(new DiskUsageCallable(workspace));
-                lastBuild.save();
+                if (Math.abs(bdua.diskUsage.wsUsage - oldWsUsage) > 1024 ) {
+                	updateWs = true;
+                }
+            }
+            else{
+            	bdua.diskUsage.wsUsage = 0; //workspace have been delete or is not reachable
+            }
+            if(updateWs){
+            	lastBuild.save();
             }
         }
     }

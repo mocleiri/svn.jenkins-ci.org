@@ -2,6 +2,8 @@ package hudson.plugins.sshslaves;
 
 import static hudson.Util.fixEmpty;
 import static java.util.logging.Level.FINE;
+
+import com.trilead.ssh2.SCPClient;
 import hudson.AbortException;
 import hudson.EnvVars;
 import hudson.Extension;
@@ -23,6 +25,7 @@ import hudson.tools.ToolLocationNodeProperty;
 import hudson.tools.ToolLocationNodeProperty.ToolLocation;
 import hudson.util.DescribableList;
 import hudson.util.IOException2;
+import hudson.util.NullStream;
 import hudson.util.Secret;
 import hudson.util.StreamCopyThread;
 
@@ -32,6 +35,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.StringWriter;
@@ -42,9 +46,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.CountingOutputStream;
 import org.apache.commons.io.output.TeeOutputStream;
 import org.kohsuke.putty.PuTTYKey;
@@ -139,7 +145,7 @@ public class SSHLauncher extends ComputerLauncher {
      *
      * @return the formatted current time stamp.
      */
-    private static String getTimestamp() {
+    protected String getTimestamp() {
         return String.format("[%1$tD %1$tT]", new Date());
     }
 
@@ -170,38 +176,9 @@ public class SSHLauncher extends ComputerLauncher {
             verifyNoHeaderJunk(listener);
             reportEnvironment(listener);
 
-            String java = null;
-            List<String> tried = new ArrayList<String>();
-            outer:
-            for (JavaProvider provider : JavaProvider.all()) {
-                for (String javaCommand : provider.getJavas(computer, listener, connection)) {
-                    LOGGER.fine("Trying Java at "+javaCommand);
-                    try {
-                        tried.add(javaCommand);
-                        java = checkJavaVersion(listener, javaCommand);
-                        if (java != null) {
-                            break outer;
-                        }
-                    } catch (IOException e) {
-                        LOGGER.log(FINE, "Failed to check the Java version",e);
-                        // try the next one
-                    }
-                }
-            }
+            String java = resolveJava(computer, listener);
 
-            final String workingDirectory = getWorkingDirectory(computer);
-
-            if (java == null) {
-                // attempt auto JDK installation
-                ByteArrayOutputStream buf = new ByteArrayOutputStream();
-                try {
-                    java = attemptToInstallJDK(listener, workingDirectory, buf);
-                } catch (IOException e) {
-                    throw new IOException2("Could not find any known supported java version in "+tried+", and we also failed to install JDK as a fallback",e);
-                }
-            }
-
-
+            String workingDirectory = getWorkingDirectory(computer);
             copySlaveJar(listener, workingDirectory);
 
             startSlave(computer, listener, java, workingDirectory);
@@ -216,6 +193,36 @@ public class SSHLauncher extends ComputerLauncher {
             connection.close();
             connection = null;
             listener.getLogger().println(Messages.SSHLauncher_ConnectionClosed(getTimestamp()));
+        }
+    }
+
+    /**
+     * Finds local Java, and if none exist, install one.
+     */
+    protected String resolveJava(SlaveComputer computer, TaskListener listener) throws InterruptedException, IOException2 {
+        String workingDirectory = getWorkingDirectory(computer);
+
+        List<String> tried = new ArrayList<String>();
+        for (JavaProvider provider : JavaProvider.all()) {
+            for (String javaCommand : provider.getJavas(computer, listener, connection)) {
+                LOGGER.fine("Trying Java at "+javaCommand);
+                try {
+                    tried.add(javaCommand);
+                    String java = checkJavaVersion(listener, javaCommand);
+                    if (java != null)
+                        return java;
+                } catch (IOException e) {
+                    LOGGER.log(FINE, "Failed to check the Java version",e);
+                    // try the next one
+                }
+            }
+        }
+
+        // attempt auto JDK installation
+        try {
+            return attemptToInstallJDK(listener, workingDirectory);
+        } catch (IOException e) {
+            throw new IOException2("Could not find any known supported java version in "+tried+", and we also failed to install JDK as a fallback",e);
         }
     }
 
@@ -236,8 +243,9 @@ public class SSHLauncher extends ComputerLauncher {
     /**
      * Attempts to install JDK, and return the path to Java.
      */
-    private String attemptToInstallJDK(TaskListener listener, String workingDirectory, ByteArrayOutputStream buf) throws IOException, InterruptedException {
-        if (connection.exec("uname -a",new TeeOutputStream(buf,listener.getLogger()))!=0)
+    private String attemptToInstallJDK(TaskListener listener, String workingDirectory) throws IOException, InterruptedException {
+        ByteArrayOutputStream unameOutput = new ByteArrayOutputStream();
+        if (connection.exec("uname -a",new TeeOutputStream(unameOutput,listener.getLogger()))!=0)
             throw new IOException("Failed to run 'uname' to obtain the environment");
 
         // guess the platform from uname output. I don't use the specific options because I'm not sure
@@ -252,7 +260,7 @@ public class SSHLauncher extends ComputerLauncher {
         // Windows_NT WINXPIE7 5 01 586
         //        (this one is from MKS)
 
-        String uname = buf.toString();
+        String uname = unameOutput.toString();
         Platform p = null;
         CPU cpu = null;
         if (uname.contains("GNU/Linux"))        p = Platform.LINUX;
@@ -299,7 +307,7 @@ public class SSHLauncher extends ComputerLauncher {
     private void startSlave(SlaveComputer computer, final TaskListener listener, String java,
                             String workingDirectory) throws IOException {
         final Session session = connection.openSession();
-        String cmd = "cd '" + workingDirectory + "' && " + java + (jvmOptions == null ? "" : " " + jvmOptions) + " -jar slave.jar";
+        String cmd = "cd '" + workingDirectory + "' && " + java + " " + getJvmOptions() + " -jar slave.jar";
         listener.getLogger().println(Messages.SSHLauncher_StartingSlaveProcess(getTimestamp(), cmd));
         session.execCommand(cmd);
         final StreamGobbler out = new StreamGobbler(session.getStdout());
@@ -349,7 +357,7 @@ public class SSHLauncher extends ComputerLauncher {
      *
      * @throws IOException If something goes wrong.
      */
-    private void copySlaveJar(TaskListener listener, String workingDirectory) throws IOException {
+    private void copySlaveJar(TaskListener listener, String workingDirectory) throws IOException, InterruptedException {
         String fileName = workingDirectory + "/slave.jar";
 
         listener.getLogger().println(Messages.SSHLauncher_StartingSFTPClient(getTimestamp()));
@@ -389,6 +397,13 @@ public class SSHLauncher extends ComputerLauncher {
             } catch (Exception e) {
                 throw new IOException2(Messages.SSHLauncher_ErrorCopyingSlaveJar(), e);
             }
+        } catch (IOException e) {
+            if (sftpClient == null) {
+                // lets try to recover if the slave doesn't have an SFTP service
+                copySlaveJarUsingSCP(listener, workingDirectory);
+            } else {
+                throw e;
+            }
         } finally {
             if (sftpClient != null) {
                 sftpClient.close();
@@ -396,18 +411,51 @@ public class SSHLauncher extends ComputerLauncher {
         }
     }
 
-    private void reportEnvironment(TaskListener listener) throws IOException, InterruptedException {
+    /**
+     * Method copies the slave jar to the remote system using scp.
+     *
+     * @param listener         The listener.
+     * @param workingDirectory The directory into which the slave jar will be copied.
+     *
+     * @throws IOException If something goes wrong.
+     * @throws InterruptedException If something goes wrong.
+     */
+    private void copySlaveJarUsingSCP(TaskListener listener, String workingDirectory) throws IOException, InterruptedException {
+        listener.getLogger().println(Messages.SSHLauncher_StartingSCPClient(getTimestamp()));
+        SCPClient scp = new SCPClient(connection);
+        try {
+            // check if the working directory exists
+            if (connection.exec("test -d " + workingDirectory ,listener.getLogger())!=0) {
+                listener.getLogger().println(Messages.SSHLauncher_RemoteFSDoesNotExist(getTimestamp(), workingDirectory));
+                // working directory doesn't exist, lets make it.
+                if (connection.exec("mkdir -p " + workingDirectory, listener.getLogger())!=0) {
+                    listener.getLogger().println("Failed to create "+workingDirectory);
+                }
+            }
+
+            // delete the slave jar as we do with SFTP
+            connection.exec("rm " + workingDirectory + "/slave.jar", new NullStream());
+
+            // SCP it to the slave. hudson.Util.ByteArrayOutputStream2 doesn't work for this. It pads the byte array.
+            InputStream is = Hudson.getInstance().servletContext.getResourceAsStream("/WEB-INF/slave.jar");
+            listener.getLogger().println(Messages.SSHLauncher_CopyingSlaveJar(getTimestamp()));
+            scp.put(IOUtils.toByteArray(is), "slave.jar", workingDirectory, "0644");
+        } catch (IOException e) {
+            throw new IOException2(Messages.SSHLauncher_ErrorCopyingSlaveJar(), e);
+        }
+    }
+
+    protected void reportEnvironment(TaskListener listener) throws IOException, InterruptedException {
         listener.getLogger().println(Messages._SSHLauncher_RemoteUserEnvironment(getTimestamp()));
         connection.exec("set",listener.getLogger());
     }
 
     private String checkJavaVersion(TaskListener listener, String javaCommand) throws IOException, InterruptedException {
         listener.getLogger().println(Messages.SSHLauncher_CheckingDefaultJava(getTimestamp(),javaCommand));
-        String line;
         StringWriter output = new StringWriter();   // record output from Java
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        connection.exec(javaCommand + " "+jvmOptions + " -version",out);
+        connection.exec(javaCommand + " "+getJvmOptions() + " -version",out);
         BufferedReader r = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(out.toByteArray())));
         final String result = checkJavaVersion(listener.getLogger(), javaCommand, r, output);
 
@@ -430,10 +478,10 @@ public class SSHLauncher extends ComputerLauncher {
 	 *            the command executed, used for logging
 	 * @param r
 	 *            the output of "java -version"
-	 * @param out
+	 * @param output
 	 *            copy the data from <code>r</code> into this output buffer
 	 */
-	static String checkJavaVersion(final PrintStream logger, String javaCommand,
+	protected String checkJavaVersion(final PrintStream logger, String javaCommand,
 			final BufferedReader r, final StringWriter output)
 			throws IOException {
 		String line;
@@ -451,7 +499,7 @@ public class SSHLauncher extends ComputerLauncher {
 				// parse as a number and we should be OK as all we care about is up through the first dot.
 				try {
 					final Number version =
-						NumberFormat.getNumberInstance().parse(versionStr);
+						NumberFormat.getNumberInstance(Locale.US).parse(versionStr);
 					if(version.doubleValue() < 1.5) {
 						throw new IOException(Messages
 								.SSHLauncher_NoJavaFound(line));
@@ -465,7 +513,7 @@ public class SSHLauncher extends ComputerLauncher {
 		return null;
 	}
 
-    private void openConnection(TaskListener listener) throws IOException {
+    protected void openConnection(TaskListener listener) throws IOException, InterruptedException {
         listener.getLogger().println(Messages.SSHLauncher_OpeningSSHConnection(getTimestamp(), host + ":" + port));
         connection.connect();
         
@@ -475,7 +523,7 @@ public class SSHLauncher extends ComputerLauncher {
             LOGGER.fine("Defaulting the user name to "+username);
         }
 
-        String pass = getPassword();
+        String pass = Util.fixNull(getPassword());
 
         boolean isAuthenticated = false;
         if(fixEmpty(privatekey)==null && fixEmpty(pass)==null) {
@@ -596,6 +644,10 @@ public class SSHLauncher extends ComputerLauncher {
      */
     public String getPrivatekey() {
         return privatekey;
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 
     @Extension

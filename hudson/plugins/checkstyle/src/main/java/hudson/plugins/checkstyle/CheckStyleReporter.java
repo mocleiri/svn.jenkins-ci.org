@@ -12,6 +12,8 @@ import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.checkstyle.parser.CheckStyleParser;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.maven.project.MavenProject;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -76,7 +78,8 @@ public class CheckStyleReporter extends HealthAwareMavenReporter {
     @Override
     public ParserResult perform(final MavenBuildProxy build, final MavenProject pom,
             final MojoInfo mojo, final PluginLogger logger) throws InterruptedException, IOException {
-        FilesParser checkstyleCollector = new FilesParser(logger, CHECKSTYLE_XML_FILE, new CheckStyleParser(getDefaultEncoding()), true, false);
+        FilesParser checkstyleCollector = new FilesParser(logger, CHECKSTYLE_XML_FILE, 
+                new CheckStyleParser(getDefaultEncoding()), getModuleName(pom));
 
         return getTargetPath(pom).act(checkstyleCollector);
     }
@@ -93,8 +96,8 @@ public class CheckStyleReporter extends HealthAwareMavenReporter {
 
     /** {@inheritDoc} */
     @Override
-    public Action getProjectAction(final MavenModule module) {
-        return new CheckStyleProjectAction(module);
+    public List<CheckStyleProjectAction> getProjectActions(final MavenModule module) {
+        return Collections.singletonList(new CheckStyleProjectAction(module));
     }
 
     /** {@inheritDoc} */

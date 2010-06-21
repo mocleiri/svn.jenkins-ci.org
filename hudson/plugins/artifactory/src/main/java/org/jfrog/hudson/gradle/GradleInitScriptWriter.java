@@ -19,14 +19,18 @@
 package org.jfrog.hudson.gradle;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
 import hudson.EnvVars;
 import hudson.model.AbstractBuild;
 import hudson.model.Cause;
+import hudson.model.CauseAction;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jfrog.build.api.BuildInfoConfigProperties;
 import org.jfrog.build.api.BuildInfoProperties;
+import org.jfrog.build.client.ClientIvyProperties;
+import org.jfrog.build.client.ClientMavenProperties;
 import org.jfrog.build.client.ClientProperties;
 import org.jfrog.hudson.ArtifactoryServer;
 import org.jfrog.hudson.ServerDetails;
@@ -48,9 +52,9 @@ public class GradleInitScriptWriter {
     private EnvVars envVars;
     private AbstractBuild build;
     private static final String NEW_LINE = "\n";
-    private static final String QUOTE = "\"";
+    private static final String QUOTE = "'";
     private static String scriptRepoPath =
-            "org/jfrog/buildinfo/build-info-extractor-gradle/1.0-SNAPSHOT/artifactoryinitplugin-1.0-SNAPSHOT.gradle";
+            "org/jfrog/buildinfo/build-info-extractor-gradle/1.0.0/artifactoryinitplugin-1.0.0.gradle";
     private ArtifactoryGradleConfigurator gradleConfigurator;
 
     /**
@@ -75,16 +79,31 @@ public class GradleInitScriptWriter {
         addProperty(stringBuilder, ClientProperties.PROP_PUBLISH_REPOKEY, getServerDetails().repositoryKey);
         addProperty(stringBuilder, ClientProperties.PROP_PUBLISH_USERNAME, gradleConfigurator.getUsername());
         addProperty(stringBuilder, ClientProperties.PROP_PUBLISH_PASSWORD, gradleConfigurator.getPassword());
-        addProperty(stringBuilder, ClientProperties.PROP_PUBLISH_IVY, Boolean.toString(gradleConfigurator.deployIvy));
-        addProperty(stringBuilder, ClientProperties.PROP_PUBLISH_MAVEN,
+        addProperty(stringBuilder, ClientIvyProperties.PROP_PUBLISH_IVY,
+                Boolean.toString(gradleConfigurator.deployIvy));
+        addProperty(stringBuilder, ClientMavenProperties.PROP_PUBLISH_MAVEN,
                 Boolean.toString(gradleConfigurator.deployMaven));
         addProperty(stringBuilder, ClientProperties.PROP_PUBLISH_ARTIFACT,
                 Boolean.toString(gradleConfigurator.isDeployArtifacts()));
         addProperty(stringBuilder, BuildInfoProperties.PROP_BUILD_NAME, build.getProject().getName());
         addProperty(stringBuilder, BuildInfoProperties.PROP_BUILD_NUMBER, build.getNumber() + "");
+        CauseAction action = ActionableHelper.getLatestAction(build, CauseAction.class);
+        String principal = "";
+        if (action != null) {
+            for (Cause cause : action.getCauses()) {
+                if (cause instanceof Cause.UserCause) {
+                    principal = (((Cause.UserCause) cause).getUserName());
+                }
+            }
+        }
+        addProperty(stringBuilder, ClientProperties.PROP_PRINCIPAL, principal);
         String buildUrl = envVars.get("BUILD_URL");
         if (StringUtils.isNotBlank(buildUrl)) {
             addProperty(stringBuilder, BuildInfoProperties.PROP_BUILD_URL, buildUrl);
+        }
+        String svnRevision = envVars.get("SVN_REVISION");
+        if (StringUtils.isNotBlank(svnRevision)) {
+            addProperty(stringBuilder, BuildInfoProperties.PROP_VCS_REVISION, svnRevision);
         }
         addProperty(stringBuilder, BuildInfoProperties.PROP_BUILD_AGENT, "Hudson/" + build.getHudsonVersion());
         Cause.UpstreamCause parent = ActionableHelper.getUpstreamCause(build);
@@ -92,15 +111,7 @@ public class GradleInitScriptWriter {
             addProperty(stringBuilder, BuildInfoProperties.PROP_PARENT_BUILD_NAME, parent.getUpstreamProject());
             addProperty(stringBuilder, BuildInfoProperties.PROP_PARENT_BUILD_NUMBER, parent.getUpstreamBuild() + "");
         }
-        // Write all the buildInfo properties.
-        Map<String, String> filteredBuildInfoKeys = Maps.filterKeys(envVars, new Predicate<String>() {
-            public boolean apply(String input) {
-                return input.startsWith(BuildInfoProperties.BUILD_INFO_PROP_PREFIX);
-            }
-        });
-        for (Map.Entry<String, String> entry : filteredBuildInfoKeys.entrySet()) {
-            addProperty(stringBuilder, entry.getKey(), entry.getValue());
-        }
+
         // Write all the deploy (matrix params) properties.
         Map<String, String> filteredMatrixParams = Maps.filterKeys(envVars, new Predicate<String>() {
             public boolean apply(String input) {
@@ -110,10 +121,32 @@ public class GradleInitScriptWriter {
         for (Map.Entry<String, String> entry : filteredMatrixParams.entrySet()) {
             addProperty(stringBuilder, entry.getKey(), entry.getValue());
         }
+
+        // add EnvVars
+
+        //Add only the hudson specific environment variables
+        MapDifference<String, String> difference = Maps.difference(envVars, System.getenv());
+        Map<String, String> filteredEnvVars = difference.entriesOnlyOnLeft();
+        for (Map.Entry<String, String> entry : filteredEnvVars.entrySet()) {
+            addProperty(stringBuilder, BuildInfoProperties.BUILD_INFO_ENVIRONMENT_PREFIX + entry.getKey(),
+                    entry.getValue());
+        }
+        addProperty(stringBuilder, BuildInfoConfigProperties.PROP_INCLUDE_ENV_VARS,
+                String.valueOf(gradleConfigurator.includeEnvVars));
+        // add build variables
+        Map<String, String> buildVariables = build.getBuildVariables();
+        for (Map.Entry<String, String> entry : buildVariables.entrySet()) {
+            addProperty(stringBuilder, BuildInfoProperties.BUILD_INFO_ENVIRONMENT_PREFIX + entry.getKey(),
+                    entry.getValue());
+        }
+
         return stringBuilder.toString();
     }
 
     private void addProperty(StringBuilder stringBuilder, String key, String value) {
+        key = key.replace("\\", "\\\\");
+        value = value.replace("\\", "\\\\");
+        value = value.replace('"', ' ');
         stringBuilder.append(QUOTE).append(key).append(QUOTE).append(":").append(QUOTE).append(value).append(QUOTE)
                 .append(",").append(NEW_LINE);
     }

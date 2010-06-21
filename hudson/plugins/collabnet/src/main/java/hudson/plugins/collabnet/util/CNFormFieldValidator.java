@@ -1,9 +1,13 @@
 package hudson.plugins.collabnet.util;
 
+import com.collabnet.ce.webservices.CTFPackage;
+import com.collabnet.ce.webservices.CTFProject;
+import com.collabnet.ce.webservices.CTFRelease;
+import com.collabnet.ce.webservices.CTFScmRepository;
+import com.collabnet.ce.webservices.CTFTracker;
 import com.collabnet.ce.webservices.CollabNetApp;
-import com.collabnet.ce.webservices.DocumentApp;
 import com.collabnet.cubit.api.CubitConnector;
-import hudson.plugins.collabnet.auth.CNConnection;
+import hudson.plugins.collabnet.auth.CNAuthentication;
 import hudson.util.FormValidation;
 import org.apache.axis.utils.StringUtils;
 import org.apache.commons.httpclient.HttpClient;
@@ -14,7 +18,13 @@ import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.IOException;
-import java.util.*;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -202,13 +212,13 @@ public abstract class CNFormFieldValidator {
     /**
      * Checks if a project name is valid, by using the given connection.
      */
-    public static FormValidation projectCheck(CollabNetApp app, String project) {
+    public static FormValidation projectCheck(CollabNetApp app, String project) throws RemoteException {
         if (CommonUtil.unset(project)) {
             return FormValidation.error("The project is required.");
         }
         if (app != null) {
             try {
-                if (CNHudsonUtil.getProjectId(app, project) == null) {
+                if (app.getProjectByTitle(project) == null) {
                     return FormValidation.warning(String.format(
                             "Project '%s' cannot be found, or user %s does not have permission to access it.",
                             project, app.getUsername()));
@@ -233,10 +243,9 @@ public abstract class CNFormFieldValidator {
         }
         checkInterpretedString(path);
 
-        String projectId = CNHudsonUtil.getProjectId(app, project);
-        if (projectId != null) {
-            DocumentApp da = new DocumentApp(app);
-            String missing = da.verifyPath(projectId, path);
+        CTFProject p = app.getProjectByTitle(project);
+        if (p != null) {
+            String missing =  p.verifyPath(path);
             if (missing != null) {
                 CNHudsonUtil.logoff(app);
                 return FormValidation.warning(String.format(
@@ -251,98 +260,102 @@ public abstract class CNFormFieldValidator {
      * Class to check that a package exists.  Expects a StaplerRequest with 
      * a url, username, password, project, and package.
      */
-    public static FormValidation packageCheck(CollabNetApp cna, String project, String rpackage) {
+    public static FormValidation packageCheck(CollabNetApp cna, String project, String rpackage) throws RemoteException {
         if (CommonUtil.unset(rpackage)) {
             return FormValidation.error("The package is required.");
         }
-        String projectId = CNHudsonUtil.getProjectId(cna, project);
-        if (projectId != null) {
-            String packageId = CNHudsonUtil.getPackageId(cna, rpackage,
-                                                         projectId);
-            if (packageId == null) {
-                CNHudsonUtil.logoff(cna);
-                return FormValidation.warning("Package could not be found.");
+        try {
+            CTFProject p = cna.getProjectByTitle(project);
+            if (p != null) {
+                CTFPackage pkg = p.getPackages().byTitle(rpackage);
+                if (pkg == null) {
+                    return FormValidation.warning("Package could not be found.");
+                }
             }
+            return FormValidation.ok();
+        } finally {
+            CNHudsonUtil.logoff(cna);
         }
-        CNHudsonUtil.logoff(cna);
-        return FormValidation.ok();
     }
 
     /**
      * Class to check that a release exists.  Expects a StaplerRequest with 
      * a url, username, password, project, package (optional), and release.
      */
-    public static FormValidation releaseCheck(CollabNetApp cna, String project, String rpackage, String release, boolean required) {
-        if (CommonUtil.unset(release)) {
-            if (required) {
-                return FormValidation.error("The release is required.");
+    public static FormValidation releaseCheck(CollabNetApp cna, String project, String rpackage, String release, boolean required) throws RemoteException {
+        try {
+            if (CommonUtil.unset(release)) {
+                if (required) {
+                    return FormValidation.error("The release is required.");
+                } else {
+                    return FormValidation.ok();
+                }
+            }
+            CTFProject p = cna.getProjectByTitle(project);
+            if (p==null)    return FormValidation.ok(); // not entered yet?
+
+            CTFPackage pkg = p.getPackages().byTitle(rpackage);
+            if (pkg != null) {
+                CTFRelease r = pkg.getReleaseByTitle(release);
+                if (r == null)
+                    return FormValidation.warning("Release could not be found.");
             } else {
-                return FormValidation.ok();
-            }
-        }
-        String projectId = CNHudsonUtil.getProjectId(cna, project);
-        String packageId = CNHudsonUtil.getPackageId(cna, rpackage,
-                                                     projectId);
-        if (packageId != null) {
-            String releaseId = CNHudsonUtil.getReleaseId(cna, packageId,
-                                                         release);
-            if (releaseId == null) {
-                CNHudsonUtil.logoff(cna);
+                // locate the release from all the packages
+                for (CTFPackage x : p.getPackages()) {
+                    if (x.getReleaseByTitle(release)!=null)
+                        return FormValidation.ok();
+                }
                 return FormValidation.warning("Release could not be found.");
             }
-        } else if (projectId != null) {
-            String releaseId = CNHudsonUtil.getProjectReleaseId(cna,
-                                                                projectId,
-                                                                release);
-            if (releaseId == null) {
-                CNHudsonUtil.logoff(cna);
-                return FormValidation.warning("Release could not be found.");
-            }
+            return FormValidation.ok();
+        } finally {
+            CNHudsonUtil.logoff(cna);
         }
-        CNHudsonUtil.logoff(cna);
-        return FormValidation.ok();
     }
 
     /**
      * Class to check that a repo exists.  Expects a StaplerRequest with 
      * a url, username, password, and project.
      */
-    public static FormValidation repoCheck(StaplerRequest request) {
+    public static FormValidation repoCheck(StaplerRequest request) throws RemoteException {
         String project = request.getParameter("project");
         String repoName = request.getParameter("repo");
         CollabNetApp cna = CNHudsonUtil.getCollabNetApp(request);
-        String projectId = CNHudsonUtil.getProjectId(cna, project);
-        if (CommonUtil.unset(repoName)) {
-            return FormValidation.error("The repository name is required.");
-        }
-        if (projectId != null) {
-            String repoId = CNHudsonUtil.getRepoId(cna, projectId, repoName);
-            if (repoId == null) {
-                CNHudsonUtil.logoff(cna);
-                return FormValidation.warning("Repository could not be " +
-                                              "found.");
+        if (cna==null)  return FormValidation.ok();
+
+        try {
+            CTFProject p = cna.getProjectByTitle(project);
+            if (CommonUtil.unset(repoName)) {
+                return FormValidation.error("The repository name is required.");
             }
+            if (p != null) {
+                CTFScmRepository r = p.getScmRepositories().byTitle(repoName);
+                if (r == null) {
+                    return FormValidation.warning("Repository could not be " +
+                                                  "found.");
+                }
+            }
+            return FormValidation.ok();
+        } finally {
+            CNHudsonUtil.logoff(cna);
         }
-        CNHudsonUtil.logoff(cna);
-        return FormValidation.ok();
     }
 
     /**
      * Class to check that a tracker exists.  Expects a StaplerRequest with 
      * a url, username, password, project, and tracker.
      */
-    public static FormValidation trackerCheck(StaplerRequest request) {
+    public static FormValidation trackerCheck(StaplerRequest request) throws RemoteException {
         String tracker = request.getParameter("tracker");
         String project = request.getParameter("project");
         if (CommonUtil.unset(tracker)) {
             return FormValidation.error("The tracker is required.");
         }
         CollabNetApp cna = CNHudsonUtil.getCollabNetApp(request);
-        String projectId = CNHudsonUtil.getProjectId(cna, project);
-        if (projectId != null) {
-            String trackerId = CNHudsonUtil.getTrackerId(cna, projectId,
-                                                         tracker);
-            if (trackerId == null) {
+        CTFProject p = cna.getProjectByTitle(project);
+        if (p!=null) {
+            CTFTracker t = p.getTrackers().byTitle(tracker);
+            if (t == null) {
                 CNHudsonUtil.logoff(cna);
                 return FormValidation.warning("Tracker could not be found.");
             }
@@ -356,28 +369,30 @@ public abstract class CNFormFieldValidator {
      * Expects a StaplerRequest with login info (url, username, password), 
      * project, and assign (which is the username).
      */
-    public static FormValidation assignCheck(StaplerRequest request) {
+    public static FormValidation assignCheck(StaplerRequest request) throws RemoteException {
         String assign = StringUtils.strip(request.getParameter("assign"));
         if (CommonUtil.unset(assign)) {
             return FormValidation.ok();
         }
         String project = request.getParameter("project");
+
         CollabNetApp cna = CNHudsonUtil.getCollabNetApp(request);
         if (cna == null) {
             return FormValidation.ok();
         }
-        String projectId = CNHudsonUtil.getProjectId(cna, project);
-        if (projectId == null) {
-            CNHudsonUtil.logoff(cna);
+        try {
+            CTFProject p = cna.getProjectById(project);
+            if (p == null) {
+                return FormValidation.ok();
+            }
+            if (!p.hasMember(assign)) {
+                return FormValidation.warning("This user is not a member of the " +
+                        "project.");
+            }
             return FormValidation.ok();
-        }
-        if (!CNHudsonUtil.isUserMember(cna, assign, projectId)) {
+        } finally {
             CNHudsonUtil.logoff(cna);
-            return FormValidation.warning("This user is not a member of the " +
-                    "project.");
         }
-        CNHudsonUtil.logoff(cna);
-        return FormValidation.ok();
     }
 
     
@@ -386,16 +401,16 @@ public abstract class CNFormFieldValidator {
      * The check only works for a logged-in site-admin.  Otherwise,
      * give a warning that we cannot check the users' validity.
      */
-    public static FormValidation userListCheck(String userStr) {
+    public static FormValidation userListCheck(String userStr) throws RemoteException {
         if (userStr == null || userStr.equals("")) {
             return FormValidation.ok();
         }
-        CNConnection conn = CNConnection.getInstance();
-        if (conn == null || !conn.isSuperUser()) {
+        CNAuthentication auth = CNAuthentication.get();
+        if (auth == null || !auth.isSuperUser()) {
             return FormValidation.warning("Cannot check if users exist unless logged " +
                     "in as a TeamForge site admin.  Be careful!");
         }
-        Collection<String> invalidUsers = getInvalidUsers(conn, userStr);
+        Collection<String> invalidUsers = getInvalidUsers(auth.getCredentials(), userStr);
         if (!invalidUsers.isEmpty()) {
             return FormValidation.error("The following users do not exist: " +
                   invalidUsers);
@@ -404,15 +419,14 @@ public abstract class CNFormFieldValidator {
     }
 
     /**
-     * @param conn
+     * @param cna
      * @param userStr
      * @return the collection of users from the array which do not exist.
      */
-    private static Collection<String> getInvalidUsers(CNConnection conn, String userStr) {
-        String[] users = CommonUtil.splitCommaStr(userStr);
+    private static Collection<String> getInvalidUsers(CollabNetApp cna, String userStr) throws RemoteException {
         Collection<String> invalidUsers = new ArrayList<String>();
-        for (String user: users) {
-            if (!conn.isUsernameValid(user)) {
+        for (String user: CommonUtil.splitCommaStr(userStr)) {
+            if (!cna.isUsernameValid(user)) {
                 invalidUsers.add(user);
             }
         }
@@ -425,7 +439,7 @@ public abstract class CNFormFieldValidator {
      * the current user if s/he will be locked out once that user
      * saves the configuration.
      */
-    public static FormValidation groupListCheck(String groupStr, String userStr) {
+    public static FormValidation groupListCheck(String groupStr, String userStr) throws RemoteException {
         Collection<String> invalidGroups = getInvalidGroups(groupStr);
         if (!invalidGroups.isEmpty()) {
             return FormValidation.error("The following groups do not exist: " +
@@ -450,23 +464,18 @@ public abstract class CNFormFieldValidator {
      * @param groupStr
      * @return the collection of groups from the array which do not exist.
      */
-    private static Collection<String> getInvalidGroups(String groupStr) {
-        CNConnection conn = CNConnection.getInstance();
-        if (conn == null) {
+    private static Collection<String> getInvalidGroups(String groupStr) throws RemoteException {
+        CNAuthentication auth = CNAuthentication.get();
+        if (auth == null) {
             // cannot connect to check.
             return Collections.emptyList();
         }
-        if (!conn.isSuperUser()) {
+        if (!auth.isSuperUser()) {
             // only super users can see all groups and do this check.
             return Collections.emptyList();
         }
-        String[] groups = CommonUtil.splitCommaStr(groupStr);
-        Collection<String> invalidGroups = new ArrayList<String>();
-        for (String group: groups) {
-            if (!conn.isGroupnameValid(group)) {
-                invalidGroups.add(group);
-            }
-        }
+        Set<String> invalidGroups = new HashSet<String>(CommonUtil.splitCommaStr(groupStr));
+        invalidGroups.removeAll(auth.getCredentials().getGroups().getTitles());
         return invalidGroups;
     }
 
@@ -480,23 +489,21 @@ public abstract class CNFormFieldValidator {
      *         authorizations.
      */
     private static boolean locksOutCurrentUser(String userStr, String groupStr) {
-        CNConnection conn = CNConnection.getInstance();
-        if (conn == null) {
+        CNAuthentication auth = CNAuthentication.get();
+        if (auth == null) {
             // cannot check
             return false;
         }
-        if (conn.isSuperUser()) {
+        if (auth.isSuperUser()) {
             return false;
         }
-        String currentUser = conn.getUsername();
-        String[] users = CommonUtil.splitCommaStr(userStr);
-        for (String user: users) {
+        String currentUser = auth.getPrincipal();
+        for (String user: CommonUtil.splitCommaStr(userStr)) {
             if (user.equals(currentUser)) {
                 return false;
             }
         }
-        String[] groups = CommonUtil.splitCommaStr(groupStr);
-        return !conn.isMemberOfAny(Arrays.asList(groups));
+        return !auth.isMemberOfAny(CommonUtil.splitCommaStr(groupStr));
     }
 
 

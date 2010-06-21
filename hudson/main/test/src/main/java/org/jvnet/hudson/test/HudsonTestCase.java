@@ -28,14 +28,13 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest;
 import hudson.*;
 import hudson.Util;
-import hudson.model.AbstractBuild;
-import hudson.model.Computer;
-import hudson.model.Executor;
 import hudson.model.*;
 import hudson.model.Queue.Executable;
 import hudson.security.AbstractPasswordBasedSecurityRealm;
 import hudson.security.GroupDetails;
 import hudson.security.SecurityRealm;
+import hudson.tasks.Builder;
+import hudson.tasks.Publisher;
 import hudson.tools.ToolProperty;
 import hudson.remoting.Which;
 import hudson.Launcher.LocalLauncher;
@@ -55,6 +54,7 @@ import hudson.tasks.Ant;
 import hudson.tasks.Ant.AntInstallation;
 import hudson.tasks.Maven.MavenInstallation;
 import hudson.util.PersistedList;
+import hudson.util.ReflectionUtils;
 import hudson.util.StreamTaskListener;
 import hudson.util.jna.GNUCLibrary;
 
@@ -65,6 +65,7 @@ import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
@@ -73,6 +74,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Arrays;
@@ -109,6 +111,8 @@ import org.jvnet.hudson.test.recipes.Recipe;
 import org.jvnet.hudson.test.recipes.Recipe.Runner;
 import org.jvnet.hudson.test.recipes.WithPlugin;
 import org.jvnet.hudson.test.rhino.JavaScriptDebugger;
+import org.kohsuke.stapler.ClassDescriptor;
+import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.Dispatcher;
 import org.kohsuke.stapler.MetaClass;
 import org.kohsuke.stapler.MetaClassLoader;
@@ -138,6 +142,9 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.gargoylesoftware.htmlunit.html.*;
+import hudson.maven.MavenBuild;
+import hudson.maven.MavenModule;
+import hudson.maven.MavenModuleSetBuild;
 import hudson.slaves.ComputerListener;
 import java.util.concurrent.CountDownLatch;
 
@@ -430,14 +437,14 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
             LOGGER.warning("Extracting a copy of Ant bundled in the test harness. " +
                     "To avoid a performance hit, set the environment variable ANT_HOME to point to an  Ant installation.");
             FilePath ant = hudson.getRootPath().createTempFile("ant", "zip");
-            ant.copyFrom(HudsonTestCase.class.getClassLoader().getResource("apache-ant-1.7.1-bin.zip"));
+            ant.copyFrom(HudsonTestCase.class.getClassLoader().getResource("apache-ant-1.8.1-bin.zip"));
             File antHome = createTmpDir();
             ant.unzip(new FilePath(antHome));
             // TODO: switch to tar that preserves file permissions more easily
             if(!Functions.isWindows())
-                GNUCLibrary.LIBC.chmod(new File(antHome,"apache-ant-1.7.1/bin/ant").getPath(),0755);
+                GNUCLibrary.LIBC.chmod(new File(antHome,"apache-ant-1.8.1/bin/ant").getPath(),0755);
 
-            antInstallation = new AntInstallation("default", new File(antHome,"apache-ant-1.7.1").getAbsolutePath(),NO_PROPERTIES);
+            antInstallation = new AntInstallation("default", new File(antHome,"apache-ant-1.8.1").getAbsolutePath(),NO_PROPERTIES);
         }
 		hudson.getDescriptorByType(Ant.DescriptorImpl.class).setInstallations(antInstallation);
 		return antInstallation;
@@ -653,6 +660,36 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
         return new WebClient().search(q);
     }
 
+    /**
+     * Loads a configuration page and submits it without any modifications, to
+     * perform a round-trip configuration test.
+     * <p>
+     * See http://wiki.hudson-ci.org/display/HUDSON/Unit+Test#UnitTest-Configurationroundtriptesting
+     */
+    protected <P extends Job> P configRoundtrip(P job) throws Exception {
+        submit(createWebClient().getPage(job,"configure").getFormByName("config"));
+        return job;
+    }
+
+    /**
+     * Performs a configuration round-trip testing for a builder.
+     */
+    protected <B extends Builder> B configRoundtrip(B before) throws Exception {
+        FreeStyleProject p = createFreeStyleProject();
+        p.getBuildersList().add(before);
+        configRoundtrip(p);
+        return (B)p.getBuildersList().get(before.getClass());
+    }
+
+    /**
+     * Performs a configuration round-trip testing for a publisher.
+     */
+    protected <P extends Publisher> P configRoundtrip(P before) throws Exception {
+        FreeStyleProject p = createFreeStyleProject();
+        p.getPublishersList().add(before);
+        configRoundtrip(p);
+        return (P)p.getPublishersList().get(before.getClass());
+    }
 
 
     /**
@@ -700,6 +737,7 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
     }
 
     public <R extends Run> R assertBuildStatusSuccess(Future<? extends R> r) throws Exception {
+        assertNotNull("build was actually scheduled", r);
         return assertBuildStatusSuccess(r.get());
     }
 
@@ -708,9 +746,15 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
     }
 
     /**
-     * Should be unnecessary, but otherwise IntelliJ complains.
+     * Avoids need for cumbersome {@code this.<J,R>buildAndAssertSuccess(...)} type hints under JDK 7 javac (and supposedly also IntelliJ).
      */
     public FreeStyleBuild buildAndAssertSuccess(FreeStyleProject job) throws Exception {
+        return assertBuildStatusSuccess(job.scheduleBuild2(0));
+    }
+    public MavenModuleSetBuild buildAndAssertSuccess(MavenModuleSet job) throws Exception {
+        return assertBuildStatusSuccess(job.scheduleBuild2(0));
+    }
+    public MavenBuild buildAndAssertSuccess(MavenModule job) throws Exception {
         return assertBuildStatusSuccess(job.scheduleBuild2(0));
     }
 
@@ -956,6 +1000,61 @@ public abstract class HudsonTestCase extends TestCase implements RootAction {
 
             assertEquals("Property "+p+" is different",lp,rp);
         }
+    }
+
+    /**
+     * Works like {@link #assertEqualBeans(Object, Object, String)} but figure out the properties
+     * via {@link DataBoundConstructor}
+     */
+    public void assertEqualDataBoundBeans(Object lhs, Object rhs) throws Exception {
+        Constructor<?> lc = findDataBoundConstructor(lhs.getClass());
+        Constructor<?> rc = findDataBoundConstructor(rhs.getClass());
+        assertEquals("Data bound constructor mismatch. Different type?",lc,rc);
+
+        List<String> primitiveProperties = new ArrayList<String>();
+
+        String[] names = ClassDescriptor.loadParameterNames(lc);
+        Class<?>[] types = lc.getParameterTypes();
+        assertEquals(names.length,types.length);
+        for (int i=0; i<types.length; i++) {
+            Object lv = ReflectionUtils.getPublicProperty(lhs, names[i]);
+            Object rv = ReflectionUtils.getPublicProperty(rhs, names[i]);
+
+            if (Iterable.class.isAssignableFrom(types[i])) {
+                Iterable lcol = (Iterable) lv;
+                Iterable rcol = (Iterable) rv;
+                Iterator ltr,rtr;
+                for (ltr=lcol.iterator(), rtr=rcol.iterator(); ltr.hasNext() && rtr.hasNext();) {
+                    Object litem = ltr.next();
+                    Object ritem = rtr.next();
+
+                    if (findDataBoundConstructor(litem.getClass())!=null) {
+                        assertEqualDataBoundBeans(litem,ritem);
+                    } else {
+                        assertEquals(litem,ritem);
+                    }
+                }
+                assertFalse("collection size mismatch between "+lhs+" and "+rhs, ltr.hasNext() ^ rtr.hasNext());
+            } else
+            if (findDataBoundConstructor(types[i])!=null) {
+                // recurse into nested databound objects
+                assertEqualDataBoundBeans(lv,rv);
+            } else {
+                primitiveProperties.add(names[i]);
+            }
+        }
+
+        // compare shallow primitive properties
+        if (!primitiveProperties.isEmpty())
+            assertEqualBeans(lhs,rhs,Util.join(primitiveProperties,","));
+    }
+
+    private Constructor<?> findDataBoundConstructor(Class<?> c) {
+        for (Constructor<?> m : c.getConstructors()) {
+            if (m.getAnnotation(DataBoundConstructor.class)!=null)
+                return m;
+        }
+        return null;
     }
 
     /**

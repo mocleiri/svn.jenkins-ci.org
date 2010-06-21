@@ -1,5 +1,9 @@
 package com.ikokoon.serenity;
 
+import java.io.File;
+
+import org.objectweb.asm.Type;
+
 /**
  * This is a constants class for database names and system property names.
  *
@@ -9,16 +13,24 @@ package com.ikokoon.serenity;
  */
 public interface IConstants {
 
-	/** The file separator. */
-	public String SEPARATOR = "/";
+	public String SERENITY = "serenity";
+	public String SOURCE = "source";
 	/** The Serenity directory for work and output data, i.e. the database. './serenity'. */
-	public String SERENITY_DIRECTORY = "." + SEPARATOR + "serenity";
+	public String SERENITY_DIRECTORY = "." + File.separatorChar + SERENITY;
 	/** The Serenity directory for the source to HTML. */
-	public String SERENITY_SOURCE = SERENITY_DIRECTORY + SEPARATOR + "source";
+	public String SERENITY_SOURCE = SERENITY_DIRECTORY + File.separatorChar + SOURCE;
+
+	/** Value : 'serenity/source/' or 'serenity\source\' */
+	public String SERENITY_SOURCE_DIRECTORY = SERENITY + File.separatorChar + SOURCE + File.separatorChar;
+
+	public String SERENITY_ODB = "serenity.odb";
+	public String SERENITY_RAM = "serenity.ram";
+	public String SERENITY_JPA = "serenity.jpa";
+
 	/** The database file, 'serenity.ram', 'serenity.odb', 'serenity.jpa'. */
-	public String DATABASE_FILE_RAM = SERENITY_DIRECTORY + SEPARATOR + "serenity.ram";
-	public String DATABASE_FILE_ODB = SERENITY_DIRECTORY + SEPARATOR + "serenity.odb";
-	public String DATABASE_FILE_JPA = SERENITY_DIRECTORY + SEPARATOR + "serenity.jpa";
+	public String DATABASE_FILE_RAM = SERENITY_DIRECTORY + File.separatorChar + SERENITY_RAM;
+	public String DATABASE_FILE_ODB = SERENITY_DIRECTORY + File.separatorChar + SERENITY_ODB;
+	public String DATABASE_FILE_JPA = SERENITY_DIRECTORY + File.separatorChar + SERENITY_JPA;
 	/** The JPA persistence unit name, 'SerenityPersistenceUnit'. */
 	public String SERENITY_PERSISTENCE_UNIT = "SerenityPersistenceUnit";
 	/** The logging configuration file, '/META-INF/log4j.properties'. */
@@ -40,10 +52,57 @@ public interface IConstants {
 	public String WRITE_CLASSES = "write.classes";
 	/** Whether to delete the old class files before writing the new enhanced class files, 'clean.classes'. */
 	public String CLEAN_CLASSES = "clean.classes";
+	/** The interval between snapshots for the profiler. */
+	public String SNAPSHOT_INTERVAL = "snapshotInterval";
 
 	public String COVERAGE = "coverage";
 	public String COMPLEXITY = "complexity";
 	public String DEPENDENCY = "dependency";
 	public String PROFILING = "profiling";
+
+	/** The type of parameters that the {@link Collector} takes in the profiling collection method. */
+	public Type STRING_TYPE = Type.getType(String.class);
+	/** The name of the class ({@link Collector}) that will be the collector for the method adapter. */
+	public String COLLECTOR_CLASS_NAME = Type.getInternalName(Collector.class);
+	/** The array of type parameters for the {@link Collector} for the profiling method. */
+	public Type[] PROFILING_TYPES = new Type[] { STRING_TYPE, STRING_TYPE, STRING_TYPE };
+
+	/** The profiling methods that are called on the {@link Collector} by the added instructions. */
+	public String COLLECT_ALLOCATION = "collectAllocation";
+	public String COLLECT_START = "collectStart";
+	public String COLLECT_END = "collectEnd";
+	public String COLLECT_START_WAIT = "collectStartWait";
+	public String COLLECT_END_WAIT = "collectEndWait";
+	/** The byte code signature of the profiling methods in the {@link Collector}. */
+	public String PROFILING_METHOD_DESCRIPTION = Type.getMethodDescriptor(Type.VOID_TYPE, PROFILING_TYPES);
+
+	public Type[] noTypes = new Type[] {};
+	public Type[] longTypes = new Type[] { Type.LONG_TYPE };
+	public Type[] longIntTypes = new Type[] { Type.LONG_TYPE, Type.INT_TYPE };
+
+	/** The sleep(long) method description in byte code. */
+	public String sleepLongMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.longTypes);
+	/** The sleep(long, int) method description in byte code. */
+	public String sleepLongIntMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.longIntTypes);
+	/** The yield() method description in byte code. */
+	public String yieldMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.noTypes);
+	/** The wait() method description in byte code. */
+	public String waitMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.noTypes);
+	/** The wait(long) method description in byte code. */
+	public String waitLongMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.longTypes);
+	/** The wait(long, int) method description in byte code. */
+	public String waitLongIntMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.longIntTypes);
+	/** The join() method description in byte code. */
+	public String joinMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.noTypes);
+	/** The join(long) method description in byte code. */
+	public String joinLongMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.longTypes);
+	/** The join(long, int) method description in byte code. */
+	public String joinLongIntMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, IConstants.longIntTypes);
+
+	public String START = "start";
+	public String END = "end";
+	public String REPORT = "report";
+
+	public int PORT = 50005;
 
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License
  *
- * Copyright (c) 2007-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ * Copyright (c) 2007-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
  *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer, Vincent Latombe
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,12 +27,14 @@ package hudson.plugins.clearcase.action;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.ConfigSpec;
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.Validate;
 
 
@@ -73,67 +75,62 @@ public abstract class AbstractCheckoutAction implements CheckOutAction {
 
     /**
      * Manages the re-creation of the view if needed. If something exists but not referenced correctly as a view, it will be renamed and the view will be created
-     * @param workspace
-     * @param viewName
-     * @param streamSelector
+     * @param workspace The job's workspace
+     * @param viewTag The view identifier on server. Must be unique on server
+     * @param viewPath The workspace relative path of the view
+     * @param streamSelector The stream selector, using streamName[@pvob] format
      * @return true if a mkview has been done, false if a view existed and is reused
      * @throws IOException
      * @throws InterruptedException
      */
-    protected boolean cleanAndCreateViewIfNeeded(FilePath workspace, String viewName, String streamSelector) throws IOException, InterruptedException {
-        FilePath viewPath = new FilePath(workspace, viewName);
-        boolean viewPathExists = viewPath.exists();
+    protected boolean cleanAndCreateViewIfNeeded(FilePath workspace, String viewTag, String viewPath, String streamSelector) throws IOException, InterruptedException {
+        FilePath filePath = new FilePath(workspace, viewPath);
+        boolean viewPathExists = filePath.exists();
         boolean doViewCreation = true;
-        if (cleartool.doesViewExist(viewName)) {
+        if (cleartool.doesViewExist(viewTag)) {
             if (viewPathExists) {
-                if (viewName.equals(cleartool.lscurrentview(viewName))) {
+                if (viewTag.equals(cleartool.lscurrentview(viewPath))) {
                     if (useUpdate) {
                         doViewCreation = false;
                     } else {
-                        cleartool.rmview(viewName);
+                        cleartool.rmview(viewPath);
                     }
                 } else {
-                    viewPath.renameTo(getUnusedFilePath(workspace, viewName));
-                    cleartool.rmviewtag(viewName);
+                    filePath.renameTo(getUnusedFilePath(workspace, viewPath));
+                    cleartool.rmviewtag(viewTag);
                 }
             } else {
-                cleartool.rmviewtag(viewName);
+                cleartool.rmviewtag(viewTag);
             }
         } else {
             if (viewPathExists) {
-                viewPath.renameTo(getUnusedFilePath(workspace, viewName));
+                filePath.renameTo(getUnusedFilePath(workspace, viewPath));
             }
         }
         if (doViewCreation) {
-            cleartool.mkview(viewName, streamSelector);
+            cleartool.mkview(viewPath, viewTag, streamSelector);
         }
         return doViewCreation;
     }
 
     protected AbstractCheckoutAction.LoadRulesDelta getLoadRulesDelta(Set<String> configSpecLoadRules, Launcher launcher) {
         Set<String> removedLoadRules = new LinkedHashSet<String>(configSpecLoadRules);
-        Set<String> addedLoadRules = new LinkedHashSet<String>(loadRules.length);
-        for (String loadRule : loadRules) {
-            addedLoadRules.add(unprefixLoadRule(loadRule));
-        }
-        removedLoadRules.removeAll(addedLoadRules);
-        addedLoadRules.removeAll(configSpecLoadRules);
-        PrintStream logger = launcher.getListener().getLogger();
-        for (String removedLoadRule : removedLoadRules) {
-            logger.println("Removed load rule : " + removedLoadRule);
-        }
-        for (String addedLoadRule : addedLoadRules) {
-            logger.println("Added load rule : " + addedLoadRule);
+        Set<String> addedLoadRules = new LinkedHashSet<String>();
+        if (!ArrayUtils.isEmpty(loadRules)) {
+            for (String loadRule : loadRules) {
+                addedLoadRules.add(ConfigSpec.cleanLoadRule(loadRule, launcher.isUnix()));
+            }
+            removedLoadRules.removeAll(addedLoadRules);
+            addedLoadRules.removeAll(configSpecLoadRules);
+            PrintStream logger = launcher.getListener().getLogger();
+            for (String removedLoadRule : removedLoadRules) {
+                logger.println("Removed load rule : " + removedLoadRule);
+            }
+            for (String addedLoadRule : addedLoadRules) {
+                logger.println("Added load rule : " + addedLoadRule);
+            }
         }
         return new AbstractCheckoutAction.LoadRulesDelta(removedLoadRules, addedLoadRules);
-    }
-
-    private String unprefixLoadRule(String loadRule) {
-        if (loadRule.startsWith("/") || loadRule.startsWith("\\")) {
-            return loadRule.substring(1);
-        } else {
-            return loadRule;
-        }
     }
 
     private FilePath getUnusedFilePath(FilePath workspace, String viewName) throws IOException, InterruptedException {

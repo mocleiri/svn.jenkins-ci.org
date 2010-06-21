@@ -22,7 +22,6 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.util.Collection;
 import java.util.logging.Logger;
 
 public class TeamForge extends SubversionRepositoryBrowser {
@@ -34,9 +33,6 @@ public class TeamForge extends SubversionRepositoryBrowser {
     private String project;
     private String repo;
     private boolean overrideAuth;
-
-    private transient static TeamForgeShare.TeamForgeShareDescriptor 
-        shareDescriptor = null;
 
     /**
      * DataBoundConstructor for building the object from form data.
@@ -148,10 +144,7 @@ public class TeamForge extends SubversionRepositoryBrowser {
      */
     public static TeamForgeShare.TeamForgeShareDescriptor 
         getTeamForgeShareDescriptor() {
-        if (shareDescriptor == null) {
-            shareDescriptor = TeamForgeShare.getTeamForgeShareDescriptor();
-        }
-        return shareDescriptor;
+        return TeamForgeShare.getTeamForgeShareDescriptor();
     }
 
     public URL getFileLink(SubversionChangeLogSet.Path path) 
@@ -173,7 +166,7 @@ public class TeamForge extends SubversionRepositoryBrowser {
         return new URL(link.toString());
     }
 
-    private StringBuffer getViewerUrlWithPath(SubversionChangeLogSet.Path path) {
+    private StringBuffer getViewerUrlWithPath(SubversionChangeLogSet.Path path) throws RemoteException {
         String[] urlParts = this.getViewerUrl().split("\\?");
         StringBuffer viewWithPath = new StringBuffer(urlParts[0]).append(path.getValue()).append("?");
         if (urlParts.length > 1) {
@@ -195,7 +188,7 @@ public class TeamForge extends SubversionRepositoryBrowser {
      * Get the viewer url to display to the user.
      * @return the viewer url
      */
-    private String getViewerUrl() {
+    private String getViewerUrl() throws RemoteException {
         CollabNetApp cna = CNHudsonUtil.getCollabNetApp(this.getCollabNetUrl(), 
                                                         this.getUsername(), 
                                                         this.getPassword());
@@ -203,7 +196,7 @@ public class TeamForge extends SubversionRepositoryBrowser {
                                             this.getRepo());
     }
 
-    private String getSystemId() {
+    private String getSystemId() throws RemoteException {
         CollabNetApp cna = CNHudsonUtil.getCollabNetApp(this.getCollabNetUrl(), 
                                                         this.getUsername(), 
                                                         this.getPassword());
@@ -247,7 +240,7 @@ public class TeamForge extends SubversionRepositoryBrowser {
         /**
          * Form validation for the project field.
          */
-        public FormValidation doCheckProject(CollabNetApp app, @QueryParameter String value) {
+        public FormValidation doCheckProject(CollabNetApp app, @QueryParameter String value) throws RemoteException {
             return CNFormFieldValidator.projectCheck(app,value);
         }
 
@@ -258,7 +251,7 @@ public class TeamForge extends SubversionRepositoryBrowser {
          *            the config.jelly.
          * @throws ServletException
          */
-        public FormValidation doCheckRepo(StaplerRequest req) {
+        public FormValidation doCheckRepo(StaplerRequest req) throws RemoteException {
             return CNFormFieldValidator.repoCheck(req);
         }
 
@@ -274,7 +267,7 @@ public class TeamForge extends SubversionRepositoryBrowser {
          * Gets a list of repos to choose from and write them as a 
          * JSON string into the response data.
          */
-        public ComboBoxModel doFillRepoItems(CollabNetApp cna, @QueryParameter String project) {
+        public ComboBoxModel doFillRepoItems(CollabNetApp cna, @QueryParameter String project) throws RemoteException {
             return ComboBoxUpdater.getRepos(cna,project);
         }
     }

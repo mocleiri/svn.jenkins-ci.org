@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLICommand (Hudson main module 1.357 API)
+CLICommand (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson main module 1.357 API)";
+        parent.document.title="CLICommand (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -221,6 +221,15 @@ Base class for Hudson CLI.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connected to stdout and stderr of the CLI agent that initiated the session.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/remoting/ChannelProperty.html" title="class in hudson.remoting">ChannelProperty</A>&lt;org.acegisecurity.Authentication&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#TRANSPORT_AUTHENTICATION">TRANSPORT_AUTHENTICATION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key for <A HREF="../../hudson/remoting/Channel.html#getProperty(java.lang.Object)"><CODE>Channel.getProperty(Object)</CODE></A> that links to the <CODE>Authentication</CODE> object
+ which captures the identity of the client given by the transport layer.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -294,6 +303,14 @@ Base class for Hudson CLI.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the quick summary of what this command does.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.acegisecurity.Authentication</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#getTransportAuthentication()">getTransportAuthentication</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the identity of the client as determined at the CLI transport level.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -445,6 +462,19 @@ public transient <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Loca
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="TRANSPORT_AUTHENTICATION"><!-- --></A><H3>
+TRANSPORT_AUTHENTICATION</H3>
+<PRE>
+public static final <A HREF="../../hudson/remoting/ChannelProperty.html" title="class in hudson.remoting">ChannelProperty</A>&lt;org.acegisecurity.Authentication&gt; <B>TRANSPORT_AUTHENTICATION</B></PRE>
+<DL>
+<DD>Key for <A HREF="../../hudson/remoting/Channel.html#getProperty(java.lang.Object)"><CODE>Channel.getProperty(Object)</CODE></A> that links to the <CODE>Authentication</CODE> object
+ which captures the identity of the client given by the transport layer.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -573,6 +603,35 @@ protected boolean <B>shouldPerformAuthentication</B>(org.acegisecurity.Authentic
 <DT><B>Parameters:</B><DD><CODE>auth</CODE> - Always non-null.
       If the underlying transport had already performed authentication, this object is something other than
       <A HREF="../../hudson/model/Hudson.html#ANONYMOUS"><CODE>Hudson.ANONYMOUS</CODE></A>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTransportAuthentication()"><!-- --></A><H3>
+getTransportAuthentication</H3>
+<PRE>
+public org.acegisecurity.Authentication <B>getTransportAuthentication</B>()</PRE>
+<DL>
+<DD>Returns the identity of the client as determined at the CLI transport level.
+
+ <p>
+ When the CLI connection to the server is tunneled over HTTP, that HTTP connection
+ can authenticate the client, just like any other HTTP connections to the server
+ can authenticate the client. This method returns that information, if one is available.
+ By generalizing it, this method returns the identity obtained at the transport-level authentication.
+
+ <p>
+ For example, imagine if the current <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> is doing Kerberos authentication,
+ then this method can return a valid identity of the client.
+
+ <p>
+ If the transport doesn't do authentication, this method returns <A HREF="../../hudson/model/Hudson.html#ANONYMOUS"><CODE>Hudson.ANONYMOUS</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

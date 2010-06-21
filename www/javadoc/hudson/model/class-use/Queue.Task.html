@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Queue.Task (Hudson main module 1.357 API)
+Uses of Interface hudson.model.Queue.Task (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Queue.Task (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson main module 1.357 API)";
+        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -359,6 +359,15 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B>Node.</B><B><A HREF="../../../hudson/model/Node.html#canTake(hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the <A HREF="../../../hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> to determine whether or not this node can
+ take the given task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>Queue.JobOffer.</B><B><A HREF="../../../hudson/model/Queue.JobOffer.html#canTake(hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
 
@@ -538,7 +547,41 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Classes in <A HREF="../../../hudson/model/queue/package-summary.html">hudson.model.queue</A> that implement <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/queue/AbstractQueueTask.html" title="class in hudson.model.queue">AbstractQueueTask</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abstract base class for <CODE>Queue.Task</CODE> to protect plugins
+ from new additions to the interface.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for defining filter <CODE>Queue.Task</CODE>.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/queue/package-summary.html">hudson.model.queue</A> with parameters of type <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B>QueueTaskDispatcher.</B><B><A HREF="../../../hudson/model/queue/QueueTaskDispatcher.html#canTake(hudson.model.Node, hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
+        <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever <A HREF="../../../hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A> is considering to execute the given task on a given node.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -550,6 +593,20 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notifies that the <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that "owns" this action (that is, the task for which this action is submitted)
  is considered as a duplicate.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/queue/package-summary.html">hudson.model.queue</A> with parameters of type <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/queue/QueueTaskFilter.html#QueueTaskFilter(hudson.model.Queue.Task)">QueueTaskFilter</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;base)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -567,6 +624,15 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/slaves/package-summary.html">hudson.slaves</A> with parameters of type <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
+<TD><CODE><B>NodeProperty.</B><B><A HREF="../../../hudson/slaves/NodeProperty.html#canTake(hudson.model.Queue.Task)">canTake</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the <A HREF="../../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> to help determine whether or not it should
+ take the given task.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

@@ -1,14 +1,24 @@
 package hudson.plugins.android_emulator;
 
-import hudson.FilePath;
 import hudson.Util;
+import hudson.model.BuildListener;
 import hudson.remoting.Callable;
+import hudson.util.ArgumentListBuilder;
+import hudson.util.StreamCopyThread;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 class EmulatorConfig implements Serializable {
 
@@ -19,13 +29,37 @@ class EmulatorConfig implements Serializable {
     private ScreenDensity screenDensity;
     private ScreenResolution screenResolution;
     private String deviceLocale;
+    private String sdCardSize;
 
     public EmulatorConfig(String avdName) {
         this.avdName = avdName;
     }
 
     public EmulatorConfig(String osVersion,
-            String screenDensity, String screenResolution, String deviceLocale) {
+            String screenDensity, String screenResolution, String deviceLocale) throws IllegalArgumentException {
+        if (osVersion == null || screenDensity == null || screenResolution == null) {
+            throw new IllegalArgumentException("Valid OS version and screen properties must be supplied.");
+        }
+
+        // FIXME: Get this from user input instead of hardcoding
+        sdCardSize = "16M";
+
+        // Normalise incoming variables
+        int targetLength = osVersion.length();
+        if (targetLength > 2 && osVersion.startsWith("\"") && osVersion.endsWith("\"")) {
+            osVersion = osVersion.substring(1, targetLength - 1);
+        }
+        screenDensity = screenDensity.toLowerCase();
+        if (screenResolution.matches("(?i)"+ Constants.REGEX_SCREEN_RESOLUTION_ALIAS)) {
+            screenResolution = screenResolution.toUpperCase();
+        } else if (screenResolution.matches("(?i)"+ Constants.REGEX_SCREEN_RESOLUTION)) {
+            screenResolution = screenResolution.toLowerCase();
+        }
+        if (deviceLocale != null) {
+            deviceLocale = deviceLocale.substring(0, 2).toLowerCase() +"_"
+                + deviceLocale.substring(3).toUpperCase();
+        }
+
         this.osVersion = AndroidPlatform.valueOf(osVersion);
         this.screenDensity = ScreenDensity.valueOf(screenDensity);
         this.screenResolution = ScreenResolution.valueOf(screenResolution);
@@ -57,7 +91,7 @@ class EmulatorConfig implements Serializable {
         String locale = getDeviceLocale().replace('_', '-');
         String density = screenDensity.toString();
         String resolution = screenResolution.toString();
-        String platform = osVersion.getTargetName();
+        String platform = osVersion.getTargetName().replace(':', '_').replace(' ', '_');
         return String.format("hudson_%s_%s_%s_%s", locale, density, resolution, platform);
     }
 
@@ -88,14 +122,19 @@ class EmulatorConfig implements Serializable {
         return getDeviceLocale().substring(3);
     }
 
+    public String getSdCardSize() {
+        return sdCardSize;
+    }
+
     /**
      * Gets a task that ensures that an Android AVD exists for this instance's configuration.
      *
      * @param homeDir  The path to the current user's home directory where ".android" should live.
+     * @param isUnix  Whether the target system is sane.
      * @return A Callable that will handle the detection/creation of an appropriate AVD.
      */
-    public Callable<Boolean, IOException> getEmulatorCreationTask(String androidHome) {
-        return new EmulatorCreationTask(androidHome);
+    public Callable<Boolean, AndroidEmulatorException> getEmulatorCreationTask(String androidHome, boolean isUnix, BuildListener listener) {
+        return new EmulatorCreationTask(androidHome, isUnix, listener);
     }
 
     private File getAvdHome(final File homeDir) {
@@ -106,46 +145,35 @@ class EmulatorConfig implements Serializable {
         return new File(getAvdHome(homeDir), getAvdName() +".avd");
     }
 
-    private void writeAvdMetadataFile(final File homeDir) throws FileNotFoundException {
-        File configFile = new File(getAvdHome(homeDir), getAvdName() +".ini");
+    private Map<String,String> parseAvdConfigFile(File homeDir) throws IOException {
+        File configFile = new File(getAvdDirectory(homeDir), "config.ini");
 
-        PrintWriter out = new PrintWriter(configFile);
-        out.print("target=");
-        out.println(osVersion.getTargetName());
-        out.print("path=");
-        out.println(getAvdDirectory(homeDir).toString());
-        out.flush();
-        out.close();
+        FileReader fileReader = new FileReader(configFile);
+        BufferedReader reader = new BufferedReader(fileReader);
+
+        String line;
+        Map<String,String> values = new HashMap<String,String>();
+        while ((line = reader.readLine()) != null) {
+            line = line.trim();
+            if (line.length() == 0 || line.charAt(0) == '#') {
+                continue;
+            }
+            String[] parts = line.split("=", 2);
+            values.put(parts[0], parts[1]);
+        }
+
+        return values;
     }
 
-    private void writeAvdConfigFile(File homeDir, String targetName) throws FileNotFoundException {
+    private void writeAvdConfigFile(File homeDir, Map<String,String> values) throws FileNotFoundException {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("image.sysdir.1=");
-        sb.append("platforms/");
-        sb.append(targetName);
-        sb.append("/images/");
-        sb.append("\r\n");
-
-        sb.append("sdcard.size=");
-        sb.append("16M\r\n");
-
-        sb.append("skin.name=");
-        sb.append(screenResolution.getSkinName());
-        sb.append("\r\n");
-
-        sb.append("skin.path=");
-        if (!screenResolution.isCustomResolution()) {
-            sb.append("platforms/");
-            sb.append(targetName);
-            sb.append("/skins/");
+        for (String key : values.keySet()) {
+            sb.append(key);
+            sb.append("=");
+            sb.append(values.get(key));
+            sb.append("\r\n");
         }
-        sb.append(screenResolution.getSkinName());
-        sb.append("\r\n");
-
-        sb.append("hw.lcd.density=");
-        sb.append(screenDensity.getDpi());
-        sb.append("\r\n");
 
         File configFile = new File(getAvdDirectory(homeDir), "config.ini");
         PrintWriter out = new PrintWriter(configFile);
@@ -181,17 +209,27 @@ class EmulatorConfig implements Serializable {
      * <code>FALSE</code> if an AVD was newly created, and throws an IOException if the given AVD
      * or parts required to generate a new AVD were not found.
      */
-    private final class EmulatorCreationTask implements Callable<Boolean, IOException> {
+    private final class EmulatorCreationTask implements Callable<Boolean, AndroidEmulatorException> {
 
         private static final long serialVersionUID = 1L;
         private final String androidHome;
+        private final boolean isUnix;
 
-        public EmulatorCreationTask(String androidHome) {
+        private final BuildListener listener;
+        private transient PrintStream logger;
+
+        public EmulatorCreationTask(String androidHome, boolean isUnix, BuildListener listener) {
             this.androidHome = androidHome;
+            this.isUnix = isUnix;
+            this.listener = listener;
         }
 
         @Override
-        public Boolean call() throws IOException {
+        public Boolean call() throws AndroidEmulatorException {
+            if (logger == null) {
+                logger = listener.getLogger();
+            }
+
             final File homeDir = new File(System.getProperty("user.home"));
             final File avdDirectory = getAvdDirectory(homeDir);
 
@@ -199,63 +237,129 @@ class EmulatorConfig implements Serializable {
             if (avdDirectory.exists()) {
                 return true;
             } else if (isNamedEmulator()) {
-                throw new FileNotFoundException(Messages.AVD_DOES_NOT_EXIST(avdName));
+                throw new EmulatorDiscoveryException(Messages.AVD_DOES_NOT_EXIST(avdName));
             }
+
+            // Ok, so we want to create a new AVD
+            AndroidEmulator.log(logger, Messages.CREATING_AVD(avdDirectory));
 
             // We can't continue if we don't know where to find emulator images
             if (androidHome == null) {
-                throw new FileNotFoundException(Messages.SDK_NOT_SPECIFIED());
+                throw new EmulatorCreationException(Messages.SDK_NOT_SPECIFIED());
             }
             final File sdkRoot = new File(androidHome);
             if (!sdkRoot.exists()) {
-                throw new FileNotFoundException(Messages.SDK_NOT_FOUND(androidHome));
+                throw new EmulatorCreationException(Messages.SDK_NOT_FOUND(androidHome));
             }
 
-            // Detect which style of target name is being used
-            final File platformsRoot = new File(sdkRoot, "platforms");
-            String targetName = null;
-            for (String target : new String[] { osVersion.getTargetName(), osVersion.getOldTargetName() }) {
-                File tmp = new File(platformsRoot, target);
-                System.out.println("");
-                if (tmp.exists()) {
-                    targetName = target;
-                    break;
-                }
+            // Build up basic arguments to `android` command
+            final String androidCmd = isUnix ? "android" : "android.bat";
+            final StringBuilder args = new StringBuilder(100);
+            args.append("create avd ");
+            if (sdCardSize != null) {
+                args.append("-c ");
+                args.append(sdCardSize);
+                args.append(" ");
             }
+            args.append("-s ");
+            args.append(screenResolution.getSkinName());
+            args.append(" -n ");
+            args.append(getAvdName());
+            ArgumentListBuilder builder = Utils.getToolCommand(androidHome, androidCmd, args.toString());
 
-            // Can't go ahead if desired platform isn't available at all
-            if (targetName == null) {
-                throw new FileNotFoundException(Messages.PLATFORM_NOT_FOUND(osVersion.getTargetName()));
-            }
+            // Tack on quoted platform name at the end, since it can be anything
+            builder.add("-t");
+            builder.add(osVersion.getTargetName());
 
-            // Create base directory
-            avdDirectory.mkdirs();
-
-            // Copy platform image
-            File platformImage = new File(platformsRoot, targetName +"/images/userdata.img");
-            if (!platformImage.exists()) {
-                throw new FileNotFoundException(Messages.PLATFORM_IMAGE_NOT_FOUND(platformImage.toString()));
-            }
+            // Run!
+            boolean avdCreated = false;
+            final Process process;
             try {
-                new FilePath(platformImage).copyTo(new FilePath(avdDirectory).child("userdata.img"));
-            } catch (InterruptedException e) {
-                // Rollback
-                try {
-                    new FilePath(avdDirectory).deleteRecursive();
-                } catch (InterruptedException e2) {}
-                e.printStackTrace();
-                throw new IOException(Messages.AVD_CREATION_INTERRUPTED());
+                ProcessBuilder procBuilder = new ProcessBuilder(builder.toList());
+                process = procBuilder.start();
+            } catch (IOException ex) {
+                throw new EmulatorCreationException(Messages.AVD_CREATION_FAILED());
             }
 
-            // Create metadata in AVD home
-            writeAvdMetadataFile(homeDir);
+            // Redirect process's stderr to a stream, for logging purposes
+            ByteArrayOutputStream stderr = new ByteArrayOutputStream();
+            new StreamCopyThread("", process.getErrorStream(), stderr).start();
 
-            // Create config in AVD directory
-            writeAvdConfigFile(homeDir, targetName);
+            // Command may prompt us whether we want to further customise the AVD.
+            // Just "press" Enter to continue with the selected target's defaults.
+            try {
+                boolean processAlive = true;
 
+                // Block until the command outputs something (or process ends)
+                final InputStream in = process.getInputStream();
+                int len = in.read();
+                if (len == -1) {
+                    // Check whether the process has exited badly, as sometimes no output is valid.
+                    // e.g. When creating an AVD with Google APIs, no user input is requested.
+                    if (process.waitFor() != 0) {
+                        AndroidEmulator.log(logger, Messages.AVD_CREATION_FAILED());
+                        AndroidEmulator.log(logger, stderr.toString(), true);
+                        throw new EmulatorCreationException(Messages.AVD_CREATION_FAILED());
+                    }
+                    processAlive = false;
+                }
+                in.close();
+
+                // Write CRLF, if required
+                if (processAlive) {
+                    final OutputStream stream = process.getOutputStream();
+                    stream.write('\r');
+                    stream.write('\n');
+                    stream.flush();
+                    stream.close();
+                }
+
+                // Wait for happy ending
+                if (process.waitFor() == 0) {
+                    avdCreated = true;
+                }
+
+            } catch (IOException e) {
+                throw new EmulatorCreationException(Messages.AVD_CREATION_ABORTED(), e);
+            } catch (InterruptedException e) {
+                throw new EmulatorCreationException(Messages.AVD_CREATION_INTERRUPTED(), e);
+            } finally {
+                process.destroy();
+            }
+
+            // Check whether everything went ok
+            if (!avdCreated) {
+                // TODO: Clear up
+                // TODO: Could potentially parse the "not valid target" message and show a nicer one
+                final String errOutput = stderr.toString();
+                if (errOutput.length() != 0) {
+                    AndroidEmulator.log(logger, stderr.toString(), true);
+                }
+                throw new EmulatorCreationException(Messages.AVD_CREATION_FAILED());
+            }
+
+            // Parse newly-created AVD's config
+            Map<String, String> configValues;
+            try {
+                configValues = parseAvdConfigFile(homeDir);
+            } catch (IOException e) {
+                throw new EmulatorCreationException(Messages.AVD_CONFIG_NOT_READABLE(), e);
+            }
+
+            // TODO: Insert/replace any hardware properties we want to override
+//            configValues.put("vm.heapSize", "4");
+//            configValues.put("hw.ramSize", "64");
+
+            // Update config file
+            try {
+                writeAvdConfigFile(homeDir, configValues);
+            } catch (IOException e) {
+                throw new EmulatorCreationException(Messages.AVD_CONFIG_NOT_WRITEABLE(), e);
+            }
+
+            // Done!
             return false;
         }
-
     }
 
 }

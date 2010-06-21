@@ -66,7 +66,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.text.ParseException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -135,6 +134,12 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
      */
     protected transient volatile int nextBuildNumber = 1;
 
+    /**
+     * Newly copied jobs get this flag set, so that Hudson doesn't try to run the job until its configuration
+     * is saved once.
+     */
+    private transient volatile boolean holdOffBuildUntilSave;
+
     private volatile LogRotator logRotator;
 
     /**
@@ -154,6 +159,12 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
 
     protected Job(ItemGroup parent, String name) {
         super(parent, name);
+    }
+
+    @Override
+    public synchronized void save() throws IOException {
+        super.save();
+        holdOffBuildUntilSave = false;
     }
 
     @Override
@@ -191,6 +202,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
         super.onCopiedFrom(src);
         synchronized (this) {
             this.nextBuildNumber = 1; // reset the next build number
+            this.holdOffBuildUntilSave = true;
         }
     }
 
@@ -210,6 +222,10 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
 
     /*package*/ TextFile getNextBuildNumberFile() {
         return new TextFile(new File(this.getRootDir(), "nextBuildNumber"));
+    }
+
+    protected boolean isHoldOffBuildUntilSave() {
+        return holdOffBuildUntilSave;
     }
 
     protected synchronized void saveNextBuildNumber() throws IOException {
@@ -286,12 +302,13 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
      * <p>
      * Much of Hudson assumes that the build number is unique and monotonic, so
      * this method can only accept a new value that's bigger than
-     * {@link #getNextBuildNumber()} returns. Otherwise it'll be no-op.
+     * {@link #getLastBuild()} returns. Otherwise it'll be no-op.
      * 
      * @since 1.199 (before that, this method was package private.)
      */
     public synchronized void updateNextBuildNumber(int next) throws IOException {
-        if (next > nextBuildNumber) {
+        RunT lb = getLastBuild();
+        if (lb!=null ?  next>lb.getNumber() : next>0) {
             this.nextBuildNumber = next;
             saveNextBuildNumber();
         }
@@ -791,6 +808,34 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
     }
 
     /**
+     * Returns the last build that was anything but stable, if any. Otherwise null.
+     * @see #getLastSuccessfulBuild
+     */
+    @Exported
+    @QuickSilver
+    public RunT getLastUnsuccessfulBuild() {
+        RunT r = getLastBuild();
+        while (r != null
+                && (r.isBuilding() || r.getResult() == Result.SUCCESS))
+            r = r.getPreviousBuild();
+        return r;
+    }
+
+    /**
+     * Returns the last unstable build, if any. Otherwise null.
+     * @see #getLastSuccessfulBuild
+     */
+    @Exported
+    @QuickSilver
+    public RunT getLastUnstableBuild() {
+        RunT r = getLastBuild();
+        while (r != null
+                && (r.isBuilding() || r.getResult() != Result.UNSTABLE))
+            r = r.getPreviousBuild();
+        return r;
+    }
+
+    /**
      * Returns the last stable build, if any. Otherwise null.
      * @see #getLastSuccessfulBuild
      */
@@ -1009,12 +1054,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
             String newName = req.getParameter("name");
             if (newName != null && !newName.equals(name)) {
                 // check this error early to avoid HTTP response splitting.
-                try {
-                    Hudson.checkGoodName(newName);
-                } catch (ParseException e) {
-                    sendError(e, req, rsp);
-                    return;
-                }
+                Hudson.checkGoodName(newName);
                 rsp.sendRedirect("rename?newName=" + URLEncoder.encode(newName, "UTF-8"));
             } else {
                 rsp.sendRedirect(".");
@@ -1270,12 +1310,7 @@ public abstract class Job<JobT extends Job<JobT, RunT>, RunT extends Run<JobT, R
         checkPermission(DELETE);
 
         String newName = req.getParameter("newName");
-        try {
-            Hudson.checkGoodName(newName);
-        } catch (ParseException e) {
-            sendError(e, req, rsp);
-            return;
-        }
+        Hudson.checkGoodName(newName);
 
         if (isBuilding()) {
             // redirect to page explaining that we can't rename now

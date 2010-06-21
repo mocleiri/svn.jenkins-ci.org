@@ -1,5 +1,6 @@
 package hudson.plugins.im;
 
+import static hudson.plugins.im.tools.BuildHelper.getProjectName;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
@@ -7,6 +8,7 @@ import hudson.model.BuildListener;
 import hudson.model.Result;
 import hudson.model.User;
 import hudson.model.UserProperty;
+import hudson.model.Fingerprint.RangeSet;
 import hudson.plugins.im.tools.Assert;
 import hudson.plugins.im.tools.BuildHelper;
 import hudson.plugins.im.tools.ExceptionHelper;
@@ -115,8 +117,6 @@ public abstract class IMPublisher extends Notifier implements BuildStep
 
     /**
      * Returns the notification targets configured on a per-job basis.
-     * 
-     * @see #calculateIMTargets(Set, BuildListener)
      */
     public List<IMMessageTarget> getNotificationTargets() {
         return this.targets;
@@ -125,7 +125,7 @@ public abstract class IMPublisher extends Notifier implements BuildStep
     /**
      * Returns the notification target which should actually be used for notification.
      * 
-     * Differs from {@link #getNotificationStrategy()} because it also takes
+     * Differs from {@link #getNotificationTargets()} because it also takes
      * {@link IMPublisherDescriptor#getDefaultTargets()} into account!
      */
     protected List<IMMessageTarget> calculateTargets() {
@@ -252,13 +252,13 @@ public abstract class IMPublisher extends Notifier implements BuildStep
         if (BuildHelper.isStillFailureOrUnstable(build)) {
             if (this.notifySuspects) {
             	log(buildListener, "Notifying suspects");
-            	final String message = "Build " + build.getProject().getName() +
+            	final String message = "Build " + getProjectName(build) +
             	    " is " + BuildHelper.getResultDescription(build) + ": " + MessageHelper.getBuildURL(build);
             	
             	for (IMMessageTarget target : calculateIMTargets(getCommitters(build), buildListener)) {
             		try {
             			log(buildListener, "Sending notification to suspect: " + target.toString());
-            			getIMConnection().send(target, message);
+            			sendNotification(message, target, buildListener);
             		} catch (final Throwable e) {
             			log(buildListener, "There was an error sending suspect notification to: " + target.toString());
             		}
@@ -267,12 +267,12 @@ public abstract class IMPublisher extends Notifier implements BuildStep
             
             if (this.notifyCulprits) {
             	log(buildListener, "Notifying culprits");
-            	final String message = "You're still being suspected of having broken " + build.getProject().getName() + ": " + MessageHelper.getBuildURL(build);
+            	final String message = "You're still being suspected of having broken " + getProjectName(build) + ": " + MessageHelper.getBuildURL(build);
             	
             	for (IMMessageTarget target : calculateIMTargets(getCulpritsOnly(build), buildListener)) {
             		try {
             			log(buildListener, "Sending notification to culprit: " + target.toString());
-            			getIMConnection().send(target, message);
+            			sendNotification(message, target, buildListener);
             		} catch (final Throwable e) {
             			log(buildListener, "There was an error sending culprit notification to: " + target.toString());
             		}
@@ -282,12 +282,12 @@ public abstract class IMPublisher extends Notifier implements BuildStep
             boolean committerNotified = false;
             if (this.notifySuspects) {
                 log(buildListener, "Notifying suspects");
-                String message = "Oh no! You're suspected of having broken " + build.getProject().getName() + ": " + MessageHelper.getBuildURL(build);
+                String message = "Oh no! You're suspected of having broken " + getProjectName(build) + ": " + MessageHelper.getBuildURL(build);
                 
                 for (IMMessageTarget target : calculateIMTargets(getCommitters(build), buildListener)) {
                     try {
                         log(buildListener, "Sending notification to suspect: " + target.toString());
-                        getIMConnection().send(target, message);
+                        sendNotification(message, target, buildListener);
                         committerNotified = true;
                     } catch (final Throwable e) {
                         log(buildListener, "There was an error sending suspect notification to: " + target.toString());
@@ -302,12 +302,12 @@ public abstract class IMPublisher extends Notifier implements BuildStep
         
         if (this.notifyFixers && BuildHelper.isFix(build)) {
         	buildListener.getLogger().append("Notifying fixers\n");
-        	final String message = "Yippie! Seems you've fixed " + build.getProject().getName() + ": " + MessageHelper.getBuildURL(build);
+        	final String message = "Yippie! Seems you've fixed " + getProjectName(build) + ": " + MessageHelper.getBuildURL(build);
         	
         	for (IMMessageTarget target : calculateIMTargets(getCommitters(build), buildListener)) {
         		try {
         			log(buildListener, "Sending notification to fixer: " + target.toString());
-        			getIMConnection().send(target, message);
+        			sendNotification(message, target, buildListener);
         		} catch (final Throwable e) {
         			log(buildListener, "There was an error sending fixer notification to: " + target.toString());
         		}
@@ -316,6 +316,17 @@ public abstract class IMPublisher extends Notifier implements BuildStep
         
         return true;
     }
+
+	private void sendNotification(String message, IMMessageTarget target, BuildListener buildListener)
+			throws IMException {
+		IMConnection imConnection = getIMConnection();
+		if (imConnection instanceof DummyConnection) {
+			// quite hacky
+			log(buildListener, "[ERROR] not connected. Cannot send message to '" + target + "'");
+		} else {
+			getIMConnection().send(target, message);
+		}
+	}
 
     /**
      * Looks for committers in the direct upstream builds and notifies them.
@@ -337,17 +348,22 @@ public abstract class IMPublisher extends Notifier implements BuildStep
 		        AbstractBuild<?, ?> upstreamBuild = (AbstractBuild<?, ?>) entry.getKey().getBuildByNumber(entry.getValue());
 		        
 		        if (upstreamBuild != null) {
+		            
+		            if (! downstreamIsFirstInRangeTriggeredByUpstream(upstreamBuild, build)) {
+		                continue;
+		            }
+		            
 			        Set<User> committers = getCommitters(upstreamBuild);
 			        
-			        String message = "Attention! Your change in " + upstreamBuild.getProject().getName()
+			        String message = "Attention! Your change in " + getProjectName(upstreamBuild)
 			        + ": " + MessageHelper.getBuildURL(upstreamBuild)
-			        + " *might* have broken the downstream job " + build.getProject().getName() + ": " + MessageHelper.getBuildURL(build)
+			        + " *might* have broken the downstream job " + getProjectName(build) + ": " + MessageHelper.getBuildURL(build)
 			        + "\nPlease have a look!";
 			        
 			        for (IMMessageTarget target : calculateIMTargets(committers, buildListener)) {
 			            try {
 			                log(buildListener, "Sending notification to upstream committer: " + target.toString());
-			                getIMConnection().send(target, message);
+			                sendNotification(message, target, buildListener);
 			                committerNotified = true;
 			            } catch (final Throwable e) {
 			                log(buildListener, "There was an error sending upstream committer notification to: " + target.toString());
@@ -363,6 +379,27 @@ public abstract class IMPublisher extends Notifier implements BuildStep
 	}
 
     /**
+     * Determines if downstreamBuild is the 1st build of the downstream project
+     * which has a dependency to the upstreamBuild.
+     */
+    //@Bug(6712)
+    private boolean downstreamIsFirstInRangeTriggeredByUpstream(
+            AbstractBuild<?, ?> upstreamBuild, AbstractBuild<?, ?> downstreamBuild) {
+        RangeSet rangeSet = upstreamBuild.getDownstreamRelationship(downstreamBuild.getProject());
+        
+        if (rangeSet.isEmpty()) {
+            // should not happen
+            LOGGER.warning("Range set is empty. Upstream " + upstreamBuild + ", downstream " + downstreamBuild);
+            return false;
+        }
+        
+        if (rangeSet.min() == downstreamBuild.getNumber()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Notify all registered chats about the build result.
      */
 	private void notifyChats(final AbstractBuild<?, ?> build, final BuildListener buildListener) {
@@ -372,7 +409,7 @@ public abstract class IMPublisher extends Notifier implements BuildStep
 		} else {
 			sb = new StringBuilder();
 		}
-		sb.append("Project ").append(build.getProject().getName())
+		sb.append("Project ").append(getProjectName(build))
 			.append(" build (").append(build.getNumber()).append("): ")
 			.append(BuildHelper.getResultDescription(build)).append(" in ")
 			.append(build.getTimestampString())
@@ -395,7 +432,7 @@ public abstract class IMPublisher extends Notifier implements BuildStep
 		{
 		    try {
 		        log(buildListener, "Sending notification to: " + target.toString());
-		        getIMConnection().send(target, msg);
+		        sendNotification(msg, target, buildListener);
 		    } catch (final Throwable t) {
 		        log(buildListener, "There was an error sending notification to: " + target.toString() + "\n" + ExceptionHelper.dump(t));
 		    }
@@ -410,7 +447,7 @@ public abstract class IMPublisher extends Notifier implements BuildStep
 		try {
 			if (notifyOnBuildStart) {
 				final StringBuilder sb = new StringBuilder("Starting build ").append(build.getNumber())
-					.append(" for job ").append(build.getProject().getName());
+					.append(" for job ").append(getProjectName(build));
 
 				if (build.getPreviousBuild() != null) {
 					sb.append(" (previous build: ")
@@ -431,7 +468,7 @@ public abstract class IMPublisher extends Notifier implements BuildStep
 					// only notify group chats
 					if (target instanceof GroupChatIMMessageTarget) {
 		                try {
-		                    getIMConnection().send(target, msg);
+		                    sendNotification(msg, target, buildListener);
 		                } catch (final Throwable e) {
 		                    log(buildListener, "There was an error sending notification to: " + target.toString());
 		                }

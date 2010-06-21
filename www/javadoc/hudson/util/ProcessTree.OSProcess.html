@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ProcessTree.OSProcess (Hudson main module 1.357 API)
+ProcessTree.OSProcess (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProcessTree.OSProcess (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProcessTree.OSProcess (Hudson main module 1.357 API)";
+        parent.document.title="ProcessTree.OSProcess (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/util/ProcessTree.Local.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="interface in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/ProcessTree.OSProcess.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -284,7 +284,8 @@ public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.htm
 <A NAME="kill()"><!-- --></A><H3>
 kill</H3>
 <PRE>
-public abstract void <B>kill</B>()</PRE>
+public abstract void <B>kill</B>()
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Kills this process.
 <P>
@@ -292,7 +293,9 @@ public abstract void <B>kill</B>()</PRE>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html#kill()">kill</A></CODE> in interface <CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -300,7 +303,8 @@ public abstract void <B>kill</B>()</PRE>
 <A NAME="killRecursively()"><!-- --></A><H3>
 killRecursively</H3>
 <PRE>
-public abstract void <B>killRecursively</B>()</PRE>
+public abstract void <B>killRecursively</B>()
+                              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Kills this process and all the descendants.
  <p>
@@ -313,7 +317,9 @@ public abstract void <B>killRecursively</B>()</PRE>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html#killRecursively()">killRecursively</A></CODE> in interface <CODE><A HREF="../../hudson/util/ProcessTreeRemoting.IOSProcess.html" title="interface in hudson.util">ProcessTreeRemoting.IOSProcess</A></CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -424,7 +430,7 @@ public &lt;T&gt; T <B>act</B>(<A HREF="../../hudson/util/ProcessTree.ProcessCall
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/util/ProcessTree.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/util/ProcessTree.Local.html" title="class in hudson.util"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/util/ProcessTree.ProcessCallable.html" title="interface in hudson.util"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/util/ProcessTree.OSProcess.html" target="_top"><B>FRAMES</B></A>  &nbsp;

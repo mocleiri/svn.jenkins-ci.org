@@ -13,6 +13,8 @@ import hudson.plugins.analysis.util.PluginLogger;
 import hudson.plugins.pmd.parser.PmdParser;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.maven.project.MavenProject;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -79,7 +81,8 @@ public class PmdReporter extends HealthAwareMavenReporter {
     /** {@inheritDoc} */
     @Override
     public ParserResult perform(final MavenBuildProxy build, final MavenProject pom, final MojoInfo mojo, final PluginLogger logger) throws InterruptedException, IOException {
-        FilesParser pmdCollector = new FilesParser(logger, PMD_XML_FILE, new PmdParser(getDefaultEncoding()), true, false);
+        FilesParser pmdCollector = new FilesParser(logger, PMD_XML_FILE,
+                new PmdParser(getDefaultEncoding()), getModuleName(pom));
 
         return getTargetPath(pom).act(pmdCollector);
     }
@@ -96,8 +99,8 @@ public class PmdReporter extends HealthAwareMavenReporter {
 
     /** {@inheritDoc} */
     @Override
-    public Action getProjectAction(final MavenModule module) {
-        return new PmdProjectAction(module);
+    public List<PmdProjectAction> getProjectActions(final MavenModule module) {
+        return Collections.singletonList(new PmdProjectAction(module));
     }
 
     /** {@inheritDoc} */

@@ -24,27 +24,31 @@
  */
 package hudson.plugins.clearcase.util;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.apache.commons.lang.StringUtils;
-
 import hudson.EnvVars;
 import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.Computer;
+import hudson.model.Node;
 import hudson.util.LogTaskListener;
 import hudson.util.VariableResolver;
+
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * A {@link VariableResolver} that resolves certain Build variables.
  * <p>
  * The build variable resolver will resolve the following:
  * <ul>
- * <li>JOB_NAME - The name of the job</li>
+ * <li>HOST - The name of the computer it is running on</li>
+ * <li>OS - Shorthand to "os.name" system property</li>
  * <li>USER_NAME - The system property "user.name" on the Node that the Launcher is being executed on (slave or master)</li>
  * <li>NODE_NAME - The name of the node that the Launcher is being executed on</li>
- * <li>Any environment variable that is set on the Node that the Launcher is being executed on (slave or master)</li>
+ * <li>Any environment variable (system or build-scoped) that is set on the Node that the Launcher is being executed on
+ * (slave or master)</li>
  * </ul>
  * Implementation note: This class is modelled after Erik Ramfelt's work in the Team Foundation Server Plugin. Maybe
  * they should be merged and moved to the hudson core
@@ -56,50 +60,67 @@ public class BuildVariableResolver implements VariableResolver<String> {
     private static final Logger LOGGER = Logger.getLogger(BuildVariableResolver.class.getName());
 
     private AbstractBuild<?, ?> build;
-    private Computer computer;
+    
+    private transient String nodeName;
+    
+    private transient Computer computer;
+    
+    private transient Map<Object, Object> systemProperties;
+    
+    private boolean restricted;
 
-    public BuildVariableResolver(final AbstractBuild<?, ?> build, final Computer computer) {
+    public BuildVariableResolver(final AbstractBuild<?, ?> build) {
         this.build = build;
-        this.computer = computer;
+        Node node = build.getBuiltOn();
+        this.nodeName = node.getNodeName();
+        this.computer = node.toComputer();
     }
-
+    
+    public BuildVariableResolver(final AbstractBuild<?, ?> build, boolean restricted) {
+        this(build);
+        this.restricted = restricted;
+    }
+    
     @Override
     public String resolve(String key) {
         try {
+            if (systemProperties == null) {
+                systemProperties = computer.getSystemProperties();
+            }
             LogTaskListener ltl = new LogTaskListener(LOGGER, Level.INFO);
             if ("JOB_NAME".equals(key) && build != null && build.getProject() != null) {
                 return build.getProject().getName();
             }
-
+            
             if ("HOST".equals(key)) {
                 return (Util.fixEmpty(computer.getHostName()));
             }
 
             if ("OS".equals(key)) {
-                return System.getProperty("os.name");
+                return (String) systemProperties.get("os.name");
             }
 
             if ("NODE_NAME".equals(key)) {
-                return (Util.fixEmpty(StringUtils.isEmpty(computer.getName()) ? "master" : computer.getName()));
+                return (Util.fixEmpty(StringUtils.isEmpty(nodeName) ? "master" : nodeName));
             }
 
             if ("USER_NAME".equals(key)) {
-                return (String) computer.getSystemProperties().get("user.name");
+                return (String) systemProperties.get("user.name");
             }
 
-            EnvVars compEnv = computer.getEnvironment();
-            if (compEnv.containsKey(key)) {
-                return compEnv.get(key);
+            Map<String, String> buildVariables = build.getBuildVariables();
+            if (buildVariables.containsKey(key)) {
+                return buildVariables.get(key);
             }
-
-            EnvVars env = build.getEnvironment(ltl);
-            if (env.containsKey(key)) {
-                return env.get(key);
+            if (!restricted) {
+                EnvVars env = build.getEnvironment(ltl);
+                if (env.containsKey(key)) {
+                    return env.get(key);
+                }
             }
-
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Variable name '" + key + "' look up failed", e);
         }
-        return null;
+        return null; 
     }
 }

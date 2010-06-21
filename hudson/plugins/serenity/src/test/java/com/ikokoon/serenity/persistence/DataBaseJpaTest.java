@@ -19,8 +19,6 @@ import com.ikokoon.toolkit.Toolkit;
 
 public class DataBaseJpaTest extends ATest {
 
-	private IDataBase dataBase;
-
 	@Test
 	public void dummy() {
 	}
@@ -110,7 +108,7 @@ public class DataBaseJpaTest extends ATest {
 		parameters.clear();
 		parameters.add(klass.getName());
 		parameters.add(methodName);
-		parameters.add(methodSignature);
+		parameters.add(methodDescription);
 		Method method = (Method) dataBase.find(Method.class, parameters);
 		assertNotNull(method);
 

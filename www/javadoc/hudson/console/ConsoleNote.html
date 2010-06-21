@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ConsoleNote (Hudson main module 1.357 API)
+ConsoleNote (Hudson main module 1.363 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-05-07">
+<META NAME="date" CONTENT="2010-06-18">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ConsoleNote (Hudson main module 1.357 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ConsoleNote (Hudson main module 1.357 API)";
+        parent.document.title="ConsoleNote (Hudson main module 1.363 API)";
     }
 }
 </SCRIPT>
@@ -102,7 +102,7 @@ Class ConsoleNote&lt;T&gt;</H2>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>&lt;?&gt;&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant">AntTargetNote</A>, <A HREF="../../hudson/console/HudsonExceptionNote.html" title="class in hudson.console">HudsonExceptionNote</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant">AntTargetNote</A>, <A HREF="../../hudson/console/HudsonExceptionNote.html" title="class in hudson.console">HudsonExceptionNote</A>, <A HREF="../../hudson/console/HyperlinkNote.html" title="class in hudson.console">HyperlinkNote</A></DD>
 </DL>
 <HR>
 <DL>
@@ -253,11 +253,27 @@ Data that hangs off from a console output.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleNote.html#encode()">encode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../../hudson/console/ConsoleNote.html#encodeTo(java.io.Writer)"><CODE>encodeTo(Writer)</CODE></A> but obtain the result as a string.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/console/ConsoleNote.html#encodeTo(java.io.OutputStream)">encodeTo</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prints this note into a stream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleNote.html#encodeTo(java.io.Writer)">encodeTo</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prints this note into a writer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -450,6 +466,48 @@ public void <B>encodeTo</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/jav
  The most typical use of this is <code>n.encodedTo(System.out)</code> where stdout is connected to Hudson.
  The encoded form doesn't include any new line character to work better in the line-oriented nature
  of <A HREF="../../hudson/console/ConsoleAnnotator.html" title="class in hudson.console"><CODE>ConsoleAnnotator</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="encodeTo(java.io.Writer)"><!-- --></A><H3>
+encodeTo</H3>
+<PRE>
+public void <B>encodeTo</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;out)
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Prints this note into a writer.
+
+ <p>
+ Technically, this method only works if the <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io"><CODE>Writer</CODE></A> to <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A>
+ encoding is ASCII compatible.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="encode()"><!-- --></A><H3>
+encode</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>encode</B>()
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Works like <A HREF="../../hudson/console/ConsoleNote.html#encodeTo(java.io.Writer)"><CODE>encodeTo(Writer)</CODE></A> but obtain the result as a string.
 <P>
 <DD><DL>
 </DL>
