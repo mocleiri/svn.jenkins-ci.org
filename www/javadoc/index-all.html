@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.363 API)
+Index (Hudson main module 1.364 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-06-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.363 API)";
+        parent.document.title="Index (Hudson main module 1.364 API)";
     }
 }
 </SCRIPT>
@@ -7987,7 +7987,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in
 <DD>Gets all the <A HREF="./hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s that are waiting for an executor in the given <A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 <DT><A HREF="./hudson/model/Queue.html#getBuildableItems()"><B>getBuildableItems()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
-<DD>Gets the snapshot of <A HREF="./hudson/model/Queue.html#buildables"><CODE>Queue.buildables</CODE></A>.
+<DD>Gets the snapshot of all <A HREF="./hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s.
 <DT><A HREF="./hudson/model/Job.html#getBuildByNumber(int)"><B>getBuildByNumber(int)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>&nbsp;
@@ -17134,6 +17134,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in
 <DT><A HREF="./hudson/search/SearchIndexBuilder.html#make()"><B>make()</B></A> - 
 Method in class hudson.search.<A HREF="./hudson/search/SearchIndexBuilder.html" title="class in hudson.search">SearchIndexBuilder</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/BuildWrapper.html#makeBuildVariables(hudson.model.AbstractBuild, java.util.Map)"><B>makeBuildVariables(AbstractBuild, Map&lt;String, String&gt;)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>
+<DD>Called to define <A HREF="./hudson/model/AbstractBuild.html#getBuildVariables()">AbstractBuild.getBuildVariables()</A>.
 <DT><A HREF="./hudson/model/AbstractProject.html#makeDisabled(boolean)"><B>makeDisabled(boolean)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Marks the build as disabled.

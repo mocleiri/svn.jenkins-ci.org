@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildWrapper (Hudson main module 1.363 API)
+BuildWrapper (Hudson main module 1.364 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-06-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildWrapper (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildWrapper (Hudson main module 1.363 API)";
+        parent.document.title="BuildWrapper (Hudson main module 1.364 API)";
     }
 }
 </SCRIPT>
@@ -215,6 +215,15 @@ Pluggability point for performing pre/post actions for the build process.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s to be displayed in the job page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tasks/BuildWrapper.html#makeBuildVariables(hudson.model.AbstractBuild, java.util.Map)">makeBuildVariables</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;variables)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called to define <A HREF="../../hudson/model/AbstractBuild.html#getBuildVariables()">AbstractBuild.getBuildVariables()</A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -419,6 +428,27 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.htm
 <DT><B>Returns:</B><DD>can be empty but never null<DT><B>Since:</B></DT>
   <DD>1.341</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="makeBuildVariables(hudson.model.AbstractBuild, java.util.Map)"><!-- --></A><H3>
+makeBuildVariables</H3>
+<PRE>
+public void <B>makeBuildVariables</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
+                               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;variables)</PRE>
+<DL>
+<DD>Called to define <A HREF="../../hudson/model/AbstractBuild.html#getBuildVariables()">AbstractBuild.getBuildVariables()</A>.
+
+ This provides an opportunity for a BuildWrapper to append any additional
+ build variables defined for the current build.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>build</CODE> - The build in progress for which this <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A> is called. Never null.<DD><CODE>variables</CODE> - Contains existing build variables. Add additional build variables that you contribute
+      to this map.</DL>
 </DD>
 </DL>
 <HR>
