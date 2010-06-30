@@ -19,6 +19,11 @@ Upcoming changes</a>
 <!-- Record your changes in the trunk here. -->
 <div id="trunk" style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
+  <li class='major bug'>
+    Fixed a possible security issue where a malicious user with the project
+    configuration access can trick Hudson into leaking the proxy password,
+    if Hudson is configured with a proxy with username/password.
+    (SECURITY-3)
   <li class=bug>
     Hide some sidepanel links that should not be shown in user-private views.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-6832">issue 6832</a>)
