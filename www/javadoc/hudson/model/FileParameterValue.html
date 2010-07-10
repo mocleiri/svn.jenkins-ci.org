@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FileParameterValue (Hudson main module 1.365 API)
+FileParameterValue (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FileParameterValue (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FileParameterValue (Hudson main module 1.365 API)";
+        parent.document.title="FileParameterValue (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -93,12 +93,12 @@ hudson.model</FONT>
 <BR>
 Class FileParameterValue</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/ParameterValue.html" title="class in hudson.model">hudson.model.ParameterValue</A>
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.FileParameterValue</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable</DD>
 </DL>
 <HR>
 <DL>
@@ -137,7 +137,7 @@ Class FileParameterValue</H2>
 <TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.FileItemImpl.html" title="class in hudson.model">FileParameterValue.FileItemImpl</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation from <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io"><CODE>File</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation from <CODE>File</CODE>.</TD>
 </TR>
 </TABLE>
 &nbsp;<!-- =========== FIELD SUMMARY =========== -->
@@ -168,24 +168,16 @@ Class FileParameterValue</H2>
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, org.apache.commons.fileupload.FileItem)">FileParameterValue</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, org.apache.commons.fileupload.FileItem)">FileParameterValue</A></B>(java.lang.String&nbsp;name,
                    org.apache.commons.fileupload.FileItem&nbsp;file)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, org.apache.commons.fileupload.FileItem, java.lang.String)">FileParameterValue</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                   org.apache.commons.fileupload.FileItem&nbsp;file,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, java.io.File, java.lang.String)">FileParameterValue</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;file,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;desc)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, java.io.File, java.lang.String)">FileParameterValue</A></B>(java.lang.String&nbsp;name,
+                   java.io.File&nbsp;file,
+                   java.lang.String&nbsp;originalFileName)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -221,14 +213,14 @@ Class FileParameterValue</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#equals(java.lang.Object)">equals</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;obj)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;obj)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In practice this will always be false, since location should be unique.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#getOriginalFileName()">getOriginalFileName</A></B>()</CODE>
 
 <BR>
@@ -236,7 +228,7 @@ Class FileParameterValue</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/FileParameterValue.html#getShortDescription()">getShortDescription</A></B>()</CODE>
 
 <BR>
@@ -263,10 +255,10 @@ Class FileParameterValue</H2>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -286,18 +278,8 @@ Class FileParameterValue</H2>
 FileParameterValue</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
-</FONT>public <B>FileParameterValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+</FONT>public <B>FileParameterValue</B>(java.lang.String&nbsp;name,
                                                org.apache.commons.fileupload.FileItem&nbsp;file)</PRE>
-<DL>
-</DL>
-<HR>
-
-<A NAME="FileParameterValue(java.lang.String, org.apache.commons.fileupload.FileItem, java.lang.String)"><!-- --></A><H3>
-FileParameterValue</H3>
-<PRE>
-public <B>FileParameterValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                          org.apache.commons.fileupload.FileItem&nbsp;file,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;description)</PRE>
 <DL>
 </DL>
 <HR>
@@ -305,9 +287,9 @@ public <B>FileParameterValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/ap
 <A NAME="FileParameterValue(java.lang.String, java.io.File, java.lang.String)"><!-- --></A><H3>
 FileParameterValue</H3>
 <PRE>
-public <B>FileParameterValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;file,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;desc)</PRE>
+public <B>FileParameterValue</B>(java.lang.String&nbsp;name,
+                          java.io.File&nbsp;file,
+                          java.lang.String&nbsp;originalFileName)</PRE>
 <DL>
 </DL>
 
@@ -324,7 +306,7 @@ public <B>FileParameterValue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/ap
 <A NAME="getOriginalFileName()"><!-- --></A><H3>
 getOriginalFileName</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getOriginalFileName</B>()</PRE>
+public java.lang.String <B>getOriginalFileName</B>()</PRE>
 <DL>
 <DD>Get the name of the originally uploaded file. If this
  <A HREF="../../hudson/model/FileParameterValue.html" title="class in hudson.model"><CODE>FileParameterValue</CODE></A> was created prior to 1.362, this method will
@@ -377,7 +359,7 @@ public int <B>hashCode</B>()</PRE>
 <A NAME="equals(java.lang.Object)"><!-- --></A><H3>
 equals</H3>
 <PRE>
-public boolean <B>equals</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;obj)</PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;obj)</PRE>
 <DL>
 <DD>In practice this will always be false, since location should be unique.
 <P>
@@ -393,7 +375,7 @@ public boolean <B>equals</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/ja
 <A NAME="getShortDescription()"><!-- --></A><H3>
 getShortDescription</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getShortDescription</B>()</PRE>
+public java.lang.String <B>getShortDescription</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/ParameterValue.html#getShortDescription()">ParameterValue</A></CODE></B></DD>
 <DD>Computes a human-readable possible-localized one-line description of the parameter value.
@@ -417,7 +399,7 @@ doDynamic</H3>
 public void <B>doDynamic</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
                       org.kohsuke.stapler.StaplerResponse&nbsp;response)
                throws javax.servlet.ServletException,
-                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                      java.io.IOException</PRE>
 <DL>
 <DD>Serve this file parameter in response to a <CODE>StaplerRequest</CODE>.
 <P>
@@ -425,7 +407,7 @@ public void <B>doDynamic</B>(org.kohsuke.stapler.StaplerRequest&nbsp;request,
 <DT><B>Parameters:</B><DD><CODE>request</CODE> - <DD><CODE>response</CODE> - 
 <DT><B>Throws:</B>
 <DD><CODE>javax.servlet.ServletException</CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-QuickSilver (Hudson main module 1.365 API)
+QuickSilver (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ QuickSilver (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="QuickSilver (Hudson main module 1.365 API)";
+        parent.document.title="QuickSilver (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -94,8 +94,8 @@ hudson.search</FONT>
 Annotation Type QuickSilver</H2>
 <HR>
 <DL>
-<DT><PRE><FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/RetentionPolicy.html?is-external=true#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>={<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html?is-external=true#METHOD" title="class or interface in java.lang.annotation">METHOD</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html?is-external=true#FIELD" title="class or interface in java.lang.annotation">FIELD</A>})
+<DT><PRE><FONT SIZE="-1">@Retention(value=RUNTIME)
+@Target(value={METHOD,FIELD})
 </FONT>public @interface <B>QuickSilver</B></DL>
 </PRE>
 
@@ -133,7 +133,7 @@ Indicates a <A HREF="../../hudson/search/SearchItem.html" title="interface in hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String[]</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/search/QuickSilver.html#value()">value</A></B></CODE>
 
 <BR>
@@ -145,7 +145,7 @@ Indicates a <A HREF="../../hudson/search/SearchItem.html" title="interface in hu
 <A NAME="value()"><!-- --></A><H3>
 value</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>value</B></PRE>
+public abstract java.lang.String[] <B>value</B></PRE>
 <DL>
 <DD><DL>
 </DL>

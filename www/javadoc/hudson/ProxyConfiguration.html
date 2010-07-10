@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ProxyConfiguration (Hudson main module 1.365 API)
+ProxyConfiguration (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ProxyConfiguration (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ProxyConfiguration (Hudson main module 1.365 API)";
+        parent.document.title="ProxyConfiguration (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson</FONT>
 <BR>
 Class ProxyConfiguration</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.ProxyConfiguration</B>
 </PRE>
 <DL>
@@ -101,7 +101,7 @@ Class ProxyConfiguration</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>ProxyConfiguration</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
+<DT><PRE>public final class <B>ProxyConfiguration</B><DT>extends java.lang.Object<DT>implements <A HREF="../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DL>
 </PRE>
 
 <P>
@@ -111,7 +111,7 @@ HTTP proxy configuration.
  Use <A HREF="../hudson/ProxyConfiguration.html#open(java.net.URL)"><CODE>open(URL)</CODE></A> to open a connection with the proxy setting.
  <p>
  Proxy authentication (including NTLM) is implemented by setting a default
- <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/Authenticator.html?is-external=true" title="class or interface in java.net"><CODE>Authenticator</CODE></A> which provides a <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/PasswordAuthentication.html?is-external=true" title="class or interface in java.net"><CODE>PasswordAuthentication</CODE></A>
+ <CODE>Authenticator</CODE> which provides a <CODE>PasswordAuthentication</CODE>
  (as described in the Java 6 tech note 
  <a href="http://java.sun.com/javase/6/docs/technotes/guides/net/http-auth.html">
  Http Authentication</a>).
@@ -133,7 +133,7 @@ HTTP proxy configuration.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#name">name</A></B></CODE>
 
 <BR>
@@ -167,17 +167,17 @@ HTTP proxy configuration.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#ProxyConfiguration(java.lang.String, int)">ProxyConfiguration</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#ProxyConfiguration(java.lang.String, int)">ProxyConfiguration</A></B>(java.lang.String&nbsp;name,
                    int&nbsp;port)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#ProxyConfiguration(java.lang.String, int, java.lang.String, java.lang.String)">ProxyConfiguration</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#ProxyConfiguration(java.lang.String, int, java.lang.String, java.lang.String)">ProxyConfiguration</A></B>(java.lang.String&nbsp;name,
                    int&nbsp;port,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;userName,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password)</CODE>
+                   java.lang.String&nbsp;userName,
+                   java.lang.String&nbsp;password)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -194,7 +194,7 @@ HTTP proxy configuration.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/Proxy.html?is-external=true" title="class or interface in java.net">Proxy</A></CODE></FONT></TD>
+<CODE>&nbsp;java.net.Proxy</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#createProxy()">createProxy</A></B>()</CODE>
 
 <BR>
@@ -202,7 +202,7 @@ HTTP proxy configuration.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#getPassword()">getPassword</A></B>()</CODE>
 
 <BR>
@@ -210,7 +210,7 @@ HTTP proxy configuration.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#getUserName()">getUserName</A></B>()</CODE>
 
 <BR>
@@ -234,11 +234,11 @@ HTTP proxy configuration.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URLConnection.html?is-external=true" title="class or interface in java.net">URLConnection</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#open(java.net.URL)">open</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;url)</CODE>
+<CODE>static&nbsp;java.net.URLConnection</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ProxyConfiguration.html#open(java.net.URL)">open</A></B>(java.net.URL&nbsp;url)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method should be used wherever <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true#openConnection()" title="class or interface in java.net"><CODE>URL.openConnection()</CODE></A> to internet URLs is invoked directly.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method should be used wherever <CODE>URL.openConnection()</CODE> to internet URLs is invoked directly.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -252,10 +252,10 @@ HTTP proxy configuration.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -274,7 +274,7 @@ HTTP proxy configuration.
 <A NAME="name"><!-- --></A><H3>
 name</H3>
 <PRE>
-public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>name</B></PRE>
+public final java.lang.String <B>name</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -303,7 +303,7 @@ public final int <B>port</B></PRE>
 <A NAME="ProxyConfiguration(java.lang.String, int)"><!-- --></A><H3>
 ProxyConfiguration</H3>
 <PRE>
-public <B>ProxyConfiguration</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+public <B>ProxyConfiguration</B>(java.lang.String&nbsp;name,
                           int&nbsp;port)</PRE>
 <DL>
 </DL>
@@ -312,10 +312,10 @@ public <B>ProxyConfiguration</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/ap
 <A NAME="ProxyConfiguration(java.lang.String, int, java.lang.String, java.lang.String)"><!-- --></A><H3>
 ProxyConfiguration</H3>
 <PRE>
-public <B>ProxyConfiguration</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
+public <B>ProxyConfiguration</B>(java.lang.String&nbsp;name,
                           int&nbsp;port,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;userName,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password)</PRE>
+                          java.lang.String&nbsp;userName,
+                          java.lang.String&nbsp;password)</PRE>
 <DL>
 </DL>
 
@@ -332,7 +332,7 @@ public <B>ProxyConfiguration</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/ap
 <A NAME="getUserName()"><!-- --></A><H3>
 getUserName</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getUserName</B>()</PRE>
+public java.lang.String <B>getUserName</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -346,7 +346,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getPassword()"><!-- --></A><H3>
 getPassword</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getPassword</B>()</PRE>
+public java.lang.String <B>getPassword</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -360,7 +360,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="createProxy()"><!-- --></A><H3>
 createProxy</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/Proxy.html?is-external=true" title="class or interface in java.net">Proxy</A> <B>createProxy</B>()</PRE>
+public java.net.Proxy <B>createProxy</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -375,7 +375,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/Proxy.html?is-e
 save</H3>
 <PRE>
 public void <B>save</B>()
-          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+          throws java.io.IOException</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../hudson/model/Saveable.html#save()">Saveable</A></CODE></B></DD>
 <DD>Persists the state of this object into XML.
@@ -392,7 +392,7 @@ public void <B>save</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the persistence failed.</DL>
+<DD><CODE>java.io.IOException</CODE> - if the persistence failed.</DL>
 </DD>
 </DL>
 <HR>
@@ -415,7 +415,7 @@ public static <A HREF="../hudson/XmlFile.html" title="class in hudson">XmlFile</
 load</H3>
 <PRE>
 public static <A HREF="../hudson/ProxyConfiguration.html" title="class in hudson">ProxyConfiguration</A> <B>load</B>()
-                               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                               throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -423,7 +423,7 @@ public static <A HREF="../hudson/ProxyConfiguration.html" title="class in hudson
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -431,10 +431,10 @@ public static <A HREF="../hudson/ProxyConfiguration.html" title="class in hudson
 <A NAME="open(java.net.URL)"><!-- --></A><H3>
 open</H3>
 <PRE>
-public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URLConnection.html?is-external=true" title="class or interface in java.net">URLConnection</A> <B>open</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;url)
-                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public static java.net.URLConnection <B>open</B>(java.net.URL&nbsp;url)
+                                   throws java.io.IOException</PRE>
 <DL>
-<DD>This method should be used wherever <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true#openConnection()" title="class or interface in java.net"><CODE>URL.openConnection()</CODE></A> to internet URLs is invoked directly.
+<DD>This method should be used wherever <CODE>URL.openConnection()</CODE> to internet URLs is invoked directly.
 <P>
 <DD><DL>
 </DL>
@@ -442,7 +442,7 @@ public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URLConne
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

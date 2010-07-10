@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildStep (Hudson main module 1.365 API)
+BuildStep (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildStep (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildStep (Hudson main module 1.365 API)";
+        parent.document.title="BuildStep (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -153,7 +153,7 @@ One step of the whole build process.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildStep.html#BUILDERS">BUILDERS</A></B></CODE>
 
 <BR>
@@ -192,7 +192,7 @@ One step of the whole build process.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Collection&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)">getProjectActions</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</CODE>
 
 <BR>
@@ -243,7 +243,7 @@ One step of the whole build process.
 <A NAME="BUILDERS"><!-- --></A><H3>
 BUILDERS</H3>
 <PRE>
-static final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt; <B>BUILDERS</B></PRE>
+static final java.util.List&lt;<A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks">Builder</A>&gt;&gt; <B>BUILDERS</B></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.286.
       Use <A HREF="../../hudson/tasks/Builder.html#all()"><CODE>Builder.all()</CODE></A> for read access, and use
@@ -306,8 +306,8 @@ perform</H3>
 boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                 <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
                 <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
-                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
-                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                throws java.lang.InterruptedException,
+                       java.io.IOException</PRE>
 <DL>
 <DD>Runs the step over the given build and reports the progress to the listener.
 
@@ -321,13 +321,13 @@ boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="cl
 <DT><B>Returns:</B><DD>true if the build can continue, false if there was an error
       and the build needs to be aborted.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - If the build is interrupted by the user (in an attempt to abort the build.)
+<DD><CODE>java.lang.InterruptedException</CODE> - If the build is interrupted by the user (in an attempt to abort the build.)
       Normally the <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> implementations may simply forward the exception
       it got from its lower-level functions.
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If the implementation wants to abort the processing when an <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><CODE>IOException</CODE></A>
+<DD><CODE>java.io.IOException</CODE> - If the implementation wants to abort the processing when an <CODE>IOException</CODE>
       happens, it can simply propagate the exception to the caller. This will cause
       the build to fail, with the default error message.
-      Implementations are encouraged to catch <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><CODE>IOException</CODE></A> on its own to
+      Implementations are encouraged to catch <CODE>IOException</CODE> on its own to
       provide a better error message, if it can do so, so that users have better
       understanding on why it failed.</DL>
 </DD>
@@ -351,7 +351,7 @@ getProjectAction</H3>
 <A NAME="getProjectActions(hudson.model.AbstractProject)"><!-- --></A><H3>
 getProjectActions</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getProjectActions</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
+java.util.Collection&lt;? extends <A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getProjectActions</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;project)</PRE>
 <DL>
 <DD>Returns action objects if this <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> has actions
  to contribute to a <A HREF="../../hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.
@@ -436,7 +436,7 @@ getRequiredMonitorService</H3>
  <h2>Note to caller</h2>
  <p>
  For plugins written against earlier versions of Hudson, calling this method results in
- <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/AbstractMethodError.html?is-external=true" title="class or interface in java.lang"><CODE>AbstractMethodError</CODE></A>.
+ <CODE>AbstractMethodError</CODE>.
 <P>
 <DD><DL>
 <DT><B>Since:</B></DT>

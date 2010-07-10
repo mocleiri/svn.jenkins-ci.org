@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ExceptionCatchingThreadFactory (Hudson main module 1.365 API)
+ExceptionCatchingThreadFactory (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ExceptionCatchingThreadFactory (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ExceptionCatchingThreadFactory (Hudson main module 1.365 API)";
+        parent.document.title="ExceptionCatchingThreadFactory (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -93,19 +93,19 @@ hudson.util</FONT>
 <BR>
 Class ExceptionCatchingThreadFactory</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.ExceptionCatchingThreadFactory</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.UncaughtExceptionHandler.html?is-external=true" title="class or interface in java.lang">Thread.UncaughtExceptionHandler</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent">ThreadFactory</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Thread.UncaughtExceptionHandler, java.util.concurrent.ThreadFactory</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>ExceptionCatchingThreadFactory</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent">ThreadFactory</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.UncaughtExceptionHandler.html?is-external=true" title="class or interface in java.lang">Thread.UncaughtExceptionHandler</A></DL>
+<DT><PRE>public class <B>ExceptionCatchingThreadFactory</B><DT>extends java.lang.Object<DT>implements java.util.concurrent.ThreadFactory, java.lang.Thread.UncaughtExceptionHandler</DL>
 </PRE>
 
 <P>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent"><CODE>ThreadFactory</CODE></A> that creates a thread, which in turn displays a stack trace
+<CODE>ThreadFactory</CODE> that creates a thread, which in turn displays a stack trace
  when it terminates unexpectedly.
 <P>
 
@@ -135,7 +135,7 @@ Class ExceptionCatchingThreadFactory</H2>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/util/ExceptionCatchingThreadFactory.html#ExceptionCatchingThreadFactory(java.util.concurrent.ThreadFactory)">ExceptionCatchingThreadFactory</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent">ThreadFactory</A>&nbsp;core)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/ExceptionCatchingThreadFactory.html#ExceptionCatchingThreadFactory(java.util.concurrent.ThreadFactory)">ExceptionCatchingThreadFactory</A></B>(java.util.concurrent.ThreadFactory&nbsp;core)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -152,8 +152,8 @@ Class ExceptionCatchingThreadFactory</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html?is-external=true" title="class or interface in java.lang">Thread</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/ExceptionCatchingThreadFactory.html#newThread(java.lang.Runnable)">newThread</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>&nbsp;r)</CODE>
+<CODE>&nbsp;java.lang.Thread</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ExceptionCatchingThreadFactory.html#newThread(java.lang.Runnable)">newThread</A></B>(java.lang.Runnable&nbsp;r)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -161,8 +161,8 @@ Class ExceptionCatchingThreadFactory</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/ExceptionCatchingThreadFactory.html#uncaughtException(java.lang.Thread, java.lang.Throwable)">uncaughtException</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html?is-external=true" title="class or interface in java.lang">Thread</A>&nbsp;t,
-                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;e)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/ExceptionCatchingThreadFactory.html#uncaughtException(java.lang.Thread, java.lang.Throwable)">uncaughtException</A></B>(java.lang.Thread&nbsp;t,
+                  java.lang.Throwable&nbsp;e)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -171,10 +171,10 @@ Class ExceptionCatchingThreadFactory</H2>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -201,7 +201,7 @@ public <B>ExceptionCatchingThreadFactory</B>()</PRE>
 <A NAME="ExceptionCatchingThreadFactory(java.util.concurrent.ThreadFactory)"><!-- --></A><H3>
 ExceptionCatchingThreadFactory</H3>
 <PRE>
-public <B>ExceptionCatchingThreadFactory</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent">ThreadFactory</A>&nbsp;core)</PRE>
+public <B>ExceptionCatchingThreadFactory</B>(java.util.concurrent.ThreadFactory&nbsp;core)</PRE>
 <DL>
 </DL>
 
@@ -218,10 +218,10 @@ public <B>ExceptionCatchingThreadFactory</B>(<A HREF="http://java.sun.com/j2se/1
 <A NAME="newThread(java.lang.Runnable)"><!-- --></A><H3>
 newThread</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html?is-external=true" title="class or interface in java.lang">Thread</A> <B>newThread</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>&nbsp;r)</PRE>
+public java.lang.Thread <B>newThread</B>(java.lang.Runnable&nbsp;r)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true#newThread(java.lang.Runnable)" title="class or interface in java.util.concurrent">newThread</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ThreadFactory.html?is-external=true" title="class or interface in java.util.concurrent">ThreadFactory</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>newThread</CODE> in interface <CODE>java.util.concurrent.ThreadFactory</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -232,11 +232,11 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html?is
 <A NAME="uncaughtException(java.lang.Thread, java.lang.Throwable)"><!-- --></A><H3>
 uncaughtException</H3>
 <PRE>
-public void <B>uncaughtException</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html?is-external=true" title="class or interface in java.lang">Thread</A>&nbsp;t,
-                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;e)</PRE>
+public void <B>uncaughtException</B>(java.lang.Thread&nbsp;t,
+                              java.lang.Throwable&nbsp;e)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.UncaughtExceptionHandler.html?is-external=true#uncaughtException(java.lang.Thread, java.lang.Throwable)" title="class or interface in java.lang">uncaughtException</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.UncaughtExceptionHandler.html?is-external=true" title="class or interface in java.lang">Thread.UncaughtExceptionHandler</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>uncaughtException</CODE> in interface <CODE>java.lang.Thread.UncaughtExceptionHandler</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-InvocationInterceptor (Hudson main module 1.365 API)
+InvocationInterceptor (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ InvocationInterceptor (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="InvocationInterceptor (Hudson main module 1.365 API)";
+        parent.document.title="InvocationInterceptor (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -98,7 +98,7 @@ Interface InvocationInterceptor</H2>
 </PRE>
 
 <P>
-Interceptor around <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/InvocationHandler.html?is-external=true" title="class or interface in java.lang.reflect"><CODE>InvocationHandler</CODE></A>.
+Interceptor around <CODE>InvocationHandler</CODE>.
 <P>
 
 <P>
@@ -122,14 +122,14 @@ Interceptor around <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/re
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/InvocationInterceptor.html#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[], java.lang.reflect.InvocationHandler)">invoke</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;proxy,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</A>&nbsp;method,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[]&nbsp;args,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/InvocationHandler.html?is-external=true" title="class or interface in java.lang.reflect">InvocationHandler</A>&nbsp;delegate)</CODE>
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/InvocationInterceptor.html#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[], java.lang.reflect.InvocationHandler)">invoke</A></B>(java.lang.Object&nbsp;proxy,
+       java.lang.reflect.Method&nbsp;method,
+       java.lang.Object[]&nbsp;args,
+       java.lang.reflect.InvocationHandler&nbsp;delegate)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method can intercept the invocation of <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/InvocationHandler.html?is-external=true" title="class or interface in java.lang.reflect"><CODE>InvocationHandler</CODE></A> either before or after
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method can intercept the invocation of <CODE>InvocationHandler</CODE> either before or after
  the invocation happens.</TD>
 </TR>
 </TABLE>
@@ -149,13 +149,13 @@ Interceptor around <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/re
 <A NAME="invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[], java.lang.reflect.InvocationHandler)"><!-- --></A><H3>
 invoke</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>invoke</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;proxy,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/Method.html?is-external=true" title="class or interface in java.lang.reflect">Method</A>&nbsp;method,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>[]&nbsp;args,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/InvocationHandler.html?is-external=true" title="class or interface in java.lang.reflect">InvocationHandler</A>&nbsp;delegate)
-              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></PRE>
+java.lang.Object <B>invoke</B>(java.lang.Object&nbsp;proxy,
+                        java.lang.reflect.Method&nbsp;method,
+                        java.lang.Object[]&nbsp;args,
+                        java.lang.reflect.InvocationHandler&nbsp;delegate)
+                        throws java.lang.Throwable</PRE>
 <DL>
-<DD>This method can intercept the invocation of <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/InvocationHandler.html?is-external=true" title="class or interface in java.lang.reflect"><CODE>InvocationHandler</CODE></A> either before or after
+<DD>This method can intercept the invocation of <CODE>InvocationHandler</CODE> either before or after
  the invocation happens.
 
  <p>
@@ -177,7 +177,7 @@ invoke</H3>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></CODE></DL>
+<DD><CODE>java.lang.Throwable</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Initializer (Hudson main module 1.365 API)
+Initializer (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Initializer (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Initializer (Hudson main module 1.365 API)";
+        parent.document.title="Initializer (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -95,9 +95,9 @@ Annotation Type Initializer</H2>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@Indexed
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Documented.html?is-external=true" title="class or interface in java.lang.annotation">@Documented</A>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/RetentionPolicy.html?is-external=true#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html?is-external=true#METHOD" title="class or interface in java.lang.annotation">METHOD</A>)
+@Documented
+@Retention(value=RUNTIME)
+@Target(value=METHOD)
 </FONT>public @interface <B>Initializer</B></DL>
 </PRE>
 
@@ -140,7 +140,7 @@ Placed on static methods to indicate that this method is to be run during the Hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String[]</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/init/Initializer.html#attains()">attains</A></B></CODE>
 
 <BR>
@@ -156,7 +156,7 @@ Placed on static methods to indicate that this method is to be run during the Hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/init/Initializer.html#displayName()">displayName</A></B></CODE>
 
 <BR>
@@ -172,7 +172,7 @@ Placed on static methods to indicate that this method is to be run during the Hu
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String[]</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/init/Initializer.html#requires()">requires</A></B></CODE>
 
 <BR>
@@ -228,7 +228,7 @@ public abstract <A HREF="../../hudson/init/InitMilestone.html" title="enum in hu
 <A NAME="requires()"><!-- --></A><H3>
 requires</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>requires</B></PRE>
+public abstract java.lang.String[] <B>requires</B></PRE>
 <DL>
 <DD>Indicates the milestones necessary before executing this initializer.
 <P>
@@ -246,7 +246,7 @@ public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Strin
 <A NAME="attains()"><!-- --></A><H3>
 attains</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[] <B>attains</B></PRE>
+public abstract java.lang.String[] <B>attains</B></PRE>
 <DL>
 <DD>Indicates the milestones that this initializer contributes to.
 
@@ -267,7 +267,7 @@ public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Strin
 <A NAME="displayName()"><!-- --></A><H3>
 displayName</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>displayName</B></PRE>
+public abstract java.lang.String <B>displayName</B></PRE>
 <DL>
 <DD>Key in <tt>Messages.properties</tt> that represents what this task is about. Used for rendering the progress.
  Defaults to "${short class name}.${method Name}".

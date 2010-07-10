@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLIMethod (Hudson main module 1.365 API)
+CLIMethod (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLIMethod (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLIMethod (Hudson main module 1.365 API)";
+        parent.document.title="CLIMethod (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -95,9 +95,9 @@ Annotation Type CLIMethod</H2>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@Indexed
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/RetentionPolicy.html?is-external=true#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html?is-external=true#METHOD" title="class or interface in java.lang.annotation">METHOD</A>)
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Documented.html?is-external=true" title="class or interface in java.lang.annotation">@Documented</A>
+@Retention(value=RUNTIME)
+@Target(value=METHOD)
+@Documented
 </FONT>public @interface <B>CLIMethod</B></DL>
 </PRE>
 
@@ -141,7 +141,7 @@ Annotates methods on model objects to expose them as CLI commands.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/cli/declarative/CLIMethod.html#name()">name</A></B></CODE>
 
 <BR>
@@ -164,7 +164,7 @@ Annotates methods on model objects to expose them as CLI commands.
 <A NAME="name()"><!-- --></A><H3>
 name</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>name</B></PRE>
+public abstract java.lang.String <B>name</B></PRE>
 <DL>
 <DD>CLI command name. Used as <A HREF="../../../hudson/cli/CLICommand.html#getName()"><CODE>CLICommand.getName()</CODE></A>
 <P>

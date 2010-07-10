@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Ant.AntInstallation (Hudson main module 1.365 API)
+Ant.AntInstallation (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Ant.AntInstallation (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Ant.AntInstallation (Hudson main module 1.365 API)";
+        parent.document.title="Ant.AntInstallation (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -93,13 +93,13 @@ hudson.tasks</FONT>
 <BR>
 Class Ant.AntInstallation</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">hudson.model.AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">hudson.tools.ToolInstallation</A>
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.Ant.AntInstallation</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;, <A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;, <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;, <A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;, <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A>&gt;, java.io.Serializable</DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/tasks/Ant.html" title="class in hudson.tasks">Ant</A></DD>
@@ -174,17 +174,17 @@ Represents the Ant installation on the system.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String)">Ant.AntInstallation</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String)">Ant.AntInstallation</A></B>(java.lang.String&nbsp;name,
+                    java.lang.String&nbsp;home)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308
       Use <CODE>#AntInstallation(String, String, List)</CODE></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String, java.util.List)">Ant.AntInstallation</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home,
-                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#Ant.AntInstallation(java.lang.String, java.lang.String, java.util.List)">Ant.AntInstallation</A></B>(java.lang.String&nbsp;name,
+                    java.lang.String&nbsp;home,
+                    java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -218,7 +218,7 @@ Represents the Ant installation on the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#getAntHome()">getAntHome</A></B>()</CODE>
 
 <BR>
@@ -226,7 +226,7 @@ Represents the Ant installation on the system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Ant.AntInstallation.html#getExecutable(hudson.Launcher)">getExecutable</A></B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)</CODE>
 
 <BR>
@@ -262,10 +262,10 @@ Represents the Ant installation on the system.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -285,9 +285,9 @@ Represents the Ant installation on the system.
 Ant.AntInstallation</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
-</FONT>public <B>Ant.AntInstallation</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home,
-                                                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
+</FONT>public <B>Ant.AntInstallation</B>(java.lang.String&nbsp;name,
+                                                java.lang.String&nbsp;home,
+                                                java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
 <DL>
 </DL>
 <HR>
@@ -295,8 +295,8 @@ Ant.AntInstallation</H3>
 <A NAME="Ant.AntInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
 Ant.AntInstallation</H3>
 <PRE>
-public <B>Ant.AntInstallation</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home)</PRE>
+public <B>Ant.AntInstallation</B>(java.lang.String&nbsp;name,
+                           java.lang.String&nbsp;home)</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.308
       Use <CODE>#AntInstallation(String, String, List)</CODE></I>
@@ -316,7 +316,7 @@ public <B>Ant.AntInstallation</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/a
 <A NAME="getAntHome()"><!-- --></A><H3>
 getAntHome</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getAntHome</B>()</PRE>
+public java.lang.String <B>getAntHome</B>()</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.307. Use <A HREF="../../hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A>.</I>
 <P>
@@ -334,9 +334,9 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getExecutable(hudson.Launcher)"><!-- --></A><H3>
 getExecutable</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getExecutable</B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)
-                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+public java.lang.String <B>getExecutable</B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)
+                               throws java.io.IOException,
+                                      java.lang.InterruptedException</PRE>
 <DL>
 <DD>Gets the executable path of this Ant on the given target system.
 <P>
@@ -346,8 +346,8 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -356,8 +356,8 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 getExists</H3>
 <PRE>
 public boolean <B>getExists</B>()
-                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                  throws java.io.IOException,
+                         java.lang.InterruptedException</PRE>
 <DL>
 <DD>Returns true if the executable exists.
 <P>
@@ -367,8 +367,8 @@ public boolean <B>getExists</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -395,8 +395,8 @@ forNode</H3>
 <PRE>
 public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hudson.tasks">Ant.AntInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
                                    <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
-                            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                            throws java.io.IOException,
+                                   java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">NodeSpecific</A></CODE></B></DD>
 <DD>Returns a specialized copy of T for functioning in the given node.
@@ -407,8 +407,8 @@ public <A HREF="../../hudson/tasks/Ant.AntInstallation.html" title="class in hud
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

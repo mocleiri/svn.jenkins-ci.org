@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.Proc (Hudson main module 1.365 API)
+Uses of Class hudson.Proc (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.Proc (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.Proc (Hudson main module 1.365 API)";
+        parent.document.title="Uses of Class hudson.Proc (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -99,6 +99,10 @@ Packages that use <A HREF="../../hudson/Proc.html" title="class in hudson">Proc<
 <TD>Maven support.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.os.windows"><B>hudson.os.windows</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.slaves"><B>hudson.slaves</B></A></TD>
 <TD>Code related to slaves.&nbsp;</TD>
 </TR>
@@ -174,11 +178,11 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
+       java.io.InputStream&nbsp;in,
+       java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -187,10 +191,10 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -200,11 +204,11 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
+       java.lang.String[]&nbsp;env,
+       java.io.InputStream&nbsp;in,
+       java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -213,11 +217,11 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+       java.lang.String[]&nbsp;env,
+       java.io.InputStream&nbsp;in,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -227,10 +231,10 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+       java.lang.String[]&nbsp;env,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -240,10 +244,10 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
+       java.io.InputStream&nbsp;in,
+       java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -252,9 +256,9 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -264,10 +268,10 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+       java.lang.String[]&nbsp;env,
+       java.io.InputStream&nbsp;in,
+       java.io.OutputStream&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -276,10 +280,10 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+       java.lang.String[]&nbsp;env,
+       java.io.InputStream&nbsp;in,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -289,9 +293,9 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+       java.lang.String[]&nbsp;env,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -301,9 +305,9 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String, java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;cmd,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String, java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String&nbsp;cmd,
+       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -313,9 +317,9 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String, java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;cmd,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+<TD><CODE><B>Launcher.</B><B><A HREF="../../hudson/Launcher.html#launch(java.lang.String, java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String&nbsp;cmd,
+       java.lang.String[]&nbsp;env,
+       java.io.OutputStream&nbsp;out,
        <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -373,6 +377,31 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 </TABLE>
 &nbsp;
 <P>
+<A NAME="hudson.os.windows"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A HREF="../../hudson/os/windows/package-summary.html">hudson.os.windows</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../hudson/os/windows/package-summary.html">hudson.os.windows</A> that return <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
+<TD><CODE><B>WindowsRemoteLauncher.</B><B><A HREF="../../hudson/os/windows/WindowsRemoteLauncher.html#launch(hudson.Launcher.ProcStarter)">launch</A></B>(<A HREF="../../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;ps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="hudson.slaves"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -390,11 +419,11 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
-<TD><CODE><B>Channels.</B><B><A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)">forProcess</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A>&nbsp;execService,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;header,
+<TD><CODE><B>Channels.</B><B><A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.Proc)">forProcess</A></B>(java.lang.String&nbsp;name,
+           java.util.concurrent.ExecutorService&nbsp;execService,
+           java.io.InputStream&nbsp;in,
+           java.io.OutputStream&nbsp;out,
+           java.io.OutputStream&nbsp;header,
            <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A>&nbsp;proc)</CODE>
 
 <BR>
@@ -404,10 +433,10 @@ Uses of <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A> in <A 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
-<TD><CODE><B>Channels.</B><B><A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">forProcess</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A>&nbsp;execService,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+<TD><CODE><B>Channels.</B><B><A HREF="../../hudson/slaves/Channels.html#forProcess(java.lang.String, java.util.concurrent.ExecutorService, java.io.InputStream, java.io.OutputStream, hudson.Proc)">forProcess</A></B>(java.lang.String&nbsp;name,
+           java.util.concurrent.ExecutorService&nbsp;execService,
+           java.io.InputStream&nbsp;in,
+           java.io.OutputStream&nbsp;out,
            <A HREF="../../hudson/Proc.html" title="class in hudson">Proc</A>&nbsp;proc)</CODE>
 
 <BR>

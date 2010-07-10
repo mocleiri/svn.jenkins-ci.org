@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Queue.Task (Hudson main module 1.365 API)
+Uses of Interface hudson.model.Queue.Task (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Queue.Task (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson main module 1.365 API)";
+        parent.document.title="Uses of Interface hudson.model.Queue.Task (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -396,7 +396,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>CauseAction.</B><B><A HREF="../../../hudson/model/CauseAction.html#foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></B>(<A HREF="../../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&nbsp;item,
                  <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;owner,
-                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;otherActions)</CODE>
+                 java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;otherActions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -411,11 +411,19 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#getItems(hudson.model.Queue.Task)">getItems</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the information about the queue item for the given project.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#isPending(hudson.model.Queue.Task)">isPending</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;t)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the given task currently pending execution?</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -441,7 +449,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <CODE>&nbsp;<A HREF="../../../hudson/model/Queue.WaitingItem.html" title="class in hudson.model">Queue.WaitingItem</A></CODE></FONT></TD>
 <TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#schedule(hudson.model.Queue.Task, int, java.util.List)">schedule</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
          int&nbsp;quietPeriod,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+         java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules an execution of a task.</TD>
@@ -450,7 +458,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>Queue.QueueDecisionHandler.</B><B><A HREF="../../../hudson/model/Queue.QueueDecisionHandler.html#shouldSchedule(hudson.model.Queue.Task, java.util.List)">shouldSchedule</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;p,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+               java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether the new item should be scheduled.</TD>
@@ -499,7 +507,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TD><CODE><B>ExecutorListener.</B><B><A HREF="../../../hudson/model/ExecutorListener.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
                           <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                           long&nbsp;durationMS,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;problems)</CODE>
+                          java.lang.Throwable&nbsp;problems)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
@@ -510,7 +518,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
                           <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                           long&nbsp;durationMS,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;problems)</CODE>
+                          java.lang.Throwable&nbsp;problems)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
@@ -525,7 +533,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/model/Queue.Item.html#Queue.Item(hudson.model.Queue.Task, java.util.List, int, hudson.model.Queue.FutureImpl)">Queue.Item</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
-           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions,
+           java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions,
            int&nbsp;id,
            hudson.model.Queue.FutureImpl&nbsp;future)</CODE>
 
@@ -588,7 +596,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>FoldableAction.</B><B><A HREF="../../../hudson/model/queue/FoldableAction.html#foldIntoExisting(hudson.model.Queue.Item, hudson.model.Queue.Task, java.util.List)">foldIntoExisting</A></B>(<A HREF="../../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&nbsp;item,
                  <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;owner,
-                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;otherActions)</CODE>
+                 java.util.List&lt;<A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;otherActions)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notifies that the <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that "owns" this action (that is, the task for which this action is submitted)
@@ -659,7 +667,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 <TD><CODE><B>SlaveComputer.</B><B><A HREF="../../../hudson/slaves/SlaveComputer.html#taskCompletedWithProblems(hudson.model.Executor, hudson.model.Queue.Task, long, java.lang.Throwable)">taskCompletedWithProblems</A></B>(<A HREF="../../../hudson/model/Executor.html" title="class in hudson.model">Executor</A>&nbsp;executor,
                           <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
                           long&nbsp;durationMS,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;problems)</CODE>
+                          java.lang.Throwable&nbsp;problems)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called whenever a task is completed without any problems by an executor.</TD>
@@ -683,7 +691,7 @@ Uses of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in huds
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/widgets/BuildHistoryWidget.html#BuildHistoryWidget(hudson.model.Queue.Task, java.lang.Iterable, hudson.widgets.HistoryWidget.Adapter)">BuildHistoryWidget</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;owner,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/widgets/BuildHistoryWidget.html" title="type parameter in BuildHistoryWidget">T</A>&gt;&nbsp;baseList,
+                   java.lang.Iterable&lt;<A HREF="../../../hudson/widgets/BuildHistoryWidget.html" title="type parameter in BuildHistoryWidget">T</A>&gt;&nbsp;baseList,
                    <A HREF="../../../hudson/widgets/HistoryWidget.Adapter.html" title="interface in hudson.widgets">HistoryWidget.Adapter</A>&lt;? super <A HREF="../../../hudson/widgets/BuildHistoryWidget.html" title="type parameter in BuildHistoryWidget">T</A>&gt;&nbsp;adapter)</CODE>
 
 <BR>

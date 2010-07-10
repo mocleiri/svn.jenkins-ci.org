@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Maven.MavenInstallation (Hudson main module 1.365 API)
+Maven.MavenInstallation (Hudson main module 1.366 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-05">
+<META NAME="date" CONTENT="2010-07-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Maven.MavenInstallation (Hudson main module 1.365 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Maven.MavenInstallation (Hudson main module 1.365 API)";
+        parent.document.title="Maven.MavenInstallation (Hudson main module 1.366 API)";
     }
 }
 </SCRIPT>
@@ -93,13 +93,13 @@ hudson.tasks</FONT>
 <BR>
 Class Maven.MavenInstallation</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">hudson.model.AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">hudson.tools.ToolInstallation</A>
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.tasks.Maven.MavenInstallation</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;, <A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>&gt;, <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>&gt;, <A HREF="../../hudson/model/EnvironmentSpecific.html" title="interface in hudson.model">EnvironmentSpecific</A>&lt;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>&gt;, <A HREF="../../hudson/slaves/NodeSpecific.html" title="interface in hudson.slaves">NodeSpecific</A>&lt;<A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A>&gt;, java.io.Serializable</DD>
 </DL>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/tasks/Maven.html" title="class in hudson.tasks">Maven</A></DD>
@@ -199,17 +199,17 @@ Represents a Maven installation in a system.
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)">Maven.MavenInstallation</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String)">Maven.MavenInstallation</A></B>(java.lang.String&nbsp;name,
+                        java.lang.String&nbsp;home)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.308.
       Use <CODE>#MavenInstallation(String, String, List)</CODE></I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String, java.util.List)">Maven.MavenInstallation</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#Maven.MavenInstallation(java.lang.String, java.lang.String, java.util.List)">Maven.MavenInstallation</A></B>(java.lang.String&nbsp;name,
+                        java.lang.String&nbsp;home,
+                        java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -243,7 +243,7 @@ Represents a Maven installation in a system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getExecutable(hudson.Launcher)">getExecutable</A></B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)</CODE>
 
 <BR>
@@ -259,7 +259,7 @@ Represents a Maven installation in a system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
+<CODE>&nbsp;java.io.File</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getHomeDir()">getHomeDir</A></B>()</CODE>
 
 <BR>
@@ -267,7 +267,7 @@ Represents a Maven installation in a system.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/tasks/Maven.MavenInstallation.html#getMavenHome()">getMavenHome</A></B>()</CODE>
 
 <BR>
@@ -312,10 +312,10 @@ Represents a Maven installation in a system.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -365,8 +365,8 @@ public static final int <B>MAVEN_21</B></PRE>
 <A NAME="Maven.MavenInstallation(java.lang.String, java.lang.String)"><!-- --></A><H3>
 Maven.MavenInstallation</H3>
 <PRE>
-public <B>Maven.MavenInstallation</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home)</PRE>
+public <B>Maven.MavenInstallation</B>(java.lang.String&nbsp;name,
+                               java.lang.String&nbsp;home)</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.308.
       Use <CODE>#MavenInstallation(String, String, List)</CODE></I>
@@ -378,9 +378,9 @@ public <B>Maven.MavenInstallation</B>(<A HREF="http://java.sun.com/j2se/1.5.0/do
 Maven.MavenInstallation</H3>
 <PRE>
 <FONT SIZE="-1">@DataBoundConstructor
-</FONT>public <B>Maven.MavenInstallation</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name,
-                                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;home,
-                                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
+</FONT>public <B>Maven.MavenInstallation</B>(java.lang.String&nbsp;name,
+                                                    java.lang.String&nbsp;home,
+                                                    java.util.List&lt;? extends <A HREF="../../hudson/tools/ToolProperty.html" title="class in hudson.tools">ToolProperty</A>&lt;?&gt;&gt;&nbsp;properties)</PRE>
 <DL>
 </DL>
 
@@ -397,7 +397,7 @@ Maven.MavenInstallation</H3>
 <A NAME="getMavenHome()"><!-- --></A><H3>
 getMavenHome</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getMavenHome</B>()</PRE>
+public java.lang.String <B>getMavenHome</B>()</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.308. Use <A HREF="../../hudson/tools/ToolInstallation.html#getHome()"><CODE>ToolInstallation.getHome()</CODE></A>.</I>
 <P>
@@ -415,7 +415,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getHomeDir()"><!-- --></A><H3>
 getHomeDir</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getHomeDir</B>()</PRE>
+public java.io.File <B>getHomeDir</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -431,8 +431,8 @@ meetsMavenReqVersion</H3>
 <PRE>
 public boolean <B>meetsMavenReqVersion</B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
                                     int&nbsp;mavenReqVersion)
-                             throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                             throws java.io.IOException,
+                                    java.lang.InterruptedException</PRE>
 <DL>
 <DD>Compares the version of this Maven installation to the minimum required version specified.
 <P>
@@ -442,8 +442,8 @@ public boolean <B>meetsMavenReqVersion</B>(<A HREF="../../hudson/Launcher.html" 
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>launcher</CODE> - Represents the node on which we evaluate the path.<DD><CODE>mavenReqVersion</CODE> - Represents the minimum required Maven version - constants defined above.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -452,8 +452,8 @@ public boolean <B>meetsMavenReqVersion</B>(<A HREF="../../hudson/Launcher.html" 
 isMaven2_1</H3>
 <PRE>
 public boolean <B>isMaven2_1</B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)
-                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                   throws java.io.IOException,
+                          java.lang.InterruptedException</PRE>
 <DL>
 <DD>Is this Maven 2.1.x or later?
 <P>
@@ -463,8 +463,8 @@ public boolean <B>isMaven2_1</B>(<A HREF="../../hudson/Launcher.html" title="cla
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>launcher</CODE> - Represents the node on which we evaluate the path.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -472,9 +472,9 @@ public boolean <B>isMaven2_1</B>(<A HREF="../../hudson/Launcher.html" title="cla
 <A NAME="getExecutable(hudson.Launcher)"><!-- --></A><H3>
 getExecutable</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getExecutable</B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)
-                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+public java.lang.String <B>getExecutable</B>(<A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher)
+                               throws java.io.IOException,
+                                      java.lang.InterruptedException</PRE>
 <DL>
 <DD>Gets the executable path of this maven on the given target system.
 <P>
@@ -484,8 +484,8 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -528,8 +528,8 @@ forNode</H3>
 <PRE>
 public <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in hudson.tasks">Maven.MavenInstallation</A> <B>forNode</B>(<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node,
                                        <A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
-                                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                                throws java.io.IOException,
+                                       java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/slaves/NodeSpecific.html#forNode(hudson.model.Node, hudson.model.TaskListener)">NodeSpecific</A></CODE></B></DD>
 <DD>Returns a specialized copy of T for functioning in the given node.
@@ -540,8 +540,8 @@ public <A HREF="../../hudson/tasks/Maven.MavenInstallation.html" title="class in
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
