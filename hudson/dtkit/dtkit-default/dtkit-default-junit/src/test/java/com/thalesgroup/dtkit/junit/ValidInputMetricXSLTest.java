@@ -43,7 +43,6 @@ public class ValidInputMetricXSLTest {
         listInputMetric.add(CppTest.class);
         listInputMetric.add(CppUnit.class);
         listInputMetric.add(FPCUnit.class);
-        listInputMetric.add(JTest.class);
         listInputMetric.add(MSTest.class);
         listInputMetric.add(NUnit.class);
         listInputMetric.add(PHPUnit.class);
