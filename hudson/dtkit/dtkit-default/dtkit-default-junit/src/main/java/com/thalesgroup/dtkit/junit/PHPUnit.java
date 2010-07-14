@@ -56,6 +56,7 @@ public class PHPUnit extends InputMetricXSL {
         return "phpunit-1.0.xsd";
     }
 
+    @Override
     public OutputMetric getOutputFormatType() {
         return JUnitModel.OUTPUT_JUNIT_1_0;
     }

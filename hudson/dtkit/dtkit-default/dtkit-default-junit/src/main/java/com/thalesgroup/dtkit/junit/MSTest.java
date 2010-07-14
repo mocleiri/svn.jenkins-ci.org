@@ -38,7 +38,7 @@ public class MSTest extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "undermined (default)";
+        return "Version N/A (default)";
     }    
 
     @Override
@@ -56,6 +56,7 @@ public class MSTest extends InputMetricXSL {
         return null;  
     }
 
+    @Override
     public OutputMetric getOutputFormatType() {
         return JUnitModel.OUTPUT_JUNIT_1_0;
     }

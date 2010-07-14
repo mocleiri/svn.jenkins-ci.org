@@ -38,7 +38,7 @@ public class AUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "with GNAT 6.x (default)";
+        return "3.1.1 (default)";
     }
 
     @Override

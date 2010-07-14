@@ -53,9 +53,10 @@ public class CppTest extends InputMetricXSL {
 
     @Override
     public String getInputXsd() {
-        return null;  
+        return null;
     }
 
+    @Override
     public OutputMetric getOutputFormatType() {
         return JUnitModel.OUTPUT_JUNIT_1_0;
     }

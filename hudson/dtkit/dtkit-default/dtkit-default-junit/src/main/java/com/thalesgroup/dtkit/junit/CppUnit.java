@@ -44,7 +44,7 @@ public class CppUnit extends InputMetricXSL {
     @Override
     public String getToolVersion() {
         return "1.12.1 (default)";
-    }    
+    }
 
     @Override
     public String getXslName() {
@@ -56,6 +56,7 @@ public class CppUnit extends InputMetricXSL {
         return "cppunit-1.0.xsd";
     }
 
+    @Override
     public OutputMetric getOutputFormatType() {
         return JUnitModel.OUTPUT_JUNIT_1_0;
     }

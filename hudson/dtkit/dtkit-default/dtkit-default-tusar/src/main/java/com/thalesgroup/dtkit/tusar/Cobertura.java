@@ -43,7 +43,7 @@ public class Cobertura extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "N/A (default)";
+        return "Version N/A (default)";
     }
 
     @Override

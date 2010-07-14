@@ -56,6 +56,7 @@ public class UnitTest extends InputMetricXSL {
         return null; 
     }
 
+    @Override
     public OutputMetric getOutputFormatType() {
         return JUnitModel.OUTPUT_JUNIT_1_0;
     }

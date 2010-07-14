@@ -43,7 +43,7 @@ public class JUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "N/A (default)";
+        return "Version N/A (default)";
     }
 
     @Override

@@ -43,7 +43,7 @@ public class NUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "undetermined (default)";
+        return "Version N/A (default)";
     }        
 
     @Override
