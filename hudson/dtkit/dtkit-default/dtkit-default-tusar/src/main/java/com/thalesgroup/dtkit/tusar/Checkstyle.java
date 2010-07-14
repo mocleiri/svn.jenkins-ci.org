@@ -43,7 +43,7 @@ public class Checkstyle extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.0 (default)";
+        return "N/A (default)";
     }
 
     @Override
