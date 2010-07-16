@@ -282,6 +282,30 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
         rsp.sendRedirect2(".");
     }
 
+    /**
+     * Returns true if backup of hudson.war exists on the hard drive
+     */
+    public boolean getCanDowngrade() {
+        return new File(Lifecycle.get().getHudsonWar() + ".bak").exists();
+    }
+
+    /**
+     * Performs hudson downgrade.
+     */
+    public void doDowngrade(StaplerResponse rsp) throws IOException, ServletException {
+        requirePOST();
+        Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+        if(!getCanDowngrade()) {
+            sendError("Hudson downgrade is not possible, probably backup does not exist");
+            return;
+        }
+
+        File backup = new File(Lifecycle.get().getHudsonWar() + ".bak");
+        LOGGER.info("Performing the core downgrade");
+        Lifecycle.get().rewriteHudsonWar(backup);
+        rsp.sendRedirect2("../downgrade_success");
+    }
+
     /*package*/ synchronized Future<UpdateCenterJob> addJob(UpdateCenterJob job) {
         // the first job is always the connectivity check
         if (sourcesUsed.add(job.site))
