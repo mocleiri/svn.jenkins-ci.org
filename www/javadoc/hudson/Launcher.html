@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Launcher (Hudson main module 1.366 API)
+Launcher (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-09">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Launcher (Hudson main module 1.366 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Launcher (Hudson main module 1.366 API)";
+        parent.document.title="Launcher (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson</FONT>
 <BR>
 Class Launcher</H2>
 <PRE>
-java.lang.Object
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.Launcher</B>
 </PRE>
 <DL>
@@ -101,7 +101,7 @@ java.lang.Object
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>Launcher</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public abstract class <B>Launcher</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
 </PRE>
 
 <P>
@@ -234,7 +234,7 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#decorateByPrefix(java.lang.String...)">decorateByPrefix</A></B>(java.lang.String...&nbsp;prefix)</CODE>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#decorateByPrefix(java.lang.String...)">decorateByPrefix</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>...&nbsp;prefix)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a decorated <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that puts the given set of arguments as a prefix to any commands
@@ -287,7 +287,7 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#kill(java.util.Map)">kill</A></B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;modelEnvVars)</CODE>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#kill(java.util.Map)">kill</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;modelEnvVars)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calls <A HREF="../hudson/util/ProcessTree.html#killAll(java.util.Map)"><CODE>ProcessTree.killAll(Map)</CODE></A> to kill processes.</TD>
@@ -312,11 +312,11 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out)</CODE>
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -325,10 +325,10 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-       java.io.OutputStream&nbsp;out,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -338,11 +338,11 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out)</CODE>
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -351,11 +351,11 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -365,10 +365,10 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], boolean[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
        boolean[]&nbsp;mask,
-       java.lang.String[]&nbsp;env,
-       java.io.OutputStream&nbsp;out,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -378,10 +378,10 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out)</CODE>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -390,9 +390,9 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-       java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -402,10 +402,10 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out)</CODE>
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.311
@@ -414,10 +414,10 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.lang.String[]&nbsp;env,
-       java.io.InputStream&nbsp;in,
-       java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -427,9 +427,9 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String[]&nbsp;cmd,
-       java.lang.String[]&nbsp;env,
-       java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String[], java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -439,9 +439,9 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String, java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String&nbsp;cmd,
-       java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-       java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String, java.util.Map, java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;cmd,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -451,9 +451,9 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/Proc.html" title="class in hudson">Proc</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String, java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(java.lang.String&nbsp;cmd,
-       java.lang.String[]&nbsp;env,
-       java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launch(java.lang.String, java.lang.String[], java.io.OutputStream, hudson.FilePath)">launch</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;cmd,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -463,10 +463,10 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)">launchChannel</A></B>(java.lang.String[]&nbsp;cmd,
-              java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)">launchChannel</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
               <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
-              java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;envVars)</CODE>
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;envVars)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Launches a specified process and connects its input/output to a <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>, then
@@ -475,7 +475,7 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.util.List, boolean[], hudson.FilePath)">maskedPrintCommandLine</A></B>(java.util.List&lt;java.lang.String&gt;&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.util.List, boolean[], hudson.FilePath)">maskedPrintCommandLine</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;cmd,
                        boolean[]&nbsp;mask,
                        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
@@ -486,7 +486,7 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)">maskedPrintCommandLine</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)">maskedPrintCommandLine</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                        boolean[]&nbsp;mask,
                        <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
@@ -496,7 +496,7 @@ Starts a process.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Launcher.html#printCommandLine(java.lang.String[], hudson.FilePath)">printCommandLine</A></B>(java.lang.String[]&nbsp;cmd,
+<TD><CODE><B><A HREF="../hudson/Launcher.html#printCommandLine(java.lang.String[], hudson.FilePath)">printCommandLine</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                  <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</CODE>
 
 <BR>
@@ -506,10 +506,10 @@ Starts a process.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -666,11 +666,11 @@ public final <A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudso
 <A NAME="launch(java.lang.String, java.util.Map, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String&nbsp;cmd,
-                         java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-                         java.io.OutputStream&nbsp;out,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;cmd,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                  throws java.io.IOException</PRE>
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -678,7 +678,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -686,11 +686,11 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], java.util.Map, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                         java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-                         java.io.OutputStream&nbsp;out,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                  throws java.io.IOException</PRE>
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -698,7 +698,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -706,11 +706,11 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], java.util.Map, java.io.InputStream, java.io.OutputStream)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                         java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-                         java.io.InputStream&nbsp;in,
-                         java.io.OutputStream&nbsp;out)
-                  throws java.io.IOException</PRE>
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -718,7 +718,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -726,12 +726,12 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], boolean[], java.util.Map, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                          boolean[]&nbsp;mask,
-                         java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-                         java.io.OutputStream&nbsp;out,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                  throws java.io.IOException</PRE>
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -745,7 +745,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The command and all it's arguments.<DD><CODE>mask</CODE> - Which of the command and arguments should be masked from the listener<DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream. the stream won't be closed.<DD><CODE>workDir</CODE> - null if the working directory could be anything.
 <DT><B>Returns:</B><DD>The process of the command.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - When there are IO problems.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - When there are IO problems.</DL>
 </DD>
 </DL>
 <HR>
@@ -753,12 +753,12 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], boolean[], java.util.Map, java.io.InputStream, java.io.OutputStream)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                          boolean[]&nbsp;mask,
-                         java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;env,
-                         java.io.InputStream&nbsp;in,
-                         java.io.OutputStream&nbsp;out)
-                  throws java.io.IOException</PRE>
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -772,7 +772,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The command and all it's arguments.<DD><CODE>mask</CODE> - Which of the command and arguments should be masked from the listener<DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>in</CODE> - null if there's no input.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream. the stream won't be closed.
 <DT><B>Returns:</B><DD>The process of the command.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - When there are IO problems.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - When there are IO problems.</DL>
 </DD>
 </DL>
 <HR>
@@ -780,11 +780,11 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String, java.lang.String[], java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String&nbsp;cmd,
-                         java.lang.String[]&nbsp;env,
-                         java.io.OutputStream&nbsp;out,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;cmd,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                  throws java.io.IOException</PRE>
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -792,7 +792,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -800,11 +800,11 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], java.lang.String[], java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                         java.lang.String[]&nbsp;env,
-                         java.io.OutputStream&nbsp;out,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                  throws java.io.IOException</PRE>
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -812,7 +812,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -820,11 +820,11 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                         java.lang.String[]&nbsp;env,
-                         java.io.InputStream&nbsp;in,
-                         java.io.OutputStream&nbsp;out)
-                  throws java.io.IOException</PRE>
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -832,7 +832,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -840,12 +840,12 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], boolean[], java.lang.String[], java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                          boolean[]&nbsp;mask,
-                         java.lang.String[]&nbsp;env,
-                         java.io.OutputStream&nbsp;out,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                          <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-                  throws java.io.IOException</PRE>
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -859,7 +859,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The command and all it's arguments.<DD><CODE>mask</CODE> - Which of the command and arguments should be masked from the listener<DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream. the stream won't be closed.<DD><CODE>workDir</CODE> - null if the working directory could be anything.
 <DT><B>Returns:</B><DD>The process of the command.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - When there are IO problems.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - When there are IO problems.</DL>
 </DD>
 </DL>
 <HR>
@@ -867,12 +867,12 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
+public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                          boolean[]&nbsp;mask,
-                         java.lang.String[]&nbsp;env,
-                         java.io.InputStream&nbsp;in,
-                         java.io.OutputStream&nbsp;out)
-                  throws java.io.IOException</PRE>
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -886,7 +886,7 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The command and all it's arguments.<DD><CODE>mask</CODE> - Which of the command and arguments should be masked from the listener<DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>in</CODE> - null if there's no input.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream. the stream won't be closed.
 <DT><B>Returns:</B><DD>The process of the command.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - When there are IO problems.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - When there are IO problems.</DL>
 </DD>
 </DL>
 <HR>
@@ -894,12 +894,12 @@ public final <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>l
 <A NAME="launch(java.lang.String[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
-                   java.lang.String[]&nbsp;env,
-                   java.io.InputStream&nbsp;in,
-                   java.io.OutputStream&nbsp;out,
+public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                    <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-            throws java.io.IOException</PRE>
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -908,7 +908,7 @@ public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch<
 <DT><B>Parameters:</B><DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>in</CODE> - null if there's no input.<DD><CODE>workDir</CODE> - null if the working directory could be anything.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream.
       the stream won't be closed.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -916,13 +916,13 @@ public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch<
 <A NAME="launch(java.lang.String[], boolean[], java.lang.String[], java.io.InputStream, java.io.OutputStream, hudson.FilePath)"><!-- --></A><H3>
 launch</H3>
 <PRE>
-public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(java.lang.String[]&nbsp;cmd,
+public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                    boolean[]&nbsp;mask,
-                   java.lang.String[]&nbsp;env,
-                   java.io.InputStream&nbsp;in,
-                   java.io.OutputStream&nbsp;out,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;env,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                    <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)
-            throws java.io.IOException</PRE>
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.311
       Use <A HREF="../hudson/Launcher.html#launch()"><CODE>launch()</CODE></A> and its associated builder pattern</I>
@@ -936,7 +936,7 @@ public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch<
 <DT><B>Parameters:</B><DD><CODE>cmd</CODE> - The command and all it's arguments.<DD><CODE>mask</CODE> - Which of the command and arguments should be masked from the listener<DD><CODE>env</CODE> - Environment variable overrides.<DD><CODE>in</CODE> - null if there's no input.<DD><CODE>out</CODE> - stdout and stderr of the process will be sent to this stream. the stream won't be closed.<DD><CODE>workDir</CODE> - null if the working directory could be anything.
 <DT><B>Returns:</B><DD>The process of the command.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - When there are IO problems.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - When there are IO problems.</DL>
 </DD>
 </DL>
 <HR>
@@ -945,14 +945,14 @@ public <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch<
 launch</H3>
 <PRE>
 public abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <B>launch</B>(<A HREF="../hudson/Launcher.ProcStarter.html" title="class in hudson">Launcher.ProcStarter</A>&nbsp;starter)
-                     throws java.io.IOException</PRE>
+                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Primarily invoked from <A HREF="../hudson/Launcher.ProcStarter.html#start()"><CODE>Launcher.ProcStarter.start()</CODE></A> to start a process with a specific launcher.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -960,12 +960,12 @@ public abstract <A HREF="../hudson/Proc.html" title="class in hudson">Proc</A> <
 <A NAME="launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)"><!-- --></A><H3>
 launchChannel</H3>
 <PRE>
-public abstract <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A> <B>launchChannel</B>(java.lang.String[]&nbsp;cmd,
-                                      java.io.OutputStream&nbsp;out,
+public abstract <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting">Channel</A> <B>launchChannel</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                                       <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir,
-                                      java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;envVars)
-                               throws java.io.IOException,
-                                      java.lang.InterruptedException</PRE>
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;envVars)
+                               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Launches a specified process and connects its input/output to a <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>, then
  return it.
@@ -979,8 +979,8 @@ public abstract <A HREF="../hudson/remoting/Channel.html" title="class in hudson
       is inherited (if this is going to be launched from a slave agent, that
       becomes the "current" process), these variables will be also set.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1001,17 +1001,17 @@ public boolean <B>isUnix</B>()</PRE>
 <A NAME="kill(java.util.Map)"><!-- --></A><H3>
 kill</H3>
 <PRE>
-public abstract void <B>kill</B>(java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;modelEnvVars)
-                   throws java.io.IOException,
-                          java.lang.InterruptedException</PRE>
+public abstract void <B>kill</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;modelEnvVars)
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Calls <A HREF="../hudson/util/ProcessTree.html#killAll(java.util.Map)"><CODE>ProcessTree.killAll(Map)</CODE></A> to kill processes.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1019,7 +1019,7 @@ public abstract void <B>kill</B>(java.util.Map&lt;java.lang.String,java.lang.Str
 <A NAME="printCommandLine(java.lang.String[], hudson.FilePath)"><!-- --></A><H3>
 printCommandLine</H3>
 <PRE>
-protected final void <B>printCommandLine</B>(java.lang.String[]&nbsp;cmd,
+protected final void <B>printCommandLine</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                                       <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</PRE>
 <DL>
 <DD>Prints out the command line to the listener so that users know what we are doing.
@@ -1033,7 +1033,7 @@ protected final void <B>printCommandLine</B>(java.lang.String[]&nbsp;cmd,
 <A NAME="maskedPrintCommandLine(java.util.List, boolean[], hudson.FilePath)"><!-- --></A><H3>
 maskedPrintCommandLine</H3>
 <PRE>
-protected final void <B>maskedPrintCommandLine</B>(java.util.List&lt;java.lang.String&gt;&nbsp;cmd,
+protected final void <B>maskedPrintCommandLine</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;cmd,
                                             boolean[]&nbsp;mask,
                                             <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</PRE>
 <DL>
@@ -1050,7 +1050,7 @@ protected final void <B>maskedPrintCommandLine</B>(java.util.List&lt;java.lang.S
 <A NAME="maskedPrintCommandLine(java.lang.String[], boolean[], hudson.FilePath)"><!-- --></A><H3>
 maskedPrintCommandLine</H3>
 <PRE>
-protected final void <B>maskedPrintCommandLine</B>(java.lang.String[]&nbsp;cmd,
+protected final void <B>maskedPrintCommandLine</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;cmd,
                                             boolean[]&nbsp;mask,
                                             <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workDir)</PRE>
 <DL>
@@ -1076,7 +1076,7 @@ public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher<
 <A NAME="decorateByPrefix(java.lang.String...)"><!-- --></A><H3>
 decorateByPrefix</H3>
 <PRE>
-public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateByPrefix</B>(java.lang.String...&nbsp;prefix)</PRE>
+public final <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>decorateByPrefix</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>...&nbsp;prefix)</PRE>
 <DL>
 <DD>Returns a decorated <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> that puts the given set of arguments as a prefix to any commands
  that it invokes.

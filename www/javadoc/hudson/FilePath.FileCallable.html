@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath.FileCallable (Hudson main module 1.366 API)
+FilePath.FileCallable (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-09">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath.FileCallable (Hudson main module 1.366 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath.FileCallable (Hudson main module 1.366 API)";
+        parent.document.title="FilePath.FileCallable (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson</FONT>
 <BR>
 Interface FilePath.FileCallable&lt;T&gt;</H2>
 <DL>
-<DT><B>All Superinterfaces:</B> <DD>java.io.Serializable</DD>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
 </DL>
 <DL>
 <DT><B>All Known Implementing Classes:</B> <DD><A HREF="../hudson/node_monitors/TemporarySpaceMonitor.GetTempSpace.html" title="class in hudson.node_monitors">TemporarySpaceMonitor.GetTempSpace</A></DD>
@@ -103,7 +103,7 @@ Interface FilePath.FileCallable&lt;T&gt;</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static interface <B>FilePath.FileCallable&lt;T&gt;</B><DT>extends java.io.Serializable</DL>
+<DT><PRE>public static interface <B>FilePath.FileCallable&lt;T&gt;</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DL>
 </PRE>
 
 <P>
@@ -129,7 +129,7 @@ Code that gets executed on the machine where the <A HREF="../hudson/FilePath.htm
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.FileCallable.html" title="type parameter in FilePath.FileCallable">T</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.FileCallable.html#invoke(java.io.File, hudson.remoting.VirtualChannel)">invoke</A></B>(java.io.File&nbsp;f,
+<TD><CODE><B><A HREF="../hudson/FilePath.FileCallable.html#invoke(java.io.File, hudson.remoting.VirtualChannel)">invoke</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;f,
        <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)</CODE>
 
 <BR>
@@ -152,10 +152,10 @@ Code that gets executed on the machine where the <A HREF="../hudson/FilePath.htm
 <A NAME="invoke(java.io.File, hudson.remoting.VirtualChannel)"><!-- --></A><H3>
 invoke</H3>
 <PRE>
-<A HREF="../hudson/FilePath.FileCallable.html" title="type parameter in FilePath.FileCallable">T</A> <B>invoke</B>(java.io.File&nbsp;f,
+<A HREF="../hudson/FilePath.FileCallable.html" title="type parameter in FilePath.FileCallable">T</A> <B>invoke</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;f,
          <A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel)
-         throws java.io.IOException,
-                java.lang.InterruptedException</PRE>
+         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Performs the computational task on the node where the data is located.
 
@@ -166,11 +166,11 @@ invoke</H3>
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>f</CODE> - <CODE>File</CODE> that represents the local file that <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> has represented.<DD><CODE>channel</CODE> - The "back pointer" of the <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that represents the communication
+<DT><B>Parameters:</B><DD><CODE>f</CODE> - <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io"><CODE>File</CODE></A> that represents the local file that <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> has represented.<DD><CODE>channel</CODE> - The "back pointer" of the <A HREF="../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> that represents the communication
       with the node from where the code was sent.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

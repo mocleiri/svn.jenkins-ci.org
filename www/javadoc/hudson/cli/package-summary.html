@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.cli (Hudson main module 1.366 API)
+hudson.cli (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-09">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.cli (Hudson main module 1.366 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.cli (Hudson main module 1.366 API)";
+        parent.document.title="hudson.cli (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -139,7 +139,11 @@ Server-side CLI commands for Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/cli/CloneableCLICommand.html" title="class in hudson.cli">CloneableCLICommand</A></B></TD>
-<TD><CODE>Cloneable</CODE> <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"><CODE>CLICommand</CODE></A>.</TD>
+<TD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang"><CODE>Cloneable</CODE></A> <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"><CODE>CLICommand</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/cli/CommandDuringBuild.html" title="class in hudson.cli">CommandDuringBuild</A></B></TD>
+<TD>Base class for those commands that are valid only during a build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/cli/CopyJobCommand.html" title="class in hudson.cli">CopyJobCommand</A></B></TD>
@@ -155,7 +159,7 @@ Server-side CLI commands for Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/cli/FullDuplexHttpStream.html" title="class in hudson.cli">FullDuplexHttpStream</A></B></TD>
-<TD>Creates a capacity-unlimited bi-directional <CODE>InputStream</CODE>/<CODE>OutputStream</CODE> pair over
+<TD>Creates a capacity-unlimited bi-directional <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io"><CODE>InputStream</CODE></A>/<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A> pair over
  HTTP, which is a request/response protocol.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -197,6 +201,10 @@ Server-side CLI commands for Hudson.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/cli/Messages.html" title="class in hudson.cli">Messages</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/cli/SetBuildResultCommand.html" title="class in hudson.cli">SetBuildResultCommand</A></B></TD>
+<TD>Sets the result of the current build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></B></TD>

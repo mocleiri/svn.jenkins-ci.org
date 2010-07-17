@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-VirtualChannel (Hudson main module 1.366 API)
+VirtualChannel (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-09">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ VirtualChannel (Hudson main module 1.366 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="VirtualChannel (Hudson main module 1.366 API)";
+        parent.document.title="VirtualChannel (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -127,7 +127,7 @@ Virtualized <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
-<CODE>&lt;V,T extends java.lang.Throwable&gt; 
+<CODE>&lt;V,T extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&gt; 
 <BR>
 V</CODE></FONT></TD>
 </TR>
@@ -144,7 +144,7 @@ V</CODE></FONT></TD>
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
-<CODE>&lt;V,T extends java.lang.Throwable&gt; 
+<CODE>&lt;V,T extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&gt; 
 <BR>
 <A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;V&gt;</CODE></FONT></TD>
 </TR>
@@ -173,7 +173,7 @@ V</CODE></FONT></TD>
 </TR>
 </TABLE>
 </CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/remoting/VirtualChannel.html#export(java.lang.Class, T)">export</A></B>(java.lang.Class&lt;T&gt;&nbsp;type,
+<TD><CODE><B><A HREF="../../hudson/remoting/VirtualChannel.html#export(java.lang.Class, T)">export</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
        T&nbsp;instance)</CODE>
 
 <BR>
@@ -213,10 +213,10 @@ V</CODE></FONT></TD>
 <A NAME="call(hudson.remoting.Callable)"><!-- --></A><H3>
 call</H3>
 <PRE>
-&lt;V,T extends java.lang.Throwable&gt; V <B>call</B>(<A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;callable)
-       throws java.io.IOException,
-              T extends java.lang.Throwable,
-              java.lang.InterruptedException</PRE>
+&lt;V,T extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&gt; V <B>call</B>(<A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;callable)
+       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+              T extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Makes a remote procedure call.
 
@@ -226,9 +226,9 @@ call</H3>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.lang.InterruptedException</CODE> - If the current thread is interrupted while waiting for the completion.
-<DD><CODE>java.io.IOException</CODE> - If there's any error in the communication between <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>s.
-<DD><CODE>T extends java.lang.Throwable</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - If the current thread is interrupted while waiting for the completion.
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there's any error in the communication between <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>s.
+<DD><CODE>T extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -236,8 +236,8 @@ call</H3>
 <A NAME="callAsync(hudson.remoting.Callable)"><!-- --></A><H3>
 callAsync</H3>
 <PRE>
-&lt;V,T extends java.lang.Throwable&gt; <A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;V&gt; <B>callAsync</B>(<A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;callable)
-                    throws java.io.IOException</PRE>
+&lt;V,T extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&gt; <A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;V&gt; <B>callAsync</B>(<A HREF="../../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,T&gt;&nbsp;callable)
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Makes an asynchronous remote procedure call.
 
@@ -249,7 +249,7 @@ callAsync</H3>
 
 <DT><B>Returns:</B><DD>The <A HREF="../../hudson/remoting/Future.html" title="interface in hudson.remoting"><CODE>Future</CODE></A> object that can be used to wait for the completion.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - If there's an error during the communication.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there's an error during the communication.</DL>
 </DD>
 </DL>
 <HR>
@@ -258,14 +258,14 @@ callAsync</H3>
 close</H3>
 <PRE>
 void <B>close</B>()
-           throws java.io.IOException</PRE>
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Performs an orderly shut down of this channel (and the remote peer.)
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - if the orderly shut-down failed.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the orderly shut-down failed.</DL>
 </DD>
 </DL>
 <HR>
@@ -274,7 +274,7 @@ void <B>close</B>()
 join</H3>
 <PRE>
 void <B>join</B>()
-          throws java.lang.InterruptedException</PRE>
+          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down.
 
@@ -283,7 +283,7 @@ void <B>join</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.lang.InterruptedException</CODE> - If the current thread is interrupted while waiting for the completion.<DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - If the current thread is interrupted while waiting for the completion.<DT><B>Since:</B></DT>
   <DD>1.300</DD>
 </DL>
 </DD>
@@ -294,14 +294,14 @@ void <B>join</B>()
 join</H3>
 <PRE>
 void <B>join</B>(long&nbsp;timeout)
-          throws java.lang.InterruptedException</PRE>
+          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Waits for this <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to be closed down, but only up the given milliseconds.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.lang.InterruptedException</CODE> - If the current thread is interrupted while waiting for the completion.<DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - If the current thread is interrupted while waiting for the completion.<DT><B>Since:</B></DT>
   <DD>1.300</DD>
 </DL>
 </DD>
@@ -311,7 +311,7 @@ void <B>join</B>(long&nbsp;timeout)
 <A NAME="export(java.lang.Class,java.lang.Object)"><!-- --></A><A NAME="export(java.lang.Class, T)"><!-- --></A><H3>
 export</H3>
 <PRE>
-&lt;T&gt; T <B>export</B>(java.lang.Class&lt;T&gt;&nbsp;type,
+&lt;T&gt; T <B>export</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
              T&nbsp;instance)</PRE>
 <DL>
 <DD>Exports an object for remoting to the other <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A>

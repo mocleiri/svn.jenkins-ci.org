@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CliAuthenticator (Hudson main module 1.366 API)
+CliAuthenticator (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-09">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CliAuthenticator (Hudson main module 1.366 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CliAuthenticator (Hudson main module 1.366 API)";
+        parent.document.title="CliAuthenticator (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -93,12 +93,12 @@ hudson.security</FONT>
 <BR>
 Class CliAuthenticator</H2>
 <PRE>
-java.lang.Object
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.security.CliAuthenticator</B>
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>CliAuthenticator</B><DT>extends java.lang.Object</DL>
+<DT><PRE>public abstract class <B>CliAuthenticator</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
 </PRE>
 
 <P>
@@ -190,10 +190,10 @@ Handles authentication for CLI commands.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -231,8 +231,8 @@ authenticate</H3>
 <PRE>
 public abstract org.acegisecurity.Authentication <B>authenticate</B>()
                                                        throws org.acegisecurity.AuthenticationException,
-                                                              java.io.IOException,
-                                                              java.lang.InterruptedException</PRE>
+                                                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Authenticates the CLI invocation. See class javadoc for the semantics.
 <P>
@@ -240,10 +240,10 @@ public abstract org.acegisecurity.Authentication <B>authenticate</B>()
 
 <DT><B>Throws:</B>
 <DD><CODE>org.acegisecurity.AuthenticationException</CODE> - If the authentication failed and hence the processing shouldn't proceed.
-<DD><CODE>java.io.IOException</CODE> - Can be thrown if the <A HREF="../../hudson/security/CliAuthenticator.html" title="class in hudson.security"><CODE>CliAuthenticator</CODE></A> fails to interact with the client.
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - Can be thrown if the <A HREF="../../hudson/security/CliAuthenticator.html" title="class in hudson.security"><CODE>CliAuthenticator</CODE></A> fails to interact with the client.
       This exception is treated as a failure of authentication. It's just that allowing this
       would often simplify the callee.
-<DD><CODE>java.lang.InterruptedException</CODE> - Same motivation as <CODE>IOException</CODE>. Treated as an authentication failure.</DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - Same motivation as <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><CODE>IOException</CODE></A>. Treated as an authentication failure.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
