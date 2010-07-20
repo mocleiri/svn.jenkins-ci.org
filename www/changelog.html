@@ -19,15 +19,93 @@ Upcoming changes</a>
 <!-- Record your changes in the trunk here. -->
 <div id="trunk" style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
-  <li class=>
+  <li class=bug>
+    Make <tt>/buildWithParameters</tt> support remote cause and user supplied cause text
+    for build via authentication token, just as <tt>/build</tt> does.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-7004">issue 7004</a>)
 </ul>
 </div><!--=TRUNK-END=-->
 
 <!-- these changes are controlled by the release process. DO NOT MODIFY -->
 <div id="rc" style="display:none;"><!--=BEGIN=-->
-<h3><a name=v1.364>What's new in 1.364</a> <!--=DATE=--></h3>
+<h3><a name=v1.368>What's new in 1.368</a> <!--=DATE=--></h3>
 <!--=RC-CHANGES=-->
 </div><!--=END=-->
+<h3><a name=v1.367>What's new in 1.367</a> (2010/07/16)</h3>
+<ul class=image>
+  <li class=bug>
+    Safe restart made Hudson unresponsive until all running jobs complete, since 1.361.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6649">issue 6649</a>)
+  <li class=bug>
+    Plugins with dependencies show wrong description on installed plugins page.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6966">issue 6966</a>)
+  <li class=bug>
+    Fix redirect after login when return URL has characters that need encoding.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6960">issue 6960</a>)
+  <li class=bug>
+    &lt;input type='hidden'> field shouldn't be getting the plain text password value.
+  <li class=rfe>
+    Added a mechanism to register CLI option handler as an extension point.
+  <li class=rfe>
+    Added a CLI command 'set-build-result' that can be used from inside a build to set the build status.
+  <li class=rfe>
+    Show outline structure for Ant execution in the console output view.
+  <li class=rfe>
+    Remote API now supports the 'tree' filter query parameter which is more efficient and easier to use.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5940">issue 5940</a>)
+</ul>
+<h3><a name=v1.366>What's new in 1.366</a> (2010/07/09)</h3>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a possible security issue where a malicious user with the project
+    configuration access can trick Hudson into leaking the proxy password,
+    if Hudson is configured with a proxy with username/password.
+    (SECURITY-3)
+  <li class=bug>
+    Delete contained module builds when a maven project build is deleted, to avoid
+    orphaned builds which can then affect the displayed result of a prior build.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6779">issue 6779</a>)
+  <li class=bug>
+    Hide some sidepanel links that should not be shown in user-private views.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6832">issue 6832</a>)
+  <li class=bug>
+    Fix for file parameters that are copied to a subdirectory of the workspace.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6889">issue 6889</a>)
+  <li class=bug>
+    File parameters uploaded via the CLI are now displayed correctly on the build Parameters page.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6896">issue 6896</a>)
+  <li class=bug>
+    Allowed file parameters to be downloaded even when the name contains URL-unfriendly characters.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6897">issue 6897</a>)
+  <li class=bug>
+    Fixed a garbage in the raw console plain text output.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6034">issue 6034</a>)
+  <li class=bug>
+    "Hudson is loading" page didn't take the user back to the same page.
+  <li class=rfe>
+    Hudson can now remotely install JDK on Windows slaves when connecting via the
+    "Let Hudson control this Windows slave as a Windows service" mode.
+  <li class=rfe>
+    The "Let Hudson control this Windows slave as a Windows service" mode now allows the same Windows slave
+    to be used by multiple Hudson masters.
+</ul>
+<h3><a name=v1.365>What's new in 1.365</a> (2010/07/05)</h3>
+<ul class=image>
+  <li class='major bug'>
+    Fixed a critical security problem. See <a href="http://infradna.com/content/security-advisory-2010-07-05">the advisory</a> for more details.
+</ul>
+<h3><a name=v1.364>What's new in 1.364</a> (2010/06/25)</h3>
+<ul class=image>
+  <li class=bug>
+    Fixed a race condition where a queued build may get executed multiple times.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6819">issue 6819</a>)
+  <li class=bug>
+    Some UI labels related to JUnit results were shown in the wrong locale.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6824">issue 6824</a>)
+  <li class=rfe>
+    <tt>BuildWrapper</tt>s can now contribute build variables.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-6497">issue 6497</a>)
+</ul>
 <h3><a name=v1.363>What's new in 1.363</a> (2010/06/18)</h3>
 <ul class=image>
   <li class=bug>

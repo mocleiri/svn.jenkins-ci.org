@@ -23,9 +23,11 @@
 
 package com.thalesgroup.hudson.plugins.xunit;
 
-import com.thalesgroup.hudson.plugins.xunit.model.TypeConfig;
+import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
+import com.thalesgroup.hudson.plugins.xunit.exception.XUnitException;
 import com.thalesgroup.hudson.plugins.xunit.transformer.XUnitTransformer;
-import com.thalesgroup.hudson.plugins.xunit.types.*;
 import com.thalesgroup.hudson.plugins.xunit.util.XUnitLog;
 import hudson.*;
 import hudson.model.*;
@@ -38,7 +40,6 @@ import hudson.tasks.junit.JUnitResultArchiver;
 import hudson.tasks.junit.TestResult;
 import hudson.tasks.junit.TestResultAction;
 import hudson.tasks.test.TestResultProjectAction;
-import hudson.util.IOException2;
 import net.sf.json.JSONObject;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
@@ -47,9 +48,6 @@ import org.kohsuke.stapler.StaplerRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -62,10 +60,12 @@ public class XUnitPublisher extends Recorder implements Serializable {
 
 
     private static final long serialVersionUID = 1L;
+    private static final String JUNIT_FILE_PATTERN = "**/TEST-*.xml";
 
-    public XUnitType[] types;
 
-    public XUnitPublisher(XUnitType[] types) {
+    public TestType[] types;
+
+    public XUnitPublisher(TestType[] types) {
         this.types = types;
     }
 
@@ -79,208 +79,219 @@ public class XUnitPublisher extends Recorder implements Serializable {
         return null;
     }
 
-    @Override
-    public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener)
-            throws InterruptedException, IOException {
-
-        XUnitLog.log(listener, "Starting to record.");
-
-        Result previousResult = build.getResult();
-
-        FilePath parentFilePath = new FilePath(build.getWorkspace(), "generatedJUnitFiles");
-
-        //Create a directory sharing temporary JUnit files
-        createTemporaryDirectory(parentFilePath);
-
-        try {
-
-            // Archiving tools report files into Junit files
-            XUnitTransformer transformer = new XUnitTransformer(listener, build.getTimestamp().getTimeInMillis(), build.getEnvironment(listener), types, parentFilePath);
-            boolean result = build.getWorkspace().act(transformer);
-            if (!result) {
-                build.setResult(Result.FAILURE);
-
-                XUnitLog.log(listener, "Stopping recording.");
-                return true;
-            }
-
-            Result curResult = recordTestResult(build, listener, parentFilePath, "**/TEST-*.xml");
-
-            //Change the status result
-            if (previousResult.isWorseOrEqualTo(curResult)) {
-                build.setResult(previousResult);
-
-                XUnitLog.log(listener, "Stopping recording.");
-                return true;
-            }
-
-            XUnitLog.log(listener, "Setting the build status to " + curResult);
-            build.setResult(curResult);
-
-
-            XUnitLog.log(listener, "Stopping recording.");
-            return true;
-
-        }
-        catch (IOException2 ioe) {
-            throw new IOException2("The plugin hasn't been performed correctly.", ioe);
-        }
-
-        finally {
-            try {
-                //Destroy temporary target junit dir
-                deleteTemporaryDirectory(parentFilePath);
-            }
-            catch (IOException ioe) {
-                XUnitLog.log(listener, "The plugin hasn't been performed correctly: " + ioe.getMessage());
-                return false;
-            }
-            catch (InterruptedException ie) {
-                XUnitLog.log(listener, "The plugin hasn't been performed correctly: " + ie.getMessage());
-                return false;
-            }
-        }
-
-
-    }
-
-    private void createTemporaryDirectory(FilePath parentFilePath) throws IOException, InterruptedException {
-        for (XUnitType tool : types) {
-            FilePath junitTargetFilePath = new FilePath(parentFilePath, tool.getDescriptor().getShortName());
-            if (junitTargetFilePath.exists()) {
-                junitTargetFilePath.deleteRecursive();
-            }
-            junitTargetFilePath.mkdirs();
-        }
-    }
-
-    private void deleteTemporaryDirectory(FilePath parentFilePath) throws IOException, InterruptedException {
-        boolean keep = false;
-        for (XUnitType tool : types) {
-            FilePath junitTargetFilePath = new FilePath(parentFilePath, tool.getDescriptor().getShortName());
-            if (tool.isDeleteJUnitFiles()) {
-                junitTargetFilePath.deleteRecursive();
-            }
-            else {
-                keep=true;
-            }
-        }
-        if (!keep){
-            parentFilePath.delete();
-        }
-    }
-
 
     /**
-     * Record the test results into the current build.
+     * Gets a Test result object (a new one if any)
      *
-     * @param build
-     * @param listener
-     * @param junitFilePattern
-     * @return
-     * @throws InterruptedException
-     * @throws IOException
+     * @param build               the current build
+     * @param junitFileDir        the parent output JUnit directory
+     * @param junitFilePattern    the JUnit search pattern
+     * @param existingTestResults the existing test result
+     * @param buildTime           the build time
+     * @param nowMaster           the time on master
+     * @return the test result object
+     * @throws XUnitException the plugin exception
      */
-    private Result recordTestResult(final AbstractBuild<?, ?> build,
-                                    final BuildListener listener,
-                                    final FilePath junitTargetFilePath,
-                                    final String junitFilePattern)
-            throws InterruptedException, IOException {
-
-
-        TestResultAction existingAction = build.getAction(TestResultAction.class);
-        TestResultAction action;
+    private TestResult getTestResult(final AbstractBuild<?, ?> build,
+                                     final File junitFileDir,
+                                     final String junitFilePattern,
+                                     final TestResult existingTestResults,
+                                     final long buildTime, final long nowMaster)
+            throws XUnitException {
 
         try {
-            final long buildTime = build.getTimestamp().getTimeInMillis();
-            final long nowMaster = System.currentTimeMillis();
+            return build.getWorkspace().act(new FilePath.FileCallable<TestResult>() {
 
-            TestResult existingTestResults = null;
-            if (existingAction != null) {
-                existingTestResults = existingAction.getResult();
-            }
+                public TestResult invoke(File ws, VirtualChannel channel) throws IOException {
+                    final long nowSlave = System.currentTimeMillis();
+                    FileSet fs = Util.createFileSet(junitFileDir, junitFilePattern);
+                    DirectoryScanner ds = fs.getDirectoryScanner();
+                    String[] files = ds.getIncludedFiles();
 
-            TestResult result = build.getWorkspace().act(
-                    new ParseResultCallable(junitTargetFilePath, junitFilePattern, existingTestResults, buildTime, nowMaster));
+                    if (files.length == 0) {
+                        // no test result. Most likely a configuration error or fatal problem
+                        throw new IOException("No test report files were found. Configuration error?");
+                    }
+                    try {
+                        if (existingTestResults == null) {
+                            return new TestResult(buildTime + (nowSlave - nowMaster), ds);
+                        } else {
+                            existingTestResults.parse(buildTime + (nowSlave - nowMaster), ds);
+                            return existingTestResults;
+                        }
+                    }
+                    catch (IOException ioe) {
+                        throw new IOException(ioe);
+                    }
+                }
+
+            });
+
+        }
+        catch (IOException ioe) {
+            throw new XUnitException(ioe);
+        }
+        catch (InterruptedException ie) {
+            throw new XUnitException(ie);
+        }
 
 
-            if (existingAction == null) {
-                action = new TestResultAction(build, result, listener);
-            } else {
-                action = existingAction;
-                action.setResult(result, listener);
-            }
+    }
 
-            if (result.getPassCount() == 0 && result.getFailCount() == 0) {
-                throw new AbortException("None of the test reports contained any result");
-            }
+    /**
+     * Record the test results into the current build and return the number of tests
+     *
+     * @param build                the current build object
+     * @param listener             the current listener object
+     * @param junitTargetDirectory the parent JUnit directory
+     * @throws com.thalesgroup.hudson.plugins.xunit.exception.XUnitException
+     *          the plugin exception if an error occurs
+     */
 
-        } catch (AbortException e) {
-            listener.getLogger().println(e.getMessage());
-            return Result.FAILURE;
+    private void recordTestResult(AbstractBuild<?, ?> build, BuildListener listener, final File junitTargetDirectory) throws XUnitException {
+
+        TestResultAction existingAction = build.getAction(TestResultAction.class);
+        final long buildTime = build.getTimestamp().getTimeInMillis();
+        final long nowMaster = System.currentTimeMillis();
+
+        TestResult existingTestResults = null;
+        if (existingAction != null) {
+            existingTestResults = existingAction.getResult();
+        }
+
+        TestResult result = getTestResult(build, junitTargetDirectory, JUNIT_FILE_PATTERN, existingTestResults, buildTime, nowMaster);
+
+        TestResultAction action;
+        if (existingAction == null) {
+            action = new TestResultAction(build, result, listener);
+        } else {
+            action = existingAction;
+            action.setResult(result, listener);
+        }
+
+        if (result.getPassCount() == 0 && result.getFailCount() == 0) {
+            throw new XUnitException("None of the test reports contained any result");
         }
 
         if (existingAction == null) {
             build.getActions().add(action);
         }
 
-        if (action.getResult().getFailCount() > 0)
-            return Result.UNSTABLE;
-
-        return Result.SUCCESS;
     }
 
-    private static final class ParseResultCallable implements
-            FilePath.FileCallable<TestResult> {
 
-        final FilePath temporaryJunitFilePath;
-        final String junitFilePattern;
-        final TestResult existingTestResults;
-        long buildTime;
-        long nowMaster;
+    @Override
+    public boolean perform(final AbstractBuild<?, ?> build, Launcher launcher, final BuildListener listener)
+            throws InterruptedException, IOException {
+
+        XUnitLog.log(listener, "Starting to record.");
+
+        Result previousResult = build.getResult();
+
+        try {
+
+            //Creation of the output JUnit directory
+            final File junitOuputDir = new File(new FilePath(build.getWorkspace(), "generatedJUnitFiles").toURI());
+            if (!junitOuputDir.mkdirs()) {
+                XUnitLog.log(listener, "Can't create the path " + junitOuputDir + ". Maybe the directory already exists.");
+            }
+
+            // Archiving tools reports into JUnit files
+            XUnitTransformer xUnitTransformer = new XUnitTransformer(listener, junitOuputDir, build.getTimeInMillis(), types);
+            boolean resultTransformation = build.getWorkspace().act(xUnitTransformer);
+            if (!resultTransformation) {
+                build.setResult(Result.FAILURE);
+                XUnitLog.log(listener, "Stopping recording.");
+                return true;
+            }
+
+            // Process the record of xUnit
+            recordTestResult(build, listener, junitOuputDir);
 
 
-        private ParseResultCallable(
-                final FilePath temporaryJunitFilePath,
-                final String junitFilePattern,
-                final TestResult existingTestResults,
-                final long buildTime, long nowMaster) {
-            this.temporaryJunitFilePath = temporaryJunitFilePath;
-            this.junitFilePattern = junitFilePattern;
-            this.existingTestResults = existingTestResults;
-            this.buildTime = buildTime;
-            this.nowMaster = nowMaster;
+            //Set the mew build status indicator to unstable if there are failded tests
+            TestResultAction testResultAction = build.getAction(TestResultAction.class);
+            Result curResult = Result.SUCCESS;
+            if (testResultAction.getResult().getFailCount() > 0) {
+                curResult = Result.UNSTABLE;
+            }
+
+
+            //Delete generated files if triggered
+            boolean resultDeletionOK = build.getWorkspace().act(new FilePath.FileCallable<Boolean>() {
+                public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
+
+                    boolean keepJUnitDirectory = false;
+                    for (TestType tool : types) {
+                        boolean keepDirectoryTool = false;
+                        InputMetric inputMetric = tool.getInputMetric();
+                        //All the files will be under a directory the toolName
+                        File toolFileParant = new File(junitOuputDir, inputMetric.getToolName());
+                        if (tool.isDeleteOutputFiles()) {
+                            File[] files = toolFileParant.listFiles();
+                            for (File f : files) {
+                                if (!f.delete()) {
+                                    XUnitLog.log(listener, "[WARNING] - Can't delete the file: " + f);
+                                }
+                            }
+                        } else {
+                            //Mark the tool file parent directory to no deletion
+                            keepDirectoryTool = true;
+                        }
+                        if (!keepDirectoryTool) {
+                            //Delete the tool parent directory
+                            toolFileParant.delete();
+                        } else {
+                            //Mark the parent JUnit directory to set to true
+                            keepJUnitDirectory = true;
+                        }
+                    }
+                    if (!keepJUnitDirectory) {
+                        junitOuputDir.delete();
+                    }
+
+
+                    return true;
+                }
+            });
+            if (!resultDeletionOK) {
+                build.setResult(Result.FAILURE);
+                XUnitLog.log(listener, "Stopping recording.");
+                return true;
+            }
+
+            //Keep the previous status result if worse or equal
+            if (previousResult.isWorseOrEqualTo(curResult)) {
+                build.setResult(previousResult);
+                XUnitLog.log(listener, "Stopping recording.");
+                return true;
+            }
+
+            // Fall back case: Set the build status to new build calculated build status
+            XUnitLog.log(listener, "Setting the build status to " + curResult);
+            build.setResult(curResult);
+            XUnitLog.log(listener, "Stopping recording.");
+            return true;
+
         }
-
-        public TestResult invoke(File ws, VirtualChannel channel) throws IOException {
-            final long nowSlave = System.currentTimeMillis();
-            File temporaryJunitDirFile = null;
-            try {
-                temporaryJunitDirFile = new File(temporaryJunitFilePath.toURI());
-            }
-            catch (InterruptedException ie) {
-
-            }
-            FileSet fs = Util.createFileSet(temporaryJunitDirFile, junitFilePattern);
-            DirectoryScanner ds = fs.getDirectoryScanner();
-            String[] files = ds.getIncludedFiles();
-            if (files.length == 0) {
-                // no test result. Most likely a configuration error or fatal problem
-                throw new AbortException("No test report files were found. Configuration error?");
-            }
-            if (existingTestResults == null) {
-                return new TestResult(buildTime + (nowSlave - nowMaster), ds);
-            } else {
-                existingTestResults.parse(buildTime + (nowSlave - nowMaster), ds);
-                return existingTestResults;
-            }
-
-
+        catch (IOException ie) {
+            XUnitLog.log(listener, "The plugin hasn't been performed correctly: " + ie.getMessage());
+            build.setResult(Result.FAILURE);
+            return false;
+        }
+        catch (XUnitException xe) {
+            XUnitLog.log(listener, "The plugin hasn't been performed correctly: " + xe.getMessage());
+            build.setResult(Result.FAILURE);
+            return false;
         }
     }
 
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
+    }
 
     @Extension
+    @SuppressWarnings("unused")
     public static final class XUnitDescriptorPublisher extends BuildStepDescriptor<Publisher> {
 
         public XUnitDescriptorPublisher() {
@@ -303,73 +314,18 @@ public class XUnitPublisher extends Recorder implements Serializable {
             return "/plugin/xunit/help.html";
         }
 
-        public DescriptorExtensionList<XUnitType, XUnitTypeDescriptor<?>> getListXUnitTypeDescriptors() {
-            return XUnitTypeDescriptor.all();
+        public DescriptorExtensionList<TestType, TestTypeDescriptor<?>> getListXUnitTypeDescriptors() {
+            return TestTypeDescriptor.all();
         }
 
         @Override
         public Publisher newInstance(StaplerRequest req, JSONObject formData) throws FormException {
-            List<XUnitType> types = Descriptor.newInstancesFromHeteroList(
+            List<TestType> types = Descriptor.newInstancesFromHeteroList(
                     req, formData, "tools", getListXUnitTypeDescriptors());
-            return new XUnitPublisher(types.toArray(new XUnitType[types.size()]));
+            return new XUnitPublisher(types.toArray(new TestType[types.size()]));
 
         }
     }
-
-
-    public BuildStepMonitor getRequiredMonitorService() {
-        return BuildStepMonitor.NONE;
-    }
-
-
-    /**
-     * Initializes members that were not present in previous versions of this plug-in.
-     *
-     * @return the created object
-     */
-    @SuppressWarnings("deprecation")
-    private Object readResolve() {
-
-        try {
-
-            if (config != null) {
-                HashMap<String, Class> map = new HashMap<String, Class>();
-                map.put("phpunit", PHPUnitType.class);
-                map.put("unittest", UnitTestType.class);
-                map.put("nunit", NUnitType.class);
-                map.put("mstest", MSTestType.class);
-                map.put("boosttest", BoostTestType.class);
-
-                List<XUnitType> xunitTypeList = new ArrayList<XUnitType>();
-
-                types = new XUnitType[0];
-
-                for (TypeConfig typeConfig : config.getTestTools()) {
-                    String pattern = typeConfig.getPattern();
-                    if (pattern != null && pattern.trim().length() != 0) {
-                        Constructor<XUnitType> constructor = map.get(typeConfig.getName()).getConstructor(String.class);
-                        XUnitType xunitType = constructor.newInstance(pattern);
-                        xunitTypeList.add(xunitType);
-                    }
-                }
-                types = xunitTypeList.toArray(new XUnitType[xunitTypeList.size()]);
-            }
-        }
-        catch (Exception e) {
-           System.err.println("[xUnit] - Error occurs during migration from previous version of xUnit plugin" + e);
-        }
-
-
-
-        return this;
-    }
-
-
-    // Backward compatibility. Do not remove.
-    // CPPCHECK:OFF
-    @Deprecated
-    private transient XUnitConfig config;
-
 
 }
 

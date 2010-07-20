@@ -23,38 +23,28 @@
 
 package com.thalesgroup.hudson.plugins.xunit.types;
 
-import com.thalesgroup.hudson.library.tusarconversion.TestsTools;
-import hudson.Extension;
-import org.kohsuke.stapler.DataBoundConstructor;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.model.BoostTestHudsonTestType;
 
+@SuppressWarnings("unused")
 public class BoostTestType extends XUnitType {
 
-
-    @DataBoundConstructor
     public BoostTestType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(TestsTools.BOOSTTEST, pattern, faildedIfNotNew, deleteJUnitFiles);
+        super(pattern, faildedIfNotNew, deleteJUnitFiles);
     }
 
-    public XUnitTypeDescriptor<?> getDescriptor() {
-        return new BoostTestType.DescriptorImpl();
+    public TestTypeDescriptor getDescriptor() {
+        return null;
     }
 
-    @Extension
-    public static class DescriptorImpl extends XUnitTypeDescriptor<BoostTestType> {
-
-        public DescriptorImpl() {
-            super(BoostTestType.class);
-        }
-
-        @Override
-        public String getDisplayName() {
-            return TestsTools.BOOSTTEST.getLabel();
-        }
-
-        public String getId() {
-            return "boosttest";
-        }
-
-
+    /**
+     * Call at Hudson startup for backward compatibility
+     *
+     * @return an new hudson object
+     */
+    @SuppressWarnings("unused")
+    public Object readResolve() {
+        return new BoostTestHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteJUnitFiles());
     }
+
 }

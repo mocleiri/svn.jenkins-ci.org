@@ -105,7 +105,7 @@ import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
  *                           |        ^
  *                           |        |
  *                           |        v
- *                           +--> buildables ---> (executed)
+ *                           +--> buildables ---> pending ---> (executed)
  * </pre>
  *
  * <p>
@@ -139,6 +139,12 @@ public class Queue extends ResourceController implements Saveable {
      * This list is sorted in such a way that earlier items are built earlier.
      */
     private final ItemList<BuildableItem> buildables = new ItemList<BuildableItem>();
+
+    /**
+     * {@link Task}s that are being handed over to the executor, but execution
+     * has not started yet.
+     */
+    private final ItemList<BuildableItem> pendings = new ItemList<BuildableItem>();
 
     /**
      * Data structure created for each idle {@link Executor}.
@@ -541,7 +547,7 @@ public class Queue extends ResourceController implements Saveable {
     }
 
     public synchronized boolean isEmpty() {
-        return waitingList.isEmpty() && blockedProjects.isEmpty() && buildables.isEmpty();
+        return waitingList.isEmpty() && blockedProjects.isEmpty() && buildables.isEmpty() && pendings.isEmpty();
     }
 
     private synchronized WaitingItem peek() {
@@ -556,12 +562,14 @@ public class Queue extends ResourceController implements Saveable {
      */
     @Exported(inline=true)
     public synchronized Item[] getItems() {
-        Item[] r = new Item[waitingList.size() + blockedProjects.size() + buildables.size()];
+        Item[] r = new Item[waitingList.size() + blockedProjects.size() + buildables.size() + pendings.size()];
         waitingList.toArray(r);
         int idx = waitingList.size();
         for (BlockedItem p : blockedProjects.values())
             r[idx++] = p;
         for (BuildableItem p : reverse(buildables.values()))
+            r[idx++] = p;
+        for (BuildableItem p : reverse(pendings.values()))
             r[idx++] = p;
         return r;
     }
@@ -570,6 +578,7 @@ public class Queue extends ResourceController implements Saveable {
     	for (Item item: waitingList) if (item.id == id) return item;
     	for (Item item: blockedProjects) if (item.id == id) return item;
     	for (Item item: buildables) if (item.id == id) return item;
+        for (Item item: pendings) if (item.id == id) return item;
     	return null;
     }
 
@@ -578,7 +587,13 @@ public class Queue extends ResourceController implements Saveable {
      */
     public synchronized List<BuildableItem> getBuildableItems(Computer c) {
         List<BuildableItem> result = new ArrayList<BuildableItem>();
-        for (BuildableItem p : buildables.values()) {
+        _getBuildableItems(c, buildables, result);
+        _getBuildableItems(c, pendings, result);
+        return result;
+    }
+
+    private void _getBuildableItems(Computer c, ItemList<BuildableItem> col, List<BuildableItem> result) {
+        for (BuildableItem p : col.values()) {
             Label l = p.task.getAssignedLabel();
             if (l != null) {
                 // if a project has assigned label, it can be only built on it
@@ -587,14 +602,32 @@ public class Queue extends ResourceController implements Saveable {
             }
             result.add(p);
         }
-        return result;
     }
 
     /**
-     * Gets the snapshot of {@link #buildables}.
+     * Gets the snapshot of all {@link BuildableItem}s.
      */
     public synchronized List<BuildableItem> getBuildableItems() {
-        return new ArrayList<BuildableItem>(buildables.values());
+        ArrayList<BuildableItem> r = new ArrayList<BuildableItem>(buildables.values());
+        r.addAll(pendings.values());
+        return r;
+    }
+
+    /**
+     * Gets the snapshot of all {@link BuildableItem}s.
+     */
+    public synchronized List<BuildableItem> getPendingItems() {
+        return new ArrayList<BuildableItem>(pendings.values());
+    }
+
+    /**
+     * Is the given task currently pending execution?
+     */
+    public synchronized boolean isPending(Task t) {
+        for (BuildableItem i : pendings)
+            if (i.task.equals(t))
+                return true;
+        return false;
     }
 
     /**
@@ -603,6 +636,9 @@ public class Queue extends ResourceController implements Saveable {
     public synchronized int countBuildableItemsFor(Label l) {
         int r = 0;
         for (BuildableItem bi : buildables.values())
+            if(bi.task.getAssignedLabel()==l)
+                r++;
+        for (BuildableItem bi : pendings.values())
             if(bi.task.getAssignedLabel()==l)
                 r++;
         return r;
@@ -618,6 +654,9 @@ public class Queue extends ResourceController implements Saveable {
         if (bp!=null)
             return bp;
         BuildableItem bi = buildables.get(t);
+        if(bi!=null)
+            return bi;
+        bi = pendings.get(t);
         if(bi!=null)
             return bi;
 
@@ -637,6 +676,7 @@ public class Queue extends ResourceController implements Saveable {
     	List<Item> result =new ArrayList<Item>();
     	result.addAll(blockedProjects.getAll(t));
     	result.addAll(buildables.getAll(t));
+        result.addAll(pendings.getAll(t));
         for (Item item : waitingList) {
             if (item.task == t)
                 result.add(item);
@@ -657,7 +697,7 @@ public class Queue extends ResourceController implements Saveable {
      * Returns true if this queue contains the said project.
      */
     public synchronized boolean contains(Task t) {
-        if (blockedProjects.containsKey(t) || buildables.containsKey(t))
+        if (blockedProjects.containsKey(t) || buildables.containsKey(t) || pendings.containsKey(t))
             return true;
         for (Item item : waitingList) {
             if (item.task == t)
@@ -710,10 +750,9 @@ public class Queue extends ResourceController implements Saveable {
                     assert runner.canTake(p.task);
 
                     // found a matching executor. use it.
-                    // the item is retracted from the buildables list by the the executor that'll be actually
-                    // running the job, so that the state change from "buildable item" to "building" happens
-                    // atomically.
                     runner.set(p);
+                    itr.remove();
+                    pendings.add(p);
                 }
 
                 // we went over all the buildable projects and awaken
@@ -741,7 +780,7 @@ public class Queue extends ResourceController implements Saveable {
                     // if so, just build it
                     LOGGER.fine("Pop returning " + offer.item + " for " + exec.getName());
                     offer.item.future.startExecuting(exec);
-                    buildables.remove(offer.item);
+                    pendings.remove(offer.item);
                     return offer.item;
                 }
                 // otherwise run a queue maintenance
@@ -852,8 +891,8 @@ public class Queue extends ResourceController implements Saveable {
     }
 
     /**
-     *  Make sure we don't queue two tasks of the same project to be built
-     *  unless that project allows concurrent builds.
+     * Make sure we don't queue two tasks of the same project to be built
+     * unless that project allows concurrent builds.
      */
     private boolean allowNewBuildableTask(Task t) {
         try {
@@ -862,7 +901,7 @@ public class Queue extends ResourceController implements Saveable {
         } catch (AbstractMethodError e) {
             // earlier versions don't have the "isConcurrentBuild" method, so fall back gracefully
         }
-        return !buildables.containsKey(t);
+        return !buildables.containsKey(t) && !pendings.containsKey(t);
     }
 
     /**
@@ -1290,7 +1329,12 @@ public class Queue extends ResourceController implements Saveable {
     }
 
     /**
-     * Extension point for deciding if particular job should be scheduled or not
+     * Extension point for deciding if particular job should be scheduled or not.
+     *
+     * <p>
+     * This handler is consulted every time someone tries to submit a task to the queue.
+     * If any of the registered handlers returns false, the task will not be added
+     * to the queue, and the task will never get executed. 
      *
      * <p>
      * This extension point is still a subject to change, as we are seeking more
@@ -1300,7 +1344,7 @@ public class Queue extends ResourceController implements Saveable {
      */
     public static abstract class QueueDecisionHandler implements ExtensionPoint {
     	/**
-    	 * Returns whether the new item should be scheduled. 
+    	 * Returns whether the new item should be scheduled.
     	 */
     	public abstract boolean shouldSchedule(Task p, List<Action> actions);
     	    	

@@ -35,6 +35,8 @@ public interface IConstants {
 	public String SERENITY_PERSISTENCE_UNIT = "SerenityPersistenceUnit";
 	/** The logging configuration file, '/META-INF/log4j.properties'. */
 	public String LOG_4_J_PROPERTIES = "/META-INF/log4j.properties";
+	/** The style sheet location for the reports. */
+	public String REPORT_STYLE_SHEET = "/META-INF/profiler-report-style.css";
 
 	/** The system property key for the packages to enhance, 'included.packages'. */
 	public String INCLUDED_PACKAGES_PROPERTY = "included.packages";
@@ -54,6 +56,8 @@ public interface IConstants {
 	public String CLEAN_CLASSES = "clean.classes";
 	/** The interval between snapshots for the profiler. */
 	public String SNAPSHOT_INTERVAL = "snapshotInterval";
+	/** The interval between report dumps for the profiler. */
+	public String REPORT_INTERVAL = "reportInterval";
 
 	public String COVERAGE = "coverage";
 	public String COMPLEXITY = "complexity";
@@ -105,5 +109,20 @@ public interface IConstants {
 	public String LISTENING = "listening";
 
 	public int PORT = 50005;
+
+	public String STYLE_SHEET = "profiler-report-style.css";
+	public String METHOD_SERIES = "methodSeries.html";
+	public String METHOD_NET_SERIES = "methodNetSeries.html";
+	public String METHOD_CHANGE_SERIES = "methodChangeSeries.html";
+	public String METHOD_NET_CHANGE_SERIES = "methodNetChangeSeries.html";
+
+	public String STYLE_SHEET_FILE = SERENITY_DIRECTORY + File.separatorChar + STYLE_SHEET;
+	public String METHOD_SERIES_FILE = SERENITY_DIRECTORY + File.separatorChar + METHOD_SERIES;
+	public String METHOD_NET_SERIES_FILE = SERENITY_DIRECTORY + File.separatorChar + METHOD_NET_SERIES;
+	public String METHOD_CHANGE_SERIES_FILE = SERENITY_DIRECTORY + File.separatorChar + METHOD_CHANGE_SERIES;
+	public String METHOD_NET_CHANGE_SERIES_FILE = SERENITY_DIRECTORY + File.separatorChar + METHOD_NET_CHANGE_SERIES;
+
+	public String CHARTS = "charts";
+	public File chartDirectory = new File(SERENITY_DIRECTORY + File.separatorChar + CHARTS);
 
 }

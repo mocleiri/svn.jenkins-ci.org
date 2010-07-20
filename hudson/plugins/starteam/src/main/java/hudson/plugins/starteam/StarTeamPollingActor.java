@@ -12,10 +12,19 @@ import java.io.IOException;
 import java.util.Date;
 
 /**
+ * This Actor class allow to check for changes in starteam repository between
+ * builds.
+ * 
  * @author ip90568
+ * @author Steve Favez <sfavez@verisign.com>
  * 
  */
 public class StarTeamPollingActor implements FileCallable<Boolean> {
+
+	/**
+	 * serial version id.
+	 */
+	private static final long serialVersionUID = -5678102033953507247L;
 
 	private String hostname;
 
@@ -35,20 +44,24 @@ public class StarTeamPollingActor implements FileCallable<Boolean> {
 	
 	private final Date sinceDate;
 
+	private final Date currentDate;
+
 	/**
-	 * @param hostname
-	 * @param port
-	 * @param user
-	 * @param passwd
-	 * @param projectname
-	 * @param viewname
-	 * @param foldername
-	 * @param sinceDate
-	 * @param listener
+	 * Default constructor.
+	 * @param hostname starteam host name
+	 * @param port  starteam port
+	 * @param user  starteam connection user name 
+	 * @param passwd starteam connection password
+	 * @param projectname starteam project name
+	 * @param viewname  starteam view name
+	 * @param foldername starteam parent folder name
+	 * @param sinceDate starteam last build date
+	 * @param currentDate starteam current date
+	 * @param listener Hudson task listener.
 	 */
 	public StarTeamPollingActor(String hostname, int port, String user,
 			String passwd, String projectname, String viewname,
-			String foldername, Date sinceDate, TaskListener listener) {
+			String foldername, Date sinceDate, Date currentDate, TaskListener listener) {
 		this.hostname = hostname;
 		this.port = port;
 		this.user = user;
@@ -58,6 +71,7 @@ public class StarTeamPollingActor implements FileCallable<Boolean> {
 		this.foldername = foldername;
 		this.listener = listener;
 		this.sinceDate = sinceDate;
+		this.currentDate = currentDate;
 	}
 
 	/*
@@ -67,6 +81,11 @@ public class StarTeamPollingActor implements FileCallable<Boolean> {
 	 *      hudson.remoting.VirtualChannel)
 	 */
 	public Boolean invoke(File f, VirtualChannel channel) throws IOException {
+
+		if (sinceDate == null) {
+			return false ;
+		}
+
 		StarTeamConnection connection = new StarTeamConnection(
 				hostname, port, user, passwd,
 				projectname, viewname, foldername);
@@ -77,8 +96,10 @@ public class StarTeamPollingActor implements FileCallable<Boolean> {
 			connection.close();
 			return false;
 		}
-		if (connection.findChangedFiles(f, listener.getLogger(), sinceDate)
-				.isEmpty()) {
+		Date synchronizedSinceDate = connection
+				.calculatePreviousDateWithTimeZoneCheck(sinceDate, currentDate);
+		if (connection.findChangedFiles(f, listener.getLogger(),
+				synchronizedSinceDate).isEmpty()) {
 			connection.close();
 			return false;
 		}

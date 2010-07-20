@@ -66,6 +66,7 @@ import hudson.util.Area;
 import hudson.util.Iterators;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
+import hudson.util.Secret;
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
@@ -444,7 +445,7 @@ public class Functions {
             response.addCookie(c);
         }
         if (refresh) {
-            response.addHeader("Refresh", "10");
+            response.addHeader("Refresh", System.getProperty("hudson.Functions.autoRefreshSeconds", "10"));
         }
     }
 
@@ -1233,6 +1234,15 @@ public class Functions {
                 // retry
             }
         }
+    }
+
+    /**
+     * Used by &lt;f:password/> so that we send an encrypted value to the client.
+     */
+    public String getPasswordValue(Object o) {
+        if (o==null)    return null;
+        if (o instanceof Secret)    return ((Secret)o).getEncryptedValue();
+        return o.toString();
     }
     
     private static final Pattern SCHEME = Pattern.compile("[a-z]+://.+");

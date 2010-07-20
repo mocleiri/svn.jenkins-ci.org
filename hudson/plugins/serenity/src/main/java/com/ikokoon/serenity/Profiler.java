@@ -1,11 +1,18 @@
 package com.ikokoon.serenity;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
 
 import com.ikokoon.serenity.model.Method;
 import com.ikokoon.serenity.model.Snapshot;
+import com.ikokoon.serenity.persistence.IDataBase;
+import com.ikokoon.serenity.process.Reporter;
+import com.ikokoon.serenity.process.Snapshooter;
 
 /**
  * This class generates the reports for the profiled classes.
@@ -79,19 +86,55 @@ public class Profiler {
 
 	protected static Logger LOGGER = Logger.getLogger(Profiler.class);
 
+	public static void initialize(final IDataBase dataBase) {
+		long snapshptInterval = Configuration.getConfiguration().getSnapshotInterval();
+		LOGGER.info("Profiler initialize : " + dataBase + ", " + snapshptInterval);
+		if (snapshptInterval > 0) {
+			Timer timer = new Timer();
+			TimerTask timerTask = new TimerTask() {
+				@Override
+				public void run() {
+					try {
+						LOGGER.warn("Taking snapshot at : " + new Date());
+						new Snapshooter(null, dataBase).execute();
+					} catch (Exception e) {
+						LOGGER.error("Exception taking the snapshot : ", e);
+					}
+				}
+			};
+			timer.schedule(timerTask, snapshptInterval, snapshptInterval);
+		}
+		long reportInterval = Configuration.getConfiguration().getReportInterval();
+		LOGGER.info("Profiler initialize : " + dataBase + ", " + reportInterval);
+		if (reportInterval > 0) {
+			Timer timer = new Timer();
+			TimerTask timerTask = new TimerTask() {
+				@Override
+				public void run() {
+					try {
+						LOGGER.warn("Writing report at : " + new Date());
+						new Reporter(null, dataBase).execute();
+					} catch (Exception e) {
+						LOGGER.error("Exception taking the snapshot : ", e);
+					}
+				}
+			};
+			timer.schedule(timerTask, snapshptInterval, snapshptInterval);
+		}
+	}
+
 	/**
 	 * Calculate the series for the total times for the method<br>
 	 * methodSeries()<br>
 	 * Snapshots {2, 5, 3, 6, 5}
 	 */
 	public static List<Long> methodSeries(Method<?, ?> method) {
-		if (method.getSeries().size() == 0) {
-			List<Snapshot<?, ?>> snapshots = method.getSnapshots();
-			for (Snapshot<?, ?> snapshot : snapshots) {
-				method.getSeries().add(snapshot.getTotal());
-			}
+		List<Long> series = new ArrayList<Long>();
+		List<Snapshot<?, ?>> snapshots = method.getSnapshots();
+		for (Snapshot<?, ?> snapshot : snapshots) {
+			series.add(snapshot.getTotal());
 		}
-		return method.getSeries();
+		return series;
 	}
 
 	/**
@@ -100,15 +143,14 @@ public class Profiler {
 	 * Snapshot {1, 2, 4, 3, 2}
 	 */
 	public static List<Long> methodNetSeries(Method<?, ?> method) {
-		if (method.getNetSeries().size() == 0) {
-			List<Snapshot<?, ?>> snapshots = method.getSnapshots();
-			for (Snapshot<?, ?> snapshot : snapshots) {
-				long netTime = snapshot.getTotal() - snapshot.getWait();
-				snapshot.setNet(netTime);
-				method.getNetSeries().add(snapshot.getNet());
-			}
+		List<Long> series = new ArrayList<Long>();
+		List<Snapshot<?, ?>> snapshots = method.getSnapshots();
+		for (Snapshot<?, ?> snapshot : snapshots) {
+			long netTime = snapshot.getTotal() - snapshot.getWait();
+			snapshot.setNet(netTime);
+			series.add(snapshot.getNet());
 		}
-		return method.getNetSeries();
+		return series;
 	}
 
 	/**
@@ -145,16 +187,15 @@ public class Profiler {
 	 * Snapshots {2, 5, 3, 6, 5} = {3, -2, 3, -1}
 	 */
 	public static List<Long> methodChangeSeries(Method<?, ?> method) {
-		if (method.getSeriesChange().size() == 0) {
-			List<Long> methodSeries = methodSeries(method);
-			long previousTime = 0;
-			for (Long time : methodSeries) {
-				long change = time - previousTime;
-				method.getSeriesChange().add(change);
-				previousTime = time;
-			}
+		List<Long> series = new ArrayList<Long>();
+		List<Long> methodSeries = methodSeries(method);
+		long previousTime = 0;
+		for (Long time : methodSeries) {
+			long change = time - previousTime;
+			series.add(change);
+			previousTime = time;
 		}
-		return method.getSeriesChange();
+		return series;
 	}
 
 	/**
@@ -163,16 +204,15 @@ public class Profiler {
 	 * Snapshot {1, 2, 4, 3, 2} = {1, 2, -1, -1}
 	 */
 	public static List<Long> methodNetChangeSeries(Method<?, ?> method) {
-		if (method.getSeriesChangeNet().size() == 0) {
-			List<Long> methodNetSeries = methodNetSeries(method);
-			long previousTime = 0;
-			for (Long time : methodNetSeries) {
-				long change = time - previousTime;
-				method.getSeriesChangeNet().add(change);
-				previousTime = time;
-			}
+		List<Long> series = new ArrayList<Long>();
+		List<Long> methodNetSeries = methodNetSeries(method);
+		long previousTime = 0;
+		for (Long time : methodNetSeries) {
+			long change = time - previousTime;
+			series.add(change);
+			previousTime = time;
 		}
-		return method.getSeriesChangeNet();
+		return series;
 	}
 
 	/**

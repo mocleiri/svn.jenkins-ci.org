@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.363 API)
+Job (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.363 API)";
+        parent.document.title="Job (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -474,6 +474,14 @@ A job is an runnable entity under the monitoring of Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getEstimatedDuration()">getEstimatedDuration</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getFirstBuild()">getFirstBuild</A></B>()</CODE>
 
@@ -495,6 +503,15 @@ A job is an runnable entity under the monitoring of Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getLastBuildsOverThreshold(int, hudson.model.Result)">getLastBuildsOverThreshold</A></B>(int&nbsp;numberOfBuilds,
+                           <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;threshold)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last 'numberOfBuilds' builds with a build result >= 'threshold'</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1874,6 +1891,39 @@ getLastCompletedBuild</H3>
 <DL>
 <DD>Returns the last completed build, if any. Otherwise null.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLastBuildsOverThreshold(int, hudson.model.Result)"><!-- --></A><H3>
+getLastBuildsOverThreshold</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>getLastBuildsOverThreshold</B>(int&nbsp;numberOfBuilds,
+                                             <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;threshold)</PRE>
+<DL>
+<DD>Returns the last 'numberOfBuilds' builds with a build result >= 'threshold'
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a list with the builds. May be smaller than 'numberOfBuilds' or even empty
+   if not enough builds satisfying the threshold have been found. Never null.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEstimatedDuration()"><!-- --></A><H3>
+getEstimatedDuration</H3>
+<PRE>
+public final long <B>getEstimatedDuration</B>()</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

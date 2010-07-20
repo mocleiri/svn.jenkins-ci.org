@@ -154,33 +154,33 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
     }
 
     @Test
-    public void testGetViewPaths() {
+    public void testGetViewPaths() throws Exception {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "viewparams", false, false, false, "", false, "", "loadrules", null, false, "viewpath");
-        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths()[0]);
+        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths(null, null, launcher)[0]);
     }
 
     @Test
-    public void testGetViewPathsWithSpaces() {
+    public void testGetViewPathsWithSpaces() throws Exception {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "viewparams", false, false, false, "", false, "", "test rules", null, false, "viewpath");
-        assertEquals("The view paths aren't correct", "test rules", scm.getViewPaths()[0]);
+        assertEquals("The view paths aren't correct", "test rules", scm.getViewPaths(null, null, launcher)[0]);
     }
 
     @Test
-    public void testGetViewPathsNoLoad() {
+    public void testGetViewPathsNoLoad() throws Exception {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "viewparams", false, false, false, "", false, "", "load loadrules", null, false, "viewpath");
-        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths()[0]);
+        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths(null, null, launcher)[0]);
     }
 
     @Test
-    public void testGetViewPathsLeadingSlash() {
+    public void testGetViewPathsLeadingSlash() throws Exception {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "viewparams", false, false, false, "", false, "", "/loadrules", null, false, "viewpath");
-        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths()[0]);
+        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths(null, null, launcher)[0]);
     }
 
     @Test
-    public void testGetViewPathsLeadingSlashAndLoad() {
+    public void testGetViewPathsLeadingSlashAndLoad() throws Exception {
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "viewparams", false, false, false, "", false, "", "load /loadrules", null, false, "viewpath");
-        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths()[0]);
+        assertEquals("The view paths aren't correct", "loadrules", scm.getViewPaths(null, null, launcher)[0]);
     }
 
     @Test
@@ -345,7 +345,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
         assertTrue("The first time should always return true", hasChanges);
 
         FilePath changeLogFilePath = new FilePath(changelogFile);
-        assertTrue("The change log file is empty", changeLogFilePath.length() > 5);
+        assertTrue("The change log file is empty", changeLogFilePath.length() == 0);
     }
 
     @Test
@@ -362,8 +362,8 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
+                one(checkOutAction).isViewValid(launcher, workspace, "viewname"); will(returnValue(true));
                 one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(true));
-
                 // normal changelog
                 one(historyAction).getChanges(with(equal(mockedCalendar.getTime())), with(equal("viewname")), with(equal("viewname")),
                         with(equal(new String[] { "branch" })), with(equal(new String[] { "vob" })));
@@ -409,8 +409,8 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
+                one(checkOutAction).isViewValid(launcher, workspace, "viewname"); will(returnValue(true));
                 one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(true));
-
                 // normal changelog
                 one(historyAction).getChanges(with(equal(bufferedDate)), with(equal("viewpath")), with(equal("viewname")),
                         with(equal(new String[] { "branch" })), with(equal(new String[] { "vob" })));
@@ -448,6 +448,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
+                one(checkOutAction).isViewValid(launcher, workspace, "viewname-CCHudson-test-node"); will(returnValue(true));
                 one(checkOutAction).checkout(launcher, workspace, "viewname-CCHudson-test-node"); will(returnValue(true));
                 ignoring(historyAction).getChanges(with(any(Date.class)), with(equal("viewname-CCHudson-test-node")), with(equal("viewname-CCHudson-test-node")), with(any(String[].class)), with(any(String[].class)));
                 will(returnValue(new ArrayList<ClearCaseChangeLogEntry>()));
@@ -486,6 +487,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
+                one(checkOutAction).isViewValid(launcher, workspace, "viewname"); will(returnValue(true));
                 one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(true));
                 one(historyAction).getChanges(with(equal(mockedCalendar.getTime())), with(equal("viewname")), with(equal("viewname")),
                         with(equal(new String[] { "branch" })), with(equal(new String[] { "vob" })));
@@ -527,6 +529,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
 
         context.checking(new Expectations() {
             {
+                one(checkOutAction).isViewValid(launcher, workspace, "viewname"); will(returnValue(true));
                 one(checkOutAction).checkout(launcher, workspace, "viewname"); will(returnValue(true));
                 one(historyAction).getChanges(with(equal(mockedCalendar.getTime())), with(equal("viewname")),
                         with(equal("viewname")), with(equal(new String[] { "branchone", "branchtwo" })), with(equal(new String[] { "vob" })));
@@ -636,6 +639,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 allowing(build).getBuildVariables(); will(returnValue(new HashMap<String, String>()));
                 allowing(build).getEnvironment(with(any(LogTaskListener.class))); will(returnValue(new EnvVars("JOB_NAME", "CCHudson")));
                 allowing(scmRevisionState).getBuildTime(); will(returnValue(new Date()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(new String[]{}));
                 allowing(computer).getSystemProperties(); will(returnValue(System.getProperties()));
             }
         });
@@ -683,6 +687,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 one(build).getTimestamp(); will(returnValue(mockedCalendar));
                 one(project).getLastBuild(); will(returnValue(build));
                 one(scmRevisionState).getBuildTime(); will(returnValue(mockedCalendar.getTime()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(new String[]{"vob"}));
             }
         });
 
@@ -719,6 +724,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 one(build).getTimestamp(); will(returnValue(mockedCalendar));
                 one(project).getLastBuild(); will(returnValue(build));
                 one(scmRevisionState).getBuildTime(); will(returnValue(mockedCalendar.getTime()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(new String[]{"vob"}));
             }
         });
         AbstractClearCaseScm scm = new AbstractClearCaseScmDummy("viewname", "vob", "");
@@ -750,6 +756,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 one(build).getTimestamp(); will(returnValue(mockedCalendar));
                 one(project).getLastBuild(); will(returnValue(build));
                 one(scmRevisionState).getBuildTime(); will(returnValue(mockedCalendar.getTime()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(new String[]{"vob1", "vob2/vob2-1", "vob\\ 3"}));
             }
         });
 
@@ -782,6 +789,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 one(project).getLastBuild(); will(returnValue(build));
                 ignoring(build).addAction(with(any(ClearCaseDataAction.class)));
                 one(scmRevisionState).getBuildTime(); will(returnValue(mockedCalendar.getTime()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(null));
             }
         });
 
@@ -815,6 +823,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 one(matrixBuild).getTimestamp(); will(returnValue(mockedCalendar));
                 ignoring(build).addAction(with(any(ClearCaseDataAction.class)));
                 one(scmRevisionState).getBuildTime(); will(returnValue(mockedCalendar.getTime()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(null));
             }
         });
 
@@ -847,6 +856,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 ignoring(project).getLastBuild(); will(returnValue(build));
                 ignoring(project).getName(); will(returnValue("CCHudson"));
                 one(scmRevisionState).getBuildTime(); will(returnValue(mockedCalendar.getTime()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(new String[]{}));
             }
         });
 
@@ -885,6 +895,7 @@ public class AbstractClearCaseScmTest extends AbstractWorkspaceTest {
                 ignoring(project).getLastBuild(); will(returnValue(build));
                 ignoring(project).getName(); will(returnValue("CCHudson"));
                 one(scmRevisionState).getBuildTime(); will(returnValue(mockedCalendar.getTime()));
+                ignoring(scmRevisionState).getLoadRules(); will(returnValue(new String[]{}));
             }
         });
 

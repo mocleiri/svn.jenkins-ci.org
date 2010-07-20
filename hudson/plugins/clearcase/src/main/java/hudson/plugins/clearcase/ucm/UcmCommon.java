@@ -1,108 +1,81 @@
+/**
+ * The MIT License
+ *
+ * Copyright (c) 2007-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi, Erik Ramfelt,
+ *                          Henrik Lynggaard, Peter Liljenberg, Andrew Bayer, Vincent Latombe
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package hudson.plugins.clearcase.ucm;
 
 import hudson.FilePath;
-import hudson.plugins.clearcase.ClearToolLauncher;
-import hudson.util.ArgumentListBuilder;
+import hudson.plugins.clearcase.Baseline;
+import hudson.plugins.clearcase.ClearTool;
+import hudson.plugins.clearcase.ClearTool.DiffBlOptions;
+import hudson.plugins.clearcase.Component;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.kohsuke.stapler.export.Exported;
-import org.kohsuke.stapler.export.ExportedBean;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author kyosi
  */
 public class UcmCommon {
-
+    
     /**
-     * @param clearToolLauncher
-     * @param isUseDynamicView
-     * @param viewName
-     * @param filePath
-     * @param baselineName
-     * @param baselineComment
-     * @param identical
-     * @param fullBaseline
-     * @param readWriteComponents
-     * @return list of created baselines
+     * Takes a list of baselines as argument, and return the load rules for all components matching these baselines
+     * @param clearTool
+     * @param stream
+     * @param baselines
+     * @return
      * @throws IOException
      * @throws InterruptedException
      */
-    public static List<BaselineDesc> makeBaseline(ClearToolLauncher clearToolLauncher, 
-                                      boolean isUseDynamicView,
-                                      String viewName,
-                                      FilePath filePath, 
-                                      String baselineName, 
-                                      String baselineComment,                                      
-                                      boolean identical, 
-                                      boolean fullBaseline,
-                                      List<String> readWriteComponents) throws IOException, InterruptedException  {
-
-        List<BaselineDesc> createdBaselinesList = new ArrayList<BaselineDesc>();
-
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        cmd.add("mkbl");
-        if (identical) {
-            cmd.add("-identical");
+    public static String[] generateLoadRulesFromBaselines(ClearTool clearTool, String stream, List<Baseline> baselines) throws IOException, InterruptedException {
+        if (baselines == null) {
+            return null;
         }
-        cmd.add("-comment");
-        cmd.add(baselineComment);
-        if (fullBaseline) {
-            cmd.add("-full");
-        } else {
-            cmd.add("-incremental");
-        }
-
-        FilePath clearToolLauncherPath = filePath;
-        if (isUseDynamicView) {
-            cmd.add("-view");
-            cmd.add(viewName);
-            clearToolLauncherPath = clearToolLauncher.getWorkspace();
-        }
-
-        // Make baseline only for read/write components (identical or not)
-        if (readWriteComponents != null) {
-            cmd.add("-comp");
-            StringBuffer lstComp = new StringBuffer();
-            for (String comp : readWriteComponents) {
-                lstComp.append(",");
-                lstComp.append(comp);
+        List<String> loadRules = new ArrayList<String>();
+        int i = 0;
+        for(Baseline bl : baselines) {
+            Reader reader = clearTool.describe("%[root_dir]p\\n", "component:" + bl.getComponentName());
+            BufferedReader br = new BufferedReader(reader);
+            StringBuilder sb = new StringBuilder();
+            for(String line = br.readLine(); line != null; line = br.readLine()){
+                if (StringUtils.isNotBlank(line)) {
+                    sb.append(line.substring(1)); // Remove leading separator
+                }
             }
-            lstComp.delete(0, 1);
-            cmd.add(lstComp.toString());
+            String loadRule = sb.toString();
+            if (StringUtils.isNotBlank(loadRule)) {
+                loadRules.add(loadRule);
+            }
         }
-
-        cmd.add(baselineName);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, clearToolLauncherPath);
-        baos.close();
-        String cleartoolResult = baos.toString();
-        if (cleartoolResult.contains("cleartool: Error")) {
-            throw new IOException("Failed to make baseline, reason: " + cleartoolResult);
-        }
-
-        Pattern pattern = Pattern.compile("Created baseline \".+?\" .+? \".+?\"");
-        Matcher matcher = pattern.matcher(cleartoolResult);
-        while (matcher.find()) {
-            String match = matcher.group();
-            String[] parts = match.split("\"");
-            String newBaseline = parts[1];
-            String componentName = parts[3];
-
-            createdBaselinesList.add(new BaselineDesc(newBaseline, componentName));
-        }
-
-        return createdBaselinesList;
+        return loadRules.toArray(new String[loadRules.size()]);
     }
-
+    
     /**
      * @param clearToolLauncher
      * @param isUseDynamicView
@@ -114,35 +87,21 @@ public class UcmCommon {
      * @throws IOException
      * @throws Exception
      */
-    public static List<String> getLatestBaselineNames(ClearToolLauncher clearToolLauncher, boolean isUseDynamicView, String viewName, FilePath filePath,
+    public static List<String> getLatestBaselineNames(ClearTool clearTool, boolean isUseDynamicView, String viewName, FilePath filePath,
             List<String> readWriteComponents) throws IOException, InterruptedException {
-
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-        FilePath clearToolLauncherPath = filePath;
-        List<String> baselineNames = new ArrayList<String>();
-
-        cmd.add("lsstream");
-        if (isUseDynamicView) {
-            cmd.add("-view");
-            cmd.add(viewName);
-            clearToolLauncherPath = clearToolLauncher.getWorkspace();
-        }
-        cmd.add("-fmt");
-        cmd.add("%[latest_bls]Xp");
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, clearToolLauncherPath);
-        baos.close();
-        String cleartoolResult = baos.toString();
+        String output = clearTool.lsstream(null, viewName, "%[latest_bls]Xp");
         String prefix = "baseline:";
-        if (cleartoolResult != null && cleartoolResult.startsWith(prefix)) {
-            String[] baselineNamesSplit = cleartoolResult.split("baseline:");
+        List<String> baselineNames = new ArrayList<String>();
+        if (StringUtils.startsWith(output, prefix)) {
+            String[] baselineNamesSplit = output.split("baseline:");
             for (String baselineName : baselineNamesSplit) {
-                String baselineNameTrimmed = baselineName.trim();
-                if (!baselineNameTrimmed.equals("")) {
+                if (StringUtils.isNotBlank(baselineName)) {
+                    String baselineNameTrimmed = StringUtils.trim(baselineName);
                     // Retrict to baseline bind to read/write component
-                    String blComp = getDataforBaseline(clearToolLauncher, filePath, baselineNameTrimmed).getBaselineName();
-                    if (readWriteComponents == null || readWriteComponents.contains(blComp))
+                    String blComp = getDataforBaseline(clearTool, filePath, baselineNameTrimmed).getBaselineName();
+                    if (readWriteComponents == null || readWriteComponents.contains(blComp)) {
                         baselineNames.add(baselineNameTrimmed);
+                    }
                 }
             }
 
@@ -161,29 +120,29 @@ public class UcmCommon {
      * @throws InterruptedException
      * @throws IOException
      */
-    public static List<BaselineDesc> getComponentsForBaselines(ClearToolLauncher clearToolLauncher, List<ComponentDesc> componentsList,
-            boolean isUseDynamicView, String viewName, FilePath filePath, List<String> baselinesNames) throws InterruptedException, IOException {
-        List<BaselineDesc> baselinesDescList = new ArrayList<BaselineDesc>();
+    public static List<Baseline> getComponentsForBaselines(ClearTool clearTool, List<Component> componentsList, boolean isUseDynamicView, String viewName,
+            FilePath filePath, List<String> baselinesNames) throws InterruptedException, IOException {
+        List<Baseline> baselinesList = new ArrayList<Baseline>();
 
         // loop through baselines
         for (String blName : baselinesNames) {
-            BaselineDesc baseLineDesc = getDataforBaseline(clearToolLauncher, filePath, blName);
-            ComponentDesc matchComponentDesc = null;
+            Baseline baseline = getDataforBaseline(clearTool, filePath, blName);
+            Component matchComponentDesc = null;
 
             // find the equivalent componentDesc element
-            for (ComponentDesc componentDesc : componentsList) {
-                if (getNoVob(componentDesc.getName()).equals(getNoVob(baseLineDesc.getComponentName()))) {
+            for (Component componentDesc : componentsList) {
+                if (getNoVob(componentDesc.getName()).equals(getNoVob(baseline.getComponentName()))) {
                     matchComponentDesc = componentDesc;
-                    baselinesDescList.add(new BaselineDesc(blName, matchComponentDesc, baseLineDesc.isNotLabeled));
+                    baselinesList.add(new Baseline(blName, matchComponentDesc, baseline.isNotLabeled()));
                     break;
                 }
             }
             if (matchComponentDesc == null) {
-                clearToolLauncher.getListener().error("Could not find a component matching baseline " + blName);
+                clearTool.getLauncher().getListener().error("Could not find a component matching baseline " + blName);
             }
         }
 
-        return baselinesDescList;
+        return baselinesList;
     }
 
     /**
@@ -196,76 +155,55 @@ public class UcmCommon {
      * @throws InterruptedException
      * @throws IOException
      */
-    public static BaselineDesc getDataforBaseline(ClearToolLauncher clearToolLauncher, FilePath filePath, String blName) throws InterruptedException,
-            IOException {
-
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        FilePath clearToolLauncherPath = filePath;
-
-        cmd.add("lsbl");
-        cmd.add("-fmt");
-        cmd.add("%[label_status]p|%[component]Xp");
-        cmd.add(blName);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, clearToolLauncherPath);
-        baos.close();
-        String cleartoolResult = baos.toString();
+    public static Baseline getDataforBaseline(ClearTool clearTool, FilePath filePath, String blName) throws InterruptedException, IOException {
+        String cleartoolResult = clearTool.lsbl(blName, "%[label_status]p|%[component]Xp");
         String[] arr = cleartoolResult.split("\\|");
         boolean isNotLabeled = arr[0].contains("Not Labeled");
 
         String prefix = "component:";
         String componentName = arr[1].substring(cleartoolResult.indexOf(cleartoolResult) + prefix.length());
 
-        return new BaselineDesc(componentName, isNotLabeled);
+        return new Baseline(componentName, isNotLabeled);
     }
-
-    /**
-     * @param clearToolLauncher
-     * @param parentStream
-     * @param childStream
-     * @throws IOException
-     * @throws InterruptedException
-     */
-    public static void mkstream(ClearToolLauncher clearToolLauncher, String parentStream, String childStream) throws IOException, InterruptedException {
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        cmd.add("mkstream");
-        cmd.add("-in");
-        cmd.add(parentStream);
-        cmd.add(childStream);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, null);
-        baos.close();
+    
+    public static List<Baseline> getLatestBaselines(ClearTool clearTool, String stream) throws IOException, InterruptedException {
+        return getBaselinesDesc(clearTool, stream, "%[latest_bls]p\\n");
     }
-
-    /**
-     * @param clearToolLauncher
-     * @param stream
-     * @return boolean indicating if the given stream exists
-     * @throws IOException
-     * @throws InterruptedException
-     */
-    public static boolean isStreamExists(ClearToolLauncher clearToolLauncher, String stream) throws IOException, InterruptedException {
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        cmd.add("lsstream");
-        cmd.add("-short");
-        cmd.add(stream);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
+    
+    public static List<Baseline> getFoundationBaselines(ClearTool clearTool, String stream) throws IOException, InterruptedException {
+        return getBaselinesDesc(clearTool, stream, "%[found_bls]p\\n");
+    }
+    
+    private static List<Baseline> getBaselinesDesc(ClearTool clearTool, String stream, String format) throws IOException,
+            InterruptedException {
+        BufferedReader rd = new BufferedReader(clearTool.describe(format, "stream:" + stream));
+        List<String> baselines = new ArrayList<String>();
         try {
-            clearToolLauncher.run(cmd.toCommandArray(), null, baos, null);
-        } catch (Exception e) {
-            // empty by design
+            for (String line = rd.readLine(); line != null; line = rd.readLine()) {
+                String[] bl = line.split(" ");
+                for (String b : bl) {
+                    if (StringUtils.isNotBlank(b)) {
+                        baselines.add(b);
+                    }
+                }
+            }
+        } finally {
+            rd.close();
         }
-        baos.close();
-        String cleartoolResult = baos.toString();
-        return !(cleartoolResult.contains("stream not found"));
+        List<Baseline> foundationBaselines = new ArrayList<Baseline>();
+        String pvob = UcmCommon.getVob(stream);
+        for (String baseline : baselines) {
+            String qualifiedBaseline = baseline + "@" + pvob;
+            BufferedReader br = new BufferedReader(clearTool.describe("%[component]p\\n", "baseline:" + qualifiedBaseline));
+            try {
+                foundationBaselines.add(new Baseline(qualifiedBaseline, br.readLine() + "@" + pvob));
+            } finally {
+                br.close();
+            }
+        }
+        return foundationBaselines;
     }
-
+    
     /**
      * @param clearToolLauncher
      * @param streamName
@@ -273,17 +211,15 @@ public class UcmCommon {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static List<ComponentDesc> getStreamComponentsDesc(ClearToolLauncher clearToolLauncher, String streamName) throws IOException, InterruptedException {
-        List<ComponentDesc> componentsDescList = new ArrayList<ComponentDesc>();
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        cmd.add("desc");
-        cmd.add("stream:" + streamName);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, null);
-        baos.close();
-        String cleartoolResult = baos.toString();
+    public static List<Component> getStreamComponentsDesc(ClearTool clearTool, String streamName) throws IOException, InterruptedException {
+        List<Component> componentsDescList = new ArrayList<Component>();
+        Reader reader = clearTool.describe(null, "stream:" + streamName);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        StringBuilder sb = new StringBuilder();
+        while (bufferedReader.ready()) {
+            sb.append(bufferedReader.readLine());
+        }
+        String output = sb.toString();
 
         // searching in the result for the pattern (<component-name> (modifiable | non-modifiable)
         int idx = 0;
@@ -291,20 +227,20 @@ public class UcmCommon {
         int idx2;
         String searchFor = "modifiable)";
         while (idx >= 0) {
-            idx = cleartoolResult.indexOf(searchFor, idx + 1);
+            idx = output.indexOf(searchFor, idx + 1);
 
             if (idx > 0) {
                 // get the component state part: modifiable or non-modifiable
-                idx1 = cleartoolResult.lastIndexOf("(", idx - 1);
-                idx2 = cleartoolResult.indexOf(")", idx1);
-                String componentState = cleartoolResult.substring(idx1 + 1, idx2);
+                idx1 = output.lastIndexOf("(", idx - 1);
+                idx2 = output.indexOf(")", idx1);
+                String componentState = output.substring(idx1 + 1, idx2);
 
                 // get the component name
-                idx1 = cleartoolResult.lastIndexOf("(", idx1 - 1);
-                idx2 = cleartoolResult.indexOf(")", idx1);
+                idx1 = output.lastIndexOf("(", idx1 - 1);
+                idx2 = output.indexOf(")", idx1);
 
                 // add to the result
-                ComponentDesc componentDesc = new ComponentDesc(cleartoolResult.substring(idx1 + 1, idx2), componentState.equals("modifiable"));
+                Component componentDesc = new Component(output.substring(idx1 + 1, idx2), componentState.equals("modifiable"));
                 componentsDescList.add(componentDesc);
             }
         }
@@ -319,16 +255,15 @@ public class UcmCommon {
      * @throws IOException
      * @throws Exception
      */
-    public static List<BaselineDesc> getLatestBlsWithCompOnStream(ClearToolLauncher clearToolLauncher, String stream, String view) throws IOException,
-            InterruptedException {
+    public static List<Baseline> getLatestBlsWithCompOnStream(ClearTool clearTool, String stream, String view) throws IOException, InterruptedException {
         // get the components on the build stream
-        List<ComponentDesc> componentsList = getStreamComponentsDesc(clearToolLauncher, stream);
+        List<Component> componentsList = getStreamComponentsDesc(clearTool, stream);
 
         // get latest baselines on the stream (name only)
-        List<String> latestBlsOnBuildStream = getLatestBaselineNames(clearToolLauncher, true, view, null, null);
+        List<String> latestBlsOnBuildStream = getLatestBaselineNames(clearTool, true, view, null, null);
 
         // add component information to baselines
-        List<BaselineDesc> latestBlsWithComp = getComponentsForBaselines(clearToolLauncher, componentsList, true, view, null, latestBlsOnBuildStream);
+        List<Baseline> latestBlsWithComp = getComponentsForBaselines(clearTool, componentsList, true, view, null, latestBlsOnBuildStream);
 
         return latestBlsWithComp;
     }
@@ -337,11 +272,14 @@ public class UcmCommon {
      * @param componentsDesc
      * @return list of read-write components out of components list (removing read-only components)
      */
-    public static List<String> getReadWriteComponents(List<ComponentDesc> componentsDesc) {
+    public static List<String> getReadWriteComponents(List<Component> components) {
         List<String> res = new ArrayList<String>();
 
-        for (ComponentDesc comp : componentsDesc)
-            res.add(comp.getName());
+        for (Component comp : components) {
+            if (comp.isModifiable()) {
+                res.add(comp.getName());
+            }
+        }
 
         return res;
     }
@@ -355,26 +293,15 @@ public class UcmCommon {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static List<String> getDiffBlVersions(ClearToolLauncher clearToolLauncher, String viewRootDirectory, String bl1, String bl2) throws IOException,
+    public static List<String> getDiffBlVersions(ClearTool clearTool, String viewRootDirectory, String bl1, String bl2) throws IOException,
             InterruptedException {
+        Reader rd = clearTool.diffbl(EnumSet.of(DiffBlOptions.VERSIONS), bl1, bl2, viewRootDirectory);
+
+        BufferedReader br = new BufferedReader(rd);
+
         List<String> versionList = new ArrayList<String>();
-
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-        FilePath clearToolLauncherPath = new FilePath(clearToolLauncher.getLauncher().getChannel(), viewRootDirectory);
-
-        cmd.add("diffbl");
-        cmd.add("-versions");
-        cmd.add(bl1);
-        cmd.add(bl2);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, clearToolLauncherPath);
-        baos.close();
-        String cleartoolResult = baos.toString();
-
         // remove ">>" from result
-        String[] arr = cleartoolResult.split("\n");
-        for (String line : arr) {
+        for (String line = br.readLine(); br.ready(); line = br.readLine()) {
             if (line.startsWith(">>")) {
                 line = line.replaceAll(">>", "");
                 versionList.add(line.trim());
@@ -391,20 +318,14 @@ public class UcmCommon {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static String getVersionDescription(ClearToolLauncher clearToolLauncher, String version, String format) throws IOException, InterruptedException {
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        cmd.add("desc");
-        cmd.add("-fmt");
-        cmd.add(format);
-        cmd.add(version);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, null);
-        baos.close();
-        String cleartoolResult = baos.toString();
-
-        return cleartoolResult;
+    public static String getVersionDescription(ClearTool clearTool, String version, String format) throws IOException, InterruptedException {
+        Reader rd = clearTool.describe(format, version);
+        BufferedReader bufferedReader = new BufferedReader(rd);
+        StringBuilder sb = new StringBuilder();
+        while (bufferedReader.ready()) {
+            sb.append(bufferedReader.readLine());
+        }
+        return sb.toString();
     }
 
     /**
@@ -414,32 +335,15 @@ public class UcmCommon {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static void rebase(ClearToolLauncher clearToolLauncher, String viewName, List<UcmCommon.BaselineDesc> baselines) throws IOException,
-            InterruptedException {
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        cmd.add("rebase");
-
-        cmd.add("-base");
+    public static void rebase(ClearTool clearTool, String viewName, List<Baseline> baselines) throws IOException, InterruptedException {
         StringBuilder sb = new StringBuilder();
-        for (UcmCommon.BaselineDesc bl : baselines) {
+        for (Baseline bl : baselines) {
             if (sb.length() > 0) {
                 sb.append(',');
             }
             sb.append(bl.getBaselineName());
         }
-        cmd.add(sb.toString());
-
-        cmd.add("-view");
-        cmd.add(viewName);
-
-        cmd.add("-complete");
-        cmd.add("-force");
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        clearToolLauncher.run(cmd.toCommandArray(), null, baos, null);
-        baos.close();
+        clearTool.rebaseDynamic(viewName, sb.toString());
     }
 
     /**
@@ -453,118 +357,6 @@ public class UcmCommon {
 
     public static String getVob(String element) {
         return element.split("@")[1];
-    }
-
-    /**
-     * @author kyosi
-     */
-    @ExportedBean
-    public static class BaselineDesc {
-
-        @Exported(visibility = 3)
-        public String baselineName;
-
-        @Exported(visibility = 3)
-        public String componentName;
-
-        @Exported(visibility = 3)
-        public ComponentDesc componentDesc;
-
-        private boolean isNotLabeled;
-
-        public BaselineDesc(String componentName, boolean isNotLabeled) {
-            super();
-            this.componentName = componentName;
-            this.isNotLabeled = isNotLabeled;
-        }
-
-        public BaselineDesc(String baselineName, String componentName) {
-            super();
-            this.baselineName = baselineName;
-            this.componentName = componentName;
-            this.componentDesc = null;
-        }
-
-        public BaselineDesc(String baselineName, ComponentDesc componentDesc) {
-            super();
-            this.baselineName = baselineName;
-            this.componentDesc = componentDesc;
-            this.componentName = componentDesc.getName();
-        }
-
-        public BaselineDesc(String baselineName, ComponentDesc componentDesc, boolean isNotLabeled) {
-            super();
-            this.baselineName = baselineName;
-            this.componentDesc = componentDesc;
-            this.componentName = componentDesc.getName();
-            this.isNotLabeled = isNotLabeled;
-        }
-
-        public String getBaselineName() {
-            return baselineName;
-        }
-
-        public void setBaselineName(String baselineName) {
-            this.baselineName = baselineName;
-        }
-
-        public String getComponentName() {
-            return (componentDesc != null ? componentDesc.getName() : componentName);
-        }
-
-        public void setComponentName(String componentName) {
-            this.componentName = componentName;
-        }
-
-        public ComponentDesc getComponentDesc() {
-            return componentDesc;
-        }
-
-        public void setComponentDesc(ComponentDesc componentDesc) {
-            this.componentDesc = componentDesc;
-        }
-
-        public boolean isNotLabeled() {
-            return isNotLabeled;
-        }
-
-        public void setNotLabeled(boolean isNotLabeled) {
-            this.isNotLabeled = isNotLabeled;
-        }
-    }
-
-    /**
-     * @author kyosi
-     */
-    @ExportedBean
-    public static class ComponentDesc {
-
-        @Exported(visibility = 3)
-        public String name;
-
-        @Exported(visibility = 3)
-        public boolean isModifiable;
-
-        public ComponentDesc(String name, boolean isModifiable) {
-            this.name = name;
-            this.isModifiable = isModifiable;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public boolean isModifiable() {
-            return isModifiable;
-        }
-
-        public void setModifiable(boolean isModifiable) {
-            this.isModifiable = isModifiable;
-        }
     }
 
 }

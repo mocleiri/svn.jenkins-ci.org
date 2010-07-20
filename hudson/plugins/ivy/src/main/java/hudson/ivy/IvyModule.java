@@ -115,7 +115,6 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
      */
     private String targets;
 
-
     /**
      * Relative path from the workspace to the ivy descriptor file for this
      * module.
@@ -233,9 +232,7 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
      * Gets the list of targets to execute for this module.
      */
     public String getTargets() {
-        if (targets != null)
-            return targets;
-        return getParent().getTargets();
+        return targets;
     }
 
     public String getRelativePathToDescriptorFromModuleRoot() {
@@ -251,18 +248,6 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
     public String getRelativePathToModuleRoot() {
         return StringUtils.removeEnd(relativePathToDescriptorFromWorkspace, StringUtils.defaultString(getRelativePathToDescriptorFromModuleRoot(),
                 IVY_XML_PATH));
-    }
-
-    /**
-     * Gets the list of targets specified by the user, without taking
-     * inheritance and into account.
-     *
-     * <p>
-     * This is only used to present the UI screen, and in all the other cases
-     * {@link #getTargets()} should be used.
-     */
-    public String getUserConfiguredTargets() {
-        return targets;
     }
 
     @Override
@@ -418,7 +403,8 @@ public final class IvyModule extends AbstractIvyProject<IvyModule, IvyBuild> imp
                 upstream = src;
             }
 
-            if (!hasDependency(graph, upstream, downstream))
+            // Create the build dependency, ignoring self-referencing or already existing deps
+            if (upstream != downstream && !hasDependency(graph, upstream, downstream))
                 graph.addDependency(new IvyThresholdDependency(upstream, downstream, Result.SUCCESS));
         }
     }

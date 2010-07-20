@@ -57,6 +57,7 @@ public class GnatcheckPublisher extends Recorder implements Serializable {
     }
 
     @Extension
+    @SuppressWarnings("unused")
     public static final class GnatcheckPublisherDescriptor extends
             BuildStepDescriptor<Publisher> {
 
@@ -75,7 +76,7 @@ public class GnatcheckPublisher extends Recorder implements Serializable {
         @Override
         public Publisher newInstance(StaplerRequest req, JSONObject formData) throws FormException {
             List<GnatcheckType> buildTypes = Descriptor.newInstancesFromHeteroList(
-                    req, formData, "types", GnatcheckTypeDescriptor.LIST);
+                    req, formData, "types", getBuildTypes());
             return new GnatcheckPublisher(buildTypes.toArray(new GnatcheckType[buildTypes.size()]));
         }
 
@@ -93,7 +94,7 @@ public class GnatcheckPublisher extends Recorder implements Serializable {
         }
 
         public List<GnatcheckTypeDescriptor> getBuildTypes() {
-            return GnatcheckTypeDescriptor.LIST;
+            return Hudson.getInstance().getDescriptorList(GnatcheckType.class);
         }
 
     }
@@ -124,7 +125,7 @@ public class GnatcheckPublisher extends Recorder implements Serializable {
 
                     ProjectGnatcheckType projectGnatcheckType = (ProjectGnatcheckType) type;
 
-                    String execPathGnat = null;
+                    String execPathGnat;
                     try {
                         execPathGnat = GnatUtil.getExecutable(projectGnatcheckType.getDescriptor().getInstallations(), type.gnatName, launcher, listener, GnatInstallation.GNAT_TYPE.GNAT);
                     }
@@ -147,7 +148,7 @@ public class GnatcheckPublisher extends Recorder implements Serializable {
 
                     FreeStyleGnatcheckType freeStyleGnatcheckType = (FreeStyleGnatcheckType) type;
 
-                    String execPathGnatcheck = null;
+                    String execPathGnatcheck;
                     try {
                         execPathGnatcheck = GnatUtil.getExecutable(freeStyleGnatcheckType.getDescriptor().getInstallations(), type.gnatName, launcher, listener, GnatInstallation.GNAT_TYPE.GNATCHECK);
                     }

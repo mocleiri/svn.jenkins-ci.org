@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.363 API)
+Hudson (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.363 API)";
+        parent.document.title="Hudson (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -491,6 +491,14 @@ Root object of the system.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 2007-12-18.
       Use <A HREF="../../hudson/model/Node.html#checkPermission(hudson.security.Permission)"><CODE>Node.checkPermission(Permission)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#canDelete(hudson.model.View)">canDelete</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determine whether a view may be deleted.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -3533,6 +3541,23 @@ public void <B>addView</B>(<A HREF="../../hudson/model/View.html" title="class i
 
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="canDelete(hudson.model.View)"><!-- --></A><H3>
+canDelete</H3>
+<PRE>
+public boolean <B>canDelete</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ViewGroup.html#canDelete(hudson.model.View)">ViewGroup</A></CODE></B></DD>
+<DD>Determine whether a view may be deleted.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#canDelete(hudson.model.View)">canDelete</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

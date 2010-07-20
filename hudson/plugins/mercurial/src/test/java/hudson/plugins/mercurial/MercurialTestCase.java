@@ -11,7 +11,11 @@ import hudson.model.TaskListener;
 import hudson.util.StreamTaskListener;
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import org.jvnet.hudson.test.HudsonTestCase;
 
 public abstract class MercurialTestCase extends HudsonTestCase {
@@ -25,8 +29,13 @@ public abstract class MercurialTestCase extends HudsonTestCase {
         launcher = Hudson.getInstance().createLauncher(listener);
     }
 
-    protected void hg(File repo, String... args) throws Exception {
-        assertEquals(0, MercurialSCM.launch(launcher).cmds(new File("hg"), args).pwd(repo).stdout(listener).join());
+    protected final void hg(File repo, String... args) throws Exception {
+        List<String> cmds = new ArrayList<String>();
+        cmds.add("hg");
+        cmds.add("--config");
+        cmds.add("ui.username=nobody@nowhere.net");
+        cmds.addAll(Arrays.asList(args));
+        assertEquals(0, MercurialSCM.launch(launcher).cmds(cmds).pwd(repo).stdout(listener).join());
     }
 
     protected void touchAndCommit(File repo, String... names) throws Exception {
@@ -44,7 +53,13 @@ public abstract class MercurialTestCase extends HudsonTestCase {
 //        for (String line : b.getLog(Integer.MAX_VALUE)) {
 //            System.err.println(">> " + line);
 //        }
-        assertTrue(b.getWorkspace().child(name).exists());
+        if (!b.getWorkspace().child(name).exists()) {
+            Set<String> children = new TreeSet<String>();
+            for (FilePath child : b.getWorkspace().list()) {
+                children.add(child.getName());
+            }
+            fail("Could not find " + name + " among " + children);
+        }
         assertNotNull(b.getAction(MercurialTagAction.class));
         @SuppressWarnings("deprecation")
         String log = b.getLog();

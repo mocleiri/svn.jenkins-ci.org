@@ -23,38 +23,27 @@
 
 package com.thalesgroup.hudson.plugins.xunit.types;
 
-import com.thalesgroup.hudson.library.tusarconversion.TestsTools;
-import hudson.Extension;
-import org.kohsuke.stapler.DataBoundConstructor;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.model.FPCUnitHudsonTestType;
 
-
+@SuppressWarnings("unused")
 public class FPCUnitType extends XUnitType {
 
-
-    @DataBoundConstructor
     public FPCUnitType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(TestsTools.FPCUNIT, pattern, faildedIfNotNew, deleteJUnitFiles);
+        super(pattern, faildedIfNotNew, deleteJUnitFiles);
     }
 
-    public XUnitTypeDescriptor<?> getDescriptor() {
-        return new FPCUnitType.DescriptorImpl();
+    public TestTypeDescriptor getDescriptor() {
+        return null;
     }
 
-    @Extension
-    public static class DescriptorImpl extends XUnitTypeDescriptor<FPCUnitType> {
-
-        public DescriptorImpl() {
-            super(FPCUnitType.class);
-        }
-
-        public String getDisplayName() {
-            return TestsTools.FPCUNIT.getLabel();
-        }
-
-        //Not use inputType object for backeard compatibility
-        public String getId() {
-            return "fpcunit";
-        }
+    /**
+     * Call at Hudson startup for backward compatibility
+     *
+     * @return an new hudson object
+     */
+    @SuppressWarnings("unused")
+    public Object readResolve() {
+        return new FPCUnitHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteJUnitFiles());
     }
-
 }

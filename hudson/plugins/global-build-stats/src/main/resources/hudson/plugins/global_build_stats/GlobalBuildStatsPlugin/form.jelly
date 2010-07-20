@@ -59,11 +59,16 @@
       		 disabled="true" name="jobNameRegex" size="10" 
       		 onblur="document.getElementById('${buildStatId}_jobFilter').value='jobNameRegex('+this.value+')';" 
       />
-      <j:invokeStatic var="escapedJobFilter" className="hudson.plugins.global_build_stats.utils.UIUtils" method="escapeAntiSlashes">
+      <j:invokeStatic var="escapedJobFilter" className="hudson.plugins.global_build_stats.GlobalBuildStatsPlugin" method="escapeAntiSlashes">
       	<j:arg type="java.lang.String" value="${currentBuildStatConfig.jobFilter}" />
       </j:invokeStatic>
       <input id="${buildStatId}_jobFilter" type="hidden" name="jobFilter" value="${escapedJobFilter}" /><br/>
 	  <script type="text/javascript"><![CDATA[
+	  // Valeur par défaut de job filter
+	  if(document.getElementById('${buildStatId}_jobFilter').value == ''){
+	  	document.getElementById('${buildStatId}_jobFilter').value = 'ALL';
+	  }
+	  
 	  if(document.getElementById('${buildStatId}_jobFilter').value.indexOf('jobNameRegex') != -1){
 	  	  document.getElementById('${buildStatId}_jobFilteringType_REGEX').checked = 'checked';
 	  	  initializeRegexField('${buildStatId}', '${escapedJobFilter}');

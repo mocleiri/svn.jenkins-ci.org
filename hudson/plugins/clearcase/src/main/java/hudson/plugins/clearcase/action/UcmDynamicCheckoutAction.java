@@ -28,11 +28,11 @@ import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.Run;
+import hudson.plugins.clearcase.Baseline;
 import hudson.plugins.clearcase.ClearCaseDataAction;
 import hudson.plugins.clearcase.ClearTool;
 import hudson.plugins.clearcase.ClearTool.SetcsOption;
 import hudson.plugins.clearcase.ucm.UcmCommon;
-import hudson.plugins.clearcase.ucm.UcmCommon.BaselineDesc;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -84,10 +84,6 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
                 dataAction.setStream(stream);
             }
         }
-        PrintStream logger = launcher.getListener().getLogger();
-        logger.println("createDynView = " + createDynView);
-        logger.println("freezeCode = " + freezeCode);
-        logger.println("recreateView = " + recreateView);
         if (createDynView) {
             if (freezeCode) {
                 checkoutCodeFreeze(viewTag);
@@ -128,22 +124,21 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         String dateStr = formatter.format(build.getTimestamp().getTime()).toLowerCase();
 
-        UcmCommon.makeBaseline(cleartool.getLauncher(), true, getConfiguredStreamViewName(), null, BASELINE_NAME + dateStr, BASELINE_COMMENT + dateStr, false,
-                false, null);
+        cleartool.mkbl((BASELINE_NAME + dateStr), getConfiguredStreamViewName(), (BASELINE_COMMENT + dateStr), false, false, null, null, null);
 
         // get latest baselines on the configured stream
-        List<UcmCommon.BaselineDesc> latestBlsOnConfgiuredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool.getLauncher(), stream,
+        List<Baseline> latestBlsOnConfgiuredStream = UcmCommon.getLatestBlsWithCompOnStream(cleartool, stream,
                 getConfiguredStreamViewName());
 
         // fix Not labeled baselines
-        for (BaselineDesc baseLineDesc : latestBlsOnConfgiuredStream) {
+        for (Baseline baseLineDesc : latestBlsOnConfgiuredStream) {
             if (baseLineDesc.isNotLabeled() && baseLineDesc.getComponentDesc().isModifiable()) {
                 // if the base is not labeled create identical one
                 List<String> readWriteCompList = new ArrayList<String>();
                 readWriteCompList.add(baseLineDesc.getComponentDesc().getName());
 
-                List<BaselineDesc> baseLineDescList = UcmCommon.makeBaseline(cleartool.getLauncher(), true, getConfiguredStreamViewName(), null, BASELINE_NAME
-                        + dateStr, BASELINE_COMMENT + dateStr, true, false, readWriteCompList);
+                List<Baseline> baseLineDescList = cleartool.mkbl((BASELINE_NAME
+                + dateStr), getConfiguredStreamViewName(), (BASELINE_COMMENT + dateStr), false, true, readWriteCompList, null, null);
 
                 String newBaseline = baseLineDescList.get(0).getBaselineName() + "@" + UcmCommon.getVob(baseLineDesc.getComponentDesc().getName());
 
@@ -152,7 +147,7 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         }
 
         // rebase build stream
-        UcmCommon.rebase(cleartool.getLauncher(), viewName, latestBlsOnConfgiuredStream);
+        UcmCommon.rebase(cleartool, viewName, latestBlsOnConfgiuredStream);
 
         // add baselines to build - to be later used by getChange
         ClearCaseDataAction dataAction = build.getAction(ClearCaseDataAction.class);
@@ -171,8 +166,8 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
         cleartool.startView(getConfiguredStreamViewName());
 
         // do we have build stream? if not create it
-        if (!UcmCommon.isStreamExists(cleartool.getLauncher(), getBuildStream())) {
-            UcmCommon.mkstream(cleartool.getLauncher(), stream, getBuildStream());
+        if (!cleartool.doesStreamExist(getBuildStream())) {
+            cleartool.mkstream(stream, getBuildStream());
         }
 
         // create view on build stream
@@ -207,6 +202,15 @@ public class UcmDynamicCheckoutAction implements CheckOutAction {
     private String getBuildStream() {
         String jobName = build.getProject().getName().replace(" ", "");
         return BUILD_STREAM_PREFIX + jobName + "." + stream;
+    }
+
+    @Override
+    public boolean isViewValid(Launcher launcher, FilePath workspace, String viewTag) throws IOException, InterruptedException {
+        if (cleartool.doesViewExist(viewTag)) {
+            cleartool.startView(viewTag);
+            return true;
+        }
+        return false;
     }
 
 }

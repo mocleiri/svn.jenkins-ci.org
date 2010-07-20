@@ -31,10 +31,10 @@ import hudson.Launcher;
 import hudson.Util;
 import hudson.matrix.MatrixProject;
 import hudson.model.*;
+import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
-import hudson.tasks.BuildStepDescriptor;
 import hudson.util.ArgumentListBuilder;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
@@ -55,6 +55,7 @@ public class GnatmetricPublisher extends Recorder implements Serializable {
     }
 
     @Extension
+    @SuppressWarnings("unused")
     public static final class GnatmetricPublisherDescriptor extends BuildStepDescriptor<Publisher> {
 
 
@@ -71,12 +72,13 @@ public class GnatmetricPublisher extends Recorder implements Serializable {
         @Override
         public Publisher newInstance(StaplerRequest req, JSONObject formData) throws FormException {
             List<GnatmetricType> buildTypes = Descriptor.newInstancesFromHeteroList(
-                    req, formData, "types", GnatmetricTypeDescriptor.LIST);
+                    req, formData, "types", getBuildTypes());
             return new GnatmetricPublisher(buildTypes.toArray(new GnatmetricType[buildTypes.size()]));
         }
 
+        @SuppressWarnings("unused")
         public List<GnatmetricTypeDescriptor> getBuildTypes() {
-            return GnatmetricTypeDescriptor.LIST;
+            return Hudson.getInstance().getDescriptorList(GnatmetricType.class);
         }
 
         @Override
@@ -117,7 +119,7 @@ public class GnatmetricPublisher extends Recorder implements Serializable {
 
                     ProjectGnatmetricType projectGnatMetricType = (ProjectGnatmetricType) type;
 
-                    String execPathGnat = null;
+                    String execPathGnat;
                     try {
                         execPathGnat = GnatUtil.getExecutable(projectGnatMetricType.getDescriptor().getInstallations(), type.gnatName, launcher, listener, GnatInstallation.GNAT_TYPE.GNAT);
                     }
@@ -140,7 +142,7 @@ public class GnatmetricPublisher extends Recorder implements Serializable {
 
                     FreeStyleGnatmetricType freeStyleGnatMetricType = (FreeStyleGnatmetricType) type;
 
-                    String execPathGnatmetric = null;
+                    String execPathGnatmetric;
                     try {
                         execPathGnatmetric = GnatUtil.getExecutable(freeStyleGnatMetricType.getDescriptor().getInstallations(), type.gnatName, launcher, listener, GnatInstallation.GNAT_TYPE.GNATMETRIC);
                     }

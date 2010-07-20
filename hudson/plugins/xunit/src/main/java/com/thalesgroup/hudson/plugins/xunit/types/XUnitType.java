@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Thales Corporate Services SAS                             *
+ * Copyright (c) 2010 Thales Corporate Services SAS                             *
  * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -23,136 +23,31 @@
 
 package com.thalesgroup.hudson.plugins.xunit.types;
 
-import com.thalesgroup.hudson.library.tusarconversion.model.InputType;
-import hudson.ExtensionList;
-import hudson.ExtensionPoint;
-import hudson.model.Describable;
-import hudson.model.Hudson;
-
-import java.io.Serializable;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
 
 
-public abstract class XUnitType implements ExtensionPoint, Describable<XUnitType>, Serializable {
+public abstract class XUnitType extends TestType {
 
-    private final String pattern;
+    /**
+     * Keep for backward compatibility
+     */
+    @SuppressWarnings("unused")
+    private transient boolean deleteJUnitFiles;
 
-    private final Boolean faildedIfNotNew;
+    protected XUnitType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
+        super(pattern, faildedIfNotNew, deleteOutputFiles);
+    }
 
-    private final Boolean deleteJUnitFiles;
-
-    protected final String customXSL;
-
-    private final InputType inputType;
-
-    @Deprecated
     protected XUnitType(String pattern) {
-        this.inputType = null;
-        this.pattern = pattern;
-        this.customXSL = null;
-        this.faildedIfNotNew = true;
-        this.deleteJUnitFiles = true;
+        super(pattern);
     }
 
-    @Deprecated
-    protected XUnitType(String pattern, String customXSL) {
-        this.inputType = null;
-        this.pattern = pattern;
-        this.customXSL = customXSL;
-        this.faildedIfNotNew = true;
-        this.deleteJUnitFiles = true;
-    }
+    public abstract TestTypeDescriptor getDescriptor();
 
-    @Deprecated
-    protected XUnitType(String pattern, String customXSL, boolean faildedIfNotNew) {
-        this.inputType = null;
-        this.pattern = pattern;
-        this.customXSL = customXSL;
-        this.faildedIfNotNew = faildedIfNotNew;
-        this.deleteJUnitFiles = true;
-    }
-
-    @Deprecated
-    protected XUnitType(String pattern, boolean faildedIfNotNew) {
-        this.inputType = null;
-        this.pattern = pattern;
-        this.customXSL = null;
-        this.faildedIfNotNew = faildedIfNotNew;
-        this.deleteJUnitFiles = true;
-    }
-
-
-    protected XUnitType(String pattern, String customXSL, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        this.inputType = null;
-        this.pattern = pattern;
-        this.faildedIfNotNew = faildedIfNotNew;
-        this.deleteJUnitFiles = deleteJUnitFiles;
-        this.customXSL = customXSL;
-    }
-
-    @Deprecated
-    protected XUnitType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        this.inputType = null;
-        this.pattern = pattern;
-        this.customXSL = null;
-        this.faildedIfNotNew = faildedIfNotNew;
-        this.deleteJUnitFiles = deleteJUnitFiles;
-    }
-
-    protected XUnitType(InputType inputType, String pattern, String customXSL, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        this.inputType = inputType;
-        this.pattern = pattern;
-        this.faildedIfNotNew = faildedIfNotNew;
-        this.deleteJUnitFiles = deleteJUnitFiles;
-        this.customXSL = customXSL;
-    }
-
-    protected XUnitType(InputType inputType, String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        this.inputType = inputType;
-        this.pattern = pattern;
-        this.customXSL = null;
-        this.faildedIfNotNew = faildedIfNotNew;
-        this.deleteJUnitFiles = deleteJUnitFiles;
-    }
-
-    public String getPattern() {
-        return pattern;
-    }
-
-    public boolean isFaildedIfNotNew() {
-        return (faildedIfNotNew == null ? true : faildedIfNotNew.booleanValue());
-    }
-
-    public boolean isDeleteJUnitFiles() {
-        return (deleteJUnitFiles == null ? true : deleteJUnitFiles.booleanValue());
-    }
 
     @SuppressWarnings("unused")
-    public String getCustomXSL() {
-        return customXSL;
+    public boolean isDeleteJUnitFiles() {
+        return deleteJUnitFiles;
     }
-
-    /**
-     * All registered instances.
-     */
-    public static ExtensionList<XUnitType> all() {
-        return Hudson.getInstance().getExtensionList(XUnitType.class);
-    }
-
-    @SuppressWarnings("unchecked")
-    public XUnitTypeDescriptor<?> getDescriptor() {
-        return (XUnitTypeDescriptor<?>) Hudson.getInstance().getDescriptor(getClass());
-    }
-
-    /**
-     * Get the associated Xsl to the type
-     *
-     * @return
-     */
-    public String getXsl() {
-        if (inputType != null) {
-            return inputType.getXsl();
-        }
-        return null;
-    }
-
 }

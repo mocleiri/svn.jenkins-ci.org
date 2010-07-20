@@ -24,6 +24,7 @@
 package com.thalesgroup.hudson.plugins.tusarnotifier.util;
 
 import hudson.model.BuildListener;
+import hudson.model.TaskListener;
 import org.jvnet.localizer.ResourceBundleHolder;
 
 
@@ -39,7 +40,7 @@ public class TusarNotifierLogger {
      * @param listener The current listener
      * @param message  The message to be outputted
      */
-    public static void log(BuildListener listener, final String message) {
+    public static void log(TaskListener listener, final String message) {
         listener.getLogger().println("[TusarNotifier] " + message);
     }
 

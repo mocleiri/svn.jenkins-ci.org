@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.QueueDecisionHandler (Hudson main module 1.363 API)
+Queue.QueueDecisionHandler (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.QueueDecisionHandler (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.QueueDecisionHandler (Hudson main module 1.363 API)";
+        parent.document.title="Queue.QueueDecisionHandler (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -108,7 +108,12 @@ Class Queue.QueueDecisionHandler</H2>
 </PRE>
 
 <P>
-Extension point for deciding if particular job should be scheduled or not
+Extension point for deciding if particular job should be scheduled or not.
+
+ <p>
+ This handler is consulted every time someone tries to submit a task to the queue.
+ If any of the registered handlers returns false, the task will not be added
+ to the queue, and the task will never get executed. 
 
  <p>
  This extension point is still a subject to change, as we are seeking more

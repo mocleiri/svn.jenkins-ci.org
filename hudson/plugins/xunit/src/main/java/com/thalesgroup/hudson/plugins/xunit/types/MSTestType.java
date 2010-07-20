@@ -22,38 +22,28 @@
  *******************************************************************************/
 package com.thalesgroup.hudson.plugins.xunit.types;
 
-import com.thalesgroup.hudson.library.tusarconversion.TestsTools;
-import hudson.Extension;
-import org.kohsuke.stapler.DataBoundConstructor;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.model.MSTestHudsonTestType;
 
 
+@SuppressWarnings("unused")
 public class MSTestType extends XUnitType {
 
-
-    @DataBoundConstructor
     public MSTestType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(TestsTools.MSTEST, pattern, faildedIfNotNew, deleteJUnitFiles);
+        super(pattern, faildedIfNotNew, deleteJUnitFiles);
     }
 
-    public XUnitTypeDescriptor<?> getDescriptor() {
-        return new MSTestType.DescriptorImpl();
+    public TestTypeDescriptor getDescriptor() {
+        return null;
     }
 
-    @Extension
-    public static class DescriptorImpl extends XUnitTypeDescriptor<MSTestType> {
-
-        public DescriptorImpl() {
-            super(MSTestType.class);
-        }
-
-        @Override
-        public String getDisplayName() {
-            return TestsTools.MSTEST.getLabel();
-        }
-
-        public String getId() {
-            return "mstest";
-        }
+    /**
+     * Call at Hudson startup for backward compatibility
+     *
+     * @return an new hudson object
+     */
+    @SuppressWarnings("unused")
+    public Object readResolve() {
+        return new MSTestHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteJUnitFiles());
     }
-
 }

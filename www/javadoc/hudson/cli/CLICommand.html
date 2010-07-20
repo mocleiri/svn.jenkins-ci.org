@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CLICommand (Hudson main module 1.363 API)
+CLICommand (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CLICommand (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CLICommand (Hudson main module 1.363 API)";
+        parent.document.title="CLICommand (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ Class CLICommand</H2>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A>, <A HREF="../../hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>, <A HREF="../../hudson/cli/CloneableCLICommand.html" title="class in hudson.cli">CloneableCLICommand</A>, <A HREF="../../hudson/cli/CopyJobCommand.html" title="class in hudson.cli">CopyJobCommand</A>, <A HREF="../../hudson/cli/CreateJobCommand.html" title="class in hudson.cli">CreateJobCommand</A>, <A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli">GroovyCommand</A>, <A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/InstallPluginCommand.html" title="class in hudson.cli">InstallPluginCommand</A>, <A HREF="../../hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>, <A HREF="../../hudson/cli/LoginCommand.html" title="class in hudson.cli">LoginCommand</A>, <A HREF="../../hudson/cli/LogoutCommand.html" title="class in hudson.cli">LogoutCommand</A>, <A HREF="../../hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/cli/AbstractBuildRangeCommand.html" title="class in hudson.cli">AbstractBuildRangeCommand</A>, <A HREF="../../hudson/cli/BuildCommand.html" title="class in hudson.cli">BuildCommand</A>, <A HREF="../../hudson/cli/CloneableCLICommand.html" title="class in hudson.cli">CloneableCLICommand</A>, <A HREF="../../hudson/cli/CommandDuringBuild.html" title="class in hudson.cli">CommandDuringBuild</A>, <A HREF="../../hudson/cli/CopyJobCommand.html" title="class in hudson.cli">CopyJobCommand</A>, <A HREF="../../hudson/cli/CreateJobCommand.html" title="class in hudson.cli">CreateJobCommand</A>, <A HREF="../../hudson/cli/GroovyCommand.html" title="class in hudson.cli">GroovyCommand</A>, <A HREF="../../hudson/cli/GroovyshCommand.html" title="class in hudson.cli">GroovyshCommand</A>, <A HREF="../../hudson/cli/HelpCommand.html" title="class in hudson.cli">HelpCommand</A>, <A HREF="../../hudson/cli/InstallPluginCommand.html" title="class in hudson.cli">InstallPluginCommand</A>, <A HREF="../../hudson/cli/InstallToolCommand.html" title="class in hudson.cli">InstallToolCommand</A>, <A HREF="../../hudson/cli/LoginCommand.html" title="class in hudson.cli">LoginCommand</A>, <A HREF="../../hudson/cli/LogoutCommand.html" title="class in hudson.cli">LogoutCommand</A>, <A HREF="../../hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>, <A HREF="../../hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A></DD>
 </DL>
 <HR>
 <DL>
@@ -290,6 +290,14 @@ Base class for Hudson CLI.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#getCurrent()">getCurrent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the calling thread is in the middle of executing a CLI command, return it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#getName()">getName</A></B>()</CODE>
 
@@ -348,6 +356,14 @@ Base class for Hudson CLI.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called while producing usage.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/cli/CLICommand.html#registerOptionHandlers()">registerOptionHandlers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Auto-discovers <CODE>OptionHandler</CODE>s and add them to the given command line parser.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -729,6 +745,22 @@ protected <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli"
 </DL>
 <HR>
 
+<A NAME="registerOptionHandlers()"><!-- --></A><H3>
+registerOptionHandlers</H3>
+<PRE>
+protected void <B>registerOptionHandlers</B>()</PRE>
+<DL>
+<DD>Auto-discovers <CODE>OptionHandler</CODE>s and add them to the given command line parser.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="all()"><!-- --></A><H3>
 all</H3>
 <PRE>
@@ -751,6 +783,22 @@ clone</H3>
 public static <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A> <B>clone</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</PRE>
 <DL>
 <DD>Obtains a copy of the command for invocation.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCurrent()"><!-- --></A><H3>
+getCurrent</H3>
+<PRE>
+public static <A HREF="../../hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A> <B>getCurrent</B>()</PRE>
+<DL>
+<DD>If the calling thread is in the middle of executing a CLI command, return it. Otherwise null.
 <P>
 <DD><DL>
 </DL>

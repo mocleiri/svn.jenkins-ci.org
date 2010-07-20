@@ -37,6 +37,7 @@ import java.io.OutputStream;
 import java.io.Closeable;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.Manifest;
 import java.util.logging.Logger;
@@ -68,7 +69,7 @@ import org.kohsuke.stapler.HttpResponses;
  *
  * @author Kohsuke Kawaguchi
  */
-public final class PluginWrapper implements Comparable<PluginWrapper> {
+public class PluginWrapper implements Comparable<PluginWrapper> {
     /**
      * {@link PluginManager} to which this belongs to.
      */
@@ -192,7 +193,15 @@ public final class PluginWrapper implements Comparable<PluginWrapper> {
      * Returns the URL of the index page jelly script.
      */
     public URL getIndexPage() {
-        return classLoader.getResource("index.jelly");
+        // In the current impl dependencies are checked first, so the plugin itself
+        // will add the last entry in the getResources result.
+        URL idx = null;
+        try {
+            Enumeration<URL> en = classLoader.getResources("index.jelly");
+            while (en.hasMoreElements())
+                idx = en.nextElement();
+        } catch (IOException ignore) { }
+        return idx;
     }
 
     private String computeShortName(Manifest manifest, File archive) {

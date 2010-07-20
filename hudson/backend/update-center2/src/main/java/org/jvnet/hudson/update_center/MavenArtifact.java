@@ -29,7 +29,6 @@ import org.sonatype.nexus.index.ArtifactInfo;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.Long;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;

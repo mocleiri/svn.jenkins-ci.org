@@ -24,10 +24,9 @@
 package com.thalesgroup.hudson.plugins.xunit.util;
 
 import hudson.model.BuildListener;
+import org.jvnet.localizer.ResourceBundleHolder;
 
 import java.io.Serializable;
-
-import org.jvnet.localizer.ResourceBundleHolder;
 
 public class XUnitLog implements Serializable {
 

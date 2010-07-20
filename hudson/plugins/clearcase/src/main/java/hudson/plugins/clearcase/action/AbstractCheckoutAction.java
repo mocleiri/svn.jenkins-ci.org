@@ -43,6 +43,7 @@ import org.apache.commons.lang.Validate;
  */
 public abstract class AbstractCheckoutAction implements CheckOutAction {
     
+
     public static class LoadRulesDelta {
         private final Set<String> removed;
         private final Set<String> added;
@@ -65,14 +66,23 @@ public abstract class AbstractCheckoutAction implements CheckOutAction {
     protected final ClearTool cleartool;
     protected final String[] loadRules;
     protected final boolean useUpdate;
+    protected final String viewPath;
     
-    public AbstractCheckoutAction(ClearTool cleartool, String[] loadRules, boolean useUpdate) {
+    public AbstractCheckoutAction(ClearTool cleartool, String[] loadRules, boolean useUpdate, String viewPath) {
         Validate.notNull(cleartool);
         this.cleartool = cleartool;
         this.loadRules = loadRules;
         this.useUpdate = useUpdate;
+        this.viewPath = viewPath;
     }
 
+    @Override
+    public boolean isViewValid(Launcher launcher, FilePath workspace, String viewTag) throws IOException, InterruptedException {
+        Validate.notEmpty(viewPath);
+        FilePath filePath = new FilePath(workspace, viewPath);
+        boolean viewPathExists = filePath.exists();
+        return cleartool.doesViewExist(viewTag) && viewPathExists && viewTag.equals(cleartool.lscurrentview(viewPath));
+    }
     /**
      * Manages the re-creation of the view if needed. If something exists but not referenced correctly as a view, it will be renamed and the view will be created
      * @param workspace The job's workspace
@@ -84,6 +94,7 @@ public abstract class AbstractCheckoutAction implements CheckOutAction {
      * @throws InterruptedException
      */
     protected boolean cleanAndCreateViewIfNeeded(FilePath workspace, String viewTag, String viewPath, String streamSelector) throws IOException, InterruptedException {
+        Validate.notEmpty(viewPath);
         FilePath filePath = new FilePath(workspace, viewPath);
         boolean viewPathExists = filePath.exists();
         boolean doViewCreation = true;
@@ -97,10 +108,10 @@ public abstract class AbstractCheckoutAction implements CheckOutAction {
                     }
                 } else {
                     filePath.renameTo(getUnusedFilePath(workspace, viewPath));
-                    cleartool.rmviewtag(viewTag);
+                    rmviewtag(viewTag);
                 }
             } else {
-                cleartool.rmviewtag(viewTag);
+                rmviewtag(viewTag);
             }
         } else {
             if (viewPathExists) {
@@ -111,6 +122,15 @@ public abstract class AbstractCheckoutAction implements CheckOutAction {
             cleartool.mkview(viewPath, viewTag, streamSelector);
         }
         return doViewCreation;
+    }
+    
+    private void rmviewtag(String viewTag) throws InterruptedException, IOException{
+        try {
+            cleartool.rmviewtag(viewTag);
+        } catch(IOException e) {
+            // ClearCase RT doesn't support rmview -tag
+            cleartool.rmtag(viewTag);
+        }
     }
 
     protected AbstractCheckoutAction.LoadRulesDelta getLoadRulesDelta(Set<String> configSpecLoadRules, Launcher launcher) {

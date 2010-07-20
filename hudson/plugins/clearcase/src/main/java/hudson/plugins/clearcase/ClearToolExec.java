@@ -50,6 +50,7 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
@@ -109,6 +110,25 @@ public abstract class ClearToolExec implements ClearTool {
         return new InputStreamReader(new ByteArrayInputStream(baos.toByteArray()));
     }
 
+    @Override
+    public boolean doesStreamExist(String streamSelector) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+
+        cmd.add("lsstream");
+        cmd.add("-short");
+        cmd.add(streamSelector);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        try {
+            launcher.run(cmd.toCommandArray(), null, baos, null);
+        } catch (Exception e) {
+            // empty by design
+        }
+        baos.close();
+        String cleartoolResult = baos.toString();
+        return !(cleartoolResult.contains("stream not found"));
+    }
+
     public boolean doesViewExist(String viewTag) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("lsview");
@@ -134,6 +154,9 @@ public abstract class ClearToolExec implements ClearTool {
     }
 
     private String fixLoadRule(String loadRule) {
+        if (StringUtils.isBlank(loadRule)) {
+            return loadRule;
+        }
         // Remove leading file separator, we don't need it when using add_loadrules
         String quotedLR = ConfigSpec.cleanLoadRule(loadRule, getLauncher().getLauncher().isUnix());
         if (quotedLR.startsWith("\"") && quotedLR.endsWith("\"")) {
@@ -392,7 +415,7 @@ public abstract class ClearToolExec implements ClearTool {
         return new ArrayList<String>();
     }
     
-    public List<String> mkbl(String name, String viewTag, String comment, boolean fullBaseline, boolean identical, List<String> components, String dDependsOn, String aDependsOn) throws IOException, InterruptedException {
+    public List<Baseline> mkbl(String name, String viewTag, String comment, boolean fullBaseline, boolean identical, List<String> components, String dDependsOn, String aDependsOn) throws IOException, InterruptedException {
         Validate.notNull(viewTag);
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("mkbl");
@@ -413,7 +436,9 @@ public abstract class ClearToolExec implements ClearTool {
         }
 
         // Make baseline only for specified components
-        cmd.add("-comp", StringUtils.join(components, ','));
+        if (CollectionUtils.isNotEmpty(components)) {
+        	cmd.add("-comp", StringUtils.join(components, ','));
+        }
         
         if (StringUtils.isNotEmpty(dDependsOn)) {
             cmd.add("-ddepends_on", dDependsOn);
@@ -429,13 +454,13 @@ public abstract class ClearToolExec implements ClearTool {
             throw new IOException("Failed to make baseline, reason: " + output);
         }
 
-        Pattern pattern = Pattern.compile("Created baseline \".+?\"");
+        Pattern pattern = Pattern.compile("Created baseline \"(.+?)\" in component \"(.+?)\"");
         Matcher matcher = pattern.matcher(output);
-        List<String> createdBaselinesList = new ArrayList<String>();
-        while (matcher.find()) {
-            String match = matcher.group();
-            String newBaseline = match.substring(match.indexOf("\"") + 1, match.length() - 1);
-            createdBaselinesList.add(newBaseline);
+        List<Baseline> createdBaselinesList = new ArrayList<Baseline>();
+        while (matcher.find() && matcher.groupCount() == 2 ) {
+            String baseline = matcher.group(1);
+            String component = matcher.group(2);
+            createdBaselinesList.add(new Baseline(baseline, component));
         }
 
         return createdBaselinesList;
@@ -444,8 +469,22 @@ public abstract class ClearToolExec implements ClearTool {
     public void mklabel(String viewName, String label) throws IOException, InterruptedException {
         throw new AbortException();
     }
+    
+    public void mkstream(String parentStream, String stream) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+
+        cmd.add("mkstream");
+        cmd.add("-in");
+        cmd.add(parentStream);
+        cmd.add(stream);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        launcher.run(cmd.toCommandArray(), null, baos, null);
+        baos.close();
+    }
 
     public void mkview(String viewPath, String viewTag, String streamSelector) throws IOException, InterruptedException {
+        Validate.notEmpty(viewPath);
         boolean isOptionalParamContainsHost = false;
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("mkview");
@@ -581,11 +620,10 @@ public abstract class ClearToolExec implements ClearTool {
     public void rebaseDynamic(String viewTag, String baseline) throws IOException, InterruptedException {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add("rebase");
-        cmd.add("-baseline");
-        cmd.add(baseline);
-        cmd.add("-view");
-        cmd.add(viewTag);
+        cmd.add("-baseline", baseline);
+        cmd.add("-view", viewTag);
         cmd.add("-complete");
+        cmd.add("-force");
         launcher.run(cmd.toCommandArray(), null, null, null);
     }
     
@@ -631,6 +669,17 @@ public abstract class ClearToolExec implements ClearTool {
             throw new IOException("Failed to remove view tag: " + output);
         }
 
+    }
+    
+    public void rmtag(String viewTag) throws IOException, InterruptedException {
+        ArgumentListBuilder cmd = new ArgumentListBuilder();
+        cmd.add("rmtag");
+        cmd.add("-view");
+        cmd.add(viewTag);
+        String output = runAndProcessOutput(cmd, null, null, false, null);
+        if (output.contains("cleartool: Error")) {
+            throw new IOException("Failed to remove view tag: " + output);
+        }
     }
 
     public void rmviewUuid(String viewUuid) throws IOException, InterruptedException {

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ViewGroup (Hudson main module 1.363 API)
+ViewGroup (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ViewGroup (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ViewGroup (Hudson main module 1.363 API)";
+        parent.document.title="ViewGroup (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -105,8 +105,6 @@ Interface ViewGroup</H2>
 
 <P>
 Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A>s.
-
- <h2>STILL EXPERIMENTAL: DO NOT IMPLEMENT</h2>
 <P>
 
 <P>
@@ -145,6 +143,14 @@ Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#canDelete(hudson.model.View)">canDelete</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determine whether a view may be deleted.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -229,6 +235,24 @@ Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="canDelete(hudson.model.View)"><!-- --></A><H3>
+canDelete</H3>
+<PRE>
+boolean <B>canDelete</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)</PRE>
+<DL>
+<DD>Determine whether a view may be deleted.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.365</DD>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="deleteView(hudson.model.View)"><!-- --></A><H3>
 deleteView</H3>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UnbufferedBase64InputStream (Hudson main module 1.363 API)
+UnbufferedBase64InputStream (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UnbufferedBase64InputStream (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UnbufferedBase64InputStream (Hudson main module 1.363 API)";
+        parent.document.title="UnbufferedBase64InputStream (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -185,6 +185,14 @@ Filter InputStream that decodes base64 without doing any buffering.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/UnbufferedBase64InputStream.html#skip(long)">skip</A></B>(long&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.io.FilterInputStream"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -192,7 +200,7 @@ Filter InputStream that decodes base64 without doing any buffering.
 <TH ALIGN="left"><B>Methods inherited from class java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true" title="class or interface in java.io">FilterInputStream</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#available()" title="class or interface in java.io">available</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#close()" title="class or interface in java.io">close</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#mark(int)" title="class or interface in java.io">mark</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#markSupported()" title="class or interface in java.io">markSupported</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#read(byte[])" title="class or interface in java.io">read</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#reset()" title="class or interface in java.io">reset</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#skip(long)" title="class or interface in java.io">skip</A></CODE></TD>
+<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#available()" title="class or interface in java.io">available</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#close()" title="class or interface in java.io">close</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#mark(int)" title="class or interface in java.io">mark</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#markSupported()" title="class or interface in java.io">markSupported</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#read(byte[])" title="class or interface in java.io">read</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#reset()" title="class or interface in java.io">reset</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -261,6 +269,23 @@ public int <B>read</B>(byte[]&nbsp;b,
 <DL>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#read(byte[], int, int)" title="class or interface in java.io">read</A></CODE> in class <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true" title="class or interface in java.io">FilterInputStream</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="skip(long)"><!-- --></A><H3>
+skip</H3>
+<PRE>
+public long <B>skip</B>(long&nbsp;n)
+          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true#skip(long)" title="class or interface in java.io">skip</A></CODE> in class <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FilterInputStream.html?is-external=true" title="class or interface in java.io">FilterInputStream</A></CODE></DL>
 </DD>
 <DD><DL>
 

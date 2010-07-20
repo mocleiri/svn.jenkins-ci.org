@@ -23,36 +23,28 @@
 
 package com.thalesgroup.hudson.plugins.xunit.types;
 
-import com.thalesgroup.hudson.library.tusarconversion.TestsTools;
-import hudson.Extension;
-import org.kohsuke.stapler.DataBoundConstructor;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.model.PHPUnitHudsonTestType;
 
+@SuppressWarnings("unused")
 public class PHPUnitType extends XUnitType {
 
-    @DataBoundConstructor
     public PHPUnitType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(TestsTools.PHPUNIT, pattern, faildedIfNotNew, deleteJUnitFiles);
+        super(pattern, faildedIfNotNew, deleteJUnitFiles);
     }
 
-    public XUnitTypeDescriptor<?> getDescriptor() {
-        return new PHPUnitType.DescriptorImpl();
+    public TestTypeDescriptor getDescriptor() {
+        return null;
     }
 
-    @Extension
-    public static class DescriptorImpl extends XUnitTypeDescriptor<PHPUnitType> {
-
-        public DescriptorImpl() {
-            super(PHPUnitType.class);
-        }
-
-        @Override
-        public String getDisplayName() {
-            return TestsTools.PHPUNIT.getLabel();
-        }
-
-        public String getId() {
-            return "phpunit";
-        }
-
+    /**
+     * Call at Hudson startup for backward compatibility
+     *
+     * @return an new hudson object
+     */
+    @SuppressWarnings("unused")
+    public Object readResolve() {
+        return new PHPUnitHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteJUnitFiles());
     }
+
 }

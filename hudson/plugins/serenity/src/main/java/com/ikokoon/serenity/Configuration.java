@@ -15,6 +15,7 @@ import com.ikokoon.serenity.instrumentation.coverage.CoverageClassAdapter;
 import com.ikokoon.serenity.instrumentation.dependency.DependencyClassAdapter;
 import com.ikokoon.serenity.instrumentation.profiling.ProfilingClassAdviceAdapter;
 import com.ikokoon.serenity.model.Project;
+import com.ikokoon.toolkit.LoggingConfigurator;
 import com.ikokoon.toolkit.Toolkit;
 
 /**
@@ -145,6 +146,14 @@ public class Configuration {
 		String snapshotInterval = System.getProperty(IConstants.SNAPSHOT_INTERVAL);
 		if (snapshotInterval != null && Toolkit.isDigits(snapshotInterval)) {
 			return Long.parseLong(snapshotInterval);
+		}
+		return -1;
+	}
+
+	public long getReportInterval() {
+		String reportInterval = System.getProperty(IConstants.REPORT_INTERVAL);
+		if (reportInterval != null && Toolkit.isDigits(reportInterval)) {
+			return Long.parseLong(reportInterval);
 		}
 		return -1;
 	}

@@ -30,8 +30,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import hudson.EnvVars;
 import hudson.Launcher;
-import hudson.model.AbstractProject;
 import hudson.model.Build;
+import hudson.model.TaskListener;
+import hudson.model.AbstractProject;
 import hudson.model.Computer;
 import hudson.model.Node;
 import hudson.plugins.clearcase.ucm.UcmHistoryAction;
@@ -60,6 +61,7 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     private ClearToolLauncher clearToolLauncher;
     private Computer computer;
     private Node node;
+    private TaskListener taskListener;
     private ClearCaseUcmSCM.ClearCaseUcmScmDescriptor clearCaseUcmScmDescriptor;
     
     @Before
@@ -77,6 +79,7 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
         clearCaseUcmScmDescriptor = classContext.mock(ClearCaseUcmSCM.ClearCaseUcmScmDescriptor.class);
         context = new JUnit4Mockery();
         cleartool = context.mock(ClearTool.class);
+        taskListener = context.mock(TaskListener.class);
         clearToolLauncher = context.mock(ClearToolLauncher.class);
         node = classContext.mock(Node.class);
         
@@ -89,7 +92,7 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     @Test
     public void testCreateChangeLogParser() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", false, "viewdrive", "option",
-                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
+                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
         assertNotNull("The change log parser is null", scm.createChangeLogParser());
         assertNotSame("The change log parser is re-used", scm.createChangeLogParser(), scm.createChangeLogParser());
     }
@@ -97,28 +100,28 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     @Test
     public void testGetStream() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", false, "viewdrive", "option",
-                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
+                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
         assertEquals("The stream isn't correct", "stream", scm.getStream());
     }
 
     @Test
     public void testGetOverrideBranchName() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", false, "viewdrive", "option",
-                                                  false, false, false, "", null, "override-branch", false, null, null, false, false, false, "viewpath");
+                                                  false, false, false, "", null, "override-branch", false, null, null, false, false, false, "viewpath", true);
         assertEquals("The override branch isn't correct", "override-branch", scm.getOverrideBranchName());
     }
 
     @Test
     public void testGetBranchNamesDefault() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", false, "viewdrive", "option",
-                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
+                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
         assertArrayEquals("The branch name array is incorrect", new String[]{"stream"}, scm.getBranchNames(EMPTY_VARIABLE_RESOLVER));
     }
 
     @Test
     public void testGetBranchNamesWithOverride() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", false, "viewdrive", "option",
-                                                  false, false, false, "", null, "override-branch", false, null, null, false, false, false, "viewpath");
+                                                  false, false, false, "", null, "override-branch", false, null, null, false, false, false, "viewpath", true);
         assertArrayEquals("The branch name array is incorrect", new String[]{"override-branch"}, scm.getBranchNames(EMPTY_VARIABLE_RESOLVER));
     }
 
@@ -130,15 +133,15 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     @Test
     public void testGetBranchNamesWithVobSelector() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream@/vob/paths", "loadrules", "viewname", false, "viewdrive",
-                                                  "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
+                                                  "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
         assertArrayEquals("The branch name array is incorrect", new String[]{"stream"}, scm.getBranchNames(EMPTY_VARIABLE_RESOLVER));
     }
 
     @Test
     public void testGetViewPaths() throws Exception {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "loadrules", "viewname", false, "viewdrive", "option",
-                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
-        assertEquals("The view path is not the same as the load rules", "loadrules", scm.getViewPaths()[0]);
+                                                  false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
+        assertEquals("The view path is not the same as the load rules", "loadrules", scm.getViewPaths(null, null, launcher)[0]);
     }
     
     /**
@@ -150,9 +153,9 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     @Test
     public void assertLoadRuleIsConvertedToRelativeViewPath() throws Exception {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "\\\\loadrule\\one\n/loadrule/two", "viewname", false,
-                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
-        assertEquals("The first view path is not correct", "loadrule\\one", scm.getViewPaths()[0]);
-        assertEquals("The second view path is not correct", "loadrule/two", scm.getViewPaths()[1]);
+                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
+        assertEquals("The first view path is not correct", "loadrule\\one", scm.getViewPaths(null, null, launcher)[0]);
+        assertEquals("The second view path is not correct", "loadrule/two", scm.getViewPaths(null, null, launcher)[1]);
     }
     
     /**
@@ -173,9 +176,9 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     @Test
     public void testGetVobPathsWithSpaces() throws Exception {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "file with space\nanotherfile", "viewname", false,
-                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
-        assertEquals("The vob path is not the same as the load rules", "file with space", scm.getViewPaths()[0]);
-        assertEquals("The vob path is not the same as the load rules", "anotherfile", scm.getViewPaths()[1]);
+                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
+        assertEquals("The vob path is not the same as the load rules", "file with space", scm.getViewPaths(null, null, launcher)[0]);
+        assertEquals("The vob path is not the same as the load rules", "anotherfile", scm.getViewPaths(null, null, launcher)[1]);
     }
     
     /**
@@ -186,15 +189,15 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
     @Test
     public void testGetWindowsVobPaths() throws Exception {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream", "\\ \\ Windows\n\\\\C\\System\\\\32", "viewname", false,
-                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
-        assertEquals("The vob path is not the same as the load rules", " \\ Windows", scm.getViewPaths()[0]);
-        assertEquals("The vob path is not the same as the load rules", "C\\System\\\\32", scm.getViewPaths()[1]);
+                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
+        assertEquals("The vob path is not the same as the load rules", " \\ Windows", scm.getViewPaths(null, null, launcher)[0]);
+        assertEquals("The vob path is not the same as the load rules", "C\\System\\\\32", scm.getViewPaths(null, null, launcher)[1]);
     }  
 
     @Test 
         public void testShortenStreamName() {
         ClearCaseUcmSCM scm = new ClearCaseUcmSCM("stream:mystream", "file with space\nanotherfile", "viewname", false,
-                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath");
+                                                  "viewdrive", "option", false, false, false, "", null, "", false, null, null, false, false, false, "viewpath", true);
         assertEquals("stream name not shortenen correctly", "mystream",scm.getStream());
     }
 
@@ -216,6 +219,8 @@ public class ClearCaseUcmSCMTest extends AbstractWorkspaceTest {
             });
         context.checking(new Expectations() {
                 {
+                    allowing(clearToolLauncher).getListener(); will(returnValue(taskListener));
+                    allowing(taskListener).getLogger(); will(returnValue(System.out));
                     allowing(clearToolLauncher).getLauncher();
                     will(returnValue(launcher));
                     one(cleartool).pwv("viewname-ClearCase");

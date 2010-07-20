@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AnnotatedLargeText (Hudson main module 1.363 API)
+AnnotatedLargeText (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AnnotatedLargeText (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AnnotatedLargeText (Hudson main module 1.363 API)";
+        parent.document.title="AnnotatedLargeText (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -220,6 +220,15 @@ Extension to <CODE>LargeText</CODE> that handles annotations by <A HREF="../../h
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/AnnotatedLargeText.html#writeLogTo(long, java.io.OutputStream)">writeLogTo</A></B>(long&nbsp;start,
+           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/console/AnnotatedLargeText.html#writeLogTo(long, java.io.Writer)">writeLogTo</A></B>(long&nbsp;start,
            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)</CODE>
 
@@ -233,7 +242,7 @@ Extension to <CODE>LargeText</CODE> that handles annotations by <A HREF="../../h
 <TH ALIGN="left"><B>Methods inherited from class org.kohsuke.stapler.framework.io.LargeText</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>createWriter, doProgressText, isComplete, markAsComplete, readAll, writeLogTo</CODE></TD>
+<TD><CODE>createWriter, doProgressText, isComplete, markAsComplete, readAll</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -340,6 +349,24 @@ writeLogTo</H3>
 <PRE>
 public long <B>writeLogTo</B>(long&nbsp;start,
                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Writer.html?is-external=true" title="class or interface in java.io">Writer</A>&nbsp;w)
+                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>writeLogTo</CODE> in class <CODE>org.kohsuke.stapler.framework.io.LargeText</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeLogTo(long, java.io.OutputStream)"><!-- --></A><H3>
+writeLogTo</H3>
+<PRE>
+public long <B>writeLogTo</B>(long&nbsp;start,
+                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)
                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>

@@ -6,6 +6,7 @@ import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCM;
@@ -15,16 +16,22 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import net.sf.json.JSONObject;
 
+import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
 
 /**
  * StarTeam SCM plugin for Hudson.
+ * Add support for change log and synchronization between starteam repository and hudson's workspace.
+ * Add support for change log creation.
+ * Refactoring to use Extension annotation and to remove use of deprecated API.
  * 
  * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
+ * @author Steve Favez <sfavez@verisign.com>
  */
 public class StarTeamSCM extends SCM {
 
@@ -43,10 +50,26 @@ public class StarTeamSCM extends SCM {
 	private final int port;
 
 	/**
-	 * The constructor.
 	 * 
-	 * @stapler-constructor
+	 * default stapler constructor.
+	 * 
+	 * @param hostname
+	 *            starteam host name.
+	 * @param port
+	 *            starteam port name
+	 * @param projectname
+	 *            name of the project
+	 * @param viewname
+	 *            name of the view
+	 * @param foldername
+	 *            parent folder name.
+	 * @param username
+	 *            the user name required to connect to starteam's server
+	 * @param password
+	 *            password required to connect to starteam's server
+	 *
 	 */
+	@DataBoundConstructor
 	public StarTeamSCM(String hostname, int port, String projectname,
 			String viewname, String foldername, String username, String password) {
 		this.hostname = hostname;
@@ -67,13 +90,23 @@ public class StarTeamSCM extends SCM {
 			FilePath workspace, BuildListener listener, File changelogFile)
 			throws IOException, InterruptedException {
 		boolean status = false;
+
+		Date previousBuildDate = null;
+		if ( build.getPreviousBuild() != null)	{
+		    previousBuildDate = build.getPreviousBuild().getTimestamp().getTime();
+		}
+		Date currentBuildDate = build.getTimestamp().getTime();
+		
+		//create a FilePath to be able to create changelog file on a remote computer.
+		FilePath changeLogFilePath = new FilePath( changelogFile ) ;
+		
 		// Create an actor to do the checkout, possibly on a remote machine
 		StarTeamCheckoutActor co_actor = new StarTeamCheckoutActor(hostname,
-				port, user, passwd, projectname, viewname, foldername, build
-						.getTimestamp().getTime(), changelogFile, listener);
+				port, user, passwd, projectname, viewname, foldername, previousBuildDate, currentBuildDate, changeLogFilePath, listener);
 		if (workspace.act(co_actor)) {
-			// TODO: truly create changelog
-			status = createEmptyChangeLog(changelogFile, listener, "log");
+			// change log is written during checkout (only one pass for
+			// comparison)
+			status = true;
 		} else {
 			listener.getLogger().println("StarTeam checkout failed");
 			status = false;
@@ -99,6 +132,7 @@ public class StarTeamSCM extends SCM {
 	@Override
 	public StarTeamSCMDescriptorImpl getDescriptor() {
 		return DESCRIPTOR;
+//		return (StarTeamSCMDescriptorImpl)super.getDescriptor();
 	}
 
 	/*
@@ -113,10 +147,16 @@ public class StarTeamSCM extends SCM {
 			final TaskListener listener) throws IOException,
 			InterruptedException {
 		boolean status = false;
+		Run run = proj.getLastBuild();
+		Date sinceDate = null;
+		if ( run != null) {
+		    sinceDate= run.getTimestamp().getTime();
+		}
+		Date currentServerDate = new Date();
 		// Create an actor to do the polling, possibly on a remote machine
 		StarTeamPollingActor p_actor = new StarTeamPollingActor(hostname, port,
 				user, passwd, projectname, viewname, foldername,
-				proj.getLastBuild().getTimestamp().getTime(),
+				sinceDate, currentServerDate,
 				listener);
 		if (workspace.act(p_actor)) {
 			status = true;
@@ -136,8 +176,9 @@ public class StarTeamSCM extends SCM {
 
 		private final Collection<StarTeamSCM> scms = new ArrayList<StarTeamSCM>();
 
-		protected StarTeamSCMDescriptorImpl() {
+		public StarTeamSCMDescriptorImpl() {
 			super(StarTeamSCM.class, null);
+			load() ;
 		}
 
 		@Override

@@ -23,22 +23,17 @@
 
 package com.thalesgroup.hudson.plugins.tusarnotifier;
 
-import com.thalesgroup.hudson.library.tusarconversion.ConversionType;
-import com.thalesgroup.hudson.library.tusarconversion.ConversionUtil;
-import com.thalesgroup.hudson.library.tusarconversion.exception.ConversionException;
-import com.thalesgroup.hudson.library.tusarconversion.model.InputType;
-import com.thalesgroup.hudson.plugins.tusarnotifier.descriptors.CoverageTypeDescriptor;
-import com.thalesgroup.hudson.plugins.tusarnotifier.descriptors.MeasuresTypeDescriptor;
-import com.thalesgroup.hudson.plugins.tusarnotifier.descriptors.TestsTypeDescriptor;
-import com.thalesgroup.hudson.plugins.tusarnotifier.descriptors.ViolationsTypeDescriptor;
-import com.thalesgroup.hudson.plugins.tusarnotifier.types.CoverageType;
-import com.thalesgroup.hudson.plugins.tusarnotifier.types.MeasuresType;
-import com.thalesgroup.hudson.plugins.tusarnotifier.types.TestsType;
-import com.thalesgroup.hudson.plugins.tusarnotifier.types.ViolationsType;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.CoverageTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.MeasureTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.ViolationsTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.CoverageType;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.MeasureType;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.ViolationsType;
 import com.thalesgroup.hudson.plugins.tusarnotifier.util.TusarNotifierLogger;
 import hudson.DescriptorExtensionList;
 import hudson.Extension;
-import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.model.*;
 import hudson.tasks.BuildStepDescriptor;
@@ -48,39 +43,45 @@ import hudson.tasks.Publisher;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 
-import java.io.*;
-import java.lang.reflect.Constructor;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TusarNotifier extends Notifier {
 
-    private TestsType[] typesTests;
-    private CoverageType[] typesCoverage;
-    private ViolationsType[] typesViolations;
-    private MeasuresType[] typesMeasures;
+    private TestType[] tests;
+    private CoverageType[] coverages;
+    private ViolationsType[] violations;
+    private MeasureType[] measures;
 
-    public TusarNotifier(TestsType[] typesTests, CoverageType[] typesCoverage,
-                         ViolationsType[] typesViolations, MeasuresType[] typesMeasures) {
-        this.typesTests = typesTests;
-        this.typesCoverage = typesCoverage;
-        this.typesViolations = typesViolations;
-        this.typesMeasures = typesMeasures;
+    public TusarNotifier(TestType[] tests,
+                         CoverageType[] coverages,
+                         ViolationsType[] violations,
+                         MeasureType[] measures) {
+        this.tests = tests;
+        this.coverages = coverages;
+        this.violations = violations;
+        this.measures = measures;
     }
 
-    public TestsType[] getTypesTests() {
-        return typesTests;
+    @SuppressWarnings("unused")
+    public TestType[] getTests() {
+        return tests;
     }
 
-    public CoverageType[] getTypesCoverage() {
-        return typesCoverage;
+    @SuppressWarnings("unused")
+    public CoverageType[] getCoverages() {
+        return coverages;
     }
 
-    public ViolationsType[] getTypesViolations() {
-        return typesViolations;
+    @SuppressWarnings("unused")
+    public ViolationsType[] getViolations() {
+        return violations;
     }
 
-    public MeasuresType[] getTypesMeasures() {
-        return typesMeasures;
+    @SuppressWarnings("unused")
+    public MeasureType[] getMeasures() {
+        return measures;
     }
 
     public BuildStepMonitor getRequiredMonitorService() {
@@ -92,137 +93,30 @@ public class TusarNotifier extends Notifier {
     public boolean perform(final AbstractBuild<?, ?> build, Launcher launcher, final BuildListener listener)
             throws InterruptedException, IOException {
 
-        TusarNotifierLogger.log(listener, "Starting Processing all tusar analysis report.");
-        final ArrayList<ParameterValue> parameters = new ArrayList<ParameterValue>();
+        TusarNotifierLogger.log(listener, "Starting processing all analysis reports.");
 
-        boolean resultConversion = build.getWorkspace().act(new FileCallable<Boolean>() {
+        TusarTransformer tusarTransformer = new TusarTransformer(launcher.getListener(), tests, coverages, violations, measures);
 
-            private void convertTusar(File workspace, File generatedDirectory, String inputTypeKey, String pattern) throws IOException, InterruptedException, ConversionException {
-
-                assert generatedDirectory != null;
-                assert inputTypeKey != null;
-                assert pattern != null;
-
-                InputType inputType = ConversionType.getInputType(inputTypeKey);
-
-                File outputFile = new File(generatedDirectory, "/result-junit-" + new File(pattern).getName());
-                outputFile.createNewFile();
-
-                File inputFile = new File(workspace, pattern);
-                if (!inputFile.exists()) {
-                    throw new IOException("No input files with the pattern " + pattern + " have been found.");
-                }
-
-                conversion(inputType, new File(workspace, pattern), outputFile);
-            }
-
-            public Boolean invoke(File workspace, hudson.remoting.VirtualChannel channel) throws IOException, InterruptedException {
-
-                final String generatedFolder = "generatedTUSARFiles";
-                final String generatedTests = generatedFolder + "/TESTS";
-                final String generatedCoverage = generatedFolder + "/COVERAGE";
-                final String generatedMeasures = generatedFolder + "/MEASURES";
-                final String generatedViolations = generatedFolder + "/VIOLATIONS";
-
-                try {
-                    parameters.add(new StringParameterValue("sonar.language", "tusar"));
-
-                    // Apply conversion for all tests tools
-                    if (typesTests.length != 0) {
-
-                        File outputTestsFileParent = new File(workspace, generatedTests);
-                        outputTestsFileParent.mkdirs();
-
-                        for (TestsType testsType : typesTests) {
-                            convertTusar(workspace, outputTestsFileParent, testsType.getInputTypeKey(), testsType.getPattern());
-                        }
-                        parameters.add(new StringParameterValue("sonar.tusar.tests.reportsPath", generatedTests));
-                    }
-
-                    // Apply conversion for all coverage tools
-                    if (typesCoverage.length != 0) {
-
-                        File outputCoverageFileParent = new File(workspace, generatedCoverage);
-                        outputCoverageFileParent.mkdirs();
-
-                        for (CoverageType coverageType : typesCoverage) {
-                            convertTusar(workspace, outputCoverageFileParent, coverageType.getInputTypeKey(), coverageType.getPattern());
-                        }
-                        parameters.add(new StringParameterValue("sonar.tusar.coverage.reportsPath", generatedCoverage));
-                    }
-
-                    //-- Apply conversion for all violations tools
-                    if (typesViolations.length != 0) {
-
-                        File outputViolationsFileParent = new File(workspace, generatedViolations);
-                        outputViolationsFileParent.mkdirs();
-
-                        for (ViolationsType violationsType : typesViolations) {
-                            convertTusar(workspace, outputViolationsFileParent, violationsType.getInputTypeKey(), violationsType.getPattern());
-                        }
-                        parameters.add(new StringParameterValue("sonar.tusar.violations.reportsPath", generatedViolations));
-
-                    }
-
-                    // Apply conversion for all measures tools
-                    if (typesMeasures.length != 0) {
-
-                        File outputMeasuresFileParent = new File(workspace, generatedMeasures);
-                        outputMeasuresFileParent.mkdirs();
-
-                        for (MeasuresType measuresType : typesMeasures) {
-                            convertTusar(workspace, outputMeasuresFileParent, measuresType.getInputTypeKey(), measuresType.getPattern());
-                        }
-                        parameters.add(new StringParameterValue("sonar.tusar.measures.reportsPath", generatedMeasures));
-                    }
-
-                }
-                catch (Exception e) {
-                    listener.getLogger().print("Tusar notifier error : " + e);
-                    return false;
-                }
-
-                return true;
-            }
-        }
-        );
-
-
-        if (!resultConversion) {
+        String result = build.getWorkspace().act(tusarTransformer);
+        if (result == null) {
             build.setResult(Result.FAILURE);
-            TusarNotifierLogger.log(listener, "Set the build status to FAILURE.");
-            TusarNotifierLogger.log(listener, "End Processing all tusar analysis report.");
-            return false;
-
-        } else {
-            //Export TUSAR Arguments as Hudson build parameters for Sonar Light mode
-            TusarNotifierLogger.log(listener, "Put Sonar Tusar args into build variables.");
-            build.addAction(new ParametersAction(parameters));
-            TusarNotifierLogger.log(listener, "End Processing all tusar analysis report.");
+            TusarNotifierLogger.log(listener, "Stopping TUSARNOFIFIER.");
             return true;
         }
-    }
 
+        List<ParameterValue> parameterValues = new ArrayList<ParameterValue>();
+        parameterValues.add(new StringParameterValue("sonar.language", "tusar"));
+        parameterValues.add(new StringParameterValue("sonar.tusar.reportsPaths", result));
+        build.addAction(new ParametersAction(parameterValues));
 
-    private void conversion(InputType type, File inputFile, File outputFile) throws IOException, ConversionException {
-
-        InputStream inputStream = new FileInputStream(inputFile);
-        OutputStream outputStream = new FileOutputStream(outputFile);
-
-        ConversionUtil.convert(type, inputStream, outputStream);
-
-        inputStream.close();
-        outputStream.close();
+        return true;
     }
 
 
     @Extension(ordinal = 1)
+    @SuppressWarnings("unused")
     public static final class TusarNotifierDescriptor extends BuildStepDescriptor<Publisher> {
 
-        private static DescriptorExtensionList<TestsType, TestsTypeDescriptor<?>> testsDescriptorExtensionList;
-        private static DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> coverageDescriptorExtensionList;
-        private static DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> violationsDescriptorExtensionList;
-        private static DescriptorExtensionList<MeasuresType, MeasuresTypeDescriptor<?>> measuresDescriptorExtensionList;
 
         public TusarNotifierDescriptor() {
             super(TusarNotifier.class);
@@ -239,153 +133,44 @@ public class TusarNotifier extends Notifier {
             return "/plugin/tusarnotifier/help.html";
         }
 
-        static {
-            testsDescriptorExtensionList = initTests();
-            coverageDescriptorExtensionList = initCoverage();
-            violationsDescriptorExtensionList = initViolations();
-            measuresDescriptorExtensionList = initMeasures();
-        }
-
-        public static DescriptorExtensionList<TestsType, TestsTypeDescriptor<?>> initTests() {
-            DescriptorExtensionList<TestsType, TestsTypeDescriptor<?>> testsList = DescriptorExtensionList.create(Hudson.getInstance(), TestsType.class);
-
-            try {
-                for (Map.Entry<String, InputType> entry : ConversionType.TESTS.getAll().entrySet()) {
-                    Constructor<TestsType> constr = TestsType.class.getDeclaredConstructor(String.class);
-                    TestsType type = constr.newInstance(entry.getKey());
-                    testsList.add(type.getDescriptor());
-                }
-            }
-            catch (Exception e) {
-                System.err.print("Descriptor creation error : " + e);
-            }
-
-            return testsList;
-        }
-
-        public static DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> initCoverage() {
-            DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> coverageList = DescriptorExtensionList.create(Hudson.getInstance(), CoverageType.class);
-            try {
-                for (Map.Entry<String, InputType> entry : ConversionType.COVERAGE.getAll().entrySet()) {
-                    Constructor<CoverageType> constr = CoverageType.class.getDeclaredConstructor(String.class);
-                    CoverageType type = constr.newInstance(entry.getKey());
-                    coverageList.add(type.getDescriptor());
-                }
-            }
-            catch (Exception e) {
-                System.err.print("Descriptor creation error : " + e);
-            }
-
-            return coverageList;
-        }
-
-        public static DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> initViolations() {
-            DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> violationsList = DescriptorExtensionList.create(Hudson.getInstance(), ViolationsType.class);
-            try {
-                for (Map.Entry<String, InputType> entry : ConversionType.VIOLATIONS.getAll().entrySet()) {
-                    Constructor<ViolationsType> constr = ViolationsType.class.getDeclaredConstructor(String.class);
-                    ViolationsType type = constr.newInstance(entry.getKey());
-                    violationsList.add(type.getDescriptor());
-                }
-            }
-            catch (Exception e) {
-                System.err.print("Descriptor creation error : " + e);
-            }
-
-            return violationsList;
-        }
-
-        public static DescriptorExtensionList<MeasuresType, MeasuresTypeDescriptor<?>> initMeasures() {
-            DescriptorExtensionList<MeasuresType, MeasuresTypeDescriptor<?>> measuresList = DescriptorExtensionList.create(Hudson.getInstance(), MeasuresType.class);
-            try {
-                for (Map.Entry<String, InputType> entry : ConversionType.MEASURES.getAll().entrySet()) {
-                    Constructor<MeasuresType> constr = MeasuresType.class.getDeclaredConstructor(String.class);
-                    MeasuresType type = constr.newInstance(entry.getKey());
-                    measuresList.add(type.getDescriptor());
-                }
-            }
-            catch (Exception e) {
-                System.err.print("Descriptor creation error : " + e);
-            }
-
-            return measuresList;
-        }
 
         @Override
         public String getDisplayName() {
             return "TUSAR Notifier";
         }
 
-        public DescriptorExtensionList<TestsType, TestsTypeDescriptor<?>> getAllTests() {
-            return testsDescriptorExtensionList;
+        public DescriptorExtensionList<TestType, TestTypeDescriptor<?>> getListTestDescriptors() {
+            return TestTypeDescriptor.all();
         }
 
-        public DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> getAllCoverage() {
-            return coverageDescriptorExtensionList;
+        public DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> getListViolationDescriptors() {
+            return ViolationsTypeDescriptor.all();
         }
 
-        public DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> getAllViolations() {
-            return violationsDescriptorExtensionList;
+
+        public DescriptorExtensionList<MeasureType, MeasureTypeDescriptor<?>> getListMeasureDescriptors() {
+            return MeasureTypeDescriptor.all();
         }
 
-        public DescriptorExtensionList<MeasuresType, MeasuresTypeDescriptor<?>> getAllMeasures() {
-            return measuresDescriptorExtensionList;
+
+        public DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> getListCoverageDescriptors() {
+            return CoverageTypeDescriptor.all();
         }
 
         @Override
         public Publisher newInstance(StaplerRequest req, JSONObject formData)
                 throws FormException {
 
-            Collection<TestsTypeDescriptor<?>> testsDescriptors = new ArrayList<TestsTypeDescriptor<?>>();
-            Collection<CoverageTypeDescriptor<?>> coverageDescriptors = new ArrayList<CoverageTypeDescriptor<?>>();
-            Collection<ViolationsTypeDescriptor<?>> violationsDescriptors = new ArrayList<ViolationsTypeDescriptor<?>>();
-            Collection<MeasuresTypeDescriptor<?>> measuresDescriptors = new ArrayList<MeasuresTypeDescriptor<?>>();
+            List<TestType> tests = Descriptor.newInstancesFromHeteroList(req, formData, "tests", getListTestDescriptors());
+            List<CoverageType> coverages = Descriptor.newInstancesFromHeteroList(req, formData, "coverages", getListCoverageDescriptors());
+            List<ViolationsType> violations = Descriptor.newInstancesFromHeteroList(req, formData, "violations", getListViolationDescriptors());
+            List<MeasureType> measures = Descriptor.newInstancesFromHeteroList(req, formData, "measures", getListMeasureDescriptors());
 
-            Iterable<Descriptor> iterableTests = Hudson.getInstance().getDescriptorList(TestsType.class).listLegacyInstances();
-            for (Iterator<Descriptor> it = iterableTests.iterator(); it.hasNext();) {
-                Descriptor desc = it.next();
-                if (desc instanceof TestsTypeDescriptor) {
-                    testsDescriptors.add((TestsTypeDescriptor) desc);
-                }
-            }
-
-            Iterable<Descriptor> iterableCoverage = Hudson.getInstance().getDescriptorList(CoverageType.class).listLegacyInstances();
-            for (Iterator<Descriptor> it = iterableCoverage.iterator(); it.hasNext();) {
-                Descriptor desc = it.next();
-                if (desc instanceof CoverageTypeDescriptor) {
-                    coverageDescriptors.add((CoverageTypeDescriptor) desc);
-                }
-            }
-
-            Iterable<Descriptor> iterableViolations = Hudson.getInstance().getDescriptorList(ViolationsType.class).listLegacyInstances();
-            for (Iterator<Descriptor> it = iterableViolations.iterator(); it.hasNext();) {
-                Descriptor desc = it.next();
-                if (desc instanceof ViolationsTypeDescriptor) {
-                    violationsDescriptors.add((ViolationsTypeDescriptor) desc);
-                }
-            }
-
-            Iterable<Descriptor> iterableMeasures = Hudson.getInstance().getDescriptorList(MeasuresType.class).listLegacyInstances();
-            for (Iterator<Descriptor> it = iterableMeasures.iterator(); it.hasNext();) {
-                Descriptor desc = it.next();
-                if (desc instanceof MeasuresTypeDescriptor<?>) {
-                    measuresDescriptors.add((MeasuresTypeDescriptor) desc);
-                }
-            }
-
-            List<TestsType> tests = Descriptor.newInstancesFromHeteroList(
-                    req, formData, "tests", testsDescriptors);
-            List<CoverageType> coverage = Descriptor.newInstancesFromHeteroList(
-                    req, formData, "coverage", coverageDescriptors);
-            List<ViolationsType> violations = Descriptor.newInstancesFromHeteroList(
-                    req, formData, "violations", violationsDescriptors);
-            List<MeasuresType> measures = Descriptor.newInstancesFromHeteroList(
-                    req, formData, "measures", measuresDescriptors);
-
-            return new TusarNotifier(tests.toArray(new TestsType[tests.size()]),
-                    coverage.toArray(new CoverageType[coverage.size()]),
+            return new TusarNotifier(tests.toArray(new TestType[tests.size()]),
+                    coverages.toArray(new CoverageType[coverages.size()]),
                     violations.toArray(new ViolationsType[violations.size()]),
-                    measures.toArray(new MeasuresType[measures.size()]));
+                    measures.toArray(new MeasureType[measures.size()])
+            );
         }
     }
 

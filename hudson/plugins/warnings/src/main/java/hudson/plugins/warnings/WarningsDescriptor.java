@@ -1,15 +1,25 @@
 package hudson.plugins.warnings;
 
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 import hudson.Extension;
 import hudson.model.AbstractProject;
 import hudson.plugins.analysis.core.PluginDescriptor;
+import hudson.plugins.warnings.parser.Warning;
+import hudson.util.CopyOnWriteList;
+import hudson.util.FormValidation;
+import hudson.util.FormValidation.Kind;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.lang.StringUtils;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
 /**
@@ -24,6 +34,9 @@ public final class WarningsDescriptor extends PluginDescriptor {
     private static final String PLUGIN_NAME = "warnings";
     /** Icon to use for the result and project action. */
     private static final String ACTION_ICON = "/plugin/warnings/icons/warnings-24x24.png";
+    private static final int MAX_MESSAGE_LENGTH = 60;
+
+    private final CopyOnWriteList<GroovyParser> groovyParsers = new CopyOnWriteList<GroovyParser>();
 
     /**
      * Instantiates a new {@link WarningsDescriptor}.
@@ -93,5 +106,136 @@ public final class WarningsDescriptor extends PluginDescriptor {
         }
 
         return parsers;
+    }
+
+    /**
+     * Returns the configured Groovy parsers.
+     *
+     * @return the Groovy parsers
+     */
+    public CopyOnWriteList<GroovyParser> getParsers() {
+        return groovyParsers;
+    }
+
+    @Override
+    public boolean configure(final StaplerRequest req, final JSONObject formData) {
+        groovyParsers.replaceBy(req.bindJSONToList(GroovyParser.class, formData.get("parsers")));
+
+        return true;
+    }
+
+    /**
+     * Performs on-the-fly validation on the name of the parser that needs to be unique.
+     *
+     * @param name
+     *            the name of the parser
+     * @return the validation result
+     */
+    public FormValidation doCheckName(@QueryParameter(required = true) final String name) {
+        return GroovyParser.doCheckName(name);
+    }
+
+    /**
+     * Performs on-the-fly validation on the regular expression.
+     *
+     * @param regexp
+     *            the regular expression
+     * @return the validation result
+     */
+    public FormValidation doCheckRegexp(@QueryParameter(required = true) final String regexp) {
+        return GroovyParser.doCheckRegexp(regexp);
+    }
+
+    /**
+     * Performs on-the-fly validation on the Groovy script.
+     *
+     * @param script
+     *            the script
+     * @return the validation result
+     */
+    public FormValidation doCheckScript(@QueryParameter(required = true) final String script) {
+        return GroovyParser.doCheckScript(script);
+    }
+
+    /**
+     * Parses the example message with the specified regular expression and script.
+     *
+     * @param example
+     *            example that should be resolve to a warning
+     * @param regexp
+     *            the regular expression
+     * @param script
+     *            the script
+     * @return the validation result
+     */
+    public FormValidation doCheckExample(@QueryParameter final String example,
+            @QueryParameter final String regexp, @QueryParameter final String script) {
+        if (StringUtils.isNotBlank(example) && StringUtils.isNotBlank(regexp) && StringUtils.isNotBlank(script)) {
+            return parseExample(script, example, regexp);
+        }
+        else {
+            return FormValidation.ok();
+        }
+    }
+
+    /**
+     * Parses the example and returns a validation result of type
+     * {@link Kind#OK} if a warning has been found.
+     *
+     * @param script
+     *            the script that parses the expression
+     * @param example
+     *            example text that will be matched by the regular expression
+     * @param regexp
+     *            the regular expression
+     * @return a result of {@link Kind#OK} if a warning has been found
+     */
+    private FormValidation parseExample(final String script, final String example, final String regexp) {
+        Pattern pattern = Pattern.compile(regexp);
+        Matcher matcher = pattern.matcher(example);
+        if (matcher.matches()) {
+            Binding binding = new Binding();
+            binding.setVariable("matcher", matcher);
+            GroovyShell shell = new GroovyShell(WarningsDescriptor.class.getClassLoader(), binding);
+            Object result = null;
+            try {
+                result = shell.evaluate(script);
+            }
+            catch (Exception exception) { // NOCHECKSTYLE: catch all exceptions of the Groovy script
+                return FormValidation.error(
+                        Messages.Warnings_GroovyParser_Error_Example_exception(exception.getMessage()));
+            }
+            if (result instanceof Warning) {
+                StringBuilder okMessage = new StringBuilder(Messages.Warnings_GroovyParser_Error_Example_ok_title());
+                Warning warning = (Warning)result;
+                message(okMessage, Messages.Warnings_GroovyParser_Error_Example_ok_file(warning.getFileName()));
+                message(okMessage, Messages.Warnings_GroovyParser_Error_Example_ok_line(warning.getPrimaryLineNumber()));
+                message(okMessage, Messages.Warnings_GroovyParser_Error_Example_ok_priority(warning.getPriority().getLongLocalizedString()));
+                message(okMessage, Messages.Warnings_GroovyParser_Error_Example_ok_category(warning.getCategory()));
+                message(okMessage, Messages.Warnings_GroovyParser_Error_Example_ok_type(warning.getType()));
+                message(okMessage, Messages.Warnings_GroovyParser_Error_Example_ok_message(warning.getMessage()));
+                return FormValidation.ok(okMessage.toString());
+            }
+            else {
+                return FormValidation.error(Messages.Warnings_GroovyParser_Error_Example_wrongReturnType(result));
+            }
+        }
+        else {
+            return FormValidation.error(Messages.Warnings_GroovyParser_Error_Example_regexpDoesNotMatch());
+        }
+    }
+
+    private void message(final StringBuilder okMessage, final String message) {
+        okMessage.append("\n");
+        int max = MAX_MESSAGE_LENGTH;
+        if (message.length() > max) {
+            int size = max / 2 - 1;
+            okMessage.append(message.substring(0, size));
+            okMessage.append("[...]");
+            okMessage.append(message.substring(message.length() - size, message.length()));
+        }
+        else {
+            okMessage.append(message);
+        }
     }
 }

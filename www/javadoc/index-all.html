@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.363 API)
+Index (Hudson main module 1.367 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-06-18">
+<META NAME="date" CONTENT="2010-07-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.363 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.363 API)";
+        parent.document.title="Index (Hudson main module 1.367 API)";
     }
 }
 </SCRIPT>
@@ -2097,9 +2097,21 @@ Method in class hudson.util.<A HREF="./hudson/util/StringConverter2.html" title=
 <DT><A HREF="./hudson/util/XStream2.PassthruConverter.html#canConvert(java.lang.Class)"><B>canConvert(Class)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/XStream2.PassthruConverter.html" title="class in hudson.util">XStream2.PassthruConverter</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Hudson.html#canDelete(hudson.model.View)"><B>canDelete(View)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/MyViewsProperty.html#canDelete(hudson.model.View)"><B>canDelete(View)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/MyViewsProperty.html" title="class in hudson.model">MyViewsProperty</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/TreeView.html#canDelete(hudson.model.View)"><B>canDelete(View)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/TreeView.html" title="class in hudson.model">TreeView</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/User.html#canDelete()"><B>canDelete()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
 <DD>With ADMINISTER permission, can delete users with persisted data but can't delete self.
+<DT><A HREF="./hudson/model/ViewGroup.html#canDelete(hudson.model.View)"><B>canDelete(View)</B></A> - 
+Method in interface hudson.model.<A HREF="./hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>
+<DD>Determine whether a view may be deleted.
 <DT><A HREF="./hudson/security/SecurityRealm.html#canLogOut()"><B>canLogOut()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>
 <DD>Returns true if this <A HREF="./hudson/security/SecurityRealm.html" title="class in hudson.security"><CODE>SecurityRealm</CODE></A> supports explicit logout operation.
@@ -2503,6 +2515,9 @@ Variable in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestR
 <DT><A HREF="./hudson/FilePath.html#chmod(int)"><B>chmod(int)</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Sets the file permission.
+<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html#chmod(java.lang.String, int)"><B>chmod(String, int)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows">WindowsRemoteFileSystem</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tools/JDKInstaller.FileSystem.html#chmod(java.lang.String, int)"><B>chmod(String, int)</B></A> - 
 Method in interface hudson.tools.<A HREF="./hudson/tools/JDKInstaller.FileSystem.html" title="interface in hudson.tools">JDKInstaller.FileSystem</A>
 <DD>&nbsp;
@@ -2763,6 +2778,9 @@ Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotationOutput
 <DT><A HREF="./hudson/console/LineTransformationOutputStream.html#close()"><B>close()</B></A> - 
 Method in class hudson.console.<A HREF="./hudson/console/LineTransformationOutputStream.html" title="class in hudson.console">LineTransformationOutputStream</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/console/PlainTextConsoleOutputStream.html#close()"><B>close()</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/PlainTextConsoleOutputStream.html" title="class in hudson.console">PlainTextConsoleOutputStream</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/DNSMultiCast.html#close()"><B>close()</B></A> - 
 Method in class hudson.<A HREF="./hudson/DNSMultiCast.html" title="class in hudson">DNSMultiCast</A>
 <DD>&nbsp;
@@ -2950,6 +2968,9 @@ Constructor for class hudson.util.<A HREF="./hudson/util/ComboBoxModel.html" tit
 <DT><A HREF="./hudson/tasks/CommandInterpreter.html#command"><B>command</B></A> - 
 Variable in class hudson.tasks.<A HREF="./hudson/tasks/CommandInterpreter.html" title="class in hudson.tasks">CommandInterpreter</A>
 <DD>Command to execute.
+<DT><A HREF="./hudson/cli/CommandDuringBuild.html" title="class in hudson.cli"><B>CommandDuringBuild</B></A> - Class in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>Base class for those commands that are valid only during a build.<DT><A HREF="./hudson/cli/CommandDuringBuild.html#CommandDuringBuild()"><B>CommandDuringBuild()</B></A> - 
+Constructor for class hudson.cli.<A HREF="./hudson/cli/CommandDuringBuild.html" title="class in hudson.cli">CommandDuringBuild</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tools/CommandInstaller.html" title="class in hudson.tools"><B>CommandInstaller</B></A> - Class in <A HREF="./hudson/tools/package-summary.html">hudson.tools</A><DD>Installs a tool by running an arbitrary shell command.<DT><A HREF="./hudson/tools/CommandInstaller.html#CommandInstaller(java.lang.String, java.lang.String, java.lang.String)"><B>CommandInstaller(String, String, String)</B></A> - 
 Constructor for class hudson.tools.<A HREF="./hudson/tools/CommandInstaller.html" title="class in hudson.tools">CommandInstaller</A>
 <DD>&nbsp;
@@ -4408,6 +4429,9 @@ Constructor for class hudson.util.<A HREF="./hudson/util/DelegatingOutputStream.
 <DT><A HREF="./hudson/FilePath.html#delete()"><B>delete()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Deletes this file.
+<DT><A HREF="./hudson/maven/MavenModuleSetBuild.html#delete()"><B>delete()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/AbstractBuild.html#delete()"><B>delete()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>
 <DD>&nbsp;
@@ -4440,6 +4464,9 @@ Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in 
 <DD>Deletes the data directory and removes this user from Hudson.
 <DT><A HREF="./hudson/model/View.html#DELETE"><B>DELETE</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html#delete(java.lang.String)"><B>delete(String)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows">WindowsRemoteFileSystem</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/EditType.html#DELETE"><B>DELETE</B></A> - 
 Static variable in class hudson.scm.<A HREF="./hudson/scm/EditType.html" title="class in hudson.scm">EditType</A>
@@ -5705,6 +5732,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/model/Api.html#doXml(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.String, java.lang.String, int)"><B>doXml(StaplerRequest, StaplerResponse, String, String, int)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Api.html" title="class in hudson.model">Api</A>
 <DD>Exposes the bean as XML.
+<DT><A HREF="./hudson/util/IOUtils.html#drain(java.io.InputStream)"><B>drain(InputStream)</B></A> - 
+Static method in class hudson.util.<A HREF="./hudson/util/IOUtils.html" title="class in hudson.util">IOUtils</A>
+<DD>Drains the input stream and closes it.
 <DT><A HREF="./hudson/util/NoOverlapCategoryAxis.html#drawCategoryLabels(java.awt.Graphics2D, java.awt.geom.Rectangle2D, java.awt.geom.Rectangle2D, org.jfree.ui.RectangleEdge, org.jfree.chart.axis.AxisState, org.jfree.chart.plot.PlotRenderingInfo)"><B>drawCategoryLabels(Graphics2D, Rectangle2D, Rectangle2D, RectangleEdge, AxisState, PlotRenderingInfo)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/NoOverlapCategoryAxis.html" title="class in hudson.util">NoOverlapCategoryAxis</A>
 <DD>&nbsp;
@@ -6010,6 +6040,9 @@ Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotationOutput
 <DT><A HREF="./hudson/console/LineTransformationOutputStream.html#eol(byte[], int)"><B>eol(byte[], int)</B></A> - 
 Method in class hudson.console.<A HREF="./hudson/console/LineTransformationOutputStream.html" title="class in hudson.console">LineTransformationOutputStream</A>
 <DD>Called for each end of the line.
+<DT><A HREF="./hudson/console/PlainTextConsoleOutputStream.html#eol(byte[], int)"><B>eol(byte[], int)</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/PlainTextConsoleOutputStream.html" title="class in hudson.console">PlainTextConsoleOutputStream</A>
+<DD>Called after we read the whole line of plain text.
 <DT><A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html#eol(byte[], int)"><B>eol(byte[], int)</B></A> - 
 Method in class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html" title="class in hudson.tasks._ant">AntConsoleAnnotator</A>
 <DD>&nbsp;
@@ -6529,9 +6562,6 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/FileParameterValue.html" title="class in hudson.model"><B>FileParameterValue</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/ParameterValue.html" title="class in hudson.model"><CODE>ParameterValue</CODE></A> for <A HREF="./hudson/model/FileParameterDefinition.html" title="class in hudson.model"><CODE>FileParameterDefinition</CODE></A>.<DT><A HREF="./hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, org.apache.commons.fileupload.FileItem)"><B>FileParameterValue(String, FileItem)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, org.apache.commons.fileupload.FileItem, java.lang.String)"><B>FileParameterValue(String, FileItem, String)</B></A> - 
-Constructor for class hudson.model.<A HREF="./hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>
-<DD>&nbsp;
 <DT><A HREF="./hudson/model/FileParameterValue.html#FileParameterValue(java.lang.String, java.io.File, java.lang.String)"><B>FileParameterValue(String, File, String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/FileParameterValue.html" title="class in hudson.model">FileParameterValue</A>
 <DD>&nbsp;
@@ -6913,6 +6943,9 @@ Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudso
 <DD>&nbsp;
 <DT><A HREF="./hudson/console/ConsoleAnnotationOutputStream.html#flush()"><B>flush()</B></A> - 
 Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotationOutputStream.html" title="class in hudson.console">ConsoleAnnotationOutputStream</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/console/PlainTextConsoleOutputStream.html#flush()"><B>flush()</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/PlainTextConsoleOutputStream.html" title="class in hudson.console">PlainTextConsoleOutputStream</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/logging/WeakLogHandler.html#flush()"><B>flush()</B></A> - 
 Method in class hudson.logging.<A HREF="./hudson/logging/WeakLogHandler.html" title="class in hudson.logging">WeakLogHandler</A>
@@ -7305,7 +7338,10 @@ Method in exception hudson.util.<A HREF="./hudson/util/FormValidation.html" titl
 <DT><A HREF="./hudson/util/ListBoxModel.html#generateResponse(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, java.lang.Object)"><B>generateResponse(StaplerRequest, StaplerResponse, Object)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ListBoxModel.html" title="class in hudson.util">ListBoxModel</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/lifecycle/WindowsSlaveInstaller.html#generateSlaveXml(java.lang.String, java.lang.String)"><B>generateSlaveXml(String, String)</B></A> - 
+<DT><A HREF="./hudson/lifecycle/WindowsSlaveInstaller.html#generateServiceId(java.lang.String)"><B>generateServiceId(String)</B></A> - 
+Static method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsSlaveInstaller.html" title="class in hudson.lifecycle">WindowsSlaveInstaller</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/lifecycle/WindowsSlaveInstaller.html#generateSlaveXml(java.lang.String, java.lang.String, java.lang.String)"><B>generateSlaveXml(String, String, String)</B></A> - 
 Static method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsSlaveInstaller.html" title="class in hudson.lifecycle">WindowsSlaveInstaller</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/StackedAreaRenderer2.html#generateToolTip(org.jfree.data.category.CategoryDataset, int, int)"><B>generateToolTip(CategoryDataset, int, int)</B></A> - 
@@ -7987,7 +8023,7 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in
 <DD>Gets all the <A HREF="./hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s that are waiting for an executor in the given <A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 <DT><A HREF="./hudson/model/Queue.html#getBuildableItems()"><B>getBuildableItems()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
-<DD>Gets the snapshot of <A HREF="./hudson/model/Queue.html#buildables"><CODE>Queue.buildables</CODE></A>.
+<DD>Gets the snapshot of all <A HREF="./hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s.
 <DT><A HREF="./hudson/model/Job.html#getBuildByNumber(int)"><B>getBuildByNumber(int)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>&nbsp;
@@ -8598,6 +8634,9 @@ Method in enum hudson.tasks.junit.<A HREF="./hudson/tasks/junit/CaseResult.Statu
 <DT><A HREF="./hudson/model/AbstractBuild.html#getCulprits()"><B>getCulprits()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>
 <DD>List of users who committed a change since the last non-broken build till now.
+<DT><A HREF="./hudson/cli/CLICommand.html#getCurrent()"><B>getCurrent()</B></A> - 
+Static method in class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>
+<DD>If the calling thread is in the middle of executing a CLI command, return it.
 <DT><A HREF="./hudson/model/Executor.html#getCurrentExecutable()"><B>getCurrentExecutable()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
 <DD>Returns the current <A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> this executor is running.
@@ -8606,6 +8645,9 @@ Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in 
 <DD>When called from within JEXL expression evaluation,
  this method returns the current <CODE>JellyContext</CODE> used
  to evaluate the script.
+<DT><A HREF="./hudson/cli/CommandDuringBuild.html#getCurrentlyBuilding()"><B>getCurrentlyBuilding()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/CommandDuringBuild.html" title="class in hudson.cli">CommandDuringBuild</A>
+<DD>This method makes sense only when called from within the build kicked by Hudson.
 <DT><A HREF="./hudson/model/AbstractBuild.AbstractRunner.html#getCurrentNode()"><B>getCurrentNode()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.AbstractRunner.html" title="class in hudson.model">AbstractBuild.AbstractRunner</A>
 <DD>Returns the current <A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> on which we are buildling.
@@ -8678,6 +8720,9 @@ Method in class hudson.cli.handlers.<A HREF="./hudson/cli/handlers/AbstractProje
 <DD>&nbsp;
 <DT><A HREF="./hudson/cli/handlers/TopLevelItemOptionHandler.html#getDefaultMetaVariable()"><B>getDefaultMetaVariable()</B></A> - 
 Method in class hudson.cli.handlers.<A HREF="./hudson/cli/handlers/TopLevelItemOptionHandler.html" title="class in hudson.cli.handlers">TopLevelItemOptionHandler</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Result.OptionHandlerImpl.html#getDefaultMetaVariable()"><B>getDefaultMetaVariable()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Result.OptionHandlerImpl.html" title="class in hudson.model">Result.OptionHandlerImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/BooleanParameterDefinition.html#getDefaultParameterValue()"><B>getDefaultParameterValue()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/BooleanParameterDefinition.html" title="class in hudson.model">BooleanParameterDefinition</A>
@@ -9802,8 +9847,8 @@ Method in class hudson.tasks.junit.<A HREF="./hudson/tasks/junit/TestResult.html
 <DT><A HREF="./hudson/tasks/test/TestResult.html#getErrorStackTrace()"><B>getErrorStackTrace()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>
 <DD>If there was an error or a failure, this is the stack trace, or otherwise null.
-<DT><A HREF="./hudson/model/AbstractProject.html#getEstimatedDuration()"><B>getEstimatedDuration()</B></A> - 
-Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
+<DT><A HREF="./hudson/model/Job.html#getEstimatedDuration()"><B>getEstimatedDuration()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/queue/QueueTaskFilter.html#getEstimatedDuration()"><B>getEstimatedDuration()</B></A> - 
 Method in class hudson.model.queue.<A HREF="./hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A>
@@ -10789,6 +10834,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Slave.html" title="class in
 <DT><A HREF="./hudson/model/Job.html#getLastBuild()"><B>getLastBuild()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
 <DD>Returns the last build.
+<DT><A HREF="./hudson/model/Job.html#getLastBuildsOverThreshold(int, hudson.model.Result)"><B>getLastBuildsOverThreshold(int, Result)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
+<DD>Returns the last 'numberOfBuilds' builds with a build result >= 'threshold'
 <DT><A HREF="./hudson/model/AbstractProject.html#getLastBuiltOn()"><B>getLastBuiltOn()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Gets the <A HREF="./hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A> where this project was last built on.
@@ -11639,6 +11687,9 @@ Method in class hudson.<A HREF="./hudson/ProxyConfiguration.html" title="class i
 <DT><A HREF="./hudson/security/HudsonPrivateSecurityRealm.Details.html#getPassword()"><B>getPassword()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/HudsonPrivateSecurityRealm.Details.html" title="class in hudson.security">HudsonPrivateSecurityRealm.Details</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Functions.html#getPasswordValue(java.lang.Object)"><B>getPasswordValue(Object)</B></A> - 
+Method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>Used by &lt;f:password/> so that we send an encrypted value to the client.
 <DT><A HREF="./hudson/Util.html#getPastTimeString(long)"><B>getPastTimeString(long)</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
 <DD>Get a human readable string representing strings like "xxx days ago",
@@ -11649,6 +11700,9 @@ Method in interface hudson.scm.<A HREF="./hudson/scm/ChangeLogSet.AffectedFile.h
 <DT><A HREF="./hudson/search/SuggestedItem.html#getPath()"><B>getPath()</B></A> - 
 Method in class hudson.search.<A HREF="./hudson/search/SuggestedItem.html" title="class in hudson.search">SuggestedItem</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.html#getPendingItems()"><B>getPendingItems()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
+<DD>Gets the snapshot of all <A HREF="./hudson/model/BuildableItem.html" title="interface in hudson.model"><CODE>BuildableItem</CODE></A>s.
 <DT><A HREF="./hudson/model/Hudson.html#getPeople()"><B>getPeople()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Hudson.html" title="class in hudson.model">Hudson</A>
 <DD>&nbsp;
@@ -12621,6 +12675,9 @@ Method in class hudson.cli.<A HREF="./hudson/cli/LogoutCommand.html" title="clas
 <DD>&nbsp;
 <DT><A HREF="./hudson/cli/MailCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/cli/SetBuildResultCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/SetBuildResultCommand.html" title="class in hudson.cli">SetBuildResultCommand</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/cli/VersionCommand.html#getShortDescription()"><B>getShortDescription()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A>
@@ -15503,6 +15560,9 @@ Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/SimpleCaseResult.
 <DT><A HREF="./hudson/tasks/test/TestResult.html#isPassed()"><B>isPassed()</B></A> - 
 Method in class hudson.tasks.test.<A HREF="./hudson/tasks/test/TestResult.html" title="class in hudson.tasks.test">TestResult</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Queue.html#isPending(hudson.model.Queue.Task)"><B>isPending(Queue.Task)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
+<DD>Is the given task currently pending execution?
 <DT><A HREF="./hudson/PluginManager.html#isPluginUploaded()"><B>isPluginUploaded()</B></A> - 
 Method in class hudson.<A HREF="./hudson/PluginManager.html" title="class in hudson">PluginManager</A>
 <DD>Returns true if any new plugin was added, which means a restart is required
@@ -16084,6 +16144,9 @@ Method in class hudson.<A HREF="./hudson/Launcher.RemoteLauncher.html" title="cl
 <DT><A HREF="./hudson/model/Computer.html#kill()"><B>kill()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Called by <A HREF="./hudson/model/Hudson.html#updateComputerList()"><CODE>Hudson.updateComputerList()</CODE></A> to notify <A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> that it will be discarded.
+<DT><A HREF="./hudson/os/windows/WindowsRemoteLauncher.html#kill(java.util.Map)"><B>kill(Map&lt;String, String&gt;)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteLauncher.html" title="class in hudson.os.windows">WindowsRemoteLauncher</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/Proc.html#kill()"><B>kill()</B></A> - 
 Method in class hudson.<A HREF="./hudson/Proc.html" title="class in hudson">Proc</A>
 <DD>Terminates the process.
@@ -16301,6 +16364,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class
 <DT><A HREF="./hudson/os/windows/ManagedWindowsServiceLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><B>launch(SlaveComputer, TaskListener)</B></A> - 
 Method in class hudson.os.windows.<A HREF="./hudson/os/windows/ManagedWindowsServiceLauncher.html" title="class in hudson.os.windows">ManagedWindowsServiceLauncher</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/os/windows/WindowsRemoteLauncher.html#launch(hudson.Launcher.ProcStarter)"><B>launch(Launcher.ProcStarter)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteLauncher.html" title="class in hudson.os.windows">WindowsRemoteLauncher</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/slaves/CommandLauncher.html#launch(hudson.slaves.SlaveComputer, hudson.model.TaskListener)"><B>launch(SlaveComputer, TaskListener)</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/CommandLauncher.html" title="class in hudson.slaves">CommandLauncher</A>
 <DD>&nbsp;
@@ -16332,6 +16398,9 @@ Method in class hudson.<A HREF="./hudson/Launcher.LocalLauncher.html" title="cla
 <DD>&nbsp;
 <DT><A HREF="./hudson/Launcher.RemoteLauncher.html#launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)"><B>launchChannel(String[], OutputStream, FilePath, Map&lt;String, String&gt;)</B></A> - 
 Method in class hudson.<A HREF="./hudson/Launcher.RemoteLauncher.html" title="class in hudson">Launcher.RemoteLauncher</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/os/windows/WindowsRemoteLauncher.html#launchChannel(java.lang.String[], java.io.OutputStream, hudson.FilePath, java.util.Map)"><B>launchChannel(String[], OutputStream, FilePath, Map&lt;String, String&gt;)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteLauncher.html" title="class in hudson.os.windows">WindowsRemoteLauncher</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/Launcher.html" title="class in hudson"><B>Launcher</B></A> - Class in <A HREF="./hudson/package-summary.html">hudson</A><DD>Starts a process.<DT><A HREF="./hudson/Launcher.html#Launcher(hudson.model.TaskListener, hudson.remoting.VirtualChannel)"><B>Launcher(TaskListener, VirtualChannel)</B></A> - 
 Constructor for class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">Launcher</A>
@@ -16611,6 +16680,9 @@ Variable in class hudson.tasks.test.<A HREF="./hudson/tasks/test/SimpleCaseResul
 <DT><A HREF="./hudson/init/InitStrategy.html#listPluginArchives(hudson.PluginManager)"><B>listPluginArchives(PluginManager)</B></A> - 
 Method in class hudson.init.<A HREF="./hudson/init/InitStrategy.html" title="class in hudson.init">InitStrategy</A>
 <DD>Returns the list of *.hpi and *.hpl to expand and load.
+<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html#listSubDirectories(java.lang.String)"><B>listSubDirectories(String)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows">WindowsRemoteFileSystem</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tools/JDKInstaller.FileSystem.html#listSubDirectories(java.lang.String)"><B>listSubDirectories(String)</B></A> - 
 Method in interface hudson.tools.<A HREF="./hudson/tools/JDKInstaller.FileSystem.html" title="interface in hudson.tools">JDKInstaller.FileSystem</A>
 <DD>List sub-directories of the given directory and just return the file name portion.
@@ -17134,6 +17206,9 @@ Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in
 <DT><A HREF="./hudson/search/SearchIndexBuilder.html#make()"><B>make()</B></A> - 
 Method in class hudson.search.<A HREF="./hudson/search/SearchIndexBuilder.html" title="class in hudson.search">SearchIndexBuilder</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/BuildWrapper.html#makeBuildVariables(hudson.model.AbstractBuild, java.util.Map)"><B>makeBuildVariables(AbstractBuild, Map&lt;String, String&gt;)</B></A> - 
+Method in class hudson.tasks.<A HREF="./hudson/tasks/BuildWrapper.html" title="class in hudson.tasks">BuildWrapper</A>
+<DD>Called to define <A HREF="./hudson/model/AbstractBuild.html#getBuildVariables()">AbstractBuild.getBuildVariables()</A>.
 <DT><A HREF="./hudson/model/AbstractProject.html#makeDisabled(boolean)"><B>makeDisabled(boolean)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Marks the build as disabled.
@@ -17841,6 +17916,9 @@ Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/Cronta
 <DT><A HREF="./hudson/FilePath.html#mkdirs()"><B>mkdirs()</B></A> - 
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Creates this directory.
+<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html#mkdirs(java.lang.String)"><B>mkdirs(String)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows">WindowsRemoteFileSystem</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/util/IOUtils.html#mkdirs(java.io.File)"><B>mkdirs(File)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/IOUtils.html" title="class in hudson.util">IOUtils</A>
 <DD>Ensures that the given directory exists (if not, it's created, including all the parent directories.)
@@ -18021,6 +18099,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/MyViewsProperty.Descr
 <DT><A HREF="./hudson/model/MyViewsProperty.GlobalAction.html" title="class in hudson.model"><B>MyViewsProperty.GlobalAction</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/MyViewsProperty.GlobalAction.html#MyViewsProperty.GlobalAction()"><B>MyViewsProperty.GlobalAction()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/MyViewsProperty.GlobalAction.html" title="class in hudson.model">MyViewsProperty.GlobalAction</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Messages.html#MyViewsProperty_DisplayName()"><B>MyViewsProperty_DisplayName()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>My Views
 <DT><A HREF="./hudson/model/Messages.html#MyViewsProperty_GlobalAction_DisplayName()"><B>MyViewsProperty_GlobalAction_DisplayName()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>My Views
@@ -18899,7 +18980,7 @@ Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.html" ti
 <DT><A HREF="./hudson/util/jna/Advapi32.html#OpenService(com.sun.jna.Pointer, java.lang.String, int)"><B>OpenService(Pointer, String, int)</B></A> - 
 Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.html" title="interface in hudson.util.jna">Advapi32</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/util/jna/Options.html" title="interface in hudson.util.jna"><B>Options</B></A> - Interface in <A HREF="./hudson/util/jna/package-summary.html">hudson.util.jna</A><DD>&nbsp;<DT><A HREF="./hudson/scheduler/CrontabParserTokenTypes.html#OR"><B>OR</B></A> - 
+<DT><A HREF="./hudson/cli/declarative/OptionHandlerExtension.html" title="annotation in hudson.cli.declarative"><B>OptionHandlerExtension</B></A> - Annotation Type in <A HREF="./hudson/cli/declarative/package-summary.html">hudson.cli.declarative</A><DD><CODE>OptionHandler</CODE>s that should be auto-discovered.<DT><A HREF="./hudson/util/jna/Options.html" title="interface in hudson.util.jna"><B>Options</B></A> - Interface in <A HREF="./hudson/util/jna/package-summary.html">hudson.util.jna</A><DD>&nbsp;<DT><A HREF="./hudson/scheduler/CrontabParserTokenTypes.html#OR"><B>OR</B></A> - 
 Static variable in interface hudson.scheduler.<A HREF="./hudson/scheduler/CrontabParserTokenTypes.html" title="interface in hudson.scheduler">CrontabParserTokenTypes</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Run.html#ORDER_BY_DATE"><B>ORDER_BY_DATE</B></A> - 
@@ -19132,6 +19213,9 @@ Method in class hudson.cli.handlers.<A HREF="./hudson/cli/handlers/AbstractProje
 <DD>&nbsp;
 <DT><A HREF="./hudson/cli/handlers/TopLevelItemOptionHandler.html#parseArguments(org.kohsuke.args4j.spi.Parameters)"><B>parseArguments(Parameters)</B></A> - 
 Method in class hudson.cli.handlers.<A HREF="./hudson/cli/handlers/TopLevelItemOptionHandler.html" title="class in hudson.cli.handlers">TopLevelItemOptionHandler</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Result.OptionHandlerImpl.html#parseArguments(org.kohsuke.args4j.spi.Parameters)"><B>parseArguments(Parameters)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/Result.OptionHandlerImpl.html" title="class in hudson.model">Result.OptionHandlerImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/remoting/Launcher.html#parseJnlpArguments()"><B>parseJnlpArguments()</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title="class in hudson.remoting">Launcher</A>
@@ -19429,13 +19513,19 @@ Method in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/TestEnvir
 <DT><A HREF="./hudson/remoting/Launcher.html#ping"><B>ping</B></A> - 
 Variable in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title="class in hudson.remoting">Launcher</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/remoting/PingThread.html" title="class in hudson.remoting"><B>PingThread</B></A> - Class in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>Periodically perform a ping.<DT><A HREF="./hudson/remoting/PingThread.html#PingThread(hudson.remoting.Channel, long)"><B>PingThread(Channel, long)</B></A> - 
+<DT><A HREF="./hudson/remoting/PingThread.html" title="class in hudson.remoting"><B>PingThread</B></A> - Class in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>Periodically perform a ping.<DT><A HREF="./hudson/remoting/PingThread.html#PingThread(hudson.remoting.Channel, long, long)"><B>PingThread(Channel, long, long)</B></A> - 
+Constructor for class hudson.remoting.<A HREF="./hudson/remoting/PingThread.html" title="class in hudson.remoting">PingThread</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/remoting/PingThread.html#PingThread(hudson.remoting.Channel, long)"><B>PingThread(Channel, long)</B></A> - 
 Constructor for class hudson.remoting.<A HREF="./hudson/remoting/PingThread.html" title="class in hudson.remoting">PingThread</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/remoting/PingThread.html#PingThread(hudson.remoting.Channel)"><B>PingThread(Channel)</B></A> - 
 Constructor for class hudson.remoting.<A HREF="./hudson/remoting/PingThread.html" title="class in hudson.remoting">PingThread</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/remoting/Pipe.html" title="class in hudson.remoting"><B>Pipe</B></A> - Class in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>Pipe for the remote <A HREF="./hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> and the local program to talk to each other.<DT><A HREF="./hudson/Platform.html" title="enum in hudson"><B>Platform</B></A> - Enum in <A HREF="./hudson/package-summary.html">hudson</A><DD>Strategy object that absorbs the platform differences.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#plugin"><B>plugin</B></A> - 
+<DT><A HREF="./hudson/remoting/Pipe.html" title="class in hudson.remoting"><B>Pipe</B></A> - Class in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>Pipe for the remote <A HREF="./hudson/remoting/Callable.html" title="interface in hudson.remoting"><CODE>Callable</CODE></A> and the local program to talk to each other.<DT><A HREF="./hudson/console/PlainTextConsoleOutputStream.html" title="class in hudson.console"><B>PlainTextConsoleOutputStream</B></A> - Class in <A HREF="./hudson/console/package-summary.html">hudson.console</A><DD>Filters out console notes.<DT><A HREF="./hudson/console/PlainTextConsoleOutputStream.html#PlainTextConsoleOutputStream(java.io.OutputStream)"><B>PlainTextConsoleOutputStream(OutputStream)</B></A> - 
+Constructor for class hudson.console.<A HREF="./hudson/console/PlainTextConsoleOutputStream.html" title="class in hudson.console">PlainTextConsoleOutputStream</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/Platform.html" title="enum in hudson"><B>Platform</B></A> - Enum in <A HREF="./hudson/package-summary.html">hudson</A><DD>Strategy object that absorbs the platform differences.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#plugin"><B>plugin</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
 <DD>What plugin are we trying to install?
 <DT><A HREF="./hudson/model/UpdateCenter.PluginEntry.html#plugin"><B>plugin</B></A> - 
@@ -19939,6 +20029,9 @@ Static variable in interface hudson.tasks.<A HREF="./hudson/tasks/BuildStep.html
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.286.
       Use <A HREF="./hudson/tasks/Publisher.html#all()"><CODE>Publisher.all()</CODE></A> for read access, and use
       <A HREF="./hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>
+<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html#pullUp(java.lang.String, java.lang.String)"><B>pullUp(String, String)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows">WindowsRemoteFileSystem</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tools/JDKInstaller.FileSystem.html#pullUp(java.lang.String, java.lang.String)"><B>pullUp(String, String)</B></A> - 
 Method in interface hudson.tools.<A HREF="./hudson/tools/JDKInstaller.FileSystem.html" title="interface in hudson.tools">JDKInstaller.FileSystem</A>
 <DD>&nbsp;
@@ -20027,7 +20120,7 @@ Constructor for class hudson.model.<A HREF="./hudson/model/Queue.NotWaitingItem.
 <DT><A HREF="./hudson/model/Queue.NotWaitingItem.html#Queue.NotWaitingItem(hudson.model.Queue.NotWaitingItem)"><B>Queue.NotWaitingItem(Queue.NotWaitingItem)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Queue.NotWaitingItem.html" title="class in hudson.model">Queue.NotWaitingItem</A>
 <DD>&nbsp;
-<DT><A HREF="./hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>Queue.QueueAction</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>An optional interface for actions on Queue.Item.<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model"><B>Queue.QueueDecisionHandler</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Extension point for deciding if particular job should be scheduled or not<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html#Queue.QueueDecisionHandler()"><B>Queue.QueueDecisionHandler()</B></A> - 
+<DT><A HREF="./hudson/model/Queue.QueueAction.html" title="interface in hudson.model"><B>Queue.QueueAction</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>An optional interface for actions on Queue.Item.<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model"><B>Queue.QueueDecisionHandler</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Extension point for deciding if particular job should be scheduled or not.<DT><A HREF="./hudson/model/Queue.QueueDecisionHandler.html#Queue.QueueDecisionHandler()"><B>Queue.QueueDecisionHandler()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Queue.QueueDecisionHandler.html" title="class in hudson.model">Queue.QueueDecisionHandler</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Queue.Task.html" title="interface in hudson.model"><B>Queue.Task</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Task whose execution is controlled by the queue.<DT><A HREF="./hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><B>Queue.TransientTask</B></A> - Interface in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Marks <A HREF="./hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s that are not persisted.<DT><A HREF="./hudson/model/Queue.WaitingItem.html" title="class in hudson.model"><B>Queue.WaitingItem</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD><A HREF="./hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> in the <A HREF="./hudson/model/Queue.html#waitingList"><CODE>Queue.waitingList</CODE></A> stage.<DT><A HREF="./hudson/model/Messages.html#Queue_AllNodesOffline(java.lang.Object)"><B>Queue_AllNodesOffline(Object)</B></A> - 
@@ -20132,6 +20225,9 @@ Method in class hudson.org.apache.tools.tar.<A HREF="./hudson/org/apache/tools/t
 <DT><A HREF="./hudson/org/apache/tools/tar/TarInputStream.html#read(byte[], int, int)"><B>read(byte[], int, int)</B></A> - 
 Method in class hudson.org.apache.tools.tar.<A HREF="./hudson/org/apache/tools/tar/TarInputStream.html" title="class in hudson.org.apache.tools.tar">TarInputStream</A>
 <DD>Reads bytes from the current tar archive entry.
+<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html#read(java.lang.String)"><B>read(String)</B></A> - 
+Method in class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows">WindowsRemoteFileSystem</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/remoting/Capability.html#read(java.io.InputStream)"><B>read(InputStream)</B></A> - 
 Static method in class hudson.remoting.<A HREF="./hudson/remoting/Capability.html" title="class in hudson.remoting">Capability</A>
 <DD>The opposite operation of <A HREF="./hudson/remoting/Capability.html#writePreamble(java.io.OutputStream)"><CODE>Capability.writePreamble(OutputStream)</CODE></A>.
@@ -20475,6 +20571,9 @@ Method in class hudson.util.spring.<A HREF="./hudson/util/spring/BeanBuilder.htm
 <DT><A HREF="./hudson/lifecycle/WindowsInstallerLink.html#registerIfApplicable()"><B>registerIfApplicable()</B></A> - 
 Static method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle">WindowsInstallerLink</A>
 <DD>Decide if <A HREF="./hudson/lifecycle/WindowsInstallerLink.html" title="class in hudson.lifecycle"><CODE>WindowsInstallerLink</CODE></A> should show up in UI, and if so, register it.
+<DT><A HREF="./hudson/cli/CLICommand.html#registerOptionHandlers()"><B>registerOptionHandlers()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/CLICommand.html" title="class in hudson.cli">CLICommand</A>
+<DD>Auto-discovers <CODE>OptionHandler</CODE>s and add them to the given command line parser.
 <DT><A HREF="./hudson/util/jna/Advapi32.html#RegisterServiceCtrlHandler(java.lang.String, hudson.util.jna.Advapi32.Handler)"><B>RegisterServiceCtrlHandler(String, Advapi32.Handler)</B></A> - 
 Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.html" title="interface in hudson.util.jna">Advapi32</A>
 <DD>&nbsp;
@@ -20940,7 +21039,10 @@ Method in class hudson.<A HREF="./hudson/FileSystemProvisioner.Default.Workspace
 <DT><A HREF="./hudson/WorkspaceSnapshot.html#restoreTo(hudson.model.AbstractBuild, hudson.FilePath, hudson.model.TaskListener)"><B>restoreTo(AbstractBuild&lt;?, ?&gt;, FilePath, TaskListener)</B></A> - 
 Method in class hudson.<A HREF="./hudson/WorkspaceSnapshot.html" title="class in hudson">WorkspaceSnapshot</A>
 <DD>Restores the snapshot to the given file system location.
-<DT><A HREF="./hudson/RestrictedSince.html" title="annotation in hudson"><B>RestrictedSince</B></A> - Annotation Type in <A HREF="./hudson/package-summary.html">hudson</A><DD>Accompanies <CODE>Restricted</CODE> annotation to indicate when the access restriction was placed.<DT><A HREF="./hudson/model/Result.html" title="class in hudson.model"><B>Result</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>The build outcome.<DT><A HREF="./hudson/model/Run.html#result"><B>result</B></A> - 
+<DT><A HREF="./hudson/RestrictedSince.html" title="annotation in hudson"><B>RestrictedSince</B></A> - Annotation Type in <A HREF="./hudson/package-summary.html">hudson</A><DD>Accompanies <CODE>Restricted</CODE> annotation to indicate when the access restriction was placed.<DT><A HREF="./hudson/cli/SetBuildResultCommand.html#result"><B>result</B></A> - 
+Variable in class hudson.cli.<A HREF="./hudson/cli/SetBuildResultCommand.html" title="class in hudson.cli">SetBuildResultCommand</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Result.html" title="class in hudson.model"><B>Result</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>The build outcome.<DT><A HREF="./hudson/model/Run.html#result"><B>result</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>The build result.
 <DT><A HREF="./hudson/tasks/test/AggregatedTestResultAction.ChildReport.html#result"><B>result</B></A> - 
@@ -20948,6 +21050,9 @@ Variable in class hudson.tasks.test.<A HREF="./hudson/tasks/test/AggregatedTestR
 <DD>&nbsp;
 <DT><A HREF="./org/jvnet/hudson/test/MockBuilder.html#result"><B>result</B></A> - 
 Variable in class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/MockBuilder.html" title="class in org.jvnet.hudson.test">MockBuilder</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/Result.OptionHandlerImpl.html" title="class in hudson.model"><B>Result.OptionHandlerImpl</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Result.OptionHandlerImpl.html#Result.OptionHandlerImpl(org.kohsuke.args4j.CmdLineParser, org.kohsuke.args4j.OptionDef, org.kohsuke.args4j.spi.Setter)"><B>Result.OptionHandlerImpl(CmdLineParser, OptionDef, Setter&lt;? super Result&gt;)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/Result.OptionHandlerImpl.html" title="class in hudson.model">Result.OptionHandlerImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><B>RetentionStrategy</B></A>&lt;<A HREF="./hudson/slaves/RetentionStrategy.html" title="type parameter in RetentionStrategy">T</A> extends <A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>&gt; - Class in <A HREF="./hudson/slaves/package-summary.html">hudson.slaves</A><DD>Controls when to take <A HREF="./hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> offline, bring it back online, or even to destroy it.<DT><A HREF="./hudson/slaves/RetentionStrategy.html#RetentionStrategy()"><B>RetentionStrategy()</B></A> - 
 Constructor for class hudson.slaves.<A HREF="./hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves">RetentionStrategy</A>
@@ -21072,6 +21177,9 @@ Method in class hudson.cli.<A HREF="./hudson/cli/LogoutCommand.html" title="clas
 <DD>&nbsp;
 <DT><A HREF="./hudson/cli/MailCommand.html#run()"><B>run()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/MailCommand.html" title="class in hudson.cli">MailCommand</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/cli/SetBuildResultCommand.html#run()"><B>run()</B></A> - 
+Method in class hudson.cli.<A HREF="./hudson/cli/SetBuildResultCommand.html" title="class in hudson.cli">SetBuildResultCommand</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/cli/VersionCommand.html#run()"><B>run()</B></A> - 
 Method in class hudson.cli.<A HREF="./hudson/cli/VersionCommand.html" title="class in hudson.cli">VersionCommand</A>
@@ -21753,6 +21861,9 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/org/apache/tools/tar/TarOutputStream.html#setBufferDebug(boolean)"><B>setBufferDebug(boolean)</B></A> - 
 Method in class hudson.org.apache.tools.tar.<A HREF="./hudson/org/apache/tools/tar/TarOutputStream.html" title="class in hudson.org.apache.tools.tar">TarOutputStream</A>
 <DD>Sets the debugging flag in this stream's TarBuffer.
+<DT><A HREF="./hudson/cli/SetBuildResultCommand.html" title="class in hudson.cli"><B>SetBuildResultCommand</B></A> - Class in <A HREF="./hudson/cli/package-summary.html">hudson.cli</A><DD>Sets the result of the current build.<DT><A HREF="./hudson/cli/SetBuildResultCommand.html#SetBuildResultCommand()"><B>SetBuildResultCommand()</B></A> - 
+Constructor for class hudson.cli.<A HREF="./hudson/cli/SetBuildResultCommand.html" title="class in hudson.cli">SetBuildResultCommand</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, hudson.model.TaskListener, hudson.remoting.Channel.Listener)"><B>setChannel(InputStream, OutputStream, TaskListener, Channel.Listener)</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/SlaveComputer.html" title="class in hudson.slaves">SlaveComputer</A>
 <DD>&nbsp;
@@ -22466,6 +22577,9 @@ Method in class hudson.util.<A HREF="./hudson/util/TagCloud.html" title="class i
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>Works like JSTL build-in size(x) function,
  but handle null gracefully.
+<DT><A HREF="./hudson/console/ConsoleNote.html#skip(java.io.DataInputStream)"><B>skip(DataInputStream)</B></A> - 
+Static method in class hudson.console.<A HREF="./hudson/console/ConsoleNote.html" title="class in hudson.console">ConsoleNote</A>
+<DD>Skips the encoded console note.
 <DT><A HREF="./hudson/org/apache/tools/tar/TarInputStream.html#skip(long)"><B>skip(long)</B></A> - 
 Method in class hudson.org.apache.tools.tar.<A HREF="./hudson/org/apache/tools/tar/TarInputStream.html" title="class in hudson.org.apache.tools.tar">TarInputStream</A>
 <DD>Skip bytes in the input buffer.
@@ -22475,6 +22589,9 @@ Method in class hudson.remoting.<A HREF="./hudson/remoting/RemoteInputStream.htm
 <DT><A HREF="./hudson/util/IOUtils.html#skip(java.io.InputStream, long)"><B>skip(InputStream, long)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/IOUtils.html" title="class in hudson.util">IOUtils</A>
 <DD>Fully skips the specified size from the given input stream
+<DT><A HREF="./hudson/util/UnbufferedBase64InputStream.html#skip(long)"><B>skip(long)</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/UnbufferedBase64InputStream.html" title="class in hudson.util">UnbufferedBase64InputStream</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/init/InitStrategy.html#skipInitTask(org.jvnet.hudson.reactor.Task)"><B>skipInitTask(Task)</B></A> - 
 Method in class hudson.init.<A HREF="./hudson/init/InitStrategy.html" title="class in hudson.init">InitStrategy</A>
 <DD>Selectively skip some of the initialization tasks.
@@ -24841,6 +24958,12 @@ Static method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/Messages.htm
 <DT><A HREF="./hudson/lifecycle/Messages.html#WindowsInstallerLink_DisplayName()"><B>WindowsInstallerLink_DisplayName()</B></A> - 
 Static method in class hudson.lifecycle.<A HREF="./hudson/lifecycle/Messages.html" title="class in hudson.lifecycle">Messages</A>
 <DD>Install as Windows Service
+<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows"><B>WindowsRemoteFileSystem</B></A> - Class in <A HREF="./hudson/os/windows/package-summary.html">hudson.os.windows</A><DD><A HREF="./hudson/tools/JDKInstaller.FileSystem.html" title="interface in hudson.tools"><CODE>JDKInstaller.FileSystem</CODE></A> implementation for remote Windows system.<DT><A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html#WindowsRemoteFileSystem(java.lang.String, jcifs.smb.NtlmPasswordAuthentication)"><B>WindowsRemoteFileSystem(String, NtlmPasswordAuthentication)</B></A> - 
+Constructor for class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteFileSystem.html" title="class in hudson.os.windows">WindowsRemoteFileSystem</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/os/windows/WindowsRemoteLauncher.html" title="class in hudson.os.windows"><B>WindowsRemoteLauncher</B></A> - Class in <A HREF="./hudson/os/windows/package-summary.html">hudson.os.windows</A><DD>Pseudo-<A HREF="./hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> implementation that uses <CODE>WindowsRemoteProcessLauncher</CODE><DT><A HREF="./hudson/os/windows/WindowsRemoteLauncher.html#WindowsRemoteLauncher(hudson.model.TaskListener, org.jvnet.hudson.remcom.WindowsRemoteProcessLauncher)"><B>WindowsRemoteLauncher(TaskListener, WindowsRemoteProcessLauncher)</B></A> - 
+Constructor for class hudson.os.windows.<A HREF="./hudson/os/windows/WindowsRemoteLauncher.html" title="class in hudson.os.windows">WindowsRemoteLauncher</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle"><B>WindowsServiceLifecycle</B></A> - Class in <A HREF="./hudson/lifecycle/package-summary.html">hudson.lifecycle</A><DD><A HREF="./hudson/lifecycle/Lifecycle.html" title="class in hudson.lifecycle"><CODE>Lifecycle</CODE></A> for Hudson installed as Windows service.<DT><A HREF="./hudson/lifecycle/WindowsServiceLifecycle.html#WindowsServiceLifecycle()"><B>WindowsServiceLifecycle()</B></A> - 
 Constructor for class hudson.lifecycle.<A HREF="./hudson/lifecycle/WindowsServiceLifecycle.html" title="class in hudson.lifecycle">WindowsServiceLifecycle</A>
 <DD>&nbsp;
@@ -25139,6 +25262,9 @@ Method in class hudson.util.<A HREF="./hudson/util/ChunkedOutputStream.html" tit
 Method in class hudson.console.<A HREF="./hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/console/AnnotatedLargeText.html#writeLogTo(long, java.io.Writer)"><B>writeLogTo(long, Writer)</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/console/AnnotatedLargeText.html#writeLogTo(long, java.io.OutputStream)"><B>writeLogTo(long, OutputStream)</B></A> - 
 Method in class hudson.console.<A HREF="./hudson/console/AnnotatedLargeText.html" title="class in hudson.console">AnnotatedLargeText</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/LargeText.html#writeLogTo(long, java.io.Writer)"><B>writeLogTo(long, Writer)</B></A> - 
@@ -26298,6 +26424,9 @@ Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title
 <DT><A HREF="./hudson/model/Messages.html#_MyView_DisplayName()"><B>_MyView_DisplayName()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>My View
+<DT><A HREF="./hudson/model/Messages.html#_MyViewsProperty_DisplayName()"><B>_MyViewsProperty_DisplayName()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>My Views
 <DT><A HREF="./hudson/model/Messages.html#_MyViewsProperty_GlobalAction_DisplayName()"><B>_MyViewsProperty_GlobalAction_DisplayName()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>My Views

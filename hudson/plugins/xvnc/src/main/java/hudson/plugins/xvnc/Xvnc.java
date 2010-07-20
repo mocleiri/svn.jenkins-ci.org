@@ -8,7 +8,10 @@ import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Computer;
 import hudson.model.Hudson;
+import hudson.model.Label;
+import hudson.model.Node;
 import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrapperDescriptor;
 import hudson.util.FormValidation;
@@ -17,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Collections;
 import java.util.Map;
+import java.util.WeakHashMap;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
@@ -44,12 +48,27 @@ public class Xvnc extends BuildWrapper {
     @Override
     public Environment setUp(AbstractBuild build, final Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
         final PrintStream logger = listener.getLogger();
-
         DescriptorImpl DESCRIPTOR = Hudson.getInstance().getDescriptorByType(DescriptorImpl.class);
+
+        // skip xvnc execution
+        if (build.getBuiltOn().getAssignedLabels().contains(Label.get("noxvnc"))
+                || build.getBuiltOn().getNodeProperties().get(NodePropertyImpl.class) != null) {
+            return new Environment(){};
+        }
+        
+        if (DESCRIPTOR.skipOnWindows && !launcher.isUnix()) {
+            return new Environment(){};
+        }
+        
+        if (DESCRIPTOR.cleanUp) {
+            maybeCleanUp(launcher, listener);
+        }
+
         String cmd = Util.nullify(DESCRIPTOR.xvnc);
         int baseDisplayNumber = DESCRIPTOR.baseDisplayNumber; 
-        if(cmd==null)
+        if (cmd == null) {
             cmd = "vncserver :$DISPLAY_NUMBER";
+        }
 
         return doSetUp(build, launcher, logger, cmd, baseDisplayNumber, 3);
     }
@@ -72,7 +91,7 @@ public class Xvnc extends BuildWrapper {
             if (exit != 0) {
                 // XXX I18N
                 String message = "Failed to run \'" + actualCmd + "\' (exit code " + exit + "), blacklisting display #" + displayNumber +
-                        "; consider adding to your Hudson launch script: killall Xvnc Xrealvnc; rm -fv /tmp/.X*-lock /tmp/.X11-unix/X*";
+                        "; consider checking the \"Clean up before start\" option";
                 // Do not release it; it may be "stuck" until cleaned up by an administrator.
                 //allocator.free(displayNumber);
                 if (retries > 0) {
@@ -105,7 +124,7 @@ public class Xvnc extends BuildWrapper {
                 logger.println(Messages.Xvnc_TERMINATING());
                 if (vncserverCommand != null) {
                     // #173: stopping the wrapper script will accomplish nothing. It has already exited, in fact.
-                    launcher.launch().cmds(vncserverCommand, "-kill", ":" + displayNumber).stdout(logger).pwd(build.getWorkspace()).join();
+                    launcher.launch().cmds(vncserverCommand, "-kill", ":" + displayNumber).stdout(logger).join();
                 } else {
                     // Assume it can be shut down by being killed.
                     proc.kill();
@@ -121,6 +140,28 @@ public class Xvnc extends BuildWrapper {
      * Manages display numbers in use.
      */
     private static final DisplayAllocator allocator = new DisplayAllocator();
+
+    /**
+     * Whether {@link #maybeCleanUp} has already been run on a given node.
+     */
+    private static final Map<Node,Boolean> cleanedUpOn = new WeakHashMap<Node,Boolean>();
+    
+    // XXX I18N
+    private static synchronized void maybeCleanUp(Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
+        Node node = Computer.currentComputer().getNode();
+        if (cleanedUpOn.put(node, true) != null) {
+            return;
+        }
+        if (!launcher.isUnix()) {
+            listener.error("Clean up not currently implemented for non-Unix nodes; skipping");
+            return;
+        }
+        PrintStream logger = listener.getLogger();
+        // ignore any error return codes
+        launcher.launch().stdout(logger).cmds("pkill", "Xvnc").join();
+        launcher.launch().stdout(logger).cmds("pkill", "Xrealvnc").join();
+        launcher.launch().stdout(logger).cmds("sh", "-c", "rm -f /tmp/.X*-lock /tmp/.X11-unix/X*").join();
+    }
     
     @Extension
     public static final class DescriptorImpl extends BuildWrapperDescriptor {
@@ -137,34 +178,46 @@ public class Xvnc extends BuildWrapper {
          */
         public int baseDisplayNumber = 10;
 
+        /**
+         * If true, skip xvnc launch on all Windows slaves.
+         */
+        public boolean skipOnWindows = true;
+        
+        /**
+         * If true, try to clean up old processes and locks when first run.
+         */
+        public boolean cleanUp = false;
+
         public DescriptorImpl() {
             super(Xvnc.class);
             load();
         }
 
         public String getDisplayName() {
-            // XXX I18N
-            return "Run Xvnc during build";
+            return Messages.description();
         }
 
         @Override
         public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
             // XXX is this now the right style?
-            req.bindParameters(this,"xvnc.");
+            req.bindJSON(this,json);
             save();
             return true;
-        }
-
-        @Override
-        public String getHelpFile() {
-            return "/plugin/xvnc/help-projectConfig.html";
         }
 
         public boolean isApplicable(AbstractProject<?, ?> item) {
             return true;
         }
 
-        public FormValidation doCheckCommandLine(@QueryParameter String value) {
+        public String getCommandline() {
+            return xvnc;
+        }
+
+        public void setCommandline(String value) {
+            this.xvnc = value;
+        }
+
+        public FormValidation doCheckCommandline(@QueryParameter String value) {
             if (Util.nullify(value) == null || value.contains("$DISPLAY_NUMBER")) {
                 return FormValidation.ok();
             } else {

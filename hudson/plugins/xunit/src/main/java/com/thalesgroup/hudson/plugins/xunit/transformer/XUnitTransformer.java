@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Thales Corporate Services SAS                             *
+ * Copyright (c) 2010 Thales Corporate Services SAS                             *
  * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -23,159 +23,110 @@
 
 package com.thalesgroup.hudson.plugins.xunit.transformer;
 
-import com.thalesgroup.hudson.library.tusarconversion.ConversionUtil;
-import com.thalesgroup.hudson.library.tusarconversion.exception.ConversionException;
-import com.thalesgroup.hudson.plugins.xunit.types.PHPUnitType;
-import com.thalesgroup.hudson.plugins.xunit.types.XUnitType;
+import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
+import com.thalesgroup.dtkit.util.converter.ConvertException;
+import com.thalesgroup.dtkit.util.validator.ValidatorError;
+import com.thalesgroup.dtkit.util.validator.ValidatorException;
+import com.thalesgroup.hudson.plugins.xunit.exception.XUnitException;
 import com.thalesgroup.hudson.plugins.xunit.util.XUnitLog;
-import hudson.AbortException;
-import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Util;
 import hudson.model.BuildListener;
 import hudson.remoting.VirtualChannel;
 import hudson.util.IOException2;
-import net.sf.saxon.s9api.SaxonApiException;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.FactoryConfigurationError;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamSource;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class XUnitTransformer implements FilePath.FileCallable<Boolean>, Serializable {
 
-    private static final String JUNIT_FILE_POSTFIX = ".xml";
-    private static final String JUNIT_FILE_PREFIX = "TEST-";
+    public static final String JUNIT_FILE_POSTFIX = ".xml";
+    public static final String JUNIT_FILE_PREFIX = "TEST-";
 
+    private final BuildListener listener;
 
-    private BuildListener listener;
-    private long buildTime;
-    private EnvVars env;
-    private XUnitType[] types;
-    private FilePath junitOutputPath = null;
+    private final File junitOuputDir;
 
-    public XUnitTransformer(BuildListener listener, long buildTime, EnvVars env, XUnitType[] types, FilePath junitOutputPath) {
+    private final TestType[] types;
+
+    private final long buildTime;
+
+    public XUnitTransformer(BuildListener listener, File junitOuputDir, long buildTime, TestType[] types) {
+        this.junitOuputDir = junitOuputDir;
         this.listener = listener;
         this.buildTime = buildTime;
-        this.env = env;
         this.types = types;
-        this.junitOutputPath = junitOutputPath;
     }
 
 
     /**
-     * Test if the field is empty
+     * Tests if the pattern is empty
      *
-     * @param field
-     * @return
+     * @param pattern the given pattern of the current test tool
+     * @return true if empty or blank, false otherwise
      */
-    private boolean isEmpty(String field) {
-        if (field == null) {
-            return true;
-        }
+    private boolean isEmptyPattern(String pattern) {
+        return pattern == null || pattern.trim().length() == 0;
 
-        if (field.trim().length() == 0) {
-            return true;
-        }
-
-        return false;
     }
+
 
     /**
      * Invocation
      *
-     * @param ws
-     * @param channel
-     * @return the Result
+     * @param ws      the Hudson workspace
+     * @param channel the Hudson chanel
+     * @return true or false if the convertion fails
      * @throws IOException
      */
     public Boolean invoke(File ws, VirtualChannel channel) throws IOException {
-
         try {
-
             boolean isInvoked = false;
-            for (XUnitType tool : types) {
-                if (!isEmpty(tool.getPattern())) {
+            for (TestType tool : types) {
+                if (!isEmptyPattern(tool.getPattern())) {
                     isInvoked = true;
-
-                    InputStream is = null;
-                    File f = new File(ws, tool.getXsl());
-                    if (!f.exists()) {
-                        XUnitLog.log(listener, "[" + tool.getDescriptor().getDisplayName() + "] - Use the embedded style sheet.");
-                        is = ConversionUtil.class.getResourceAsStream(tool.getXsl());
-                    } else {
-                        XUnitLog.log(listener, "[" + tool.getDescriptor().getDisplayName() + "] - Use the style sheet found into the workspace.");
-                        is = new FileInputStream(f);
-                    }
-
-                    if (is == null) {
-                        XUnitLog.log(listener, "The style sheet '" + tool.getXsl() + "' is not found for the xUnit tool '" + tool.getDescriptor().getDisplayName() + "'");
-                        return false;
-                    }
-
-                    boolean result = processTool(ws, tool, new StreamSource(is));
-                    is.close();
-
+                    boolean result = processTool(ws, tool);
                     if (!result) {
                         return result;
                     }
                 }
             }
 
+            //None of the test were processed
             if (!isInvoked) {
                 String msg = "[ERROR] - No test report files were found. Configuration error?";
                 XUnitLog.log(listener, msg);
                 return false;
             }
-
-
         }
-        catch (Exception e) {
-            throw new IOException2("Problem on converting into JUnit reports.", e);
+        catch (XUnitException xe) {
+            throw new IOException2("Problem on converting into JUnit reports.", xe);
         }
+
 
         return true;
-
     }
-
-
-    private boolean validateXUnitResultFile(File fileXUnitReportFile)
-            throws FactoryConfigurationError {
-        try {
-            DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            parser.parse(fileXUnitReportFile);
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
-    }
-
 
     /**
      * /**
-     * Collect reports from the given parentpath and the pattern, while
+     * Gets all reports from the given parent path and the pattern, while
      * filtering out all files that were created before the given time.
      *
+     * @param testTool        the current test tool
      * @param buildTime       the build time
      * @param parentPath      parent
-     * @param pattern         pattern to seach files
+     * @param pattern         pattern to search files
      * @param faildedIfNotNew indicated if the tests time need to be checked
      * @return an array of strings
      */
-    private List<String> findtReports(XUnitType testTool, long buildTime, File parentPath, String pattern, boolean faildedIfNotNew) throws AbortException {
+    private List<String> findReports(TestType testTool, long buildTime, File parentPath, String pattern, boolean faildedIfNotNew) {
 
         FileSet fs = Util.createFileSet(parentPath, pattern);
         DirectoryScanner ds = fs.getDirectoryScanner();
@@ -192,7 +143,7 @@ public class XUnitTransformer implements FilePath.FileCallable<Boolean>, Seriali
         }
 
 
-        //Check the timestamp for each test file if the UI option is checked (true by default)
+        //Checks the timestamp for each test file if the UI option is checked (true by default)
         if (faildedIfNotNew) {
             ArrayList<File> oldResults = new ArrayList<File>();
             for (String value : xunitFiles) {
@@ -227,127 +178,88 @@ public class XUnitTransformer implements FilePath.FileCallable<Boolean>, Seriali
     }
 
     /**
-     * Processing the current test tool
+     * Process the conversion of the current test tool
      *
-     * @param moduleRoot
-     * @param testTool
-     * @param stylesheet
-     * @throws IOException
-     * @throws InterruptedException
+     * @param ws       the Hudson workspace
+     * @param testTool the current test tool
+     * @return true if the conversion and the validation is OK, false otherwise
+     * @throws XUnitException the plugin exception if an error occurs
      */
-    private boolean processTool(File moduleRoot, XUnitType testTool, StreamSource stylesheet)
-            throws IOException, InterruptedException {
+    private boolean processTool(File ws, TestType testTool) throws XUnitException {
+        try {
 
-        String curPattern = testTool.getPattern();
-        curPattern = curPattern.replaceAll("[\t\r\n]+", " ");
-        curPattern = Util.replaceMacro(curPattern, this.env);
-
-        List<String> resultFiles = findtReports(testTool, this.buildTime, moduleRoot, curPattern, testTool.isFaildedIfNotNew());
-
-
-        if (resultFiles == null) {
-            return false;
-        }
-
-        XUnitLog.log(listener, "[" + testTool.getDescriptor().getDisplayName() + "] - Processing " + resultFiles.size() + " files with the pattern '" + testTool.getPattern() + "' relative to '" + moduleRoot + "'.");
-
-        boolean hasInvalidateFiles = false;
-        for (String resultFile : resultFiles) {
-
-            File resultFilePathFile = new File(moduleRoot, resultFile);
-
-            if (resultFilePathFile.length() == 0) {
-                //Ignore the empty result file (some reason)
-                String msg = "[WARNING] - The file '" + resultFilePathFile.getPath() + "' is empty. This file has been ignored.";
-                XUnitLog.log(listener, msg);
-                continue;
+            //Gets the associated inputMetric object
+            InputMetric inputMetric = testTool.getInputMetric();
+            if (inputMetric == null) {
+                throw new RuntimeException("The associated input metric object to the tool " + testTool + " is null.");
             }
 
+            //Retrieves the pattern
+            String curPattern = testTool.getPattern();
+            curPattern = curPattern.replaceAll("[\t\r\n]+", " ");
+            //curPattern = Util.replaceMacro(curPattern, owner.getEnvironment(listener));
 
-            if (!validateXUnitResultFile(resultFilePathFile)) {
-
-                //register there are unvalid files
-                hasInvalidateFiles = true;
-
-                //Ignore unvalid files
-                XUnitLog.log(listener, "[WARNING] - The file '" + resultFilePathFile + "' is an invalid file. It has been ignored.");
-                continue;
-            }
-
-
-            FilePath currentOutputDir = new FilePath(junitOutputPath, testTool.getDescriptor().getShortName());
-            FilePath junitTargetFile = new FilePath(currentOutputDir, JUNIT_FILE_PREFIX + resultFilePathFile.hashCode() + JUNIT_FILE_POSTFIX);
-            try {
-                processJUnitFile(testTool, resultFilePathFile, junitTargetFile, currentOutputDir);
-
-            }
-            catch (Exception se) {
-                String msg = "[ERROR] - Couldn't convert the file '" + resultFilePathFile.getPath() + "' into a JUnit file.";
-                XUnitLog.log(listener, msg + se.toString());
+            //Gets all input files matching the user pattern
+            List<String> resultFiles = findReports(testTool, buildTime, ws, curPattern, testTool.isFaildedIfNotNew());
+            if (resultFiles == null || resultFiles.size() == 0) {
                 return false;
             }
-        }
-        return true;
-    }
 
+            XUnitLog.log(listener, "[" + testTool.getDescriptor().getDisplayName() + "] - Processing " + resultFiles.size() + " files with the pattern '" + testTool.getPattern() + "' relative to '" + ws + "'.");
+            for (String resultFileName : resultFiles) {
 
-    /**
-     * Processing the current junit file
-     *
-     * @param testTool
-     * @param inputFile
-     * @param junitOutputPath
-     * @throws SAXException
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws ParserConfigurationException
-     */
-    private void processJUnitFile(XUnitType testTool, File inputFile, FilePath junitTargetFilePath, FilePath junitOutputPath)
-            throws IOException, ConversionException, ParserConfigurationException, SAXException, InterruptedException {
+                File resultFile = new File(ws, resultFileName);
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder xmlDocumentBuilder = factory.newDocumentBuilder();
-        Document document = xmlDocumentBuilder.parse(inputFile);
-        NodeList testsuitesNodeList = document.getElementsByTagName("testsuites");
+                if (resultFile.length() == 0) {
+                    //Ignore the empty result file (some reason)
+                    String msg = "[WARNING] - The file '" + resultFile.getPath() + "' is empty. This file has been ignored.";
+                    XUnitLog.log(listener, msg);
+                    continue;
+                }
 
-        if ((testTool.getClass() == PHPUnitType.class || testsuitesNodeList == null) || testsuitesNodeList.getLength() == 0) {
-            File fTargetFile = new File(junitTargetFilePath.toURI());
-            fTargetFile.createNewFile();
-            ConversionUtil.convert(testTool.getXsl(), new FileInputStream(inputFile), new FileOutputStream(fTargetFile));
-        } else {
-            splitJunitFile(testTool, testsuitesNodeList, junitOutputPath);
-        }
+                //Validates the input file (nom empty)
+                if (!inputMetric.validateInputFile(resultFile)) {
 
-    }
+                    //Ignores invalid files
+                    XUnitLog.log(listener, "[WARNING] - The file '" + resultFile + "' is an invalid file.");
+                    for (ValidatorError validatorError : inputMetric.getInputValidationErrors()) {
+                        XUnitLog.log(listener, "[WARNING] " + validatorError.toString());
+                    }
+                    XUnitLog.log(listener, "[WARNING] - The file '" + resultFile + "' has been ignored.");
+                    continue;
+                }
 
-    /**
-     * Segragate the current junit file
-     *
-     * @param testTool
-     * @param testsuitesNodeList
-     * @param junitOutputPath
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws SaxonApiException
-     */
-    private void splitJunitFile(XUnitType testTool, NodeList testsuitesNodeList, FilePath junitOutputPath)
-            throws IOException, InterruptedException, ConversionException {
-        NodeList elementsByTagName = ((Element) testsuitesNodeList.item(0)).getElementsByTagName("testsuite");
-        for (int i = 0; i < elementsByTagName.getLength(); i++) {
-            Element element = (Element) elementsByTagName.item(i);
+                // Process the conversion
+                File parent = new File(junitOuputDir, inputMetric.getToolName());
+                parent.mkdirs();
+                if (!parent.exists()) {
+                    throw new XUnitException("Can't create " + parent);
+                }
+                File junitTargetFile = new File(parent, JUNIT_FILE_PREFIX + resultFile.hashCode() + JUNIT_FILE_POSTFIX);
+                XUnitLog.log(listener, "[INFO] - Converting '" + resultFile + "' .");
+                inputMetric.convert(resultFile, junitTargetFile);
 
-            DOMSource source = new DOMSource(element);
-
-            String suiteName = element.getAttribute("name");
-            FilePath junitOutputFile = new FilePath(junitOutputPath, JUNIT_FILE_PREFIX + suiteName.hashCode() + JUNIT_FILE_POSTFIX);
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(junitOutputFile.toURI()));
-            try {
-                ConversionUtil.convert(testTool.getXsl(), source, fileOutputStream);
-
-            } finally {
-                fileOutputStream.close();
+                //Validates the output
+                boolean validateOutput = inputMetric.validateOutputFile(junitTargetFile);
+                if (!validateOutput) {
+                    XUnitLog.log(listener, "[ERROR] - The converted file for the input file '" + resultFile + "' doesn't match the JUnit format");
+                    for (ValidatorError validatorError : inputMetric.getOutputValidationErrors()) {
+                        XUnitLog.log(listener, "[ERROR] " + validatorError.toString());
+                    }
+                    return false;
+                }
             }
+
         }
+        catch (ValidatorException vae) {
+            throw new XUnitException("Validation failed", vae);
+        }
+        catch (ConvertException ce) {
+            throw new XUnitException("Conversion failed", ce);
+        }
+
+
+        return true;
     }
 
 }

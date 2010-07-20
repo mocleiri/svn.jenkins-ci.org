@@ -1,26 +1,33 @@
 package hudson.plugins.global_build_stats.model;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Calendar;
 
 public class DateRange implements Comparable<DateRange> {
 
-	// TODO: internationalize this !
-	private static final SimpleDateFormat SDF = new SimpleDateFormat("dd MMM yy HH:mm");
+	private Calendar start, end;
+	private DateFormat dateFormatter;
 	
-	private Calendar d1, d2;
-	
-	public DateRange(Calendar _d1, Calendar _d2){
-		this.d1 = (Calendar)_d1.clone();
-		this.d2 = (Calendar)_d2.clone();
+	public DateRange(Calendar _start, Calendar _end, DateFormat _dateFormatter){
+		this.start = (Calendar)_start.clone();
+		this.end = (Calendar)_end.clone();
+		this.dateFormatter = _dateFormatter;
 	}
 	
 	public int compareTo(DateRange o) {
-		return this.d1.compareTo(o.d1);
+		return this.start.compareTo(o.start);
 	}
 	
 	@Override
 	public String toString() {
-		return new StringBuilder().append(SDF.format(d1.getTime())).append(" --> ").append(SDF.format(d2.getTime())).toString();
+		return new StringBuilder().append(dateFormatter.format(start.getTime())).append(" --> ").append(dateFormatter.format(end.getTime())).toString();
+	}
+
+	public Calendar getStart() {
+		return start;
+	}
+
+	public Calendar getEnd() {
+		return end;
 	}
 }
