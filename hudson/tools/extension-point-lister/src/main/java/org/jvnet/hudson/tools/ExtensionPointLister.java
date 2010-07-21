@@ -91,7 +91,7 @@ public class ExtensionPointLister implements AnnotationProcessor {
                                 // unknown
                                 m.appendReplacement(sb,"{{$1{}}}");
                             } else {
-                                m.appendReplacement(sb, '['+simpleName+'|'+fullName.replace('.','/')+"@javadoc]");
+                                m.appendReplacement(sb, '['+simpleName+'|'+fullName+"@javadoc]");
                             }
                         }
                         m.appendTail(sb);
