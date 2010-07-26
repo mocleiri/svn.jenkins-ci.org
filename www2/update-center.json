@@ -2005,12 +2005,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gerrit+Plugin"
     },
     "gerrit-trigger":     {
-      "buildDate": "Jul 05, 2010",
-      "dependencies": [      {
-        "name": "git",
-        "optional": false,
-        "version": "0.9"
-      }],
+      "buildDate": "Jul 26, 2010",
+      "dependencies":       [
+                {
+          "name": "git",
+          "optional": false,
+          "version": "0.9"
+        },
+                {
+          "name": "rebuild",
+          "optional": true,
+          "version": "1.1"
+        }
+      ],
       "developers":       [
                 {
           "developerId": "rsandell",
@@ -2026,11 +2033,12 @@ updateCenter.post(
       "excerpt": "This plugin integrates Hudson to <a href='http://code.google.com/p/gerrit/'>Gerrit<\/a> code review for triggering builds when a \"patch set\" is created. \\\\  ",
       "labels": ["trigger"],
       "name": "gerrit-trigger",
-      "releaseTimestamp": "2010-07-06T02:37:32.00Z",
-      "requiredCore": "1.360",
+      "previousTimestamp": "2010-07-06T02:37:32.00Z",
+      "releaseTimestamp": "2010-07-27T00:31:48.00Z",
+      "requiredCore": "1.362",
       "title": "Gerrit Trigger",
-      "url": "http://updates.hudson-labs.org/download/plugins/gerrit-trigger/2.0/gerrit-trigger.hpi",
-      "version": "2.0",
+      "url": "http://updates.hudson-labs.org/download/plugins/gerrit-trigger/2.1.0/gerrit-trigger.hpi",
+      "version": "2.1.0",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gerrit+Trigger"
     },
     "girls":     {
@@ -4339,11 +4347,19 @@ updateCenter.post(
         "email": "-",
         "name": "domi"
       }],
+      "excerpt": "Scriptler allows you to store/edit/execute <a href='http://groovy.codehaus.org/'>groovy scripts<\/a> on any of the slaves/nodes... no need for copy paste groovy code anymore. Beside administer&nbsp; your scripts, Scritpler also provides a way to share scripts between users via hosted script catalogs on the internet. ",
+      "labels":       [
+        "external",
+        "slaves",
+        "misc"
+      ],
       "name": "scriptler",
       "releaseTimestamp": "2010-07-18T21:30:34.00Z",
       "requiredCore": "1.367",
+      "title": "Scriptler Plugin",
       "url": "http://updates.hudson-labs.org/download/plugins/scriptler/1.0/scriptler.hpi",
-      "version": "1.0"
+      "version": "1.0",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Scriptler+Plugin"
     },
     "secret":     {
       "buildDate": "May 06, 2010",
@@ -5682,8 +5698,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIE8jCCA9qgAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0xMDA0MTgyMzQzMzhaFw0xMTA0MTgyMzQzMzhaMIGVMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxDzANBgNVBAoTBkh1ZHNvbjEPMA0GA1UECxMGSHVkc29uMR0wGwYDVQQDExRIdWRzb24gVXBkYXRlIENlbnRlcjEdMBsGCSqGSIb3DQEJARYOa2tAa29oc3VrZS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDUQ7uN/ZQvyHvi5UONr2CAmWfWiAPPqaF4SS7dTIaLM/sxRgnZY1k7zt/8MTce7gNOd2EyCru93EgMVY1ivEH4b9fYSlzSnu8Lx2RdMulW0iqinLY17Jv+J1qxq+tRUyMa9y3DN28sf7ydLcpEJog3Of6KL+zJlKQS0oNcgsju9LdfzccmMu8Qq3lNhtcdsPkcRWpHyGiyva99xXBR/pqxM0GR8aMZYNwLi59Vg8/fpkTLwhBGVOgEIdO4ARvH/HTlfaLdr2pJ5BfsODk7A3VHV2ObDYIa+skEy1PPvtLv3/TfI/nD9Owt/TlpyI5aAbd1lboUrsPNyKjiR6GIfOcFAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBSMP/tadXU+XdrmlxxDSCZeyMAcbDCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEADs3NHx8j+x45msMgjHPoMb4yvz42vI1ea4UyYHrDZGlEsK7kfVbNHNpt+UGZaws0b+f6brL/3DA9w0niCTucHMd+ZqqFGpXHvV/IVVrR7omLgQ6EdinYYDXzIl/1Z97jeRDmL4/kckxxGyTyw/Y4/YatmVSM8ZESY3W9lYS9P90I+Jmo0e4W6tY+ztPrsw3C3ixmvfqG++YQTjZivr/5sCUd6UJHAz7XuX9Eqgyz2Od1wOazmtP7TEsQVEwiJXGB5HFLw7qtC51K3VdAj43nm+qgKe0U3yOw57EYKlntQzCWF24ucOZ1QhpvrIlzcD1q4AlIdlTD0OtuP9uGIYCTjA=="],
-    "digest": "IpOU3pShztJqEF0DaSxsLvlMgao=",
-    "signature": "nWIGUO+qmLDHH8O6a/4ptDRzV5tNeg7XCo4ylHx2E3VY6ZaiKstS4SoBCWcfsLG6Pw/vZeQiONgMZuqMD1SpzJV9NhQIHnMQjp+tEFL7giPIylnjLGaILua1q23wgmOHRciVMSVhDXbqXSh4u+y5dBW0WW4rCcJaY4IiICFL0qBHgjcS1wYjgGOJyM2FowhO7xZGNj6CVsg53o9os9sPVXZv+eQoYXGrsvpJ9gmh/EP/lejPOGdkfe4wmKlxHK8mU9aNLP9bhx1w/UoGoW13iOl2oYJ9B+S1LEVm2NowIdse2sGcXwHYzw4HqlJke8njeMW9uYVyCmYnx8+X4gfcZw=="
+    "digest": "yjCgAIjiebHPinfnowoNAINkqWM=",
+    "signature": "xrAiPnsG231Tp4PJ918WlLFNAGReyyVRpYO7idDtX4faZ/0hMH3VLagUR2gAlPVQF9sPCdKu7uYkCpzRWgiB6zSQ5sJO8QyduH9imKYkj9Y9Y4RpNQswrPvXSotFgrAqb1CP8/NrQyBqnvULUb5Bc7sUcfBm2dp67MZNeXXIpilGQs3uCzNnK7zC5qCrySOYmqFsWccMVeWyid/qGKZbBjcdkxduRDifB1emi1ac/pM9iKdgPqSV5TIxnqad0RuNxSiBFrfuLzXaeK93Wjw4KXK1t4VeQjTNuzoEwXGoodT4eXnMnKPwNZOXS7bZIk9k4VwFTHRDC48fXA15BTM+Bg=="
   },
   "updateCenterVersion": "1"
 }
