@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Mailer (Hudson main module 1.367 API)
+Mailer (Hudson main module 1.368 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-16">
+<META NAME="date" CONTENT="2010-07-26">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Mailer (Hudson main module 1.367 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Mailer (Hudson main module 1.367 API)";
+        parent.document.title="Mailer (Hudson main module 1.368 API)";
     }
 }
 </SCRIPT>
@@ -462,7 +462,8 @@ perform</H3>
 public boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                        <A HREF="../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
                        <A HREF="../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)
-                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/tasks/BuildStep.html#perform(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">BuildStep</A></CODE></B></DD>
 <DD>Runs the step over the given build and reports the progress to the listener.
@@ -480,6 +481,12 @@ public boolean <B>perform</B>(<A HREF="../../hudson/model/AbstractBuild.html" ti
 <DT><B>Returns:</B><DD>true if the build can continue, false if there was an error
       and the build needs to be aborted.
 <DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If the implementation wants to abort the processing when an <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><CODE>IOException</CODE></A>
+      happens, it can simply propagate the exception to the caller. This will cause
+      the build to fail, with the default error message.
+      Implementations are encouraged to catch <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io"><CODE>IOException</CODE></A> on its own to
+      provide a better error message, if it can do so, so that users have better
+      understanding on why it failed.
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE> - If the build is interrupted by the user (in an attempt to abort the build.)
       Normally the <A HREF="../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks"><CODE>BuildStep</CODE></A> implementations may simply forward the exception
       it got from its lower-level functions.</DL>
