@@ -1,12 +1,12 @@
 updateCenter.post(
 {
   "core":   {
-    "buildDate": "Jul 16, 2010",
+    "buildDate": "Jul 26, 2010",
     "previousTimestamp": "1970-01-01T00:00:00.00Z",
-    "url": "https://hudson.dev.java.net/files/documents/2402/151568/hudson.war",
+    "url": "https://hudson.dev.java.net/files/documents/2402/151820/hudson.war",
     "name": "core",
-    "version": "1.367",
-    "releaseTimestamp": "2010-07-17T05:21:08.00Z"
+    "version": "1.368",
+    "releaseTimestamp": "2010-07-26T18:31:09.00Z"
   },
   "updateCenterVersion": "1",
   "plugins":   {
@@ -3049,14 +3049,17 @@ updateCenter.post(
     "scriptler":     {
       "dependencies": [],
       "buildDate": "Jul 18, 2010",
+      "title": "Scriptler Plugin",
       "developers": [      {
         "developerId": "domi",
         "email": "-",
         "name": "domi"
       }],
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Scriptler+Plugin",
       "previousTimestamp": "2010-07-18T12:35:20.00Z",
       "url": "https://hudson.dev.java.net/files/documents/2402/151592/scriptler.hpi",
       "requiredCore": "1.367",
+      "excerpt": "Scriptler allows you to store/edit/execute <a href='http://groovy.codehaus.org/'>groovy scripts<\/a> on any of the slaves/nodes... no need for copy paste groovy code anymore. Beside administer&nbsp; your scripts, Scritpler also provides a way to share scripts between users via hosted script catalogs on the internet. ",
       "name": "scriptler",
       "releaseTimestamp": "2010-07-18T12:35:20.00Z",
       "version": "1.0"
@@ -3456,12 +3459,19 @@ updateCenter.post(
       "version": "1.6"
     },
     "gerrit-trigger":     {
-      "dependencies": [      {
-        "optional": false,
-        "name": "git",
-        "version": "0.9"
-      }],
-      "buildDate": "Jul 05, 2010",
+      "dependencies":       [
+                {
+          "optional": false,
+          "name": "git",
+          "version": "0.9"
+        },
+                {
+          "optional": true,
+          "name": "rebuild",
+          "version": "1.1"
+        }
+      ],
+      "buildDate": "Jul 26, 2010",
       "title": "Gerrit Trigger",
       "developers":       [
                 {
@@ -3477,11 +3487,11 @@ updateCenter.post(
       ],
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Gerrit+Trigger",
       "previousTimestamp": "2010-07-05T17:42:05.00Z",
-      "url": "https://hudson.dev.java.net/files/documents/2402/151318/gerrit-trigger.hpi",
-      "requiredCore": "1.360",
+      "url": "https://hudson.dev.java.net/files/documents/2402/151805/gerrit-trigger.hpi",
+      "requiredCore": "1.362",
       "name": "gerrit-trigger",
-      "releaseTimestamp": "2010-07-05T17:42:05.00Z",
-      "version": "2.0"
+      "releaseTimestamp": "2010-07-26T15:37:03.00Z",
+      "version": "2.1.0"
     },
     "copy-to-slave":     {
       "dependencies": [],
