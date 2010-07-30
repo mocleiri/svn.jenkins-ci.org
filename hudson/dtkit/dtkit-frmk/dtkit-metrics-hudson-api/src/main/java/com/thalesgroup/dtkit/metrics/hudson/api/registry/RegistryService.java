@@ -25,12 +25,12 @@ package com.thalesgroup.dtkit.metrics.hudson.api.registry;
 
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RegistryService {
 
-    private static Map<String, Class<? extends InputMetric>> registry = new HashMap<String, Class<? extends InputMetric>>();
+    private final static Map<String, Class<? extends InputMetric>> registry = new ConcurrentHashMap<String, Class<? extends InputMetric>>();
 
     @SuppressWarnings("unused")
     public static Map<String, Class<? extends InputMetric>> getRegistry() {

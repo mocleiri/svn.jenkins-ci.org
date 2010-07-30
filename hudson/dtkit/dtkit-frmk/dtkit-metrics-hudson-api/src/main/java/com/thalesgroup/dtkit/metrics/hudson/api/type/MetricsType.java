@@ -57,12 +57,12 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
 
     @SuppressWarnings("unused")
     public boolean isFaildedIfNotNew() {
-        return (faildedIfNotNew == null ? true : faildedIfNotNew.booleanValue());
+        return (faildedIfNotNew == null ? true : faildedIfNotNew);
     }
 
     @SuppressWarnings("unused")
     public boolean isDeleteOutputFiles() {
-        return (deleteOutputFiles == null ? true : deleteOutputFiles.booleanValue());
+        return (deleteOutputFiles == null ? true : deleteOutputFiles);
     }
 
     @SuppressWarnings("unused")

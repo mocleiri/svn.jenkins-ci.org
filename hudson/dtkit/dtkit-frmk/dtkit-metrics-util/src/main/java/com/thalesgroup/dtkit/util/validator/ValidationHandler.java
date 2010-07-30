@@ -23,58 +23,52 @@
 
 package com.thalesgroup.dtkit.util.validator;
 
-import java.io.Serializable;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXParseException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-@SuppressWarnings("unused")
-public class ValidatorError implements Serializable {
+public class ValidationHandler implements ErrorHandler {
 
-    private ErrorType type;
 
-    private int line;
+    private List<ValidationError> errors = new ArrayList<ValidationError>();
 
-    private String errorId;
+    /**
+     * Report a non-fatal error
+     *
+     * @param ex the error condition
+     */
+    public void error(SAXParseException ex) {
 
-    private String message;
-
-    public ValidatorError(ErrorType errorType, int line, String errorId, String message) {
-        this.type = errorType;
-        this.line = line;
-        this.errorId = errorId;
-        this.message = message;
+        errors.add(new ValidationError(ErrorType.ERROR, ex.getLineNumber(), ex.getSystemId(), ex.getMessage()));
     }
 
-    public String getErrorId() {
-        return errorId;
+    /**
+     * Report a fatal error
+     *
+     * @param ex the error condition
+     */
+
+    public void fatalError(SAXParseException ex) {
+        System.err.println("At line " + ex.getLineNumber() + " of " + ex.getSystemId() + ':');
+        System.err.println(ex.getMessage());
+        errors.add(new ValidationError(ErrorType.FATAL_ERROR, ex.getLineNumber(), ex.getSystemId(), ex.getMessage()));
     }
 
-    public int getLine() {
-        return line;
+    /**
+     * Report a warning
+     *
+     * @param ex the warning condition
+     */
+    public void warning(org.xml.sax.SAXParseException ex) {
+        System.err.println("At line " + ex.getLineNumber() + " of " + ex.getSystemId() + ':');
+        System.err.println(ex.getMessage());
+        errors.add(new ValidationError(ErrorType.WARNING, ex.getLineNumber(), ex.getSystemId(), ex.getMessage()));
     }
 
-    public void setLine(int line) {
-        this.line = line;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public ErrorType getType() {
-        return type;
-    }
-
-    public void setType(ErrorType type) {
-        this.type = type;
-    }
-
-    public String toString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("At line ").append(line).append(" of ").append(errorId).append(":").append((message));
-        return sb.toString();
+    public List<ValidationError> getErrors() {
+        return errors;
     }
 }

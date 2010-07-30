@@ -24,9 +24,15 @@
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
 
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Singleton;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.CoverageType;
+import com.thalesgroup.dtkit.util.converter.ConversionService;
+import com.thalesgroup.dtkit.util.validator.ValidationService;
 import hudson.DescriptorExtensionList;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
@@ -34,13 +40,21 @@ import hudson.model.Hudson;
 
 public abstract class CoverageTypeDescriptor<T extends CoverageType> extends Descriptor<CoverageType> {
 
-    @SuppressWarnings("unused")
-    private Class<? extends CoverageType> type;
+    private final Injector injector;
 
-    protected CoverageTypeDescriptor(Class<T> clazz, Class<? extends InputMetric> inputMetricClass) {
+    protected CoverageTypeDescriptor(Class<T> clazz, final Class<? extends InputMetric> inputMetricClass) {
         super(clazz);
-        type = clazz;
         RegistryService.addElement(getId(), inputMetricClass);
+        injector = Guice.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                //Optional binding, provided by default in Guice)
+                bind(ValidationService.class).in(Singleton.class);
+                bind(ConversionService.class).in(Singleton.class);
+                //Make the instance of inputMetricClass also a Singleton
+                bind(inputMetricClass).in(Singleton.class);
+            }
+        });
     }
 
     @SuppressWarnings("unused")
@@ -57,15 +71,7 @@ public abstract class CoverageTypeDescriptor<T extends CoverageType> extends Des
 
     @SuppressWarnings("unused")
     public InputMetric getInputMetric() {
-        try {
-            Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
-            return inputMetricClass.newInstance();
-        }
-        catch (IllegalAccessException iae) {
-            return null;
-        }
-        catch (InstantiationException ie) {
-            return null;
-        }
+        Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
+        return injector.getInstance(inputMetricClass);
     }
 }

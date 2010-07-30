@@ -32,8 +32,8 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class ViolationsType extends MetricsType implements Describable<ViolationsType> {
 
-    protected ViolationsType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
-        super(pattern, faildedIfNotNew, deleteOutputFiles);
+    protected ViolationsType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles) {
+        super(pattern, failureIfNotNew, deleteOutputFiles);
     }
 
     protected ViolationsType(String pattern) {
@@ -45,8 +45,9 @@ public abstract class ViolationsType extends MetricsType implements Describable<
         return Hudson.getInstance().getExtensionList(ViolationsType.class);
     }
 
-    public ViolationsTypeDescriptor getDescriptor() {
-        return (ViolationsTypeDescriptor<?>) Hudson.getInstance().getDescriptor(getClass());
+    @SuppressWarnings("unchecked")
+    public ViolationsTypeDescriptor<ViolationsType> getDescriptor() {
+        return (ViolationsTypeDescriptor<ViolationsType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     @SuppressWarnings("unused")

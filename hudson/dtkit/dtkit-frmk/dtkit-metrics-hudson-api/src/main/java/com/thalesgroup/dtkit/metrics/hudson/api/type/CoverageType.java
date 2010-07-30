@@ -33,8 +33,8 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class CoverageType extends MetricsType implements Describable<CoverageType> {
 
-    protected CoverageType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
-        super(pattern, faildedIfNotNew, deleteOutputFiles);
+    protected CoverageType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles) {
+        super(pattern, failureIfNotNew, deleteOutputFiles);
     }
 
     protected CoverageType(String pattern) {
@@ -45,8 +45,9 @@ public abstract class CoverageType extends MetricsType implements Describable<Co
         return Hudson.getInstance().getExtensionList(CoverageType.class);
     }
 
-    public CoverageTypeDescriptor getDescriptor() {
-        return (CoverageTypeDescriptor<?>) Hudson.getInstance().getDescriptor(getClass());
+    @SuppressWarnings("unchecked")
+    public CoverageTypeDescriptor<CoverageType> getDescriptor() {
+        return (CoverageTypeDescriptor<CoverageType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     @SuppressWarnings("unused")

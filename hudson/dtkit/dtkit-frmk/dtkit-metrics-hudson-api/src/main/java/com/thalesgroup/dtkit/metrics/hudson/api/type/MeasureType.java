@@ -32,8 +32,8 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class MeasureType extends MetricsType implements Describable<MeasureType> {
 
-    protected MeasureType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
-        super(pattern, faildedIfNotNew, deleteOutputFiles);
+    protected MeasureType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles) {
+        super(pattern, failureIfNotNew, deleteOutputFiles);
     }
 
     protected MeasureType(String pattern) {
@@ -44,8 +44,9 @@ public abstract class MeasureType extends MetricsType implements Describable<Mea
         return Hudson.getInstance().getExtensionList(MeasureType.class);
     }
 
-    public MeasureTypeDescriptor getDescriptor() {
-        return (MeasureTypeDescriptor<?>) Hudson.getInstance().getDescriptor(getClass());
+    @SuppressWarnings("unchecked")
+    public MeasureTypeDescriptor<MeasureType> getDescriptor() {
+        return (MeasureTypeDescriptor<MeasureType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     @SuppressWarnings("unused")

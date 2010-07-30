@@ -25,21 +25,21 @@ package com.thalesgroup.dtkit.util.validator;
 
 
 @SuppressWarnings("unused")
-public class ValidatorException extends Exception {
+public class ValidationException extends Exception {
 
-    public ValidatorException() {
+    public ValidationException() {
         super();
     }
 
-    public ValidatorException(String message) {
+    public ValidationException(String message) {
         super(message);
     }
 
-    public ValidatorException(Throwable cause) {
+    public ValidationException(Throwable cause) {
         super(cause);
     }
 
-    public ValidatorException(String message, Throwable cause) {
+    public ValidationException(String message, Throwable cause) {
         super(message, cause);
     }
 

@@ -23,9 +23,9 @@
 
 package com.thalesgroup.dtkit.metrics.api;
 
-import com.thalesgroup.dtkit.util.converter.ConvertException;
-import com.thalesgroup.dtkit.util.validator.ValidatorError;
-import com.thalesgroup.dtkit.util.validator.ValidatorException;
+import com.thalesgroup.dtkit.util.converter.ConversionException;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
+import com.thalesgroup.dtkit.util.validator.ValidationException;
 
 import java.io.File;
 import java.io.Serializable;
@@ -38,12 +38,12 @@ public abstract class InputMetric implements Serializable {
     /**
      * The current input validation errors
      */
-    private List<ValidatorError> inputValidationErrors;
+    private List<ValidationError> inputValidationErrors;
 
     /**
      * The current output validation errors
      */
-    private List<ValidatorError> outputValidationErrors;
+    private List<ValidationError> outputValidationErrors;
 
     /**
      * The  name of the current tool
@@ -98,10 +98,10 @@ public abstract class InputMetric implements Serializable {
      *
      * @param inputFile the input file to convert
      * @param outFile   the output file to convert
-     * @throws ConvertException an application Exception to throw when there is an error of conversion
+     * @throws com.thalesgroup.dtkit.util.converter.ConversionException an application Exception to throw when there is an error of conversion
      *                          The exception is catched by the API client (as Hudson plugin)
      */
-    public abstract void convert(File inputFile, File outFile) throws ConvertException;
+    public abstract void convert(File inputFile, File outFile) throws ConversionException;
 
 
     /*
@@ -109,14 +109,14 @@ public abstract class InputMetric implements Serializable {
      *
      * @return true if the input file is valid, false otherwise
      */
-    public abstract boolean validateInputFile(File inputXMLFile) throws ValidatorException;
+    public abstract boolean validateInputFile(File inputXMLFile) throws ValidationException;
 
     /*
      *  Gives the validation process for the output file
      *
      * @return true if the input file is valid, false otherwise
      */
-    public abstract boolean validateOutputFile(File inputXMLFile) throws ValidatorException;
+    public abstract boolean validateOutputFile(File inputXMLFile) throws ValidationException;
 
 
     /**
@@ -124,7 +124,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the list of all input validation errors
      */
-    public List<ValidatorError> getInputValidationErrors() {
+    public List<ValidationError> getInputValidationErrors() {
         return inputValidationErrors;
     }
 
@@ -133,15 +133,15 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the list of all output validation errors
      */
-    public List<ValidatorError> getOutputValidationErrors() {
+    public List<ValidationError> getOutputValidationErrors() {
         return outputValidationErrors;
     }
 
-    public void setInputValidationErrors(List<ValidatorError> inputValidationErrors) {
+    public void setInputValidationErrors(List<ValidationError> inputValidationErrors) {
         this.inputValidationErrors = inputValidationErrors;
     }
 
-    public void setOutputValidationErrors(List<ValidatorError> outputValidationErrors) {
+    public void setOutputValidationErrors(List<ValidationError> outputValidationErrors) {
         this.outputValidationErrors = outputValidationErrors;
     }
 }

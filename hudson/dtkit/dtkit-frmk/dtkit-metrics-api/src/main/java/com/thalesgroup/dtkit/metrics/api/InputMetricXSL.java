@@ -23,16 +23,28 @@
 
 package com.thalesgroup.dtkit.metrics.api;
 
-import com.thalesgroup.dtkit.util.converter.ConvertException;
-import com.thalesgroup.dtkit.util.converter.ConvertUtil;
-import com.thalesgroup.dtkit.util.validator.ValidatorException;
-import com.thalesgroup.dtkit.util.validator.ValidatorUtil;
+import com.google.inject.Inject;
+import com.thalesgroup.dtkit.util.converter.ConversionException;
+import com.thalesgroup.dtkit.util.converter.ConversionService;
+import com.thalesgroup.dtkit.util.validator.ValidationException;
+import com.thalesgroup.dtkit.util.validator.ValidationService;
 
 import java.io.File;
 
 @SuppressWarnings("unused")
 public abstract class InputMetricXSL extends InputMetric {
 
+
+    private ConversionService conversionService;
+
+    private ValidationService validationService;
+
+
+    @Inject
+    void set(ConversionService conversionService, ValidationService validationService) {
+        this.conversionService = conversionService;
+        this.validationService = validationService;
+    }
 
     /**
      * Gets the Class (namespace) of the xsl file resource
@@ -88,27 +100,30 @@ public abstract class InputMetricXSL extends InputMetric {
     /*
      *  Convert the input file against the current xsl of the tool and put the result in the outFile
      */
+
     @Override
-    public void convert(File inputFile, File outFile) throws ConvertException {
-        ConvertUtil.convert(this.getXSLResourceClass(), this.getXslName(), inputFile, outFile);
+    public void convert(File inputFile, File outFile) throws ConversionException {
+        conversionService.convert(this.getXSLResourceClass(), this.getXslName(), inputFile, outFile);
     }
 
 
     /*
      *  Validates the input file against the current grammar of the tool
      */
+
     @Override
-    public boolean validateInputFile(File inputXMLFile) throws ValidatorException {
-        setInputValidationErrors(ValidatorUtil.processValidation(this.getInputXSDClass(), this.getInputXsd(), inputXMLFile));
+    public boolean validateInputFile(File inputXMLFile) throws ValidationException {
+        setInputValidationErrors(validationService.processValidation(this.getInputXSDClass(), this.getInputXsd(), inputXMLFile));
         return getInputValidationErrors().size() == 0;
     }
 
     /*
      *  Validates the output file against the current grammar of the format
      */
+
     @Override
-    public boolean validateOutputFile(File inputXMLFile) throws ValidatorException {
-        setOutputValidationErrors(ValidatorUtil.processValidation(this.getOutputFormatType().getClass(), this.getOutputXsd(), inputXMLFile));
+    public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
+        setOutputValidationErrors(validationService.processValidation(this.getOutputFormatType().getClass(), this.getOutputXsd(), inputXMLFile));
         return getOutputValidationErrors().size() == 0;
     }
 

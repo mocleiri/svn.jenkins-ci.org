@@ -27,23 +27,27 @@ import com.thalesgroup.dtkit.metrics.api.OutputMetric;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 public class JUnitModel implements OutputMetric, Serializable {
 
+    @SuppressWarnings("unused")
     public static OutputMetric OUTPUT_JUNIT_1_0 = new JUnitModel("1.0", "JUNIT OUTPUT FORMAT 1.0");
 
-    private String version;
+    private final String version;
 
-    private String description;
+    private final String description;
 
     public JUnitModel(String version, String description) {
         this.version = version;
         this.description = description;
     }
 
+    @SuppressWarnings("unused")
     public String getDescription() {
         return description;
     }
 
+    @SuppressWarnings("unused")
     public String getVersion() {
         return version;
     }

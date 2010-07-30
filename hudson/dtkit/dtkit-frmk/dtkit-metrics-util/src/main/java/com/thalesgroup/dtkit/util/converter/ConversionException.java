@@ -23,21 +23,24 @@
 
 package com.thalesgroup.dtkit.util.converter;
 
-public class ConvertException extends Exception {
+public class ConversionException extends Exception {
 
-    public ConvertException() {
+    @SuppressWarnings("unused")
+    public ConversionException() {
         super();
     }
 
-    public ConvertException(String message) {
+    @SuppressWarnings("unused")
+    public ConversionException(String message) {
         super(message);
     }
 
-    public ConvertException(Throwable cause) {
+    @SuppressWarnings("unused")
+    public ConversionException(Throwable cause) {
         super(cause);
     }
 
-    public ConvertException(String message, Throwable cause) {
+    public ConversionException(String message, Throwable cause) {
         super(message, cause);
     }
 

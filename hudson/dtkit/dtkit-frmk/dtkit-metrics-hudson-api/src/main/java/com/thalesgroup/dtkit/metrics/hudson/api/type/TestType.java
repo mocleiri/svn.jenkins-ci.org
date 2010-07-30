@@ -32,16 +32,17 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class TestType extends MetricsType implements Describable<TestType> {
 
-    protected TestType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
-        super(pattern, faildedIfNotNew, deleteOutputFiles);
+    protected TestType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles) {
+        super(pattern, failureIfNotNew, deleteOutputFiles);
     }
 
     protected TestType(String pattern) {
         super(pattern);
     }
 
-    public TestTypeDescriptor getDescriptor() {
-        return (TestTypeDescriptor<?>) Hudson.getInstance().getDescriptor(getClass());
+    @SuppressWarnings("unchecked")
+    public TestTypeDescriptor<TestType> getDescriptor() {
+        return (TestTypeDescriptor<TestType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     public static ExtensionList<TestType> all() {
