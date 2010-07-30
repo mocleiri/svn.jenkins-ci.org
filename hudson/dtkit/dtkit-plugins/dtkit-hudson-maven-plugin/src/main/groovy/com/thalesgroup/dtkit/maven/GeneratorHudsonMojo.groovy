@@ -109,18 +109,18 @@ public class GeneratorHudsonMojo extends AbstractMojo {
 
   public generate(String hudsonType, hudsonDescriptorType, String packageName, InputMetric inputMetric) throws Exception {
     // Where to write the classes
-    File targetDirectory = new File(project.build.directory + '/generated-sources/groovy')
+    File targetDirectory = new File(project.build.directory + "/generated-sources/groovy")
 
     // The directory to write the source to
     File packageDir = new File(targetDirectory, packageName.replace('.', '/'))
 
-    def buildName = inputMetric.getToolName() + 'Hudson' + hudsonType
+    def buildName = inputMetric.getToolName() + "Hudson" + hudsonType
     def classname = buildName.substring(0, 1).toUpperCase() + buildName.substring(1);
 
     // Now to create our enum
     def out = []
 
-    out << 'package ' + packageName + ';\n'
+    out << "package " + packageName + ";\n"
 
     out << "\n"
 
@@ -134,15 +134,18 @@ public class GeneratorHudsonMojo extends AbstractMojo {
     out << "public class " + classname + " extends ${hudsonType} {\n"
     out << "\n"
 
-    out << '@DataBoundConstructor\n'
-    out << 'public ' + classname + '(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n'
-    out << '  super(pattern, faildedIfNotNew, deleteOutputFiles);\n'
-    out << '}\n'
+    out << "private static ${hudsonDescriptorType}<?> DESCRIPTOR = new " + classname + ".DescriptorImpl();\n"       
+    out << "\n"
+    
+    out << "@DataBoundConstructor\n"
+    out << "public " + classname + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n"
+    out << "  super(pattern, faildedIfNotNew, deleteOutputFiles);\n"
+    out << "}\n"
     out << "\n"
 
     out << "public ${hudsonDescriptorType}<?> getDescriptor() {\n"
-    out << ' return new ' + classname + '.DescriptorImpl();\n'
-    out << '}\n'
+    out << " return  DESCRIPTOR;\n"
+    out << "}\n"
     out << "\n"
 
     out << "@Extension\n"
@@ -166,7 +169,7 @@ public class GeneratorHudsonMojo extends AbstractMojo {
     out << "\n"
 
     // Finish the  class
-    out << '}\n'
+    out << "}\n"
 
     // Convert the array into a string
     StringBuilder sb = new StringBuilder()
