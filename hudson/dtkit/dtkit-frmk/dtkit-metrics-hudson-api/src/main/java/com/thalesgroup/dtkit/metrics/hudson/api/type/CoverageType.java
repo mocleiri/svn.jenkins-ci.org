@@ -46,8 +46,8 @@ public abstract class CoverageType extends MetricsType implements Describable<Co
     }
 
     @SuppressWarnings("unchecked")
-    public CoverageTypeDescriptor<CoverageType> getDescriptor() {
-        return (CoverageTypeDescriptor<CoverageType>) Hudson.getInstance().getDescriptor(getClass());
+    public CoverageTypeDescriptor<? extends CoverageType> getDescriptor() {
+        return (CoverageTypeDescriptor<? extends CoverageType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     @SuppressWarnings("unused")

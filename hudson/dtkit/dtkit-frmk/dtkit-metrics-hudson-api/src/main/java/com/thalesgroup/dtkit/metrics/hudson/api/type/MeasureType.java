@@ -45,8 +45,8 @@ public abstract class MeasureType extends MetricsType implements Describable<Mea
     }
 
     @SuppressWarnings("unchecked")
-    public MeasureTypeDescriptor<MeasureType> getDescriptor() {
-        return (MeasureTypeDescriptor<MeasureType>) Hudson.getInstance().getDescriptor(getClass());
+    public MeasureTypeDescriptor<? extends MeasureType> getDescriptor() {
+        return (MeasureTypeDescriptor<? extends MeasureType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     @SuppressWarnings("unused")

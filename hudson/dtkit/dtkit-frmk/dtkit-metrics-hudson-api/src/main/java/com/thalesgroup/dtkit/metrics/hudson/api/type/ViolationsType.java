@@ -46,8 +46,8 @@ public abstract class ViolationsType extends MetricsType implements Describable<
     }
 
     @SuppressWarnings("unchecked")
-    public ViolationsTypeDescriptor<ViolationsType> getDescriptor() {
-        return (ViolationsTypeDescriptor<ViolationsType>) Hudson.getInstance().getDescriptor(getClass());
+    public ViolationsTypeDescriptor<? extends ViolationsType> getDescriptor() {
+        return (ViolationsTypeDescriptor<? extends ViolationsType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     @SuppressWarnings("unused")

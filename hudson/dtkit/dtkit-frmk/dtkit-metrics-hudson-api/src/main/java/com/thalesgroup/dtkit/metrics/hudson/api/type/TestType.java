@@ -41,8 +41,8 @@ public abstract class TestType extends MetricsType implements Describable<TestTy
     }
 
     @SuppressWarnings("unchecked")
-    public TestTypeDescriptor<TestType> getDescriptor() {
-        return (TestTypeDescriptor<TestType>) Hudson.getInstance().getDescriptor(getClass());
+    public TestTypeDescriptor<? extends TestType> getDescriptor() {
+        return (TestTypeDescriptor<? extends TestType>) Hudson.getInstance().getDescriptor(getClass());
     }
 
     public static ExtensionList<TestType> all() {
