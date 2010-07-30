@@ -134,7 +134,7 @@ public class GeneratorHudsonMojo extends AbstractMojo {
     out << "public class " + classname + " extends ${hudsonType} {\n"
     out << "\n"
 
-    out << "private static ${hudsonDescriptorType}<?> DESCRIPTOR = new " + classname + ".DescriptorImpl();\n"       
+    out << "private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + classname + ".DescriptorImpl();\n"
     out << "\n"
     
     out << "@DataBoundConstructor\n"
@@ -143,13 +143,13 @@ public class GeneratorHudsonMojo extends AbstractMojo {
     out << "}\n"
     out << "\n"
 
-    out << "public ${hudsonDescriptorType}<?> getDescriptor() {\n"
+    out << "public ${hudsonDescriptorType}<? extends ${hudsonType}> getDescriptor() {\n"
     out << " return  DESCRIPTOR;\n"
     out << "}\n"
     out << "\n"
 
     out << "@Extension\n"
-    out << "public static class DescriptorImpl extends ${hudsonDescriptorType}<" + classname + "> {\n"
+    out << "public static class DescriptorImpl  extends ${hudsonDescriptorType}<" + classname + "> {\n"
     out << "\n"
 
     out << "  public DescriptorImpl() {\n"
