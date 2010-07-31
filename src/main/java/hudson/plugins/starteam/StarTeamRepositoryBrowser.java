@@ -5,6 +5,7 @@ package hudson.plugins.starteam;
 
 import hudson.model.Descriptor;
 import hudson.scm.RepositoryBrowser;
+import hudson.scm.CVSSCM;
 import hudson.scm.ChangeLogSet.Entry;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public abstract class StarTeamRepositoryBrowser extends RepositoryBrowser {
 	@Override
 	public URL getChangeSetLink(Entry changeSet) throws IOException {
 		// TODO Auto-generated method stub
-		return null;
+    return null;
 	}
 
 	/*

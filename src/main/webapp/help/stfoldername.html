@@ -1,0 +1,39 @@
+<div>
+  <p>
+		The list of folder to be checked out to the root of the workspace.
+  </p>
+
+  <h4>Example 1 - Single project</h4>
+  <pre>MyProjects/alpha</pre>
+
+
+  <h4>Example 2 - Single project with multiple source folders checked out on top of each other</h4>
+  <pre>MyProjects/alpha
+MyProjects/beta
+MyProjects/delta</pre>
+
+  <h4>Example 3 - Single project with multiple source folders checked out to different locations</h4>
+  <p>
+    Provide a comma seperated list of folders.  The first column is the starteam folder.  The second column
+    is the checkout destination relative to the hudson workspace.
+  </p>
+
+<pre>MyProjects/alpha
+MyProjects/beta/src,    src/main/java
+MyProjects/delta/src,   src/test/java
+MyProjects/tests/data,  src/test/resources
+</pre>
+    <b>Note:</b> It is recommended that projects adopt a proper structure.  This feature assists difficult
+    project structures that should be transitioned to more a maintainable structure.
+
+  <h4>Why</h4>
+
+  <p><i>O horrible world... why .. o why?</i></p>
+
+  <p>
+    This helps when migrating badly structured projects to maven projects.  For mediaum to large
+      projects (40+ projects, 10,000+ files, 5+ destination environments, lots of circular dependencies,
+      tc) it is difficult to migrate from an existing "working" build system (typically held together by
+      ANT scripts) to maven in a single leap and flexibility is needed.  This provides that flexibility.
+  </p>
+</div>

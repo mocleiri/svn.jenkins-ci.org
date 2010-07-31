@@ -12,13 +12,15 @@ import hudson.scm.SCMDescriptor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Collection;
+import java.util.ArrayList;
 
 import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.StaplerRequest;
-
+import org.apache.commons.lang.StringUtils;
 
 /**
  * StarTeam SCM plugin for Hudson.
@@ -36,27 +38,59 @@ public class StarTeamSCM extends SCM {
 	private final String passwd;
 	private final String projectname;
 	private final String viewname;
-	private final String foldername;
+	private String foldername;
 	private final String hostname;
-	private final int port;
+  private String labelname;
+  private boolean promotionstate;
+  private final int port;
 
-	/**
+  // do not persist the following, they are transient
+  /**
+   * All folders (single or multiple) end up in the following folder map
+   * as key value pairs where the key is the starteam folder name and the value is the relative path.
+   * . is used if none is provided.
+   */
+  private transient Map<String,String> folderMap;
+  private transient String name;
+  private transient boolean namePromotionState;
+
+
+  /**
 	 * The constructor.
 	 * 
 	 * @stapler-constructor
 	 */
-	public StarTeamSCM(String hostname, int port, String projectname,
-			String viewname, String foldername, String username, String password) {
+	public StarTeamSCM(String hostname, int port,
+                     String projectname, String viewname, String foldername,
+                     String username, String password,
+                     String labelname, String promotionstate) {
 		this.hostname = hostname;
 		this.port = port;
 		this.projectname = projectname;
 		this.viewname = viewname;
-		this.foldername = foldername;
+		this.foldername = StringUtils.trimToNull(foldername);
 		this.user = username;
 		this.passwd = password;
-	}
 
-	/*
+    this.labelname = StringUtils.trimToNull(labelname);
+    this.promotionstate = StringUtils.trimToNull(promotionstate) != null ? true : false;
+  }
+
+  protected void initialise() {
+    this.foldername = StringUtils.trimToNull(this.foldername);
+    this.labelname = StringUtils.trimToNull(this.labelname);
+
+    this.folderMap = new HashMap<String,String>();
+
+    this.name = labelname;
+    this.namePromotionState = promotionstate;
+
+    if (foldername != null) {
+      folderMap.putAll(StarTeamFunctions.splitCsvString(foldername));
+    }
+  }
+
+  /*
 	 * @see hudson.scm.SCM#checkout(hudson.model.AbstractBuild, hudson.Launcher,
 	 *      hudson.FilePath, hudson.model.BuildListener, java.io.File)
 	 */
@@ -64,22 +98,31 @@ public class StarTeamSCM extends SCM {
 	public boolean checkout(AbstractBuild build, Launcher launcher,
 			FilePath workspace, BuildListener listener, File changelogFile)
 			throws IOException, InterruptedException {
-		boolean status = false;
+
+    initialise();
+
+    listener.getLogger().println("Checking Out (host=["+hostname+"],port=["+port+"],projectname=["+projectname+"],viewname=["+viewname+"],user=["+user+"],password=<******>,labelname=["+labelname+"],promotionstate=["+promotionstate+"])");
+
+    boolean status;
+
 		// Create an actor to do the checkout, possibly on a remote machine
-		StarTeamCheckoutActor co_actor = new StarTeamCheckoutActor(hostname,
-				port, user, passwd, projectname, viewname, foldername, build
-						.getTimestamp().getTime(), changelogFile, listener);
+		StarTeamCheckoutActor co_actor = new StarTeamCheckoutActor(
+        hostname, port, user, passwd, projectname, viewname,
+        folderMap, name, namePromotionState,
+        build.getRootDir(),
+        listener, changelogFile, build);
+
 		if (workspace.act(co_actor)) {
-			// TODO: truly create changelog
-			status = createEmptyChangeLog(changelogFile, listener, "log");
+			status = true;
 		} else {
-			listener.getLogger().println("StarTeam checkout failed");
-			status = false;
+			listener.getLogger().println("StarTeam polling failed");
+      status = false;
 		}
-		return status;
+
+    return status;
 	}
 
-	/*
+  /*
 	 * (non-Javadoc)
 	 * 
 	 * @see hudson.scm.SCM#createChangeLogParser()
@@ -110,18 +153,22 @@ public class StarTeamSCM extends SCM {
 			final Launcher launcher, final FilePath workspace,
 			final TaskListener listener) throws IOException,
 			InterruptedException {
-		boolean status = false;
-		// Create an actor to do the polling, possibly on a remote machine
+    initialise();
+
+    boolean status = false;
+
+    // Create an actor to do the polling, possibly on a remote machine
 		StarTeamPollingActor p_actor = new StarTeamPollingActor(hostname, port,
-				user, passwd, projectname, viewname, foldername,
-				proj.getLastBuild().getTimestamp().getTime(),
-				listener);
-		if (workspace.act(p_actor)) {
+				user, passwd, projectname, viewname, folderMap, name, namePromotionState,
+        listener);
+
+    if (workspace.act(p_actor)) {
 			status = true;
 		} else {
 			listener.getLogger().println("StarTeam polling failed");
 		}
-		return status;
+
+    return status;
 	}
 
 	/**
@@ -130,7 +177,8 @@ public class StarTeamSCM extends SCM {
 	 * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
 	 * 
 	 */
-	public static final class StarTeamSCMDescriptorImpl extends SCMDescriptor<StarTeamSCM> {
+	public static final class StarTeamSCMDescriptorImpl extends
+			SCMDescriptor<StarTeamSCM> {
 
 		private final Collection<StarTeamSCM> scms = new ArrayList<StarTeamSCM>();
 
@@ -155,24 +203,12 @@ public class StarTeamSCM extends SCM {
 				scm = req.bindParameters(StarTeamSCM.class, "starteam.");
 				scms.add(scm);
 			} catch (RuntimeException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// We don't have working repo browsers yet...
 			// scm.repositoryBrowser = RepositoryBrowsers.createInstance(
 			// StarTeamRepositoryBrowser.class, req, "starteam.browser");
 			return scm;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see hudson.model.Descriptor#configure(org.kohsuke.stapler.StaplerRequest)
-		 */
-		@Override
-		public boolean configure(StaplerRequest req) throws FormException {
-			// This is used for the global configuration
-			return true;
 		}
 
 	}
@@ -239,4 +275,23 @@ public class StarTeamSCM extends SCM {
 	public String getPassword() {
 		return passwd;
 	}
+
+  /**
+   * Get the label used to check out from starteam.
+   *
+   * @return The password.
+   */
+  public String getLabelname() {
+    return labelname;
+  }
+
+  /**
+   * Is the label a promotion state name?
+   *
+   * @return True if the label name is actually a promotion state.
+   */
+  public boolean isPromotionstate() {
+    return promotionstate;
+  }
+
 }

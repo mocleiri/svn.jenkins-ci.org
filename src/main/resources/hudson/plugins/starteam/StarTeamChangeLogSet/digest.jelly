@@ -1,0 +1,64 @@
+<!--
+  Displays the StarTeam change log digest.
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+<j:choose>
+	<j:when test="${it.emptySet}">
+		No changes from last build.
+	</j:when>
+	<j:otherwise>
+		<b>Summary Of Changes</b> - <b><a href="changes">View Detail</a></b>
+		<br/>
+		<j:forEach var="c" items="${it.history}" varStatus="loop">
+
+      <j:choose>
+        <j:when test="${'deleted'==c.change}">
+          <j:set var="xbackground" value=" background-color:orange;"/>
+        </j:when>
+        <j:when test="${'rollback'==c.change}">
+          <j:set var="xbackground" value=" background-color:lightyellow;"/>
+        </j:when>
+        <j:otherwise>
+          <j:set var="xbackground" value=""/>
+        </j:otherwise>
+      </j:choose>
+
+      <div class="changeset-message" style="width: 650px; margin-bottom: 4px;${xbackground}">
+				<table>
+				<tr>
+					<td nowrap="true" rowspan="1">
+          <j:if test="${c.fileName != null}">
+          <a href="changes#detail${loop.index}">${c.fileName}
+            <j:if test="${c.revisionNumber != null}">
+            - ${c.revisionNumber}
+            </j:if>
+          </a>
+          </j:if>
+          <j:if test="${c.change != null}">
+            <j:if test="${c.fileName != null}">
+              -
+            </j:if>
+            ${c.change}
+          </j:if>
+          <j:if test="${c.author != null}">
+					by <a href="${rootURL}/${c.author.url}/">${c.author}</a>
+          </j:if>
+          <j:if test="${c.date != null}">
+            on <i:formatDate value="${c.date}" type="both" dateStyle="medium" timeStyle="medium"/>
+          </j:if>
+          </td>
+				</tr>
+				<tr>
+					<td colspan="1">
+            <j:if test="${c.msgAnnotated != null}">
+          ${c.msgAnnotated}
+            </j:if>
+          <br/>
+					</td>
+				</tr>
+				</table>
+			</div>
+    </j:forEach>
+	</j:otherwise>
+</j:choose>
+</j:jelly>

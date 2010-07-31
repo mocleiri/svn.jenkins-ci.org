@@ -8,7 +8,8 @@ import hudson.scm.SCMS;
  * @plugin
  */
 public class PluginImpl extends Plugin {
-	/*
+
+  /*
 	 * (non-Javadoc)
 	 * 
 	 * @see hudson.Plugin#start()

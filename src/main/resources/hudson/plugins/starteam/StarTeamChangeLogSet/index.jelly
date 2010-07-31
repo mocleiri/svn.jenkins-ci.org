@@ -1,0 +1,57 @@
+<!--
+  Displays the detail view of the change log for a specific build.
+  
+  Shown when clicking on the detail link of any change on the change log summary.
+-->
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+<j:set var="browser" value="${it.build.parent.scm.effectiveBrowser}"/>
+<j:choose>
+	<j:when test="${it.emptySet}">
+		No changes from last build.
+	</j:when>
+	<j:otherwise>
+		
+		<j:forEach var="entry" items="${it.history}" varStatus="loop">
+
+      <j:choose>
+        <j:when test="${'deleted'==entry.change}">
+          <j:set var="xbackground" value=" background-color:orange;"/>
+        </j:when>
+        <j:when test="${'rollback'==entry.change}">
+          <j:set var="xbackground" value=" background-color:lightyellow;"/>
+        </j:when>
+        <j:otherwise>
+          <j:set var="xbackground" value=""/>
+        </j:otherwise>
+      </j:choose>
+
+      <div class="changeset-message" style="width: 650px; margin-bottom: 4px;${xbackground}">
+				<a name="detail${loop.index}"></a>
+        <j:if test="${entry.fileName != null}">
+        <b>${entry.fileName}
+          <j:if test="${entry.revisionNumber != null}">
+            - ${entry.revisionNumber}
+          </j:if>
+        </b>
+        </j:if>
+        <j:if test="${entry.change != null}">
+          <j:if test="${entry.fileName != null}">
+            -
+          </j:if>
+          ${entry.change} 
+        </j:if>
+        <j:if test="${entry.author != null}">
+        by <a href="${rootURL}/${entry.author.url}/">${entry.author}</a>
+        </j:if>
+        <j:if test="${entry.date != null}">
+        on <i:formatDate value="${entry.date}" type="both" dateStyle="medium" timeStyle="medium"/>
+        </j:if>
+        <br/>
+				${entry.msgAnnotated}
+				<br/>
+			</div>
+				
+		</j:forEach>
+	</j:otherwise>
+</j:choose>
+</j:jelly>

@@ -9,17 +9,10 @@ package hudson.plugins.starteam;
  */
 public class StarTeamSCMException extends Exception {
 
-	/**
-	 * @param message
-	 * @param cause
-	 */
 	public StarTeamSCMException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	/**
-	 * @param message
-	 */
 	public StarTeamSCMException(String message) {
 		super(message);
 	}

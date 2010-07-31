@@ -2,12 +2,13 @@ package hudson.plugins.starteam;
 
 import hudson.FilePath.FileCallable;
 import hudson.model.BuildListener;
+import hudson.model.AbstractBuild;
 import hudson.remoting.VirtualChannel;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Date;
+import java.io.*;
+import java.util.*;
+
+import com.starbase.starteam.Folder;
 
 /**
  * A helper class for transparent checkout operations over the network. Can be
@@ -17,44 +18,52 @@ import java.util.Date;
  */
 class StarTeamCheckoutActor implements FileCallable<Boolean> {
 
-	private final Date buildDate;
-	private final File changelog;
 	private final BuildListener listener;
-	private String hostname;
-	private int port;
-	private String user;
-	private String passwd;
-	private String projectname;
-	private String viewname;
-	private String foldername;
 
-	/**
-	 * @param hostname
-	 * @param port
-	 * @param user
-	 * @param passwd
-	 * @param projectname
-	 * @param viewname
-	 * @param foldername
-	 * @param buildDate
-	 * @param changelogFile
-	 * @param listener
-	 */
-	public StarTeamCheckoutActor(String hostname, int port, String user,
-			String passwd, String projectname, String viewname,
-			String foldername, Date buildDate, File changelogFile,
-			BuildListener listener) {
+	private String hostname;
+
+	private int port;
+
+	private String user;
+
+	private String passwd;
+
+	private String projectname;
+
+	private String viewname;
+
+	private Map folderMap;
+
+  private String labelname;
+
+  private boolean promotionstate;
+
+  private File buildFolder;
+
+  private File changelogFile;
+
+  private AbstractBuild build;
+
+  public StarTeamCheckoutActor(String hostname, int port,
+                               String user, String passwd,
+                               String projectname, String viewname, Map folderMap,
+                               String labelname, boolean promotionstate,
+                               File buildFolder, BuildListener listener, File changelogFile,
+                               AbstractBuild build) {
 		this.hostname = hostname;
 		this.port = port;
 		this.user = user;
 		this.passwd = passwd;
 		this.projectname = projectname;
 		this.viewname = viewname;
-		this.foldername = foldername;
-		this.buildDate = buildDate;
-		this.changelog = changelogFile;
+		this.folderMap = folderMap;
 		this.listener = listener;
-	}
+    this.labelname = labelname;
+    this.promotionstate = promotionstate;
+    this.buildFolder = buildFolder;
+    this.changelogFile = changelogFile;
+    this.build = build;
+  }
 
 	/*
 	 * (non-Javadoc)
@@ -64,22 +73,68 @@ class StarTeamCheckoutActor implements FileCallable<Boolean> {
 	 */
 	public Boolean invoke(File workspace, VirtualChannel channel)
 			throws IOException {
-		StarTeamConnection connection = new StarTeamConnection(
-				hostname, port, user, passwd,
-				projectname, viewname, foldername);
-		try {
-			connection.initialize();
-		} catch (StarTeamSCMException e) {
-			listener.getLogger().println(e.getLocalizedMessage());
-			return false;
-		}
 
-		// Get a list of files that require updating
-		Collection<com.starbase.starteam.File> changedFiles = connection.findAllFiles(workspace, listener.getLogger());
-		// Check 'em out
-		connection.checkOut(changedFiles, listener.getLogger());
-		// TODO: create changelog
-		connection.close();
-		return true;
-	}
+    listener.getLogger().print("Connecting to starteam ");
+
+    StarTeamConnection connection = new StarTeamConnection(
+				hostname, port,
+        user, passwd,
+				projectname, viewname, folderMap,
+        labelname, promotionstate);
+
+    try {
+
+      try {
+        connection.initialize();
+      } catch (StarTeamSCMException e) {
+        listener.getLogger().println(e.getLocalizedMessage());
+        return false;
+      }
+
+      listener.getLogger().println("[done]");
+
+      Map<String, Folder> rootFolderMap = connection.getRootFolder();
+
+      listener.getLogger().print("Computing change set ");
+
+      java.io.File filePointFile = null;
+      if (build.getPreviousBuild()!=null && new File(build.getPreviousBuild().getRootDir(),StarTeamConnection.FILE_POINT_FILENAME).exists()) {
+        filePointFile = new File(build.getPreviousBuild().getRootDir(),StarTeamConnection.FILE_POINT_FILENAME);
+      }
+      //return createEmptyChangeLog(changelogFile, listener, "log");
+
+      // compute changes
+      StarTeamChangeSet changeSet = connection.computeChangeSet(rootFolderMap, workspace, filePointFile, listener.getLogger());
+
+      listener.getLogger().println("[done]");
+
+      // perform checkout
+      connection.checkOut(changeSet, listener.getLogger(),buildFolder);
+
+      listener.getLogger().print("Writing change log ");
+
+      // write out the change log
+			createChangeLog(changelogFile, changeSet);
+
+      listener.getLogger().println("[done]");
+
+      return true;
+    } catch (StarTeamSCMException e) {
+      listener.getLogger().println("[problem] "+e.getLocalizedMessage());
+      return false;
+    } finally {
+      connection.close();
+    }
+
+  }
+
+	protected boolean createChangeLog(File changelogFile, StarTeamChangeSet changeSet) throws IOException {
+	  OutputStream os = new BufferedOutputStream(new FileOutputStream(changelogFile));
+    try {
+      return StarTeamChangeLogBuilder.writeChangeLog(os, changeSet);
+    } finally {
+      os.close();
+    }
+  }
+
 }

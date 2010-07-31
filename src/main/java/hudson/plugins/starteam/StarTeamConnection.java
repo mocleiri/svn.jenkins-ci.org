@@ -1,21 +1,19 @@
+/**
+ *
+ */
 package hudson.plugins.starteam;
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 import com.starbase.starteam.File;
 import com.starbase.starteam.Folder;
 import com.starbase.starteam.Item;
 import com.starbase.starteam.LogonException;
+import com.starbase.starteam.Label;
 import com.starbase.starteam.Project;
 import com.starbase.starteam.PropertyNames;
+import com.starbase.starteam.PromotionState;
 import com.starbase.starteam.Server;
 import com.starbase.starteam.ServerConfiguration;
 import com.starbase.starteam.ServerInfo;
@@ -23,425 +21,428 @@ import com.starbase.starteam.Status;
 import com.starbase.starteam.View;
 import com.starbase.starteam.ViewConfiguration;
 import com.starbase.util.OLEDate;
+import org.apache.commons.lang.exception.ExceptionUtils;
 
 /**
  * StarTeamActor is a class that implements connecting to a StarTeam repository,
  * to a given project, view and folder.
- * 
+ *
  * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
  */
-public class StarTeamConnection implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class StarTeamConnection {
 
-	private final String hostName;
-	private final int port;
-	private final String userName;
-	private final String password;
-	private final String projectName;
-	private final String viewName;
-	private final String folderName;
+  public static final String FILE_POINT_FILENAME = "starteam-filepoints.csv";
 
-	private transient Server server;
-	private transient View view;
-	private transient Folder rootFolder;
-	private transient Project project;
+  private final ServerInfo serverinfo;
 
-	/**
-	 * @param hostName
-	 * @param port
-	 * @param userName
-	 * @param password
-	 * @param projectName
-	 * @param viewName
-	 * @param folderName
-	 */
-	public StarTeamConnection(String hostName, int port, String userName, String password, String projectName, String viewName, String folderName) {
-		checkParameters(hostName, port, userName, password, projectName, viewName, folderName);
-		this.hostName = hostName;
-		this.port = port;
-		this.userName = userName;
-		this.password = password;
-		this.projectName = projectName;
-		this.viewName = viewName;
-		this.folderName = folderName;
-	}
+  private final String username;
 
-	private ServerInfo createServerInfo() {
-		ServerInfo serverInfo = new ServerInfo();
-		serverInfo.setConnectionType(ServerConfiguration.PROTOCOL_TCP_IP_SOCKETS);
-		serverInfo.setHost(this.hostName);
-		serverInfo.setPort(this.port);
+  private final String password;
 
-		populateDescription(serverInfo);
+  private final String projectname;
 
-		return serverInfo;
-	}
+  private final String viewname;
 
-	void populateDescription(ServerInfo serverInfo) {
-		// Increment a counter until the description is unique
-		int counter = 0;
-		while (!setDescription(serverInfo, counter))
-			++counter;
-	}
+  private final Map<String, String> folderMap;
 
-	private boolean setDescription(ServerInfo serverInfo, int counter) {
-		try {
-			serverInfo.setDescription("StarTeam connection to " + this.hostName + ((counter == 0) ? "" : " (" + Integer.toString(counter) + ")"));
-			return true;
-		} catch (com.starbase.starteam.DuplicateServerListEntryException e) {
-			return false;
-		}
-	}
+  private Server server = null;
 
-	private void checkParameters(String hostName, int port, String userName, String password, String projectName, String viewName,
-			String folderName) {
-		if (null == hostName)
-			throw new NullPointerException("hostName cannot be null");
-		if (null == userName)
-			throw new NullPointerException("user cannot be null");
-		if (null == password)
-			throw new NullPointerException("passwd cannot be null");
-		if (null == projectName)
-			throw new NullPointerException("projectName cannot be null");
-		if (null == viewName)
-			throw new NullPointerException("viewName cannot be null");
-		if (null == folderName)
-			throw new NullPointerException("folderName cannot be null");
+  private View baseView = null;
 
-		if ((port < 1) || (port > 65535))
-			throw new IllegalArgumentException("Invalid port: " + port);
-	}
+  private View effectiveView = null;
 
-	/**
-	 * Initialize the connection. This means logging on to the server and
-	 * finding the project, view and folder we want.
-	 * 
-	 * @throws StarTeamSCMException if logging on fails.
-	 */
-	public void initialize() throws StarTeamSCMException {
-		server = new Server(createServerInfo());
-		server.connect();
-		try {
-			server.logOn(userName, password);
-		} catch (LogonException e) {
-			throw new StarTeamSCMException("Could not log on: " + e.getErrorMessage());
-		}
+  private Map<String, Folder> rootFolderMap = new HashMap<String, Folder>();
 
-		project = findProjectOnServer(server, projectName);
-		view = findViewInProject(project, viewName);
-		rootFolder = findFolderInView(view, folderName);
+  private Project project = null;
 
-		// Cache some folder data
-		final PropertyNames pnames = rootFolder.getPropertyNames();
-		final String[] propsToCache = new String[] { pnames.FILE_LOCAL_FILE_EXISTS, pnames.FILE_LOCAL_TIMESTAMP, pnames.FILE_NAME,
-				pnames.FILE_FILE_TIME_AT_CHECKIN, pnames.MODIFIED_TIME, pnames.MODIFIED_USER_ID, pnames.FILE_STATUS };
-		rootFolder.populateNow(server.getTypeNames().FILE, propsToCache, -1);
-	}
+  private String labelname;         // the name of the label
 
-	/**
-	 * @param filesToCheckOut
-	 * @throws IOException if checkout fails.
-	 */
-	public void checkOut(Collection<File> filesToCheckOut, PrintStream logger) throws IOException {
-		logger.println("*** Performing checkout");
-		for (File f : filesToCheckOut) {
-			switch (f.getStatus()) {
-				case Status.MERGE:
-				case Status.MODIFIED:
-				case Status.UNKNOWN:
-					// clobber these
-					new java.io.File(f.getFullName()).delete();
-					break;
-				case Status.MISSING:
-				case Status.OUTOFDATE:
-					// just go on an check out
-					break;
-				default:
-					// By default do nothing, go to next iteration
-					continue;
-			}
-			logger.print("[co] " + f.getFullName() + "... ");
-			f.checkout(Item.LockType.UNLOCKED, // check out as unlocked
-					false, // use timestamp from repo
-					true, // convert EOL to native format
-					true); // update status
-			f.discard();
-			logger.println("ok");
-		}
-		logger.println("*** done");
-	}
+  private boolean promotionstate;   // is the label a promotion state name?
 
-	/**
-	 * @param server
-	 * @param projectname
-	 * @return
-	 * @throws StarTeamSCMException
-	 */
-	static Project findProjectOnServer(final Server server, final String projectname) throws StarTeamSCMException {
-		for (Project project : server.getProjects()) {
-			if (project.getName().equals(projectname)) {
-				return project;
-			}
-		}
-		throw new StarTeamSCMException("Couldn't find project " + projectname + " on server " + server.getAddress());
-	}
+  private Integer labelId;          // the label ID
 
-	/**
-	 * @param project
-	 * @param viewname
-	 * @return
-	 * @throws StarTeamSCMException
-	 */
-	static View findViewInProject(final Project project, final String viewname) throws StarTeamSCMException {
-		for (View view : project.getAccessibleViews()) {
-			if (view.getName().equals(viewname)) {
-				return view;
-			}
-		}
-		throw new StarTeamSCMException("Couldn't find view " + viewname + " in project " + project.getName());
-	}
+  private Integer promotionStateId; // the promotion state ID
 
-	/**
-	 * List all files in a given folder.
-	 * 
-	 * @param folder The folder
-	 * @return a Map of Files, keyed on full pathname.
-	 */
-	private Map<String, File> listAllFiles(Folder folder, PrintStream logger) {
-		logger.println("*** Looking for versioned files in " + folder.getName());
-		Map<String, File> files = new HashMap<String, File>();
-		// If working directory doesn't exist, create it
-		java.io.File workdir = new java.io.File(folder.getPath());
-		if (!workdir.exists()) {
-			logger.println("*** Creating working directory: " + workdir.getAbsolutePath());
-			workdir.mkdirs();
-		}
-		// call for subfolders
-		for (Folder f : folder.getSubFolders()) {
-			files.putAll(listAllFiles(f, logger));
-		}
-		// find items in this folder
-		for (Item i : folder.getItems(folder.getView().getProject().getServer().getTypeNames().FILE)) {
-			File f = (com.starbase.starteam.File) i;
-			try {
-				// This sometimes throws... deep inside starteam =(
-				files.put(f.getParentFolderHierarchy() + f.getName(), f);
-			} catch (RuntimeException e) {
-				logger.println("Exception in listAllFiles: " + e.getLocalizedMessage());
-			}
-		}
-		folder.discard();
-		return files;
-	}
+  public StarTeamConnection(String hostname, int port, String user,
+                            String passwd, String projectname, String viewname,
+                            String foldername, String labelname, boolean promotionstate) {
 
-	/**
-	 * Recursively look for changes between two file lists.
-	 * 
-	 * @param thenFiles The list of files representing a past moment in time.
-	 * @param nowFiles The list of files representing "now".
-	 * @param logger The logger for logging output.
-	 * @return a Collection of File objects that have changed since date.
-	 */
-	private Collection<File> getFileSetDifferences(Map<String, File> thenFiles, Map<String, File> nowFiles, PrintStream logger) {
-		List<File> files = new ArrayList<File>();
-		// Iterate over all files in the "now" set
-		for (Map.Entry<String, File> e : nowFiles.entrySet()) {
-			File nowFile = e.getValue();
-			// Check if the file existed "then"
-			if (thenFiles.containsKey(e.getKey())) {
-				File thenFile = thenFiles.get(e.getKey());
-				// File exists in the past revision as well
-				if (thenFile.getRevisionNumber() < nowFile.getRevisionNumber()) {
-					// revision number has increased, add it to changes
-					logger.println("[modified] " + nowFile.getFullName());
-					files.add(nowFile);
-				} else if (!nowFile.getLocalFileExists()) {
-					// File not modified but local missing,
-					// add to change list
-					logger.println("[local missing] " + nowFile.getFullName());
-					files.add(nowFile);
-				} else {
-					// File not modified, discard metadata
-					logger.println("[hit] " + nowFile.getFullName());
-					nowFile.discard();
-				}
-				// discard and remove from "then" files
-				thenFile.discard();
-				thenFiles.remove(e.getKey());
-			} else {
-				// File is new
-				logger.println("[new] " + nowFile.getFullName());
-				files.add(nowFile);
-			}
-		}
-		// Iterate over all remaining files in the "then" set:
-		// only files that have been deleted from the repo
-		// since "then" remain, therefore we'll report those
-		// as changes too.
-		for (Map.Entry<String, File> e : thenFiles.entrySet()) {
-			logger.println("[deleted] " + e.getValue().getFullName());
-			files.add(e.getValue());
-		}
+    this(hostname, port, user, passwd, projectname, viewname, new HashMap(), labelname, promotionstate);
 
-		return files;
-	}
+    folderMap.put(foldername, ".");
+  }
 
-	/**
-	 * Find the given folder in the given view.
-	 * 
-	 * @param view The view to look in.
-	 * @param foldername The view-relative path of the folder to look for.
-	 * @return The folder or null if a folder by the given name was not found.
-	 * @throws StarTeamSCMException
-	 */
-	private Folder findFolderInView(final View view, final String foldername) throws StarTeamSCMException {
-		// Check the root folder of the view
-		if (view.getName().equals(foldername)) {
-			return view.getRootFolder();
-		}
+  public StarTeamConnection(String hostname, int port, String user,
+                            String passwd, String projectname, String viewname,
+                            Map folderMap, String labelname, boolean promotionstate) {
+    // Create the server information object
+    serverinfo = new ServerInfo();
+    serverinfo.setConnectionType(ServerConfiguration.PROTOCOL_TCP_IP_SOCKETS);
 
-		// Create a File object with the folder name for system-
-		// independent matching
-		java.io.File thefolder = new java.io.File(foldername);
+    // Do a trick in case there are several hosts with the same
+    // description: if an exception is thrown, start adding a counter
+    // to the end of the string.
+    String desc_base = "StarTeam connection to " + hostname;
+    String desc = desc_base;
+    do {
+      int ctr = 1;
+      try {
+        serverinfo.setDescription(desc);
+        break;
+      } catch (com.starbase.starteam.DuplicateServerListEntryException e) {
+        desc = desc_base + " (" + Integer.toString(ctr++) + ")";
+      }
+    } while (true);
 
-		// Search for the folder in subfolders
-		Folder result = findFolderRecursively(view.getRootFolder(), thefolder);
-		if (result == null) {
-			throw new StarTeamSCMException("Couldn't find folder " + foldername + " in view " + view.getName());
-		}
-		return result;
-	}
+    serverinfo.setHost(hostname);
+    serverinfo.setPort(port);
 
-	/**
-	 * Do a breadth-first search for a folder with the given name, starting with
-	 * children of the provided folder.
-	 * 
-	 * @param folder the folder whose children to check
-	 * @param thefolder the folder to look for
-	 * @return
-	 */
-	private Folder findFolderRecursively(Folder folder, java.io.File thefolder) {
-		// Check subfolders, breadth first. checkLater is a collection
-		// of folders that didn't match, therefore their children
-		// will be checked next.
-		Collection<Folder> checkLater = new ArrayList<Folder>();
-		for (Folder f : folder.getSubFolders()) {
-			// Compare pathnames. The getFolderHierarchy call returns
-			// the full folder name (including root folder name which
-			// is the same as the view name) terminated by the
-			// platform-specific separator.
-			if (f.getFolderHierarchy().equals(thefolder.getPath() + java.io.File.separator)) {
-				return f;
-			} else {
-				// add to list of folders whose children will be checked
-				checkLater.add(f);
-			}
-		}
-		// recurse unto children
-		for (Folder f : checkLater) {
-			Folder result = findFolderRecursively(f, thefolder);
-			if (result != null) {
-				return result;
-			}
-		}
-		return null;
-	}
+    this.username = user;
+    this.password = passwd;
+    this.projectname = projectname;
+    this.viewname = viewname;
+    this.folderMap = folderMap;
+    this.labelname = trimToNull(labelname);
+    this.promotionstate = promotionstate;
+  }
 
-	public Collection<File> findAllFiles(java.io.File workspace, PrintStream logger) {
-		logger.println("*** Get list of all files for " + workspace);
+  private static String trimToNull(String value) {
+      String v = value != null ? value.trim() : null;
+      return v;
+  }
 
-		// set root folder
-		rootFolder.setAlternatePathFragment(workspace.getAbsolutePath());
+  /**
+   * Initialize the connection. This means logging on to the server and
+   * finding the project, view and folders we want.
+   *
+   * @throws StarTeamSCMException if logging on fails.
+   */
+  public void initialize() throws StarTeamSCMException {
+    server = new Server(serverinfo);
+    server.connect();
+    try {
+      server.logOn(username, password);
+    } catch (LogonException e) {
+      throw new StarTeamSCMException("Could not log on: "+ e.getErrorMessage());
+    }
 
-		// Get a list of all files
-		Map<String, File> nowFiles = listAllFiles(rootFolder, logger);
+    project = findProjectOnServer(server, projectname);
+    baseView = findViewInProject(project, viewname);
 
-		logger.println("*** done");
-		return nowFiles.values();
-	}
+    if (labelname != null) {
+      if (promotionstate) {
+        // note: If the promotion state is assigned to <<current>> then the resulting ID will be NULL and
+        // we will revert to a view based on the current timestamp.
+        promotionStateId = findPromotionStateInView(baseView, labelname);
+      } else {
+        labelId = findLabelInView(baseView, labelname);
+      }
+    }
 
-	/**
-	 * @param workspace
-	 * @param logger
-	 * @param fromDate
-	 * @return
-	 */
-	public Collection<File> findChangedFiles(java.io.File workspace, PrintStream logger, Date fromDate) {
-		logger.println("*** Looking for changed files since " + fromDate);
-		// set root folder
-		rootFolder.setAlternatePathFragment(workspace.getAbsolutePath());
-		// Create OLEDate to represent last build time
-		OLEDate oleSince = new OLEDate(fromDate);
-		// Create a view to represent last build time
-		View sinceView = new View(view, ViewConfiguration.createFromTime(oleSince));
+    effectiveView = createView(baseView, null, labelId, promotionStateId);
 
-		// This list will contain the changed files
-		Collection<File> changedFiles = null;
+    for (Map.Entry<String, String> folder : folderMap.entrySet()) {
+      Folder rootFolder = StarTeamFunctions.findFolderInView(effectiveView, folder.getKey());
 
-		// Get a list of all files
-		logger.println("Fetching current files:");
-		Map<String, File> nowFiles = listAllFiles(rootFolder, logger);
-		logger.println("done");
+      // Cache some folder data
+      final PropertyNames pnames = rootFolder.getPropertyNames();
+      final String[] propsToCache = new String[]{
+          pnames.FILE_LOCAL_FILE_EXISTS, pnames.FILE_LOCAL_TIMESTAMP,
+          pnames.FILE_NAME, pnames.FILE_FILE_TIME_AT_CHECKIN,
+          pnames.MODIFIED_TIME, pnames.MODIFIED_USER_ID,
+          pnames.FILE_STATUS};
+      rootFolder.populateNow(server.getTypeNames().FILE, propsToCache, -1);
+      rootFolder.setAlternatePathFragment(folder.getValue());
+      rootFolderMap.put(folder.getKey(), rootFolder);
+    }
+  }
 
-		Folder sinceFolder = null;
-		Map<String, File> sinceFiles = null;
-		try {
-			sinceFolder = findFolderInView(sinceView, folderName);
-			sinceFolder.setAlternatePathFragment(workspace.getAbsolutePath());
-			logger.println("Fetching files at " + fromDate);
-			sinceFiles = listAllFiles(sinceFolder, logger);
-			logger.println("done");
-			logger.println("Comparing");
-			changedFiles = getFileSetDifferences(sinceFiles, nowFiles, logger);
-			logger.println("done");
-		} catch (StarTeamSCMException e) {
-			logger.println("Caught exception: " + e.getLocalizedMessage());
-			// Folder not found? That means that every file is a change
-			changedFiles = nowFiles.values();
-		}
+  public Map<String, Folder> getRootFolder() {
+    return rootFolderMap;
+  }
 
-		logger.println("*** done");
-		return changedFiles;
-	}
+  static Project findProjectOnServer(final Server server, final String projectname) throws StarTeamSCMException {
+    for (Project project : server.getProjects()) {
+      if (project.getName().equals(projectname)) {
+        return project;
+      }
+    }
+    throw new StarTeamSCMException("Couldn't find project [" + projectname + "] on server [" + server.getAddress()+"]");
+  }
 
-	/**
-	 * Close the connection.
-	 */
-	public void close() {
-		rootFolder.discardItems(rootFolder.getTypeNames().FILE, -1);
-		view.discard();
-		project.discard();
-		server.disconnect();
-	}
+  static View findViewInProject(final Project project, final String viewname) throws StarTeamSCMException {
+    for (View view : project.getAccessibleViews()) {
+      if (view.getName().equals(viewname)) {
+        return view;
+      }
+    }
+    throw new StarTeamSCMException("Couldn't find view [" + viewname + "] in project " + project.getName());
+  }
 
-	@Override
-	protected void finalize() throws Throwable {
-		close();
-	}
+  static int findLabelInView(final View view, final String labelname) throws StarTeamSCMException {
+    for (Label label : view.getLabels()) {
+      if (labelname.equals(label.getName())) {
+        return label.getID();
+      }
+    }
+    throw new StarTeamSCMException("Couldn't find label [" + labelname + "] in view " + view.getName());
+  }
 
-	@Override
-	public boolean equals(Object object) {
-		if (null == object)
-			return false;
+  static Integer findPromotionStateInView(final View view, final String promotionState) throws StarTeamSCMException {
+    for (PromotionState ps : view.getPromotionModel().getPromotionStates()) {
+      if (promotionState.equals(ps.getName())) {
+        if (ps.getLabelID() == -1) {
+          // PROMOTION STATE is set to <<current>>
+          return null;
+        }
+        return ps.getObjectID();
+      }
+    }
+    throw new StarTeamSCMException("Couldn't find promotion state " + promotionState + " in view " + view.getName());
+  }
 
-		if (!getClass().equals(object.getClass()))
-			return false;
+  static View createView(View view, Date effectiveDate, Integer labelId, Integer promotionStateId) throws StarTeamSCMException {
+    final ViewConfiguration configuration;
 
-		StarTeamConnection other = (StarTeamConnection) object;
+    if (promotionStateId != null) {
+      configuration = ViewConfiguration.createFromPromotionState(promotionStateId);
+    } else if (labelId != null) {
+      configuration = ViewConfiguration.createFromLabel(labelId);
+    } else if (effectiveDate != null) {
+      configuration = ViewConfiguration.createFromTime(new OLEDate(effectiveDate));
+    } else if (view != null) {
+        ViewConfiguration result = null;
+        try {
+            result = ViewConfiguration.createFromTime(view.getServer().getCurrentTime());
+        } catch (UnsupportedOperationException unsupported) {
+            // We cannot fetch the current server time from various versions of starteam so we "guess" by subtracting 10 seconds. 
+            result = ViewConfiguration.createFromTime(new OLEDate(System.currentTimeMillis()-5000));
+        }
+        configuration = result;
+    } else {
+      throw new StarTeamSCMException("Could not construct view - no configuration provided");
+    }
 
-		return port == other.port && hostName.equals(other.hostName) && userName.equals(other.userName) &&
-				password.equals(other.password) && projectName.equals(other.projectName) && viewName.equals(other.viewName) &&
-				folderName.equals(other.folderName);
-	}
+    return new View(view, configuration);
+  }
 
-	@Override
-	public int hashCode() {
-		return userName.hashCode();
-	}
+  /**
+   * Close the connection.
+   */
+  public void close() {
+    if (rootFolderMap != null) {
+      for (Map.Entry<String, Folder> e : rootFolderMap.entrySet()) {
+        e.getValue().discardItems(e.getValue().getTypeNames().FILE, -1);
+      }
+      rootFolderMap.clear();
+    }
+    if (effectiveView != null) {
+      effectiveView.discard();
+    }
+    if (baseView != null) {
+      baseView.discard();
+    }
+    if (project != null) {
+      project.discard();
+    }
+    if (server != null) {
+      server.disconnect();
+    }
+  }
 
-	@Override
-	public String toString() {
-		return "host: " + hostName + ", port: " + Integer.toString(port) + ", user: " + userName + ", passwd: ******, project: " +
-				projectName + ", view: " + viewName + ", folder: " + folderName;
-	}
+  @Override
+  protected void finalize() throws Throwable {
+    close();
+  }
+
+  private final Object syncLock = new Object();
+
+  public void checkOut(StarTeamChangeSet changeSet, PrintStream logger, java.io.File buildFolder) throws IOException {
+    logger.println("*** Performing checkout on [" + changeSet.getFilesToCheckout().size() + "] files");
+    boolean quietCheckout = changeSet.getFilesToCheckout().size() >= 2000;
+    if (quietCheckout) {
+      logger.println("*** More than 2000 files, quiet mode enabled");
+    }
+    if (!changeSet.isComparisonAvailable()) {
+      changeSet.setDirty(new TreeSet<StarTeamFilePoint>());
+    }
+    int amount = 0;
+    for (File f : changeSet.getFilesToCheckout()) {
+      amount += 1;
+      boolean actioned = checkOutFile(f, changeSet, logger, quietCheckout);
+      f.discard();
+
+      if (actioned && !quietCheckout) logger.println("ok");
+      if (amount % 100 == 0) {
+        logger.println("[checkout] [quite mode] " + amount + " files checked out.");
+      }
+    }
+    logger.println("*** removing [" + changeSet.getFilesToRemove().size() + "] files");
+    boolean quietDelete = changeSet.getFilesToRemove().size() > 100;
+    if (quietDelete) {
+      logger.println("*** More than 100 files, quiet mode enabled");
+    }
+    for (java.io.File f : changeSet.getFilesToRemove()) {
+      if (f.exists()) {
+        if (!quietDelete) logger.println("[remove] [" + f + "]");
+        f.delete();
+      } else {
+        logger.println("[remove:warn] Planned to remove [" + f + "]");
+      }
+    }
+    logger.println("*** storing change set");
+    StarTeamFilePointFunctions.storeCollection(new java.io.File(buildFolder, FILE_POINT_FILENAME), changeSet.getFilePointsToRemember());
+    logger.println("*** done");
+  }
+
+  private boolean checkOutFile(File f, StarTeamChangeSet changeSet, PrintStream logger, boolean quiet) throws IOException {
+
+    // we may support parallel checkout and do not want to fail when creating folders
+    java.io.File dir = new java.io.File(f.getFullName()).getParentFile();
+    synchronized (syncLock) {
+      if (!dir.exists()) {
+        if (!quiet) logger.println("[mkdir] [" + dir.getPath() + "]");
+        dir.mkdirs();
+      }
+    }
+
+    boolean dirty = !changeSet.isComparisonAvailable();
+
+    switch (f.getStatus()) {
+      case Status.MERGE:
+      case Status.MODIFIED:
+      case Status.UNKNOWN:
+        dirty = false;
+        // clobber these
+        new java.io.File(f.getFullName()).delete();
+        break;
+      case Status.MISSING:
+        dirty = false;
+      case Status.OUTOFDATE:
+        // just go on an check out
+        break;
+      default:
+        // By default do nothing, go to next iteration
+        return false;
+    }
+    if (!quiet) logger.print("[checkout] [" + f.getFullName() + "] ");
+    try {
+
+      if (filterAllow(f)) {
+        
+          f.checkout(Item.LockType.UNCHANGED, // check out as unlocked
+              false, // use timestamp from repo
+              true, // convert EOL to native format
+              true); // update status
+      }
+    } catch (IOException e) {
+      logger.print("[checkout] [exception] [Problem checking out file: "+f.getFullName()+"] \n"+ExceptionUtils.getFullStackTrace(e)+"\n");
+      throw e;
+    } catch (RuntimeException e) {
+      logger.print("[checkout] [exception] [Problem checking out file: "+f.getFullName()+"] \n"+ExceptionUtils.getFullStackTrace(e)+"\n");
+      throw e;
+    }
+
+    if (dirty) {
+      changeSet.getDirty().add(new StarTeamFilePoint(f));
+    }
+
+    return true;
+
+  }
+
+  private static Set TWO = new HashSet();
+  private static Set ONE = new HashSet();
+  static  {
+    TWO.add("toplink");
+
+    ONE.add("table");
+    ONE.add("package");
+    ONE.add("descriptor");
+    ONE.add("database");
+    ONE.add("classRepository");
+    ONE.add("class");
+  }
+  
+  public boolean filterAllow(File f) {
+    String fn = f.getFullName().toLowerCase();
+
+    if (fn.endsWith(".xml")) {
+      java.io.File parent = new java.io.File(fn).getParentFile();
+      if (parent != null) {
+        if (ONE.contains(parent.getName())) {
+          parent = parent.getParentFile();
+          if (parent != null) {
+            if (TWO.contains(parent.getName())) {
+              return false;
+            }
+          }
+        }
+      }
+    }
+
+    return true;
+  }
+
+  public static void main(String[] args) throws Throwable {
+      String hostname = "dhstarteam01";
+      int port = 49201;
+      String user = "MMSBUILD";
+      String password = "dozyBadger";
+      String project = "Health Systems (MMD)";
+      String view = "Health Systems (MMD)";
+      String folder = "Health Systems (MMD)/HUM/AuthorisationObjectModel";
+      String label = null;
+      boolean promotionstate = false;
+
+      StarTeamConnection stc = new StarTeamConnection(hostname,port,user,password,project,view,folder,label,promotionstate);
+      stc.initialize();
+      System.out.println("Yoohaaa");
+      stc.close();
+  }
+
+  public StarTeamChangeSet computeChangeSet(Map<String,Folder> rootFolderMap, java.io.File workspace, java.io.File filePointFile, PrintStream logger) throws StarTeamSCMException, IOException {
+
+    // --- compute changes as per starteam
+
+    final Collection<com.starbase.starteam.File> starteamFiles = StarTeamFunctions.listAllFiles(rootFolderMap, workspace);
+    final Map<java.io.File, com.starbase.starteam.File> starteamFileMap = StarTeamFilePointFunctions.convertToFileMap(starteamFiles);
+    final Collection<java.io.File> starteamFileSet = starteamFileMap.keySet();
+    final Collection<StarTeamFilePoint> starteamFilePoint = StarTeamFilePointFunctions.convertFilePointCollection(starteamFiles);
+
+    final Collection<java.io.File> fileSystemFiles = StarTeamFilePointFunctions.listAllFiles(workspace);
+    final Collection<java.io.File> fileSystemRemove = new TreeSet<java.io.File>(fileSystemFiles);
+    fileSystemRemove.removeAll(starteamFileSet);
+
+    final StarTeamChangeSet changeSet = new StarTeamChangeSet();
+    changeSet.setFilesToCheckout(starteamFiles);
+    changeSet.setFilesToRemove(fileSystemRemove);
+    changeSet.setFilePointsToRemember(starteamFilePoint);
+
+    // --- compute differences as per historic storage file
+
+    if (filePointFile != null && filePointFile.exists() && filePointFile.isFile()) {
+
+      try {
+
+        //java.io.File starteamFilePoints = new java.io.File(fromDir, FILE_POINT_FILENAME);
+
+        final Collection<StarTeamFilePoint> historicStarteamFilePoint = StarTeamFilePointFunctions.loadCollection(filePointFile);
+
+        changeSet.setComparisonAvailable(true);
+
+        StarTeamFilePointFunctions.computeDifference(starteamFilePoint, historicStarteamFilePoint, changeSet);
+
+      } catch (Throwable t) {
+        t.printStackTrace(logger);
+      }
+    }
+
+    return changeSet;
+  }
+
+  public void populateDescription(ServerInfo serverInfoMock) {
+
+  }
+
 }
