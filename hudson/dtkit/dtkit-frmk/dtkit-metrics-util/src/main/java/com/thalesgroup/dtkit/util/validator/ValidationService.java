@@ -31,11 +31,12 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ValidationService {
+public class ValidationService implements Serializable {
 
 
     /**

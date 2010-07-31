@@ -23,15 +23,11 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.thalesgroup.dtkit.metrics.api.InputMetricException;
+import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
 import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.MeasureType;
-import com.thalesgroup.dtkit.util.converter.ConversionService;
-import com.thalesgroup.dtkit.util.validator.ValidationService;
 import hudson.DescriptorExtensionList;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
@@ -39,21 +35,9 @@ import hudson.model.Hudson;
 
 public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descriptor<MeasureType> {
 
-    private final Injector injector;
-
     protected MeasureTypeDescriptor(Class<T> clazz, final Class<? extends InputMetric> inputMetricClass) {
         super(clazz);
         RegistryService.addElement(getId(), inputMetricClass);
-        injector = Guice.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                //Optional binding, provided by default in Guice)
-                bind(ValidationService.class).in(Singleton.class);
-                bind(ConversionService.class).in(Singleton.class);
-                //Make the instance of inputMetricClass also a Singleton
-                bind(inputMetricClass).in(Singleton.class);
-            }
-        });
     }
 
     @SuppressWarnings("unused")
@@ -71,6 +55,10 @@ public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descr
     @SuppressWarnings("unused")
     public InputMetric getInputMetric() {
         Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
-        return injector.getInstance(inputMetricClass);
+        try {
+            return InputMetricFactory.getInstance(inputMetricClass);
+        } catch (InputMetricException e) {
+            return null;
+        }
     }
 }

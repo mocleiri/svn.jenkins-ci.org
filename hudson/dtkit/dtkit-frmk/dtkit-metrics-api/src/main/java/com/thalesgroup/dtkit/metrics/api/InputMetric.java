@@ -29,6 +29,7 @@ import com.thalesgroup.dtkit.util.validator.ValidationException;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -98,8 +99,9 @@ public abstract class InputMetric implements Serializable {
      *
      * @param inputFile the input file to convert
      * @param outFile   the output file to convert
-     * @throws com.thalesgroup.dtkit.util.converter.ConversionException an application Exception to throw when there is an error of conversion
-     *                          The exception is catched by the API client (as Hudson plugin)
+     * @throws com.thalesgroup.dtkit.util.converter.ConversionException
+     *          an application Exception to throw when there is an error of conversion
+     *          The exception is catched by the API client (as Hudson plugin)
      */
     public abstract void convert(File inputFile, File outFile) throws ConversionException;
 
@@ -109,6 +111,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return true if the input file is valid, false otherwise
      */
+
     public abstract boolean validateInputFile(File inputXMLFile) throws ValidationException;
 
     /*
@@ -116,6 +119,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return true if the input file is valid, false otherwise
      */
+
     public abstract boolean validateOutputFile(File inputXMLFile) throws ValidationException;
 
 
@@ -125,7 +129,8 @@ public abstract class InputMetric implements Serializable {
      * @return the list of all input validation errors
      */
     public List<ValidationError> getInputValidationErrors() {
-        return inputValidationErrors;
+        return new ArrayList<ValidationError>();
+        //return inputValidationErrors;
     }
 
     /**

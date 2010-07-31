@@ -23,9 +23,11 @@
 
 package com.thalesgroup.dtkit.util.validator;
 
+import java.io.Serializable;
+
 
 @SuppressWarnings("unused")
-public class ValidationException extends Exception {
+public class ValidationException extends Exception implements Serializable {
 
     public ValidationException() {
         super();

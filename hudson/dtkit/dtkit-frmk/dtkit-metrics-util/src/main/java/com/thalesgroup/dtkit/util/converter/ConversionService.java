@@ -29,8 +29,9 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.Serializable;
 
-public class ConversionService {
+public class ConversionService implements Serializable {
 
 
     /**

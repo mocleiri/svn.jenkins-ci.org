@@ -26,11 +26,12 @@ package com.thalesgroup.dtkit.util.validator;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXParseException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ValidationHandler implements ErrorHandler {
+public class ValidationHandler implements ErrorHandler, Serializable {
 
 
     private List<ValidationError> errors = new ArrayList<ValidationError>();
