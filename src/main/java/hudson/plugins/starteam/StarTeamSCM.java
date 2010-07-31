@@ -9,22 +9,20 @@ import hudson.model.TaskListener;
 import hudson.scm.ChangeLogParser;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
+import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Collection;
 import java.util.ArrayList;
-
-import net.sf.json.JSONObject;
-
-import org.kohsuke.stapler.StaplerRequest;
-import org.apache.commons.lang.StringUtils;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * StarTeam SCM plugin for Hudson.
- * 
+ *
  * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
  */
 public class StarTeamSCM extends SCM {
@@ -57,7 +55,7 @@ public class StarTeamSCM extends SCM {
 
   /**
 	 * The constructor.
-	 * 
+	 *
 	 * @stapler-constructor
 	 */
 	public StarTeamSCM(String hostname, int port,
@@ -124,7 +122,7 @@ public class StarTeamSCM extends SCM {
 
   /*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see hudson.scm.SCM#createChangeLogParser()
 	 */
 	@Override
@@ -134,7 +132,7 @@ public class StarTeamSCM extends SCM {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see hudson.scm.SCM#getDescriptor()
 	 */
 	@Override
@@ -144,7 +142,7 @@ public class StarTeamSCM extends SCM {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see hudson.scm.SCM#pollChanges(hudson.model.AbstractProject,
 	 *      hudson.Launcher, hudson.FilePath, hudson.model.TaskListener)
 	 */
@@ -153,6 +151,7 @@ public class StarTeamSCM extends SCM {
 			final Launcher launcher, final FilePath workspace,
 			final TaskListener listener) throws IOException,
 			InterruptedException {
+
     initialise();
 
     boolean status = false;
@@ -160,7 +159,7 @@ public class StarTeamSCM extends SCM {
     // Create an actor to do the polling, possibly on a remote machine
 		StarTeamPollingActor p_actor = new StarTeamPollingActor(hostname, port,
 				user, passwd, projectname, viewname, folderMap, name, namePromotionState,
-        listener);
+        listener, (AbstractBuild)proj.getLastBuild());
 
     if (workspace.act(p_actor)) {
 			status = true;
@@ -173,9 +172,9 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Descriptor class for the SCM class.
-	 * 
+	 *
 	 * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
-	 * 
+	 *
 	 */
 	public static final class StarTeamSCMDescriptorImpl extends
 			SCMDescriptor<StarTeamSCM> {
@@ -215,7 +214,7 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Get the hostname this SCM is using.
-	 * 
+	 *
 	 * @return The hostname.
 	 */
 	public String getHostname() {
@@ -224,7 +223,7 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Get the port number this SCM is using.
-	 * 
+	 *
 	 * @return The port.
 	 */
 	public int getPort() {
@@ -233,7 +232,7 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Get the project name this SCM is connected to.
-	 * 
+	 *
 	 * @return The project's name.
 	 */
 	public String getProjectname() {
@@ -242,7 +241,7 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Get the view name in the project this SCM uses.
-	 * 
+	 *
 	 * @return The name of the view.
 	 */
 	public String getViewname() {
@@ -251,7 +250,7 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Get the root folder name of our monitored workspace.
-	 * 
+	 *
 	 * @return The name of the folder.
 	 */
 	public String getFoldername() {
@@ -260,7 +259,7 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Get the username used to connect to starteam.
-	 * 
+	 *
 	 * @return The username.
 	 */
 	public String getUsername() {
@@ -269,7 +268,7 @@ public class StarTeamSCM extends SCM {
 
 	/**
 	 * Get the password used to connect to starteam.
-	 * 
+	 *
 	 * @return The password.
 	 */
 	public String getPassword() {

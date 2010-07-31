@@ -1,9 +1,11 @@
 /**
- * 
+ *
  */
 package hudson.plugins.starteam;
 
+import com.starbase.starteam.Folder;
 import hudson.FilePath.FileCallable;
+import hudson.model.AbstractBuild;
 import hudson.model.TaskListener;
 import hudson.remoting.VirtualChannel;
 
@@ -11,11 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import com.starbase.starteam.Folder;
-
 /**
  * @author ip90568
- * 
+ *
  */
 public class StarTeamPollingActor implements FileCallable<Boolean> {
 
@@ -38,11 +38,13 @@ public class StarTeamPollingActor implements FileCallable<Boolean> {
   private boolean promotionstate;
 
   private final TaskListener listener;
-	
-	public StarTeamPollingActor(String hostname, int port, String user,
+
+  private AbstractBuild lastBuild;
+
+  public StarTeamPollingActor(String hostname, int port, String user,
 			String passwd, String projectname, String viewname,
 			Map<String,String> folderMap, String labelname, boolean promotionstate,
-      TaskListener listener) {
+      TaskListener listener, AbstractBuild lastBuild ) {
 		this.hostname = hostname;
 		this.port = port;
 		this.user = user;
@@ -53,11 +55,12 @@ public class StarTeamPollingActor implements FileCallable<Boolean> {
 		this.listener = listener;
     this.labelname = labelname;
     this.promotionstate = promotionstate;
+    this.lastBuild = lastBuild;
   }
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see hudson.FilePath.FileCallable#invoke(java.io.File,
 	 *      hudson.remoting.VirtualChannel)
 	 */
@@ -78,7 +81,12 @@ public class StarTeamPollingActor implements FileCallable<Boolean> {
 
       Map<String, Folder> rootFolderMap = connection.getRootFolder();
 
-      StarTeamChangeSet changeSet = connection.computeChangeSet(rootFolderMap, workspace,null,listener.getLogger());
+      java.io.File filePointFile = null;
+      if (lastBuild != null && new File(lastBuild.getRootDir(), StarTeamConnection.FILE_POINT_FILENAME).exists() ) {
+        filePointFile = new File(lastBuild.getRootDir(),StarTeamConnection.FILE_POINT_FILENAME);
+      }
+
+      StarTeamChangeSet changeSet = connection.computeChangeSet(rootFolderMap, workspace,filePointFile,listener.getLogger());
 
       return changeSet.hasChanges();
 

@@ -28,12 +28,12 @@ public class StarTeamChangeSet {
   private Collection<StarTeamFilePoint> filePointsToRemember = new ArrayList<StarTeamFilePoint>();
 
   public boolean hasChanges() {
-      return isComparisonAvailable()
-      || getAdded() != null && getAdded().isEmpty()
-      || getHigher() != null && getHigher().isEmpty()
-      || getLower() != null && getLower().isEmpty()
-      || getDelete() != null && getDelete().isEmpty()
-      || getDirty() != null && getDirty().isEmpty();
+      return isComparisonAvailable() &&
+      (  getAdded() != null && !getAdded().isEmpty()
+      || getHigher() != null && !getHigher().isEmpty()
+      || getLower() != null && !getLower().isEmpty()
+      || getDelete() != null && !getDelete().isEmpty()
+      || getDirty() != null && !getDirty().isEmpty() );
   }
 
   public Collection<java.io.File> getFilesToRemove() {
@@ -115,4 +115,29 @@ public class StarTeamChangeSet {
     return dirty;
   }
 
+  @Override
+  public String toString() {
+    final StringBuffer buffer = new StringBuffer();
+
+    if (added != null) {
+      buffer.append( " added: " ).append( added.size() );
+    }
+
+    if (higher != null) {
+      buffer.append( " higher: " ).append( higher.size() );
+    }
+
+    if (lower != null) {
+      buffer.append( " lower: " ).append( lower.size() );
+    }
+
+    if (delete != null) {
+      buffer.append( " delete: " ).append( delete.size() );
+    }
+
+    if (dirty != null) {
+      buffer.append( " dirty: " ).append( dirty.size() );
+    }
+    return buffer.toString();
+  }
 }

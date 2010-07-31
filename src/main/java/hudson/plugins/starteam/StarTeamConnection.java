@@ -215,7 +215,7 @@ public class StarTeamConnection {
         try {
             result = ViewConfiguration.createFromTime(view.getServer().getCurrentTime());
         } catch (UnsupportedOperationException unsupported) {
-            // We cannot fetch the current server time from various versions of starteam so we "guess" by subtracting 10 seconds. 
+            // We cannot fetch the current server time from various versions of starteam so we "guess" by subtracting 10 seconds.
             result = ViewConfiguration.createFromTime(new OLEDate(System.currentTimeMillis()-5000));
         }
         configuration = result;
@@ -248,11 +248,6 @@ public class StarTeamConnection {
     if (server != null) {
       server.disconnect();
     }
-  }
-
-  @Override
-  protected void finalize() throws Throwable {
-    close();
   }
 
   private final Object syncLock = new Object();
@@ -329,7 +324,7 @@ public class StarTeamConnection {
     try {
 
       if (filterAllow(f)) {
-        
+
           f.checkout(Item.LockType.UNCHANGED, // check out as unlocked
               false, // use timestamp from repo
               true, // convert EOL to native format
@@ -363,7 +358,7 @@ public class StarTeamConnection {
     ONE.add("classRepository");
     ONE.add("class");
   }
-  
+
   public boolean filterAllow(File f) {
     String fn = f.getFullName().toLowerCase();
 
@@ -388,7 +383,7 @@ public class StarTeamConnection {
       String hostname = "dhstarteam01";
       int port = 49201;
       String user = "MMSBUILD";
-      String password = "dozyBadger";
+      String password = "******";
       String project = "Health Systems (MMD)";
       String view = "Health Systems (MMD)";
       String folder = "Health Systems (MMD)/HUM/AuthorisationObjectModel";
