@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-BuildTrigger (Hudson main module 1.368 API)
+BuildTrigger (Hudson main module 1.369 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-26">
+<META NAME="date" CONTENT="2010-07-30">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ BuildTrigger (Hudson main module 1.368 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BuildTrigger (Hudson main module 1.368 API)";
+        parent.document.title="BuildTrigger (Hudson main module 1.369 API)";
     }
 }
 </SCRIPT>
@@ -335,7 +335,7 @@ Triggers builds of other projects.
              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called from <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)"><CODE>Job.renameTo(String)</CODE></A> when a job is renamed.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called from <A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.ItemListenerImpl.html" title="class in hudson.tasks"><CODE>BuildTrigger.DescriptorImpl.ItemListenerImpl</CODE></A> when a job is renamed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -737,15 +737,14 @@ onJobRenamed</H3>
 public boolean <B>onJobRenamed</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)</PRE>
 <DL>
-<DD>Called from <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)"><CODE>Job.renameTo(String)</CODE></A> when a job is renamed.
+<DD>Called from <A HREF="../../hudson/tasks/BuildTrigger.DescriptorImpl.ItemListenerImpl.html" title="class in hudson.tasks"><CODE>BuildTrigger.DescriptorImpl.ItemListenerImpl</CODE></A> when a job is renamed.
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>true
-      if this <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><CODE>BuildTrigger</CODE></A> is changed and needs to be saved.</DL>
+<DT><B>Returns:</B><DD>true if this <A HREF="../../hudson/tasks/BuildTrigger.html" title="class in hudson.tasks"><CODE>BuildTrigger</CODE></A> is changed and needs to be saved.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
