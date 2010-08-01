@@ -3,8 +3,9 @@ BODY, TH, TD, P, LI {
   font-size: 100%;
 }
 
-BODY {
-  font-size: 0.8em;
+/* cancel out the CSS style definition in the Drupal theme */
+#content .content UL.image LI {
+  list-style: none !important;
 }
 
 UL.image {
@@ -49,5 +50,5 @@ H3 {
 /* For community ratings */
 img.rate { vertical-align: middle; margin-right: 2em; }
 img.rate:hover { cursor: pointer; }
-div.rate-offset { position: relative; bottom: 1.1em; left: 22em; }
-
+div.rate-offset { padding-left: 2em; }
+span.related-issues { display: block; }
