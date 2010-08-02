@@ -15,36 +15,34 @@ import java.util.List;
  * @author Eric D. Broyles
  * @version 1.0
  */
-public class StarTeamChangeLogSet extends ChangeLogSet<StarTeamChangeLogEntry>
-{
+public class StarTeamChangeLogSet extends ChangeLogSet<StarTeamChangeLogEntry> {
 
   private List<StarTeamChangeLogEntry> history = null;
 
-  public StarTeamChangeLogSet(AbstractBuild<?, ?> build, List<StarTeamChangeLogEntry> logs)
-  {
-    super(build);
-    this.history = Collections.unmodifiableList(logs);
+  public StarTeamChangeLogSet(AbstractBuild<?, ?> build, List<StarTeamChangeLogEntry> logs) {
+	  super(build);
+	  this.history = Collections.unmodifiableList(logs);
   }
 
   @Override
-  public boolean isEmptySet()
-  {
-    return history.isEmpty();
+  public boolean isEmptySet() {
+	  return history.isEmpty();
   }
 
-  public Iterator<StarTeamChangeLogEntry> iterator()
-  {
-    return history.iterator();
+  /**
+   * return an iterator over all change log entries.
+   */
+  public Iterator<StarTeamChangeLogEntry> iterator() {
+	  return history.iterator();
   }
 
   /**
    * Return the history for this change log set.
    * 
-   * @return
+   * @return a List of all log entries
    */
-  public List<StarTeamChangeLogEntry> getHistory()
-  {
-    return history;
+  public List<StarTeamChangeLogEntry> getHistory() {
+	  return history;
   }
 
 }

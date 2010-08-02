@@ -4,11 +4,9 @@ import hudson.Plugin;
 import hudson.scm.SCMS;
 
 /**
- * @author Ilkka Laukkanen
- * @plugin
+ * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
  */
 public class PluginImpl extends Plugin {
-
   /*
 	 * (non-Javadoc)
 	 * 

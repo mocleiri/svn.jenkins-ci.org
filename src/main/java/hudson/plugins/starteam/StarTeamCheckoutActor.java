@@ -14,7 +14,7 @@ import com.starbase.starteam.Folder;
  * A helper class for transparent checkout operations over the network. Can be
  * used with FilePath.act() to do a checkout on a remote node.
  * 
- * @author ip90568
+ * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
  */
 class StarTeamCheckoutActor implements FileCallable<Boolean> {
 

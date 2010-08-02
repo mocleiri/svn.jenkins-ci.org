@@ -13,7 +13,7 @@ import java.net.URL;
 
 /**
  * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
- * @TODO implement maybe?
+ * TODO implement maybe?
  */
 public abstract class StarTeamRepositoryBrowser extends RepositoryBrowser {
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * @author ip90568
+ * @author Ilkka Laukkanen <ilkka.s.laukkanen@gmail.com>
  *
  */
 public class StarTeamPollingActor implements FileCallable<Boolean> {

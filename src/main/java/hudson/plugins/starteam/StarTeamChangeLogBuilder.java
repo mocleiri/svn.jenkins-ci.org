@@ -1,7 +1,6 @@
 package hudson.plugins.starteam;
 
 import hudson.Util;
-import hudson.util.WriterOutputStream;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -9,19 +8,16 @@ import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.GregorianCalendar;
 
-import com.starbase.starteam.File;
-
+import org.kohsuke.stapler.framework.io.WriterOutputStream;
 
 /**
  * Builds <tt>changelog.xml</tt> for {@link StarTeamSCM}.
  *
- * @author Eric Broyles
+ * @author Eric D. Broyles
  */
-public final class StarTeamChangeLogBuilder
-{
+public final class StarTeamChangeLogBuilder {
   
   /**
    * Stores the history objects to the output stream as xml.
@@ -51,7 +47,8 @@ public final class StarTeamChangeLogBuilder
    */
   public static boolean writeChangeLog(OutputStream outputStream, StarTeamChangeSet changeSet) throws IOException {
     OutputStreamWriter writer = new OutputStreamWriter(outputStream, Charset.forName("UTF-8"));
-    hudson.util.WriterOutputStream stream1 = new WriterOutputStream(writer);
+    //hudson.util.WriterOutputStream stream1 = new WriterOutputStream(writer);
+    org.kohsuke.stapler.framework.io.WriterOutputStream stream1 = new WriterOutputStream(writer);
     PrintStream stream = new PrintStream(stream1);
 
     stream.println("<?xml version='1.0' encoding='UTF-8'?>");

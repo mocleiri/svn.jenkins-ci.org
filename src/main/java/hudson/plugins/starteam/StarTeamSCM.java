@@ -92,33 +92,32 @@ public class StarTeamSCM extends SCM {
 	 * @see hudson.scm.SCM#checkout(hudson.model.AbstractBuild, hudson.Launcher,
 	 *      hudson.FilePath, hudson.model.BuildListener, java.io.File)
 	 */
-	@Override
-	public boolean checkout(AbstractBuild build, Launcher launcher,
-			FilePath workspace, BuildListener listener, File changelogFile)
-			throws IOException, InterruptedException {
+  @Override
+  public boolean checkout(AbstractBuild build, Launcher launcher,
+		  FilePath workspace, BuildListener listener, File changelogFile)
+  throws IOException, InterruptedException {
 
-    initialise();
+	  initialise();
 
-    listener.getLogger().println("Checking Out (host=["+hostname+"],port=["+port+"],projectname=["+projectname+"],viewname=["+viewname+"],user=["+user+"],password=<******>,labelname=["+labelname+"],promotionstate=["+promotionstate+"])");
+	  listener.getLogger().println("Checking Out (host=["+hostname+"],port=["+port+"],projectname=["+projectname+"],viewname=["+viewname+"],user=["+user+"],password=<******>,labelname=["+labelname+"],promotionstate=["+promotionstate+"])");
 
-    boolean status;
+	  boolean status;
 
-		// Create an actor to do the checkout, possibly on a remote machine
-		StarTeamCheckoutActor co_actor = new StarTeamCheckoutActor(
-        hostname, port, user, passwd, projectname, viewname,
-        folderMap, name, namePromotionState,
-        build.getRootDir(),
-        listener, changelogFile, build);
+	  // Create an actor to do the checkout, possibly on a remote machine
+	  StarTeamCheckoutActor co_actor = new StarTeamCheckoutActor(
+			  hostname, port, user, passwd, projectname, viewname,
+			  folderMap, name, namePromotionState,
+			  build.getRootDir(),
+			  listener, changelogFile, build);
 
-		if (workspace.act(co_actor)) {
-			status = true;
-		} else {
-			listener.getLogger().println("StarTeam polling failed");
-      status = false;
-		}
-
-    return status;
-	}
+	  if (workspace.act(co_actor)) {
+		  status = true;
+	  } else {
+		  listener.getLogger().println("StarTeam checkout failed");
+		  status = false;
+	  }
+	  return status;
+  }
 
   /*
 	 * (non-Javadoc)
@@ -152,22 +151,21 @@ public class StarTeamSCM extends SCM {
 			final TaskListener listener) throws IOException,
 			InterruptedException {
 
-    initialise();
+		initialise();
 
-    boolean status = false;
+		boolean status = false;
 
-    // Create an actor to do the polling, possibly on a remote machine
+		// Create an actor to do the polling, possibly on a remote machine
 		StarTeamPollingActor p_actor = new StarTeamPollingActor(hostname, port,
 				user, passwd, projectname, viewname, folderMap, name, namePromotionState,
-        listener, (AbstractBuild)proj.getLastBuild());
+				listener, (AbstractBuild)proj.getLastBuild());
 
-    if (workspace.act(p_actor)) {
+		if (workspace.act(p_actor)) {
 			status = true;
 		} else {
 			listener.getLogger().println("StarTeam polling failed");
 		}
-
-    return status;
+		return status;
 	}
 
 	/**
@@ -278,7 +276,7 @@ public class StarTeamSCM extends SCM {
   /**
    * Get the label used to check out from starteam.
    *
-   * @return The password.
+   * @return The label.
    */
   public String getLabelname() {
     return labelname;
@@ -292,5 +290,4 @@ public class StarTeamSCM extends SCM {
   public boolean isPromotionstate() {
     return promotionstate;
   }
-
 }

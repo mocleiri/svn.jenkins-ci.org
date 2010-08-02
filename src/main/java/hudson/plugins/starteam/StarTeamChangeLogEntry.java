@@ -8,14 +8,13 @@ import java.util.Date;
 
 /**
  * <p>
- * Implementation of {@link ChangeLogSet.Entry} for StarTeam SCM.
+ * Implementation of {@link hudson.scm.ChangeLogSet.Entry} for StarTeam SCM.
  * </p>
  * 
  * @author Eric D. Broyles
  * @version 1.0
  */
-public class StarTeamChangeLogEntry extends hudson.scm.ChangeLogSet.Entry
-{
+public class StarTeamChangeLogEntry extends hudson.scm.ChangeLogSet.Entry {
   private Integer revisionNumber;
 
   private String username;
@@ -29,8 +28,7 @@ public class StarTeamChangeLogEntry extends hudson.scm.ChangeLogSet.Entry
   private String change;
 
   @Override
-  public Collection<String> getAffectedPaths()
-  {
+  public Collection<String> getAffectedPaths() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -41,16 +39,14 @@ public class StarTeamChangeLogEntry extends hudson.scm.ChangeLogSet.Entry
    * @see hudson.scm.ChangeLogSet.Entry#getAuthor()
    */
   @Override
-  public User getAuthor()
-  {
+  public User getAuthor() {
     if (username == null) {
       username = "Unknown";
     }
     return User.get(username);
   }
 
-  public void setUsername(String username)
-  {
+  public void setUsername(String username) {
     this.username = username;
   }
 
@@ -59,43 +55,35 @@ public class StarTeamChangeLogEntry extends hudson.scm.ChangeLogSet.Entry
   }
 
   @Override
-  public String getMsg()
-  {
+  public String getMsg() {
     return msg;
   }
 
-  public void setMsg(String msg)
-  {
+  public void setMsg(String msg) {
     this.msg = msg;
   }
 
-  public Integer getRevisionNumber()
-  {
+  public Integer getRevisionNumber() {
     return revisionNumber;
   }
 
-  public void setRevisionNumber(Integer revisionNumber)
-  {
+  public void setRevisionNumber(Integer revisionNumber) {
     this.revisionNumber = revisionNumber;
   }
 
-  public Date getDate()
-  {
+  public Date getDate() {
     return date;
   }
 
-  public void setDate(Date date)
-  {
+  public void setDate(Date date) {
     this.date = date;
   }
 
-  public String getFileName()
-  {
+  public String getFileName() {
     return fileName;
   }
 
-  public void setFileName(String fileName)
-  {
+  public void setFileName(String fileName) {
     this.fileName = fileName;
   }
 
