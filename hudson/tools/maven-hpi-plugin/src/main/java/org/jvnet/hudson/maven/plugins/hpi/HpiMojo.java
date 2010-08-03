@@ -55,7 +55,7 @@ public class HpiMojo extends AbstractHpiMojo {
     /**
      * Used to create .jar archive.
      *
-     * @parameter expression="${component.org.codehaus.plexus.archiver.Archiver#jar}"
+     * @component role="org.codehaus.plexus.archiver.Archiver" role-hint="jar"
      * @required
      */
     private JarArchiver jarArchiver;
@@ -63,7 +63,7 @@ public class HpiMojo extends AbstractHpiMojo {
     /**
      * Used to create .hpi archive.
      *
-     * @parameter expression="${component.org.codehaus.plexus.archiver.Archiver#jar}"
+     * @component role="org.codehaus.plexus.archiver.Archiver" role-hint="jar"
      * @required
      */
     private JarArchiver hpiArchiver;
