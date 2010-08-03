@@ -67,14 +67,14 @@ public class StarTeamConnection {
                             String passwd, String projectname, String viewname,
                             String foldername, String labelname, boolean promotionstate) {
 
-    this(hostname, port, user, passwd, projectname, viewname, new HashMap(), labelname, promotionstate);
+    this(hostname, port, user, passwd, projectname, viewname, new HashMap<String, String>(), labelname, promotionstate);
 
     folderMap.put(foldername, ".");
   }
 
   public StarTeamConnection(String hostname, int port, String user,
                             String passwd, String projectname, String viewname,
-                            Map folderMap, String labelname, boolean promotionstate) {
+                            Map<String, String> folderMap, String labelname, boolean promotionstate) {
     // Create the server information object
     serverinfo = new ServerInfo();
     serverinfo.setConnectionType(ServerConfiguration.PROTOCOL_TCP_IP_SOCKETS);
@@ -346,8 +346,8 @@ public class StarTeamConnection {
 
   }
 
-  private static Set TWO = new HashSet();
-  private static Set ONE = new HashSet();
+  private static Set<String> TWO = new HashSet<String>();
+  private static Set<String> ONE = new HashSet<String>();
   static  {
     TWO.add("toplink");
 
@@ -396,7 +396,16 @@ public class StarTeamConnection {
       stc.close();
   }
 
-  public StarTeamChangeSet computeChangeSet(Map<String,Folder> rootFolderMap, java.io.File workspace, java.io.File filePointFile, PrintStream logger) throws StarTeamSCMException, IOException {
+  /**
+ * @param rootFolderMap Map of all project directories
+ * @param workspace a workspace directory
+ * @param filePointFile a file containing previous File Point description
+ * @param logger a logger for consuming log messages
+ * @return set of changes  
+ * @throws StarTeamSCMException
+ * @throws IOException
+ */
+public StarTeamChangeSet computeChangeSet(Map<String,Folder> rootFolderMap, java.io.File workspace, java.io.File filePointFile, PrintStream logger) throws StarTeamSCMException, IOException {
 
     // --- compute changes as per starteam
 
