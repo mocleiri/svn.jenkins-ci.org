@@ -27,7 +27,7 @@ THE SOFTWARE.
       <j:if test="${app.updateCenter.canDowngrade}">
         <form method="post" action="${rootURL}/updateCenter/downgrade">
             <br/>Restore the previous version of Hudson 
-            <f:submit value="${%Downgrade}"/>         
+            <f:submit value="Downgrade to ${app.updateCenter.backupVersion}"/>
         </form>
       </j:if>
   </div>

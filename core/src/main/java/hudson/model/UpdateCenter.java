@@ -74,6 +74,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.acegisecurity.context.SecurityContextHolder;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.regex.*;
+
 /**
  * Controls update center capability.
  *
@@ -300,10 +307,59 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
             return;
         }
 
+        HudsonDowngradeJob job = new HudsonDowngradeJob(getCoreSource(), Hudson.getAuthentication());
+        LOGGER.info("Scheduling the core downgrade");
+        addJob(job);
+        rsp.sendRedirect2(".");
+    }
+
+    /**
+     * Returns String with version of backup .war file,
+     * if the file does not exists returns null
+     */
+    public String getBackupVersion()
+    {
         File backup = new File(Lifecycle.get().getHudsonWar() + ".bak");
-        LOGGER.info("Performing the core downgrade");
-        Lifecycle.get().rewriteHudsonWar(backup);
-        rsp.sendRedirect2("../downgrade_success");
+        if(backup.exists())
+        {
+            try
+            {
+                ZipFile zf = new ZipFile(backup.getPath());
+                Enumeration entries = zf.entries();
+                while (entries.hasMoreElements())
+                {
+                    ZipEntry ze = (ZipEntry) entries.nextElement();
+                    if(ze.getName().equals("META-INF/MANIFEST.MF"))
+                    {
+                        long size = ze.getSize();
+                        if (size > 0)
+                        {
+                            BufferedReader br = new BufferedReader(new InputStreamReader(zf.getInputStream(ze)));
+                            String line;
+                            String version = "Hudson-Version: ";
+                            Pattern p = Pattern.compile(version);
+                            while ((line = br.readLine()) != null)
+                            {
+                                Matcher m = p.matcher(line);
+                                if(m.find())
+                                {
+                                    return line.substring(m.end());
+                                }
+                            }
+                            br.close();
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (IOException e)
+            {
+              e.printStackTrace();
+              return null;
+            }
+        }
+        else
+            return null;
     }
 
     /*package*/ synchronized Future<UpdateCenterJob> addJob(UpdateCenterJob job) {
@@ -938,6 +994,56 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
 
         protected void onSuccess() {
             status = new Success();
+        }
+
+        @Override
+        protected void replace(File dst, File src) throws IOException {
+            Lifecycle.get().rewriteHudsonWar(src);
+        }
+    }
+
+    public final class HudsonDowngradeJob extends DownloadJob {
+        public HudsonDowngradeJob(UpdateSite site, Authentication auth) {
+            super(site, auth);
+        }
+
+        protected URL getURL() throws MalformedURLException {
+            return new URL(site.getData().core.url);
+        }
+
+        protected File getDestination() {
+            return Lifecycle.get().getHudsonWar();
+        }
+
+        public String getName() {
+            return "hudson.war";
+        }
+        protected void onSuccess() {
+            status = new Success();
+        }
+        @Override
+        public void run() {
+            try {
+                LOGGER.info("Starting the downgrade of "+getName()+" on behalf of "+getUser().getName());
+
+                _run();
+
+                LOGGER.info("Downgrading successful: "+getName());
+                status = new Success();
+                onSuccess();
+            } catch (Throwable e) {
+                LOGGER.log(Level.SEVERE, "Failed to downgrade "+getName(),e);
+                status = new Failure(e);
+            }
+        }
+
+        @Override
+        protected void _run() throws IOException {
+
+            File backup = new File(Lifecycle.get().getHudsonWar() + ".bak");
+            File dst = getDestination();
+
+            config.install(this, backup, dst);
         }
 
         @Override
