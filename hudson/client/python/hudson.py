@@ -4,6 +4,7 @@ A Python interface to a Hudson instance.
 Please contribute!
  * submit bugs/patches/requests via issues.hudson-ci.org
  * email mcrooney@dev.java.net with bugs/patches/requests
+ * fork the Gist and request a pull: http://gist.github.com/510467
 
 TODO:
  * remove dep on BeautifulSoup in getTestFailuresForJob, use /api/python instead
