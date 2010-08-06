@@ -129,8 +129,7 @@ public abstract class InputMetric implements Serializable {
      * @return the list of all input validation errors
      */
     public List<ValidationError> getInputValidationErrors() {
-        return new ArrayList<ValidationError>();
-        //return inputValidationErrors;
+        return inputValidationErrors;
     }
 
     /**
