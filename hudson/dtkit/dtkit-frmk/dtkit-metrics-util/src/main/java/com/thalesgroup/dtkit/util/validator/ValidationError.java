@@ -37,6 +37,9 @@ public class ValidationError implements Serializable {
 
     private String message;
 
+    public ValidationError() {
+    }
+
     public ValidationError(ErrorType errorType, int line, String errorId, String message) {
         this.type = errorType;
         this.line = line;
