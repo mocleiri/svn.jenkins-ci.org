@@ -64,7 +64,7 @@ class HudsonInstance:
         """Read and return the config.xml of the specified job."""
         return self.read("/job/%s/config.xml" % job)
 
-    def createJob(job, config, build=False, buildToken=None):
+    def createJob(self, job, config, build=False, buildToken=None):
         """Given a name and a config.xml, create a new Hudson job, optionally triggering a build."""
         url = self.URL + "/createItem?name=%s" % job
         cmd = 'wget --header="Content-Type: text/xml" --post-data="%s" -O - "%s"' % (sanitize(config), url)
