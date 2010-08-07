@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.369 API)
+Index (Hudson main module 1.370 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-30">
+<META NAME="date" CONTENT="2010-08-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.369 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.369 API)";
+        parent.document.title="Index (Hudson main module 1.370 API)";
     }
 }
 </SCRIPT>
@@ -2321,6 +2321,9 @@ Constructor for class hudson.remoting.<A HREF="./hudson/remoting/Channel.html" t
 Constructor for class hudson.remoting.<A HREF="./hudson/remoting/Channel.Listener.html" title="class in hudson.remoting">Channel.Listener</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/remoting/Channel.Mode.html" title="enum in hudson.remoting"><B>Channel.Mode</B></A> - Enum in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>Communication mode.<DT><A HREF="./hudson/remoting/ChannelClosedException.html" title="class in hudson.remoting"><B>ChannelClosedException</B></A> - Exception in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>Indicates that the channel is already closed.<DT><A HREF="./hudson/remoting/ChannelClosedException.html#ChannelClosedException()"><B>ChannelClosedException()</B></A> - 
+Constructor for exception hudson.remoting.<A HREF="./hudson/remoting/ChannelClosedException.html" title="class in hudson.remoting">ChannelClosedException</A>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="./hudson/remoting/ChannelClosedException.html#ChannelClosedException(java.lang.Throwable)"><CODE>ChannelClosedException.ChannelClosedException(Throwable)</CODE></A>.</I>
+<DT><A HREF="./hudson/remoting/ChannelClosedException.html#ChannelClosedException(java.lang.Throwable)"><B>ChannelClosedException(Throwable)</B></A> - 
 Constructor for exception hudson.remoting.<A HREF="./hudson/remoting/ChannelClosedException.html" title="class in hudson.remoting">ChannelClosedException</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/remoting/ChannelProperty.html" title="class in hudson.remoting"><B>ChannelProperty</B></A>&lt;<A HREF="./hudson/remoting/ChannelProperty.html" title="type parameter in ChannelProperty">T</A>&gt; - Class in <A HREF="./hudson/remoting/package-summary.html">hudson.remoting</A><DD>A convenient key type for <A HREF="./hudson/remoting/Channel.html#getProperty(java.lang.Object)"><CODE>Channel.getProperty(Object)</CODE></A> and <A HREF="./hudson/remoting/Channel.html#setProperty(java.lang.Object, java.lang.Object)"><CODE>Channel.setProperty(Object, Object)</CODE></A><DT><A HREF="./hudson/remoting/ChannelProperty.html#ChannelProperty(java.lang.Class, java.lang.String)"><B>ChannelProperty(Class&lt;T&gt;, String)</B></A> - 
@@ -14832,6 +14835,9 @@ Method in class hudson.maven.<A HREF="./hudson/maven/MojoInfo.html" title="class
 <DT><A HREF="./hudson/util/InterceptingProxy.html" title="class in hudson.util"><B>InterceptingProxy</B></A> - Class in <A HREF="./hudson/util/package-summary.html">hudson.util</A><DD>Creates a proxy that traps every method call.<DT><A HREF="./hudson/util/InterceptingProxy.html#InterceptingProxy()"><B>InterceptingProxy()</B></A> - 
 Constructor for class hudson.util.<A HREF="./hudson/util/InterceptingProxy.html" title="class in hudson.util">InterceptingProxy</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Util.html#intern(java.lang.String)"><B>intern(String)</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Util.html" title="class in hudson">Util</A>
+<DD>Null-safe String intern method.
 <DT><A HREF="./hudson/model/Computer.html#interrupt()"><B>interrupt()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Interrupt all <A HREF="./hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.
@@ -17457,7 +17463,7 @@ Constructor for class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.Descr
 <DD>&nbsp;
 <DT><A HREF="./hudson/matrix/Messages.html#MatrixProject_DisplayName()"><B>MatrixProject_DisplayName()</B></A> - 
 Static method in class hudson.matrix.<A HREF="./hudson/matrix/Messages.html" title="class in hudson.matrix">Messages</A>
-<DD>Build multi-configuration project (alpha)
+<DD>Build multi-configuration project
 <DT><A HREF="./hudson/matrix/Messages.html#MatrixProject_DuplicateAxisName()"><B>MatrixProject_DuplicateAxisName()</B></A> - 
 Static method in class hudson.matrix.<A HREF="./hudson/matrix/Messages.html" title="class in hudson.matrix">Messages</A>
 <DD>Duplicate axis name
@@ -20321,6 +20327,9 @@ Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">X
 <DT><A HREF="./hudson/matrix/MatrixBuild.html#readResolve()"><B>readResolve()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/maven/ModuleDependency.html#readResolve()"><B>readResolve()</B></A> - 
+Method in class hudson.maven.<A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven">ModuleDependency</A>
+<DD>Upon reading from the disk, intern strings.
 <DT><A HREF="./hudson/model/MyViewsProperty.html#readResolve()"><B>readResolve()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/MyViewsProperty.html" title="class in hudson.model">MyViewsProperty</A>
 <DD>&nbsp;
@@ -23923,7 +23932,8 @@ Method in class org.jvnet.hudson.test.rhino.<A HREF="./org/jvnet/hudson/test/rhi
 <DD>Formats the current call stack into a human readable string.
 <DT><A HREF="./hudson/util/ArgumentListBuilder.html#toStringWithQuote()"><B>toStringWithQuote()</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
-<DD>&nbsp;
+<DD>Just adds quotes around args containing spaces, but no other special characters,
+ so this method should generally be used only for informational/logging purposes.
 <DT><A HREF="./hudson/model/LoadStatistics.html#totalExecutors"><B>totalExecutors</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A>
 <DD>Number of total executors and how it changes over time.
@@ -23946,6 +23956,9 @@ Constructor for class org.jvnet.hudson.test.<A HREF="./org/jvnet/hudson/test/Tou
 Method in class hudson.<A HREF="./hudson/FilePath.html" title="class in hudson">FilePath</A>
 <DD>Converts this file to the URI, relative to the machine
  on which this file is available.
+<DT><A HREF="./hudson/util/ArgumentListBuilder.html#toWindowsCommand()"><B>toWindowsCommand()</B></A> - 
+Method in class hudson.util.<A HREF="./hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>
+<DD>Wrap command in a CMD.EXE call so we can return the exit code (ERRORLEVEL).
 <DT><A HREF="./hudson/model/AbstractProject.html#transientActions"><B>transientActions</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD><A HREF="./hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s contributed from subsidiary objects associated with
@@ -24155,7 +24168,7 @@ Method in class hudson.util.<A HREF="./hudson/util/XStream2.html" title="class i
 <DT><A HREF="./hudson/XmlFile.html#unmarshal(java.lang.Object)"><B>unmarshal(Object)</B></A> - 
 Method in class hudson.<A HREF="./hudson/XmlFile.html" title="class in hudson">XmlFile</A>
 <DD>Loads the contents of this file into an existing object.
-<DT><A HREF="./hudson/util/RobustReflectionConverter.html#unmarshallField(com.thoughtworks.xstream.converters.UnmarshallingContext, java.lang.Object, java.lang.Class, java.lang.reflect.Field)"><B>unmarshallField(UnmarshallingContext, Object, Class, Field)</B></A> - 
+<DT><A HREF="./hudson/util/RobustReflectionConverter.html#unmarshalField(com.thoughtworks.xstream.converters.UnmarshallingContext, java.lang.Object, java.lang.Class, java.lang.reflect.Field)"><B>unmarshalField(UnmarshallingContext, Object, Class, Field)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/RobustReflectionConverter.html" title="class in hudson.util">RobustReflectionConverter</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/util/Protector.html#unprotect(java.lang.String)"><B>unprotect(String)</B></A> - 
@@ -26304,7 +26317,7 @@ Static method in class hudson.matrix.<A HREF="./hudson/matrix/Messages.html" tit
 <DD>Configuration
 <DT><A HREF="./hudson/matrix/Messages.html#_MatrixProject_DisplayName()"><B>_MatrixProject_DisplayName()</B></A> - 
 Static method in class hudson.matrix.<A HREF="./hudson/matrix/Messages.html" title="class in hudson.matrix">Messages</A>
-<DD>Build multi-configuration project (alpha)
+<DD>Build multi-configuration project
 <DT><A HREF="./hudson/matrix/Messages.html#_MatrixProject_DuplicateAxisName()"><B>_MatrixProject_DuplicateAxisName()</B></A> - 
 Static method in class hudson.matrix.<A HREF="./hudson/matrix/Messages.html" title="class in hudson.matrix">Messages</A>
 <DD>Duplicate axis name

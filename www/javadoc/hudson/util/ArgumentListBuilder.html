@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ArgumentListBuilder (Hudson main module 1.369 API)
+ArgumentListBuilder (Hudson main module 1.370 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-07-30">
+<META NAME="date" CONTENT="2010-08-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ArgumentListBuilder (Hudson main module 1.369 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ArgumentListBuilder (Hudson main module 1.369 API)";
+        parent.document.title="ArgumentListBuilder (Hudson main module 1.370 API)";
     }
 }
 </SCRIPT>
@@ -286,7 +286,16 @@ Used to build up arguments for a process invocation.
 <TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#toStringWithQuote()">toStringWithQuote</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Just adds quotes around args containing spaces, but no other special characters,
+ so this method should generally be used only for informational/logging purposes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ArgumentListBuilder.html#toWindowsCommand()">toWindowsCommand</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wrap command in a CMD.EXE call so we can return the exit code (ERRORLEVEL).</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -551,11 +560,43 @@ toStringWithQuote</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toStringWithQuote</B>()</PRE>
 <DL>
+<DD>Just adds quotes around args containing spaces, but no other special characters,
+ so this method should generally be used only for informational/logging purposes.
+<P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toWindowsCommand()"><!-- --></A><H3>
+toWindowsCommand</H3>
+<PRE>
+public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A> <B>toWindowsCommand</B>()</PRE>
+<DL>
+<DD>Wrap command in a CMD.EXE call so we can return the exit code (ERRORLEVEL).
+ This method takes care of escaping special characters in the command, which
+ is needed since the command is now passed as a string to the CMD.EXE shell.
+ This is done as follows:
+ Wrap arguments in double quotes if they contain any of:
+   space *?;^&<>|" or % followed by a letter.
+ <br/> These characters are also prepended with a ^ character: ^&<>|
+ <br/> A " is prepended with another " character.
+ <br/> A % followed by a letter has that letter wrapped in double quotes,
+ to avoid possible variable expansion.  ie, %foo% becomes "%"f"oo%".
+ The second % does not need special handling because it is not followed
+ by a letter. <br/>
+ Example: "-Dfoo=*abc?def;ghi^^jkl^&mno^<pqr^>stu^|vwx""yz%"e"nd"
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD></DL>
 </DD>
 </DL>
 <HR>
