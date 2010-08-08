@@ -23,7 +23,7 @@
 
 package com.thalesgroup.dtkit.metrics.api;
 
-import com.sun.xml.internal.bind.AnyTypeAdapter;
+import com.sun.xml.bind.AnyTypeAdapter;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
