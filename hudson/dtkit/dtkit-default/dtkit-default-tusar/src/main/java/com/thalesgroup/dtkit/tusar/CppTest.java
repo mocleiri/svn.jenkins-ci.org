@@ -28,7 +28,10 @@ import com.thalesgroup.dtkit.metrics.api.InputType;
 import com.thalesgroup.dtkit.metrics.api.OutputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
+import javax.xml.bind.annotation.XmlType;
 
+
+@XmlType(name = "CppTestForTUSAR")
 public class CppTest extends InputMetricXSL {
 
     @Override

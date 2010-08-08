@@ -28,7 +28,9 @@ import com.thalesgroup.dtkit.metrics.api.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.api.InputType;
 import com.thalesgroup.dtkit.metrics.api.OutputMetric;
 
+import javax.xml.bind.annotation.XmlType;
 
+@XmlType(name = "CppTestForJUnit")
 public class CppTest extends InputMetricXSL {
 
     @Override
