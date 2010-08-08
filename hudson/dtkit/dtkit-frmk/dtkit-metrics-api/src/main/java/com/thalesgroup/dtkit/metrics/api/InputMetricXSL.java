@@ -29,6 +29,7 @@ import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.io.File;
 
 @SuppressWarnings("unused")
@@ -69,6 +70,7 @@ public abstract class InputMetricXSL extends InputMetric {
      *
      * @return the relative xsl path
      */
+    @XmlElement
     public abstract String getXslName();
 
     /**
@@ -76,6 +78,7 @@ public abstract class InputMetricXSL extends InputMetric {
      *
      * @return the relative xsd path. Can be null if there no XSD for the input file of the current tool type
      */
+    @XmlElement
     public abstract String getInputXsd();
 
     /**

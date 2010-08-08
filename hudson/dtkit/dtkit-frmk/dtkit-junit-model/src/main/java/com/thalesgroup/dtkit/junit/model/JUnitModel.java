@@ -23,35 +23,40 @@
 
 package com.thalesgroup.dtkit.junit.model;
 
+import com.thalesgroup.dtkit.metrics.api.AbstractOutputMetric;
 import com.thalesgroup.dtkit.metrics.api.OutputMetric;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
+
 @SuppressWarnings("unused")
-public class JUnitModel implements OutputMetric, Serializable {
+@XmlAccessorType(XmlAccessType.PROPERTY)
+public class JUnitModel extends AbstractOutputMetric implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_JUNIT_1_0 = new JUnitModel("1.0", "JUNIT OUTPUT FORMAT 1.0");
+    public static OutputMetric OUTPUT_JUNIT_1_0 = new JUnitModel();
 
-    private final String version;
-
-    private final String description;
-
-    public JUnitModel(String version, String description) {
-        this.version = version;
-        this.description = description;
+    @Override
+    @XmlElement
+    public String getKey() {
+        return "junit";
     }
 
-    @SuppressWarnings("unused")
+    @Override
+    @XmlElement
     public String getDescription() {
-        return description;
+        return "JUNIT OUTPUT FORMAT 1.0";
     }
 
-    @SuppressWarnings("unused")
+    @Override
+    @XmlElement
     public String getVersion() {
-        return version;
+        return "1.0";
     }
 
+    @Override
+    @XmlElement
     public String getXsd() {
         return "xsd/junit-1.0.xsd";
     }

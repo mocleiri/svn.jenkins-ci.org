@@ -23,6 +23,8 @@
 
 package com.thalesgroup.dtkit.metrics.api;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
  * OutMetric Interface
  * <p/>
@@ -30,7 +32,14 @@ package com.thalesgroup.dtkit.metrics.api;
  * <p/>
  * The interface must be implemented by a format class in the format model library (as junit-model.jar or tusar-model.jar)
  */
+@XmlJavaTypeAdapter(AbstractOutputMetric.Adapter.class)
 public interface OutputMetric {
+
+    public String getKey();
+
+    public String getDescription();
+
+    public String getVersion();
 
     public String getXsd();
 }

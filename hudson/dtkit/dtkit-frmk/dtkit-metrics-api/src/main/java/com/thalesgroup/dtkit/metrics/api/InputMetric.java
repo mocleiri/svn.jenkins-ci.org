@@ -23,17 +23,24 @@
 
 package com.thalesgroup.dtkit.metrics.api;
 
+import com.sun.xml.internal.bind.AnyTypeAdapter;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
 @SuppressWarnings("unused")
+@XmlJavaTypeAdapter(AnyTypeAdapter.class)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public abstract class InputMetric implements Serializable {
 
     /**
@@ -51,6 +58,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the tool name
      */
+    @XmlElement
     public abstract String getToolName();
 
 
@@ -59,6 +67,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the tool version
      */
+    @XmlElement
     public abstract String getToolVersion();
 
 
@@ -67,6 +76,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the label metric
      */
+    @XmlElement
     public String getLabel() {
         return getToolName() + "-" + getToolVersion();
     }
@@ -83,6 +93,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the input object
      */
+    @XmlElement
     public abstract InputType getToolType();
 
     /**
@@ -90,6 +101,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the Output format type (usually retrieved by the format model library as junit-model.jar or tusar-model.jar)
      */
+    @XmlElement
     public abstract OutputMetric getOutputFormatType();
 
     /**
@@ -128,6 +140,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the list of all input validation errors
      */
+    @JsonIgnore
     public List<ValidationError> getInputValidationErrors() {
         return inputValidationErrors;
     }
@@ -137,6 +150,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the list of all output validation errors
      */
+    @JsonIgnore
     public List<ValidationError> getOutputValidationErrors() {
         return outputValidationErrors;
     }
