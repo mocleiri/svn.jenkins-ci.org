@@ -12,6 +12,7 @@ TODO:
 """
 import re
 import urllib2
+import commands
 
 def sanitize(arg):
     """Sanitize an argument to put in a shell command."""
@@ -56,6 +57,7 @@ class HudsonInstance:
         for test in soup.findAll("case"):
             if test.status.contents[0] not in ["PASSED", "FIXED"]:
                 test.AGE = int(test.age.contents[0])
+                test.CLASS = test.classname.contents[0]
                 test.NAME = test.find("name").contents[0]
                 failures.append(test)
         return failures
