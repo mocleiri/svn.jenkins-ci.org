@@ -56,7 +56,7 @@
             <xsl:when test="count($childs) &gt; 0">
 
                 <xsl:variable name="testcaseElt" select="($childs[position()=1])"/>
-                <xsl:variable name="errors" select="count($testcaseElt/FatalError)"/>
+                <xsl:variable name="errors" select="count($testcaseElt/FatalError)+count($testcaseElt/Exception)"/>
                 <xsl:variable name="failures" select="count($testcaseElt/Error)"/>
 
                 <xsl:call-template name="TestSuiteElement">
@@ -116,7 +116,7 @@
                     <xsl:text>&#13;</xsl:text>
                 </xsl:when>
 
-                <xsl:when test="$currEltName='FatalError'">
+                <xsl:when test="$currEltName='FatalError' or $currEltName='Exception'">
                     <xsl:text>&#13;</xsl:text>
                     <xsl:text>[Exception] - </xsl:text>
                     <xsl:value-of select="($currElt)"/>
@@ -155,7 +155,7 @@
             </xsl:attribute>
 
             <xsl:variable name="nbErrors" select="count(Error)"/>
-            <xsl:variable name="nbFatalErrors" select="count(FatalError)"/>
+            <xsl:variable name="nbFatalErrors" select="count(FatalError)+count(Exception)"/>
 
             <xsl:choose>
                 <xsl:when test="$nbFatalErrors&gt;0">
@@ -212,6 +212,7 @@
 
                 </system-out>
             </xsl:if>
+        </testcase>
 
             <xsl:if test="count(child::Exception)>0">
                 <xsl:element name="system-err">
@@ -229,10 +230,8 @@
                 </xsl:element>
             </xsl:if>
 
-        </testcase>
     </xsl:template>
 
 
     <xsl:template match="text()|@*"/>
 </xsl:stylesheet>
-
