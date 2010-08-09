@@ -31,6 +31,7 @@ import com.thalesgroup.dtkit.junit.CppUnit;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
@@ -40,22 +41,29 @@ import java.io.*;
 
 public class InputMetricResourceTest extends JerseyTest {
 
+    private WebResource webResource;
+
     public InputMetricResourceTest() throws Exception {
         super(new WebAppDescriptor.Builder("com.thalesgroup.dtkit.ws.rs").contextPath("dtkit-rs").build());
     }
 
+    @Before
+    public void loadWebResurce() {
+        webResource = resource().path(InputMetrics.PATH);
+    }
+
+
     @Test
     public void getInputMetrics() {
-        InputMetricResult inputMetricResult = resource()
-                .path(InputMetricResource.PATH + "/all")
+        InputMetricResult inputMetricResult = webResource.path("/all")
                 .get(InputMetricResult.class);
         Assert.assertNotNull(inputMetricResult);
-        Assert.assertEquals(InputMetricResource.registry.size(), inputMetricResult.getMetrics().size());
+        Assert.assertEquals(InputMetrics.registry.size(), inputMetricResult.getMetrics().size());
     }
 
     @Test
     public void getExistXSD() {
-        InputStream is = resource().path(InputMetricResource.PATH + "/cppunit/xsd")
+        InputStream is = webResource.path("/cppunit/xsd")
                 .get(InputStream.class);
         Assert.assertNotNull(is);
     }
@@ -63,15 +71,14 @@ public class InputMetricResourceTest extends JerseyTest {
     @Test
     public void getXSDNotFound() {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path(InputMetricResource.PATH + "/notExistMetric/xsd")
+        ClientResponse clientResponse = webResource.path("/notExistMetric/xsd")
                 .get(ClientResponse.class);
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), clientResponse.getStatus());
     }
 
     @Test
     public void validateInputFileValidFileForXML() throws Exception {
-        WebResource webResource = resource();
-        String result = webResource.path(InputMetricResource.PATH + "/cppunit/validate")
+        String result = webResource.path("/cppunit/validate")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML)
                 .post(String.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
@@ -82,9 +89,8 @@ public class InputMetricResourceTest extends JerseyTest {
 
     @Test
     public void validateInputFileValidFileForJSON() throws Exception {
-        WebResource webResource = resource();
-        String result = webResource.path(InputMetricResource.PATH + "/cppunit/validate")
-                .type(MediaType.APPLICATION_JSON)
+        String result = webResource.path("/cppunit/validate")
+                .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_JSON)
                 .post(String.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
         Assert.assertNotNull(result);
@@ -94,8 +100,7 @@ public class InputMetricResourceTest extends JerseyTest {
 
     @Test
     public void validateInputFileWithNoValidFileForXML() throws Exception {
-        WebResource webResource = resource();
-        String result = webResource.path(InputMetricResource.PATH + "/cppunit/validate")
+        String result = webResource.path("/cppunit/validate")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML)
                 .post(String.class, this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"));
@@ -107,7 +112,7 @@ public class InputMetricResourceTest extends JerseyTest {
     @Test
     public void validateInputFileWithNoExistingMetric() throws Exception {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path(InputMetricResource.PATH + "/notExistMetric/validate")
+        ClientResponse clientResponse = webResource.path("/notExistMetric/validate")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML, "application/json")
                 .post(ClientResponse.class);
@@ -117,8 +122,7 @@ public class InputMetricResourceTest extends JerseyTest {
 
     @Test
     public void convertInputFileWithValidInputs() throws Exception {
-        WebResource webResource = resource();
-        File cppunitJunitFile = webResource.path(InputMetricResource.PATH + "/cppunit;format=junit/convert")
+        File cppunitJunitFile = webResource.path("/cppunit;format=junit/convert")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML)
                 .post(File.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
@@ -132,7 +136,7 @@ public class InputMetricResourceTest extends JerseyTest {
     @Test
     public void convertInputFileWithNoExistingMetric1() throws Exception {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path(InputMetricResource.PATH + "/notExistMetric/convert")
+        ClientResponse clientResponse = webResource.path("/notExistMetric/convert")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class);
@@ -142,7 +146,7 @@ public class InputMetricResourceTest extends JerseyTest {
     @Test
     public void convertInputFileWithNoExistingMetric2() throws Exception {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path(InputMetricResource.PATH + "/cppunit;format=tusar/convert")
+        ClientResponse clientResponse = webResource.path("/cppunit;format=tusar/convert")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class);
@@ -151,8 +155,7 @@ public class InputMetricResourceTest extends JerseyTest {
 
     @Test
     public void convertInputFileNoValidInputFile() throws Exception {
-        WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path(InputMetricResource.PATH + "/cppunit;format=junit/convert")
+        ClientResponse clientResponse = webResource.path("/cppunit;format=junit/convert")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class, this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"));

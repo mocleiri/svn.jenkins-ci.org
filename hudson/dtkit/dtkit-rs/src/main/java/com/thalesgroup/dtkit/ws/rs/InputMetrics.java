@@ -44,8 +44,8 @@ import java.util.List;
 import java.util.ServiceLoader;
 
 
-@Path(InputMetricResource.PATH)
-public class InputMetricResource {
+@Path(InputMetrics.PATH)
+public class InputMetrics {
 
     public static final String PATH = "/inputMetrics";
 
@@ -129,6 +129,7 @@ public class InputMetricResource {
 
     @POST
     @Path("/{metric}/validate")
+    @Consumes(MediaType.APPLICATION_XML)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response validateInputFile(@PathParam("metric") PathSegment metricSegment, File inputXMLFile) {
         logger.debug("validateInputFile() service");
