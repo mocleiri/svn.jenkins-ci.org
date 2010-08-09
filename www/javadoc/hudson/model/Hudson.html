@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.370 API)
+Hudson (Hudson main module 1.371 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-07">
+<META NAME="date" CONTENT="2010-08-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.370 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.370 API)";
+        parent.document.title="Hudson (Hudson main module 1.371 API)";
     }
 }
 </SCRIPT>
@@ -5530,8 +5530,9 @@ public <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in
 <A NAME="doRestart(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doRestart</H3>
 <PRE>
-public void <B>doRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="restart")
+</FONT>public void <B>doRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                       javax.servlet.ServletException,
                       <A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></PRE>
@@ -5556,8 +5557,9 @@ public void <B>doRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <A NAME="doSafeRestart(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doSafeRestart</H3>
 <PRE>
-public void <B>doSafeRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="safe-restart")
+</FONT>public void <B>doSafeRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                        org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                           javax.servlet.ServletException,
                           <A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></PRE>
@@ -5584,8 +5586,7 @@ public void <B>doSafeRestart</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <A NAME="restart()"><!-- --></A><H3>
 restart</H3>
 <PRE>
-<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="restart")
-</FONT>public void <B>restart</B>()
+public void <B>restart</B>()
              throws <A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></PRE>
 <DL>
 <DD>Performs a restart.
@@ -5604,8 +5605,7 @@ restart</H3>
 <A NAME="safeRestart()"><!-- --></A><H3>
 safeRestart</H3>
 <PRE>
-<FONT SIZE="-1"><A HREF="../../hudson/cli/declarative/CLIMethod.html" title="annotation in hudson.cli.declarative">@CLIMethod</A>(<A HREF="../../hudson/cli/declarative/CLIMethod.html#name()">name</A>="safe-restart")
-</FONT>public void <B>safeRestart</B>()
+public void <B>safeRestart</B>()
                  throws <A HREF="../../hudson/lifecycle/RestartNotSupportedException.html" title="class in hudson.lifecycle">RestartNotSupportedException</A></PRE>
 <DL>
 <DD>Queues up a restart to be performed once there are no builds currently running.

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.cli.declarative.CLIMethod (Hudson main module 1.370 API)
+Uses of Class hudson.cli.declarative.CLIMethod (Hudson main module 1.371 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-07">
+<META NAME="date" CONTENT="2010-08-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.cli.declarative.CLIMethod (Hudson main module 1.370 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.cli.declarative.CLIMethod (Hudson main module 1.370 API)";
+        parent.document.title="Uses of Class hudson.cli.declarative.CLIMethod (Hudson main module 1.371 API)";
     }
 }
 </SCRIPT>
@@ -153,24 +153,16 @@ Uses of <A HREF="../../../../hudson/cli/declarative/CLIMethod.html" title="annot
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>AbstractItem.</B><B><A HREF="../../../../hudson/model/AbstractItem.html#delete()">delete</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes this item.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>AbstractProject.</B><B><A HREF="../../../../hudson/model/AbstractProject.html#disable()">disable</A></B>()</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../../hudson/model/Hudson.html#doCancelQuietDown()">doCancelQuietDown</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;org.kohsuke.stapler.HttpRedirect</CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../../hudson/model/Hudson.html#doCancelQuietDown()">doCancelQuietDown</A></B>()</CODE>
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B>AbstractProject.</B><B><A HREF="../../../../hudson/model/AbstractProject.html#doDisable()">doDisable</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -182,6 +174,23 @@ Uses of <A HREF="../../../../hudson/cli/declarative/CLIMethod.html" title="annot
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Really deletes the slave.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>AbstractItem.</B><B><A HREF="../../../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deletes this item.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
+<TD><CODE><B>AbstractProject.</B><B><A HREF="../../../../hudson/model/AbstractProject.html#doEnable()">doEnable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -203,10 +212,20 @@ Uses of <A HREF="../../../../hudson/cli/declarative/CLIMethod.html" title="annot
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>AbstractProject.</B><B><A HREF="../../../../hudson/model/AbstractProject.html#enable()">enable</A></B>()</CODE>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../../hudson/model/Hudson.html#doRestart(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doRestart</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+          org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perform a restart of Hudson, if we can.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../../hudson/model/Hudson.html#doSafeRestart(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSafeRestart</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+              org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queues up a restart of Hudson for when there are no builds running, if we can.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -215,22 +234,6 @@ Uses of <A HREF="../../../../hudson/cli/declarative/CLIMethod.html" title="annot
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks this build to keep the log.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../../hudson/model/Hudson.html#restart()">restart</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a restart.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../../hudson/model/Hudson.html#safeRestart()">safeRestart</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Queues up a restart to be performed once there are no builds currently running.</TD>
 </TR>
 </TABLE>
 &nbsp;
