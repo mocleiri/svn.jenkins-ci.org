@@ -22,8 +22,14 @@ class HudsonInstance:
     def __init__(self, hudsonUrl):
         self.URL = hudsonUrl
 
+    def getAbsoluteUrl(self, relativeUrl):
+        # Take care of proper url joining.
+        if not (self.URL.endswith("/") or relativeUrl.startswith("/")):
+            relativeUrl = "/" + relativeUrl
+        return self.URL + relativeUrl
+
     def read(self, url):
-        fullUrl = self.URL + url
+        fullUrl = self.getAbsoluteUrl(url)
         return urllib2.urlopen(fullUrl).read()
 
     def build(self, job, parameters="", token=None):
