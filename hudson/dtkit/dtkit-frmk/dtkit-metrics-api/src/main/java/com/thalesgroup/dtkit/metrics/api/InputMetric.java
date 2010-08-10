@@ -39,6 +39,9 @@ import java.util.List;
 
 
 @SuppressWarnings("unused")
+//-- JAXB Annotations
+// @XmlJavaTypeAdapter used for class and interface enables users to not add a custom adapter
+// - All implementation must be explicitly added in the JAXBContext
 @XmlJavaTypeAdapter(AnyTypeAdapter.class)
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public abstract class InputMetric implements Serializable {
