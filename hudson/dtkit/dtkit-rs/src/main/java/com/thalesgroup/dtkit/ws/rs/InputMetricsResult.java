@@ -23,52 +23,26 @@
 
 package com.thalesgroup.dtkit.ws.rs;
 
-import com.thalesgroup.dtkit.junit.model.JUnitModel;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
-import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
-import javax.ws.rs.ext.ContextResolver;
-import javax.ws.rs.ext.Provider;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ServiceLoader;
 
 
-@Provider
-public class InputMetricResolver implements ContextResolver<JAXBContext> {
+@XmlRootElement(name = "result")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class InputMetricsResult {
 
-    private JAXBContext ctx;
+    @XmlElementWrapper(name = "metrics")
+    @XmlElement(name = "metric")
+    private List<InputMetric> metrics = new ArrayList<InputMetric>();
 
-    public InputMetricResolver() {
-        try {
-            ServiceLoader<InputMetric> metricServiceLoader = ServiceLoader.load(InputMetric.class, Thread.currentThread().getContextClassLoader());
-            metricServiceLoader.reload();
-
-            List<Class> listInputMetricClass = new ArrayList<Class>();
-            for (InputMetric inputMetric : metricServiceLoader) {
-                listInputMetricClass.add(inputMetric.getClass());
-            }
-            listInputMetricClass.add(InputMetricResult.class);
-            listInputMetricClass.add(JUnitModel.class);
-            listInputMetricClass.add(TusarModel.class);
-
-            ctx = JAXBContext.newInstance(listInputMetricClass.toArray(new Class[listInputMetricClass.size()]));
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
+    public List<InputMetric> getMetrics() {
+        return metrics;
     }
 
-    public JAXBContext getContext(Class<?> type) {
-        // Used a dedicated JAXBContext due to the OutputMetric interface.
-        // There is an adapter. Nevertheless, all the interface implementations must have an instance and they must be
-        // referred by the JAXBContext
-        if (type == InputMetricResult.class) {
-            return ctx;
-        } else {
-            return null;
-        }
+    public void setMetrics(List<InputMetric> metrics) {
+        this.metrics = metrics;
     }
-
 }

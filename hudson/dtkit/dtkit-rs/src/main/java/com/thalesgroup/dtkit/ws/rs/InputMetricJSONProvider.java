@@ -25,22 +25,29 @@ package com.thalesgroup.dtkit.ws.rs;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 @Provider
-@Produces("application/json")
-public class JsonMessageBodyWriter implements MessageBodyWriter {
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public class InputMetricJSONProvider implements MessageBodyWriter, MessageBodyReader<InputMetricsResult> {
+
     @Override
     public long getSize(Object obj, Class type, Type genericType,
                         Annotation[] annotations, MediaType mediaType) {
+        //Returns -1 (can't be determined in advance)
         return -1;
     }
 
@@ -55,7 +62,30 @@ public class JsonMessageBodyWriter implements MessageBodyWriter {
                         Annotation[] annotations, MediaType mediaType,
                         MultivaluedMap httpHeaders, OutputStream outputStream)
             throws IOException {
-        new ObjectMapper().writeValue(outputStream, target);
+
+        //Use Jackson to build the json output and write it in the outputStream object
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (type == InputMetricResult.class || type == InputMetricsResult.class) {
+            objectMapper = objectMapper.enableDefaultTyping();
+        }
+
+        objectMapper.writeValue(outputStream, target);
+    }
+
+    @Override
+    public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+        return (type == InputMetricResult.class || type == InputMetricsResult.class);
+    }
+
+    @Override
+    public InputMetricsResult readFrom(Class<InputMetricsResult> type,
+                                       Type genericType,
+                                       Annotation[] annotations,
+                                       MediaType mediaType,
+                                       MultivaluedMap<String, String> httpHeaders,
+                                       InputStream entityStream) throws IOException, WebApplicationException {
+        return new ObjectMapper().enableDefaultTyping().readValue(entityStream, type);
     }
 }
 

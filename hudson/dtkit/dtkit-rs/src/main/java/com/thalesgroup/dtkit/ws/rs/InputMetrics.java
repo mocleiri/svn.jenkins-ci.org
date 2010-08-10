@@ -65,7 +65,7 @@ public class InputMetrics {
         }
     }
 
-    private InputMetric getInputMetric(PathSegment metricSegment) {
+    private InputMetric getInputMetricObject(PathSegment metricSegment) {
 
         String metricName = metricSegment.getPath();
         String type = metricSegment.getMatrixParameters().getFirst("type");
@@ -97,13 +97,26 @@ public class InputMetrics {
 
 
     @GET
-    @Path("/all")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Response getInputMetrics() {
         logger.debug("getInputMetrics() service");
-        InputMetricResult inputMetricResults = new InputMetricResult();
-        inputMetricResults.setMetrics(registry);
-        return Response.ok(inputMetricResults).build();
+        InputMetricsResult inputMetricsResult = new InputMetricsResult();
+        inputMetricsResult.setMetrics(registry);
+        return Response.ok(inputMetricsResult).build();
+    }
+
+    @GET
+    @Path("{metric}")
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    public Response getInputMetric(@PathParam("metric") PathSegment metricSegment) {
+        logger.debug("getInputMetric() service");
+
+        //Retrieving the metric
+        InputMetric inputMetric = getInputMetricObject(metricSegment);
+
+        InputMetricResult inputMetricResult = new InputMetricResult();
+        inputMetricResult.setInputMetric(inputMetric);
+        return Response.ok(inputMetricResult).build();
     }
 
 
@@ -112,7 +125,7 @@ public class InputMetrics {
     @Produces(MediaType.APPLICATION_XML)
     public InputStream getXSD(@PathParam("metric") PathSegment metricSegment) {
         logger.debug("getXSD() service");
-        InputMetric inputMetric = getInputMetric(metricSegment);
+        InputMetric inputMetric = getInputMetricObject(metricSegment);
         if (!(inputMetric instanceof InputMetricXSL)) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -135,7 +148,7 @@ public class InputMetrics {
         logger.debug("validateInputFile() service");
         InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
         try {
-            InputMetric inputMetric = getInputMetric(metricSegment);
+            InputMetric inputMetric = getInputMetricObject(metricSegment);
             inputMetricValidationResult.setValid(inputMetric.validateInputFile(inputXMLFile));
             inputMetricValidationResult.setValidationErrors(inputMetric.getInputValidationErrors());
 
@@ -155,13 +168,13 @@ public class InputMetrics {
         try {
             //Validating input file
             Response inputMetricValidationResponse = validateInputFile(metricSegment, inputMetricFile);
-            InputMetricValidationResult inputMetricValidationResult = (InputMetricValidationResult)inputMetricValidationResponse.getEntity();
-            if (!inputMetricValidationResult.isValid()){
+            InputMetricValidationResult inputMetricValidationResult = (InputMetricValidationResult) inputMetricValidationResponse.getEntity();
+            if (!inputMetricValidationResult.isValid()) {
                 throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
             }
 
             //Retrieving the metric
-            InputMetric inputMetric = getInputMetric(metricSegment);
+            InputMetric inputMetric = getInputMetricObject(metricSegment);
 
             //Converting the input file
             File dest = File.createTempFile("toot", "ttt");

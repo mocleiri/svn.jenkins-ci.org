@@ -25,13 +25,17 @@ package com.thalesgroup.dtkit.ws.rs;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
 import com.thalesgroup.dtkit.junit.CppUnit;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
@@ -41,10 +45,44 @@ import java.io.*;
 
 public class InputMetricResourceTest extends JerseyTest {
 
+    private static ClientConfig clientConfig;
+
     private WebResource webResource;
 
-    public InputMetricResourceTest() throws Exception {
-        super(new WebAppDescriptor.Builder("com.thalesgroup.dtkit.ws.rs").contextPath("dtkit-rs").build());
+    private String readContentReader(Reader reader) throws IOException {
+        StringBuffer sb = new StringBuffer(1000);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        char[] buf = new char[1024];
+        int numRead;
+        while ((numRead = bufferedReader.read(buf)) != -1) {
+            sb.append(buf, 0, numRead);
+        }
+        reader.close();
+        return sb.toString();
+    }
+
+    private String readContentInputStream(InputStream inputStream) throws IOException {
+        StringBuffer sb = new StringBuffer(1000);
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+        int c;
+        while ((c = bufferedInputStream.read()) != -1) {
+            sb.append((char) c);
+        }
+        bufferedInputStream.close();
+        return sb.toString();
+    }
+
+    @BeforeClass
+    public static void loadClientConfig(){
+        clientConfig = new DefaultClientConfig();
+        clientConfig.getClasses().add(JacksonJsonProvider.class);
+        clientConfig.getClasses().add(InputMetricJSONProvider.class);
+    }
+
+    public InputMetricResourceTest() throws Exception {        
+        super(new WebAppDescriptor.Builder("com.thalesgroup.dtkit.ws.rs;org.codehaus.jackson.jaxrs")
+                .clientConfig(clientConfig)
+                .contextPath("dtkit-rs").build());
     }
 
     @Before
@@ -54,11 +92,31 @@ public class InputMetricResourceTest extends JerseyTest {
 
 
     @Test
-    public void getInputMetrics() {
-        InputMetricResult inputMetricResult = webResource.path("/all")
-                .get(InputMetricResult.class);
-        Assert.assertNotNull(inputMetricResult);
-        Assert.assertEquals(InputMetrics.registry.size(), inputMetricResult.getMetrics().size());
+    public void getInputMetricsXML() {
+        InputMetricsResult inputMetricsResult =
+                webResource.accept(MediaType.APPLICATION_XML)
+                        .get(InputMetricsResult.class);
+        Assert.assertNotNull(inputMetricsResult);
+        Assert.assertEquals(InputMetrics.registry.size(), inputMetricsResult.getMetrics().size());
+    }
+
+
+    @Test
+    public void getInputMetricCppunitXML() throws IOException {
+        String result = webResource.path("/cppunit").accept(MediaType.APPLICATION_XML).get(String.class);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(
+                readContentInputStream(this.getClass()
+                        .getResourceAsStream("cppunit/cppunit-xml-result.xml")), result);
+    }
+
+    @Test
+    public void getInputMetricCppunitJSON() throws IOException {
+        String result = webResource.path("/cppunit").accept(MediaType.APPLICATION_JSON).get(String.class);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(
+                readContentInputStream(this.getClass()
+                        .getResourceAsStream("cppunit/cppunit-json-result.txt")), result);
     }
 
     @Test
@@ -129,8 +187,9 @@ public class InputMetricResourceTest extends JerseyTest {
         Assert.assertNotNull(cppunitJunitFile);
         InputMetric inputMetricCppUnit = InputMetricFactory.getInstance(CppUnit.class);
         Assert.assertTrue(inputMetricCppUnit.validateOutputFile(cppunitJunitFile));
-
-        Assert.assertEquals(readContentFile(new File(this.getClass().getResource("cppunit/cppunit-valid-junit-result.xml").toURI())), readContentFile(cppunitJunitFile));
+        FileReader cppunitJunitFileReader = new FileReader(cppunitJunitFile);
+        Assert.assertEquals(readContentInputStream(this.getClass().getResourceAsStream("cppunit/cppunit-valid-junit-result.xml")), readContentReader(cppunitJunitFileReader));
+        cppunitJunitFileReader.close();
     }
 
     @Test
@@ -160,18 +219,6 @@ public class InputMetricResourceTest extends JerseyTest {
                 .accept(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class, this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"));
         Assert.assertEquals(Response.Status.PRECONDITION_FAILED.getStatusCode(), clientResponse.getStatus());
-    }
-
-    private String readContentFile(File inputFile) throws IOException {
-        StringBuffer sb = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-        char[] buf = new char[1024];
-        int numRead;
-        while ((numRead = reader.read(buf)) != -1) {
-            sb.append(buf, 0, numRead);
-        }
-        reader.close();
-        return sb.toString();
     }
 
 }
