@@ -37,7 +37,9 @@ public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descr
 
     protected MeasureTypeDescriptor(Class<T> clazz, final Class<? extends InputMetric> inputMetricClass) {
         super(clazz);
-        RegistryService.addElement(getId(), inputMetricClass);
+        if (inputMetricClass != null) {
+            RegistryService.addElement(getId(), inputMetricClass);
+        }
     }
 
     @SuppressWarnings("unused")
@@ -58,7 +60,7 @@ public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descr
         try {
             return InputMetricFactory.getInstance(inputMetricClass);
         } catch (InputMetricException e) {
-            return null;
+            throw new RuntimeException("Can't instanciate the inputMeric object for the class " + inputMetricClass);
         }
     }
 }

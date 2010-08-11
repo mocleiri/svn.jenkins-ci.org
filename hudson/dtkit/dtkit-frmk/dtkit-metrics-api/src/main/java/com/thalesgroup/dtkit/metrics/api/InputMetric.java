@@ -81,6 +81,9 @@ public abstract class InputMetric implements Serializable {
      */
     @XmlElement
     public String getLabel() {
+        if (getToolVersion() == null){
+            return getToolName();
+        }
         return getToolName() + "-" + getToolVersion();
     }
 
@@ -120,7 +123,6 @@ public abstract class InputMetric implements Serializable {
      */
     public abstract void convert(File inputFile, File outFile) throws ConversionException;
 
-
     /*
      *  Gives the validation process for the input file
      *
@@ -136,7 +138,6 @@ public abstract class InputMetric implements Serializable {
      */
 
     public abstract boolean validateOutputFile(File inputXMLFile) throws ValidationException;
-
 
     /**
      * Gets all input validation errors

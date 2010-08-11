@@ -73,6 +73,17 @@ public abstract class InputMetricXSL extends InputMetric {
     @XmlElement
     public abstract String getXslName();
 
+
+    /**
+     * Overrides this method if you want to provide your own xsl (independent of its location)
+     * Used for custom type where the user specifies its own xsl
+     *
+     * @return null by default
+     */
+    public File getXSLFile() {
+        return null;
+    }
+
     /**
      * the XSD file associated to this tool result file
      *
@@ -106,7 +117,11 @@ public abstract class InputMetricXSL extends InputMetric {
 
     @Override
     public void convert(File inputFile, File outFile) throws ConversionException {
-        conversionService.convert(this.getXSLResourceClass(), this.getXslName(), inputFile, outFile);
+        if (getXSLFile() == null) {
+            conversionService.convert(this.getXSLResourceClass(), this.getXslName(), inputFile, outFile);
+        } else {
+            conversionService.convert(getXSLFile(), inputFile, outFile);
+        }
     }
 
 

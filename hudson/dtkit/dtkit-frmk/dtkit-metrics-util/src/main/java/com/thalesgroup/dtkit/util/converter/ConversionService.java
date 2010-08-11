@@ -26,25 +26,51 @@ package com.thalesgroup.dtkit.util.converter;
 import net.sf.saxon.s9api.*;
 
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
 public class ConversionService implements Serializable {
 
 
     /**
      * Launches an XSLT conversion from a source to an OutputStream.
-     * This methods uses the net.sf.saxon packages.
      *
-     * @param xslNamespace  the xsl namespace
-     * @param xslName the xsl name
+     * @param xslFile   the xsl file
      * @param inputFile the input file
-     * @param outFile the output file
-     * @throws ConversionException  the convert exception
+     * @param outFile   the output file
+     * @throws ConversionException the convert exception
+     */
+    public void convert(File xslFile, File inputFile, File outFile) throws ConversionException {
+        try {
+            convert(new StreamSource(new FileReader(xslFile)), inputFile, outFile);
+        } catch (FileNotFoundException e) {
+            throw new ConversionException("Can't find " + xslFile);
+        }
+    }
+
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     *
+     * @param xslNamespace the xsl namespace
+     * @param xslName      the xsl name
+     * @param inputFile    the input file
+     * @param outFile      the output file
+     * @throws ConversionException the convert exception
      */
     public void convert(Class xslNamespace, String xslName, File inputFile, File outFile) throws ConversionException {
+        convert(new StreamSource(xslNamespace.getResourceAsStream(xslName)), inputFile, outFile);
+    }
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     * This methods uses the net.sf.saxon packages.
+     *
+     * @param xslSource the source of the xsl
+     * @param inputFile the input file
+     * @param outFile   the output file
+     * @throws ConversionException the convert exception
+     */
+    private void convert(StreamSource xslSource, File inputFile, File outFile) throws ConversionException {
 
         try {
 
@@ -53,7 +79,7 @@ public class ConversionService implements Serializable {
             XsltCompiler compiler = processor.newXsltCompiler();
 
             // compile and load the XSL file
-            XsltExecutable xsltExecutable = compiler.compile(new StreamSource(xslNamespace.getResourceAsStream(xslName)));
+            XsltExecutable xsltExecutable = compiler.compile(xslSource);
             XsltTransformer xsltTransformer = xsltExecutable.load();
 
             // create the input
@@ -74,7 +100,7 @@ public class ConversionService implements Serializable {
             throw new ConversionException("Error to convert - A file not found", fne);
         }
         catch (SaxonApiException sae) {
-            throw new ConversionException("Error to convert the input XML document with the stylesheet '" + xslName + "'", sae);
+            throw new ConversionException("Error to convert the input XML document", sae);
         }
     }
 

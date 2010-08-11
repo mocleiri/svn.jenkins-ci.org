@@ -37,7 +37,9 @@ public abstract class ViolationsTypeDescriptor<T extends ViolationsType> extends
 
     protected ViolationsTypeDescriptor(Class<T> classType, final Class<? extends InputMetric> inputMetricClass) {
         super(classType);
-        RegistryService.addElement(getId(), inputMetricClass);
+        if (inputMetricClass != null) {
+            RegistryService.addElement(getId(), inputMetricClass);
+        }
     }
 
     @SuppressWarnings("unused")

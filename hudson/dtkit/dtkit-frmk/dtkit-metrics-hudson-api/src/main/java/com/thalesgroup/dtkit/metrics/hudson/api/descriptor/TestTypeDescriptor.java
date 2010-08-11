@@ -37,7 +37,9 @@ public abstract class TestTypeDescriptor<T extends TestType> extends Descriptor<
 
     protected TestTypeDescriptor(Class<T> classType, final Class<? extends InputMetric> inputMetricClass) {
         super(classType);
-        RegistryService.addElement(getId(), inputMetricClass);
+        if (inputMetricClass != null) {
+            RegistryService.addElement(getId(), inputMetricClass);
+        }
     }
 
     @SuppressWarnings("unused")
@@ -54,7 +56,7 @@ public abstract class TestTypeDescriptor<T extends TestType> extends Descriptor<
     }
 
     @SuppressWarnings("unused")
-    public InputMetric getInputMetric() {
+    public InputMetric getInputMetric() {        
         final Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
         /** Can't retrieve the instance with guice due to a
          java.lang.NoClassDefFoundError: com/google/inject/internal/Finalizer$ShutDown

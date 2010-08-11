@@ -38,7 +38,9 @@ public abstract class CoverageTypeDescriptor<T extends CoverageType> extends Des
 
     protected CoverageTypeDescriptor(Class<T> clazz, final Class<? extends InputMetric> inputMetricClass) {
         super(clazz);
-        RegistryService.addElement(getId(), inputMetricClass);
+        if (inputMetricClass != null) {
+            RegistryService.addElement(getId(), inputMetricClass);
+        }
     }
 
     @SuppressWarnings("unused")
