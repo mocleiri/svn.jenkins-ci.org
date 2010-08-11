@@ -494,6 +494,23 @@ public abstract class PluginManager extends AbstractModelObject {
         }
         rsp.sendRedirect("../updateCenter/");
     }
+    /**
+     * Performs the downgrade of the plugin.
+     */
+    public void doDowngrade(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
+        Enumeration<String> en = req.getParameterNames();
+        while (en.hasMoreElements()) {
+            String n =  en.nextElement();
+            //first parameter is "json", we don't want to do anything with it
+            if(n.equals("json"))
+                continue;
+            UpdateSite.Plugin p = Hudson.getInstance().getUpdateCenter().getPlugin(n);
+            if(p==null)
+                throw new Failure("No such plugin: "+n);
+            p.deployBackup();
+        }
+        rsp.sendRedirect("../updateCenter/");
+    }
 
     /**
      * Bare-minimum configuration mechanism to change the update center.

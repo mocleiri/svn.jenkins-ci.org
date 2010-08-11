@@ -973,6 +973,87 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     }
 
     /**
+     * Represents the state of the downgrading activity of plugin.
+     */
+    public final class PluginDowngradeJob extends DownloadJob {
+        /**
+         * What plugin are we trying to install?
+         */
+        public final Plugin plugin;
+
+        private final PluginManager pm = Hudson.getInstance().getPluginManager();
+
+        public PluginDowngradeJob(Plugin plugin, UpdateSite site, Authentication auth) {
+            super(site, auth);
+            this.plugin = plugin;
+        }
+
+        protected URL getURL() throws MalformedURLException {
+            return new URL(plugin.url);
+        }
+
+        protected File getDestination() {
+            File baseDir = pm.rootDir;
+            return new File(baseDir, plugin.name + ".hpi");
+        }
+
+        protected File getBackup()
+        {
+            File baseDir = pm.rootDir;
+            return new File(baseDir, plugin.name + ".bak");
+        }
+
+        public String getName() {
+            return plugin.getDisplayName();
+        }
+
+        @Override
+        public void run() {
+            try {
+                LOGGER.info("Starting the downgrade of "+getName()+" on behalf of "+getUser().getName());
+
+                _run();
+
+                LOGGER.info("Downgrade successful: "+getName());
+                status = new Success();
+                onSuccess();
+            } catch (Throwable e) {
+                LOGGER.log(Level.SEVERE, "Failed to downgrade "+getName(),e);
+                status = new Failure(e);
+            }
+        }
+
+        @Override
+        protected void _run() throws IOException {
+            File dst = getDestination();
+            File backup = getBackup();
+
+            config.install(this, backup, dst);
+        }
+
+        /**
+         * Called to overwrite
+         * current version with backup file
+         */
+        @Override
+        protected void replace(File dst, File backup) throws IOException {
+            dst.delete(); // any failure up to here is no big deal
+            if(!backup.renameTo(dst)) {
+                throw new IOException("Failed to rename "+backup+" to "+dst);
+            }
+        }
+
+        protected void onSuccess() {
+            pm.pluginUploaded = true;
+        }
+
+        @Override
+        public String toString() {
+            return super.toString()+"[plugin="+plugin.title+"]";
+        }
+    }
+
+    /**
      * Represents the state of the upgrade activity of Hudson core.
      */
     public final class HudsonUpgradeJob extends DownloadJob {

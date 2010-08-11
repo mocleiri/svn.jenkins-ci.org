@@ -603,6 +603,15 @@ public class UpdateSite {
         }
 
         /**
+         * Schedules the downgrade of this plugin.
+         */
+        public Future<UpdateCenterJob> deployBackup()
+        {
+            Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
+            UpdateCenter uc = Hudson.getInstance().getUpdateCenter();
+            return uc.addJob(uc.new PluginDowngradeJob(this, UpdateSite.this, Hudson.getAuthentication()));
+        }
+        /**
          * Making the installation web bound.
          */
         public void doInstall(StaplerResponse rsp) throws IOException {
