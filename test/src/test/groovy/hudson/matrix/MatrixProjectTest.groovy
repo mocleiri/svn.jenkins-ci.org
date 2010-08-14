@@ -202,7 +202,7 @@ public class MatrixProjectTest extends HudsonTestCase {
         List<Slave> slaves = (0..2).collect { createSlave() }
 
         def p = createMatrixProject();
-        p.axes.add(new JDKAxis(["jdk1.5","jdk1.6"]));
+        p.axes.add(new JDKAxis(["jdk1.6","jdk1.5"]));
         p.axes.add(new LabelAxis("label1",[slaves[0].nodeName, slaves[1].nodeName]));
         p.axes.add(new LabelAxis("label2",[slaves[2].nodeName])); // make sure single value handling works OK
         def o = new AxisList(p.axes);
