@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenBuildProxy (Hudson main module 1.371 API)
+MavenBuildProxy (Hudson main module 1.372 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-09">
+<META NAME="date" CONTENT="2010-08-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenBuildProxy (Hudson main module 1.371 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenBuildProxy (Hudson main module 1.371 API)";
+        parent.document.title="MavenBuildProxy (Hudson main module 1.372 API)";
     }
 }
 </SCRIPT>
@@ -244,6 +244,15 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenBuildProxy.html#registerAsProjectAction(hudson.maven.MavenProjectActionBuilder)">registerAsProjectAction</A></B>(<A HREF="../../hudson/maven/MavenProjectActionBuilder.html" title="interface in hudson.maven">MavenProjectActionBuilder</A>&nbsp;builder)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nominates that the reporter will contribute a project action
+ for this build by using <A HREF="../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectActions(MavenModule)</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/maven/MavenBuildProxy.html#registerAsProjectAction(hudson.maven.MavenReporter)">registerAsProjectAction</A></B>(<A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&nbsp;reporter)</CODE>
 
 <BR>
@@ -445,6 +454,26 @@ void <B>registerAsProjectAction</B>(<A HREF="../../hudson/maven/MavenReporter.ht
  and will become a persisted part of the <A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A>.
 <P>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="registerAsProjectAction(hudson.maven.MavenProjectActionBuilder)"><!-- --></A><H3>
+registerAsProjectAction</H3>
+<PRE>
+void <B>registerAsProjectAction</B>(<A HREF="../../hudson/maven/MavenProjectActionBuilder.html" title="interface in hudson.maven">MavenProjectActionBuilder</A>&nbsp;builder)</PRE>
+<DL>
+<DD>Nominates that the reporter will contribute a project action
+ for this build by using <A HREF="../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)"><CODE>MavenReporter.getProjectActions(MavenModule)</CODE></A>.
+
+ <p>
+ The specified <A HREF="../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A> object will be transferred to the master
+ and will become a persisted part of the <A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven"><CODE>MavenBuild</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.372</DD>
 </DL>
 </DD>
 </DL>

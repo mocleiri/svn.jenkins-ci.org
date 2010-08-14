@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SurefireArchiver (Hudson main module 1.371 API)
+SurefireArchiver (Hudson main module 1.372 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-09">
+<META NAME="date" CONTENT="2010-08-13">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SurefireArchiver (Hudson main module 1.371 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SurefireArchiver (Hudson main module 1.371 API)";
+        parent.document.title="SurefireArchiver (Hudson main module 1.372 API)";
     }
 }
 </SCRIPT>
@@ -98,7 +98,7 @@ Class SurefireArchiver</H2>
       <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.maven.reporters.SurefireArchiver</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../../hudson/maven/MavenProjectActionBuilder.html" title="interface in hudson.maven">MavenProjectActionBuilder</A>, <A HREF="../../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A>&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
 </DL>
 <HR>
 <DL>
@@ -171,12 +171,12 @@ Records the surefire test result.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A></B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</CODE>
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/maven/reporters/SurefireArchiver.html#fixUp(java.util.List)">fixUp</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/maven/MavenProjectActionBuilder.html" title="interface in hudson.maven">MavenProjectActionBuilder</A>&gt;&nbsp;builders)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equivalent of <A HREF="../../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectActions(AbstractProject)</CODE></A>
- for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Up to 1.372, there was a bug that causes Hudson to persist <A HREF="../../../hudson/maven/reporters/SurefireArchiver.html" title="class in hudson.maven.reporters"><CODE>SurefireArchiver</CODE></A> with the entire test result
+ in it.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -208,7 +208,7 @@ Records the surefire test result.
 <TH ALIGN="left"><B>Methods inherited from class hudson.maven.<A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#end(hudson.maven.MavenBuild, hudson.Launcher, hudson.model.BuildListener)">end</A>, <A HREF="../../../hudson/maven/MavenReporter.html#enterModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">enterModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)">getAggregatedProjectAction</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getDescriptor()">getDescriptor</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A>, <A HREF="../../../hudson/maven/MavenReporter.html#leaveModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">leaveModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#postBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">postBuild</A>, <A HREF="../../../hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">preBuild</A>, <A HREF="../../../hudson/maven/MavenReporter.html#reportGenerated(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MavenReportInfo, hudson.model.BuildListener)">reportGenerated</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#end(hudson.maven.MavenBuild, hudson.Launcher, hudson.model.BuildListener)">end</A>, <A HREF="../../../hudson/maven/MavenReporter.html#enterModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">enterModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getAggregatedProjectAction(hudson.maven.MavenModuleSet)">getAggregatedProjectAction</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getDescriptor()">getDescriptor</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getProjectAction(hudson.maven.MavenModule)">getProjectAction</A>, <A HREF="../../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A>, <A HREF="../../../hudson/maven/MavenReporter.html#leaveModule(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">leaveModule</A>, <A HREF="../../../hudson/maven/MavenReporter.html#postBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">postBuild</A>, <A HREF="../../../hudson/maven/MavenReporter.html#preBuild(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.model.BuildListener)">preBuild</A>, <A HREF="../../../hudson/maven/MavenReporter.html#reportGenerated(hudson.maven.MavenBuildProxy, org.apache.maven.project.MavenProject, hudson.maven.MavenReportInfo, hudson.model.BuildListener)">reportGenerated</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -310,33 +310,19 @@ public boolean <B>postExecute</B>(<A HREF="../../../hudson/maven/MavenBuildProxy
 </DL>
 <HR>
 
-<A NAME="getProjectActions(hudson.maven.MavenModule)"><!-- --></A><H3>
-getProjectActions</H3>
+<A NAME="fixUp(java.util.List)"><!-- --></A><H3>
+fixUp</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>getProjectActions</B>(<A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>&nbsp;module)</PRE>
+public static void <B>fixUp</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/maven/MavenProjectActionBuilder.html" title="interface in hudson.maven">MavenProjectActionBuilder</A>&gt;&nbsp;builders)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)">MavenReporter</A></CODE></B></DD>
-<DD>Equivalent of <A HREF="../../../hudson/tasks/BuildStep.html#getProjectActions(hudson.model.AbstractProject)"><CODE>BuildStep.getProjectActions(AbstractProject)</CODE></A>
- for <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A>.
+<DD>Up to 1.372, there was a bug that causes Hudson to persist <A HREF="../../../hudson/maven/reporters/SurefireArchiver.html" title="class in hudson.maven.reporters"><CODE>SurefireArchiver</CODE></A> with the entire test result
+ in it. If we are loading those, fix it up in memory to reduce the memory footprint.
 
- <p>
- Registers a transient action to <A HREF="../../../hudson/maven/MavenModule.html" title="class in hudson.maven"><CODE>MavenModule</CODE></A> when it's rendered.
- This is useful if you'd like to display an action at the module level.
-
- <p>
- Since this contributes a transient action, the returned <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>
- will not be serialized.
-
- <p>
- For this method to be invoked, your <A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven"><CODE>MavenReporter</CODE></A> has to invoke
- <A HREF="../../../hudson/maven/MavenBuildProxy.html#registerAsProjectAction(hudson.maven.MavenReporter)"><CODE>MavenBuildProxy.registerAsProjectAction(MavenReporter)</CODE></A> during the build.
+ It'd be nice we can save the record to remove problematic portion, but that might have
+ additional side effect.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/maven/MavenReporter.html#getProjectActions(hudson.maven.MavenModule)">getProjectActions</A></CODE> in class <CODE><A HREF="../../../hudson/maven/MavenReporter.html" title="class in hudson.maven">MavenReporter</A></CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>can be empty but never null.</DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
