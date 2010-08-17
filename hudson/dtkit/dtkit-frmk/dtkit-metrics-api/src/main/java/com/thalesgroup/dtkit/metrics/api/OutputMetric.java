@@ -23,6 +23,8 @@
 
 package com.thalesgroup.dtkit.metrics.api;
 
+import org.codehaus.jackson.annotate.JsonValue;
+
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -35,11 +37,17 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlJavaTypeAdapter(AbstractOutputMetric.Adapter.class)
 public interface OutputMetric {
 
+    @SuppressWarnings("unused")
     public String getKey();
 
+    @JsonValue
+    @SuppressWarnings("unused")
     public String getDescription();
 
+    @SuppressWarnings("unused")
     public String getVersion();
 
     public String getXsd();
+
+
 }

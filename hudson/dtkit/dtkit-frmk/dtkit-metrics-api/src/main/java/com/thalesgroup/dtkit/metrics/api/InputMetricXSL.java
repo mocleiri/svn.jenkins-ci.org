@@ -28,6 +28,7 @@ import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.io.File;
@@ -35,11 +36,9 @@ import java.io.File;
 @SuppressWarnings("unused")
 public abstract class InputMetricXSL extends InputMetric {
 
-
     private ConversionService conversionService;
 
     private ValidationService validationService;
-
 
     @Inject
     void set(ConversionService conversionService, ValidationService validationService) {
@@ -80,6 +79,7 @@ public abstract class InputMetricXSL extends InputMetric {
      *
      * @return null by default
      */
+    @JsonIgnore
     public File getXSLFile() {
         return null;
     }
