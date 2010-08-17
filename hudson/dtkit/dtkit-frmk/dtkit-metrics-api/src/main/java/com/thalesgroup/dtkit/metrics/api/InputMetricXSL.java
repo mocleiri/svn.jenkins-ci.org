@@ -36,6 +36,15 @@ import java.io.File;
 @SuppressWarnings("unused")
 public abstract class InputMetricXSL extends InputMetric {
 
+
+    private String xslName;
+    private File xslFile;
+    private String inputXsd;
+
+    /**
+     * -----------------------------------------
+     * The business services
+     */
     private ConversionService conversionService;
 
     private ValidationService validationService;
@@ -51,7 +60,8 @@ public abstract class InputMetricXSL extends InputMetric {
      *
      * @return the resource class (for loading)
      */
-    public Class getXSLResourceClass() {
+    @JsonIgnore
+    public Class getXslResourceClass() {
         return this.getClass();
     }
 
@@ -60,7 +70,8 @@ public abstract class InputMetricXSL extends InputMetric {
      *
      * @return the xsd class (for loading)
      */
-    public Class getInputXSDClass() {
+    @JsonIgnore
+    public Class getInputXsdClass() {
         return this.getClass();
     }
 
@@ -70,7 +81,9 @@ public abstract class InputMetricXSL extends InputMetric {
      * @return the relative xsl path
      */
     @XmlElement
-    public abstract String getXslName();
+    public String getXslName() {
+        return xslName;
+    }
 
 
     /**
@@ -80,8 +93,8 @@ public abstract class InputMetricXSL extends InputMetric {
      * @return null by default
      */
     @JsonIgnore
-    public File getXSLFile() {
-        return null;
+    public File getXslFile() {
+        return xslFile;
     }
 
     /**
@@ -90,13 +103,16 @@ public abstract class InputMetricXSL extends InputMetric {
      * @return the relative xsd path. Can be null if there no XSD for the input file of the current tool type
      */
     @XmlElement
-    public abstract String getInputXsd();
+    public String getInputXsd() {
+        return inputXsd;
+    }
 
     /**
      * the XSD file associated to this output format
      *
      * @return the relative xsd path. Can be null if there no XSD for the output format
      */
+    @JsonIgnore
     public String getOutputXsd() {
         return getOutputFormatType().getXsd();
     }
@@ -117,10 +133,10 @@ public abstract class InputMetricXSL extends InputMetric {
 
     @Override
     public void convert(File inputFile, File outFile) throws ConversionException {
-        if (getXSLFile() == null) {
-            conversionService.convert(this.getXSLResourceClass(), this.getXslName(), inputFile, outFile);
+        if (getXslFile() == null) {
+            conversionService.convert(this.getXslResourceClass(), this.getXslName(), inputFile, outFile);
         } else {
-            conversionService.convert(getXSLFile(), inputFile, outFile);
+            conversionService.convert(getXslFile(), inputFile, outFile);
         }
     }
 
@@ -131,7 +147,7 @@ public abstract class InputMetricXSL extends InputMetric {
 
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
-        setInputValidationErrors(validationService.processValidation(this.getInputXSDClass(), this.getInputXsd(), inputXMLFile));
+        setInputValidationErrors(validationService.processValidation(this.getInputXsdClass(), this.getInputXsd(), inputXMLFile));
         return getInputValidationErrors().size() == 0;
     }
 
@@ -146,4 +162,55 @@ public abstract class InputMetricXSL extends InputMetric {
     }
 
 
+    /**
+     * --------------------------------------------------------
+     * <p/>
+     * SETTERS for JAX-RS Layer
+     * <p/>
+     * --------------------------------------------------------
+     */
+    public void setXslName(String xslName) {
+        this.xslName = xslName;
+    }
+
+    public void setXslFile(File xslFile) {
+        this.xslFile = xslFile;
+    }
+
+    public void setInputXsd(String inputXsd) {
+        this.inputXsd = inputXsd;
+    }
+
+
+    /**
+     * --------------------------------------------------------
+     * <p/>
+     * HASHCODE() AND EQUALS() for comparaison
+     * <p/>
+     * --------------------------------------------------------
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        InputMetricXSL that = (InputMetricXSL) o;
+
+        if (getInputXsd() != null ? !getInputXsd().equals(that.getInputXsd()) : that.getInputXsd() != null)
+            return false;
+        if (getXslFile() != null ? !getXslFile().equals(that.getXslFile()) : that.getXslFile() != null) return false;
+        if (getXslName() != null ? !getXslName().equals(that.getXslName()) : that.getXslName() != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (getXslName() != null ? getXslName().hashCode() : 0);
+        result = 31 * result + (getXslFile() != null ? getXslFile().hashCode() : 0);
+        result = 31 * result + (getInputXsd() != null ? getInputXsd().hashCode() : 0);
+        return result;
+    }
 }
