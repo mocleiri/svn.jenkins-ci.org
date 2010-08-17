@@ -11,6 +11,7 @@ TODO:
  * eliminate wget shell call in createJob via native urllib[2]
 """
 import re
+import urllib
 import urllib2
 import commands
 
@@ -28,22 +29,30 @@ class HudsonInstance:
             relativeUrl = "/" + relativeUrl
         return self.URL + relativeUrl
 
-    def read(self, url):
+    def read(self, url, postVarDict=None):
+        if postVarDict:
+            postVarDict = urllib.urlencode(postVarDict)
         fullUrl = self.getAbsoluteUrl(url)
-        return urllib2.urlopen(fullUrl).read()
+        return urllib2.urlopen(fullUrl, postVarDict).read()
+
+    def readJob(self, job, url, postVarDict=None):
+        return self.read("/job/%s/%s" % (job, url), postVarDict)
 
     def build(self, job, parameters="", token=None):
-        url = "/job/%s/build" % job
+        url = "/build"
         if parameters:
             url += "WithParameters?%s" % parameters
             if token:
                 url += "&token=%s" % token
         elif token:
             url += "?token=%s" % token
-        self.read(url)
+        self.readJob(job, url)
+
+    def isJobBuilding(self, job):
+        return "<building>true</building>" in self.readJob(job, "/lastBuild/api/xml")
 
     def getLastBuildNumberForJob(self, job):
-        contents = self.read("/job/%s/lastBuild/" % job)
+        contents = self.readJob(job, "/lastBuild/")
         last = re.search("Build \#(\d+)", contents).groups()[0]
         last = int(last)
         return last
@@ -54,7 +63,7 @@ class HudsonInstance:
             buildNumber = self.getLastBuildNumberForJob(job)
 
         try:
-            testResultXml = self.read("/job/%s/%s/testReport/api/xml" % (job, buildNumber))
+            testResultXml = self.readJob(job, "/%s/testReport/api/xml" % buildNumber)
         except urllib2.HTTPError:
             return None
 
@@ -68,9 +77,18 @@ class HudsonInstance:
                 failures.append(test)
         return failures
 
+    def getConsoleTextForJob(self, job, build="lastBuild"):
+        return self.readJob(job, "/%s/consoleText" % build)
+
     def getConfigForJob(self, job):
         """Read and return the config.xml of the specified job."""
-        return self.read("/job/%s/config.xml" % job)
+        return self.readJob(job, "/config.xml")
+
+    def getDescriptionForJob(self, job):
+        return self.readJob(job, "/description")
+
+    def setDescriptionForJob(self, job, description):
+        return self.readJob(job, "/description", {"description": description})
 
     def createJob(self, job, config, build=False, buildToken=None):
         """Given a name and a config.xml, create a new Hudson job, optionally triggering a build."""
