@@ -46,6 +46,12 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public abstract class InputMetric implements Serializable {
 
+    private String toolName;
+    private String toolVersion;
+    private InputMetricType inputMetricType;
+    private InputType toolType;
+    private OutputMetric outputFormatType;
+
     /**
      * The current input validation errors
      */
@@ -62,7 +68,9 @@ public abstract class InputMetric implements Serializable {
      * @return the tool name
      */
     @XmlElement
-    public abstract String getToolName();
+    public String getToolName() {
+        return toolName;
+    }
 
 
     /**
@@ -71,7 +79,9 @@ public abstract class InputMetric implements Serializable {
      * @return the tool version
      */
     @XmlElement
-    public abstract String getToolVersion();
+    public String getToolVersion() {
+        return toolVersion;
+    }
 
 
     /**
@@ -81,7 +91,7 @@ public abstract class InputMetric implements Serializable {
      */
     @XmlElement
     public String getLabel() {
-        if (getToolVersion() == null){
+        if (getToolVersion() == null) {
             return getToolName();
         }
         return getToolName() + "-" + getToolVersion();
@@ -92,7 +102,9 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the input metric type
      */
-    public abstract InputMetricType getInputMetricType();
+    public InputMetricType getInputMetricType() {
+        return inputMetricType;
+    }
 
     /**
      * Gives the metric tool type (TEST, COVERAGE, MEASURE, VIOLATION)
@@ -100,7 +112,9 @@ public abstract class InputMetric implements Serializable {
      * @return the input object
      */
     @XmlElement
-    public abstract InputType getToolType();
+    public InputType getToolType() {
+        return toolType;
+    }
 
     /**
      * Gives the output format type (given by the format model)
@@ -108,7 +122,9 @@ public abstract class InputMetric implements Serializable {
      * @return the Output format type (usually retrieved by the format model library as junit-model.jar or tusar-model.jar)
      */
     @XmlElement
-    public abstract OutputMetric getOutputFormatType();
+    public OutputMetric getOutputFormatType() {
+        return outputFormatType;
+    }
 
     /**
      * Convert an input file to an output file
@@ -165,5 +181,76 @@ public abstract class InputMetric implements Serializable {
 
     public void setOutputValidationErrors(List<ValidationError> outputValidationErrors) {
         this.outputValidationErrors = outputValidationErrors;
+    }
+
+    /**
+     * --------------------------------------------------------
+     * <p/>
+     * SETTERS for JAX-RS Layer
+     * <p/>
+     * --------------------------------------------------------
+     */
+
+
+    public void setToolName(String toolName) {
+        this.toolName = toolName;
+    }
+
+    public void setToolVersion(String toolVersion) {
+        this.toolVersion = toolVersion;
+    }
+
+    @JsonIgnore
+    //Mandatory for deserialization (the associated field is present in the output serialization)
+    public void setLabel(String label) {
+        //nothing
+    }
+
+    public void setInputMetricType(InputMetricType inputMetricType) {
+        this.inputMetricType = inputMetricType;
+    }
+
+    public void setToolType(InputType toolType) {
+        this.toolType = toolType;
+    }
+
+    @JsonIgnore
+    public void setOutputFormatType(OutputMetric outputFormatType) {
+        this.outputFormatType = outputFormatType;
+    }
+
+
+    /**
+     * --------------------------------------------------------
+     * <p/>
+     * HASHCODE() AND EQUALS() for comparaison
+     * <p/>
+     * --------------------------------------------------------
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        InputMetric that = (InputMetric) o;
+
+        if (getInputMetricType() != that.getInputMetricType()) return false;
+        if (getToolName() != null ? !getToolName().equals(that.getToolName()) : that.getToolName() != null)
+            return false;
+        if (getToolType() != that.getToolType()) return false;
+        if (getToolVersion() != null ? !getToolVersion().equals(that.getToolVersion()) : that.getToolVersion() != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getToolName() != null ? getToolName().hashCode() : 0;
+        result = 31 * result + (getToolVersion() != null ? getToolVersion().hashCode() : 0);
+        result = 31 * result + (getInputMetricType() != null ? getInputMetricType().hashCode() : 0);
+        result = 31 * result + (getToolType() != null ? getToolType().hashCode() : 0);
+        return result;
     }
 }
