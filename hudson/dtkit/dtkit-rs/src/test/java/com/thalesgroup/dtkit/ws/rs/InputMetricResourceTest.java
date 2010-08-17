@@ -29,10 +29,16 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
+import com.thalesgroup.dtkit.junit.CppTest;
 import com.thalesgroup.dtkit.junit.CppUnit;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
+import eu.vahlas.json.schema.JSONSchema;
+import eu.vahlas.json.schema.JSONSchemaProvider;
+import eu.vahlas.json.schema.impl.JacksonSchemaProvider;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -41,6 +47,8 @@ import org.junit.Test;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class InputMetricResourceTest extends JerseyTest {
@@ -48,6 +56,27 @@ public class InputMetricResourceTest extends JerseyTest {
     private static ClientConfig clientConfig;
 
     private WebResource webResource;
+
+    private void validateInputMetricJSONXMLSchema(String jsonResult, String jsonSchemaName) {
+        ObjectMapper mapper = new ObjectMapper();
+        JSONSchemaProvider schemaProvider = new JacksonSchemaProvider(mapper);
+        InputStream schemaIS = this.getClass().getResourceAsStream(jsonSchemaName);
+        JSONSchema schema = schemaProvider.getSchema(schemaIS);
+        List<String> errors = schema.validate(jsonResult);
+        for (String error : errors) {
+            System.out.println("[JSON Schema Validator Error]" + error);
+        }
+        Assert.assertTrue(errors.size() == 0);
+    }
+
+    private void validateInputMetricJSONXMLSchema(String jsonResult) {
+        validateInputMetricJSONXMLSchema(jsonResult, "inputMetric-json-schema.json");
+    }
+
+    private void validateValidateMethodJSONXMLSchema(String jsonResult) {
+        validateInputMetricJSONXMLSchema(jsonResult, "validateMethod-json-schema.json");
+    }
+
 
     private String readContentReader(Reader reader) throws IOException {
         StringBuffer sb = new StringBuffer(1000);
@@ -73,13 +102,13 @@ public class InputMetricResourceTest extends JerseyTest {
     }
 
     @BeforeClass
-    public static void loadClientConfig(){
+    public static void loadClientConfig() {
         clientConfig = new DefaultClientConfig();
         clientConfig.getClasses().add(JacksonJsonProvider.class);
         clientConfig.getClasses().add(InputMetricJSONProvider.class);
     }
 
-    public InputMetricResourceTest() throws Exception {        
+    public InputMetricResourceTest() throws Exception {
         super(new WebAppDescriptor.Builder("com.thalesgroup.dtkit.ws.rs;org.codehaus.jackson.jaxrs")
                 .clientConfig(clientConfig)
                 .contextPath("dtkit-rs").build());
@@ -102,21 +131,53 @@ public class InputMetricResourceTest extends JerseyTest {
 
 
     @Test
+    public void getInputMetrics() throws IOException {
+        JsonNode node = webResource.accept(MediaType.APPLICATION_JSON).get(JsonNode.class);
+        Assert.assertNotNull(node);
+        Assert.assertNotNull(node.isArray());
+        int count = 0;
+        Iterator<JsonNode> nodeIterator = node.getElements();
+        while (nodeIterator.hasNext()) {
+            ++count;
+            nodeIterator.next();
+        }
+        Assert.assertEquals(InputMetrics.registry.size(), count);
+    }
+
+    @Test
     public void getInputMetricCppunitXML() throws IOException {
         String result = webResource.path("/cppunit").accept(MediaType.APPLICATION_XML).get(String.class);
         Assert.assertNotNull(result);
+        System.out.println(result);
         Assert.assertEquals(
                 readContentInputStream(this.getClass()
                         .getResourceAsStream("cppunit/cppunit-xml-result.xml")), result);
     }
 
     @Test
-    public void getInputMetricCppunitJSON() throws IOException {
+    public void getInputMetricCpptestJSON() throws Exception {
+        String result = webResource.path("/cpptest").accept(MediaType.APPLICATION_JSON).get(String.class);
+        System.out.println(result);
+        Assert.assertNotNull(result);
+        validateInputMetricJSONXMLSchema(result);
+        InputMetric expectedCppTest = InputMetricFactory.getInstance(CppTest.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        CppTest actualCppTest = objectMapper.readValue(result, CppTest.class);
+        Assert.assertTrue(expectedCppTest.equals(actualCppTest));
+    }
+
+
+    @Test
+    public void getInputMetricCppunitJSON() throws Exception {
         String result = webResource.path("/cppunit").accept(MediaType.APPLICATION_JSON).get(String.class);
         Assert.assertNotNull(result);
-        Assert.assertEquals(
-                readContentInputStream(this.getClass()
-                        .getResourceAsStream("cppunit/cppunit-json-result.txt")), result);
+        validateInputMetricJSONXMLSchema(result);
+        Assert.assertNotNull(result);
+        validateInputMetricJSONXMLSchema(result);
+        InputMetric expectedCppunit = InputMetricFactory.getInstance(CppUnit.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        CppUnit actualCppunit = objectMapper.readValue(result, CppUnit.class);
+        Assert.assertTrue(expectedCppunit.equals(actualCppunit));
     }
 
     @Test
@@ -147,13 +208,22 @@ public class InputMetricResourceTest extends JerseyTest {
 
     @Test
     public void validateInputFileValidFileForJSON() throws Exception {
-        String result = webResource.path("/cppunit/validate")
+        JsonNode node = webResource.path("/cppunit/validate")
                 .type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_JSON)
-                .post(String.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
-        Assert.assertNotNull(result);
-        String expectedOutput = "{\"valid\":true,\"validationErrors\":[]}";
-        Assert.assertEquals(expectedOutput, result);
+                .post(JsonNode.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
+        Assert.assertNotNull(node);
+        //Node valid
+        JsonNode jsonNodeValid = node.get("valid");
+        Assert.assertTrue(jsonNodeValid.isBoolean());
+        Assert.assertTrue(node.get("valid").getBooleanValue());
+        //Node validationErrors
+        JsonNode jsonNodeValidationErrors = node.get("validationErrors");
+        jsonNodeValidationErrors.isArray();
+        jsonNodeValidationErrors.getElements();
+        Assert.assertFalse(jsonNodeValidationErrors.iterator().hasNext());
+
+        validateValidateMethodJSONXMLSchema(node.toString());
     }
 
     @Test

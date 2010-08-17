@@ -64,13 +64,19 @@ public class InputMetricJSONProvider implements MessageBodyWriter, MessageBodyRe
             throws IOException {
 
         //Use Jackson to build the json output and write it in the outputStream object
-
         ObjectMapper objectMapper = new ObjectMapper();
-        if (type == InputMetricResult.class || type == InputMetricsResult.class) {
+        Object entity = target;
+
+        if (type == InputMetricResult.class) {
             objectMapper = objectMapper.enableDefaultTyping();
+            entity = ((InputMetricResult) target).getInputMetric();
+        }
+        if (type == InputMetricsResult.class) {
+            objectMapper = objectMapper.enableDefaultTyping();
+            entity = ((InputMetricsResult) target).getMetrics();
         }
 
-        objectMapper.writeValue(outputStream, target);
+        objectMapper.writeValue(outputStream, entity);
     }
 
     @Override
