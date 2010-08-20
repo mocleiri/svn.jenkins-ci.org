@@ -21,7 +21,7 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs;
+package com.thalesgroup.dtkit.ws.rs.providers;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -38,6 +38,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)

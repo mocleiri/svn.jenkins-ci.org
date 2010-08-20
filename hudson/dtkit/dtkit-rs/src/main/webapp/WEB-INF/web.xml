@@ -28,19 +28,35 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <servlet>
-        <servlet-name>JerseyServlet</servlet-name>
-        <servlet-class>
-            com.sun.jersey.spi.container.servlet.ServletContainer
-        </servlet-class>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.thalesgroup.dtkit.ws.rs;org.codehaus.jackson.jaxrs</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>JerseyServlet</servlet-name>
+
+    <listener>
+        <listener-class>com.thalesgroup.dtkit.ws.rs.services.GuiceConfig</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </servlet-mapping>
+    </filter-mapping>
+
+    <!--<servlet>-->
+        <!--<servlet-name>JerseyServlet</servlet-name>-->
+        <!--<servlet-class>-->
+            <!--com.sun.jersey.spi.container.servlet.ServletContainer-->
+        <!--</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>com.sun.jersey.config.property.packages</param-name>-->
+            <!--<param-value>com.thalesgroup.dtkit.ws.rs;org.codehaus.jackson.jaxrs</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>JerseyServlet</servlet-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
 </web-app>

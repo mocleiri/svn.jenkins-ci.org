@@ -21,26 +21,40 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs;
+package com.thalesgroup.dtkit.ws.rs.vo;
 
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
+import java.util.List;
 
 
-@XmlRootElement(name = "result")
+@XmlRootElement(name = "validationResult")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InputMetricResult {
+public class InputMetricValidationResult {
 
-    private InputMetric inputMetric;
+    private boolean valid;
 
-    public InputMetric getInputMetric() {
-        return inputMetric;
+    @XmlElementWrapper(name = "errors")
+    @XmlElement(name = "error")
+    private List<ValidationError> validationErrors;
+
+    @SuppressWarnings("unused")
+    public boolean isValid() {
+        return valid;
     }
 
-    public void setInputMetric(InputMetric inputMetric) {
-        this.inputMetric = inputMetric;
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    @SuppressWarnings("unused")
+    public List<ValidationError> getValidationErrors() {
+        return validationErrors;
+    }
+
+    public void setValidationErrors(List<ValidationError> validationErrors) {
+        this.validationErrors = validationErrors;
     }
 }
+

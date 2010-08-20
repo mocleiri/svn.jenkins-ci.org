@@ -21,11 +21,13 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs;
+package com.thalesgroup.dtkit.ws.rs.providers;
 
 import com.thalesgroup.dtkit.junit.model.JUnitModel;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -40,6 +42,7 @@ import java.util.ServiceLoader;
 
 @Provider
 @Produces(MediaType.APPLICATION_XML)
+@SuppressWarnings("unused")
 public class InputMetricXMLProvider implements ContextResolver<JAXBContext> {
 
     private JAXBContext ctx;

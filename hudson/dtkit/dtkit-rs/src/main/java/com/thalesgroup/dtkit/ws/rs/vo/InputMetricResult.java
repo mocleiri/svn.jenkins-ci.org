@@ -21,28 +21,26 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs;
+package com.thalesgroup.dtkit.ws.rs.vo;
 
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 
-import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement(name = "result")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InputMetricsResult {
+public class InputMetricResult {
 
-    @XmlElementWrapper(name = "metrics")
-    @XmlElement(name = "metric")
-    private List<InputMetric> metrics = new ArrayList<InputMetric>();
+    private InputMetric inputMetric;
 
-    public List<InputMetric> getMetrics() {
-        return metrics;
+    public InputMetric getInputMetric() {
+        return inputMetric;
     }
 
-    public void setMetrics(List<InputMetric> metrics) {
-        this.metrics = metrics;
+    public void setInputMetric(InputMetric inputMetric) {
+        this.inputMetric = inputMetric;
     }
 }

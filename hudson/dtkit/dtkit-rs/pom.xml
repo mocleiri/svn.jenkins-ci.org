@@ -56,7 +56,20 @@
             <url>http://repository.codehaus.org</url>
         </repository>
 
+        <repository>
+            <id>maven-repository.dev.java.net</id>
+            <name>Java.net Maven 1 Repository (legacy)</name>
+            <url>http://download.java.net/maven/1</url>
+            <layout>legacy</layout>
+        </repository>
+
+        <repository>
+            <id>guice-maven</id>
+            <name>guice maven</name>
+            <url>http://guiceyfruit.googlecode.com/svn/repo/releases</url>
+        </repository>
     </repositories>
+
 
     <developers>
         <developer>
@@ -81,6 +94,13 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -114,6 +134,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-guice</artifactId>
+            <version>${jersey.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
             <version>${jackson.version}</version>
@@ -136,16 +162,16 @@
             <artifactId>json-schema-validator</artifactId>
             <version>0.0.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/json-schema-validator-0.0.1-SNAPSHOT.jar</systemPath>
+            <systemPath>${basedir}/json-schema-validator-0.0.1-SNAPSHOT.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>com.sun.jersey.jersey-test-framework</groupId>
-            <artifactId>jersey-test-framework-grizzly</artifactId>
+            <artifactId>jersey-test-framework-embedded-glassfish</artifactId>
             <version>${jersey.version}</version>
             <scope>test</scope>
         </dependency>
-
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

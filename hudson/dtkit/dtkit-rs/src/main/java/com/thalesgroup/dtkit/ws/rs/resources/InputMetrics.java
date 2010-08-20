@@ -21,14 +21,15 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs;
+package com.thalesgroup.dtkit.ws.rs.resources;
 
+import com.google.inject.Inject;
+import com.google.inject.servlet.RequestScoped;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
-import com.thalesgroup.dtkit.metrics.api.InputMetricException;
-import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
 import com.thalesgroup.dtkit.metrics.api.InputMetricXSL;
-import com.thalesgroup.dtkit.util.converter.ConversionException;
-import com.thalesgroup.dtkit.util.validator.ValidationException;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
+import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,33 +37,23 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ServiceLoader;
 
 
 @Path(InputMetrics.PATH)
+@RequestScoped
 public class InputMetrics {
 
     public static final String PATH = "/inputMetrics";
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    static List<InputMetric> registry = new ArrayList<InputMetric>();
+    private InputMetricsLocator inputMetricsLocator;
 
-    static {
-        ServiceLoader<InputMetric> metricServiceLoader = ServiceLoader.load(InputMetric.class, Thread.currentThread().getContextClassLoader());
-        metricServiceLoader.reload();
-        for (InputMetric inputMetric : metricServiceLoader) {
-            try {
-                registry.add(InputMetricFactory.getInstance(inputMetric.getClass()));
-            } catch (InputMetricException e) {
-                e.printStackTrace();
-            }
-        }
+    @Inject
+    @SuppressWarnings("unused")
+    public void setInputMetricsLocator(InputMetricsLocator inputMetricsLocator) {
+        this.inputMetricsLocator = inputMetricsLocator;
     }
 
     private InputMetric getInputMetricObject(PathSegment metricSegment) {
@@ -72,42 +63,28 @@ public class InputMetrics {
         String version = metricSegment.getMatrixParameters().getFirst("version");
         String format = metricSegment.getMatrixParameters().getFirst("format");
 
-        for (InputMetric inputMetric : registry) {
-            if (inputMetric.getToolName().toUpperCase().equalsIgnoreCase(metricName)) {
-
-                if ((type != null) && (!(inputMetric.getToolType().toString()).equalsIgnoreCase(type))) {
-                    continue;
-                }
-
-                if ((version != null) && (!inputMetric.getToolVersion().equalsIgnoreCase(version))) {
-                    continue;
-                }
-
-                if ((format != null) && (!(inputMetric.getOutputFormatType().getKey()).equalsIgnoreCase(format))) {
-                    continue;
-                }
-
-                return inputMetric;
-            }
+        InputMetric inputMetric = inputMetricsLocator.getInputMetricObject(metricName, type, version, format);
+        if (inputMetric == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
+        return inputMetric;
     }
 
 
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @SuppressWarnings("unused")
     public Response getInputMetrics() {
         logger.debug("getInputMetrics() service");
         InputMetricsResult inputMetricsResult = new InputMetricsResult();
-        inputMetricsResult.setMetrics(registry);
+        inputMetricsResult.setMetrics(inputMetricsLocator.getAllMetrics());
         return Response.ok(inputMetricsResult).build();
     }
 
     @GET
     @Path("{metric}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @SuppressWarnings("unused")
     public Response getInputMetric(@PathParam("metric") PathSegment metricSegment) {
         logger.debug("getInputMetric() service");
 
@@ -123,6 +100,7 @@ public class InputMetrics {
     @GET
     @Path("{metric}/xsd")
     @Produces(MediaType.APPLICATION_XML)
+    @SuppressWarnings("unused")
     public InputStream getXSD(@PathParam("metric") PathSegment metricSegment) {
         logger.debug("getXSD() service");
         InputMetric inputMetric = getInputMetricObject(metricSegment);
@@ -138,58 +116,5 @@ public class InputMetrics {
 
         return inputMetric.getClass().getResourceAsStream(xsdPath);
     }
-
-
-    @POST
-    @Path("/{metric}/validate")
-    @Consumes(MediaType.APPLICATION_XML)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Response validateInputFile(@PathParam("metric") PathSegment metricSegment, File inputXMLFile) {
-        logger.debug("validateInputFile() service");
-        InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
-        try {
-            InputMetric inputMetric = getInputMetricObject(metricSegment);
-            inputMetricValidationResult.setValid(inputMetric.validateInputFile(inputXMLFile));
-            inputMetricValidationResult.setValidationErrors(inputMetric.getInputValidationErrors());
-
-        } catch (ValidationException ve) {
-            logger.error("Validation error for " + metricSegment.getPath(), ve);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-        }
-        return Response.ok(inputMetricValidationResult).build();
-    }
-
-    @POST
-    @Path("/{metric}/convert")
-    @Consumes(MediaType.APPLICATION_XML)
-    @Produces(MediaType.APPLICATION_XML)
-    public Response convertInputFile(@PathParam("metric") PathSegment metricSegment, File inputMetricFile) {
-        logger.debug("convertInputFile() service");
-        try {
-            //Validating input file
-            Response inputMetricValidationResponse = validateInputFile(metricSegment, inputMetricFile);
-            InputMetricValidationResult inputMetricValidationResult = (InputMetricValidationResult) inputMetricValidationResponse.getEntity();
-            if (!inputMetricValidationResult.isValid()) {
-                throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
-            }
-
-            //Retrieving the metric
-            InputMetric inputMetric = getInputMetricObject(metricSegment);
-
-            //Converting the input file
-            File dest = File.createTempFile("toot", "ttt");
-            inputMetric.convert(inputMetricFile, dest);
-            return Response.ok(dest).build();
-
-        } catch (IOException ioe) {
-            logger.error("Conversion error for " + metricSegment.getPath(), ioe);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-
-        } catch (ConversionException ce) {
-            logger.error("Conversion error for " + metricSegment.getPath(), ce);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-        }
-    }
-
 
 }
