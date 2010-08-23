@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MatrixProject (Hudson main module 1.372 API)
+MatrixProject (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MatrixProject (Hudson main module 1.372 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MatrixProject (Hudson main module 1.372 API)";
+        parent.document.title="MatrixProject (Hudson main module 1.373 API)";
     }
 }
 </SCRIPT>
@@ -256,14 +256,6 @@ Class MatrixProject</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/matrix/MatrixProject.html#doCheckAxisName(java.lang.String)">doCheckAxisName</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Makes sure that the given name is good as a axis name.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;org.kohsuke.stapler.HttpResponse</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/matrix/MatrixProject.html#doDoWipeOutWorkspace()">doDoWipeOutWorkspace</A></B>()</CODE>
 
@@ -494,7 +486,8 @@ Class MatrixProject</H2>
 <TD><CODE><B><A HREF="../../hudson/matrix/MatrixProject.html#getUserAxes()">getUserAxes</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the subset of <A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix"><CODE>AxisList</CODE></A> that are not system axes.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.373
+      System vs user difference are generalized into extension point.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -944,6 +937,9 @@ getUserAxes</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt; <B>getUserAxes</B>()</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.373
+      System vs user difference are generalized into extension point.</I>
+<P>
 <DD>Gets the subset of <A HREF="../../hudson/matrix/AxisList.html" title="class in hudson.matrix"><CODE>AxisList</CODE></A> that are not system axes.
 <P>
 <DD><DL>
@@ -1463,23 +1459,6 @@ public org.kohsuke.stapler.HttpResponse <B>doDoWipeOutWorkspace</B>()
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE>javax.servlet.ServletException</CODE>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="doCheckAxisName(java.lang.String)"><!-- --></A><H3>
-doCheckAxisName</H3>
-<PRE>
-public <A HREF="../../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>doCheckAxisName</B>(<FONT SIZE="-1">@QueryParameter</FONT>
-                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</PRE>
-<DL>
-<DD>Makes sure that the given name is good as a axis name.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
 </DD>
 </DL>
 <HR>

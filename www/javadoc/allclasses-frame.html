@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-All Classes (Hudson main module 1.372 API)
+All Classes (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -191,6 +191,8 @@ All Classes (Hudson main module 1.372 API)
 <A HREF="hudson/util/AWTProblem.html" title="class in hudson.util" target="classFrame">AWTProblem</A>
 <BR>
 <A HREF="hudson/matrix/Axis.html" title="class in hudson.matrix" target="classFrame">Axis</A>
+<BR>
+<A HREF="hudson/matrix/AxisDescriptor.html" title="class in hudson.matrix" target="classFrame">AxisDescriptor</A>
 <BR>
 <A HREF="hudson/matrix/AxisList.html" title="class in hudson.matrix" target="classFrame">AxisList</A>
 <BR>
@@ -499,6 +501,8 @@ All Classes (Hudson main module 1.372 API)
 <A HREF="hudson/util/DataSetBuilder.html" title="class in hudson.util" target="classFrame">DataSetBuilder</A>
 <BR>
 <A HREF="hudson/util/DecodingStream.html" title="class in hudson.util" target="classFrame">DecodingStream</A>
+<BR>
+<A HREF="hudson/matrix/DefaultAxisDescriptor.html" title="class in hudson.matrix" target="classFrame">DefaultAxisDescriptor</A>
 <BR>
 <A HREF="org/jvnet/hudson/test/DefaultConstructorChecker.html" title="class in org.jvnet.hudson.test" target="classFrame">DefaultConstructorChecker</A>
 <BR>
@@ -1000,6 +1004,10 @@ All Classes (Hudson main module 1.372 API)
 <BR>
 <A HREF="hudson/model/JDK.DescriptorImpl.html" title="class in hudson.model" target="classFrame">JDK.DescriptorImpl</A>
 <BR>
+<A HREF="hudson/matrix/JDKAxis.html" title="class in hudson.matrix" target="classFrame">JDKAxis</A>
+<BR>
+<A HREF="hudson/matrix/JDKAxis.DescriptorImpl.html" title="class in hudson.matrix" target="classFrame">JDKAxis.DescriptorImpl</A>
+<BR>
 <A HREF="hudson/tools/JDKInstaller.html" title="class in hudson.tools" target="classFrame">JDKInstaller</A>
 <BR>
 <A HREF="hudson/tools/JDKInstaller.CPU.html" title="enum in hudson.tools" target="classFrame">JDKInstaller.CPU</A>
@@ -1062,33 +1070,41 @@ All Classes (Hudson main module 1.372 API)
 <BR>
 <A HREF="hudson/model/Label.ConverterImpl.html" title="class in hudson.model" target="classFrame">Label.ConverterImpl</A>
 <BR>
-<A HREF="hudson/model/label/LabelAtom.html" title="class in hudson.model.label" target="classFrame">LabelAtom</A>
+<A HREF="hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels" target="classFrame">LabelAtom</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.html" title="class in hudson.model.label" target="classFrame">LabelExpression</A>
+<A HREF="hudson/model/labels/LabelAtomProperty.html" title="class in hudson.model.labels" target="classFrame">LabelAtomProperty</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.And.html" title="class in hudson.model.label" target="classFrame">LabelExpression.And</A>
+<A HREF="hudson/model/labels/LabelAtomPropertyDescriptor.html" title="class in hudson.model.labels" target="classFrame">LabelAtomPropertyDescriptor</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.Binary.html" title="class in hudson.model.label" target="classFrame">LabelExpression.Binary</A>
+<A HREF="hudson/matrix/LabelAxis.html" title="class in hudson.matrix" target="classFrame">LabelAxis</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.Iff.html" title="class in hudson.model.label" target="classFrame">LabelExpression.Iff</A>
+<A HREF="hudson/matrix/LabelAxis.DescriptorImpl.html" title="class in hudson.matrix" target="classFrame">LabelAxis.DescriptorImpl</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.Implies.html" title="class in hudson.model.label" target="classFrame">LabelExpression.Implies</A>
+<A HREF="hudson/model/labels/LabelExpression.html" title="class in hudson.model.labels" target="classFrame">LabelExpression</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.Not.html" title="class in hudson.model.label" target="classFrame">LabelExpression.Not</A>
+<A HREF="hudson/model/labels/LabelExpression.And.html" title="class in hudson.model.labels" target="classFrame">LabelExpression.And</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.Or.html" title="class in hudson.model.label" target="classFrame">LabelExpression.Or</A>
+<A HREF="hudson/model/labels/LabelExpression.Binary.html" title="class in hudson.model.labels" target="classFrame">LabelExpression.Binary</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpression.Paren.html" title="class in hudson.model.label" target="classFrame">LabelExpression.Paren</A>
+<A HREF="hudson/model/labels/LabelExpression.Iff.html" title="class in hudson.model.labels" target="classFrame">LabelExpression.Iff</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpressionLexer.html" title="class in hudson.model.label" target="classFrame">LabelExpressionLexer</A>
+<A HREF="hudson/model/labels/LabelExpression.Implies.html" title="class in hudson.model.labels" target="classFrame">LabelExpression.Implies</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpressionParser.html" title="class in hudson.model.label" target="classFrame">LabelExpressionParser</A>
+<A HREF="hudson/model/labels/LabelExpression.Not.html" title="class in hudson.model.labels" target="classFrame">LabelExpression.Not</A>
 <BR>
-<A HREF="hudson/model/label/LabelExpressionParserTokenTypes.html" title="interface in hudson.model.label" target="classFrame"><I>LabelExpressionParserTokenTypes</I></A>
+<A HREF="hudson/model/labels/LabelExpression.Or.html" title="class in hudson.model.labels" target="classFrame">LabelExpression.Or</A>
+<BR>
+<A HREF="hudson/model/labels/LabelExpression.Paren.html" title="class in hudson.model.labels" target="classFrame">LabelExpression.Paren</A>
+<BR>
+<A HREF="hudson/model/labels/LabelExpressionLexer.html" title="class in hudson.model.labels" target="classFrame">LabelExpressionLexer</A>
+<BR>
+<A HREF="hudson/model/labels/LabelExpressionParser.html" title="class in hudson.model.labels" target="classFrame">LabelExpressionParser</A>
+<BR>
+<A HREF="hudson/model/labels/LabelExpressionParserTokenTypes.html" title="interface in hudson.model.labels" target="classFrame"><I>LabelExpressionParserTokenTypes</I></A>
 <BR>
 <A HREF="hudson/model/LabelFinder.html" title="class in hudson.model" target="classFrame">LabelFinder</A>
 <BR>
-<A HREF="hudson/model/label/LabelOperatorPrecedence.html" title="enum in hudson.model.label" target="classFrame">LabelOperatorPrecedence</A>
+<A HREF="hudson/model/labels/LabelOperatorPrecedence.html" title="enum in hudson.model.labels" target="classFrame">LabelOperatorPrecedence</A>
 <BR>
 <A HREF="hudson/model/LargeText.html" title="class in hudson.model" target="classFrame">LargeText</A>
 <BR>
@@ -2015,6 +2031,10 @@ All Classes (Hudson main module 1.372 API)
 <A HREF="hudson/tasks/test/TestResultParser.html" title="class in hudson.tasks.test" target="classFrame">TestResultParser</A>
 <BR>
 <A HREF="hudson/tasks/test/TestResultProjectAction.html" title="class in hudson.tasks.test" target="classFrame">TestResultProjectAction</A>
+<BR>
+<A HREF="hudson/matrix/TextAxis.html" title="class in hudson.matrix" target="classFrame">TextAxis</A>
+<BR>
+<A HREF="hudson/matrix/TextAxis.DescriptorImpl.html" title="class in hudson.matrix" target="classFrame">TextAxis.DescriptorImpl</A>
 <BR>
 <A HREF="hudson/util/TextFile.html" title="class in hudson.util" target="classFrame">TextFile</A>
 <BR>

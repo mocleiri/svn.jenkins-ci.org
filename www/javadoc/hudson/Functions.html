@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Functions (Hudson main module 1.372 API)
+Functions (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson main module 1.372 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson main module 1.372 API)";
+        parent.document.title="Functions (Hudson main module 1.373 API)";
     }
 }
 </SCRIPT>
@@ -724,6 +724,15 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the host name of the Hudson server that clients can use to talk back to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#getSortedDescriptorsForGlobalConfig()">getSortedDescriptorsForGlobalConfig</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the descriptors sorted by their inheritance tree of <A HREF="../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ so that descriptors of similar types come nearby.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1802,6 +1811,20 @@ getNodePropertyDescriptors</H3>
 <PRE>
 public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/slaves/NodePropertyDescriptor.html" title="class in hudson.slaves">NodePropertyDescriptor</A>&gt; <B>getNodePropertyDescriptors</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../hudson/model/Node.html" title="class in hudson.model">Node</A>&gt;&nbsp;clazz)</PRE>
 <DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSortedDescriptorsForGlobalConfig()"><!-- --></A><H3>
+getSortedDescriptorsForGlobalConfig</H3>
+<PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt; <B>getSortedDescriptorsForGlobalConfig</B>()</PRE>
+<DL>
+<DD>Gets all the descriptors sorted by their inheritance tree of <A HREF="../hudson/model/Describable.html" title="interface in hudson.model"><CODE>Describable</CODE></A>
+ so that descriptors of similar types come nearby.
+<P>
 <DD><DL>
 </DL>
 </DD>

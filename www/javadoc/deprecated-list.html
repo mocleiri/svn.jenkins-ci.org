@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.372 API)
+Deprecated List (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.372 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.372 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.373 API)";
     }
 }
 </SCRIPT>
@@ -228,7 +228,7 @@ function windowTitle()
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/junit/TestObject.html" title="class in hudson.tasks.junit">hudson.tasks.junit.TestObject</A>
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I></I>&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>Use <A HREF="hudson/tasks/test/TestObject.html" title="class in hudson.tasks.test"><CODE>TestObject</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/triggers/Triggers.html" title="class in hudson.triggers">hudson.triggers.Triggers</A>
@@ -443,6 +443,12 @@ function windowTitle()
       Use <A HREF="hudson/model/listeners/RunListener.html#all()"><CODE>RunListener.all()</CODE></A> for read access, and use <A HREF="hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> for registration.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/matrix/Axis.html#name">hudson.matrix.Axis.name</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.373
+      Use <A HREF="hudson/matrix/Axis.html#getName()"><CODE>Axis.getName()</CODE></A></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/UpdateCenter.html#neverUpdate">hudson.model.UpdateCenter.neverUpdate</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.333
@@ -487,6 +493,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>in 1.271.
  This proxy always delegate to <code>Hudson.getInstance().getSecurityRealm().getSecurityComponents().userDetails</code>,
  so use that instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/matrix/Axis.html#values">hudson.matrix.Axis.values</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.373
+      Use <A HREF="hudson/matrix/Axis.html#getValues()"><CODE>Axis.getValues()</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/BuildWrappers.html#WRAPPERS">hudson.tasks.BuildWrappers.WRAPPERS</A>
@@ -1037,6 +1049,12 @@ function windowTitle()
       Perhaps you meant <A HREF="hudson/model/Hudson.html#getRootUrl()"><CODE>Hudson.getRootUrl()</CODE></A>.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/matrix/MatrixProject.html#getUserAxes()">hudson.matrix.MatrixProject.getUserAxes()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.373
+      System vs user difference are generalized into extension point.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Queue.Task.html#getWhyBlocked()">hudson.model.Queue.Task.getWhyBlocked()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.330
@@ -1119,6 +1137,12 @@ function windowTitle()
 <TD><A HREF="hudson/slaves/SlaveComputer.html#isJnlpAgent()">hudson.slaves.SlaveComputer.isJnlpAgent()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 2008-05-20.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/matrix/Axis.html#isSystem()">hudson.matrix.Axis.isSystem()</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.373
+      System vs user difference are generalized into extension point.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Computer.html#isTemporarilyOffline()">hudson.model.Computer.isTemporarilyOffline()</A>

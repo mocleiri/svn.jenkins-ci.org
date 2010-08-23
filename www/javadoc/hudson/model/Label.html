@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Label (Hudson main module 1.372 API)
+Label (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Label (Hudson main module 1.372 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Label (Hudson main module 1.372 API)";
+        parent.document.title="Label (Hudson main module 1.373 API)";
     }
 }
 </SCRIPT>
@@ -94,18 +94,20 @@ hudson.model</FONT>
 Class Label</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Label</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">hudson.model.Actionable</A>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Label</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>, <A HREF="../../hudson/model/label/LabelExpression.html" title="class in hudson.model.label">LabelExpression</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>, <A HREF="../../hudson/model/labels/LabelExpression.html" title="class in hudson.model.labels">LabelExpression</A></DD>
 </DL>
 <HR>
 <DL>
 <DT><PRE><FONT SIZE="-1">@ExportedBean
-</FONT>public abstract class <B>Label</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DL>
+</FONT>public abstract class <B>Label</B><DT>extends <A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A>&gt;, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></DL>
 </PRE>
 
 <P>
@@ -160,7 +162,7 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#name">name</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display name of this label.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -274,7 +276,15 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a human-readable text that represents this label.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#getExpression()">getExpression</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a label expression that represents this label.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -290,7 +300,7 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#getName()">getName</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alias for <A HREF="../../hudson/model/Label.html#getDisplayName()"><CODE>getDisplayName()</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -299,6 +309,14 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s that belong to this label.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#getSearchUrl()">getSearchUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the URL of this item relative to the parent <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -323,6 +341,14 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of total <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s that belong to this label that are functioning.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#getUrl()">getUrl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relative URL from the context path, that ends with '/'.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -384,11 +410,11 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Label.html#matches(java.util.Collection)">matches</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt;&nbsp;labels)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/Label.html#matches(java.util.Collection)">matches</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt;&nbsp;labels)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Evaluates whether the label expression is true when an entity owns the given set of
- <A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label"><CODE>LabelAtom</CODE></A>s.</TD>
+ <A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels"><CODE>LabelAtom</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -434,7 +460,7 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#parse(java.lang.String)">parse</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;labels)</CODE>
 
 <BR>
@@ -450,7 +476,7 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="../../hudson/model/label/LabelOperatorPrecedence.html" title="enum in hudson.model.label">LabelOperatorPrecedence</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../../hudson/model/labels/LabelOperatorPrecedence.html" title="enum in hudson.model.labels">LabelOperatorPrecedence</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Label.html#precedence()">precedence</A></B>()</CODE>
 
 <BR>
@@ -463,6 +489,24 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">Actionable</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/Actionable.html#addAction(hudson.model.Action)">addAction</A>, <A HREF="../../hudson/model/Actionable.html#getAction(java.lang.Class)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getAction(int)">getAction</A>, <A HREF="../../hudson/model/Actionable.html#getActions()">getActions</A>, <A HREF="../../hudson/model/Actionable.html#getActions(java.lang.Class)">getActions</A>, <A HREF="../../hudson/model/Actionable.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractModelObject"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">AbstractModelObject</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/AbstractModelObject.html#getSearch()">getSearch</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchIndex()">getSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#getSearchName()">getSearchName</A>, <A HREF="../../hudson/model/AbstractModelObject.html#makeSearchIndex()">makeSearchIndex</A>, <A HREF="../../hudson/model/AbstractModelObject.html#requirePOST()">requirePOST</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.Exception, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">sendError</A>, <A HREF="../../hudson/model/AbstractModelObject.html#sendError(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, boolean)">sendError</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -490,8 +534,10 @@ Group of <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><C
 <A NAME="name"><!-- --></A><H3>
 name</H3>
 <PRE>
-protected final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>name</B></PRE>
+protected final transient <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>name</B></PRE>
 <DL>
+<DD>Display name of this label.
+<P>
 <DL>
 </DL>
 </DL>
@@ -501,7 +547,7 @@ protected final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Strin
 loadStatistics</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public final <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A> <B>loadStatistics</B></PRE>
+</FONT>public final transient <A HREF="../../hudson/model/LoadStatistics.html" title="class in hudson.model">LoadStatistics</A> <B>loadStatistics</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -511,7 +557,7 @@ loadStatistics</H3>
 <A NAME="nodeProvisioner"><!-- --></A><H3>
 nodeProvisioner</H3>
 <PRE>
-public final <A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves">NodeProvisioner</A> <B>nodeProvisioner</B></PRE>
+public final transient <A HREF="../../hudson/slaves/NodeProvisioner.html" title="class in hudson.slaves">NodeProvisioner</A> <B>nodeProvisioner</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -548,8 +594,10 @@ public <B>Label</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/S
 getName</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getName</B>()</PRE>
+</FONT>public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getName</B>()</PRE>
 <DL>
+<DD>Alias for <A HREF="../../hudson/model/Label.html#getDisplayName()"><CODE>getDisplayName()</CODE></A>.
+<P>
 <DD><DL>
 </DL>
 </DD>
@@ -564,11 +612,65 @@ getDisplayName</H3>
 <PRE>
 public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getDisplayName</B>()</PRE>
 <DL>
+<DD>Returns a human-readable text that represents this label.
+<P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE> in interface <CODE><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExpression()"><!-- --></A><H3>
+getExpression</H3>
+<PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getExpression</B>()</PRE>
+<DL>
+<DD>Returns a label expression that represents this label.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUrl()"><!-- --></A><H3>
+getUrl</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getUrl</B>()</PRE>
+<DL>
+<DD>Relative URL from the context path, that ends with '/'.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSearchUrl()"><!-- --></A><H3>
+getSearchUrl</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getSearchUrl</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">SearchItem</A></CODE></B></DD>
+<DD>Returns the URL of this item relative to the parent <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search"><CODE>SearchItem</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/search/SearchItem.html#getSearchUrl()">getSearchUrl</A></CODE> in interface <CODE><A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>URL like "foo" or "foo/bar". The path can end with '/'.
+      The path that starts with '/' will be interpreted as the absolute path
+      (within the context path of Hudson.)</DL>
 </DD>
 </DL>
 <HR>
@@ -593,10 +695,10 @@ public abstract boolean <B>matches</B>(<A HREF="../../hudson/util/VariableResolv
 <A NAME="matches(java.util.Collection)"><!-- --></A><H3>
 matches</H3>
 <PRE>
-public final boolean <B>matches</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt;&nbsp;labels)</PRE>
+public final boolean <B>matches</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt;&nbsp;labels)</PRE>
 <DL>
 <DD>Evaluates whether the label expression is true when an entity owns the given set of
- <A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label"><CODE>LabelAtom</CODE></A>s.
+ <A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels"><CODE>LabelAtom</CODE></A>s.
 <P>
 <DD><DL>
 </DL>
@@ -968,7 +1070,7 @@ public <A HREF="../../hudson/model/Label.html" title="class in hudson.model">Lab
 <A NAME="precedence()"><!-- --></A><H3>
 precedence</H3>
 <PRE>
-public abstract <A HREF="../../hudson/model/label/LabelOperatorPrecedence.html" title="enum in hudson.model.label">LabelOperatorPrecedence</A> <B>precedence</B>()</PRE>
+public abstract <A HREF="../../hudson/model/labels/LabelOperatorPrecedence.html" title="enum in hudson.model.labels">LabelOperatorPrecedence</A> <B>precedence</B>()</PRE>
 <DL>
 <DD>Precedence of the top most operator.
 <P>
@@ -1040,7 +1142,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="parse(java.lang.String)"><!-- --></A><H3>
 parse</H3>
 <PRE>
-public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt; <B>parse</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;labels)</PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt; <B>parse</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;labels)</PRE>
 <DL>
 <DD>Convers a whitespace-separate list of tokens into a set of <A HREF="../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>s.
 <P>

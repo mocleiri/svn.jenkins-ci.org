@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.matrix.Axis (Hudson main module 1.372 API)
+Uses of Class hudson.matrix.Axis (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.matrix.Axis (Hudson main module 1.372 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.matrix.Axis (Hudson main module 1.372 API)";
+        parent.document.title="Uses of Class hudson.matrix.Axis (Hudson main module 1.373 API)";
     }
 }
 </SCRIPT>
@@ -109,6 +109,38 @@ Uses of <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Subclasses of <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A> in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/matrix/JDKAxis.html" title="class in hudson.matrix">JDKAxis</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix"><CODE>Axis</CODE></A> that selects available JDKs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/matrix/LabelAxis.html" title="class in hudson.matrix">LabelAxis</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix"><CODE>Axis</CODE></A> that selects label expressions.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/matrix/TextAxis.html" title="class in hudson.matrix">TextAxis</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User-defined plain text axis.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A> with type parameters of type <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -171,11 +203,20 @@ Uses of <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>&lt;<A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>,<A HREF="../../../hudson/matrix/AxisDescriptor.html" title="class in hudson.matrix">AxisDescriptor</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Axis.</B><B><A HREF="../../../hudson/matrix/Axis.html#all()">all</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the registered <A HREF="../../../hudson/matrix/AxisDescriptor.html" title="class in hudson.matrix"><CODE>AxisDescriptor</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>MatrixProject.</B><B><A HREF="../../../hudson/matrix/MatrixProject.html#getUserAxes()">getUserAxes</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the subset of <A HREF="../../../hudson/matrix/AxisList.html" title="class in hudson.matrix"><CODE>AxisList</CODE></A> that are not system axes.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.373
+      System vs user difference are generalized into extension point.</I></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -202,6 +243,14 @@ Uses of <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Axis is fully ordered so that we can convert between a list of axis
  and a string unambiguously.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B>Combination.</B><B><A HREF="../../../hudson/matrix/Combination.html#get(hudson.matrix.Axis)">get</A></B>(<A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&nbsp;a)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
 </TABLE>
 &nbsp;
 <P>
@@ -212,11 +261,27 @@ Uses of <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/matrix/AxisList.html" title="class in hudson.matrix">AxisList</A></CODE></FONT></TD>
+<TD><CODE><B>AxisList.</B><B><A HREF="../../../hudson/matrix/AxisList.html#subList(java.lang.Class)">subList</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt;&nbsp;subType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a subset of the list that only contains the type assignable to the specified type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B>Combination.</B><B><A HREF="../../../hudson/matrix/Combination.html#toString(java.util.Collection)">toString</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt;&nbsp;subset)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Works like <A HREF="../../../hudson/matrix/Combination.html#toString()"><CODE>Combination.toString()</CODE></A> but only include the given axes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Combination.</B><B><A HREF="../../../hudson/matrix/Combination.html#values(java.util.Collection)">values</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt;&nbsp;axes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the values that correspond to the specified axes, in their order.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -241,7 +306,13 @@ Uses of <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix
 <TH ALIGN="left" COLSPAN="2">Constructor parameters in <A HREF="../../../hudson/matrix/package-summary.html">hudson.matrix</A> with type arguments of type <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/matrix/AxisList.html#AxisList(java.util.Collection)">AxisList</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt;&nbsp;c)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/matrix/AxisDescriptor.html#AxisDescriptor(java.lang.Class)">AxisDescriptor</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;? extends <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt;&nbsp;clazz)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/matrix/AxisList.html#AxisList(java.util.Collection)">AxisList</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>&gt;&nbsp;c)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LDAPSecurityRealm (Hudson main module 1.372 API)
+LDAPSecurityRealm (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LDAPSecurityRealm (Hudson main module 1.372 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LDAPSecurityRealm (Hudson main module 1.372 API)";
+        parent.document.title="LDAPSecurityRealm (Hudson main module 1.373 API)";
     }
 }
 </SCRIPT>
@@ -96,14 +96,15 @@ Class LDAPSecurityRealm</H2>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractDescribableImpl.html" title="class in hudson.model">hudson.model.AbstractDescribableImpl</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">hudson.security.SecurityRealm</A>
-          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.security.LDAPSecurityRealm</B>
+          <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">hudson.security.AbstractPasswordBasedSecurityRealm</A>
+              <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.security.LDAPSecurityRealm</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Describable.html" title="interface in hudson.model">Describable</A>&lt;<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A>&gt;, org.acegisecurity.userdetails.UserDetailsService</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>LDAPSecurityRealm</B><DT>extends <A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></DL>
+<DT><PRE>public class <B>LDAPSecurityRealm</B><DT>extends <A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">AbstractPasswordBasedSecurityRealm</A></DL>
 </PRE>
 
 <P>
@@ -411,6 +412,15 @@ Class LDAPSecurityRealm</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.acegisecurity.userdetails.UserDetails</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#authenticate(java.lang.String, java.lang.String)">authenticate</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;username,
+             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authenticate a login attempt.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" title="class in hudson.security">SecurityRealm.SecurityComponents</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#createSecurityComponents()">createSecurityComponents</A></B>()</CODE>
 
@@ -451,6 +461,23 @@ Class LDAPSecurityRealm</H2>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lookup a group; given input must match the configured syntax for group names
  in WEB-INF/security/LDAPBindSecurityRealm.groovy's authoritiesPopulator entry.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.acegisecurity.userdetails.UserDetails</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/security/LDAPSecurityRealm.html#loadUserByUsername(java.lang.String)">loadUserByUsername</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;username)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves information about an user by its name.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.security.AbstractPasswordBasedSecurityRealm"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class hudson.security.<A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">AbstractPasswordBasedSecurityRealm</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html#createCliAuthenticator(hudson.cli.CLICommand)">createCliAuthenticator</A></CODE></TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.security.SecurityRealm"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -458,7 +485,7 @@ Class LDAPSecurityRealm</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.security.<A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#all()">all</A>, <A HREF="../../hudson/security/SecurityRealm.html#allowsSignup()">allowsSignup</A>, <A HREF="../../hudson/security/SecurityRealm.html#canLogOut()">canLogOut</A>, <A HREF="../../hudson/security/SecurityRealm.html#createCliAuthenticator(hudson.cli.CLICommand)">createCliAuthenticator</A>, <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)">createFilter</A>, <A HREF="../../hudson/security/SecurityRealm.html#doCaptcha(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCaptcha</A>, <A HREF="../../hudson/security/SecurityRealm.html#doLogout(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doLogout</A>, <A HREF="../../hudson/security/SecurityRealm.html#findBean(java.lang.Class, org.springframework.context.ApplicationContext)">findBean</A>, <A HREF="../../hudson/security/SecurityRealm.html#getAuthenticationGatewayUrl()">getAuthenticationGatewayUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/security/SecurityRealm.html#getLoginUrl()">getLoginUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getPostLogOutUrl(org.kohsuke.stapler.StaplerRequest, org.acegisecurity.Authentication)">getPostLogOutUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()">getSecurityComponents</A>, <A HREF="../../hudson/security/SecurityRealm.html#loadUserByUsername(java.lang.String)">loadUserByUsername</A>, <A HREF="../../hudson/security/SecurityRealm.html#validateCaptcha(java.lang.String)">validateCaptcha</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/security/SecurityRealm.html#all()">all</A>, <A HREF="../../hudson/security/SecurityRealm.html#allowsSignup()">allowsSignup</A>, <A HREF="../../hudson/security/SecurityRealm.html#canLogOut()">canLogOut</A>, <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)">createFilter</A>, <A HREF="../../hudson/security/SecurityRealm.html#doCaptcha(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doCaptcha</A>, <A HREF="../../hudson/security/SecurityRealm.html#doLogout(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doLogout</A>, <A HREF="../../hudson/security/SecurityRealm.html#findBean(java.lang.Class, org.springframework.context.ApplicationContext)">findBean</A>, <A HREF="../../hudson/security/SecurityRealm.html#getAuthenticationGatewayUrl()">getAuthenticationGatewayUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getDescriptor()">getDescriptor</A>, <A HREF="../../hudson/security/SecurityRealm.html#getLoginUrl()">getLoginUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getPostLogOutUrl(org.kohsuke.stapler.StaplerRequest, org.acegisecurity.Authentication)">getPostLogOutUrl</A>, <A HREF="../../hudson/security/SecurityRealm.html#getSecurityComponents()">getSecurityComponents</A>, <A HREF="../../hudson/security/SecurityRealm.html#validateCaptcha(java.lang.String)">validateCaptcha</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -673,10 +700,77 @@ public <A HREF="../../hudson/security/SecurityRealm.SecurityComponents.html" tit
  overriding <A HREF="../../hudson/security/SecurityRealm.html#createFilter(javax.servlet.FilterConfig)"><CODE>SecurityRealm.createFilter(FilterConfig)</CODE></A>.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/SecurityRealm.html#createSecurityComponents()">createSecurityComponents</A></CODE> in class <CODE><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html#createSecurityComponents()">createSecurityComponents</A></CODE> in class <CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">AbstractPasswordBasedSecurityRealm</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="authenticate(java.lang.String, java.lang.String)"><!-- --></A><H3>
+authenticate</H3>
+<PRE>
+protected org.acegisecurity.userdetails.UserDetails <B>authenticate</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;username,
+                                                                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;password)
+                                                          throws org.acegisecurity.AuthenticationException</PRE>
+<DL>
+<DD>Authenticate a login attempt.
+ This method is the heart of a <A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security"><CODE>AbstractPasswordBasedSecurityRealm</CODE></A>.
+
+ <p>
+ If the user name and the password pair matches, retrieve the information about this user and
+ return it as a <CODE>UserDetails</CODE> object. <CODE>User</CODE> is a convenient
+ implementation to use, but if your backend offers additional data, you may want to use your own subtype
+ so that the rest of Hudson can use those additional information (such as e-mail address --- see
+ <A HREF="../../hudson/tasks/MailAddressResolver.html" title="class in hudson.tasks"><CODE>MailAddressResolver</CODE></A>.)
+
+ <p>
+ Properties like <CODE>UserDetails.getPassword()</CODE> make no sense, so just return an empty value from it.
+ The only information that you need to pay real attention is <CODE>UserDetails.getAuthorities()</CODE>, which
+ is a list of roles/groups that the user is in. At minimum, this must contain <A HREF="../../hudson/security/SecurityRealm.html#AUTHENTICATED_AUTHORITY"><CODE>SecurityRealm.AUTHENTICATED_AUTHORITY</CODE></A>
+ (which indicates that this user is authenticated and not anonymous), but if your backend supports a notion
+ of groups, you should make sure that the authorities contain one entry per one group. This enables
+ users to control authorization based on groups.
+
+ <p>
+ If the user name and the password pair doesn't match, throw <CODE>AuthenticationException</CODE> to reject the login
+ attempt.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html#authenticate(java.lang.String, java.lang.String)">authenticate</A></CODE> in class <CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">AbstractPasswordBasedSecurityRealm</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.acegisecurity.AuthenticationException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="loadUserByUsername(java.lang.String)"><!-- --></A><H3>
+loadUserByUsername</H3>
+<PRE>
+public org.acegisecurity.userdetails.UserDetails <B>loadUserByUsername</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;username)
+                                                             throws org.acegisecurity.userdetails.UsernameNotFoundException,
+                                                                    org.springframework.dao.DataAccessException</PRE>
+<DL>
+<DD>Retrieves information about an user by its name.
+
+ <p>
+ This method is used, for example, to validate if the given token is a valid user name when the user is configuring an ACL.
+ This is an optional method that improves the user experience. If your backend doesn't support
+ a query like this, just always throw <CODE>UsernameNotFoundException</CODE>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>loadUserByUsername</CODE> in interface <CODE>org.acegisecurity.userdetails.UserDetailsService</CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html#loadUserByUsername(java.lang.String)">loadUserByUsername</A></CODE> in class <CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">AbstractPasswordBasedSecurityRealm</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>never null.
+<DT><B>Throws:</B>
+<DD><CODE>org.acegisecurity.userdetails.UsernameNotFoundException</CODE>
+<DD><CODE>org.springframework.dao.DataAccessException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -694,7 +788,7 @@ public <A HREF="../../hudson/security/GroupDetails.html" title="class in hudson.
  not return any data if the given name lacks the proper prefix and/or case.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/security/SecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></CODE> in class <CODE><A HREF="../../hudson/security/SecurityRealm.html" title="class in hudson.security">SecurityRealm</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html#loadGroupByGroupname(java.lang.String)">loadGroupByGroupname</A></CODE> in class <CODE><A HREF="../../hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security">AbstractPasswordBasedSecurityRealm</A></CODE></DL>
 </DD>
 <DD><DL>
 

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Node (Hudson main module 1.372 API)
+Node (Hudson main module 1.373 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-13">
+<META NAME="date" CONTENT="2010-08-23">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Node (Hudson main module 1.372 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Node (Hudson main module 1.372 API)";
+        parent.document.title="Node (Hudson main module 1.373 API)";
     }
 }
 </SCRIPT>
@@ -246,7 +246,7 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#getAssignedLabels()">getAssignedLabels</A></B>()</CODE>
 
 <BR>
@@ -297,7 +297,7 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/TagCloud.html" title="class in hudson.util">TagCloud</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/TagCloud.html" title="class in hudson.util">TagCloud</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#getLabelCloud()">getLabelCloud</A></B>()</CODE>
 
 <BR>
@@ -379,7 +379,7 @@ Base type of Hudson slaves (although in practice, you probably extend <A HREF=".
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Node.html#getSelfLabel()">getSelfLabel</A></B>()</CODE>
 
 <BR>
@@ -716,7 +716,7 @@ protected abstract <A HREF="../../hudson/model/Computer.html" title="class in hu
 <A NAME="getLabelCloud()"><!-- --></A><H3>
 getLabelCloud</H3>
 <PRE>
-public <A HREF="../../hudson/util/TagCloud.html" title="class in hudson.util">TagCloud</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt; <B>getLabelCloud</B>()</PRE>
+public <A HREF="../../hudson/util/TagCloud.html" title="class in hudson.util">TagCloud</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt; <B>getLabelCloud</B>()</PRE>
 <DL>
 <DD>Return the possibly empty tag cloud for the labels of this node.
 <P>
@@ -733,7 +733,7 @@ public <A HREF="../../hudson/util/TagCloud.html" title="class in hudson.util">Ta
 getAssignedLabels</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A>&gt; <B>getAssignedLabels</B>()</PRE>
+</FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>&gt; <B>getAssignedLabels</B>()</PRE>
 <DL>
 <DD>Returns the possibly empty set of labels that are assigned to this node,
  including the automatic <A HREF="../../hudson/model/Node.html#getSelfLabel()"><CODE>self label</CODE></A>, manually
@@ -778,7 +778,7 @@ public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Strin
 getSelfLabel</H3>
 <PRE>
 <FONT SIZE="-1">@WithBridgeMethods(value=<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label.class</A>)
-</FONT>public <A HREF="../../hudson/model/label/LabelAtom.html" title="class in hudson.model.label">LabelAtom</A> <B>getSelfLabel</B>()</PRE>
+</FONT>public <A HREF="../../hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A> <B>getSelfLabel</B>()</PRE>
 <DL>
 <DD>Gets the special label that represents this node itself.
 <P>
