@@ -23,11 +23,16 @@ class HudsonInstance:
     def __init__(self, hudsonUrl):
         self.URL = hudsonUrl
 
+    def escapeUrl(self, url):
+        for char in ":# ":
+            url = url.replace(char, "_")
+        return url
+
     def getAbsoluteUrl(self, relativeUrl):
         # Take care of proper url joining.
         if not (self.URL.endswith("/") or relativeUrl.startswith("/")):
             relativeUrl = "/" + relativeUrl
-        return self.URL + relativeUrl
+        return self.URL + self.escapeUrl(relativeUrl)
 
     def read(self, url, postVarDict=None):
         if postVarDict:
