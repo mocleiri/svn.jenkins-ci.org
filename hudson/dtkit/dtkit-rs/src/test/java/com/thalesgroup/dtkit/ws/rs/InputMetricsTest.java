@@ -61,7 +61,7 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         String xmlResult = clientResponse.getEntity(String.class);
         Assert.assertNotNull(xmlResult);
-        //Assert.assertEquals(readContentInputStream(this.getClass().getResourceAsStream("cppunit/cppunit-xml-result.xml")), xmlResult);
+        Assert.assertEquals(readContentInputStream(this.getClass().getResourceAsStream("cppunit/cppunit-xml-result.xml")), xmlResult);
     }
 
     @Test
