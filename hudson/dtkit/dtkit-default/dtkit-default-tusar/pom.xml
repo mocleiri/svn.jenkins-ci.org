@@ -23,118 +23,29 @@
 *******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.jvnet.hudson.dtkit</groupId>
         <artifactId>dtkit-default</artifactId>
-        <version>0.5-SNAPSHOT</version>
+        <version>0.6-SNAPSHOT</version>
     </parent>
 
     <artifactId>dtkit-default-tusar</artifactId>
-    <version>0.6-SNAPSHOT</version>
     <name>DTKIT Default TUSAR</name>
-    <packaging>hudsonjar</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <!-- Used for creating the user classes -->
-        <dependency>
-            <groupId>org.jvnet.hudson.dtkit</groupId>
-            <artifactId>dtkit-metrics-api</artifactId>
-        </dependency>
-
-        <!-- Used for compiling the generated Hudson classes -->
-        <dependency>
-            <groupId>org.jvnet.hudson.dtkit</groupId>
-            <artifactId>dtkit-metrics-hudson-api</artifactId>
-        </dependency>
-
-        <!-- Used for compiling the generated classes -->
-        <dependency>
-            <groupId>org.jvnet.hudson.main</groupId>
-            <artifactId>hudson-core</artifactId>
-            <version>${hudson.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- JUNIT MODEL -->
         <dependency>
             <groupId>org.jvnet.hudson.dtkit</groupId>
             <artifactId>dtkit-tusar-model</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>xmlunit</groupId>
-            <artifactId>xmlunit</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
-                <artifactId>dtkit-hudson-maven-plugin</artifactId>
-                <version>${dtkit.plugins.version}</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>generate-hudson</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-
-                    <execution>
-                        <id>package-hudson</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>packager</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-            </plugin>
-
-            <!-- Execute but with no effect for the first compilation time -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.5</version>
-                <configuration>
-                    <sources>
-                        <source>${project.build.directory}/generated-sources/groovy</source>
-                    </sources>
-                </configuration>
-
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources/groovy</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
@@ -143,7 +54,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>
