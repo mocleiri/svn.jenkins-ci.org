@@ -1,21 +1,87 @@
+<!--
+/*******************************************************************************
+* Copyright (c) 2010 Thales Corporate Services SAS                             *
+* Author : Gregory Boissinot                                                   *
+*                                                                              *
+* Permission is hereby granted, free of charge, to any person obtaining a copy *
+* of this software and associated documentation files (the "Software"), to deal*
+* in the Software without restriction, including without limitation the rights *
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell    *
+* copies of the Software, and to permit persons to whom the Software is        *
+* furnished to do so, subject to the following conditions:                     *
+*                                                                              *
+* The above copyright notice and this permission notice shall be included in   *
+* all copies or substantial portions of the Software.                          *
+*                                                                              *
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR   *
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,     *
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  *
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER       *
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,*
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN    *
+* THE SOFTWARE.                                                                *
+*******************************************************************************/
+-->
 <component-set>
     <components>
+
         <component>
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
-            <role-hint>hudsonjar</role-hint>
+            <role-hint>dtkit-hudson-jar</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
             <configuration>
                 <phases>
                     <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources</process-resources>
-                    <compile>org.kohsuke.stapler:maven-stapler-plugin:stapler,org.kohsuke.stapler:maven-stapler-plugin:apt-compile</compile>
-                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources</process-test-resources>
+                    <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
+                    <process-classes>org.jvnet.hudson.dtkit:dtkit-hudson-maven-plugin:generate</process-classes>
+                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources
+                    </process-test-resources>
                     <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
                     <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                    <package>org.apache.maven.plugins:maven-jar-plugin:jar</package>
+                    <prepare-package>
+                        org.kohsuke.stapler:maven-stapler-plugin:stapler,org.kohsuke.stapler:maven-stapler-plugin:apt-compile
+                    </prepare-package>
+                    <package>org.apache.maven.plugins:maven-jar-plugin:jar</package>-->
+                    <!--<package>org.jvnet.hudson.dtkit:dtkit-hudson-maven-plugin:packager</package>-->
                     <install>org.apache.maven.plugins:maven-install-plugin:install</install>
                     <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
                 </phases>
             </configuration>
         </component>
+
+        <component>
+            <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+            <role-hint>dtkit-hudson-hpi</role-hint>
+            <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+            <configuration>
+                <phases>
+                    <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources</process-resources>
+                    <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
+                    <process-classes>org.jvnet.hudson.dtkit:dtkit-hudson-maven-plugin:generate</process-classes>
+                    <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources
+                    </process-test-resources>
+                    <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
+                    <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
+                    <prepare-package>org.jvnet.hudson.tools:maven-hpi-plugin:apt-compile</prepare-package>
+                    <package>org.jvnet.hudson.tools:maven-hpi-plugin:hpi</package>
+                    <install>org.apache.maven.plugins:maven-install-plugin:install</install>
+                    <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
+                </phases>
+            </configuration>
+        </component>
+
+        <component>
+            <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+            <role-hint>dtkit-hudson-jar</role-hint>
+            <implementation>org.apache.maven.artifact.handler.DefaultArtifactHandler</implementation>
+            <configuration>
+                <extension>jar</extension>
+                <type>dtkit-hudson-jar</type>
+                <packaging>dtkit-hudson-jar</packaging>
+                <language>java</language>
+                <addedToClasspath>true</addedToClasspath>
+            </configuration>
+        </component>
+
     </components>
 </component-set>

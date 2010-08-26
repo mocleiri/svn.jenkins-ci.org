@@ -35,7 +35,6 @@ import org.apache.maven.project.MavenProject
  * Generate some Hudson source file from generic input type
  *
  * @goal generate
- * @execute phase="package"
  */
 public class GeneratorHudsonMojo extends AbstractMojo {
 
@@ -46,13 +45,14 @@ public class GeneratorHudsonMojo extends AbstractMojo {
   private MavenProject project;
 
   /**
-   * <i>Maven Internal</i>: List of artifacts for the plugin.
+   * <i>Maven Internal</i>: List of runtime artifacts for the projects.
    *
-   * @parameter expression="${plugin.artifacts}"
+   * @parameter expression="${project.runtimeArtifacts}"
    * @required
    * @readonly
    */
-  private List pluginClasspathList;
+  private List projectClasspathList;
+
 
   public void execute()
   throws MojoExecutionException {
@@ -60,16 +60,23 @@ public class GeneratorHudsonMojo extends AbstractMojo {
 
     try {
 
-      //Build a new classloader
-      URL[] urls = new URL[pluginClasspathList.size() + 1];
-      for (int i = 0; i < pluginClasspathList.size(); i++) {
-        urls[i] = new URL("file:///" + ((Artifact) pluginClasspathList.get(i)).getFile().getPath());
+      //Build a new classloader     
+      File output =  new File(project.getBuild().getOutputDirectory())
+      URL[] urls;
+      if (output.exists()) {
+         urls = new URL[projectClasspathList.size() + 1];
+         urls[urls.length - 1] = new URL("file:///" + project.getBuild().getOutputDirectory() + "/");
       }
-      urls[urls.length - 1] = new URL("file:///" + project.getBuild().getDirectory() + "/" + project.getBuild().getFinalName() + ".jar");
+      else {
+        urls = new URL[+ projectClasspathList.size()];
+      }
+      for (int i = 0; i < projectClasspathList.size(); i++) {
+        urls[i] = new URL("file:///" + ((Artifact) projectClasspathList.get(i)).getFile().getPath());
+      }      
       ClassLoader cl = new URLClassLoader(urls, Thread.currentThread().getContextClassLoader());
 
       // Retrieve all input type
-      getLog().info("Introspect all the type");
+      getLog().info("Introspecting all DTKIT metrics");
       ServiceLoader<InputMetric> metricsLoader = ServiceLoader.load(InputMetric.class, cl);
       metricsLoader.reload();
 
@@ -77,7 +84,7 @@ public class GeneratorHudsonMojo extends AbstractMojo {
       Iterator<InputMetric> commandsIterator = metricsLoader.iterator();
       while (commandsIterator.hasNext()) {
         InputMetric metric = commandsIterator.next();
-        getLog().info("Genereration the Hudson class for "+ metric.getLabel());
+        getLog().info("Genererating the Hudson class for "+ metric.getLabel() + " metric");
         switch (metric.getToolType()) {
           case InputType.TEST: generateTest("com.thalesgroup.dtkit.metrics.hudson.model", metric); break;
           case InputType.COVERAGE: generateCoverage("com.thalesgroup.dtkit.metrics.hudson.model", metric); break;
@@ -87,7 +94,7 @@ public class GeneratorHudsonMojo extends AbstractMojo {
       }
     }
     catch (Exception e) {
-      getLog().error("A problem occured during transformation " + e);
+      getLog().error("A problem occured during Hudson generation " + e);
     }
   }
 
