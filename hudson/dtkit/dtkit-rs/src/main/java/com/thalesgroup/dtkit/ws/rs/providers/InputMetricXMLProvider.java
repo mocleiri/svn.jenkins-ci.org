@@ -26,8 +26,8 @@ package com.thalesgroup.dtkit.ws.rs.providers;
 import com.thalesgroup.dtkit.junit.model.JUnitModel;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
-import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -47,23 +47,28 @@ public class InputMetricXMLProvider implements ContextResolver<JAXBContext> {
 
     private JAXBContext ctx;
 
+    public JAXBContext buildJAXBContext() throws JAXBException {
+        ServiceLoader<InputMetric> metricServiceLoader = ServiceLoader.load(InputMetric.class, Thread.currentThread().getContextClassLoader());
+        metricServiceLoader.reload();
+
+        List<Class> listInputMetricClass = new ArrayList<Class>();
+        for (InputMetric inputMetric : metricServiceLoader) {
+            listInputMetricClass.add(inputMetric.getClass());
+        }
+        //Add the object class built by the response of the method
+        listInputMetricClass.add(InputMetricsResult.class);
+        listInputMetricClass.add(InputMetricResult.class);
+        //Add the object implemented class of the interface com.thalesgroup.dtkit.metrics.api.OutputMetric
+        listInputMetricClass.add(JUnitModel.class);
+        listInputMetricClass.add(TusarModel.class);
+
+        return JAXBContext.newInstance(listInputMetricClass.toArray(new Class[listInputMetricClass.size()]));
+    }
+
+
     public InputMetricXMLProvider() {
         try {
-            ServiceLoader<InputMetric> metricServiceLoader = ServiceLoader.load(InputMetric.class, Thread.currentThread().getContextClassLoader());
-            metricServiceLoader.reload();
-
-            List<Class> listInputMetricClass = new ArrayList<Class>();
-            for (InputMetric inputMetric : metricServiceLoader) {
-                listInputMetricClass.add(inputMetric.getClass());
-            }
-            //Add the object class built by the response of the method
-            listInputMetricClass.add(InputMetricsResult.class);
-            listInputMetricClass.add(InputMetricResult.class);
-            //Add the object implemented class of the interface com.thalesgroup.dtkit.metrics.api.OutputMetric
-            listInputMetricClass.add(JUnitModel.class);
-            listInputMetricClass.add(TusarModel.class);
-
-            ctx = JAXBContext.newInstance(listInputMetricClass.toArray(new Class[listInputMetricClass.size()]));
+            ctx = buildJAXBContext();
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -74,7 +79,7 @@ public class InputMetricXMLProvider implements ContextResolver<JAXBContext> {
         // Used a dedicated JAXBContext due to the com.thalesgroup.dtkit.metrics.api.OutputMetric interface.
         // There is an adapter. Nevertheless, all the interface implementations must have an instance and they must be
         // referred by the JAXBContext
-        if (type == InputMetricsResult.class || type== InputMetricResult.class) {
+        if (type == InputMetricsResult.class || type == InputMetricResult.class) {
             return ctx;
         } else {
             return null;

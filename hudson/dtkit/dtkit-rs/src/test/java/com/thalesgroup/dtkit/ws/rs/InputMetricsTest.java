@@ -7,16 +7,23 @@ import com.thalesgroup.dtkit.junit.CppTest;
 import com.thalesgroup.dtkit.junit.CppUnit;
 import com.thalesgroup.dtkit.metrics.api.InputMetric;
 import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
-import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
+import com.thalesgroup.dtkit.ws.rs.providers.InputMetricXMLProvider;
 import com.thalesgroup.dtkit.ws.rs.resources.InputMetrics;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -56,12 +63,27 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
     }
 
     @Test
-    public void getInputMetricCppunitXML() throws IOException {
+    public void getInputMetricCppunitXML() throws Exception {
         ClientResponse clientResponse = webResource.path("/cppunit").accept(MediaType.APPLICATION_XML_TYPE).get(ClientResponse.class);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         String xmlResult = clientResponse.getEntity(String.class);
         Assert.assertNotNull(xmlResult);
-        Assert.assertEquals(readContentInputStream(this.getClass().getResourceAsStream("cppunit/cppunit-xml-result.xml")), xmlResult);
+
+        try {
+            InputMetricXMLProvider inputMetricXMLProvider = new InputMetricXMLProvider();
+            JAXBContext context = inputMetricXMLProvider.buildJAXBContext();
+            Unmarshaller u = context.createUnmarshaller();
+            SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = sf.newSchema(this.getClass().getResource("cppunit/cppunit-xml-result.xml.xsd"));
+            u.setSchema(schema);
+            InputMetric expectedCppUnit = InputMetricFactory.getInstance(CppUnit.class);
+            InputMetricResult inputMetricResult= (InputMetricResult) (u.unmarshal(this.getClass().getResourceAsStream("cppunit/cppunit-xml-result.xml")));
+            InputMetric actualCppUnit = inputMetricResult.getInputMetric(); 
+            Assert.assertTrue(expectedCppUnit.equals(actualCppUnit));
+            Assert.assertTrue(true);
+        } catch (JAXBException e) {
+            Assert.assertTrue(false);
+        }
     }
 
     @Test
