@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="result" type="resultType"/>
+
+
+    <xs:complexType name="outputFormatTypeType" abstract="true"/>
+    <xs:complexType name="jUnitModel">
+        <xs:complexContent mixed="true">
+            <xs:extension base="outputFormatTypeType">
+                <xs:sequence>
+                    <xs:element type="xs:string" name="description"/>
+                    <xs:element type="xs:string" name="key"/>
+                    <xs:element type="xs:string" name="version"/>
+                    <xs:element type="xs:string" name="xsd"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="inputMetricType" abstract="true"/>
+    <xs:complexType name="cppUnit">
+        <xs:complexContent mixed="true">
+            <xs:extension base="inputMetricType">
+                <xs:sequence>
+                    <xs:element type="xs:string" name="inputMetricType"/>
+                    <xs:element type="xs:string" name="label"/>
+                    <xs:element type="outputFormatTypeType" name="outputFormatType"/>
+                    <xs:element type="xs:string" name="toolName"/>
+                    <xs:element type="xs:string" name="toolType"/>
+                    <xs:element type="xs:string" name="toolVersion"/>
+                    <xs:element type="xs:string" name="inputXsd"/>
+                    <xs:element type="xs:string" name="xslName"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="resultType">
+        <xs:sequence>
+            <xs:element type="inputMetricType" name="inputMetric"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
