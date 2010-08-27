@@ -24,6 +24,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -66,7 +67,7 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
     public void getInputMetricCppunitXML() throws Exception {
         ClientResponse clientResponse = webResource.path("/cppunit").accept(MediaType.APPLICATION_XML_TYPE).get(ClientResponse.class);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
-        String xmlResult = clientResponse.getEntity(String.class);
+        InputStream xmlResult = clientResponse.getEntity(InputStream.class);
         Assert.assertNotNull(xmlResult);
 
         try {
@@ -77,7 +78,7 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
             Schema schema = sf.newSchema(this.getClass().getResource("cppunit/cppunit-xml-result.xml.xsd"));
             u.setSchema(schema);
             InputMetric expectedCppUnit = InputMetricFactory.getInstance(CppUnit.class);
-            InputMetricResult inputMetricResult= (InputMetricResult) (u.unmarshal(this.getClass().getResourceAsStream("cppunit/cppunit-xml-result.xml")));
+            InputMetricResult inputMetricResult= (InputMetricResult) (u.unmarshal(xmlResult));
             InputMetric actualCppUnit = inputMetricResult.getInputMetric(); 
             Assert.assertTrue(expectedCppUnit.equals(actualCppUnit));
             Assert.assertTrue(true);
