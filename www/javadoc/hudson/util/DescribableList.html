@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DescribableList (Hudson main module 1.373 API)
+DescribableList (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescribableList (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescribableList (Hudson main module 1.373 API)";
+        parent.document.title="DescribableList (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -504,7 +504,8 @@ rebuild</H3>
 public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                     net.sf.json.JSONObject&nbsp;json,
                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors)
-             throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+             throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Rebuilds the list by creating a fresh instances from the submitted form.
 
@@ -515,7 +516,8 @@ public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>json</CODE> - Structured form data that includes the data for nested descriptor list.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -527,7 +529,8 @@ public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                     net.sf.json.JSONObject&nbsp;json,
                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix)
-             throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+             throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.271
       Use <A HREF="../../hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List)"><CODE>rebuild(StaplerRequest, JSONObject, List)</CODE></A> instead.</I>
@@ -535,7 +538,8 @@ public void <B>rebuild</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -547,7 +551,8 @@ public void <B>rebuildHetero</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                           net.sf.json.JSONObject&nbsp;formData,
                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../../hudson/util/DescribableList.html" title="type parameter in DescribableList">T</A>&gt;&gt;&nbsp;descriptors,
                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;key)
-                   throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></PRE>
+                   throws <A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A>,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Rebuilds the list by creating a fresh instances from the submitted form.
 
@@ -559,7 +564,8 @@ public void <B>rebuildHetero</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE></DL>
+<DD><CODE><A HREF="../../hudson/model/Descriptor.FormException.html" title="class in hudson.model">Descriptor.FormException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

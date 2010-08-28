@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.373 API)
+Job (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.373 API)";
+        parent.document.title="Job (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -332,16 +332,6 @@ A job is an runnable entity under the monitoring of Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;org.koshuke.stapler.simile.timeline.TimelineEventList</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Job.html#doTimelineData(org.kohsuke.stapler.StaplerRequest, long, long)">doTimelineData</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-               long&nbsp;min,
-               long&nbsp;max)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/security/ACL.html" title="class in hudson.security">ACL</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getACL()">getACL</A></B>()</CODE>
 
@@ -415,11 +405,11 @@ A job is an runnable entity under the monitoring of Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getBuilds()">getBuilds</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the builds.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the read-only view of all the builds.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -439,12 +429,12 @@ A job is an runnable entity under the monitoring of Hudson.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getBuildsByTimestamp(long, long)">getBuildsByTimestamp</A></B>(long&nbsp;start,
                      long&nbsp;end)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a list of builds, in the descending order, that are within the specified time range [start,end).</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.372. Should just do <code>getBuilds().byTimestamp(s,e)</code> to avoid code bloat in <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</I></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -646,6 +636,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/BuildTimelineWidget.html" title="class in hudson.model">BuildTimelineWidget</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getTimeline()">getTimeline</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/widgets/Widget.html" title="class in hudson.widgets">Widget</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Job.html#getWidgets()">getWidgets</A></B>()</CODE>
 
@@ -842,7 +840,7 @@ T</CODE></FONT></TD>
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.<A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSetName(java.lang.String)">doSetName</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getParent()">getParent</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#resolveForCLI(java.lang.String)">resolveForCLI</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/AbstractItem.html#checkPermission(hudson.security.Permission)">checkPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#delete()">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#delete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">delete</A>, <A HREF="../../hudson/model/AbstractItem.html#doDoDelete(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doDoDelete</A>, <A HREF="../../hudson/model/AbstractItem.html#doSetName(java.lang.String)">doSetName</A>, <A HREF="../../hudson/model/AbstractItem.html#doSubmitDescription(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doSubmitDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getAbsoluteUrl()">getAbsoluteUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getApi()">getApi</A>, <A HREF="../../hudson/model/AbstractItem.html#getConfigFile()">getConfigFile</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescription()">getDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#getDescriptorByName(java.lang.String)">getDescriptorByName</A>, <A HREF="../../hudson/model/AbstractItem.html#getDisplayName()">getDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/AbstractItem.html#getFullName()">getFullName</A>, <A HREF="../../hudson/model/AbstractItem.html#getName()">getName</A>, <A HREF="../../hudson/model/AbstractItem.html#getParent()">getParent</A>, <A HREF="../../hudson/model/AbstractItem.html#getRootDir()">getRootDir</A>, <A HREF="../../hudson/model/AbstractItem.html#getSearchUrl()">getSearchUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getShortUrl()">getShortUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/AbstractItem.html#hasPermission(hudson.security.Permission)">hasPermission</A>, <A HREF="../../hudson/model/AbstractItem.html#onCreatedFromScratch()">onCreatedFromScratch</A>, <A HREF="../../hudson/model/AbstractItem.html#resolveForCLI(java.lang.String)">resolveForCLI</A>, <A HREF="../../hudson/model/AbstractItem.html#setDescription(java.lang.String)">setDescription</A>, <A HREF="../../hudson/model/AbstractItem.html#toString()">toString</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Actionable"><!-- --></A>
@@ -1536,9 +1534,10 @@ isBuildable</H3>
 getBuilds</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>getBuilds</B>()</PRE>
+@WithBridgeMethods(value=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">java.util.List.class</A>)
+</FONT>public <A HREF="../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>getBuilds</B>()</PRE>
 <DL>
-<DD>Gets all the builds.
+<DD>Gets the read-only view of all the builds.
 <P>
 <DD><DL>
 </DL>
@@ -1618,9 +1617,12 @@ public <A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT<
 <A NAME="getBuildsByTimestamp(long, long)"><!-- --></A><H3>
 getBuildsByTimestamp</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>getBuildsByTimestamp</B>(long&nbsp;start,
-                                       long&nbsp;end)</PRE>
+<FONT SIZE="-1">@WithBridgeMethods(value=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">java.util.List.class</A>)
+</FONT>public <A HREF="../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt; <B>getBuildsByTimestamp</B>(long&nbsp;start,
+                                                                                long&nbsp;end)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.372. Should just do <code>getBuilds().byTimestamp(s,e)</code> to avoid code bloat in <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</I>
+<P>
 <DD>Obtains a list of builds, in the descending order, that are within the specified time range [start,end).
 <P>
 <DD><DL>
@@ -2219,23 +2221,16 @@ public <A HREF="../../hudson/security/ACL.html" title="class in hudson.security"
 </DL>
 <HR>
 
-<A NAME="doTimelineData(org.kohsuke.stapler.StaplerRequest, long, long)"><!-- --></A><H3>
-doTimelineData</H3>
+<A NAME="getTimeline()"><!-- --></A><H3>
+getTimeline</H3>
 <PRE>
-public org.koshuke.stapler.simile.timeline.TimelineEventList <B>doTimelineData</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                                                                            <FONT SIZE="-1">@QueryParameter</FONT>
-                                                                            long&nbsp;min,
-                                                                            <FONT SIZE="-1">@QueryParameter</FONT>
-                                                                            long&nbsp;max)
-                                                                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public <A HREF="../../hudson/model/BuildTimelineWidget.html" title="class in hudson.model">BuildTimelineWidget</A> <B>getTimeline</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

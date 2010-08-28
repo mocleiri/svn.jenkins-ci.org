@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractItem (Hudson main module 1.373 API)
+AbstractItem (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractItem (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractItem (Hudson main module 1.373 API)";
+        parent.document.title="AbstractItem (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -398,6 +398,15 @@ Partial default implementation of <A HREF="../../hudson/model/Item.html" title="
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractItem.html#onCreatedFromScratch()">onCreatedFromScratch</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When an item is created from scratch (instead of copied),
+ this method will be invoked.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractItem.html#onLoad(hudson.model.ItemGroup, java.lang.String)">onLoad</A></B>(<A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;? extends <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>&gt;&nbsp;parent,
        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</CODE>
 
@@ -553,6 +562,24 @@ protected <B>AbstractItem</B>(<A HREF="../../hudson/model/ItemGroup.html" title=
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
+
+<A NAME="onCreatedFromScratch()"><!-- --></A><H3>
+onCreatedFromScratch</H3>
+<PRE>
+public void <B>onCreatedFromScratch</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/Item.html#onCreatedFromScratch()">Item</A></CODE></B></DD>
+<DD>When an item is created from scratch (instead of copied),
+ this method will be invoked. Used as the post-construction initialization.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Item.html#onCreatedFromScratch()">onCreatedFromScratch</A></CODE> in interface <CODE><A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
 
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>

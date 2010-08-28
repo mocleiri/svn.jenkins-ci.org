@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ArgumentListBuilder (Hudson main module 1.373 API)
+ArgumentListBuilder (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ArgumentListBuilder (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ArgumentListBuilder (Hudson main module 1.373 API)";
+        parent.document.title="ArgumentListBuilder (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -584,7 +584,8 @@ public <A HREF="../../hudson/util/ArgumentListBuilder.html" title="class in huds
  Wrap arguments in double quotes if they contain any of:
    space *?;^&<>|" or % followed by a letter.
  <br/> These characters are also prepended with a ^ character: ^&<>|
- <br/> A " is prepended with another " character.
+ <br/> A " is prepended with another " character.  Note: Windows has issues
+ escaping some combinations of quotes and spaces.  Quotes should be avoided.
  <br/> A % followed by a letter has that letter wrapped in double quotes,
  to avoid possible variable expansion.  ie, %foo% becomes "%"f"oo%".
  The second % does not need special handling because it is not followed

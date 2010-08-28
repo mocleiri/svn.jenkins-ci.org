@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-User (Hudson main module 1.373 API)
+User (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ User (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="User (Hudson main module 1.373 API)";
+        parent.document.title="User (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -332,7 +332,7 @@ Represents a user.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/User.html#getBuilds()">getBuilds</A></B>()</CODE>
 
 <BR>
@@ -898,7 +898,8 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 <A NAME="getBuilds()"><!-- --></A><H3>
 getBuilds</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&gt; <B>getBuilds</B>()</PRE>
+<FONT SIZE="-1">@WithBridgeMethods(value=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">java.util.List.class</A>)
+</FONT>public <A HREF="../../hudson/util/RunList.html" title="class in hudson.util">RunList</A> <B>getBuilds</B>()</PRE>
 <DL>
 <DD>Gets the list of <A HREF="../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>s that include changes by this user,
  by the timestamp order.

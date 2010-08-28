@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ManagedWindowsServiceLauncher (Hudson main module 1.373 API)
+ManagedWindowsServiceLauncher (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ManagedWindowsServiceLauncher (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ManagedWindowsServiceLauncher (Hudson main module 1.373 API)";
+        parent.document.title="ManagedWindowsServiceLauncher (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -383,6 +383,14 @@ public void <B>afterDisconnect</B>(<A HREF="../../../hudson/slaves/SlaveComputer
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">ComputerLauncher</A></CODE></B></DD>
 <DD>Allows the <A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.
+
+ <p>
+ This method is invoked after the <A HREF="../../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to this computer is terminated.
+
+ <p>
+ Disconnect operation is performed asynchronously, so there's no guarantee
+ that the corresponding <A HREF="../../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><CODE>SlaveComputer</CODE></A> exists for the duration of the
+ operation.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></CODE> in class <CODE><A HREF="../../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>

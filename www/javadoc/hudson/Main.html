@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Main (Hudson main module 1.373 API)
+Main (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Main (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Main (Hudson main module 1.373 API)";
+        parent.document.title="Main (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -127,6 +127,14 @@ Entry point to Hudson from command line.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Main.html#isDevelopmentMode">isDevelopmentMode</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set to true if we are running inside "mvn hpi:run" or "mvn hudson-dev:run"</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/Main.html#isUnitTest">isUnitTest</A></B></CODE>
 
 <BR>
@@ -219,6 +227,18 @@ isUnitTest</H3>
 public static boolean <B>isUnitTest</B></PRE>
 <DL>
 <DD>Set to true if we are running unit tests.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="isDevelopmentMode"><!-- --></A><H3>
+isDevelopmentMode</H3>
+<PRE>
+public static boolean <B>isDevelopmentMode</B></PRE>
+<DL>
+<DD>Set to true if we are running inside "mvn hpi:run" or "mvn hudson-dev:run"
 <P>
 <DL>
 </DL>

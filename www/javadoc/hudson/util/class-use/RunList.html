@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.util.RunList (Hudson main module 1.373 API)
+Uses of Class hudson.util.RunList (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.util.RunList (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.util.RunList (Hudson main module 1.373 API)";
+        parent.document.title="Uses of Class hudson.util.RunList (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -113,6 +113,22 @@ Uses of <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util"
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> declared as <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;?&gt;</CODE></FONT></TD>
+<TD><CODE><B>BuildTimelineWidget.</B><B><A HREF="../../../hudson/model/BuildTimelineWidget.html#builds">builds</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
 <TH ALIGN="left" COLSPAN="2">Methods in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> that return <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -126,7 +142,47 @@ Uses of <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util"
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
+<TD><CODE><B>User.</B><B><A HREF="../../../hudson/model/User.html#getBuilds()">getBuilds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the list of <A HREF="../../../hudson/model/Build.html" title="class in hudson.model"><CODE>Build</CODE></A>s that include changes by this user,
+ by the timestamp order.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
 <TD><CODE><B>Computer.</B><B><A HREF="../../../hudson/model/Computer.html#getBuilds()">getBuilds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Job.</B><B><A HREF="../../../hudson/model/Job.html#getBuilds()">getBuilds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the read-only view of all the builds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../../hudson/model/Job.html" title="type parameter in Job">RunT</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>Job.</B><B><A HREF="../../../hudson/model/Job.html#getBuildsByTimestamp(long, long)">getBuildsByTimestamp</A></B>(long&nbsp;start,
+                     long&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.372. Should just do <code>getBuilds().byTimestamp(s,e)</code> to avoid code bloat in <A HREF="../../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Constructors in <A HREF="../../../hudson/model/package-summary.html">hudson.model</A> with parameters of type <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/BuildTimelineWidget.html#BuildTimelineWidget(hudson.util.RunList)">BuildTimelineWidget</A></B>(<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;?&gt;&nbsp;builds)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -150,7 +206,16 @@ Uses of <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../../hudson/util/RunList.html" title="type parameter in RunList">R</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#byTimestamp(long, long)">byTimestamp</A></B>(long&nbsp;start,
+            long&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter the list by timestamp.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../../hudson/util/RunList.html" title="type parameter in RunList">R</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#failureOnly()">failureOnly</A></B>()</CODE>
 
 <BR>
@@ -158,15 +223,24 @@ Uses of <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
-<TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#fromRuns(java.util.Collection)">fromRuns</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt;&nbsp;runs)</CODE>
+<CODE>static
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;R extends <A HREF="../../../hudson/model/Run.html" title="class in hudson.model">Run</A>&gt; 
+<BR>
+<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;R&gt;</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#fromRuns(java.util.Collection)">fromRuns</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends R&gt;&nbsp;runs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../../hudson/util/RunList.html" title="type parameter in RunList">R</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#newBuilds()">newBuilds</A></B>()</CODE>
 
 <BR>
@@ -174,7 +248,7 @@ Uses of <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../../hudson/util/RunList.html" title="type parameter in RunList">R</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#node(hudson.model.Node)">node</A></B>(<A HREF="../../../hudson/model/Node.html" title="class in hudson.model">Node</A>&nbsp;node)</CODE>
 
 <BR>
@@ -182,7 +256,7 @@ Uses of <A HREF="../../../hudson/util/RunList.html" title="class in hudson.util"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../hudson/util/RunList.html" title="class in hudson.util">RunList</A>&lt;<A HREF="../../../hudson/util/RunList.html" title="type parameter in RunList">R</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>RunList.</B><B><A HREF="../../../hudson/util/RunList.html#regressionOnly()">regressionOnly</A></B>()</CODE>
 
 <BR>

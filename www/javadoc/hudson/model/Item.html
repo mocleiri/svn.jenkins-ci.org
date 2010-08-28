@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Item (Hudson main module 1.373 API)
+Item (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Item (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Item (Hudson main module 1.373 API)";
+        parent.document.title="Item (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -326,6 +326,15 @@ Basic configuration unit in Hudson.
  the files are first copied on the file system,
  then it will be loaded, then this method will be invoked
  to perform any implementation-specific work.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Item.html#onCreatedFromScratch()">onCreatedFromScratch</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When an item is created from scratch (instead of copied),
+ this method will be invoked.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -696,6 +705,23 @@ void <B>onCopiedFrom</B>(<A HREF="../../hudson/model/Item.html" title="interface
  the files are first copied on the file system,
  then it will be loaded, then this method will be invoked
  to perform any implementation-specific work.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onCreatedFromScratch()"><!-- --></A><H3>
+onCreatedFromScratch</H3>
+<PRE>
+void <B>onCreatedFromScratch</B>()</PRE>
+<DL>
+<DD>When an item is created from scratch (instead of copied),
+ this method will be invoked. Used as the post-construction initialization.
 <P>
 <DD><DL>
 </DL>

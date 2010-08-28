@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ComputerLauncherFilter (Hudson main module 1.373 API)
+ComputerLauncherFilter (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ComputerLauncherFilter (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComputerLauncherFilter (Hudson main module 1.373 API)";
+        parent.document.title="ComputerLauncherFilter (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -386,6 +386,14 @@ public void <B>afterDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.ht
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">ComputerLauncher</A></CODE></B></DD>
 <DD>Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to tidy-up after a disconnect.
+
+ <p>
+ This method is invoked after the <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to this computer is terminated.
+
+ <p>
+ Disconnect operation is performed asynchronously, so there's no guarantee
+ that the corresponding <A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><CODE>SlaveComputer</CODE></A> exists for the duration of the
+ operation.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/slaves/ComputerLauncher.html#afterDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">afterDisconnect</A></CODE> in class <CODE><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>
@@ -404,6 +412,17 @@ public void <B>beforeDisconnect</B>(<A HREF="../../hudson/slaves/SlaveComputer.h
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">ComputerLauncher</A></CODE></B></DD>
 <DD>Allows the <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> to prepare for a disconnect.
+
+ <p>
+ This method is invoked before the <A HREF="../../hudson/remoting/Channel.html" title="class in hudson.remoting"><CODE>Channel</CODE></A> to this computer is terminated,
+ thus the channel is still accessible from <A HREF="../../hudson/slaves/SlaveComputer.html#getChannel()"><CODE>SlaveComputer.getChannel()</CODE></A>.
+ If the channel is terminated unexpectedly, this method will not be invoked,
+ as the channel is already gone.
+
+ <p>
+ Disconnect operation is performed asynchronously, so there's no guarantee
+ that the corresponding <A HREF="../../hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><CODE>SlaveComputer</CODE></A> exists for the duration of the
+ operation.
 <P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/slaves/ComputerLauncher.html#beforeDisconnect(hudson.slaves.SlaveComputer, hudson.model.TaskListener)">beforeDisconnect</A></CODE> in class <CODE><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves">ComputerLauncher</A></CODE></DL>

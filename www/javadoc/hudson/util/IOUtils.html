@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-IOUtils (Hudson main module 1.373 API)
+IOUtils (Hudson main module 1.374 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-23">
+<META NAME="date" CONTENT="2010-08-27">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ IOUtils (Hudson main module 1.373 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="IOUtils (Hudson main module 1.373 API)";
+        parent.document.title="IOUtils (Hudson main module 1.374 API)";
     }
 }
 </SCRIPT>
@@ -161,6 +161,15 @@ Adds more to commons-io.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/IOUtils.html#absolutize(java.io.File, java.lang.String)">absolutize</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;base,
+           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolves the given path with respect to given base.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/IOUtils.html#copy(java.io.File, java.io.OutputStream)">copy</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;src,
      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out)</CODE>
@@ -184,6 +193,14 @@ Adds more to commons-io.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drains the input stream and closes it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/IOUtils.html#isAbsolute(java.lang.String)">isAbsolute</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <A HREF="../../hudson/FilePath.html#isAbsolute(java.lang.String)"><CODE>FilePath.isAbsolute(String)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -329,6 +346,38 @@ public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStre
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.349</DD>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="absolutize(java.io.File, java.lang.String)"><!-- --></A><H3>
+absolutize</H3>
+<PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>absolutize</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;base,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path)</PRE>
+<DL>
+<DD>Resolves the given path with respect to given base. If the path represents an absolute path, a file representing
+ it is returned, otherwise a file representing a path relative to base is returned.
+ <p>
+ It would be nice if File#File(File, String) were doing this.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>base</CODE> - File that represents the parent, may be null if path is absolute<DD><CODE>path</CODE> - Path of the file, may not be null
+<DT><B>Returns:</B><DD>new File(name) if name represents an absolute path, new File(base, name) otherwise<DT><B>See Also:</B><DD><A HREF="../../hudson/FilePath.html#absolutize()"><CODE>FilePath.absolutize()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAbsolute(java.lang.String)"><!-- --></A><H3>
+isAbsolute</H3>
+<PRE>
+public static boolean <B>isAbsolute</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;path)</PRE>
+<DL>
+<DD>See <A HREF="../../hudson/FilePath.html#isAbsolute(java.lang.String)"><CODE>FilePath.isAbsolute(String)</CODE></A>.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>path</CODE> - String representing <code> Platform Specific </code> (unlike FilePath, which may get Platform agnostic paths), may not be null
+<DT><B>Returns:</B><DD>true if String represents absolute path on this platform, false otherwise</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
