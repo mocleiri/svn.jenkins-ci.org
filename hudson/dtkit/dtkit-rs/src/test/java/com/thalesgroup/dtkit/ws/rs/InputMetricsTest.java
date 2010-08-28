@@ -63,7 +63,6 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
         Assert.assertEquals(inputMetricsLocator.getAllMetrics().size(), count);
     }
 
-    @Test
     public void getInputMetricCppunitXML() throws Exception {
         ClientResponse clientResponse = webResource.path("/cppunit").accept(MediaType.APPLICATION_XML_TYPE).get(ClientResponse.class);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
