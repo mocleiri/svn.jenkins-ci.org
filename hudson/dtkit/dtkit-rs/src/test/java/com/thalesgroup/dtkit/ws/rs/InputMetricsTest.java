@@ -74,7 +74,7 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
             JAXBContext context = inputMetricXMLProvider.buildJAXBContext();
             Unmarshaller u = context.createUnmarshaller();
             SchemaFactory sf = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = sf.newSchema(this.getClass().getResource("cppunit/cppunit-xml-result.xml.xsd"));
+            Schema schema = sf.newSchema(this.getClass().getResource("cppunit/cppunit-xml-result.xsd"));
             u.setSchema(schema);
             InputMetric expectedCppUnit = InputMetricFactory.getInstance(CppUnit.class);
             InputMetricResult inputMetricResult= (InputMetricResult) (u.unmarshal(xmlResult));

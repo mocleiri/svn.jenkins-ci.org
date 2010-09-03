@@ -26,8 +26,8 @@ package com.thalesgroup.dtkit.ws.rs;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.LoggingFilter;
-import com.sun.jersey.multipart.MultiPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.multipart.MultiPart;
 import com.thalesgroup.dtkit.ws.rs.resources.InputMetricsValidation;
 import org.codehaus.jackson.JsonNode;
 import org.junit.Assert;
@@ -49,13 +49,30 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
     @Test
     public void validateInputFileValidFileForXML() throws Exception {
         MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE);
-        String result = webResource.path("/cppunit")
+        ClientResponse clientResponse = webResource.path("/cppunit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
-                .post(String.class, multiPart);
-        Assert.assertNotNull(result);
+                .post(ClientResponse.class, multiPart);
+        Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
+        String xmlResult = clientResponse.getEntity(String.class);
+        Assert.assertNotNull(xmlResult);
         String expectedOutput = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><validationResult><valid>true</valid><errors/></validationResult>";
-        Assert.assertEquals(expectedOutput, result);
+        Assert.assertEquals(expectedOutput, xmlResult);
+    }
+
+    @Test
+    public void validateInputFileValidFileWithValidXSDForXML() throws Exception {
+        MultiPart multiPart = new FormDataMultiPart()
+                .field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE)
+                .field("xsd", this.getClass().getResourceAsStream("cppunit/cppunit-input.xsd"), MediaType.APPLICATION_XML_TYPE);
+        ClientResponse clientResponse = webResource
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
+                .accept(MediaType.APPLICATION_XML_TYPE)
+                .post(ClientResponse.class, multiPart);
+        String xmlResult = clientResponse.getEntity(String.class);
+        Assert.assertNotNull(xmlResult);
+        String expectedOutput = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><validationResult><valid>true</valid><errors/></validationResult>";
+        Assert.assertEquals(expectedOutput, xmlResult);
     }
 
     @Test
@@ -82,8 +99,49 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
     }
 
     @Test
-    public void validateInputFileWithNoValidFileForXML() throws Exception {
+    public void validateInputFileValidFileWithValidXSDForJSON() throws Exception {
+        MultiPart multiPart = new FormDataMultiPart()
+                .field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE)
+                .field("xsd", this.getClass().getResourceAsStream("cppunit/cppunit-input.xsd"), MediaType.APPLICATION_XML_TYPE);
+        ClientResponse clientResponse = webResource
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(ClientResponse.class, multiPart);
+        Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
+        JsonNode node = clientResponse.getEntity(JsonNode.class);
+
+        Assert.assertNotNull(node);
+        //Node valid
+        JsonNode jsonNodeValid = node.get("valid");
+        Assert.assertTrue(jsonNodeValid.isBoolean());
+        Assert.assertTrue(node.get("valid").getBooleanValue());
+        //Node validationErrors
+        JsonNode jsonNodeValidationErrors = node.get("validationErrors");
+        jsonNodeValidationErrors.isArray();
+        jsonNodeValidationErrors.getElements();
+        Assert.assertFalse(jsonNodeValidationErrors.iterator().hasNext());
+        validateValidateMethodJSONXMLSchema(node.toString());
+    }
+
+    @Test
+    public void validateInputFileWithInvalidFileForXML() throws Exception {
         MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"), MediaType.APPLICATION_XML_TYPE);
+        ClientResponse clientResponse = webResource.path("/cppunit")
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
+                .accept(MediaType.APPLICATION_XML_TYPE)
+                .post(ClientResponse.class, multiPart);
+        Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
+        String xmlResult = clientResponse.getEntity(String.class);
+        Assert.assertNotNull(xmlResult);
+        String expectedOutput = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><validationResult><valid>false</valid><errors><error><line>2</line><message>cvc-elt.1: Cannot find the declaration of element 'TestRun2'.</message><type>ERROR</type></error></errors></validationResult>";
+        Assert.assertEquals(expectedOutput, xmlResult);
+    }
+
+    @Test
+    public void validateInputFileWithInvalidFileWithValidXSDForXML() throws Exception {
+        MultiPart multiPart = new FormDataMultiPart()
+                .field("file", this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"), MediaType.APPLICATION_XML_TYPE)
+                .field("xsd", this.getClass().getResourceAsStream("cppunit/cppunit-input.xsd"), MediaType.APPLICATION_XML_TYPE);
         ClientResponse clientResponse = webResource.path("/cppunit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
