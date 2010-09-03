@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import com.thalesgroup.dtkit.metrics.api.InputMetricXSL;
+import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationService;

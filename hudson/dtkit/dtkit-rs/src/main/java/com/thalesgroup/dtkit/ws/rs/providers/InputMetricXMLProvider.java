@@ -24,7 +24,7 @@
 package com.thalesgroup.dtkit.ws.rs.providers;
 
 import com.thalesgroup.dtkit.junit.model.JUnitModel;
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;

@@ -21,14 +21,14 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.metrics.api;
+package com.thalesgroup.dtkit.metrics.model;
 
 import org.codehaus.jackson.annotate.JsonValue;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * OutMetric Interface
+ * OutputMetric Interface
  * <p/>
  * It's a marker interface
  * <p/>

@@ -25,8 +25,8 @@ package com.thalesgroup.dtkit.ws.rs.resources;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
-import com.thalesgroup.dtkit.metrics.api.InputMetricXSL;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
 import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;

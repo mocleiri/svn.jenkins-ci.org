@@ -26,6 +26,8 @@ package com.thalesgroup.dtkit.ws.rs;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.LoggingFilter;
+import com.sun.jersey.multipart.MultiPart;
+import com.sun.jersey.multipart.FormDataMultiPart;
 import com.thalesgroup.dtkit.ws.rs.resources.InputMetricsValidation;
 import org.codehaus.jackson.JsonNode;
 import org.junit.Assert;
@@ -46,10 +48,11 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
 
     @Test
     public void validateInputFileValidFileForXML() throws Exception {
+        MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE);
         String result = webResource.path("/cppunit")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
-                .post(String.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
+                .post(String.class, multiPart);
         Assert.assertNotNull(result);
         String expectedOutput = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><validationResult><valid>true</valid><errors/></validationResult>";
         Assert.assertEquals(expectedOutput, result);
@@ -57,11 +60,11 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
 
     @Test
     public void validateInputFileValidFileForJSON() throws Exception {
-
+        MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE);
         ClientResponse clientResponse = webResource.path("/cppunit")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(ClientResponse.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
+                .post(ClientResponse.class, multiPart);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         JsonNode node = clientResponse.getEntity(JsonNode.class);
 
@@ -80,10 +83,11 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
 
     @Test
     public void validateInputFileWithNoValidFileForXML() throws Exception {
+        MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"), MediaType.APPLICATION_XML_TYPE);
         ClientResponse clientResponse = webResource.path("/cppunit")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
-                .post(ClientResponse.class, this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"));
+                .post(ClientResponse.class, multiPart);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         String xmlResult = clientResponse.getEntity(String.class);
         Assert.assertNotNull(xmlResult);
@@ -95,7 +99,7 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
     public void validateInputFileWithNoExistingMetric() throws Exception {
         WebResource webResource = resource();
         ClientResponse clientResponse = webResource.path("/notExistMetric")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE, MediaType.APPLICATION_JSON_TYPE)
                 .post(ClientResponse.class);
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), clientResponse.getStatus());

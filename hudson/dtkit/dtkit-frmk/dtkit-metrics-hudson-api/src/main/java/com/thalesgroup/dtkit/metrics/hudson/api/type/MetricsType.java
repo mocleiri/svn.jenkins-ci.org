@@ -23,7 +23,7 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.type;
 
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import hudson.ExtensionPoint;
 
 import java.io.Serializable;

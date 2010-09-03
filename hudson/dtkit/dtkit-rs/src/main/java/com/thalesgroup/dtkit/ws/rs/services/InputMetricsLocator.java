@@ -24,9 +24,9 @@
 package com.thalesgroup.dtkit.ws.rs.services;
 
 import com.google.inject.Singleton;
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
-import com.thalesgroup.dtkit.metrics.api.InputMetricException;
-import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricException;
+import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -23,9 +23,9 @@
 
 package com.thalesgroup.dtkit.junit;
 
-import com.thalesgroup.dtkit.metrics.api.InputMetricXSL;
-import com.thalesgroup.dtkit.metrics.api.InputType;
-import com.thalesgroup.dtkit.metrics.api.OutputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
+import com.thalesgroup.dtkit.metrics.model.InputType;
+import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.junit.model.JUnitModel;
 
 

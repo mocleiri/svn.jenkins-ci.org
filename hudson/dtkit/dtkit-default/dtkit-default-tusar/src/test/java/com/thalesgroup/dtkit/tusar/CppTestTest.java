@@ -28,7 +28,17 @@ import org.junit.Test;
 public class CppTestTest extends AbstractTest {
 
     @Test
-    public void testAutoTest() throws Exception {
-        convertAndValidate(CppTest.class, "cpptest/inputcpptest.xml", "cpptest/tusar-result.xml");
+    public void testcase1() throws Exception {
+        convertAndValidate(CppTest.class, "cpptest/testcase1/inputcpptest.xml", "cpptest/testcase1/tusar-result.xml");
+    }
+
+    @Test
+    public void testcase2() throws Exception {
+        convertAndValidate(CppTest.class, "cpptest/testcase2/inputCpptest_mix.xml", "cpptest/testcase2/tusar-result.xml");
+    }
+
+    @Test
+    public void testcase3() throws Exception {
+        convertAndValidate(CppTest.class, "cpptest/testcase3/inputcpptest_std.xml", "cpptest/testcase3/tusar-result.xml");
     }
 }

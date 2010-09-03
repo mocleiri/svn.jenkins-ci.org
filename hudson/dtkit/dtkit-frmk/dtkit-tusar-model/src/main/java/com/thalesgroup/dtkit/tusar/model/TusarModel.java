@@ -23,8 +23,8 @@
 
 package com.thalesgroup.dtkit.tusar.model;
 
-import com.thalesgroup.dtkit.metrics.api.AbstractOutputMetric;
-import com.thalesgroup.dtkit.metrics.api.OutputMetric;
+import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
+import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

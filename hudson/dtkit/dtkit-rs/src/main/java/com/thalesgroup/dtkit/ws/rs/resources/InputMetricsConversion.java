@@ -25,8 +25,10 @@ package com.thalesgroup.dtkit.ws.rs.resources;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.sun.jersey.multipart.FormDataParam;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
+import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
 import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
 import org.slf4j.Logger;
@@ -36,6 +38,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
+import javax.print.attribute.standard.Media;
 import java.io.File;
 import java.io.IOException;
 
@@ -50,10 +53,13 @@ public class InputMetricsConversion {
 
     private InputMetricsLocator inputMetricsLocator;
 
+    private ConversionService conversionService;
+
     @Inject
     @SuppressWarnings("unused")
-    public void setInputMetricsLocator(InputMetricsLocator inputMetricsLocator) {
+    public void load(InputMetricsLocator inputMetricsLocator, ConversionService conversionService) {
         this.inputMetricsLocator = inputMetricsLocator;
+        this.conversionService = conversionService;
     }
 
     private InputMetric getInputMetricObject(PathSegment metricSegment) {
@@ -71,14 +77,33 @@ public class InputMetricsConversion {
     }
 
     @POST
-    @Path("/{metric}")
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_XML)
     @SuppressWarnings("unused")
-    public Response convertInputFile(@PathParam("metric") PathSegment metricSegment, File inputMetricFile) {
-        logger.debug("convertInputFile() service");
+    public Response convertInputFile( @FormDataParam("file") File inputFile, @FormDataParam("xsl") File inputXsl) {
+        logger.debug("convertInputMetric() service");
         try {
+            File dest = File.createTempFile("toot", "ttt");
+            conversionService.convert(inputXsl, inputFile, dest);
+            return Response.ok(dest).build();
+        } catch (IOException ioe) {
+            logger.error("Conversion error", ioe);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+        catch (ConversionException ce) {
+            logger.error("Conversion error", ce);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @POST
+    @Path("/{metric}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_XML)
+    @SuppressWarnings("unused")
+    public Response convertInputMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputMetricFile) {
+        logger.debug("convertInputMetric() service");
+        try {
 
             //Retrieving the metric
             InputMetric inputMetric = getInputMetricObject(metricSegment);
@@ -102,10 +127,13 @@ public class InputMetricsConversion {
         } catch (IOException ioe) {
             logger.error("Conversion error for " + metricSegment.getPath(), ioe);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-
-        } catch (ConversionException ce) {
+        }
+        catch (ConversionException ce) {
             logger.error("Conversion error for " + metricSegment.getPath(), ce);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
 }

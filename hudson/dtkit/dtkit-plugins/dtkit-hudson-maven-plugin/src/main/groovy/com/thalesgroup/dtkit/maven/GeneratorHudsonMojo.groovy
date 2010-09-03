@@ -24,8 +24,8 @@
 package com.thalesgroup.dtkit.maven;
 
 
-import com.thalesgroup.dtkit.metrics.api.InputMetric
-import com.thalesgroup.dtkit.metrics.api.InputType
+import com.thalesgroup.dtkit.metrics.model.InputMetric
+import com.thalesgroup.dtkit.metrics.model.InputType
 import org.apache.maven.artifact.Artifact
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugin.MojoExecutionException

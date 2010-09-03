@@ -26,9 +26,11 @@ package com.thalesgroup.dtkit.ws.rs;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.LoggingFilter;
+import com.sun.jersey.multipart.FormDataMultiPart;
+import com.sun.jersey.multipart.MultiPart;
 import com.thalesgroup.dtkit.junit.CppUnit;
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
-import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
 import com.thalesgroup.dtkit.ws.rs.resources.InputMetricsConversion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -51,10 +53,33 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
     @Test
     public void convertInputFileWithValidInputs() throws Exception {
 
+        MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE);
         ClientResponse clientResponse = webResource.path("/cppunit;format=junit")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
-                .post(ClientResponse.class, this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"));
+                .post(ClientResponse.class, multiPart);
+
+        Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
+        File cppunitJunitFile = clientResponse.getEntity(File.class);
+        Assert.assertNotNull(cppunitJunitFile);
+        InputMetric inputMetricCppUnit = InputMetricFactory.getInstance(CppUnit.class);
+        Assert.assertTrue(inputMetricCppUnit.validateOutputFile(cppunitJunitFile));
+        FileReader cppunitJunitFileReader = new FileReader(cppunitJunitFile);
+        Assert.assertEquals(readContentInputStream(this.getClass().getResourceAsStream("cppunit/cppunit-valid-junit-result.xml")), readContentReader(cppunitJunitFileReader));
+        cppunitJunitFileReader.close();
+    }
+
+    @Test
+    public void convertInputFileWithXSL() throws Exception {
+
+        MultiPart multiPart = new FormDataMultiPart()
+                .field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE)
+                .field("xsl", this.getClass().getResourceAsStream("cppunit/cppunit-to-junit.xsl"), MediaType.APPLICATION_XML_TYPE);
+        ClientResponse clientResponse = webResource
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
+                .accept(MediaType.APPLICATION_XML_TYPE)
+                .post(ClientResponse.class, multiPart);
+
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         File cppunitJunitFile = clientResponse.getEntity(File.class);
         Assert.assertNotNull(cppunitJunitFile);
@@ -69,7 +94,7 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
     public void convertInputFileWithNoExistingMetric1() throws Exception {
         WebResource webResource = resource();
         ClientResponse clientResponse = webResource.path("/notExistMetric")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class);
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), clientResponse.getStatus());
@@ -79,7 +104,7 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
     public void convertInputFileWithNoExistingMetric2() throws Exception {
         WebResource webResource = resource();
         ClientResponse clientResponse = webResource.path("/cppunit;format=tusar")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class);
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), clientResponse.getStatus());
@@ -87,10 +112,11 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
 
     @Test
     public void convertInputFileNoValidInputFile() throws Exception {
+        MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"), MediaType.APPLICATION_XML_TYPE);
         ClientResponse clientResponse = webResource.path("/cppunit;format=junit")
-                .type(MediaType.APPLICATION_XML_TYPE)
+                .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
-                .post(ClientResponse.class, this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"));
+                .post(ClientResponse.class, multiPart);
         Assert.assertEquals(Response.Status.PRECONDITION_FAILED.getStatusCode(), clientResponse.getStatus());
     }
 

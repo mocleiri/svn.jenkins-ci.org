@@ -27,13 +27,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jvnet.hudson</groupId>
-        <artifactId>hudson</artifactId>
-        <version>1.7</version>
+       <groupId>org.jvnet.hudson.dtkit</groupId>
+       <artifactId>dtkit-metrics-parent</artifactId>
+       <version>2-SNAPSHOT</version>
     </parent>
 
-
-    <groupId>org.jvnet.hudson.dtkit</groupId>
     <artifactId>dtkit-frmk</artifactId>
     <version>0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -61,22 +59,18 @@
     </developers>
 
     <modules>
-        <module>dtkit-metrics-api</module>
+        <module>dtkit-metrics-model</module>
         <module>dtkit-metrics-hudson-api</module>
         <module>dtkit-junit-model</module>
         <module>dtkit-tusar-model</module>
         <module>dtkit-metrics-util</module>
     </modules>
 
-    <properties>
-        <hudson.version>1.355</hudson.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.jvnet.hudson.dtkit</groupId>
-                <artifactId>dtkit-metrics-api</artifactId>
+                <artifactId>dtkit-metrics-model</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -90,28 +84,6 @@
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <configuration>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 </project>
