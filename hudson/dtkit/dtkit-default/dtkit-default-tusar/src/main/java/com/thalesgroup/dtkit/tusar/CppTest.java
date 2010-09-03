@@ -56,7 +56,7 @@ public class CppTest extends InputMetricXSL {
 
     @Override
     public String getInputXsd() {
-        return "cpptest-1.0.xsd";
+        return null;
     }
 
     @Override
