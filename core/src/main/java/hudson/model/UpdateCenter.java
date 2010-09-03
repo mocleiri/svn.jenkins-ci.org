@@ -70,16 +70,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.acegisecurity.context.SecurityContextHolder;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.regex.*;
 
 /**
  * Controls update center capability.
@@ -292,7 +287,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     /**
      * Returns true if backup of hudson.war exists on the hard drive
      */
-    public boolean getCanDowngrade() {
+    public boolean isDowngradable() {
         return new File(Lifecycle.get().getHudsonWar() + ".bak").exists();
     }
 
@@ -302,7 +297,7 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
     public void doDowngrade(StaplerResponse rsp) throws IOException, ServletException {
         requirePOST();
         Hudson.getInstance().checkPermission(Hudson.ADMINISTER);
-        if(!getCanDowngrade()) {
+        if(!isDowngradable()) {
             sendError("Hudson downgrade is not possible, probably backup does not exist");
             return;
         }
@@ -319,47 +314,13 @@ public class UpdateCenter extends AbstractModelObject implements Saveable {
      */
     public String getBackupVersion()
     {
-        File backup = new File(Lifecycle.get().getHudsonWar() + ".bak");
-        if(backup.exists())
-        {
-            try
-            {
-                ZipFile zf = new ZipFile(backup.getPath());
-                Enumeration entries = zf.entries();
-                while (entries.hasMoreElements())
-                {
-                    ZipEntry ze = (ZipEntry) entries.nextElement();
-                    if(ze.getName().equals("META-INF/MANIFEST.MF"))
-                    {
-                        long size = ze.getSize();
-                        if (size > 0)
-                        {
-                            BufferedReader br = new BufferedReader(new InputStreamReader(zf.getInputStream(ze)));
-                            String line;
-                            String version = "Hudson-Version: ";
-                            Pattern p = Pattern.compile(version);
-                            while ((line = br.readLine()) != null)
-                            {
-                                Matcher m = p.matcher(line);
-                                if(m.find())
-                                {
-                                    return line.substring(m.end());
-                                }
-                            }
-                            br.close();
-                        }
-                    }
-                }
-                return null;
-            }
-            catch (IOException e)
-            {
-              e.printStackTrace();
-              return null;
-            }
-        }
-        else
-            return null;
+        try {
+            JarFile backupWar = new JarFile(new File(Lifecycle.get().getHudsonWar().getParentFile(), "hudson.war.bak"));
+            return backupWar.getManifest().getMainAttributes().getValue("Hudson-Version");
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "Failed to read backup version ", e);
+            return null;}
+
     }
 
     /*package*/ synchronized Future<UpdateCenterJob> addJob(UpdateCenterJob job) {

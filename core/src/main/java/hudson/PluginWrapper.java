@@ -37,7 +37,6 @@ import java.io.OutputStream;
 import java.io.Closeable;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.Manifest;
 import java.util.logging.Logger;
@@ -47,12 +46,8 @@ import org.apache.commons.logging.LogFactory;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.HttpResponses;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.regex.*;
+import java.util.jar.JarFile;
 
 /**
  * Represents a Hudson plug-in and associated control information
@@ -468,71 +463,37 @@ public final class PluginWrapper implements Comparable<PluginWrapper> {
     /*
      * returns true if backup of previous version of plugin exists
      */
-    public boolean getCanDowngrade()
-    {
-        return new File(getBackupPath()).exists();
+    public boolean isDowngradable() {
+        return getBackupFile().exists();
     }
     /*
      * returns String with what should be backup file path
      */
-    public String getBackupPath()
-    {
-        try
-        {
-            return Hudson.getInstance().getRootPath().absolutize().toURI().getPath() + "plugins/" + getShortName() + ".bak";
-        }
-        catch(Exception e)
-        {
-            LOGGER.log(WARNING, "Failed to create path of backup of "+shortName, e);
+
+    public File getBackupFile() {
+        try {
+            return new File(Hudson.getInstance().getRootPath().child("plugins").child(getShortName() + ".bak").getRemote());
+        } catch (Exception e) {
+            LOGGER.log(WARNING, "Failed to get backup of " + shortName, e);
             return null;
         }
     }
     /*
      * returns String with numer of version of plugin in backup file, if file does not exist or number cannot be obtained by other reason returns null
      */
-    public String getBackupVersion()
-    {
-        File backup = new File(getBackupPath());
-        if(backup.exists())
-        {
-            try
-            {
-                ZipFile zf = new ZipFile(backup.getPath());
-                Enumeration entries = zf.entries();
-                while (entries.hasMoreElements())
-                {
-                    ZipEntry ze = (ZipEntry) entries.nextElement();
-                    if(ze.getName().equals("META-INF/MANIFEST.MF"))
-                    {
-                        long size = ze.getSize();
-                        if (size > 0)
-                        {
-                            BufferedReader br = new BufferedReader(new InputStreamReader(zf.getInputStream(ze)));
-                            String line;
-                            String version = "Plugin-Version: ";
-                            Pattern p = Pattern.compile(version);
-                            while ((line = br.readLine()) != null)
-                            {
-                                Matcher m = p.matcher(line);
-                                if(m.find())
-                                {
-                                    return line.substring(m.end());
-                                }
-                            }
-                            br.close();
-                        }
-                    }
-                }
+
+    public String getBackupVersion() {
+        if (getBackupFile().exists()) {
+            try {
+                JarFile backupPlugin = new JarFile(getBackupFile());
+                return backupPlugin.getManifest().getMainAttributes().getValue("Plugin-Version");
+            } catch (IOException e) {
+                LOGGER.log(WARNING, "Failed to get backup version ", e);
                 return null;
             }
-            catch (IOException e)
-            {
-              e.printStackTrace();
-              return null;
-            }
-        }
-        else
+        } else {
             return null;
+        }
     }
 //
 //

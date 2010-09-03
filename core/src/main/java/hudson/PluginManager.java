@@ -500,14 +500,15 @@ public abstract class PluginManager extends AbstractModelObject {
     public void doDowngrade(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
         Enumeration<String> en = req.getParameterNames();
         while (en.hasMoreElements()) {
-            String n =  en.nextElement();
+            String n = en.nextElement();
             //first parameter is "json", we don't want to do anything with it
-            if(n.equals("json"))
-                continue;
-            UpdateSite.Plugin p = Hudson.getInstance().getUpdateCenter().getPlugin(n);
-            if(p==null)
-                throw new Failure("No such plugin: "+n);
-            p.deployBackup();
+            if (!n.equals("json")) {
+                UpdateSite.Plugin p = Hudson.getInstance().getUpdateCenter().getPlugin(n);
+                if (p == null) {
+                    throw new Failure("No such plugin: " + n);
+                }
+                p.deployBackup();
+            }
         }
         rsp.sendRedirect("../updateCenter/");
     }
