@@ -21,7 +21,7 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.metrics.api;
+package com.thalesgroup.dtkit.metrics.model;
 
 import com.thalesgroup.dtkit.util.converter.ConversionServiceFactory;
 import com.thalesgroup.dtkit.util.validator.ValidationServiceFactory;

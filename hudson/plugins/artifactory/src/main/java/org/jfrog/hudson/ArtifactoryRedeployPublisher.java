@@ -23,6 +23,7 @@ import hudson.maven.MavenModuleSetBuild;
 import hudson.maven.reporters.MavenAbstractArtifactRecord;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
+import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.model.Hudson;
 import hudson.model.Result;
@@ -33,6 +34,9 @@ import hudson.tasks.Recorder;
 import hudson.util.Scrambler;
 import net.sf.json.JSONObject;
 import org.jfrog.build.client.ArtifactoryBuildInfoClient;
+import org.jfrog.hudson.action.ArtifactoryProjectAction;
+import org.jfrog.hudson.maven2.ArtifactsDeployer;
+import org.jfrog.hudson.maven2.BuildInfoDeployer;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -44,9 +48,6 @@ import java.util.List;
  * is fully succeeded. `
  *
  * @author Yossi Shaul
- *         <p/>
- *         TODO [yl]: This class is used by Gradle as well - need to factor out the repository data object form here.
- *         Currently this class fqn is hardcoded into thge configuration so that
  */
 public class ArtifactoryRedeployPublisher extends Recorder {
     /**
@@ -99,6 +100,11 @@ public class ArtifactoryRedeployPublisher extends Recorder {
     }
 
     @Override
+    public Action getProjectAction(AbstractProject<?, ?> project) {
+        return details != null ? new ArtifactoryProjectAction(details.artifactoryName, project) : null;
+    }
+
+    @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener)
             throws InterruptedException, IOException {
         if (build.getResult().isWorseThan(Result.SUCCESS)) {
@@ -129,7 +135,7 @@ public class ArtifactoryRedeployPublisher extends Recorder {
             }
             new BuildInfoDeployer(this, client, mavenBuild, listener).deploy();
             // add the result action
-            build.getActions().add(new BuildInfoResultAction(this, build));
+            build.getActions().add(new BuildInfoResultAction(getArtifactoryName(), build));
             return true;
         } catch (Exception e) {
             e.printStackTrace(listener.error(e.getMessage()));

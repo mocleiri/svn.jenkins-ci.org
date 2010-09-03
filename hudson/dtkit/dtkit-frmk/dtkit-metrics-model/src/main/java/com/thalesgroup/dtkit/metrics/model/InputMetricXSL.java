@@ -21,7 +21,7 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.metrics.api;
+package com.thalesgroup.dtkit.metrics.model;
 
 import com.google.inject.Inject;
 import com.thalesgroup.dtkit.util.converter.ConversionException;

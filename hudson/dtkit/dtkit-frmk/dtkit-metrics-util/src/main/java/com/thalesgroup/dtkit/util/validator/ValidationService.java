@@ -25,6 +25,7 @@ package com.thalesgroup.dtkit.util.validator;
 
 import org.xml.sax.SAXException;
 
+import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -42,24 +43,19 @@ public class ValidationService implements Serializable {
     /**
      * Validate an input file against a XSD
      *
-     * @param xsdNamespace the class of the xsd
-     * @param xsdName       the xsd name
-     * @param inputXML      the input XML file
+     * @param xsdSource      the xsd source
+     * @param inputXML     the input XML file
      * @return true if the validation succeeded, false otherwise
      * @throws ValidationException when there is a validation error
      */
-    public List<ValidationError> processValidation(Class xsdNamespace, String xsdName, File inputXML) throws ValidationException {
-
-        if (xsdName == null) {
-            return new ArrayList<ValidationError>();
-        }
+    public List<ValidationError> processValidation(Source xsdSource, File inputXML) throws ValidationException {
 
         ValidationHandler handler = new ValidationHandler();
         try {
 
             SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
             schemaFactory.setErrorHandler(handler);
-            Schema schemaGrammar = schemaFactory.newSchema(xsdNamespace.getResource(xsdName));
+            Schema schemaGrammar = schemaFactory.newSchema(xsdSource);
             //Resolver resolver = new Resolver();
             Validator schemaValidator = schemaGrammar.newValidator();
             //schemaValidator.setResourceResolver(resolver);
@@ -75,5 +71,36 @@ public class ValidationService implements Serializable {
         catch (IOException ioe) {
             throw new ValidationException("Validation error", ioe);
         }
+    }
+
+    /**
+     * Validate an input file against a XSD
+     *
+     * @param xsdNamespace the class of the xsd
+     * @param xsdName      the xsd name
+     * @param inputXML     the input XML file
+     * @return true if the validation succeeded, false otherwise
+     * @throws ValidationException when there is a validation error
+     */
+    public List<ValidationError> processValidation(Class xsdNamespace, String xsdName, File inputXML) throws ValidationException {
+
+        if (xsdName == null) {
+            return new ArrayList<ValidationError>();
+        }
+
+        return processValidation(new StreamSource(xsdNamespace.getResourceAsStream(xsdName)), inputXML);
+    }
+
+    /**
+     * Validate an input file against a XSD
+     *
+     * @param xsdFile      the xsd file
+     * @param inputXML     the input XML file
+     * @return true if the validation succeeded, false otherwise
+     * @throws ValidationException when there is a validation error
+     */
+    public List<ValidationError> processValidation(File xsdFile, File inputXML) throws ValidationException {
+
+        return processValidation(new StreamSource(xsdFile), inputXML);
     }
 }

@@ -21,7 +21,7 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.metrics.api;
+package com.thalesgroup.dtkit.metrics.model;
 
 @SuppressWarnings("unused")
 public enum InputType {

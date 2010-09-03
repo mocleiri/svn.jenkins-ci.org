@@ -2,7 +2,7 @@ package hudson.plugins.covcomplplot;
 
 import hudson.XmlFile;
 import hudson.model.AbstractBuild;
-import hudson.plugins.covcomplplot.annalyzer.Analyzer;
+import hudson.plugins.covcomplplot.analyzer.Analyzer;
 import hudson.plugins.covcomplplot.model.MethodInfo;
 import hudson.plugins.covcomplplot.util.CustomGraph;
 import hudson.plugins.covcomplplot.util.ScatterPlotPointMapRenderer;
@@ -42,50 +42,66 @@ import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
 /**
- * Target containing coverage and complexity methods. This class handles graph
- * and map generation in default and This class handles method list output when
- * it is used in the detailed view. {@link CovComplPlotTaget} is used as a top
- * level information holder. It defers the detailed information to
- * {@link CovComplPlotMethods}.
+ * Target containing coverage and complexity methods. This class y mostlhandles graph
+ * and map generation. This class handles detailed method list generation when
+ * the detailed view is shown. 
+ * {@link CovComplPlotTaget} is a top level information holder. 
+ * It defers the detailed method list view responsibility to {@link CovComplPlotMethods}.
  * 
- * @author nhn
+ * @author JunHo Yoon
  */
 
 public class CovComplPlotTaget implements Serializable {
 
-	/**
-	 * UID
-	 */
+	/** UID */
 	private static final long serialVersionUID = 1L;
 
+	/** Method occurrence count matrix */
 	private transient int[][] methodOccuranceMatrix;
+
+	/** Method list per each cell */
 	@SuppressWarnings("unchecked")
 	private transient List[][] methodMapMatrix;
+
+	/** Cache for graph map shown each build page */
 	private transient String graphMapWithBuildNo = null;
+
+	/** Cache for graph map shown in project page */
 	private transient String graphMap = null;
 
+	/** Timestamp */
 	private final Calendar ownerTimestamp;
+
+	/** Method list in total */
 	private final List<MethodInfo> methodInfoList;
 
+	/** Owner */
 	private transient AbstractBuild<?, ?> owner;
 
+	/** Analyzer from which this object is created */
 	private final Analyzer analyzer;
-	public Object lock = new Object(); 
+
+	/** Synchronization lock */
+	public Object lock = new Object();
+
 	/**
-	 * Get the build which owns this information.
+	 * Get the {@link AbstractBuild} instance which owns this instance.
 	 * 
-	 * @return build object
+	 * @return {@link AbstractBuild} instance.
 	 */
 	public AbstractBuild<?, ?> getOwner() {
 		return owner;
 	}
 
 	/**
-	 * Constructor for detailed level information holder
+	 * Constructor 
 	 * 
 	 * @param owner
+	 *            {@link AbstractBuild} instance which owns this instance.
 	 * @param methodInfoList
+	 *            {@link MethodInfo} list
 	 * @param ownersTimeStamp
+	 *            timestamp of owner.
 	 */
 	public CovComplPlotTaget(AbstractBuild<?, ?> owner, List<MethodInfo> methodInfoList, Analyzer analyzer, Calendar ownersTimeStamp) {
 		this.owner = owner;
@@ -94,13 +110,11 @@ public class CovComplPlotTaget implements Serializable {
 		this.ownerTimestamp = ownersTimeStamp;
 	}
 
-	public String getMethodUrlLocation(MethodInfo methodInfo) {
-		return analyzer.getHandler().getMethodUrlLocation(owner, methodInfo);
-	}
-
 	/**
-	 * Get graph. This will be called to show graph from jelly.
-	 * 
+	 * Get graph. This method is called to show a graph from jelly.
+	 * <pre>
+	 * projectName/build/graph/map
+	 * </pre>
 	 * @return GraphImpl object
 	 */
 	public GraphImpl getGraph() {
@@ -108,15 +122,20 @@ public class CovComplPlotTaget implements Serializable {
 	}
 
 	/**
+	 * Dynamic handling of Stapler request. This method create appropriate
+	 * {@link CovComplPlotMethods} object based on the given parameters and
+	 * redirect the {@link StaplerRequest} to the created object.
 	 * 
-	 * @param token
 	 * @param req
+	 *            stapler request
 	 * @param rsp
+	 *            stapler response
 	 * @param cov
+	 *            coverage range start value
 	 * @param compl
-	 * @param start
-	 * @param size
-	 * @return
+	 *            complexity range start value
+	 * @param page
+	 *            page
 	 * @throws ServletException
 	 * @throws IOException
 	 */
@@ -140,7 +159,16 @@ public class CovComplPlotTaget implements Serializable {
 		req.getView(new CovComplPlotMethods(owner, (List<MethodInfo>) obj, analyzer, cov, compl, page, totalSize), "index.jelly").forward(req, rsp);
 	}
 
-
+	/**
+	 * Create a method occurrence matrix. a method occurrence matrix is
+	 * a 2 dimensional array and each cell represents the corresponding coverage and complexity value.
+	 * The reason why uses array is to save memories and regulate the graph rendering speed.
+	 * 
+	 * This method is subject to be synchronized. Because internally it uses a cache not to generate matrix more than once.
+	 * @param methodInfoList
+	 *            {@link MethodInfo} list from which method occurrence matrix is created
+	 * @return method occurrence matrix
+	 */
 	private int[][] createMatrix(List<MethodInfo> methodInfoList) {
 		synchronized (lock) {
 			if (this.methodOccuranceMatrix == null) {
@@ -153,18 +181,47 @@ public class CovComplPlotTaget implements Serializable {
 				this.methodOccuranceMatrix = matrix;
 			}
 		}
-
 		return this.methodOccuranceMatrix;
 	}
-
+	
+	/**
+	 * Get custom java script
+	 * @return custom java script string
+	 */
+	public String getCustomJavaScript() {
+		return analyzer.getHandler().getCustomJavaScript();
+	}
+	/**
+	 * Get the description of the graph. The description is different according to which analyzer is used.
+	 * For example, coverage in clover processing means statement coverage.
+	 * @return description
+	 */
 	public String getDescription() {
 		return analyzer.getHandler().getDescription();
 	}
 
+	/**
+	 * Get the snap value of the passed x. For example, if the snap is 5, the
+	 * value returned for 6 is 5. In case that x is 11, the snap value is 10.
+	 * 
+	 * @param x
+	 *            value to be converted
+	 * @param snap
+	 *            snap to be applied
+	 * @return snaped value
+	 */
 	private int getSnapValue(double x, int snap) {
 		return ((int) (x / snap)) * snap;
 	}
 
+	/**
+	 * Create {@link MethodInfo} list per each grid cell. {@link MethodInfo}
+	 * list is subject to be cached. So there is synchronized block inside.
+	 * 
+	 * @param methodInfoList
+	 *            all {@link MethodInfo} list to be reorganized/
+	 * @return 2 dimensional array of {@link MethodInfo} instances.
+	 */
 	@SuppressWarnings("unchecked")
 	private List[][] createMapGridMatrix(List<MethodInfo> methodInfoList) {
 		synchronized (lock) {
@@ -195,15 +252,18 @@ public class CovComplPlotTaget implements Serializable {
 				this.methodMapMatrix = matrix;
 			}
 		}
-
 		return this.methodMapMatrix;
 	}
 
+	/**
+	 * Create {@link DefaultXYZDataset} instance from methodOccurenceMatrix
+	 * 
+	 * @return {@link DefaultXYZDataset} instance.
+	 */
 	public DefaultXYZDataset generateXYDataset() {
 		this.methodOccuranceMatrix = createMatrix(this.getMethodInfoList());
 		DefaultXYZDataset dataSet = new DefaultXYZDataset();
-
-		// 먼저 전체 데이터 개수를 확인한다.
+		// At first check the total count of point to create dataset array.
 		int totalPoint = 0;
 		for (int[] eachRow : methodOccuranceMatrix) {
 			for (int eachValue : eachRow) {
@@ -214,8 +274,7 @@ public class CovComplPlotTaget implements Serializable {
 		}
 		double[][] eachPoint = new double[3][totalPoint];
 		int count = 0;
-
-		// 
+		// Create the dataset
 		for (int eachRowCount = 0; eachRowCount < methodOccuranceMatrix.length; eachRowCount++) {
 			for (int eachColumCount = 0; eachColumCount < methodOccuranceMatrix[eachRowCount].length; eachColumCount++) {
 				int methodCount = methodOccuranceMatrix[eachRowCount][eachColumCount];
@@ -228,45 +287,78 @@ public class CovComplPlotTaget implements Serializable {
 			}
 		}
 		dataSet.addSeries(1, eachPoint);
-
 		return dataSet;
 	}
 
+	/**
+	 * Implementation of scatter plot graph
+	 * 
+	 * @author JunHo Yoon
+	 */
 	public class GraphImpl extends CustomGraph {
+		/** Renderer to be used */
 		XYDotRenderer renderer = null;
+		/** Timestamp */
 		public final long timeInMillis;
 
+		/**
+		 * Default constructor
+		 */
 		protected GraphImpl() {
 			super(ownerTimestamp, 500, 200);
 			timeInMillis = ownerTimestamp.getTimeInMillis();
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * hudson.plugins.covcomplplot.util.CustomGraph#doPng(org.kohsuke.stapler
+		 * .StaplerRequest, org.kohsuke.stapler.StaplerResponse)
+		 */
 		@Override
 		public void doPng(StaplerRequest req, StaplerResponse rsp) throws IOException {
 			this.renderer = new ScatterPlotPointRenderer();
 			super.doPng(req, rsp);
 		}
 
+		/**
+		 * Create image map string. This method uses caching inside.
+		 * 
+		 * @param withBuildNo
+		 *            "true" if URL should contains build NO.
+		 * @return Image Map String
+		 */
 		public synchronized String getMapString(String withBuildNo) {
 			if ("true".equals(withBuildNo)) {
 				if (graphMapWithBuildNo == null) {
-					graphMapWithBuildNo = getMapString(withBuildNo, null);
+					graphMapWithBuildNo = getMapStringInternal(withBuildNo);
 				}
 				return graphMapWithBuildNo;
 			} else {
 				if (graphMap == null) {
-					graphMap = getMapString(withBuildNo, null);
+					graphMap = getMapStringInternal(withBuildNo);
 				}
 				return graphMap;
 			}
 		}
 
-		private String getMapString(String withBuildNo, StaplerRequest req) {
+		/**
+		 * Create image map string
+		 * 
+		 * @param withBuildNo
+		 *            true if URL should contains build NO.
+		 * @return Image Map String
+		 */
+		private String getMapStringInternal(String withBuildNo) {
+			// To be minimize the rendering processing, assign an almost empty
+			// renderer.
 			this.renderer = new ScatterPlotPointMapRenderer();
-			ChartRenderingInfo info = new ChartRenderingInfo();
-			render(req, info);
+			// Only reason why rendering here is to get the dataArea.
+			render(null);
 			Rectangle2D dataArea = ((ScatterPlotPointMapRenderer) this.renderer).dataArea;
 
+			ChartRenderingInfo info = new ChartRenderingInfo();
 			XYPlot xyPlot = this.graph.getXYPlot();
 			ValueAxis domainAxis = xyPlot.getDomainAxis();
 			ValueAxis rangeAxis = xyPlot.getRangeAxis();
@@ -276,6 +368,7 @@ public class CovComplPlotTaget implements Serializable {
 			RectangleEdge rangeAxisEdge = xyPlot.getRangeAxisEdge();
 			int buildNo = owner.number;
 			List<?>[][] mapGridMatrix = createMapGridMatrix(getMethodInfoList());
+			// Create mapString per each grid cell
 			for (int x = 0; x < Constant.DOMAIN_AXIS_COUNT; x++) {
 				for (int y = 0; y < Constant.RANGE_AXIS_COUNT; y++) {
 					if (mapGridMatrix[y][x] != null) {
@@ -305,6 +398,11 @@ public class CovComplPlotTaget implements Serializable {
 			return mapString;
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see hudson.plugins.covcomplplot.util.CustomGraph#createGraph()
+		 */
 		@Override
 		protected JFreeChart createGraph() {
 			final XYZDataset dataset = generateXYDataset();
@@ -312,14 +410,21 @@ public class CovComplPlotTaget implements Serializable {
 					false);
 			chart.setBackgroundPaint(Color.white);
 			final XYPlot plot = chart.getXYPlot();
+			// set up paint
 			plot.setBackgroundPaint(Color.WHITE);
 			plot.setOutlinePaint(null);
 			plot.setForegroundAlpha(0.4f);
+		
+			// set up grid line
 			plot.setRangeGridlinesVisible(true);
 			plot.setRangeGridlinePaint(Color.GRAY);
 			plot.setRangeGridlinesVisible(true);
 			plot.setDomainGridlinePaint(Color.GRAY);
+			
+			
+			// Set up axis
 			plot.setAxisOffset(new RectangleInsets(0, 0, 0, 0));
+
 			ValueAxis rangeAxis = plot.getRangeAxis();
 			rangeAxis.setAutoRange(false);
 			rangeAxis.setUpperBound(Constant.RANGE_AXIS_UPPERBOUND);
@@ -330,8 +435,8 @@ public class CovComplPlotTaget implements Serializable {
 			domainAxis.setAutoRange(false);
 			domainAxis.setUpperBound(Constant.DOMAIN_AXIS_UPPERBOUND);
 			domainAxis.setLowerBound(0);
-
 			((NumberAxis) domainAxis).setTickUnit(new NumberTickUnit(Constant.DOMAIN_AXIS_TICK_UNIT));
+
 			plot.setInsets(new RectangleInsets(5, 0, 0, 10));
 			renderer.setSeriesPaint(0, Color.BLUE);
 			plot.setRenderer(renderer);
@@ -340,25 +445,60 @@ public class CovComplPlotTaget implements Serializable {
 		}
 	}
 
+	/**
+	 * Set owner
+	 * 
+	 * @param owner
+	 *            owner
+	 */
 	public void setOwner(AbstractBuild<?, ?> owner) {
 		this.owner = owner;
 	}
 
+	/**
+	 * Get datafile in the {@link AbstractBuild} root.
+	 * 
+	 * @param build
+	 *            build
+	 * @return {@link XmlFile}
+	 */
 	private static XmlFile getDataFile(AbstractBuild<?, ?> build) {
 		File dir = build == null ? new File(System.getProperty("java.io.tmpdir")) : build.getRootDir();
 		return new XmlFile(new XStream2(), new File(dir, Constant.RESULT_FILENAME));
 	}
 
-	public static CovComplPlotTaget loadCloverScatterPlotTarget(AbstractBuild<?, ?> build) throws IOException {
+	/**
+	 * Load {@link CovComplPlotTaget} instance from datafile
+	 * 
+	 * @param build
+	 *            the build where the datafile is located.
+	 * @return {@link CovComplPlotTaget} instance
+	 * @throws IOException
+	 *             occurs if there is file system failure.
+	 */
+	public static CovComplPlotTaget loadCovComplScatterPlotTarget(AbstractBuild<?, ?> build) throws IOException {
 		CovComplPlotTaget target = (CovComplPlotTaget) getDataFile(build).read();
 		target.setOwner(build);
 		return target;
 	}
 
-	public static void saveCloverScatterPlotTarget(AbstractBuild<?, ?> build, CovComplPlotTaget target) throws IOException {
-		getDataFile(build).write(target);
+	/**
+	 * Save {@link CovComplPlotTaget} in the datafile named.
+	 * 
+	 * @param target
+	 *            {@link CovComplPlotTaget} instance to be saved.
+	 * @throws IOException
+	 *             occurs if there is file system failure.
+	 */
+	public static void saveCovComplScatterPlotTarget(CovComplPlotTaget target) throws IOException {
+		getDataFile(target.getOwner()).write(target);
 	}
 
+	/**
+	 * Get all {@link MethodInfo} list.
+	 * 
+	 * @return {@link MethodInfo} list
+	 */
 	public List<MethodInfo> getMethodInfoList() {
 		return methodInfoList;
 	}

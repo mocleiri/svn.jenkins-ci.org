@@ -16,13 +16,14 @@
 
 package org.jfrog.hudson.gradle;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Predicate;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
+import com.google.common.io.Files;
 import hudson.EnvVars;
 import hudson.model.AbstractBuild;
 import hudson.model.Cause;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jfrog.build.api.BuildInfoConfigProperties;
 import org.jfrog.build.api.BuildInfoProperties;
@@ -31,7 +32,7 @@ import org.jfrog.build.client.ClientIvyProperties;
 import org.jfrog.build.client.ClientProperties;
 import org.jfrog.hudson.ArtifactoryServer;
 import org.jfrog.hudson.ServerDetails;
-import org.jfrog.hudson.util.ActionableHelper;
+import org.jfrog.hudson.action.ActionableHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,12 +46,12 @@ import java.util.Map;
  * @author Tomer Cohen
  */
 public class GradleInitScriptWriter {
+    private static final String NEW_LINE = "\n";
+    private static final String QUOTE = "'";
 
     private EnvVars envVars;
     private AbstractBuild build;
-    private static final String NEW_LINE = "\n";
-    private static final String QUOTE = "'";
-    private static String scriptRepoPath =
+    private String scriptRepoPath =
             "org/jfrog/buildinfo/build-info-extractor-gradle/1.0.1/artifactoryinitplugin-1.0.1.gradle";
     private ArtifactoryGradleConfigurator gradleConfigurator;
 
@@ -151,7 +152,7 @@ public class GradleInitScriptWriter {
     public String generateInitScript() throws URISyntaxException, IOException {
         StringBuilder initScript = new StringBuilder();
         File template = new File(getClass().getResource("/initscriptemplate.gradle").toURI());
-        String templateAsString = FileUtils.readFileToString(template);
+        String templateAsString = Files.toString(template, Charsets.UTF_8);
         if (StringUtils.isNotBlank(gradleConfigurator.remotePluginLocation)) {
             scriptRepoPath = gradleConfigurator.remotePluginLocation;
         }

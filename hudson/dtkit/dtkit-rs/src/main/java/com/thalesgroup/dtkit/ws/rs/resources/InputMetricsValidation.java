@@ -25,10 +25,13 @@ package com.thalesgroup.dtkit.ws.rs.resources;
 
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.sun.jersey.multipart.FormDataParam;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
-import com.thalesgroup.dtkit.ws.rs.vo.InputMetricValidationResult;
+import com.thalesgroup.dtkit.util.validator.ValidationService;
 import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +40,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
 import java.io.File;
+import java.util.List;
 
 
 @Path(InputMetricsValidation.PATH)
@@ -49,10 +53,13 @@ public class InputMetricsValidation {
 
     private InputMetricsLocator inputMetricsLocator;
 
+    private ValidationService validationService;
+
     @Inject
     @SuppressWarnings("unused")
-    public void setInputMetricsLocator(InputMetricsLocator inputMetricsLocator) {
+    public void load(InputMetricsLocator inputMetricsLocator, ValidationService validationService) {
         this.inputMetricsLocator = inputMetricsLocator;
+        this.validationService=validationService;
     }
 
     private InputMetric getInputMetricObject(PathSegment metricSegment) {
@@ -70,12 +77,31 @@ public class InputMetricsValidation {
     }
 
     @POST
-    @Path("/{metric}")
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @SuppressWarnings("unused")
-    public Response validateInputFile(@PathParam("metric") PathSegment metricSegment, File inputXMLFile) {
+    public Response validateInputFile(@FormDataParam("file") File inputXMLFile, @FormDataParam("xsd") File inputXsd) {
         logger.debug("validateInputFile() service");
+        InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
+        try {
+            List<ValidationError> validationErrors = validationService.processValidation(inputXsd, inputXMLFile);
+            inputMetricValidationResult.setValid(validationErrors.size() == 0);
+            inputMetricValidationResult.setValidationErrors(validationErrors);
+
+        } catch (ValidationException ve) {
+            logger.error("Validation error ", ve);
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+        return Response.ok(inputMetricValidationResult).build();
+    }
+
+    @POST
+    @Path("/{metric}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @SuppressWarnings("unused")
+    public Response validateInputFileMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputXMLFile) {
+        logger.debug("validateInputFileMetric() service");
         InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
         try {
             InputMetric inputMetric = getInputMetricObject(metricSegment);

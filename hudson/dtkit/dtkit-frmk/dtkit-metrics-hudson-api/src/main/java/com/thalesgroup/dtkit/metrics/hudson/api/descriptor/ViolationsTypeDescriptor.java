@@ -23,9 +23,9 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
-import com.thalesgroup.dtkit.metrics.api.InputMetricException;
-import com.thalesgroup.dtkit.metrics.api.InputMetricFactory;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricException;
+import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
 import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.ViolationsType;
 import hudson.DescriptorExtensionList;

@@ -21,7 +21,7 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.metrics.api;
+package com.thalesgroup.dtkit.metrics.model;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

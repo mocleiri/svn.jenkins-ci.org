@@ -23,9 +23,9 @@
 
 package com.thalesgroup.dtkit.tusar;
 
-import com.thalesgroup.dtkit.metrics.api.InputMetricXSL;
-import com.thalesgroup.dtkit.metrics.api.InputType;
-import com.thalesgroup.dtkit.metrics.api.OutputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
+import com.thalesgroup.dtkit.metrics.model.InputType;
+import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
 
@@ -53,7 +53,7 @@ public class GnatMetric  extends InputMetricXSL {
 
     @Override
     public String getInputXsd() {
-        return null;
+        return "gnatmetric-1.0.xsd";
     }
 
     @Override

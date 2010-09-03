@@ -19,11 +19,13 @@ package org.jfrog.hudson.maven3;
 import com.google.common.base.Predicate;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
+import com.google.common.io.Closeables;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
+import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.model.Cause;
 import hudson.model.CauseAction;
@@ -34,7 +36,6 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrapperDescriptor;
 import hudson.util.Scrambler;
 import net.sf.json.JSONObject;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jfrog.build.api.Build;
 import org.jfrog.build.api.BuildInfoConfigProperties;
@@ -42,11 +43,10 @@ import org.jfrog.build.api.BuildInfoProperties;
 import org.jfrog.build.client.ClientProperties;
 import org.jfrog.build.extractor.maven.BuildInfoRecorder;
 import org.jfrog.hudson.ArtifactoryBuilder;
-import org.jfrog.hudson.ArtifactoryRedeployPublisher;
 import org.jfrog.hudson.ArtifactoryServer;
 import org.jfrog.hudson.BuildInfoResultAction;
 import org.jfrog.hudson.ServerDetails;
-import org.jfrog.hudson.util.ActionableHelper;
+import org.jfrog.hudson.action.ActionableHelper;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -54,6 +54,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -119,6 +120,11 @@ public class ArtifactoryMaven3Configurator extends BuildWrapper {
     }
 
     @Override
+    public Collection<? extends Action> getProjectActions(AbstractProject project) {
+        return ActionableHelper.getArtifactoryProjectAction(details.artifactoryName, project);
+    }
+
+    @Override
     public Environment setUp(final AbstractBuild build, Launcher launcher, final BuildListener listener)
             throws IOException, InterruptedException {
 
@@ -157,9 +163,7 @@ public class ArtifactoryMaven3Configurator extends BuildWrapper {
                     return false;
                 }
                 if (result.isBetterOrEqualTo(Result.SUCCESS)) {
-                    ArtifactoryRedeployPublisher publisher = new ArtifactoryRedeployPublisher(getDetails(),
-                            deployArtifacts, username, getPassword(), includeEnvVars);
-                    build.getActions().add(new BuildInfoResultAction(publisher, build));
+                    build.getActions().add(new BuildInfoResultAction(getArtifactoryName(), build));
                     return true;
                 }
                 return false;
@@ -250,7 +254,7 @@ public class ArtifactoryMaven3Configurator extends BuildWrapper {
         try {
             props.store(fileOutputStream, null);
         } finally {
-            IOUtils.closeQuietly(fileOutputStream);
+            Closeables.closeQuietly(fileOutputStream);
         }
 
         env.put(BuildInfoConfigProperties.PROP_PROPS_FILE, tempPropsFile.getCanonicalPath());

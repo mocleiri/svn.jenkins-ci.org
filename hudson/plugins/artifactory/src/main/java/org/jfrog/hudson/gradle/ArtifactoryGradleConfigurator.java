@@ -16,11 +16,14 @@
 
 package org.jfrog.hudson.gradle;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
+import hudson.model.Action;
 import hudson.model.BuildListener;
 import hudson.model.FreeStyleProject;
 import hudson.model.Hudson;
@@ -29,17 +32,17 @@ import hudson.tasks.BuildWrapper;
 import hudson.tasks.BuildWrapperDescriptor;
 import hudson.util.Scrambler;
 import net.sf.json.JSONObject;
-import org.apache.commons.io.FileUtils;
 import org.jfrog.hudson.ArtifactoryBuilder;
-import org.jfrog.hudson.ArtifactoryRedeployPublisher;
 import org.jfrog.hudson.ArtifactoryServer;
 import org.jfrog.hudson.BuildInfoResultAction;
 import org.jfrog.hudson.ServerDetails;
+import org.jfrog.hudson.action.ActionableHelper;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -124,6 +127,11 @@ public class ArtifactoryGradleConfigurator extends BuildWrapper {
     }
 
     @Override
+    public Collection<? extends Action> getProjectActions(AbstractProject project) {
+        return ActionableHelper.getArtifactoryProjectAction(details.artifactoryName, project);
+    }
+
+    @Override
     public Environment setUp(AbstractBuild build, Launcher launcher, BuildListener listener)
             throws IOException, InterruptedException {
         ArtifactoryServer artifactoryServer = getArtifactoryServer();
@@ -138,7 +146,7 @@ public class ArtifactoryGradleConfigurator extends BuildWrapper {
         path = path.replace('\\', '/');
         initScript = new File(path);
         try {
-            FileUtils.writeStringToFile(initScript, writer.generateInitScript(), "UTF-8");
+            Files.write(writer.generateInitScript(), initScript, Charsets.UTF_8);
         } catch (Exception e) {
             listener.getLogger().println("Error occurred while writing Gradle Init Script");
             build.setResult(Result.FAILURE);
@@ -161,11 +169,8 @@ public class ArtifactoryGradleConfigurator extends BuildWrapper {
                     return false;
                 }
                 if (result.isBetterOrEqualTo(Result.SUCCESS)) {
-                    ArtifactoryRedeployPublisher publisher =
-                            new ArtifactoryRedeployPublisher(getDetails(), deployArtifacts, username, getPassword(),
-                                    includeEnvVars);
                     if (isDeployBuildInfo()) {
-                        build.getActions().add(new BuildInfoResultAction(publisher, build));
+                        build.getActions().add(new BuildInfoResultAction(getArtifactoryName(), build));
                     }
                     return true;
                 }
@@ -204,7 +209,7 @@ public class ArtifactoryGradleConfigurator extends BuildWrapper {
 
         @Override
         public String getDisplayName() {
-            return "Use Gradle-Artifactory Plugin";
+            return "Gradle-Artifactory Integration";
         }
 
         @Override

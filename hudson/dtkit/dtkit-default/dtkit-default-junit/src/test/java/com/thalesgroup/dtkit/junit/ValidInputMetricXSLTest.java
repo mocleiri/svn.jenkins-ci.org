@@ -23,7 +23,7 @@
 
 package com.thalesgroup.dtkit.junit;
 
-import com.thalesgroup.dtkit.metrics.api.InputMetricXSL;
+import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
