@@ -68,7 +68,8 @@ public class IrcPublisher extends IMPublisher {
             BuildToChatNotifier buildToChatNotifier)
     {
         super(defaultTargets, notificationStrategy, notifyGroupChatsOnBuildStart,
-        		notifySuspects, notifyCulprits, notifyFixers, notifyUpstreamCommitters,buildToChatNotifier);
+        		notifySuspects, notifyCulprits, notifyFixers, notifyUpstreamCommitters,
+        		buildToChatNotifier);
     }
 
     public BuildStepMonitor getRequiredMonitorService() {
@@ -326,7 +327,7 @@ public class IrcPublisher extends IMPublisher {
 
             return new IrcPublisher(targets, n, notifyStart, notifySuspects, notifyCulprits,
                 		notifyFixers, notifyUpstream,
-                    req.bindJSON(BuildToChatNotifier.class,formData.getJSONObject("buildToChatNotifier")));
+                		req.bindJSON(BuildToChatNotifier.class,formData.getJSONObject("buildToChatNotifier")));
         }
 
         @Override
