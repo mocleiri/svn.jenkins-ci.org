@@ -59,7 +59,7 @@ public class InputMetricsValidation {
     @SuppressWarnings("unused")
     public void load(InputMetricsLocator inputMetricsLocator, ValidationService validationService) {
         this.inputMetricsLocator = inputMetricsLocator;
-        this.validationService=validationService;
+        this.validationService = validationService;
     }
 
     private InputMetric getInputMetricObject(PathSegment metricSegment) {
@@ -80,11 +80,20 @@ public class InputMetricsValidation {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @SuppressWarnings("unused")
-    public Response validateInputFile(@FormDataParam("file") File inputXMLFile, @FormDataParam("xsd") File inputXsd) {
+    public Response validateInputFile(@FormDataParam("file") File inputXmlLFile, @FormDataParam("xsd") File inputXsdFile) {
         logger.debug("validateInputFile() service");
+
+        if (inputXmlLFile == null) {
+            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+        }
+
+        if (inputXsdFile == null) {
+            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+        }
+
         InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
         try {
-            List<ValidationError> validationErrors = validationService.processValidation(inputXsd, inputXMLFile);
+            List<ValidationError> validationErrors = validationService.processValidation(inputXsdFile, inputXmlLFile);
             inputMetricValidationResult.setValid(validationErrors.size() == 0);
             inputMetricValidationResult.setValidationErrors(validationErrors);
 
@@ -100,12 +109,17 @@ public class InputMetricsValidation {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @SuppressWarnings("unused")
-    public Response validateInputFileMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputXMLFile) {
+    public Response validateInputFileMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputXmlLFile) {
         logger.debug("validateInputFileMetric() service");
+
+        if (inputXmlLFile == null) {
+            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+        }
+
         InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
         try {
             InputMetric inputMetric = getInputMetricObject(metricSegment);
-            inputMetricValidationResult.setValid(inputMetric.validateInputFile(inputXMLFile));
+            inputMetricValidationResult.setValid(inputMetric.validateInputFile(inputXmlLFile));
             inputMetricValidationResult.setValidationErrors(inputMetric.getInputValidationErrors());
 
         } catch (ValidationException ve) {

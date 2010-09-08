@@ -38,7 +38,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
-import javax.print.attribute.standard.Media;
 import java.io.File;
 import java.io.IOException;
 
@@ -80,11 +79,20 @@ public class InputMetricsConversion {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_XML)
     @SuppressWarnings("unused")
-    public Response convertInputFile( @FormDataParam("file") File inputFile, @FormDataParam("xsl") File inputXsl) {
+    public Response convertInputFile(@FormDataParam("file") File inputXmlLFile, @FormDataParam("xsl") File inputXslFile) {
         logger.debug("convertInputMetric() service");
+
+        if (inputXmlLFile == null) {
+            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+        }
+
+        if (inputXslFile == null) {
+            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+        }
+
         try {
             File dest = File.createTempFile("toot", "ttt");
-            conversionService.convert(inputXsl, inputFile, dest);
+            conversionService.convert(inputXslFile, inputXmlLFile, dest);
             return Response.ok(dest).build();
         } catch (IOException ioe) {
             logger.error("Conversion error", ioe);
@@ -101,8 +109,13 @@ public class InputMetricsConversion {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_XML)
     @SuppressWarnings("unused")
-    public Response convertInputMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputMetricFile) {
+    public Response convertInputMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputXmlLFile) {
         logger.debug("convertInputMetric() service");
+
+        if (inputXmlLFile == null) {
+            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+        }
+
         try {
 
             //Retrieving the metric
@@ -111,7 +124,7 @@ public class InputMetricsConversion {
             //Validating input file
             boolean result;
             try {
-                result = inputMetric.validateInputFile(inputMetricFile);
+                result = inputMetric.validateInputFile(inputXmlLFile);
             } catch (ValidationException e) {
                 throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
             }
@@ -121,7 +134,7 @@ public class InputMetricsConversion {
 
             //Converting the input file
             File dest = File.createTempFile("toot", "ttt");
-            inputMetric.convert(inputMetricFile, dest);
+            inputMetric.convert(inputXmlLFile, dest);
             return Response.ok(dest).build();
 
         } catch (IOException ioe) {
@@ -133,7 +146,6 @@ public class InputMetricsConversion {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 
 }

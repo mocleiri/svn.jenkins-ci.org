@@ -27,9 +27,9 @@ import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
+import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
-import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
