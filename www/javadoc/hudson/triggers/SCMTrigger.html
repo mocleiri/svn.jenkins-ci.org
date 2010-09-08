@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCMTrigger (Hudson main module 1.374 API)
+SCMTrigger (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCMTrigger (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCMTrigger (Hudson main module 1.374 API)";
+        parent.document.title="SCMTrigger (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -269,6 +269,14 @@ Class SCMTrigger</H2>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes the triggered task.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/triggers/SCMTrigger.html#run(hudson.model.Action[])">run</A></B>(<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>[]&nbsp;additionalActions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Run the SCM trigger with additional build actions.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.triggers.Trigger"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -360,6 +368,22 @@ public void <B>run</B>()</PRE>
 <DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/triggers/Trigger.html#run()">run</A></CODE> in class <CODE><A HREF="../../hudson/triggers/Trigger.html" title="class in hudson.triggers">Trigger</A>&lt;<A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="run(hudson.model.Action[])"><!-- --></A><H3>
+run</H3>
+<PRE>
+public void <B>run</B>(<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>[]&nbsp;additionalActions)</PRE>
+<DL>
+<DD>Run the SCM trigger with additional build actions. Used by SubversionRepositoryStatus
+ to trigger a build at a specific revisionn number.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>additionalActions</CODE> - <DT><B>Since:</B></DT>
+  <DD>1.375</DD>
 </DL>
 </DD>
 </DL>

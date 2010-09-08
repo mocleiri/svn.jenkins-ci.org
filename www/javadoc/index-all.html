@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.374 API)
+Index (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.374 API)";
+        parent.document.title="Index (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -568,6 +568,10 @@ Method in class hudson.util.<A HREF="./hudson/util/CopyOnWriteList.html" title="
 <DT><A HREF="./hudson/util/PersistedList.html#addAllTo(java.util.Collection)"><B>addAllTo(Collection&lt;? super T&gt;)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/PersistedList.html" title="class in hudson.util">PersistedList</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/matrix/Axis.html#addBuildVariable(java.lang.String, java.util.Map)"><B>addBuildVariable(String, Map&lt;String, String&gt;)</B></A> - 
+Method in class hudson.matrix.<A HREF="./hudson/matrix/Axis.html" title="class in hudson.matrix">Axis</A>
+<DD>Converts the selected value (which is among <A HREF="./hudson/matrix/Axis.html#values"><CODE>Axis.values</CODE></A>) and adds that to the given map,
+ which serves as the build variables.
 <DT><A HREF="./hudson/remoting/Launcher.html#addClasspath(java.lang.String)"><B>addClasspath(String)</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/Launcher.html" title="class in hudson.remoting">Launcher</A>
 <DD>&nbsp;
@@ -1056,6 +1060,9 @@ Method in interface hudson.model.<A HREF="./hudson/model/TaskListener.html" titl
 <DT><A HREF="./hudson/scm/ChangeLogAnnotator.html#annotate(hudson.model.AbstractBuild, hudson.scm.ChangeLogSet.Entry, hudson.MarkupText)"><B>annotate(AbstractBuild&lt;?, ?&gt;, ChangeLogSet.Entry, MarkupText)</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/ChangeLogAnnotator.html" title="class in hudson.scm">ChangeLogAnnotator</A>
 <DD>Called by Hudson to allow markups to be added to the changelog text.
+<DT><A HREF="./hudson/tasks/_ant/AntOutcomeNote.html#annotate(java.lang.Object, hudson.MarkupText, int)"><B>annotate(Object, MarkupText, int)</B></A> - 
+Method in class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntOutcomeNote.html" title="class in hudson.tasks._ant">AntOutcomeNote</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/_ant/AntTargetNote.html#annotate(java.lang.Object, hudson.MarkupText, int)"><B>annotate(Object, MarkupText, int)</B></A> - 
 Method in class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant">AntTargetNote</A>
 <DD>&nbsp;
@@ -1147,6 +1154,12 @@ Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title
 <DD>Maybe you need to configure the job to choose one of your Ant installations?
 <DT><A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html" title="class in hudson.tasks._ant"><B>AntConsoleAnnotator</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>Filter <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A> that places an annotation that marks Ant target execution.<DT><A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html#AntConsoleAnnotator(java.io.OutputStream, java.nio.charset.Charset)"><B>AntConsoleAnnotator(OutputStream, Charset)</B></A> - 
 Constructor for class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntConsoleAnnotator.html" title="class in hudson.tasks._ant">AntConsoleAnnotator</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/_ant/AntOutcomeNote.html" title="class in hudson.tasks._ant"><B>AntOutcomeNote</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>Annotates the BUILD SUCCESSFUL/FAILED line of the Ant execution.<DT><A HREF="./hudson/tasks/_ant/AntOutcomeNote.html#AntOutcomeNote()"><B>AntOutcomeNote()</B></A> - 
+Constructor for class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntOutcomeNote.html" title="class in hudson.tasks._ant">AntOutcomeNote</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/tasks/_ant/AntOutcomeNote.DescriptorImpl.html" title="class in hudson.tasks._ant"><B>AntOutcomeNote.DescriptorImpl</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>&nbsp;<DT><A HREF="./hudson/tasks/_ant/AntOutcomeNote.DescriptorImpl.html#AntOutcomeNote.DescriptorImpl()"><B>AntOutcomeNote.DescriptorImpl()</B></A> - 
+Constructor for class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntOutcomeNote.DescriptorImpl.html" title="class in hudson.tasks._ant">AntOutcomeNote.DescriptorImpl</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant"><B>AntTargetNote</B></A> - Class in <A HREF="./hudson/tasks/_ant/package-summary.html">hudson.tasks._ant</A><DD>Marks the log line "TARGET:" that Ant uses to mark the beginning of the new target.<DT><A HREF="./hudson/tasks/_ant/AntTargetNote.html#AntTargetNote()"><B>AntTargetNote()</B></A> - 
 Constructor for class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntTargetNote.html" title="class in hudson.tasks._ant">AntTargetNote</A>
@@ -1275,6 +1288,9 @@ Variable in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/Maven
 <DT><A HREF="./hudson/tasks/MailSender.html#artifactMatches(java.lang.String, hudson.model.AbstractBuild)"><B>artifactMatches(String, AbstractBuild&lt;?, ?&gt;)</B></A> - 
 Method in class hudson.tasks.<A HREF="./hudson/tasks/MailSender.html" title="class in hudson.tasks">MailSender</A>
 <DD>Check whether a path (/-separated) will be archived.
+<DT><A HREF="./hudson/model/Run.html#ARTIFACTS"><B>ARTIFACTS</B></A> - 
+Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
+<DD>See <A HREF="./hudson/Functions.html#isArtifactsPermissionEnabled()"><CODE>Functions.isArtifactsPermissionEnabled()</CODE></A>
 <DT><A HREF="./hudson/maven/MavenModule.html#asDependency()"><B>asDependency()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>
 <DD>Gets groupId+artifactId+version as <A HREF="./hudson/maven/ModuleDependency.html" title="class in hudson.maven"><CODE>ModuleDependency</CODE></A>.
@@ -5701,6 +5717,12 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractBuild.html" title="
 <DT><A HREF="./hudson/model/Executor.html#doStop(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doStop(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
 <DD>Stops the current build.
+<DT><A HREF="./hudson/console/ConsoleAnnotationDescriptor.html#doStyleCss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doStyleCss(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotationDescriptor.html" title="class in hudson.console">ConsoleAnnotationDescriptor</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/console/ConsoleAnnotatorFactory.html#doStyleCss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doStyleCss(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console">ConsoleAnnotatorFactory</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/plugins/ui_samples/DropdownList.html#doSubmit(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doSubmit(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.plugins.ui_samples.<A HREF="./hudson/plugins/ui_samples/DropdownList.html" title="class in hudson.plugins.ui_samples">DropdownList</A>
 <DD>&nbsp;
@@ -7415,7 +7437,7 @@ Static method in class hudson.util.<A HREF="./hudson/util/ChartUtil.html" title=
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.320
       Bind <A HREF="./hudson/util/Graph.html" title="class in hudson.util"><CODE>Graph</CODE></A> to the URL space. See <A HREF="./hudson/tasks/junit/History.html" title="class in hudson.tasks.junit"><CODE>History</CODE></A> as an example (note that doing so involves
       a bit of URL structure change.)</I>
-<DT><A HREF="./hudson/Functions.html#generateConsoleAnnotationScript()"><B>generateConsoleAnnotationScript()</B></A> - 
+<DT><A HREF="./hudson/Functions.html#generateConsoleAnnotationScriptAndStylesheet()"><B>generateConsoleAnnotationScriptAndStylesheet()</B></A> - 
 Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
 <DD>Generate a series of &lt;script> tags to include <tt>script.js</tt>
  from <A HREF="./hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console"><CODE>ConsoleAnnotatorFactory</CODE></A>s and <A HREF="./hudson/console/ConsoleAnnotationDescriptor.html" title="class in hudson.console"><CODE>ConsoleAnnotationDescriptor</CODE></A>s.
@@ -9569,6 +9591,9 @@ Method in class hudson.slaves.<A HREF="./hudson/slaves/RetentionStrategy.Demand.
 <DT><A HREF="./hudson/slaves/SimpleScheduledRetentionStrategy.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/SimpleScheduledRetentionStrategy.DescriptorImpl.html" title="class in hudson.slaves">SimpleScheduledRetentionStrategy.DescriptorImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/_ant/AntOutcomeNote.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
+Method in class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntOutcomeNote.DescriptorImpl.html" title="class in hudson.tasks._ant">AntOutcomeNote.DescriptorImpl</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/_ant/AntTargetNote.DescriptorImpl.html#getDisplayName()"><B>getDisplayName()</B></A> - 
 Method in class hudson.tasks._ant.<A HREF="./hudson/tasks/_ant/AntTargetNote.DescriptorImpl.html" title="class in hudson.tasks._ant">AntTargetNote.DescriptorImpl</A>
 <DD>&nbsp;
@@ -11111,6 +11136,12 @@ Method in class hudson.<A HREF="./hudson/Launcher.html" title="class in hudson">
 <DT><A HREF="./hudson/model/Queue.html#getLoadBalancer()"><B>getLoadBalancer()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Queue.html" title="class in hudson.model">Queue</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/DescriptorExtensionList.html#getLoadLock()"><B>getLoadLock()</B></A> - 
+Method in class hudson.<A HREF="./hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>
+<DD><A HREF="./hudson/DescriptorExtensionList.html#load()"><CODE>DescriptorExtensionList.load()</CODE></A> in the descriptor is not a real load activity, so locking against "this" is enough.
+<DT><A HREF="./hudson/ExtensionList.html#getLoadLock()"><B>getLoadLock()</B></A> - 
+Method in class hudson.<A HREF="./hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>
+<DD>Chooses the object that locks the loading of the extension instances.
 <DT><A HREF="./hudson/model/Computer.html#getLoadStatistics()"><B>getLoadStatistics()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>&nbsp;
@@ -14436,6 +14467,12 @@ Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotatorFactory
 <DT><A HREF="./hudson/model/Executor.html#hasStopPermission()"><B>hasStopPermission()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Executor.html" title="class in hudson.model">Executor</A>
 <DD>Checks if the current user has a permission to stop this build.
+<DT><A HREF="./hudson/console/ConsoleAnnotationDescriptor.html#hasStylesheet()"><B>hasStylesheet()</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotationDescriptor.html" title="class in hudson.console">ConsoleAnnotationDescriptor</A>
+<DD>Returns true if this descriptor has a stylesheet to be inserted on applicable console page.
+<DT><A HREF="./hudson/console/ConsoleAnnotatorFactory.html#hasStylesheet()"><B>hasStylesheet()</B></A> - 
+Method in class hudson.console.<A HREF="./hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console">ConsoleAnnotatorFactory</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/node_monitors/ResponseTimeMonitor.Data.html#hasTooManyTimeouts()"><B>hasTooManyTimeouts()</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/ResponseTimeMonitor.Data.html" title="class in hudson.node_monitors">ResponseTimeMonitor.Data</A>
 <DD>&nbsp;
@@ -15359,6 +15396,10 @@ Method in interface hudson.maven.<A HREF="./hudson/maven/MavenBuildProxy.html" t
 <DT><A HREF="./hudson/maven/MavenModuleSet.html#isArchivingDisabled()"><B>isArchivingDisabled()</B></A> - 
 Method in class hudson.maven.<A HREF="./hudson/maven/MavenModuleSet.html" title="class in hudson.maven">MavenModuleSet</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/Functions.html#isArtifactsPermissionEnabled()"><B>isArtifactsPermissionEnabled()</B></A> - 
+Static method in class hudson.<A HREF="./hudson/Functions.html" title="class in hudson">Functions</A>
+<DD>Returns <code>true</code> if the <A HREF="./hudson/model/Run.html#ARTIFACTS"><CODE>Run.ARTIFACTS</CODE></A> permission is enabled,
+ <code>false</code> otherwise.
 <DT><A HREF="./hudson/model/Label.html#isAssignable()"><B>isAssignable()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Label.html" title="class in hudson.model">Label</A>
 <DD>Can jobs be assigned to this label?
@@ -17461,6 +17502,9 @@ Constructor for class hudson.tasks.<A HREF="./hudson/tasks/MailSender.html" titl
 <DT><A HREF="./hudson/tasks/MailSender.html#MailSender(java.lang.String, boolean, boolean, java.lang.String)"><B>MailSender(String, boolean, boolean, String)</B></A> - 
 Constructor for class hudson.tasks.<A HREF="./hudson/tasks/MailSender.html" title="class in hudson.tasks">MailSender</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/tasks/MailSender.html#MailSender(java.lang.String, boolean, boolean, java.lang.String, java.util.Collection)"><B>MailSender(String, boolean, boolean, String, Collection&lt;AbstractProject&gt;)</B></A> - 
+Constructor for class hudson.tasks.<A HREF="./hudson/tasks/MailSender.html" title="class in hudson.tasks">MailSender</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/tasks/Messages.html#MailSender_BackToNormal_Normal()"><B>MailSender_BackToNormal_Normal()</B></A> - 
 Static method in class hudson.tasks.<A HREF="./hudson/tasks/Messages.html" title="class in hudson.tasks">Messages</A>
 <DD>normal
@@ -18098,7 +18142,7 @@ Static variable in class hudson.maven.<A HREF="./hudson/maven/MavenBuild.html" t
 <DT><A HREF="./hudson/maven/Messages.html#MavenProcessFactory_ClassWorldsNotFound(java.lang.Object)"><B>MavenProcessFactory_ClassWorldsNotFound(Object)</B></A> - 
 Static method in class hudson.maven.<A HREF="./hudson/maven/Messages.html" title="class in hudson.maven">Messages</A>
 <DD>No classworlds*.jar found in {0} -- Is this a valid maven2 directory?
-<DT><A HREF="./hudson/maven/MavenProjectActionBuilder.html" title="interface in hudson.maven"><B>MavenProjectActionBuilder</B></A> - Interface in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Can contribute to project actions.<DT><A HREF="./hudson/maven/MavenRedeployer.html" title="class in hudson.maven"><B>MavenRedeployer</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><CODE>Publisher</CODE> for Maven projects to deploy artifacts to a Maven repository
+<DT><A HREF="./hudson/maven/MavenProjectActionBuilder.html" title="interface in hudson.maven"><B>MavenProjectActionBuilder</B></A> - Interface in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD>Can contribute to project actions.<DT><A HREF="./hudson/maven/MavenRedeployer.html" title="class in hudson.maven"><B>MavenRedeployer</B></A> - Class in <A HREF="./hudson/maven/package-summary.html">hudson.maven</A><DD><A HREF="./hudson/tasks/Publisher.html" title="class in hudson.tasks"><CODE>Publisher</CODE></A> for Maven projects to deploy artifacts to a Maven repository
  after the fact.<DT><A HREF="./hudson/maven/MavenRedeployer.html#MavenRedeployer()"><B>MavenRedeployer()</B></A> - 
 Constructor for class hudson.maven.<A HREF="./hudson/maven/MavenRedeployer.html" title="class in hudson.maven">MavenRedeployer</A>
 <DD>&nbsp;
@@ -21821,6 +21865,9 @@ Method in class hudson.triggers.<A HREF="./hudson/triggers/SafeTimerTask.html" t
 <DT><A HREF="./hudson/triggers/SCMTrigger.html#run()"><B>run()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.html#run(hudson.model.Action[])"><B>run(Action[])</B></A> - 
+Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.html" title="class in hudson.triggers">SCMTrigger</A>
+<DD>Run the SCM trigger with additional build actions.
 <DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#run()"><B>run()</B></A> - 
 Method in class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
 <DD>&nbsp;
@@ -21865,6 +21912,9 @@ Constructor for exception hudson.model.<A HREF="./hudson/model/Run.RunnerAborted
 <DT><A HREF="./hudson/model/Run.Summary.html" title="class in hudson.model"><B>Run.Summary</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/Run.Summary.html#Run.Summary(boolean, java.lang.String)"><B>Run.Summary(boolean, String)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/Run.Summary.html" title="class in hudson.model">Run.Summary</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Messages.html#Run_ArtifactsPermission_Description()"><B>Run_ArtifactsPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to retrieve the artifacts produced by builds.
 <DT><A HREF="./hudson/model/Messages.html#Run_BuildAborted()"><B>Run_BuildAborted()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build was aborted
@@ -22193,6 +22243,9 @@ Constructor for class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Desc
 <DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers"><B>SCMTrigger.Runner</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A> that actually performs polling.<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#SCMTrigger.Runner()"><B>SCMTrigger.Runner()</B></A> - 
 Constructor for class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/triggers/SCMTrigger.Runner.html#SCMTrigger.Runner(hudson.model.Action[])"><B>SCMTrigger.Runner(Action[])</B></A> - 
+Constructor for class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.Runner.html" title="class in hudson.triggers">SCMTrigger.Runner</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/triggers/SCMTrigger.SCMAction.html" title="class in hudson.triggers"><B>SCMTrigger.SCMAction</B></A> - Class in <A HREF="./hudson/triggers/package-summary.html">hudson.triggers</A><DD>Action object for <A HREF="./hudson/model/Project.html" title="class in hudson.model"><CODE>Project</CODE></A>.<DT><A HREF="./hudson/triggers/SCMTrigger.SCMAction.html#SCMTrigger.SCMAction()"><B>SCMTrigger.SCMAction()</B></A> - 
 Constructor for class hudson.triggers.<A HREF="./hudson/triggers/SCMTrigger.SCMAction.html" title="class in hudson.triggers">SCMTrigger.SCMAction</A>
 <DD>&nbsp;
@@ -22208,6 +22261,18 @@ Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html"
 <DT><A HREF="./hudson/triggers/Messages.html#SCMTrigger_SCMTriggerCause_ShortDescription()"><B>SCMTrigger_SCMTriggerCause_ShortDescription()</B></A> - 
 Static method in class hudson.triggers.<A HREF="./hudson/triggers/Messages.html" title="class in hudson.triggers">Messages</A>
 <DD>Started by an SCM change
+<DT><A HREF="./hudson/ExtensionFinder.html#scout(java.lang.Class, hudson.model.Hudson)"><B>scout(Class, Hudson)</B></A> - 
+Method in class hudson.<A HREF="./hudson/ExtensionFinder.html" title="class in hudson">ExtensionFinder</A>
+<DD>Performs class initializations without creating instances.
+<DT><A HREF="./hudson/ExtensionFinder.Sezpoz.html#scout(java.lang.Class, hudson.model.Hudson)"><B>scout(Class, Hudson)</B></A> - 
+Method in class hudson.<A HREF="./hudson/ExtensionFinder.Sezpoz.html" title="class in hudson">ExtensionFinder.Sezpoz</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/DescriptorExtensionList.html#scoutLoad()"><B>scoutLoad()</B></A> - 
+Method in class hudson.<A HREF="./hudson/DescriptorExtensionList.html" title="class in hudson">DescriptorExtensionList</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/ExtensionList.html#scoutLoad()"><B>scoutLoad()</B></A> - 
+Method in class hudson.<A HREF="./hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>
+<DD>See <A HREF="./hudson/ExtensionFinder.html#scout(java.lang.Class, hudson.model.Hudson)"><CODE>ExtensionFinder.scout(Class, Hudson)</CODE></A> for the dead lock issue and what this does.
 <DT><A HREF="./hudson/util/Scrambler.html#scramble(java.lang.String)"><B>scramble(String)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Scrambler.html" title="class in hudson.util">Scrambler</A>
 <DD>&nbsp;
@@ -22586,6 +22651,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Mailer.DescriptorImpl.html"
 <DT><A HREF="./hudson/model/HealthReport.html#setIconUrl(java.lang.String)"><B>setIconUrl(String)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/HealthReport.html" title="class in hudson.model">HealthReport</A>
 <DD>Setter for property 'iconUrl'.
+<DT><A HREF="./hudson/Lookup.html#setIfNull(java.lang.Class, T)"><B>setIfNull(Class&lt;T&gt;, T)</B></A> - 
+Method in class hudson.<A HREF="./hudson/Lookup.html" title="class in hudson">Lookup</A>
+<DD>Overwrites the value only if the current value is null.
 <DT><A HREF="./hudson/node_monitors/NodeMonitor.html#setIgnored(boolean)"><B>setIgnored(boolean)</B></A> - 
 Method in class hudson.node_monitors.<A HREF="./hudson/node_monitors/NodeMonitor.html" title="class in hudson.node_monitors">NodeMonitor</A>
 <DD>&nbsp;
@@ -27230,6 +27298,9 @@ Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.ht
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#_run()"><B>_run()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/Messages.html#_Run_ArtifactsPermission_Description()"><B>_Run_ArtifactsPermission_Description()</B></A> - 
+Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
+<DD>This permission grants the ability to retrieve the artifacts produced by builds.
 <DT><A HREF="./hudson/model/Messages.html#_Run_BuildAborted()"><B>_Run_BuildAborted()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>
 <DD>Build was aborted

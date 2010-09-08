@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ConsoleAnnotatorFactory (Hudson main module 1.374 API)
+ConsoleAnnotatorFactory (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ConsoleAnnotatorFactory (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ConsoleAnnotatorFactory (Hudson main module 1.374 API)";
+        parent.document.title="ConsoleAnnotatorFactory (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -123,6 +123,13 @@ Entry point to the <A HREF="../../hudson/console/ConsoleAnnotator.html" title="c
 
  <p>
  To register, put @<A HREF="../../hudson/Extension.html" title="annotation in hudson"><CODE>Extension</CODE></A> on your <A HREF="../../hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console"><CODE>ConsoleAnnotatorFactory</CODE></A> subtype.
+
+ <h2>Behaviour, JavaScript, and CSS</h2>
+ <p>
+ <A HREF="../../hudson/console/ConsoleNote.html" title="class in hudson.console"><CODE>ConsoleNote</CODE></A> can have associated <tt>script.js</tt> and <tt>style.css</tt> (put them
+ in the same resource directory that you normally put Jelly scripts), which will be loaded into
+ the HTML page whenever the console notes are used. This allows you to use minimal markup in
+ code generation, and do the styling in CSS and perform the rest of the interesting work as a CSS behaviour/JavaScript.
 <P>
 
 <P>
@@ -198,11 +205,28 @@ Entry point to the <A HREF="../../hudson/console/ConsoleAnnotator.html" title="c
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotatorFactory.html#doStyleCss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doStyleCss</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotatorFactory.html#hasScript()">hasScript</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this descriptor has a JavaScript to be inserted on applicable console page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotatorFactory.html#hasStylesheet()">hasStylesheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -314,6 +338,20 @@ public boolean <B>hasScript</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="hasStylesheet()"><!-- --></A><H3>
+hasStylesheet</H3>
+<PRE>
+public boolean <B>hasStylesheet</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="doScriptJs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doScriptJs</H3>
 <PRE>
@@ -325,6 +363,27 @@ doScriptJs</H3>
 <DL>
 <DD>Serves the JavaScript file associated with this console annotator factory.
 <P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doStyleCss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doStyleCss</H3>
+<PRE>
+<FONT SIZE="-1">@WebMethod(name="style.css")
+</FONT>public void <B>doStyleCss</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                       javax.servlet.ServletException</PRE>
+<DL>
 <DD><DL>
 </DL>
 </DD>

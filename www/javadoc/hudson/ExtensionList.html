@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ExtensionList (Hudson main module 1.374 API)
+ExtensionList (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ExtensionList (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ExtensionList (Hudson main module 1.374 API)";
+        parent.document.title="ExtensionList (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -302,6 +302,14 @@ U</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ExtensionList.html#getLoadLock()">getLoadLock</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chooses the object that locks the loading of the extension instances.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</A>&lt;<A HREF="../hudson/ExtensionList.html" title="type parameter in ExtensionList">T</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/ExtensionList.html#iterator()">iterator</A></B>()</CODE>
 
@@ -331,6 +339,14 @@ U</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/ExtensionList.html#scoutLoad()">scoutLoad</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <A HREF="../hudson/ExtensionFinder.html#scout(java.lang.Class, hudson.model.Hudson)"><CODE>ExtensionFinder.scout(Class, Hudson)</CODE></A> for the dead lock issue and what this does.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -612,6 +628,32 @@ finders</H3>
 protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../hudson/ExtensionFinder.html" title="class in hudson">ExtensionFinder</A>&gt; <B>finders</B>()</PRE>
 <DL>
 <DD>Returns <A HREF="../hudson/ExtensionFinder.html" title="class in hudson"><CODE>ExtensionFinder</CODE></A>s used to search for the extension instances.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLoadLock()"><!-- --></A><H3>
+getLoadLock</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>getLoadLock</B>()</PRE>
+<DL>
+<DD>Chooses the object that locks the loading of the extension instances.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="scoutLoad()"><!-- --></A><H3>
+scoutLoad</H3>
+<PRE>
+protected void <B>scoutLoad</B>()</PRE>
+<DL>
+<DD>See <A HREF="../hudson/ExtensionFinder.html#scout(java.lang.Class, hudson.model.Hudson)"><CODE>ExtensionFinder.scout(Class, Hudson)</CODE></A> for the dead lock issue and what this does.
 <P>
 <DD><DL>
 </DL>

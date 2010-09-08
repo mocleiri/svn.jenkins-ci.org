@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Functions (Hudson main module 1.374 API)
+Functions (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Functions (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Functions (Hudson main module 1.374 API)";
+        parent.document.title="Functions (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -376,7 +376,7 @@ Utility functions used in views.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/Functions.html#generateConsoleAnnotationScript()">generateConsoleAnnotationScript</A></B>()</CODE>
+<TD><CODE><B><A HREF="../hudson/Functions.html#generateConsoleAnnotationScriptAndStylesheet()">generateConsoleAnnotationScriptAndStylesheet</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate a series of &lt;script> tags to include <tt>script.js</tt>
@@ -872,6 +872,15 @@ Utility functions used in views.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the current user is anonymous.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Functions.html#isArtifactsPermissionEnabled()">isArtifactsPermissionEnabled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns <code>true</code> if the <A HREF="../hudson/model/Run.html#ARTIFACTS"><CODE>Run.ARTIFACTS</CODE></A> permission is enabled,
+ <code>false</code> otherwise.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2339,10 +2348,10 @@ public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Date.ht
 </DL>
 <HR>
 
-<A NAME="generateConsoleAnnotationScript()"><!-- --></A><H3>
-generateConsoleAnnotationScript</H3>
+<A NAME="generateConsoleAnnotationScriptAndStylesheet()"><!-- --></A><H3>
+generateConsoleAnnotationScriptAndStylesheet</H3>
 <PRE>
-public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>generateConsoleAnnotationScript</B>()</PRE>
+public static <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>generateConsoleAnnotationScriptAndStylesheet</B>()</PRE>
 <DL>
 <DD>Generate a series of &lt;script> tags to include <tt>script.js</tt>
  from <A HREF="../hudson/console/ConsoleAnnotatorFactory.html" title="class in hudson.console"><CODE>ConsoleAnnotatorFactory</CODE></A>s and <A HREF="../hudson/console/ConsoleAnnotationDescriptor.html" title="class in hudson.console"><CODE>ConsoleAnnotationDescriptor</CODE></A>s.
@@ -2385,6 +2394,27 @@ getIsUnitTest</H3>
 public static boolean <B>getIsUnitTest</B>()</PRE>
 <DL>
 <DD>Returns true if we are running unit tests.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isArtifactsPermissionEnabled()"><!-- --></A><H3>
+isArtifactsPermissionEnabled</H3>
+<PRE>
+public static boolean <B>isArtifactsPermissionEnabled</B>()</PRE>
+<DL>
+<DD>Returns <code>true</code> if the <A HREF="../hudson/model/Run.html#ARTIFACTS"><CODE>Run.ARTIFACTS</CODE></A> permission is enabled,
+ <code>false</code> otherwise.
+
+ <p>When the <A HREF="../hudson/model/Run.html#ARTIFACTS"><CODE>Run.ARTIFACTS</CODE></A> permission is not turned on using the
+ <code>hudson.security.ArtifactsPermission</code>, this permission must not be
+ considered to be set to <code>false</code> for every user. It must rather be
+ like if the permission doesn't exist at all (which means that every user
+ has to have an access to the artifacts but the permission can't be
+ configured in the security screen). Got it?</p>
 <P>
 <DD><DL>
 </DL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ConsoleAnnotationDescriptor (Hudson main module 1.374 API)
+ConsoleAnnotationDescriptor (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ConsoleAnnotationDescriptor (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ConsoleAnnotationDescriptor (Hudson main module 1.374 API)";
+        parent.document.title="ConsoleAnnotationDescriptor (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,7 @@ Class ConsoleAnnotationDescriptor</H2>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/_ant/AntTargetNote.DescriptorImpl.html" title="class in hudson.tasks._ant">AntTargetNote.DescriptorImpl</A>, <A HREF="../../hudson/console/HudsonExceptionNote.DescriptorImpl.html" title="class in hudson.console">HudsonExceptionNote.DescriptorImpl</A>, <A HREF="../../hudson/console/HyperlinkNote.DescriptorImpl.html" title="class in hudson.console">HyperlinkNote.DescriptorImpl</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/tasks/_ant/AntOutcomeNote.DescriptorImpl.html" title="class in hudson.tasks._ant">AntOutcomeNote.DescriptorImpl</A>, <A HREF="../../hudson/tasks/_ant/AntTargetNote.DescriptorImpl.html" title="class in hudson.tasks._ant">AntTargetNote.DescriptorImpl</A>, <A HREF="../../hudson/console/HudsonExceptionNote.DescriptorImpl.html" title="class in hudson.console">HudsonExceptionNote.DescriptorImpl</A>, <A HREF="../../hudson/console/HyperlinkNote.DescriptorImpl.html" title="class in hudson.console">HyperlinkNote.DescriptorImpl</A></DD>
 </DL>
 <HR>
 <DL>
@@ -228,6 +228,15 @@ Descriptor for <A HREF="../../hudson/console/ConsoleNote.html" title="class in h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotationDescriptor.html#doStyleCss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">doStyleCss</A></B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+           org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotationDescriptor.html#getDisplayName()">getDisplayName</A></B>()</CODE>
 
@@ -241,6 +250,14 @@ Descriptor for <A HREF="../../hudson/console/ConsoleNote.html" title="class in h
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this descriptor has a JavaScript to be inserted on applicable console page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/console/ConsoleAnnotationDescriptor.html#hasStylesheet()">hasStylesheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if this descriptor has a stylesheet to be inserted on applicable console page.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Descriptor"><!-- --></A>
@@ -333,11 +350,48 @@ public boolean <B>hasScript</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="hasStylesheet()"><!-- --></A><H3>
+hasStylesheet</H3>
+<PRE>
+public boolean <B>hasStylesheet</B>()</PRE>
+<DL>
+<DD>Returns true if this descriptor has a stylesheet to be inserted on applicable console page.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="doScriptJs(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doScriptJs</H3>
 <PRE>
 <FONT SIZE="-1">@WebMethod(name="script.js")
 </FONT>public void <B>doScriptJs</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                                 org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                       javax.servlet.ServletException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE>javax.servlet.ServletException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doStyleCss(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doStyleCss</H3>
+<PRE>
+<FONT SIZE="-1">@WebMethod(name="style.css")
+</FONT>public void <B>doStyleCss</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                                  org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                        javax.servlet.ServletException</PRE>

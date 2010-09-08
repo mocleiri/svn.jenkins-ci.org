@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DescriptorExtensionList (Hudson main module 1.374 API)
+DescriptorExtensionList (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DescriptorExtensionList (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DescriptorExtensionList (Hudson main module 1.374 API)";
+        parent.document.title="DescriptorExtensionList (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -239,6 +239,14 @@ Class DescriptorExtensionList&lt;T extends <A HREF="../hudson/model/Describable.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#getLoadLock()">getLoadLock</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/DescriptorExtensionList.html#load()"><CODE>load()</CODE></A> in the descriptor is not a real load activity, so locking against "this" is enough.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#listLegacyInstances()">listLegacyInstances</A></B>()</CODE>
 
@@ -271,6 +279,14 @@ Class DescriptorExtensionList&lt;T extends <A HREF="../hudson/model/Describable.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/DescriptorExtensionList.html#scoutLoad()">scoutLoad</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See <A HREF="../hudson/ExtensionFinder.html#scout(java.lang.Class, hudson.model.Hudson)"><CODE>ExtensionFinder.scout(Class, Hudson)</CODE></A> for the dead lock issue and what this does.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.ExtensionList"><!-- --></A>
@@ -432,6 +448,39 @@ public <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">D
 
  If none is found, null is returned.
 <P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLoadLock()"><!-- --></A><H3>
+getLoadLock</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A> <B>getLoadLock</B>()</PRE>
+<DL>
+<DD><A HREF="../hudson/DescriptorExtensionList.html#load()"><CODE>load()</CODE></A> in the descriptor is not a real load activity, so locking against "this" is enough.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../hudson/ExtensionList.html#getLoadLock()">getLoadLock</A></CODE> in class <CODE><A HREF="../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A> extends <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">T</A>&gt;&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="scoutLoad()"><!-- --></A><H3>
+scoutLoad</H3>
+<PRE>
+protected void <B>scoutLoad</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../hudson/ExtensionList.html#scoutLoad()">ExtensionList</A></CODE></B></DD>
+<DD>See <A HREF="../hudson/ExtensionFinder.html#scout(java.lang.Class, hudson.model.Hudson)"><CODE>ExtensionFinder.scout(Class, Hudson)</CODE></A> for the dead lock issue and what this does.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../hudson/ExtensionList.html#scoutLoad()">scoutLoad</A></CODE> in class <CODE><A HREF="../hudson/ExtensionList.html" title="class in hudson">ExtensionList</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">D</A> extends <A HREF="../hudson/model/Descriptor.html" title="class in hudson.model">Descriptor</A>&lt;<A HREF="../hudson/DescriptorExtensionList.html" title="type parameter in DescriptorExtensionList">T</A>&gt;&gt;</CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

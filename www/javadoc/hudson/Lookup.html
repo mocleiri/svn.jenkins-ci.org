@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Lookup (Hudson main module 1.374 API)
+Lookup (Hudson main module 1.375 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-08-27">
+<META NAME="date" CONTENT="2010-09-07">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Lookup (Hudson main module 1.374 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Lookup (Hudson main module 1.374 API)";
+        parent.document.title="Lookup (Hudson main module 1.375 API)";
     }
 }
 </SCRIPT>
@@ -169,6 +169,22 @@ Type-safe instance map.
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
+<TR ALIGN="right" VALIGN="">
+<TD NOWRAP><FONT SIZE="-1">
+<CODE>&lt;T&gt; T</CODE></FONT></TD>
+</TR>
+</TABLE>
+</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/Lookup.html#setIfNull(java.lang.Class, T)">setIfNull</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
+          T&nbsp;instance)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overwrites the value only if the current value is null.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -228,6 +244,22 @@ public &lt;T&gt; T <B>set</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/j
 <DL>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIfNull(java.lang.Class,java.lang.Object)"><!-- --></A><A NAME="setIfNull(java.lang.Class, T)"><!-- --></A><H3>
+setIfNull</H3>
+<PRE>
+public &lt;T&gt; T <B>setIfNull</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&lt;T&gt;&nbsp;type,
+                       T&nbsp;instance)</PRE>
+<DL>
+<DD>Overwrites the value only if the current value is null.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>If the value was null, return the <code>instance</code> value.
+      Otherwise return the current value, which is non-null.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
