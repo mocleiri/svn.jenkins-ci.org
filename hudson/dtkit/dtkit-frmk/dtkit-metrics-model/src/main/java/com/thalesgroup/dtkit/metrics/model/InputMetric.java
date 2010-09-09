@@ -82,7 +82,10 @@ public abstract class InputMetric implements Serializable {
     public String getToolVersion() {
         return toolVersion;
     }
-
+    
+    public boolean isDefault(){
+        return false;
+    }
 
     /**
      * The label of the tool
@@ -91,10 +94,17 @@ public abstract class InputMetric implements Serializable {
      */
     @XmlElement
     public String getLabel() {
+        String label;
         if (getToolVersion() == null) {
-            return getToolName();
+            label = getToolName();
+        } else{
+            label = getToolName() + "-" + getToolVersion();
         }
-        return getToolName() + "-" + getToolVersion();
+        if (isDefault()){
+            label = label + " (default)";
+        }
+        
+        return label;
     }
 
     /**
