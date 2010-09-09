@@ -45,9 +45,9 @@ public class GeneratorHudsonMojo extends AbstractMojo {
   private MavenProject project;
 
   /**
-   * <i>Maven Internal</i>: List of runtime artifacts for the projects.
+   * <i>Maven Internal</i>: List of compile artifacts for the projects.
    *
-   * @parameter expression="${project.runtimeArtifacts}"
+   * @parameter expression="${project.compileArtifacts}"
    * @required
    * @readonly
    */
@@ -60,27 +60,40 @@ public class GeneratorHudsonMojo extends AbstractMojo {
 
     try {
 
-      //Build a new classloader     
+
+      //Filtering projectClasspathList
+      List computeClassPathList = new ArrayList();
+      for (int i = 0; i < projectClasspathList.size(); i++) {
+        Artifact  artifact = (Artifact) projectClasspathList.get(i);
+        //Exclude all Hudson plugins
+	if (!"org.jvnet.hudson.plugins".equals(artifact.getGroupId())){
+           computeClassPathList.add(artifact);
+        }
+      }
+
+
+      //Building a new classloader     
       File output =  new File(project.getBuild().getOutputDirectory())
       URL[] urls;
       if (output.exists()) {
-         urls = new URL[projectClasspathList.size() + 1];
+         urls = new URL[computeClassPathList.size() + 1];
          urls[urls.length - 1] = new URL("file:///" + project.getBuild().getOutputDirectory() + "/");
       }
       else {
-        urls = new URL[+ projectClasspathList.size()];
+        urls = new URL[+ computeClassPathList.size()];
       }
-      for (int i = 0; i < projectClasspathList.size(); i++) {
-        urls[i] = new URL("file:///" + ((Artifact) projectClasspathList.get(i)).getFile().getPath());
+      for (int i = 0; i < computeClassPathList.size(); i++) {
+          Artifact  artifact = (Artifact) computeClassPathList.get(i);
+          urls[i] = new URL("file:///" + ((Artifact) computeClassPathList.get(i)).getFile().getPath());
       }      
       ClassLoader cl = new URLClassLoader(urls, Thread.currentThread().getContextClassLoader());
 
-      // Retrieve all input type
+      // Retrieving all input type
       getLog().info("Introspecting all DTKIT metrics");
       ServiceLoader<InputMetric> metricsLoader = ServiceLoader.load(InputMetric.class, cl);
       metricsLoader.reload();
 
-      //Create Hudson classes
+      //Creating Hudson classes
       Iterator<InputMetric> commandsIterator = metricsLoader.iterator();
       while (commandsIterator.hasNext()) {
         InputMetric metric = commandsIterator.next();
@@ -121,7 +134,9 @@ public class GeneratorHudsonMojo extends AbstractMojo {
     // The directory to write the source to
     File packageDir = new File(targetDirectory, packageName.replace('.', '/'))
 
-    def buildName = inputMetric.getToolName() + "Hudson" + hudsonType
+    def keyFormat = inputMetric.getOutputFormatType().getKey()
+    keyFormat = keyFormat.substring(0, 1).toUpperCase() + keyFormat.substring(1);  
+    def buildName = inputMetric.getToolName() +  keyFormat  + "Hudson" + hudsonType
     def classname = buildName.substring(0, 1).toUpperCase() + buildName.substring(1);
 
     // Now to create our enum
