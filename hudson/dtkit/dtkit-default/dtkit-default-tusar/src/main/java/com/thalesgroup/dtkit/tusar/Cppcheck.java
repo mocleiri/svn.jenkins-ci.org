@@ -43,9 +43,14 @@ public class Cppcheck extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.43 (default)";
+        return "1.43";
     }
 
+    @Override
+    public boolean isDefault() {
+        return true;
+    }
+    
     @Override
     public String getXslName() {
         return "cppcheck-1.0-to-tusar-1.0.xsl";

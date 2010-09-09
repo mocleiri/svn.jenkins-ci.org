@@ -47,6 +47,11 @@ public class GnatMetric  extends InputMetricXSL {
     }
 
     @Override
+    public boolean isDefault() {
+        return true;
+    }    
+
+    @Override
     public String getXslName() {
         return "gnatmetric-1.0-to-tusar-1.0.xsl";
     }

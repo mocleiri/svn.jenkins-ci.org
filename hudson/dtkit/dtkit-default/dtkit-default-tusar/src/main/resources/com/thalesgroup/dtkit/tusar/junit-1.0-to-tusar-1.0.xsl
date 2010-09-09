@@ -52,7 +52,7 @@
                             <xsl:value-of select="@tests"/>
                         </xsl:attribute>
 
-                        <xsl:if test="@failure">
+                        <xsl:if test="@failures">
                             <xsl:attribute name="failures">
                                 <xsl:value-of select="@failures"/>
                             </xsl:attribute>

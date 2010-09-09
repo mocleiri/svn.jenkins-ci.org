@@ -29,31 +29,31 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
 
-public class Klocwork extends InputMetricXSL {
+public class AUnit extends InputMetricXSL {
 
     @Override
     public InputType getToolType() {
-        return InputType.VIOLATION;
+        return InputType.TEST;
     }
 
     @Override
     public String getToolName() {
-        return "Klocwork";
+        return "AUnit";
     }
 
     @Override
     public String getToolVersion() {
-        return "9.0";
+        return "3.1.1";
     }
 
     @Override
     public boolean isDefault() {
         return true;
-    }    
+    }
 
     @Override
     public String getXslName() {
-        return "klocwork-1.0-to-tusar-1.0.xsl";
+        return "aunit-1.0-to-tusar-1.0.xsl";
     }
 
     @Override
