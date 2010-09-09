@@ -30,7 +30,6 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name = "CppTestForJUnit")
 public class CppTest extends InputMetricXSL {
 
     @Override
@@ -40,7 +39,12 @@ public class CppTest extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "7.3 (default)";
+        return "7.3";
+    }
+
+    @Override
+    public boolean isDefault() {
+        return true;
     }
 
     @Override

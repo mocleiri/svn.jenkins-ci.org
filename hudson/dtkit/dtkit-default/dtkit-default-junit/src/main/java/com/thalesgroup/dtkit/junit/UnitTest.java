@@ -43,8 +43,13 @@ public class UnitTest extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.4 (default)";
+        return "1.4";
     }        
+
+    @Override
+    public boolean isDefault() {
+        return true;
+    }    
 
     @Override
     public String getXslName() {

@@ -25,13 +25,7 @@ package com.thalesgroup.dtkit.junit;
 
 import org.junit.Test;
 
-/**
- * Created by IntelliJ IDEA.
- * User: S0011918
- * Date: 01-Jul-2010
- * Time: 15:15:21
- * To change this template use File | Settings | File Templates.
- */
+
 public class MSTestTest extends AbstractTest {
     @Test
     public void testTransformationCase1() throws Exception {

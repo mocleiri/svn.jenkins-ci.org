@@ -43,8 +43,13 @@ public class Tusar extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.0 (default)";
+        return "1.0)";
     }
+
+    @Override
+    public boolean isDefault() {
+        return true;
+    }    
 
     @Override
     public String getXslName() {

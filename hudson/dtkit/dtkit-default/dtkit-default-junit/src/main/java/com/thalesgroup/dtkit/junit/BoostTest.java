@@ -43,8 +43,13 @@ public class BoostTest extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.35.0 (default)";
+        return "1.35.0";
     }
+
+    @Override
+    public boolean isDefault() {
+        return true;
+    }   
 
     @Override
     public String getXslName() {

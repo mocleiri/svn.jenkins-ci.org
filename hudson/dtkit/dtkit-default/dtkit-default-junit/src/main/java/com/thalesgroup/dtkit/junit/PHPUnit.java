@@ -43,8 +43,13 @@ public class PHPUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "3.4 (default)";
-    }      
+        return "3.4";
+    }
+    
+    @Override
+    public boolean isDefault() {
+        return true;
+    }
 
     @Override
     public String getXslName() {

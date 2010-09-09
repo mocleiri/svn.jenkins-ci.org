@@ -43,7 +43,12 @@ public class FPCUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "2.0 (default)";
+        return "2.0";
+    }
+
+    @Override
+    public boolean isDefault() {
+        return true;
     }
 
     @Override

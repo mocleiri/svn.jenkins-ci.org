@@ -43,7 +43,12 @@ public class CppUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.12.1 (default)";
+        return "1.12.1";
+    }
+
+    @Override
+    public boolean isDefault() {
+        return true;
     }
 
     @Override
