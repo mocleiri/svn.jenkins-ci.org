@@ -5626,17 +5626,22 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Version+Number+Plugin"
     },
     "view-job-filters":     {
-      "buildDate": "Aug 13, 2010",
+      "buildDate": "Sep 10, 2010",
       "dependencies":       [
                 {
           "name": "cvs",
-          "optional": false,
+          "optional": true,
           "version": "1.1"
         },
                 {
           "name": "subversion",
-          "optional": false,
+          "optional": true,
           "version": "1.11"
+        },
+                {
+          "name": "email-ext",
+          "optional": true,
+          "version": "2.7"
         }
       ],
       "developers": [      {
@@ -5644,15 +5649,15 @@ updateCenter.post(
         "email": "jacob.robertson.work@gmail.com",
         "name": "Jacob Robertson"
       }],
-      "excerpt": "Manage multiple views and hundreds of jobs much more easily.  This plug-in provides more ways to include/exclude jobs from a view, including filtering by SCM path, and by any job or build status type, as well as \"chaining\" of filters and negating filters. ",
+      "excerpt": "Manage multiple views and hundreds of jobs much more easily.&nbsp; Include or exclude jobs from a view using things like the SCM path, the job or build status type, or email recipients. Mix and match filters to narrow down to exactly what you want. ",
       "labels": ["ui"],
       "name": "view-job-filters",
-      "previousTimestamp": "2010-07-08T18:11:22.00Z",
-      "releaseTimestamp": "2010-08-13T10:15:04.00Z",
+      "previousTimestamp": "2010-08-13T10:15:04.00Z",
+      "releaseTimestamp": "2010-09-10T16:21:42.00Z",
       "requiredCore": "1.363",
       "title": "View Job Filters",
-      "url": "http://updates.hudson-labs.org/download/plugins/view-job-filters/1.2/view-job-filters.hpi",
-      "version": "1.2",
+      "url": "http://updates.hudson-labs.org/download/plugins/view-job-filters/1.3/view-job-filters.hpi",
+      "version": "1.3",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/View+Job+Filters"
     },
     "viewVC":     {
@@ -5936,8 +5941,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIE8jCCA9qgAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0xMDA0MTgyMzQzMzhaFw0xMTA0MTgyMzQzMzhaMIGVMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxDzANBgNVBAoTBkh1ZHNvbjEPMA0GA1UECxMGSHVkc29uMR0wGwYDVQQDExRIdWRzb24gVXBkYXRlIENlbnRlcjEdMBsGCSqGSIb3DQEJARYOa2tAa29oc3VrZS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDUQ7uN/ZQvyHvi5UONr2CAmWfWiAPPqaF4SS7dTIaLM/sxRgnZY1k7zt/8MTce7gNOd2EyCru93EgMVY1ivEH4b9fYSlzSnu8Lx2RdMulW0iqinLY17Jv+J1qxq+tRUyMa9y3DN28sf7ydLcpEJog3Of6KL+zJlKQS0oNcgsju9LdfzccmMu8Qq3lNhtcdsPkcRWpHyGiyva99xXBR/pqxM0GR8aMZYNwLi59Vg8/fpkTLwhBGVOgEIdO4ARvH/HTlfaLdr2pJ5BfsODk7A3VHV2ObDYIa+skEy1PPvtLv3/TfI/nD9Owt/TlpyI5aAbd1lboUrsPNyKjiR6GIfOcFAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBSMP/tadXU+XdrmlxxDSCZeyMAcbDCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEADs3NHx8j+x45msMgjHPoMb4yvz42vI1ea4UyYHrDZGlEsK7kfVbNHNpt+UGZaws0b+f6brL/3DA9w0niCTucHMd+ZqqFGpXHvV/IVVrR7omLgQ6EdinYYDXzIl/1Z97jeRDmL4/kckxxGyTyw/Y4/YatmVSM8ZESY3W9lYS9P90I+Jmo0e4W6tY+ztPrsw3C3ixmvfqG++YQTjZivr/5sCUd6UJHAz7XuX9Eqgyz2Od1wOazmtP7TEsQVEwiJXGB5HFLw7qtC51K3VdAj43nm+qgKe0U3yOw57EYKlntQzCWF24ucOZ1QhpvrIlzcD1q4AlIdlTD0OtuP9uGIYCTjA=="],
-    "digest": "sSxp0097XgeTvwNXwMQtmgozo1I=",
-    "signature": "fB4/bbLnmEZAp6la14/+dJN9aTmqL0doQy33OoT/wwYfTcikxH3ZLtmCDGd+4rbEPox1KSj8U8Scf95wSTc5dmzj2jX+q7Xk0THiIMP4Q1fbTuKQE5pIY+P4MT0ASyR/HM7QHlW7NAGtTFIj+aK8r1TLLY3bwHnfykDKbralEHbLrxqhVRqwgjEtkV/av4lzu/++3s4qbCbKBtIjdTH78WWoeYddPZoQizwoSrUePdmdux7Wtd9/MJAwQo6rAhR508rgLi2qbDUxncvVHdt+/YJ7hOXFXbvOYRqM860rTZUFEA/EdLKcX9nwUTsgsJgyZmAitF0Eu2EyoEBDpWgLMA=="
+    "digest": "kZpp43eUQ1Wd+viDzTjjf1mq+Vg=",
+    "signature": "ff7zu9qqNYwhlp3Dlbb8EwuNozSgt2KuAenoF9N9bOG2YLxq1qscCiWeX3ZRrF4hde4hTmONeStfsox6e4THbdg3TVwJMwklp5978bFyTUjtVt0dgtparfHQOB8a4aboV2VIOdIM9LzqJvkCSmZDsv0W9v32L785FwxkDF1PsYXBsC4CZ/KuEJox94RqmUnhTTq0Mbl2UawanbIaPDCRvF4v2FUMKiud2/uwEcM615YVvowzaWEgwA3U2hPqdJo5Bu8yKlqiV+XVvrARvjbXZsajrfqMkNvSUkLAPP200chigGHKtodYw7jR8GqSuK4794OQq3wTd6jGdjMxEDexow=="
   },
   "updateCenterVersion": "1"
 }
