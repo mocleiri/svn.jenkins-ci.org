@@ -2506,7 +2506,7 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Hudson+Tray+Application"
     },
     "instant-messaging":     {
-      "buildDate": "Jun 15, 2010",
+      "buildDate": "Sep 10, 2010",
       "dependencies":       [
                 {
           "name": "ci-game",
@@ -2532,12 +2532,12 @@ updateCenter.post(
       "excerpt": "This plugin provides generic support for build notifications and a 'bot' via instant messaging protocols. ",
       "labels": ["notifier"],
       "name": "instant-messaging",
-      "previousTimestamp": "2010-04-15T03:44:50.00Z",
-      "releaseTimestamp": "2010-06-16T01:56:48.00Z",
+      "previousTimestamp": "2010-06-16T01:56:48.00Z",
+      "releaseTimestamp": "2010-09-11T01:55:10.00Z",
       "requiredCore": "1.327",
       "title": "Instant Messaging Plugin",
-      "url": "http://updates.hudson-labs.org/download/plugins/instant-messaging/1.8/instant-messaging.hpi",
-      "version": "1.8",
+      "url": "http://updates.hudson-labs.org/download/plugins/instant-messaging/1.9/instant-messaging.hpi",
+      "version": "1.9",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Instant+Messaging+Plugin"
     },
     "iphoneview":     {
@@ -2560,12 +2560,29 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/iPhoneView+Plugin"
     },
     "ircbot":     {
-      "buildDate": "Jun 15, 2010",
-      "dependencies": [      {
-        "name": "instant-messaging",
-        "optional": false,
-        "version": "1.8"
-      }],
+      "buildDate": "Sep 10, 2010",
+      "dependencies":       [
+                {
+          "name": "instant-messaging",
+          "optional": false,
+          "version": "1.9"
+        },
+                {
+          "name": "ci-game",
+          "optional": true,
+          "version": "1.16"
+        },
+                {
+          "name": "analysis-core",
+          "optional": true,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.327"
+        }
+      ],
       "developers": [      {
         "developerId": "kutzi",
         "email": "kutzi@gmx.de",
@@ -2577,12 +2594,12 @@ updateCenter.post(
         "notifier"
       ],
       "name": "ircbot",
-      "previousTimestamp": "2010-05-18T22:43:50.00Z",
-      "releaseTimestamp": "2010-06-16T02:06:36.00Z",
+      "previousTimestamp": "2010-06-16T02:06:36.00Z",
+      "releaseTimestamp": "2010-09-11T02:21:36.00Z",
       "requiredCore": "1.327",
       "title": "IRC Plugin",
-      "url": "http://updates.hudson-labs.org/download/plugins/ircbot/2.5/ircbot.hpi",
-      "version": "2.5",
+      "url": "http://updates.hudson-labs.org/download/plugins/ircbot/2.6/ircbot.hpi",
+      "version": "2.6",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/IRC+Plugin"
     },
     "ivy":     {
@@ -2616,13 +2633,29 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Ivy+Plugin"
     },
     "jabber":     {
-      "buildDate": "Jun 15, 2010",
-      "compatibleSinceVersion": "1.0",
-      "dependencies": [      {
-        "name": "instant-messaging",
-        "optional": false,
-        "version": "1.8"
-      }],
+      "buildDate": "Sep 10, 2010",
+      "dependencies":       [
+                {
+          "name": "instant-messaging",
+          "optional": false,
+          "version": "1.9"
+        },
+                {
+          "name": "ci-game",
+          "optional": true,
+          "version": "1.16"
+        },
+                {
+          "name": "analysis-core",
+          "optional": true,
+          "version": "1.0"
+        },
+                {
+          "name": "maven-plugin",
+          "optional": false,
+          "version": "1.327"
+        }
+      ],
       "developers":       [
                 {
           "developerId": "rtyler",
@@ -2641,12 +2674,12 @@ updateCenter.post(
         "notifier"
       ],
       "name": "jabber",
-      "previousTimestamp": "2010-04-15T03:54:30.00Z",
-      "releaseTimestamp": "2010-06-16T02:14:16.00Z",
+      "previousTimestamp": "2010-06-16T02:14:16.00Z",
+      "releaseTimestamp": "2010-09-11T02:34:50.00Z",
       "requiredCore": "1.327",
       "title": "Jabber Plugin",
-      "url": "http://updates.hudson-labs.org/download/plugins/jabber/1.10/jabber.hpi",
-      "version": "1.10",
+      "url": "http://updates.hudson-labs.org/download/plugins/jabber/1.11/jabber.hpi",
+      "version": "1.11",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Jabber+Plugin"
     },
     "japex":     {
@@ -5941,8 +5974,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIE8jCCA9qgAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0xMDA0MTgyMzQzMzhaFw0xMTA0MTgyMzQzMzhaMIGVMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxDzANBgNVBAoTBkh1ZHNvbjEPMA0GA1UECxMGSHVkc29uMR0wGwYDVQQDExRIdWRzb24gVXBkYXRlIENlbnRlcjEdMBsGCSqGSIb3DQEJARYOa2tAa29oc3VrZS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDUQ7uN/ZQvyHvi5UONr2CAmWfWiAPPqaF4SS7dTIaLM/sxRgnZY1k7zt/8MTce7gNOd2EyCru93EgMVY1ivEH4b9fYSlzSnu8Lx2RdMulW0iqinLY17Jv+J1qxq+tRUyMa9y3DN28sf7ydLcpEJog3Of6KL+zJlKQS0oNcgsju9LdfzccmMu8Qq3lNhtcdsPkcRWpHyGiyva99xXBR/pqxM0GR8aMZYNwLi59Vg8/fpkTLwhBGVOgEIdO4ARvH/HTlfaLdr2pJ5BfsODk7A3VHV2ObDYIa+skEy1PPvtLv3/TfI/nD9Owt/TlpyI5aAbd1lboUrsPNyKjiR6GIfOcFAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBSMP/tadXU+XdrmlxxDSCZeyMAcbDCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEADs3NHx8j+x45msMgjHPoMb4yvz42vI1ea4UyYHrDZGlEsK7kfVbNHNpt+UGZaws0b+f6brL/3DA9w0niCTucHMd+ZqqFGpXHvV/IVVrR7omLgQ6EdinYYDXzIl/1Z97jeRDmL4/kckxxGyTyw/Y4/YatmVSM8ZESY3W9lYS9P90I+Jmo0e4W6tY+ztPrsw3C3ixmvfqG++YQTjZivr/5sCUd6UJHAz7XuX9Eqgyz2Od1wOazmtP7TEsQVEwiJXGB5HFLw7qtC51K3VdAj43nm+qgKe0U3yOw57EYKlntQzCWF24ucOZ1QhpvrIlzcD1q4AlIdlTD0OtuP9uGIYCTjA=="],
-    "digest": "kZpp43eUQ1Wd+viDzTjjf1mq+Vg=",
-    "signature": "ff7zu9qqNYwhlp3Dlbb8EwuNozSgt2KuAenoF9N9bOG2YLxq1qscCiWeX3ZRrF4hde4hTmONeStfsox6e4THbdg3TVwJMwklp5978bFyTUjtVt0dgtparfHQOB8a4aboV2VIOdIM9LzqJvkCSmZDsv0W9v32L785FwxkDF1PsYXBsC4CZ/KuEJox94RqmUnhTTq0Mbl2UawanbIaPDCRvF4v2FUMKiud2/uwEcM615YVvowzaWEgwA3U2hPqdJo5Bu8yKlqiV+XVvrARvjbXZsajrfqMkNvSUkLAPP200chigGHKtodYw7jR8GqSuK4794OQq3wTd6jGdjMxEDexow=="
+    "digest": "XwGv8stf+nfCvcIdxFqTYARb2CA=",
+    "signature": "ot6Po1BTSbIJQ1ONXf2PmW0g1OBJ3L266YEHsffakm837wNV2MmUva6iabvXTqnDEdMUS2kGJSobO87qAyULnocKOmatGnNDRI82Iq1QfAHyE8fmfyzEDBJwFnZ3YW7cRDIjvwY1VNFo/Lzyl/xRpVsfPQHJMsWqyLWoJwJoOjzFq2vq2EBr1skmtR6g8rIDRfkF3bAlq8+SWBs0iDZF7F7G6Q7pxwn/rrRyTxul2O6LDc7iqaAVLflB8H804Ubj8sopIQql8R9vO2aNz5pFBQPE2sZNsfGa8cAYLYvr1kDNZbMTm0rA2P6ILpiVinbxtzdJpbr6KwMiAEc/w4ViEg=="
   },
   "updateCenterVersion": "1"
 }
