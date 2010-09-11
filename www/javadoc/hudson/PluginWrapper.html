@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginWrapper (Hudson main module 1.375 API)
+PluginWrapper (Hudson main module 1.376 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-07">
+<META NAME="date" CONTENT="2010-09-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginWrapper (Hudson main module 1.375 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginWrapper (Hudson main module 1.375 API)";
+        parent.document.title="PluginWrapper (Hudson main module 1.376 API)";
     }
 }
 </SCRIPT>
@@ -256,6 +256,23 @@ Represents a Hudson plug-in and associated control information
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getBackupFile()">getBackupFile</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Where is the backup file?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getBackupVersion()">getBackupVersion</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the version of the backed up plugin,
+ or null if there's no back up.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;hudson.PluginWrapper.Dependency&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/PluginWrapper.html#getDependencies()">getDependencies</A></B>()</CODE>
 
@@ -382,6 +399,14 @@ Represents a Hudson plug-in and associated control information
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginWrapper.html#isDowngradable()">isDowngradable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns true if backup of previous version of plugin exists</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -945,6 +970,55 @@ public int <B>compareTo</B>(<A HREF="../hudson/PluginWrapper.html" title="class 
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true#compareTo(T)" title="class or interface in java.lang">compareTo</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;<A HREF="../hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isDowngradable()"><!-- --></A><H3>
+isDowngradable</H3>
+<PRE>
+public boolean <B>isDowngradable</B>()</PRE>
+<DL>
+<DD>returns true if backup of previous version of plugin exists
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBackupFile()"><!-- --></A><H3>
+getBackupFile</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getBackupFile</B>()</PRE>
+<DL>
+<DD>Where is the backup file?
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBackupVersion()"><!-- --></A><H3>
+getBackupVersion</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getBackupVersion</B>()</PRE>
+<DL>
+<DD>returns the version of the backed up plugin,
+ or null if there's no back up.
+<P>
+<DD><DL>
+</DL>
 </DD>
 <DD><DL>
 </DL>

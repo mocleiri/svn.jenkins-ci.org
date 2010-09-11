@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-DirectoryBrowserSupport (Hudson main module 1.375 API)
+DirectoryBrowserSupport (Hudson main module 1.376 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-07">
+<META NAME="date" CONTENT="2010-09-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ DirectoryBrowserSupport (Hudson main module 1.375 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="DirectoryBrowserSupport (Hudson main module 1.375 API)";
+        parent.document.title="DirectoryBrowserSupport (Hudson main module 1.376 API)";
     }
 }
 </SCRIPT>
@@ -363,14 +363,14 @@ public void <B>setIndexFileName</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs
 <A NAME="serveFile(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse, hudson.FilePath, java.lang.String, boolean)"><!-- --></A><H3>
 serveFile</H3>
 <PRE>
-public final void <B>serveFile</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
-                            org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
-                            <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;root,
-                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;icon,
-                            boolean&nbsp;serveDirIndex)
-                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                            javax.servlet.ServletException,
-                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+public void <B>serveFile</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
+                      org.kohsuke.stapler.StaplerResponse&nbsp;rsp,
+                      <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;root,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;icon,
+                      boolean&nbsp;serveDirIndex)
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                      javax.servlet.ServletException,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.297
       Instead of calling this method explicitly, just return the <A HREF="../../hudson/model/DirectoryBrowserSupport.html" title="class in hudson.model"><CODE>DirectoryBrowserSupport</CODE></A> object

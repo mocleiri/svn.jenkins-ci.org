@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (Hudson main module 1.375 API)
+Index (Hudson main module 1.376 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-07">
+<META NAME="date" CONTENT="2010-09-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="./stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Index (Hudson main module 1.375 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (Hudson main module 1.375 API)";
+        parent.document.title="Index (Hudson main module 1.376 API)";
     }
 }
 </SCRIPT>
@@ -4661,6 +4661,9 @@ Method in class hudson.maven.reporters.<A HREF="./hudson/maven/reporters/MavenAr
 <DT><A HREF="./hudson/model/UpdateSite.Plugin.html#deploy()"><B>deploy()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>
 <DD>Schedules the installation of this plugin.
+<DT><A HREF="./hudson/model/UpdateSite.Plugin.html#deployBackup()"><B>deployBackup()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>
+<DD>Schedules the downgrade of this plugin.
 <DT><A HREF="./hudson/util/Scrambler.html#descramble(java.lang.String)"><B>descramble(String)</B></A> - 
 Static method in class hudson.util.<A HREF="./hudson/util/Scrambler.html" title="class in hudson.util">Scrambler</A>
 <DD>&nbsp;
@@ -5311,6 +5314,12 @@ Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title
 <DT><A HREF="./hudson/model/AbstractProject.html#doDoWipeOutWorkspace()"><B>doDoWipeOutWorkspace()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>
 <DD>Wipes out the workspace.
+<DT><A HREF="./hudson/model/UpdateCenter.html#doDowngrade(org.kohsuke.stapler.StaplerResponse)"><B>doDowngrade(StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>Performs hudson downgrade.
+<DT><A HREF="./hudson/model/UpdateSite.Plugin.html#doDowngrade(org.kohsuke.stapler.StaplerResponse)"><B>doDowngrade(StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateSite.Plugin.html" title="class in hudson.model">UpdateSite.Plugin</A>
+<DD>Performs the downgrade of the plugin.
 <DT><A HREF="./hudson/model/Computer.html#doDumpExportTable(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doDumpExportTable(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Computer.html" title="class in hudson.model">Computer</A>
 <DD>Dumps the contents of the export table.
@@ -5615,6 +5624,9 @@ Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in 
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/View.html#doRssFailed(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doRssFailed(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/User.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doRssLatest(StaplerRequest, StaplerResponse)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/View.html#doRssLatest(org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)"><B>doRssLatest(StaplerRequest, StaplerResponse)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/View.html" title="class in hudson.model">View</A>
@@ -6674,9 +6686,6 @@ Static variable in interface hudson.util.jna.<A HREF="./hudson/util/jna/GNUCLibr
 <DT><A HREF="./hudson/model/Run.html#FEED_ADAPTER"><B>FEED_ADAPTER</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD><A HREF="./hudson/FeedAdapter.html" title="interface in hudson"><CODE>FeedAdapter</CODE></A> to produce feed from the summary of this build.
-<DT><A HREF="./hudson/model/User.html#FEED_ADAPTER"><B>FEED_ADAPTER</B></A> - 
-Static variable in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
-<DD><A HREF="./hudson/FeedAdapter.html" title="interface in hudson"><CODE>FeedAdapter</CODE></A> to produce build status summary in the feed.
 <DT><A HREF="./hudson/model/Run.html#FEED_ADAPTER_LATEST"><B>FEED_ADAPTER_LATEST</B></A> - 
 Static variable in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD><A HREF="./hudson/FeedAdapter.html" title="interface in hudson"><CODE>FeedAdapter</CODE></A> to produce feeds to show one build per project.
@@ -8118,6 +8127,20 @@ Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.html" title
 <DT><A HREF="./hudson/matrix/MatrixProject.DescriptorImpl.html#getAxisDescriptors()"><B>getAxisDescriptors()</B></A> - 
 Method in class hudson.matrix.<A HREF="./hudson/matrix/MatrixProject.DescriptorImpl.html" title="class in hudson.matrix">MatrixProject.DescriptorImpl</A>
 <DD>All <A HREF="./hudson/matrix/AxisDescriptor.html" title="class in hudson.matrix"><CODE>AxisDescriptor</CODE></A>s that contribute to the UI.
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#getBackup()"><B>getBackup()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/PluginWrapper.html#getBackupFile()"><B>getBackupFile()</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
+<DD>Where is the backup file?
+<DT><A HREF="./hudson/model/UpdateCenter.html#getBackupVersion()"><B>getBackupVersion()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>Returns String with version of backup .war file,
+ if the file does not exists returns null
+<DT><A HREF="./hudson/PluginWrapper.html#getBackupVersion()"><B>getBackupVersion()</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
+<DD>returns the version of the backed up plugin,
+ or null if there's no back up.
 <DT><A HREF="./hudson/model/Run.html#getBadgeActions()"><B>getBadgeActions()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Run.html" title="class in hudson.model">Run</A>
 <DD>Gets the subset of <A HREF="./hudson/model/Actionable.html#getActions()"><CODE>Actionable.getActions()</CODE></A> that consists of <A HREF="./hudson/model/BuildBadgeAction.html" title="interface in hudson.model"><CODE>BuildBadgeAction</CODE></A>s.
@@ -9203,11 +9226,17 @@ Method in class hudson.model.<A HREF="./hudson/model/Descriptor.html" title="cla
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html#getDestination()"><B>getDestination()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>
 <DD>Where to download the file to.
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#getDestination()"><B>getDestination()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html#getDestination()"><B>getDestination()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#getDestination()"><B>getDestination()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#getDestination()"><B>getDestination()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/ContainerAuthentication.html#getDetails()"><B>getDetails()</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/ContainerAuthentication.html" title="class in hudson.security">ContainerAuthentication</A>
@@ -11446,11 +11475,17 @@ Method in interface hudson.model.<A HREF="./hudson/model/Queue.Task.html" title=
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#getName()"><B>getName()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#getName()"><B>getName()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/scm/EditType.html#getName()"><B>getName()</B></A> - 
 Method in class hudson.scm.<A HREF="./hudson/scm/EditType.html" title="class in hudson.scm">EditType</A>
@@ -12243,6 +12278,9 @@ Method in class hudson.tasks.<A HREF="./hudson/tasks/Ant.html" title="class in h
 <DD>&nbsp;
 <DT><A HREF="./hudson/tools/ToolInstallation.html#getProperties()"><B>getProperties()</B></A> - 
 Method in class hudson.tools.<A HREF="./hudson/tools/ToolInstallation.html" title="class in hudson.tools">ToolInstallation</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/labels/LabelAtom.html#getPropertiesList()"><B>getPropertiesList()</B></A> - 
+Method in class hudson.model.labels.<A HREF="./hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels">LabelAtom</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Job.html#getProperty(java.lang.Class)"><B>getProperty(Class&lt;T&gt;)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/Job.html" title="class in hudson.model">Job</A>
@@ -13690,11 +13728,17 @@ Method in class hudson.model.<A HREF="./hudson/model/Slave.JnlpJar.html" title="
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html#getURL()"><B>getURL()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>
 <DD>Where to download the file from.
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#getURL()"><B>getURL()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html#getURL()"><B>getURL()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#getURL()"><B>getURL()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#getURL()"><B>getURL()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateSite.html#getUrl()"><B>getUrl()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>
@@ -15553,6 +15597,12 @@ Method in class hudson.model.<A HREF="./hudson/model/AbstractProject.html" title
 <DT><A HREF="./hudson/remoting/AsyncFutureImpl.html#isDone()"><B>isDone()</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/AsyncFutureImpl.html" title="class in hudson.remoting">AsyncFutureImpl</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.html#isDowngradable()"><B>isDowngradable()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.html" title="class in hudson.model">UpdateCenter</A>
+<DD>Returns true if backup of hudson.war exists on the hard drive
+<DT><A HREF="./hudson/PluginWrapper.html#isDowngradable()"><B>isDowngradable()</B></A> - 
+Method in class hudson.<A HREF="./hudson/PluginWrapper.html" title="class in hudson">PluginWrapper</A>
+<DD>returns true if backup of previous version of plugin exists
 <DT><A HREF="./hudson/model/UpdateSite.html#isDue()"><B>isDue()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateSite.html" title="class in hudson.model">UpdateSite</A>
 <DD>Returns true if it's time for us to check for new version.
@@ -19443,11 +19493,17 @@ Method in class hudson.model.listeners.<A HREF="./hudson/model/listeners/RunList
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html#onSuccess()"><B>onSuccess()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>
 <DD>Called when the whole thing went successfully.
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#onSuccess()"><B>onSuccess()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html#onSuccess()"><B>onSuccess()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#onSuccess()"><B>onSuccess()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#onSuccess()"><B>onSuccess()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/security/AuthenticationProcessingFilter2.html#onUnsuccessfulAuthentication(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.acegisecurity.AuthenticationException)"><B>onUnsuccessfulAuthentication(HttpServletRequest, HttpServletResponse, AuthenticationException)</B></A> - 
 Method in class hudson.security.<A HREF="./hudson/security/AuthenticationProcessingFilter2.html" title="class in hudson.security">AuthenticationProcessingFilter2</A>
@@ -20067,6 +20123,9 @@ Constructor for class hudson.console.<A HREF="./hudson/console/PlainTextConsoleO
 <DD>&nbsp;
 <DT><A HREF="./hudson/Platform.html" title="enum in hudson"><B>Platform</B></A> - Enum in <A HREF="./hudson/package-summary.html">hudson</A><DD>Strategy object that absorbs the platform differences.<DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#plugin"><B>plugin</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>What plugin are we trying to install?
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#plugin"><B>plugin</B></A> - 
+Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>What plugin are we trying to install?
 <DT><A HREF="./hudson/model/UpdateCenter.PluginEntry.html#plugin"><B>plugin</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginEntry.html" title="class in hudson.model">UpdateCenter.PluginEntry</A>
@@ -21175,7 +21234,8 @@ Method in interface hudson.util.jna.<A HREF="./hudson/util/jna/Advapi32.html" ti
 <DT><A HREF="./hudson/model/Run.Artifact.html#relativePath"><B>relativePath</B></A> - 
 Variable in class hudson.model.<A HREF="./hudson/model/Run.Artifact.html" title="class in hudson.model">Run.Artifact</A>
 <DD>Relative path name from <A HREF="./hudson/model/Run.html#getArtifactsDir()"><CODE>Run.getArtifactsDir()</CODE></A>
-<DT><A HREF="./hudson/slaves/WorkspaceList.Lease.html#release()"><B>release()</B></A> - 
+<DT><A HREF="./hudson/RelativePath.html" title="annotation in hudson"><B>RelativePath</B></A> - Annotation Type in <A HREF="./hudson/package-summary.html">hudson</A><DD>Used in conjunction with <CODE>QueryParameter</CODE> to refer to
+ nearby parameters that belong to different parents.<DT><A HREF="./hudson/slaves/WorkspaceList.Lease.html#release()"><B>release()</B></A> - 
 Method in class hudson.slaves.<A HREF="./hudson/slaves/WorkspaceList.Lease.html" title="class in hudson.slaves">WorkspaceList.Lease</A>
 <DD>Releases this lease.
 <DT><A HREF="./hudson/maven/Messages.html#ReleaseAction_DisplayName()"><B>ReleaseAction_DisplayName()</B></A> - 
@@ -21360,9 +21420,16 @@ Method in class hudson.<A HREF="./hudson/MarkupText.SubText.html" title="class i
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>
 <DD>Called when the download is completed to overwrite
  the old file with the new file.
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#replace(java.io.File, java.io.File)"><B>replace(File, File)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html#replace(java.io.File, java.io.File)"><B>replace(File, File)</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#replace(java.io.File, java.io.File)"><B>replace(File, File)</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
+<DD>Called to overwrite
+ current version with backup file
 <DT><A HREF="./hudson/util/DescribableList.html#replace(T)"><B>replace(T)</B></A> - 
 Method in class hudson.util.<A HREF="./hudson/util/DescribableList.html" title="class in hudson.util">DescribableList</A>
 <DD>Removes all instances of the same type, then add the new one.
@@ -21843,6 +21910,12 @@ Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.ConnectionChec
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html#run()"><B>run()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#run()"><B>run()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#run()"><B>run()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/remoting/Engine.html#run()"><B>run()</B></A> - 
 Method in class hudson.remoting.<A HREF="./hudson/remoting/Engine.html" title="class in hudson.remoting">Engine</A>
@@ -24493,6 +24566,9 @@ Method in class hudson.model.<A HREF="./hudson/model/TimeSeries.html" title="cla
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#toString()"><B>toString()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#toString()"><B>toString()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/User.html#toString()"><B>toString()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/User.html" title="class in hudson.model">User</A>
 <DD>&nbsp;
@@ -24935,6 +25011,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.Download
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.Success.html" title="class in hudson.model"><B>UpdateCenter.DownloadJob.Success</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Indicates that the plugin was successfully installed.<DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.Success.html#UpdateCenter.DownloadJob.Success()"><B>UpdateCenter.DownloadJob.Success()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.Success.html" title="class in hudson.model">UpdateCenter.DownloadJob.Success</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model"><B>UpdateCenter.HudsonDowngradeJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#UpdateCenter.HudsonDowngradeJob(hudson.model.UpdateSite, org.acegisecurity.Authentication)"><B>UpdateCenter.HudsonDowngradeJob(UpdateSite, Authentication)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model"><B>UpdateCenter.HudsonUpgradeJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents the state of the upgrade activity of Hudson core.<DT><A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html#UpdateCenter.HudsonUpgradeJob(hudson.model.UpdateSite, org.acegisecurity.Authentication)"><B>UpdateCenter.HudsonUpgradeJob(UpdateSite, Authentication)</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonUpgradeJob.html" title="class in hudson.model">UpdateCenter.HudsonUpgradeJob</A>
 <DD>&nbsp;
@@ -24943,6 +25022,9 @@ Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.Installa
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model"><B>UpdateCenter.PageDecoratorImpl</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Adds the update center data retriever to HTML.<DT><A HREF="./hudson/model/UpdateCenter.PageDecoratorImpl.html#UpdateCenter.PageDecoratorImpl()"><B>UpdateCenter.PageDecoratorImpl()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.PageDecoratorImpl.html" title="class in hudson.model">UpdateCenter.PageDecoratorImpl</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model"><B>UpdateCenter.PluginDowngradeJob</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Represents the state of the downgrading activity of plugin.<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#UpdateCenter.PluginDowngradeJob(hudson.model.UpdateSite.Plugin, hudson.model.UpdateSite, org.acegisecurity.Authentication)"><B>UpdateCenter.PluginDowngradeJob(UpdateSite.Plugin, UpdateSite, Authentication)</B></A> - 
+Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.PluginEntry.html" title="class in hudson.model"><B>UpdateCenter.PluginEntry</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>&nbsp;<DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model"><B>UpdateCenter.UpdateCenterConfiguration</B></A> - Class in <A HREF="./hudson/model/package-summary.html">hudson.model</A><DD>Strategy object for controlling the update center's behaviors.<DT><A HREF="./hudson/model/UpdateCenter.UpdateCenterConfiguration.html#UpdateCenter.UpdateCenterConfiguration()"><B>UpdateCenter.UpdateCenterConfiguration()</B></A> - 
 Constructor for class hudson.model.<A HREF="./hudson/model/UpdateCenter.UpdateCenterConfiguration.html" title="class in hudson.model">UpdateCenter.UpdateCenterConfiguration</A>
@@ -27295,8 +27377,14 @@ Static method in class hudson.slaves.<A HREF="./hudson/slaves/Messages.html" tit
 <DT><A HREF="./hudson/model/UpdateCenter.DownloadJob.html#_run()"><B>_run()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.DownloadJob.html" title="class in hudson.model">UpdateCenter.DownloadJob</A>
 <DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html#_run()"><B>_run()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.HudsonDowngradeJob.html" title="class in hudson.model">UpdateCenter.HudsonDowngradeJob</A>
+<DD>&nbsp;
 <DT><A HREF="./hudson/model/UpdateCenter.InstallationJob.html#_run()"><B>_run()</B></A> - 
 Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.InstallationJob.html" title="class in hudson.model">UpdateCenter.InstallationJob</A>
+<DD>&nbsp;
+<DT><A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html#_run()"><B>_run()</B></A> - 
+Method in class hudson.model.<A HREF="./hudson/model/UpdateCenter.PluginDowngradeJob.html" title="class in hudson.model">UpdateCenter.PluginDowngradeJob</A>
 <DD>&nbsp;
 <DT><A HREF="./hudson/model/Messages.html#_Run_ArtifactsPermission_Description()"><B>_Run_ArtifactsPermission_Description()</B></A> - 
 Static method in class hudson.model.<A HREF="./hudson/model/Messages.html" title="class in hudson.model">Messages</A>

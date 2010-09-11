@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-UpdateSite.Plugin (Hudson main module 1.375 API)
+UpdateSite.Plugin (Hudson main module 1.376 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-07">
+<META NAME="date" CONTENT="2010-09-11">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ UpdateSite.Plugin (Hudson main module 1.375 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="UpdateSite.Plugin (Hudson main module 1.375 API)";
+        parent.document.title="UpdateSite.Plugin (Hudson main module 1.376 API)";
     }
 }
 </SCRIPT>
@@ -216,6 +216,22 @@ Class UpdateSite.Plugin</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules the installation of this plugin.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Future.html?is-external=true" title="class or interface in java.util.concurrent">Future</A>&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#deployBackup()">deployBackup</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules the downgrade of this plugin.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/UpdateSite.Plugin.html#doDowngrade(org.kohsuke.stapler.StaplerResponse)">doDowngrade</A></B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs the downgrade of the plugin.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -522,6 +538,19 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Fut
 </DL>
 <HR>
 
+<A NAME="deployBackup()"><!-- --></A><H3>
+deployBackup</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Future.html?is-external=true" title="class or interface in java.util.concurrent">Future</A>&lt;<A HREF="../../hudson/model/UpdateCenter.UpdateCenterJob.html" title="class in hudson.model">UpdateCenter.UpdateCenterJob</A>&gt; <B>deployBackup</B>()</PRE>
+<DL>
+<DD>Schedules the downgrade of this plugin.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="doInstall(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
 doInstall</H3>
 <PRE>
@@ -529,6 +558,22 @@ public void <B>doInstall</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Making the installation web bound.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="doDowngrade(org.kohsuke.stapler.StaplerResponse)"><!-- --></A><H3>
+doDowngrade</H3>
+<PRE>
+public void <B>doDowngrade</B>(org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
+                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Performs the downgrade of the plugin.
 <P>
 <DD><DL>
 
