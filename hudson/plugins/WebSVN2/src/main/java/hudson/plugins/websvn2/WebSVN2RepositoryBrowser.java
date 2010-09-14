@@ -52,9 +52,9 @@ public class WebSVN2RepositoryBrowser extends SubversionRepositoryBrowser {
     private static final String CHANGE_SET_FORMAT
         = "revision.php?%1srev=%2d";
     private static final String DIFF_FORMAT
-        = "diff.php?%1path=%2&rev=%3d";
+        = "diff.php?%1spath=%2s&rev=%3d";
     private static final String FILE_FORMAT
-        = "filedetails.php?%1spath=%2s";
+        = "filedetails.php?%1spath=%2s&rev=%d3";
     private static final Pattern URL_PATTERN
         = Pattern.compile(
             "(.*/)(revision|diff|comp|filedetails|listing|blame|dl|log)"
@@ -101,7 +101,8 @@ public class WebSVN2RepositoryBrowser extends SubversionRepositoryBrowser {
             this.baseUrl,
             String.format(FILE_FORMAT,
                 getRepname(),
-                URLEncoder.encode(path.getValue(), "UTF-8")));
+                URLEncoder.encode(path.getValue(), "UTF-8"),
+                path.getLogEntry().getRevision()));
     }
 
     @Override
