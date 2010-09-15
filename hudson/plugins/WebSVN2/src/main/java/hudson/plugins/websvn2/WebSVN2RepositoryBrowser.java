@@ -44,22 +44,27 @@ import org.kohsuke.stapler.QueryParameter;
 
 /**
  * {@link SubversionRepositoryBrowser} that produces links to http://www.websvn.info/ for SVN
+ * compatible with Version 2.3.1 of WebSVN.
  *
- * @author Andreas Mandel, based in ViewVC plugin by Mike Salnikov, based on Polarion plug-in by Jonny Wray
+ * @author Andreas Mandel, based on ViewVC plugin by Mike Salnikov, based on Polarion plug-in by Jonny Wray
  */
 public class WebSVN2RepositoryBrowser extends SubversionRepositoryBrowser {
 
+    // alternative: https://server/websvn/comp.php?repname=rep&compare[]=/@2222&compare[]=/@2225
     private static final String CHANGE_SET_FORMAT
         = "revision.php?%1srev=%2d";
+        
     private static final String DIFF_FORMAT
         = "diff.php?%1spath=%2s&rev=%3d";
+        
+    // alternative: "blame.php?%1spath=%2s&rev=%3d";
     private static final String FILE_FORMAT
-        = "filedetails.php?%1spath=%2s&rev=%d3";
+        = "filedetails.php?%1spath=%2s&rev=%3d";
+        
     private static final Pattern URL_PATTERN
         = Pattern.compile(
             "(.*/)(revision|diff|comp|filedetails|listing|blame|dl|log)"
             + "\\.php([^?]*)\\?(repname=([^&]*))?(.*)");
-
     private static final int URL_PATTERN_BASE_URL_GROUP = 1;
     private static final int URL_PATTERN_REPNAME_GROUP = 4;
 
