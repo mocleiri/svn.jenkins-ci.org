@@ -92,4 +92,35 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!-- Execute but with no effect for the first compilation time -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <sources>
+                        <source>${project.build.directory}/generated-sources/groovy</source>
+                    </sources>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/groovy</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>         
+    </build>
 </project>
