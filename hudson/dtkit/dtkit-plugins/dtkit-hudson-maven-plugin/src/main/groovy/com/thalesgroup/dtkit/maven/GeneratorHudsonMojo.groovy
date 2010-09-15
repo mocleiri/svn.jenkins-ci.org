@@ -47,11 +47,17 @@ public class GeneratorHudsonMojo extends AbstractMojo {
   /**
    * <i>Maven Internal</i>: List of compile artifacts for the projects.
    *
-   * @parameter expression="${project.compileArtifacts}"
+   * @parameter expression="${project.runtimeArtifacts}"
    * @required
    * @readonly
    */
   private List projectClasspathList;
+
+  /**
+   * <i>Maven Internal</i>: List of plugins artifacts
+   * @parameter default-value="${plugin.artifacts}"
+   */
+  private java.util.List pluginArtifacts;
 
 
   public void execute()
@@ -60,32 +66,39 @@ public class GeneratorHudsonMojo extends AbstractMojo {
 
     try {
 
-
-      //Filtering projectClasspathList
+      //-------------------- Filtering projectClasspathList
       List computeClassPathList = new ArrayList();
+
       for (int i = 0; i < projectClasspathList.size(); i++) {
-        Artifact  artifact = (Artifact) projectClasspathList.get(i);
+        Artifact artifact = (Artifact) projectClasspathList.get(i);
         //Exclude all Hudson plugins
-	if (!"org.jvnet.hudson.plugins".equals(artifact.getGroupId())){
-           computeClassPathList.add(artifact);
+        if (!"org.jvnet.hudson.plugins".equals(artifact.getGroupId())) {
+          computeClassPathList.add(artifact);
         }
       }
 
+      for (int i = 0; i < pluginArtifacts.size(); i++) {
+        Artifact artifact = (Artifact) pluginArtifacts.get(i);
+        //Exclude all Hudson plugins
+        if (!"org.jvnet.hudson.plugins".equals(artifact.getGroupId())) {
+          computeClassPathList.add(artifact);
+        }
+      }
 
-      //Building a new classloader     
-      File output =  new File(project.getBuild().getOutputDirectory())
+      //Building a new classloader
+      File output = new File(project.getBuild().getOutputDirectory())
       URL[] urls;
       if (output.exists()) {
-         urls = new URL[computeClassPathList.size() + 1];
-         urls[urls.length - 1] = new URL("file:///" + project.getBuild().getOutputDirectory() + "/");
+        urls = new URL[computeClassPathList.size() + 1];
+        urls[urls.length - 1] = new URL("file:///" + project.getBuild().getOutputDirectory() + "/");
       }
       else {
-        urls = new URL[+ computeClassPathList.size()];
+        urls = new URL[+computeClassPathList.size()];
       }
       for (int i = 0; i < computeClassPathList.size(); i++) {
-          Artifact  artifact = (Artifact) computeClassPathList.get(i);
-          urls[i] = new URL("file:///" + ((Artifact) computeClassPathList.get(i)).getFile().getPath());
-      }      
+        Artifact artifact = (Artifact) computeClassPathList.get(i);
+        urls[i] = new URL("file:///" + ((Artifact) computeClassPathList.get(i)).getFile().getPath());
+      }
       ClassLoader cl = new URLClassLoader(urls, Thread.currentThread().getContextClassLoader());
 
       // Retrieving all input type
@@ -97,12 +110,12 @@ public class GeneratorHudsonMojo extends AbstractMojo {
       Iterator<InputMetric> commandsIterator = metricsLoader.iterator();
       while (commandsIterator.hasNext()) {
         InputMetric metric = commandsIterator.next();
-        getLog().info("Genererating the Hudson class for "+ metric.getLabel() + " metric");
+        getLog().info("Genererating the Hudson class for " + metric.getLabel() + " metric");
         switch (metric.getToolType()) {
           case InputType.TEST: generateTest("com.thalesgroup.dtkit.metrics.hudson.model", metric); break;
           case InputType.COVERAGE: generateCoverage("com.thalesgroup.dtkit.metrics.hudson.model", metric); break;
           case InputType.MEASURE: generateMeasure("com.thalesgroup.dtkit.metrics.hudson.model", metric); break;
-          case InputType.VIOLATION: generateViolation("com.thalesgroup.dtkit.metrics.hudson.model", metric);  break;
+          case InputType.VIOLATION: generateViolation("com.thalesgroup.dtkit.metrics.hudson.model", metric); break;
         }
       }
     }
@@ -130,13 +143,16 @@ public class GeneratorHudsonMojo extends AbstractMojo {
   public generate(String hudsonType, hudsonDescriptorType, String packageName, InputMetric inputMetric) throws Exception {
     // Where to write the classes
     File targetDirectory = new File(project.build.directory + "/generated-sources/groovy")
+    if (!targetDirectory.exists()){
+      targetDirectory.mkdirs();
+    }
 
     // The directory to write the source to
     File packageDir = new File(targetDirectory, packageName.replace('.', '/'))
 
     def keyFormat = inputMetric.getOutputFormatType().getKey()
-    keyFormat = keyFormat.substring(0, 1).toUpperCase() + keyFormat.substring(1);  
-    def buildName = inputMetric.getToolName() +  keyFormat  + "Hudson" + hudsonType
+    keyFormat = keyFormat.substring(0, 1).toUpperCase() + keyFormat.substring(1);
+    def buildName = inputMetric.getToolName() + keyFormat + "Hudson" + hudsonType
     def classname = buildName.substring(0, 1).toUpperCase() + buildName.substring(1);
 
     // Now to create our enum
@@ -158,7 +174,7 @@ public class GeneratorHudsonMojo extends AbstractMojo {
 
     out << "private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + classname + ".DescriptorImpl();\n"
     out << "\n"
-    
+
     out << "@DataBoundConstructor\n"
     out << "public " + classname + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n"
     out << "  super(pattern, faildedIfNotNew, deleteOutputFiles);\n"
@@ -183,7 +199,7 @@ public class GeneratorHudsonMojo extends AbstractMojo {
     out << "\n"
 
     out << "public String getId() {\n"
-    out << " return \"" +   inputMetric.getMetaClass().getTheClass() + "\";\n"
+    out << " return \"" + inputMetric.getMetaClass().getTheClass() + "\";\n"
     out << "}\n"
     out << "\n"
 
