@@ -40,14 +40,30 @@ Upcoming changes</a>
 <!-- Record your changes in the trunk here. -->
 <div id="trunk" style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
-  <li class=>
+  <li class='major bug'>
+    Improving the master/slave communication to avoid pipe clogging problem.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5977">issue 5977</a>)
+  <li class=bug>
+    Multiple fingerprints and "redeploy artifacts" links are added to M2 builds when multiple forked lifecycles are invovled.
+  <li class=bug>
+    Computation of the module build time in the m2 job was incorrect when multiple forked lifecycles are involved.
+  <li class=rfe>
+    Console annotations are added to highlight warnings/errors in Maven
+  <li class=rfe>
+    If a polling initiated a build, capture its log to the build.
+  <li class=rfe>
+    Added a new extension point to prolong the quiet down period programmatically.
 </ul>
 </div><!--=TRUNK-END=-->
 
 <!-- these changes are controlled by the release process. DO NOT MODIFY -->
 <div id="rc" style="display:none;"><!--=BEGIN=-->
 <h3><a name=v1.377>What's new in 1.377</a> <!--=DATE=--></h3>
-<!--=RC-CHANGES=-->
+<ul class=image>
+  <li class=bug>
+    Moved nulling out of buildEnvironments to cleanUp, so that node variables are available in Publishers.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-5925">issue 5925</a>)
+</ul>
 </div><!--=END=-->
 <h3><a name=v1.376>What's new in 1.376</a> (2010/09/11)</h3>
 <ul class=image>

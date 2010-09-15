@@ -43,7 +43,7 @@ public class BoostTest extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.35.0";
+        return "1.37.0";
     }
 
     @Override
@@ -58,7 +58,7 @@ public class BoostTest extends InputMetricXSL {
 
     @Override
     public String getInputXsd() {
-        return "boosttest-1.0.xsd";
+        return "boosttest-1.1.xsd";
     }
 
     @Override    
