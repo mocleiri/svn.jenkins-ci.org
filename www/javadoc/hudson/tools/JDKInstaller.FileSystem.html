@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JDKInstaller.FileSystem (Hudson main module 1.376 API)
+JDKInstaller.FileSystem (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ JDKInstaller.FileSystem (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JDKInstaller.FileSystem (Hudson main module 1.376 API)";
+        parent.document.title="JDKInstaller.FileSystem (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -124,7 +124,7 @@ Abstraction of the file system to perform JDK installation.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#chmod(java.lang.String, int)">chmod</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;file,
+<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#chmod(java.lang.String, int)">chmod</A></B>(java.lang.String&nbsp;file,
       int&nbsp;mode)</CODE>
 
 <BR>
@@ -133,15 +133,15 @@ Abstraction of the file system to perform JDK installation.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#delete(java.lang.String)">delete</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;file)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#delete(java.lang.String)">delete</A></B>(java.lang.String&nbsp;file)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#listSubDirectories(java.lang.String)">listSubDirectories</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;dir)</CODE>
+<CODE>&nbsp;java.util.List&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#listSubDirectories(java.lang.String)">listSubDirectories</A></B>(java.lang.String&nbsp;dir)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List sub-directories of the given directory and just return the file name portion.</TD>
@@ -149,16 +149,16 @@ Abstraction of the file system to perform JDK installation.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#pullUp(java.lang.String, java.lang.String)">pullUp</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;from,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;to)</CODE>
+<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#pullUp(java.lang.String, java.lang.String)">pullUp</A></B>(java.lang.String&nbsp;from,
+       java.lang.String&nbsp;to)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#read(java.lang.String)">read</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;file)</CODE>
+<CODE>&nbsp;java.io.InputStream</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/tools/JDKInstaller.FileSystem.html#read(java.lang.String)">read</A></B>(java.lang.String&nbsp;file)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -180,15 +180,15 @@ Abstraction of the file system to perform JDK installation.
 <A NAME="delete(java.lang.String)"><!-- --></A><H3>
 delete</H3>
 <PRE>
-void <B>delete</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;file)
-            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+void <B>delete</B>(java.lang.String&nbsp;file)
+            throws java.io.IOException,
+                   java.lang.InterruptedException</PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -196,16 +196,16 @@ void <B>delete</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/St
 <A NAME="chmod(java.lang.String, int)"><!-- --></A><H3>
 chmod</H3>
 <PRE>
-void <B>chmod</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;file,
+void <B>chmod</B>(java.lang.String&nbsp;file,
            int&nbsp;mode)
-           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+           throws java.io.IOException,
+                  java.lang.InterruptedException</PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -213,13 +213,13 @@ void <B>chmod</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Str
 <A NAME="read(java.lang.String)"><!-- --></A><H3>
 read</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A> <B>read</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;file)
-                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+java.io.InputStream <B>read</B>(java.lang.String&nbsp;file)
+                         throws java.io.IOException</PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -227,17 +227,17 @@ read</H3>
 <A NAME="listSubDirectories(java.lang.String)"><!-- --></A><H3>
 listSubDirectories</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>listSubDirectories</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;dir)
-                                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+java.util.List&lt;java.lang.String&gt; <B>listSubDirectories</B>(java.lang.String&nbsp;dir)
+                                                    throws java.io.IOException,
+                                                           java.lang.InterruptedException</PRE>
 <DL>
 <DD>List sub-directories of the given directory and just return the file name portion.
 <P>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -245,16 +245,16 @@ listSubDirectories</H3>
 <A NAME="pullUp(java.lang.String, java.lang.String)"><!-- --></A><H3>
 pullUp</H3>
 <PRE>
-void <B>pullUp</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;from,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;to)
-            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+void <B>pullUp</B>(java.lang.String&nbsp;from,
+            java.lang.String&nbsp;to)
+            throws java.io.IOException,
+                   java.lang.InterruptedException</PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

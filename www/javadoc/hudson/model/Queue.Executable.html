@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Executable (Hudson main module 1.376 API)
+Queue.Executable (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Executable (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Executable (Hudson main module 1.376 API)";
+        parent.document.title="Queue.Executable (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson.model</FONT>
 <BR>
 Interface Queue.Executable</H2>
 <DL>
-<DT><B>All Superinterfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A></DD>
+<DT><B>All Superinterfaces:</B> <DD>java.lang.Runnable</DD>
 </DL>
 <DL>
 <DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>, <A HREF="../../hudson/maven/AbstractMavenBuild.html" title="class in hudson.maven">AbstractMavenBuild</A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>, <A HREF="../../hudson/model/FreeStyleBuild.html" title="class in hudson.model">FreeStyleBuild</A>, <A HREF="../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A>, <A HREF="../../hudson/matrix/MatrixRun.html" title="class in hudson.matrix">MatrixRun</A>, <A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>, <A HREF="../../hudson/maven/MavenModuleSetBuild.html" title="class in hudson.maven">MavenModuleSetBuild</A></DD>
@@ -103,8 +103,17 @@ Interface Queue.Executable</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static interface <B>Queue.Executable</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A></DL>
+<DT><PRE>public static interface <B>Queue.Executable</B><DT>extends java.lang.Runnable</DL>
 </PRE>
+
+<P>
+Represents the real meet of the computation run by <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>.
+
+ <h2>Views</h2>
+ <p>
+ Implementation must have <tt>executorCell.jelly</tt>, which is
+ used to render the HTML that indicates this executable is executing.
+<P>
 
 <P>
 <HR>
@@ -121,7 +130,7 @@ Interface Queue.Executable</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Executable.html#getParent()">getParent</A></B>()</CODE>
 
 <BR>
@@ -137,7 +146,7 @@ Interface Queue.Executable</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Executable.html#toString()">toString</A></B>()</CODE>
 
 <BR>
@@ -160,7 +169,7 @@ Interface Queue.Executable</H2>
 <A NAME="getParent()"><!-- --></A><H3>
 getParent</H3>
 <PRE>
-<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A> <B>getParent</B>()</PRE>
+<A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A> <B>getParent</B>()</PRE>
 <DL>
 <DD>Task from which this executable was created.
  Never null.
@@ -182,7 +191,7 @@ void <B>run</B>()</PRE>
 <DD>Called by <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> to perform the task
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true#run()" title="class or interface in java.lang">run</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>run</CODE> in interface <CODE>java.lang.Runnable</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -193,12 +202,12 @@ void <B>run</B>()</PRE>
 <A NAME="toString()"><!-- --></A><H3>
 toString</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toString</B>()</PRE>
+java.lang.String <B>toString</B>()</PRE>
 <DL>
 <DD>Used to render the HTML. Should be a human readable text of what this executable is.
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A></CODE> in class <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
 </DD>
 <DD><DL>
 </DL>

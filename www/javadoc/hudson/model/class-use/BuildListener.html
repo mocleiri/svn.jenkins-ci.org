@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.BuildListener (Hudson main module 1.376 API)
+Uses of Interface hudson.model.BuildListener (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.BuildListener (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.BuildListener (Hudson main module 1.376 API)";
+        parent.document.title="Uses of Interface hudson.model.BuildListener (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -164,7 +164,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
          <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changelogFile)</CODE>
+         java.io.File&nbsp;changelogFile)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -348,7 +348,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
             org.apache.maven.project.MavenProject&nbsp;pom,
             <A HREF="../../../hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>&nbsp;mojo,
             <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;error)</CODE>
+            java.lang.Throwable&nbsp;error)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after execution of a single mojo.</TD>
@@ -390,8 +390,8 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <CODE>static&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>MavenUtil.</B><B><A HREF="../../../hudson/maven/MavenUtil.html#resolveModules(hudson.maven.MavenEmbedder, org.apache.maven.project.MavenProject, java.lang.String, java.util.Map, hudson.model.BuildListener, boolean)">resolveModules</A></B>(hudson.maven.MavenEmbedder&nbsp;embedder,
                org.apache.maven.project.MavenProject&nbsp;project,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rel,
-               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;org.apache.maven.project.MavenProject,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;relativePathInfo,
+               java.lang.String&nbsp;rel,
+               java.util.Map&lt;org.apache.maven.project.MavenProject,java.lang.String&gt;&nbsp;relativePathInfo,
                <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
                boolean&nbsp;nonRecursive)</CODE>
 
@@ -418,8 +418,8 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/maven/MavenBuilder.html#MavenBuilder(hudson.model.BuildListener, java.util.List, java.util.Map)">MavenBuilder</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;goals,
-             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;systemProps)</CODE>
+             java.util.List&lt;java.lang.String&gt;&nbsp;goals,
+             java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;systemProps)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -445,7 +445,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>MavenArtifact.</B><B><A HREF="../../../hudson/maven/reporters/MavenArtifact.html#archive(hudson.maven.MavenBuildProxy, java.io.File, hudson.model.BuildListener)">archive</A></B>(<A HREF="../../../hudson/maven/MavenBuildProxy.html" title="interface in hudson.maven">MavenBuildProxy</A>&nbsp;build,
-        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;file,
+        java.io.File&nbsp;file,
         <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
 
 <BR>
@@ -498,7 +498,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
             org.apache.maven.project.MavenProject&nbsp;pom,
             <A HREF="../../../hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>&nbsp;mojo,
             <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;error)</CODE>
+            java.lang.Throwable&nbsp;error)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mojos perform different dependency resolution, so we need to check this for each mojo.</TD>
@@ -510,7 +510,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
             org.apache.maven.project.MavenProject&nbsp;pom,
             <A HREF="../../../hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>&nbsp;mojo,
             <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;error)</CODE>
+            java.lang.Throwable&nbsp;error)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -522,7 +522,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
             org.apache.maven.project.MavenProject&nbsp;pom,
             <A HREF="../../../hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>&nbsp;mojo,
             <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;error)</CODE>
+            java.lang.Throwable&nbsp;error)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -534,7 +534,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
             org.apache.maven.project.MavenProject&nbsp;pom,
             <A HREF="../../../hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>&nbsp;mojo,
             <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;error)</CODE>
+            java.lang.Throwable&nbsp;error)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -546,7 +546,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
             org.apache.maven.project.MavenProject&nbsp;pom,
             <A HREF="../../../hudson/maven/MojoInfo.html" title="class in hudson.maven">MojoInfo</A>&nbsp;mojo,
             <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&nbsp;error)</CODE>
+            java.lang.Throwable&nbsp;error)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -638,7 +638,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD><CODE><B><A HREF="../../../hudson/model/StreamBuildListener.html" title="class in hudson.model">StreamBuildListener</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model"><CODE>BuildListener</CODE></A> that writes to an <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model"><CODE>BuildListener</CODE></A> that writes to an <CODE>OutputStream</CODE>.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -670,7 +670,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#checkout(hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener, java.io.File)">checkout</A></B>(<A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
          <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changelogFile)</CODE>
+         java.io.File&nbsp;changelogFile)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -747,7 +747,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.lang.Iterable, boolean)">performAllBuildStep</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                    java.lang.Iterable&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
                     boolean&nbsp;phase)</CODE>
 
 <BR>
@@ -758,7 +758,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildStep(hudson.model.BuildListener, java.util.Map, boolean)">performAllBuildStep</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                    java.util.Map&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
                     boolean&nbsp;phase)</CODE>
 
 <BR>
@@ -769,7 +769,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.lang.Iterable, boolean)">performAllBuildSteps</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                     java.lang.Iterable&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
                      boolean&nbsp;phase)</CODE>
 
 <BR>
@@ -779,7 +779,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#performAllBuildSteps(hudson.model.BuildListener, java.util.Map, boolean)">performAllBuildSteps</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
+                     java.util.Map&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;buildSteps,
                      boolean&nbsp;phase)</CODE>
 
 <BR>
@@ -830,7 +830,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#preBuild(hudson.model.BuildListener, java.util.Collection)">preBuild</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
+         java.util.Collection&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -839,7 +839,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#preBuild(hudson.model.BuildListener, java.lang.Iterable)">preBuild</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
+         java.lang.Iterable&lt;? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -848,7 +848,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
 <TD><CODE><B>AbstractBuild.AbstractRunner.</B><B><A HREF="../../../hudson/model/AbstractBuild.AbstractRunner.html#preBuild(hudson.model.BuildListener, java.util.Map)">preBuild</A></B>(<A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
+         java.util.Map&lt;?,? extends <A HREF="../../../hudson/tasks/BuildStep.html" title="interface in hudson.tasks">BuildStep</A>&gt;&nbsp;steps)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -929,7 +929,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
          <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;remoteDir,
          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changeLogFile)</CODE>
+         java.io.File&nbsp;changeLogFile)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -941,7 +941,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
          <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changelogFile)</CODE>
+         java.io.File&nbsp;changelogFile)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains a fresh workspace of the module(s) into the specified directory
@@ -950,9 +950,9 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changelogFile,
+<TD><CODE><B>SCM.</B><B><A HREF="../../../hudson/scm/SCM.html#createEmptyChangeLog(java.io.File, hudson.model.BuildListener, java.lang.String)">createEmptyChangeLog</A></B>(java.io.File&nbsp;changelogFile,
                      <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rootTag)</CODE>
+                     java.lang.String&nbsp;rootTag)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1287,7 +1287,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B>Maven.</B><B><A HREF="../../../hudson/tasks/Maven.html#wrapUpArguments(hudson.util.ArgumentListBuilder, java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">wrapUpArguments</A></B>(<A HREF="../../../hudson/util/ArgumentListBuilder.html" title="class in hudson.util">ArgumentListBuilder</A>&nbsp;args,
-                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;normalizedTarget,
+                java.lang.String&nbsp;normalizedTarget,
                 <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&nbsp;build,
                 <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
                 <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
@@ -1336,7 +1336,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="../../../hudson/tasks/junit/TestResult.html" title="class in hudson.tasks.junit">TestResult</A></CODE></FONT></TD>
-<TD><CODE><B>JUnitResultArchiver.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">parse</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;expandedTestResults,
+<TD><CODE><B>JUnitResultArchiver.</B><B><A HREF="../../../hudson/tasks/junit/JUnitResultArchiver.html#parse(java.lang.String, hudson.model.AbstractBuild, hudson.Launcher, hudson.model.BuildListener)">parse</A></B>(java.lang.String&nbsp;expandedTestResults,
       <A HREF="../../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build,
       <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
       <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener)</CODE>
@@ -1446,7 +1446,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
          <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changeLogFile)</CODE>
+         java.io.File&nbsp;changeLogFile)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1458,7 +1458,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
          <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changeLogFile)</CODE>
+         java.io.File&nbsp;changeLogFile)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1470,7 +1470,7 @@ Uses of <A HREF="../../../hudson/model/BuildListener.html" title="interface in h
          <A HREF="../../../hudson/Launcher.html" title="class in hudson">Launcher</A>&nbsp;launcher,
          <A HREF="../../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
          <A HREF="../../../hudson/model/BuildListener.html" title="interface in hudson.model">BuildListener</A>&nbsp;listener,
-         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;changeLogFile)</CODE>
+         java.io.File&nbsp;changeLogFile)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

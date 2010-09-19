@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ConsistentHash (Hudson main module 1.376 API)
+ConsistentHash (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ConsistentHash (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ConsistentHash (Hudson main module 1.376 API)";
+        parent.document.title="ConsistentHash (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -93,12 +93,12 @@ hudson.util</FONT>
 <BR>
 Class ConsistentHash&lt;T&gt;</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.ConsistentHash&lt;T&gt;</B>
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <B>ConsistentHash&lt;T&gt;</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+<DT><PRE>public class <B>ConsistentHash&lt;T&gt;</B><DT>extends java.lang.Object</DL>
 </PRE>
 
 <P>
@@ -109,7 +109,7 @@ Consistent hash.
  can be performed concurrently even when modifications is in progress.
 
  <p>
- Since typical hash functions we use in <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang"><CODE>Object.hashCode()</CODE></A> isn't random enough to
+ Since typical hash functions we use in <CODE>Object.hashCode()</CODE> isn't random enough to
  evenly populate the 2^32 ring space, we only ask the user to give us
  <a href="http://en.wikipedia.org/wiki/Injective_function">an injective function</a> to a string,
  and then we use MD5 to create random enough distribution.
@@ -215,7 +215,7 @@ Consistent hash.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.html#addAll(java.util.Collection)">addAll</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;&nbsp;nodes)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.html#addAll(java.util.Collection)">addAll</A></B>(java.util.Collection&lt;? extends <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;&nbsp;nodes)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calls <A HREF="../../hudson/util/ConsistentHash.html#add(T)"><CODE>add(Object)</CODE></A> with all the arguments.</TD>
@@ -238,7 +238,7 @@ Consistent hash.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.Iterable&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.html#list(int)">list</A></B>(int&nbsp;queryPoint)</CODE>
 
 <BR>
@@ -246,8 +246,8 @@ Consistent hash.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.html#list(java.lang.String)">list</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;queryPoint)</CODE>
+<CODE>&nbsp;java.lang.Iterable&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.html#list(java.lang.String)">list</A></B>(java.lang.String&nbsp;queryPoint)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takes a string, hash it with MD5, then calls <A HREF="../../hudson/util/ConsistentHash.html#list(int)"><CODE>list(int)</CODE></A>.</TD>
@@ -263,7 +263,7 @@ Consistent hash.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.html#lookup(java.lang.String)">lookup</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;queryPoint)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.html#lookup(java.lang.String)">lookup</A></B>(java.lang.String&nbsp;queryPoint)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takes a string, hash it with MD5, then calls <A HREF="../../hudson/util/ConsistentHash.html#lookup(int)"><CODE>lookup(int)</CODE></A>.</TD>
@@ -280,10 +280,10 @@ Consistent hash.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -381,7 +381,7 @@ public void <B>addAll</B>(<A HREF="../../hudson/util/ConsistentHash.html" title=
 <A NAME="addAll(java.util.Collection)"><!-- --></A><H3>
 addAll</H3>
 <PRE>
-public void <B>addAll</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;&nbsp;nodes)</PRE>
+public void <B>addAll</B>(java.util.Collection&lt;? extends <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt;&nbsp;nodes)</PRE>
 <DL>
 <DD>Calls <A HREF="../../hudson/util/ConsistentHash.html#add(T)"><CODE>add(Object)</CODE></A> with all the arguments.
 <P>
@@ -443,7 +443,7 @@ public <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in 
 <A NAME="lookup(java.lang.String)"><!-- --></A><H3>
 lookup</H3>
 <PRE>
-public <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A> <B>lookup</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;queryPoint)</PRE>
+public <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A> <B>lookup</B>(java.lang.String&nbsp;queryPoint)</PRE>
 <DL>
 <DD>Takes a string, hash it with MD5, then calls <A HREF="../../hudson/util/ConsistentHash.html#lookup(int)"><CODE>lookup(int)</CODE></A>.
 <P>
@@ -456,7 +456,7 @@ public <A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in 
 <A NAME="list(int)"><!-- --></A><H3>
 list</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt; <B>list</B>(int&nbsp;queryPoint)</PRE>
+public java.lang.Iterable&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt; <B>list</B>(int&nbsp;queryPoint)</PRE>
 <DL>
 <DD>Creates a permutation of all the nodes for the given data point.
 
@@ -477,7 +477,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?
 <A NAME="list(java.lang.String)"><!-- --></A><H3>
 list</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt; <B>list</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;queryPoint)</PRE>
+public java.lang.Iterable&lt;<A HREF="../../hudson/util/ConsistentHash.html" title="type parameter in ConsistentHash">T</A>&gt; <B>list</B>(java.lang.String&nbsp;queryPoint)</PRE>
 <DL>
 <DD>Takes a string, hash it with MD5, then calls <A HREF="../../hudson/util/ConsistentHash.html#list(int)"><CODE>list(int)</CODE></A>.
 <P>

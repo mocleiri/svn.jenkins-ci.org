@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.Computer (Hudson main module 1.376 API)
+Uses of Class hudson.model.Computer (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.Computer (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.Computer (Hudson main module 1.376 API)";
+        parent.document.title="Uses of Class hudson.model.Computer (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -101,6 +101,10 @@ Packages that use <A HREF="../../../hudson/model/Computer.html" title="class in 
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.model"><B>hudson.model</B></A></TD>
 <TD>Core object model that are bound to URLs via stapler, rooted at <a href="../../../hudson/model/Hudson.html"><tt>Hudson</tt></a>.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.model.queue"><B>hudson.model.queue</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.node_monitors"><B>hudson.node_monitors</B></A></TD>
@@ -266,7 +270,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></FONT></TD>
-<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getComputer(java.lang.String)">getComputer</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</CODE>
+<TD><CODE><B>Hudson.</B><B><A HREF="../../../hudson/model/Hudson.html#getComputer(java.lang.String)">getComputer</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -282,7 +286,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></FONT></TD>
-<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;token,
+<TD><CODE><B>ComputerSet.</B><B><A HREF="../../../hudson/model/ComputerSet.html#getDynamic(java.lang.String, org.kohsuke.stapler.StaplerRequest, org.kohsuke.stapler.StaplerResponse)">getDynamic</A></B>(java.lang.String&nbsp;token,
            org.kohsuke.stapler.StaplerRequest&nbsp;req,
            org.kohsuke.stapler.StaplerResponse&nbsp;rsp)</CODE>
 
@@ -315,7 +319,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>View.</B><B><A HREF="../../../hudson/model/View.html#getComputers()">getComputers</A></B>()</CODE>
 
 <BR>
@@ -339,7 +343,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>Queue.</B><B><A HREF="../../../hudson/model/Queue.html#getBuildableItems(hudson.model.Computer)">getBuildableItems</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
@@ -361,8 +365,33 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/model/OneOffExecutor.html#OneOffExecutor(hudson.model.Computer, hudson.model.Queue.Item)">OneOffExecutor</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;owner,
-               <A HREF="../../../hudson/model/Queue.Item.html" title="class in hudson.model">Queue.Item</A>&nbsp;item)</CODE>
+<TD><CODE><B><A HREF="../../../hudson/model/OneOffExecutor.html#OneOffExecutor(hudson.model.Computer, hudson.model.queue.WorkUnit)">OneOffExecutor</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;owner,
+               <A HREF="../../../hudson/model/queue/WorkUnit.html" title="class in hudson.model.queue">WorkUnit</A>&nbsp;work)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.model.queue"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A> in <A HREF="../../../hudson/model/queue/package-summary.html">hudson.model.queue</A></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left" COLSPAN="2">Fields in <A HREF="../../../hudson/model/queue/package-summary.html">hudson.model.queue</A> declared as <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A></CODE></FONT></TD>
+<TD><CODE><B>MappingWorksheet.ExecutorChunk.</B><B><A HREF="../../../hudson/model/queue/MappingWorksheet.ExecutorChunk.html#computer">computer</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -386,7 +415,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
 <TD><CODE><B>NodeMonitor.</B><B><A HREF="../../../hudson/node_monitors/NodeMonitor.html#data(hudson.model.Computer)">data</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
@@ -394,7 +423,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
 <TD><CODE><B>AbstractDiskSpaceMonitor.</B><B><A HREF="../../../hudson/node_monitors/AbstractDiskSpaceMonitor.html#data(hudson.model.Computer)">data</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
@@ -452,7 +481,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B>ArchitectureMonitor.DescriptorImpl.</B><B><A HREF="../../../hudson/node_monitors/ArchitectureMonitor.DescriptorImpl.html#monitor(hudson.model.Computer)">monitor</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>
@@ -485,7 +514,7 @@ Uses of <A HREF="../../../hudson/model/Computer.html" title="class in hudson.mod
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B>ManagedWindowsServiceLauncher.</B><B><A HREF="../../../hudson/os/windows/ManagedWindowsServiceLauncher.html#determineHost(hudson.model.Computer)">determineHost</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;c)</CODE>
 
 <BR>

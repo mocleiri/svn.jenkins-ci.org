@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.376 API)
+Deprecated List (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.376 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -305,6 +305,12 @@ function windowTitle()
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.355
       <A HREF="hudson/PluginManager.html" title="class in hudson"><CODE>PluginManager</CODE></A> can now live longer than <A HREF="hudson/model/Hudson.html" title="class in hudson.model"><CODE>Hudson</CODE></A> instance, so
       use <code>Hudson.getInstance().servletContext</code> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/LoadBalancer.html#DEFAULT">hudson.model.LoadBalancer.DEFAULT</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.FATTASK
+      The only implementation in the core now is the one based on consistent hash.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/tasks/Maven.html#DESCRIPTOR">hudson.tasks.Maven.DESCRIPTOR</A>

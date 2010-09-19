@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractQueueTask (Hudson main module 1.376 API)
+AbstractQueueTask (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractQueueTask (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractQueueTask (Hudson main module 1.376 API)";
+        parent.document.title="AbstractQueueTask (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -57,7 +57,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../hudson/model/queue/AbstractSubTask.html" title="class in hudson.model.queue"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/model/queue/AbstractQueueTask.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="AbstractQueueTask.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -77,9 +77,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_java.lang.Object">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -93,15 +93,15 @@ hudson.model.queue</FONT>
 <BR>
 Class AbstractQueueTask</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>hudson.model.queue.AbstractQueueTask</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>, <A HREF="../../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A>, <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>, <A HREF="../../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>AbstractQueueTask</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></DL>
+<DT><PRE>public abstract class <B>AbstractQueueTask</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></DL>
 </PRE>
 
 <P>
@@ -144,14 +144,30 @@ Abstract base class for <CODE>Queue.Task</CODE> to protect plugins
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/queue/AbstractQueueTask.html#getOwnerTask()">getOwnerTask</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that this subtask belongs to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;? extends <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/queue/AbstractQueueTask.html#getSubTasks()">getSubTasks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>s that constitute this task.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Queue.Task"><!-- --></A>
@@ -160,7 +176,7 @@ Abstract base class for <CODE>Queue.Task</CODE> to protect plugins
 <TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/model/Queue.Task.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../../hudson/model/Queue.Task.html#createExecutable()">createExecutable</A>, <A HREF="../../../hudson/model/Queue.Task.html#getAssignedLabel()">getAssignedLabel</A>, <A HREF="../../../hudson/model/Queue.Task.html#getCauseOfBlockage()">getCauseOfBlockage</A>, <A HREF="../../../hudson/model/Queue.Task.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../../hudson/model/Queue.Task.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../../hudson/model/Queue.Task.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../../hudson/model/Queue.Task.html#getName()">getName</A>, <A HREF="../../../hudson/model/Queue.Task.html#getUrl()">getUrl</A>, <A HREF="../../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../../hudson/model/Queue.Task.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../../hudson/model/Queue.Task.html#isBuildBlocked()">isBuildBlocked</A>, <A HREF="../../../hudson/model/Queue.Task.html#isConcurrentBuild()">isConcurrentBuild</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/model/Queue.Task.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../../hudson/model/Queue.Task.html#getCauseOfBlockage()">getCauseOfBlockage</A>, <A HREF="../../../hudson/model/Queue.Task.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../../hudson/model/Queue.Task.html#getName()">getName</A>, <A HREF="../../../hudson/model/Queue.Task.html#getUrl()">getUrl</A>, <A HREF="../../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../../hudson/model/Queue.Task.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../../hudson/model/Queue.Task.html#isBuildBlocked()">isBuildBlocked</A>, <A HREF="../../../hudson/model/Queue.Task.html#isConcurrentBuild()">isConcurrentBuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ModelObject"><!-- --></A>
@@ -170,6 +186,15 @@ Abstract base class for <CODE>Queue.Task</CODE> to protect plugins
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><A HREF="../../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.queue.SubTask"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.queue.<A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../hudson/model/queue/SubTask.html#createExecutable()">createExecutable</A>, <A HREF="../../../hudson/model/queue/SubTask.html#getAssignedLabel()">getAssignedLabel</A>, <A HREF="../../../hudson/model/queue/SubTask.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../../hudson/model/queue/SubTask.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../../hudson/model/queue/SubTask.html#getSameNodeConstraint()">getSameNodeConstraint</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ResourceActivity"><!-- --></A>
@@ -199,6 +224,61 @@ AbstractQueueTask</H3>
 <PRE>
 public <B>AbstractQueueTask</B>()</PRE>
 <DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getSubTasks()"><!-- --></A><H3>
+getSubTasks</H3>
+<PRE>
+public java.util.Collection&lt;? extends <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A>&gt; <B>getSubTasks</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../hudson/model/Queue.Task.html#getSubTasks()">Queue.Task</A></CODE></B></DD>
+<DD>Obtains the <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>s that constitute this task.
+
+ <p>
+ The collection returned by this method must also contain the primary <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>
+ represented by this <A HREF="../../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> object itself as the first element.
+ The returned value is read-only.
+
+ <p>
+ At least size 1.
+
+ <p>
+ Since this is a newly added method, the invocation may results in <CODE>AbstractMethodError</CODE>.
+ Use <CODE>Tasks#getSubTasksOf(Task)</CODE> that avoids this.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/model/Queue.Task.html#getSubTasks()">getSubTasks</A></CODE> in interface <CODE><A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOwnerTask()"><!-- --></A><H3>
+getOwnerTask</H3>
+<PRE>
+public final <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A> <B>getOwnerTask</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../hudson/model/queue/SubTask.html#getOwnerTask()">SubTask</A></CODE></B></DD>
+<DD>Gets the <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that this subtask belongs to.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/model/queue/SubTask.html#getOwnerTask()">getOwnerTask</A></CODE> in interface <CODE><A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
 <HR>
@@ -232,7 +312,7 @@ public <B>AbstractQueueTask</B>()</PRE>
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../hudson/model/queue/AbstractSubTask.html" title="class in hudson.model.queue"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../index.html?hudson/model/queue/AbstractQueueTask.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="AbstractQueueTask.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -252,9 +332,9 @@ public <B>AbstractQueueTask</B>()</PRE>
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_java.lang.Object">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

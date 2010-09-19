@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.search.SearchIndex (Hudson main module 1.376 API)
+Uses of Interface hudson.search.SearchIndex (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.search.SearchIndex (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.search.SearchIndex (Hudson main module 1.376 API)";
+        parent.document.title="Uses of Interface hudson.search.SearchIndex (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -147,7 +147,7 @@ Uses of <A HREF="../../../hudson/search/SearchIndex.html" title="interface in hu
 <TD><CODE><B><A HREF="../../../hudson/search/CollectionSearchIndex.html" title="class in hudson.search">CollectionSearchIndex&lt;SMT extends SearchableModelObject&gt;</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A> built on a <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util"><CODE>Map</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/search/SearchIndex.html" title="interface in hudson.search"><CODE>SearchIndex</CODE></A> built on a <CODE>Map</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -240,8 +240,8 @@ Uses of <A HREF="../../../hudson/search/SearchIndex.html" title="interface in hu
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A></CODE></FONT></TD>
-<TD><CODE><B>SearchItems.</B><B><A HREF="../../../hudson/search/SearchItems.html#create(java.lang.String, java.lang.String, hudson.search.SearchIndex)">create</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;searchName,
-       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;url,
+<TD><CODE><B>SearchItems.</B><B><A HREF="../../../hudson/search/SearchItems.html#create(java.lang.String, java.lang.String, hudson.search.SearchIndex)">create</A></B>(java.lang.String&nbsp;searchName,
+       java.lang.String&nbsp;url,
        <A HREF="../../../hudson/search/SearchIndex.html" title="interface in hudson.search">SearchIndex</A>&nbsp;children)</CODE>
 
 <BR>
@@ -251,16 +251,16 @@ Uses of <A HREF="../../../hudson/search/SearchIndex.html" title="interface in hu
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../../../hudson/search/SuggestedItem.html" title="class in hudson.search">SuggestedItem</A></CODE></FONT></TD>
 <TD><CODE><B>Search.</B><B><A HREF="../../../hudson/search/Search.html#find(hudson.search.SearchIndex, java.lang.String)">find</A></B>(<A HREF="../../../hudson/search/SearchIndex.html" title="interface in hudson.search">SearchIndex</A>&nbsp;index,
-     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;query)</CODE>
+     java.lang.String&nbsp;query)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Performs a search and returns the match, or null if no match was found.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/search/SuggestedItem.html" title="class in hudson.search">SuggestedItem</A>&gt;</CODE></FONT></TD>
+<CODE>static&nbsp;java.util.List&lt;<A HREF="../../../hudson/search/SuggestedItem.html" title="class in hudson.search">SuggestedItem</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>Search.</B><B><A HREF="../../../hudson/search/Search.html#suggest(hudson.search.SearchIndex, java.lang.String)">suggest</A></B>(<A HREF="../../../hudson/search/SearchIndex.html" title="interface in hudson.search">SearchIndex</A>&nbsp;index,
-        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;tokenList)</CODE>
+        java.lang.String&nbsp;tokenList)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.NonBlockingTask (Hudson main module 1.376 API)
+Queue.NonBlockingTask (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.NonBlockingTask (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.NonBlockingTask (Hudson main module 1.376 API)";
+        parent.document.title="Queue.NonBlockingTask (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson.model</FONT>
 <BR>
 Interface Queue.NonBlockingTask</H2>
 <DL>
-<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>, <A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></DD>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>, <A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A>, <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></DD>
 </DL>
 <DL>
 <DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A></DD>
@@ -135,7 +135,7 @@ Marks <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in 
 <TH ALIGN="left"><B>Methods inherited from interface hudson.model.<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/model/Queue.Task.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../hudson/model/Queue.Task.html#createExecutable()">createExecutable</A>, <A HREF="../../hudson/model/Queue.Task.html#getAssignedLabel()">getAssignedLabel</A>, <A HREF="../../hudson/model/Queue.Task.html#getCauseOfBlockage()">getCauseOfBlockage</A>, <A HREF="../../hudson/model/Queue.Task.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../hudson/model/Queue.Task.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Queue.Task.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/Queue.Task.html#getName()">getName</A>, <A HREF="../../hudson/model/Queue.Task.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../hudson/model/Queue.Task.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()">isBuildBlocked</A>, <A HREF="../../hudson/model/Queue.Task.html#isConcurrentBuild()">isConcurrentBuild</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/model/Queue.Task.html#checkAbortPermission()">checkAbortPermission</A>, <A HREF="../../hudson/model/Queue.Task.html#getCauseOfBlockage()">getCauseOfBlockage</A>, <A HREF="../../hudson/model/Queue.Task.html#getFullDisplayName()">getFullDisplayName</A>, <A HREF="../../hudson/model/Queue.Task.html#getName()">getName</A>, <A HREF="../../hudson/model/Queue.Task.html#getSubTasks()">getSubTasks</A>, <A HREF="../../hudson/model/Queue.Task.html#getUrl()">getUrl</A>, <A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A>, <A HREF="../../hudson/model/Queue.Task.html#hasAbortPermission()">hasAbortPermission</A>, <A HREF="../../hudson/model/Queue.Task.html#isBuildBlocked()">isBuildBlocked</A>, <A HREF="../../hudson/model/Queue.Task.html#isConcurrentBuild()">isConcurrentBuild</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ModelObject"><!-- --></A>
@@ -145,6 +145,15 @@ Marks <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.queue.SubTask"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.queue.<A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/queue/SubTask.html#createExecutable()">createExecutable</A>, <A HREF="../../hudson/model/queue/SubTask.html#getAssignedLabel()">getAssignedLabel</A>, <A HREF="../../hudson/model/queue/SubTask.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../hudson/model/queue/SubTask.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/queue/SubTask.html#getOwnerTask()">getOwnerTask</A>, <A HREF="../../hudson/model/queue/SubTask.html#getSameNodeConstraint()">getSameNodeConstraint</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ResourceActivity"><!-- --></A>

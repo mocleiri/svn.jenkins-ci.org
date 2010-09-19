@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Task (Hudson main module 1.376 API)
+Queue.Task (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Task (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Task (Hudson main module 1.376 API)";
+        parent.document.title="Queue.Task (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -93,7 +93,7 @@ hudson.model</FONT>
 <BR>
 Interface Queue.Task</H2>
 <DL>
-<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></DD>
+<DT><B>All Superinterfaces:</B> <DD><A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A>, <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></DD>
 </DL>
 <DL>
 <DT><B>All Known Subinterfaces:</B> <DD><A HREF="../../hudson/model/BuildableItem.html" title="interface in hudson.model">BuildableItem</A>, <A HREF="../../hudson/model/BuildableItemWithBuildWrappers.html" title="interface in hudson.model">BuildableItemWithBuildWrappers</A>, <A HREF="../../hudson/model/Queue.FlyweightTask.html" title="interface in hudson.model">Queue.FlyweightTask</A>, <A HREF="../../hudson/model/Queue.NonBlockingTask.html" title="interface in hudson.model">Queue.NonBlockingTask</A>, <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model">Queue.TransientTask</A>, <A HREF="../../hudson/model/SCMedItem.html" title="interface in hudson.model">SCMedItem</A></DD>
@@ -106,14 +106,14 @@ Interface Queue.Task</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public static interface <B>Queue.Task</B><DT>extends <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/ResourceActivity.html" title="interface in hudson.model">ResourceActivity</A></DL>
+<DT><PRE>public static interface <B>Queue.Task</B><DT>extends <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></DL>
 </PRE>
 
 <P>
 Task whose execution is controlled by the queue.
 
  <p>
- <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang"><CODE>Value equality</CODE></A> of <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s is used
+ <CODE>Value equality</CODE> of <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A>s is used
  to collapse two tasks into one. This is used to avoid infinite
  queue backlog.
 
@@ -126,6 +126,12 @@ Task whose execution is controlled by the queue.
  Plugins are encouraged to extend from <A HREF="../../hudson/model/queue/AbstractQueueTask.html" title="class in hudson.model.queue"><CODE>AbstractQueueTask</CODE></A>
  instead of implementing this interface directly, to maintain
  compatibility with future changes to this interface.
+
+ <p>
+ For historical reasons, <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> object by itself
+ also represents the "primary" sub-task (and as implied by this
+ design, a <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> must have at least one sub-task.)
+ Most of the time, the primary subtask is the only sub task.
 <P>
 
 <P>
@@ -151,23 +157,6 @@ Task whose execution is controlled by the queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#createExecutable()">createExecutable</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model"><CODE>Queue.Executable</CODE></A>, which performs the actual execution of the task.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getAssignedLabel()">getAssignedLabel</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this task needs to be run on a node with a particular label,
- return that <A HREF="../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getCauseOfBlockage()">getCauseOfBlockage</A></B>()</CODE>
 
@@ -177,15 +166,7 @@ Task whose execution is controlled by the queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;long</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getEstimatedDuration()">getEstimatedDuration</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estimate of how long will it take to execute this task.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getFullDisplayName()">getFullDisplayName</A></B>()</CODE>
 
 <BR>
@@ -193,16 +174,7 @@ Task whose execution is controlled by the queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getLastBuiltOn()">getLastBuiltOn</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the previous execution of this task run on a certain node
- and this task prefers to run on the same node, return that.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getName()">getName</A></B>()</CODE>
 
 <BR>
@@ -210,7 +182,15 @@ Task whose execution is controlled by the queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.util.Collection&lt;? extends <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getSubTasks()">getSubTasks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obtains the <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>s that constitute this task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getUrl()">getUrl</A></B>()</CODE>
 
 <BR>
@@ -218,7 +198,7 @@ Task whose execution is controlled by the queue.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Task.html#getWhyBlocked()">getWhyBlocked</A></B>()</CODE>
 
 <BR>
@@ -261,6 +241,15 @@ Task whose execution is controlled by the queue.
 <TD><CODE><A HREF="../../hudson/model/ModelObject.html#getDisplayName()">getDisplayName</A></CODE></TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_hudson.model.queue.SubTask"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface hudson.model.queue.<A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../hudson/model/queue/SubTask.html#createExecutable()">createExecutable</A>, <A HREF="../../hudson/model/queue/SubTask.html#getAssignedLabel()">getAssignedLabel</A>, <A HREF="../../hudson/model/queue/SubTask.html#getEstimatedDuration()">getEstimatedDuration</A>, <A HREF="../../hudson/model/queue/SubTask.html#getLastBuiltOn()">getLastBuiltOn</A>, <A HREF="../../hudson/model/queue/SubTask.html#getOwnerTask()">getOwnerTask</A>, <A HREF="../../hudson/model/queue/SubTask.html#getSameNodeConstraint()">getSameNodeConstraint</A></CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.ResourceActivity"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
@@ -282,42 +271,6 @@ Task whose execution is controlled by the queue.
 <B>Method Detail</B></FONT></TH>
 </TR>
 </TABLE>
-
-<A NAME="getAssignedLabel()"><!-- --></A><H3>
-getAssignedLabel</H3>
-<PRE>
-<A HREF="../../hudson/model/Label.html" title="class in hudson.model">Label</A> <B>getAssignedLabel</B>()</PRE>
-<DL>
-<DD>If this task needs to be run on a node with a particular label,
- return that <A HREF="../../hudson/model/Label.html" title="class in hudson.model"><CODE>Label</CODE></A>. Otherwise null, indicating
- it can run on anywhere.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getLastBuiltOn()"><!-- --></A><H3>
-getLastBuiltOn</H3>
-<PRE>
-<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A> <B>getLastBuiltOn</B>()</PRE>
-<DL>
-<DD>If the previous execution of this task run on a certain node
- and this task prefers to run on the same node, return that.
- Otherwise null.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
 
 <A NAME="isBuildBlocked()"><!-- --></A><H3>
 isBuildBlocked</H3>
@@ -342,7 +295,7 @@ boolean <B>isBuildBlocked</B>()</PRE>
 <A NAME="getWhyBlocked()"><!-- --></A><H3>
 getWhyBlocked</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getWhyBlocked</B>()</PRE>
+java.lang.String <B>getWhyBlocked</B>()</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.330
       Use <A HREF="../../hudson/model/queue/CauseOfBlockage.html#getShortDescription()"><CODE>CauseOfBlockage.getShortDescription()</CODE></A> instead.</I>
@@ -383,7 +336,7 @@ getCauseOfBlockage</H3>
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getName</B>()</PRE>
+java.lang.String <B>getName</B>()</PRE>
 <DL>
 <DD>Unique name of this task.
 
@@ -402,50 +355,13 @@ getName</H3>
 <A NAME="getFullDisplayName()"><!-- --></A><H3>
 getFullDisplayName</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getFullDisplayName</B>()</PRE>
+java.lang.String <B>getFullDisplayName</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 <DT><B>See Also:</B><DD><A HREF="../../hudson/model/Item.html#getFullDisplayName()"><CODE>Item.getFullDisplayName()</CODE></A></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getEstimatedDuration()"><!-- --></A><H3>
-getEstimatedDuration</H3>
-<PRE>
-long <B>getEstimatedDuration</B>()</PRE>
-<DL>
-<DD>Estimate of how long will it take to execute this task.
- Measured in milliseconds.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Returns:</B><DD>-1 if it's impossible to estimate.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="createExecutable()"><!-- --></A><H3>
-createExecutable</H3>
-<PRE>
-<A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A> <B>createExecutable</B>()
-                                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Creates <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model"><CODE>Queue.Executable</CODE></A>, which performs the actual execution of the task.
-<P>
-<DD><DL>
-</DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -489,7 +405,7 @@ boolean <B>hasAbortPermission</B>()</PRE>
 <A NAME="getUrl()"><!-- --></A><H3>
 getUrl</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getUrl</B>()</PRE>
+java.lang.String <B>getUrl</B>()</PRE>
 <DL>
 <DD>Returns the URL of this task relative to the context root of the application.
 
@@ -520,6 +436,36 @@ boolean <B>isConcurrentBuild</B>()</PRE>
 <DD><DL>
 <DT><B>Since:</B></DT>
   <DD>1.338</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubTasks()"><!-- --></A><H3>
+getSubTasks</H3>
+<PRE>
+java.util.Collection&lt;? extends <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A>&gt; <B>getSubTasks</B>()</PRE>
+<DL>
+<DD>Obtains the <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>s that constitute this task.
+
+ <p>
+ The collection returned by this method must also contain the primary <A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>
+ represented by this <A HREF="../../hudson/model/Queue.TransientTask.html" title="interface in hudson.model"><CODE>Queue.TransientTask</CODE></A> object itself as the first element.
+ The returned value is read-only.
+
+ <p>
+ At least size 1.
+
+ <p>
+ Since this is a newly added method, the invocation may results in <CODE>AbstractMethodError</CODE>.
+ Use <CODE>Tasks#getSubTasksOf(Task)</CODE> that avoids this.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.FATTASK</DD>
 </DL>
 </DD>
 </DL>

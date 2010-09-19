@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractBuild (Hudson main module 1.376 API)
+AbstractBuild (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractBuild (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractBuild (Hudson main module 1.376 API)";
+        parent.document.title="AbstractBuild (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -93,14 +93,14 @@ hudson.model</FONT>
 <BR>
 Class AbstractBuild&lt;P extends <A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;P,R&gt;,R extends AbstractBuild&lt;P,R&gt;&gt;</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/AbstractModelObject.html" title="class in hudson.model">hudson.model.AbstractModelObject</A>
       <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Actionable.html" title="class in hudson.model">hudson.model.Actionable</A>
           <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/Run.html" title="class in hudson.model">hudson.model.Run</A>&lt;P,R&gt;
               <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.AbstractBuild&lt;P,R&gt;</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;R&gt;, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, java.lang.Comparable&lt;R&gt;, java.lang.Runnable</DD>
 </DL>
 <DL>
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/maven/AbstractMavenBuild.html" title="class in hudson.maven">AbstractMavenBuild</A>, <A HREF="../../hudson/model/Build.html" title="class in hudson.model">Build</A>, <A HREF="../../hudson/matrix/MatrixBuild.html" title="class in hudson.matrix">MatrixBuild</A></DD>
@@ -179,7 +179,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A>&gt;</CODE></FONT></TD>
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#buildEnvironments">buildEnvironments</A></B></CODE>
 
 <BR>
@@ -226,7 +226,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#AbstractBuild(P, java.util.Calendar)">AbstractBuild</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>&nbsp;job,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A>&nbsp;timestamp)</CODE>
+              java.util.Calendar&nbsp;timestamp)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -235,7 +235,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected </CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#AbstractBuild(P, java.io.File)">AbstractBuild</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>&nbsp;project,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;buildDir)</CODE>
+              java.io.File&nbsp;buildDir)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -269,7 +269,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A></CODE></FONT></TD>
+<CODE>&nbsp;java.util.Calendar</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#due()">due</A></B>()</CODE>
 
 <BR>
@@ -277,7 +277,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getBuildVariableResolver()">getBuildVariableResolver</A></B>()</CODE>
 
 <BR>
@@ -285,7 +285,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getBuildVariables()">getBuildVariables</A></B>()</CODE>
 
 <BR>
@@ -301,7 +301,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getBuiltOnStr()">getBuiltOnStr</A></B>()</CODE>
 
 <BR>
@@ -317,7 +317,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Set&lt;<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getCulprits()">getCulprits</A></B>()</CODE>
 
 <BR>
@@ -325,7 +325,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/AbstractBuild.DependencyChange.html" title="class in hudson.model">AbstractBuild.DependencyChange</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/AbstractBuild.DependencyChange.html" title="class in hudson.model">AbstractBuild.DependencyChange</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getDependencyChanges(hudson.model.AbstractBuild)">getDependencyChanges</A></B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;from)</CODE>
 
 <BR>
@@ -333,7 +333,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getDownstreamBuilds()">getDownstreamBuilds</A></B>()</CODE>
 
 <BR>
@@ -342,7 +342,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.lang.Iterable&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getDownstreamBuilds(hudson.model.AbstractProject)">getDownstreamBuilds</A></B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;that)</CODE>
 
 <BR>
@@ -369,7 +369,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getHudsonVersion()">getHudsonVersion</A></B>()</CODE>
 
 <BR>
@@ -409,7 +409,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,java.lang.Integer&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getTransitiveUpstreamBuilds()">getTransitiveUpstreamBuilds</A></B>()</CODE>
 
 <BR>
@@ -418,7 +418,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,java.lang.Integer&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getUpstreamBuilds()">getUpstreamBuilds</A></B>()</CODE>
 
 <BR>
@@ -445,7 +445,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getUpUrl()">getUpUrl</A></B>()</CODE>
 
 <BR>
@@ -453,7 +453,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractBuild.html#getWhyKeepLog()">getWhyKeepLog</A></B>()</CODE>
 
 <BR>
@@ -532,10 +532,10 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Queue.Executable"><!-- --></A>
@@ -563,7 +563,7 @@ Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hud
 <A NAME="buildEnvironments"><!-- --></A><H3>
 buildEnvironments</H3>
 <PRE>
-protected transient <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A>&gt; <B>buildEnvironments</B></PRE>
+protected transient java.util.List&lt;<A HREF="../../hudson/model/Environment.html" title="class in hudson.model">Environment</A>&gt; <B>buildEnvironments</B></PRE>
 <DL>
 <DD>During the build this field remembers <CODE>BuildWrapper.Environment</CODE>s created by
  <A HREF="../../hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><CODE>BuildWrapper</CODE></A>. This design is bit ugly but forced due to compatibility.
@@ -586,12 +586,12 @@ protected transient <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/L
 AbstractBuild</H3>
 <PRE>
 protected <B>AbstractBuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>&nbsp;job)
-                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                 throws java.io.IOException</PRE>
 <DL>
 <DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DL>
 <HR>
 
@@ -599,7 +599,7 @@ protected <B>AbstractBuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" t
 AbstractBuild</H3>
 <PRE>
 protected <B>AbstractBuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>&nbsp;job,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A>&nbsp;timestamp)</PRE>
+                        java.util.Calendar&nbsp;timestamp)</PRE>
 <DL>
 </DL>
 <HR>
@@ -608,13 +608,13 @@ protected <B>AbstractBuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" t
 AbstractBuild</H3>
 <PRE>
 protected <B>AbstractBuild</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="type parameter in AbstractBuild">P</A>&nbsp;project,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;buildDir)
-                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                        java.io.File&nbsp;buildDir)
+                 throws java.io.IOException</PRE>
 <DL>
 <DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -662,7 +662,7 @@ public <A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node
 getBuiltOnStr</H3>
 <PRE>
 <FONT SIZE="-1">@Exported(name="builtOn")
-</FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getBuiltOnStr</B>()</PRE>
+</FONT>public java.lang.String <B>getBuiltOnStr</B>()</PRE>
 <DL>
 <DD>Returns the name of the slave it was built on; null or "" if built by the master.
  (null happens when we read old record that didn't have this information.)
@@ -679,7 +679,7 @@ getBuiltOnStr</H3>
 <A NAME="getUpUrl()"><!-- --></A><H3>
 getUpUrl</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getUpUrl</B>()</PRE>
+public java.lang.String <B>getUpUrl</B>()</PRE>
 <DL>
 <DD>Used to render the side panel "Back to project" link.
 
@@ -786,7 +786,7 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 getCulprits</H3>
 <PRE>
 <FONT SIZE="-1">@Exported
-</FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A>&gt; <B>getCulprits</B>()</PRE>
+</FONT>public java.util.Set&lt;<A HREF="../../hudson/model/User.html" title="class in hudson.model">User</A>&gt; <B>getCulprits</B>()</PRE>
 <DL>
 <DD>List of users who committed a change since the last non-broken build till now.
 
@@ -825,7 +825,7 @@ public boolean <B>hasParticipant</B>(<A HREF="../../hudson/model/User.html" titl
 <A NAME="getHudsonVersion()"><!-- --></A><H3>
 getHudsonVersion</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getHudsonVersion</B>()</PRE>
+public java.lang.String <B>getHudsonVersion</B>()</PRE>
 <DL>
 <DD>Gets the version of Hudson that was used to build this job.
 <P>
@@ -844,7 +844,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is
 delete</H3>
 <PRE>
 public void <B>delete</B>()
-            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+            throws java.io.IOException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Run.html#delete()">Run</A></CODE></B></DD>
 <DD>Deletes this build and its entire log
@@ -855,7 +855,7 @@ public void <B>delete</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if we fail to delete.</DL>
+<DD><CODE>java.io.IOException</CODE> - if we fail to delete.</DL>
 </DD>
 </DL>
 <HR>
@@ -898,8 +898,8 @@ public boolean <B>hasChangeSetComputed</B>()</PRE>
 getEnvironment</H3>
 <PRE>
 public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <B>getEnvironment</B>(<A HREF="../../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;log)
-                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Run.html#getEnvironment(hudson.model.TaskListener)">Run</A></CODE></B></DD>
 <DD>Returns the map that contains environmental variables to be used for launching
@@ -920,8 +920,8 @@ public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -929,7 +929,7 @@ public <A HREF="../../hudson/EnvVars.html" title="class in hudson">EnvVars</A> <
 <A NAME="due()"><!-- --></A><H3>
 due</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?is-external=true" title="class or interface in java.util">Calendar</A> <B>due</B>()</PRE>
+public java.util.Calendar <B>due</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -943,7 +943,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Calendar.html?
 <A NAME="getBuildVariables()"><!-- --></A><H3>
 getBuildVariables</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>getBuildVariables</B>()</PRE>
+public java.util.Map&lt;java.lang.String,java.lang.String&gt; <B>getBuildVariables</B>()</PRE>
 <DL>
 <DD>Provides additional variables and their values to <A HREF="../../hudson/tasks/Builder.html" title="class in hudson.tasks"><CODE>Builder</CODE></A>s.
 
@@ -969,7 +969,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-ex
 <A NAME="getBuildVariableResolver()"><!-- --></A><H3>
 getBuildVariableResolver</H3>
 <PRE>
-public final <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>getBuildVariableResolver</B>()</PRE>
+public final <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util">VariableResolver</A>&lt;java.lang.String&gt; <B>getBuildVariableResolver</B>()</PRE>
 <DL>
 <DD>Creates <A HREF="../../hudson/util/VariableResolver.html" title="interface in hudson.util"><CODE>VariableResolver</CODE></A> backed by <A HREF="../../hudson/model/AbstractBuild.html#getBuildVariables()"><CODE>getBuildVariables()</CODE></A>.
 <P>
@@ -1006,7 +1006,7 @@ public abstract void <B>run</B>()</PRE>
 <DD>Invoked by <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> to performs a build.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Executable.html#run()">run</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true#run()" title="class or interface in java.lang">run</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/Queue.Executable.html#run()">run</A></CODE> in interface <CODE><A HREF="../../hudson/model/Queue.Executable.html" title="interface in hudson.model">Queue.Executable</A></CODE><DT><B>Specified by:</B><DD><CODE>run</CODE> in interface <CODE>java.lang.Runnable</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -1017,7 +1017,7 @@ public abstract void <B>run</B>()</PRE>
 <A NAME="getWhyKeepLog()"><!-- --></A><H3>
 getWhyKeepLog</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getWhyKeepLog</B>()</PRE>
+public java.lang.String <B>getWhyKeepLog</B>()</PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/Run.html#getWhyKeepLog()">Run</A></CODE></B></DD>
 <DD>If <A HREF="../../hudson/model/Run.html#isKeepLog()"><CODE>Run.isKeepLog()</CODE></A> returns true, returns a human readable
@@ -1054,7 +1054,7 @@ public <A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hu
 <A NAME="getDownstreamBuilds(hudson.model.AbstractProject)"><!-- --></A><H3>
 getDownstreamBuilds</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&gt; <B>getDownstreamBuilds</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;that)</PRE>
+public java.lang.Iterable&lt;<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&lt;?,?&gt;&gt; <B>getDownstreamBuilds</B>(<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;?,?&gt;&nbsp;that)</PRE>
 <DL>
 <DD>Works like <A HREF="../../hudson/model/AbstractBuild.html#getDownstreamRelationship(hudson.model.AbstractProject)"><CODE>getDownstreamRelationship(AbstractProject)</CODE></A> but returns
  the actual build objects, in ascending order.
@@ -1111,7 +1111,7 @@ public <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.mo
 <A NAME="getDownstreamBuilds()"><!-- --></A><H3>
 getDownstreamBuilds</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>&gt; <B>getDownstreamBuilds</B>()</PRE>
+public java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/Fingerprint.RangeSet.html" title="class in hudson.model">Fingerprint.RangeSet</A>&gt; <B>getDownstreamBuilds</B>()</PRE>
 <DL>
 <DD>Gets the downstream builds of this build, which are the builds of the
  downstream projects that use artifacts of this build.
@@ -1130,7 +1130,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-ex
 <A NAME="getUpstreamBuilds()"><!-- --></A><H3>
 getUpstreamBuilds</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A>&gt; <B>getUpstreamBuilds</B>()</PRE>
+public java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,java.lang.Integer&gt; <B>getUpstreamBuilds</B>()</PRE>
 <DL>
 <DD>Gets the upstream builds of this build, which are the builds of the
  upstream projects whose artifacts feed into this build.
@@ -1147,7 +1147,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-ex
 <A NAME="getTransitiveUpstreamBuilds()"><!-- --></A><H3>
 getTransitiveUpstreamBuilds</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang">Integer</A>&gt; <B>getTransitiveUpstreamBuilds</B>()</PRE>
+public java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,java.lang.Integer&gt; <B>getTransitiveUpstreamBuilds</B>()</PRE>
 <DL>
 <DD>Works like <A HREF="../../hudson/model/AbstractBuild.html#getUpstreamBuilds()"><CODE>getUpstreamBuilds()</CODE></A>  but also includes all the transitive
  dependencies as well.
@@ -1164,7 +1164,7 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-ex
 <A NAME="getDependencyChanges(hudson.model.AbstractBuild)"><!-- --></A><H3>
 getDependencyChanges</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/AbstractBuild.DependencyChange.html" title="class in hudson.model">AbstractBuild.DependencyChange</A>&gt; <B>getDependencyChanges</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;from)</PRE>
+public java.util.Map&lt;<A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>,<A HREF="../../hudson/model/AbstractBuild.DependencyChange.html" title="class in hudson.model">AbstractBuild.DependencyChange</A>&gt; <B>getDependencyChanges</B>(<A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;from)</PRE>
 <DL>
 <DD>Gets the changes in the dependency between the given build and this build.
 <P>
@@ -1182,7 +1182,7 @@ doStop</H3>
 <PRE>
 public void <B>doStop</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
                    org.kohsuke.stapler.StaplerResponse&nbsp;rsp)
-            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+            throws java.io.IOException,
                    javax.servlet.ServletException</PRE>
 <DL>
 <DD>Stops this build if it's still going.
@@ -1196,7 +1196,7 @@ public void <B>doStop</B>(org.kohsuke.stapler.StaplerRequest&nbsp;req,
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE>java.io.IOException</CODE>
 <DD><CODE>javax.servlet.ServletException</CODE></DL>
 </DD>
 </DL>

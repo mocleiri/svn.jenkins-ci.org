@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model.queue (Hudson main module 1.376 API)
+hudson.model.queue (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model.queue (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model.queue (Hudson main module 1.376 API)";
+        parent.document.title="hudson.model.queue (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -93,6 +93,10 @@ Package hudson.model.queue
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/FoldableAction.html" title="interface in hudson.model.queue">FoldableAction</A></B></TD>
 <TD>An action interface that allows action data to be folded together.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></B></TD>
+<TD>A component of <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> that represents a computation carried out by a single <A HREF="../../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>.</TD>
+</TR>
 </TABLE>
 &nbsp;
 
@@ -105,12 +109,17 @@ Package hudson.model.queue
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue">AbstractQueueSorterImpl</A></B></TD>
-<TD>Partial implementation of <A HREF="../../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A> in terms of <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util"><CODE>Comparator</CODE></A>.</TD>
+<TD>Partial implementation of <A HREF="../../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A> in terms of <CODE>Comparator</CODE>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/AbstractQueueTask.html" title="class in hudson.model.queue">AbstractQueueTask</A></B></TD>
 <TD>Abstract base class for <CODE>Queue.Task</CODE> to protect plugins
  from new additions to the interface.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/AbstractSubTask.html" title="class in hudson.model.queue">AbstractSubTask</A></B></TD>
+<TD>Partial default implementation of <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A> to avoid
+ <CODE>AbstractMethodError</CODE> with future additions to <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></B></TD>
@@ -133,6 +142,14 @@ Package hudson.model.queue
 <TD>Build is blocked because a node is offline.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/FutureImpl.html" title="class in hudson.model.queue">FutureImpl</A></B></TD>
+<TD>Created when <CODE>Queue.Item</CODE> is created so that the caller can track the progress of the task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A></B></TD>
+<TD>Defines a mapping problem for answering "where do we execute this task?"</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/Messages.html" title="class in hudson.model.queue">Messages</A></B></TD>
 <TD>&nbsp;</TD>
 </TR>
@@ -147,6 +164,22 @@ Package hudson.model.queue
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/QueueTaskFilter.html" title="class in hudson.model.queue">QueueTaskFilter</A></B></TD>
 <TD>Base class for defining filter <CODE>Queue.Task</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/SubTaskContributor.html" title="class in hudson.model.queue">SubTaskContributor</A></B></TD>
+<TD>Externally contributes <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>s to <A HREF="../../../hudson/model/AbstractProject.html#getSubTasks()"><CODE>AbstractProject.getSubTasks()</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/Tasks.html" title="class in hudson.model.queue">Tasks</A></B></TD>
+<TD>Convenience methods around <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A> and <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/WorkUnit.html" title="class in hudson.model.queue">WorkUnit</A></B></TD>
+<TD>Represents a unit of hand-over to <A HREF="../../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A> from <A HREF="../../../hudson/model/Queue.html" title="class in hudson.model"><CODE>Queue</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/WorkUnitContext.html" title="class in hudson.model.queue">WorkUnitContext</A></B></TD>
+<TD>Holds the information shared between <A HREF="../../../hudson/model/queue/WorkUnit.html" title="class in hudson.model.queue"><CODE>WorkUnit</CODE></A>s created from the same <A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model"><CODE>Queue.Task</CODE></A>.</TD>
 </TR>
 </TABLE>
 &nbsp;

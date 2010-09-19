@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SequentialExecutionQueue (Hudson main module 1.376 API)
+SequentialExecutionQueue (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SequentialExecutionQueue (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SequentialExecutionQueue (Hudson main module 1.376 API)";
+        parent.document.title="SequentialExecutionQueue (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -93,27 +93,27 @@ hudson.util</FONT>
 <BR>
 Class SequentialExecutionQueue</H2>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+java.lang.Object
   <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.util.SequentialExecutionQueue</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Executor.html?is-external=true" title="class or interface in java.util.concurrent">Executor</A></DD>
+<DT><B>All Implemented Interfaces:</B> <DD>java.util.concurrent.Executor</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>SequentialExecutionQueue</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Executor.html?is-external=true" title="class or interface in java.util.concurrent">Executor</A></DL>
+<DT><PRE>public class <B>SequentialExecutionQueue</B><DT>extends java.lang.Object<DT>implements java.util.concurrent.Executor</DL>
 </PRE>
 
 <P>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Executor.html?is-external=true" title="class or interface in java.util.concurrent"><CODE>Executor</CODE></A> that collapses two equal <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A>s into one,
- and makes sure no two equal <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A>s get executed simultaneously.
+<CODE>Executor</CODE> that collapses two equal <CODE>Runnable</CODE>s into one,
+ and makes sure no two equal <CODE>Runnable</CODE>s get executed simultaneously.
 
  <p>
- That is, if a <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A> is executing and another one gets submitted,
+ That is, if a <CODE>Runnable</CODE> is executing and another one gets submitted,
  the 2nd one waits for the completion of the 1st one.
 
- <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang"><CODE>Object.equals(Object)</CODE></A> is used on <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A> to identify
- two equal <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A>s.
+ <CODE>Object.equals(Object)</CODE> is used on <CODE>Runnable</CODE> to identify
+ two equal <CODE>Runnable</CODE>s.
 <P>
 
 <P>
@@ -134,7 +134,7 @@ Class SequentialExecutionQueue</H2>
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#SequentialExecutionQueue(java.util.concurrent.ExecutorService)">SequentialExecutionQueue</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A>&nbsp;executors)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#SequentialExecutionQueue(java.util.concurrent.ExecutorService)">SequentialExecutionQueue</A></B>(java.util.concurrent.ExecutorService&nbsp;executors)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -152,14 +152,14 @@ Class SequentialExecutionQueue</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#execute(java.lang.Runnable)">execute</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>&nbsp;item)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#execute(java.lang.Runnable)">execute</A></B>(java.lang.Runnable&nbsp;item)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A></CODE></FONT></TD>
+<CODE>&nbsp;java.util.concurrent.ExecutorService</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#getExecutors()">getExecutors</A></B>()</CODE>
 
 <BR>
@@ -167,11 +167,11 @@ Class SequentialExecutionQueue</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Set&lt;java.lang.Runnable&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#getInProgress()">getInProgress</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A>s that are currently executed by a live thread.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets <CODE>Runnable</CODE>s that are currently executed by a live thread.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -179,25 +179,25 @@ Class SequentialExecutionQueue</H2>
 <TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#isStarving(long)">isStarving</A></B>(long&nbsp;threshold)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if too much time is spent since some <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A> is submitted into the queue
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true if too much time is spent since some <CODE>Runnable</CODE> is submitted into the queue
  until they get executed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#setExecutors(java.util.concurrent.ExecutorService)">setExecutors</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A>&nbsp;svc)</CODE>
+<TD><CODE><B><A HREF="../../hudson/util/SequentialExecutionQueue.html#setExecutors(java.util.concurrent.ExecutorService)">setExecutors</A></B>(java.util.concurrent.ExecutorService&nbsp;svc)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts using a new <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent"><CODE>ExecutorService</CODE></A> to carry out executions.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starts using a new <CODE>ExecutorService</CODE> to carry out executions.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -216,7 +216,7 @@ Class SequentialExecutionQueue</H2>
 <A NAME="SequentialExecutionQueue(java.util.concurrent.ExecutorService)"><!-- --></A><H3>
 SequentialExecutionQueue</H3>
 <PRE>
-public <B>SequentialExecutionQueue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A>&nbsp;executors)</PRE>
+public <B>SequentialExecutionQueue</B>(java.util.concurrent.ExecutorService&nbsp;executors)</PRE>
 <DL>
 </DL>
 
@@ -233,7 +233,7 @@ public <B>SequentialExecutionQueue</B>(<A HREF="http://java.sun.com/j2se/1.5.0/d
 <A NAME="getExecutors()"><!-- --></A><H3>
 getExecutors</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A> <B>getExecutors</B>()</PRE>
+public java.util.concurrent.ExecutorService <B>getExecutors</B>()</PRE>
 <DL>
 <DD>Gets the base underlying executors.,
 <P>
@@ -249,12 +249,12 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Exe
 <A NAME="setExecutors(java.util.concurrent.ExecutorService)"><!-- --></A><H3>
 setExecutors</H3>
 <PRE>
-public void <B>setExecutors</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent">ExecutorService</A>&nbsp;svc)</PRE>
+public void <B>setExecutors</B>(java.util.concurrent.ExecutorService&nbsp;svc)</PRE>
 <DL>
-<DD>Starts using a new <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent"><CODE>ExecutorService</CODE></A> to carry out executions.
+<DD>Starts using a new <CODE>ExecutorService</CODE> to carry out executions.
 
  <p>
- The older <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/ExecutorService.html?is-external=true" title="class or interface in java.util.concurrent"><CODE>ExecutorService</CODE></A> will be shut down (but it's still expected to
+ The older <CODE>ExecutorService</CODE> will be shut down (but it's still expected to
  complete whatever they are doing and scheduled.)
 <P>
 <DD><DL>
@@ -269,10 +269,10 @@ public void <B>setExecutors</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api
 <A NAME="execute(java.lang.Runnable)"><!-- --></A><H3>
 execute</H3>
 <PRE>
-public void <B>execute</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>&nbsp;item)</PRE>
+public void <B>execute</B>(java.lang.Runnable&nbsp;item)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Executor.html?is-external=true#execute(java.lang.Runnable)" title="class or interface in java.util.concurrent">execute</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Executor.html?is-external=true" title="class or interface in java.util.concurrent">Executor</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>execute</CODE> in interface <CODE>java.util.concurrent.Executor</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -285,7 +285,7 @@ isStarving</H3>
 <PRE>
 public boolean <B>isStarving</B>(long&nbsp;threshold)</PRE>
 <DL>
-<DD>Returns true if too much time is spent since some <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A> is submitted into the queue
+<DD>Returns true if too much time is spent since some <CODE>Runnable</CODE> is submitted into the queue
  until they get executed.
 <P>
 <DD><DL>
@@ -300,9 +300,9 @@ public boolean <B>isStarving</B>(long&nbsp;threshold)</PRE>
 <A NAME="getInProgress()"><!-- --></A><H3>
 getInProgress</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A>&gt; <B>getInProgress</B>()</PRE>
+public java.util.Set&lt;java.lang.Runnable&gt; <B>getInProgress</B>()</PRE>
 <DL>
-<DD>Gets <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang"><CODE>Runnable</CODE></A>s that are currently executed by a live thread.
+<DD>Gets <CODE>Runnable</CODE>s that are currently executed by a live thread.
 <P>
 <DD><DL>
 </DL>

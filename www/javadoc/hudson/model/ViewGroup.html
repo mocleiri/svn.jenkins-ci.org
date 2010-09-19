@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ViewGroup (Hudson main module 1.376 API)
+ViewGroup (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ViewGroup (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ViewGroup (Hudson main module 1.376 API)";
+        parent.document.title="ViewGroup (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -162,7 +162,7 @@ Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#getUrl()">getUrl</A></B>()</CODE>
 
 <BR>
@@ -172,14 +172,14 @@ Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#getView(java.lang.String)">getView</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</CODE>
+<TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#getView(java.lang.String)">getView</A></B>(java.lang.String&nbsp;name)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a view of the given name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#getViews()">getViews</A></B>()</CODE>
 
 <BR>
@@ -189,8 +189,8 @@ Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">onViewRenamed</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
-              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)</CODE>
+              java.lang.String&nbsp;oldName,
+              java.lang.String&nbsp;newName)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> calls this method when it's renamed.</TD>
@@ -258,7 +258,7 @@ boolean <B>canDelete</B>(<A HREF="../../hudson/model/View.html" title="class in 
 deleteView</H3>
 <PRE>
 void <B>deleteView</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view)
-                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                throws java.io.IOException</PRE>
 <DL>
 <DD>Deletes a view in this group.
 <P>
@@ -268,7 +268,7 @@ void <B>deleteView</B>(<A HREF="../../hudson/model/View.html" title="class in hu
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -276,7 +276,7 @@ void <B>deleteView</B>(<A HREF="../../hudson/model/View.html" title="class in hu
 <A NAME="getViews()"><!-- --></A><H3>
 getViews</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt; <B>getViews</B>()</PRE>
+java.util.Collection&lt;<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&gt; <B>getViews</B>()</PRE>
 <DL>
 <DD>Gets all the views in this group.
 <P>
@@ -293,7 +293,7 @@ getViews</H3>
 <A NAME="getView(java.lang.String)"><!-- --></A><H3>
 getView</H3>
 <PRE>
-<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A> <B>getView</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</PRE>
+<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A> <B>getView</B>(java.lang.String&nbsp;name)</PRE>
 <DL>
 <DD>Gets a view of the given name.
 
@@ -311,7 +311,7 @@ getView</H3>
 <A NAME="getUrl()"><!-- --></A><H3>
 getUrl</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getUrl</B>()</PRE>
+java.lang.String <B>getUrl</B>()</PRE>
 <DL>
 <DD>Returns the path of this group, relative to the context root,
  like "foo/bar/zot/". Note no leading slash but trailing slash.
@@ -329,8 +329,8 @@ getUrl</H3>
 onViewRenamed</H3>
 <PRE>
 void <B>onViewRenamed</B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
-                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)</PRE>
+                   java.lang.String&nbsp;oldName,
+                   java.lang.String&nbsp;newName)</PRE>
 <DL>
 <DD><A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A> calls this method when it's renamed.
  This method is intended to work as a notification to the <A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model"><CODE>ViewGroup</CODE></A>

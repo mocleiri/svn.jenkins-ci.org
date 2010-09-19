@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ConsistentHash.Hash (Hudson main module 1.376 API)
+ConsistentHash.Hash (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ConsistentHash.Hash (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ConsistentHash.Hash (Hudson main module 1.376 API)";
+        parent.document.title="ConsistentHash.Hash (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -104,7 +104,7 @@ Interface ConsistentHash.Hash&lt;T&gt;</H2>
 Hashes an object to some value.
 
  <p>
- By default, <A HREF="../../hudson/util/ConsistentHash.html" title="class in hudson.util"><CODE>ConsistentHash</CODE></A> uses <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang"><CODE>Object.toString()</CODE></A> on 'T' to
+ By default, <A HREF="../../hudson/util/ConsistentHash.html" title="class in hudson.util"><CODE>ConsistentHash</CODE></A> uses <CODE>Object.toString()</CODE> on 'T' to
  obtain the hash, but that behavior can be changed by providing
  a <A HREF="../../hudson/util/ConsistentHash.Hash.html" title="interface in hudson.util"><CODE>ConsistentHash.Hash</CODE></A> implementation.
 
@@ -130,7 +130,7 @@ Hashes an object to some value.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/util/ConsistentHash.Hash.html#hash(T)">hash</A></B>(<A HREF="../../hudson/util/ConsistentHash.Hash.html" title="type parameter in ConsistentHash.Hash">T</A>&nbsp;t)</CODE>
 
 <BR>
@@ -153,7 +153,7 @@ Hashes an object to some value.
 <A NAME="hash(java.lang.Object)"><!-- --></A><A NAME="hash(T)"><!-- --></A><H3>
 hash</H3>
 <PRE>
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>hash</B>(<A HREF="../../hudson/util/ConsistentHash.Hash.html" title="type parameter in ConsistentHash.Hash">T</A>&nbsp;t)</PRE>
+java.lang.String <B>hash</B>(<A HREF="../../hudson/util/ConsistentHash.Hash.html" title="type parameter in ConsistentHash.Hash">T</A>&nbsp;t)</PRE>
 <DL>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>t</CODE> - The object to be hashed. Never null.

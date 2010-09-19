@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginManagerListener (Hudson main module 1.376 API)
+PluginManagerListener (Hudson main module 1.377 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-11">
+<META NAME="date" CONTENT="2010-09-19">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManagerListener (Hudson main module 1.376 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManagerListener (Hudson main module 1.376 API)";
+        parent.document.title="PluginManagerListener (Hudson main module 1.377 API)";
     }
 }
 </SCRIPT>
@@ -138,7 +138,7 @@ Receives notification from <A HREF="../../../hudson/maven/agent/PluginManagerInt
             org.apache.maven.plugin.Mojo&nbsp;mojo,
             org.codehaus.plexus.configuration.PlexusConfiguration&nbsp;mergedConfig,
             org.codehaus.plexus.component.configurator.expression.ExpressionEvaluator&nbsp;eval,
-            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A>&nbsp;exception)</CODE>
+            java.lang.Exception&nbsp;exception)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called after the mojo has finished executing.</TD>
@@ -177,16 +177,16 @@ void <B>preExecute</B>(org.apache.maven.project.MavenProject&nbsp;project,
                 org.apache.maven.plugin.Mojo&nbsp;mojo,
                 org.codehaus.plexus.configuration.PlexusConfiguration&nbsp;mergedConfig,
                 org.codehaus.plexus.component.configurator.expression.ExpressionEvaluator&nbsp;eval)
-                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                throws java.io.IOException,
+                       java.lang.InterruptedException</PRE>
 <DL>
 <DD>Called right before <CODE>Mojo.execute()</CODE> is invoked.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>mojo</CODE> - The mojo object to be invoked. All its configuration values have been populated.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -199,9 +199,9 @@ void <B>postExecute</B>(org.apache.maven.project.MavenProject&nbsp;project,
                  org.apache.maven.plugin.Mojo&nbsp;mojo,
                  org.codehaus.plexus.configuration.PlexusConfiguration&nbsp;mergedConfig,
                  org.codehaus.plexus.component.configurator.expression.ExpressionEvaluator&nbsp;eval,
-                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Exception.html?is-external=true" title="class or interface in java.lang">Exception</A>&nbsp;exception)
-                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                 java.lang.Exception&nbsp;exception)
+                 throws java.io.IOException,
+                        java.lang.InterruptedException</PRE>
 <DL>
 <DD>Called after the mojo has finished executing.
 <P>
@@ -211,8 +211,8 @@ void <B>postExecute</B>(org.apache.maven.project.MavenProject&nbsp;project,
       with those error objects.
       If mojo executed successfully, this parameter is null.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -224,16 +224,16 @@ void <B>onReportGenerated</B>(org.apache.maven.reporting.MavenReport&nbsp;report
                        org.apache.maven.plugin.MojoExecution&nbsp;mojoExecution,
                        org.codehaus.plexus.configuration.PlexusConfiguration&nbsp;mergedConfig,
                        org.codehaus.plexus.component.configurator.expression.ExpressionEvaluator&nbsp;eval)
-                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
-                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
+                       throws java.io.IOException,
+                              java.lang.InterruptedException</PRE>
 <DL>
 <DD>Called after a successful execution of <CODE>MavenReport.generate(Sink, Locale)</CODE>.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>report</CODE> - The <CODE>MavenReport</CODE> object that just successfully completed.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
-<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>java.lang.InterruptedException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
