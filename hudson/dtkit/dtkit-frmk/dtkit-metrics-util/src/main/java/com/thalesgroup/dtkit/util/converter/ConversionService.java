@@ -47,20 +47,6 @@ public class ConversionService implements Serializable {
         }
     }
 
-
-    /**
-     * Launches an XSLT conversion from a source to an OutputStream.
-     *
-     * @param xslNamespace the xsl namespace
-     * @param xslName      the xsl name
-     * @param inputFile    the input file
-     * @param outFile      the output file
-     * @throws ConversionException the convert exception
-     */
-    public void convert(Class xslNamespace, String xslName, File inputFile, File outFile) throws ConversionException {
-        convert(new StreamSource(xslNamespace.getResourceAsStream(xslName)), inputFile, outFile);
-    }
-
     /**
      * Launches an XSLT conversion from a source to an OutputStream.
      * This methods uses the net.sf.saxon packages.
@@ -70,7 +56,7 @@ public class ConversionService implements Serializable {
      * @param outFile   the output file
      * @throws ConversionException the convert exception
      */
-    private void convert(StreamSource xslSource, File inputFile, File outFile) throws ConversionException {
+    public void convert(StreamSource xslSource, File inputFile, File outFile) throws ConversionException {
 
         try {
 

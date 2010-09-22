@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -55,12 +56,12 @@ public abstract class InputMetric implements Serializable {
     /**
      * The current input validation errors
      */
-    private List<ValidationError> inputValidationErrors;
+    private List<ValidationError> inputValidationErrors = new ArrayList<ValidationError>();
 
     /**
      * The current output validation errors
      */
-    private List<ValidationError> outputValidationErrors;
+    private List<ValidationError> outputValidationErrors = new ArrayList<ValidationError>();
 
     /**
      * The  name of the current tool
@@ -82,8 +83,9 @@ public abstract class InputMetric implements Serializable {
     public String getToolVersion() {
         return toolVersion;
     }
-    
-    public boolean isDefault(){
+
+    @JsonIgnore
+    public boolean isDefault() {
         return false;
     }
 
@@ -92,18 +94,18 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the label metric
      */
-    @XmlElement
+    @JsonIgnore
     public String getLabel() {
         String label;
         if (getToolVersion() == null) {
             label = getToolName();
-        } else{
+        } else {
             label = getToolName() + "-" + getToolVersion();
         }
-        if (isDefault()){
+        if (isDefault()) {
             label = label + " (default)";
         }
-        
+
         return label;
     }
 
@@ -112,6 +114,7 @@ public abstract class InputMetric implements Serializable {
      *
      * @return the input metric type
      */
+    @JsonIgnore
     public InputMetricType getInputMetricType() {
         return inputMetricType;
     }

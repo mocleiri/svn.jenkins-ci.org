@@ -28,7 +28,9 @@ import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 
+import javax.xml.bind.annotation.XmlType;
 
+@XmlType(name="fpcunit", namespace = "junit")
 public class FPCUnit extends InputMetricXSL {
 
     @Override
@@ -57,7 +59,7 @@ public class FPCUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsd() {
+    public String getInputXsdName() {
         return null;
     }
 

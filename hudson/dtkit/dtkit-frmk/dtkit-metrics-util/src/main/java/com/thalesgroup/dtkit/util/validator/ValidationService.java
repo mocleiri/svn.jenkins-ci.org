@@ -56,12 +56,9 @@ public class ValidationService implements Serializable {
             SchemaFactory schemaFactory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
             schemaFactory.setErrorHandler(handler);
             Schema schemaGrammar = schemaFactory.newSchema(xsdSource);
-            //Resolver resolver = new Resolver();
             Validator schemaValidator = schemaGrammar.newValidator();
-            //schemaValidator.setResourceResolver(resolver);
             schemaValidator.setErrorHandler(handler);
             schemaValidator.validate(new StreamSource(inputXML));
-
             return handler.getErrors();
         }
 
@@ -73,23 +70,6 @@ public class ValidationService implements Serializable {
         }
     }
 
-    /**
-     * Validate an input file against a XSD
-     *
-     * @param xsdNamespace the class of the xsd
-     * @param xsdName      the xsd name
-     * @param inputXML     the input XML file
-     * @return true if the validation succeeded, false otherwise
-     * @throws ValidationException when there is a validation error
-     */
-    public List<ValidationError> processValidation(Class xsdNamespace, String xsdName, File inputXML) throws ValidationException {
-
-        if (xsdName == null) {
-            return new ArrayList<ValidationError>();
-        }
-
-        return processValidation(new StreamSource(xsdNamespace.getResourceAsStream(xsdName)), inputXML);
-    }
 
     /**
      * Validate an input file against a XSD

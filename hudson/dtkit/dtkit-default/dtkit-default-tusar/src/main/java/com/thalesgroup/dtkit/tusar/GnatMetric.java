@@ -28,7 +28,10 @@ import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
+import javax.xml.bind.annotation.XmlType;
 
+
+@XmlType(name="gnatmetric", namespace = "tusar")
 public class GnatMetric  extends InputMetricXSL {
 
     @Override
@@ -57,7 +60,7 @@ public class GnatMetric  extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsd() {
+    public String getInputXsdName() {
         return "gnatmetric-1.0.xsd";
     }
 

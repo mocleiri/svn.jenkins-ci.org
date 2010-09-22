@@ -28,7 +28,10 @@ import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.junit.model.JUnitModel;
 
+import javax.xml.bind.annotation.XmlType;
 
+
+@XmlType(name="tusar", namespace = "junit")
 public class Tusar extends InputMetricXSL {
 
     @Override
@@ -57,7 +60,7 @@ public class Tusar extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsd() {
+    public String getInputXsdName() {
         return null;
     }
 

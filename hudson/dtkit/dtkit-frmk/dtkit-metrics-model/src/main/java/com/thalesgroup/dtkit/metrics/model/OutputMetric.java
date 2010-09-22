@@ -24,6 +24,7 @@
 package com.thalesgroup.dtkit.metrics.model;
 
 import org.codehaus.jackson.annotate.JsonValue;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -47,6 +48,7 @@ public interface OutputMetric {
     @SuppressWarnings("unused")
     public String getVersion();
 
+    @JsonIgnore
     public String getXsd();
 
 

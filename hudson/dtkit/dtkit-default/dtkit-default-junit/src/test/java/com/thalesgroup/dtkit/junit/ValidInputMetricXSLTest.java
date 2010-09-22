@@ -72,13 +72,13 @@ public class ValidInputMetricXSLTest {
             }
 
             //The xsd must exist if it sets
-            if (inputMetricXSL.getInputXsd() != null) {
+            if (inputMetricXSL.getInputXsdName() != null) {
                 try {
-                    new File(inputMetricXSL.getClass().getResource(inputMetricXSL.getInputXsd()).toURI());
+                    new File(inputMetricXSL.getClass().getResource(inputMetricXSL.getInputXsdName()).toURI());
                     Assert.assertTrue(true);
                 }
                 catch (NullPointerException npe) {
-                    Assert.assertTrue(inputMetricXSL.getInputXsd() + " doesn't exist.", false);
+                    Assert.assertTrue(inputMetricXSL.getInputXsdName() + " doesn't exist.", false);
                 }
             }
 

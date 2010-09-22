@@ -32,10 +32,10 @@
        <version>2</version>
     </parent>
 
-    <artifactId>dtkit-frmk</artifactId>
+    <artifactId>dtkit-format</artifactId>
     <version>0.7-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>DTKIT Frmk</name>
+    <name>DTKIT Format</name>
     <url>http://wiki.hudson-ci.org/display/HUDSON/DTKIT</url>
 
     <licenses>
@@ -59,28 +59,8 @@
     </developers>
 
     <modules>
-        <module>dtkit-metrics-model</module>
-        <module>dtkit-metrics-hudson-api</module>
-        <module>dtkit-metrics-util</module>
+        <module>dtkit-junit-model</module>
+        <module>dtkit-tusar-model</module>
     </modules>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
-                <artifactId>dtkit-metrics-model</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
-                <artifactId>dtkit-metrics-util</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
-                <artifactId>dtkit-metrics-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

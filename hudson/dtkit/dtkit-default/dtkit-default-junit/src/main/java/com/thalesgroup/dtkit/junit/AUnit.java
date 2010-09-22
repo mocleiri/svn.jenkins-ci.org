@@ -28,7 +28,10 @@ import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 
+import javax.xml.bind.annotation.XmlType;
 
+
+@XmlType(name="aunit", namespace = "junit")
 public class AUnit extends InputMetricXSL {
 
     @Override
@@ -57,7 +60,7 @@ public class AUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsd() {
+    public String getInputXsdName() {
         return "aunit-1.0.xsd";
     }
 

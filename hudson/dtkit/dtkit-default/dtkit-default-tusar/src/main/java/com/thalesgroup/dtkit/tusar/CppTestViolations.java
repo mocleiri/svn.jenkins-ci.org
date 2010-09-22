@@ -60,7 +60,7 @@ public class CppTestViolations extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsd() {
+    public String getInputXsdName() {
         return null;
     }
 
