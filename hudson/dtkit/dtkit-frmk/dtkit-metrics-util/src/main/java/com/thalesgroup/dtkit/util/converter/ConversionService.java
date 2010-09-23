@@ -75,15 +75,18 @@ public class ConversionService implements Serializable {
             Serializer out = new Serializer();
             out.setOutputProperty(Serializer.Property.METHOD, "xml");
             out.setOutputProperty(Serializer.Property.INDENT, "yes");
-            out.setOutputStream(new FileOutputStream(outFile));
+            FileOutputStream fos = new FileOutputStream(outFile);
+            out.setOutputStream(fos);
 
             // run the conversion
             xsltTransformer.setInitialContextNode(xdmNode);
             xsltTransformer.setDestination(out);
             xsltTransformer.transform();
+
+            fos.close();
         }
-        catch (FileNotFoundException fne) {
-            throw new ConversionException("Error to convert - A file not found", fne);
+        catch (IOException ioe) {
+            throw new ConversionException("Error to convert - A file not found", ioe);
         }
         catch (SaxonApiException sae) {
             throw new ConversionException("Error to convert the input XML document", sae);
