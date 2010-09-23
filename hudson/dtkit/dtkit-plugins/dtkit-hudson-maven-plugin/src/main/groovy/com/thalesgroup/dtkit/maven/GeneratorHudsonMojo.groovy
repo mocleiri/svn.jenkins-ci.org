@@ -53,11 +53,6 @@ public class GeneratorHudsonMojo extends AbstractMojo {
    */
   private List projectClasspathList;
 
-  /**
-   * <i>Maven Internal</i>: List of plugins artifacts
-   * @parameter default-value="${plugin.artifacts}"
-   */
-  private java.util.List pluginArtifacts;
 
 
   public void execute()
@@ -77,14 +72,6 @@ public class GeneratorHudsonMojo extends AbstractMojo {
         }
       }
 
-      for (int i = 0; i < pluginArtifacts.size(); i++) {
-        Artifact artifact = (Artifact) pluginArtifacts.get(i);
-        //Exclude all Hudson plugins
-        if (!"org.jvnet.hudson.plugins".equals(artifact.getGroupId())) {
-          computeClassPathList.add(artifact);
-        }
-      }
-
       //Building a new classloader
       File output = new File(project.getBuild().getOutputDirectory())
       URL[] urls;
@@ -95,9 +82,11 @@ public class GeneratorHudsonMojo extends AbstractMojo {
       else {
         urls = new URL[+computeClassPathList.size()];
       }
+
+
       for (int i = 0; i < computeClassPathList.size(); i++) {
         Artifact artifact = (Artifact) computeClassPathList.get(i);
-        urls[i] = new URL("file:///" + ((Artifact) computeClassPathList.get(i)).getFile().getPath());
+        urls[i] = new URL("file:///" + artifact.getFile().getPath());
       }
       ClassLoader cl = new URLClassLoader(urls, Thread.currentThread().getContextClassLoader());
 
