@@ -24,6 +24,7 @@
 package com.thalesgroup.dtkit.tusar;
 
 import java.io.File;
+import java.util.List;
 
 import com.thalesgroup.dtkit.metrics.model.InputMetricOther;
 import com.thalesgroup.dtkit.metrics.model.InputType;
@@ -31,6 +32,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
 
 public class Gnatcheck extends InputMetricOther{
 
@@ -66,6 +68,7 @@ public class Gnatcheck extends InputMetricOther{
      *          an application Exception to throw when there is an error of conversion
      *          The exception is catch by the API client (as Hudson plugin)
      */
+    @Override
     public  void convert(File inputFile, File outFile) throws ConversionException{
     	GnatcheckParser parser = new GnatcheckParser();
     	parser.convert(inputFile, outFile);
@@ -76,7 +79,7 @@ public class Gnatcheck extends InputMetricOther{
      *
      * @return true if the input file is valid, false otherwise
      */
-
+    @Override
     public  boolean validateInputFile(File inputXMLFile) throws ValidationException{
     	GnatcheckParser parser = new GnatcheckParser();
     	parser.validateInputFile(inputXMLFile);
@@ -88,18 +91,11 @@ public class Gnatcheck extends InputMetricOther{
      *
      * @return true if the input file is valid, false otherwise
      */
-
-    public  boolean validateOutputFile(File inputXMLFile) throws ValidationException{
-    	return true;
-
-    	//return new TusarModel().validateOutputFile(inputXMLFile);
-    }
-
     @Override
-    public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_1_0;
+    public  boolean validateOutputFile(File inputXMLFile) throws ValidationException{
+        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_1_0.validate(inputXMLFile);
+        this.setOutputValidationErrors(errors);
+        return errors.isEmpty();
     }
-
-
 
 }
