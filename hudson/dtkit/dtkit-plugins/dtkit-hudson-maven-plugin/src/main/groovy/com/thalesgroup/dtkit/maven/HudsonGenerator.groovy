@@ -27,28 +27,7 @@ import com.thalesgroup.dtkit.metrics.model.InputMetric;
 
 public class HudsonGenerator{
 
-  public generate(String hudsonType, hudsonDescriptorType, String packageName, InputMetric inputMetric) throws Exception {
-
-     // Where to write the classes
-     File targetDirectory = new File(project.build.directory + "/generated-sources/groovy")
-     if (!targetDirectory.exists()) {
-       targetDirectory.mkdirs();
-     }
-
-     // The directory to write the source to
-     File packageDir = new File(targetDirectory, packageName.replace('.', '/'))
-
-     def buildName;
-     if (inputMetric.getOutputFormatType() != null) {
-       def keyFormat = inputMetric.getOutputFormatType().getKey()
-       keyFormat = keyFormat.substring(0, 1).toUpperCase() + keyFormat.substring(1);
-       buildName = inputMetric.getToolName() + keyFormat + "Hudson" + hudsonType
-     }
-     else {
-       buildName = inputMetric.getToolName() + "Hudson" + hudsonType
-     }
-
-     def classname = buildName.substring(0, 1).toUpperCase() + buildName.substring(1);
+  public String getGeneratedClass(String className, String hudsonType, hudsonDescriptorType, String packageName, InputMetric inputMetric)  {
 
      // Now to create our enum
      def out = []
@@ -64,14 +43,14 @@ public class HudsonGenerator{
      out << "import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.${hudsonDescriptorType};\n"
 
      out << "\n"
-     out << "public class " + classname + " extends ${hudsonType} {\n"
+     out << "public class " + className + " extends ${hudsonType} {\n"
      out << "\n"
 
-     out << "private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + classname + ".DescriptorImpl();\n"
+     out << "private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + className + ".DescriptorImpl();\n"
      out << "\n"
 
      out << "@DataBoundConstructor\n"
-     out << "public " + classname + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n"
+     out << "public " + className + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n"
      out << "  super(pattern, faildedIfNotNew, deleteOutputFiles);\n"
      out << "}\n"
      out << "\n"
@@ -82,14 +61,14 @@ public class HudsonGenerator{
      out << "\n"
 
      out << "@Extension\n"
-     out << "public static class DescriptorImpl  extends ${hudsonDescriptorType}<" + classname + "> {\n"
+     out << "public static class DescriptorImpl  extends ${hudsonDescriptorType}<" + className + "> {\n"
      out << "\n"
 
      out << "  public DescriptorImpl() {\n"
      String classType = inputMetric.getMetaClass().getTheClass().toString();
      classType = classType.substring("class ".length());
      classType = classType + ".class"
-     out << "     super(" + classname + ".class, " + classType + ");\n"
+     out << "     super(" + className + ".class, " + classType + ");\n"
      out << "  }\n"
      out << "\n"
 
@@ -108,9 +87,7 @@ public class HudsonGenerator{
      StringBuilder sb = new StringBuilder()
      out.each { sb.append(it) }
 
-     // Now write the source, ensuring the directory exists first
-     packageDir.mkdirs()
-     new File(packageDir, classname + ".java").write(sb.toString());
+     return sb.toString();
    }
 
 }
