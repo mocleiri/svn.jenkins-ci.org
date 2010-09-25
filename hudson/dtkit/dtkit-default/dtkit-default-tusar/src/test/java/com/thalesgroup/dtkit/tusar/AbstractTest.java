@@ -5,6 +5,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
@@ -40,23 +41,23 @@ public class AbstractTest {
     }
 
 
-    public void convertAndValidate(Class<? extends InputMetricXSL> inputMetricXSLClassType, String inputXMLPath, String expectedResultPath) throws Exception {
+    public void convertAndValidate(Class<? extends InputMetric> inputMetricClassType, String inputXMLPath, String expectedResultPath) throws Exception {
 
-        InputMetricXSL inputMetricXSL = injector.getInstance(inputMetricXSLClassType);        
+        InputMetric inputMetric = injector.getInstance(inputMetricClassType);
 
         File outputXMLFile = File.createTempFile("result", "xml");
         File inputXMLFile = new File(this.getClass().getResource(inputXMLPath).toURI());
 
         //The input file must be valid
-        Assert.assertTrue(inputMetricXSL.validateInputFile(inputXMLFile));
+        Assert.assertTrue(inputMetric.validateInputFile(inputXMLFile));
 
-        inputMetricXSL.convert(inputXMLFile, outputXMLFile);
+        inputMetric.convert(inputXMLFile, outputXMLFile);
         Diff myDiff = new Diff(XSLUtil.readXmlAsString(new File(this.getClass().getResource(expectedResultPath).toURI())), XSLUtil.readXmlAsString(outputXMLFile));
         Assert.assertTrue("XSL transformation did not work" + myDiff, myDiff.similar());
 
         //The generated output file must be valid
-        boolean result = inputMetricXSL.validateOutputFile(outputXMLFile);
-        for (ValidationError validatorError : inputMetricXSL.getOutputValidationErrors()) {
+        boolean result = inputMetric.validateOutputFile(outputXMLFile);
+        for (ValidationError validatorError : inputMetric.getOutputValidationErrors()) {
             System.out.println("[ERROR] " + validatorError.toString());
         }
         Assert.assertTrue(result);
