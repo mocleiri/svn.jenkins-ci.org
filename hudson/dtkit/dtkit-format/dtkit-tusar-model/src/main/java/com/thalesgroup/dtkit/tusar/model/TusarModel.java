@@ -23,13 +23,15 @@
 
 package com.thalesgroup.dtkit.tusar.model;
 
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
+import com.thalesgroup.dtkit.util.validator.ValidationService;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 
@@ -38,7 +40,13 @@ import java.io.Serializable;
 public class TusarModel extends AbstractOutputMetric implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_0 = new TusarModel();
+    public static OutputMetric OUTPUT_TUSAR_1_0 = Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+            bind(ValidationService.class);
+        }
+    }).getInstance(TusarModel.class);
+
 
     @Override
     @XmlElement
@@ -60,7 +68,8 @@ public class TusarModel extends AbstractOutputMetric implements Serializable {
 
     @Override
     @XmlElement
-    public String getXsd() {
+    public String getXsdName() {
         return "xsd/tusar-1.0.xsd";
     }
+
 }
