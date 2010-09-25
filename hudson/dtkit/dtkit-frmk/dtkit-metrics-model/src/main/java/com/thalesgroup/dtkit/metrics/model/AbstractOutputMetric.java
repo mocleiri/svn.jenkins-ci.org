@@ -23,9 +23,24 @@
 
 package com.thalesgroup.dtkit.metrics.model;
 
+import com.google.inject.Inject;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
+import com.thalesgroup.dtkit.util.validator.ValidationException;
+import com.thalesgroup.dtkit.util.validator.ValidationService;
+
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
+import java.util.List;
 
 public abstract class AbstractOutputMetric implements OutputMetric {
+
+    private ValidationService validationService;
+
+    @Inject
+    void set(ValidationService validationService) {
+        this.validationService = validationService;
+    }
 
     static class Adapter extends XmlAdapter<AbstractOutputMetric, OutputMetric> {
         public OutputMetric unmarshal(AbstractOutputMetric v) {
@@ -35,5 +50,10 @@ public abstract class AbstractOutputMetric implements OutputMetric {
         public AbstractOutputMetric marshal(OutputMetric v) {
             return (AbstractOutputMetric) v;
         }
+    }
+
+    @Override
+    public List<ValidationError> validate(File inputXMLFile) throws ValidationException {
+        return validationService.processValidation(new StreamSource(this.getClass().getResourceAsStream(getXsdName())), inputXMLFile);
     }
 }

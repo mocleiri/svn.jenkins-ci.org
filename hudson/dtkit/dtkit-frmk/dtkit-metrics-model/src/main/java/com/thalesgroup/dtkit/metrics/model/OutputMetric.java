@@ -27,6 +27,11 @@ import org.codehaus.jackson.annotate.JsonValue;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.File;
+import java.util.List;
+
+import com.thalesgroup.dtkit.util.validator.ValidationException;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
 
 /**
  * OutputMetric Interface
@@ -49,7 +54,8 @@ public interface OutputMetric {
     public String getVersion();
 
     @JsonIgnore
-    public String getXsd();
+    public String getXsdName();
 
+    public List<ValidationError> validate(File inputXML) throws ValidationException;
 
 }

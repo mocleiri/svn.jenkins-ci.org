@@ -152,7 +152,7 @@ public abstract class InputMetricXSL extends InputMetric {
      */
     @JsonIgnore
     public String getOutputXsd() {
-        return getOutputFormatType().getXsd();
+        return getOutputFormatType().getXsdName();
     }
 
     /**
