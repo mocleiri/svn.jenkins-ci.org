@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-FilePath (Hudson main module 1.377 API)
+FilePath (Hudson main module 1.378 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-19">
+<META NAME="date" CONTENT="2010-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ FilePath (Hudson main module 1.377 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FilePath (Hudson main module 1.377 API)";
+        parent.document.title="FilePath (Hudson main module 1.378 API)";
     }
 }
 </SCRIPT>
@@ -93,25 +93,25 @@ hudson</FONT>
 <BR>
 Class FilePath</H2>
 <PRE>
-java.lang.Object
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../resources/inherit.gif" ALT="extended by "><B>hudson.FilePath</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public final class <B>FilePath</B><DT>extends java.lang.Object<DT>implements java.io.Serializable</DL>
+<DT><PRE>public final class <B>FilePath</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A></DL>
 </PRE>
 
 <P>
-<CODE>File</CODE> like object with remoting support.
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io"><CODE>File</CODE></A> like object with remoting support.
 
  <p>
- Unlike <CODE>File</CODE>, which always implies a file path on the current computer,
+ Unlike <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io"><CODE>File</CODE></A>, which always implies a file path on the current computer,
  <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a file path on a specific slave or the master.
 
- Despite that, <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> can be used much like <CODE>File</CODE>. It exposes
+ Despite that, <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> can be used much like <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io"><CODE>File</CODE></A>. It exposes
  a bunch of operations (and we should add more operations as long as they are
  generally useful), and when invoked against a file on a remote node, <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>
  executes the necessary code remotely, thereby providing semi-transparent file
@@ -224,21 +224,21 @@ java.lang.Object
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(java.io.File)">FilePath</A></B>(java.io.File&nbsp;localPath)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(java.io.File)">FilePath</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;localPath)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To create <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents a "local" path.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)">FilePath</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base,
-         java.lang.String&nbsp;rel)</CODE>
+         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a path starting with a base location.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../hudson/FilePath.html#FilePath(hudson.remoting.VirtualChannel, java.lang.String)">FilePath</A></B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
-         java.lang.String&nbsp;remote)</CODE>
+         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;remote)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents a path on the given node.</TD>
@@ -267,7 +267,7 @@ java.lang.Object
 <TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" SUMMARY="">
 <TR ALIGN="right" VALIGN="">
 <TD NOWRAP><FONT SIZE="-1">
-<CODE>&lt;V,E extends java.lang.Throwable&gt; 
+<CODE>&lt;V,E extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&gt; 
 <BR>
 V</CODE></FONT></TD>
 </TR>
@@ -315,17 +315,17 @@ V</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#archive(hudson.util.io.ArchiverFactory, java.io.OutputStream, hudson.util.DirScanner)">archive</A></B>(<A HREF="../hudson/util/io/ArchiverFactory.html" title="class in hudson.util.io">ArchiverFactory</A>&nbsp;factory,
-        java.io.OutputStream&nbsp;os,
+        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
         <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util">DirScanner</A>&nbsp;scanner)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Archives this directory into the specified archive format, to the given <CODE>OutputStream</CODE>, by using
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Archives this directory into the specified archive format, to the given <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A>, by using
  <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util"><CODE>DirScanner</CODE></A> to choose what files to include.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#child(java.lang.String)">child</A></B>(java.lang.String&nbsp;rel)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#child(java.lang.String)">child</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The same as <A HREF="../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><CODE>FilePath(FilePath,String)</CODE></A> but more OO.</TD>
@@ -357,15 +357,15 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(java.io.InputStream)">copyFrom</A></B>(java.io.InputStream&nbsp;in)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(java.io.InputStream)">copyFrom</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the content of this file by the data from the given <CODE>InputStream</CODE>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replaces the content of this file by the data from the given <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io"><CODE>InputStream</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(java.net.URL)">copyFrom</A></B>(java.net.URL&nbsp;url)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyFrom(java.net.URL)">copyFrom</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;url)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads the URL on the current VM, and writes all the data to this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>
@@ -382,7 +382,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#copyRecursiveTo(java.lang.String, hudson.FilePath)">copyRecursiveTo</A></B>(java.lang.String&nbsp;fileMask,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyRecursiveTo(java.lang.String, hudson.FilePath)">copyRecursiveTo</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileMask,
                 <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)</CODE>
 
 <BR>
@@ -391,8 +391,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#copyRecursiveTo(java.lang.String, java.lang.String, hudson.FilePath)">copyRecursiveTo</A></B>(java.lang.String&nbsp;fileMask,
-                java.lang.String&nbsp;excludes,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyRecursiveTo(java.lang.String, java.lang.String, hudson.FilePath)">copyRecursiveTo</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileMask,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;excludes,
                 <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)</CODE>
 
 <BR>
@@ -409,10 +409,10 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#copyTo(java.io.OutputStream)">copyTo</A></B>(java.io.OutputStream&nbsp;os)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#copyTo(java.io.OutputStream)">copyTo</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends the contents of this file into the given <CODE>OutputStream</CODE>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sends the contents of this file into the given <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -434,8 +434,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#createTempDir(java.lang.String, java.lang.String)">createTempDir</A></B>(java.lang.String&nbsp;prefix,
-              java.lang.String&nbsp;suffix)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#createTempDir(java.lang.String, java.lang.String)">createTempDir</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a temporary directory inside the directory represented by 'this'</TD>
@@ -443,8 +443,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#createTempFile(java.lang.String, java.lang.String)">createTempFile</A></B>(java.lang.String&nbsp;prefix,
-               java.lang.String&nbsp;suffix)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#createTempFile(java.lang.String, java.lang.String)">createTempFile</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a temporary file in the directory that this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> object designates.</TD>
@@ -452,9 +452,9 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#createTextTempFile(java.lang.String, java.lang.String, java.lang.String)">createTextTempFile</A></B>(java.lang.String&nbsp;prefix,
-                   java.lang.String&nbsp;suffix,
-                   java.lang.String&nbsp;contents)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#createTextTempFile(java.lang.String, java.lang.String, java.lang.String)">createTextTempFile</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;contents)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a temporary file in this directory and set the contents by the
@@ -463,9 +463,9 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#createTextTempFile(java.lang.String, java.lang.String, java.lang.String, boolean)">createTextTempFile</A></B>(java.lang.String&nbsp;prefix,
-                   java.lang.String&nbsp;suffix,
-                   java.lang.String&nbsp;contents,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#createTextTempFile(java.lang.String, java.lang.String, java.lang.String, boolean)">createTextTempFile</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;contents,
                    boolean&nbsp;inThisDirectory)</CODE>
 
 <BR>
@@ -475,7 +475,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#createZipArchive(java.io.OutputStream)">createZipArchive</A></B>(java.io.OutputStream&nbsp;os)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#createZipArchive(java.io.OutputStream)">createZipArchive</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.315. Use <A HREF="../hudson/FilePath.html#zip(java.io.OutputStream)"><CODE>zip(OutputStream)</CODE></A> that has more consistent name.</I></TD>
@@ -483,8 +483,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#createZipArchive(java.io.OutputStream, java.lang.String)">createZipArchive</A></B>(java.io.OutputStream&nbsp;os,
-                 java.lang.String&nbsp;glob)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#createZipArchive(java.io.OutputStream, java.lang.String)">createZipArchive</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.315
@@ -516,7 +516,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#digest()">digest</A></B>()</CODE>
 
 <BR>
@@ -525,7 +525,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;o)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#equals(java.lang.Object)">equals</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;o)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -540,7 +540,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#getBaseName()">getBaseName</A></B>()</CODE>
 
 <BR>
@@ -556,7 +556,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#getName()">getName</A></B>()</CODE>
 
 <BR>
@@ -572,7 +572,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#getRemote()">getRemote</A></B>()</CODE>
 
 <BR>
@@ -589,9 +589,9 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)">installIfNecessaryFrom</A></B>(java.net.URL&nbsp;archive,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)">installIfNecessaryFrom</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;archive,
                        <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-                       java.lang.String&nbsp;message)</CODE>
+                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;message)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given a tgz/zip file, extracts it to the given target directory, if necessary.</TD>
@@ -631,7 +631,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#list()">list</A></B>()</CODE>
 
 <BR>
@@ -639,23 +639,23 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#list(java.io.FileFilter)">list</A></B>(java.io.FileFilter&nbsp;filter)</CODE>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#list(java.io.FileFilter)">list</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileFilter.html?is-external=true" title="class or interface in java.io">FileFilter</A>&nbsp;filter)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up files in this directory, just like <CODE>File.listFiles(FileFilter)</CODE>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up files in this directory, just like <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true#listFiles(java.io.FileFilter)" title="class or interface in java.io"><CODE>File.listFiles(FileFilter)</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>[]</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#list(java.lang.String)">list</A></B>(java.lang.String&nbsp;includes)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#list(java.lang.String)">list</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;includes)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List up files in this directory that matches the given Ant-style filter.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#listDirectories()">listDirectories</A></B>()</CODE>
 
 <BR>
@@ -687,7 +687,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.io.InputStream</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#read()">read</A></B>()</CODE>
 
 <BR>
@@ -695,7 +695,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#readToString()">readToString</A></B>()</CODE>
 
 <BR>
@@ -712,7 +712,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#sibling(java.lang.String)">sibling</A></B>(java.lang.String&nbsp;rel)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#sibling(java.lang.String)">sibling</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rel)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>getParent().child(rel)</code>.</TD>
@@ -720,7 +720,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#tar(java.io.OutputStream, hudson.util.DirScanner)">tar</A></B>(java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#tar(java.io.OutputStream, hudson.util.DirScanner)">tar</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
     <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util">DirScanner</A>&nbsp;scanner)</CODE>
 
 <BR>
@@ -729,8 +729,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#tar(java.io.OutputStream, java.io.FileFilter)">tar</A></B>(java.io.OutputStream&nbsp;out,
-    java.io.FileFilter&nbsp;filter)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#tar(java.io.OutputStream, java.io.FileFilter)">tar</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileFilter.html?is-external=true" title="class or interface in java.io">FileFilter</A>&nbsp;filter)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -738,15 +738,15 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#tar(java.io.OutputStream, java.lang.String)">tar</A></B>(java.io.OutputStream&nbsp;out,
-    java.lang.String&nbsp;glob)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#tar(java.io.OutputStream, java.lang.String)">tar</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes files in 'this' directory to a tar stream.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#toString()">toString</A></B>()</CODE>
 
 <BR>
@@ -762,7 +762,7 @@ V</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.net.URI</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#toURI()">toURI</A></B>()</CODE>
 
 <BR>
@@ -781,7 +781,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)">untarFrom</A></B>(java.io.InputStream&nbsp;_in,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)">untarFrom</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;_in,
           <A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>&nbsp;compression)</CODE>
 
 <BR>
@@ -798,15 +798,15 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#unzipFrom(java.io.InputStream)">unzipFrom</A></B>(java.io.InputStream&nbsp;_in)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#unzipFrom(java.io.InputStream)">unzipFrom</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;_in)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reads the given InputStream as a zip file and extracts it into this directory.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)">validateAntFileMask</A></B>(java.lang.String&nbsp;fileMasks)</CODE>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)">validateAntFileMask</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileMasks)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validates the ant file mask (like "foo/bar/*.txt, zot/*.jar")
@@ -816,7 +816,7 @@ V</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(hudson.FilePath, java.lang.String)">validateFileMask</A></B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;pathOrNull,
-                 java.lang.String&nbsp;value)</CODE>
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shortcut for <A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)"><CODE>validateFileMask(String)</CODE></A> in case the left-hand side can be null.</TD>
@@ -824,7 +824,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)">validateFileMask</A></B>(java.lang.String&nbsp;value)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)">validateFileMask</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Short for <code>validateFileMask(value,true)</code></TD>
@@ -832,7 +832,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String, boolean)">validateFileMask</A></B>(java.lang.String&nbsp;value,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String, boolean)">validateFileMask</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value,
                  boolean&nbsp;errorIfNotExist)</CODE>
 
 <BR>
@@ -841,7 +841,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String)">validateRelativeDirectory</A></B>(java.lang.String&nbsp;value)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String)">validateRelativeDirectory</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -849,7 +849,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String, boolean)">validateRelativeDirectory</A></B>(java.lang.String&nbsp;value,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativeDirectory(java.lang.String, boolean)">validateRelativeDirectory</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value,
                           boolean&nbsp;errorIfNotExist)</CODE>
 
 <BR>
@@ -858,7 +858,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)">validateRelativePath</A></B>(java.lang.String&nbsp;value,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)">validateRelativePath</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value,
                      boolean&nbsp;errorIfNotExist,
                      boolean&nbsp;expectingFile)</CODE>
 
@@ -868,14 +868,14 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#withSuffix(java.lang.String)">withSuffix</A></B>(java.lang.String&nbsp;suffix)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#withSuffix(java.lang.String)">withSuffix</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> by adding the given suffix to this path name.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;java.io.OutputStream</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../hudson/FilePath.html#write()">write</A></B>()</CODE>
 
 <BR>
@@ -884,8 +884,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#write(java.lang.String, java.lang.String)">write</A></B>(java.lang.String&nbsp;content,
-      java.lang.String&nbsp;encoding)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#write(java.lang.String, java.lang.String)">write</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;content,
+      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;encoding)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overwrites this file by placing the given String as the content.</TD>
@@ -893,7 +893,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream)">zip</A></B>(java.io.OutputStream&nbsp;os)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream)">zip</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a zip file from this directory or a file and sends that to the given output stream.</TD>
@@ -901,7 +901,7 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;int</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream, hudson.util.DirScanner)">zip</A></B>(java.io.OutputStream&nbsp;out,
+<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream, hudson.util.DirScanner)">zip</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
     <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util">DirScanner</A>&nbsp;scanner)</CODE>
 
 <BR>
@@ -910,8 +910,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream, java.io.FileFilter)">zip</A></B>(java.io.OutputStream&nbsp;os,
-    java.io.FileFilter&nbsp;filter)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream, java.io.FileFilter)">zip</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
+    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileFilter.html?is-external=true" title="class or interface in java.io">FileFilter</A>&nbsp;filter)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a zip file from this directory by using the specified filter,
@@ -920,8 +920,8 @@ V</CODE></FONT></TD>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream, java.lang.String)">zip</A></B>(java.io.OutputStream&nbsp;os,
-    java.lang.String&nbsp;glob)</CODE>
+<TD><CODE><B><A HREF="../hudson/FilePath.html#zip(java.io.OutputStream, java.lang.String)">zip</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
+    <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a zip file from this directory by only including the files that match the given glob.</TD>
@@ -930,10 +930,10 @@ V</CODE></FONT></TD>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+<TD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -972,7 +972,7 @@ public static int <B>SIDE_BUFFER_SIZE</B></PRE>
 FilePath</H3>
 <PRE>
 public <B>FilePath</B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="interface in hudson.remoting">VirtualChannel</A>&nbsp;channel,
-                java.lang.String&nbsp;remote)</PRE>
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;remote)</PRE>
 <DL>
 <DD>Creates a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents a path on the given node.
 <P>
@@ -985,7 +985,7 @@ public <B>FilePath</B>(<A HREF="../hudson/remoting/VirtualChannel.html" title="i
 <A NAME="FilePath(java.io.File)"><!-- --></A><H3>
 FilePath</H3>
 <PRE>
-public <B>FilePath</B>(java.io.File&nbsp;localPath)</PRE>
+public <B>FilePath</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;localPath)</PRE>
 <DL>
 <DD>To create <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> that represents a "local" path.
 
@@ -1000,7 +1000,7 @@ public <B>FilePath</B>(java.io.File&nbsp;localPath)</PRE>
 FilePath</H3>
 <PRE>
 public <B>FilePath</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;base,
-                java.lang.String&nbsp;rel)</PRE>
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rel)</PRE>
 <DL>
 <DD>Construct a path starting with a base location.
 <P>
@@ -1021,7 +1021,7 @@ public <B>FilePath</B>(<A HREF="../hudson/FilePath.html" title="class in hudson"
 <A NAME="getRemote()"><!-- --></A><H3>
 getRemote</H3>
 <PRE>
-public java.lang.String <B>getRemote</B>()</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getRemote</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -1035,9 +1035,9 @@ public java.lang.String <B>getRemote</B>()</PRE>
 <A NAME="createZipArchive(java.io.OutputStream)"><!-- --></A><H3>
 createZipArchive</H3>
 <PRE>
-public void <B>createZipArchive</B>(java.io.OutputStream&nbsp;os)
-                      throws java.io.IOException,
-                             java.lang.InterruptedException</PRE>
+public void <B>createZipArchive</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os)
+                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.315. Use <A HREF="../hudson/FilePath.html#zip(java.io.OutputStream)"><CODE>zip(OutputStream)</CODE></A> that has more consistent name.</I>
 <P>
@@ -1049,8 +1049,8 @@ public void <B>createZipArchive</B>(java.io.OutputStream&nbsp;os)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1058,9 +1058,9 @@ public void <B>createZipArchive</B>(java.io.OutputStream&nbsp;os)
 <A NAME="zip(java.io.OutputStream)"><!-- --></A><H3>
 zip</H3>
 <PRE>
-public void <B>zip</B>(java.io.OutputStream&nbsp;os)
-         throws java.io.IOException,
-                java.lang.InterruptedException</PRE>
+public void <B>zip</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os)
+         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a zip file from this directory or a file and sends that to the given output stream.
 <P>
@@ -1070,8 +1070,8 @@ public void <B>zip</B>(java.io.OutputStream&nbsp;os)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1079,10 +1079,10 @@ public void <B>zip</B>(java.io.OutputStream&nbsp;os)
 <A NAME="zip(java.io.OutputStream, java.io.FileFilter)"><!-- --></A><H3>
 zip</H3>
 <PRE>
-public void <B>zip</B>(java.io.OutputStream&nbsp;os,
-                java.io.FileFilter&nbsp;filter)
-         throws java.io.IOException,
-                java.lang.InterruptedException</PRE>
+public void <B>zip</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileFilter.html?is-external=true" title="class or interface in java.io">FileFilter</A>&nbsp;filter)
+         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a zip file from this directory by using the specified filter,
  and sends the result to the given output stream.
@@ -1093,8 +1093,8 @@ public void <B>zip</B>(java.io.OutputStream&nbsp;os,
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>filter</CODE> - Must be serializable since it may be executed remotely. Can be null to add all files.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.315</DD>
 </DL>
 </DD>
@@ -1104,10 +1104,10 @@ public void <B>zip</B>(java.io.OutputStream&nbsp;os,
 <A NAME="createZipArchive(java.io.OutputStream, java.lang.String)"><!-- --></A><H3>
 createZipArchive</H3>
 <PRE>
-public void <B>createZipArchive</B>(java.io.OutputStream&nbsp;os,
-                             java.lang.String&nbsp;glob)
-                      throws java.io.IOException,
-                             java.lang.InterruptedException</PRE>
+public void <B>createZipArchive</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob)
+                      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;<I>as of 1.315
       Use <A HREF="../hudson/FilePath.html#zip(java.io.OutputStream, java.lang.String)"><CODE>zip(OutputStream,String)</CODE></A> that has more consistent name.</I>
@@ -1121,8 +1121,8 @@ public void <B>createZipArchive</B>(java.io.OutputStream&nbsp;os,
 <DT><B>Parameters:</B><DD><CODE>glob</CODE> - Ant style glob, like "**&#x2F;*.xml". If empty or null, this method
       works like <A HREF="../hudson/FilePath.html#createZipArchive(java.io.OutputStream)"><CODE>createZipArchive(OutputStream)</CODE></A>
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.129</DD>
 </DL>
 </DD>
@@ -1132,10 +1132,10 @@ public void <B>createZipArchive</B>(java.io.OutputStream&nbsp;os,
 <A NAME="zip(java.io.OutputStream, java.lang.String)"><!-- --></A><H3>
 zip</H3>
 <PRE>
-public void <B>zip</B>(java.io.OutputStream&nbsp;os,
-                java.lang.String&nbsp;glob)
-         throws java.io.IOException,
-                java.lang.InterruptedException</PRE>
+public void <B>zip</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob)
+         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a zip file from this directory by only including the files that match the given glob.
 <P>
@@ -1146,8 +1146,8 @@ public void <B>zip</B>(java.io.OutputStream&nbsp;os,
 <DT><B>Parameters:</B><DD><CODE>glob</CODE> - Ant style glob, like "**&#x2F;*.xml". If empty or null, this method
       works like <A HREF="../hudson/FilePath.html#createZipArchive(java.io.OutputStream)"><CODE>createZipArchive(OutputStream)</CODE></A>
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.315</DD>
 </DL>
 </DD>
@@ -1157,10 +1157,10 @@ public void <B>zip</B>(java.io.OutputStream&nbsp;os,
 <A NAME="zip(java.io.OutputStream, hudson.util.DirScanner)"><!-- --></A><H3>
 zip</H3>
 <PRE>
-public int <B>zip</B>(java.io.OutputStream&nbsp;out,
+public int <B>zip</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util">DirScanner</A>&nbsp;scanner)
-        throws java.io.IOException,
-               java.lang.InterruptedException</PRE>
+        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Uses the given scanner on 'this' directory to list up files and then archive it to a zip stream.
 <P>
@@ -1170,8 +1170,8 @@ public int <B>zip</B>(java.io.OutputStream&nbsp;out,
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1180,12 +1180,12 @@ public int <B>zip</B>(java.io.OutputStream&nbsp;out,
 archive</H3>
 <PRE>
 public int <B>archive</B>(<A HREF="../hudson/util/io/ArchiverFactory.html" title="class in hudson.util.io">ArchiverFactory</A>&nbsp;factory,
-                   java.io.OutputStream&nbsp;os,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os,
                    <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util">DirScanner</A>&nbsp;scanner)
-            throws java.io.IOException,
-                   java.lang.InterruptedException</PRE>
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
-<DD>Archives this directory into the specified archive format, to the given <CODE>OutputStream</CODE>, by using
+<DD>Archives this directory into the specified archive format, to the given <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A>, by using
  <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util"><CODE>DirScanner</CODE></A> to choose what files to include.
 <P>
 <DD><DL>
@@ -1196,8 +1196,8 @@ public int <B>archive</B>(<A HREF="../hudson/util/io/ArchiverFactory.html" title
 <DT><B>Returns:</B><DD>number of files/directories archived. This is only really useful to check for a situation where nothing
       is archived.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1206,8 +1206,8 @@ public int <B>archive</B>(<A HREF="../hudson/util/io/ArchiverFactory.html" title
 unzip</H3>
 <PRE>
 public void <B>unzip</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-           throws java.io.IOException,
-                  java.lang.InterruptedException</PRE>
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>When this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a zip file, extracts that zip file.
 <P>
@@ -1217,8 +1217,8 @@ public void <B>unzip</B>(<A HREF="../hudson/FilePath.html" title="class in hudso
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>target</CODE> - Target directory to expand files to. All the necessary directories will be created.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.248</DD>
 <DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#unzipFrom(java.io.InputStream)"><CODE>unzipFrom(InputStream)</CODE></A></DL>
 </DD>
@@ -1230,8 +1230,8 @@ untar</H3>
 <PRE>
 public void <B>untar</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target,
                   <A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>&nbsp;compression)
-           throws java.io.IOException,
-                  java.lang.InterruptedException</PRE>
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>When this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a tar file, extracts that tar file.
 <P>
@@ -1241,8 +1241,8 @@ public void <B>untar</B>(<A HREF="../hudson/FilePath.html" title="class in hudso
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>target</CODE> - Target directory to expand files to. All the necessary directories will be created.<DD><CODE>compression</CODE> - Compression mode of this tar file.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.292</DD>
 <DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)"><CODE>untarFrom(InputStream, TarCompression)</CODE></A></DL>
 </DD>
@@ -1252,9 +1252,9 @@ public void <B>untar</B>(<A HREF="../hudson/FilePath.html" title="class in hudso
 <A NAME="unzipFrom(java.io.InputStream)"><!-- --></A><H3>
 unzipFrom</H3>
 <PRE>
-public void <B>unzipFrom</B>(java.io.InputStream&nbsp;_in)
-               throws java.io.IOException,
-                      java.lang.InterruptedException</PRE>
+public void <B>unzipFrom</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;_in)
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Reads the given InputStream as a zip file and extracts it into this directory.
 <P>
@@ -1264,8 +1264,8 @@ public void <B>unzipFrom</B>(java.io.InputStream&nbsp;_in)
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>_in</CODE> - The stream will be closed by this method after it's fully read.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.283</DD>
 <DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#unzip(hudson.FilePath)"><CODE>unzip(FilePath)</CODE></A></DL>
 </DD>
@@ -1276,8 +1276,8 @@ public void <B>unzipFrom</B>(java.io.InputStream&nbsp;_in)
 absolutize</H3>
 <PRE>
 public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>absolutize</B>()
-                    throws java.io.IOException,
-                           java.lang.InterruptedException</PRE>
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Absolutizes this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> and returns the new one.
 <P>
@@ -1287,8 +1287,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1296,10 +1296,10 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <A NAME="equals(java.lang.Object)"><!-- --></A><H3>
 equals</H3>
 <PRE>
-public boolean <B>equals</B>(java.lang.Object&nbsp;o)</PRE>
+public boolean <B>equals</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;o)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A></CODE> in class <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -1313,7 +1313,7 @@ hashCode</H3>
 public int <B>hashCode</B>()</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE>hashCode</CODE> in class <CODE>java.lang.Object</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A></CODE> in class <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -1324,10 +1324,10 @@ public int <B>hashCode</B>()</PRE>
 <A NAME="untarFrom(java.io.InputStream, hudson.FilePath.TarCompression)"><!-- --></A><H3>
 untarFrom</H3>
 <PRE>
-public void <B>untarFrom</B>(java.io.InputStream&nbsp;_in,
+public void <B>untarFrom</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;_in,
                       <A HREF="../hudson/FilePath.TarCompression.html" title="enum in hudson">FilePath.TarCompression</A>&nbsp;compression)
-               throws java.io.IOException,
-                      java.lang.InterruptedException</PRE>
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Reads the given InputStream as a tar file and extracts it into this directory.
 <P>
@@ -1337,8 +1337,8 @@ public void <B>untarFrom</B>(java.io.InputStream&nbsp;_in,
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>_in</CODE> - The stream will be closed by this method after it's fully read.<DD><CODE>compression</CODE> - The compression method in use.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.292</DD>
 </DL>
 </DD>
@@ -1348,11 +1348,11 @@ public void <B>untarFrom</B>(java.io.InputStream&nbsp;_in,
 <A NAME="installIfNecessaryFrom(java.net.URL, hudson.model.TaskListener, java.lang.String)"><!-- --></A><H3>
 installIfNecessaryFrom</H3>
 <PRE>
-public boolean <B>installIfNecessaryFrom</B>(java.net.URL&nbsp;archive,
+public boolean <B>installIfNecessaryFrom</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;archive,
                                       <A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener,
-                                      java.lang.String&nbsp;message)
-                               throws java.io.IOException,
-                                      java.lang.InterruptedException</PRE>
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;message)
+                               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Given a tgz/zip file, extracts it to the given target directory, if necessary.
 
@@ -1373,13 +1373,13 @@ public boolean <B>installIfNecessaryFrom</B>(java.net.URL&nbsp;archive,
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>archive</CODE> - The resource that represents the tgz/zip file. This URL must support the "Last-Modified" header.
-      (Most common usage is to get this from <CODE>ClassLoader.getResource(String)</CODE>)<DD><CODE>listener</CODE> - If non-null, a message will be printed to this listener once this method decides to
+      (Most common usage is to get this from <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true#getResource(java.lang.String)" title="class or interface in java.lang"><CODE>ClassLoader.getResource(String)</CODE></A>)<DD><CODE>listener</CODE> - If non-null, a message will be printed to this listener once this method decides to
       extract an archive.
 <DT><B>Returns:</B><DD>true if the archive was extracted. false if the extraction was skipped because the target directory
       was considered up to date.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.299</DD>
 </DL>
 </DD>
@@ -1389,9 +1389,9 @@ public boolean <B>installIfNecessaryFrom</B>(java.net.URL&nbsp;archive,
 <A NAME="copyFrom(java.net.URL)"><!-- --></A><H3>
 copyFrom</H3>
 <PRE>
-public void <B>copyFrom</B>(java.net.URL&nbsp;url)
-              throws java.io.IOException,
-                     java.lang.InterruptedException</PRE>
+public void <B>copyFrom</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;url)
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Reads the URL on the current VM, and writes all the data to this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>
  (this is different from resolving URL remotely.)
@@ -1402,8 +1402,8 @@ public void <B>copyFrom</B>(java.net.URL&nbsp;url)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.293</DD>
 </DL>
 </DD>
@@ -1413,11 +1413,11 @@ public void <B>copyFrom</B>(java.net.URL&nbsp;url)
 <A NAME="copyFrom(java.io.InputStream)"><!-- --></A><H3>
 copyFrom</H3>
 <PRE>
-public void <B>copyFrom</B>(java.io.InputStream&nbsp;in)
-              throws java.io.IOException,
-                     java.lang.InterruptedException</PRE>
+public void <B>copyFrom</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;in)
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
-<DD>Replaces the content of this file by the data from the given <CODE>InputStream</CODE>.
+<DD>Replaces the content of this file by the data from the given <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io"><CODE>InputStream</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -1425,8 +1425,8 @@ public void <B>copyFrom</B>(java.io.InputStream&nbsp;in)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.293</DD>
 </DL>
 </DD>
@@ -1437,8 +1437,8 @@ public void <B>copyFrom</B>(java.io.InputStream&nbsp;in)
 copyFrom</H3>
 <PRE>
 public void <B>copyFrom</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;src)
-              throws java.io.IOException,
-                     java.lang.InterruptedException</PRE>
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Conveniene method to call <A HREF="../hudson/FilePath.html#copyTo(hudson.FilePath)"><CODE>copyTo(FilePath)</CODE></A>.
 <P>
@@ -1448,8 +1448,8 @@ public void <B>copyFrom</B>(<A HREF="../hudson/FilePath.html" title="class in hu
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.311</DD>
 </DL>
 </DD>
@@ -1460,8 +1460,8 @@ public void <B>copyFrom</B>(<A HREF="../hudson/FilePath.html" title="class in hu
 copyFrom</H3>
 <PRE>
 public void <B>copyFrom</B>(org.apache.commons.fileupload.FileItem&nbsp;file)
-              throws java.io.IOException,
-                     java.lang.InterruptedException</PRE>
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Place the data from <CODE>FileItem</CODE> into the file location specified by this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> object.
 <P>
@@ -1471,8 +1471,8 @@ public void <B>copyFrom</B>(org.apache.commons.fileupload.FileItem&nbsp;file)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1481,8 +1481,8 @@ public void <B>copyFrom</B>(org.apache.commons.fileupload.FileItem&nbsp;file)
 act</H3>
 <PRE>
 public &lt;T&gt; T <B>act</B>(<A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>&lt;T&gt;&nbsp;callable)
-      throws java.io.IOException,
-             java.lang.InterruptedException</PRE>
+      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Executes some program on the machine that this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> exists,
  so that one can perform local file operations.
@@ -1493,8 +1493,8 @@ public &lt;T&gt; T <B>act</B>(<A HREF="../hudson/FilePath.FileCallable.html" tit
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1503,8 +1503,8 @@ public &lt;T&gt; T <B>act</B>(<A HREF="../hudson/FilePath.FileCallable.html" tit
 actAsync</H3>
 <PRE>
 public &lt;T&gt; <A HREF="../hudson/remoting/Future.html" title="interface in hudson.remoting">Future</A>&lt;T&gt; <B>actAsync</B>(<A HREF="../hudson/FilePath.FileCallable.html" title="interface in hudson">FilePath.FileCallable</A>&lt;T&gt;&nbsp;callable)
-                   throws java.io.IOException,
-                          java.lang.InterruptedException</PRE>
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Executes some program on the machine that this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> exists,
  so that one can perform local file operations.
@@ -1515,8 +1515,8 @@ public &lt;T&gt; <A HREF="../hudson/remoting/Future.html" title="interface in hu
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1524,10 +1524,10 @@ public &lt;T&gt; <A HREF="../hudson/remoting/Future.html" title="interface in hu
 <A NAME="act(hudson.remoting.Callable)"><!-- --></A><H3>
 act</H3>
 <PRE>
-public &lt;V,E extends java.lang.Throwable&gt; V <B>act</B>(<A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)
-      throws java.io.IOException,
-             java.lang.InterruptedException,
-             E extends java.lang.Throwable</PRE>
+public &lt;V,E extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A>&gt; V <B>act</B>(<A HREF="../hudson/remoting/Callable.html" title="interface in hudson.remoting">Callable</A>&lt;V,E&gt;&nbsp;callable)
+      throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A>,
+             E extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></PRE>
 <DL>
 <DD>Executes some program on the machine that this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> exists,
  so that one can perform local file operations.
@@ -1538,9 +1538,9 @@ public &lt;V,E extends java.lang.Throwable&gt; V <B>act</B>(<A HREF="../hudson/r
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE>
-<DD><CODE>E extends java.lang.Throwable</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE>
+<DD><CODE>E extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1548,9 +1548,9 @@ public &lt;V,E extends java.lang.Throwable&gt; V <B>act</B>(<A HREF="../hudson/r
 <A NAME="toURI()"><!-- --></A><H3>
 toURI</H3>
 <PRE>
-public java.net.URI <B>toURI</B>()
-                   throws java.io.IOException,
-                          java.lang.InterruptedException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/net/URI.html?is-external=true" title="class or interface in java.net">URI</A> <B>toURI</B>()
+          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Converts this file to the URI, relative to the machine
  on which this file is available.
@@ -1561,8 +1561,8 @@ public java.net.URI <B>toURI</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1571,8 +1571,8 @@ public java.net.URI <B>toURI</B>()
 mkdirs</H3>
 <PRE>
 public void <B>mkdirs</B>()
-            throws java.io.IOException,
-                   java.lang.InterruptedException</PRE>
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates this directory.
 <P>
@@ -1582,8 +1582,8 @@ public void <B>mkdirs</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1592,8 +1592,8 @@ public void <B>mkdirs</B>()
 deleteRecursive</H3>
 <PRE>
 public void <B>deleteRecursive</B>()
-                     throws java.io.IOException,
-                            java.lang.InterruptedException</PRE>
+                     throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Deletes this directory, including all its contents recursively.
 <P>
@@ -1603,8 +1603,8 @@ public void <B>deleteRecursive</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1613,8 +1613,8 @@ public void <B>deleteRecursive</B>()
 deleteContents</H3>
 <PRE>
 public void <B>deleteContents</B>()
-                    throws java.io.IOException,
-                           java.lang.InterruptedException</PRE>
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Deletes all the contents of this directory, but not the directory itself
 <P>
@@ -1624,8 +1624,8 @@ public void <B>deleteContents</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1633,7 +1633,7 @@ public void <B>deleteContents</B>()
 <A NAME="getBaseName()"><!-- --></A><H3>
 getBaseName</H3>
 <PRE>
-public java.lang.String <B>getBaseName</B>()</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getBaseName</B>()</PRE>
 <DL>
 <DD>Gets the file name portion except the extension.
 
@@ -1651,7 +1651,7 @@ public java.lang.String <B>getBaseName</B>()</PRE>
 <A NAME="getName()"><!-- --></A><H3>
 getName</H3>
 <PRE>
-public java.lang.String <B>getName</B>()</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getName</B>()</PRE>
 <DL>
 <DD>Gets just the file name portion.
 
@@ -1669,7 +1669,7 @@ public java.lang.String <B>getName</B>()</PRE>
 <A NAME="sibling(java.lang.String)"><!-- --></A><H3>
 sibling</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>sibling</B>(java.lang.String&nbsp;rel)</PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>sibling</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rel)</PRE>
 <DL>
 <DD>Short for <code>getParent().child(rel)</code>. Useful for getting other files in the same directory.
 <P>
@@ -1685,7 +1685,7 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <A NAME="withSuffix(java.lang.String)"><!-- --></A><H3>
 withSuffix</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>withSuffix</B>(java.lang.String&nbsp;suffix)</PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>withSuffix</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</PRE>
 <DL>
 <DD>Returns a <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> by adding the given suffix to this path name.
 <P>
@@ -1701,7 +1701,7 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <A NAME="child(java.lang.String)"><!-- --></A><H3>
 child</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>child</B>(java.lang.String&nbsp;rel)</PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>child</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;rel)</PRE>
 <DL>
 <DD>The same as <A HREF="../hudson/FilePath.html#FilePath(hudson.FilePath, java.lang.String)"><CODE>FilePath(FilePath,String)</CODE></A> but more OO.
 <P>
@@ -1735,10 +1735,10 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <A NAME="createTempFile(java.lang.String, java.lang.String)"><!-- --></A><H3>
 createTempFile</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTempFile</B>(java.lang.String&nbsp;prefix,
-                               java.lang.String&nbsp;suffix)
-                        throws java.io.IOException,
-                               java.lang.InterruptedException</PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTempFile</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+                               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)
+                        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a temporary file in the directory that this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> object designates.
 <P>
@@ -1748,8 +1748,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1757,11 +1757,11 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <A NAME="createTextTempFile(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
 createTextTempFile</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTextTempFile</B>(java.lang.String&nbsp;prefix,
-                                   java.lang.String&nbsp;suffix,
-                                   java.lang.String&nbsp;contents)
-                            throws java.io.IOException,
-                                   java.lang.InterruptedException</PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTextTempFile</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix,
+                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;contents)
+                            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a temporary file in this directory and set the contents by the
  given text (encoded in the platform default encoding)
@@ -1772,8 +1772,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1781,12 +1781,12 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <A NAME="createTextTempFile(java.lang.String, java.lang.String, java.lang.String, boolean)"><!-- --></A><H3>
 createTextTempFile</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTextTempFile</B>(java.lang.String&nbsp;prefix,
-                                   java.lang.String&nbsp;suffix,
-                                   java.lang.String&nbsp;contents,
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTextTempFile</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix,
+                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;contents,
                                    boolean&nbsp;inThisDirectory)
-                            throws java.io.IOException,
-                                   java.lang.InterruptedException</PRE>
+                            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a temporary file in this directory and set the contents by the
  given text (encoded in the platform default encoding)
@@ -1797,8 +1797,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1806,10 +1806,10 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <A NAME="createTempDir(java.lang.String, java.lang.String)"><!-- --></A><H3>
 createTempDir</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTempDir</B>(java.lang.String&nbsp;prefix,
-                              java.lang.String&nbsp;suffix)
-                       throws java.io.IOException,
-                              java.lang.InterruptedException</PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>createTempDir</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;prefix,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)
+                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a temporary directory inside the directory represented by 'this'
 <P>
@@ -1819,8 +1819,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.311</DD>
 </DL>
 </DD>
@@ -1831,8 +1831,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A> <B
 delete</H3>
 <PRE>
 public boolean <B>delete</B>()
-               throws java.io.IOException,
-                      java.lang.InterruptedException</PRE>
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Deletes this file.
 <P>
@@ -1843,8 +1843,8 @@ public boolean <B>delete</B>()
 
 <DT><B>Returns:</B><DD>true, for a modicum of compatibility
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE> - if it exists but could not be successfully deleted
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if it exists but could not be successfully deleted
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1853,8 +1853,8 @@ public boolean <B>delete</B>()
 exists</H3>
 <PRE>
 public boolean <B>exists</B>()
-               throws java.io.IOException,
-                      java.lang.InterruptedException</PRE>
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Checks if the file exists.
 <P>
@@ -1864,8 +1864,8 @@ public boolean <B>exists</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1874,8 +1874,8 @@ public boolean <B>exists</B>()
 lastModified</H3>
 <PRE>
 public long <B>lastModified</B>()
-                  throws java.io.IOException,
-                         java.lang.InterruptedException</PRE>
+                  throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Gets the last modified time stamp of this file, by using the clock
  of the machine where this file actually resides.
@@ -1886,8 +1886,8 @@ public long <B>lastModified</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>See Also:</B><DD><CODE>File.lastModified()</CODE>, 
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>See Also:</B><DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true#lastModified()" title="class or interface in java.io"><CODE>File.lastModified()</CODE></A>, 
 <A HREF="../hudson/FilePath.html#touch(long)"><CODE>touch(long)</CODE></A></DL>
 </DD>
 </DL>
@@ -1897,8 +1897,8 @@ public long <B>lastModified</B>()
 touch</H3>
 <PRE>
 public void <B>touch</B>(long&nbsp;timestamp)
-           throws java.io.IOException,
-                  java.lang.InterruptedException</PRE>
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a file (if not already exist) and sets the timestamp.
 <P>
@@ -1908,8 +1908,8 @@ public void <B>touch</B>(long&nbsp;timestamp)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.299</DD>
 </DL>
 </DD>
@@ -1920,8 +1920,8 @@ public void <B>touch</B>(long&nbsp;timestamp)
 isDirectory</H3>
 <PRE>
 public boolean <B>isDirectory</B>()
-                    throws java.io.IOException,
-                           java.lang.InterruptedException</PRE>
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Checks if the file is a directory.
 <P>
@@ -1931,8 +1931,8 @@ public boolean <B>isDirectory</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -1941,8 +1941,8 @@ public boolean <B>isDirectory</B>()
 length</H3>
 <PRE>
 public long <B>length</B>()
-            throws java.io.IOException,
-                   java.lang.InterruptedException</PRE>
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Returns the file size in bytes.
 <P>
@@ -1952,8 +1952,8 @@ public long <B>length</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.129</DD>
 </DL>
 </DD>
@@ -1964,8 +1964,8 @@ public long <B>length</B>()
 chmod</H3>
 <PRE>
 public void <B>chmod</B>(int&nbsp;mask)
-           throws java.io.IOException,
-                  java.lang.InterruptedException</PRE>
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Sets the file permission.
 
@@ -1978,8 +1978,8 @@ public void <B>chmod</B>(int&nbsp;mask)
 <DT><B>Parameters:</B><DD><CODE>mask</CODE> - File permission mask. To simplify the permission copying,
       if the parameter is -1, this method becomes no-op.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.303</DD>
 <DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#mode()"><CODE>mode()</CODE></A></DL>
 </DD>
@@ -1990,8 +1990,8 @@ public void <B>chmod</B>(int&nbsp;mask)
 mode</H3>
 <PRE>
 public int <B>mode</B>()
-         throws java.io.IOException,
-                java.lang.InterruptedException</PRE>
+         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Gets the file permission bit mask.
 <P>
@@ -2002,8 +2002,8 @@ public int <B>mode</B>()
 
 <DT><B>Returns:</B><DD>-1 on Windows, since such a concept doesn't make sense.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.311</DD>
 <DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#chmod(int)"><CODE>chmod(int)</CODE></A></DL>
 </DD>
@@ -2013,9 +2013,9 @@ public int <B>mode</B>()
 <A NAME="list()"><!-- --></A><H3>
 list</H3>
 <PRE>
-public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>list</B>()
-                              throws java.io.IOException,
-                                     java.lang.InterruptedException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>list</B>()
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>List up files and directories in this directory.
 
@@ -2028,8 +2028,8 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2037,9 +2037,9 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
 <A NAME="listDirectories()"><!-- --></A><H3>
 listDirectories</H3>
 <PRE>
-public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>listDirectories</B>()
-                                         throws java.io.IOException,
-                                                java.lang.InterruptedException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>listDirectories</B>()
+                               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>List up subdirectories.
 <P>
@@ -2050,8 +2050,8 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
 
 <DT><B>Returns:</B><DD>can be empty but never null. Doesn't contain "." and ".."
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2059,23 +2059,23 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
 <A NAME="list(java.io.FileFilter)"><!-- --></A><H3>
 list</H3>
 <PRE>
-public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>list</B>(java.io.FileFilter&nbsp;filter)
-                              throws java.io.IOException,
-                                     java.lang.InterruptedException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&gt; <B>list</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileFilter.html?is-external=true" title="class or interface in java.io">FileFilter</A>&nbsp;filter)
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
-<DD>List up files in this directory, just like <CODE>File.listFiles(FileFilter)</CODE>.
+<DD>List up files in this directory, just like <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-external=true#listFiles(java.io.FileFilter)" title="class or interface in java.io"><CODE>File.listFiles(FileFilter)</CODE></A>.
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>filter</CODE> - The optional filter used to narrow down the result.
-      If non-null, must be <CODE>Serializable</CODE>.
+      If non-null, must be <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io"><CODE>Serializable</CODE></A>.
       If this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A> represents a remote path,
       the filter object will be executed on the remote machine.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2083,9 +2083,9 @@ public java.util.List&lt;<A HREF="../hudson/FilePath.html" title="class in hudso
 <A NAME="list(java.lang.String)"><!-- --></A><H3>
 list</H3>
 <PRE>
-public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>[] <B>list</B>(java.lang.String&nbsp;includes)
-                throws java.io.IOException,
-                       java.lang.InterruptedException</PRE>
+public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>[] <B>list</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;includes)
+                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                       <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>List up files in this directory that matches the given Ant-style filter.
 <P>
@@ -2096,8 +2096,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>[] 
 <DT><B>Parameters:</B><DD><CODE>includes</CODE> - See <CODE>FileSet</CODE> for the syntax. String like "foo/*.zip" or "foo/*&#42;/*.xml"
 <DT><B>Returns:</B><DD>can be empty but always non-null.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2105,8 +2105,8 @@ public <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>[] 
 <A NAME="read()"><!-- --></A><H3>
 read</H3>
 <PRE>
-public java.io.InputStream <B>read</B>()
-                         throws java.io.IOException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A> <B>read</B>()
+                 throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Reads this file.
 <P>
@@ -2116,7 +2116,7 @@ public java.io.InputStream <B>read</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2124,8 +2124,8 @@ public java.io.InputStream <B>read</B>()
 <A NAME="readToString()"><!-- --></A><H3>
 readToString</H3>
 <PRE>
-public java.lang.String <B>readToString</B>()
-                              throws java.io.IOException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>readToString</B>()
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Reads this file into a string, by using the current system encoding.
 <P>
@@ -2135,7 +2135,7 @@ public java.lang.String <B>readToString</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2143,9 +2143,9 @@ public java.lang.String <B>readToString</B>()
 <A NAME="write()"><!-- --></A><H3>
 write</H3>
 <PRE>
-public java.io.OutputStream <B>write</B>()
-                           throws java.io.IOException,
-                                  java.lang.InterruptedException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A> <B>write</B>()
+                   throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Writes to this file.
  If this file already exists, it will be overwritten.
@@ -2157,8 +2157,8 @@ public java.io.OutputStream <B>write</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2166,10 +2166,10 @@ public java.io.OutputStream <B>write</B>()
 <A NAME="write(java.lang.String, java.lang.String)"><!-- --></A><H3>
 write</H3>
 <PRE>
-public void <B>write</B>(java.lang.String&nbsp;content,
-                  java.lang.String&nbsp;encoding)
-           throws java.io.IOException,
-                  java.lang.InterruptedException</PRE>
+public void <B>write</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;content,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;encoding)
+           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Overwrites this file by placing the given String as the content.
 <P>
@@ -2179,8 +2179,8 @@ public void <B>write</B>(java.lang.String&nbsp;content,
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>encoding</CODE> - Null to use the platform default encoding.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.105</DD>
 </DL>
 </DD>
@@ -2190,9 +2190,9 @@ public void <B>write</B>(java.lang.String&nbsp;content,
 <A NAME="digest()"><!-- --></A><H3>
 digest</H3>
 <PRE>
-public java.lang.String <B>digest</B>()
-                        throws java.io.IOException,
-                               java.lang.InterruptedException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>digest</B>()
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Computes the MD5 digest of the file in hex string.
 <P>
@@ -2202,8 +2202,8 @@ public java.lang.String <B>digest</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2212,8 +2212,8 @@ public java.lang.String <B>digest</B>()
 renameTo</H3>
 <PRE>
 public void <B>renameTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-              throws java.io.IOException,
-                     java.lang.InterruptedException</PRE>
+              throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                     <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Rename this file/directory to the target filepath.  This FilePath and the target must
  be on the some host
@@ -2224,8 +2224,8 @@ public void <B>renameTo</B>(<A HREF="../hudson/FilePath.html" title="class in hu
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2234,8 +2234,8 @@ public void <B>renameTo</B>(<A HREF="../hudson/FilePath.html" title="class in hu
 moveAllChildrenTo</H3>
 <PRE>
 public void <B>moveAllChildrenTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-                       throws java.io.IOException,
-                              java.lang.InterruptedException</PRE>
+                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Moves all the contents of this directory into the specified directory, then delete this directory itself.
 <P>
@@ -2245,8 +2245,8 @@ public void <B>moveAllChildrenTo</B>(<A HREF="../hudson/FilePath.html" title="cl
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.308.</DD>
 </DL>
 </DD>
@@ -2257,8 +2257,8 @@ public void <B>moveAllChildrenTo</B>(<A HREF="../hudson/FilePath.html" title="cl
 copyTo</H3>
 <PRE>
 public void <B>copyTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-            throws java.io.IOException,
-                   java.lang.InterruptedException</PRE>
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Copies this file to the specified target.
 <P>
@@ -2268,8 +2268,8 @@ public void <B>copyTo</B>(<A HREF="../hudson/FilePath.html" title="class in huds
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2278,8 +2278,8 @@ public void <B>copyTo</B>(<A HREF="../hudson/FilePath.html" title="class in huds
 copyToWithPermission</H3>
 <PRE>
 public void <B>copyToWithPermission</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-                          throws java.io.IOException,
-                                 java.lang.InterruptedException</PRE>
+                          throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Copies this file to the specified target, with file permissions intact.
 <P>
@@ -2289,8 +2289,8 @@ public void <B>copyToWithPermission</B>(<A HREF="../hudson/FilePath.html" title=
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.311</DD>
 </DL>
 </DD>
@@ -2300,11 +2300,11 @@ public void <B>copyToWithPermission</B>(<A HREF="../hudson/FilePath.html" title=
 <A NAME="copyTo(java.io.OutputStream)"><!-- --></A><H3>
 copyTo</H3>
 <PRE>
-public void <B>copyTo</B>(java.io.OutputStream&nbsp;os)
-            throws java.io.IOException,
-                   java.lang.InterruptedException</PRE>
+public void <B>copyTo</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;os)
+            throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                   <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
-<DD>Sends the contents of this file into the given <CODE>OutputStream</CODE>.
+<DD>Sends the contents of this file into the given <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io"><CODE>OutputStream</CODE></A>.
 <P>
 <DD><DL>
 </DL>
@@ -2312,8 +2312,8 @@ public void <B>copyTo</B>(java.io.OutputStream&nbsp;os)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2322,8 +2322,8 @@ public void <B>copyTo</B>(java.io.OutputStream&nbsp;os)
 copyRecursiveTo</H3>
 <PRE>
 public int <B>copyRecursiveTo</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-                    throws java.io.IOException,
-                           java.lang.InterruptedException</PRE>
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Copies the contents of this directory recursively into the specified target directory.
 <P>
@@ -2333,8 +2333,8 @@ public int <B>copyRecursiveTo</B>(<A HREF="../hudson/FilePath.html" title="class
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.312</DD>
 </DL>
 </DD>
@@ -2344,10 +2344,10 @@ public int <B>copyRecursiveTo</B>(<A HREF="../hudson/FilePath.html" title="class
 <A NAME="copyRecursiveTo(java.lang.String, hudson.FilePath)"><!-- --></A><H3>
 copyRecursiveTo</H3>
 <PRE>
-public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
+public int <B>copyRecursiveTo</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileMask,
                            <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-                    throws java.io.IOException,
-                           java.lang.InterruptedException</PRE>
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2355,8 +2355,8 @@ public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2364,11 +2364,11 @@ public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
 <A NAME="copyRecursiveTo(java.lang.String, java.lang.String, hudson.FilePath)"><!-- --></A><H3>
 copyRecursiveTo</H3>
 <PRE>
-public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
-                           java.lang.String&nbsp;excludes,
+public int <B>copyRecursiveTo</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileMask,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;excludes,
                            <A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;target)
-                    throws java.io.IOException,
-                           java.lang.InterruptedException</PRE>
+                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                           <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Copies the files that match the given file mask to the specified target node.
 <P>
@@ -2382,8 +2382,8 @@ public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
       "abc, def" and "abc,def" to mean the same thing.<DD><CODE>excludes</CODE> - Files to be excluded. Can be null.
 <DT><B>Returns:</B><DD>the number of files copied.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2391,10 +2391,10 @@ public int <B>copyRecursiveTo</B>(java.lang.String&nbsp;fileMask,
 <A NAME="tar(java.io.OutputStream, java.lang.String)"><!-- --></A><H3>
 tar</H3>
 <PRE>
-public int <B>tar</B>(java.io.OutputStream&nbsp;out,
-               java.lang.String&nbsp;glob)
-        throws java.io.IOException,
-               java.lang.InterruptedException</PRE>
+public int <B>tar</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;glob)
+        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Writes files in 'this' directory to a tar stream.
 <P>
@@ -2404,8 +2404,8 @@ public int <B>tar</B>(java.io.OutputStream&nbsp;out,
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>glob</CODE> - Ant file pattern mask, like "**&#x2F;*.java".
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2413,10 +2413,10 @@ public int <B>tar</B>(java.io.OutputStream&nbsp;out,
 <A NAME="tar(java.io.OutputStream, java.io.FileFilter)"><!-- --></A><H3>
 tar</H3>
 <PRE>
-public int <B>tar</B>(java.io.OutputStream&nbsp;out,
-               java.io.FileFilter&nbsp;filter)
-        throws java.io.IOException,
-               java.lang.InterruptedException</PRE>
+public int <B>tar</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/FileFilter.html?is-external=true" title="class or interface in java.io">FileFilter</A>&nbsp;filter)
+        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2424,8 +2424,8 @@ public int <B>tar</B>(java.io.OutputStream&nbsp;out,
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2433,10 +2433,10 @@ public int <B>tar</B>(java.io.OutputStream&nbsp;out,
 <A NAME="tar(java.io.OutputStream, hudson.util.DirScanner)"><!-- --></A><H3>
 tar</H3>
 <PRE>
-public int <B>tar</B>(java.io.OutputStream&nbsp;out,
+public int <B>tar</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A>&nbsp;out,
                <A HREF="../hudson/util/DirScanner.html" title="class in hudson.util">DirScanner</A>&nbsp;scanner)
-        throws java.io.IOException,
-               java.lang.InterruptedException</PRE>
+        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Uses the given scanner on 'this' directory to list up files and then archive it to a tar stream.
 <P>
@@ -2446,8 +2446,8 @@ public int <B>tar</B>(java.io.OutputStream&nbsp;out,
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2456,8 +2456,8 @@ public int <B>tar</B>(java.io.OutputStream&nbsp;out,
 createLauncher</H3>
 <PRE>
 public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B>createLauncher</B>(<A HREF="../hudson/model/TaskListener.html" title="interface in hudson.model">TaskListener</A>&nbsp;listener)
-                        throws java.io.IOException,
-                               java.lang.InterruptedException</PRE>
+                        throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Creates a <A HREF="../hudson/Launcher.html" title="class in hudson"><CODE>Launcher</CODE></A> for starting processes on the node
  that has this file.
@@ -2468,8 +2468,8 @@ public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.89</DD>
 </DL>
 </DD>
@@ -2479,9 +2479,9 @@ public <A HREF="../hudson/Launcher.html" title="class in hudson">Launcher</A> <B
 <A NAME="validateAntFileMask(java.lang.String)"><!-- --></A><H3>
 validateAntFileMask</H3>
 <PRE>
-public java.lang.String <B>validateAntFileMask</B>(java.lang.String&nbsp;fileMasks)
-                                     throws java.io.IOException,
-                                            java.lang.InterruptedException</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>validateAntFileMask</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileMasks)
+                           throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></PRE>
 <DL>
 <DD>Validates the ant file mask (like "foo/bar/*.txt, zot/*.jar")
  against this directory, and try to point out the problem.
@@ -2496,8 +2496,8 @@ public java.lang.String <B>validateAntFileMask</B>(java.lang.String&nbsp;fileMas
 
 <DT><B>Returns:</B><DD>null if no error was found. Otherwise returns a human readable error message.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE>
-<DD><CODE>java.lang.InterruptedException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.90</DD>
 <DT><B>See Also:</B><DD><A HREF="../hudson/FilePath.html#validateFileMask(hudson.FilePath, java.lang.String)"><CODE>validateFileMask(FilePath, String)</CODE></A></DL>
 </DD>
@@ -2508,8 +2508,8 @@ public java.lang.String <B>validateAntFileMask</B>(java.lang.String&nbsp;fileMas
 validateFileMask</H3>
 <PRE>
 public static <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(<A HREF="../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;pathOrNull,
-                                              java.lang.String&nbsp;value)
-                                       throws java.io.IOException</PRE>
+                                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)
+                                       throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Shortcut for <A HREF="../hudson/FilePath.html#validateFileMask(java.lang.String)"><CODE>validateFileMask(String)</CODE></A> in case the left-hand side can be null.
 <P>
@@ -2519,7 +2519,7 @@ public static <A HREF="../hudson/util/FormValidation.html" title="class in hudso
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2527,8 +2527,8 @@ public static <A HREF="../hudson/util/FormValidation.html" title="class in hudso
 <A NAME="validateFileMask(java.lang.String)"><!-- --></A><H3>
 validateFileMask</H3>
 <PRE>
-public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(java.lang.String&nbsp;value)
-                                throws java.io.IOException</PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)
+                                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Short for <code>validateFileMask(value,true)</code>
 <P>
@@ -2538,7 +2538,7 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2546,9 +2546,9 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <A NAME="validateFileMask(java.lang.String, boolean)"><!-- --></A><H3>
 validateFileMask</H3>
 <PRE>
-public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(java.lang.String&nbsp;value,
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateFileMask</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value,
                                        boolean&nbsp;errorIfNotExist)
-                                throws java.io.IOException</PRE>
+                                throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Checks the GLOB-style file mask. See <A HREF="../hudson/FilePath.html#validateAntFileMask(java.lang.String)"><CODE>validateAntFileMask(String)</CODE></A>.
  Requires configure permission on ancestor AbstractProject object in request.
@@ -2559,7 +2559,7 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE><DT><B>Since:</B></DT>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>Since:</B></DT>
   <DD>1.294</DD>
 </DL>
 </DD>
@@ -2569,10 +2569,10 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <A NAME="validateRelativePath(java.lang.String, boolean, boolean)"><!-- --></A><H3>
 validateRelativePath</H3>
 <PRE>
-public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativePath</B>(java.lang.String&nbsp;value,
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativePath</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value,
                                            boolean&nbsp;errorIfNotExist,
                                            boolean&nbsp;expectingFile)
-                                    throws java.io.IOException</PRE>
+                                    throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Validates a relative file path from this <A HREF="../hudson/FilePath.html" title="class in hudson"><CODE>FilePath</CODE></A>.
  Requires configure permission on ancestor AbstractProject object in request.
@@ -2584,7 +2584,7 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <DT><B>Parameters:</B><DD><CODE>value</CODE> - The relative path being validated.<DD><CODE>errorIfNotExist</CODE> - If true, report an error if the given relative path doesn't exist. Otherwise it's a warning.<DD><CODE>expectingFile</CODE> - If true, we expect the relative path to point to a file.
       Otherwise, the relative path is expected to be pointing to a directory.
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2592,9 +2592,9 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <A NAME="validateRelativeDirectory(java.lang.String, boolean)"><!-- --></A><H3>
 validateRelativeDirectory</H3>
 <PRE>
-public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(java.lang.String&nbsp;value,
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value,
                                                 boolean&nbsp;errorIfNotExist)
-                                         throws java.io.IOException</PRE>
+                                         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>A convenience method over <A HREF="../hudson/FilePath.html#validateRelativePath(java.lang.String, boolean, boolean)"><CODE>validateRelativePath(String, boolean, boolean)</CODE></A>.
 <P>
@@ -2604,7 +2604,7 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2612,8 +2612,8 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <A NAME="validateRelativeDirectory(java.lang.String)"><!-- --></A><H3>
 validateRelativeDirectory</H3>
 <PRE>
-public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(java.lang.String&nbsp;value)
-                                         throws java.io.IOException</PRE>
+public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util">FormValidation</A> <B>validateRelativeDirectory</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;value)
+                                         throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -2621,7 +2621,7 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE>java.io.IOException</CODE></DL>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -2629,13 +2629,13 @@ public <A HREF="../hudson/util/FormValidation.html" title="class in hudson.util"
 <A NAME="toString()"><!-- --></A><H3>
 toString</H3>
 <PRE>
-<FONT SIZE="-1">@Deprecated
-</FONT>public java.lang.String <B>toString</B>()</PRE>
+<FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</A>
+</FONT>public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toString</B>()</PRE>
 <DL>
 <DD><B>Deprecated.</B>&nbsp;
 <P>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A></CODE> in class <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

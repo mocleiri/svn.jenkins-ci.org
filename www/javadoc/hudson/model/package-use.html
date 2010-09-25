@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package hudson.model (Hudson main module 1.377 API)
+Uses of Package hudson.model (Hudson main module 1.378 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-19">
+<META NAME="date" CONTENT="2010-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Package hudson.model (Hudson main module 1.377 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package hudson.model (Hudson main module 1.377 API)";
+        parent.document.title="Uses of Package hudson.model (Hudson main module 1.378 API)";
     }
 }
 </SCRIPT>
@@ -206,6 +206,10 @@ that perform the actual heavy-lifting of a build.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#hudson.tasks._ant"><B>hudson.tasks._ant</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#hudson.tasks._maven"><B>hudson.tasks._maven</B></A></TD>
 <TD>&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -550,7 +554,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/PeriodicWork.html#hudson.diagnosis"><B>PeriodicWork</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Timer.html?is-external=true" title="class or interface in java.util"><CODE>Timer</CODE></A>.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Run.html#hudson.diagnosis"><B>Run</B></A></B>
@@ -1502,6 +1506,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents the running state of a remote computer that holds <A HREF="../../hudson/model/Executor.html" title="class in hudson.model"><CODE>Executor</CODE></A>s.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/ComputerPinger.html#hudson.model"><B>ComputerPinger</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A way to see if a computer is reachable.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/ComputerSet.html#hudson.model"><B>ComputerSet</B></A></B>
 
 <BR>
@@ -1847,7 +1857,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/PeriodicWork.html#hudson.model"><B>PeriodicWork</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Timer.html?is-external=true" title="class or interface in java.util"><CODE>Timer</CODE></A>.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/PermalinkProjectAction.Permalink.html#hudson.model"><B>PermalinkProjectAction.Permalink</B></A></B>
@@ -1954,6 +1964,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List of <A HREF="../../hudson/model/Resource.html" title="class in hudson.model"><CODE>Resource</CODE></A>s that an activity needs.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/RestartListener.html#hudson.model"><B>RestartListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point that allows plugins to veto the restart.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Result.html#hudson.model"><B>Result</B></A></B>
 
 <BR>
@@ -1998,10 +2014,16 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/RunAction.html#hudson.model"><B>RunAction</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional interface for <A HREF="../../hudson/model/Action.html" title="interface in hudson.model"><CODE>Action</CODE></A>s that add themselves to <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/RunMap.html#hudson.model"><B>RunMap</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>Map</CODE> from build number to <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util"><CODE>Map</CODE></A> from build number to <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/RunMap.Constructor.html#hudson.model"><B>RunMap.Constructor</B></A></B>
@@ -2076,7 +2098,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/TaskThread.html#hudson.model"><B>TaskThread</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<CODE>Thread</CODE> for performing one-off task.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Thread.html?is-external=true" title="class or interface in java.lang"><CODE>Thread</CODE></A> for performing one-off task.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/TaskThread.ListenerAndText.html#hudson.model"><B>TaskThread.ListenerAndText</B></A></B>
@@ -3129,7 +3151,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/PeriodicWork.html#hudson.slaves"><B>PeriodicWork</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Timer.html?is-external=true" title="class or interface in java.util"><CODE>Timer</CODE></A>.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Queue.Task.html#hudson.slaves"><B>Queue.Task</B></A></B>
@@ -3322,6 +3344,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The build outcome.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Run.html#hudson.tasks"><B>Run</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A particular execution of <A HREF="../../hudson/model/Job.html" title="class in hudson.model"><CODE>Job</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Run.RunnerAbortedException.html#hudson.tasks"><B>Run.RunnerAbortedException</B></A></B>
 
 <BR>
@@ -3390,6 +3418,33 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Saveable.html#hudson.tasks._ant"><B>Saveable</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object whose state is persisted to XML.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="hudson.tasks._maven"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> used by <A HREF="../../hudson/tasks/_maven/package-summary.html">hudson.tasks._maven</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Describable.html#hudson.tasks._maven"><B>Describable</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Classes that are described by <A HREF="../../hudson/model/Descriptor.html" title="class in hudson.model"><CODE>Descriptor</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Descriptor.html#hudson.tasks._maven"><B>Descriptor</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Metadata about a configurable instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/Saveable.html#hudson.tasks._maven"><B>Saveable</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object whose state is persisted to XML.</TD>
@@ -3673,6 +3728,12 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> used by <A HREF="../../hudson/triggers/package-summary.html">hudson.triggers</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../hudson/model/class-use/AbstractBuild.html#hudson.triggers"><B>AbstractBuild</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base implementation of <A HREF="../../hudson/model/Run.html" title="class in hudson.model"><CODE>Run</CODE></A>s that build software.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/AbstractModelObject.html#hudson.triggers"><B>AbstractModelObject</B></A></B>
 
 <BR>
@@ -3738,7 +3799,7 @@ Classes in <A HREF="../../hudson/model/package-summary.html">hudson.model</A> us
 <TD><B><A HREF="../../hudson/model/class-use/PeriodicWork.html#hudson.triggers"><B>PeriodicWork</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <CODE>Timer</CODE>.)</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension point to perform a periodic task in Hudson (through <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Timer.html?is-external=true" title="class or interface in java.util"><CODE>Timer</CODE></A>.)</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../hudson/model/class-use/Saveable.html#hudson.triggers"><B>Saveable</B></A></B>

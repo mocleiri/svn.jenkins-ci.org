@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.triggers (Hudson main module 1.377 API)
+hudson.triggers (Hudson main module 1.378 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-19">
+<META NAME="date" CONTENT="2010-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.triggers (Hudson main module 1.377 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.triggers (Hudson main module 1.377 API)";
+        parent.document.title="hudson.triggers (Hudson main module 1.378 API)";
     }
 }
 </SCRIPT>
@@ -101,7 +101,7 @@ Built-in <a href="Trigger.html"><tt>Trigger</tt></a>s that run periodically to k
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/triggers/SafeTimerTask.html" title="class in hudson.triggers">SafeTimerTask</A></B></TD>
-<TD><CODE>Timer</CODE> wrapper so that a fatal error in <CODE>TimerTask</CODE>
+<TD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Timer.html?is-external=true" title="class or interface in java.util"><CODE>Timer</CODE></A> wrapper so that a fatal error in <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/TimerTask.html?is-external=true" title="class or interface in java.util"><CODE>TimerTask</CODE></A>
  won't terminate the timer.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -111,6 +111,11 @@ Built-in <a href="Trigger.html"><tt>Trigger</tt></a>s that run periodically to k
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/triggers/SCMTrigger.AdministrativeMonitorImpl.html" title="class in hudson.triggers">SCMTrigger.AdministrativeMonitorImpl</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/triggers/SCMTrigger.BuildAction.html" title="class in hudson.triggers">SCMTrigger.BuildAction</A></B></TD>
+<TD>Associated with <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model"><CODE>AbstractBuild</CODE></A> to show the polling log
+ that triggered that build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/triggers/SCMTrigger.DescriptorImpl.html" title="class in hudson.triggers">SCMTrigger.DescriptorImpl</A></B></TD>

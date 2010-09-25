@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.model.queue (Hudson main module 1.377 API)
+hudson.model.queue (Hudson main module 1.378 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-09-19">
+<META NAME="date" CONTENT="2010-09-25">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.model.queue (Hudson main module 1.377 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.model.queue (Hudson main module 1.377 API)";
+        parent.document.title="hudson.model.queue (Hudson main module 1.378 API)";
     }
 }
 </SCRIPT>
@@ -109,7 +109,7 @@ Package hudson.model.queue
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/AbstractQueueSorterImpl.html" title="class in hudson.model.queue">AbstractQueueSorterImpl</A></B></TD>
-<TD>Partial implementation of <A HREF="../../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A> in terms of <CODE>Comparator</CODE>.</TD>
+<TD>Partial implementation of <A HREF="../../../hudson/model/queue/QueueSorter.html" title="class in hudson.model.queue"><CODE>QueueSorter</CODE></A> in terms of <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util"><CODE>Comparator</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/AbstractQueueTask.html" title="class in hudson.model.queue">AbstractQueueTask</A></B></TD>
@@ -119,7 +119,7 @@ Package hudson.model.queue
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/AbstractSubTask.html" title="class in hudson.model.queue">AbstractSubTask</A></B></TD>
 <TD>Partial default implementation of <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A> to avoid
- <CODE>AbstractMethodError</CODE> with future additions to <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>.</TD>
+ <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/AbstractMethodError.html?is-external=true" title="class or interface in java.lang"><CODE>AbstractMethodError</CODE></A> with future additions to <A HREF="../../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue"><CODE>SubTask</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/CauseOfBlockage.html" title="class in hudson.model.queue">CauseOfBlockage</A></B></TD>
@@ -144,6 +144,18 @@ Package hudson.model.queue
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/FutureImpl.html" title="class in hudson.model.queue">FutureImpl</A></B></TD>
 <TD>Created when <CODE>Queue.Item</CODE> is created so that the caller can track the progress of the task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A></B></TD>
+<TD>Estimated future load to Hudson.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/LoadPredictor.html" title="class in hudson.model.queue">LoadPredictor</A></B></TD>
+<TD>Predicts future load to the system, to assist the scheduling decisions</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/LoadPredictor.CurrentlyRunningTasks.html" title="class in hudson.model.queue">LoadPredictor.CurrentlyRunningTasks</A></B></TD>
+<TD>Considers currently running tasks and their completion.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A></B></TD>
