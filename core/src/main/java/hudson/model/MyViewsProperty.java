@@ -29,6 +29,7 @@ import hudson.model.Descriptor.FormException;
 import hudson.security.ACL;
 import hudson.security.Permission;
 import hudson.util.FormValidation;
+import hudson.views.ViewsTabBar;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -238,6 +239,10 @@ public class MyViewsProperty extends UserProperty implements ViewGroup, Action {
             // preserve the non-empty invariant
             views.add(new AllView(Messages.Hudson_ViewName(), this));
         return this;
+    }
+
+    public ViewsTabBar getTabBar() {
+        return Hudson.getInstance().getTabBar();
     }
     
     @Extension

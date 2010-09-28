@@ -1,4 +1,4 @@
-/*
+    /*
  * The MIT License
  * 
  * Copyright (c) 2004-2010, Sun Microsystems, Inc., Kohsuke Kawaguchi,
@@ -127,6 +127,8 @@ import hudson.util.VersionNumber;
 import hudson.util.XStream2;
 import hudson.util.Service;
 import hudson.util.IOUtils;
+import hudson.views.DefaultViewsTabBar;
+import hudson.views.ViewsTabBar;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
 import org.acegisecurity.AccessDeniedException;
@@ -1294,6 +1296,18 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             throw new IllegalStateException("Cannot delete last view");
         views.remove(view);
         save();
+    }
+    
+    private ViewsTabBar selectedTabBar;
+
+    public synchronized ViewsTabBar getTabBar() {
+        Descriptor<ViewsTabBar> defaultViewsTabBarDescriptor = ViewsTabBar.all().find(DefaultViewsTabBar.class);
+        try {
+            selectedTabBar = defaultViewsTabBarDescriptor.newInstance(null, null);
+        } catch (FormException e) {
+            LOGGER.log(Level.WARNING, "Failed to instantiate " + defaultViewsTabBarDescriptor.clazz, e);
+        }
+        return selectedTabBar;
     }
 
     /**

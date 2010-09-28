@@ -23,19 +23,21 @@ THE SOFTWARE.
 -->
 
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:i="jelly:fmt">
-  <j:choose>
-    <j:when test="${empty(items)}">
-      <j:if test="${!empty(app.items)}">
-        <st:include page="viewTabs.jelly" />
-        <br/>
-      </j:if>
-      <st:include page="noJob.jelly" />
-    </j:when>
-    <j:otherwise>
+    <j:choose>
+        <j:when test="${empty(items)}">
+            <j:if test="${!empty(app.items)}">
+                <st:include page="viewTabs.jelly" />
+                <br/>
+            </j:if>
+            <st:include page="noJob.jelly" />
+        </j:when>
+        <j:otherwise>
       <!-- set @jobBaseUrl="" so that links to jobs will be under this view. -->
-      <t:projectView jobs="${items}" jobBaseUrl="" showViewTabs="true" columnExtensions="${it.columns}">
-        <st:include page="viewTabs.jelly" />
-      </t:projectView>
-    </j:otherwise>
-  </j:choose>
+            <t:projectView jobs="${items}" jobBaseUrl="" showViewTabs="true" columnExtensions="${it.columns}">
+                <j:set var="views" value="${it.owner.views}"/>
+                <j:set var="currentView" value="${it}"/>
+                <st:include page="viewTabs.jelly" it="${it.owner.tabBar}"/>
+            </t:projectView>
+        </j:otherwise>
+    </j:choose>
 </j:jelly>
