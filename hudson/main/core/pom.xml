@@ -381,23 +381,14 @@ THE SOFTWARE.
     </dependency>
     <dependency>
       <groupId>org.kohsuke.stapler</groupId>
-      <artifactId>stapler-jelly</artifactId>
-      <version>1.151</version>
-      <exclusions>
-        <exclusion>
-          <groupId>commons-jelly</groupId>
-          <artifactId>commons-jelly</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-jexl</groupId>
-          <artifactId>commons-jexl</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.kohsuke.stapler</groupId>
       <artifactId>stapler-adjunct-timeline</artifactId>
       <version>1.2</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>stapler</artifactId>
+          <groupId>org.kohsuke.stapler</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency><!-- this helps us see the source code of the control while we edit Hudson. -->
       <groupId>org.kohsuke.stapler</groupId>
@@ -821,6 +812,16 @@ THE SOFTWARE.
       <scope>system</scope>
       <systemPath>/usr/local/yjp/lib/yjp.jar</systemPath>
     </dependency-->
+    <dependency>
+      <groupId>org.kohsuke.stapler</groupId>
+      <artifactId>stapler</artifactId>
+      <version>1.152-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.kohsuke.stapler</groupId>
+      <artifactId>stapler-jelly</artifactId>
+      <version>1.152-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <reporting>
