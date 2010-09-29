@@ -1298,12 +1298,14 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         save();
     }
     
-    private Descriptor<ViewsTabBar> viewsTabBarDescriptor;
+    private String currentViewsTabBar;
 
     public synchronized ViewsTabBar getViewsTabBar() {
-        if (viewsTabBarDescriptor == null){
-            viewsTabBarDescriptor = ViewsTabBar.all().find(DefaultViewsTabBar.class);
+        if (currentViewsTabBar == null){
+            currentViewsTabBar = DefaultViewsTabBar.class.getName();
         }
+
+        Descriptor<ViewsTabBar> viewsTabBarDescriptor = getDescriptorByName(currentViewsTabBar);
         try {
             return  viewsTabBarDescriptor.newInstance(null, null);
         } catch (FormException e) {
@@ -1313,7 +1315,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     }
 
     public Descriptor<ViewsTabBar> getViewsTabBarDescriptor(){
-        return viewsTabBarDescriptor;
+        return getDescriptorByName(currentViewsTabBar);
     }
 
     /**
@@ -2357,8 +2359,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             }
 
             if (json.has("viewsTabBar")) {
-                String decriptorClass = (String) json.getJSONObject("viewsTabBar").get("stapler-class");
-                viewsTabBarDescriptor = getDescriptorByName(decriptorClass);
+                currentViewsTabBar = (String) json.getJSONObject("viewsTabBar").get("stapler-class");
             }
 
             primaryView = json.has("primaryView") ? json.getString("primaryView") : getViews().iterator().next().getViewName();
