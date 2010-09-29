@@ -173,7 +173,7 @@ public class TreeView extends View implements ViewGroup {
         }
     }
 
-    public ViewsTabBar getTabBar() {
-        return Hudson.getInstance().getTabBar();
+    public ViewsTabBar getViewsTabBar() {
+        return Hudson.getInstance().getViewsTabBar();
     }
 }

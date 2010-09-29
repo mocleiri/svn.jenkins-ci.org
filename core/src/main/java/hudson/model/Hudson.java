@@ -1298,16 +1298,22 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         save();
     }
     
-    private ViewsTabBar selectedTabBar;
+    private Descriptor<ViewsTabBar> viewsTabBarDescriptor;
 
-    public synchronized ViewsTabBar getTabBar() {
-        Descriptor<ViewsTabBar> defaultViewsTabBarDescriptor = ViewsTabBar.all().find(DefaultViewsTabBar.class);
-        try {
-            selectedTabBar = defaultViewsTabBarDescriptor.newInstance(null, null);
-        } catch (FormException e) {
-            LOGGER.log(Level.WARNING, "Failed to instantiate " + defaultViewsTabBarDescriptor.clazz, e);
+    public synchronized ViewsTabBar getViewsTabBar() {
+        if (viewsTabBarDescriptor == null){
+            viewsTabBarDescriptor = ViewsTabBar.all().find(DefaultViewsTabBar.class);
         }
-        return selectedTabBar;
+        try {
+            return  viewsTabBarDescriptor.newInstance(null, null);
+        } catch (FormException e) {
+            LOGGER.log(Level.WARNING, "Failed to instantiate " + viewsTabBarDescriptor.clazz, e);
+            return null;
+        }
+    }
+
+    public Descriptor<ViewsTabBar> getViewsTabBarDescriptor(){
+        return viewsTabBarDescriptor;
     }
 
     /**
@@ -2346,9 +2352,13 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
             if (json.has("csrf")) {
             	JSONObject csrf = json.getJSONObject("csrf");
-            	setCrumbIssuer(CrumbIssuer.all().newInstanceFromRadioList(csrf, "issuer"));
             } else {
             	setCrumbIssuer(null);
+            }
+
+            if (json.has("viewsTabBar")) {
+                String decriptorClass = (String) json.getJSONObject("viewsTabBar").get("stapler-class");
+                viewsTabBarDescriptor = getDescriptorByName(decriptorClass);
             }
 
             primaryView = json.has("primaryView") ? json.getString("primaryView") : getViews().iterator().next().getViewName();

@@ -87,5 +87,5 @@ public interface ViewGroup extends Saveable, ModelObject, AccessControlled {
      * at a given time (Selectable by user in the global Configuration page)
      * Default TabBar is provided by Hudson Platform
      */
-    ViewsTabBar getTabBar();
+    ViewsTabBar getViewsTabBar();
 }
