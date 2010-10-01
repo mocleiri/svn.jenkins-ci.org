@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ValidInputMetricXSLTest {
@@ -72,13 +73,16 @@ public class ValidInputMetricXSLTest {
             }
 
             //The xsd must exist if it sets
-            if (inputMetricXSL.getInputXsdName() != null) {
+            if (inputMetricXSL.getInputXsdNameList() != null) {
                 try {
-                    new File(inputMetricXSL.getClass().getResource(inputMetricXSL.getInputXsdName()).toURI());
+                    for (int i = 0; i < inputMetricXSL.getInputXsdNameList().length; i++) {
+                        new File(inputMetricXSL.getClass().getResource(inputMetricXSL.getInputXsdNameList()[i]).toURI());
+                    }
+
                     Assert.assertTrue(true);
                 }
                 catch (NullPointerException npe) {
-                    Assert.assertTrue(inputMetricXSL.getInputXsdName() + " doesn't exist.", false);
+                    Assert.assertTrue("one of" + Arrays.toString(inputMetricXSL.getInputXsdNameList()) + " doesn't exist.", false);
                 }
             }
 

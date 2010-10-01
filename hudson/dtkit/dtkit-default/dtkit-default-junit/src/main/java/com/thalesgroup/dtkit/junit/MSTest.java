@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="mstest", namespace = "junit")
+@XmlType(name = "mstest", namespace = "junit")
 public class MSTest extends InputMetricXSL {
 
     @Override
@@ -60,8 +60,8 @@ public class MSTest extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return null;  
+    public String[] getInputXsdNameList() {
+        return null;
     }
 
     @Override

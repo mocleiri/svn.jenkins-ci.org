@@ -23,46 +23,61 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  
+				xmlns:t="http://www.thalesgroup.com/tusar/tests/v1"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
     <xsl:template match="/TestLog">
 
-        <xsl:element name="tusar">
-            <xsl:attribute name="xmlns_xsi">
-                <xsl:text>http://www.w3.org/2001/XMLSchema-instance</xsl:text>
-            </xsl:attribute>
 
-            <xsl:attribute name="version">
-                <xsl:text>1.0</xsl:text>
-            </xsl:attribute>
+        <tusar:tusar
+                xmlns:t="http://www.thalesgroup.com/tusar/tests/v1"
+                xmlns:tusar="http://www.thalesgroup.com/tusar/v2"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                version="1.0">
 
-            <xsl:element name="tests">
-                <xsl:element name="testsuite">
-                    <xsl:attribute name="tests">
-                        <xsl:value-of select="count(//TestCase)"/>
-                    </xsl:attribute>
 
-                    <xsl:attribute name="errors">
-                        <xsl:value-of select="count(//TestCase/FatalError)+count(//TestCase/Exception)"/>
-                    </xsl:attribute>
+            <!--<xsl:attribute name="xmlns:t">-->
+            <!--<xsl:text>http://www.thalesgroup.com/tusar/tests/v1</xsl:text>-->
+            <!--</xsl:attribute>-->
+            <!--<xsl:attribute name="xmlns:tusar">-->
+            <!--<xsl:text>http://www.thalesgroup.com/tusar/v2</xsl:text>-->
+            <!--</xsl:attribute>-->
+            <!--<xsl:attribute name="xmlns_xsi">-->
+            <!--<xsl:text>http://www.w3.org/2001/XMLSchema-instance</xsl:text>-->
+            <!--</xsl:attribute>-->
 
-                    <xsl:attribute name="failures">
-                        <xsl:value-of select="count(//TestCase/Error)"/>
-                    </xsl:attribute>
+            <!--<xsl:attribute name="version">-->
+            <!--<xsl:text>1.0</xsl:text>-->
+            <!--</xsl:attribute>-->
 
-                    <xsl:attribute name="name">MergedTestSuite</xsl:attribute>
+           <tusar:tests>
+            <t:testsuite>
+                <xsl:attribute name="tests">
+                    <xsl:value-of select="count(//TestCase)"/>
+                </xsl:attribute>
 
-                    <xsl:attribute name="skipped">0</xsl:attribute>
+                <xsl:attribute name="errors">
+                    <xsl:value-of select="count(//TestCase/FatalError)+count(//TestCase/Exception)"/>
+                </xsl:attribute>
 
-                    <xsl:for-each select="//TestCase">
-                        <xsl:call-template name="testCase"/>
-                    </xsl:for-each>
-                </xsl:element>
-            </xsl:element>
+                <xsl:attribute name="failures">
+                    <xsl:value-of select="count(//TestCase/Error)"/>
+                </xsl:attribute>
 
-        </xsl:element>
+                <xsl:attribute name="name">MergedTestSuite</xsl:attribute>
+
+                <xsl:attribute name="skipped">0</xsl:attribute>
+
+                <xsl:for-each select="//TestCase">
+                    <xsl:call-template name="testCase"/>
+                </xsl:for-each>
+
+            </t:testsuite>
+           </tusar:tests> 
+        </tusar:tusar>
     </xsl:template>
 
 
@@ -104,7 +119,7 @@
         <xsl:variable name="packageName" select="concat($suiteName, '.')"/>
 
 
-        <xsl:element name="testcase">
+        <t:testcase>
             <xsl:variable name="elt" select="(child::*[position()=1])"/>
             <xsl:variable name="time" select="TestingTime"/>
 
@@ -126,13 +141,13 @@
 
             <xsl:choose>
                 <xsl:when test="$nbFatalErrors&gt;0">
-                    <xsl:element name="error">
+                    <xsl:element name="t:error">
                         <xsl:call-template name="testCaseContent"/>
                     </xsl:element>
                 </xsl:when>
 
                 <xsl:when test="$nbErrors&gt;0">
-                    <xsl:element name="failure">
+                    <xsl:element name="t:failure">
                         <xsl:call-template name="testCaseContent"/>
                     </xsl:element>
                 </xsl:when>
@@ -140,7 +155,7 @@
 
 
             <xsl:if test="(count(child::Info)+ count(child::Warning) + count(child::Message))>0">
-                <xsl:element name="system-out">
+                <t:system-out>
                     <xsl:for-each select="child::Info">
                         <xsl:variable name="currElt" select="."/>
                         <xsl:text>&#13;</xsl:text>
@@ -177,12 +192,12 @@
                         <xsl:text>&#13;</xsl:text>
                     </xsl:for-each>
 
-                </xsl:element>
+                </t:system-out>
             </xsl:if>
-        </xsl:element>
+        </t:testcase>
 
         <xsl:if test="count(child::Exception)>0">
-            <xsl:element name="system-err">
+            <t:system-err>
                 <xsl:for-each select="child::Exception">
                     <xsl:variable name="currElt" select="."/>
                     <xsl:text>&#13;</xsl:text>
@@ -194,7 +209,7 @@
                     <xsl:text> == [Line] - </xsl:text><xsl:value-of select="($currElt)/@line"/>
                     <xsl:text>&#13;</xsl:text>
                 </xsl:for-each>
-            </xsl:element>
+            </t:system-err>
         </xsl:if>
 
     </xsl:template>

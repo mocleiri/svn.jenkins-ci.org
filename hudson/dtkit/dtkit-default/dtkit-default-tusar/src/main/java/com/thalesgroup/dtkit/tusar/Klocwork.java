@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="klocwork", namespace = "tusar")
+@XmlType(name = "klocwork", namespace = "tusar")
 public class Klocwork extends InputMetricXSL {
 
     @Override
@@ -52,7 +52,7 @@ public class Klocwork extends InputMetricXSL {
     @Override
     public boolean isDefault() {
         return true;
-    }    
+    }
 
     @Override
     public String getXslName() {
@@ -60,7 +60,7 @@ public class Klocwork extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

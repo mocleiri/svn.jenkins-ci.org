@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="nunit", namespace = "tusar")
+@XmlType(name = "nunit", namespace = "tusar")
 public class NUnit extends InputMetricXSL {
 
     @Override
@@ -60,7 +60,7 @@ public class NUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

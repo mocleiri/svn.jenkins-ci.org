@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="boosttest", namespace = "tusar")
+@XmlType(name = "boosttest", namespace = "tusar")
 public class BoostTest extends InputMetricXSL {
 
     @Override
@@ -60,12 +60,12 @@ public class BoostTest extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return "boosttest-1.1.xsd";
+    public String[] getInputXsdNameList() {
+        return new String[]{"boosttest-1.1.xsd"};
     }
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_1_0;
+        return TusarModel.OUTPUT_TUSAR_1_1;
     }
 }

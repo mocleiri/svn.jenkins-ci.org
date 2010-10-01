@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="cppunit", namespace = "tusar")
+@XmlType(name = "cppunit", namespace = "tusar")
 public class CppUnit extends InputMetricXSL {
 
     @Override
@@ -60,8 +60,8 @@ public class CppUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return "cppunit-1.0.xsd";
+    public String[] getInputXsdNameList() {
+        return new String[]{"cppunit-1.0.xsd"};
     }
 
     @Override

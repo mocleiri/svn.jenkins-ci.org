@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 @SuppressWarnings("unused")
 public abstract class InputMetricXSL extends InputMetric {
@@ -43,8 +44,8 @@ public abstract class InputMetricXSL extends InputMetric {
     private String xslName;
     private File xslFile;
 
-    private String inputXsdName;
-    private File xsdFile;
+    private String[] inputXsdNameList;
+    private File[] inputXsdFileList;
 
     /**
      * -----------------------------------------
@@ -122,24 +123,34 @@ public abstract class InputMetricXSL extends InputMetric {
      * @return the xsd name. Can be null if there no XSD for the input file of the current tool type
      */
     @JsonIgnore
-    public String getInputXsdName() {
-        return inputXsdName;
+    public String[] getInputXsdNameList() {
+        return inputXsdNameList;
     }
 
     @JsonIgnore
-    public File getXsdFile() {
-        return xsdFile;
+    public File[] getInputXsdFileList() {
+        return inputXsdFileList;
     }
 
     @JsonIgnore
-    public InputStream getXsdInputStream() throws IOException {
+    public InputStream[] getListXsdInputStream() throws IOException {
 
-        if (getXsdFile() != null) {
-            return new FileInputStream(getXsdFile());
+        File[] inputXsdFileList = getInputXsdFileList();
+        if (inputXsdFileList != null) {
+            InputStream[] inputStreams = new InputStream[inputXsdFileList.length];
+            for (int i = 0; i < inputXsdFileList.length; i++) {
+                inputStreams[i] = new FileInputStream(inputXsdFileList[i]);
+            }
+            return inputStreams;
         }
 
-        if (this.getInputXsdName() != null) {
-            return this.getInputXsdClass().getResourceAsStream(this.getInputXsdName());
+        String[] inputXsdNameList = getInputXsdNameList();
+        if (inputXsdNameList != null) {
+            InputStream[] inputStreams = new InputStream[inputXsdNameList.length];
+            for (int i = 0; i < inputXsdNameList.length; i++) {
+                inputStreams[i] = this.getInputXsdClass().getResourceAsStream(inputXsdNameList[i]);
+            }
+            return inputStreams;
         }
 
         return null;
@@ -151,8 +162,8 @@ public abstract class InputMetricXSL extends InputMetric {
      * @return the relative xsd path. Can be null if there no XSD for the output format
      */
     @JsonIgnore
-    public String getOutputXsd() {
-        return getOutputFormatType().getXsdName();
+    public String[] getOutputXsdNameList() {
+        return getOutputFormatType().getXsdNameList();
     }
 
     /**
@@ -186,11 +197,16 @@ public abstract class InputMetricXSL extends InputMetric {
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
 
-        if (this.getInputXsdName() == null) {
+        if (this.getInputXsdNameList() == null) {
             return true;
         }
 
-        setInputValidationErrors(validationService.processValidation(new StreamSource(this.getInputXsdClass().getResourceAsStream(this.getInputXsdName())), inputXMLFile));
+        StreamSource[] streamSources = new StreamSource[getInputXsdNameList().length];
+        for (int i = 0; i < streamSources.length; i++) {
+            streamSources[i] = new StreamSource(this.getInputXsdClass().getResourceAsStream(getInputXsdNameList()[i]));
+        }
+
+        setInputValidationErrors(validationService.processValidation(streamSources, inputXMLFile));
         return getInputValidationErrors().size() == 0;
     }
 
@@ -200,11 +216,16 @@ public abstract class InputMetricXSL extends InputMetric {
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
 
-        if (this.getOutputXsd() == null) {
+        if (this.getOutputXsdNameList() == null) {
             return true;
         }
 
-        setOutputValidationErrors(validationService.processValidation(new StreamSource(this.getOutputFormatType().getClass().getResourceAsStream(this.getOutputXsd())), inputXMLFile));
+        StreamSource[] streamSources = new StreamSource[getOutputXsdNameList().length];
+        for (int i = 0; i < streamSources.length; i++) {
+            streamSources[i] = new StreamSource(this.getOutputFormatType().getClass().getResourceAsStream(getOutputXsdNameList()[i]));
+        }
+
+        setOutputValidationErrors(validationService.processValidation(streamSources, inputXMLFile));
         return getOutputValidationErrors().size() == 0;
     }
 
@@ -223,10 +244,10 @@ public abstract class InputMetricXSL extends InputMetric {
 
         InputMetricXSL that = (InputMetricXSL) o;
 
-        if (getInputXsdName() != null ? !getInputXsdName().equals(that.getInputXsdName()) : that.getInputXsdName() != null)
-            return false;
-        if (getXslFile() != null ? !getXslFile().equals(that.getXslFile()) : that.getXslFile() != null) return false;
-        if (getXslName() != null ? !getXslName().equals(that.getXslName()) : that.getXslName() != null) return false;
+        if (!Arrays.equals(inputXsdFileList, that.inputXsdFileList)) return false;
+        if (!Arrays.equals(inputXsdNameList, that.inputXsdNameList)) return false;
+        if (xslFile != null ? !xslFile.equals(that.xslFile) : that.xslFile != null) return false;
+        if (xslName != null ? !xslName.equals(that.xslName) : that.xslName != null) return false;
 
         return true;
     }
@@ -234,9 +255,10 @@ public abstract class InputMetricXSL extends InputMetric {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (getXslName() != null ? getXslName().hashCode() : 0);
-        result = 31 * result + (getXslFile() != null ? getXslFile().hashCode() : 0);
-        result = 31 * result + (getInputXsdName() != null ? getInputXsdName().hashCode() : 0);
+        result = 31 * result + (xslName != null ? xslName.hashCode() : 0);
+        result = 31 * result + (xslFile != null ? xslFile.hashCode() : 0);
+        result = 31 * result + (inputXsdNameList != null ? Arrays.hashCode(inputXsdNameList) : 0);
+        result = 31 * result + (inputXsdFileList != null ? Arrays.hashCode(inputXsdFileList) : 0);
         return result;
     }
 }

@@ -67,7 +67,7 @@ public class JUnitModel extends AbstractOutputMetric implements Serializable {
 
     @Override
     @XmlElement
-    public String getXsdName() {
-        return "xsd/junit-1.0.xsd";
+    public String[] getXsdNameList() {
+        return new String[]{"xsd/junit-1.0.xsd"};
     }
 }

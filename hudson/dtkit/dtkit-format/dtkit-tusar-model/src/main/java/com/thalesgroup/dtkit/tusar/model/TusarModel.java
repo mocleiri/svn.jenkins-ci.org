@@ -37,7 +37,7 @@ import java.io.Serializable;
 
 @SuppressWarnings("unused")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class TusarModel extends AbstractOutputMetric implements Serializable {
+public class TusarModel implements Serializable {
 
     @SuppressWarnings("unused")
     public static OutputMetric OUTPUT_TUSAR_1_0 = Guice.createInjector(new AbstractModule() {
@@ -45,31 +45,69 @@ public class TusarModel extends AbstractOutputMetric implements Serializable {
         protected void configure() {
             bind(ValidationService.class);
         }
-    }).getInstance(TusarModel.class);
+    }).getInstance(TusarModel0.class);
 
+    @SuppressWarnings("unused")
+    public static OutputMetric OUTPUT_TUSAR_1_1 = Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+            bind(ValidationService.class);
+        }
+    }).getInstance(TusarModel1.class);
 
-    @Override
-    @XmlElement
-    public String getKey() {
-        return "tusar";
+    public static class TusarModel0 extends AbstractOutputMetric implements Serializable {
+
+        @Override
+        @XmlElement
+        public String getKey() {
+            return "tusar";
+        }
+
+        @Override
+        @XmlElement
+        public String getDescription() {
+            return "TUSAR OUTPUT FORMAT 1.0";
+        }
+
+        @Override
+        @XmlElement
+        public String getVersion() {
+            return "1.0";
+        }
+
+        @Override
+        @XmlElement
+        public String[] getXsdNameList() {
+            return new String[]{"xsd/tusar-1.0.xsd"};
+        }
     }
 
-    @Override
-    @XmlElement
-    public String getDescription() {
-        return "TUSAR OUTPUT FORMAT 1.0";
+    public static class TusarModel1 extends AbstractOutputMetric implements Serializable {
+
+        @Override
+        @XmlElement
+        public String getKey() {
+            return "tusar";
+        }
+
+        @Override
+        @XmlElement
+        public String getDescription() {
+            return "TUSAR OUTPUT FORMAT 1.1";
+        }
+
+        @Override
+        @XmlElement
+        public String getVersion() {
+            return "1.1";
+        }
+
+        @Override
+        @XmlElement
+        public String[] getXsdNameList() {
+            return new String[]{"xsd/tests-1.1.xsd", "xsd/coverage-1.1.xsd", "xsd/violations-1.1.xsd", "xsd/measures-1.1.xsd", "xsd/tusar-1.1.xsd"};
+        }
     }
 
-    @Override
-    @XmlElement
-    public String getVersion() {
-        return "1.0";
-    }
-
-    @Override
-    @XmlElement
-    public String getXsdName() {
-        return "xsd/tusar-1.0.xsd";
-    }
 
 }

@@ -60,8 +60,8 @@ public class AUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return "aunit-1.0.xsd";
+    public String[] getInputXsdNameList() {
+        return new String[]{"aunit-1.0.xsd"};
     }
 
     @Override

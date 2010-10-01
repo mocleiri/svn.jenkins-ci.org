@@ -54,7 +54,7 @@ public interface OutputMetric {
     public String getVersion();
 
     @JsonIgnore
-    public String getXsdName();
+    public String[] getXsdNameList();
 
     public List<ValidationError> validate(File inputXML) throws ValidationException;
 

@@ -29,7 +29,7 @@
     <parent>
        <groupId>org.jvnet.hudson.dtkit</groupId>
        <artifactId>dtkit-metrics-parent</artifactId>
-       <version>2</version>
+       <version>4-SNAPSHOT</version>
     </parent>
 
     <groupId>org.jvnet.hudson.dtkit</groupId>
@@ -63,6 +63,8 @@
         <hudson.version>1.355</hudson.version>
         <dtkit.frmk.version>0.8-SNAPSHOT</dtkit.frmk.version>
         <dtkit.plugins.version>0.8-SNAPSHOT</dtkit.plugins.version>
+        <dtkit.format.junit.version>0.8-SNAPSHOT</dtkit.format.junit.version>
+        <dtkit.format.tusar.version>0.8-SNAPSHOT</dtkit.format.tusar.version>
     </properties>
 
     <dependencyManagement>
@@ -77,13 +79,13 @@
             <dependency>
                 <groupId>org.jvnet.hudson.dtkit</groupId>
                 <artifactId>dtkit-junit-model</artifactId>
-                <version>${dtkit.frmk.version}</version>
+                <version>${dtkit.format.junit.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jvnet.hudson.dtkit</groupId>
                 <artifactId>dtkit-tusar-model</artifactId>
-                <version>${dtkit.frmk.version}</version>
+                <version>${dtkit.format.tusar.version}</version>
             </dependency>
 
             <!-- Used for compiling the generated classes -->

@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="nunit", namespace = "junit")
+@XmlType(name = "nunit", namespace = "junit")
 public class NUnit extends InputMetricXSL {
 
     @Override
@@ -47,12 +47,12 @@ public class NUnit extends InputMetricXSL {
     @Override
     public String getToolVersion() {
         return "Version N/A";
-    }        
+    }
 
     @Override
     public boolean isDefault() {
         return true;
-    }    
+    }
 
     @Override
     public String getXslName() {
@@ -60,8 +60,8 @@ public class NUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return null;  
+    public String[] getInputXsdNameList() {
+        return null;
     }
 
     public OutputMetric getOutputFormatType() {

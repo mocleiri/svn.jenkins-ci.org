@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="cobertura", namespace = "tusar")
+@XmlType(name = "cobertura", namespace = "tusar")
 public class Cobertura extends InputMetricXSL {
 
     @Override
@@ -60,7 +60,7 @@ public class Cobertura extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

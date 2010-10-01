@@ -30,7 +30,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="cpptest", namespace = "junit")
+@XmlType(name = "cpptest", namespace = "junit")
 public class CppTestUnit extends InputMetricXSL {
 
     @Override
@@ -59,7 +59,7 @@ public class CppTestUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

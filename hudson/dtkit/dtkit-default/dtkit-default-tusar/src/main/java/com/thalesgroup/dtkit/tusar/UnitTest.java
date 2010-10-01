@@ -32,7 +32,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="unittest", namespace = "tusar")
+@XmlType(name = "unittest", namespace = "tusar")
 public class UnitTest extends InputMetricXSL {
 
     @Override
@@ -61,7 +61,7 @@ public class UnitTest extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

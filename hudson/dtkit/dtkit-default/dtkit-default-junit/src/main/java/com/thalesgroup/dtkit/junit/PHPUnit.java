@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="phpunit", namespace = "junit")
+@XmlType(name = "phpunit", namespace = "junit")
 public class PHPUnit extends InputMetricXSL {
 
     @Override
@@ -48,7 +48,7 @@ public class PHPUnit extends InputMetricXSL {
     public String getToolVersion() {
         return "3.4";
     }
-    
+
     @Override
     public boolean isDefault() {
         return true;
@@ -60,8 +60,8 @@ public class PHPUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return "phpunit-1.0.xsd";
+    public String[] getInputXsdNameList() {
+        return new String[]{"phpunit-1.0.xsd"};
     }
 
     @Override

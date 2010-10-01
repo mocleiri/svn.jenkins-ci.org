@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="unittest", namespace = "junit")
+@XmlType(name = "unittest", namespace = "junit")
 public class UnitTest extends InputMetricXSL {
 
     @Override
@@ -47,12 +47,12 @@ public class UnitTest extends InputMetricXSL {
     @Override
     public String getToolVersion() {
         return "1.4";
-    }        
+    }
 
     @Override
     public boolean isDefault() {
         return true;
-    }    
+    }
 
     @Override
     public String getXslName() {
@@ -60,8 +60,8 @@ public class UnitTest extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return null; 
+    public String[] getInputXsdNameList() {
+        return null;
     }
 
     @Override

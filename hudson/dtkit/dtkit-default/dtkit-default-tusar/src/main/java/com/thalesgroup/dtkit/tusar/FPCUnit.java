@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="fpcunit", namespace = "tusar")
+@XmlType(name = "fpcunit", namespace = "tusar")
 public class FPCUnit extends InputMetricXSL {
 
     @Override
@@ -60,7 +60,7 @@ public class FPCUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

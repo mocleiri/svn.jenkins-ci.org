@@ -31,6 +31,7 @@ import com.thalesgroup.dtkit.util.validator.ValidationService;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractOutputMetric implements OutputMetric {
@@ -54,6 +55,16 @@ public abstract class AbstractOutputMetric implements OutputMetric {
 
     @Override
     public List<ValidationError> validate(File inputXMLFile) throws ValidationException {
-        return validationService.processValidation(new StreamSource(this.getClass().getResourceAsStream(getXsdName())), inputXMLFile);
+
+        if (this.getXsdNameList() == null) {
+            return new ArrayList<ValidationError>();
+        }
+
+        StreamSource[] streamSources = new StreamSource[getXsdNameList().length];
+        for (int i = 0; i < streamSources.length; i++) {
+            streamSources[i] = new StreamSource(this.getClass().getResourceAsStream(getXsdNameList()[i]));
+        }
+
+        return validationService.processValidation(streamSources, inputXMLFile);
     }
 }

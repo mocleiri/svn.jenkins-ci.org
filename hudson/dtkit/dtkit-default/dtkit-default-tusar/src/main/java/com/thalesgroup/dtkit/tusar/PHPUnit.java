@@ -32,7 +32,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="phpunit", namespace = "tusar")
+@XmlType(name = "phpunit", namespace = "tusar")
 public class PHPUnit extends InputMetricXSL {
 
     @Override
@@ -61,8 +61,8 @@ public class PHPUnit extends InputMetricXSL {
     }
 
     @Override
-    public String getInputXsdName() {
-        return "phpunit-1.0.xsd";
+    public String[] getInputXsdNameList() {
+        return new String[]{"phpunit-1.0.xsd"};
     }
 
     @Override

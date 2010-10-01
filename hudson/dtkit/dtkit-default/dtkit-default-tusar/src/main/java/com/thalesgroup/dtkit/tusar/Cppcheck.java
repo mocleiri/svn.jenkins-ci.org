@@ -31,7 +31,7 @@ import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="cppcheck", namespace = "tusar")
+@XmlType(name = "cppcheck", namespace = "tusar")
 public class Cppcheck extends InputMetricXSL {
 
     @Override
@@ -53,14 +53,14 @@ public class Cppcheck extends InputMetricXSL {
     public boolean isDefault() {
         return true;
     }
-    
+
     @Override
     public String getXslName() {
         return "cppcheck-1.0-to-tusar-1.0.xsl";
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 
