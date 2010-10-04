@@ -27,7 +27,7 @@ import java.io.Serializable;
 
 
 @SuppressWarnings("unused")
-public class ValidationException extends Exception implements Serializable {
+public class ValidationException extends RuntimeException implements Serializable {
 
     public ValidationException() {
         super();

@@ -95,6 +95,11 @@ public class ValidationService implements Serializable {
             schemaValidator.setErrorHandler(handler);
             schemaValidator.setResourceResolver(resolver);
             schemaValidator.validate(new StreamSource(inputXML));
+
+            for (int i=0; i<xsdSources.length;i++){
+                xsdSources[i] = null;
+            }
+
             return handler.getErrors();
         }
         catch (SAXException sae) {

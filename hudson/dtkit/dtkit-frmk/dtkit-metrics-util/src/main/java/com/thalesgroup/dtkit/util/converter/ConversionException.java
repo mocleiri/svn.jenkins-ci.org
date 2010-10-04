@@ -25,7 +25,7 @@ package com.thalesgroup.dtkit.util.converter;
 
 import java.io.Serializable;
 
-public class ConversionException extends Exception implements Serializable {
+public class ConversionException extends RuntimeException implements Serializable {
 
     @SuppressWarnings("unused")
     public ConversionException() {

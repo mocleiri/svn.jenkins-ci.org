@@ -31,6 +31,7 @@ import com.thalesgroup.dtkit.util.validator.ValidationService;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.transform.Source;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -207,6 +208,7 @@ public abstract class InputMetricXSL extends InputMetric {
         }
 
         setInputValidationErrors(validationService.processValidation(streamSources, inputXMLFile));
+        
         return getInputValidationErrors().size() == 0;
     }
 
@@ -216,16 +218,20 @@ public abstract class InputMetricXSL extends InputMetric {
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
 
+        if (validationService!=null){
+            return true;
+        }
+
         if (this.getOutputXsdNameList() == null) {
             return true;
         }
 
-        StreamSource[] streamSources = new StreamSource[getOutputXsdNameList().length];
-        for (int i = 0; i < streamSources.length; i++) {
-            streamSources[i] = new StreamSource(this.getOutputFormatType().getClass().getResourceAsStream(getOutputXsdNameList()[i]));
+        Source[] sources = new Source[getOutputXsdNameList().length];
+        for (int i = 0; i < sources.length; i++) {
+            sources[i] = new StreamSource(this.getOutputFormatType().getClass().getResourceAsStream(getOutputXsdNameList()[i]));
         }
 
-        setOutputValidationErrors(validationService.processValidation(streamSources, inputXMLFile));
+        setOutputValidationErrors(validationService.processValidation(sources, inputXMLFile));
         return getOutputValidationErrors().size() == 0;
     }
 
