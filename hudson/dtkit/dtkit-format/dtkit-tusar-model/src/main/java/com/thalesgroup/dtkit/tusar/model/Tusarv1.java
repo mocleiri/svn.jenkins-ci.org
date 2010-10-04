@@ -23,35 +23,35 @@
 
 package com.thalesgroup.dtkit.tusar.model;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.thalesgroup.dtkit.metrics.model.OutputMetric;
-import com.thalesgroup.dtkit.util.validator.ValidationService;
+import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
 
-@SuppressWarnings("unused")
-@XmlAccessorType(XmlAccessType.PROPERTY)
-public class TusarModel implements Serializable {
+public class Tusarv1 extends AbstractOutputMetric implements Serializable {
 
-    @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_0 = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-            bind(ValidationService.class);
-        }
-    }).getInstance(Tusarv0.class);
+    @Override
+    @XmlElement
+    public String getKey() {
+        return "tusar";
+    }
 
-    @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_1 = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-            bind(ValidationService.class);
-        }
-    }).getInstance(Tusarv1.class);
+    @Override
+    @XmlElement
+    public String getDescription() {
+        return "TUSAR OUTPUT FORMAT 1.1";
+    }
 
+    @Override
+    @XmlElement
+    public String getVersion() {
+        return "1.1";
+    }
 
+    @Override
+    @XmlElement
+    public String[] getXsdNameList() {
+        return new String[]{"xsd/tests-1.1.xsd", "xsd/coverage-1.1.xsd", "xsd/violations-1.1.xsd", "xsd/measures-1.1.xsd", "xsd/tusar-1.1.xsd"};
+    }
 }
