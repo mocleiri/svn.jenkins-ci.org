@@ -62,6 +62,8 @@ THE SOFTWARE.
                     <j:forEach var="descriptor" items="${h.viewsTabBarDescriptors}" varStatus="loop">
                         <f:dropdownListBlock title="${descriptor.displayName}" value="${loop.index}"
                                  selected="${descriptor==it.viewsTabBarDescriptor}" staplerClass="${descriptor.clazz.name}">
+                                 <!-- Include config.jelly for this Views TabBar type -->
+                                 <st:include page="${descriptor.configPage}" from="${descriptor}" optional="true"/>
                         </f:dropdownListBlock>
                     </j:forEach>
                 </f:dropdownList>
