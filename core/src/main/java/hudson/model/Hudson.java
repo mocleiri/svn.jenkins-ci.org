@@ -2343,6 +2343,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
             if (json.has("csrf")) {
             	JSONObject csrf = json.getJSONObject("csrf");
+                setCrumbIssuer(CrumbIssuer.all().newInstanceFromRadioList(csrf, "issuer"));
             } else {
             	setCrumbIssuer(null);
             }
