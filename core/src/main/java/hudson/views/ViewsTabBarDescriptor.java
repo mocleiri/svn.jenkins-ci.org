@@ -26,15 +26,12 @@ package hudson.views;
 import hudson.model.Descriptor;
 
 /**
- * {@link Descriptor} for {@link ViewTabs}.
- *
+ * {@link Descriptor} for {@link ViewsTabBar}.
  *
  * @author Winston Prakash
  * @since 1.378
  */
 public abstract class ViewsTabBarDescriptor extends Descriptor<ViewsTabBar> {
-     
-    public boolean shownByDefault() {
-        return true;
-    }
+    // so far nothing different from plain Descriptor
+    // but it may prove useful for future expansion
 }

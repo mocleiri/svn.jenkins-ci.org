@@ -25,12 +25,10 @@ package hudson.views;
 
 import hudson.DescriptorExtensionList;
 import hudson.ExtensionPoint;
-import hudson.model.Describable;
+import hudson.model.AbstractDescribableImpl;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
 import hudson.model.ListView;
-import hudson.util.DescriptorList;
-import org.kohsuke.stapler.export.Exported;
 
 /**
  * Extension point for adding a ViewsTabBar header to Projects {@link ListView}.
@@ -46,20 +44,9 @@ import org.kohsuke.stapler.export.Exported;
  *
  * @author Winston Prakash
  * @since 1.378
- * @see ViewTabsDescriptor
+ * @see ViewsTabBarDescriptor
  */
-public abstract class ViewsTabBar implements ExtensionPoint, Describable<ViewsTabBar> {
-    /**
-     * Returns the name of the column that explains what this column means
-     *
-     * @return
-     *      The convention is to use capitalization like "Foo Bar Zot".
-     */
-    @Exported
-    public String getColumnCaption() {
-        return getDescriptor().getDisplayName();
-    }
-
+public abstract class ViewsTabBar extends AbstractDescribableImpl<ViewsTabBar> implements ExtensionPoint {
     /**
      * Returns all the registered {@link ListViewColumn} descriptors.
      */
@@ -67,30 +54,7 @@ public abstract class ViewsTabBar implements ExtensionPoint, Describable<ViewsTa
         return Hudson.getInstance().<ViewsTabBar, Descriptor<ViewsTabBar>>getDescriptorList(ViewsTabBar.class);
     }
 
-    /**
-     * All registered {@link ListViewColumn}s.
-     * @deprecated as of 1.281
-     *      Use {@link #all()} for read access and {@link Extension} for registration.
-     */
-    public static final DescriptorList<ViewsTabBar> LIST = new DescriptorList<ViewsTabBar>(ViewsTabBar.class);
-
-    /**
-     * Whether this column will be shown by default.
-     * The default implementation is true.
-     *
-     * @since 1.301
-     * @deprecated as of 1.342.
-     *      Use {@link ViewTabsDescriptor#shownByDefault()}
-     */
-    public boolean shownByDefault() {
-        return true;
-    }
-
-    /**
-     * For compatibility reason, this method may not return a {@link ViewTabsDescriptor}
-     * and instead return a plain {@link Descriptor} instance.
-     */
-    public Descriptor<ViewsTabBar> getDescriptor() {
-        return Hudson.getInstance().getDescriptorOrDie(getClass());
+    public ViewsTabBarDescriptor getDescriptor() {
+        return (ViewsTabBarDescriptor)super.getDescriptor();
     }
 }
