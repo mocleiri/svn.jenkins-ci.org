@@ -242,6 +242,8 @@ public class MyViewsProperty extends UserProperty implements ViewGroup, Action {
     }
 
     public ViewsTabBar getViewsTabBar() {
+        // TODO: we should let the MyViewsProperty define its own ViewsTabBar,
+        // so that people can have their favorite tab bar implementation
         return Hudson.getInstance().getViewsTabBar();
     }
     

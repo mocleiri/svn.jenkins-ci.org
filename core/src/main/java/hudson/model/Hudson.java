@@ -341,6 +341,11 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     private transient volatile DependencyGraph dependencyGraph;
 
     /**
+     * Currently active tab bar.
+     */
+    private volatile ViewsTabBar viewsTabBar = new DefaultViewsTabBar();
+
+    /**
      * All {@link ExtensionList} keyed by their {@link ExtensionList#extensionType}.
      */
     private transient final Memoizer<Class,ExtensionList> extensionLists = new Memoizer<Class,ExtensionList>() {
@@ -1298,24 +1303,8 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
         save();
     }
     
-    private String currentViewsTabBar;
-
-    public synchronized ViewsTabBar getViewsTabBar() {
-        if (currentViewsTabBar == null){
-            currentViewsTabBar = DefaultViewsTabBar.class.getName();
-        }
-
-        Descriptor<ViewsTabBar> viewsTabBarDescriptor = getDescriptorByName(currentViewsTabBar);
-        try {
-            return  viewsTabBarDescriptor.newInstance(null, null);
-        } catch (FormException e) {
-            LOGGER.log(Level.WARNING, "Failed to instantiate " + viewsTabBarDescriptor.clazz, e);
-            return null;
-        }
-    }
-
-    public Descriptor<ViewsTabBar> getViewsTabBarDescriptor(){
-        return getDescriptorByName(currentViewsTabBar);
+    public ViewsTabBar getViewsTabBar() {
+        return viewsTabBar;
     }
 
     /**
@@ -2359,7 +2348,9 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
             }
 
             if (json.has("viewsTabBar")) {
-                currentViewsTabBar = (String) json.getJSONObject("viewsTabBar").get("stapler-class");
+                viewsTabBar = req.bindJSON(ViewsTabBar.class,json.getJSONObject("viewsTabBar"));
+            } else {
+                viewsTabBar = new DefaultViewsTabBar();
             }
 
             primaryView = json.has("primaryView") ? json.getString("primaryView") : getViews().iterator().next().getViewName();
