@@ -56,7 +56,7 @@ public class Checkstyle extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "checkstyle-1.0-to-tusar-1.0.xsl";
+        return "checkstyle-1.0-to-tusar-1.1.xsl";
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Checkstyle extends InputMetricXSL {
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_1_0;
+        return TusarModel.OUTPUT_TUSAR_1_1;
     }
 }
 

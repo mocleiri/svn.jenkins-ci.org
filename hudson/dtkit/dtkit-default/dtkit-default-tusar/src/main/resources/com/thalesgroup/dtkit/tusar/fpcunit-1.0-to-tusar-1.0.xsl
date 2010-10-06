@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*******************************************************************************
-* Copyright (c) 2009 Thales Corporate Services SAS                             *
-* Author : Joel Forner                                                         *
+* Copyright (c) 2010 Thales Corporate Services SAS                             *
+* Author : Gregory Boissinot, Joel Forner                                      *
 *          from a script by  Jan De Bleser (jan at commsquare dot com)         *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
