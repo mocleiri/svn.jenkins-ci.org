@@ -27,23 +27,23 @@ import hudson.Extension;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
- * The Default ViewsTabBar Extension for {@link ViewsTabBar}.
+ * The Default MyViewsTabBar Extension for {@link MyViewsTabBar}.
  *
  * @author Winston Prakash
  * @since 1.378
- * @see ViewsTabBar
+ * @see MyViewsTabBar
  */
-public class DefaultViewsTabBar extends ViewsTabBar {
+public class DefaultMyViewsTabBar extends MyViewsTabBar {
     @DataBoundConstructor
-    public DefaultViewsTabBar() {
+    public DefaultMyViewsTabBar() {
     }
 
     @Extension
-    public static class DescriptorImpl extends ViewsTabBarDescriptor {
+    public static class DescriptorImpl extends MyViewsTabBarDescriptor {
         @Override
         public String getDisplayName() {
-            return Messages.DefaultViewsTabsBar_DisplayName();
-            //return "Default Views TabsBar";
+            return Messages.DefaultMyViewsTabsBar_DisplayName();
+            //return "Default My Views TabsBar";
         }
     }
 

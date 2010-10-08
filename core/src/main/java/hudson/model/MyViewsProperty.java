@@ -29,6 +29,7 @@ import hudson.model.Descriptor.FormException;
 import hudson.security.ACL;
 import hudson.security.Permission;
 import hudson.util.FormValidation;
+import hudson.views.MyViewsTabBar;
 import hudson.views.ViewsTabBar;
 
 import java.io.IOException;
@@ -242,9 +243,11 @@ public class MyViewsProperty extends UserProperty implements ViewGroup, Action {
     }
 
     public ViewsTabBar getViewsTabBar() {
-        // TODO: we should let the MyViewsProperty define its own ViewsTabBar,
-        // so that people can have their favorite tab bar implementation
         return Hudson.getInstance().getViewsTabBar();
+    }
+
+    public MyViewsTabBar getMyViewsTabBar() {
+        return Hudson.getInstance().getMyViewsTabBar();
     }
     
     @Extension

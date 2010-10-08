@@ -127,7 +127,9 @@ import hudson.util.VersionNumber;
 import hudson.util.XStream2;
 import hudson.util.Service;
 import hudson.util.IOUtils;
+import hudson.views.DefaultMyViewsTabBar;
 import hudson.views.DefaultViewsTabBar;
+import hudson.views.MyViewsTabBar;
 import hudson.views.ViewsTabBar;
 import hudson.widgets.Widget;
 import net.sf.json.JSONObject;
@@ -341,9 +343,14 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     private transient volatile DependencyGraph dependencyGraph;
 
     /**
-     * Currently active tab bar.
+     * Currently active Vies tab bar.
      */
     private volatile ViewsTabBar viewsTabBar = new DefaultViewsTabBar();
+
+    /**
+     * Currently active My Views tab bar.
+     */
+    private volatile MyViewsTabBar myViewsTabBar = new DefaultMyViewsTabBar();
 
     /**
      * All {@link ExtensionList} keyed by their {@link ExtensionList#extensionType}.
@@ -563,7 +570,7 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
 
     /**
      * @param pluginManager
-     *      If non-null, use existing plugin manager. Otherwise create a new one.
+     *      If non-null, use existing plugin manager.  create a new one.
      */
     public Hudson(File root, ServletContext context, PluginManager pluginManager) throws IOException, InterruptedException, ReactorException {
     	// As hudson is starting, grant this process full control
@@ -1305,6 +1312,10 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
     
     public ViewsTabBar getViewsTabBar() {
         return viewsTabBar;
+    }
+
+    public MyViewsTabBar getMyViewsTabBar() {
+        return myViewsTabBar;
     }
 
     /**
@@ -2352,6 +2363,12 @@ public final class Hudson extends Node implements ItemGroup<TopLevelItem>, Stapl
                 viewsTabBar = req.bindJSON(ViewsTabBar.class,json.getJSONObject("viewsTabBar"));
             } else {
                 viewsTabBar = new DefaultViewsTabBar();
+            }
+
+            if (json.has("myViewsTabBar")) {
+                myViewsTabBar = req.bindJSON(MyViewsTabBar.class,json.getJSONObject("myViewsTabBar"));
+            } else {
+                myViewsTabBar = new DefaultMyViewsTabBar();
             }
 
             primaryView = json.has("primaryView") ? json.getString("primaryView") : getViews().iterator().next().getViewName();

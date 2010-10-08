@@ -37,7 +37,14 @@ THE SOFTWARE.
             <t:projectView jobs="${items}" jobBaseUrl="" showViewTabs="true" columnExtensions="${it.columns}">
                 <j:set var="views" value="${it.owner.views}"/>
                 <j:set var="currentView" value="${it}"/>
-                <st:include page="viewTabs.jelly" it="${it.owner.viewsTabBar}"/>
+                <j:choose>
+                    <j:when test="${it.owner.class.name=='hudson.model.MyViewsProperty'}">
+                        <st:include page="myViewTabs.jelly" it="${it.owner.myViewsTabBar}"/>
+                    </j:when>
+                    <j:otherwise>
+                        <st:include page="viewTabs.jelly" it="${it.owner.viewsTabBar}"/>
+                    </j:otherwise>
+                </j:choose>
             </t:projectView>
         </j:otherwise>
     </j:choose>
