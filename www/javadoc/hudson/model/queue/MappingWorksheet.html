@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MappingWorksheet (Hudson main module 1.379 API)
+MappingWorksheet (Hudson main module 1.380 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-02">
+<META NAME="date" CONTENT="2010-10-09">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MappingWorksheet (Hudson main module 1.379 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MappingWorksheet (Hudson main module 1.379 API)";
+        parent.document.title="MappingWorksheet (Hudson main module 1.380 API)";
     }
 }
 </SCRIPT>
@@ -194,6 +194,14 @@ Defines a mapping problem for answering "where do we execute this task?"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html#item">item</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><CODE>Queue.BuildableItem</CODE></A> for which we are trying to figure out the execution plan.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/queue/MappingWorksheet.WorkChunk.html" title="class in hudson.model.queue">MappingWorksheet.WorkChunk</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html#works">works</A></B></CODE>
 
@@ -211,7 +219,7 @@ Defines a mapping problem for answering "where do we execute this task?"
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html#MappingWorksheet(hudson.model.Queue.Task, java.util.List)">MappingWorksheet</A></B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+<TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html#MappingWorksheet(hudson.model.Queue.BuildableItem, java.util.List)">MappingWorksheet</A></B>(<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&nbsp;item,
                  <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A>&gt;&nbsp;offers)</CODE>
 
 <BR>
@@ -284,6 +292,18 @@ public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.htm
 <DL>
 </DL>
 </DL>
+<HR>
+
+<A NAME="item"><!-- --></A><H3>
+item</H3>
+<PRE>
+public final <A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A> <B>item</B></PRE>
+<DL>
+<DD><A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model"><CODE>Queue.BuildableItem</CODE></A> for which we are trying to figure out the execution plan. Never null.
+<P>
+<DL>
+</DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -295,10 +315,10 @@ public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.htm
 </TR>
 </TABLE>
 
-<A NAME="MappingWorksheet(hudson.model.Queue.Task, java.util.List)"><!-- --></A><H3>
+<A NAME="MappingWorksheet(hudson.model.Queue.BuildableItem, java.util.List)"><!-- --></A><H3>
 MappingWorksheet</H3>
 <PRE>
-public <B>MappingWorksheet</B>(<A HREF="../../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+public <B>MappingWorksheet</B>(<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&nbsp;item,
                         <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A>&gt;&nbsp;offers)</PRE>
 <DL>
 </DL>
