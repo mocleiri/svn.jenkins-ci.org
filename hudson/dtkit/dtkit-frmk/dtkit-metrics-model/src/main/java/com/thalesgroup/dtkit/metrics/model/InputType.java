@@ -26,5 +26,33 @@ package com.thalesgroup.dtkit.metrics.model;
 @SuppressWarnings("unused")
 public enum InputType {
 
-    TEST, COVERAGE, VIOLATION, MEASURE
+    TEST("test"), COVERAGE("coverage"), VIOLATION("violation"), MEASURE("measure");
+
+    private String value;
+
+    private InputType(String val) {
+        this.value = val;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public static InputType getInputType(String type) {
+
+        if (TEST.getValue().equalsIgnoreCase(type)) {
+            return TEST;
+        }
+        if (COVERAGE.getValue().equalsIgnoreCase(type)) {
+            return COVERAGE;
+        }
+        if (VIOLATION.getValue().equalsIgnoreCase(type)) {
+            return VIOLATION;
+        }
+        if (MEASURE.getValue().equalsIgnoreCase(type)) {
+            return MEASURE;
+        }
+
+        throw new IllegalArgumentException("Wrong input type: " + type);
+    }
 }

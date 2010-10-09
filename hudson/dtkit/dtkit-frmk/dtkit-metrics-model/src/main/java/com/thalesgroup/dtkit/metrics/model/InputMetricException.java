@@ -26,7 +26,7 @@ package com.thalesgroup.dtkit.metrics.model;
 import java.io.Serializable;
 
 
-public class InputMetricException extends Exception implements Serializable {
+public class InputMetricException extends RuntimeException implements Serializable {
 
     @SuppressWarnings("unused")
     public InputMetricException() {

@@ -70,16 +70,33 @@
                 <version>${jaxb2.maven.plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>tusarv1</id>    
+                        <configuration>
+	                   <schemaDirectory>${basedir}/src/main/resources/com/thalesgroup/dtkit/tusar/model/xsd</schemaDirectory>
+  			   <packageName>com.thalesgroup.dtkit.tusar.model</packageName>
+		           <schemaFiles>tusar-1.0.xsd</schemaFiles>
+		           <staleFile>${project.build.directory}/generated-sources/jaxb/tusarv1/.staleFlag.</staleFile> 
+			   <clearOutputDir>false</clearOutputDir>
+  	                </configuration>
                         <goals>
                             <goal>xjc</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>tusarv2</id>    
+                        <configuration>
+	                   <schemaDirectory>${basedir}/src/main/resources/com/thalesgroup/dtkit/tusar/model/xsd</schemaDirectory>
+ 	    	      	   <schemaFiles>tusar-1.1.xsd</schemaFiles>
+		           <staleFile>${project.build.directory}/generated-sources/jaxb/tusarv2/.staleFlag.</staleFile> 
+			   <clearOutputDir>false</clearOutputDir>
+  	                </configuration>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+
                 </executions>
-                <configuration>
-                    <schemaDirectory>${basedir}/src/main/resources/com/thalesgroup/dtkit/tusar/model/xsd</schemaDirectory>
- 	    	    <schemaFiles>tusar-1.0.xsd</schemaFiles>
- 	    	    <schemaFiles>tusar-1.1.xsd</schemaFiles>
-                </configuration>
             </plugin>
         </plugins>
     </build>
