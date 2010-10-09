@@ -28,11 +28,11 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
-import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
 import com.sun.jersey.test.framework.spi.container.embedded.glassfish.EmbeddedGlassFishTestContainerFactory;
+import com.thalesgroup.dtkit.metrics.model.InputMetricException;
+import com.thalesgroup.dtkit.ws.rs.dao.InputMetricEmbeddedDAO;
 import com.thalesgroup.dtkit.ws.rs.providers.InputMetricJSONProvider;
-import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
 import eu.vahlas.json.schema.JSONSchema;
 import eu.vahlas.json.schema.JSONSchemaProvider;
 import eu.vahlas.json.schema.impl.JacksonSchemaProvider;
@@ -51,7 +51,7 @@ public abstract class InputMetricsAbstractTest extends JerseyTest {
 
     protected WebResource webResource;
 
-    protected InputMetricsLocator inputMetricsLocator;
+    protected InputMetricEmbeddedDAO inputMetricEmbeddedDAO;
 
     @Override
     protected TestContainerFactory getTestContainerFactory() {
@@ -65,14 +65,18 @@ public abstract class InputMetricsAbstractTest extends JerseyTest {
         clientConfig.getClasses().add(InputMetricJSONProvider.class);
     }
 
-    public InputMetricsAbstractTest() throws TestContainerException {
+    public InputMetricsAbstractTest() {
         super(new WebAppDescriptor.Builder("com.thalesgroup.dtkit.ws.rs;org.codehaus.jackson.jaxrs")
                 .clientConfig(clientConfig)
-                        //.contextListenerClass(com.thalesgroup.dtkit.ws.rs.services.GuiceConfig.class)
-                        //.filterClass(com.google.inject.servlet.GuiceFilter.class)
-                .contextPath("dtkit-rs").build());
+                .build());
 
-        inputMetricsLocator = new InputMetricsLocator();//Guice.createInjector().getInstance(InputMetricsLocator.class);
+//        GuiceFilter.reset();
+//        Guice.createInjector(Modules.override(new GuiceModule()).with(new GuiceModuleTest()));
+        try {
+            inputMetricEmbeddedDAO = new InputMetricEmbeddedDAO();
+        } catch (InputMetricException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected void validateInputMetricJSONXMLSchema(String jsonResult, String jsonSchemaName) {

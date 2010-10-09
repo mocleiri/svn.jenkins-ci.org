@@ -21,19 +21,29 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs.services;
+package com.thalesgroup.dtkit.ws.rs.dao;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.servlet.GuiceServletContextListener;
-import com.google.inject.servlet.ServletModule;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricException;
+import com.thalesgroup.dtkit.metrics.model.InputType;
+import com.thalesgroup.dtkit.metrics.model.OutputMetric;
+import com.thalesgroup.dtkit.ws.rs.model.InputMetricSelector;
 
-public class GuiceConfig extends GuiceServletContextListener {
+import java.io.File;
+import java.util.List;
+import java.util.Collection;
 
-    protected Injector getInjector() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"com/thalesgroup/dtkit/ws/rs/services/applicationContext.xml"});
-        Object bean = context.getBean("guiceModule");
-        return Guice.createInjector((ServletModule) bean);
-    }
+public interface InputMetricDAO {
+
+    public void insert(String name, String version, InputType toolType, File xsl, File xsd, OutputMetric outputMetric);
+
+    public void delete(String name, String version, InputType toolType, OutputMetric outputMetric);
+
+    public long getCount();
+
+    public Collection<? extends InputMetric> getInputMetric(InputMetricSelector inputMetricSelector);
+
+    public Collection<? extends InputMetric> getInputMetrics();
+
+    public boolean isPersistenceStore();
 }

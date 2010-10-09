@@ -27,19 +27,24 @@ import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
 import com.sun.jersey.multipart.FormDataParam;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
-import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
+import com.thalesgroup.dtkit.ws.rs.dao.InputMetricDAO;
+import com.thalesgroup.dtkit.ws.rs.model.InputMetricSelector;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricValidationResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Path(InputMetricsConversion.PATH)
@@ -50,102 +55,89 @@ public class InputMetricsConversion {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private InputMetricsLocator inputMetricsLocator;
+    private List<InputMetricDAO> inputMetricDAOList;
 
     private ConversionService conversionService;
 
     @Inject
     @SuppressWarnings("unused")
-    public void load(InputMetricsLocator inputMetricsLocator, ConversionService conversionService) {
-        this.inputMetricsLocator = inputMetricsLocator;
+    public void load(List<InputMetricDAO> inputMetricDAOList, ConversionService conversionService) {
         this.conversionService = conversionService;
+        this.inputMetricDAOList = inputMetricDAOList;
     }
 
-    private InputMetric getInputMetricObject(PathSegment metricSegment) {
-
-        String metricName = metricSegment.getPath();
-        String type = metricSegment.getMatrixParameters().getFirst("type");
-        String version = metricSegment.getMatrixParameters().getFirst("version");
-        String format = metricSegment.getMatrixParameters().getFirst("format");
-
-        InputMetric inputMetric = inputMetricsLocator.getInputMetricObject(metricName, type, version, format);
-        if (inputMetric == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        return inputMetric;
-    }
-
-    @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_XML)
-    @SuppressWarnings("unused")
-    public Response convertInputFile(@FormDataParam("file") File inputXmlLFile, @FormDataParam("xsl") File inputXslFile) {
-        logger.debug("convertInputMetric() service");
+    private File convertCustom(File inputXmlLFile, File inputXslFile) throws ConversionException {
 
         if (inputXmlLFile == null) {
-            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+            throw new NullPointerException("For a custom conversion, the input file is mandatory");
         }
-
         if (inputXslFile == null) {
-            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+            throw new NullPointerException("For a custom conversion, the input XSL file is mandatory");
         }
 
         try {
-            File dest = File.createTempFile("toot", "ttt");
+            File dest = File.createTempFile("temp", Long.toString(System.nanoTime()));
             conversionService.convert(inputXslFile, inputXmlLFile, dest);
-            return Response.ok(dest).build();
+            return dest;
         } catch (IOException ioe) {
             logger.error("Conversion error", ioe);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-        }
-        catch (ConversionException ce) {
-            logger.error("Conversion error", ce);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+            throw new ConversionException("Conversion error for " + inputXmlLFile, ioe);
         }
     }
 
-    @POST
-    @Path("/{metric}")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_XML)
-    @SuppressWarnings("unused")
-    public Response convertInputMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputXmlLFile) {
-        logger.debug("convertInputMetric() service");
 
-        if (inputXmlLFile == null) {
-            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
-        }
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @SuppressWarnings("unused")
+    public Response convertInputFile(
+            @MatrixParam("name") String name, @MatrixParam("version") String version, @MatrixParam("type") String type, @MatrixParam("format") String format,
+            @FormDataParam("file") File inputXmlLFile, @FormDataParam("xsl") File inputXslFile) {
 
         try {
 
-            //Retrieving the metric
-            InputMetric inputMetric = getInputMetricObject(metricSegment);
+            InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, type, format);
+            if (inputMetricSelector.isNoCriteria()) {
+                File convertedFile = convertCustom(inputXmlLFile, inputXslFile);
+                return Response.ok(convertedFile).build();
+            }
+
+            List<InputMetric> metrics = new ArrayList<InputMetric>();
+            for (InputMetricDAO inputMetricDAO : inputMetricDAOList) {
+                metrics.addAll(inputMetricDAO.getInputMetric(inputMetricSelector));
+            }
+
+            if (metrics.size() == 0) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+            if (metrics.size() > 1) {
+                return Response.status(Response.Status.CONFLICT).build();
+            }
+
+            InputMetric metric = metrics.get(0);
+            if (!(metric instanceof InputMetricXSL)) {
+                return Response.status(Response.Status.PRECONDITION_FAILED).build();
+            }
 
             //Validating input file
-            boolean result;
-            try {
-                result = inputMetric.validateInputFile(inputXmlLFile);
-            } catch (ValidationException e) {
-                throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
-            }
+            boolean result = metric.validateInputFile(inputXmlLFile);
             if (!result) {
-                throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+                InputMetricVo inputMetricVo = new InputMetricVo(metric.getToolName(), metric.getToolVersion(), metric.getToolType().name(), metric.getOutputFormatType().getKey());
+                InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
+                inputMetricValidationResult.setValid(metric.validateInputFile(inputXmlLFile));
+                inputMetricValidationResult.setValidationErrors(metric.getInputValidationErrors());
+                return Response.ok(inputMetricValidationResult).build();
             }
 
             //Converting the input file
-            File dest = File.createTempFile("toot", "ttt");
-            inputMetric.convert(inputXmlLFile, dest);
+            File dest = File.createTempFile("temp", Long.toString(System.nanoTime()));
+            metric.convert(inputXmlLFile, dest);
             return Response.ok(dest).build();
-
-        } catch (IOException ioe) {
-            logger.error("Conversion error for " + metricSegment.getPath(), ioe);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
-        catch (ConversionException ce) {
-            logger.error("Conversion error for " + metricSegment.getPath(), ce);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        catch (IOException ioe) {
+            throw new WebApplicationException(ioe, Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 }

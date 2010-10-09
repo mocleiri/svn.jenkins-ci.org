@@ -28,10 +28,17 @@ import com.thalesgroup.dtkit.util.validator.ValidationError;
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonValue;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonWriteNullProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 
 @XmlRootElement(name = "validationResult")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InputMetricValidationResult {
+
+    private InputMetricVo metric;
 
     private boolean valid;
 
@@ -55,6 +62,17 @@ public class InputMetricValidationResult {
 
     public void setValidationErrors(List<ValidationError> validationErrors) {
         this.validationErrors = validationErrors;
+    }
+
+    public void setMetric(InputMetricVo metric) {
+        this.metric = metric;
+    }
+
+
+    @SuppressWarnings("unused")
+    @JsonSerialize(include=JsonSerialize.Inclusion.NON_DEFAULT)    
+    public InputMetricVo getMetric() {
+        return metric;
     }
 }
 

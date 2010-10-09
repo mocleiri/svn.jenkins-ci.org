@@ -23,7 +23,8 @@
 *******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -38,16 +39,11 @@
     <artifactId>dtkit-rs</artifactId>
     <packaging>war</packaging>
     <version>0.3-SNAPSHOT</version>
-    <name>dtkit-rs</name>
+    <name>DTKIT RS</name>
     <description>DTKIT Web services layer</description>
     <url>http://wiki.hudson-ci.org/display/HUDSON/DTKIT</url>
 
     <repositories>
-        <repository>
-            <id>javanet</id>
-            <name>Repository for JavaNet</name>
-            <url>http://download.java.net/maven/2</url>
-        </repository>
 
         <repository>
             <id>codehaus</id>
@@ -56,10 +52,16 @@
         </repository>
 
         <repository>
-            <id>maven-repository.dev.java.net</id>
+            <id>javanet1</id>
             <name>Java.net Maven 1 Repository (legacy)</name>
             <url>http://download.java.net/maven/1</url>
             <layout>legacy</layout>
+        </repository>
+
+        <repository>
+            <id>javanet2</id>
+            <name>Repository for JavaNet</name>
+            <url>http://download.java.net/maven/2</url>
         </repository>
 
         <repository>
@@ -67,6 +69,13 @@
             <name>guice maven</name>
             <url>http://guiceyfruit.googlecode.com/svn/repo/releases</url>
         </repository>
+
+        <repository>
+            <id>morphia</id>
+            <name>Morphia Repository</name>
+            <url>http://morphia.googlecode.com/svn/mavenrepo</url>
+        </repository>
+
     </repositories>
 
 
@@ -82,12 +91,14 @@
             </roles>
         </developer>
     </developers>
-   
+
     <properties>
         <jersey.version>1.4-ea06</jersey.version>
-        <dtkit.default.junit>0.7</dtkit.default.junit>
-        <dtkit.default.tusar>0.8-SNAPSHOT</dtkit.default.tusar>
-        <jackson.version>1.5.5</jackson.version>
+        <spring.version>3.0.4.RELEASE</spring.version>
+        <dtkit.frmk.version>0.8-SNAPSHOT</dtkit.frmk.version>
+        <dtkit.default.junit.version>0.9-SNAPSHOT</dtkit.default.junit.version>
+        <dtkit.default.tusar.version>0.9-SNAPSHOT</dtkit.default.tusar.version>
+        <jackson.version>1.6.0</jackson.version>
         <slf4j.version>1.6.1</slf4j.version>
     </properties>
 
@@ -115,13 +126,19 @@
         <dependency>
             <groupId>org.jvnet.hudson.dtkit</groupId>
             <artifactId>dtkit-default-junit</artifactId>
-            <version>${dtkit.default.junit}</version>
+            <version>${dtkit.default.junit.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.hudson.dtkit</groupId>
+            <artifactId>dtkit-metrics-model</artifactId>
+            <version>${dtkit.frmk.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.jvnet.hudson.dtkit</groupId>
             <artifactId>dtkit-default-tusar</artifactId>
-            <version>${dtkit.default.tusar}</version>
+            <version>${dtkit.default.tusar.version}</version>
         </dependency>
 
         <dependency>
@@ -134,13 +151,25 @@
             <groupId>com.sun.jersey.contribs</groupId>
             <artifactId>jersey-guice</artifactId>
             <version>${jersey.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.inject</groupId>
+                    <artifactId>guice</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>com.sun.jersey.contribs</groupId>
             <artifactId>jersey-multipart</artifactId>
             <version>${jersey.version}</version>
-        </dependency>        
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
@@ -169,6 +198,33 @@
         </dependency>
 
         <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.morphia</groupId>
+            <artifactId>morphia</artifactId>
+            <version>0.95</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.thoughtworks.proxytoys</groupId>
+            <artifactId>proxytoys</artifactId>
+            <version>1.0</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>[2.1_3,)</version>
+            <type>jar</type>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
             <groupId>com.sun.jersey.jersey-test-framework</groupId>
             <artifactId>jersey-test-framework-embedded-glassfish</artifactId>
             <version>${jersey.version}</version>
@@ -185,6 +241,7 @@
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -202,6 +259,16 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/GuiceModuleTest*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
+
 </project>

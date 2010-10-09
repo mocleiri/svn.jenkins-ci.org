@@ -23,6 +23,8 @@
 
 package com.thalesgroup.dtkit.ws.rs.providers;
 
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.ws.rs.Consumes;
@@ -38,9 +40,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-
-import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
-import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)

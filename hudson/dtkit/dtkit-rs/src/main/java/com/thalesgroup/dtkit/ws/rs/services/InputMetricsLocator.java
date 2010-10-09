@@ -24,60 +24,18 @@
 package com.thalesgroup.dtkit.ws.rs.services;
 
 import com.google.inject.Singleton;
-import com.thalesgroup.dtkit.metrics.model.InputMetric;
-import com.thalesgroup.dtkit.metrics.model.InputMetricException;
-import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
+import com.thalesgroup.dtkit.ws.rs.model.InputMetricSelector;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ServiceLoader;
+import javax.ws.rs.core.PathSegment;
 
 @Singleton
 public class InputMetricsLocator {
 
-    private List<InputMetric> allMetrics = new ArrayList<InputMetric>();
-
-    private void loadMetrics() {
-        ServiceLoader<InputMetric> metricServiceLoader = ServiceLoader.load(InputMetric.class, Thread.currentThread().getContextClassLoader());
-        metricServiceLoader.reload();
-        for (InputMetric inputMetric : metricServiceLoader) {
-            try {
-                allMetrics.add(InputMetricFactory.getInstance(inputMetric.getClass()));
-            } catch (InputMetricException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @SuppressWarnings("unused")
-    public InputMetricsLocator() {
-        loadMetrics();
-    }
-
-    public InputMetric getInputMetricObject(String metricName, String type, String version, String format) {
-
-        for (InputMetric inputMetric : allMetrics) {
-            if (inputMetric.getToolName().toUpperCase().equalsIgnoreCase(metricName)) {
-
-                if ((type != null) && (!(inputMetric.getToolType().toString()).equalsIgnoreCase(type))) {
-                    continue;
-                }
-
-                if ((version != null) && (!inputMetric.getToolVersion().equalsIgnoreCase(version))) {
-                    continue;
-                }
-
-                if ((format != null) && (!(inputMetric.getOutputFormatType().getKey()).equalsIgnoreCase(format))) {
-                    continue;
-                }
-
-                return inputMetric;
-            }
-        }
-        return null;
-    }
-
-    public List<InputMetric> getAllMetrics() {
-        return allMetrics;
+    public InputMetricSelector extractSelector(PathSegment metricSegment) {
+        String name = metricSegment.getMatrixParameters().getFirst("name");
+        String type = metricSegment.getMatrixParameters().getFirst("type");
+        String version = metricSegment.getMatrixParameters().getFirst("version");
+        String format = metricSegment.getMatrixParameters().getFirst("format");
+        return new InputMetricSelector(name, version, type, format);
     }
 }

@@ -21,19 +21,19 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs.services;
+package com.thalesgroup.dtkit.ws.rs.providers;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.servlet.GuiceServletContextListener;
-import com.google.inject.servlet.ServletModule;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
-public class GuiceConfig extends GuiceServletContextListener {
+@Provider
+public class NullPointerExceptionMapper implements ExceptionMapper<NullPointerException> {
 
-    protected Injector getInjector() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"com/thalesgroup/dtkit/ws/rs/services/applicationContext.xml"});
-        Object bean = context.getBean("guiceModule");
-        return Guice.createInjector((ServletModule) bean);
+    public Response toResponse(NullPointerException ne) {
+        return Response.status(Response.Status.BAD_REQUEST).
+                entity(ne.getMessage()).
+                type("text/plain").
+                build();
     }
 }

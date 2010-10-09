@@ -54,7 +54,7 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
     public void convertInputFileWithValidInputs() throws Exception {
 
         MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE);
-        ClientResponse clientResponse = webResource.path("/cppunit;format=junit")
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=junit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class, multiPart);
@@ -93,7 +93,7 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
     @Test
     public void convertInputFileWithNoExistingMetric1() throws Exception {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path("/notExistMetric")
+        ClientResponse clientResponse = webResource.path(";name=notExistMetric")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class);
@@ -103,7 +103,7 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
     @Test
     public void convertInputFileWithNoExistingMetric2() throws Exception {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path("/cppunit;format=tusar")
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=tusar")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class);
@@ -113,11 +113,13 @@ public class InputMetricsConversionTest extends InputMetricsAbstractTest {
     @Test
     public void convertInputFileNoValidInputFile() throws Exception {
         MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"), MediaType.APPLICATION_XML_TYPE);
-        ClientResponse clientResponse = webResource.path("/cppunit;format=junit")
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=junit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class, multiPart);
-        Assert.assertEquals(Response.Status.PRECONDITION_FAILED.getStatusCode(), clientResponse.getStatus());
+        Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
+        String expectedResult = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><validationResult><valid>false</valid><errors><error><line>2</line><message>cvc-elt.1: Cannot find the declaration of element 'TestRun2'.</message><type>ERROR</type></error></errors></validationResult>";
+        Assert.assertEquals(expectedResult, clientResponse.getEntity(String.class));
     }
 
 

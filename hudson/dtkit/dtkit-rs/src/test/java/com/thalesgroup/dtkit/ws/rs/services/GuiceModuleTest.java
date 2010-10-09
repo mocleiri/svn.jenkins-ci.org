@@ -23,17 +23,25 @@
 
 package com.thalesgroup.dtkit.ws.rs.services;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.servlet.GuiceServletContextListener;
-import com.google.inject.servlet.ServletModule;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.google.inject.TypeLiteral;
+import com.thalesgroup.dtkit.metrics.model.InputMetricException;
+import com.thalesgroup.dtkit.ws.rs.dao.InputMetricDAO;
+import com.thalesgroup.dtkit.ws.rs.dao.InputMetricEmbeddedDAO;
+import com.thalesgroup.dtkit.ws.rs.services.GuiceModule;
 
-public class GuiceConfig extends GuiceServletContextListener {
+import java.util.Arrays;
+import java.util.List;
 
-    protected Injector getInjector() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"com/thalesgroup/dtkit/ws/rs/services/applicationContext.xml"});
-        Object bean = context.getBean("guiceModule");
-        return Guice.createInjector((ServletModule) bean);
+public class GuiceModuleTest extends GuiceModule {
+
+    @Override
+    protected void bindDAO() {
+        try {
+            List<InputMetricDAO> inputMetricDAOs = Arrays.asList(new InputMetricDAO[]{new InputMetricEmbeddedDAO()});
+            bind(new TypeLiteral<List<InputMetricDAO>>() {
+            }).toInstance(inputMetricDAOs);
+        } catch (InputMetricException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

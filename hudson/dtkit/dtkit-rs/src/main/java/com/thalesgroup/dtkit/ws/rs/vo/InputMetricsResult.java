@@ -36,13 +36,13 @@ public class InputMetricsResult {
 
     @XmlElementWrapper(name = "metrics")
     @XmlElement(name = "metric")
-    private List<InputMetric> metrics = new ArrayList<InputMetric>();
+    private List<? extends InputMetric> metrics = new ArrayList<InputMetric>();
 
-    public List<InputMetric> getMetrics() {
+    public List<? extends InputMetric> getMetrics() {
         return metrics;
     }
 
-    public void setMetrics(List<InputMetric> metrics) {
+    public void setMetrics(List<? extends InputMetric> metrics) {
         this.metrics = metrics;
     }
 }

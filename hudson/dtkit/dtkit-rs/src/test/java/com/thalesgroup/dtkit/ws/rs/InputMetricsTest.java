@@ -3,14 +3,14 @@ package com.thalesgroup.dtkit.ws.rs;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.LoggingFilter;
-import com.thalesgroup.dtkit.junit.CppTest;
+import com.thalesgroup.dtkit.junit.CppTestUnit;
 import com.thalesgroup.dtkit.junit.CppUnit;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
 import com.thalesgroup.dtkit.ws.rs.providers.InputMetricXMLProvider;
 import com.thalesgroup.dtkit.ws.rs.resources.InputMetrics;
-import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricsResult;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
@@ -24,7 +24,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
@@ -44,7 +43,7 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         InputMetricsResult inputMetricsResult = clientResponse.getEntity(InputMetricsResult.class);
         Assert.assertNotNull(inputMetricsResult);
-        Assert.assertEquals(inputMetricsLocator.getAllMetrics().size(), inputMetricsResult.getMetrics().size());
+        Assert.assertEquals(inputMetricEmbeddedDAO.getInputMetrics().size(), inputMetricsResult.getMetrics().size());
     }
 
     @Test
@@ -60,7 +59,7 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
             ++count;
             nodeIterator.next();
         }
-        Assert.assertEquals(inputMetricsLocator.getAllMetrics().size(), count);
+        Assert.assertEquals(inputMetricEmbeddedDAO.getInputMetrics().size(), count);
     }
 
     public void getInputMetricCppunitXML() throws Exception {
@@ -77,8 +76,8 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
             Schema schema = sf.newSchema(this.getClass().getResource("cppunit/cppunit-xml-result.xsd"));
             u.setSchema(schema);
             InputMetric expectedCppUnit = InputMetricFactory.getInstance(CppUnit.class);
-            InputMetricResult inputMetricResult= (InputMetricResult) (u.unmarshal(xmlResult));
-            InputMetric actualCppUnit = inputMetricResult.getInputMetric(); 
+            InputMetricResult inputMetricResult = (InputMetricResult) (u.unmarshal(xmlResult));
+            InputMetric actualCppUnit = inputMetricResult.getInputMetric();
             Assert.assertTrue(expectedCppUnit.equals(actualCppUnit));
             Assert.assertTrue(true);
         } catch (JAXBException e) {
@@ -88,21 +87,21 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
 
     @Test
     public void getInputMetricCpptestJSON() throws Exception {
-        ClientResponse clientResponse = webResource.path("/cpptest").accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
+        ClientResponse clientResponse = webResource.path(";name=cpptest;format=junit").accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         String jsonResult = clientResponse.getEntity(String.class);
         Assert.assertNotNull(jsonResult);
         validateInputMetricJSONXMLSchema(jsonResult);
-        InputMetric expectedCppTest = InputMetricFactory.getInstance(CppTest.class);
+        InputMetric expectedCppTest = InputMetricFactory.getInstance(CppTestUnit.class);
         ObjectMapper objectMapper = new ObjectMapper();
-        CppTest actualCppTest = objectMapper.readValue(jsonResult, CppTest.class);
+        CppTestUnit actualCppTest = objectMapper.readValue(jsonResult, CppTestUnit.class);
         Assert.assertTrue(expectedCppTest.equals(actualCppTest));
     }
 
 
     @Test
-    public void getInputMetricCppunitJSON() throws Exception {
-        ClientResponse clientResponse = webResource.path("/cppunit").accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
+    public void getInputMetricCppunitJunitJSON() throws Exception {
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=junit").accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
         Assert.assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatus());
         String jsonResult = clientResponse.getEntity(String.class);
         Assert.assertNotNull(jsonResult);
@@ -115,14 +114,20 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
 
     @Test
     public void getExistXSD() {
-        InputStream is = webResource.path("/cppunit/xsd").get(InputStream.class);
+        InputStream is = webResource.path("/xsd;name=cppunit;format=junit").get(InputStream.class);
         Assert.assertNotNull(is);
+    }
+
+    @Test
+    public void getXSDWithConflict() {
+        ClientResponse clientResponse = webResource.path("/xsd;name=cppunit").get(ClientResponse.class);
+        Assert.assertEquals(Response.Status.CONFLICT.getStatusCode(), clientResponse.getStatus());
     }
 
     @Test
     public void getXSDNotFound() {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path("/notExistMetric/xsd").get(ClientResponse.class);
+        ClientResponse clientResponse = webResource.path("/xsd;name=notExistMetric").get(ClientResponse.class);
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), clientResponse.getStatus());
     }
 }

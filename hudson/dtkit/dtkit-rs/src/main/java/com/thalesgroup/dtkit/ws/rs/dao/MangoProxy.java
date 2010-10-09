@@ -21,19 +21,18 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.dtkit.ws.rs.services;
+package com.thalesgroup.dtkit.ws.rs.dao;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.servlet.GuiceServletContextListener;
-import com.google.inject.servlet.ServletModule;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.google.code.morphia.DAO;
+import com.google.code.morphia.Morphia;
+import com.mongodb.Mongo;
+import com.thalesgroup.dtkit.ws.rs.model.InputMetricDB;
+import org.bson.types.ObjectId;
 
-public class GuiceConfig extends GuiceServletContextListener {
 
-    protected Injector getInjector() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"com/thalesgroup/dtkit/ws/rs/services/applicationContext.xml"});
-        Object bean = context.getBean("guiceModule");
-        return Guice.createInjector((ServletModule) bean);
+public class MangoProxy extends DAO<InputMetricDB, ObjectId> {
+
+    public MangoProxy( Mongo mongo, Morphia morphia, String dbName) {
+       super(mongo,morphia, dbName);
     }
 }

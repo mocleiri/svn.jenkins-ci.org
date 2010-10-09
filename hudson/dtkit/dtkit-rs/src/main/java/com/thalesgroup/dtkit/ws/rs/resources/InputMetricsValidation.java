@@ -30,16 +30,19 @@ import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
-import com.thalesgroup.dtkit.ws.rs.services.InputMetricsLocator;
+import com.thalesgroup.dtkit.ws.rs.dao.InputMetricDAO;
+import com.thalesgroup.dtkit.ws.rs.model.InputMetricSelector;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricValidationResult;
+import com.thalesgroup.dtkit.ws.rs.vo.InputMetricVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,81 +54,80 @@ public class InputMetricsValidation {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private InputMetricsLocator inputMetricsLocator;
+    private List<InputMetricDAO> inputMetricDAOList;
 
     private ValidationService validationService;
 
     @Inject
     @SuppressWarnings("unused")
-    public void load(InputMetricsLocator inputMetricsLocator, ValidationService validationService) {
-        this.inputMetricsLocator = inputMetricsLocator;
+    public void load(List<InputMetricDAO> inputMetricDAOList, ValidationService validationService) {
+        this.inputMetricDAOList = inputMetricDAOList;
         this.validationService = validationService;
     }
 
-    private InputMetric getInputMetricObject(PathSegment metricSegment) {
-
-        String metricName = metricSegment.getPath();
-        String type = metricSegment.getMatrixParameters().getFirst("type");
-        String version = metricSegment.getMatrixParameters().getFirst("version");
-        String format = metricSegment.getMatrixParameters().getFirst("format");
-
-        InputMetric inputMetric = inputMetricsLocator.getInputMetricObject(metricName, type, version, format);
-        if (inputMetric == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        return inputMetric;
-    }
-
-    @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    @SuppressWarnings("unused")
-    public Response validateInputFile(@FormDataParam("file") File inputXmlLFile, @FormDataParam("xsd") File inputXsdFile) {
-        logger.debug("validateInputFile() service");
+    private InputMetricValidationResult validateCustom(File inputXmlLFile, File inputXsdFile) throws ValidationException {
 
         if (inputXmlLFile == null) {
-            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+            throw new NullPointerException("For a custom validation, the input file is mandatory");
         }
-
         if (inputXsdFile == null) {
-            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+            throw new NullPointerException("For a custom validation, the input XSD file is mandatory");
         }
 
         InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
-        try {
-            List<ValidationError> validationErrors = validationService.processValidation(inputXsdFile, inputXmlLFile);
-            inputMetricValidationResult.setValid(validationErrors.size() == 0);
-            inputMetricValidationResult.setValidationErrors(validationErrors);
-
-        } catch (ValidationException ve) {
-            logger.error("Validation error ", ve);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
-        }
-        return Response.ok(inputMetricValidationResult).build();
+        List<ValidationError> validationErrors = validationService.processValidation(inputXsdFile, inputXmlLFile);
+        inputMetricValidationResult.setValid(validationErrors.size() == 0);
+        inputMetricValidationResult.setValidationErrors(validationErrors);
+        return inputMetricValidationResult;
     }
 
+
     @POST
-    @Path("/{metric}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @SuppressWarnings("unused")
-    public Response validateInputFileMetric(@PathParam("metric") PathSegment metricSegment, @FormDataParam("file") File inputXmlLFile) {
-        logger.debug("validateInputFileMetric() service");
+    public Response validateInputFile(
+            @MatrixParam("name") String name, @MatrixParam("version") String version, @MatrixParam("type") String type, @MatrixParam("format") String format,
+            @FormDataParam("file") File inputXmlLFile, @FormDataParam("xsd") File inputXsdFile) {
 
-        if (inputXmlLFile == null) {
-            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
+
+        InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, type, format);
+        if (inputMetricSelector.isNoCriteria()) {
+            InputMetricValidationResult inputMetricValidationResult = validateCustom(inputXmlLFile, inputXsdFile);
+            return Response.ok(inputMetricValidationResult).build();
         }
 
-        InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
-        try {
-            InputMetric inputMetric = getInputMetricObject(metricSegment);
-            inputMetricValidationResult.setValid(inputMetric.validateInputFile(inputXmlLFile));
-            inputMetricValidationResult.setValidationErrors(inputMetric.getInputValidationErrors());
-
-        } catch (ValidationException ve) {
-            logger.error("Validation error for " + metricSegment.getPath(), ve);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        List<InputMetric> metrics = new ArrayList<InputMetric>();
+        for (InputMetricDAO inputMetricDAO : inputMetricDAOList) {
+            metrics.addAll(inputMetricDAO.getInputMetric(inputMetricSelector));
         }
-        return Response.ok(inputMetricValidationResult).build();
+
+        if (metrics.size() == 0) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        if (metrics.size() == 1) {
+            InputMetric metric = metrics.get(0);
+            InputMetricValidationResult inputMetricValidationResult = new InputMetricValidationResult();
+            inputMetricValidationResult.setValid(metric.validateInputFile(inputXmlLFile));
+            inputMetricValidationResult.setValidationErrors(metric.getInputValidationErrors());
+             return Response.ok(inputMetricValidationResult).header("charset", "utf-8").build();
+        }
+
+        InputMetricValidationResult inputMetricValidationResult;
+        List<InputMetricValidationResult> results = new ArrayList<InputMetricValidationResult>();
+        for (InputMetric metric : metrics) {
+            InputMetricVo inputMetricVo = new InputMetricVo(metric.getToolName(), metric.getToolVersion(), metric.getToolType().name(), metric.getOutputFormatType().getKey());
+            inputMetricValidationResult = new InputMetricValidationResult();
+            inputMetricValidationResult.setValid(metric.validateInputFile(inputXmlLFile));
+            inputMetricValidationResult.setValidationErrors(metric.getInputValidationErrors());
+            inputMetricValidationResult.setMetric(inputMetricVo);
+            results.add(inputMetricValidationResult);
+        }
+
+        GenericEntity entity = new GenericEntity<List<InputMetricValidationResult>>(results) {
+        };
+        return Response.ok(entity).header("charset", "utf-8").build();
     }
+
 }

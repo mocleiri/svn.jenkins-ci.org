@@ -49,7 +49,7 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
     @Test
     public void validateInputFileValidFileForXML() throws Exception {
         MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE);
-        ClientResponse clientResponse = webResource.path("/cppunit")
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=junit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class, multiPart);
@@ -78,7 +78,7 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
     @Test
     public void validateInputFileValidFileForJSON() throws Exception {
         MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-valid-input.xml"), MediaType.APPLICATION_XML_TYPE);
-        ClientResponse clientResponse = webResource.path("/cppunit")
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=junit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .post(ClientResponse.class, multiPart);
@@ -126,7 +126,7 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
     @Test
     public void validateInputFileWithInvalidFileForXML() throws Exception {
         MultiPart multiPart = new FormDataMultiPart().field("file", this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"), MediaType.APPLICATION_XML_TYPE);
-        ClientResponse clientResponse = webResource.path("/cppunit")
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=junit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class, multiPart);
@@ -142,7 +142,7 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
         MultiPart multiPart = new FormDataMultiPart()
                 .field("file", this.getClass().getResourceAsStream("cppunit/cppunit-novalid-input.xml"), MediaType.APPLICATION_XML_TYPE)
                 .field("xsd", this.getClass().getResourceAsStream("cppunit/cppunit-input.xsd"), MediaType.APPLICATION_XML_TYPE);
-        ClientResponse clientResponse = webResource.path("/cppunit")
+        ClientResponse clientResponse = webResource.path(";name=cppunit;format=junit")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE)
                 .post(ClientResponse.class, multiPart);
@@ -156,7 +156,7 @@ public class InputMetricsValidationTest extends InputMetricsAbstractTest {
     @Test
     public void validateInputFileWithNoExistingMetric() throws Exception {
         WebResource webResource = resource();
-        ClientResponse clientResponse = webResource.path("/notExistMetric")
+        ClientResponse clientResponse = webResource.path(";name=notExistMetric")
                 .type(MediaType.MULTIPART_FORM_DATA_TYPE)
                 .accept(MediaType.APPLICATION_XML_TYPE, MediaType.APPLICATION_JSON_TYPE)
                 .post(ClientResponse.class);
