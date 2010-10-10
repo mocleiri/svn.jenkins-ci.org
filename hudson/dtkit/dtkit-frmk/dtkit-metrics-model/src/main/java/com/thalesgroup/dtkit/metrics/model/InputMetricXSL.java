@@ -216,7 +216,7 @@ public abstract class InputMetricXSL extends InputMetric {
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
 
-        if (validationService!=null){
+        if (validationService==null){
             return true;
         }
 
