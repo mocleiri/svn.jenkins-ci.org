@@ -24,6 +24,7 @@
 package com.thalesgroup.dtkit.ws.rs.dao;
 
 import com.google.code.morphia.Morphia;
+import com.google.code.morphia.mapping.MappingException;
 import com.google.code.morphia.query.Query;
 import com.google.code.morphia.query.QueryResults;
 import com.google.inject.Inject;
@@ -59,12 +60,35 @@ public class InputMetricMangoDAO implements InputMetricDAO {
         return true;
     }
 
-    @Override
-    public void insert(String name, String version, InputType toolType, File xsl, File xsd, OutputMetric outputMetricType) {
-        try {
+    private Query<InputMetricDB> makeQuery(InputMetricSelector inputMetricSelector) {
+        String toolName = inputMetricSelector.getToolName();
+        String toolVersion = inputMetricSelector.getToolVersion();
+        String toolType = inputMetricSelector.getTooType();
+        String outputFormat = inputMetricSelector.getOutputFormat();
+        Query<InputMetricDB> query = mangoProxy.createQuery();
 
+        if (toolName != null) {
+            query = query.field("toolName").startsWithIgnoreCase(toolName);
+            query = query.field("toolName").endsWithIgnoreCase(toolName);
+        }
+        if (toolVersion != null) {
+            query = query.field("toolVersion").containsIgnoreCase(toolVersion);
+        }
+        if (toolType != null) {
+            query = query.field("toolType").containsIgnoreCase(toolType);
+        }
+        if (outputFormat != null) {
+            query = query.field("outputFormat").containsIgnoreCase(outputFormat);
+        }
+        return query;
+    }
+
+    @Override
+    public void insert(String name, String version, InputType toolType, File xsl, File xsd, OutputMetric outputMetric) {
+
+        InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, toolType.name(), outputMetric.getKey());
+        try {
             //Verify that the object not already exists
-            InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, toolType.name(), outputMetricType.getKey());
             Collection<? extends InputMetric> inputMetrics = getInputMetric(inputMetricSelector);
             assert inputMetrics.size() <= 1;
             if (inputMetrics.size() == 1) {
@@ -85,30 +109,25 @@ public class InputMetricMangoDAO implements InputMetricDAO {
                 inputMetricDB.setXsdContent(null);
             }
             inputMetricDB.setInputMetricType(InputMetricType.XSL);
-            inputMetricDB.setOutputFormat(outputMetricType.getKey());
+            inputMetricDB.setOutputFormat(outputMetric.getKey());
             mangoProxy.save(inputMetricDB);
         }
-        catch (IOException e) {
-            throw new InputMetricException("Can't insert the current object", e);
+        catch (IOException ioe) {
+            throw new InputMetricException("Cannot insert the current netric " + inputMetricSelector.toString(), ioe);
         }
     }
 
     @Override
     public void delete(String name, String version, InputType toolType, OutputMetric outputMetric) {
-        Query<InputMetricDB> query = mangoProxy.createQuery();
-        if (name != null) {
-            query = query.field("toolName").startsWithIgnoreCase(name);
-            query = query.field("toolName").endsWithIgnoreCase(name);
+
+        InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, toolType.name(), outputMetric.getKey());
+        Query<InputMetricDB> query = makeQuery(inputMetricSelector);
+        Collection<? extends InputMetric>  metrics =  mangoProxy.find(query).asList();
+        if (metrics.size() == 0){
+            throw new MappingException("Cannot get metric for "+ inputMetricSelector.toString());
         }
-        if (version != null) {
-            query = query.field("toolVersion").containsIgnoreCase(version);
-        }
-        if (toolType != null) {
-            query = query.field("toolType").containsIgnoreCase(toolType.name());
-        }
-        if (outputMetric != null) {
-            query = query.field("outputFormat").containsIgnoreCase(outputMetric.getKey());
-        }
+        assert metrics.size() == 1 : "There are more than 2 metrics for " + inputMetricSelector.toString();
+        
         mangoProxy.deleteByQuery(query);
     }
 
@@ -118,26 +137,7 @@ public class InputMetricMangoDAO implements InputMetricDAO {
     }
 
     public Collection<? extends InputMetric> getInputMetric(InputMetricSelector inputMetricSelector) {
-        String toolName = inputMetricSelector.getToolName();
-        String toolVersion = inputMetricSelector.getToolVersion();
-        String toolType = inputMetricSelector.getTooType();
-        String outputFormat = inputMetricSelector.getOutputFormat();
-        Query<InputMetricDB> query = mangoProxy.createQuery();
-
-        if (toolName != null) {
-            query = query.field("toolName").startsWithIgnoreCase(toolName);
-            query = query.field("toolName").endsWithIgnoreCase(toolName);
-        }
-        if (toolVersion != null) {
-            query = query.field("toolVersion").containsIgnoreCase(toolVersion);
-        }
-        if (toolType != null) {
-            query = query.field("toolType").containsIgnoreCase(toolType);
-        }
-        if (outputFormat != null) {
-            query = query.field("outputFormat").containsIgnoreCase(outputFormat);
-        }
-        return mangoProxy.find(query).asList();
+        return mangoProxy.find(makeQuery(inputMetricSelector)).asList();
     }
 
 
