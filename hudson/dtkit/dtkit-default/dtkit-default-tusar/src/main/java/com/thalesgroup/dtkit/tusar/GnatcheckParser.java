@@ -164,6 +164,9 @@ public class GnatcheckParser {
 		    	output.format( str_violformat, m.group(2).trim(), m.group(4).trim(), rule );
 		    }
 		}
+		if(!matchedfile.equals("")){
+			output.format("        </file>\n");
+		}
 		output.format(str_filetail);
 		if ( output != null )
 			output.close();
@@ -290,4 +293,5 @@ public class GnatcheckParser {
 		}
 		return bMatch;
 	}
+	
 }
