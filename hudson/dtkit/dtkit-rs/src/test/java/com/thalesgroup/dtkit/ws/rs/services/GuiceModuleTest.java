@@ -27,12 +27,16 @@ import com.google.inject.TypeLiteral;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
 import com.thalesgroup.dtkit.ws.rs.dao.InputMetricDAO;
 import com.thalesgroup.dtkit.ws.rs.dao.InputMetricEmbeddedDAO;
-import com.thalesgroup.dtkit.ws.rs.services.GuiceModule;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class GuiceModuleTest extends GuiceModule {
+
+    public GuiceModuleTest(String host, String port, String dbName) {
+        super(host, port, dbName);
+
+    }
 
     @Override
     protected void bindDAO() {

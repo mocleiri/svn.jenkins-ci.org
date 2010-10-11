@@ -24,14 +24,10 @@
 package com.thalesgroup.dtkit.ws.rs.vo;
 
 import com.thalesgroup.dtkit.util.validator.ValidationError;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
-
-import org.codehaus.jackson.annotate.JsonValue;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonWriteNullProperties;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 
 @XmlRootElement(name = "validationResult")
@@ -70,7 +66,7 @@ public class InputMetricValidationResult {
 
 
     @SuppressWarnings("unused")
-    @JsonSerialize(include=JsonSerialize.Inclusion.NON_DEFAULT)    
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_DEFAULT)
     public InputMetricVo getMetric() {
         return metric;
     }

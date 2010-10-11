@@ -45,6 +45,19 @@ import java.util.Map;
 
 public class GuiceModule extends ServletModule {
 
+    private String host;
+
+    private String port;
+
+    private String dbName;
+
+    public GuiceModule(String host, String port, String dbName) {
+        System.out.println("host="+ host + ";port="+ port+ ";dbName="+dbName);
+        this.host = host;
+        this.port = port;
+        this.dbName = dbName;
+    }
+
     @Override
     protected void configureServlets() {
         final Map<String, String> params = new HashMap<String, String>();
@@ -57,8 +70,7 @@ public class GuiceModule extends ServletModule {
 
         try {
             //Externalize parameters
-            final Mongo mango = new Mongo();
-            final String dbName = "metrics";
+            final Mongo mango = new Mongo(host, Integer.valueOf(port));
 
             InputMetricMangoDAO inputMetricDAOMango = Guice.createInjector(new AbstractModule() {
                 @Override
@@ -70,12 +82,12 @@ public class GuiceModule extends ServletModule {
             }).getInstance(InputMetricMangoDAO.class);
 
 
-            List<InputMetricDAO> inputMetricDAOs = null;
-            try{
+            List<InputMetricDAO> inputMetricDAOs;
+            try {
                 mango.getDB(dbName).getCollectionNames();
                 inputMetricDAOs = Arrays.asList(new InputMetricDAO[]{new InputMetricEmbeddedDAO(), inputMetricDAOMango});
             }
-            catch (MongoException me){
+            catch (MongoException me) {
                 inputMetricDAOs = Arrays.asList(new InputMetricDAO[]{new InputMetricEmbeddedDAO()});
             }
 

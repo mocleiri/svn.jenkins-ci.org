@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*******************************************************************************
 * Copyright (c) 2010 Thales Corporate Services SAS                             *
@@ -22,12 +23,11 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-<!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
 
     <listener>
         <listener-class>com.thalesgroup.dtkit.ws.rs.services.GuiceConfig</listener-class>
@@ -44,24 +44,20 @@
     </filter-mapping>
 
     <!--<servlet>-->
-        <!--<servlet-name>JerseyServlet</servlet-name>-->
-        <!--<servlet-class>-->
-            <!--com.sun.jersey.spi.container.servlet.ServletContainer-->
-        <!--</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>com.sun.jersey.config.property.packages</param-name>-->
-            <!--<param-value>com.thalesgroup.dtkit.ws.rs;org.codehaus.jackson.jaxrs</param-value>-->
-        <!--</init-param>-->
-        <!--<load-on-startup>1</load-on-startup>-->
+    <!--<servlet-name>JerseyServlet</servlet-name>-->
+    <!--<servlet-class>-->
+    <!--com.sun.jersey.spi.container.servlet.ServletContainer-->
+    <!--</servlet-class>-->
+    <!--<init-param>-->
+    <!--<param-name>com.sun.jersey.config.property.packages</param-name>-->
+    <!--<param-value>com.thalesgroup.dtkit.ws.rs;org.codehaus.jackson.jaxrs</param-value>-->
+    <!--</init-param>-->
+    <!--<load-on-startup>1</load-on-startup>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
-        <!--<servlet-name>JerseyServlet</servlet-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
+    <!--<servlet-name>JerseyServlet</servlet-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
     <!--</servlet-mapping>-->
 
-       <!-- Default page to serve -->
-27	    <welcome-file-list>
-28	        <welcome-file>application.wadl</welcome-file>
-29	    </welcome-file-list>
 
 </web-app>
