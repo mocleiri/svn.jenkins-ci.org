@@ -1,0 +1,49 @@
+﻿<view height="285" width="430" oncancel="onCancel();" onok="onOk();"
+  onopen="onOpen();">
+    <label height="15" width="430" x="20" y="66" bold="true" wordwrap="true"
+     >&TIMEOUT_LABEL;
+    </label>
+    <edit height="16" name="urlPath" width="253" x="20" y="129"/>
+    <button height="22" name="updateUrlButton" width="96" x="282" y="127"
+      onclick="updateUrlButton_onclick()" color="#222222" downImage="stock_images\button_down.png"
+      image="stock_images\button_up.png" overImage="stock_images\button_over.png"
+      caption="Add URL"/>
+    <label enabled="true" height="17" width="400" x="20" y="108" onclick="label_onclick()"
+      bold="true" wordwrap="true">&URL_LABEL;
+    </label>
+    <label height="52" width="398" x="20" y="10" wordwrap="true">&OPTIONS_HEADER;
+    </label>
+    <combobox height="250" name="intervalMinutes" width="50" x="20" y="82"
+      background="#FFFFFF" itemSeparator="true" selectedIndex="0"
+      itemWidth="50" itemHeight="16" onchange="intervalMinutes_onchange();"
+      type="droplist" value="1">
+        <item height="16" width="50" selected="true">
+            <label valign="middle">1
+            </label>
+        </item>
+        <item height="16" width="50">
+            <label valign="middle">2
+            </label>
+        </item>
+        <item height="16" width="50">
+            <label valign="middle">5
+            </label>
+        </item>
+        <item height="16" width="50">
+            <label valign="middle">10
+            </label>
+        </item>
+    </combobox>
+    <label height="16" width="430" x="20" y="157" bold="true">&OPTIONS_URL_LIST;
+    </label>
+    <listbox height="82" name="urlList" width="359" x="20" y="174" background="#FFFFFF"
+      itemSeparatorColor="#CCCCCC" itemSeparator="true" itemWidth="350"
+      itemHeight="20" itemOverColor="#DBEEFE" onchange="urlList_onchange()"
+      autoscroll="true" itemSelectedColor="#CBDEEE">
+        <item height="20" name="Add new" width="350">
+            <label font="" size="10" valign="middle">&ADD_URL;
+            </label>
+        </item>
+    </listbox>
+    <script src="options.js" />
+</view>

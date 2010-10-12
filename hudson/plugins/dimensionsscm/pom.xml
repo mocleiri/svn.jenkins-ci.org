@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+        <groupId>org.jvnet.hudson.plugins</groupId>
+        <artifactId>plugin</artifactId>
+        <version>1.344</version>
+        <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <groupId>hudson.plugins</groupId>
+  <artifactId>dimensionsscm</artifactId>
+  <packaging>hpi</packaging>
+  <version>0.7.8-SNAPSHOT</version>
+  <name>Dimensions SCM plugin</name>
+  <description>Dimension SCM plugin for Hudson</description>
+  <url>http://wiki.hudson-ci.org/display/HUDSON/Dimensions+Plugin</url>
+
+
+  <developers>
+    <developer>
+      <id>TPayne</id>
+      <name>Tim Payne</name>
+      <email>tpayne@serena.com</email>
+      <roles>
+          <role>Developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.serena</groupId>
+      <artifactId>dmclient</artifactId>
+      <version>10.2</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <defaultGoal>package</defaultGoal>
+    <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+               <source>1.5</source>
+               <target>1.5</target>
+            </configuration>
+         </plugin>
+         <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.4.3</version>
+            <configuration>
+               <forkMode>always</forkMode>
+            </configuration>
+         </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+        <id>serena-lib</id>
+        <url>file:${project.basedir}/lib/</url></repository>
+  </repositories>
+</project>

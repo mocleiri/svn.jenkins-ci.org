@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>Hudson and Tomcat</title>
+	<style>
+		pre {
+			background-color: lightgray;
+			padding: 0.5em;
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Hudson and Tomcat</h1>
+
+<h3>Requirements</h3>
+<p>
+	You need Tomcat 5.0 or later.
+
+<h3>Installation</h3>
+<p>
+	To install Hudson on Tomcat, simply copy <tt>huddson.war</tt> to <tt>$TOMCAT_HOME/webapps</tt>, then access <tt>http://yourhost/hudson</tt>.
+<p>
+	If you are running Tomcat just to host Hudson, then remove everything from <tt>$TOMCAT_HOME/webapps</tt>, and place <tt>hudson.war</tt> as <tt>ROOT.war</tt>. Tomcat should expand this and create the <tt>ROOT</tt> directory, and you should see Hudson in <tt>http://yourhost/</tt> without any additional path. This also works nicely when you set up a virtual host, as it allows a single Tomcat instance to run multiple applications, yet users can still access your hudson with URLs like <tt>http://hudson.acme.org/</tt> without any additional path. See <a href="http://tomcat.apache.org/tomcat-5.0-doc/config/host.html">the Tomcat documentation</a> for more about how to set up a virtual host.
+
+
+<h3>Upgrade</h3>
+<p>
+	Simply overwrite your <tt>hudson.war</tt> with the new version. Tomcat should automatically redeploy the application.
+
+<h3>Setting HUDSON_HOME</h3>
+<p>
+	Before starting Tomcat, set CATALINA_OPTS like this. This can be also used to specify JVM options to inrease the heap size:
+<pre>
+$ export CATALINA_OPTS="-DHUDSON_HOME=/path/to/hudson_home -Xmx512m"
+$ catalina.sh start
+</pre>
+<p>
+	Or if that fails for some reason, you should still be able to use the environment variable:
+<pre>
+$ export HUDSON_HOME=/path/to/hudson_home
+$ catalina.sh start
+</pre>
+
+
+
+<h3>Relevant Issues</h3>
+<p>
+See <a href="https://hudson.dev.java.net/issues/buglist.cgi?component=hudson&version=current&email1=&emailtype1=exact&emailassigned_to1=1&email2=&emailtype2=exact&emailreporter2=1&issueidtype=include&issue_id=&changedin=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&short_desc=&short_desc_type=fulltext&long_desc=&long_desc_type=fulltext&issue_file_loc=&issue_file_loc_type=fulltext&status_whiteboard=tomcat&status_whiteboard_type=fulltext&field0-0-0=noop&type0-0-0=noop&value0-0-0=&cmdtype=doit&newqueryname=&order=Issue+Number&Submit+query=Submit+query">the list of issues</a> filed that are specifically marked relevant to Tomcat.
+
+
+</div></body>
+</html>

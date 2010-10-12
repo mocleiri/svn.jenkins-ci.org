@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Hudson Debian packages</title>
+</head>
+<body>
+<h1>Hudson Debian packages</h1>
+<p>
+Hudson can be installed as a Debian package, which enables:
+
+<ul>
+<li>Automatic upgrade of Hudson via <tt>apt</tt>
+<li><tt>/etc/init.d</tt> hook up to start Hudson on boot
+</ul>
+
+To use the repository, first add the key to your system:
+
+<pre style="padding:0.5em; margin:1em; background-color:black; color:white">
+wget -O /tmp/key http://hudson-ci.org/debian/hudson-ci.org.key
+sudo apt-key add /tmp/key
+</pre>
+
+<p>
+Then install Hudson
+
+<pre style="padding:0.5em; margin:1em; background-color:black; color:white">
+wget -O /tmp/hudson.deb http://hudson-ci.org/latest/debian/hudson.deb
+sudo dpkg --install /tmp/hudson.deb
+</pre>
+
+<p>
+Once the package is installed, <tt>apt-get update; apt-get install hudson</tt> will update Hudson. See <a href="http://wiki.hudson-ci.org/display/HUDSON/Installing+Hudson+on+Ubuntu">Wiki</a> for more information.
+</p>
+</body>
+</html>

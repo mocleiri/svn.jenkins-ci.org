@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Hudson and Winstone</title>
+	<style>
+		pre {
+			background-color: lightgray;
+			padding: 0.5em;
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Hudson and Winstone</h1>
+
+<h3>Installation</h3>
+<p>
+	Hudson ships with Winstone, so no additional installation needed. Just run with <tt>java -jar hudson.war</tt>.
+
+<h4>Notes</h4>
+<ul>
+	<li><a href="http://www.nabble.com/problem-with-AJP13-and-apache-tf3587565.html">Running behind Apache with AJP</a>
+	<li><a href="http://winstone.sourceforge.net/#commandLine">List of available command line options</a> for example to change the HTTP port.
+</ul>
+
+<h3>Setting HUDSON_HOME</h3>
+<p>
+	Specify the -D option to the invocation:
+<pre>
+$ java -DHUDSON_HOME=/path/to/home -jar hudson.war
+</pre>
+<p>
+	Or if that fails for some reason, you should still be able to use the environment variable:
+<pre>
+$ export HUDSON_HOME=/path/to/hudson_home
+$ java -jar hudson.war
+</pre>
+
+
+
+<h3>Relevant Issues</h3>
+<p>
+See <a href="https://hudson.dev.java.net/issues/buglist.cgi?component=hudson&version=current&email1=&emailtype1=exact&emailassigned_to1=1&email2=&emailtype2=exact&emailreporter2=1&issueidtype=include&issue_id=&changedin=&votes=&chfieldfrom=&chfieldto=Now&chfieldvalue=&short_desc=&short_desc_type=fulltext&long_desc=&long_desc_type=fulltext&issue_file_loc=&issue_file_loc_type=fulltext&status_whiteboard=winstone&status_whiteboard_type=fulltext&field0-0-0=noop&type0-0-0=noop&value0-0-0=&cmdtype=doit&newqueryname=&order=Issue+Number&Submit+query=Submit+query">the list of issues</a> filed that are specifically marked relevant to Tomcat.
+
+
+</div></body>
+</html>

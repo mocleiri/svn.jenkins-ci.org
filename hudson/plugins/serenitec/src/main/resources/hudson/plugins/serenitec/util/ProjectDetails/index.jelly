@@ -1,0 +1,42 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler"
+  xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson"
+  xmlns:f="/lib/form" xmlns:i="jelly:fmt">
+  <l:layout norefresh="true">
+    <st:include it="${it.owner}" page="sidepanel.jelly" />
+    <l:main-panel>
+        <h1>${it.DisplayName}</h1>
+        <div>
+            <img src="trend" />
+		</div>
+        
+        <j:if test="${it.TestedRules}">
+        	<st:include page="TestedRules.jelly" />
+        </j:if>
+        
+        <j:if test="${it.Errors}">
+        	<st:include page="Errors.jelly" />
+        </j:if>
+        
+        <j:if test="${it.NewErrors}">
+        	<st:include page="NewErrors.jelly" />
+        </j:if>
+        
+        <j:if test="${it.FixedErrors}">
+        	<st:include page="FixedErrors.jelly" />
+        </j:if>
+        
+        <j:if test="${it.NotFixedErrors}">
+        	<st:include page="NotFixedErrors.jelly" />
+        </j:if>
+        
+        <j:if test="${it.Patterns}">
+        	<st:include page="Patterns.jelly" />
+        </j:if>
+        
+        
+        
+        
+    </l:main-panel>
+  </l:layout>
+</j:jelly>
+

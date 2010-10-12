@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Maven Tools for Hudson - Introduction</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+          </head>
+  <body class="composite">
+    <div id="banner">
+                    <span id="bannerLeft">
+    
+            Maven Tools for Hudson
+    
+            </span>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2010-03-16
+                      </div>
+            <div class="xright">      
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                   <h5>Documentation</h5>
+            <ul>
+              
+    <li class="none">
+              <strong>Introduction</strong>
+        </li>
+          </ul>
+              <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+            
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+            <li class="expanded">
+                    <a href="project-info.html">Project Information</a>
+                  <ul>
+                  
+    <li class="none">
+              <strong>About</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="integration.html">Continuous Integration</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="dependencies.html">Dependencies</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="dependency-management.html">Dependency Management</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="issue-tracking.html">Issue Tracking</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="mail-lists.html">Mailing Lists</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="plugin-management.html">Plugin Management</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="license.html">Project License</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="plugins.html">Project Plugins</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="project-summary.html">Project Summary</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="team-list.html">Project Team</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="source-repository.html">Source Repository</a>
+          </li>
+              </ul>
+        </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-reports.html">Project Reports</a>
+                </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Introduction</h2>
+<p>This plugin exists to create a job on a Hudson build server. It obtains the base Hudson URL either through the <tt>ciManagement</tt> section of the pom or a <tt>hudson.url</tt> property. At the present time, this plugin assumes the use of Subversion.</p>
+<div class="section"><h3>Goals Overview</h3>
+<p>The Hudson Plugin has five goal:</p>
+<ul><li><a href="add-job-mojo.html">hudson:add-job</a> creates the job on Hudson.</li>
+<li><a href="replace-job-mojo.html">hudson:replace-job</a> replaces a job's configuration in Hudson.</li>
+<li><a href="build-all-mojo.html">hudson:build-all</a> builds every job in Hudson.</li>
+<li><a href="adjust-violations-mojo.html">hudson:adjust-violations</a> changes the settings of the Violations plugin.</li>
+<li><a href="add-twitter-mojo.html">hudson:add-twitter</a> adds Twitter notifications.</li>
+</ul>
+</div>
+<div class="section"><h3>Authentication</h3>
+<p>The Hudson plugin supports passing HTTP authentication to the Hudson server. The credentials used are retrieved from the Maven settings.xml file. Since the <tt>ciManagement</tt> element within the pom doesn't support an id attribute, the server id is generated from the Hudson URL. If you have this <tt>ciManagement</tt> section in your pom:</p>
+<div class="source"><pre>&lt;ciManagement&gt;
+  &lt;system&gt;hudson&lt;/system&gt;
+  &lt;url&gt;http://myserver/hudson/&lt;/url&gt;
+&lt;/ciManagement&gt;      </pre>
+</div>
+<p>Then you need to have this in your settings.xml file:</p>
+<div class="source"><pre>&lt;server&gt;
+  &lt;id&gt;myserver&lt;/id&gt;
+  &lt;username&gt;USERNAME&lt;/username&gt;
+  &lt;password&gt;PASSWORD&lt;/password&gt;
+&lt;/server&gt;     </pre>
+</div>
+<p>If your Hudson URL is on a non-default port, e.g.</p>
+<div class="source"><pre>&lt;ciManagement&gt;
+  &lt;system&gt;hudson&lt;/system&gt;
+  &lt;url&gt;http://myserver:81/hudson/&lt;/url&gt;
+&lt;/ciManagement&gt;      </pre>
+</div>
+<p>Then you need to have this in your settings.xml file:</p>
+<div class="source"><pre>&lt;server&gt;
+  &lt;id&gt;myserver:81&lt;/id&gt;
+  &lt;username&gt;USERNAME&lt;/username&gt;
+  &lt;password&gt;PASSWORD&lt;/password&gt;
+&lt;/server&gt;     </pre>
+</div>
+</div>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          1981-2010
+    
+          MTV Networks
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

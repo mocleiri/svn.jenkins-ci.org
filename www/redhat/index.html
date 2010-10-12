@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>Hudson RPM for RedHat Linux</title>
+</head>
+<body>
+<h1><a href="http://hudson-ci.org/">Hudson</a> RPM for RedHat Linux</h1>
+<p>
+Hudson can be installed as an RPM package, which enables:
+
+<ul>
+<li>Automatic upgrade of Hudson via <tt>yum</tt>
+<li><tt>/etc/init.d</tt> hook up to start Hudson on boot
+</ul>
+
+To use the repository, first add the key to your system:
+
+<pre style="padding:0.5em; margin:1em; background:black; color:white">
+sudo rpm --import http://hudson-ci.org/redhat/hudson-ci.org.key
+</pre>
+
+<p>
+Then install Hudson:
+
+<pre style="padding:0.5em; margin:1em; background-color:black; color:white">
+wget -O /tmp/hudson.rpm http://hudson-ci.org/latest/redhat/hudson.rpm
+sudo rpm --install /tmp/hudson.rpm
+</pre>
+
+<p>
+Once installed, Hudson can be updated with <tt>yum</tt>.
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson"
+    xmlns:f="/lib/form">
+    ${response.setContentType("text/html; charset=UTF-8")}
+    <j:set var="html" value="${it.wantHtml(request)}"/>
+    <j:set var="baseURL" value="${it.getBaseUrl(request)}"/>
+    <j:set var="imagesURL" value="${it.getImagesUrl(request)}"/>
+    <j:set var="changeSet" value="${it.build.changeSet}"/>
+    <j:if test="${!html}">
+    ${response.setContentType("text/javascript; charset=UTF-8")}
+    document.write('</j:if>
+    <div style="background-color: #ffe; border: 1px solid #bbb; width: 470px">
+    <j:set var="buildURL" value="${baseURL}/${it.build.url}"/>
+    <div align="center"><b>${%Hudson ChangeSet for} <a href="${buildURL}">${buildURL}</a></b></div>
+    <j:if test="${changeSet.isEmptySet()}">
+        <p>${%No changes in this build}.</p>
+    </j:if>
+    <j:if test="${!changeSet.isEmptySet()}">
+    <table style="border:none">
+    <j:forEach var="changeSetEntry" items="${changeSet}">
+        <tr><th><small>${changeSetEntry.msgEscaped}</small></th><th><small>by <i>${changeSetEntry.author}</i></small></th></tr>
+        <j:forEach var="file" items="${it.getChangeSetEntries(changeSetEntry)}">
+            <tr><td colspan="2"><small><tt>${file}</tt></small></td></tr>
+        </j:forEach>
+    </j:forEach>
+    </table>
+    </j:if>
+    </div>
+    <j:if test="${!html}">');</j:if>
+</j:jelly>

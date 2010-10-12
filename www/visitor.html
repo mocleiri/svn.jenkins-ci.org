@@ -1,0 +1,212 @@
+<html>
+<head>
+  <title>Meet Hudson</title>
+  <style>
+    .testimonial {
+      font-style: italic;
+      margin-top: 1em;
+    }
+    
+    dt {
+      font-weight: bold;
+      margin-left: 1em;
+    }
+    
+    .screenshot {
+      float:right;
+      font-size:smaller;
+      padding: 0.5em;
+    }
+    
+    .app H3 {
+      clear: none;
+    }
+  </style>
+</head>
+<body><div class=app>
+<div style="float:right; padding: 1em; width: 10em; background-color: rgb(237,237,231); font-size: 1.2em; border: 1em solid white; border-right: 0em; border-top: 0em;">
+  <div>
+    <b>Testimonials:</b>
+  </div>
+  <div class=testimonial>
+  Hudson is terrific. It's just so...so...simple. Elegant, even.
+  </div>
+  <div align=right>
+  &mdash; <a href="http://jroller.com/page/ljn?entry=hudson_is_fantastic">Laird Nelson</a>
+  </div>
+  <div class=testimonial>
+  It has totally blown me away
+  </div>
+  <div align=right>
+  &mdash; <a href="http://blogs.bytecode.com.au/glen/2007/01/22/1169458555645.html">Glen Smith</a>
+  </div>
+  <div class=testimonial>
+  I am very satisfied with Hudson's performance: It was very easy to setup
+  </div>
+  <div align=right>
+  &mdash; <a href="http://weblogs.goshaky.com/weblogs/lars/entry/20070131">Lars Trieloff</a>
+  </div>
+  <div class=testimonial>
+  Everyone that is in need of a (new) build system, ... should consider Hudson.
+  </div>
+  <div align=right>
+  &mdash; <a href="http://javatools.wordpress.com/2007/02/23/hudson-a-continuous-build-system/">Sjoerd</a>
+  </div>
+  <div class=testimonial>
+  I'm really impressed. It's a snap to install and I had it building our project in no time.
+  </div>
+  <div align=right>
+  &mdash; <a href="http://sparrowlegs.com/nest/hudson/">JC@SparrowNest</a>
+  </div>
+  
+</div>
+<h3>What is Hudson?</h3>
+<div class=screenshot>
+	<a href="screenshots/1.png"><img src="screenshots/1s.png" border=0 /></a><br>
+	<center>
+		<a href="screenshots/1.png">
+			click to enlarge
+		</a>
+	</center>
+</div>
+<p>
+	Hudson monitors executions of repeated jobs, such as building a software project or jobs run by cron. Among those things, current Hudson focuses on the following two jobs:
+	<ol>
+		<li>
+			<b>Building/testing software projects continuously, just like <a href="http://cruisecontrol.sourceforge.net/">CruiseControl</a> or <a href="http://damagecontrol.codehaus.org/">DamageControl</a>.</b>
+			In a nutshell, Hudson provides an easy-to-use so-called continuous integration system, making it easier for developers to integrate changes to the project, and making it easier for users to obtain a fresh build. The automated, continoues build increases the productivity.
+		<li>
+			<b>Monitoring executions of externally-run jobs</b>, such as cron jobs and procmail jobs, even those that are run on a remote machine. For example, with cron, all you receive is regular e-mails that capture the output, and it is up to you to look at them dilligently and notice when it broke. Hudson keeps those outputs and makes it easy for you to notice when something is wrong.
+	</ol>
+
+
+
+<h3>Features</h3>
+<div class=screenshot>
+	<a href="screenshots/2.png"><img src="screenshots/2s.png" border=0 /></a><br>
+	<center>
+		<a href="screenshots/2.png">
+			click to enlarge
+		</a>
+	</center>
+	<br>
+	<a href="screenshots/5.png"><img src="screenshots/5s.png" border=0 /></a><br>
+	<center>
+		<a href="screenshots/5.png">
+			click to enlarge
+		</a>
+	</center>
+</div>
+<p>
+	Hudson offers the following features:
+	<dl>
+		<dt>Easy installation</dt>
+		<dd>
+			Just <tt>java -jar hudson.war</tt>, or deploy it in a servlet container. No additional install, no database.
+		</dd>
+		
+		<dt>Easy configuration</dt>
+		<dd>
+			Hudson can be configured entirely from its friendly web GUI with extensive on-the-fly error checks and inline help. There's no need to tweak XML manually anymore, although if you'd like to do so, you can do that, too.
+		</dd>
+		
+		<dt>Change set support</dt>
+		<dd>
+			Hudson can generate a list of changes made into the build from CVS/Subversion. This is also done in a fairly efficient fashion, to reduce the load of the repository.
+		</dd>
+		
+		<dt>Permanent links to "latest build"/"latest successful build"</dt>
+		<dd>
+			Hudson gives you a fixed URL for those, so that they can be easily linked from elsewhere.
+		</dd>
+		
+		<dt>RSS/E-mail Integration</dt>
+		<dd>
+			Monitor build results by RSS or e-mail to get real-time notifications on failures.
+		</dd>
+		
+		<dt>After-the-fact tagging</dt>
+		<dd>
+			Builds can be tagged long after builds are completed
+		</dd>
+		
+		<dt>JUnit/TestNG test reporting</dt>
+		<dd>
+			JUnit test reports can be tabulated, summarized, and displayed with history information,
+			such as when it started breaking, etc. History trend is plotted into a graph.
+		
+		<dt>Distributed builds</dt>
+		<dd>
+			Hudson can distribute build/test loads to multiple computers. This lets you get the most out of those idle workstations sitting beneath developers' desks.
+		
+		<dt>File fingerprinting</dt>
+		<dd>
+			Hudson can keep track of which build produced which jars, and which build is using which version of jars, and so on. This works even for jars that are produced outside Hudson, and is ideal for projects to track dependency.
+		
+		<dt>Plugin Support</dt>
+		<dd>
+			Hudson can be extended via <a href="plugins.html">3rd party plugins</a>. You can write plugins to make Hudson support tools/processes that your team uses.
+	</dl>
+
+
+<h3>Benefits</h3>
+<div class=screenshot>
+	<a href="screenshots/3.png"><img src="screenshots/3s.png" border=0 /></a><br>
+	<center>
+		<a href="screenshots/3.png">
+			click to enlarge
+		</a>
+	</center>
+</div>
+<dl>
+	<dt>No more "full rebuild" before a commit
+	<dd>
+		With Hudson, I stopped doing a rebuild before I commit. Nowadays I just commit, and let Hudson check if a build fails or not for me. Meanwhile, I move on to work on other things. If a build fails, Hudson can tell me so within a few minutes, so breaking a build for that short period of time is not really a problem, especially for projects of small teams, like JAXB. Thanks to this, I can spend my time more productively.
+	
+	<dt>No more running tests locally
+	<dd>
+		With Hudson, I stopped running unit tests locally. I just commit, and let Hudson run it for me. Meanwhile, I move on to work on other things. In this way, I save time and I can be more productive.
+	
+	<dt>No more sending bug fixes
+	<dd>
+		When someone needs an urgent bug fix for my project, I used to fix a bug, do a build, and send him the updated build via e-mail. With Hudson, I no longer have to do this. I just fix a bug and commit. He knows where my Hudson is, so he can pull the new bits by himself. This saves my time, and it makes me more productive.
+	
+	<dt>No more workspace tagging
+	<dd>
+		When someone needs a CVS tag for my project (for example, JAX-WS occasionally want a JAXB snapshot), he used to send me an e-mail, I then run <tt>cvs rtag</tt> manually, and reply him back when it's done. With Hudson, I no longer has to do any of this. Every version I deliver to him has a Hudson build Id baked in. So when he wants a tag for a particular version, he can just use Hudson to tag it. instead of sending me an e-mail. This saves my time, and it makes me more productive.
+</dl>
+<p>
+	I think by now you should have seen the pattern. It's all about making developers more productive.
+
+<h3>Test Drive</h3>
+<table width=100%>
+	<tr>
+		<td style="vertical-align:middle">
+			<a href="/hudson.jnlp"><img src=images/webstart.gif width=88 height=23 border=0></a>
+		</td><td>
+			<p style="margin-bottom:0px; margin-left: 1em;">
+				Launch Hudson through Java Web Start for a test drive. Once it launches, visit <a href="http://localhost:8080/">http://localhost:8080/</a> to get to the dashboard. Any configuration that you do with this Hudson will be stored in <tt>~/.hudson</tt>, so your data will survive through Hudson process restart.
+		</td>
+	</tr>
+</table>
+
+<h3>Installation</h3>
+<p>
+	To run Hudson, minimally you need to have J2SE 1.5 or later. After you download <a href="https://hudson.dev.java.net/servlets/ProjectDocumentList?folderID=2761"><tt>hudson.war</tt></a>, you can launch it by <a href="http://weblogs.java.net/blog/kohsuke/archive/2007/02/hudson_became_s.html">executing <tt>java -jar hudson.war</tt></a>. This is basically the same set up as the test drive, except that the output will go to console, not to a window.
+
+<p>
+	Alternatively, if you have a serlvet container that supports Servlet 2.4/JSP 2.0 or later, such as Glassfish, Tomcat 5, Jetty 6, etc., then you can deploy <tt>hudson.war</tt></a> as you would any WAR file. See <a href="containers/">this document</a> for more about container-specific installation instruction.
+
+<p>
+	Once the war file is exploded, run <tt>chmod 755 hudson</tt> in the exploded <tt>hudson/WEB-INF</tt> directory so that you can execute this shell script.
+<p>
+	Also, see how other people are deploying Hudson to get some idea of how to make it fit your environment.
+<ul>
+	<li><a href="case-study-1.html">Case study of Sven Reimers</a>
+	<li><a href="case-study-2.html">Case study of Kohsuke Kawaguchi</a>
+	<li><a href="case-study-3.html">Case study of Rhett Sutphin</a>
+	<li>we'd love to list yours here. Please talk to us.
+</ul>
+
+</div></body>
+</html>

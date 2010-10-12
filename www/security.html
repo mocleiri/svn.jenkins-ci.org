@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Securing Hudson</title>
+	<style>
+		pre {
+			background-color: lightgray;
+			padding: 0.5em;
+			margin-left: 2em;
+			margin-right: 2em;
+		}
+	</style>
+</head>
+<body><div class=app>
+<h1>Securing Hudson</h1>
+
+<p>
+  In the default configuration, Hudson does not perform any security check. This means any person accessing the website can configure Hudson and jobs, and perform builds. While this configuration is normally acceptable for intranet use, Hudson can be also configured to authenticate users, so that it can be exposed to the untrusted environment, such as the internet.
+
+<p>
+  To enable this setting, go to <tt>http://yourhost/hudson/configure</tt> and select "enable security". Then read on to configure the security realm in your web container.
+
+
+<h3>Security Implication</h3>
+<p>
+  When this mode is enabled, unauthenticated users can only read data from Hudson. To change configuration of Hudson and jobs, or to schedule a new build, you need to log in as an user who as the "admin" role. As per the servlet specification, exactly where the user names and passwords are stored are up to the container.
+
+<p>
+  Note that builds that are performed in Hudson still retains the full access to the entire system. This implies any committor to any of the projects built in Hudson has full access to the system, since they can change the build script.
+
+<p>
+  If you are using the master/slave mode, slaves that are connected to Hudson also retains the full access to the system.
+
+<h3>Configuring Containers</h3>
+<h4>Glassfish</h4>
+<p>
+  See <a href="http://www.nabble.com/Re%3A-Security-problem-with-hudson-on-glassfish-p8888662.html">this e-mail</a> for how to configure Glassfish to perform simple password authentication.
+
+<h4>Tomcat</h4>
+<p>
+  Tomcat by default stores the user database in an XML file called <tt>$TOMCAT_HOME/conf/tomcat-users.xml</tt>. You can add the following lines to this file to create an admin user.
+
+<pre>&lt;role rolename="admin"/>
+&lt;user username="hudson-admin" password="secret" roles="admin"/>
+</pre>
+
+</div></body>
+</html>
