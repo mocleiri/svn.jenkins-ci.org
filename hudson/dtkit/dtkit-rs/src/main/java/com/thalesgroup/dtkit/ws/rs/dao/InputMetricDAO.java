@@ -24,13 +24,11 @@
 package com.thalesgroup.dtkit.ws.rs.dao;
 
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
-import com.thalesgroup.dtkit.metrics.model.InputMetricException;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.ws.rs.model.InputMetricSelector;
 
 import java.io.File;
-import java.util.List;
 import java.util.Collection;
 
 public interface InputMetricDAO {
@@ -44,6 +42,8 @@ public interface InputMetricDAO {
     public Collection<? extends InputMetric> getInputMetric(InputMetricSelector inputMetricSelector);
 
     public Collection<? extends InputMetric> getInputMetrics();
+
+    public byte[] getXSD(InputMetricSelector inputMetricSelector);
 
     public boolean isPersistenceStore();
 }

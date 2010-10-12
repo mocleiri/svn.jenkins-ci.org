@@ -121,7 +121,7 @@ public class InputMetricsTest extends InputMetricsAbstractTest {
     @Test
     public void getXSDWithConflict() {
         ClientResponse clientResponse = webResource.path("/xsd;name=cppunit").get(ClientResponse.class);
-        Assert.assertEquals(Response.Status.CONFLICT.getStatusCode(), clientResponse.getStatus());
+        Assert.assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), clientResponse.getStatus());
     }
 
     @Test

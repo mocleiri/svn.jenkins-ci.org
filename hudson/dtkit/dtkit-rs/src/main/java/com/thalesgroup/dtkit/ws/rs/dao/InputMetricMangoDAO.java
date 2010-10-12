@@ -72,13 +72,16 @@ public class InputMetricMangoDAO implements InputMetricDAO {
             query = query.field("toolName").endsWithIgnoreCase(toolName);
         }
         if (toolVersion != null) {
-            query = query.field("toolVersion").containsIgnoreCase(toolVersion);
+            query = query.field("toolVersion").startsWithIgnoreCase(toolVersion);
+            query = query.field("toolVersion").endsWithIgnoreCase(toolVersion);
         }
         if (toolType != null) {
-            query = query.field("toolType").containsIgnoreCase(toolType);
+            query = query.field("toolType").startsWithIgnoreCase(toolType);
+            query = query.field("toolType").endsWithIgnoreCase(toolType);
         }
         if (outputFormat != null) {
-            query = query.field("outputFormat").containsIgnoreCase(outputFormat);
+            query = query.field("outputFormat").startsWithIgnoreCase(outputFormat);
+            query = query.field("outputFormat").endsWithIgnoreCase(outputFormat);                        
         }
         return query;
     }
@@ -122,12 +125,12 @@ public class InputMetricMangoDAO implements InputMetricDAO {
 
         InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, toolType.name(), outputMetric.getKey());
         Query<InputMetricDB> query = makeQuery(inputMetricSelector);
-        Collection<? extends InputMetric>  metrics =  mangoProxy.find(query).asList();
-        if (metrics.size() == 0){
-            throw new MappingException("Cannot get metric for "+ inputMetricSelector.toString());
+        Collection<? extends InputMetric> metrics = mangoProxy.find(query).asList();
+        if (metrics.size() == 0) {
+            throw new MappingException("Cannot get metric for " + inputMetricSelector.toString());
         }
         assert metrics.size() == 1 : "There are more than 2 metrics for " + inputMetricSelector.toString();
-        
+
         mangoProxy.deleteByQuery(query);
     }
 
@@ -154,5 +157,23 @@ public class InputMetricMangoDAO implements InputMetricDAO {
     public Collection<? extends InputMetric> getInputMetrics() {
         QueryResults<InputMetricDB> inputMetricDBQueryResults = mangoProxy.find();
         return inputMetricDBQueryResults.asList();
+    }
+
+    @Override
+    public byte[] getXSD(InputMetricSelector inputMetricSelector) {
+
+        //Verify that the object not already exists
+        Collection<? extends InputMetric> inputMetrics = getInputMetric(inputMetricSelector);
+        assert inputMetrics.size() <= 1;
+
+        if (inputMetrics.size() == 0) {
+            return null;
+        }
+
+        InputMetric metric = inputMetrics.iterator().next();
+        assert  metric instanceof InputMetricDB;
+        InputMetricDB inputMetricDB = (InputMetricDB) metric;
+
+        return String.valueOf(inputMetricDB.getXsdContent()).getBytes();
     }
 }

@@ -26,7 +26,10 @@ package com.thalesgroup.dtkit.ws.rs.resources;
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
 import com.sun.jersey.multipart.FormDataParam;
-import com.thalesgroup.dtkit.metrics.model.*;
+import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputType;
+import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.ws.rs.dao.InputMetricDAO;
 import com.thalesgroup.dtkit.ws.rs.model.InputMetricSelector;
 import com.thalesgroup.dtkit.ws.rs.vo.InputMetricResult;
@@ -37,11 +40,9 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -155,53 +156,38 @@ public class InputMetrics {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @SuppressWarnings("unused")
-    public Response delete(@FormDataParam("name") String name, @FormDataParam("version") String version,
-                           @FormDataParam("type") String type, final @FormDataParam("format") String format) {
+    public Response delete(@MatrixParam("name") String name, @MatrixParam("version") String version,
+                           @MatrixParam("type") String type, final @MatrixParam("format") String format) {
         if (logger.isDebugEnabled()) {
             logger.debug("getInputMetricByName() service");
         }
 
-        //All parameters except xsd must be provided
-        if ((name == null)
-                || (version == null)
-                || (type == null)
-                || (format == null)) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-
-        // Get the toolType
-        InputType toolType = InputType.getInputType(type);
-
-        //Get the output metric
-        OutputMetric outputMetric = new AbstractOutputMetric() {
-            @Override
-            public String getKey() {
-                return format;
-            }
-
-            @Override
-            public String getDescription() {
-                return "Given format by REST";
-            }
-
-            @Override
-            public String getVersion() {
-                return "N/A";
-            }
-
-            @Override
-            public String[] getXsdNameList() {
-                return null;
-            }
-        };
-
+        InputMetricDAO providedDAO = null;
+        List<InputMetric> metrics = new ArrayList<InputMetric>();
         InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, type, format);
         for (InputMetricDAO inputMetricDAO : inputMetricDAOList) {
-            if (inputMetricDAO.isPersistenceStore()) {
-                inputMetricDAO.delete(name, version, toolType, outputMetric);
+            Collection<? extends InputMetric> selectMetrics = inputMetricDAO.getInputMetric(inputMetricSelector);
+            if (selectMetrics.size() > 1) {
+                throw new IllegalArgumentException("You can't delete more than one metric at each request. The selector " + inputMetricSelector + " returns " + selectMetrics.size() + " metrics.");
+            }
+            if (selectMetrics.size() == 1) {
+                metrics.add(selectMetrics.iterator().next());
+                providedDAO = inputMetricDAO;
             }
         }
 
+        if (metrics.size() == 0) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        if (metrics.size() > 1) {
+            throw new IllegalArgumentException("You can't delete more than one metric at each request. The select" + inputMetricSelector + " returns " + metrics.size() + " metrics.");
+        }
+
+        assert providedDAO != null;
+
+        InputMetric metric = metrics.get(0);
+        providedDAO.delete(metric.getToolName(), metric.getToolVersion(), metric.getToolType(), metric.getOutputFormatType());
         return Response.status(Response.Status.OK).build();
     }
 
@@ -209,56 +195,22 @@ public class InputMetrics {
     @Path("/xsd")
     @Produces(MediaType.APPLICATION_XML)
     @SuppressWarnings("unused")
-    public byte[] getXSD(@MatrixParam("name") String name, @MatrixParam("version") String version, @MatrixParam("type") String type, @MatrixParam("format") String format) {
+    public Response getXSD(@MatrixParam("name") String name, @MatrixParam("version") String version,
+                           @MatrixParam("type") String type, final @MatrixParam("format") String format) {
         if (logger.isDebugEnabled()) {
             logger.debug("getXSD() service");
         }
 
-        List<InputMetric> metrics = new ArrayList<InputMetric>();
         InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, type, format);
         for (InputMetricDAO inputMetricDAO : inputMetricDAOList) {
-            metrics.addAll(inputMetricDAO.getInputMetric(inputMetricSelector));
-        }
-
-        if (metrics.size() == 0) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-
-        if (metrics.size() > 1) {
-            throw new WebApplicationException(Response.Status.CONFLICT);
-        }
-
-        InputMetric inputMetric = metrics.get(0);
-        if (!(inputMetric instanceof InputMetricXSL)) {
-            throw new WebApplicationException(Response.Status.PRECONDITION_FAILED);
-        }
-
-        InputMetricXSL inputMetricXSL = (InputMetricXSL) inputMetric;
-        String[] xsdPath = inputMetricXSL.getInputXsdNameList();
-        if (xsdPath == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        for (int i = 0; i < xsdPath.length; i++) {
-            try {
-                InputStream inputStream = inputMetric.getClass().getResourceAsStream(xsdPath[i]);
-                byte[] buffer = new byte[1024];
-                int wasRead = 0;
-                do {
-                    wasRead = inputStream.read(buffer);
-                    if (wasRead > 0) {
-                        baos.write(buffer, 0, wasRead);
-                    }
-                }
-                while (wasRead > 0);
-            }
-            catch (IOException ioe) {
-                throw new WebApplicationException(ioe, Response.Status.INTERNAL_SERVER_ERROR);
+            byte[] result = inputMetricDAO.getXSD(inputMetricSelector);
+            if (result != null) {
+                return Response.status(Response.Status.OK).entity(result).build();
             }
         }
 
-        return baos.toByteArray();
+        return Response.status(Response.Status.NOT_FOUND).build();
+
     }
 
 }

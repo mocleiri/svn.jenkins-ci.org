@@ -28,10 +28,10 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class IllegalArgumentExceptionMapper implements ExceptionMapper<IllegalArgumentException> {
+public class UnsupportedOperationExceptionMapper implements ExceptionMapper<UnsupportedOperationException> {
 
-    public Response toResponse(IllegalArgumentException ie) {
-        return Response.status(Response.Status.BAD_REQUEST).
+    public Response toResponse(UnsupportedOperationException ie) {
+        return Response.status(Response.Status.FORBIDDEN).
                 entity(ie.getMessage()).
                 type("text/plain").
                 build();

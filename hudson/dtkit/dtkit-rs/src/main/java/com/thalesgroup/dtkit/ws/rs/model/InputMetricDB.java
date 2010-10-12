@@ -25,10 +25,9 @@ package com.thalesgroup.dtkit.ws.rs.model;
 
 import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Serialized;
-import com.thalesgroup.dtkit.junit.model.JUnitModel;
+import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
-import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
@@ -92,16 +91,29 @@ public class InputMetricDB extends InputMetricXSL {
     @JsonIgnore
     @Override
     public OutputMetric getOutputFormatType() {
-        String outputFormat = null;
-        if ((outputFormat = getOutputFormat()) != null) {
-            if (JUnitModel.OUTPUT_JUNIT_1_0.getKey().equalsIgnoreCase(outputFormat)) {
-                setOutputFormatType(JUnitModel.OUTPUT_JUNIT_1_0);
-            } else {
-                setOutputFormatType(TusarModel.OUTPUT_TUSAR_1_0);
-            }
-        }
 
-        return super.getOutputFormatType();
+        //Get the output metric
+        return new AbstractOutputMetric() {
+            @Override
+            public String getKey() {
+                return outputFormat;
+            }
+
+            @Override
+            public String getDescription() {
+                return "Given format by REST";
+            }
+
+            @Override
+            public String getVersion() {
+                return "N/A";
+            }
+
+            @Override
+            public String[] getXsdNameList() {
+                return null;
+            }
+        };
     }
 
     @Override

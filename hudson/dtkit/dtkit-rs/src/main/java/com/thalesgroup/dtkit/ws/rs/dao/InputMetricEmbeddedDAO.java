@@ -26,7 +26,12 @@ package com.thalesgroup.dtkit.ws.rs.dao;
 import com.thalesgroup.dtkit.metrics.model.*;
 import com.thalesgroup.dtkit.ws.rs.model.InputMetricSelector;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -140,5 +145,48 @@ public class InputMetricEmbeddedDAO implements InputMetricDAO {
     @Override
     public Collection<? extends InputMetric> getInputMetrics() {
         return new ArrayList(allMetrics.values());
+    }
+
+    @Override
+    public byte[] getXSD(InputMetricSelector inputMetricSelector) {
+
+        Collection<? extends InputMetric> metrics = getInputMetric(inputMetricSelector);
+        if (metrics.size() == 0) {
+            return null;
+        }
+
+        if (metrics.size() > 1) {
+            throw new IllegalArgumentException("There are nore than one metric for the selector " + inputMetricSelector);
+        }
+
+        InputMetric metric = metrics.iterator().next();
+        if (!(metric instanceof InputMetricXSL)) {
+            throw new UnsupportedOperationException("The metric " + inputMetricSelector.toString() + " doesn't support getXSD() operation.");
+        }
+        InputMetricXSL inputMetricXSL = (InputMetricXSL) metric;
+        if (inputMetricXSL.getInputXsdNameList() == null) {
+            return null;
+        }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        for (int i = 0; i < inputMetricXSL.getInputXsdNameList().length; i++) {
+            try {
+                InputStream inputStream = metric.getClass().getResourceAsStream(inputMetricXSL.getInputXsdNameList()[i]);
+                byte[] buffer = new byte[1024];
+                int wasRead;
+                do {
+                    wasRead = inputStream.read(buffer);
+                    if (wasRead > 0) {
+                        baos.write(buffer, 0, wasRead);
+                    }
+                }
+                while (wasRead > 0);
+            }
+            catch (IOException ioe) {
+                throw new WebApplicationException(ioe, Response.Status.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return baos.toByteArray();
     }
 }
