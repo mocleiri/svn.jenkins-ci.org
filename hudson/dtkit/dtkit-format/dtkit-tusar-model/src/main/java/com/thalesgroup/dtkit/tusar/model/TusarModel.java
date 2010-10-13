@@ -23,18 +23,13 @@
 
 package com.thalesgroup.dtkit.tusar.model;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 
 
 @SuppressWarnings("unused")
-@XmlAccessorType(XmlAccessType.PROPERTY)
 public class TusarModel implements Serializable {
 
     @SuppressWarnings("unused")
