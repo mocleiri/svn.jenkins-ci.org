@@ -49,8 +49,8 @@ public class PluginTest extends HudsonTestCase {
         webClient = createWebClient();
     }
 
-    /** {@inheritDoc}.
-     * Deletes the hudson instance directory on teardown to avoid leakage of testdirectories.
+    /**
+     * {@inheritDoc}. Deletes the hudson instance directory on teardown to avoid leakage of testdirectories.
      */
     @Override
     protected void tearDown() throws Exception {
@@ -62,7 +62,7 @@ public class PluginTest extends HudsonTestCase {
 
     /**
      * Test method for an existing job without any builds.
-     *
+     * 
      * @throws IOException
      * @throws SAXException
      */
@@ -84,6 +84,17 @@ public class PluginTest extends HudsonTestCase {
         checkJavaScriptOutput(blueIcon, relative);
         checkHtmlOutput(blueIcon, relative);
         checkRowCount(webClient.goTo(relative + "?html=true"), 3);
+    }
+
+    @LocalData
+    public void testJsHealthWithoutDescription() throws IOException, SAXException {
+        final String blueIcon = "16x16/blue.gif";
+        final String relative = "/job/bar/" + JsConsts.URLNAME + "/health/";
+        final String htmlNeedle = "job with \\'3\\' builds";
+        checkJavaScriptOutput(htmlNeedle, relative);
+        final JavaScriptPage javaScriptPage = checkJavaScriptOutput(blueIcon, relative + "?skipDescription=true");
+        final String javaScript = javaScriptPage.getContent().trim();
+        assertFalse(htmlNeedle + " found in " + javaScript, javaScript.contains(htmlNeedle));
     }
 
     @LocalData
@@ -138,7 +149,6 @@ public class PluginTest extends HudsonTestCase {
         testJsBuildAction(buildPath, changesJelly, "#/trunk/foo", nodeName);
     }
 
-
     @Bug(4889)
     @LocalData
     public void testJsBuildActionWithChangesAfterReloadOfConfiguration() throws IOException, SAXException {
@@ -182,7 +192,6 @@ public class PluginTest extends HudsonTestCase {
         Thread.sleep(TimeUnit.MILLISECONDS.convert(5, TimeUnit.SECONDS));
         testJsBuildAction(buildPath, changesJelly, changeLogNeedle, nodeName);
     }
-
 
     @LocalData
     public void testJsProjectActionFactory() {
@@ -240,7 +249,7 @@ public class PluginTest extends HudsonTestCase {
 
     /**
      * Checks the existence of the index-jelly entry and an additional specialized jelly referenced by jellyPath.
-     *
+     * 
      * @param objectPath
      * @param jellyPath
      * @throws IOException
@@ -252,7 +261,8 @@ public class PluginTest extends HudsonTestCase {
         checkXpath(jobPage, "//a[contains(@href, \"" + objectPath + "/" + JsConsts.URLNAME + "\")]");
         final String href = objectPath + "/" + JsConsts.URLNAME;
         final HtmlPage jsIndexPage = (HtmlPage) jobPage.getAnchorByHref(href).click();
-        checkXpath(jsIndexPage, "//script[@type=\"text/javascript\" and contains(@src, \"" + href + "/" + jellyPath + "\")]");
+        checkXpath(jsIndexPage, "//script[@type=\"text/javascript\" and contains(@src, \"" + href + "/" + jellyPath
+                + "\")]");
     }
 
     /**
@@ -287,12 +297,15 @@ public class PluginTest extends HudsonTestCase {
     /**
      * @param htmlNeedle
      * @param relative
+     * @return
      * @throws IOException
      * @throws SAXException
      */
-    private void checkJavaScriptOutput(final String htmlNeedle, final String relative) throws IOException, SAXException {
+    private JavaScriptPage checkJavaScriptOutput(final String htmlNeedle, final String relative) throws IOException,
+            SAXException {
         final JavaScriptPage jsPage = (JavaScriptPage) webClient.goTo(relative, "text/javascript");
         checkJavaScriptOutput(htmlNeedle, jsPage);
+        return jsPage;
     }
 
     /**
@@ -304,8 +317,10 @@ public class PluginTest extends HudsonTestCase {
         assertTrue(htmlNeedle + " not found in " + javaScript, javaScript.contains(htmlNeedle));
         assertTrue(javaScript + " does not start with " + JAVA_SCRIPT_NEEDLE, javaScript.startsWith(JAVA_SCRIPT_NEEDLE));
     }
+
     /**
      * Checks that the jsindex.png is only referenced once on the page.
+     * 
      * @param build
      * @throws IOException
      * @throws SAXException

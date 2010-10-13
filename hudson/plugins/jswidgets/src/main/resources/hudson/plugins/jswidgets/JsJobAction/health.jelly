@@ -3,6 +3,7 @@
     xmlns:f="/lib/form">
     ${response.setContentType("text/html; charset=UTF-8")}
     <j:set var="html" value="${it.wantHtml(request)}"/>
+    <j:set var="skipDescription" value="${it.skipDescription(request)}"/>
     <j:set var="job" value="${it.project}"/>
         <j:set var="baseURL" value="${it.getBaseUrl(request)}${rootURL}"/>
         <j:set var="imagesURL" value="${it.getImagesUrl(request)}"/>
@@ -36,6 +37,8 @@ document.write('</j:if>
                     </j:forEach>
                 </tbody>
             </table>
-            <div><small>${it.getJobDescription(!html)}</small></div>
+            <j:if test="${!skipDescription}">
+                <div><small>${it.getJobDescription(!html)}</small></div>
+            </j:if>
         </div><j:if test="${!html}">');</j:if>
 </j:jelly>
