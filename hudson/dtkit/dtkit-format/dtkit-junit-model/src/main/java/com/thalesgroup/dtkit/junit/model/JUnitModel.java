@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class JUnitModel implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_0 = new JUnit1() {
+    public static OutputMetric OUTPUT_JUNIT_1_0 = new JUnit1() {
         {
             set(new ValidationService());
         }
