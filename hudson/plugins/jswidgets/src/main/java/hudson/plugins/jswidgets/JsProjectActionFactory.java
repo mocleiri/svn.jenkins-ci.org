@@ -28,10 +28,12 @@ public class JsProjectActionFactory extends TransientProjectActionFactory {
     public Collection<? extends Action> createFor(@SuppressWarnings("unchecked") AbstractProject target) {
         LOG.fine(this + " adds JsJobAction for " + target);
         final List<JsJobAction> jsJobActions = target.getActions(JsJobAction.class);
-        LOG.fine(target + " already has " + jsJobActions);
-        final JsJobAction newAction = new JsJobAction(target);
         final ArrayList<Action> actions = new ArrayList<Action>();
-        actions.add(newAction);
+        if (jsJobActions.isEmpty()) {
+            LOG.fine(target + " already has " + jsJobActions);
+            final JsJobAction newAction = new JsJobAction(target);
+            actions.add(newAction);
+        }
         return actions;
     }
 
