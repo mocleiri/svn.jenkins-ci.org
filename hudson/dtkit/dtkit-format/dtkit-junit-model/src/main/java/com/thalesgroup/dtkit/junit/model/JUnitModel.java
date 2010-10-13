@@ -23,51 +23,19 @@
 
 package com.thalesgroup.dtkit.junit.model;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
 
 @SuppressWarnings("unused")
-@XmlAccessorType(XmlAccessType.PROPERTY)
-public class JUnitModel extends AbstractOutputMetric implements Serializable {
+public class JUnitModel implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_JUNIT_1_0 = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-            bind(ValidationService.class);
+    public static OutputMetric OUTPUT_JUNIT_1_0 = new JUnit1() {
+        {
+            set(new ValidationService());
         }
-    }).getInstance(JUnitModel.class);
-
-    @Override
-    @XmlElement
-    public String getKey() {
-        return "junit";
-    }
-
-    @Override
-    @XmlElement
-    public String getDescription() {
-        return "JUNIT OUTPUT FORMAT 1.0";
-    }
-
-    @Override
-    @XmlElement
-    public String getVersion() {
-        return "1.0";
-    }
-
-    @Override
-    @XmlElement
-    public String[] getXsdNameList() {
-        return new String[]{"xsd/junit-1.0.xsd"};
-    }
+    };
 }

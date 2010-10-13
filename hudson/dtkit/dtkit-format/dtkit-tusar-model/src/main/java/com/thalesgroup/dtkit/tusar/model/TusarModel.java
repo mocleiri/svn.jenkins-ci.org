@@ -38,20 +38,18 @@ import java.io.Serializable;
 public class TusarModel implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_0 = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-            bind(ValidationService.class);
+    public static OutputMetric OUTPUT_TUSAR_1_0 = new Tusarv0() {
+        {
+            set(new ValidationService());
         }
-    }).getInstance(Tusarv0.class);
+    };
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_1 = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-            bind(ValidationService.class);
+    public static OutputMetric OUTPUT_TUSAR_1_1 = new Tusarv1() {
+        {
+            set(new ValidationService());
         }
-    }).getInstance(Tusarv1.class);
+    };
 
 
 }
