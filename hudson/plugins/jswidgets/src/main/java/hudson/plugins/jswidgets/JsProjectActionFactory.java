@@ -33,8 +33,11 @@ public class JsProjectActionFactory extends TransientProjectActionFactory {
             LOG.fine(target + " already has " + jsJobActions);
             final JsJobAction newAction = new JsJobAction(target);
             actions.add(newAction);
+            return actions;    
+        } else {
+            return jsJobActions;
         }
-        return actions;
+        
     }
 
 }
