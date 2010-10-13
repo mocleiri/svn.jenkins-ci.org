@@ -36,6 +36,8 @@ public class JsBuildAction extends JsBaseAction {
     }
 
     /**
+     * This class implements the JS widgets pages for a build.
+     * 
      * @param build
      *            this action acts on.
      */

@@ -30,7 +30,7 @@ public class JsJobAction extends JsBaseAction {
         for (Object object : builds) {
             final AbstractBuild<?, ?> build = (AbstractBuild<?, ?>) object;
             final List<JsBuildAction> jsBuildActions = build.getActions(JsBuildAction.class);
-            if (jsBuildActions.size() == 0) {                
+            if (jsBuildActions.isEmpty()) {                
                 final JsBuildAction jsBuildAction = new JsBuildAction(build);
                 build.addAction(jsBuildAction);
                 LOG.fine("Adding " + jsBuildAction + " to " + build);

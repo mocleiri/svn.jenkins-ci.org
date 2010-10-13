@@ -31,6 +31,19 @@ public abstract class JsBaseAction implements Action {
     }
 
     /**
+     * Returns whether we want to skip the description of the job.
+     * 
+     * @param request
+     *            stapler request
+     * @return true if skipDescription is true
+     */
+    public boolean skipDescription(final StaplerRequest request) {
+        final boolean skipDescription = Boolean.parseBoolean(request.getParameter("skipDescription"));
+        LOG.finest("skipDescription=" + skipDescription);
+        return skipDescription;
+    }
+
+    /**
      * Calculates Hudson's URL including protocol, host and port from the request.
      * 
      * @param req
