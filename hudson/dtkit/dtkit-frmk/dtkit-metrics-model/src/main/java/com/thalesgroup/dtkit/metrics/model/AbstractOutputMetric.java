@@ -39,7 +39,7 @@ public abstract class AbstractOutputMetric implements OutputMetric {
     private ValidationService validationService;
 
     @Inject
-    void set(ValidationService validationService) {
+    protected void set(ValidationService validationService) {
         this.validationService = validationService;
     }
 
