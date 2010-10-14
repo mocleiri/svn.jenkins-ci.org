@@ -10,10 +10,10 @@
             <h3>${%Job Health Javascript for} ${job.name}</h3>
             <j:set var="jshealthURL" value="${baseURL}/${job.url}${it.urlName}/health/"/>
             <p>${%Copy this snippet to a HTML page to include via Javascript}</p>
-            <p><tt>&amp;lt;script type="text/javascript" src="${jshealthURL}"&amp;gt;&amp;lt;/script&amp;gt;</tt></p>
+            <p><tt>&amp;lt;script type="text/javascript" src="${jshealthURL}?skipDescription=true"&amp;gt;&amp;lt;/script&amp;gt;</tt></p>
             <script type="text/javascript" src="${jshealthURL}"></script>
             <h3>${%Job Health HTML for} ${job.name}</h3>
-            <j:set var="jshealthURL" value="${jshealthURL}?html=true"/>
+            <j:set var="jshealthURL" value="${jshealthURL}?html=true&amp;skipDescription=true"/>
             <p>${%Copy this snippet to a HTML page to include via IFRAME}</p>
             <p><tt>&amp;lt;iframe src="${jshealthURL}" width="470"/&amp;gt;&amp;lt;/iframe&amp;gt;</tt></p>
             <iframe src="${jshealthURL}" width="470"></iframe>
