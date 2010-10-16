@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-AbstractProject (Hudson main module 1.380 API)
+AbstractProject (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ AbstractProject (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="AbstractProject (Hudson main module 1.380 API)";
+        parent.document.title="AbstractProject (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -417,6 +417,14 @@ void</CODE></FONT></TD>
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;<A HREF="../../hudson/widgets/HistoryWidget.html" title="class in hudson.widgets">HistoryWidget</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#createHistoryWidget()">createHistoryWidget</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#createTransientActions()">createTransientActions</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -1253,7 +1261,7 @@ void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/AbstractProject.html#updateTransientActions()">updateTransientActions</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;effectively deprecated.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.Job"><!-- --></A>
@@ -2059,6 +2067,26 @@ public <A HREF="../../hudson/model/BallColor.html" title="enum in hudson.model">
 updateTransientActions</H3>
 <PRE>
 protected void <B>updateTransientActions</B>()</PRE>
+<DL>
+<DD>effectively deprecated. Since using updateTransientActions correctly
+ under concurrent environment requires a lock that can too easily cause deadlocks.
+
+ <p>
+ Override <A HREF="../../hudson/model/AbstractProject.html#createTransientActions()"><CODE>createTransientActions()</CODE></A> instead.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTransientActions()"><!-- --></A><H3>
+createTransientActions</H3>
+<PRE>
+protected <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt; <B>createTransientActions</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>

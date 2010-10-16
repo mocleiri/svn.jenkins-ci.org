@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MappingWorksheet (Hudson main module 1.380 API)
+MappingWorksheet (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MappingWorksheet (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MappingWorksheet (Hudson main module 1.380 API)";
+        parent.document.title="MappingWorksheet (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -161,6 +161,14 @@ Defines a mapping problem for answering "where do we execute this task?"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;class</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.Mapping.html" title="class in hudson.model.queue">MappingWorksheet.Mapping</A></B></CODE>
 
@@ -220,7 +228,15 @@ Defines a mapping problem for answering "where do we execute this task?"
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html#MappingWorksheet(hudson.model.Queue.BuildableItem, java.util.List)">MappingWorksheet</A></B>(<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&nbsp;item,
-                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A>&gt;&nbsp;offers)</CODE>
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A>&gt;&nbsp;offers)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../hudson/model/queue/MappingWorksheet.html#MappingWorksheet(hudson.model.Queue.BuildableItem, java.util.List, java.util.Collection)">MappingWorksheet</A></B>(<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&nbsp;item,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A>&gt;&nbsp;offers,
+                 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/queue/LoadPredictor.html" title="class in hudson.model.queue">LoadPredictor</A>&gt;&nbsp;loadPredictors)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -319,7 +335,17 @@ public final <A HREF="../../../hudson/model/Queue.BuildableItem.html" title="cla
 MappingWorksheet</H3>
 <PRE>
 public <B>MappingWorksheet</B>(<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&nbsp;item,
-                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../../hudson/model/Queue.JobOffer.html" title="class in hudson.model">Queue.JobOffer</A>&gt;&nbsp;offers)</PRE>
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A>&gt;&nbsp;offers)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="MappingWorksheet(hudson.model.Queue.BuildableItem, java.util.List, java.util.Collection)"><!-- --></A><H3>
+MappingWorksheet</H3>
+<PRE>
+public <B>MappingWorksheet</B>(<A HREF="../../../hudson/model/Queue.BuildableItem.html" title="class in hudson.model">Queue.BuildableItem</A>&nbsp;item,
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;? extends <A HREF="../../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A>&gt;&nbsp;offers,
+                        <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/queue/LoadPredictor.html" title="class in hudson.model.queue">LoadPredictor</A>&gt;&nbsp;loadPredictors)</PRE>
 <DL>
 </DL>
 

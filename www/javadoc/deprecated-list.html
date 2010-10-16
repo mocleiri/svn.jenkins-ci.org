@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.380 API)
+Deprecated List (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.380 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -1360,6 +1360,12 @@ function windowTitle()
 <TD><A HREF="hudson/tasks/Publisher.html#prebuild(hudson.model.Build, hudson.model.BuildListener)">hudson.tasks.Publisher.prebuild(Build, BuildListener)</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.150</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/model/queue/LoadPredictor.html#predict(hudson.model.Computer, long, long)">hudson.model.queue.LoadPredictor.predict(Computer, long, long)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.380
+      Use <A HREF="hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)"><CODE>LoadPredictor.predict(MappingWorksheet, Computer, long, long)</CODE></A></I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/util/DescribableList.html#rebuild(org.kohsuke.stapler.StaplerRequest, net.sf.json.JSONObject, java.util.List, java.lang.String)">hudson.util.DescribableList.rebuild(StaplerRequest, JSONObject, List<? extends Descriptor<T>>, String)</A>

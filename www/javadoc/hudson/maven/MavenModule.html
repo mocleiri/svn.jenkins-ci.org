@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MavenModule (Hudson main module 1.380 API)
+MavenModule (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MavenModule (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MavenModule (Hudson main module 1.380 API)";
+        parent.document.title="MavenModule (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -217,7 +217,8 @@ Class MavenModule</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../hudson/maven/MavenModule.html#addTransientActionsFromBuild(hudson.maven.MavenBuild, java.util.Set)">addTransientActionsFromBuild</A></B>(<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&nbsp;build,
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModule.html#addTransientActionsFromBuild(hudson.maven.MavenBuild, java.util.List, java.util.Set)">addTransientActionsFromBuild</A></B>(<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&nbsp;build,
+                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;collection,
                              <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&gt;&nbsp;added)</CODE>
 
 <BR>
@@ -487,6 +488,14 @@ Class MavenModule</H2>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True if this instance supports log rotation configuration.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/maven/MavenModule.html#updateTransientActions()">updateTransientActions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;effectively deprecated.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.maven.AbstractMavenProject"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -494,7 +503,7 @@ Class MavenModule</H2>
 <TH ALIGN="left"><B>Methods inherited from class hudson.maven.<A HREF="../../hudson/maven/AbstractMavenProject.html" title="class in hudson.maven">AbstractMavenProject</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../hudson/maven/AbstractMavenProject.html#updateTransientActions()">updateTransientActions</A></CODE></TD>
+<TD><CODE><A HREF="../../hudson/maven/AbstractMavenProject.html#createTransientActions()">createTransientActions</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.AbstractProject"><!-- --></A>
@@ -1117,6 +1126,27 @@ public boolean <B>isFingerprintConfigured</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="updateTransientActions()"><!-- --></A><H3>
+updateTransientActions</H3>
+<PRE>
+protected void <B>updateTransientActions</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../hudson/model/AbstractProject.html#updateTransientActions()">AbstractProject</A></CODE></B></DD>
+<DD>effectively deprecated. Since using updateTransientActions correctly
+ under concurrent environment requires a lock that can too easily cause deadlocks.
+
+ <p>
+ Override <A HREF="../../hudson/model/AbstractProject.html#createTransientActions()"><CODE>AbstractProject.createTransientActions()</CODE></A> instead.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../hudson/model/AbstractProject.html#updateTransientActions()">updateTransientActions</A></CODE> in class <CODE><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>&lt;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="buildDependencyGraph(hudson.model.DependencyGraph)"><!-- --></A><H3>
 buildDependencyGraph</H3>
 <PRE>
@@ -1134,17 +1164,18 @@ protected void <B>buildDependencyGraph</B>(<A HREF="../../hudson/model/Dependenc
 </DL>
 <HR>
 
-<A NAME="addTransientActionsFromBuild(hudson.maven.MavenBuild, java.util.Set)"><!-- --></A><H3>
+<A NAME="addTransientActionsFromBuild(hudson.maven.MavenBuild, java.util.List, java.util.Set)"><!-- --></A><H3>
 addTransientActionsFromBuild</H3>
 <PRE>
 protected void <B>addTransientActionsFromBuild</B>(<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&nbsp;build,
+                                            <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;collection,
                                             <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</A>&gt;&nbsp;added)</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/maven/AbstractMavenProject.html#addTransientActionsFromBuild(R, java.util.Set)">addTransientActionsFromBuild</A></CODE> in class <CODE><A HREF="../../hudson/maven/AbstractMavenProject.html" title="class in hudson.maven">AbstractMavenProject</A>&lt;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/maven/AbstractMavenProject.html#addTransientActionsFromBuild(R, java.util.List, java.util.Set)">addTransientActionsFromBuild</A></CODE> in class <CODE><A HREF="../../hudson/maven/AbstractMavenProject.html" title="class in hudson.maven">AbstractMavenProject</A>&lt;<A HREF="../../hudson/maven/MavenModule.html" title="class in hudson.maven">MavenModule</A>,<A HREF="../../hudson/maven/MavenBuild.html" title="class in hudson.maven">MavenBuild</A>&gt;</CODE></DL>
 </DD>
 <DD><DL>
-</DL>
+<DD><CODE>collection</CODE> - Add the transient actions to this collection.</DL>
 </DD>
 </DL>
 <HR>

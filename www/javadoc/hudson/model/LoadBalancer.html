@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LoadBalancer (Hudson main module 1.380 API)
+LoadBalancer (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LoadBalancer (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LoadBalancer (Hudson main module 1.380 API)";
+        parent.document.title="LoadBalancer (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -168,7 +168,7 @@ Strategy that decides which <A HREF="../../hudson/model/Queue.Task.html" title="
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected abstract &nbsp;<A HREF="../../hudson/model/queue/MappingWorksheet.Mapping.html" title="class in hudson.model.queue">MappingWorksheet.Mapping</A></CODE></FONT></TD>
+<CODE>abstract &nbsp;<A HREF="../../hudson/model/queue/MappingWorksheet.Mapping.html" title="class in hudson.model.queue">MappingWorksheet.Mapping</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/LoadBalancer.html#map(hudson.model.Queue.Task, hudson.model.queue.MappingWorksheet)">map</A></B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
     <A HREF="../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;worksheet)</CODE>
 
@@ -260,8 +260,8 @@ public <B>LoadBalancer</B>()</PRE>
 <A NAME="map(hudson.model.Queue.Task, hudson.model.queue.MappingWorksheet)"><!-- --></A><H3>
 map</H3>
 <PRE>
-protected abstract <A HREF="../../hudson/model/queue/MappingWorksheet.Mapping.html" title="class in hudson.model.queue">MappingWorksheet.Mapping</A> <B>map</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
-                                                <A HREF="../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;worksheet)</PRE>
+public abstract <A HREF="../../hudson/model/queue/MappingWorksheet.Mapping.html" title="class in hudson.model.queue">MappingWorksheet.Mapping</A> <B>map</B>(<A HREF="../../hudson/model/Queue.Task.html" title="interface in hudson.model">Queue.Task</A>&nbsp;task,
+                                             <A HREF="../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;worksheet)</PRE>
 <DL>
 <DD>Chooses the executor(s) to carry out the build for the given task.
 

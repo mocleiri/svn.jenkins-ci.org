@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ViewGroup (Hudson main module 1.380 API)
+ViewGroup (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ViewGroup (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ViewGroup (Hudson main module 1.380 API)";
+        parent.document.title="ViewGroup (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -187,6 +187,16 @@ Container of <A HREF="../../hudson/model/View.html" title="class in hudson.model
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/views/ViewsTabBar.html" title="class in hudson.views">ViewsTabBar</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#getViewsTabBar()">getViewsTabBar</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the TabBar for the views
+
+ TabBar for views can be provided by extension.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/ViewGroup.html#onViewRenamed(hudson.model.View, java.lang.String, java.lang.String)">onViewRenamed</A></B>(<A HREF="../../hudson/model/View.html" title="class in hudson.model">View</A>&nbsp;view,
               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
@@ -339,6 +349,26 @@ void <B>onViewRenamed</B>(<A HREF="../../hudson/model/View.html" title="class in
  <p>
  It is the caller's responsibility to ensure that the new name is a
  <A HREF="../../hudson/model/Hudson.html#checkGoodName(java.lang.String)">legal view name</A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getViewsTabBar()"><!-- --></A><H3>
+getViewsTabBar</H3>
+<PRE>
+<A HREF="../../hudson/views/ViewsTabBar.html" title="class in hudson.views">ViewsTabBar</A> <B>getViewsTabBar</B>()</PRE>
+<DL>
+<DD>Gets the TabBar for the views
+
+ TabBar for views can be provided by extension. Only one TabBar can be active
+ at a given time (Selectable by user in the global Configuration page)
+ Default TabBar is provided by Hudson Platform
 <P>
 <DD><DL>
 </DL>

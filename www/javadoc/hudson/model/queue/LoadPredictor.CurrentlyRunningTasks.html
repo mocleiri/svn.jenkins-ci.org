@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LoadPredictor.CurrentlyRunningTasks (Hudson main module 1.380 API)
+LoadPredictor.CurrentlyRunningTasks (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LoadPredictor.CurrentlyRunningTasks (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LoadPredictor.CurrentlyRunningTasks (Hudson main module 1.380 API)";
+        parent.document.title="LoadPredictor.CurrentlyRunningTasks (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -174,7 +174,8 @@ Considers currently running tasks and their completion.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../hudson/model/queue/LoadPredictor.CurrentlyRunningTasks.html#predict(hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+<TD><CODE><B><A HREF="../../../hudson/model/queue/LoadPredictor.CurrentlyRunningTasks.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;plan,
+        <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
         long&nbsp;start,
         long&nbsp;eternity)</CODE>
 
@@ -188,7 +189,7 @@ Considers currently running tasks and their completion.
 <TH ALIGN="left"><B>Methods inherited from class hudson.model.queue.<A HREF="../../../hudson/model/queue/LoadPredictor.html" title="class in hudson.model.queue">LoadPredictor</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html#all()">all</A></CODE></TD>
+<TD><CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html#all()">all</A>, <A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.Computer, long, long)">predict</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -230,21 +231,25 @@ public <B>LoadPredictor.CurrentlyRunningTasks</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="predict(hudson.model.Computer, long, long)"><!-- --></A><H3>
+<A NAME="predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)"><!-- --></A><H3>
 predict</H3>
 <PRE>
-public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt; <B>predict</B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt; <B>predict</B>(<A HREF="../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;plan,
+                                    <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
                                     long&nbsp;start,
                                     long&nbsp;eternity)</PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.Computer, long, long)">LoadPredictor</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)">LoadPredictor</A></CODE></B></DD>
 <DD>Estimates load starting from the 'start' timestamp, up to the 'end' timestamp.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.Computer, long, long)">predict</A></CODE> in class <CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html" title="class in hudson.model.queue">LoadPredictor</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)">predict</A></CODE> in class <CODE><A HREF="../../../hudson/model/queue/LoadPredictor.html" title="class in hudson.model.queue">LoadPredictor</A></CODE></DL>
 </DD>
 <DD><DL>
-<DD><CODE>start</CODE> - Where to start enumeration. Always bigger or equal to the current time of the execution.</DL>
+<DT><B>Parameters:</B><DD><CODE>plan</CODE> - This is the execution plan for which we are making a load prediction. Never null. While
+      this object is still being partially constructed when this method is called, some
+      of its properties (like <A HREF="../../../hudson/model/queue/MappingWorksheet.html#item"><CODE>MappingWorksheet.item</CODE></A> provide access to more contextual
+      information.<DD><CODE>start</CODE> - Where to start enumeration. Always bigger or equal to the current time of the execution.</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

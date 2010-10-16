@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Class hudson.model.queue.FutureLoad (Hudson main module 1.380 API)
+Uses of Class hudson.model.queue.FutureLoad (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Class hudson.model.queue.FutureLoad (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class hudson.model.queue.FutureLoad (Hudson main module 1.380 API)";
+        parent.document.title="Uses of Class hudson.model.queue.FutureLoad (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -113,8 +113,31 @@ Uses of <A HREF="../../../../hudson/model/queue/FutureLoad.html" title="class in
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B>LoadPredictor.</B><B><A HREF="../../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+        long&nbsp;start,
+        long&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.380
+      Use <A HREF="../../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)"><CODE>LoadPredictor.predict(MappingWorksheet, Computer, long, long)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>BackFiller.</B><B><A HREF="../../../../hudson/model/queue/BackFiller.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;plan,
+        <A HREF="../../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+        long&nbsp;start,
+        long&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>LoadPredictor.</B><B><A HREF="../../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;plan,
+        <A HREF="../../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
         long&nbsp;start,
         long&nbsp;end)</CODE>
 
@@ -124,7 +147,8 @@ Uses of <A HREF="../../../../hudson/model/queue/FutureLoad.html" title="class in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B>LoadPredictor.CurrentlyRunningTasks.</B><B><A HREF="../../../../hudson/model/queue/LoadPredictor.CurrentlyRunningTasks.html#predict(hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+<TD><CODE><B>LoadPredictor.CurrentlyRunningTasks.</B><B><A HREF="../../../../hudson/model/queue/LoadPredictor.CurrentlyRunningTasks.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;plan,
+        <A HREF="../../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
         long&nbsp;start,
         long&nbsp;eternity)</CODE>
 

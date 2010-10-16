@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TreeView (Hudson main module 1.380 API)
+TreeView (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ TreeView (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TreeView (Hudson main module 1.380 API)";
+        parent.document.title="TreeView (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -286,6 +286,16 @@ Class TreeView</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all the views in this group.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/views/ViewsTabBar.html" title="class in hudson.views">ViewsTabBar</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/TreeView.html#getViewsTabBar()">getViewsTabBar</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the TabBar for the views
+
+ TabBar for views can be provided by extension.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -703,6 +713,27 @@ register</H3>
 <DL>
 <DD><DL>
 </DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getViewsTabBar()"><!-- --></A><H3>
+getViewsTabBar</H3>
+<PRE>
+public <A HREF="../../hudson/views/ViewsTabBar.html" title="class in hudson.views">ViewsTabBar</A> <B>getViewsTabBar</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ViewGroup.html#getViewsTabBar()">ViewGroup</A></CODE></B></DD>
+<DD>Gets the TabBar for the views
+
+ TabBar for views can be provided by extension. Only one TabBar can be active
+ at a given time (Selectable by user in the global Configuration page)
+ Default TabBar is provided by Hudson Platform
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#getViewsTabBar()">getViewsTabBar</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>

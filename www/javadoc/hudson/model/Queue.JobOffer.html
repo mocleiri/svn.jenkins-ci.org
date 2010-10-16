@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.JobOffer (Hudson main module 1.380 API)
+Queue.JobOffer (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.JobOffer (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.JobOffer (Hudson main module 1.380 API)";
+        parent.document.title="Queue.JobOffer (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -94,14 +94,15 @@ hudson.model</FONT>
 Class Queue.JobOffer</H2>
 <PRE>
 <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Queue.JobOffer</B>
+  <IMG SRC="../../resources/inherit.gif" ALT="extended by "><A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">hudson.model.queue.MappingWorksheet.ExecutorSlot</A>
+      <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Queue.JobOffer</B>
 </PRE>
 <DL>
 <DT><B>Enclosing class:</B><DD><A HREF="../../hudson/model/Queue.html" title="class in hudson.model">Queue</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>Queue.JobOffer</B><DT>extends <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+<DT><PRE>public class <B>Queue.JobOffer</B><DT>extends <A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A></DL>
 </PRE>
 
 <P>
@@ -154,6 +155,14 @@ Data structure created for each idle <A HREF="../../hudson/model/Executor.html" 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.JobOffer.html#getExecutor()">getExecutor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.JobOffer.html#getNode()">getNode</A></B>()</CODE>
 
@@ -178,7 +187,7 @@ Data structure created for each idle <A HREF="../../hudson/model/Executor.html" 
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
+<CODE>protected &nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.JobOffer.html#set(hudson.model.queue.WorkUnit)">set</A></B>(<A HREF="../../hudson/model/queue/WorkUnit.html" title="class in hudson.model.queue">WorkUnit</A>&nbsp;p)</CODE>
 
 <BR>
@@ -229,8 +238,25 @@ public final <A HREF="../../hudson/model/Executor.html" title="class in hudson.m
 <A NAME="set(hudson.model.queue.WorkUnit)"><!-- --></A><H3>
 set</H3>
 <PRE>
-public void <B>set</B>(<A HREF="../../hudson/model/queue/WorkUnit.html" title="class in hudson.model.queue">WorkUnit</A>&nbsp;p)</PRE>
+protected void <B>set</B>(<A HREF="../../hudson/model/queue/WorkUnit.html" title="class in hudson.model.queue">WorkUnit</A>&nbsp;p)</PRE>
 <DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html#set(hudson.model.queue.WorkUnit)">set</A></CODE> in class <CODE><A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getExecutor()"><!-- --></A><H3>
+getExecutor</H3>
+<PRE>
+public <A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A> <B>getExecutor</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html#getExecutor()">getExecutor</A></CODE> in class <CODE><A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>
@@ -257,6 +283,9 @@ public boolean <B>isAvailable</B>()</PRE>
 <DL>
 <DD>Is this executor ready to accept some tasks?
 <P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html#isAvailable()">isAvailable</A></CODE> in class <CODE><A HREF="../../hudson/model/queue/MappingWorksheet.ExecutorSlot.html" title="class in hudson.model.queue">MappingWorksheet.ExecutorSlot</A></CODE></DL>
+</DD>
 <DD><DL>
 </DL>
 </DD>

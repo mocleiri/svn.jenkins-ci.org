@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-LoadPredictor (Hudson main module 1.380 API)
+LoadPredictor (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ LoadPredictor (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="LoadPredictor (Hudson main module 1.380 API)";
+        parent.document.title="LoadPredictor (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -100,7 +100,7 @@ Class LoadPredictor</H2>
 <DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../hudson/model/queue/LoadPredictor.CurrentlyRunningTasks.html" title="class in hudson.model.queue">LoadPredictor.CurrentlyRunningTasks</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../hudson/model/queue/BackFiller.html" title="class in hudson.model.queue">BackFiller</A>, <A HREF="../../../hudson/model/queue/LoadPredictor.CurrentlyRunningTasks.html" title="class in hudson.model.queue">LoadPredictor.CurrentlyRunningTasks</A></DD>
 </DL>
 <HR>
 <DL>
@@ -189,8 +189,20 @@ Predicts future load to the system, to assist the scheduling decisions
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>abstract &nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+        long&nbsp;start,
+        long&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.380
+      Use <A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)"><CODE>predict(MappingWorksheet, Computer, long, long)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)">predict</A></B>(<A HREF="../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;plan,
+        <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
         long&nbsp;start,
         long&nbsp;end)</CODE>
 
@@ -237,13 +249,40 @@ public <B>LoadPredictor</B>()</PRE>
 </TR>
 </TABLE>
 
+<A NAME="predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)"><!-- --></A><H3>
+predict</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt; <B>predict</B>(<A HREF="../../../hudson/model/queue/MappingWorksheet.html" title="class in hudson.model.queue">MappingWorksheet</A>&nbsp;plan,
+                                    <A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+                                    long&nbsp;start,
+                                    long&nbsp;end)</PRE>
+<DL>
+<DD>Estimates load starting from the 'start' timestamp, up to the 'end' timestamp.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>start</CODE> - Where to start enumeration. Always bigger or equal to the current time of the execution.<DD><CODE>plan</CODE> - This is the execution plan for which we are making a load prediction. Never null. While
+      this object is still being partially constructed when this method is called, some
+      of its properties (like <A HREF="../../../hudson/model/queue/MappingWorksheet.html#item"><CODE>MappingWorksheet.item</CODE></A> provide access to more contextual
+      information.<DT><B>Since:</B></DT>
+  <DD>1.380</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="predict(hudson.model.Computer, long, long)"><!-- --></A><H3>
 predict</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt; <B>predict</B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
-                                             long&nbsp;start,
-                                             long&nbsp;end)</PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../hudson/model/queue/FutureLoad.html" title="class in hudson.model.queue">FutureLoad</A>&gt; <B>predict</B>(<A HREF="../../../hudson/model/Computer.html" title="class in hudson.model">Computer</A>&nbsp;computer,
+                                    long&nbsp;start,
+                                    long&nbsp;end)</PRE>
 <DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.380
+      Use <A HREF="../../../hudson/model/queue/LoadPredictor.html#predict(hudson.model.queue.MappingWorksheet, hudson.model.Computer, long, long)"><CODE>predict(MappingWorksheet, Computer, long, long)</CODE></A></I>
+<P>
 <DD>Estimates load starting from the 'start' timestamp, up to the 'end' timestamp.
 <P>
 <DD><DL>

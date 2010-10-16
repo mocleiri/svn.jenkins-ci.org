@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.380 API)
+Hudson (Hudson main module 1.381 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-09">
+<META NAME="date" CONTENT="2010-10-16">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.380 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.380 API)";
+        parent.document.title="Hudson (Hudson main module 1.381 API)";
     }
 }
 </SCRIPT>
@@ -1532,6 +1532,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/views/MyViewsTabBar.html" title="class in hudson.views">MyViewsTabBar</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getMyViewsTabBar()">getMyViewsTabBar</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Node.html" title="class in hudson.model">Node</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getNode(java.lang.String)">getNode</A></B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;name)</CODE>
 
@@ -1945,6 +1953,16 @@ P</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the read-only list of all <A HREF="../../hudson/model/View.html" title="class in hudson.model"><CODE>View</CODE></A>s.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/views/ViewsTabBar.html" title="class in hudson.views">ViewsTabBar</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getViewsTabBar()">getViewsTabBar</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the TabBar for the views
+
+ TabBar for views can be provided by extension.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2640,7 +2658,7 @@ public <B>Hudson</B>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Fi
               org.jvnet.hudson.reactor.ReactorException</PRE>
 <DL>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>pluginManager</CODE> - If non-null, use existing plugin manager. Otherwise create a new one.
+<DT><B>Parameters:</B><DD><CODE>pluginManager</CODE> - If non-null, use existing plugin manager.  create a new one.
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/InterruptedException.html?is-external=true" title="class or interface in java.lang">InterruptedException</A></CODE>
@@ -3602,6 +3620,41 @@ public void <B>deleteView</B>(<A HREF="../../hudson/model/View.html" title="clas
 
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getViewsTabBar()"><!-- --></A><H3>
+getViewsTabBar</H3>
+<PRE>
+public <A HREF="../../hudson/views/ViewsTabBar.html" title="class in hudson.views">ViewsTabBar</A> <B>getViewsTabBar</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ViewGroup.html#getViewsTabBar()">ViewGroup</A></CODE></B></DD>
+<DD>Gets the TabBar for the views
+
+ TabBar for views can be provided by extension. Only one TabBar can be active
+ at a given time (Selectable by user in the global Configuration page)
+ Default TabBar is provided by Hudson Platform
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#getViewsTabBar()">getViewsTabBar</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMyViewsTabBar()"><!-- --></A><H3>
+getMyViewsTabBar</H3>
+<PRE>
+public <A HREF="../../hudson/views/MyViewsTabBar.html" title="class in hudson.views">MyViewsTabBar</A> <B>getMyViewsTabBar</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>
