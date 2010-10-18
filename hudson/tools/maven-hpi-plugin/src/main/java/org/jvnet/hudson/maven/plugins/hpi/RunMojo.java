@@ -109,6 +109,14 @@ public class RunMojo extends AbstractJetty6Mojo {
      */
     protected String defaultPort;
 
+    /**
+     * If true, the context will be restarted after a line feed on
+     * the input console. Disabled by default.
+     *
+     * @parameter expression="${jetty.consoleForceReload}" default-value="false"
+     */
+    protected boolean consoleForceReload;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         // compute hudsonHome
         if(hudsonHome==null) {
@@ -305,6 +313,16 @@ public class RunMojo extends AbstractJetty6Mojo {
         scanList.add(webApp);
         scanList.add(new File(getProject().getBuild().getOutputDirectory()));
         setScanList(scanList);
+    }
+
+    @Override
+    protected void startScanner() {
+        super.startScanner();
+
+        if (consoleForceReload) {
+            getLog().info("Console reloading is ENABLED. Hit ENTER on the console to restart the context.");
+            new ConsoleScanner(this).start();
+        }
     }
 
     public void checkPomConfiguration() throws MojoExecutionException {
