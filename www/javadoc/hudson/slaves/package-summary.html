@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-hudson.slaves (Hudson main module 1.381 API)
+hudson.slaves (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ hudson.slaves (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="hudson.slaves (Hudson main module 1.381 API)";
+        parent.document.title="hudson.slaves (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -114,9 +114,18 @@ Code related to slaves.
 <B>Class Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/AbstractCloudComputer.html" title="class in hudson.slaves">AbstractCloudComputer&lt;T extends AbstractCloudSlave&gt;</A></B></TD>
+<TD>Partial implementation of <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A> to be used in conjunction with
+ <A HREF="../../hudson/slaves/AbstractCloudSlave.html" title="class in hudson.slaves"><CODE>AbstractCloudSlave</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/AbstractCloudImpl.html" title="class in hudson.slaves">AbstractCloudImpl</A></B></TD>
 <TD>Additional convenience implementation on top of <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> that are likely useful to
  typical <A HREF="../../hudson/slaves/Cloud.html" title="class in hudson.slaves"><CODE>Cloud</CODE></A> implementations.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/AbstractCloudSlave.html" title="class in hudson.slaves">AbstractCloudSlave</A></B></TD>
+<TD>Partial implementation of <A HREF="../../hudson/model/Slave.html" title="class in hudson.model"><CODE>Slave</CODE></A> to be used by <A HREF="../../hudson/slaves/AbstractCloudImpl.html" title="class in hudson.slaves"><CODE>AbstractCloudImpl</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/Channels.html" title="class in hudson.slaves">Channels</A></B></TD>
@@ -127,11 +136,20 @@ Code related to slaves.
 <TD>Creates <A HREF="../../hudson/model/Node.html" title="class in hudson.model"><CODE>Node</CODE></A>s to dynamically expand/shrink the slaves attached to Hudson.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/CloudRetentionStrategy.html" title="class in hudson.slaves">CloudRetentionStrategy</A></B></TD>
+<TD><A HREF="../../hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><CODE>RetentionStrategy</CODE></A> implementation for <A HREF="../../hudson/slaves/AbstractCloudComputer.html" title="class in hudson.slaves"><CODE>AbstractCloudComputer</CODE></A> that terminates
+ it if it remains idle for X minutes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/CommandLauncher.html" title="class in hudson.slaves">CommandLauncher</A></B></TD>
 <TD><A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> through a remote login mechanism like ssh/rsh.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/CommandLauncher.DescriptorImpl.html" title="class in hudson.slaves">CommandLauncher.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/ComputerConnector.html" title="class in hudson.slaves">ComputerConnector</A></B></TD>
 <TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -154,6 +172,17 @@ Code related to slaves.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/ConnectionActivityMonitor.html" title="class in hudson.slaves">ConnectionActivityMonitor</A></B></TD>
 <TD>Makes sure that connections to slaves are alive, and if they are not, cut them off.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/DelegatingComputerLauncher.html" title="class in hudson.slaves">DelegatingComputerLauncher</A></B></TD>
+<TD>Convenient base implementation of <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A> that allows
+ subtypes to perform some initialization (typically something cloud/v12n related
+ to power up the machine), then to delegate to another <A HREF="../../hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><CODE>ComputerLauncher</CODE></A>
+ to connect.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../hudson/slaves/DelegatingComputerLauncher.DescriptorImpl.html" title="class in hudson.slaves">DelegatingComputerLauncher.DescriptorImpl</A></B></TD>
+<TD>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../hudson/slaves/DumbSlave.html" title="class in hudson.slaves">DumbSlave</A></B></TD>

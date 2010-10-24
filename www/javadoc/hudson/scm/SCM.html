@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SCM (Hudson main module 1.381 API)
+SCM (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ SCM (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SCM (Hudson main module 1.381 API)";
+        parent.document.title="SCM (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -333,12 +333,32 @@ Captures the configuration information in it.
 <TD><CODE><B><A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)">getModuleRoot</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</CODE>
 
 <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>since 1.382
+      Use/override <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath, hudson.model.AbstractBuild)"><CODE>getModuleRoot(FilePath, AbstractBuild)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath, hudson.model.AbstractBuild)">getModuleRoot</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+              <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build)</CODE>
+
+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the top directory of the checked out module.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>[]</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath)">getModuleRoots</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>as of 1.382.
+      Use/derive from <A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath, hudson.model.AbstractBuild)"><CODE>getModuleRoots(FilePath, AbstractBuild)</CODE></A> instead.</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath, hudson.model.AbstractBuild)">getModuleRoots</A></B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+               <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the top directories of all the checked out modules.</TD>
@@ -918,10 +938,11 @@ public void <B>buildEnvVars</B>(<A HREF="../../hudson/model/AbstractBuild.html" 
 </DL>
 <HR>
 
-<A NAME="getModuleRoot(hudson.FilePath)"><!-- --></A><H3>
+<A NAME="getModuleRoot(hudson.FilePath, hudson.model.AbstractBuild)"><!-- --></A><H3>
 getModuleRoot</H3>
 <PRE>
-public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getModuleRoot</B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</PRE>
+public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getModuleRoot</B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                              <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build)</PRE>
 <DL>
 <DD>Gets the top directory of the checked out module.
 
@@ -964,15 +985,37 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>workspace</CODE> - The workspace root directory.</DL>
+<DT><B>Parameters:</B><DD><CODE>workspace</CODE> - The workspace root directory.<DD><CODE>build</CODE> - The build for which the module root is desired.
+      This parameter is null when existing legacy code calls deprecated <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)"><CODE>getModuleRoot(FilePath)</CODE></A>.
+      Handle this situation gracefully if your can, but otherwise you can just fail with an exception, too.<DT><B>Since:</B></DT>
+  <DD>1.382</DD>
+</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="getModuleRoots(hudson.FilePath)"><!-- --></A><H3>
+<A NAME="getModuleRoot(hudson.FilePath)"><!-- --></A><H3>
+getModuleRoot</H3>
+<PRE>
+public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A> <B>getModuleRoot</B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>since 1.382
+      Use/override <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath, hudson.model.AbstractBuild)"><CODE>getModuleRoot(FilePath, AbstractBuild)</CODE></A> instead.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getModuleRoots(hudson.FilePath, hudson.model.AbstractBuild)"><!-- --></A><H3>
 getModuleRoots</H3>
 <PRE>
-public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>[] <B>getModuleRoots</B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</PRE>
+public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>[] <B>getModuleRoots</B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace,
+                                 <A HREF="../../hudson/model/AbstractBuild.html" title="class in hudson.model">AbstractBuild</A>&nbsp;build)</PRE>
 <DL>
 <DD>Gets the top directories of all the checked out modules.
 
@@ -995,14 +1038,35 @@ public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>
 
  <p>
  For normal SCMs, the array will be of length <code>1</code> and it's contents
- will be identical to calling <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)"><CODE>getModuleRoot(FilePath)</CODE></A>.
+ will be identical to calling <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath, hudson.model.AbstractBuild)"><CODE>getModuleRoot(FilePath, AbstractBuild)</CODE></A>.
 <P>
 <DD><DL>
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>workspace</CODE> - The workspace root directory
-<DT><B>Returns:</B><DD>An array of all module roots.</DL>
+<DT><B>Parameters:</B><DD><CODE>workspace</CODE> - The workspace root directory<DD><CODE>build</CODE> - The build for which the module roots are desired.
+      This parameter is null when existing legacy code calls deprecated <A HREF="../../hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)"><CODE>getModuleRoot(FilePath)</CODE></A>.
+      Handle this situation gracefully if your can, but otherwise you can just fail with an exception, too.
+<DT><B>Returns:</B><DD>An array of all module roots.<DT><B>Since:</B></DT>
+  <DD>1.382</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getModuleRoots(hudson.FilePath)"><!-- --></A><H3>
+getModuleRoots</H3>
+<PRE>
+public <A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>[] <B>getModuleRoots</B>(<A HREF="../../hudson/FilePath.html" title="class in hudson">FilePath</A>&nbsp;workspace)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>as of 1.382.
+      Use/derive from <A HREF="../../hudson/scm/SCM.html#getModuleRoots(hudson.FilePath, hudson.model.AbstractBuild)"><CODE>getModuleRoots(FilePath, AbstractBuild)</CODE></A> instead.</I>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <HR>

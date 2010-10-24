@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ItemGroup (Hudson main module 1.381 API)
+ItemGroup (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ ItemGroup (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ItemGroup (Hudson main module 1.381 API)";
+        parent.document.title="ItemGroup (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -199,6 +199,16 @@ Represents a grouping inherent to a kind of <A HREF="../../hudson/model/Item.htm
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the URL token that prefixes the URLs for child <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/ItemGroup.html#onRenamed(T, java.lang.String, java.lang.String)">onRenamed</A></B>(<A HREF="../../hudson/model/ItemGroup.html" title="type parameter in ItemGroup">T</A>&nbsp;item,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal method.</TD>
+</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_hudson.model.PersistenceRoot"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -348,6 +358,27 @@ getRootDirFor</H3>
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onRenamed(hudson.model.Item,java.lang.String,java.lang.String)"><!-- --></A><A NAME="onRenamed(T, java.lang.String, java.lang.String)"><!-- --></A><H3>
+onRenamed</H3>
+<PRE>
+void <B>onRenamed</B>(<A HREF="../../hudson/model/ItemGroup.html" title="type parameter in ItemGroup">T</A>&nbsp;item,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Internal method. Called by <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s when they are renamed by users.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->

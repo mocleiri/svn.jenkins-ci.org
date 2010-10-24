@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Deprecated List (Hudson main module 1.381 API)
+Deprecated List (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Deprecated List (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Deprecated List (Hudson main module 1.381 API)";
+        parent.document.title="Deprecated List (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -965,10 +965,22 @@ function windowTitle()
       See <A HREF="hudson/model/AbstractProject.html#getWorkspace()"><CODE>AbstractProject.getWorkspace()</CODE></A> for a migration strategy.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/SCM.html#getModuleRoot(hudson.FilePath)">hudson.scm.SCM.getModuleRoot(FilePath)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>since 1.382
+      Use/override <A HREF="hudson/scm/SCM.html#getModuleRoot(hudson.FilePath, hudson.model.AbstractBuild)"><CODE>SCM.getModuleRoot(FilePath, AbstractBuild)</CODE></A> instead.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/AbstractProject.html#getModuleRoots()">hudson.model.AbstractProject.getModuleRoots()</A>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.319
       See <A HREF="hudson/model/AbstractProject.html#getWorkspace()"><CODE>AbstractProject.getWorkspace()</CODE></A> for a migration strategy.</I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="hudson/scm/SCM.html#getModuleRoots(hudson.FilePath)">hudson.scm.SCM.getModuleRoots(FilePath)</A>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>as of 1.382.
+      Use/derive from <A HREF="hudson/scm/SCM.html#getModuleRoots(hudson.FilePath, hudson.model.AbstractBuild)"><CODE>SCM.getModuleRoots(FilePath, AbstractBuild)</CODE></A> instead.</I>&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="hudson/model/Hudson.html#getNodeName()">hudson.model.Hudson.getNodeName()</A>

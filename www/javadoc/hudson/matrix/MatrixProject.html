@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MatrixProject (Hudson main module 1.381 API)
+MatrixProject (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ MatrixProject (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MatrixProject (Hudson main module 1.381 API)";
+        parent.document.title="MatrixProject (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -537,6 +537,16 @@ Class MatrixProject</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called right after when a <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A> is loaded from disk.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/matrix/MatrixProject.html#onRenamed(hudson.matrix.MatrixConfiguration, java.lang.String, java.lang.String)">onRenamed</A></B>(<A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>&nbsp;item,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal method.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1186,6 +1196,28 @@ public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/File.html?is-ext
 </DD>
 <DD><DL>
 </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onRenamed(hudson.matrix.MatrixConfiguration, java.lang.String, java.lang.String)"><!-- --></A><H3>
+onRenamed</H3>
+<PRE>
+public void <B>onRenamed</B>(<A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>&nbsp;item,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ItemGroup.html#onRenamed(T, java.lang.String, java.lang.String)">ItemGroup</A></CODE></B></DD>
+<DD>Internal method. Called by <A HREF="../../hudson/model/Item.html" title="interface in hudson.model"><CODE>Item</CODE></A>s when they are renamed by users.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#onRenamed(T, java.lang.String, java.lang.String)">onRenamed</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/matrix/MatrixConfiguration.html" title="class in hudson.matrix">MatrixConfiguration</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>

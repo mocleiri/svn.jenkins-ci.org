@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-InitMilestone (Hudson main module 1.381 API)
+InitMilestone (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ InitMilestone (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="InitMilestone (Hudson main module 1.381 API)";
+        parent.document.title="InitMilestone (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -139,6 +139,13 @@ Various key milestone in the initialization process of Hudson.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The very last milestone
 
  This is used in <A HREF="../../hudson/init/Initializer.html#before()"><CODE>Initializer.before()</CODE></A> since annotations cannot have null as the default value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../hudson/init/InitMilestone.html#EXTENSIONS_AUGMENTED">EXTENSIONS_AUGMENTED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By this milestone, all programmatically constructed extension point implementations
+ should be added.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><CODE><B><A HREF="../../hudson/init/InitMilestone.html#JOB_LOADED">JOB_LOADED</A></B></CODE>
@@ -296,6 +303,19 @@ public static final <A HREF="../../hudson/init/InitMilestone.html" title="enum i
  This is a separate milestone from <A HREF="../../hudson/init/InitMilestone.html#PLUGINS_PREPARED"><CODE>PLUGINS_PREPARED</CODE></A> since the execution
  of a plugin often involves finding extension point implementations, which in turn
  require all the classes from all the plugins to be loadable.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="EXTENSIONS_AUGMENTED"><!-- --></A><H3>
+EXTENSIONS_AUGMENTED</H3>
+<PRE>
+public static final <A HREF="../../hudson/init/InitMilestone.html" title="enum in hudson.init">InitMilestone</A> <B>EXTENSIONS_AUGMENTED</B></PRE>
+<DL>
+<DD>By this milestone, all programmatically constructed extension point implementations
+ should be added.
 <P>
 <DL>
 </DL>

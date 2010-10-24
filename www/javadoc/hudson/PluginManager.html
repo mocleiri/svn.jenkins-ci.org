@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PluginManager (Hudson main module 1.381 API)
+PluginManager (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ PluginManager (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PluginManager (Hudson main module 1.381 API)";
+        parent.document.title="PluginManager (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -136,6 +136,14 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remembers why a plugin failed to deploy.</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../hudson/PluginManager.UberClassLoader.html" title="class in hudson">PluginManager.UberClassLoader</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang"><CODE>ClassLoader</CODE></A> that can see all plugins.</TD>
+</TR>
 </TABLE>
 &nbsp;<!-- =========== FIELD SUMMARY =========== -->
 
@@ -201,7 +209,7 @@ Manages <A HREF="../hudson/PluginWrapper.html" title="class in hudson"><CODE>Plu
 <TD><CODE><B><A HREF="../hudson/PluginManager.html#uberClassLoader">uberClassLoader</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang"><CODE>ClassLoader</CODE></A> that can load all the publicly visible classes from plugins
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A HREF="../hudson/PluginManager.UberClassLoader.html" title="class in hudson"><CODE>PluginManager.UberClassLoader</CODE></A> that can load all the publicly visible classes from plugins
  (and including the classloader that loads Hudson itself.)</TD>
 </TR>
 </TABLE>
@@ -493,7 +501,7 @@ uberClassLoader</H3>
 <PRE>
 public final <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A> <B>uberClassLoader</B></PRE>
 <DL>
-<DD><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang"><CODE>ClassLoader</CODE></A> that can load all the publicly visible classes from plugins
+<DD><A HREF="../hudson/PluginManager.UberClassLoader.html" title="class in hudson"><CODE>PluginManager.UberClassLoader</CODE></A> that can load all the publicly visible classes from plugins
  (and including the classloader that loads Hudson itself.)
 <P>
 <DL>

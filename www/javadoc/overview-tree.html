@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Class Hierarchy (Hudson main module 1.381 API)
+Class Hierarchy (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Class Hierarchy (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Class Hierarchy (Hudson main module 1.381 API)";
+        parent.document.title="Class Hierarchy (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -134,9 +134,9 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.matrix.<A HREF="hudson/matrix/JDKAxis.html" title="class in hudson.matrix"><B>JDKAxis</B></A><LI TYPE="circle">hudson.matrix.<A HREF="hudson/matrix/LabelAxis.html" title="class in hudson.matrix"><B>LabelAxis</B></A><LI TYPE="circle">hudson.matrix.<A HREF="hudson/matrix/TextAxis.html" title="class in hudson.matrix"><B>TextAxis</B></A></UL>
 <LI TYPE="circle">hudson.tasks.<A HREF="hudson/tasks/BuildWrapper.html" title="class in hudson.tasks"><B>BuildWrapper</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
-<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><B>ComputerLauncher</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/ComputerConnector.html" title="class in hudson.slaves"><B>ComputerConnector</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/ComputerLauncher.html" title="class in hudson.slaves"><B>ComputerLauncher</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
-<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/CommandLauncher.html" title="class in hudson.slaves"><B>CommandLauncher</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves"><B>ComputerLauncherFilter</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves"><B>JNLPLauncher</B></A><LI TYPE="circle">hudson.os.windows.<A HREF="hudson/os/windows/ManagedWindowsServiceLauncher.html" title="class in hudson.os.windows"><B>ManagedWindowsServiceLauncher</B></A></UL>
+<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/CommandLauncher.html" title="class in hudson.slaves"><B>CommandLauncher</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/ComputerLauncherFilter.html" title="class in hudson.slaves"><B>ComputerLauncherFilter</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/DelegatingComputerLauncher.html" title="class in hudson.slaves"><B>DelegatingComputerLauncher</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/JNLPLauncher.html" title="class in hudson.slaves"><B>JNLPLauncher</B></A><LI TYPE="circle">hudson.os.windows.<A HREF="hudson/os/windows/ManagedWindowsServiceLauncher.html" title="class in hudson.os.windows"><B>ManagedWindowsServiceLauncher</B></A></UL>
 <LI TYPE="circle">hudson.model.labels.<A HREF="hudson/model/labels/LabelAtomProperty.html" title="class in hudson.model.labels"><B>LabelAtomProperty</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <LI TYPE="circle">hudson.views.<A HREF="hudson/views/MyViewsTabBar.html" title="class in hudson.views"><B>MyViewsTabBar</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
@@ -144,7 +144,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.scm.<A HREF="hudson/scm/RepositoryBrowser.html" title="class in hudson.scm"><B>RepositoryBrowser</B></A>&lt;E&gt; (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
 <LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/RetentionStrategy.html" title="class in hudson.slaves"><B>RetentionStrategy</B></A>&lt;T&gt; (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
-<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/RetentionStrategy.Always.html" title="class in hudson.slaves"><B>RetentionStrategy.Always</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/RetentionStrategy.Demand.html" title="class in hudson.slaves"><B>RetentionStrategy.Demand</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/SimpleScheduledRetentionStrategy.html" title="class in hudson.slaves"><B>SimpleScheduledRetentionStrategy</B></A></UL>
+<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/CloudRetentionStrategy.html" title="class in hudson.slaves"><B>CloudRetentionStrategy</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/RetentionStrategy.Always.html" title="class in hudson.slaves"><B>RetentionStrategy.Always</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/RetentionStrategy.Demand.html" title="class in hudson.slaves"><B>RetentionStrategy.Demand</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/SimpleScheduledRetentionStrategy.html" title="class in hudson.slaves"><B>SimpleScheduledRetentionStrategy</B></A></UL>
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/SecurityRealm.html" title="class in hudson.security"><B>SecurityRealm</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/AbstractPasswordBasedSecurityRealm.html" title="class in hudson.security"><B>AbstractPasswordBasedSecurityRealm</B></A> (implements org.acegisecurity.userdetails.UserDetailsService)
@@ -219,7 +219,9 @@ Class Hierarchy
 </UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Computer.html" title="class in hudson.model"><B>Computer</B></A> (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, hudson.model.<A HREF="hudson/model/ExecutorListener.html" title="interface in hudson.model">ExecutorListener</A>)
 <UL>
-<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><B>SlaveComputer</B></A></UL>
+<LI TYPE="circle">hudson.model.<A HREF="hudson/model/Hudson.MasterComputer.html" title="class in hudson.model"><B>Hudson.MasterComputer</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/SlaveComputer.html" title="class in hudson.slaves"><B>SlaveComputer</B></A><UL>
+<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/AbstractCloudComputer.html" title="class in hudson.slaves"><B>AbstractCloudComputer</B></A>&lt;T&gt;</UL>
+</UL>
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Label.html" title="class in hudson.model"><B>Label</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</A>&lt;T&gt;, hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
 <UL>
 <LI TYPE="circle">hudson.model.labels.<A HREF="hudson/model/labels/LabelAtom.html" title="class in hudson.model.labels"><B>LabelAtom</B></A> (implements hudson.model.<A HREF="hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>)
@@ -258,7 +260,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Hudson.html" title="class in hudson.model"><B>Hudson</B></A> (implements hudson.security.<A HREF="hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, hudson.model.<A HREF="hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, hudson.model.<A HREF="hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;T&gt;, org.kohsuke.stapler.StaplerFallback, org.kohsuke.stapler.StaplerProxy, hudson.model.<A HREF="hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A>)
 <LI TYPE="circle">hudson.model.<A HREF="hudson/model/Slave.html" title="class in hudson.model"><B>Slave</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
 <UL>
-<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/DumbSlave.html" title="class in hudson.slaves"><B>DumbSlave</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/PretendSlave.html" title="class in org.jvnet.hudson.test"><B>PretendSlave</B></A></UL>
+<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/AbstractCloudSlave.html" title="class in hudson.slaves"><B>AbstractCloudSlave</B></A><LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/DumbSlave.html" title="class in hudson.slaves"><B>DumbSlave</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/PretendSlave.html" title="class in org.jvnet.hudson.test"><B>PretendSlave</B></A></UL>
 </UL>
 <LI TYPE="circle">hudson.<A HREF="hudson/PluginManager.html" title="class in hudson"><B>PluginManager</B></A><UL>
 <LI TYPE="circle">hudson.<A HREF="hudson/LocalPluginManager.html" title="class in hudson"><B>LocalPluginManager</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TestPluginManager.html" title="class in org.jvnet.hudson.test"><B>TestPluginManager</B></A></UL>
@@ -420,7 +422,7 @@ Class Hierarchy
 <UL>
 <LI TYPE="circle">hudson.<A HREF="hudson/PluginFirstClassLoader.html" title="class in hudson"><B>PluginFirstClassLoader</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Closeable.html?is-external=true" title="class or interface in java.io">Closeable</A>)
 </UL>
-<LI TYPE="circle">hudson.util.<A HREF="hudson/util/MaskingClassLoader.html" title="class in hudson.util"><B>MaskingClassLoader</B></A></UL>
+<LI TYPE="circle">hudson.util.<A HREF="hudson/util/MaskingClassLoader.html" title="class in hudson.util"><B>MaskingClassLoader</B></A><LI TYPE="circle">hudson.<A HREF="hudson/PluginManager.UberClassLoader.html" title="class in hudson"><B>PluginManager.UberClassLoader</B></A><LI TYPE="circle">hudson.util.<A HREF="hudson/util/SubClassGenerator.html" title="class in hudson.util"><B>SubClassGenerator</B></A></UL>
 <LI TYPE="circle">hudson.util.<A HREF="hudson/util/ClasspathBuilder.html" title="class in hudson.util"><B>ClasspathBuilder</B></A> (implements java.io.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>)
 <LI TYPE="circle">hudson.cli.<A HREF="hudson/cli/CLI.html" title="class in hudson.cli"><B>CLI</B></A><LI TYPE="circle">hudson.security.<A HREF="hudson/security/CliAuthenticator.html" title="class in hudson.security"><B>CliAuthenticator</B></A><LI TYPE="circle">hudson.cli.<A HREF="hudson/cli/CLICommand.html" title="class in hudson.cli"><B>CLICommand</B></A> (implements java.lang.<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A>, hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
@@ -510,7 +512,7 @@ Class Hierarchy
 <LI TYPE="circle">hudson.security.csrf.<A HREF="hudson/security/csrf/DefaultCrumbIssuer.DescriptorImpl.html" title="class in hudson.security.csrf"><B>DefaultCrumbIssuer.DescriptorImpl</B></A> (implements hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
 <LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/TestCrumbIssuer.DescriptorImpl.html" title="class in org.jvnet.hudson.test"><B>TestCrumbIssuer.DescriptorImpl</B></A> (implements hudson.model.<A HREF="hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>)
 </UL>
-<LI TYPE="circle">hudson.plugins.ui_samples.<A HREF="hudson/plugins/ui_samples/DropdownList.FruitDescriptor.html" title="class in hudson.plugins.ui_samples"><B>DropdownList.FruitDescriptor</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test"><B>FailureBuilder.DescriptorImpl</B></A><LI TYPE="circle">hudson.<A HREF="hudson/FileSystemProvisionerDescriptor.html" title="class in hudson"><B>FileSystemProvisionerDescriptor</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
+<LI TYPE="circle">hudson.slaves.<A HREF="hudson/slaves/DelegatingComputerLauncher.DescriptorImpl.html" title="class in hudson.slaves"><B>DelegatingComputerLauncher.DescriptorImpl</B></A><LI TYPE="circle">hudson.plugins.ui_samples.<A HREF="hudson/plugins/ui_samples/DropdownList.FruitDescriptor.html" title="class in hudson.plugins.ui_samples"><B>DropdownList.FruitDescriptor</B></A><LI TYPE="circle">org.jvnet.hudson.test.<A HREF="org/jvnet/hudson/test/FailureBuilder.DescriptorImpl.html" title="class in org.jvnet.hudson.test"><B>FailureBuilder.DescriptorImpl</B></A><LI TYPE="circle">hudson.<A HREF="hudson/FileSystemProvisionerDescriptor.html" title="class in hudson"><B>FileSystemProvisionerDescriptor</B></A> (implements hudson.<A HREF="hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>)
 <UL>
 <LI TYPE="circle">hudson.<A HREF="hudson/FileSystemProvisioner.Default.DescriptorImpl.html" title="class in hudson"><B>FileSystemProvisioner.Default.DescriptorImpl</B></A><LI TYPE="circle">hudson.os.solaris.<A HREF="hudson/os/solaris/ZFSProvisioner.DescriptorImpl.html" title="class in hudson.os.solaris"><B>ZFSProvisioner.DescriptorImpl</B></A></UL>
 <LI TYPE="circle">hudson.security.<A HREF="hudson/security/GlobalMatrixAuthorizationStrategy.DescriptorImpl.html" title="class in hudson.security"><B>GlobalMatrixAuthorizationStrategy.DescriptorImpl</B></A><LI TYPE="circle">hudson.security.<A HREF="hudson/security/HudsonPrivateSecurityRealm.DescriptorImpl.html" title="class in hudson.security"><B>HudsonPrivateSecurityRealm.DescriptorImpl</B></A><LI TYPE="circle">hudson.model.<A HREF="hudson/model/JobPropertyDescriptor.html" title="class in hudson.model"><B>JobPropertyDescriptor</B></A><UL>

@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Hudson (Hudson main module 1.381 API)
+Hudson (Hudson main module 1.382 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-16">
+<META NAME="date" CONTENT="2010-10-24">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Hudson (Hudson main module 1.381 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Hudson (Hudson main module 1.381 API)";
+        parent.document.title="Hudson (Hudson main module 1.382 API)";
     }
 }
 </SCRIPT>
@@ -1960,9 +1960,7 @@ P</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Hudson.html#getViewsTabBar()">getViewsTabBar</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the TabBar for the views
-
- TabBar for views can be provided by extension.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the TabBar for the views.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2114,6 +2112,16 @@ P</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default implementation that returns empty index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Hudson.html#onRenamed(hudson.model.TopLevelItem, java.lang.String, java.lang.String)">onRenamed</A></B>(<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&nbsp;job,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
+          <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)"><CODE>Job.renameTo(String)</CODE></A> to update relevant data structure.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -3630,11 +3638,11 @@ getViewsTabBar</H3>
 public <A HREF="../../hudson/views/ViewsTabBar.html" title="class in hudson.views">ViewsTabBar</A> <B>getViewsTabBar</B>()</PRE>
 <DL>
 <DD><B>Description copied from interface: <CODE><A HREF="../../hudson/model/ViewGroup.html#getViewsTabBar()">ViewGroup</A></CODE></B></DD>
-<DD>Gets the TabBar for the views
+<DD>Gets the TabBar for the views.
 
  TabBar for views can be provided by extension. Only one TabBar can be active
- at a given time (Selectable by user in the global Configuration page)
- Default TabBar is provided by Hudson Platform
+ at a given time (Selectable by user in the global Configuration page).
+ Default TabBar is provided by Hudson Platform.
 <P>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ViewGroup.html#getViewsTabBar()">getViewsTabBar</A></CODE> in interface <CODE><A HREF="../../hudson/model/ViewGroup.html" title="interface in hudson.model">ViewGroup</A></CODE></DL>
@@ -4857,6 +4865,28 @@ public &lt;T extends <A HREF="../../hudson/model/TopLevelItem.html" title="inter
 
 <DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</A></CODE> - if the project of the given name already exists.
+<DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onRenamed(hudson.model.TopLevelItem, java.lang.String, java.lang.String)"><!-- --></A><H3>
+onRenamed</H3>
+<PRE>
+public void <B>onRenamed</B>(<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&nbsp;job,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;oldName,
+                      <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;newName)
+               throws <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD>Called by <A HREF="../../hudson/model/Job.html#renameTo(java.lang.String)"><CODE>Job.renameTo(String)</CODE></A> to update relevant data structure.
+ assumed to be synchronized on Hudson by the caller.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../hudson/model/ItemGroup.html#onRenamed(T, java.lang.String, java.lang.String)">onRenamed</A></CODE> in interface <CODE><A HREF="../../hudson/model/ItemGroup.html" title="interface in hudson.model">ItemGroup</A>&lt;<A HREF="../../hudson/model/TopLevelItem.html" title="interface in hudson.model">TopLevelItem</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
 <DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
