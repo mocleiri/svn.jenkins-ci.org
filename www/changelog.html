@@ -33,16 +33,22 @@ Legend: <br/>
 View ratings below, and click one of the icons next to your version to provide your input.
 </div>
 
-<a href="" onclick="document.getElementById('trunk').style.display=document.getElementById('rc').style.display='block';return false">
+<a href="" onClick="document.getElementById('trunk').style.display=document.getElementById('rc').style.display='block';return false">
 Upcoming changes</a>
-<a href="" style="padding-left:3em" onclick="return loaddata(this)">Community ratings</a>
+<a href="" style="padding-left:3em" onClick="return loaddata(this)">Community ratings</a>
 
 <!-- Record your changes in the trunk here. -->
 <div id="trunk" style="display:none"><!--=TRUNK-BEGIN=-->
 <ul class=image>
+  <li class="major bug">
+    Fix security issue where a user with job configure permission could obtain
+    admin permission for their session.
+    (<a href="http://issues.hudson-ci.org/browse/HUDSON-7256">issue 7256</a>)
   <li class=bug>
     Build wrappers can now decorate the launcher or logger for matrix builds.
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-7868">issue 7868</a>)
+  <li class=bug>
+    Fixed a bug where non-existent optional dependencies can result in a cascading load failure.
   <li class=rfe>
     Added extension point to allow plugins to add global filters to console
     log streams.
@@ -77,6 +83,8 @@ Upcoming changes</a>
     (<a href="http://issues.hudson-ci.org/browse/HUDSON-7500">issue 7500</a>)
   <li class=rfe>
     Improved packet fragmentation in Winstone when writing out HTTP responses.
+  <li class=rfe><a href="http://wiki.hudson-ci.org/display/HUDSON/Extension+Point+for+Project+Views+Navigation">Extension Point to provide alternate UI for Project Views implemented</a>
+    </l> (<a href="http://issues.hudson-ci.org/browse/HUDSON-1467">issue 1467</a>)
 </ul>
 <h3><a name=v1.380>What's new in 1.380</a> (2010/10/09)</h3>
 <ul class=image>
