@@ -87,8 +87,10 @@
     <xsl:template name="testCase">
 
         <xsl:variable name="curElt" select="."/>
-        <xsl:variable name="suiteName" select="($curElt/parent::*)[1]/@name"/>
-        <xsl:variable name="packageName" select="concat($suiteName, '.')"/>
+        <xsl:variable name="suiteName">
+          <xsl:for-each select="($curElt/ancestor::TestSuite)"><xsl:value-of select="./@name"/>.</xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="packageName" select="($suiteName)"/>
 
 
         <xsl:element name="testcase">
@@ -96,7 +98,7 @@
             <xsl:variable name="time" select="TestingTime"/>
 
             <xsl:attribute name="classname">
-                <xsl:value-of select="concat($packageName,  substring-before(($elt)/@file, '.'))"/>
+                <xsl:value-of select="concat($packageName, substring-before(($elt)/@file, '.'))"/>
             </xsl:attribute>
 
             <xsl:attribute name="name">
