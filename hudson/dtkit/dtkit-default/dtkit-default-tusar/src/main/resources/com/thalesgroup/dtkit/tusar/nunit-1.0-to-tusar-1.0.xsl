@@ -22,7 +22,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN    *
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
--->        
+-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
@@ -40,71 +40,73 @@
 
             <xsl:element name="tests">
 
-				<xsl:for-each select="test-suite//results//test-case[1]">
-			
-					<xsl:for-each select="../..">
-						<xsl:variable name="firstTestName"
-							select="results//test-case[1]//@name" />
-						<xsl:variable name="assembly"
-							select="concat(substring-before($firstTestName, @name), @name)" />
-						
-						<!--  <redirect:write file="{$outputpath}/TEST-{$assembly}.xml">-->
+                <xsl:for-each select="test-suite//results//test-case[1]">
 
-							<testsuite name="{$assembly}"
-								tests="{count(*/test-case)}" time="{@time}"
-								failures="{count(*/test-case/failure)}" errors="0"
-								skipped="{count(*/test-case[@executed='False'])}">
-								<xsl:for-each select="*/test-case[@time!='']">
-									<xsl:variable name="testcaseName">
-										<xsl:choose>
-											<xsl:when test="contains(./@name, $assembly)">
-												<xsl:value-of select="substring-after(./@name, concat($assembly,'.'))"/><!-- We either instantiate a "15" -->
-											</xsl:when>
-											<xsl:otherwise>
-												<xsl:value-of select="./@name"/><!-- ...or a "20" -->
-											</xsl:otherwise>
-										</xsl:choose>
-									</xsl:variable>
-								
-									<testcase fulltestname="{$assembly}"
-										testname="{$testcaseName}"
-										time="{@time}">
+                    <xsl:for-each select="../..">
+                        <xsl:variable name="firstTestName"
+                                      select="results//test-case[1]//@name"/>
+                        <xsl:variable name="assembly"
+                                      select="concat(substring-before($firstTestName, @name), @name)"/>
 
-										<xsl:variable name="generalfailure"
-											select="./failure" />
+                        <!--  <redirect:write file="{$outputpath}/TEST-{$assembly}.xml">-->
 
-										<xsl:if test="./failure">
-											<xsl:variable name="failstack"
-												select="count(./failure/stack-trace/*) + count(./failure/stack-trace/text())" />
-											<failure>
-												<xsl:choose>
-													<xsl:when test="$failstack &gt; 0 or not($generalfailure)">
-MESSAGE:
-<xsl:value-of select="./failure/message" />
-+++++++++++++++++++
-STACK TRACE:
-<xsl:value-of select="./failure/stack-trace" />
-											</xsl:when>
-											<xsl:otherwise>
-MESSAGE:
-<xsl:value-of select="$generalfailure/message" />
-+++++++++++++++++++
-STACK TRACE:
-<xsl:value-of select="$generalfailure/stack-trace" />
-													</xsl:otherwise>
-												</xsl:choose>
-											</failure>
-										</xsl:if>
-									</testcase>
-								</xsl:for-each>
-							</testsuite>
-						<!--  </redirect:write>-->
-					</xsl:for-each>
-				</xsl:for-each>
-				
+                        <testsuite name="{$assembly}"
+                                   tests="{count(*/test-case)}" time="{@time}"
+                                   failures="{count(*/test-case/failure)}" errors="0"
+                                   skipped="{count(*/test-case[@executed='False'])}">
+                            <xsl:for-each select="*/test-case[@time!='']">
+                                <xsl:variable name="testcaseName">
+                                    <xsl:choose>
+                                        <xsl:when test="contains(./@name, $assembly)">
+                                            <xsl:value-of select="substring-after(./@name, concat($assembly,'.'))"/>
+                                            <!-- We either instantiate a "15" -->
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="./@name"/>
+                                            <!-- ...or a "20" -->
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:variable>
+
+                                <testcase fulltestname="{$assembly}"
+                                          testname="{$testcaseName}"
+                                          time="{@time}">
+
+                                    <xsl:variable name="generalfailure"
+                                                  select="./failure"/>
+
+                                    <xsl:if test="./failure">
+                                        <xsl:variable name="failstack"
+                                                      select="count(./failure/stack-trace/*) + count(./failure/stack-trace/text())"/>
+                                        <failure>
+                                            <xsl:choose>
+                                                <xsl:when test="$failstack &gt; 0 or not($generalfailure)">
+                                                    MESSAGE:
+                                                    <xsl:value-of select="./failure/message"/>
+                                                    +++++++++++++++++++
+                                                    STACK TRACE:
+                                                    <xsl:value-of select="./failure/stack-trace"/>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    MESSAGE:
+                                                    <xsl:value-of select="$generalfailure/message"/>
+                                                    +++++++++++++++++++
+                                                    STACK TRACE:
+                                                    <xsl:value-of select="$generalfailure/stack-trace"/>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </failure>
+                                    </xsl:if>
+                                </testcase>
+                            </xsl:for-each>
+                        </testsuite>
+                        <!--  </redirect:write>-->
+                    </xsl:for-each>
+                </xsl:for-each>
+
             </xsl:element>
         </xsl:element>
     </xsl:template>
-	
+
     <xsl:template match="text()|@*"/>
 </xsl:stylesheet>

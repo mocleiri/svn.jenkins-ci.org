@@ -33,14 +33,21 @@ import java.io.Serializable;
 public class TusarModel implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_0 = new Tusarv0() {
+    public static OutputMetric OUTPUT_TUSAR_1_0 = new Tusarv1() {
         {
             set(new ValidationService());
         }
     };
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_1 = new Tusarv1() {
+    public static OutputMetric OUTPUT_TUSAR_2_0 = new Tusarv2() {
+        {
+            set(new ValidationService());
+        }
+    };
+
+    @SuppressWarnings("unused")
+    public static OutputMetric OUTPUT_TUSAR_3_0 = new Tusarv3() {
         {
             set(new ValidationService());
         }

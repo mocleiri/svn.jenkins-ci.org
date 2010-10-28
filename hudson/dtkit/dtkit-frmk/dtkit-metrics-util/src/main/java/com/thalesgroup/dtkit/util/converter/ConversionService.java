@@ -23,8 +23,16 @@
 
 package com.thalesgroup.dtkit.util.converter;
 
-import net.sf.saxon.s9api.*;
 
+import net.sf.saxon.s9api.*;
+import org.w3c.dom.Document;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 
@@ -41,9 +49,11 @@ public class ConversionService implements Serializable {
      */
     public void convert(File xslFile, File inputFile, File outFile) throws ConversionException {
         try {
-            convert(new StreamSource(new FileReader(xslFile)), inputFile, outFile);
-        } catch (FileNotFoundException e) {
-            throw new ConversionException("Can't find " + xslFile);
+            Reader reader = new FileReader(xslFile);
+            convert(new StreamSource(reader), inputFile, outFile);
+            reader.close();
+        } catch (IOException ioe) {
+            throw new ConversionException("Conversion Error", ioe);
         }
     }
 
@@ -60,6 +70,19 @@ public class ConversionService implements Serializable {
 
         try {
 
+            javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+            javax.xml.parsers.DocumentBuilder builder = null;
+            builder = factory.newDocumentBuilder();
+            builder.setEntityResolver(new EntityResolver() {
+                public InputSource resolveEntity(String publicId, String systemId)
+                        throws SAXException, IOException {
+                    return new InputSource(new StringReader(""));
+                }
+            });
+
+            Document document = builder.parse(inputFile);
+            Source source = new DOMSource(document.getDocumentElement());
+
             // create the conversion processor with a Xslt compiler
             Processor processor = new Processor(false);
             XsltCompiler compiler = processor.newXsltCompiler();
@@ -69,7 +92,10 @@ public class ConversionService implements Serializable {
             XsltTransformer xsltTransformer = xsltExecutable.load();
 
             // create the input
-            XdmNode xdmNode = processor.newDocumentBuilder().build(inputFile);
+            DocumentBuilder documentBuilder = processor.newDocumentBuilder();
+            documentBuilder.setDTDValidation(false);
+
+            XdmNode xdmNode = documentBuilder.build(source);
 
             // create the output with its options
             Serializer out = new Serializer();
@@ -90,6 +116,12 @@ public class ConversionService implements Serializable {
         }
         catch (SaxonApiException sae) {
             throw new ConversionException("Error to convert the input XML document", sae);
+        }
+        catch (SAXException sae) {
+            throw new ConversionException("Error to convert - A file not found", sae);
+        }
+        catch (ParserConfigurationException pe) {
+            throw new ConversionException("Error to convert - A file not found", pe);
         }
     }
 

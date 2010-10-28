@@ -24,42 +24,42 @@
 *******************************************************************************/
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="file">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metric" maxOccurs="unbounded" />
-        <xs:element ref="unit" />
-      </xs:sequence>
-      <xs:attribute name="name" type="xs:string" use="required" />
-    </xs:complexType>
-  </xs:element>
+    <xs:element name="file">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="metric" maxOccurs="unbounded"/>
+                <xs:element ref="unit"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
-  <xs:element name="global">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="file" maxOccurs="unbounded" />
-        <xs:element ref="metric" maxOccurs="unbounded" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+    <xs:element name="global">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="file" maxOccurs="unbounded"/>
+                <xs:element ref="metric" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-  <xs:element name="metric">
-    <xs:complexType mixed="true">
-      <xs:attribute name="name" type="xs:NMTOKEN" use="required" />
-    </xs:complexType>
-  </xs:element>
+    <xs:element name="metric">
+        <xs:complexType mixed="true">
+            <xs:attribute name="name" type="xs:NMTOKEN" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
-  <xs:element name="unit">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metric" maxOccurs="unbounded" />
-        <xs:element ref="unit" minOccurs="0" maxOccurs="unbounded" />
-      </xs:sequence>
-      <xs:attribute name="line" type="xs:NMTOKEN" use="required" />
-      <xs:attribute name="name" type="xs:NMTOKEN" use="required" />
-      <xs:attribute name="col" type="xs:NMTOKEN" use="required" />
-      <xs:attribute name="kind" type="xs:string" use="required" />
-    </xs:complexType>
-  </xs:element>
+    <xs:element name="unit">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="metric" maxOccurs="unbounded"/>
+                <xs:element ref="unit" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="line" type="xs:NMTOKEN" use="required"/>
+            <xs:attribute name="name" type="xs:NMTOKEN" use="required"/>
+            <xs:attribute name="col" type="xs:NMTOKEN" use="required"/>
+            <xs:attribute name="kind" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>

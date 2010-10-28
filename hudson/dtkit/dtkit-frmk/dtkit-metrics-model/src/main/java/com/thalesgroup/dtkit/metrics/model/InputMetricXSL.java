@@ -30,8 +30,8 @@ import com.thalesgroup.dtkit.util.validator.ValidationException;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -196,17 +196,24 @@ public abstract class InputMetricXSL extends InputMetric {
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
 
-        if (this.getInputXsdNameList() == null) {
+        if ((this.getInputXsdNameList() == null) && (this.getInputXsdFileList() == null)) {
             return true;
         }
 
-        StreamSource[] streamSources = new StreamSource[getInputXsdNameList().length];
-        for (int i = 0; i < streamSources.length; i++) {
-            streamSources[i] = new StreamSource(this.getInputXsdClass().getResourceAsStream(getInputXsdNameList()[i]));
+        if (this.getInputXsdFileList() != null) {
+            setInputValidationErrors(validationService.processValidation(getInputXsdFileList(), inputXMLFile));
         }
 
-        setInputValidationErrors(validationService.processValidation(streamSources, inputXMLFile));
-        
+        if (getInputXsdNameList() != null) {
+            StreamSource[] streamSources = new StreamSource[getInputXsdNameList().length];
+            for (int i = 0; i < streamSources.length; i++) {
+                streamSources[i] = new StreamSource(this.getInputXsdClass().getResourceAsStream(getInputXsdNameList()[i]));
+            }
+
+            setInputValidationErrors(validationService.processValidation(streamSources, inputXMLFile));
+        }
+
+
         return getInputValidationErrors().size() == 0;
     }
 
@@ -215,10 +222,6 @@ public abstract class InputMetricXSL extends InputMetric {
      */
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
-
-        if (validationService==null){
-            return true;
-        }
 
         if (this.getOutputXsdNameList() == null) {
             return true;

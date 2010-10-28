@@ -25,5 +25,5 @@ package com.thalesgroup.dtkit.util.validator;
 
 public enum ErrorType {
 
-    ERROR, FATAL_ERROR, WARNING
+    ERROR, FATAL_ERROR, WARNING ;
 }

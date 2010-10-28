@@ -79,14 +79,14 @@ public class GnatcheckParser {
 	private String str_filehead =
 		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
 		"<tusar xmlns_xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\">\n"+
-		"    <violations>\n";
+		"    <violations:violation s>\n";
 
 	private String str_filetail =
 		"    </violations>\n"+
 		"</tusar>";
 
 	private String str_violformat =
-	"            <violation line=\"%s\"\n"+
+	"            <violations:violation  line=\"%s\"\n"+
 	"                       message=\"%s\"\n"+
 	"                       key=\"%s\"\n"+
 	"                       severity=\"info\"/>\n";

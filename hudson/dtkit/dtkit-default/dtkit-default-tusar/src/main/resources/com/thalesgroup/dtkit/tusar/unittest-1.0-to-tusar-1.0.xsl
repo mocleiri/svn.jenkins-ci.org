@@ -22,7 +22,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN    *
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
--->        
+-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
@@ -40,46 +40,46 @@
 
             <xsl:element name="tests">
 
-				  <xsl:element name="testsuite">
-					 <xsl:attribute name="errors">
-						<xsl:value-of select="unittest-results/@failedtests" />
-					 </xsl:attribute>
+                <xsl:element name="testsuite">
+                    <xsl:attribute name="errors">
+                        <xsl:value-of select="unittest-results/@failedtests"/>
+                    </xsl:attribute>
 
-					 <xsl:attribute name="failures">
-						<xsl:value-of select="unittest-results/@failures" />
-					 </xsl:attribute>
-					 
-					 <xsl:attribute name="tests">
-						<xsl:value-of select="unittest-results/@tests" />
-					 </xsl:attribute>         
+                    <xsl:attribute name="failures">
+                        <xsl:value-of select="unittest-results/@failures"/>
+                    </xsl:attribute>
 
-					 <xsl:attribute name="name">unittest</xsl:attribute>  
-					 
-					 <xsl:apply-templates />
-				  </xsl:element>
-				
+                    <xsl:attribute name="tests">
+                        <xsl:value-of select="unittest-results/@tests"/>
+                    </xsl:attribute>
+
+                    <xsl:attribute name="name">unittest</xsl:attribute>
+
+                    <xsl:apply-templates/>
+                </xsl:element>
+
             </xsl:element>
         </xsl:element>
     </xsl:template>
-	
-   <xsl:template match="/unittest-results/test">
-      <xsl:element name="testcase">
+
+    <xsl:template match="/unittest-results/test">
+        <xsl:element name="testcase">
 
 
-         <xsl:attribute name="fulltestname">
-            <xsl:value-of select="@suite" />
-         </xsl:attribute>
+            <xsl:attribute name="fulltestname">
+                <xsl:value-of select="@suite"/>
+            </xsl:attribute>
 
-         <xsl:attribute name="testname">
-            <xsl:value-of select="@name" />
-         </xsl:attribute>
+            <xsl:attribute name="testname">
+                <xsl:value-of select="@name"/>
+            </xsl:attribute>
 
-         <xsl:attribute name="time">0</xsl:attribute>
-         
-          <xsl:copy-of select="child::*" />
+            <xsl:attribute name="time">0</xsl:attribute>
 
-      </xsl:element>
-   </xsl:template>
+            <xsl:copy-of select="child::*"/>
+
+        </xsl:element>
+    </xsl:template>
 
     <xsl:template match="text()|@*"/>
 </xsl:stylesheet>

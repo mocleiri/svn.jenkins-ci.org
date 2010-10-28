@@ -32,9 +32,7 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
 
 
@@ -81,6 +79,37 @@ public class ValidationService implements Serializable {
         return processValidation(new Source[]{xsdSource}, inputXML);
     }
 
+    public List<ValidationError> processValidation(File[] xsdFiles, File inputXML) throws ValidationException {
+        Source[] xsdSources = new Source[xsdFiles.length];
+        Reader[] readers = new Reader[xsdFiles.length];
+
+        for (int i = 0; i < xsdFiles.length; i++) {
+            try {
+                readers[i] = new FileReader(xsdFiles[i]);
+            } catch (FileNotFoundException fne) {
+                throw new ValidationException("Validation error", fne);
+            }
+        }
+
+        for (int i = 0; i < readers.length; i++) {
+            xsdSources[i] = new StreamSource(readers[i]);
+        }
+
+        List<ValidationError> listErrors  = processValidation(xsdSources, inputXML);
+
+        for (int i = 0; i < readers.length; i++) {
+            try {
+                readers[i].close();
+            } catch (IOException ioe) {
+                throw new ValidationException("Validation error", ioe);
+            }
+        }
+
+        return listErrors;
+    }
+
+
+
 
     public List<ValidationError> processValidation(Source[] xsdSources, File inputXML) throws ValidationException {
 
@@ -96,7 +125,7 @@ public class ValidationService implements Serializable {
             schemaValidator.setResourceResolver(resolver);
             schemaValidator.validate(new StreamSource(inputXML));
 
-            for (int i=0; i<xsdSources.length;i++){
+            for (int i = 0; i < xsdSources.length; i++) {
                 xsdSources[i] = null;
             }
 

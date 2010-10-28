@@ -23,35 +23,35 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xs:schema 
-           xmlns:tests="http://www.thalesgroup.com/tusar/tests/v1"
-           xmlns:coverage="http://www.thalesgroup.com/tusar/coverage/v1"
-           xmlns:measures="http://www.thalesgroup.com/tusar/measures/v1"
-           xmlns:violations="http://www.thalesgroup.com/tusar/violations/v1"
-           targetNamespace="http://www.thalesgroup.com/tusar/v2" 
-           xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           elementFormDefault="qualified">
+<xs:schema
+        xmlns:tests="http://www.thalesgroup.com/tusar/tests/v2"
+        xmlns:coverage="http://www.thalesgroup.com/tusar/coverage/v2"
+        xmlns:measures="http://www.thalesgroup.com/tusar/measures/v2"
+        xmlns:violations="http://www.thalesgroup.com/tusar/violations/v2"
+        targetNamespace="http://www.thalesgroup.com/tusar/v2"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
 
-  <xs:import namespace="http://www.thalesgroup.com/tusar/tests/v1" 
-             schemaLocation="tests-1.1.xsd" /> 
-  <xs:import namespace="http://www.thalesgroup.com/tusar/measures/v1" 
-             schemaLocation="measures-1.1.xsd" /> 
-  <xs:import namespace="http://www.thalesgroup.com/tusar/coverage/v1" 
-             schemaLocation="coverage-1.1.xsd" /> 
-  <xs:import namespace="http://www.thalesgroup.com/tusar/violations/v1" 
-             schemaLocation="violations-1.1.xsd" /> 
+    <xs:import namespace="http://www.thalesgroup.com/tusar/tests/v2"
+               schemaLocation="tests-2.0.xsd"/>
+    <xs:import namespace="http://www.thalesgroup.com/tusar/measures/v2"
+               schemaLocation="measures-2.0.xsd"/>
+    <xs:import namespace="http://www.thalesgroup.com/tusar/coverage/v2"
+               schemaLocation="coverage-2.0.xsd"/>
+    <xs:import namespace="http://www.thalesgroup.com/tusar/violations/v2"
+               schemaLocation="violations-2.0.xsd"/>
 
- <xs:element name="tusar">
+    <xs:element name="tusar">
         <xs:complexType>
             <xs:sequence>
-		<xs:element name="tests" type="tests:TestsComplexType" minOccurs="0" maxOccurs="1"/> 
-		<xs:element name="coverage" type="coverage:CoverageComplexType" minOccurs="0" maxOccurs="1"/> 
-		<xs:element name="violations" type="violations:ViolationsComplexType" minOccurs="0" maxOccurs="1"/> 
-		<xs:element name="measures" type="measures:MeasuresComplexType" minOccurs="0" maxOccurs="1"/> 
+                <xs:element name="tests" type="tests:TestsComplexType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="coverage" type="coverage:CoverageComplexType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="violations" type="violations:ViolationsComplexType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="measures" type="measures:MeasuresComplexType" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="version" type="xs:string" use="optional"/>
             <xs:attribute name="xmlns_xsi" type="xs:string" use="optional"/>
-        </xs:complexType>     
-   </xs:element>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>

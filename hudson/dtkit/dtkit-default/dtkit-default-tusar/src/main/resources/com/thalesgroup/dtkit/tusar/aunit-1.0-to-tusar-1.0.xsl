@@ -22,7 +22,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN    *
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
--->        
+-->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
@@ -40,29 +40,29 @@
 
             <xsl:element name="tests">
 
-				<xsl:element name="testsuite">
-				
-					<xsl:attribute name="name">aunit</xsl:attribute>
-					
-					<xsl:attribute name="errors">
-						<xsl:value-of select="TestRun/Statistics/Errors"/>
-					</xsl:attribute>
+                <xsl:element name="testsuite">
 
-					<xsl:attribute name="failures">
-						<xsl:value-of select="TestRun/Statistics/Failures"/>
-					</xsl:attribute>
+                    <xsl:attribute name="name">aunit</xsl:attribute>
 
-					<xsl:attribute name="tests">
-						<xsl:value-of select="TestRun/Statistics/Tests"/>
-					</xsl:attribute>
+                    <xsl:attribute name="errors">
+                        <xsl:value-of select="TestRun/Statistics/Errors"/>
+                    </xsl:attribute>
 
-					<xsl:apply-templates/>
-				</xsl:element>
-				
+                    <xsl:attribute name="failures">
+                        <xsl:value-of select="TestRun/Statistics/Failures"/>
+                    </xsl:attribute>
+
+                    <xsl:attribute name="tests">
+                        <xsl:value-of select="TestRun/Statistics/Tests"/>
+                    </xsl:attribute>
+
+                    <xsl:apply-templates/>
+                </xsl:element>
+
             </xsl:element>
         </xsl:element>
     </xsl:template>
-	
+
     <xsl:template match="/TestRun/SuccessfulTests/Test">
         <xsl:call-template name="successTestCase"/>
     </xsl:template>
@@ -79,7 +79,7 @@
                     <xsl:attribute name="testname">
                         <xsl:value-of select="substring-after(Name, '.')"/>
                     </xsl:attribute>
-					
+
                     <xsl:attribute name="fulltestname">
                         <xsl:value-of select="substring-before(Name, '.')"/>
                     </xsl:attribute>
@@ -91,7 +91,7 @@
                     <xsl:attribute name="testname">
                         <xsl:value-of select="Name"/>
                     </xsl:attribute>
-					
+
                     <xsl:attribute name="fulltestname">TestClass</xsl:attribute>
 
                     <xsl:attribute name="time">0</xsl:attribute>
@@ -112,7 +112,7 @@
                     <xsl:attribute name="fulltestname">
                         <xsl:value-of select="substring-before(Name, '.')"/>
                     </xsl:attribute>
-					
+
                     <xsl:attribute name="time">0</xsl:attribute>
                 </xsl:when>
 
@@ -120,9 +120,9 @@
                     <xsl:attribute name="testname">
                         <xsl:value-of select="Name"/>
                     </xsl:attribute>
-					
+
                     <xsl:attribute name="fulltestname">TestClass</xsl:attribute>
-					
+
                     <xsl:attribute name="time">0</xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>

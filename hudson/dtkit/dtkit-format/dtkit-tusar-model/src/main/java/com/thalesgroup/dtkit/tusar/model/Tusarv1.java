@@ -40,18 +40,18 @@ public class Tusarv1 extends AbstractOutputMetric implements Serializable {
     @Override
     @XmlElement
     public String getDescription() {
-        return "TUSAR OUTPUT FORMAT 1.1";
+        return "TUSAR OUTPUT FORMAT 1.0";
     }
 
     @Override
     @XmlElement
     public String getVersion() {
-        return "1.1";
+        return "1.0";
     }
 
     @Override
     @XmlElement
     public String[] getXsdNameList() {
-        return new String[]{"xsd/tests-1.1.xsd", "xsd/coverage-1.1.xsd", "xsd/violations-1.1.xsd", "xsd/measures-1.1.xsd", "xsd/tusar-1.1.xsd"};
+        return new String[]{"xsd/tusar-1.0.xsd"};
     }
 }

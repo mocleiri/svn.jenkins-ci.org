@@ -4,7 +4,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
@@ -49,18 +48,23 @@ public class AbstractTest {
         File inputXMLFile = new File(this.getClass().getResource(inputXMLPath).toURI());
 
         //The input file must be valid
-        Assert.assertTrue(inputMetric.validateInputFile(inputXMLFile));
+        boolean resultInput = inputMetric.validateInputFile(inputXMLFile);        
+        for (ValidationError validatorError : inputMetric.getInputValidationErrors()) {
+            System.out.println("[ERROR] " + validatorError.toString());
+        }
+        Assert.assertTrue(resultInput);
+
 
         inputMetric.convert(inputXMLFile, outputXMLFile);
         Diff myDiff = new Diff(XSLUtil.readXmlAsString(new File(this.getClass().getResource(expectedResultPath).toURI())), XSLUtil.readXmlAsString(outputXMLFile));
         Assert.assertTrue("XSL transformation did not work" + myDiff, myDiff.similar());
 
         //The generated output file must be valid
-        boolean result = inputMetric.validateOutputFile(outputXMLFile);
+        boolean resultOutput = inputMetric.validateOutputFile(outputXMLFile);
         for (ValidationError validatorError : inputMetric.getOutputValidationErrors()) {
             System.out.println("[ERROR] " + validatorError.toString());
         }
-        Assert.assertTrue(result);
+        Assert.assertTrue(resultOutput);
 
         outputXMLFile.deleteOnExit();
     }

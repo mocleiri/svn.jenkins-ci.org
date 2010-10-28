@@ -57,7 +57,7 @@ public class PHPUnit extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "phpunit-1.0-to-tusar-1.0.xsl";
+        return "phpunit-1.0-to-tusar-3.0.xsl";
     }
 
     @Override
@@ -67,6 +67,6 @@ public class PHPUnit extends InputMetricXSL {
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_1_0;
+        return TusarModel.OUTPUT_TUSAR_3_0;
     }
 }
