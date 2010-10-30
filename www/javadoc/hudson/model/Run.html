@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Run (Hudson main module 1.382 API)
+Run (Hudson main module 1.383 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-24">
+<META NAME="date" CONTENT="2010-10-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Run (Hudson main module 1.382 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Run (Hudson main module 1.382 API)";
+        parent.document.title="Run (Hudson main module 1.383 API)";
     }
 }
 </SCRIPT>
@@ -769,6 +769,14 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getEstimatedDuration()">getEstimatedDuration</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the estimated duration for this run if it is currently running.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Executor.html" title="class in hudson.model">Executor</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getExecutor()">getExecutor</A></B>()</CODE>
 
@@ -917,6 +925,15 @@ T</CODE></FONT></TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getPreviousBuildsOverThreshold(int, hudson.model.Result)">getPreviousBuildsOverThreshold</A></B>(int&nbsp;numberOfBuilds,
+                               <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;threshold)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last 'numberOfBuilds' builds with a build result >= 'threshold'.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Run.html#getPreviousBuiltBuild()">getPreviousBuiltBuild</A></B>()</CODE>
 
@@ -946,6 +963,14 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last build that didn't fail before this build.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Run.html#getPreviousSuccessfulBuild()">getPreviousSuccessfulBuild</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the last successful build before this build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -2135,6 +2160,46 @@ public <A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT<
 </DL>
 <HR>
 
+<A NAME="getPreviousSuccessfulBuild()"><!-- --></A><H3>
+getPreviousSuccessfulBuild</H3>
+<PRE>
+public <A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A> <B>getPreviousSuccessfulBuild</B>()</PRE>
+<DL>
+<DD>Returns the last successful build before this build.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>1.383</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPreviousBuildsOverThreshold(int, hudson.model.Result)"><!-- --></A><H3>
+getPreviousBuildsOverThreshold</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="../../hudson/model/Run.html" title="type parameter in Run">RunT</A>&gt; <B>getPreviousBuildsOverThreshold</B>(int&nbsp;numberOfBuilds,
+                                                 <A HREF="../../hudson/model/Result.html" title="class in hudson.model">Result</A>&nbsp;threshold)</PRE>
+<DL>
+<DD>Returns the last 'numberOfBuilds' builds with a build result >= 'threshold'.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>numberOfBuilds</CODE> - the desired number of builds<DD><CODE>threshold</CODE> - the build result threshold
+<DT><B>Returns:</B><DD>a list with the builds (youngest build first).
+   May be smaller than 'numberOfBuilds' or even empty
+   if not enough builds satisfying the threshold have been found. Never null.<DT><B>Since:</B></DT>
+  <DD>1.383</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getNextBuild()"><!-- --></A><H3>
 getNextBuild</H3>
 <PRE>
@@ -3055,6 +3120,27 @@ public static <A HREF="../../hudson/model/Run.html" title="class in hudson.model
 </DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEstimatedDuration()"><!-- --></A><H3>
+getEstimatedDuration</H3>
+<PRE>
+public long <B>getEstimatedDuration</B>()</PRE>
+<DL>
+<DD>Returns the estimated duration for this run if it is currently running.
+ Default to <A HREF="../../hudson/model/Job.html#getEstimatedDuration()"><CODE>Job.getEstimatedDuration()</CODE></A>, may be overridden in subclasses
+ if duration may depend on run specific parameters (like incremental Maven builds).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the estimated duration in milliseconds<DT><B>Since:</B></DT>
+  <DD>1.383</DD>
 </DL>
 </DD>
 </DL>

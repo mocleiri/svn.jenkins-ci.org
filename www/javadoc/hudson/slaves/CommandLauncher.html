@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-CommandLauncher (Hudson main module 1.382 API)
+CommandLauncher (Hudson main module 1.383 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-24">
+<META NAME="date" CONTENT="2010-10-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ CommandLauncher (Hudson main module 1.382 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CommandLauncher (Hudson main module 1.382 API)";
+        parent.document.title="CommandLauncher (Hudson main module 1.383 API)";
     }
 }
 </SCRIPT>
@@ -56,7 +56,7 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/slaves/CloudRetentionStrategy.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/CommandConnector.DescriptorImpl.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/slaves/CommandLauncher.DescriptorImpl.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/CommandLauncher.html" target="_top"><B>FRAMES</B></A>  &nbsp;
@@ -301,7 +301,7 @@ public void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title
 <DD>Launches the slave agent for the given <A HREF="../../hudson/model/Computer.html" title="class in hudson.model"><CODE>Computer</CODE></A>.
 
  <p>
- If the slave agent is launched successfully, <A HREF="../../hudson/slaves/SlaveComputer.html#setChannel(java.io.InputStream, java.io.OutputStream, java.io.OutputStream, hudson.remoting.Channel.Listener)"><CODE>SlaveComputer.setChannel(InputStream, OutputStream, OutputStream, Channel.Listener)</CODE></A>
+ If the slave agent is launched successfully, <CODE>SlaveComputer#setChannel(InputStream, OutputStream, TaskListener, Listener)</CODE>
  should be invoked in the end to notify Hudson of the established connection.
  The operation could also fail, in which case there's no need to make any callback notification,
  (except to notify the user of the failure through <A HREF="../../hudson/util/StreamTaskListener.html" title="class in hudson.util"><CODE>StreamTaskListener</CODE></A>.)
@@ -348,7 +348,7 @@ public void <B>launch</B>(<A HREF="../../hudson/slaves/SlaveComputer.html" title
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../hudson/slaves/CloudRetentionStrategy.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../hudson/slaves/CommandConnector.DescriptorImpl.html" title="class in hudson.slaves"><B>PREV CLASS</B></A>&nbsp;
 &nbsp;<A HREF="../../hudson/slaves/CommandLauncher.DescriptorImpl.html" title="class in hudson.slaves"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../index.html?hudson/slaves/CommandLauncher.html" target="_top"><B>FRAMES</B></A>  &nbsp;

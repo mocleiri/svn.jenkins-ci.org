@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Interface hudson.model.Action (Hudson main module 1.382 API)
+Uses of Interface hudson.model.Action (Hudson main module 1.383 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-24">
+<META NAME="date" CONTENT="2010-10-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Uses of Interface hudson.model.Action (Hudson main module 1.382 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Interface hudson.model.Action (Hudson main module 1.382 API)";
+        parent.document.title="Uses of Interface hudson.model.Action (Hudson main module 1.383 API)";
     }
 }
 </SCRIPT>
@@ -1042,6 +1042,17 @@ T</CODE></FONT></TD>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules an execution of a task.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Future.html?is-external=true" title="class or interface in java.util.concurrent">Future</A>&lt;<A HREF="../../../hudson/model/AbstractProject.html" title="type parameter in AbstractProject">R</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B>AbstractProject.</B><B><A HREF="../../../hudson/model/AbstractProject.html#scheduleBuild2(int, hudson.model.Cause, java.util.Collection)">scheduleBuild2</A></B>(int&nbsp;quietPeriod,
+               <A HREF="../../../hudson/model/Cause.html" title="class in hudson.model">Cause</A>&nbsp;c,
+               <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;? extends <A HREF="../../../hudson/model/Action.html" title="interface in hudson.model">Action</A>&gt;&nbsp;actions)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schedules a build of this project, and returns a <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/Future.html?is-external=true" title="class or interface in java.util.concurrent"><CODE>Future</CODE></A> object
+ to wait for the completion of the build.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">

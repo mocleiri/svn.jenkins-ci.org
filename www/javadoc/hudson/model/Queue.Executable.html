@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Queue.Executable (Hudson main module 1.382 API)
+Queue.Executable (Hudson main module 1.383 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-24">
+<META NAME="date" CONTENT="2010-10-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Queue.Executable (Hudson main module 1.382 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Queue.Executable (Hudson main module 1.382 API)";
+        parent.document.title="Queue.Executable (Hudson main module 1.383 API)";
     }
 }
 </SCRIPT>
@@ -130,6 +130,14 @@ Represents the real meet of the computation run by <A HREF="../../hudson/model/E
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Queue.Executable.html#getEstimatedDuration()">getEstimatedDuration</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Estimate of how long will it take to execute this executable.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../hudson/model/queue/SubTask.html" title="interface in hudson.model.queue">SubTask</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../hudson/model/Queue.Executable.html#getParent()">getParent</A></B>()</CODE>
 
@@ -199,6 +207,26 @@ void <B>run</B>()</PRE>
 <DT><B>Specified by:</B><DD><CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true#run()" title="class or interface in java.lang">run</A></CODE> in interface <CODE><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Runnable.html?is-external=true" title="class or interface in java.lang">Runnable</A></CODE></DL>
 </DD>
 <DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEstimatedDuration()"><!-- --></A><H3>
+getEstimatedDuration</H3>
+<PRE>
+long <B>getEstimatedDuration</B>()</PRE>
+<DL>
+<DD>Estimate of how long will it take to execute this executable.
+ Measured in milliseconds.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>-1 if it's impossible to estimate.<DT><B>Since:</B></DT>
+  <DD>1.383</DD>
 </DL>
 </DD>
 </DL>

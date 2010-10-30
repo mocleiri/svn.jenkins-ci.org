@@ -5,10 +5,10 @@
 <!-- -->
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Job (Hudson main module 1.382 API)
+Job (Hudson main module 1.383 API)
 </TITLE>
 
-<META NAME="date" CONTENT="2010-10-24">
+<META NAME="date" CONTENT="2010-10-29">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
@@ -16,7 +16,7 @@ Job (Hudson main module 1.382 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Job (Hudson main module 1.382 API)";
+        parent.document.title="Job (Hudson main module 1.383 API)";
     }
 }
 </SCRIPT>
@@ -100,14 +100,14 @@ Class Job&lt;JobT extends Job&lt;JobT,RunT&gt;,RunT extends <A HREF="../../hudso
               <IMG SRC="../../resources/inherit.gif" ALT="extended by "><B>hudson.model.Job&lt;JobT,RunT&gt;</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.HttpDeletable</DD>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, <A HREF="../../hudson/model/DescriptorByNameOwner.html" title="interface in hudson.model">DescriptorByNameOwner</A>, <A HREF="../../hudson/model/Item.html" title="interface in hudson.model">Item</A>, <A HREF="../../hudson/model/ModelObject.html" title="interface in hudson.model">ModelObject</A>, <A HREF="../../hudson/model/PersistenceRoot.html" title="interface in hudson.model">PersistenceRoot</A>, <A HREF="../../hudson/model/Saveable.html" title="interface in hudson.model">Saveable</A>, <A HREF="../../hudson/search/SearchableModelObject.html" title="interface in hudson.search">SearchableModelObject</A>, <A HREF="../../hudson/search/SearchItem.html" title="interface in hudson.search">SearchItem</A>, <A HREF="../../hudson/security/AccessControlled.html" title="interface in hudson.security">AccessControlled</A>, org.kohsuke.stapler.HttpDeletable, org.kohsuke.stapler.StaplerOverridable</DD>
 </DL>
 <DL>
 <DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../hudson/model/AbstractProject.html" title="class in hudson.model">AbstractProject</A>, <A HREF="../../hudson/model/ViewJob.html" title="class in hudson.model">ViewJob</A></DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public abstract class <B>Job&lt;JobT extends Job&lt;JobT,RunT&gt;,RunT extends <A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;JobT,RunT&gt;&gt;</B><DT>extends <A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A><DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A></DL>
+<DT><PRE>public abstract class <B>Job&lt;JobT extends Job&lt;JobT,RunT&gt;,RunT extends <A HREF="../../hudson/model/Run.html" title="class in hudson.model">Run</A>&lt;JobT,RunT&gt;&gt;</B><DT>extends <A HREF="../../hudson/model/AbstractItem.html" title="class in hudson.model">AbstractItem</A><DT>implements <A HREF="../../hudson/ExtensionPoint.html" title="interface in hudson">ExtensionPoint</A>, org.kohsuke.stapler.StaplerOverridable</DL>
 </PRE>
 
 <P>
@@ -582,6 +582,14 @@ A job is an runnable entity under the monitoring of Hudson.
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Peeks the next build number.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;?&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../hudson/model/Job.html#getOverrides()">getOverrides</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overrides from job properties.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -1455,6 +1463,22 @@ public &lt;T extends <A HREF="../../hudson/model/JobProperty.html" title="class 
 <P>
 <DD><DL>
 </DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOverrides()"><!-- --></A><H3>
+getOverrides</H3>
+<PRE>
+public <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;?&gt; <B>getOverrides</B>()</PRE>
+<DL>
+<DD>Overrides from job properties.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>getOverrides</CODE> in interface <CODE>org.kohsuke.stapler.StaplerOverridable</CODE></DL>
 </DD>
 <DD><DL>
 </DL>
