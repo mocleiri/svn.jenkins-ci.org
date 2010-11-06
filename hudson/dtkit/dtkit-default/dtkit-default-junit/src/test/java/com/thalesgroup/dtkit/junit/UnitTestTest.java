@@ -33,4 +33,9 @@ public class UnitTestTest extends AbstractTest {
         convertAndValidate(UnitTest.class, "unitTest++/testcase1/testresult.xml", "unitTest++/testcase1/junit-result.xml");
     }
 
+    @Test
+    public void testcase2() throws Exception {
+        convertAndValidate(UnitTest.class, "unitTest++/testcase2/result.xml", "unitTest++/testcase2/junit-result.xml");
+    }
+
 }
