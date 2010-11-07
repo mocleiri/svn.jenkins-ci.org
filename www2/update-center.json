@@ -288,17 +288,17 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Android+Emulator+Plugin"
     },
     "artifactory":     {
-      "buildDate": "Oct 28, 2010",
+      "buildDate": "Nov 07, 2010",
       "dependencies":       [
                 {
           "name": "maven-plugin",
           "optional": false,
-          "version": "1.358"
+          "version": "1.362"
         },
                 {
           "name": "ivy",
           "optional": true,
-          "version": "1.9"
+          "version": "1.11"
         }
       ],
       "developers": [      {
@@ -309,12 +309,12 @@ updateCenter.post(
       "excerpt": "This plugin allows deploying Maven 2, Maven 3, Ivy and Gradle artifacts and build info to the Artifactory artifacts manager.",
       "labels": ["upload"],
       "name": "artifactory",
-      "previousTimestamp": "2010-10-21T20:20:20.00Z",
-      "releaseTimestamp": "2010-10-28T21:44:10.00Z",
-      "requiredCore": "1.358",
+      "previousTimestamp": "2010-10-28T21:44:10.00Z",
+      "releaseTimestamp": "2010-11-08T00:13:22.00Z",
+      "requiredCore": "1.362",
       "title": "Artifactory Plugin",
-      "url": "http://updates.hudson-labs.org/download/plugins/artifactory/1.3.4/artifactory.hpi",
-      "version": "1.3.4",
+      "url": "http://updates.hudson-labs.org/download/plugins/artifactory/1.3.5/artifactory.hpi",
+      "version": "1.3.5",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Artifactory+Plugin"
     },
     "audit-trail":     {
@@ -1183,8 +1183,12 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/CopyArchiver+Plugin"
     },
     "copyartifact":     {
-      "buildDate": "Oct 10, 2010",
-      "dependencies": [],
+      "buildDate": "Nov 07, 2010",
+      "dependencies": [      {
+        "name": "maven-plugin",
+        "optional": true,
+        "version": "1.376"
+      }],
       "developers": [      {
         "developerId": "mindless",
         "email": "mindless@dev.java.net",
@@ -1193,12 +1197,12 @@ updateCenter.post(
       "excerpt": "Adds a build step to copy artifacts from another project.",
       "labels": ["builder"],
       "name": "copyartifact",
-      "previousTimestamp": "2010-09-28T19:00:22.00Z",
-      "releaseTimestamp": "2010-10-10T12:55:26.00Z",
+      "previousTimestamp": "2010-10-10T12:55:26.00Z",
+      "releaseTimestamp": "2010-11-07T13:55:26.00Z",
       "requiredCore": "1.376",
       "title": "Copy Artifact Plugin",
-      "url": "http://updates.hudson-labs.org/download/plugins/copyartifact/1.10/copyartifact.hpi",
-      "version": "1.10",
+      "url": "http://updates.hudson-labs.org/download/plugins/copyartifact/1.11/copyartifact.hpi",
+      "version": "1.11",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Copy+Artifact+Plugin"
     },
     "covcomplplot":     {
@@ -1812,18 +1816,18 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/EasyAnt+Plugin"
     },
     "ec2":     {
-      "buildDate": "Aug 11, 2010",
+      "buildDate": "Nov 07, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "abayer"}],
+      "developers": [{"developerId": "kohsuke"}],
       "excerpt": "Allow Hudson to start slaves on <a href='http://aws.amazon.com/ec2/'>EC2<\/a> or <a href='http://www.ubuntu.com/cloud/private'>Ubuntu Enterprise Cloud<\/a> (Eucalyptus) on demand, and kill them as they get unused.",
       "labels": ["cluster"],
       "name": "ec2",
-      "previousTimestamp": "2010-04-10T05:40:24.00Z",
-      "releaseTimestamp": "2010-08-11T12:45:06.00Z",
+      "previousTimestamp": "2010-08-11T12:45:06.00Z",
+      "releaseTimestamp": "2010-11-07T15:35:56.00Z",
       "requiredCore": "1.346",
       "title": "Amazon EC2 Plugin",
-      "url": "http://updates.hudson-labs.org/download/plugins/ec2/1.9/ec2.hpi",
-      "version": "1.9",
+      "url": "http://updates.hudson-labs.org/download/plugins/ec2/1.10/ec2.hpi",
+      "version": "1.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Amazon+EC2+Plugin"
     },
     "email-ext":     {
@@ -4657,6 +4661,27 @@ updateCenter.post(
       "version": "1.10",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Release+Plugin"
     },
+    "repository-connector":     {
+      "buildDate": "Nov 07, 2010",
+      "dependencies": [],
+      "developers": [      {
+        "developerId": "domi",
+        "email": "-",
+        "name": "domi"
+      }],
+      "excerpt": "Repository Connector adds a build step which allows to resolve artifacts from a maven repository like nexus. In future it will also allow to deploy artifacts to the same repo.",
+      "labels":       [
+        "external",
+        "maven"
+      ],
+      "name": "repository-connector",
+      "releaseTimestamp": "2010-11-07T21:50:38.00Z",
+      "requiredCore": "1.370",
+      "title": "Repository Connector Plugin",
+      "url": "http://updates.hudson-labs.org/download/plugins/repository-connector/0.5/repository-connector.hpi",
+      "version": "0.5",
+      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Repository+Connector+Plugin"
+    },
     "reviewboard":     {
       "buildDate": "May 04, 2010",
       "dependencies": [      {
@@ -4879,33 +4904,19 @@ updateCenter.post(
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Screenshot+Plugin"
     },
     "script-realm":     {
-      "buildDate": "Apr 08, 2010",
+      "buildDate": "Nov 07, 2010",
       "dependencies": [],
-      "developers": [{"developerId": "kohsuke"}],
+      "developers": [{"developerId": "domi"}],
       "excerpt": "This plugin allows you to use a user-written custom script to authenticate the username and password",
       "labels": ["user"],
       "name": "script-realm",
-      "previousTimestamp": "2009-11-06T00:08:38.00Z",
-      "releaseTimestamp": "2010-04-08T09:45:18.00Z",
+      "previousTimestamp": "2010-11-07T23:09:54.00Z",
+      "releaseTimestamp": "2010-11-07T23:47:44.00Z",
       "requiredCore": "1.330",
       "title": "Script Security Realm",
-      "url": "http://updates.hudson-labs.org/download/plugins/script-realm/1.1/script-realm.hpi",
-      "version": "1.1",
+      "url": "http://updates.hudson-labs.org/download/plugins/script-realm/1.2.1/script-realm.hpi",
+      "version": "1.2.1",
       "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Script+Security+Realm"
-    },
-    "script-realm-extended":     {
-      "buildDate": "Oct 24, 2010",
-      "dependencies": [],
-      "developers": [{"developerId": "domi"}],
-      "excerpt": "This plugin is a fork of the \"<a href='http://wiki.hudson-ci.org/display/HUDSON/Script+Security+Realm'>Script Security Realm<\/a> \" and as the origin it allows you to use a user-written custom script to authenticate the username and password. But in addition it also supports the execution of a second script to resolve the groups for the newly logged in user. ",
-      "labels": ["user"],
-      "name": "script-realm-extended",
-      "releaseTimestamp": "2010-10-24T22:22:16.00Z",
-      "requiredCore": "1.330",
-      "title": "Script Security Realm Extended",
-      "url": "http://updates.hudson-labs.org/download/plugins/script-realm-extended/1.0/script-realm-extended.hpi",
-      "version": "1.0",
-      "wiki": "http://wiki.hudson-ci.org//display/HUDSON/Script+Security+Realm+Extended"
     },
     "scriptler":     {
       "buildDate": "Oct 11, 2010",
@@ -6382,8 +6393,8 @@ updateCenter.post(
   },
   "signature":   {
     "certificates": ["MIIE8jCCA9qgAwIBAgIBBjANBgkqhkiG9w0BAQUFADCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbTAeFw0xMDA0MTgyMzQzMzhaFw0xMTA0MTgyMzQzMzhaMIGVMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxDzANBgNVBAoTBkh1ZHNvbjEPMA0GA1UECxMGSHVkc29uMR0wGwYDVQQDExRIdWRzb24gVXBkYXRlIENlbnRlcjEdMBsGCSqGSIb3DQEJARYOa2tAa29oc3VrZS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDUQ7uN/ZQvyHvi5UONr2CAmWfWiAPPqaF4SS7dTIaLM/sxRgnZY1k7zt/8MTce7gNOd2EyCru93EgMVY1ivEH4b9fYSlzSnu8Lx2RdMulW0iqinLY17Jv+J1qxq+tRUyMa9y3DN28sf7ydLcpEJog3Of6KL+zJlKQS0oNcgsju9LdfzccmMu8Qq3lNhtcdsPkcRWpHyGiyva99xXBR/pqxM0GR8aMZYNwLi59Vg8/fpkTLwhBGVOgEIdO4ARvH/HTlfaLdr2pJ5BfsODk7A3VHV2ObDYIa+skEy1PPvtLv3/TfI/nD9Owt/TlpyI5aAbd1lboUrsPNyKjiR6GIfOcFAgMBAAGjggE8MIIBODAJBgNVHRMEAjAAMB0GA1UdDgQWBBSMP/tadXU+XdrmlxxDSCZeyMAcbDCB1wYDVR0jBIHPMIHMgBRRpkLqhXylaDmRPhWgCQ0fl62cX6GBqKSBpTCBojELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFDASBgNVBAcTC1NhbnRhIENsYXJhMRcwFQYDVQQKEw5IdWRzb24gcHJvamVjdDEXMBUGA1UECxMOSHVkc29uIFJvb3QgQ0ExFzAVBgNVBAMTDkh1ZHNvbiBSb290IENBMR0wGwYJKoZIhvcNAQkBFg5odWRzb25Ac3VuLmNvbYIJAImLL4rgC+O7MDIGCWCGSAGG+EIBBAQlFiNodHRwOi8vaHVkc29uLWNpLm9yZy9odWRzb24tY3JsLnBlbTANBgkqhkiG9w0BAQUFAAOCAQEADs3NHx8j+x45msMgjHPoMb4yvz42vI1ea4UyYHrDZGlEsK7kfVbNHNpt+UGZaws0b+f6brL/3DA9w0niCTucHMd+ZqqFGpXHvV/IVVrR7omLgQ6EdinYYDXzIl/1Z97jeRDmL4/kckxxGyTyw/Y4/YatmVSM8ZESY3W9lYS9P90I+Jmo0e4W6tY+ztPrsw3C3ixmvfqG++YQTjZivr/5sCUd6UJHAz7XuX9Eqgyz2Od1wOazmtP7TEsQVEwiJXGB5HFLw7qtC51K3VdAj43nm+qgKe0U3yOw57EYKlntQzCWF24ucOZ1QhpvrIlzcD1q4AlIdlTD0OtuP9uGIYCTjA=="],
-    "digest": "i6sLa7fekqB+M0LO4yibGdxUc/c=",
-    "signature": "i8jjBzIGjm+Ny5c5ohoAHMarddHVBjGJtU5NwqQpEY8xiMJ15ozgq90B2a9+sAmYcCQzrE81IqUhNjpnqNqRa3JmYJ3lyQrwfF6viy3BLI7ArREpBiR6xz1798GiejHmKkqcZMDWlK6ZdB0JWelpPAcojQXuMFTHKRjNx9q+J3j6xe1YVVg411gkaoc/q7LZmTI1I88WvhFhZ/WK0qwLWZpPrPbSBjrV48oLwS9oAdeOfrV1Jn/FkvJ9ixGzfNWDUV/vqJdoaE9OKTDu9+qpAl3Js8CWQzixNmqDX2ncbxnMA9BYc7/5nj12WeUiTu/NsCJlYEqVBFpRQpIsE3jufw=="
+    "digest": "TAg72D6vCQbei9jbJfCH4VzVZAo=",
+    "signature": "MbXHj3gjh0AtSTfSSDpn5ztueqfLHh1iS3vsx9XNTarAEor1lJClGiKagCdg37h62sgOOa8qGHNVOjA3LO9SHH0xE6kzYlSIPbqnPHhaAH1Zm27MMMq9SEr6fnN2wXS7BnmrMLaR4bM4wppC595LbEGsE68p0Eybkve4Wsf+GRLC5s4DOAU7U3OTFbufALKt2SM4wr68xprJ3YNKRRz7LnW/FZNfoyFhNgGEwVFQCpBPbBVxS4SLD6XOECHTiNo6bR4uFR8xy2FLWwNeEHIqRvGQQ9GCd7KwryJgcjxuWGOpIgingM7kqglghjXkpq77yV5j5YiXg7VFWlwbP/tzyg=="
   },
   "updateCenterVersion": "1"
 }
