@@ -106,7 +106,8 @@ public class IrcPublisher extends IMPublisher {
     
     // deserialize/migrate old instances
     @SuppressWarnings("deprecation")
-    private Object readResolve() {
+    protected Object readResolve() {
+        super.readResolve();
     	if (this.getNotificationTargets() == null) {
     		if (this.channels != null) {
     			List<IMMessageTarget> targets = new ArrayList<IMMessageTarget>(this.channels.size());
