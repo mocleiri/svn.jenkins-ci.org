@@ -37,6 +37,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public abstract class InputMetricXSL extends InputMetric {
@@ -181,18 +182,22 @@ public abstract class InputMetricXSL extends InputMetric {
      *  Convert the input file against the current xsl of the tool and put the result in the outFile
      */
     @Override
-    public void convert(File inputFile, File outFile) throws ConversionException {
+    public void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
         if (getXslFile() == null) {
-            conversionService.convert(new StreamSource(this.getXslResourceClass().getResourceAsStream(this.getXslName())), inputFile, outFile);
+            conversionService.convert(new StreamSource(this.getXslResourceClass().getResourceAsStream(this.getXslName())), inputFile, outFile, params);
         } else {
-            conversionService.convert(getXslFile(), inputFile, outFile);
+            conversionService.convert(getXslFile(), inputFile, outFile, params);
         }
     }
 
+    @Override
+    public void convert(File inputFile, File outFile) throws ConversionException {
+        convert(inputFile, outFile, null);
+    }
 
     /*
-     *  Validates the input file against the current grammar of the tool
-     */
+    *  Validates the input file against the current grammar of the tool
+    */
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
 

@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @SuppressWarnings("unused")
@@ -151,6 +152,21 @@ public abstract class InputMetric implements Serializable {
      *          The exception is catched by the API client (as Hudson plugin)
      */
     public abstract void convert(File inputFile, File outFile) throws ConversionException;
+
+
+    /**
+     * Convert an input file to an output file
+     * Give your conversion process
+     * Input and Output files are relatives to the filesystem where the process is executed on (like Hudson agent)
+     *
+     * @param inputFile the input file to convert
+     * @param outFile   the output file to convert
+     * @param params the conversion parameters
+     * @throws com.thalesgroup.dtkit.util.converter.ConversionException
+     *          an application Exception to throw when there is an error of conversion
+     *          The exception is catched by the API client (as Hudson plugin)
+     */
+    public abstract void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException;    
 
     /*
      *  Gives the validation process for the input file

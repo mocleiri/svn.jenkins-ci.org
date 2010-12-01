@@ -35,6 +35,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.util.Map;
 
 public class ConversionService implements Serializable {
 
@@ -45,16 +46,29 @@ public class ConversionService implements Serializable {
      * @param xslFile   the xsl file
      * @param inputFile the input file
      * @param outFile   the output file
+     * @param params    the parameter map
      * @throws ConversionException the convert exception
      */
-    public void convert(File xslFile, File inputFile, File outFile) throws ConversionException {
+    public void convert(File xslFile, File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
         try {
             Reader reader = new FileReader(xslFile);
-            convert(new StreamSource(reader), inputFile, outFile);
+            convert(new StreamSource(reader), inputFile, outFile, params);
             reader.close();
         } catch (IOException ioe) {
             throw new ConversionException("Conversion Error", ioe);
         }
+    }
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     *
+     * @param xslFile   the xsl file
+     * @param inputFile the input file
+     * @param outFile   the output file
+     * @throws ConversionException the convert exception
+     */
+    public void convert(File xslFile, File inputFile, File outFile) throws ConversionException {
+        convert(xslFile, inputFile, outFile, null);
     }
 
     /**
@@ -64,15 +78,15 @@ public class ConversionService implements Serializable {
      * @param xslSource the source of the xsl
      * @param inputFile the input file
      * @param outFile   the output file
+     * @param params    the parameter map
      * @throws ConversionException the convert exception
      */
-    public void convert(StreamSource xslSource, File inputFile, File outFile) throws ConversionException {
+    public void convert(StreamSource xslSource, File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
 
         try {
 
             javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
-            javax.xml.parsers.DocumentBuilder builder = null;
-            builder = factory.newDocumentBuilder();
+            javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
             builder.setEntityResolver(new EntityResolver() {
                 public InputSource resolveEntity(String publicId, String systemId)
                         throws SAXException, IOException {
@@ -106,6 +120,14 @@ public class ConversionService implements Serializable {
 
             // run the conversion
             xsltTransformer.setInitialContextNode(xdmNode);
+            if (params != null) {
+                for (Map.Entry<String, Object> entry : params.entrySet()) {
+                    QName paramName = new QName(entry.getKey());
+                    XdmAtomicValue paramValue = new XdmAtomicValue(String.valueOf(entry.getValue()));
+                    xsltTransformer.setParameter(paramName, paramValue);
+                }
+            }
+
             xsltTransformer.setDestination(out);
             xsltTransformer.transform();
 
@@ -123,6 +145,20 @@ public class ConversionService implements Serializable {
         catch (ParserConfigurationException pe) {
             throw new ConversionException("Error to convert - A file not found", pe);
         }
+    }
+
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     * This methods uses the net.sf.saxon packages.
+     *
+     * @param xslSource the source of the xsl
+     * @param inputFile the input file
+     * @param outFile   the output file
+     * @throws ConversionException the convert exception
+     */
+    public void convert(StreamSource xslSource, File inputFile, File outFile) throws ConversionException {
+        convert(xslSource, inputFile, outFile, null);
     }
 
 }
