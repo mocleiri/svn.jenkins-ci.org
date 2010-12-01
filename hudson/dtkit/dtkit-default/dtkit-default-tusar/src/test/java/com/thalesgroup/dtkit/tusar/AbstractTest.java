@@ -48,7 +48,7 @@ public class AbstractTest {
         File inputXMLFile = new File(this.getClass().getResource(inputXMLPath).toURI());
 
         //The input file must be valid
-        boolean resultInput = inputMetric.validateInputFile(inputXMLFile);        
+        boolean resultInput = inputMetric.validateInputFile(inputXMLFile);
         for (ValidationError validatorError : inputMetric.getInputValidationErrors()) {
             System.out.println("[ERROR] " + validatorError.toString());
         }
