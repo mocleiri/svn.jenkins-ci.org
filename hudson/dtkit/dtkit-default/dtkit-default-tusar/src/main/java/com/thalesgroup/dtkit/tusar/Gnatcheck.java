@@ -23,18 +23,18 @@
 
 package com.thalesgroup.dtkit.tusar;
 
-import java.io.File;
-import java.util.List;
-
 import com.thalesgroup.dtkit.metrics.model.InputMetricOther;
 import com.thalesgroup.dtkit.metrics.model.InputType;
-import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
-import com.thalesgroup.dtkit.util.validator.ValidationException;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
+import com.thalesgroup.dtkit.util.validator.ValidationException;
 
-public class Gnatcheck extends InputMetricOther{
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
+public class Gnatcheck extends InputMetricOther {
 
 
     @Override
@@ -64,14 +64,15 @@ public class Gnatcheck extends InputMetricOther{
      *
      * @param inputFile the input file to convert
      * @param outFile   the output file to convert
+     * @param params    the xsl parameters
      * @throws com.thalesgroup.dtkit.util.converter.ConversionException
      *          an application Exception to throw when there is an error of conversion
      *          The exception is catch by the API client (as Hudson plugin)
      */
     @Override
-    public  void convert(File inputFile, File outFile) throws ConversionException{
-    	GnatcheckParser parser = new GnatcheckParser();
-    	parser.convert(inputFile, outFile);
+    public void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
+        GnatcheckParser parser = new GnatcheckParser();
+        parser.convert(inputFile, outFile);
     }
 
     /*
@@ -80,10 +81,10 @@ public class Gnatcheck extends InputMetricOther{
      * @return true if the input file is valid, false otherwise
      */
     @Override
-    public  boolean validateInputFile(File inputXMLFile) throws ValidationException{
-    	GnatcheckParser parser = new GnatcheckParser();
-    	parser.validateInputFile(inputXMLFile);
-    	return true;
+    public boolean validateInputFile(File inputXMLFile) throws ValidationException {
+        GnatcheckParser parser = new GnatcheckParser();
+        parser.validateInputFile(inputXMLFile);
+        return true;
     }
 
     /*
@@ -92,7 +93,7 @@ public class Gnatcheck extends InputMetricOther{
      * @return true if the input file is valid, false otherwise
      */
     @Override
-    public  boolean validateOutputFile(File inputXMLFile) throws ValidationException{
+    public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
         List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_1_0.validate(inputXMLFile);
         this.setOutputValidationErrors(errors);
         return errors.isEmpty();

@@ -15,7 +15,7 @@ public class WithParam extends AbstractTest {
 
     @Test
     public void testcase1() throws Exception {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("myParameter", "myvalue");
 
         ConversionService conversionService = new ConversionService();
