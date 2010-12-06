@@ -52,6 +52,6 @@ public class Tusarv2 extends AbstractOutputMetric implements Serializable {
     @Override
     @XmlElement
     public String[] getXsdNameList() {
-        return new String[]{"xsd/tests-2.0.xsd", "xsd/coverage-2.0.xsd", "xsd/violations-2.0.xsd", "xsd/measures-2.0.xsd", "xsd/tusar-2.0.xsd"};
+        return new String[]{"xsd/tests-2.xsd", "xsd/coverage-2.xsd", "xsd/violations-2.xsd", "xsd/measures-2.xsd", "xsd/tusar-2.xsd"};
     }
 }

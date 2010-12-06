@@ -54,4 +54,12 @@ public class TusarModel implements Serializable {
     };
 
 
+    @SuppressWarnings("unused")
+    public static OutputMetric OUTPUT_TUSAR_4_0 = new Tusarv4() {
+        {
+            set(new ValidationService());
+        }
+    };
+
+
 }
