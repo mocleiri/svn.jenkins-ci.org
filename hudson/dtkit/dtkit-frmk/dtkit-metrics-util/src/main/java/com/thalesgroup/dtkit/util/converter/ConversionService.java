@@ -42,6 +42,65 @@ public class ConversionService implements Serializable {
 
     /**
      * Launches an XSLT conversion from a source to an OutputStream.
+     * This methods uses the net.sf.saxon packages.
+     *
+     * @param xslFile   the xsl file
+     * @param inputFile the input file
+     * @param params    the parameter map
+     * @return the converted string
+     * @throws ConversionException the convert exception
+     */
+    public String convertAndReturn(File xslFile, InputSource inputFile, Map<String, Object> params) throws ConversionException {
+        try {
+            Reader reader = new FileReader(xslFile);
+            String result = convertAndReturn(new StreamSource(reader), inputFile, params);
+            reader.close();
+            return result;
+        } catch (IOException ioe) {
+            throw new ConversionException("Conversion Error", ioe);
+        }
+    }
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     * This methods uses the net.sf.saxon packages.
+     *
+     * @param xslFile   the xsl file
+     * @param inputFile the input file
+     * @param outFile   the output file
+     * @param params    the parameter map
+     * @return the converted string
+     * @throws ConversionException the convert exception
+     */
+    public String convertAndReturn(File xslFile, File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
+        FileInputStream fis = null;
+        try {
+            Reader reader = new FileReader(xslFile);
+            fis = new FileInputStream(inputFile);
+            String result = convertAndReturn(new StreamSource(reader), new InputSource(fis), params);
+            reader.close();
+            return result;
+        }
+        catch (FileNotFoundException fne) {
+            throw new ConversionException(fne);
+
+        }
+        catch (IOException ioe) {
+            throw new ConversionException("Conversion Error", ioe);
+        }
+        finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException ioe) {
+                    throw new ConversionException(ioe);
+                }
+            }
+        }
+    }
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
      *
      * @param xslFile   the xsl file
      * @param inputFile the input file
@@ -77,11 +136,180 @@ public class ConversionService implements Serializable {
      *
      * @param xslSource the source of the xsl
      * @param inputFile the input file
+     * @param params    the parameter map
+     * @return the converted string
+     * @throws ConversionException the convert exception
+     */
+    public String convertAndReturn(StreamSource xslSource, File inputFile, Map<String, Object> params) throws ConversionException {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(inputFile);
+            return convertAndReturn(xslSource, new InputSource(fis), params);
+        }
+        catch (FileNotFoundException fne) {
+            throw new ConversionException(fne);
+        }
+        finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException ioe) {
+                    throw new ConversionException(ioe);
+                }
+            }
+        }
+    }
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     * This methods uses the net.sf.saxon packages.
+     *
+     * @param xslSource the source of the xsl
+     * @param inputFile the input file
      * @param outFile   the output file
      * @param params    the parameter map
      * @throws ConversionException the convert exception
      */
     public void convert(StreamSource xslSource, File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(inputFile);
+            convert(xslSource, new InputSource(fis), outFile, params);
+        }
+        catch (FileNotFoundException fne) {
+            throw new ConversionException(fne);
+        }
+        finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException ioe) {
+                    throw new ConversionException(ioe);
+                }
+            }
+        }
+    }
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     *
+     * @param xslFile   the xsl file
+     * @param inputFile the input file
+     * @param outFile   the output file
+     * @param params    the parameter map
+     * @throws ConversionException the convert exception
+     */
+    public void convert(File xslFile, InputSource inputFile, File outFile, Map<String, Object> params) throws ConversionException {
+        try {
+            Reader reader = new FileReader(xslFile);
+            convert(new StreamSource(reader), inputFile, outFile, params);
+            reader.close();
+        } catch (IOException ioe) {
+            throw new ConversionException("Conversion Error", ioe);
+        }
+    }
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     * This methods uses the net.sf.saxon packages.
+     *
+     * @param xslSource the source of the xsl
+     * @param inputFile the input file
+     * @param params    the parameter map
+     * @return the converted string
+     * @throws ConversionException the convert exception
+     */
+    public String convertAndReturn(StreamSource xslSource, InputSource inputFile, Map<String, Object> params) throws ConversionException {
+
+        try {
+
+            javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+            javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
+            builder.setEntityResolver(new EntityResolver() {
+                public InputSource resolveEntity(String publicId, String systemId)
+                        throws SAXException, IOException {
+                    return new InputSource(new StringReader(""));
+                }
+            });
+
+            Document document = builder.parse(inputFile);
+            Source source = new DOMSource(document.getDocumentElement());
+
+            // create the conversion processor with a Xslt compiler
+            Processor processor = new Processor(false);
+            XsltCompiler compiler = processor.newXsltCompiler();
+
+            // compile and load the XSL file
+            XsltExecutable xsltExecutable = compiler.compile(xslSource);
+            XsltTransformer xsltTransformer = xsltExecutable.load();
+
+            // create the input
+            DocumentBuilder documentBuilder = processor.newDocumentBuilder();
+            documentBuilder.setDTDValidation(false);
+
+            XdmNode xdmNode = documentBuilder.build(source);
+
+            // create the output with its options
+            Serializer out = new Serializer();
+            out.setOutputProperty(Serializer.Property.METHOD, "xml");
+            out.setOutputProperty(Serializer.Property.INDENT, "yes");
+            File fileOut = File.createTempFile("serializer", "convert");
+            FileOutputStream fos = new FileOutputStream(fileOut);
+            out.setOutputStream(fos);
+
+            // run the conversion
+            xsltTransformer.setInitialContextNode(xdmNode);
+            if (params != null) {
+                for (Map.Entry<String, Object> entry : params.entrySet()) {
+                    QName paramName = new QName(entry.getKey());
+                    XdmAtomicValue paramValue = new XdmAtomicValue(String.valueOf(entry.getValue()));
+                    xsltTransformer.setParameter(paramName, paramValue);
+                }
+            }
+
+            xsltTransformer.setDestination(out);
+            xsltTransformer.transform();
+
+            Reader reader = new FileReader(fileOut);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            StringBuffer sb = new StringBuffer();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            reader.close();
+            ;
+            bufferedReader.close();
+            fos.close();
+
+            return sb.toString();
+        }
+        catch (IOException ioe) {
+            throw new ConversionException("Error to convert - A file not found", ioe);
+        }
+        catch (SaxonApiException sae) {
+            throw new ConversionException("Error to convert the input XML document", sae);
+        }
+        catch (SAXException sae) {
+            throw new ConversionException("Error to convert - A file not found", sae);
+        }
+        catch (ParserConfigurationException pe) {
+            throw new ConversionException("Error to convert - A file not found", pe);
+        }
+    }
+
+
+    /**
+     * Launches an XSLT conversion from a source to an OutputStream.
+     * This methods uses the net.sf.saxon packages.
+     *
+     * @param xslSource the source of the xsl
+     * @param inputFile the input file
+     * @param outFile   the output file
+     * @param params    the parameter map
+     * @throws ConversionException the convert exception
+     */
+    public void convert(StreamSource xslSource, InputSource inputFile, File outFile, Map<String, Object> params) throws ConversionException {
 
         try {
 

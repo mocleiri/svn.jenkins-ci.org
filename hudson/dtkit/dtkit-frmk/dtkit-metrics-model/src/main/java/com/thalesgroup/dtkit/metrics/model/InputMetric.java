@@ -151,7 +151,9 @@ public abstract class InputMetric implements Serializable {
      *          an application Exception to throw when there is an error of conversion
      *          The exception is catched by the API client (as Hudson plugin)
      */
-    public abstract void convert(File inputFile, File outFile) throws ConversionException;
+    public  void convert(File inputFile, File outFile) throws ConversionException {
+         convert(inputFile, outFile, null);
+    }
 
 
     /**
