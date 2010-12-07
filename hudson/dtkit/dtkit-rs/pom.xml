@@ -38,6 +38,7 @@
     <artifactId>dtkit-rs</artifactId>
     <packaging>war</packaging>
     <version>0.5-SNAPSHOT</version>
+
     <name>DTKIT RS</name>
     <description>DTKIT Web services layer</description>
     <url>http://wiki.hudson-ci.org/display/HUDSON/DTKIT</url>
@@ -92,14 +93,20 @@
     </developers>
 
     <properties>
-        <jersey.version>1.4-ea06</jersey.version>
-        <spring.version>3.0.4.RELEASE</spring.version>
-        <dtkit.frmk.version>0.8</dtkit.frmk.version>
-        <dtkit.default.junit.version>0.9</dtkit.default.junit.version>
-        <dtkit.default.tusar.version>0.9</dtkit.default.tusar.version>
-        <jackson.version>1.6.0</jackson.version>
+        <jersey.version>1.5-ea07</jersey.version>
+        <spring.version>3.0.5.RELEASE</spring.version>
+        <dtkit.frmk.version>0.11</dtkit.frmk.version>
+        <dtkit.default.junit.version>0.13</dtkit.default.junit.version>
+        <dtkit.default.tusar.version>0.13</dtkit.default.tusar.version>
+        <jackson.version>1.6.3</jackson.version>
         <slf4j.version>1.6.1</slf4j.version>
     </properties>
+
+    <scm>
+        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-rs</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-rs</developerConnection>
+    </scm>
+
 
     <dependencies>
 
@@ -264,6 +271,13 @@
                     <excludes>
                         <exclude>**/GuiceModuleTest*</exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>deploy</goals>
                 </configuration>
             </plugin>
 
