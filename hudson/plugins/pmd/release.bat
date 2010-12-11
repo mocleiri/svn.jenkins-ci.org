@@ -1,1 +1,0 @@
-mvn -Dmaven.scm.provider.cvs.implementation=cvs_native -Djava.net.id=drulli release:prepare release:perform
