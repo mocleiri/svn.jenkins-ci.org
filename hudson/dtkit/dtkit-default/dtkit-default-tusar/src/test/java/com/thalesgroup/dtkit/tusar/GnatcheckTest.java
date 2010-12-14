@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Joel Forner                                                         *
+ * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -23,49 +23,15 @@
 
 package com.thalesgroup.dtkit.tusar;
 
-import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
-import com.thalesgroup.dtkit.metrics.model.InputType;
-import com.thalesgroup.dtkit.metrics.model.OutputMetric;
-import com.thalesgroup.dtkit.tusar.model.TusarModel;
-
-import javax.xml.bind.annotation.XmlType;
+import org.junit.Test;
 
 
-@XmlType(name = "gnatmetric", namespace = "tusar")
-public class GnatMetric extends InputMetricXSL {
+public class GnatcheckTest extends AbstractTest {
 
-    @Override
-    public InputType getToolType() {
-        return InputType.MEASURE;
+    @Test
+    public void testcase1() throws Exception {
+        convertAndValidate(Gnatcheck.class, "gnatcheck/testcase1/input.xml", "gnatcheck/testcase1/tusar-result.xml");
     }
 
-    @Override
-    public String getToolName() {
-        return "Gnatmetric";
-    }
 
-    @Override
-    public String getToolVersion() {
-        return "6.2.1";
-    }
-
-    @Override
-    public boolean isDefault() {
-        return true;
-    }
-
-    @Override
-    public String getXslName() {
-        return "gnatmetric-1.0-to-tusar-4.0.xsl";
-    }
-
-    @Override
-    public String[] getInputXsdNameList() {
-        return new String[]{"gnatmetric-1.0.xsd"};
-    }
-
-    @Override
-    public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_4_0;
-    }
 }

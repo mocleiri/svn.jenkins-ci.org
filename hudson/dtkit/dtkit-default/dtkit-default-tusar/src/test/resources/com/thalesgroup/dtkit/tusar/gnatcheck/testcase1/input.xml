@@ -1,0 +1,4183 @@
+Rule checking report generated 2010.12.14 11:28
+by GNATCHECK (built with ASIS 2.0.R for GNAT Pro 6.2.2 (20090612))
+
+Applied rules:
+   (Abstract_Type_Declarations) abstract types
+   (Anonymous_Arrays) anonymous array types
+   (Anonymous_Subtypes) anonymous subtypes
+   (Blocks) block statements
+   (Boolean_Relational_Operators) comparisons of Boolean values
+   (Complex_Inlined_Subprograms) complex inlined subprograms
+   (Controlled_Type_Declarations) controlled types
+   (Declarations_In_Blocks) block statements with local declarations
+   (Deep_Inheritance_Hierarchies) derivation tree is too deep
+   (Deeply_Nested_Generics) deeply nested generic declarations
+   (Default_Parameters) declarations of default subprogram parameters
+   (Direct_Calls_To_Primitives) non-dispatching calls to primitives
+   (Discriminated_Records) discriminanted records
+   (Enumeration_Ranges_In_CASE_Statements) enumeration ranges as choices in case statements
+   (Exceptions_As_Control_Flow) exceptions for control flow
+   (EXIT_Statements_With_No_Loop_Name) exit statements with no loop name
+   (Expanded_Loop_Exit_Names) expanded loop names in exit statements
+   (Explicit_Full_Discrete_Ranges) explicit discrete ranges
+   (Float_Equality_Checks) equality for float values
+   (Forbidden_Pragmas) usage of specified pragmas
+   (Function_Style_Procedures) procedures looking like functions
+   (Generics_In_Subprograms) definitions of generic units in  subprogram bodies
+   (GOTO_Statements) goto statements
+   (Implicit_IN_Mode_Parameters) implicit IN mode in parameter specifications
+   (Implicit_SMALL_For_Fixed_Point_Types) fixed point type declarations with no 'Small clause
+   (Improper_Returns) improper use of return statements
+   (Improperly_Located_Instantiations) instantiations that can cause problems
+   (Library_Level_Subprograms) library level subprograms
+   (Local_Packages) local packages
+   (Metrics_Cyclomatic_Complexity) (metrics) high cyclomatic complexity
+   (Metrics_Essential_Complexity) (metrics) high essential complexity
+   (Metrics_LSLOC) (metrics) high LSLOC value
+   (Misnamed_Identifiers) suffixes in defining names
+   (Multiple_Entries_In_Protected_Definitions) protected definitions with more than one entry
+   (Name_Clashes) restrictions on name space
+   (Non_Qualified_Aggregates) non-qualified aggregates
+   (Non_Short_Circuit_Operators) use of predefined AND and OR for boolean types
+   (Non_SPARK_Attributes) attributes that are not from the SPARK subset
+   (Non_Tagged_Derived_Types) derived types that are not type extensions
+   (Non_Visible_Exceptions) potential propagations of non-visible exceptions
+   (Numeric_Literals) numeric literals
+   (OTHERS_In_Aggregates) OTHERS choices in aggregates
+   (OTHERS_In_CASE_Statements) OTHERS choices in case statements
+   (OTHERS_In_Exception_Handlers) OTHERS choices in exception handlers
+   (Outer_Loop_Exits) exiting more than one loop at once
+   (Overloaded_Operators) operator overloading
+   (Overly_Nested_Control_Structures) deep nesting level of control structures
+   (Parameters_Out_Of_Order) formal parameters ordering
+   (Positional_Actuals_For_Defaulted_Generic_Parameters) positional generic actuals for defaulted generic parameters
+   (Positional_Actuals_For_Defaulted_Parameters) positional actuals for defaulted parameters
+   (Positional_Components) positional components associations in aggregates
+   (Positional_Generic_Parameters) positional generic associations
+   (Positional_Parameters) positional associations in subprogram and entry calls
+   (Predefined_Numeric_Types) explicit references to predefined numeric subtypes
+   (Raising_External_Exceptions) visibility of exceptions raised by routines declared in library package
+   (Raising_Predefined_Exceptions) explicit raise of predefined exceptions
+   (Separate_Numeric_Error_Handlers) Numeric_Error and Constraint error are not handled together
+   (Slices) slices
+   (Too_Many_Parents) type/object has too many parents
+   (Unassigned_OUT_Parameters) OUT parameters do not get values in procedure bodies
+   (Uncommented_BEGIN_In_Package_Bodies) BEGIN keywords in package bodies non-marked with comment with package name
+   (Unconstrained_Array_Returns) functions returning unconstrained arrays
+   (Universal_Ranges) ranges with universal integer bounds
+   (Unnamed_Blocks_And_Loops) compound statements naming
+   (USE_PACKAGE_Clauses) use clause for packages
+   (Visible_Components) Types with publically accessible components
+   (Volatile_Objects_Without_Address_Clauses) volatile objects with no address clause
+
+Disabled rules:
+   (Exits_From_Conditional_Loops) exit from conditional loops
+   (Recursive_Subprograms) recursion (call graph cycles)
+   (Unconditional_Exits) Exit statement with no condition
+
+   No active compiler style check
+   No active compiler warning:
+   No active compiler-checked restriction
+
+
+Checked argument sources:
+   chop.ads
+   chop.adb
+   random_generic.ads
+   random_generic.adb
+   windows.ads
+   windows.adb
+   phil.ads
+   phil.adb
+   society.ads
+   screen.ads
+   screen.adb
+   room.ads
+   room.adb
+   diners.adb
+
+This report contains following sections:
+
+Section 1 - compiler-style report, diagnoses are grouped by files and
+            for each file ordered by line numbers
+Section 2 - diagnoses are grouped by rules, then - by files and then -
+            by line numbers
+Section 3 - diagnoses are grouped by files, then - by rules and then -
+            by line numbers
+
+-------- Start Section 1 ------------
+   (compiler-style report, diagnoses are grouped by files,
+    and for each file diagnoses are ordered by increasing
+    the source location of the corresponding construct)
+
+chop.ads: 4: 1: LSLOC is too high:  5
+chop.ads:11: 3: LSLOC is too high:  4
+chop.ads:11:18: wrong suffix in type name
+chop.adb: 5:1: LSLOC is too high:  6
+chop.adb:12:3: LSLOC is too high:  5
+chop.adb:14:5: cyclomatic complexity is too high:  1
+chop.adb:14:5: essential complexity is too high:  1
+chop.adb:14:5: LSLOC is too high:  2
+chop.adb:19:5: cyclomatic complexity is too high:  1
+chop.adb:19:5: essential complexity is too high:  1
+chop.adb:19:5: LSLOC is too high:  2
+random_generic.ads:4:1: LSLOC is too high:  3
+random_generic.adb: 5:1: cyclomatic complexity is too high:  1
+random_generic.adb: 5:1: essential complexity is too high:  1
+random_generic.adb: 5:1: LSLOC is too high:  6
+random_generic.adb: 5:1: mark BEGIN with pakage name (Random_Generic)
+random_generic.adb:17:3: cyclomatic complexity is too high:  1
+random_generic.adb:17:3: essential complexity is too high:  1
+random_generic.adb:17:3: LSLOC is too high:  2
+windows.ads: 5: 1: LSLOC is too high:  28
+windows.ads:11: 8: wrong suffix in type name
+windows.ads:13:18: implicit IN mode in parameter specification
+windows.ads:14:18: implicit IN mode in parameter specification
+windows.ads:15:18: implicit IN mode in parameter specification
+windows.ads:20: 3: parameter W of mode IN OUT precedes parameter Name of mode IN
+windows.ads:27: 3: parameter W of mode IN OUT precedes parameter Corner of mode IN
+windows.ads:33: 3: parameter W of mode IN OUT precedes parameter P of mode IN
+windows.ads:40: 3: parameter W of mode IN OUT precedes parameter Ch of mode IN
+windows.ads:48: 3: parameter W of mode IN OUT precedes parameter S of mode IN
+windows.adb:  5: 1: cyclomatic complexity is too high:  1
+windows.adb:  5: 1: essential complexity is too high:  1
+windows.adb:  5: 1: LSLOC is too high:  90
+windows.adb:  5: 1: mark BEGIN with pakage name (Windows)
+windows.adb: 11: 3: cyclomatic complexity is too high:  1
+windows.adb: 11: 3: essential complexity is too high:  1
+windows.adb: 11: 3: LSLOC is too high:  9
+windows.adb: 11:18: implicit IN mode in parameter specification
+windows.adb: 12:18: implicit IN mode in parameter specification
+windows.adb: 13:18: implicit IN mode in parameter specification
+windows.adb: 18:22: aggregate is not a part of a qualified expression
+windows.adb: 23: 3: cyclomatic complexity is too high:  2
+windows.adb: 23: 3: essential complexity is too high:  1
+windows.adb: 23: 3: LSLOC is too high:  7
+windows.adb: 26:35: anonymous subtype
+windows.adb: 32: 3: cyclomatic complexity is too high:  4
+windows.adb: 32: 3: essential complexity is too high:  1
+windows.adb: 32: 3: LSLOC is too high:  13
+windows.adb: 38: 7: nesting level of control structures too deep
+windows.adb: 59: 3: cyclomatic complexity is too high:  2
+windows.adb: 59: 3: essential complexity is too high:  1
+windows.adb: 59: 3: LSLOC is too high:  6
+windows.adb: 62:19: anonymous subtype
+windows.adb: 63:12: positional parameter association
+windows.adb: 63:15: positional parameter association
+windows.adb: 67: 3: cyclomatic complexity is too high:  3
+windows.adb: 67: 3: essential complexity is too high:  1
+windows.adb: 67: 3: LSLOC is too high:  8
+windows.adb: 80: 3: cyclomatic complexity is too high:  3
+windows.adb: 80: 3: essential complexity is too high:  1
+windows.adb: 80: 3: LSLOC is too high:  14
+windows.adb: 86:10: positional parameter association
+windows.adb: 86:13: positional parameter association
+windows.adb: 93:50: nesting level of control structures too deep
+windows.adb: 93:34: anonymous subtype
+windows.adb: 94:14: positional parameter association
+windows.adb: 94:17: positional parameter association
+windows.adb: 97:36: numeric literal outside a constant declaration
+windows.adb:101: 3: cyclomatic complexity is too high:  4
+windows.adb:101: 3: essential complexity is too high:  1
+windows.adb:101: 3: LSLOC is too high:  24
+windows.adb:107:37: anonymous subtype
+windows.adb:113:34: anonymous subtype
+windows.adb:114:26: aggregate is not a part of a qualified expression
+windows.adb:116:26: aggregate is not a part of a qualified expression
+windows.adb:121:24: aggregate is not a part of a qualified expression
+windows.adb:123:37: anonymous subtype
+windows.adb:129:17: aggregate is not a part of a qualified expression
+windows.adb:130:17: aggregate is not a part of a qualified expression
+windows.adb:134: 3: cyclomatic complexity is too high:  1
+windows.adb:134: 3: essential complexity is too high:  1
+windows.adb:134: 3: LSLOC is too high:  5
+phil.ads: 5: 1: LSLOC is too high:  14
+phil.ads:12: 3: LSLOC is too high:  5
+phil.ads:12: 3: type defines publicly accessible components
+phil.ads:12:13: wrong suffix in type name
+phil.ads:14:41: explicit reference to predefined numeric subtype
+phil.ads:15:41: explicit reference to predefined numeric subtype
+phil.ads:19: 8: wrong suffix in type name
+phil.adb: 7: 1: LSLOC is too high:  34
+phil.adb:21:26: explicit reference to predefined numeric subtype
+phil.adb:21:44: numeric literal outside a constant declaration
+phil.adb:25:25: explicit reference to predefined numeric subtype
+phil.adb:25:43: numeric literal outside a constant declaration
+phil.adb:29: 3: cyclomatic complexity is too high:  1
+phil.adb:29: 3: essential complexity is too high:  1
+phil.adb:29: 3: LSLOC is too high:  29
+phil.adb:31:26: explicit reference to predefined numeric subtype
+phil.adb:31:44: numeric literal outside a constant declaration
+phil.adb:34:19: explicit reference to predefined numeric subtype
+phil.adb:35:19: explicit reference to predefined numeric subtype
+phil.adb:43:42: explicit reference to predefined numeric subtype
+phil.adb:44:42: explicit reference to predefined numeric subtype
+phil.adb:49:33: positional parameter association
+phil.adb:49:43: positional parameter association
+phil.adb:54:35: positional parameter association
+phil.adb:54:45: positional parameter association
+phil.adb:54:60: use named notation when passing actual to defaulted parameter
+phil.adb:54:60: positional parameter association
+phil.adb:57:35: positional parameter association
+phil.adb:57:45: positional parameter association
+phil.adb:57:62: use named notation when passing actual to defaulted parameter
+phil.adb:57:62: positional parameter association
+phil.adb:60:35: positional parameter association
+phil.adb:60:45: positional parameter association
+phil.adb:60:53: use named notation when passing actual to defaulted parameter
+phil.adb:60:53: positional parameter association
+phil.adb:60:64: use named notation when passing actual to defaulted parameter
+phil.adb:60:64: positional parameter association
+phil.adb:62:13: explicit reference to predefined numeric subtype
+phil.adb:64:35: positional parameter association
+phil.adb:64:45: positional parameter association
+phil.adb:70:35: positional parameter association
+phil.adb:70:45: positional parameter association
+phil.adb:70:55: use named notation when passing actual to defaulted parameter
+phil.adb:70:55: positional parameter association
+phil.adb:71:13: explicit reference to predefined numeric subtype
+phil.adb:75:33: positional parameter association
+phil.adb:75:43: positional parameter association
+society.ads: 4: 1: LSLOC is too high:  3
+society.ads:11:31: explicit reference to predefined numeric subtype
+society.ads:11:49: numeric literal outside a constant declaration
+society.ads:13:19: anonymous array type
+society.ads:13:46: anonymous subtype
+society.ads:13:54: anonymous subtype
+society.ads:13:54: range with universal integer bounds
+society.ads:13:56: numeric literal outside a constant declaration
+society.ads:15: 6: aggregate with a positional component association
+screen.ads: 4: 1: LSLOC is too high:  12
+screen.ads:10: 3: wrong suffix in constant name
+screen.ads:10:27: explicit reference to predefined numeric subtype
+screen.ads:11: 3: wrong suffix in constant name
+screen.ads:11:26: explicit reference to predefined numeric subtype
+screen.ads:13:21: explicit reference to predefined numeric subtype
+screen.ads:14:21: explicit reference to predefined numeric subtype
+screen.ads:16: 3: type defines publicly accessible components
+screen.ads:16: 8: wrong suffix in type name
+screen.adb: 5: 1: LSLOC is too high:  16
+screen.adb:15:52: explicit reference to predefined numeric subtype
+screen.adb:17: 3: cyclomatic complexity is too high:  1
+screen.adb:17: 3: essential complexity is too high:  1
+screen.adb:17: 3: LSLOC is too high:  2
+screen.adb:22: 3: cyclomatic complexity is too high:  1
+screen.adb:22: 3: essential complexity is too high:  1
+screen.adb:22: 3: LSLOC is too high:  3
+screen.adb:28: 3: cyclomatic complexity is too high:  1
+screen.adb:28: 3: essential complexity is too high:  1
+screen.adb:28: 3: LSLOC is too high:  9
+room.ads: 7: 1: LSLOC is too high:  11
+room.ads:19:25: explicit reference to predefined numeric subtype
+room.ads:21:12: anonymous array type
+room.ads:23: 3: LSLOC is too high:  7
+room.ads:27:25: default value for subprogram parameter
+room.ads:27:41: explicit reference to predefined numeric subtype
+room.ads:28:25: default value for subprogram parameter
+room.ads:28:41: explicit reference to predefined numeric subtype
+room.adb: 10: 1: LSLOC is too high:  51
+room.adb: 19:27: anonymous subtype
+room.adb: 20:27: anonymous subtype
+room.adb: 20:50: numeric literal outside a constant declaration
+room.adb: 21:27: anonymous subtype
+room.adb: 21:50: numeric literal outside a constant declaration
+room.adb: 22:27: anonymous subtype
+room.adb: 22:50: numeric literal outside a constant declaration
+room.adb: 23:27: anonymous subtype
+room.adb: 23:50: numeric literal outside a constant declaration
+room.adb: 25: 8: wrong suffix in access type name
+room.adb: 27:11: anonymous array type
+room.adb: 28:18: anonymous array type
+room.adb: 29:16: anonymous array type
+room.adb: 31: 3: cyclomatic complexity is too high:  8
+room.adb: 31: 3: essential complexity is too high:  3
+room.adb: 31: 3: LSLOC is too high:  41
+room.adb: 33:18: explicit reference to predefined numeric subtype
+room.adb: 35: 5: wrong suffix in constant name
+room.adb: 46: 7: aggregate with a positional component association
+room.adb: 46:16: attribute is not from the SPARK subset
+room.adb: 47:16: attribute is not from the SPARK subset
+room.adb: 48:12: attribute is not from the SPARK subset
+room.adb: 49:15: attribute is not from the SPARK subset
+room.adb: 50:18: attribute is not from the SPARK subset
+room.adb: 52:21: aggregate with a positional component association
+room.adb: 52:25: numeric literal outside a constant declaration
+room.adb: 52:28: numeric literal outside a constant declaration
+room.adb: 52:31: numeric literal outside a constant declaration
+room.adb: 52:34: numeric literal outside a constant declaration
+room.adb: 55: 7: aggregate with a positional component association
+room.adb: 55:22: positional parameter association
+room.adb: 55:22: aggregate is not a part of a qualified expression
+room.adb: 55:22: aggregate with a positional component association
+room.adb: 55:27: numeric literal outside a constant declaration
+room.adb: 55:32: positional parameter association
+room.adb: 55:32: numeric literal outside a constant declaration
+room.adb: 55:35: positional parameter association
+room.adb: 55:35: numeric literal outside a constant declaration
+room.adb: 56:22: positional parameter association
+room.adb: 56:22: aggregate is not a part of a qualified expression
+room.adb: 56:22: aggregate with a positional component association
+room.adb: 56:24: numeric literal outside a constant declaration
+room.adb: 56:28: numeric literal outside a constant declaration
+room.adb: 56:32: positional parameter association
+room.adb: 56:32: numeric literal outside a constant declaration
+room.adb: 56:35: positional parameter association
+room.adb: 56:35: numeric literal outside a constant declaration
+room.adb: 57:22: positional parameter association
+room.adb: 57:22: aggregate is not a part of a qualified expression
+room.adb: 57:22: aggregate with a positional component association
+room.adb: 57:24: numeric literal outside a constant declaration
+room.adb: 57:27: numeric literal outside a constant declaration
+room.adb: 57:32: positional parameter association
+room.adb: 57:32: numeric literal outside a constant declaration
+room.adb: 57:35: positional parameter association
+room.adb: 57:35: numeric literal outside a constant declaration
+room.adb: 58:22: positional parameter association
+room.adb: 58:22: aggregate is not a part of a qualified expression
+room.adb: 58:22: aggregate with a positional component association
+room.adb: 58:23: numeric literal outside a constant declaration
+room.adb: 58:28: numeric literal outside a constant declaration
+room.adb: 58:32: positional parameter association
+room.adb: 58:32: numeric literal outside a constant declaration
+room.adb: 58:35: positional parameter association
+room.adb: 58:35: numeric literal outside a constant declaration
+room.adb: 59:22: positional parameter association
+room.adb: 59:22: aggregate is not a part of a qualified expression
+room.adb: 59:22: aggregate with a positional component association
+room.adb: 59:23: numeric literal outside a constant declaration
+room.adb: 59:27: numeric literal outside a constant declaration
+room.adb: 59:32: positional parameter association
+room.adb: 59:32: numeric literal outside a constant declaration
+room.adb: 59:35: positional parameter association
+room.adb: 59:35: numeric literal outside a constant declaration
+room.adb: 62:37: anonymous subtype
+room.adb: 63:24: positional parameter association
+room.adb: 63:52: positional parameter association
+room.adb: 63:57: positional parameter association
+room.adb: 63:62: positional parameter association
+room.adb: 68:12: numeric literal outside a constant declaration
+room.adb: 68:29: positional parameter association
+room.adb: 68:32: positional parameter association
+room.adb: 68:32: numeric literal outside a constant declaration
+room.adb: 69:12: numeric literal outside a constant declaration
+room.adb: 69:29: positional parameter association
+room.adb: 69:29: numeric literal outside a constant declaration
+room.adb: 69:32: positional parameter association
+room.adb: 69:32: numeric literal outside a constant declaration
+room.adb: 70:12: numeric literal outside a constant declaration
+room.adb: 70:29: positional parameter association
+room.adb: 70:29: numeric literal outside a constant declaration
+room.adb: 70:32: positional parameter association
+room.adb: 70:32: numeric literal outside a constant declaration
+room.adb: 71:12: numeric literal outside a constant declaration
+room.adb: 71:29: positional parameter association
+room.adb: 71:32: positional parameter association
+room.adb: 71:32: numeric literal outside a constant declaration
+room.adb: 72:12: numeric literal outside a constant declaration
+room.adb: 72:29: positional parameter association
+room.adb: 72:29: numeric literal outside a constant declaration
+room.adb: 72:32: positional parameter association
+room.adb: 72:32: numeric literal outside a constant declaration
+room.adb: 75: 7: nesting level of control structures too deep
+room.adb: 78:30: default value for subprogram parameter
+room.adb: 78:46: explicit reference to predefined numeric subtype
+room.adb: 79:30: default value for subprogram parameter
+room.adb: 79:46: explicit reference to predefined numeric subtype
+room.adb: 81:16: explicit reference to predefined numeric subtype
+room.adb: 83:11: nesting level of control structures too deep
+room.adb: 86:29: positional parameter association
+room.adb: 87:36: positional parameter association
+room.adb: 87:64: positional parameter association
+room.adb: 88:28: positional parameter association
+room.adb: 90:23: positional parameter association
+room.adb: 89:37: attribute is not from the SPARK subset
+room.adb: 89:30: explicit reference to predefined numeric subtype
+room.adb: 94:28: positional parameter association
+room.adb: 97:50: positional parameter association
+room.adb: 95:37: attribute is not from the SPARK subset
+room.adb: 95:30: explicit reference to predefined numeric subtype
+room.adb: 97:32: attribute is not from the SPARK subset
+room.adb: 97:25: explicit reference to predefined numeric subtype
+room.adb:101:28: positional parameter association
+room.adb:106:50: positional parameter association
+room.adb:102:37: attribute is not from the SPARK subset
+room.adb:102:30: explicit reference to predefined numeric subtype
+room.adb:104:32: attribute is not from the SPARK subset
+room.adb:104:25: explicit reference to predefined numeric subtype
+room.adb:106:32: attribute is not from the SPARK subset
+room.adb:106:25: explicit reference to predefined numeric subtype
+room.adb:110:28: positional parameter association
+room.adb:112:23: positional parameter association
+room.adb:111:37: attribute is not from the SPARK subset
+room.adb:111:30: explicit reference to predefined numeric subtype
+room.adb:116:28: positional parameter association
+room.adb:119:23: positional parameter association
+room.adb:117:37: attribute is not from the SPARK subset
+room.adb:117:30: explicit reference to predefined numeric subtype
+room.adb:119:32: attribute is not from the SPARK subset
+room.adb:119:25: explicit reference to predefined numeric subtype
+room.adb:123:28: positional parameter association
+room.adb:126:23: positional parameter association
+room.adb:124:37: attribute is not from the SPARK subset
+room.adb:124:30: explicit reference to predefined numeric subtype
+room.adb:126:32: attribute is not from the SPARK subset
+room.adb:126:25: explicit reference to predefined numeric subtype
+room.adb:130:28: positional parameter association
+room.adb:132:23: positional parameter association
+room.adb:131:37: attribute is not from the SPARK subset
+room.adb:131:30: explicit reference to predefined numeric subtype
+diners.adb:6:1: declaration of library level subprogram
+diners.adb:6:1: cyclomatic complexity is too high:  1
+diners.adb:6:1: essential complexity is too high:  1
+diners.adb:6:1: LSLOC is too high:  2
+-------- End Section 1 ------------
+
+
+-------- Start Section 2 ------------
+   (diagnoses are grouped by rules, and for each rule -
+    by files, and for each file - by increasing the source
+    location of the corresponding construct)
+
+abstract types
+      No matches detected in processed files
+
+anonymous array types
+   Matches detected in file society.ads
+      13:19
+
+   Matches detected in file room.ads
+      21:12
+
+   Matches detected in file room.adb
+      27:11
+      28:18
+      29:16
+
+
+anonymous subtypes
+   Matches detected in file windows.adb
+      26:35
+      62:19
+      93:34
+      107:37
+      113:34
+      123:37
+
+   Matches detected in file society.ads
+      13:46
+      13:54
+
+   Matches detected in file room.adb
+      19:27
+      20:27
+      21:27
+      22:27
+      23:27
+      62:37
+
+
+block statements
+      No matches detected in processed files
+
+comparisons of Boolean values
+      No matches detected in processed files
+
+complex inlined subprograms
+      No matches detected in processed files
+
+controlled types
+      No matches detected in processed files
+
+block statements with local declarations
+      No matches detected in processed files
+
+derivation tree is too deep
+      No matches detected in processed files
+
+deeply nested generic declarations
+      No matches detected in processed files
+
+declarations of default subprogram parameters
+   Matches detected in file room.ads
+      27:25
+      28:25
+
+   Matches detected in file room.adb
+      78:30
+      79:30
+
+
+non-dispatching calls to primitives
+      No matches detected in processed files
+
+discriminanted records
+      No matches detected in processed files
+
+enumeration ranges as choices in case statements
+      No matches detected in processed files
+
+exceptions for control flow
+      No matches detected in processed files
+
+exit statements with no loop name
+      No matches detected in processed files
+
+expanded loop names in exit statements
+      No matches detected in processed files
+
+explicit discrete ranges
+      No matches detected in processed files
+
+equality for float values
+      No matches detected in processed files
+
+usage of specified pragmas
+      No matches detected in processed files
+
+procedures looking like functions
+      No matches detected in processed files
+
+definitions of generic units in  subprogram bodies
+      No matches detected in processed files
+
+goto statements
+      No matches detected in processed files
+
+implicit IN mode in parameter specifications
+   Matches detected in file windows.ads
+      13:18
+      14:18
+      15:18
+
+   Matches detected in file windows.adb
+      11:18
+      12:18
+      13:18
+
+
+fixed point type declarations with no 'Small clause
+      No matches detected in processed files
+
+improper use of return statements
+      No matches detected in processed files
+
+instantiations that can cause problems
+      No matches detected in processed files
+
+library level subprograms
+   Matches detected in file diners.adb
+      6:1
+
+
+local packages
+      No matches detected in processed files
+
+(metrics) high cyclomatic complexity
+   Matches detected in file chop.adb
+      14:5
+      19:5
+
+   Matches detected in file random_generic.adb
+      5:1
+      17:3
+
+   Matches detected in file windows.adb
+      5:1
+      11:3
+      23:3
+      32:3
+      59:3
+      67:3
+      80:3
+      101:3
+      134:3
+
+   Matches detected in file phil.adb
+      29:3
+
+   Matches detected in file screen.adb
+      17:3
+      22:3
+      28:3
+
+   Matches detected in file room.adb
+      31:3
+
+   Matches detected in file diners.adb
+      6:1
+
+
+(metrics) high essential complexity
+   Matches detected in file chop.adb
+      14:5
+      19:5
+
+   Matches detected in file random_generic.adb
+      5:1
+      17:3
+
+   Matches detected in file windows.adb
+      5:1
+      11:3
+      23:3
+      32:3
+      59:3
+      67:3
+      80:3
+      101:3
+      134:3
+
+   Matches detected in file phil.adb
+      29:3
+
+   Matches detected in file screen.adb
+      17:3
+      22:3
+      28:3
+
+   Matches detected in file room.adb
+      31:3
+
+   Matches detected in file diners.adb
+      6:1
+
+
+(metrics) high LSLOC value
+   Matches detected in file chop.ads
+      4:1
+      11:3
+
+   Matches detected in file chop.adb
+      5:1
+      12:3
+      14:5
+      19:5
+
+   Matches detected in file random_generic.ads
+      4:1
+
+   Matches detected in file random_generic.adb
+      5:1
+      17:3
+
+   Matches detected in file windows.ads
+      5:1
+
+   Matches detected in file windows.adb
+      5:1
+      11:3
+      23:3
+      32:3
+      59:3
+      67:3
+      80:3
+      101:3
+      134:3
+
+   Matches detected in file phil.ads
+      5:1
+      12:3
+
+   Matches detected in file phil.adb
+      7:1
+      29:3
+
+   Matches detected in file society.ads
+      4:1
+
+   Matches detected in file screen.ads
+      4:1
+
+   Matches detected in file screen.adb
+      5:1
+      17:3
+      22:3
+      28:3
+
+   Matches detected in file room.ads
+      7:1
+      23:3
+
+   Matches detected in file room.adb
+      10:1
+      31:3
+
+   Matches detected in file diners.adb
+      6:1
+
+
+suffixes in defining names
+   Matches detected in file chop.ads
+      11:18
+
+   Matches detected in file windows.ads
+      11:8
+
+   Matches detected in file phil.ads
+      12:13
+      19:8
+
+   Matches detected in file screen.ads
+      10:3
+      11:3
+      16:8
+
+   Matches detected in file room.adb
+      25:8
+      35:5
+
+
+protected definitions with more than one entry
+      No matches detected in processed files
+
+restrictions on name space
+      No matches detected in processed files
+
+non-qualified aggregates
+   Matches detected in file windows.adb
+      18:22
+      114:26
+      116:26
+      121:24
+      129:17
+      130:17
+
+   Matches detected in file room.adb
+      55:22
+      56:22
+      57:22
+      58:22
+      59:22
+
+
+use of predefined AND and OR for boolean types
+      No matches detected in processed files
+
+attributes that are not from the SPARK subset
+   Matches detected in file room.adb
+      46:16
+      47:16
+      48:12
+      49:15
+      50:18
+      89:37
+      95:37
+      97:32
+      102:37
+      104:32
+      106:32
+      111:37
+      117:37
+      119:32
+      124:37
+      126:32
+      131:37
+
+
+derived types that are not type extensions
+      No matches detected in processed files
+
+potential propagations of non-visible exceptions
+      No matches detected in processed files
+
+numeric literals
+   Matches detected in file windows.adb
+      97:36
+
+   Matches detected in file phil.adb
+      21:44
+      25:43
+      31:44
+
+   Matches detected in file society.ads
+      11:49
+      13:56
+
+   Matches detected in file room.adb
+      20:50
+      21:50
+      22:50
+      23:50
+      52:25
+      52:28
+      52:31
+      52:34
+      55:27
+      55:32
+      55:35
+      56:24
+      56:28
+      56:32
+      56:35
+      57:24
+      57:27
+      57:32
+      57:35
+      58:23
+      58:28
+      58:32
+      58:35
+      59:23
+      59:27
+      59:32
+      59:35
+      68:12
+      68:32
+      69:12
+      69:29
+      69:32
+      70:12
+      70:29
+      70:32
+      71:12
+      71:32
+      72:12
+      72:29
+      72:32
+
+
+OTHERS choices in aggregates
+      No matches detected in processed files
+
+OTHERS choices in case statements
+      No matches detected in processed files
+
+OTHERS choices in exception handlers
+      No matches detected in processed files
+
+exiting more than one loop at once
+      No matches detected in processed files
+
+operator overloading
+      No matches detected in processed files
+
+deep nesting level of control structures
+   Matches detected in file windows.adb
+      38:7
+      93:50
+
+   Matches detected in file room.adb
+      75:7
+      83:11
+
+
+formal parameters ordering
+   Matches detected in file windows.ads
+      20:3
+      27:3
+      33:3
+      40:3
+      48:3
+
+
+positional generic actuals for defaulted generic parameters
+      No matches detected in processed files
+
+positional actuals for defaulted parameters
+   Matches detected in file phil.adb
+      54:60
+      57:62
+      60:53
+      60:64
+      70:55
+
+
+positional components associations in aggregates
+   Matches detected in file society.ads
+      15:6
+
+   Matches detected in file room.adb
+      46:7
+      52:21
+      55:7
+      55:22
+      56:22
+      57:22
+      58:22
+      59:22
+
+
+positional generic associations
+      No matches detected in processed files
+
+positional associations in subprogram and entry calls
+   Matches detected in file windows.adb
+      63:12
+      63:15
+      86:10
+      86:13
+      94:14
+      94:17
+
+   Matches detected in file phil.adb
+      49:33
+      49:43
+      54:35
+      54:45
+      54:60
+      57:35
+      57:45
+      57:62
+      60:35
+      60:45
+      60:53
+      60:64
+      64:35
+      64:45
+      70:35
+      70:45
+      70:55
+      75:33
+      75:43
+
+   Matches detected in file room.adb
+      55:22
+      55:32
+      55:35
+      56:22
+      56:32
+      56:35
+      57:22
+      57:32
+      57:35
+      58:22
+      58:32
+      58:35
+      59:22
+      59:32
+      59:35
+      63:24
+      63:52
+      63:57
+      63:62
+      68:29
+      68:32
+      69:29
+      69:32
+      70:29
+      70:32
+      71:29
+      71:32
+      72:29
+      72:32
+      86:29
+      87:36
+      87:64
+      88:28
+      90:23
+      94:28
+      97:50
+      101:28
+      106:50
+      110:28
+      112:23
+      116:28
+      119:23
+      123:28
+      126:23
+      130:28
+      132:23
+
+
+explicit references to predefined numeric subtypes
+   Matches detected in file phil.ads
+      14:41
+      15:41
+
+   Matches detected in file phil.adb
+      21:26
+      25:25
+      31:26
+      34:19
+      35:19
+      43:42
+      44:42
+      62:13
+      71:13
+
+   Matches detected in file society.ads
+      11:31
+
+   Matches detected in file screen.ads
+      10:27
+      11:26
+      13:21
+      14:21
+
+   Matches detected in file screen.adb
+      15:52
+
+   Matches detected in file room.ads
+      19:25
+      27:41
+      28:41
+
+   Matches detected in file room.adb
+      33:18
+      78:46
+      79:46
+      81:16
+      89:30
+      95:30
+      97:25
+      102:30
+      104:25
+      106:25
+      111:30
+      117:30
+      119:25
+      124:30
+      126:25
+      131:30
+
+
+visibility of exceptions raised by routines declared in library package
+      No matches detected in processed files
+
+explicit raise of predefined exceptions
+      No matches detected in processed files
+
+Numeric_Error and Constraint error are not handled together
+      No matches detected in processed files
+
+slices
+      No matches detected in processed files
+
+type/object has too many parents
+      No matches detected in processed files
+
+OUT parameters do not get values in procedure bodies
+      No matches detected in processed files
+
+BEGIN keywords in package bodies non-marked with comment with package name
+   Matches detected in file random_generic.adb
+      5:1
+
+   Matches detected in file windows.adb
+      5:1
+
+
+functions returning unconstrained arrays
+      No matches detected in processed files
+
+ranges with universal integer bounds
+   Matches detected in file society.ads
+      13:54
+
+
+compound statements naming
+      No matches detected in processed files
+
+use clause for packages
+      No matches detected in processed files
+
+Types with publically accessible components
+   Matches detected in file phil.ads
+      12:3
+
+   Matches detected in file screen.ads
+      16:3
+
+
+volatile objects with no address clause
+      No matches detected in processed files
+
+-------- End Section 2 ------------
+
+
+-------- Start Section 3 ------------
+   (diagnoses are grouped by files, and for each file they
+    are first grouped by rules and then - by increasing
+    the source location of the corresponding construct)
+
+Matches detected in file chop.ads
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      No matches detected
+
+   (metrics) high essential complexity
+      No matches detected
+
+   (metrics) high LSLOC value
+      4:1
+      11:3
+
+   suffixes in defining names
+      11:18
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      No matches detected
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file chop.adb
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      14:5
+      19:5
+
+   (metrics) high essential complexity
+      14:5
+      19:5
+
+   (metrics) high LSLOC value
+      5:1
+      12:3
+      14:5
+      19:5
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      No matches detected
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file random_generic.ads
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      No matches detected
+
+   (metrics) high essential complexity
+      No matches detected
+
+   (metrics) high LSLOC value
+      4:1
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      No matches detected
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file random_generic.adb
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      5:1
+      17:3
+
+   (metrics) high essential complexity
+      5:1
+      17:3
+
+   (metrics) high LSLOC value
+      5:1
+      17:3
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      No matches detected
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      5:1
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file windows.ads
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      13:18
+      14:18
+      15:18
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      No matches detected
+
+   (metrics) high essential complexity
+      No matches detected
+
+   (metrics) high LSLOC value
+      5:1
+
+   suffixes in defining names
+      11:8
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      20:3
+      27:3
+      33:3
+      40:3
+      48:3
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      No matches detected
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file windows.adb
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      26:35
+      62:19
+      93:34
+      107:37
+      113:34
+      123:37
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      11:18
+      12:18
+      13:18
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      5:1
+      11:3
+      23:3
+      32:3
+      59:3
+      67:3
+      80:3
+      101:3
+      134:3
+
+   (metrics) high essential complexity
+      5:1
+      11:3
+      23:3
+      32:3
+      59:3
+      67:3
+      80:3
+      101:3
+      134:3
+
+   (metrics) high LSLOC value
+      5:1
+      11:3
+      23:3
+      32:3
+      59:3
+      67:3
+      80:3
+      101:3
+      134:3
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      18:22
+      114:26
+      116:26
+      121:24
+      129:17
+      130:17
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      97:36
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      38:7
+      93:50
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      63:12
+      63:15
+      86:10
+      86:13
+      94:14
+      94:17
+
+   explicit references to predefined numeric subtypes
+      No matches detected
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      5:1
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file phil.ads
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      No matches detected
+
+   (metrics) high essential complexity
+      No matches detected
+
+   (metrics) high LSLOC value
+      5:1
+      12:3
+
+   suffixes in defining names
+      12:13
+      19:8
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      14:41
+      15:41
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      12:3
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file phil.adb
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      29:3
+
+   (metrics) high essential complexity
+      29:3
+
+   (metrics) high LSLOC value
+      7:1
+      29:3
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      21:44
+      25:43
+      31:44
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      54:60
+      57:62
+      60:53
+      60:64
+      70:55
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      49:33
+      49:43
+      54:35
+      54:45
+      54:60
+      57:35
+      57:45
+      57:62
+      60:35
+      60:45
+      60:53
+      60:64
+      64:35
+      64:45
+      70:35
+      70:45
+      70:55
+      75:33
+      75:43
+
+   explicit references to predefined numeric subtypes
+      21:26
+      25:25
+      31:26
+      34:19
+      35:19
+      43:42
+      44:42
+      62:13
+      71:13
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file society.ads
+   abstract types
+      No matches detected
+
+   anonymous array types
+      13:19
+
+   anonymous subtypes
+      13:46
+      13:54
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      No matches detected
+
+   (metrics) high essential complexity
+      No matches detected
+
+   (metrics) high LSLOC value
+      4:1
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      11:49
+      13:56
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      15:6
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      11:31
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      13:54
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file screen.ads
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      No matches detected
+
+   (metrics) high essential complexity
+      No matches detected
+
+   (metrics) high LSLOC value
+      4:1
+
+   suffixes in defining names
+      10:3
+      11:3
+      16:8
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      10:27
+      11:26
+      13:21
+      14:21
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      16:3
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file screen.adb
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      17:3
+      22:3
+      28:3
+
+   (metrics) high essential complexity
+      17:3
+      22:3
+      28:3
+
+   (metrics) high LSLOC value
+      5:1
+      17:3
+      22:3
+      28:3
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      15:52
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file room.ads
+   abstract types
+      No matches detected
+
+   anonymous array types
+      21:12
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      27:25
+      28:25
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      No matches detected
+
+   (metrics) high essential complexity
+      No matches detected
+
+   (metrics) high LSLOC value
+      7:1
+      23:3
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      19:25
+      27:41
+      28:41
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file room.adb
+   abstract types
+      No matches detected
+
+   anonymous array types
+      27:11
+      28:18
+      29:16
+
+   anonymous subtypes
+      19:27
+      20:27
+      21:27
+      22:27
+      23:27
+      62:37
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      78:30
+      79:30
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      No matches detected
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      31:3
+
+   (metrics) high essential complexity
+      31:3
+
+   (metrics) high LSLOC value
+      10:1
+      31:3
+
+   suffixes in defining names
+      25:8
+      35:5
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      55:22
+      56:22
+      57:22
+      58:22
+      59:22
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      46:16
+      47:16
+      48:12
+      49:15
+      50:18
+      89:37
+      95:37
+      97:32
+      102:37
+      104:32
+      106:32
+      111:37
+      117:37
+      119:32
+      124:37
+      126:32
+      131:37
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      20:50
+      21:50
+      22:50
+      23:50
+      52:25
+      52:28
+      52:31
+      52:34
+      55:27
+      55:32
+      55:35
+      56:24
+      56:28
+      56:32
+      56:35
+      57:24
+      57:27
+      57:32
+      57:35
+      58:23
+      58:28
+      58:32
+      58:35
+      59:23
+      59:27
+      59:32
+      59:35
+      68:12
+      68:32
+      69:12
+      69:29
+      69:32
+      70:12
+      70:29
+      70:32
+      71:12
+      71:32
+      72:12
+      72:29
+      72:32
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      75:7
+      83:11
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      46:7
+      52:21
+      55:7
+      55:22
+      56:22
+      57:22
+      58:22
+      59:22
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      55:22
+      55:32
+      55:35
+      56:22
+      56:32
+      56:35
+      57:22
+      57:32
+      57:35
+      58:22
+      58:32
+      58:35
+      59:22
+      59:32
+      59:35
+      63:24
+      63:52
+      63:57
+      63:62
+      68:29
+      68:32
+      69:29
+      69:32
+      70:29
+      70:32
+      71:29
+      71:32
+      72:29
+      72:32
+      86:29
+      87:36
+      87:64
+      88:28
+      90:23
+      94:28
+      97:50
+      101:28
+      106:50
+      110:28
+      112:23
+      116:28
+      119:23
+      123:28
+      126:23
+      130:28
+      132:23
+
+   explicit references to predefined numeric subtypes
+      33:18
+      78:46
+      79:46
+      81:16
+      89:30
+      95:30
+      97:25
+      102:30
+      104:25
+      106:25
+      111:30
+      117:30
+      119:25
+      124:30
+      126:25
+      131:30
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+Matches detected in file diners.adb
+   abstract types
+      No matches detected
+
+   anonymous array types
+      No matches detected
+
+   anonymous subtypes
+      No matches detected
+
+   block statements
+      No matches detected
+
+   comparisons of Boolean values
+      No matches detected
+
+   complex inlined subprograms
+      No matches detected
+
+   controlled types
+      No matches detected
+
+   block statements with local declarations
+      No matches detected
+
+   derivation tree is too deep
+      No matches detected
+
+   deeply nested generic declarations
+      No matches detected
+
+   declarations of default subprogram parameters
+      No matches detected
+
+   non-dispatching calls to primitives
+      No matches detected
+
+   discriminanted records
+      No matches detected
+
+   enumeration ranges as choices in case statements
+      No matches detected
+
+   exceptions for control flow
+      No matches detected
+
+   exit statements with no loop name
+      No matches detected
+
+   expanded loop names in exit statements
+      No matches detected
+
+   explicit discrete ranges
+      No matches detected
+
+   equality for float values
+      No matches detected
+
+   usage of specified pragmas
+      No matches detected
+
+   procedures looking like functions
+      No matches detected
+
+   definitions of generic units in  subprogram bodies
+      No matches detected
+
+   goto statements
+      No matches detected
+
+   implicit IN mode in parameter specifications
+      No matches detected
+
+   fixed point type declarations with no 'Small clause
+      No matches detected
+
+   improper use of return statements
+      No matches detected
+
+   instantiations that can cause problems
+      No matches detected
+
+   library level subprograms
+      6:1
+
+   local packages
+      No matches detected
+
+   (metrics) high cyclomatic complexity
+      6:1
+
+   (metrics) high essential complexity
+      6:1
+
+   (metrics) high LSLOC value
+      6:1
+
+   suffixes in defining names
+      No matches detected
+
+   protected definitions with more than one entry
+      No matches detected
+
+   restrictions on name space
+      No matches detected
+
+   non-qualified aggregates
+      No matches detected
+
+   use of predefined AND and OR for boolean types
+      No matches detected
+
+   attributes that are not from the SPARK subset
+      No matches detected
+
+   derived types that are not type extensions
+      No matches detected
+
+   potential propagations of non-visible exceptions
+      No matches detected
+
+   numeric literals
+      No matches detected
+
+   OTHERS choices in aggregates
+      No matches detected
+
+   OTHERS choices in case statements
+      No matches detected
+
+   OTHERS choices in exception handlers
+      No matches detected
+
+   exiting more than one loop at once
+      No matches detected
+
+   operator overloading
+      No matches detected
+
+   deep nesting level of control structures
+      No matches detected
+
+   formal parameters ordering
+      No matches detected
+
+   positional generic actuals for defaulted generic parameters
+      No matches detected
+
+   positional actuals for defaulted parameters
+      No matches detected
+
+   positional components associations in aggregates
+      No matches detected
+
+   positional generic associations
+      No matches detected
+
+   positional associations in subprogram and entry calls
+      No matches detected
+
+   explicit references to predefined numeric subtypes
+      No matches detected
+
+   visibility of exceptions raised by routines declared in library package
+      No matches detected
+
+   explicit raise of predefined exceptions
+      No matches detected
+
+   Numeric_Error and Constraint error are not handled together
+      No matches detected
+
+   slices
+      No matches detected
+
+   type/object has too many parents
+      No matches detected
+
+   OUT parameters do not get values in procedure bodies
+      No matches detected
+
+   BEGIN keywords in package bodies non-marked with comment with package name
+      No matches detected
+
+   functions returning unconstrained arrays
+      No matches detected
+
+   ranges with universal integer bounds
+      No matches detected
+
+   compound statements naming
+      No matches detected
+
+   use clause for packages
+      No matches detected
+
+   Types with publically accessible components
+      No matches detected
+
+   volatile objects with no address clause
+      No matches detected
+
+
+-------- End Section 3 ------------
