@@ -43,7 +43,6 @@ public abstract class AbstractWarningsGraphPortlet extends AbstractPortlet {
      * @param dayCountString
      *            number of days to consider
      */
-    @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
     public AbstractWarningsGraphPortlet(final String name, final String width, final String height, final String dayCountString) {
         super(name);
 
@@ -88,6 +87,15 @@ public abstract class AbstractWarningsGraphPortlet extends AbstractPortlet {
             graph = configuration.getGraphType();
         }
         return graph.getGraph(-1, configuration, getPluginName(), results);
+    }
+
+    /**
+     * Checks if the results are empty.
+     *
+     * @return <code>true</code> if the results are empty, <code>false</code> otherwise
+     */
+    public boolean isEmpty() {
+        return getActions().isEmpty();
     }
 
     /**

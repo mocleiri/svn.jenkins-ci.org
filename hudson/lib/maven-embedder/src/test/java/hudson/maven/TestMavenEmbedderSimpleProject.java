@@ -31,18 +31,13 @@ import org.apache.maven.execution.ExecutionEvent;
 import org.apache.maven.execution.MavenExecutionResult;
 import org.apache.maven.project.MavenProject;
 
-
-
 /**
  * @author olamy
  *
  */
-public class TestMavenEmbedderSimpleProject
-    extends TestCase
-{
+public class TestMavenEmbedderSimpleProject extends TestCase {
 
-    public void testSimpleProjectRead() throws Exception
-    {
+    public void testSimpleProjectRead() throws Exception {
         MavenRequest mavenRequest = new MavenRequest();
         mavenRequest.setPom( new File( "src/test/projects-tests/one-module/pom.xml" ).getAbsolutePath() );
 
@@ -56,8 +51,7 @@ public class TestMavenEmbedderSimpleProject
         System.out.println("artficatId " + project.getArtifactId());
     }
     
-    public void testSimpleProjectBuild() throws Exception
-    {
+    public void testSimpleProjectBuild() throws Exception {
         MavenRequest mavenRequest = new MavenRequest();
         mavenRequest.setUserSettingsFile( new File(System.getProperty( "user.home"), ".m2/settings.xml" ).getAbsolutePath() );
         mavenRequest.setLocalRepositoryPath( "target/local-repo" );
@@ -89,6 +83,34 @@ public class TestMavenEmbedderSimpleProject
         assertTrue(executedMojos.contains( "maven-clean-plugin" ));
         assertTrue(executedMojos.contains( "maven-surefire-plugin" ));
         
-    }    
+    }  
+    
+    public void testEclipsePluginProjectRead() throws Exception {
+        MavenRequest mavenRequest = new MavenRequest();
+        mavenRequest.setPom( new File( "src/test/projects-tests/eclipse-plugin/pom.xml" ).getAbsolutePath() );
+
+        mavenRequest.setLocalRepositoryPath( "./target/repo-maven" );
+        
+        mavenRequest.setBaseDirectory( new File( "src/test/projects-tests/scm-git-test-one-module" ).getAbsolutePath() );
+        MavenEmbedder mavenEmbedder = new MavenEmbedder( Thread.currentThread().getContextClassLoader(), mavenRequest );
+            //new MavenEmbedder( new File( System.getProperty( "maven.home" ) ), mavenRequest );
+        
+        MavenProject project = mavenEmbedder.readProject( new File( "src/test/projects-tests/eclipse-plugin/pom.xml" ) );
+        System.out.println("artficatId " + project.getArtifactId());
+    } 
+    
+    public void testEclipsePluginProjectReadMultiModule() throws Exception {
+        MavenRequest mavenRequest = new MavenRequest();
+        mavenRequest.setPom( new File( "src/test/projects-tests/eclipse-plugin-with-parent/parent/pom.xml" ).getAbsolutePath() );
+
+        mavenRequest.setLocalRepositoryPath( "./target/repo-maven" );
+        
+        mavenRequest.setBaseDirectory( new File( "src/test/projects-tests/eclipse-plugin-with-parent/parent/" ).getAbsolutePath() );
+        MavenEmbedder mavenEmbedder = new MavenEmbedder( Thread.currentThread().getContextClassLoader(), mavenRequest );
+            //new MavenEmbedder( new File( System.getProperty( "maven.home" ) ), mavenRequest );
+        
+        List<MavenProject> projects = mavenEmbedder.readProjects( new File( "src/test/projects-tests/eclipse-plugin-with-parent/parent/pom.xml" ), true );
+        assertEquals( "not 2 projects", 2, projects.size() );
+    }     
     
 }

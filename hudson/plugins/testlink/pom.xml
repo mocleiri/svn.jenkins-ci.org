@@ -9,7 +9,7 @@
 
   <artifactId>testlink</artifactId>
   <name>TestLink Hudson Plugin</name>
-  <version>2.1-SNAPSHOT</version>
+  <version>2.0.2-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <description>This plug-in integrates TestLink and Hudson.</description>
   <url>http://wiki.hudson-ci.org/display/HUDSON/TestLink+Plugin</url>
@@ -99,14 +99,6 @@
   	</dependency>
   	<dependency>
   		<groupId>br.eti.kinoshita</groupId>
-  		<artifactId>tap4j</artifactId>
-  		<version>1.3</version>
-  		<type>jar</type>
-  		<scope>system</scope>
-  		<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/tap4j-1.3.jar</systemPath>
-  	</dependency>
-  	<dependency>
-  		<groupId>br.eti.kinoshita</groupId>
   		<artifactId>testlink-java-api</artifactId>
   		<version>1.9.0-4</version>
   		<type>jar</type>
@@ -126,6 +118,13 @@
   		<type>jar</type>
   		<scope>compile</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>br.eti.kinoshita</groupId>
+  		<artifactId>tap4j</artifactId>
+  		<version>1.3</version>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>
   </dependencies>
   
   <developers>
@@ -137,6 +136,15 @@
       <roles>
         <role>Developer</role>
       </roles>
+  	</developer>
+  	<developer>
+  		<email>cesar.fa@gmail.com</email>
+  		<id>cesar1983</id>
+  		<name>César Fernandes de Almeida</name>
+  		<timezone>-3 GMT</timezone>
+  		<roles>
+	        <role>Developer</role>
+	      </roles>
   	</developer>
   </developers>
 

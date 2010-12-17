@@ -1,28 +1,30 @@
-/**
- *	 __                                        
- *	/\ \      __                               
- *	\ \ \/'\ /\_\    ___     ___   __  __  __  
- *	 \ \ , < \/\ \ /' _ `\  / __`\/\ \/\ \/\ \ 
- *	  \ \ \\`\\ \ \/\ \/\ \/\ \L\ \ \ \_/ \_/ \
- *	   \ \_\ \_\ \_\ \_\ \_\ \____/\ \___x___/'
- *	    \/_/\/_/\/_/\/_/\/_/\/___/  \/__//__/  
- *                                          
- * Copyright (c) 1999-present Kinow
- * Casa Verde - São Paulo - SP. Brazil.
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of
- * Kinow ("Confidential Information"). You shall not
- * disclose such Confidential Information and shall use it only in
- * accordance with the terms of the license agreement you entered into
- * with Kinow.                                      
+/* 
+ * The MIT License
  * 
- * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
- * @since 03/12/2010
+ * Copyright (c) 2010 Bruno P. Kinoshita <http://www.kinoshita.eti.br>
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package hudson.plugins.testlink.finder;
 
 import hudson.model.BuildListener;
+import hudson.plugins.testlink.Messages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,7 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestProject;
 
 /**
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
- * @since 03/12/2010
+ * @since 2.0
  */
 public class AutomatedTestCasesFinder
 {
@@ -95,7 +97,7 @@ public class AutomatedTestCasesFinder
 	 */
 	protected String[] customFieldsNames;
 	
-	private static final String BUILD_NOTES = "Build created automatically with Hudson TestLink plug-in.";
+	private static final String BUILD_NOTES = Messages.TestLinkBuilder_Build_Notes();
 	
 	public AutomatedTestCasesFinder( 
 		BuildListener listener, 
@@ -121,12 +123,11 @@ public class AutomatedTestCasesFinder
 		final List<TestCase> foundAutomatedTestCases = new ArrayList<TestCase>();
 		
 		// TestLink details (project, plan, build).
-		listener.getLogger().println("Retrieving TestLink details about " +
-				"Test Project, Test Plan and Build.");
+		listener.getLogger().println( Messages.TestLinkBuilder_Finder_RetrievingDetails() );
 		
 		this.retrieveTestLinkData();
 		
-		listener.getLogger().println("Retrieving list of automated test cases from TestLink");
+		listener.getLogger().println( Messages.TestLinkBuilder_Finder_RetrievingListOfAutomatedTestCases() );
 		
 		final TestCase[] testCases = this.api.getTestCasesForTestPlan(
 				this.testPlan.getId(), null, null, null, null, null, null, null, 
@@ -134,11 +135,11 @@ public class AutomatedTestCasesFinder
 		
 		for (int i = 0; i < testCases.length; i++) 
 		{
-			listener.getLogger().println("Found TestLink Test Case: " + testCases[i] );			
+			listener.getLogger().println( Messages.TestLinkBuilder_Finder_FoundAutomatedTestCase( testCases[i] ) );			
 			testCases[i].setTestProjectId( this.testProject.getId() );
 			
 			// Retrieve list of custom fields for TC
-			listener.getLogger().println("Automated test case found. Retrieving list of custom fields for test case");
+			listener.getLogger().println( Messages.TestLinkBuilder_Finder_RetrievingListOfCustomFields() );
 			this.retrieveListOfCustomFields( testCases[i] );
 			
 			foundAutomatedTestCases.add(testCases[i]);
@@ -182,7 +183,7 @@ public class AutomatedTestCasesFinder
 			{
 				String customFieldName = customFieldsNames[i];
 				
-				listener.getLogger().println( "Retrieving custom field " + customFieldName );
+				listener.getLogger().println( Messages.TestLinkBuilder_Finder_RetrievingCustomField( customFieldName ) );
 				
 				try
 				{
@@ -196,11 +197,11 @@ public class AutomatedTestCasesFinder
 
 					testCase.getCustomFields().add( customField );
 					
-					listener.getLogger().println("Custom field " + customFieldName + " value: " + customField.getValue() );
+					listener.getLogger().println( Messages.TestLinkBuilder_Finder_CustomFieldNameAndValue( customFieldName, customField.getValue()) );
 				} 
 				catch (TestLinkAPIException e)
 				{
-					listener.getLogger().println("Failed to retrieve custom field " + customFieldName + " for Test Case " + testCase.toString());
+					listener.getLogger().println( Messages.TestLinkBuilder_Finder_FailedToRetrieveCustomField(customFieldName, testCase.toString(), e.getMessage()) );
 					e.printStackTrace( listener.getLogger() );
 				}
 

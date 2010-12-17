@@ -5,6 +5,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.Properties;
 
 import org.apache.maven.artifact.versioning.ComparableVersion;
@@ -38,8 +40,9 @@ import org.codehaus.plexus.classworlds.realm.ClassRealm;
 public class MavenEmbedderUtils
 {
     
-    private MavenEmbedderUtils()
-    {
+    private static final String POM_PROPERTIES_PATH = "META-INF/maven/org.apache.maven/maven-core/pom.properties";
+    
+    private MavenEmbedderUtils() {
         // no op only to prevent construction
     }
     
@@ -55,31 +58,25 @@ public class MavenEmbedderUtils
      * @return
      */
     public static ClassRealm buildClassRealm(File mavenHome, ClassWorld world, ClassLoader parentClassLoader )
-        throws MavenEmbedderException
-    {
+        throws MavenEmbedderException {
         
-        if ( mavenHome == null )
-        {
+        if ( mavenHome == null ) {
             throw new IllegalArgumentException( "mavenHome cannot be null" );
         }
-        if ( !mavenHome.exists() )
-        {
+        if ( !mavenHome.exists() ) {
             throw new IllegalArgumentException( "mavenHome must exists" );
         }
 
         // list all jar under mavenHome/lib
 
         File libDirectory = new File( mavenHome, "lib" );
-        if ( !libDirectory.exists() )
-        {
+        if ( !libDirectory.exists() ) {
             throw new IllegalArgumentException( mavenHome.getPath() + " without lib directory" );
         }
 
         File[] jarFiles = libDirectory.listFiles( new FilenameFilter()
         {
-
-            public boolean accept( File dir, String name )
-            {
+            public boolean accept( File dir, String name ) {
                 return name.endsWith( ".jar" );
             }
         } );
@@ -88,26 +85,20 @@ public class MavenEmbedderUtils
         AntClassLoader antClassLoader = new AntClassLoader( Thread.currentThread().getContextClassLoader(), false );
         
 
-        for ( File jarFile : jarFiles )
-        {
+        for ( File jarFile : jarFiles ) {
             antClassLoader.addPathComponent( jarFile );
         }
         
-        if (world == null)
-        {
+        if (world == null) {
             world = new ClassWorld();
         }
         
         ClassRealm classRealm = new ClassRealm( world, "maven", parentClassLoader == null ? antClassLoader : parentClassLoader );
 
-        for ( File jarFile : jarFiles )
-        {
-            try
-            {
+        for ( File jarFile : jarFiles ) {
+            try {
                 classRealm.addURL( jarFile.toURI().toURL() );
-            }
-            catch ( MalformedURLException e )
-            {
+            } catch ( MalformedURLException e ) {
                 throw new MavenEmbedderException( e.getMessage(), e );
             }
         }
@@ -119,34 +110,45 @@ public class MavenEmbedderUtils
      * @return the maven version 
      * @throws MavenEmbedderException
      */
-    public static String getMavenVersion(File mavenHome) throws MavenEmbedderException
-    {
+    public static String getMavenVersion(File mavenHome) throws MavenEmbedderException {
         
         ClassRealm realm = buildClassRealm( mavenHome, null, null );
+        if (debug) {
+            debugMavenVersion(realm);
+        }
         ClassLoader original = Thread.currentThread().getContextClassLoader();
-        try
-        {
+        try {
             Thread.currentThread().setContextClassLoader( realm );
-            InputStream inStream = realm.getResourceAsStream( "META-INF/maven/org.apache.maven/maven-core/pom.properties" );
+            InputStream inStream = realm.getResourceAsStream( POM_PROPERTIES_PATH );
             Properties properties = new Properties();
             properties.load( inStream );
             return properties.getProperty( "version" );
-        }
-        catch ( IOException e )
-        {
+        } catch ( IOException e ) {
             throw new MavenEmbedderException( e.getMessage(), e );
-        } finally
-        {
+        } finally {
             Thread.currentThread().setContextClassLoader( original );
         }
         
     }
     
-    public static boolean isAtLeastMavenVersion(File mavenHome, String version)  throws MavenEmbedderException
-    {
+    public static boolean isAtLeastMavenVersion(File mavenHome, String version)  throws MavenEmbedderException {
         ComparableVersion found = new ComparableVersion( getMavenVersion( mavenHome ) );
         ComparableVersion testedOne = new ComparableVersion( version );
         return found.compareTo( testedOne ) >= 0;
     }
+    
+    private static void debugMavenVersion(ClassRealm realm ) {
+        try {
+        Enumeration<URL> urls = realm.findResources( POM_PROPERTIES_PATH );
+        System.out.println("urls for " + POM_PROPERTIES_PATH );
+        while(urls.hasMoreElements()) {
+            System.out.println("url " + urls.nextElement().toExternalForm());
+        }
+        } catch (IOException e) {
+            System.out.println("Ignore IOException during searching " + POM_PROPERTIES_PATH + ":" + e.getMessage());
+        }
+    }
+    
+    public static boolean debug = Boolean.getBoolean( "hudson.maven.MavenEmbedderUtils.debug" );
 
 }

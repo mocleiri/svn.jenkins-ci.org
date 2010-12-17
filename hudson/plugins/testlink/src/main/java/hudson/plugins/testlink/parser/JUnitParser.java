@@ -1,9 +1,30 @@
-/**
+/* 
+ * The MIT License
  * 
+ * Copyright (c) 2010 Bruno P. Kinoshita <http://www.kinoshita.eti.br>
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package hudson.plugins.testlink.parser;
 
 import hudson.model.BuildListener;
+import hudson.plugins.testlink.Messages;
 import hudson.plugins.testlink.model.TestLinkReport;
 import hudson.plugins.testlink.model.TestResult;
 
@@ -28,7 +49,7 @@ import br.eti.kinoshita.testlinkjavaapi.model.Attachment;
 
 /**
  * @author Bruno P. Kinoshita
- *
+ * @since 2.0
  */
 public class JUnitParser 
 extends Parser
@@ -76,11 +97,11 @@ extends Parser
 			} 
 			catch (SAXException se)
 			{
-				throw new IOException2( "Could not transform " + getName() + " report. Please report this issue to the plugin author", se );
+				throw new IOException2( Messages.TestLinkBuilder_Parser_SAX_CouldNotTransform( getName() ) );
 			} 
 			catch (ParserConfigurationException pe)
 			{
-				throw new IOException2( "Could not intialize the XML parser. Please report this issue to the plugin author", pe );
+				throw new IOException2( Messages.TestLinkBuilder_Parser_SAX_CouldNotIntializeXMLParser() );
 			}
 			if ( foundTestResult != null )
 			{
@@ -103,7 +124,7 @@ extends Parser
 				attachment = this.getAttachment( foundTestResult.getTestCase().getVersionId(), file );
 			} catch (MessagingException e)
 			{
-				throw new IOException("Failed to read JUnit report file content and convert to Base64: " +  e.getMessage(), e);
+				throw new IOException( Messages.TestLinkBuilder_Parser_AttachmentError( getName(), e.getMessage()) ) ;
 			}
 			foundTestResult.addAttachment( attachment );
 		}	

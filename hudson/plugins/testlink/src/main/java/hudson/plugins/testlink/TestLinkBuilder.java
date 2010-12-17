@@ -1,24 +1,25 @@
-/**
- *	 __                                        
- *	/\ \      __                               
- *	\ \ \/'\ /\_\    ___     ___   __  __  __  
- *	 \ \ , < \/\ \ /' _ `\  / __`\/\ \/\ \/\ \ 
- *	  \ \ \\`\\ \ \/\ \/\ \/\ \L\ \ \ \_/ \_/ \
- *	   \ \_\ \_\ \_\ \_\ \_\ \____/\ \___x___/'
- *	    \/_/\/_/\/_/\/_/\/_/\/___/  \/__//__/  
- *                                          
- * Copyright (c) 1999-present Kinow
- * Casa Verde - São Paulo - SP. Brazil.
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of
- * Kinow ("Confidential Information"). You shall not
- * disclose such Confidential Information and shall use it only in
- * accordance with the terms of the license agreement you entered into
- * with Kinow.                                      
+/* 
+ * The MIT License
  * 
- * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
- * @since 30/08/2010
+ * Copyright (c) 2010 Bruno P. Kinoshita <http://www.kinoshita.eti.br>
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package hudson.plugins.testlink;
 
@@ -123,11 +124,17 @@ extends Builder
 	private final String customFields;
 	
 	/**
-	 * The test command to be executed. For each Test Case found we will 
+	 * The test command to be executed independently of how many tests we have. 
+	 * With this command we are able to execute a test suite, for instance. 
+	 */
+	private final String singleTestCommand;
+	
+	/**
+	 * The test command to be executed for each Test Case found. We will 
 	 * execute this command passing the Test Case information as environment 
 	 * variables.
 	 */
-	private final String testCommand;
+	private final String iterativeTestCommand;
 	
 	/**
 	 * Whether this build has a transactional execution of tests or not. If a 
@@ -204,7 +211,7 @@ extends Builder
 	 * @param testPlanName TestLink Test Plan name.
 	 * @param buildName TestLink Build name.
 	 * @param customFields TestLink comma-separated list of Custom Fields.
-	 * @param testCommand Test Command to execute for each Automated Test Case.
+	 * @param iterativeTestCommand Test Command to execute for each Automated Test Case.
 	 * @param transactional Whether the build's execution is transactional or not.
 	 * @param latestRevisionInfo Information on SVN latest revision.
 	 * @param keyCustomField Automated Test Case key custom field. 
@@ -219,7 +226,8 @@ extends Builder
 		String testPlanName, 
 		String buildName, 
 		String customFields, 
-		String testCommand, 
+		String singleTestCommand, 
+		String iterativeTestCommand, 
 		Boolean transactional, 
 		TestLinkLatestRevisionInfo latestRevisionInfo, 
 		String keyCustomField, 
@@ -234,7 +242,8 @@ extends Builder
 		this.buildName = buildName;
 		this.latestRevisionInfo = latestRevisionInfo;
 		this.customFields = customFields;
-		this.testCommand = testCommand;
+		this.singleTestCommand = singleTestCommand;
+		this.iterativeTestCommand = iterativeTestCommand;
 		this.transactional = transactional;
 		this.keyCustomField = keyCustomField;
 		this.junitReportFilesPattern = junitReportFilesPattern;
@@ -286,11 +295,19 @@ extends Builder
 	}
 	
 	/**
-	 * @return Test Command.
+	 * @return Single Test Command.
 	 */
-	public String getTestCommand()
+	public String getSingleTestCommand()
 	{
-		return this.testCommand;
+		return this.singleTestCommand;
+	}
+	
+	/**
+	 * @return Iterative Test Command.
+	 */
+	public String getIterativeTestCommand()
+	{
+		return this.iterativeTestCommand;
 	}
 	
 	/**
@@ -388,23 +405,23 @@ extends Builder
 	{
 		
 		// TestLink installation.
-		listener.getLogger().println("Preparing TestLink client API");
+		listener.getLogger().println( Messages.TestLinkBuilder_PreparingTLAPI() );
 		TestLinkBuilderInstallation installation = 
 			DESCRIPTOR.getInstallationByTestLinkName(this.testLinkName);
 		if ( installation == null )
 		{
-			throw new AbortException("Invalid TestLink installation.");
+			throw new AbortException( Messages.TestLinkBuilder_InvalidTLAPI() );
 		}
 		
 		try 
 		{
 			this.api = 
 				new TestLinkAPI( installation.getUrl(), installation.getDevKey() );
-			listener.getLogger().println("Using TestLink URL: " + installation.getUrl() );
+			listener.getLogger().println( Messages.TestLinkBuilder_UsedTLURL(installation.getUrl()) );
 		} 
 		catch (MalformedURLException mue) 
 		{
-			final String message = "Invalid TestLink URL: " + installation.getUrl();
+			final String message = Messages.TestLinkBuilder_InvalidTLURL( installation.getUrl() );
 			listener.fatalError( message );
 			throw new AbortException( message );
 		}
@@ -412,7 +429,7 @@ extends Builder
 		// SVN revision information for Build.
 		if ( this.getLatestRevisionEnabled() )
 		{
-			listener.getLogger().println("Using SVN latest revision from repository as Build Name");
+			listener.getLogger().println( Messages.TestLinkBuilder_UsingSVNRevision() );
 			SVNLatestRevisionService svn = new SVNLatestRevisionService(
 					this.latestRevisionInfo.getSvnUrl(), 
 					this.latestRevisionInfo.getSvnUser(),
@@ -421,13 +438,12 @@ extends Builder
 			{
 				Long latestRevision = svn.getLatestRevision();
 				this.buildName = Long.toString( latestRevision );
-				listener.getLogger().println( "Latest revision for " + this.latestRevisionInfo.getSvnUrl() + ": " + latestRevision );
+				listener.getLogger().println( Messages.TestLinkBuilder_ShowLatestRevision(this.latestRevisionInfo.getSvnUrl(), latestRevision) );
 			} 
 			catch (SVNException e)
 			{
-				e.printStackTrace( listener.fatalError("Error retrieving latest revision from SVN repository: " + e.getMessage()) );
+				e.printStackTrace( listener.fatalError(Messages.TestLinkBuilder_SVNError(e.getMessage())) );
 				throw new AbortException();
-				// return false;
 			}
 		}
 		
@@ -452,11 +468,25 @@ extends Builder
 			throw new AbortException(e.getMessage());
 		}
 		
+		// Execute single test command
+		listener.getLogger().println(Messages.TestLinkBuilder_ExecutingSingleTestCommand());
+		final EnvVars singleTestEnvironmentVariables = new EnvVars();
+		Integer singleTestCommandExitCode = this.executeTestCommand( 
+				singleTestEnvironmentVariables, 
+				build, 
+				launcher, 
+				listener, 
+				singleTestCommand);
+		if ( singleTestCommandExitCode != 0 )
+		{
+			this.failure = true;
+		}
+		
 		for ( TestCase automatedTestCase : automatedTestCases )
 		{
 			if ( this.failure  && this.transactional )
 			{
-				listener.getLogger().println("A test failed in transactional execution. Skiping tests.");
+				listener.getLogger().println(Messages.TestLinkBuilder_TransactionalError());
 				automatedTestCase.setExecutionStatus(ExecutionStatus.BLOCKED);
 			} 
 			else
@@ -464,13 +494,13 @@ extends Builder
 				final EnvVars buildEnvironmentVariables = this.buildEnvironmentVariables( automatedTestCase, listener, finder.getTestProject(), finder.getTestPlan(), finder.getBuild() ); 
 				//build.getEnvironment(listener).putAll(buildEnvironmentVariables);
 				buildEnvironmentVariables.putAll( build.getEnvironment( listener ) );
-				Integer exitCode = this.executeTestCommand( 
+				final Integer iterativeTestCommandExitCode = this.executeTestCommand( 
 						buildEnvironmentVariables, 
-						automatedTestCase, 
 						build, 
 						launcher, 
-						listener);
-				if ( exitCode != 0 )
+						listener, 
+						iterativeTestCommand);
+				if ( iterativeTestCommandExitCode != 0 )
 				{
 					this.failure = true;
 				}
@@ -503,24 +533,41 @@ extends Builder
 			{
 				try
 				{
-					List<TestResult> foundResults = null;
+					TestResult[] foundResults = null;
 					
 					foundResults = build.getWorkspace().act( parser );
 					
-					if ( foundResults != null  )
+					if ( foundResults != null && foundResults.length > 0   )
 					{
-						listener.getLogger().println("Found " + foundResults.size() + " test results");
-						if ( foundResults.size() > 0 )
+						listener.getLogger().println(Messages.TestLinkBuilder_ShowFoundTestResults(foundResults.length) );
+						for ( int i = 0 ; i < foundResults.length ; ++i )
 						{
-							testResults.addAll( foundResults );
+							if ( foundResults[i] != null )
+							{
+								testResults.add( foundResults[i] );
+							}
 						}
+					} 
+					else
+					{
+						listener.getLogger().println( Messages.TestLinkBuilder_NoTestResultsFound() );
 					}
 				}
 				catch (IOException e)
 				{
-					listener.getLogger().println("Failed to open report file");
+					listener.getLogger().println( Messages.TestLinkBuilder_FailedToOpenReportFile() );
 					e.printStackTrace( listener.getLogger() );
 				} 
+			}
+		}
+		
+		// Add blocked tests to the test results list
+		for( TestCase testCase : automatedTestCases )
+		{
+			if ( testCase.getExecutionStatus() == ExecutionStatus.BLOCKED )
+			{
+				TestResult blockedTestResult = new TestResult(testCase, finder.getBuild(), finder.getTestPlan());
+				testResults.add( blockedTestResult );
 			}
 		}
 		
@@ -533,7 +580,7 @@ extends Builder
 		} 
 		catch (TestLinkAPIException tlae) 
 		{
-			tlae.printStackTrace( listener.fatalError( "Failed to update TestLink test results: " + tlae.getMessage() ) );
+			tlae.printStackTrace( listener.fatalError( Messages.TestLinkBuilder_FailedToUpdateTL(tlae.getMessage()) ) );
 			throw new AbortException ( tlae.getMessage() );
 		}
 		
@@ -581,31 +628,34 @@ extends Builder
 	}
 	
 	/**
+	 * 
 	 * @param testCase
-	 * @param build 
-	 * @param testPlan 
-	 * @param testProject 
-	 * @return Environment Vars
+	 * @param listener
+	 * @param testProject
+	 * @param testPlan
+	 * @param build
+	 * @return
 	 */
 	protected EnvVars buildEnvironmentVariables( TestCase testCase, BuildListener listener, TestProject testProject, TestPlan testPlan, Build build ) 
 	{
 		// Build environment variables list
-		listener.getLogger().println("Creating list of environment variables for test case execution");
+		listener.getLogger().println(Messages.TestLinkBuilder_CreatingEnvVars());
 		Map<String, String> testLinkEnvironmentVariables = this.createTestLinkEnvironmentVariables( testCase, testProject, testPlan, build );
 
 		// Merge with build environment variables list
-		listener.getLogger().println("Merging build environment variables with TestLink environment variables");
+		listener.getLogger().println(Messages.TestLinkBuilder_MergingEnvVars());
 
 		final EnvVars buildEnvironment = new EnvVars( testLinkEnvironmentVariables );
 		return buildEnvironment;
 	}
 	
 	/**
+	 * 
 	 * @param testCase
-	 * @param build 
-	 * @param testPlan 
-	 * @param testProject 
-	 * @return Map
+	 * @param testProject
+	 * @param testPlan
+	 * @param build
+	 * @return
 	 */
 	protected Map<String, String> createTestLinkEnvironmentVariables( TestCase testCase, TestProject testProject, TestPlan testPlan, Build build ) 
 	{
@@ -633,8 +683,10 @@ extends Builder
 	}
 	
 	/**
-	 * @param name
-	 * @return
+	 * Formats a custom field's name into an environment variable. 
+	 * 
+	 * @param name The name of the custom field
+	 * @return Formatted name for a environment variable
 	 */
 	private String formatCustomFieldEnvironmentVariableName(String name) 
 	{
@@ -646,91 +698,97 @@ extends Builder
 	}
 	
 	/**
-	 * @param buildEnvironmentVariables
-	 * @param testCase
+	 * Executes a test command for a given test case.
+	 * 
+	 * @param buildEnvironmentVariables Map of Environment Variables
+	 * @param testCase Test Case
+	 * @param hudsonBuild Hudson Build instance
+	 * @param launcher Hudson Build instance's launcher
+	 * @param listener Hudson Build instance's listener
+	 * @param command Command to execute
+	 * @return Integer representing the process exit code
 	 */
 	protected Integer executeTestCommand( 
 		EnvVars buildEnvironmentVariables,
-		TestCase testCase, 
 		AbstractBuild<?, ?> hudsonBuild, 
 		Launcher launcher, 
-		BuildListener listener) 
+		BuildListener listener, 
+		String command) 
 	{
 		
 		int exitCode = -1;
 
-		if ( this.transactional && this.failure )
+		FilePath temporaryExecutableScript = null;
+		
+		try
 		{
-			testCase.setExecutionStatus(ExecutionStatus.BLOCKED);
-		} 
-		else 
-		{ 
-			FilePath temporaryExecutableScript = null;
-			
-			try
+			temporaryExecutableScript = this.createTemporaryExecutableScript( hudsonBuild, launcher, command );
+			ArgumentListBuilder args = new ArgumentListBuilder();
+			args.add( temporaryExecutableScript.getRemote() );
+			if ( ! launcher.isUnix() )
 			{
-				temporaryExecutableScript = this.createTemporaryExecutableScript( hudsonBuild, launcher );
-				ArgumentListBuilder args = new ArgumentListBuilder();
-				args.add( temporaryExecutableScript.getRemote() );
-				if ( ! launcher.isUnix() )
+				args.add("&&","exit","%%ERRORLEVEL%%");
+			}
+            ProcStarter ps = launcher.launch();
+            ps.envs( buildEnvironmentVariables );
+            ps.cmds( args );
+            ps.stdout( listener );
+            ps.pwd( hudsonBuild.getModuleRoot() ); 
+            
+            listener.getLogger().println(Messages.TestLinkBuilder_ExecutingIterativeTestCommand());
+            //exitCode = ps.join();
+            exitCode = launcher.launch( ps ).join();
+		}  
+		catch (IOException e)
+        {
+            Util.displayIOException(e,listener);
+            e.printStackTrace( listener.fatalError(Messages.TestLinkBuilder_TestCommandError(e.getMessage())) );
+            failure = true;
+        } 
+        catch (InterruptedException e) 
+        {
+        	e.printStackTrace( listener.fatalError(Messages.TestLinkBuilder_TestCommandError(e.getMessage())) );
+        	failure = true;
+        } 
+        // Destroy temporary file.
+        finally 
+        {
+        	if ( temporaryExecutableScript != null )
+			{
+				try 
 				{
-					args.add("&&","exit","%%ERRORLEVEL%%");
-				}
-	            ProcStarter ps = launcher.launch();
-	            ps.envs( buildEnvironmentVariables );
-	            ps.cmds( args );
-	            ps.stdout( listener );
-	            ps.pwd( hudsonBuild.getModuleRoot() ); 
-	            
-	            listener.getLogger().println("Executing test command");
-	            //exitCode = ps.join();
-	            exitCode = launcher.launch( ps ).join();
-			}  
-			catch (IOException e)
-	        {
-	            Util.displayIOException(e,listener);
-	            e.printStackTrace( listener.fatalError("Test command execution failed") );
-	            failure = true;
-	        } 
-	        catch (InterruptedException e) 
-	        {
-	        	e.printStackTrace( listener.fatalError("Test command execution failed") );
-	        	failure = true;
-	        } 
-	        // Destroy temporary file.
-	        finally 
-	        {
-	        	if ( temporaryExecutableScript != null )
+					temporaryExecutableScript.delete();
+				} 
+				catch (IOException e)
 				{
-					try 
-					{
-						temporaryExecutableScript.delete();
-					} 
-					catch (IOException e)
-					{
-						e.printStackTrace( listener.error("Error deleting temporary script " + temporaryExecutableScript) );
-					} 
-					catch (InterruptedException e) 
-					{
-						e.printStackTrace( listener.error("Error deleting temporary script " + temporaryExecutableScript) );
-					}
+					e.printStackTrace( listener.fatalError(Messages.TestLinkBuilder_DeleteTempArchiveError(temporaryExecutableScript)) );
+				} 
+				catch (InterruptedException e) 
+				{
+					e.printStackTrace( listener.fatalError(Messages.TestLinkBuilder_DeleteTempArchiveError(temporaryExecutableScript)) );
 				}
-	        }
-	        
-		}	
+			}
+        }
+
 		
 		return exitCode;
 
 	}
 	
 	/**
-	 * Creates a temporary executable script with the test command inside it.
+	 * Creates a temporary executable script with the test command inside it
 	 * 
+	 * @param hudsonBuild
+	 * @param launcher
+	 * @param command
 	 * @return FilePath object referring to the temporary executable script.
-	 * @throws InterruptedException 
-	 * @throws IOException 
+	 * @throws IOException
+	 * @throws InterruptedException
 	 */
-	protected FilePath createTemporaryExecutableScript( AbstractBuild<?, ?> hudsonBuild, Launcher launcher ) 
+	protected FilePath createTemporaryExecutableScript( 
+			AbstractBuild<?, ?> hudsonBuild, 
+			Launcher launcher, 
+			String command ) 
 	throws IOException, InterruptedException
 	{
 		FilePath temporaryExecutableScript = null;
@@ -750,7 +808,7 @@ extends Builder
 			new TemporaryExecutableScriptWriter(
 					temporaryExecutableScript.getRemote(), 
 					launcher.isUnix(), 
-					testCommand );
+					command );
 		
 		hudsonBuild.getWorkspace().act( scriptCreator );
 		    	

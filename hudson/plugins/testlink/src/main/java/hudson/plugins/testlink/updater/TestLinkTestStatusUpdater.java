@@ -1,27 +1,29 @@
-/**
- *	 __                                        
- *	/\ \      __                               
- *	\ \ \/'\ /\_\    ___     ___   __  __  __  
- *	 \ \ , < \/\ \ /' _ `\  / __`\/\ \/\ \/\ \ 
- *	  \ \ \\`\\ \ \/\ \/\ \/\ \L\ \ \ \_/ \_/ \
- *	   \ \_\ \_\ \_\ \_\ \_\ \____/\ \___x___/'
- *	    \/_/\/_/\/_/\/_/\/_/\/___/  \/__//__/  
- *                                          
- * Copyright (c) 1999-present Kinow
- * Casa Verde - São Paulo - SP. Brazil.
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of
- * Kinow ("Confidential Information"). You shall not
- * disclose such Confidential Information and shall use it only in
- * accordance with the terms of the license agreement you entered into
- * with Kinow.                                      
+/* 
+ * The MIT License
  * 
- * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
- * @since 22/11/2010
+ * Copyright (c) 2010 Bruno P. Kinoshita <http://www.kinoshita.eti.br>
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package hudson.plugins.testlink.updater;
 
+import hudson.plugins.testlink.Messages;
 import hudson.plugins.testlink.model.TestResult;
 import hudson.plugins.testlink.util.TestLinkHelper;
 
@@ -36,7 +38,7 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 
 /**
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
- * @since 22/11/2010
+ * @since 2.0
  */
 public class TestLinkTestStatusUpdater 
 {
@@ -48,42 +50,47 @@ public class TestLinkTestStatusUpdater
 	public void updateTestCases( TestLinkAPI api, PrintStream ps, List<TestResult> testResults ) 
 	throws TestLinkAPIException
 	{
-		ps.println("Updating " + testResults.size() + " test case(s) execution status");
-		// Update TestLink Test Status
-		for( TestResult testResult : testResults )
+		if ( testResults.size() > 0 )
 		{
-			TestCase testCase = testResult.getTestCase();
-			ps.println("Updating Automated Test Case " + testCase.getName() + " with status " + TestLinkHelper.getExecutionStatusText( testCase.getExecutionStatus() ) );
-			// Update Test Case status
-			ReportTCResultResponse reportTCResultResponse = api.reportTCResult(
-					testCase.getId(), 
-					testCase.getInternalId(), 
-					testResult.getTestPlan().getId(), 
-					testCase.getExecutionStatus(), 
-					testResult.getBuild().getId(), 
-					testResult.getBuild().getName(), 
-					testResult.getNotes(), 
-					null, // guess
-					null, // bug id
-					null, // platform id 
-					null, // platform name
-					null, // custom fields
-					null);
-			
-			for ( Attachment attachment : testResult.getAttachments() )
+			ps.println( Messages.TestLinkBuilder_Update_AutomatedTestCases( testResults.size() ) );
+			// Update TestLink Test Status
+			for( TestResult testResult : testResults )
 			{
-				ps.println("Uploading execution " + 
-						reportTCResultResponse.getExecutionId() + " attachment " + 
-						attachment.getFileName());
-				api.uploadAttachment(
-						reportTCResultResponse.getExecutionId(), 
-						EXECUTIONS_TABLE, // TBD: replace with TestLinkTables enum value
-						attachment.getTitle(), 
-						attachment.getDescription(), 
-						attachment.getFileName(), 
-						attachment.getFileType(), 
-						attachment.getContent());
-			}		
+				TestCase testCase = testResult.getTestCase();
+				ps.println( Messages.TestLinkBuilder_Update_AutomatedTestCase(testCase.getName(), TestLinkHelper.getExecutionStatusText( testCase.getExecutionStatus() )) );
+				// Update Test Case status
+				ReportTCResultResponse reportTCResultResponse = api.reportTCResult(
+						testCase.getId(), 
+						testCase.getInternalId(), 
+						testResult.getTestPlan().getId(), 
+						testCase.getExecutionStatus(), 
+						testResult.getBuild().getId(), 
+						testResult.getBuild().getName(), 
+						testResult.getNotes(), 
+						null, // guess
+						null, // bug id
+						null, // platform id 
+						null, // platform name
+						null, // custom fields
+						null);
+				
+				for ( Attachment attachment : testResult.getAttachments() )
+				{
+					ps.println( Messages.TestLinkBuilder_Upload_ExecutionAttachment(reportTCResultResponse.getExecutionId(), attachment.getFileName()) );
+					api.uploadAttachment(
+							reportTCResultResponse.getExecutionId(), 
+							EXECUTIONS_TABLE, // TBD: replace with TestLinkTables enum value
+							attachment.getTitle(), 
+							attachment.getDescription(), 
+							attachment.getFileName(), 
+							attachment.getFileType(), 
+							attachment.getContent());
+				}
+			} 
+		}
+		else
+		{
+			ps.println(Messages.TestLinkBuilder_Update_Skipped());
 		}
 	}
 	

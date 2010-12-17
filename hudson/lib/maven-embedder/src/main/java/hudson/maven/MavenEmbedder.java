@@ -21,6 +21,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -28,6 +29,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.apache.maven.DefaultMaven;
 import org.apache.maven.Maven;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.InvalidRepositoryException;
@@ -38,13 +40,17 @@ import org.apache.maven.artifact.repository.layout.ArtifactRepositoryLayout;
 import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
 import org.apache.maven.artifact.resolver.ArtifactResolutionException;
 import org.apache.maven.execution.DefaultMavenExecutionRequest;
+import org.apache.maven.execution.DefaultMavenExecutionResult;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionRequestPopulationException;
 import org.apache.maven.execution.MavenExecutionRequestPopulator;
 import org.apache.maven.execution.MavenExecutionResult;
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Model;
+import org.apache.maven.model.Profile;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
+import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuilder;
@@ -75,6 +81,7 @@ import org.codehaus.plexus.logging.Logger;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.codehaus.plexus.util.Os;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.sonatype.aether.RepositorySystemSession;
 import org.sonatype.aether.repository.LocalRepository;
 
 
@@ -94,52 +101,66 @@ public class MavenEmbedder
 
 
 
-    private File mavenHome;
+    private final File mavenHome;
     
-    private PlexusContainer plexusContainer;
+    private final PlexusContainer plexusContainer;
     
-    private MavenRequest mavenRequest;
+    private final MavenRequest mavenRequest;
     
     private MavenExecutionRequest mavenExecutionRequest;
+    private final MavenSession mavenSession;
 
-    public MavenEmbedder( File mavenHome, MavenRequest mavenRequest )
+    public MavenEmbedder( File mavenHome, MavenRequest mavenRequest ) throws MavenEmbedderException {
+        this(mavenHome,mavenRequest,buildPlexusContainer(mavenHome, mavenRequest));
+    }
+
+    public MavenEmbedder( ClassLoader mavenClassLoader, ClassLoader parent, MavenRequest mavenRequest ) throws MavenEmbedderException {
+        this(null,mavenRequest,buildPlexusContainer(mavenClassLoader, parent, mavenRequest));
+    }
+
+    private MavenEmbedder( File mavenHome, MavenRequest mavenRequest, PlexusContainer plexusContainer )
         throws MavenEmbedderException
     {
         this.mavenHome = mavenHome;
         this.mavenRequest = mavenRequest;
+        this.plexusContainer = plexusContainer;
+
+        try {
+            this.buildMavenExecutionRequest();
+
+            RepositorySystemSession rss = ((DefaultMaven) lookup(Maven.class)).newRepositorySession(mavenExecutionRequest);
+            mavenSession = new MavenSession( plexusContainer, rss, mavenExecutionRequest, new DefaultMavenExecutionResult() );
+            lookup(LegacySupport.class).setSession(mavenSession);
+        } catch (MavenEmbedderException e) {
+            throw new MavenEmbedderException(e.getMessage(), e);
+        } catch (ComponentLookupException e) {
+            throw new MavenEmbedderException(e.getMessage(), e);
+        }
+    }
+
+
+    public MavenEmbedder( ClassLoader mavenClassLoader, MavenRequest mavenRequest ) throws MavenEmbedderException {
+        this(mavenClassLoader, null, mavenRequest);
+    }
+
+    private static PlexusContainer buildPlexusContainer(File mavenHome, MavenRequest mavenRequest) throws MavenEmbedderException {
         ClassWorld world = new ClassWorld("plexus.core", Thread.currentThread().getContextClassLoader());
 
         ClassRealm classRealm = MavenEmbedderUtils.buildClassRealm( mavenHome, world, Thread.currentThread().getContextClassLoader() );
-        
+
         DefaultContainerConfiguration conf = new DefaultContainerConfiguration();
 
         conf.setContainerConfigurationURL( mavenRequest.getOverridingComponentsXml() )
         .setRealm( classRealm ).setClassWorld( world );
-        
-        this.plexusContainer = buildPlexusContainer( conf );
-        
-        try
-        {
-            this.buildMavenExecutionRequest();
-        }
-        catch ( MavenEmbedderException e )
-        {
-            throw new MavenEmbedderException( e.getMessage(), e );
-        }
-        catch ( ComponentLookupException e )
-        {
-            throw new MavenEmbedderException( e.getMessage(), e );
-        }
+
+        return buildPlexusContainer(mavenRequest,conf);
     }
-    
-    public MavenEmbedder( ClassLoader mavenClassLoader, ClassLoader parent, MavenRequest mavenRequest )
-        throws MavenEmbedderException
-    {
-        this.mavenRequest = mavenRequest;
+
+    private static PlexusContainer buildPlexusContainer(ClassLoader mavenClassLoader, ClassLoader parent, MavenRequest mavenRequest) throws MavenEmbedderException {
         DefaultContainerConfiguration conf = new DefaultContainerConfiguration();
 
         conf.setContainerConfigurationURL( mavenRequest.getOverridingComponentsXml() );
-        
+
         ClassWorld classWorld = new ClassWorld();
 
         ClassRealm classRealm = new ClassRealm( classWorld, "maven", mavenClassLoader );
@@ -148,66 +169,37 @@ public class MavenEmbedder
                                                                    : parent ) );
         conf.setRealm( classRealm );
 
-        this.plexusContainer = buildPlexusContainer( conf );
-        
-        
-        try
-        {
-            this.buildMavenExecutionRequest();
-        }
-        catch ( MavenEmbedderException e )
-        {
-            throw new MavenEmbedderException( e.getMessage(), e );
-        }
-        catch ( ComponentLookupException e )
-        {
-            throw new MavenEmbedderException( e.getMessage(), e );
-        }
+        return buildPlexusContainer(mavenRequest,conf);
     }
-    
-    public MavenEmbedder( ClassLoader mavenClassLoader, MavenRequest mavenRequest )
-        throws MavenEmbedderException
-    {
-        this(mavenClassLoader, null, mavenRequest);
-    }
-    
-    private PlexusContainer buildPlexusContainer( ContainerConfiguration containerConfiguration )
-        throws MavenEmbedderException
-    {
+
+    private static PlexusContainer buildPlexusContainer(MavenRequest mavenRequest,ContainerConfiguration containerConfiguration )
+        throws MavenEmbedderException {
         try
         {
             DefaultPlexusContainer plexusContainer = new DefaultPlexusContainer( containerConfiguration );
             plexusContainer.setLoggerManager( mavenRequest.getMavenLoggerManager() );
             return plexusContainer;
-        }
-        catch ( PlexusContainerException e )
-        {
+        } catch ( PlexusContainerException e ) {
             throw new MavenEmbedderException( e.getMessage(), e );
         }
     }
     
     private void buildMavenExecutionRequest()
-        throws MavenEmbedderException, ComponentLookupException
-    {
+        throws MavenEmbedderException, ComponentLookupException  {
         this.mavenExecutionRequest = new DefaultMavenExecutionRequest();
 
-        if ( this.mavenRequest.getGlobalSettingsFile() != null )
-        {
+        if ( this.mavenRequest.getGlobalSettingsFile() != null ) {
             this.mavenExecutionRequest.setGlobalSettingsFile( this.mavenExecutionRequest.getGlobalSettingsFile() );
         }
 
-        if ( this.mavenExecutionRequest.getUserSettingsFile() != null )
-        {
+        if ( this.mavenExecutionRequest.getUserSettingsFile() != null ) {
             this.mavenExecutionRequest.setUserSettingsFile( new File( mavenRequest.getUserSettingsFile() ) );
         }
 
-        try
-        {
+        try {
             lookup( MavenExecutionRequestPopulator.class ).populateFromSettings( this.mavenExecutionRequest,
                                                                                  getSettings() );
-        }
-        catch ( MavenExecutionRequestPopulationException e )
-        {
+        } catch ( MavenExecutionRequestPopulationException e ) {
             throw new MavenEmbedderException( e.getMessage(), e );
         }
 
@@ -226,18 +218,24 @@ public class MavenEmbedder
 
         this.mavenExecutionRequest.setUserProperties( this.mavenRequest.getUserProperties() );
         this.mavenExecutionRequest.getSystemProperties().putAll( System.getProperties() );
-        if ( this.mavenRequest.getSystemProperties() != null )
-        {
+        if ( this.mavenRequest.getSystemProperties() != null ) {
             this.mavenExecutionRequest.getSystemProperties().putAll( this.mavenRequest.getSystemProperties() );
         }
         this.mavenExecutionRequest.getSystemProperties().putAll( getEnvVars() );
 
-        if ( this.mavenHome != null )
-        {
+        if ( this.mavenHome != null ) {
             this.mavenExecutionRequest.getSystemProperties().put( "maven.home", this.mavenHome.getAbsolutePath() );
         }
-        this.mavenExecutionRequest.setActiveProfiles( this.mavenRequest.getProfiles() );
-        //this.mavenExecutionRequest.setProfiles( this.mavenRequest.getProfiles() );
+       
+        if (this.mavenRequest.getProfiles() != null && !this.mavenRequest.getProfiles().isEmpty()) {
+            for (String id : this.mavenRequest.getProfiles()) {
+                Profile p = new Profile();
+                p.setId( id );
+                p.setSource( "cli" );
+                this.mavenExecutionRequest.addProfile( p );
+                this.mavenExecutionRequest.addActiveProfile( id );
+            }
+        }
 
         // FIXME
         this.mavenExecutionRequest.setLoggingLevel( MavenExecutionRequest.LOGGING_LEVEL_DEBUG );
@@ -250,13 +248,11 @@ public class MavenEmbedder
             .setGlobalChecksumPolicy( this.mavenRequest.getGlobalChecksumPolicy() )
             .setGoals( this.mavenRequest.getGoals() );
 
-        if ( this.mavenRequest.getPom() != null )
-        {
+        if ( this.mavenRequest.getPom() != null ) {
             this.mavenExecutionRequest.setPom( new File( this.mavenRequest.getPom() ) );
         }
         
-        if (this.mavenRequest.getWorkspaceReader() != null)
-        {
+        if (this.mavenRequest.getWorkspaceReader() != null) {
             this.mavenExecutionRequest.setWorkspaceReader( this.mavenRequest.getWorkspaceReader() );
         }
         
@@ -267,8 +263,7 @@ public class MavenEmbedder
     
     
     
-    private Properties getEnvVars( )
-    {
+    private Properties getEnvVars( ) {
         Properties envVars = new Properties();
         boolean caseSensitive = !Os.isFamily( Os.FAMILY_WINDOWS );
         for ( Map.Entry<String, String> entry : System.getenv().entrySet() )
@@ -280,16 +275,13 @@ public class MavenEmbedder
     }
     
     public Settings getSettings()
-        throws MavenEmbedderException, ComponentLookupException
-    {
+        throws MavenEmbedderException, ComponentLookupException {
 
         SettingsBuildingRequest settingsBuildingRequest = new DefaultSettingsBuildingRequest();
-        if ( this.mavenRequest.getGlobalSettingsFile() != null )
-        {
+        if ( this.mavenRequest.getGlobalSettingsFile() != null ) {
             settingsBuildingRequest.setGlobalSettingsFile( new File( this.mavenRequest.getGlobalSettingsFile() ) );
         }
-        if ( this.mavenRequest.getUserSettingsFile() != null )
-        {
+        if ( this.mavenRequest.getUserSettingsFile() != null ) {
             settingsBuildingRequest.setUserSettingsFile( new File( this.mavenRequest.getUserSettingsFile() ) );
         }
         
@@ -298,59 +290,43 @@ public class MavenEmbedder
         settingsBuildingRequest.getSystemProperties().putAll( this.mavenRequest.getSystemProperties() );
         settingsBuildingRequest.getSystemProperties().putAll( getEnvVars() );
         
-        try
-        {
+        try {
             return lookup( SettingsBuilder.class ).build( settingsBuildingRequest ).getEffectiveSettings();
-        }
-        catch ( SettingsBuildingException e )
-        {
+        } catch ( SettingsBuildingException e ) {
             throw new MavenEmbedderException( e.getMessage(), e );
         }
     }
     
-    public ArtifactRepository getLocalRepository() throws ComponentLookupException
-    {
-        try
-        {
+    public ArtifactRepository getLocalRepository() throws ComponentLookupException {
+        try {
             String localRepositoryPath = getLocalRepositoryPath();
-            if ( localRepositoryPath != null )
-            {
+            if ( localRepositoryPath != null ) {
                 return lookup( RepositorySystem.class ).createLocalRepository( new File( localRepositoryPath ) );
             }
             return lookup( RepositorySystem.class ).createLocalRepository( RepositorySystem.defaultUserLocalRepository );
-        }
-        catch ( InvalidRepositoryException e )
-        {
+        } catch ( InvalidRepositoryException e ) {
             // never happened
             throw new IllegalStateException( e );
         }
     }
     
-    public String getLocalRepositoryPath()
-    {
+    public String getLocalRepositoryPath() {
         String path = null;
 
-        try
-        {
+        try {
             Settings settings = getSettings();
             path = settings.getLocalRepository();
-        }
-        catch ( MavenEmbedderException e )
-        {
+        } catch ( MavenEmbedderException e ) {
             // ignore
-        }
-        catch ( ComponentLookupException e )
-        {
+        } catch ( ComponentLookupException e ) {
             // ignore
         }
 
-        if (path == null && this.mavenRequest.getLocalRepositoryPath() != null)
-        {
+        if (path == null && this.mavenRequest.getLocalRepositoryPath() != null) {
             path =  this.mavenRequest.getLocalRepositoryPath();
         }        
         
-        if ( path == null )
-        {
+        if ( path == null ) {
             path = RepositorySystem.defaultUserLocalRepository.getAbsolutePath();
         }
         return path;
@@ -378,30 +354,45 @@ public class MavenEmbedder
     public MavenProject readProject( File mavenProject )
         throws ProjectBuildingException, MavenEmbedderException {
         
-        try
-        {
-            ProjectBuilder projectBuilder = lookup( ProjectBuilder.class );
-            ProjectBuildingRequest projectBuildingRequest = this.mavenExecutionRequest.getProjectBuildingRequest();
-            MavenRepositorySystemSession session = new MavenRepositorySystemSession();
-            session.setTransferListener( this.mavenRequest.getTransferListener() );
-            session.setUserProperties( propertiesToMap( this.mavenRequest.getUserProperties() ) );
-            session.setSystemProperties( propertiesToMap( this.mavenRequest.getSystemProperties() ) );
-            
-            org.sonatype.aether.RepositorySystem repoSystem = lookup( org.sonatype.aether.RepositorySystem.class );
-            LocalRepository localRepository = new LocalRepository( getLocalRepositoryPath() );
-            session.setLocalRepositoryManager( repoSystem.newLocalRepositoryManager( localRepository ) );
-            
-            projectBuildingRequest.setRepositorySession( session );
-
-            ProjectBuildingResult projectBuildingResult = projectBuilder.build( mavenProject,projectBuildingRequest );
-            return projectBuildingResult.getProject();
-        } catch(ComponentLookupException e)
-        {
-            throw new MavenEmbedderException(e.getMessage(), e);
-        }
+        List<MavenProject> projects = readProjects( mavenProject, false );
+        return projects == null || projects.isEmpty() ? null : projects.get( 0 );
         
     }
 
+    public List<MavenProject> readProjects( File mavenProject, boolean recursive )
+        throws ProjectBuildingException, MavenEmbedderException {
+    ClassLoader originalCl = Thread.currentThread().getContextClassLoader();
+    try {
+        Thread.currentThread().setContextClassLoader( this.plexusContainer.getContainerRealm() );
+        ProjectBuilder projectBuilder = lookup( ProjectBuilder.class );
+        ProjectBuildingRequest projectBuildingRequest = this.mavenExecutionRequest.getProjectBuildingRequest();
+        MavenRepositorySystemSession session = new MavenRepositorySystemSession();
+        session.setTransferListener( this.mavenRequest.getTransferListener() );
+        session.setUserProperties( propertiesToMap( this.mavenRequest.getUserProperties() ) );
+        session.setSystemProperties( propertiesToMap( this.mavenRequest.getSystemProperties() ) );
+        
+        org.sonatype.aether.RepositorySystem repoSystem = lookup( org.sonatype.aether.RepositorySystem.class );
+        LocalRepository localRepository = new LocalRepository( getLocalRepositoryPath() );
+        session.setLocalRepositoryManager( repoSystem.newLocalRepositoryManager( localRepository ) );
+        
+        projectBuildingRequest.setRepositorySession( session );
+        
+        projectBuildingRequest.setProcessPlugins( true );
+
+        List<ProjectBuildingResult> results = projectBuilder.build( Arrays.asList(mavenProject), recursive, projectBuildingRequest );
+        
+        List<MavenProject> projects = new ArrayList<MavenProject>(results.size());
+        for (ProjectBuildingResult result : results) {
+            projects.add( result.getProject() );
+        }
+        return projects;
+    } catch(ComponentLookupException e) {
+        throw new MavenEmbedderException(e.getMessage(), e);
+    } finally {
+        Thread.currentThread().setContextClassLoader( originalCl );
+    }
+    
+}    
 
     public List<MavenProject> collectProjects( File basedir, String[] includes, String[] excludes )
         throws MojoExecutionException, MavenEmbedderException {
@@ -409,17 +400,13 @@ public class MavenEmbedder
 
         List<File> poms = getPomFiles( basedir, includes, excludes );
 
-        for ( File pom : poms )
-        {
-            try
-            {
+        for ( File pom : poms ) {
+            try {
                 MavenProject p = readProject( pom );
 
                 projects.add( p );
 
-            }
-            catch ( ProjectBuildingException e )
-            {
+            } catch ( ProjectBuildingException e ) {
                 throw new MojoExecutionException( "Error loading " + pom, e );
             }
         }
@@ -434,13 +421,10 @@ public class MavenEmbedder
     public Artifact createArtifact( String groupId, String artifactId, String version, String scope, String type ) 
         throws MavenEmbedderException
     {
-        try
-        {
+        try {
             RepositorySystem repositorySystem = lookup( RepositorySystem.class );
             return repositorySystem.createArtifact( groupId, artifactId, version, scope, type );
-        }
-        catch ( ComponentLookupException e )
-        {
+        } catch ( ComponentLookupException e ) {
             throw new MavenEmbedderException(e.getMessage(), e);
         }
         
@@ -449,20 +433,16 @@ public class MavenEmbedder
     public Artifact createArtifactWithClassifier( String groupId, String artifactId, String version, String type, String classifier )
         throws MavenEmbedderException
     {
-        try
-        {
+        try {
             RepositorySystem repositorySystem = lookup( RepositorySystem.class );
             return repositorySystem.createArtifactWithClassifier( groupId, artifactId, version, type, classifier );
-        }
-        catch ( ComponentLookupException e )
-        {
+        } catch ( ComponentLookupException e ) {
             throw new MavenEmbedderException(e.getMessage(), e);
         }
     }
 
     public void resolve( Artifact artifact, List remoteRepositories, ArtifactRepository localRepository )
-        throws ArtifactResolutionException, ArtifactNotFoundException
-    {
+        throws ArtifactResolutionException, ArtifactNotFoundException {
         // FIXME ?
     }
 
@@ -471,16 +451,13 @@ public class MavenEmbedder
     // ----------------------------------------------------------------------
 
     public MavenExecutionResult execute( MavenRequest mavenRequest )
-        throws ComponentLookupException
-    {
+        throws ComponentLookupException {
         Maven maven = lookup( Maven.class );
         ClassLoader original = Thread.currentThread().getContextClassLoader();
-        try
-        {
+        try {
             Thread.currentThread().setContextClassLoader( this.plexusContainer.getContainerRealm() );
             return maven.execute( mavenExecutionRequest );
-        } finally 
-        {
+        } finally {
             Thread.currentThread().setContextClassLoader( original );
         }
     }
@@ -493,22 +470,18 @@ public class MavenEmbedder
     public static final String DEFAULT_LAYOUT_ID = "default";
 
     public ArtifactRepository createLocalRepository( File localRepository )
-        throws ComponentLookupException 
-    {
+        throws ComponentLookupException {
         return createLocalRepository( localRepository.getAbsolutePath(), DEFAULT_LOCAL_REPO_ID );
     }
 
     public ArtifactRepository createLocalRepository( Settings settings )
-        throws ComponentLookupException
-    {
+        throws ComponentLookupException {
         return createLocalRepository( settings.getLocalRepository(), DEFAULT_LOCAL_REPO_ID );
     }
 
     public ArtifactRepository createLocalRepository( String url, String repositoryId )
-        throws ComponentLookupException
-    {
-        if ( !url.startsWith( "file:" ) )
-        {
+        throws ComponentLookupException {
+        if ( !url.startsWith( "file:" ) ) {
             url = "file://" + url;
         }
 
@@ -516,8 +489,7 @@ public class MavenEmbedder
     }
 
     public ArtifactRepository createRepository( String url, String repositoryId )
-        throws ComponentLookupException
-    {
+        throws ComponentLookupException {
         // snapshots vs releases
         // offline = to turning the update policy off
 
@@ -544,8 +516,7 @@ public class MavenEmbedder
     // ----------------------------------------------------------------------
     
 
-    private List<File> getPomFiles( File basedir, String[] includes, String[] excludes )
-    {
+    private List<File> getPomFiles( File basedir, String[] includes, String[] excludes ) {
         DirectoryScanner scanner = new DirectoryScanner();
 
         scanner.setBasedir( basedir );
@@ -558,8 +529,7 @@ public class MavenEmbedder
 
         List<File> poms = new ArrayList<File>();
 
-        for ( int i = 0; i < scanner.getIncludedFiles().length; i++ )
-        {
+        for ( int i = 0; i < scanner.getIncludedFiles().length; i++ ) {
             poms.add( new File( basedir, scanner.getIncludedFiles()[i] ) );
         }
 
@@ -604,39 +574,28 @@ public class MavenEmbedder
         }
     }
 
-    public <T> T lookup( Class<T> clazz )
-        throws ComponentLookupException
-    {
+    public <T> T lookup( Class<T> clazz ) throws ComponentLookupException {
         return plexusContainer.lookup( clazz );
     }
 
-    public <T> T lookup( Class<T> clazz, String hint )
-        throws ComponentLookupException
-    {
+    public <T> T lookup( Class<T> clazz, String hint ) throws ComponentLookupException {
         return plexusContainer.lookup( clazz, hint );
     }
 
-    public Object lookup( String role, String hint )
-        throws ComponentLookupException
-    {
+    public Object lookup( String role, String hint ) throws ComponentLookupException {
         return plexusContainer.lookup( role, hint );
     }
 
-    public Object lookup( String role )
-        throws ComponentLookupException
-    {
+    public Object lookup( String role ) throws ComponentLookupException {
         return plexusContainer.lookup( role );
     }
     
-    private Map<String,String> propertiesToMap(Properties properties)
-    {
-        if ( properties == null || properties.isEmpty() )
-        {
+    private Map<String,String> propertiesToMap(Properties properties) {
+        if ( properties == null || properties.isEmpty() ) {
             return new HashMap<String, String>( 0 );
         }
         Map<String, String> result = new HashMap<String, String>( properties.size() );
-        for ( Entry<Object, Object> entry : properties.entrySet() )
-        {
+        for ( Entry<Object, Object> entry : properties.entrySet() ) {
             result.put( (String) entry.getKey(), (String) entry.getValue() );
         }
         return result;

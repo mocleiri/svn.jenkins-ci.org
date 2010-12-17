@@ -1,5 +1,25 @@
-/**
+/* 
+ * The MIT License
  * 
+ * Copyright (c) 2010 Bruno P. Kinoshita <http://www.kinoshita.eti.br>
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package hudson.plugins.testlink.parser;
 
@@ -35,7 +55,7 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestLinkTables;
  * @since 2.0
  */
 public abstract class Parser 
-implements FileCallable<List<TestResult>>
+implements FileCallable<TestResult[]>
 {
 	
 	/**
@@ -94,7 +114,7 @@ implements FileCallable<List<TestResult>>
 	 * @throws TestLinkPluginException
 	 * @throws IOException
 	 */
-	public List<TestResult> parse( File baseDir ) 
+	public TestResult[] parse( File baseDir ) 
 	throws IOException
 	{
 		
@@ -108,13 +128,13 @@ implements FileCallable<List<TestResult>>
 			String fileName = files[i];
 			File file = new File( baseDir, fileName );
 			
-			listener.getLogger().println( getName() + " file found. Parsing file to extract Test Results");
+			listener.getLogger().println( getName() + " file found. Parsing file to extract Test Results" );
 			List<TestResult> foundTestResults = this.parseFile ( file );
 			
 			results.addAll( foundTestResults );
 		}
 		
-		return results;
+		return results.toArray(new TestResult[0]);
 	}
 
 	/**
@@ -131,7 +151,7 @@ implements FileCallable<List<TestResult>>
 	/* (non-Javadoc)
 	 * @see hudson.FilePath.FileCallable#invoke(java.io.File, hudson.remoting.VirtualChannel)
 	 */
-	public List<TestResult> invoke( File file, VirtualChannel channel )
+	public TestResult[] invoke( File file, VirtualChannel channel )
 	throws IOException, InterruptedException 
 	{
 		return this.parse( file );
@@ -149,7 +169,7 @@ implements FileCallable<List<TestResult>>
 		Attachment attachment = new Attachment();
 		String fileContent = this.getBase64FileContent( file );
 		attachment.setContent( fileContent );
-		attachment.setDescription( "JUnit report file for Automated Test Case" );
+		attachment.setDescription( getName() + " report file for Automated Test Case" );
 		attachment.setFileName( file.getName() );
 		attachment.setFileSize( file.length() );
 		attachment.setFkTable( TestLinkTables.nodesHierarchy.toString() );

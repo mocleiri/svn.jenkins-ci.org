@@ -77,13 +77,16 @@ public class GnatcheckParser {
 	};
 
 	private String str_filehead =
-		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+
-		"<tusar xmlns_xsi=\"http://www.w3.org/2001/XMLSchema-instance\" version=\"1.0\">\n"+
-		"    <violations:violation s>\n";
+		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<tusar:tusar xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
+                "             xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "             xmlns:violations=\"http://www.thalesgroup.com/tusar/violations/v3\"\n" +
+                "             xmlns:tusar=\"http://www.thalesgroup.com/tusar/v3\"\n" +
+                "             version=\"3.0\">\n" +
+                "    <tusar:violations>\n";
 
 	private String str_filetail =
-		"    </violations>\n"+
-		"</tusar>";
+		"    </tusar:violations>\n"+
+		"</tusar:tusar>";
 
 	private String str_violformat =
 	"            <violations:violation  line=\"%s\"\n"+
@@ -155,9 +158,9 @@ public class GnatcheckParser {
 		    if (m.find(  )) {
 		    	if( !matchedfile.equals(m.group(1)) ){
 		    		if(!matchedfile.equals("")){
-		    			output.format("        </file>\n");
+		    			output.format("        </violations:file>\n");
 		    		}
-		    		output.format("        <file path=\"%s\">\n", m.group(1) );
+		    		output.format("        <violations:file path=\"%s\">\n", m.group(1) );
 		    		matchedfile = m.group(1);
 		    	}
 		    	rule = findRule(m.group(1), m.group(2).trim() + ":" + m.group(3).trim());
@@ -165,7 +168,7 @@ public class GnatcheckParser {
 		    }
 		}
 		if(!matchedfile.equals("")){
-			output.format("        </file>\n");
+			output.format("        </violations:file>\n");
 		}
 		output.format(str_filetail);
 		if ( output != null )
