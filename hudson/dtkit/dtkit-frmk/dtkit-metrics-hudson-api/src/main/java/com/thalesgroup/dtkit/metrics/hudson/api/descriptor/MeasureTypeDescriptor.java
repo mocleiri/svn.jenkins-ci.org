@@ -44,7 +44,7 @@ public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descr
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<MeasureType, MeasureTypeDescriptor<?>> all() {
-        return Hudson.getInstance().getDescriptorList(MeasureType.class);
+        return Hudson.getInstance().<MeasureType,MeasureTypeDescriptor<?>>getDescriptorList(MeasureType.class);
     }
 
     public abstract String getId();

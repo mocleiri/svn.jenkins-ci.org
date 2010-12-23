@@ -44,7 +44,7 @@ public abstract class ViolationsTypeDescriptor<T extends ViolationsType> extends
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> all() {
-        return Hudson.getInstance().getDescriptorList(ViolationsType.class);
+        return Hudson.getInstance().<ViolationsType,ViolationsTypeDescriptor<?>>getDescriptorList(ViolationsType.class);
     }
 
     public abstract String getId();

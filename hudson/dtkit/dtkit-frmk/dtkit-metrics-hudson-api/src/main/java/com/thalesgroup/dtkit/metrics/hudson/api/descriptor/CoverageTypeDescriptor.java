@@ -45,7 +45,7 @@ public abstract class CoverageTypeDescriptor<T extends CoverageType> extends Des
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> all() {
-        return Hudson.getInstance().getDescriptorList(CoverageType.class);
+        return Hudson.getInstance().<CoverageType,CoverageTypeDescriptor<?>>getDescriptorList(CoverageType.class);
     }
 
     public abstract String getId();

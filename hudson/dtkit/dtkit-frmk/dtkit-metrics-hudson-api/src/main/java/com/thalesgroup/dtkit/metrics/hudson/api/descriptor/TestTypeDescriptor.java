@@ -44,7 +44,7 @@ public abstract class TestTypeDescriptor<T extends TestType> extends Descriptor<
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<TestType, TestTypeDescriptor<?>> all() {
-        return Hudson.getInstance().getDescriptorList(TestType.class);
+        return Hudson.getInstance().<TestType,TestTypeDescriptor<?>>getDescriptorList(TestType.class);
     }
 
     public abstract String getId();
