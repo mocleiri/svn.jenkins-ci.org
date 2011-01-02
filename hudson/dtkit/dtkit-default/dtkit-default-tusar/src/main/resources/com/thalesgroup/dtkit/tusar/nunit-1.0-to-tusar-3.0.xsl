@@ -52,9 +52,9 @@
                         <!--  <redirect:write file="{$outputpath}/TEST-{$assembly}.xml">-->
 
                         <t:testsuite name="{$assembly}"
-                                   tests="{count(*/test-case)}" time="{@time}"
-                                   failures="{count(*/test-case/failure)}" errors="0"
-                                   skipped="{count(*/test-case[@executed='False'])}">
+                                     tests="{count(*/test-case)}" time="{@time}"
+                                     failures="{count(*/test-case/failure)}" errors="0"
+                                     skipped="{count(*/test-case[@executed='False'])}">
                             <xsl:for-each select="*/test-case[@time!='']">
                                 <xsl:variable name="testcaseName">
                                     <xsl:choose>
@@ -70,8 +70,8 @@
                                 </xsl:variable>
 
                                 <t:testcase fulltestname="{$assembly}"
-                                          testname="{$testcaseName}"
-                                          time="{@time}">
+                                            testname="{$testcaseName}"
+                                            time="{@time}">
 
                                     <xsl:variable name="generalfailure"
                                                   select="./failure"/>

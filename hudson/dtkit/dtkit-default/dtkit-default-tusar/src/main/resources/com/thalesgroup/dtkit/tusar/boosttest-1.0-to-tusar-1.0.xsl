@@ -23,8 +23,8 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  
-				xmlns:t="http://www.thalesgroup.com/tusar/tests/v1"
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:t="http://www.thalesgroup.com/tusar/tests/v1"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
@@ -53,30 +53,30 @@
             <!--<xsl:text>1.0</xsl:text>-->
             <!--</xsl:attribute>-->
 
-           <tusar:tests>
-            <t:testsuite>
-                <xsl:attribute name="tests">
-                    <xsl:value-of select="count(//TestCase)"/>
-                </xsl:attribute>
+            <tusar:tests>
+                <t:testsuite>
+                    <xsl:attribute name="tests">
+                        <xsl:value-of select="count(//TestCase)"/>
+                    </xsl:attribute>
 
-                <xsl:attribute name="errors">
-                    <xsl:value-of select="count(//TestCase/FatalError)+count(//TestCase/Exception)"/>
-                </xsl:attribute>
+                    <xsl:attribute name="errors">
+                        <xsl:value-of select="count(//TestCase/FatalError)+count(//TestCase/Exception)"/>
+                    </xsl:attribute>
 
-                <xsl:attribute name="failures">
-                    <xsl:value-of select="count(//TestCase/Error)"/>
-                </xsl:attribute>
+                    <xsl:attribute name="failures">
+                        <xsl:value-of select="count(//TestCase/Error)"/>
+                    </xsl:attribute>
 
-                <xsl:attribute name="name">MergedTestSuite</xsl:attribute>
+                    <xsl:attribute name="name">MergedTestSuite</xsl:attribute>
 
-                <xsl:attribute name="skipped">0</xsl:attribute>
+                    <xsl:attribute name="skipped">0</xsl:attribute>
 
-                <xsl:for-each select="//TestCase">
-                    <xsl:call-template name="testCase"/>
-                </xsl:for-each>
+                    <xsl:for-each select="//TestCase">
+                        <xsl:call-template name="testCase"/>
+                    </xsl:for-each>
 
-            </t:testsuite>
-           </tusar:tests> 
+                </t:testsuite>
+            </tusar:tests>
         </tusar:tusar>
     </xsl:template>
 

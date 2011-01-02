@@ -168,7 +168,7 @@
 
                         <xsl:if test="system-out">
                             <xsl:element name="t:system-out">
-								<xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
+                                <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
                                 <xsl:value-of select="system-out" disable-output-escaping="yes"/>
                                 <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
                             </xsl:element>
@@ -176,7 +176,7 @@
 
                         <xsl:if test="system-err">
                             <xsl:element name="t:system-err">
-								<xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
+                                <xsl:text disable-output-escaping="yes">&lt;![CDATA[</xsl:text>
                                 <xsl:value-of select="system-err" disable-output-escaping="yes"/>
                                 <xsl:text disable-output-escaping="yes">]]&gt;</xsl:text>
                             </xsl:element>

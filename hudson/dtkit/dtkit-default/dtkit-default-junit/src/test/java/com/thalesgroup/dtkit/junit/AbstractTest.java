@@ -50,7 +50,7 @@ public class AbstractTest {
         //The input file must be valid
         boolean inputResult = inputMetricXSL.validateInputFile(inputXMLFile);
         for (ValidationError validatorError : inputMetricXSL.getInputValidationErrors()) {
-             System.out.println("[ERROR] " + validatorError.toString());
+            System.out.println("[ERROR] " + validatorError.toString());
         }
         Assert.assertTrue(inputResult);
 

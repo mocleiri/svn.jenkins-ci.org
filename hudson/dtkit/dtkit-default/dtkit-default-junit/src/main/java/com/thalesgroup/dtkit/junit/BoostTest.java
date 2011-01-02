@@ -27,11 +27,13 @@ import com.thalesgroup.dtkit.junit.model.JUnitModel;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
+import com.thalesgroup.dtkit.processor.InputMetric;
 
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType(name="boosttest", namespace = "junit")
+@XmlType(name = "boosttest", namespace = "junit")
+@InputMetric
 public class BoostTest extends InputMetricXSL {
 
     @Override
@@ -52,7 +54,7 @@ public class BoostTest extends InputMetricXSL {
     @Override
     public boolean isDefault() {
         return true;
-    }   
+    }
 
     @Override
     public String getXslName() {
@@ -60,11 +62,11 @@ public class BoostTest extends InputMetricXSL {
     }
 
     @Override
-   public String[] getInputXsdNameList() {
+    public String[] getInputXsdNameList() {
         return new String[]{"boosttest-1.1.xsd"};
     }
 
-    @Override    
+    @Override
     public OutputMetric getOutputFormatType() {
         return JUnitModel.OUTPUT_JUNIT_1_0;
     }

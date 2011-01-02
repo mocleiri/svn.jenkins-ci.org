@@ -4,6 +4,8 @@
     <xsl:param name="myParameter"/>
 
     <xsl:template match="/">
-        <root><xsl:value-of select="$myParameter"/></root>                
+        <root>
+            <xsl:value-of select="$myParameter"/>
+        </root>
     </xsl:template>
 </xsl:stylesheet>

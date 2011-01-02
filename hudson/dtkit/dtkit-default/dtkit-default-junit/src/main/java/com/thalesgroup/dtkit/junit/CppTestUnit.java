@@ -27,10 +27,12 @@ import com.thalesgroup.dtkit.junit.model.JUnitModel;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
+import com.thalesgroup.dtkit.processor.InputMetric;
 
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name = "cpptest", namespace = "junit")
+@InputMetric
 public class CppTestUnit extends InputMetricXSL {
 
     @Override

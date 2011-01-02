@@ -1,9 +1,9 @@
 package com.thalesgroup.dtkit.tusar;
 
 import com.thalesgroup.dtkit.util.converter.ConversionService;
-import org.junit.Test;
-import org.junit.Assert;
 import org.custommonkey.xmlunit.Diff;
+import org.junit.Assert;
+import org.junit.Test;
 
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;

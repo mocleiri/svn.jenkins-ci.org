@@ -28,7 +28,6 @@ import org.junit.Test;
 
 public class NUnitTest extends AbstractTest {
 
-
     @Test
     public void testTransformation() throws Exception {
         convertAndValidate(NUnit.class, "nunit/NUnit-simple.xml", "nunit/JUnit-simple.xml");

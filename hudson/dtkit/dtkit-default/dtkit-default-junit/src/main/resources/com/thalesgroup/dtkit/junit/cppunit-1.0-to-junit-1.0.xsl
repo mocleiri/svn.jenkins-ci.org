@@ -27,7 +27,7 @@
     <xsl:output method="xml" indent="yes"/>
 
     <xsl:template match="/">
-          <xsl:element name="testsuite">
+        <xsl:element name="testsuite">
             <xsl:attribute name="errors">
                 <xsl:value-of select="TestRun/Statistics/Errors"/>
             </xsl:attribute>

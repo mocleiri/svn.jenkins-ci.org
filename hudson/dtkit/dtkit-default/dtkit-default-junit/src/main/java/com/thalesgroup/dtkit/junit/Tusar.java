@@ -27,11 +27,18 @@ import com.thalesgroup.dtkit.junit.model.JUnitModel;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
+import com.thalesgroup.dtkit.processor.InputMetric;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
+import com.thalesgroup.dtkit.util.validator.ValidationException;
+import com.thalesgroup.dtkit.tusar.model.TusarModel;
 
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
+import java.io.File;
 
 
 @XmlType(name = "tusar", namespace = "junit")
+@InputMetric
 public class Tusar extends InputMetricXSL {
 
     @Override
@@ -46,7 +53,7 @@ public class Tusar extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.0)";
+        return "1.0";
     }
 
     @Override
@@ -60,9 +67,12 @@ public class Tusar extends InputMetricXSL {
     }
 
     @Override
-    public String[] getInputXsdNameList() {
-        return null;
+    public boolean validateInputFile(File inputXMLFile) throws ValidationException {
+        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_1_0.validate(inputXMLFile);
+        this.setInputValidationErrors(errors);
+        return errors.isEmpty();
     }
+
 
     @Override
     public OutputMetric getOutputFormatType() {

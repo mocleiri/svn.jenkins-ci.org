@@ -25,6 +25,7 @@ package com.thalesgroup.dtkit.tusar;
 
 import com.thalesgroup.dtkit.metrics.model.InputMetricOther;
 import com.thalesgroup.dtkit.metrics.model.InputType;
+import com.thalesgroup.dtkit.processor.InputMetric;
 import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
@@ -34,6 +35,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+@InputMetric
 public class Gnatcheck extends InputMetricOther {
 
 

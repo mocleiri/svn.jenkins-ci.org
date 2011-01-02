@@ -175,15 +175,15 @@
         </xsl:if>
 
         <xsl:apply-templates select="testsuite"/>
-        
+
 
     </xsl:template>
 
 
-  <xsl:template match="testsuites">
-      <xsl:element name="testsuites">
-         <xsl:apply-templates select="testsuite"/>
-       </xsl:element>
+    <xsl:template match="testsuites">
+        <xsl:element name="testsuites">
+            <xsl:apply-templates select="testsuite"/>
+        </xsl:element>
     </xsl:template>
 
 
