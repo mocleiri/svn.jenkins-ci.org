@@ -58,7 +58,7 @@ public class BoostTest extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "boosttest-1.0-to-junit-1.0.xsl";
+        return "boosttest-1.1-to-junit-1.0.xsl";
     }
 
     @Override
