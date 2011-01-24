@@ -14,4 +14,11 @@ public class JUnitModel implements Serializable {
             set(new ValidationService());
         }
     };
+
+    @SuppressWarnings("unused")
+    public static OutputMetric OUTPUT_JUNIT_2 = new JUnit2() {
+        {
+            set(new ValidationService());
+        }
+    };
 }
