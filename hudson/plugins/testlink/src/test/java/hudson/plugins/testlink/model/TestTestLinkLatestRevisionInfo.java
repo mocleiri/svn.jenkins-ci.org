@@ -23,11 +23,10 @@
  */
 package hudson.plugins.testlink.model;
 
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import hudson.plugins.testlink.model.TestLinkLatestRevisionInfo;
 
 /**
  * @author Bruno P. Kinoshita - http://www.kinoshita.eti.br
