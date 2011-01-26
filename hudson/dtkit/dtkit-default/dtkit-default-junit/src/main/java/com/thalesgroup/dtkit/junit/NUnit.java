@@ -58,7 +58,7 @@ public class NUnit extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "nunit-1.0-to-junit-1.0.xsl";
+        return "nunit-1.0-to-junit-2.xsl";
     }
 
     @Override
