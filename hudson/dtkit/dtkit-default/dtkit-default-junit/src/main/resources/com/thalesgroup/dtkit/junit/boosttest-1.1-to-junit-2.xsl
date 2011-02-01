@@ -90,7 +90,7 @@
                     <xsl:text>&#13;</xsl:text>
                 </xsl:when>
 
-                <xsl:when test="$currEltName='FatalError' or $currEltName='Exception'">
+                <xsl:when test="$currEltName='FatalError'">
                     <xsl:text>&#13;</xsl:text>
                     <xsl:text>[Exception] - </xsl:text>
                     <xsl:call-template name="processQuote">
@@ -104,6 +104,22 @@
                     <xsl:text> == [Line] -</xsl:text><xsl:value-of select="($currElt)/@line"/>
                     <xsl:text>&#13;</xsl:text>
                 </xsl:when>
+
+                <xsl:when test="$currEltName='Exception'">
+                    <xsl:text>&#13;</xsl:text>
+                    <xsl:text>[Exception] - </xsl:text>
+                    <xsl:call-template name="processQuote">
+                        <xsl:with-param name="string">
+                            <xsl:value-of select="$currElt"/>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                    <xsl:text>&#13;</xsl:text>
+                    <xsl:text> == [File] - </xsl:text><xsl:value-of select="($currElt)/LastCheckpoint/@file"/>
+                    <xsl:text>&#13;</xsl:text>
+                    <xsl:text> == [Line] - </xsl:text><xsl:value-of select="($currElt)/LastCheckpoint/@line"/>
+                    <xsl:text>&#13;</xsl:text>
+                </xsl:when>
+
             </xsl:choose>
         </xsl:for-each>
     </xsl:template>
@@ -125,6 +141,23 @@
             <xsl:attribute name="classname">
                 <xsl:value-of select="concat($packageName, substring-before(($elt)/@file, '.'))"/>
             </xsl:attribute>
+
+
+          <xsl:choose>
+
+                <xsl:when test="((count(child::Exception))=1) and ((count(child::Info)+ count(child::Warning) + count(child::Message))=0)">
+                    <xsl:variable name="fileName" select="substring-before((./Exception/LastCheckpoint)/@file, '.')"/>
+                    <xsl:attribute name="classname">
+                        <xsl:value-of select="concat($packageName, $fileName)"/>
+                    </xsl:attribute>
+                </xsl:when>
+
+                <xsl:otherwise>
+                    <xsl:attribute name="classname">
+                        <xsl:value-of select="concat($packageName, substring-before(($elt)/@file, '.'))"/>
+                    </xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
 
             <xsl:attribute name="name">
                 <xsl:value-of select="@name"/>
@@ -219,9 +252,9 @@
                             </xsl:with-param>
                         </xsl:call-template>
                         <xsl:text>&#13;</xsl:text>
-                        <xsl:text> == [File] - </xsl:text><xsl:value-of select="($currElt)/@file"/>
+                        <xsl:text> == [File] - </xsl:text><xsl:value-of select="($currElt)/LastCheckpoint/@file"/>
                         <xsl:text>&#13;</xsl:text>
-                        <xsl:text> == [Line] - </xsl:text><xsl:value-of select="($currElt)/@line"/>
+                        <xsl:text> == [Line] - </xsl:text><xsl:value-of select="($currElt)/LastCheckpoint/@line"/>
                         <xsl:text>&#13;</xsl:text>
                     </xsl:for-each>
                 </xsl:element>

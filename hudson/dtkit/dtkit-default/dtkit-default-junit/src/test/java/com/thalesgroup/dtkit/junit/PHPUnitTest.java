@@ -47,4 +47,8 @@ public class PHPUnitTest extends AbstractTest {
         convertAndValidate(PHPUnit.class, "phpunit/testcase4/testresult.xml", "phpunit/testcase4/junit-result.xml");
     }
 
+    @Test
+    public void testcase5() throws Exception {
+        convertAndValidate(PHPUnit.class, "phpunit/testcase5/testresult.xml", "phpunit/testcase5/junit-result.xml");
+    }
 }
