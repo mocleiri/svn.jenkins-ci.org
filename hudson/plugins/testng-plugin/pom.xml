@@ -65,4 +65,20 @@
          scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/plugins/testng-plugin
       </developerConnection>
    </scm>
+   <distributionManagement>
+      <repository>
+         <id>java.net-m2-repository</id>
+         <url>http://maven.hudson-labs.org:8081/content/repositories/releases/</url>
+      </repository>
+   </distributionManagement>
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-release-plugin</artifactId>
+            <configuration>
+               <goals>deploy</goals>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 </project>
