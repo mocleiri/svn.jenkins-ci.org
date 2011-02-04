@@ -23,8 +23,8 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.type;
 
-import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.CoverageTypeDescriptor;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import hudson.ExtensionList;
 import hudson.model.Describable;
 import hudson.model.Hudson;

@@ -28,7 +28,7 @@ public class ValidationServiceFactory {
 
     private static ValidationService INSTANCE = new ValidationService();
 
-    public static ValidationService getInstance(){
+    public static ValidationService getInstance() {
         return INSTANCE;
     }
 }

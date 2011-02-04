@@ -42,7 +42,7 @@ public abstract class AbstractOutputMetric implements OutputMetric {
     protected void set(ValidationService validationService) {
         this.validationService = validationService;
     }
-                                   
+
     static class Adapter extends XmlAdapter<AbstractOutputMetric, OutputMetric> {
         public OutputMetric unmarshal(AbstractOutputMetric v) {
             return v;

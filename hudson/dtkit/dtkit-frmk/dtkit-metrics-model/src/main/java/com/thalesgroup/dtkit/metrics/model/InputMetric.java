@@ -151,8 +151,8 @@ public abstract class InputMetric implements Serializable {
      *          an application Exception to throw when there is an error of conversion
      *          The exception is catched by the API client (as Hudson plugin)
      */
-    public  void convert(File inputFile, File outFile) throws ConversionException {
-         convert(inputFile, outFile, null);
+    public void convert(File inputFile, File outFile) throws ConversionException {
+        convert(inputFile, outFile, null);
     }
 
 
@@ -163,18 +163,18 @@ public abstract class InputMetric implements Serializable {
      *
      * @param inputFile the input file to convert
      * @param outFile   the output file to convert
-     * @param params the conversion parameters
+     * @param params    the conversion parameters
      * @throws com.thalesgroup.dtkit.util.converter.ConversionException
      *          an application Exception to throw when there is an error of conversion
      *          The exception is catched by the API client (as Hudson plugin)
      */
-    public abstract void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException;    
+    public abstract void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException;
 
     /*
-     *  Gives the validation process for the input file
-     *
-     * @return true if the input file is valid, false otherwise
-     */
+    *  Gives the validation process for the input file
+    *
+    * @return true if the input file is valid, false otherwise
+    */
 
     public abstract boolean validateInputFile(File inputXMLFile) throws ValidationException;
 

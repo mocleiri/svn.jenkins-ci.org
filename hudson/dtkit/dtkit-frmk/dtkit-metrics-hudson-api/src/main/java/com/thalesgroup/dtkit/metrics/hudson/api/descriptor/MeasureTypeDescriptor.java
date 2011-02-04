@@ -23,11 +23,11 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
+import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.MeasureType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
 import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
-import com.thalesgroup.dtkit.metrics.hudson.api.type.MeasureType;
 import hudson.DescriptorExtensionList;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
@@ -44,7 +44,7 @@ public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descr
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<MeasureType, MeasureTypeDescriptor<?>> all() {
-        return Hudson.getInstance().<MeasureType,MeasureTypeDescriptor<?>>getDescriptorList(MeasureType.class);
+        return Hudson.getInstance().<MeasureType, MeasureTypeDescriptor<?>>getDescriptorList(MeasureType.class);
     }
 
     public abstract String getId();

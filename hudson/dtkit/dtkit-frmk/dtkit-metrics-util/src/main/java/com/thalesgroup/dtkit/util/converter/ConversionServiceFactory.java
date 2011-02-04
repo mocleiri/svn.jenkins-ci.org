@@ -28,7 +28,7 @@ public class ConversionServiceFactory {
 
     private static ConversionService INSTANCE = new ConversionService();
 
-    public static ConversionService getInstance(){
+    public static ConversionService getInstance() {
         return INSTANCE;
     }
 }

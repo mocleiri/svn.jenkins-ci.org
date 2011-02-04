@@ -24,11 +24,11 @@
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
 
+import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.CoverageType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
 import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
-import com.thalesgroup.dtkit.metrics.hudson.api.type.CoverageType;
 import hudson.DescriptorExtensionList;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
@@ -45,7 +45,7 @@ public abstract class CoverageTypeDescriptor<T extends CoverageType> extends Des
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> all() {
-        return Hudson.getInstance().<CoverageType,CoverageTypeDescriptor<?>>getDescriptorList(CoverageType.class);
+        return Hudson.getInstance().<CoverageType, CoverageTypeDescriptor<?>>getDescriptorList(CoverageType.class);
     }
 
     public abstract String getId();

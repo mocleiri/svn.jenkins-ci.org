@@ -251,7 +251,6 @@ public class ConversionService implements Serializable {
 
             // create the output with its options
             Serializer out = new Serializer();
-            //out.setOutputProperty(Serializer.Property.METHOD, "xml");
             out.setOutputProperty(Serializer.Property.INDENT, "yes");
             File fileOut = File.createTempFile("serializer", "convert");
             FileOutputStream fos = new FileOutputStream(fileOut);
@@ -341,7 +340,6 @@ public class ConversionService implements Serializable {
 
             // create the output with its options
             Serializer out = new Serializer();
-            out.setOutputProperty(Serializer.Property.METHOD, "xml");
             out.setOutputProperty(Serializer.Property.INDENT, "yes");
             FileOutputStream fos = new FileOutputStream(outFile);
             out.setOutputStream(fos);

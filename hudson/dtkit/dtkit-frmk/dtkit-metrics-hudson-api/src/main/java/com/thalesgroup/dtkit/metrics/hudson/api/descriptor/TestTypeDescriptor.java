@@ -23,11 +23,11 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
+import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
 import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
-import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
 import hudson.DescriptorExtensionList;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
@@ -44,7 +44,7 @@ public abstract class TestTypeDescriptor<T extends TestType> extends Descriptor<
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<TestType, TestTypeDescriptor<?>> all() {
-        return Hudson.getInstance().<TestType,TestTypeDescriptor<?>>getDescriptorList(TestType.class);
+        return Hudson.getInstance().<TestType, TestTypeDescriptor<?>>getDescriptorList(TestType.class);
     }
 
     public abstract String getId();
@@ -56,7 +56,7 @@ public abstract class TestTypeDescriptor<T extends TestType> extends Descriptor<
     }
 
     @SuppressWarnings("unused")
-    public InputMetric getInputMetric() {        
+    public InputMetric getInputMetric() {
         final Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
         /** Can't retrieve the instance with guice due to a
          java.lang.NoClassDefFoundError: com/google/inject/internal/Finalizer$ShutDown

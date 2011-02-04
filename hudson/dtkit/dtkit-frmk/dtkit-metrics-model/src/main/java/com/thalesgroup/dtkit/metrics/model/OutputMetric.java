@@ -23,15 +23,14 @@
 
 package com.thalesgroup.dtkit.metrics.model;
 
-import org.codehaus.jackson.annotate.JsonValue;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
+import com.thalesgroup.dtkit.util.validator.ValidationException;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonValue;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.File;
 import java.util.List;
-
-import com.thalesgroup.dtkit.util.validator.ValidationException;
-import com.thalesgroup.dtkit.util.validator.ValidationError;
 
 /**
  * OutputMetric Interface

@@ -23,11 +23,11 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
+import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.ViolationsType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
 import com.thalesgroup.dtkit.metrics.model.InputMetricFactory;
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
-import com.thalesgroup.dtkit.metrics.hudson.api.type.ViolationsType;
 import hudson.DescriptorExtensionList;
 import hudson.model.Descriptor;
 import hudson.model.Hudson;
@@ -44,7 +44,7 @@ public abstract class ViolationsTypeDescriptor<T extends ViolationsType> extends
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> all() {
-        return Hudson.getInstance().<ViolationsType,ViolationsTypeDescriptor<?>>getDescriptorList(ViolationsType.class);
+        return Hudson.getInstance().<ViolationsType, ViolationsTypeDescriptor<?>>getDescriptorList(ViolationsType.class);
     }
 
     public abstract String getId();

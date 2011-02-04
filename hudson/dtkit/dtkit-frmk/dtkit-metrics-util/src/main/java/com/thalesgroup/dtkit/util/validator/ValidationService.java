@@ -95,7 +95,7 @@ public class ValidationService implements Serializable {
             xsdSources[i] = new StreamSource(readers[i]);
         }
 
-        List<ValidationError> listErrors  = processValidation(xsdSources, inputXML);
+        List<ValidationError> listErrors = processValidation(xsdSources, inputXML);
 
         for (int i = 0; i < readers.length; i++) {
             try {
@@ -107,9 +107,6 @@ public class ValidationService implements Serializable {
 
         return listErrors;
     }
-
-                                                  
-
 
 
     public List<ValidationError> processValidation(Source[] xsdSources, File inputXML) throws ValidationException {
