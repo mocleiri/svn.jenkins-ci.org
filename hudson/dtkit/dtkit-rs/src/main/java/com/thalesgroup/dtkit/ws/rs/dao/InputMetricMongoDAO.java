@@ -44,15 +44,15 @@ import java.util.Collection;
 
 
 @Singleton
-public class InputMetricMangoDAO implements InputMetricDAO {
+public class InputMetricMongoDAO implements InputMetricDAO {
 
-    private MangoProxy mangoProxy;
+    private MongoProxy mongoProxy;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Inject
     private void load(Mongo mongo, Morphia morphia, String dbName) {
-        mangoProxy = new MangoProxy(mongo, morphia, dbName);
+        mongoProxy = new MongoProxy(mongo, morphia, dbName);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class InputMetricMangoDAO implements InputMetricDAO {
         String toolVersion = inputMetricSelector.getToolVersion();
         String toolType = inputMetricSelector.getTooType();
         String outputFormat = inputMetricSelector.getOutputFormat();
-        Query<InputMetricDB> query = mangoProxy.createQuery();
+        Query<InputMetricDB> query = mongoProxy.createQuery();
 
         if (toolName != null) {
             query = query.field("toolName").startsWithIgnoreCase(toolName);
@@ -113,7 +113,7 @@ public class InputMetricMangoDAO implements InputMetricDAO {
             }
             inputMetricDB.setInputMetricType(InputMetricType.XSL);
             inputMetricDB.setOutputFormat(outputMetric.getKey());
-            mangoProxy.save(inputMetricDB);
+            mongoProxy.save(inputMetricDB);
         }
         catch (IOException ioe) {
             throw new InputMetricException("Cannot insert the current netric " + inputMetricSelector.toString(), ioe);
@@ -125,22 +125,22 @@ public class InputMetricMangoDAO implements InputMetricDAO {
 
         InputMetricSelector inputMetricSelector = new InputMetricSelector(name, version, toolType.name(), outputMetric.getKey());
         Query<InputMetricDB> query = makeQuery(inputMetricSelector);
-        Collection<? extends InputMetric> metrics = mangoProxy.find(query).asList();
+        Collection<? extends InputMetric> metrics = mongoProxy.find(query).asList();
         if (metrics.size() == 0) {
             throw new MappingException("Cannot get metric for " + inputMetricSelector.toString());
         }
         assert metrics.size() == 1 : "There are more than 2 metrics for " + inputMetricSelector.toString();
 
-        mangoProxy.deleteByQuery(query);
+        mongoProxy.deleteByQuery(query);
     }
 
 
     public long getCount() {
-        return mangoProxy.count();
+        return mongoProxy.count();
     }
 
     public Collection<? extends InputMetric> getInputMetric(InputMetricSelector inputMetricSelector) {
-        return mangoProxy.find(makeQuery(inputMetricSelector)).asList();
+        return mongoProxy.find(makeQuery(inputMetricSelector)).asList();
     }
 
 
@@ -155,7 +155,7 @@ public class InputMetricMangoDAO implements InputMetricDAO {
     }
 
     public Collection<? extends InputMetric> getInputMetrics() {
-        QueryResults<InputMetricDB> inputMetricDBQueryResults = mangoProxy.find();
+        QueryResults<InputMetricDB> inputMetricDBQueryResults = mongoProxy.find();
         return inputMetricDBQueryResults.asList();
     }
 

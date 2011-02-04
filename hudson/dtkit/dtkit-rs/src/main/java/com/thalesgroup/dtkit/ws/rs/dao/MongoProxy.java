@@ -30,9 +30,9 @@ import com.thalesgroup.dtkit.ws.rs.model.InputMetricDB;
 import org.bson.types.ObjectId;
 
 
-public class MangoProxy extends DAO<InputMetricDB, ObjectId> {
+public class MongoProxy extends DAO<InputMetricDB, ObjectId> {
 
-    public MangoProxy( Mongo mongo, Morphia morphia, String dbName) {
+    public MongoProxy( Mongo mongo, Morphia morphia, String dbName) {
        super(mongo,morphia, dbName);
     }
 }

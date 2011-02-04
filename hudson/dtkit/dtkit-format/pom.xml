@@ -63,4 +63,29 @@
         <module>dtkit-tusar-model</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>deploy</goals>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+    <scm>
+        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-format</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-format</developerConnection>
+    </scm>
+
+    <distributionManagement>
+       <repository>
+           <id>java.net-m2-repository</id>
+           <url>http://maven.hudson-labs.org:8081/content/repositories/releases/</url>
+      </repository>
+   </distributionManagement>
+
 </project>
