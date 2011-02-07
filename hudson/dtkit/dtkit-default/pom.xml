@@ -28,12 +28,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jvnet.hudson.dtkit</groupId>
+        <groupId>com.thalesgroup.dtkit</groupId>
         <artifactId>dtkit-metrics-default-parent</artifactId>
         <version>8-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.jvnet.hudson.dtkit</groupId>
     <artifactId>dtkit-default</artifactId>
     <version>0.15-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -73,23 +72,29 @@
         <dependencies>
 
             <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
+                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-default-junit</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
+                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-default-tusar</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+		<groupId>com.thalesgroup.dtkit</groupId>
+		<artifactId>dtkit-processor</artifactId>
+		<version>0.2-SNAPSHOT</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
 
     <scm>
-        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-default</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-default
+        <connection>scm:svn:https://gbois@svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default</connection>
+        <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default
         </developerConnection>
     </scm>
 
@@ -131,12 +136,5 @@
 
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>java.net-m2-repository</id>
-            <url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
-        </repository>
-    </distributionManagement>
 
 </project>
