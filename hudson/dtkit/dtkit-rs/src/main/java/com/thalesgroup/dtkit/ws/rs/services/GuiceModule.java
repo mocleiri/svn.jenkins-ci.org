@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
+ * Copyright (c) 2011 Thales Corporate Services SAS                             *
  * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -35,7 +35,7 @@ import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
 import com.thalesgroup.dtkit.ws.rs.dao.InputMetricDAO;
 import com.thalesgroup.dtkit.ws.rs.dao.InputMetricEmbeddedDAO;
-import com.thalesgroup.dtkit.ws.rs.dao.InputMetricMangoDAO;
+import com.thalesgroup.dtkit.ws.rs.dao.InputMetricMongoDAO;
 
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -70,22 +70,22 @@ public class GuiceModule extends ServletModule {
 
         try {
             //Externalize parameters
-            final Mongo mango = new Mongo(host, Integer.valueOf(port));
+            final Mongo mongo = new Mongo(host, Integer.valueOf(port));
 
-            InputMetricMangoDAO inputMetricDAOMango = Guice.createInjector(new AbstractModule() {
+            InputMetricMongoDAO inputMetricDAOMongo = Guice.createInjector(new AbstractModule() {
                 @Override
                 public void configure() {
-                    bind(Mongo.class).toInstance(mango);
+                    bind(Mongo.class).toInstance(mongo);
                     bind(Morphia.class);
                     bind(String.class).toInstance(dbName);
                 }
-            }).getInstance(InputMetricMangoDAO.class);
+            }).getInstance(InputMetricMongoDAO.class);
 
 
             List<InputMetricDAO> inputMetricDAOs;
             try {
-                mango.getDB(dbName).getCollectionNames();
-                inputMetricDAOs = Arrays.asList(new InputMetricDAO[]{new InputMetricEmbeddedDAO(), inputMetricDAOMango});
+                mongo.getDB(dbName).getCollectionNames();
+                inputMetricDAOs = Arrays.asList(new InputMetricDAO[]{new InputMetricEmbeddedDAO(), inputMetricDAOMongo});
             }
             catch (MongoException me) {
                 inputMetricDAOs = Arrays.asList(new InputMetricDAO[]{new InputMetricEmbeddedDAO()});

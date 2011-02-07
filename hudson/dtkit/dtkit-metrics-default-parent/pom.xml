@@ -1,6 +1,6 @@
 <!--
 /*******************************************************************************
-* Copyright (c) 2010 Thales Corporate Services SAS                             *
+* Copyright (c) 2011 Thales Corporate Services SAS                             *
 * Author : Gregory Boissinot                                                   *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -27,17 +27,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-       <groupId>org.jvnet.hudson.dtkit</groupId>
+       <groupId>com.thalesgroup.dtkit</groupId>
        <artifactId>dtkit-metrics-parent</artifactId>
-       <version>4</version>
+       <version>5-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.jvnet.hudson.dtkit</groupId>
     <artifactId>dtkit-metrics-default-parent</artifactId>
     <version>8-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DTKIT Metrics Default Parent</name>
-    <url>http://wiki.hudson-ci.org/display/HUDSON/DTKIT</url>
+    <url>http://wiki.jenkins-ci.org/display/JENKINS/DTKit</url>
 
     <licenses>
         <license>
@@ -60,39 +59,39 @@
     </developers>
 
     <properties>
-        <hudson.version>1.355</hudson.version>
+        <jenkins.version>1.396</jenkins.version>
         <dtkit.frmk.version>0.12-SNAPSHOT</dtkit.frmk.version>
-        <dtkit.plugins.version>0.9</dtkit.plugins.version>
+        <dtkit.plugins.version>0.10-SNAPSHOT</dtkit.plugins.version>
         <dtkit.format.junit.version>0.13-SNAPSHOT</dtkit.format.junit.version>
-        <dtkit.format.tusar.version>0.11</dtkit.format.tusar.version>
+        <dtkit.format.tusar.version>0.12-SNAPSHOT</dtkit.format.tusar.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
 
             <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
+                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-metrics-hudson-api</artifactId>
                 <version>${dtkit.frmk.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
+                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-junit-model</artifactId>
                 <version>${dtkit.format.junit.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
+                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-tusar-model</artifactId>
                 <version>${dtkit.format.tusar.version}</version>
             </dependency>
 
             <!-- Used for compiling the generated classes -->
             <dependency>
-                <groupId>org.jvnet.hudson.main</groupId>
-                <artifactId>hudson-core</artifactId>
-                <version>${hudson.version}</version>
+                <groupId>org.jenkins-ci.main</groupId>
+                <artifactId>jenkins-core</artifactId>
+                <version>${jenkins.version}</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -102,7 +101,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.jvnet.hudson.dtkit</groupId>
+            <groupId>com.thalesgroup.dtkit</groupId>
             <artifactId>dtkit-metrics-model</artifactId>
             <version>${dtkit.frmk.version}</version>
         </dependency>
@@ -138,8 +137,8 @@
     </dependencies>
 
     <scm>
-        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-metrics-default-parent</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-metrics-default-parent</developerConnection>
+        <connection>scm:svn:https://gbois@svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-metrics-default-parent</connection>
+        <developerConnection>scm:svn: http://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-metrics-default-parent</developerConnection>
     </scm>
 
     <build>
@@ -167,7 +166,7 @@
         <plugins>
 
             <plugin>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
+                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-hudson-maven-plugin</artifactId>
                 <version>${dtkit.plugins.version}</version>
                 <extensions>true</extensions>

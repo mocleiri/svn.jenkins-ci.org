@@ -1,6 +1,6 @@
 <!--
 /*******************************************************************************
-* Copyright (c) 2010 Thales Corporate Services SAS                             *
+* Copyright (c) 2011 Thales Corporate Services SAS                             *
 * Author : Gregory Boissinot                                                   *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -27,17 +27,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jvnet.hudson</groupId>
-        <artifactId>hudson</artifactId>
-        <version>1.7</version>
+        <groupId>org.jenkins-ci</groupId>
+        <artifactId>jenkins</artifactId>
+        <version>1.12</version>
     </parent>
 
-    <groupId>org.jvnet.hudson.dtkit</groupId>
+    <groupId>com.thalesgroup.dtkit</groupId>
     <artifactId>dtkit-plugins</artifactId>
     <version>0.10-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DTKIT Plugins</name>
-    <url>http://wiki.hudson-ci.org/display/HUDSON/DTKIT</url>
+    <url>http://wiki.jenkins-ci.org/display/JENKINS/DTKit</url>
 
     <licenses>
         <license>
@@ -60,13 +60,13 @@
     </developers>
 
     <properties>
-        <dtkit.frmk.version>0.10</dtkit.frmk.version>
+        <dtkit.frmk.version>0.12-SNAPSHOT</dtkit.frmk.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.jvnet.hudson.dtkit</groupId>
+                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-metrics-model</artifactId>
                 <version>${dtkit.frmk.version}</version>
             </dependency>
