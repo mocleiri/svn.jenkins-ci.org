@@ -25,11 +25,11 @@ $reallyGithub = readFromStdin();
 $prefix = isset($argv[1]) ? $argv[1] : '';
 $issueUrl = 'http://issues.jenkins-ci.org/browse';
 $svn = 'svn --non-interactive';
-$javanetBase = 'https://svn.java.net/svn/hudson~svn';
+$svnBase = 'https://svn.jenkins-ci.org';
 # Where to find all svn tags (a couple plugins use a subdir of /tags)
-$svnTagDirs = array("$javanetBase/tags",
-                    "$javanetBase/tags/global-build-stats",
-                    "$javanetBase/tags/scm-sync-configuration");
+$svnTagDirs = array("$svnBase/tags",
+                    "$svnBase/tags/global-build-stats",
+                    "$svnBase/tags/scm-sync-configuration");
 $fisheyeBase = 'http://fisheye.jenkins-ci.org';
 $fisheyeUrl = array("$fisheyeBase/search/hudson/trunk/hudson/plugins/",
                     '?ql=select%20revisions%20from%20dir%20/trunk/hudson/plugins/',
@@ -47,13 +47,13 @@ $updateCenter = json_decode(
              "updateCnr.os(); \t\n\r"));
 if (!$updateCenter) mydie('** No data from update-center.json');
 
-# 2. Load all tags from java.net svn
+# 2. Load all tags from svn
 $xml = xml_parser_create();
 $svnTagDirs = implode(' ', $svnTagDirs);
 xml_parse_into_struct($xml,
     `$svn ls --xml $svnTagDirs`, $xmlData, $xmlIndex);
 xml_parser_free($xml);
-if (!$xmlData) mydie('** Failed to get tags from java.net svn');
+if (!$xmlData) mydie('** Failed to get tags from svn');
 foreach ($xmlIndex['NAME'] as $i) {
   $tag = $xmlData[$i]['value'];
   $rev = $xmlData[$i+2]['attributes']['REVISION'];
@@ -80,7 +80,7 @@ foreach ($updateCenter->plugins as $id => $p) {
   } else {
     $seenJavanetDirs[$repoName] = 1;
     $seenGithubRepos[$repoName . '-plugin'] = 1; # Skip github mirror too
-    list($ver, $revs, $url) = javanetSvn($id, $repoName, $p);
+    list($ver, $revs, $url) = jenkinsSvn($id, $repoName, $p);
   }
   # Examine/count the revs-since-release and print resulting data.
   $data[] = processRevs($revs, $id, $p, $ver, $url);
@@ -89,10 +89,10 @@ foreach ($updateCenter->plugins as $id => $p) {
 # Skip github mirrors of svn dirs too
 foreach ($repoMap as $key => $value) if ($value=='skip') $repoMap["$key-plugin"] = 'skip';
 
-# 4. Get list of all directories under hudson/plugins in java.net svn
+# 4. Get list of all directories under hudson/plugins in svn
 #    and report any unreleased plugins
-exec("$svn ls $javanetBase/trunk/hudson/plugins", $plugins);
-if (!$plugins) mydie('** Failed to get plugin list from java.net svn');
+exec("$svn ls $svnBase/trunk/hudson/plugins", $plugins);
+if (!$plugins) mydie('** Failed to get plugin list from svn');
 foreach ($plugins as $p) {
   if ($prefix and !preg_match("/^$prefix/i", $p)) continue;
   if (substr($p, -1) == '/') {
@@ -197,8 +197,8 @@ function dateFormat($date) {
     ? sprintf('%d-%02d-%02d', $match[3], $monthMap[$match[2]], $match[1]) : $date;
 }
 
-function javanetSvn($pluginId, $repoName, $pluginJson) {
-  global $fisheyeUrl, $svnTagMap, $svn, $javanetBase, $knownRevs;
+function jenkinsSvn($pluginId, $repoName, $pluginJson) {
+  global $fisheyeUrl, $svnTagMap, $svn, $svnBase, $knownRevs;
   # URL for changes since last release
   $url = "$fisheyeUrl[0]$repoName$fisheyeUrl[1]$repoName$fisheyeUrl[2]"
     . $pluginJson->releaseTimestamp . $fisheyeUrl[3];
@@ -216,7 +216,7 @@ function javanetSvn($pluginId, $repoName, $pluginJson) {
     # Get revisions in trunk since last release
     $xml = xml_parser_create();
     xml_parse_into_struct($xml,
-      `$svn log -r $tagRev:HEAD --xml $javanetBase/trunk/hudson/plugins/$repoName`,
+      `$svn log -r $tagRev:HEAD --xml $svnBase/trunk/hudson/plugins/$repoName`,
       $xmlData, $xmlIndex);
     xml_parser_free($xml);
     if (isset($xmlIndex['MSG'])) {
