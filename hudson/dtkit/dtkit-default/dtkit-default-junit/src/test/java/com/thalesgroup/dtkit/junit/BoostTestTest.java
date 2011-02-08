@@ -48,4 +48,9 @@ public class BoostTestTest extends AbstractTest {
     public void testTestCase7() throws Exception {
         convertAndValidate(BoostTest.class, "boosttest/testcase7/testlog.xml", "boosttest/testcase7/junit-result.xml");
     }
+
+    @Test
+    public void testTestCase8() throws Exception {
+        convertAndValidate(BoostTest.class, "boosttest/testcase8/testlog.xml", "boosttest/testcase8/junit-result.xml");
+    }
 }
