@@ -181,6 +181,7 @@ public abstract class InputMetricXSL extends InputMetric {
     /*
      *  Convert the input file against the current xsl of the tool and put the result in the outFile
      */
+
     @Override
     public void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
         if (getXslFile() == null) {
@@ -198,6 +199,7 @@ public abstract class InputMetricXSL extends InputMetric {
     /*
     *  Validates the input file against the current grammar of the tool
     */
+
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
 
@@ -225,6 +227,7 @@ public abstract class InputMetricXSL extends InputMetric {
     /*
      *  Validates the output file against the current grammar of the format
      */
+
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
 

@@ -24,12 +24,13 @@
 
 package com.thalesgroup.dtkit.util.converter;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import org.xml.sax.InputSource;
 
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 
 public class AbstractTest {
