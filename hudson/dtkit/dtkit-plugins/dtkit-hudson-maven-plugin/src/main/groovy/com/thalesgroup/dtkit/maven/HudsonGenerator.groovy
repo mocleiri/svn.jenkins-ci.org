@@ -23,71 +23,71 @@
 
 package com.thalesgroup.dtkit.maven
 
-import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetric
 
-public class HudsonGenerator{
+public class HudsonGenerator {
 
-  public String getGeneratedClass(String className, String hudsonType, hudsonDescriptorType, String packageName, InputMetric inputMetric)  {
+  public String getGeneratedClass(String className, String hudsonType, hudsonDescriptorType, String packageName, InputMetric inputMetric) {
 
-     // Now to create our enum
-     def out = []
+    // Now to create our enum
+    def out = []
 
-     out << "package " + packageName + ";\n"
+    out << "package " + packageName + ";\n"
 
-     out << "\n"
+    out << "\n"
 
-     out << "import org.kohsuke.stapler.DataBoundConstructor;\n"
-     out << "import hudson.Extension;\n"
+    out << "import org.kohsuke.stapler.DataBoundConstructor;\n"
+    out << "import hudson.Extension;\n"
 
-     out << "import com.thalesgroup.dtkit.metrics.hudson.api.type.${hudsonType};\n"
-     out << "import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.${hudsonDescriptorType};\n"
+    out << "import com.thalesgroup.dtkit.metrics.hudson.api.type.${hudsonType};\n"
+    out << "import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.${hudsonDescriptorType};\n"
 
-     out << "\n"
-     out << "public class " + className + " extends ${hudsonType} {\n"
-     out << "\n"
+    out << "\n"
+    out << "public class " + className + " extends ${hudsonType} {\n"
+    out << "\n"
 
-     out << "private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + className + ".DescriptorImpl();\n"
-     out << "\n"
+    out << "private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + className + ".DescriptorImpl();\n"
+    out << "\n"
 
-     out << "@DataBoundConstructor\n"
-     out << "public " + className + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n"
-     out << "  super(pattern, faildedIfNotNew, deleteOutputFiles);\n"
-     out << "}\n"
-     out << "\n"
+    out << "@DataBoundConstructor\n"
+    out << "public " + className + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n"
+    out << "  super(pattern, faildedIfNotNew, deleteOutputFiles);\n"
+    out << "}\n"
+    out << "\n"
 
-     out << "public ${hudsonDescriptorType}<? extends ${hudsonType}> getDescriptor() {\n"
-     out << " return  DESCRIPTOR;\n"
-     out << "}\n"
-     out << "\n"
+    out << "public ${hudsonDescriptorType}<? extends ${hudsonType}> getDescriptor() {\n"
+    out << " return  DESCRIPTOR;\n"
+    out << "}\n"
+    out << "\n"
 
-     out << "@Extension\n"
-     out << "public static class DescriptorImpl  extends ${hudsonDescriptorType}<" + className + "> {\n"
-     out << "\n"
+    out << "@Extension\n"
+    out << "public static class DescriptorImpl  extends ${hudsonDescriptorType}<" + className + "> {\n"
+    out << "\n"
 
-     out << "  public DescriptorImpl() {\n"
-     String classType = inputMetric.getMetaClass().getTheClass().toString();
-     classType = classType.substring("class ".length());
-     classType = classType + ".class"
-     out << "     super(" + className + ".class, " + classType + ");\n"
-     out << "  }\n"
-     out << "\n"
+    out << "  public DescriptorImpl() {\n"
+    String classType = inputMetric.getMetaClass().getTheClass().toString();
+    classType = classType.substring("class ".length());
+    classType = classType + ".class"
+    out << "     super(" + className + ".class, " + classType + ");\n"
+    out << "  }\n"
+    out << "\n"
 
-     out << "public String getId() {\n"
-     out << " return \"" + inputMetric.getMetaClass().getTheClass() + "\";\n"
-     out << "}\n"
-     out << "\n"
+    out << "public String getId() {\n"
+    out << " return \"" + inputMetric.getMetaClass().getTheClass() + "\";\n"
+    out << "}\n"
+    out << "\n"
 
-     out << "}\n"
-     out << "\n"
+    out << "}\n"
+    out << "\n"
 
-     // Finish the  class
-     out << "}\n"
+    // Finish the  class
+    out << "}\n"
 
-     // Convert the array into a string
-     StringBuilder sb = new StringBuilder()
-     out.each { sb.append(it) }
+    // Convert the array into a string
+    StringBuilder sb = new StringBuilder()
+    out.each { sb.append(it) }
 
-     return sb.toString();
-   }
+    return sb.toString();
+  }
 
 }

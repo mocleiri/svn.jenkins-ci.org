@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class PackagerHudsonMojo extends AbstractSourceJarMojo {
 
-    public PackagerHudsonMojo(){
+    public PackagerHudsonMojo() {
     }
 
     /**
