@@ -30,14 +30,14 @@
     <parent>
         <groupId>com.thalesgroup.dtkit</groupId>
         <artifactId>dtkit-metrics-default-parent</artifactId>
-        <version>8-SNAPSHOT</version>
+        <version>8</version>
     </parent>
 
     <artifactId>dtkit-default</artifactId>
     <version>0.15-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>DTKIT Default</name>
-    <url>http://wiki.hudson-ci.org/display/HUDSON/DTKIT</url>
+    <name>DTKit Default</name>
+    <url>http://wiki.jenkins-ci.org/display/JENKINS/DTKit</url>
 
     <licenses>
         <license>
@@ -63,10 +63,14 @@
         <!-- Generic DTKIT modules containing default set of metrics -->
         <module>dtkit-default-junit</module>
         <module>dtkit-default-tusar</module>
-        <!-- DTKIT Maven modules aimed at the Hudson CI server -->
-        <module>dtkit-default-junit-hudson</module>
-        <module>dtkit-default-tusar-hudson</module>
+        <!-- DTKIT Maven modules aimed at the Jenkins CI server -->
+        <module>dtkit-default-junit-jenkins</module>
+        <module>dtkit-default-tusar-jenkins</module>
     </modules>
+
+    <properties>
+        <dtkit.processor.version>0.2</dtkit.processor.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -84,23 +88,23 @@
             </dependency>
 
             <dependency>
-		<groupId>com.thalesgroup.dtkit</groupId>
-		<artifactId>dtkit-processor</artifactId>
-		<version>0.2-SNAPSHOT</version>
+                <groupId>com.thalesgroup.dtkit</groupId>
+                <artifactId>dtkit-processor</artifactId>
+                <version>${dtkit.processor.version}</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
 
     <scm>
-        <connection>scm:svn:https://gbois@svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default</connection>
+        <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default</connection>
         <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default
         </developerConnection>
     </scm>
 
     <build>
         <plugins>
-            <!-- Execute but with no effect for the first compilation time -->
+            <!-- Note: no effect for the first compilation time -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -110,7 +114,6 @@
                         <source>${project.build.directory}/generated-sources/groovy</source>
                     </sources>
                 </configuration>
-
                 <executions>
                     <execution>
                         <id>add-source</id>
@@ -126,14 +129,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <goals>deploy</goals>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 
