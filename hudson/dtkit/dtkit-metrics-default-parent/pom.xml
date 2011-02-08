@@ -23,13 +23,14 @@
 *******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-       <groupId>com.thalesgroup.dtkit</groupId>
-       <artifactId>dtkit-metrics-parent</artifactId>
-       <version>5-SNAPSHOT</version>
+        <groupId>com.thalesgroup.dtkit</groupId>
+        <artifactId>dtkit-metrics-parent</artifactId>
+        <version>5</version>
     </parent>
 
     <artifactId>dtkit-metrics-default-parent</artifactId>
@@ -60,10 +61,10 @@
 
     <properties>
         <jenkins.version>1.396</jenkins.version>
-        <dtkit.frmk.version>0.12-SNAPSHOT</dtkit.frmk.version>
-        <dtkit.plugins.version>0.10-SNAPSHOT</dtkit.plugins.version>
-        <dtkit.format.junit.version>0.13-SNAPSHOT</dtkit.format.junit.version>
-        <dtkit.format.tusar.version>0.12-SNAPSHOT</dtkit.format.tusar.version>
+        <dtkit.frmk.version>0.12</dtkit.frmk.version>
+        <dtkit.plugins.version>0.10</dtkit.plugins.version>
+        <dtkit.format.junit.version>0.13</dtkit.format.junit.version>
+        <dtkit.format.tusar.version>0.12</dtkit.format.tusar.version>
     </properties>
 
     <dependencyManagement>
@@ -137,8 +138,9 @@
     </dependencies>
 
     <scm>
-        <connection>scm:svn:https://gbois@svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-metrics-default-parent</connection>
-        <developerConnection>scm:svn: http://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-metrics-default-parent</developerConnection>
+        <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-metrics-default-parent</connection>
+        <developerConnection>scm:svn: http://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-metrics-default-parent
+        </developerConnection>
     </scm>
 
     <build>
@@ -164,21 +166,12 @@
         </pluginManagement>
 
         <plugins>
-
             <plugin>
                 <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-hudson-maven-plugin</artifactId>
                 <version>${dtkit.plugins.version}</version>
                 <extensions>true</extensions>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <goals>deploy</goals>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 
