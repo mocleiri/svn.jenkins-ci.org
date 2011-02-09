@@ -56,29 +56,11 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
+    <scm>
+        <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default-junit</connection>
+        <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default-junit
+        </developerConnection>
+    </scm>
 
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <compilerArguments>
-                        <processor>com.thalesgroup.dtkit.processor.InputMetricProcessor</processor>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
 
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*Abstract*</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
 </project>

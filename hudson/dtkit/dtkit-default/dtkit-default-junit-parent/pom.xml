@@ -95,6 +95,33 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArguments>
+                        <processor>com.thalesgroup.dtkit.processor.InputMetricProcessor</processor>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*Abstract*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
             <!-- Note: no effect for the first compilation time -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
