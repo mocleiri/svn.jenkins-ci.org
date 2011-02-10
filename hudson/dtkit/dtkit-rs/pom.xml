@@ -23,7 +23,8 @@
 *******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -33,13 +34,13 @@
         <version>1.12</version>
     </parent>
 
-
+    <groupId>com.thalesgroup.dtkit</groupId>
     <artifactId>dtkit-rs</artifactId>
     <packaging>war</packaging>
     <version>0.6-SNAPSHOT</version>
 
-    <name>DTKIT RS</name>
-    <description>DTKIT Web services layer</description>
+    <name>DTKit RS</name>
+    <description>DTKit Web services layer</description>
     <url>http://wiki.jenkins-ci.org/display/JENKINS/DTKit</url>
 
     <repositories>
@@ -94,16 +95,16 @@
     <properties>
         <jersey.version>1.5-ea09</jersey.version>
         <spring.version>3.0.5.RELEASE</spring.version>
-        <dtkit.frmk.version>0.12-SNAPSHOT</dtkit.frmk.version>
-        <dtkit.default.junit.version>0.15-SNAPSHOT</dtkit.default.junit.version>
-        <dtkit.default.tusar.version>0.16-SNAPSHOT</dtkit.default.tusar.version>
+        <dtkit.frmk.version>0.12</dtkit.frmk.version>
+        <dtkit.default.junit.version>0.15</dtkit.default.junit.version>
+        <dtkit.default.tusar.version>0.16</dtkit.default.tusar.version>
         <jackson.version>1.7.1</jackson.version>
         <slf4j.version>1.6.1</slf4j.version>
     </properties>
 
     <scm>
-        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-rs</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/dtkit/dtkit-rs</developerConnection>
+        <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-rs</connection>
+        <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-rs</developerConnection>
     </scm>
 
     <dependencies>
@@ -269,13 +270,6 @@
                     <excludes>
                         <exclude>**/GuiceModuleTest*</exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <goals>deploy</goals>
                 </configuration>
             </plugin>
 
