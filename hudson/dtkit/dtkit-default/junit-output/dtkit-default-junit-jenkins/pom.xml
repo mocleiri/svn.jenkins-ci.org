@@ -1,6 +1,6 @@
 <!--
 /*******************************************************************************
-* Copyright (c) 2010 Thales Corporate Services SAS                             *
+* Copyright (c) 2011 Thales Corporate Services SAS                             *
 * Author : Gregory Boissinot                                                   *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -29,57 +29,38 @@
 
     <parent>
         <groupId>com.thalesgroup.dtkit</groupId>
-        <artifactId>dtkit-default</artifactId>
+        <artifactId>dtkit-default-junit-parent</artifactId>
         <version>0.15-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dtkit-default-tusar</artifactId>
-    <version>0.16-SNAPSHOT</version>
-    <name>DTKit Default TUSAR</name>
-    <packaging>jar</packaging>
+    <artifactId>dtkit-default-junit-jenkins</artifactId>
+    <packaging>dtkit-hudson-jar</packaging>
+    <name>DTKit Default JUnit Jenkins</name>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.thalesgroup.dtkit</groupId>
+            <artifactId>dtkit-default-junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.thalesgroup.dtkit</groupId>
+            <artifactId>dtkit-metrics-hudson-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.thalesgroup.dtkit</groupId>
             <artifactId>dtkit-junit-model</artifactId>
         </dependency>
 
+        <!-- Used only for compiling the generated Hudson classes -->
         <dependency>
-            <groupId>com.thalesgroup.dtkit</groupId>
-            <artifactId>dtkit-tusar-model</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.thalesgroup.dtkit</groupId>
-            <artifactId>dtkit-processor</artifactId>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-core</artifactId>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
 
-    <build>
-        <plugins>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <compilerArguments>
-                        <processor>com.thalesgroup.dtkit.processor.InputMetricProcessor</processor>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/*Abstract*</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
 </project>

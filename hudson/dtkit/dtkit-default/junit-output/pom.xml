@@ -1,6 +1,6 @@
 <!--
 /*******************************************************************************
-* Copyright (c) 2010 Thales Corporate Services SAS                             *
+* Copyright (c) 2011 Thales Corporate Services SAS                             *
 * Author : Gregory Boissinot                                                   *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -33,10 +33,10 @@
         <version>8</version>
     </parent>
 
-    <artifactId>dtkit-default</artifactId>
+    <artifactId>dtkit-default-junit-parent</artifactId>
     <version>0.15-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>DTKit Default</name>
+    <name>DTKit Default JUnit Parent</name>
     <url>http://wiki.jenkins-ci.org/display/JENKINS/DTKit</url>
 
     <licenses>
@@ -62,10 +62,7 @@
     <modules>
         <!-- Generic DTKIT modules containing default set of metrics -->
         <module>dtkit-default-junit</module>
-        <module>dtkit-default-tusar</module>
-        <!-- DTKIT Maven modules aimed at the Jenkins CI server -->
         <module>dtkit-default-junit-jenkins</module>
-        <module>dtkit-default-tusar-jenkins</module>
     </modules>
 
     <properties>
@@ -83,12 +80,6 @@
 
             <dependency>
                 <groupId>com.thalesgroup.dtkit</groupId>
-                <artifactId>dtkit-default-tusar</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.thalesgroup.dtkit</groupId>
                 <artifactId>dtkit-processor</artifactId>
                 <version>${dtkit.processor.version}</version>
             </dependency>
@@ -97,13 +88,40 @@
     </dependencyManagement>
 
     <scm>
-        <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default</connection>
-        <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default
+        <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default/junit-output</connection>
+        <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-default/junit-output
         </developerConnection>
     </scm>
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArguments>
+                        <processor>com.thalesgroup.dtkit.processor.InputMetricProcessor</processor>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*Abstract*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
             <!-- Note: no effect for the first compilation time -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

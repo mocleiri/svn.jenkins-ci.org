@@ -29,18 +29,25 @@
 
     <parent>
         <groupId>com.thalesgroup.dtkit</groupId>
-        <artifactId>dtkit-default</artifactId>
-        <version>0.15-SNAPSHOT</version>
+        <artifactId>dtkit-default-tusar-parent</artifactId>
+        <version>0.16-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dtkit-default-junit</artifactId>
-    <packaging>jar</packaging>
-    <name>DTKit Default JUnit</name>
+    <artifactId>dtkit-default-tusar-jenkins</artifactId>
+    <version>0.16-SNAPSHOT</version>
+    <name>DTKit Default TUSAR Jenkins</name>
+    <packaging>dtkit-hudson-jar</packaging>
 
     <dependencies>
+
         <dependency>
             <groupId>com.thalesgroup.dtkit</groupId>
-            <artifactId>dtkit-junit-model</artifactId>
+            <artifactId>dtkit-default-tusar</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.thalesgroup.dtkit</groupId>
+            <artifactId>dtkit-metrics-hudson-api</artifactId>
         </dependency>
 
         <dependency>
@@ -48,27 +55,17 @@
             <artifactId>dtkit-tusar-model</artifactId>
         </dependency>
 
+        <!-- Used only for compiling the generated Hudson classes -->
         <dependency>
-            <groupId>com.thalesgroup.dtkit</groupId>
-            <artifactId>dtkit-processor</artifactId>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-core</artifactId>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
 
     <build>
         <plugins>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <compilerArguments>
-                        <processor>com.thalesgroup.dtkit.processor.InputMetricProcessor</processor>
-                    </compilerArguments>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
