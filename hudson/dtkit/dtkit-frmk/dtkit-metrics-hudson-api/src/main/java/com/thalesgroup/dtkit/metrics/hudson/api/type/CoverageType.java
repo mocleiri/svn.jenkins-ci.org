@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
+ * Copyright (c) 2011 Thales Corporate Services SAS                             *
  * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -32,6 +32,10 @@ import hudson.model.Hudson;
 
 @SuppressWarnings("unused")
 public abstract class CoverageType extends MetricsType implements Describable<CoverageType> {
+
+    protected CoverageType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
+        super(pattern, failureIfNotNew, deleteOutputFiles, stopProcessingIfError);
+    }
 
     protected CoverageType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles) {
         super(pattern, failureIfNotNew, deleteOutputFiles);

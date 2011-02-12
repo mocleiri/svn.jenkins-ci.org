@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
+ * Copyright (c) 2011 Thales Corporate Services SAS                             *
  * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -37,18 +37,28 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
 
     private final Boolean deleteOutputFiles;
 
+    private final Boolean stopProcessingIfError;
+
+    protected MetricsType(String pattern, Boolean faildedIfNotNew, Boolean deleteOutputFiles, Boolean stopProcessingIfError) {
+        this.pattern = pattern;
+        this.faildedIfNotNew = faildedIfNotNew;
+        this.deleteOutputFiles = deleteOutputFiles;
+        this.stopProcessingIfError = stopProcessingIfError;
+    }
+
     protected MetricsType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
         this.pattern = pattern;
         this.faildedIfNotNew = faildedIfNotNew;
         this.deleteOutputFiles = deleteOutputFiles;
+        this.stopProcessingIfError = true;
     }
 
     protected MetricsType(String pattern) {
         this.pattern = pattern;
         this.faildedIfNotNew = false;
         this.deleteOutputFiles = false;
+        this.stopProcessingIfError = true;
     }
-
 
     @SuppressWarnings("unused")
     public String getPattern() {
@@ -63,6 +73,11 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
     @SuppressWarnings("unused")
     public boolean isDeleteOutputFiles() {
         return (deleteOutputFiles == null ? true : deleteOutputFiles);
+    }
+
+    @SuppressWarnings("unused")
+    public Boolean isStopProcessingIfError() {
+        return stopProcessingIfError;
     }
 
     @SuppressWarnings("unused")
