@@ -27,7 +27,7 @@
 
         <component>
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
-            <role-hint>dtkit-hudson-jar</role-hint>
+            <role-hint>dtkit-jenkins-jar</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
             <configuration>
                 <lifecycles>
@@ -37,7 +37,7 @@
                             <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources
                             </process-resources>
                             <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
-                            <process-classes>org.jvnet.hudson.dtkit:dtkit-hudson-maven-plugin:generate</process-classes>
+                            <process-classes>com.thalesgroup.dtkit:dtkit-hudson-maven-plugin:generate</process-classes>
                             <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources
                             </process-test-resources>
                             <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
@@ -56,7 +56,7 @@
 
         <component>
             <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
-            <role-hint>dtkit-hudson-hpi</role-hint>
+            <role-hint>dtkit-jenkins-hpi</role-hint>
             <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
             <configuration>
                 <lifecycles>
@@ -66,13 +66,13 @@
                             <process-resources>org.apache.maven.plugins:maven-resources-plugin:resources
                             </process-resources>
                             <compile>org.apache.maven.plugins:maven-compiler-plugin:compile</compile>
-                            <process-classes>org.jvnet.hudson.dtkit:dtkit-hudson-maven-plugin:generate</process-classes>
+                            <process-classes>com.thalesgroup.dtkitt:dtkit-hudson-maven-plugin:generate</process-classes>
                             <process-test-resources>org.apache.maven.plugins:maven-resources-plugin:testResources
                             </process-test-resources>
                             <test-compile>org.apache.maven.plugins:maven-compiler-plugin:testCompile</test-compile>
                             <test>org.apache.maven.plugins:maven-surefire-plugin:test</test>
-                            <prepare-package>org.jvnet.hudson.tools:maven-hpi-plugin:apt-compile</prepare-package>
-                            <package>org.jvnet.hudson.tools:maven-hpi-plugin:hpi</package>
+                            <prepare-package>org.jenkins-ci.tools:maven-hpi-plugin:apt-compile</prepare-package>
+                            <package>org.jenkins-ci.tools:maven-hpi-plugin:hpi</package>
                             <install>org.apache.maven.plugins:maven-install-plugin:install</install>
                             <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
                         </phases>
