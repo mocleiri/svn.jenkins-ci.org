@@ -1,5 +1,5 @@
 /** *****************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
+ * Copyright (c) 2011 Thales Corporate Services SAS                             *
  * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -46,38 +46,38 @@ public class HudsonGenerator {
     out << "public class " + className + " extends ${hudsonType} {\n"
     out << "\n"
 
-    out << "private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + className + ".DescriptorImpl();\n"
+    out << "    private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + className + ".DescriptorImpl();\n"
     out << "\n"
 
-    out << "@DataBoundConstructor\n"
-    out << "public " + className + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {\n"
-    out << "  super(pattern, faildedIfNotNew, deleteOutputFiles);\n"
-    out << "}\n"
+    out << "    @DataBoundConstructor\n"
+    out << "    public " + className + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {\n"
+    out << "        super(pattern, faildedIfNotNew, deleteOutputFiles, stopProcessingIfError);\n"
+    out << "    }\n"
     out << "\n"
 
-    out << "public ${hudsonDescriptorType}<? extends ${hudsonType}> getDescriptor() {\n"
-    out << " return  DESCRIPTOR;\n"
-    out << "}\n"
+    out << "    public ${hudsonDescriptorType}<? extends ${hudsonType}> getDescriptor() {\n"
+    out << "        return  DESCRIPTOR;\n"
+    out << "    }\n"
     out << "\n"
 
-    out << "@Extension\n"
-    out << "public static class DescriptorImpl  extends ${hudsonDescriptorType}<" + className + "> {\n"
+    out << "    @Extension\n"
+    out << "    public static class DescriptorImpl  extends ${hudsonDescriptorType}<" + className + "> {\n"
     out << "\n"
 
-    out << "  public DescriptorImpl() {\n"
+    out << "        public DescriptorImpl() {\n"
     String classType = inputMetric.getMetaClass().getTheClass().toString();
     classType = classType.substring("class ".length());
     classType = classType + ".class"
-    out << "     super(" + className + ".class, " + classType + ");\n"
-    out << "  }\n"
+    out << "            super(" + className + ".class, " + classType + ");\n"
+    out << "        }\n"
     out << "\n"
 
-    out << "public String getId() {\n"
-    out << " return \"" + inputMetric.getMetaClass().getTheClass() + "\";\n"
-    out << "}\n"
+    out << "        public String getId() {\n"
+    out << "            return \"" + inputMetric.getMetaClass().getTheClass() + "\";\n"
+    out << "        }\n"
     out << "\n"
 
-    out << "}\n"
+    out << "    }\n"
     out << "\n"
 
     // Finish the  class
