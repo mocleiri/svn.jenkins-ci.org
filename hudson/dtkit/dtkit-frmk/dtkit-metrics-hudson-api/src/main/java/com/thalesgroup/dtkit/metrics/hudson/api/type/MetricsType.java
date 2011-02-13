@@ -76,7 +76,7 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
     }
 
     @SuppressWarnings("unused")
-    public Boolean isStopProcessingIfError() {
+    public boolean isStopProcessingIfError() {
         return stopProcessingIfError;
     }
 
