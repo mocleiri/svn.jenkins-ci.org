@@ -261,7 +261,7 @@ public class ChangeLogTask extends AbstractCvsTask {
                 // the server sends us all the logs that we care.
                 //
                 // the only downside of this change is that it will increase the traffic
-                // unnecessarily, but given that in Hudson we already narrow down the scope
+                // unnecessarily, but given that in Jenkins we already narrow down the scope
                 // by specifying files, this should be acceptable increase.
 
                 Date safeStart = new Date(m_start.getTime()-1000L*60*60*24);
