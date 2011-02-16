@@ -1,5 +1,5 @@
 <!--
-  This POM is used to bootstrap the Hudson plugin installation,
+  This POM is used to bootstrap the Jenkins plugin installation,
   to work around a bug in Maven, where:
 
     $ mvn org.jvnet.hudson.tools:maven-hpi-plugin:create
@@ -39,21 +39,8 @@
       </snapshots>
     </repository>
     <repository>
-      <id>java.net</id>
-      <url>http://download.java.net/maven/1</url>
-      <layout>legacy</layout>
-      <releases>
-        <enabled>true</enabled>
-        <!-- only look for jars here when they are not present locally -->
-        <updatePolicy>never</updatePolicy>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>java.net2</id>
-      <url>http://download.java.net/maven/2</url>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
       <releases>
         <enabled>true</enabled>
         <updatePolicy>never</updatePolicy>
@@ -63,12 +50,10 @@
       </snapshots>
     </repository>
     <repository>
-      <id>hudson-libs</id>
-      <url>https://www.dev.java.net/svn/hudson/trunk/hudson/main/lib</url>
-      <layout>legacy</layout>
+      <id>maven.jenkins-ci.org</id>
+      <url>http://maven.jenkins-ci.org/content/repositories/releases/</url>
       <releases>
         <enabled>true</enabled>
-        <!-- only look for jars here when they are not present locally -->
         <updatePolicy>never</updatePolicy>
       </releases>
       <snapshots>
@@ -79,8 +64,8 @@
 
   <pluginRepositories>
     <pluginRepository>
-      <id>java.net2</id>
-      <url>http://download.java.net/maven/2</url>
+      <id>m.g.o-public</id>
+      <url>http://maven.glassfish.org/content/groups/public/</url>
     </pluginRepository>
   </pluginRepositories>
 </project>
