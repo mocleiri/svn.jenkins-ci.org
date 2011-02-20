@@ -33,9 +33,4 @@ public class CppTestUnitTest extends AbstractTest {
         convertAndValidate(CppTestUnit.class, "cpptestunit/testcase1/inputcpptest.xml", "cpptestunit/testcase1/tusar-result.xml");
     }
 
-    @Test
-    public void cpptestTestcase2() throws Exception {
-        convertAndValidate(CppTestUnit.class, "cpptestunit/testcase2/inputcpptest.xml", "cpptestunit/testcase2/tusar-result.xml");
-    }
-
 }
