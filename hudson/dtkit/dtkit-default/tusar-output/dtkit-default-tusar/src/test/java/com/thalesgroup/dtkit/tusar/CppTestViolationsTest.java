@@ -41,4 +41,10 @@ public class CppTestViolationsTest extends AbstractTest {
     public void testcase3() throws Exception {
         convertAndValidate(CppTestViolations.class, "cpptestviolations/testcase3/inputcpptest_std.xml", "cpptestviolations/testcase3/tusar-result.xml");
     }
+
+    @Test
+    public void testcase4() throws Exception {
+        convertAndValidate(CppTestViolations.class, "cpptestviolations/testcase4/inputcpptest.xml", "cpptestviolations/testcase4/tusar-result.xml");
+    }
+
 }

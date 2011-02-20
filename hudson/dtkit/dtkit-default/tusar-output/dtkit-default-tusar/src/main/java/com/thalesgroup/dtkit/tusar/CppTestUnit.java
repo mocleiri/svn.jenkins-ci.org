@@ -57,7 +57,7 @@ public class CppTestUnit extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "cpptestunit-1.0-to-tusar-3.0.xsl";
+        return "cpptestunit-1.1-to-tusar-tests-3.0.xsl";
     }
 
     @Override
