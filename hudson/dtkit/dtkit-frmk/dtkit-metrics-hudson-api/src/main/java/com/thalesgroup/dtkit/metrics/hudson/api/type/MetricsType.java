@@ -37,7 +37,7 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
 
     private final Boolean deleteOutputFiles;
 
-    private final Boolean stopProcessingIfError;
+    private Boolean stopProcessingIfError;
 
     protected MetricsType(String pattern, Boolean faildedIfNotNew, Boolean deleteOutputFiles, Boolean stopProcessingIfError) {
         this.pattern = pattern;
@@ -83,5 +83,12 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
     @SuppressWarnings("unused")
     public abstract InputMetric getInputMetric();
 
+
+    public Object readResolve() {
+        if (stopProcessingIfError == null){
+            stopProcessingIfError = true;
+        }
+        return this;
+    }
 }
 
