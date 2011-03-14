@@ -110,16 +110,16 @@ public class ExtensionPointLister implements AnnotationProcessor {
 
             if(pageName!=null) {
                 env.getMessager().printNotice("Uploading to "+pageName);
-                ConfluenceSoapService service = Confluence.connect(new URL("http://wiki.hudson-ci.org/"));
+                ConfluenceSoapService service = Confluence.connect(new URL("http://wiki.jenkins-ci.org/"));
 
                 Properties props = new Properties();
-                File credential = new File(new File(System.getProperty("user.home")), ".hudson.confluence");
+                File credential = new File(new File(System.getProperty("user.home")), ".jenkins-ci.org");
                 if (!credential.exists())
                     throw new IOException("You need to have userName and password in "+credential);
                 props.load(new FileInputStream(credential));
                 String token = service.login(props.getProperty("userName"),props.getProperty("password"));
 
-                RemotePage p = service.getPage(token, "HUDSON", pageName);
+                RemotePage p = service.getPage(token, "JENKINS", pageName);
                 p.setContent(FileUtils.readFileToString(output));
                 service.storePage(token,p);
             }
