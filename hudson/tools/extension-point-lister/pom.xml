@@ -37,6 +37,24 @@
     </profile>
   </profiles>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.jvnet.hudson</groupId>
+      <artifactId>confluence-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
+    </dependency>
+  </dependencies>
+
+  <scm>
+    <connection>svn:https://svn.jenkins-ci.org/trunk/hudson/tools/extension-point-lister</connection>
+    <developerConnection>svn:https://svn.jenkins-ci.org/trunk/hudson/tools/extension-point-lister</developerConnection>
+  </scm>
+
   <repositories>
     <repository>
       <id>m.g.o-public</id>
@@ -50,16 +68,10 @@
     </repository>
   </repositories>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.jvnet.hudson</groupId>
-      <artifactId>confluence-api</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>1.4</version>
-    </dependency>
-  </dependencies>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>maven.jenkins-ci.org</id>
+      <url>http://maven.jenkins-ci.org:8081/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
