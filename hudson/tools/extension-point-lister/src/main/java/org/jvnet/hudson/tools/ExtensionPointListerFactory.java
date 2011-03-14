@@ -31,6 +31,8 @@ public class ExtensionPointListerFactory implements AnnotationProcessorFactory {
             if(k.startsWith("-Atarget="))
                 output = new File(k.substring("-Atarget=".length()));
         }
+        File dir = output.getParentFile();
+        if (dir!=null)  dir.mkdirs();
         return new ExtensionPointLister(env,page, output);
     }
 }
