@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot, Guillaume Tanier                                 *
+ * Copyright (c) 2011 Thales Corporate Services SAS                             *
+ * Author : Gregory Boissinot,                                                  *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -23,49 +23,35 @@
 
 package com.thalesgroup.dtkit.tusar.model;
 
-import com.thalesgroup.dtkit.metrics.model.OutputMetric;
-import com.thalesgroup.dtkit.util.validator.ValidationService;
+import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
 
-@SuppressWarnings("unused")
-public class TusarModel implements Serializable {
+public class Tusarv5 extends AbstractOutputMetric implements Serializable {
 
-    @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_0 = new Tusarv1() {
-        {
-            set(new ValidationService());
-        }
-    };
+    @Override
+    @XmlElement
+    public String getKey() {
+        return "tusar";
+    }
 
-    @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_2_0 = new Tusarv2() {
-        {
-            set(new ValidationService());
-        }
-    };
+    @Override
+    @XmlElement
+    public String getDescription() {
+        return "TUSAR OUTPUT FORMAT 5.0";
+    }
 
-    @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_3_0 = new Tusarv3() {
-        {
-            set(new ValidationService());
-        }
-    };
+    @Override
+    @XmlElement
+    public String getVersion() {
+        return "5.0";
+    }
 
-
-    @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_4_0 = new Tusarv4() {
-        {
-            set(new ValidationService());
-        }
-    };
-
-    @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_5_0 = new Tusarv5() {
-        {
-            set(new ValidationService());
-        }
-    };
-
+    @Override
+    @XmlElement
+    public String[] getXsdNameList() {
+        return new String[]{"xsd/tests-3.xsd", "xsd/coverage-3.xsd", "xsd/violations-4.xsd", "xsd/measures-4.xsd", "xsd/tusar-5.xsd"};
+    }
 }
