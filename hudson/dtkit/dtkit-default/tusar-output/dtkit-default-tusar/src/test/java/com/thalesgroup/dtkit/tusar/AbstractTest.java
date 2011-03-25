@@ -5,6 +5,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
+import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
@@ -15,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.io.File;
+import java.util.List;
 
 public class AbstractTest {
 
@@ -67,6 +69,14 @@ public class AbstractTest {
         Assert.assertTrue(resultOutput);
 
         outputXMLFile.deleteOnExit();
+    }
+
+    public void validOutputTusarV5(File inputXMLFile) {
+        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_5_0.validate(inputXMLFile);
+        for (ValidationError validatorError : errors) {
+            System.out.println("[ERROR] " + validatorError.toString());
+        }
+        Assert.assertTrue(errors.isEmpty());
     }
 
 }
