@@ -9,5 +9,4 @@ public class JUnitTest extends AbstractTest {
         convertAndValidate(JUnit.class, "junit/testcase1/input.xml", "junit/testcase1/tusar-result.xml");
     }
 
-
 }

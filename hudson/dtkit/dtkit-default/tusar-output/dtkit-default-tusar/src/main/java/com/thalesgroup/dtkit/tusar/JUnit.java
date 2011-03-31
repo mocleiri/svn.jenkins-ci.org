@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
+ * Copyright (c) 2010-2011 Thales Corporate Services SAS                        *
  * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -53,7 +53,7 @@ public class JUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "1.0";
+        return "3.0";
     }
 
     @Override
@@ -63,19 +63,19 @@ public class JUnit extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "junit-1.0-to-tusar-3.0.xsl";
+        return "junit-3-to-tusar-6.xsl";
     }
 
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
-        List<ValidationError> errors = JUnitModel.OUTPUT_JUNIT_1_0.validate(inputXMLFile);
+        List<ValidationError> errors = JUnitModel.OUTPUT_JUNIT_3.validate(inputXMLFile);
         this.setInputValidationErrors(errors);
         return errors.isEmpty();
     }
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_3_0;
+        return TusarModel.OUTPUT_TUSAR_6_0;
     }
 }
 
