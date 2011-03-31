@@ -28,7 +28,9 @@ import com.thalesgroup.dtkit.metrics.model.AbstractOutputMetric;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
-
+/**
+ * @author Gregory Boissinot
+ */
 public class Tusarv5 extends AbstractOutputMetric implements Serializable {
 
     @Override
