@@ -1,6 +1,6 @@
 <!--
 /*******************************************************************************
-* Copyright (c) 2011 Thales Corporate Services SAS                             *
+* Copyright (c) 2010-2011 Thales Corporate Services SAS                        *
 * Author : Gregory Boissinot                                                   *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -23,22 +23,22 @@
 *******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
 
     <parent>
         <groupId>com.thalesgroup.dtkit</groupId>
         <artifactId>dtkit-metrics-parent</artifactId>
-        <version>6</version>
+        <version>7-SNAPSHOT</version>
     </parent>
 
     <artifactId>dtkit-junit-model</artifactId>
     <version>0.15-SNAPSHOT</version>
-    <name>DTKIT JUNIT Model</name>
+    <name>DTKIT JUnit Model</name>
 
     <properties>
-        <frmk.model.version>0.14</frmk.model.version>
+        <frmk.model.version>0.14.1</frmk.model.version>
     </properties>
 
     <dependencies>
@@ -89,6 +89,19 @@
                             </schemaDirectory>
                             <schemaFiles>junit-2.xsd</schemaFiles>
                             <staleFile>${project.build.directory}/generated-sources/jaxb/junitv2/.staleFlag.</staleFile>
+                            <clearOutputDir>false</clearOutputDir>
+                        </configuration>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>junitv3</id>
+                        <configuration>
+                            <schemaDirectory>${basedir}/src/main/resources/com/thalesgroup/dtkit/junit/model/xsd
+                            </schemaDirectory>
+                            <schemaFiles>junit-3.xsd</schemaFiles>
+                            <staleFile>${project.build.directory}/generated-sources/jaxb/junitv3/.staleFlag.</staleFile>
                             <clearOutputDir>false</clearOutputDir>
                         </configuration>
                         <goals>

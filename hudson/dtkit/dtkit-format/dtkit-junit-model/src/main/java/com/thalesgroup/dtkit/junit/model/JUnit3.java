@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
+ * Copyright (c) 2011 Thales Corporate Services SAS                             *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -29,11 +29,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
+
 /**
  * @author Gregory Boissinot
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class JUnit1 extends AbstractOutputMetric implements Serializable {
+public class JUnit3 extends AbstractOutputMetric implements Serializable {
 
     @Override
     @XmlElement
@@ -44,18 +45,18 @@ public class JUnit1 extends AbstractOutputMetric implements Serializable {
     @Override
     @XmlElement
     public String getDescription() {
-        return "JUNIT OUTPUT FORMAT 1.0";
+        return "JUNIT OUTPUT FORMAT 3.0";
     }
 
     @Override
     @XmlElement
     public String getVersion() {
-        return "1.0";
+        return "3.0";
     }
 
     @Override
     @XmlElement
     public String[] getXsdNameList() {
-        return new String[]{"xsd/junit-1.0.xsd"};
+        return new String[]{"xsd/junit-3.xsd"};
     }
 }
