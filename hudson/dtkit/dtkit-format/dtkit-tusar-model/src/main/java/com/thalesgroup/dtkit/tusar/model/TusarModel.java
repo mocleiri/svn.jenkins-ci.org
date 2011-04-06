@@ -81,4 +81,7 @@ public class TusarModel implements Serializable {
             set(new ValidationService());
         }
     };
+ 
+    public static OutputMetric LATEST = OUTPUT_TUSAR_7_0;
+
 }
