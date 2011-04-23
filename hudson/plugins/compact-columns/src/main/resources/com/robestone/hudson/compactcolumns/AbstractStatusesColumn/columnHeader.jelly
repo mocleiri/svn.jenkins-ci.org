@@ -1,8 +1,8 @@
 <j:jelly xmlns:j="jelly:core">
 
-	<j:invokeStatic var="message_failed" className="com.robestone.hudson.compactcolumns.AbstractCompactColumn" method="getFailedMessage"/>
-	<j:invokeStatic var="message_unstable" className="com.robestone.hudson.compactcolumns.AbstractCompactColumn" method="getUnstableMessage"/>
-	<j:invokeStatic var="message_stable" className="com.robestone.hudson.compactcolumns.AbstractCompactColumn" method="getStableMessage"/>
+	<j:invokeStatic var="message_failed" className="com.robestone.hudson.compactcolumns.AbstractStatusesColumn" method="getFailedMessage"/>
+	<j:invokeStatic var="message_unstable" className="com.robestone.hudson.compactcolumns.AbstractStatusesColumn" method="getUnstableMessage"/>
+	<j:invokeStatic var="message_stable" className="com.robestone.hudson.compactcolumns.AbstractStatusesColumn" method="getStableMessage"/>
 
     <th tooltip=
     "&lt;span style='text-decoration: none; color: red; border-bottom: 1px solid'&gt;${message_failed}&lt;/span&gt;;
