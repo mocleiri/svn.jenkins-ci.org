@@ -156,7 +156,7 @@ public class IrcPublisher extends IMPublisher {
 
         String password = null;
 
-        String nick = null;
+        String nick = "jenkins-bot";
         
         String nickServPassword = null;
 
@@ -170,7 +170,7 @@ public class IrcPublisher extends IMPublisher {
         
         private List<IMMessageTarget> defaultTargets;
 
-        String commandPrefix = null;
+        String commandPrefix = "!jenkins";
         
         private String hudsonLogin;
         private String hudsonPassword;
