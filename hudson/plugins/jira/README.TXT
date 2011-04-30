@@ -1,2 +1,2 @@
-sources are in git https://github.com/hudson/jira-plugin
+sources are in git https://github.com/jenkinsci/jira-plugin
 
