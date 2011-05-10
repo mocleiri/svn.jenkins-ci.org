@@ -25,108 +25,108 @@
 *******************************************************************************/
 -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        xmlns:tests="http://www.thalesgroup.com/tusar/tests/v3"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+                xmlns:tests="http://www.thalesgroup.com/tusar/tests/v3"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
-<xsl:template match="/">
+    <xsl:template match="/">
 
-<tusar:tusar
-    xmlns:t="http://www.thalesgroup.com/tusar/tests/v3"
-    xmlns:tusar="http://www.thalesgroup.com/tusar/v3"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    version="3.0">
+        <tusar:tusar
+                xmlns:t="http://www.thalesgroup.com/tusar/tests/v3"
+                xmlns:tusar="http://www.thalesgroup.com/tusar/v3"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                version="3.0">
 
-<xsl:element name="tusar:tests">
+            <xsl:element name="tusar:tests">
 
-    <xsl:attribute name="toolname">cpptest</xsl:attribute>
-    <xsl:attribute name="version">7.3</xsl:attribute>
+                <xsl:attribute name="toolname">cpptest</xsl:attribute>
+                <xsl:attribute name="version">7.3</xsl:attribute>
 
-    <tests:testsuite name="{ResultsSession/Exec/Summary/Projects/Project/@name}" time="0"
-                     tests="{ResultsSession/Exec/Summary/Projects/Project/@testCases}"
-                     failures="{ResultsSession/Exec/Summary/Projects/Project/@fail}">
-        <xsl:apply-templates select="ResultsSession/Exec"></xsl:apply-templates>
-        <xsl:apply-templates select="ResultsSession/ExecutedTestsDetails"></xsl:apply-templates>
-    </tests:testsuite>
-</xsl:element>
-</tusar:tusar>
-</xsl:template>
+                <tests:testsuite name="{ResultsSession/Exec/Summary/Projects/Project/@name}" time="0"
+                                 tests="{ResultsSession/Exec/Summary/Projects/Project/@testCases}"
+                                 failures="{ResultsSession/Exec/Summary/Projects/Project/@fail}">
+                    <xsl:apply-templates select="ResultsSession/Exec"></xsl:apply-templates>
+                    <xsl:apply-templates select="ResultsSession/ExecutedTestsDetails"></xsl:apply-templates>
+                </tests:testsuite>
+            </xsl:element>
+        </tusar:tusar>
+    </xsl:template>
 
-<xsl:template match="Exec">
+    <xsl:template match="Exec">
 
-<xsl:apply-templates select="*"/>
+        <xsl:apply-templates select="*"/>
 
-</xsl:template>
+    </xsl:template>
 
-<xsl:template match="Goals">
-<tests:properties>
-<xsl:apply-templates select="Goal"/>
-</tests:properties>
-</xsl:template>
+    <xsl:template match="Goals">
+        <tests:properties>
+            <xsl:apply-templates select="Goal"/>
+        </tests:properties>
+    </xsl:template>
 
-<xsl:template match="Goal">
-<tests:property name="{@name}" value="{@type}"/>
-</xsl:template>
+    <xsl:template match="Goal">
+        <tests:property name="{@name}" value="{@type}"/>
+    </xsl:template>
 
-<xsl:template match="ExecViols">
-<xsl:apply-templates select="ExecViol"/>
-</xsl:template>
+    <xsl:template match="ExecViols">
+        <xsl:apply-templates select="ExecViol"/>
+    </xsl:template>
 
-<xsl:template match="ExecViol">
-<xsl:variable name="fullTestName"><xsl:value-of select="/ResultsSession/Exec/Summary/Projects/Project/@name"/>TusarTestSuite
-</xsl:variable>
+    <xsl:template match="ExecViol">
+        <xsl:variable name="fullTestName"><xsl:value-of select="/ResultsSession/Exec/Summary/Projects/Project/@name"/>TusarTestSuite
+        </xsl:variable>
 
-<xsl:if test="@cat!=6">
-<tests:testcase testname="{@testName}" fulltestname="{$fullTestName}" time="0">
-    <xsl:apply-templates select="Thr"/>
-</tests:testcase>
-</xsl:if>
+        <xsl:if test="@cat!=6">
+            <tests:testcase testname="{@testName}" fulltestname="{$fullTestName}" time="0">
+                <xsl:apply-templates select="Thr"/>
+            </tests:testcase>
+        </xsl:if>
 
-</xsl:template>
+    </xsl:template>
 
-<xsl:template match="Thr">
-<xsl:apply-templates select="ThrPart"/>
-</xsl:template>
+    <xsl:template match="Thr">
+        <xsl:apply-templates select="ThrPart"/>
+    </xsl:template>
 
-<xsl:template match="ThrPart">
-<tests:failure type="{@clName}" message="{@detMsg}"/>
-<tests:system-err>
-<xsl:text>Trace </xsl:text>
-<xsl:apply-templates select="Trace"/>
-</tests:system-err>
-</xsl:template>
+    <xsl:template match="ThrPart">
+        <tests:failure type="{@clName}" message="{@detMsg}"/>
+        <tests:system-err>
+            <xsl:text>Trace </xsl:text>
+            <xsl:apply-templates select="Trace"/>
+        </tests:system-err>
+    </xsl:template>
 
-<xsl:template match="Trace">
-<xsl:text>Line :</xsl:text>
-<xsl:value-of select="@ln"/>
-<xsl:text>    File :</xsl:text>
-<xsl:value-of select="@fileName"/>
-</xsl:template>
+    <xsl:template match="Trace">
+        <xsl:text>Line :</xsl:text>
+        <xsl:value-of select="@ln"/>
+        <xsl:text>    File :</xsl:text>
+        <xsl:value-of select="@fileName"/>
+    </xsl:template>
 
-<!--New way to convert test results-->
-<xsl:template match="ExecutedTestsDetails">
-<xsl:apply-templates select="Total"/>
-</xsl:template>
+    <!--New way to convert test results-->
+    <xsl:template match="ExecutedTestsDetails">
+        <xsl:apply-templates select="Total"/>
+    </xsl:template>
 
-<xsl:template match="Total">
-<xsl:apply-templates select="Project"/>
-</xsl:template>
+    <xsl:template match="Total">
+        <xsl:apply-templates select="Project"/>
+    </xsl:template>
 
-<xsl:template match="Project">
-<xsl:apply-templates select="TestSuite"/>
-</xsl:template>
+    <xsl:template match="Project">
+        <xsl:apply-templates select="TestSuite"/>
+    </xsl:template>
 
-<xsl:template match="TestSuite">
-<xsl:apply-templates select="*"/>
-</xsl:template>
+    <xsl:template match="TestSuite">
+        <xsl:apply-templates select="*"/>
+    </xsl:template>
 
-<xsl:template match="Test">
-<xsl:variable name="fullTestName"><xsl:value-of select="/ResultsSession/Exec/Summary/Projects/Project/@name"/>TusarTestSuite
-</xsl:variable>
-<xsl:if test="@pass=1">
-<tests:testcase testname="{@name}" fulltestname="{$fullTestName}" time="0"/>
-</xsl:if>
-</xsl:template>
+    <xsl:template match="Test">
+        <xsl:variable name="fullTestName"><xsl:value-of select="/ResultsSession/Exec/Summary/Projects/Project/@name"/>TusarTestSuite
+        </xsl:variable>
+        <xsl:if test="@pass=1">
+            <tests:testcase testname="{@name}" fulltestname="{$fullTestName}" time="0"/>
+        </xsl:if>
+    </xsl:template>
 
-<xsl:template match="text()|@*"/>
+    <xsl:template match="text()|@*"/>
 </xsl:stylesheet>
