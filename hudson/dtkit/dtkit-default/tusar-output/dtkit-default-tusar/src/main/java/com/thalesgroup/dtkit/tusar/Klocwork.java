@@ -63,7 +63,7 @@ public class Klocwork extends InputMetricXSL {
 
     @Override
     public String[] getInputXsdNameList() {
-        return new String[]{"klocwork-9.2.xsd"};
+        return new String[]{"klocwork-9.2-1.0.xsd"};
     }
 
     @Override

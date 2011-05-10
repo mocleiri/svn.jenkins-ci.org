@@ -43,11 +43,14 @@
 
                 <xsl:for-each-group select="CodingStandards/StdViols/StdViol" group-by="@locFile">
                     <!-- AM : getting the @fsPath corresponding to the @locFile (if it exists)-->
-                    <xsl:variable name="locFile"><xsl:value-of select="@locFile"/></xsl:variable>
+                    <xsl:variable name="locFile">
+                        <xsl:value-of select="@locFile"/>
+                    </xsl:variable>
                     <xsl:variable name="fsPath">
                         <xsl:choose>
                             <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">
-                                <xsl:value-of select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
+                                <xsl:value-of
+                                        select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of select="$locFile"/>
@@ -96,11 +99,14 @@
 
                 <xsl:for-each-group select="CodingStandards/StdViols/FlowViol" group-by="@locFile">
                     <!-- AM : getting the @fsPath corresponding to the @locFile (if it exists)-->
-                    <xsl:variable name="locFile"><xsl:value-of select="@locFile"/></xsl:variable>
+                    <xsl:variable name="locFile">
+                        <xsl:value-of select="@locFile"/>
+                    </xsl:variable>
                     <xsl:variable name="fsPath">
                         <xsl:choose>
                             <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">
-                                <xsl:value-of select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
+                                <xsl:value-of
+                                        select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of select="$locFile"/>
@@ -159,11 +165,14 @@
 
                 <xsl:for-each-group select="CodingStandards/StdViols/MetViol" group-by="@locFile">
                     <!-- AM : getting the @fsPath corresponding to the @locFile (if it exists)-->
-                    <xsl:variable name="locFile"><xsl:value-of select="@locFile"/></xsl:variable>
+                    <xsl:variable name="locFile">
+                        <xsl:value-of select="@locFile"/>
+                    </xsl:variable>
                     <xsl:variable name="fsPath">
                         <xsl:choose>
                             <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">
-                                <xsl:value-of select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
+                                <xsl:value-of
+                                        select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of select="$locFile"/>

@@ -70,7 +70,9 @@
 
     <xsl:template match="ExecViol">
         <!-- AM : getting the @fsPath corresponding to the @locFile (if it exists)-->
-        <xsl:variable name="locFile"><xsl:value-of select="@locFile"/></xsl:variable>
+        <xsl:variable name="locFile">
+            <xsl:value-of select="@locFile"/>
+        </xsl:variable>
         <xsl:variable name="fsPath">
             <xsl:choose>
                 <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">

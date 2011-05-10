@@ -4,22 +4,24 @@
              xmlns:t="http://www.thalesgroup.com/tusar/tests/v4"
              xmlns:tusar="http://www.thalesgroup.com/tusar/v6"
              version="6.0">
-   <tusar:tests toolname="junit">
-      <t:testsuite name="ProgressStateTest" tests="3" failures="1" errors="0" time="0.001">
-         <t:testcase testname="zeroValueOfValidTargetIsZeroPercent" fulltestname="ProgressStateTest"
-                     time="0"/>
-         <t:testcase testname="negativeValueOfValidTargetIsZeroPercent"
-                     fulltestname="ProgressStateTest"
-                     time="0"/>
-         <t:testcase testname="valueEqualTargetIsHundredPercent" fulltestname="ProgressStateTest"
-                     time="0.001">
-            <t:failure message="Value of: progress.getPercentage()&#xA;  Actual: 100&#xA;Expected: (unsigned int) 900&#xA;Which is: 900"
-                       type="">../progressStateTester.cpp:23
-Value of: progress.getPercentage()
-  Actual: 100
-Expected: (unsigned int) 900
-Which is: 900</t:failure>
-         </t:testcase>
-      </t:testsuite>
-   </tusar:tests>
+    <tusar:tests toolname="junit">
+        <t:testsuite name="ProgressStateTest" tests="3" failures="1" errors="0" time="0.001">
+            <t:testcase testname="zeroValueOfValidTargetIsZeroPercent" fulltestname="ProgressStateTest"
+                        time="0"/>
+            <t:testcase testname="negativeValueOfValidTargetIsZeroPercent"
+                        fulltestname="ProgressStateTest"
+                        time="0"/>
+            <t:testcase testname="valueEqualTargetIsHundredPercent" fulltestname="ProgressStateTest"
+                        time="0.001">
+                <t:failure
+                        message="Value of: progress.getPercentage()&#xA;  Actual: 100&#xA;Expected: (unsigned int) 900&#xA;Which is: 900"
+                        type="">../progressStateTester.cpp:23
+                    Value of: progress.getPercentage()
+                    Actual: 100
+                    Expected: (unsigned int) 900
+                    Which is: 900
+                </t:failure>
+            </t:testcase>
+        </t:testsuite>
+    </tusar:tests>
 </tusar:tusar>

@@ -22,14 +22,12 @@
  *******************************************************************************/
 package com.thalesgroup.dtkit.tusar;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 
 public class KlocworkTest extends AbstractTest {
 
     @Test
-    @Ignore
     public void testAutoTest() throws Exception {
         convertAndValidate(Klocwork.class, "klocwork/inputklocwork.xml", "klocwork/tusar-result.xml");
     }
