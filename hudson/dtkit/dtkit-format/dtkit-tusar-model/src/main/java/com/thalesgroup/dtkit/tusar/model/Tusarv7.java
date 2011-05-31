@@ -43,7 +43,7 @@ public class Tusarv7 extends AbstractOutputMetric implements Serializable {
     @Override
     @XmlElement
     public String getDescription() {
-        return "TUSAR OUTPUT FORMAT .0";
+        return "TUSAR OUTPUT FORMAT 7.0";
     }
 
     @Override
@@ -55,6 +55,6 @@ public class Tusarv7 extends AbstractOutputMetric implements Serializable {
     @Override
     @XmlElement
     public String[] getXsdNameList() {
-        return new String[]{"xsd/tests-4.xsd", "xsd/coverage-3.xsd", "xsd/violations-4.xsd", "xsd/measures-5.xsd", "xsd/tusar-6.xsd", "xsd/design-1.xsd", "xsd/size-1.xsd", "documentation-1.xsd", "duplications-1.xsd"};
+        return new String[]{ "xsd/design-1.xsd", "xsd/size-1.xsd", "xsd/documentation-1.xsd", "xsd/duplications-1.xsd", "xsd/tests-4.xsd", "xsd/coverage-3.xsd", "xsd/violations-4.xsd", "xsd/measures-5.xsd", "xsd/tusar-7.xsd"};
     }
 }
