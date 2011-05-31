@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tusar:tusar xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:t="http://www.thalesgroup.com/tusar/tests/v3"
+             xmlns:tusar="http://www.thalesgroup.com/tusar/v3"
+             version="3.0">
+    <tusar:tests toolname="cppunit" version="1.12.1">
+        <t:testsuite name="cppunit" errors="0" failures="1" tests="5">
+            <t:testcase fulltestname="MathTest" testname="testSum" time="0">
+                <t:failure message="equality assertion failed - Expected: 141496748 - Actual : 16777217"
+                           type="Assertion"/>
+                <t:system-err>
+                    [File] - mathTest.cpp
+                    [Line] - 56
+                </t:system-err>
+            </t:testcase>
+            <t:testcase fulltestname="MathTest" testname="testConstructor" time="0"/>
+            <t:testcase fulltestname="MathTest" testname="testPush" time="0"/>
+            <t:testcase fulltestname="ExpressionTest" testname="testConstructor" time="0"/>
+            <t:testcase fulltestname="ExpressionTest" testname="testPush" time="0"/>
+        </t:testsuite>
+    </tusar:tests>
+</tusar:tusar>

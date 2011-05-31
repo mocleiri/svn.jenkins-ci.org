@@ -1,0 +1,1936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*******************************************************************************
+* Copyright (c) 2009 Thales Corporate Services SAS                             *
+* Author : Gregory Boissinot                                                   *
+*                                                                              *
+* Permission is hereby granted, free of charge, to any person obtaining a copy *
+* of this software and associated documentation files (the "Software"), to deal*
+* in the Software without restriction, including without limitation the rights *
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell    *
+* copies of the Software, and to permit persons to whom the Software is        *
+* furnished to do so, subject to the following conditions:                     *
+*                                                                              *
+* The above copyright notice and this permission notice shall be included in   *
+* all copies or substantial portions of the Software.                          *
+*                                                                              *
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR   *
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,     *
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  *
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER       *
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,*
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN    *
+* THE SOFTWARE.                                                                *
+*******************************************************************************/
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="ResultsSession">
+        <xs:annotation>
+            <xs:documentation>Root of the result session, contains xml of a single Parasoft tool
+                execution.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Authors">
+                    <xs:annotation>
+                        <xs:documentation>List of authors</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="VersionInfos"/>
+                <xs:element ref="Locations"/>
+                <xs:element ref="Scope"/>
+                <xs:element ref="CodingStandards"/>
+                <xs:element ref="Metrics"/>
+                <xs:element ref="FunctionalTests"/>
+                <xs:element ref="Generation"/>
+                <xs:element ref="Exec"/>
+                <xs:element ref="ExecutedTestsDetails"/>
+                <xs:element ref="Goals"/>
+                <xs:element ref="CodeReview"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.ResultsSession"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.ResultsSession">
+        <xs:attribute name="time" use="required"/>
+        <xs:attribute name="toolName" use="required"/>
+        <xs:attribute name="toolVer" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="Authors">
+        <xs:annotation>
+            <xs:documentation>List of authors</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Author"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="VersionInfos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="StorageInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Scope">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ProjectInformations"/>
+                <xs:element minOccurs="0" ref="TestingProcessProblems"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CodingStandards">
+        <xs:annotation>
+            <xs:documentation>Contains results of a static analysis run</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Goal"/>
+                <xs:element ref="Projects"/>
+                <xs:element ref="StdViols"/>
+                <xs:element ref="Supps"/>
+                <xs:element ref="History"/>
+                <xs:element ref="Rules"/>
+                <xs:element ref="FailedRuns"/>
+                <xs:element ref="TestingProcessProblems"/>
+                <xs:element ref="TestedFilesDetails"/>
+                <xs:element name="FADetails"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.CodingStandards"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.CodingStandards">
+        <xs:attribute name="ownerId" use="required"/>
+        <xs:attribute name="time" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="Metrics">
+        <xs:annotation>
+            <xs:documentation>Contains results of a metrics run</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Metric"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Metrics"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Metrics">
+        <xs:attribute name="ownerId" use="required"/>
+        <xs:attribute name="time" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="visibleDepth" use="required"/>
+        <xs:attribute name="invSymbols" type="xs:boolean"/>
+    </xs:attributeGroup>
+    <xs:element name="FunctionalTests">
+        <xs:annotation>
+            <xs:documentation>Contains results of a functional test suite execution</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Goals"/>
+                <xs:element ref="History"/>
+                <xs:element ref="FuncViols"/>
+                <xs:element ref="Categories"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.FunctionalTests"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.FunctionalTests">
+        <xs:attribute name="ownerId" use="required"/>
+        <xs:attribute name="time" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="Generation">
+        <xs:annotation>
+            <xs:documentation>Contains results of an auto test generation run</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="TestingProcessProblems"/>
+                <xs:element name="Projects">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" ref="GenerationProjectInfo"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GenerationInformations"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Generation"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Generation">
+        <xs:attribute name="time" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="Exec">
+        <xs:annotation>
+            <xs:documentation>Contains results of unit tests execution</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Goals"/>
+                <xs:element ref="ExecViols"/>
+                <xs:element ref="History"/>
+                <xs:element ref="Categories"/>
+                <xs:element ref="Summary"/>
+                <xs:element ref="Coverage"/>
+                <xs:element ref="TestingProcessProblems">
+                </xs:element>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.Exec"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Exec">
+        <xs:attribute name="ownerId" use="required"/>
+        <xs:attribute name="time" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="CodeReview">
+        <xs:annotation>
+            <xs:documentation>Contains results of code reviews scanning session</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="TestingProcessProblems"/>
+                <xs:element ref="ScannerReviews"/>
+                <xs:element ref="UndefinedAuthors"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.CodeReview"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.CodeReview">
+        <xs:attribute name="ownerId" use="required"/>
+        <xs:attribute name="time" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="ScannerReviews">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Review"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Review">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Reviewers"/>
+                <xs:element ref="Monitors"/>
+                <xs:element ref="Sources"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.Review"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Review">
+        <xs:attribute name="active" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="author" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="date" use="required"/>
+        <xs:attribute name="new" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="num" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Reviewers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Reviewer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sources">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Source"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Reviewer">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Reviewer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Reviewer">
+        <xs:attribute name="active" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="name" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="status" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Source">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Source"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Source">
+        <xs:attribute name="issues" use="required"/>
+        <xs:attribute name="path" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Monitor">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Monitor"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Monitor">
+        <xs:attribute name="active" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="name" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="status" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="StorageInfo">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.StorageInfo"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.StorageInfo">
+        <xs:attribute name="ownerId" use="required"/>
+        <xs:attribute name="resultId" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="ver" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="ProjectInformations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ScopeProjectInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FailedRuns">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Src"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="StdViols">
+        <xs:annotation>
+            <xs:documentation>Collection of static analysis violations - bug detective, duplication,
+                static analysis and metrics
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="DupViol"/>
+                <xs:element ref="FlowViol">
+                    <xs:annotation>
+                        <xs:documentation>Bug Detective violation</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="MetViol">
+                    <xs:annotation>
+                        <xs:documentation>Metric violation</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="StdViol">
+                    <xs:annotation>
+                        <xs:documentation>Static Analysis violation</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Supps">
+        <xs:annotation>
+            <xs:documentation>collection of suppressions</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Supp"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TestedFilesDetails">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Total"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Rules">
+        <xs:annotation>
+            <xs:documentation>contains information about rules, rule categories and
+                severities
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RulesList"/>
+                <xs:element ref="CategoriesList"/>
+                <xs:element ref="SeverityList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Metric">
+        <xs:annotation>
+            <xs:documentation>contains information about calculated metric</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Info"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Metric"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Metric">
+        <xs:attribute name="aggType" use="required">
+            <xs:annotation>
+                <xs:documentation>Metric aggregation type, MAX (children maximum value used) or SUM
+                    (children values are added).
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="MAX"/>
+                    <xs:enumeration value="SUM"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="name" use="required">
+            <xs:annotation>
+                <xs:documentation>Metric name</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="short" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="lang" use="required" type="xs:string"/>
+    </xs:attributeGroup>
+    <xs:element name="FuncViols">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="FuncViol">
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerationInformations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GenerationInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ExecViols">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ExecViol">
+                    <xs:annotation>
+                        <xs:documentation>violation that is result of unit test execution</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="InsureViol">
+                    <xs:annotation>
+                        <xs:documentation>violation detected by Runtime Error Detection</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsureViol">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ElDescList"/>
+            </xs:sequence>
+            <xs:attribute name="auth" use="required" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>owner of the violation</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="cat" use="required" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>identifier of category</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="errTypeId" use="required" type="xs:string"/>
+            <xs:attribute name="ftype" use="required">
+                <xs:annotation>
+                    <xs:documentation>full name of type flagged with this violation</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="goals"/>
+            <xs:attribute name="hash" use="required" type="xs:integer"/>
+            <xs:attribute name="lang" use="required" type="xs:string"/>
+            <xs:attribute name="ln" use="required" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>line number</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="locEndLn" type="xs:integer"/>
+            <xs:attribute name="locEndPos" type="xs:integer"/>
+            <xs:attribute name="locFile"/>
+            <xs:attribute name="locStartPos" type="xs:integer"/>
+            <xs:attribute name="locStartln" type="xs:integer"/>
+            <xs:attribute name="locType" use="required" type="xs:string"/>
+            <xs:attribute name="msg" use="required">
+                <xs:annotation>
+                    <xs:documentation>error message</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="pid" type="xs:integer"/>
+            <xs:attribute name="rule" use="required" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>identifier of the runtime error detection rule</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="sev" use="required" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>severity of the rule</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="tool" use="required" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>parasoft tool</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="urgent" type="xs:boolean"/>
+            <xs:attribute name="uri" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ElDesc">
+        <xs:annotation>
+            <xs:documentation>single element of execution path or stack trace</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Props"/>
+                <xs:element ref="ElDescList"/>
+            </xs:choice>
+            <xs:attribute name="ElType" use="required" type="xs:string"/>
+            <xs:attribute name="desc" use="required">
+                <xs:annotation>
+                    <xs:documentation>description of element, usually describes point in source
+                        code
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="eln">
+                <xs:annotation>
+                    <xs:documentation>end line in case of multi-line location</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="rngLn"/>
+            <xs:attribute name="sourceRngHash"/>
+            <xs:attribute name="ln" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>line number</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="srcRngEndLn" type="xs:integer"/>
+            <xs:attribute name="srcRngEndPos" type="xs:integer"/>
+            <xs:attribute name="srcRngFile"/>
+            <xs:attribute name="srcRngStartPos" type="xs:integer"/>
+            <xs:attribute name="srcRngStartln" type="xs:integer"/>
+            <xs:attribute name="srcRnghash" type="xs:integer"/>
+            <xs:attribute name="srcRngLen" type="xs:integer"/>
+            <xs:attribute name="srcRngOffs" type="xs:integer"/>
+            <xs:attribute name="throwingMethod" type="xs:string"/>
+            <xs:attribute name="thrownTypes" type="xs:NMTOKEN"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Summary">
+        <xs:annotation>
+            <xs:documentation>execution statistics</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Total">
+                    <xs:complexType>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="CategoryErrors"/>
+                        </xs:choice>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Projects"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Coverage">
+        <xs:annotation>
+            <xs:documentation>contains coverage information of executest unit tests</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Types"/>
+                <xs:element ref="CvgStats"/>
+                <xs:element ref="History"/>
+                <xs:element ref="Files"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ScopeProjectInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="File"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.ScopeProjectInfo"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.ScopeProjectInfo">
+        <xs:attribute name="fltFiles" use="required"/>
+        <xs:attribute name="fltLns" use="required"/>
+        <xs:attribute name="project" use="required"/>
+        <xs:attribute name="totFiles" use="required"/>
+        <xs:attribute name="totLns" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="DupViol">
+        <xs:annotation>
+            <xs:documentation>Duplication violation</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ElDescList"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.DupViol"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.DupViol">
+        <xs:attribute name="NvActs" use="required"/>
+        <xs:attribute name="NvType" use="required"/>
+        <xs:attribute name="auth" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>owner of violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="cat" use="required" type="xs:NMTOKEN">
+            <xs:annotation>
+                <xs:documentation>category of violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="goals"/>
+        <xs:attribute name="hash" use="required"/>
+        <xs:attribute name="lang" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="ln" use="required">
+            <xs:annotation>
+                <xs:documentation>line number</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="locEndLn" use="required"/>
+        <xs:attribute name="locEndPos" use="required"/>
+        <xs:attribute name="locFile" use="required"/>
+        <xs:attribute name="locStartPos" use="required"/>
+        <xs:attribute name="locStartln" use="required"/>
+        <xs:attribute name="locType" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="msg" use="required">
+            <xs:annotation>
+                <xs:documentation>error message</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="rule" use="required" type="xs:NMTOKEN">
+            <xs:annotation>
+                <xs:documentation>identifier of the duplication rule</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="sev" use="required">
+            <xs:annotation>
+                <xs:documentation>severity of the rule</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="supp" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>is the violation supressed</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="urgent" type="xs:boolean"/>
+        <xs:attribute name="tool" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>parasoft tool</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="FlowViol">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Props"/>
+                <xs:element ref="ElDescList"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.FlowViol"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.FlowViol">
+        <xs:attribute name="FirstElSrcRngEndLn"/>
+        <xs:attribute name="FirstElSrcRngEndPos"/>
+        <xs:attribute name="FirstElSrcRngFile" use="required"/>
+        <xs:attribute name="FirstElSrcRngLen"/>
+        <xs:attribute name="FirstElSrcRngOffs"/>
+        <xs:attribute name="FirstElSrcRngStartPos"/>
+        <xs:attribute name="FirstElSrcRngStartln"/>
+        <xs:attribute name="auth" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>owner of the violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="eln">
+            <xs:annotation>
+                <xs:documentation>end line in case of multi-line location</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="goals"/>
+        <xs:attribute name="hash" use="required"/>
+        <xs:attribute name="id" use="required"/>
+        <xs:attribute name="lang" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="ln" use="required" type="xs:integer">
+            <xs:annotation>
+                <xs:documentation>line number</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="locEndLn"/>
+        <xs:attribute name="locEndPos"/>
+        <xs:attribute name="locFile" use="required"/>
+        <xs:attribute name="locLen"/>
+        <xs:attribute name="locOffs"/>
+        <xs:attribute name="locStartPos"/>
+        <xs:attribute name="locStartln"/>
+        <xs:attribute name="locType" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="msg" use="required">
+            <xs:annotation>
+                <xs:documentation>error message</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="rule" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>identifier of the Bug Detective rule</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ruleRHMsg"/>
+        <xs:attribute name="ruleSAFMsg" use="required"/>
+        <xs:attribute name="ruleSCSCMsg" use="required"/>
+        <xs:attribute name="sev" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="supp" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>is the violation supressed</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="urgent">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="true"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="sym"/>
+        <xs:attribute name="tool" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>parasoft tool</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="MetViol">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.MetViol"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.MetViol">
+        <xs:attribute name="auth" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>owner of the violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="cat" use="required" type="xs:NMTOKEN">
+            <xs:annotation>
+                <xs:documentation>category of violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="goals"/>
+        <xs:attribute name="hash" use="required"/>
+        <xs:attribute name="lang" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="ln" use="required" type="xs:integer">
+            <xs:annotation>
+                <xs:documentation>line number</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="locFile"/>
+        <xs:attribute name="locLen"/>
+        <xs:attribute name="locOffs"/>
+        <xs:attribute name="locType" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="msg" use="required">
+            <xs:annotation>
+                <xs:documentation>error message</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="resFile"/>
+        <xs:attribute name="rule" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>identifier of the Metric rule</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="sym" use="required"/>
+        <xs:attribute name="sev" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="supp" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>is the violation supressed</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="tool" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>parasoft tool</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="urgent">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="true"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="StdViol">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.StdViol"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.StdViol">
+        <xs:attribute name="auth" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>owner of the violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="sym" type="xs:string"/>
+        <xs:attribute name="cat" use="required" type="xs:NMTOKEN">
+            <xs:annotation>
+                <xs:documentation>category of violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="eln">
+            <xs:annotation>
+                <xs:documentation>end line in case of multi-line location</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="extAttr"/>
+        <xs:attribute name="goals"/>
+        <xs:attribute name="hash" use="required"/>
+        <xs:attribute name="lang" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="ln" use="required" type="xs:integer">
+            <xs:annotation>
+                <xs:documentation>line number</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="locEndLn"/>
+        <xs:attribute name="locEndPos"/>
+        <xs:attribute name="locFile"/>
+        <xs:attribute name="locLen"/>
+        <xs:attribute name="locOffs"/>
+        <xs:attribute name="locRng"/>
+        <xs:attribute name="locStartPos"/>
+        <xs:attribute name="locStartln"/>
+        <xs:attribute name="locType" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="msg" use="required">
+            <xs:annotation>
+                <xs:documentation>error message</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="project" type="xs:NMTOKEN"/>
+        <xs:attribute name="rule" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>identifier of the Static Analysis rule</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="testId"/>
+        <xs:attribute name="tool" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>parasoft tool</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="uri"/>
+        <xs:attribute name="sev" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="supp" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>is the violation supressed</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="urgent">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="true"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="Supp">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Supp"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Supp">
+        <xs:attribute name="suppAuth" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>author of suppression</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="suppCount" use="required"/>
+        <xs:attribute name="suppLoc" use="required"/>
+        <xs:attribute name="suppMsg" use="required"/>
+        <xs:attribute name="suppRsn" use="required">
+            <xs:annotation>
+                <xs:documentation>reason of suppression</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="suppRule" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="RulesList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Rule"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CategoriesList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="Category" type="ListCategory"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SeverityList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Severity"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FuncViol">
+        <xs:annotation>
+            <xs:documentation>functional violation</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.FuncViol"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.FuncViol">
+        <xs:attribute name="auth" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>owner of the violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="cat" use="required" type="xs:NMTOKEN">
+            <xs:annotation>
+                <xs:documentation>category of violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="fatal" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="hash" use="required"/>
+        <xs:attribute name="lang" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="ln" use="required" type="xs:integer">
+            <xs:annotation>
+                <xs:documentation>line number</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="locFile" use="required"/>
+        <xs:attribute name="locType" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="msg" use="required">
+            <xs:annotation>
+                <xs:documentation>error message</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="pageDescription"/>
+        <xs:attribute name="requestTrafficBody"/>
+        <xs:attribute name="requestTrafficHeaders"/>
+        <xs:attribute name="requestTrafficMIMEType"/>
+        <xs:attribute name="requestTrafficTime"/>
+        <xs:attribute name="responseTrafficBody"/>
+        <xs:attribute name="responseTrafficHeaders"/>
+        <xs:attribute name="responseTrafficMIMEType"/>
+        <xs:attribute name="responseTrafficTime"/>
+        <xs:attribute name="taskType" use="required"/>
+        <xs:attribute name="testCaseId" use="required"/>
+        <xs:attribute name="testParams"/>
+        <xs:attribute name="tool" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>parasoft tool</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="toolSource"/>
+        <xs:attribute name="violationDetails"/>
+        <xs:attribute name="sev" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="supp" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>is the violation supressed</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="urgent">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="true"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="GenerationInfo">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="TestCaseList">
+                    <xs:attributeGroup ref="attlist.GenerationInfo"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.GenerationInfo">
+        <xs:attribute name="auth" use="required" type="xs:string"/>
+        <xs:attribute name="testedType" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="time" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="unitTestType" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="ExecViol">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Thr">
+                    <xs:attributeGroup ref="attlist.ExecViol"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.ExecViol">
+        <xs:attribute name="actVal" use="required"/>
+        <xs:attribute name="auth" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>owner of the violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="cat" use="required" type="xs:NMTOKEN">
+            <xs:annotation>
+                <xs:documentation>category of violation</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="comparFail" type="xs:NMTOKEN"/>
+        <xs:attribute name="eln">
+            <xs:annotation>
+                <xs:documentation>end line in case of multi-line location</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="testParams"/>
+        <xs:attribute name="expectVal" use="required"/>
+        <xs:attribute name="goals"/>
+        <xs:attribute name="hash" use="required"/>
+        <xs:attribute name="lang" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="ln" use="required" type="xs:integer">
+            <xs:annotation>
+                <xs:documentation>line number</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="locEndLn"/>
+        <xs:attribute name="locEndPos"/>
+        <xs:attribute name="locFile" use="required"/>
+        <xs:attribute name="locLen"/>
+        <xs:attribute name="locOffs"/>
+        <xs:attribute name="locStartPos"/>
+        <xs:attribute name="locStartln"/>
+        <xs:attribute name="setupProblem">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="true"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="locType" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="sev" use="required">
+            <xs:annotation>
+                <xs:documentation>severity</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="sym"/>
+        <xs:attribute name="testCaseId" use="required"/>
+        <xs:attribute name="testCaseOrig" use="required"/>
+        <xs:attribute name="testId"/>
+        <xs:attribute name="testName"/>
+        <xs:attribute name="testedMet"/>
+        <xs:attribute name="testedType"/>
+        <xs:attribute name="tool" use="required" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>parasoft tool</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="unitTestMet"/>
+        <xs:attribute name="unitTestType"/>
+        <xs:attribute name="urgent">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="true"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="verifBy"/>
+        <xs:attribute name="whiteBox">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="true"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="Total">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Project"/>
+            </xs:choice>
+            <xs:attribute name="authFail"/>
+            <xs:attribute name="fail"/>
+            <xs:attribute name="name"/>
+            <xs:attribute name="pass"/>
+            <xs:attribute name="supp"/>
+            <xs:attribute name="total"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Types">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="CvgType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CvgStats">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="CvgInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Files">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="File">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                            <xs:element ref="Content"/>
+                            <xs:element ref="CvgData"/>
+                        </xs:sequence>
+                        <xs:attribute name="loc"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Rule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Stats"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Rule"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Rule">
+        <xs:attribute name="cat" use="required" type="xs:NMTOKEN">
+            <xs:annotation>
+                <xs:documentation>rule category</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="desc" use="required">
+            <xs:annotation>
+                <xs:documentation>rule description</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="qfix" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>is quickfix available</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="sev" use="required">
+            <xs:annotation>
+                <xs:documentation>rule severity</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="Severity">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Stats"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Severity"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Severity">
+        <xs:attribute name="id" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:int">
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="-1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:complexType name="TestCaseList">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="TestCaseList"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="TestCaseList" type="TestCase"/>
+    <xs:complexType name="Thr">
+        <xs:sequence>
+            <xs:element ref="Thr">
+                <xs:annotation>
+                    <xs:documentation>throwable/exception associated with this violation</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Thr">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ThrPart"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Thr"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Thr">
+        <xs:attribute name="lang" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="CategoryErrors">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="SubCategoryErrors"/>
+                <xs:element ref="TypeErrors"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.CategoryErrors"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TypeErrors">
+        <xs:complexType>
+            <xs:attribute name="authCount"/>
+            <xs:attribute name="authUrgCount"/>
+            <xs:attribute name="count" use="required" type="xs:integer"/>
+            <xs:attribute name="name" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.CategoryErrors">
+        <xs:attribute name="authCount"/>
+        <xs:attribute name="authUrgCount"/>
+        <xs:attribute name="cat" use="required"/>
+        <xs:attribute name="count" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="CvgType">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.CvgType"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.CvgType">
+        <xs:attribute name="cvgDecor" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="dispCvg" use="required"/>
+        <xs:attribute name="dispId" use="required" type="xs:NMTOKEN"/>
+        <xs:attribute name="dispName" use="required"/>
+        <xs:attribute name="dispNoCvg" use="required"/>
+        <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:complexType name="TestCase">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="TestCase"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="TestCase">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.TestCase"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.TestCase">
+        <xs:attribute name="val" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="ThrPart">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Trace"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.ThrPart"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.ThrPart">
+        <xs:attribute name="clName" use="required">
+            <xs:annotation>
+                <xs:documentation>class name or message</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="detMsg" use="required">
+            <xs:annotation>
+                <xs:documentation>detailed message if available</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="prnMsg" use="required">
+            <xs:annotation>
+                <xs:documentation>printable message
+                </xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="Trace">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Trace"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Trace">
+        <xs:attribute name="clName" use="required">
+            <xs:annotation>
+                <xs:documentation>class name or message</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="fhash" use="required"/>
+        <xs:attribute name="fileName" use="required">
+            <xs:annotation>
+                <xs:documentation>file name</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="ln" use="required" type="xs:integer">
+            <xs:annotation>
+                <xs:documentation>line number</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="metName" use="required">
+            <xs:annotation>
+                <xs:documentation>method name</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="Author">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Author"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Author">
+        <xs:attribute name="id" type="xs:string"/>
+        <xs:attribute name="name" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Delta" type="xs:string"/>
+    <xs:element name="TestSuite">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="TestSuite"/>
+                <xs:element ref="Test"/>
+                <xs:element ref="Stats"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.TestSuite"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.TestSuite">
+        <xs:attribute name="authFail" use="required"/>
+        <xs:attribute name="fail" use="required"/>
+        <xs:attribute name="id" use="required"/>
+        <xs:attribute name="name" use="required"/>
+        <xs:attribute name="pass" use="required"/>
+        <xs:attribute name="root" type="xs:NMTOKEN"/>
+        <xs:attribute name="tool"/>
+    </xs:attributeGroup>
+    <xs:element name="Test">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Stats"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Test"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Test">
+        <xs:attribute name="authFail" use="required"/>
+        <xs:attribute name="fail" use="required"/>
+        <xs:attribute name="id" use="required"/>
+        <xs:attribute name="name" use="required"/>
+        <xs:attribute name="pass" use="required"/>
+        <xs:attribute name="time" type="xs:NMTOKEN"/>
+        <xs:attribute name="tool"/>
+    </xs:attributeGroup>
+    <xs:element name="Stats">
+        <xs:complexType>
+            <xs:attribute name="authTot"/>
+            <xs:attribute name="authUrg"/>
+            <xs:attribute name="total"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="File">
+        <xs:complexType>
+            <xs:attribute name="path"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Content" type="xs:string"/>
+    <xs:element name="CvgData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Stat"/>
+                <xs:element ref="Lines"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.CvgData"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.CvgData">
+        <xs:attribute name="cvgType" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="Stat">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Stat"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Stat">
+        <xs:attribute name="val" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Lines">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Lines"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Lines">
+        <xs:attribute name="val" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="TestingProcessProblems">
+        <xs:annotation>
+            <xs:documentation>contains problems detected during testing session</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="InconsistentScopeProblem"/>
+                <xs:element ref="CppAnalysisProblem"/>
+                <xs:element ref="SourceControlProblem"/>
+                <xs:element ref="ScopeBuildProblem"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InconsistentScopeProblem">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ErrorList">
+                    <xs:attributeGroup ref="attlist.InconsistentScopeProblem"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.InconsistentScopeProblem">
+        <xs:attribute name="tested" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="ScopeBuildProblem">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ErrorList">
+                    <xs:attributeGroup ref="attlist.ScopeBuildProblem"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.ScopeBuildProblem">
+        <xs:attribute name="tested" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="CppAnalysisProblem">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ErrorList">
+                    <xs:attributeGroup ref="attlist.CppAnalysisProblem"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.CppAnalysisProblem">
+        <xs:attribute name="tested" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="SourceControlProblem">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="ErrorList">
+                    <xs:attributeGroup ref="attlist.SourceControlProblem"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.SourceControlProblem">
+        <xs:attribute name="tested" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Goal">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Goal"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Goal">
+        <xs:attribute name="active" type="xs:NMTOKEN"/>
+        <xs:attribute name="hash"/>
+        <xs:attribute name="id" type="xs:NMTOKEN"/>
+        <xs:attribute name="mode"/>
+        <xs:attribute name="name" use="required"/>
+        <xs:attribute name="tsks"/>
+        <xs:attribute name="type"/>
+    </xs:attributeGroup>
+    <xs:element name="Projects">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Project">
+                    <xs:complexType>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="ProjectErrors"/>
+                        </xs:choice>
+                        <xs:attribute name="fail"/>
+                        <xs:attribute name="name" use="required"/>
+                        <xs:attribute name="pass"/>
+                        <xs:attribute name="testCases"/>
+                        <xs:attribute name="totLns"/>
+                        <xs:attribute name="totFiles"/>
+                        <xs:attribute name="totErrs"/>
+                        <xs:attribute name="checkedFiles"/>
+                        <xs:attribute name="checkedLns"/>
+                        <xs:attribute name="qfixErrs"/>
+                        <xs:attribute name="supp"/>
+                        <xs:attribute name="suppErrs"/>
+                        <xs:attribute name="total"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerationProjectInfo">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.GenerationProjectInfo"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.GenerationProjectInfo">
+        <xs:attribute name="filesChecked" use="required"/>
+        <xs:attribute name="filesSkippedAsTests" use="required"/>
+        <xs:attribute name="filesSkippedWithCurrentTests" use="required"/>
+        <xs:attribute name="filesSkippedWithOldTests" use="required"/>
+        <xs:attribute name="filesSkippedWithoutTests" use="required"/>
+        <xs:attribute name="project" use="required" type="xs:string"/>
+        <xs:attribute name="testCases" use="required"/>
+        <xs:attribute name="testCls" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Project">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Res"/>
+                <xs:element ref="TestSuite"/>
+            </xs:choice>
+            <xs:attribute name="authFail"/>
+            <xs:attribute name="total"/>
+            <xs:attribute name="supp"/>
+            <xs:attribute name="name"/>
+            <xs:attribute name="pass"/>
+            <xs:attribute name="fail"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProjectErrors">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.ProjectErrors"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.ProjectErrors">
+        <xs:attribute name="cat" use="required"/>
+        <xs:attribute name="count" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="Props">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Prop"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Prop">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Prop"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Prop">
+        <xs:attribute name="key" use="required"/>
+        <xs:attribute name="val" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="ElDescList">
+        <xs:annotation>
+            <xs:documentation>list of elements that represent an execution path or stack
+                trace
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ElDesc"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="History">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Graph"/>
+                <xs:element ref="Tasks"/>
+                <xs:element ref="TestCases"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Tasks">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="X"/>
+                <xs:element ref="Y"/>
+                <xs:element maxOccurs="unbounded" ref="Author"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="GraphCategory">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Category" type="GraphCategory"/>
+            <xs:element ref="Stats"/>
+        </xs:choice>
+        <xs:attribute name="authPos"/>
+        <xs:attribute name="pos"/>
+        <xs:attribute name="color"/>
+        <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+    <xs:element name="Graph">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element name="Categories">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Category" type="GraphCategory"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Total">
+                    <xs:complexType>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="X"/>
+                            <xs:element ref="Y"/>
+                            <xs:element ref="Delta"/>
+                        </xs:choice>
+                        <xs:attribute name="secSer"/>
+                        <xs:attribute name="title"/>
+                        <xs:attribute name="xTitle" type="xs:NMTOKEN"/>
+                        <xs:attribute name="yTitle" type="xs:NMTOKEN"/>
+                        <xs:attribute name="yTitle2"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Authors">
+                    <xs:annotation>
+                        <xs:documentation>Authors statistics</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" maxOccurs="unbounded" name="Author">
+                                <xs:complexType>
+                                    <xs:sequence minOccurs="0">
+                                        <xs:element ref="X"/>
+                                        <xs:element ref="Y"/>
+                                        <xs:element ref="Delta"/>
+                                    </xs:sequence>
+                                    <xs:attributeGroup ref="attlist.Author"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attributeGroup ref="attlist.Authors"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.Graph"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Graph">
+        <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="attlist.Authors">
+        <xs:attribute name="secSer"/>
+        <xs:attribute name="title"/>
+        <xs:attribute name="xTitle" type="xs:NMTOKEN"/>
+        <xs:attribute name="yTitle"/>
+        <xs:attribute name="yTitle2"/>
+    </xs:attributeGroup>
+    <xs:element name="Info">
+        <xs:annotation>
+            <xs:documentation>Caclulated metric value</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Info"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Info"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Info">
+        <xs:attribute name="avg">
+            <xs:annotation>
+                <xs:documentation>Average value for all child elements (if applies)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="elem" use="required">
+            <xs:annotation>
+                <xs:documentation>Element for which the value has been calculated</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="est" type="xs:NMTOKEN"/>
+        <xs:attribute name="max">
+            <xs:annotation>
+                <xs:documentation>Maximum value for all child elements (if applies)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="stddev">
+            <xs:annotation>
+                <xs:documentation>Standard deviation value for all child elements (if applies)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="sum">
+            <xs:annotation>
+                <xs:documentation>Sum value for all child elements (if applies)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="val"/>
+    </xs:attributeGroup>
+    <xs:element name="Goals">
+        <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="Goal"/>
+                <xs:element ref="History"/>
+            </xs:choice>
+            <xs:attributeGroup ref="attlist.Goals"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Goals">
+        <xs:attribute name="tsks"/>
+    </xs:attributeGroup>
+    <xs:element name="CvgInfo">
+        <xs:annotation>
+            <xs:documentation>contains executed unit test coverage information</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="CvgInfo"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.CvgInfo"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.CvgInfo">
+        <xs:attribute name="exp"/>
+        <xs:attribute name="covLns"/>
+        <xs:attribute name="cvgPrt"/>
+        <xs:attribute name="elem">
+            <xs:annotation>
+                <xs:documentation>element for which coverage has been calculated</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="loc">
+            <xs:annotation>
+                <xs:documentation>location of element for which coverage has been calculated</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="name"/>
+        <xs:attribute name="num">
+            <xs:annotation>
+                <xs:documentation>number of covered elements</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="totLns"/>
+        <xs:attribute name="total">
+            <xs:annotation>
+                <xs:documentation>total number of coverable elements</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="val">
+            <xs:annotation>
+                <xs:documentation>percentage coverage value</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:element name="X" type="xs:string"/>
+    <xs:element name="Y" type="xs:string"/>
+    <xs:complexType name="ErrorList">
+        <xs:sequence>
+            <xs:element ref="ErrorList"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ErrorList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="Error">
+                    <xs:complexType>
+                        <xs:attribute name="val"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Error">
+        <xs:complexType>
+            <xs:attribute name="msg"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Locations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Loc"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ExecutedTestsDetails">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Total"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Loc">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.Loc"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Loc">
+        <xs:attribute name="fsPath" use="required"/>
+        <xs:attribute name="loc" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="UndefinedAuthors">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="UndefinedAuthor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Src">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Error"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Src"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Src">
+        <xs:attribute name="name" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="UndefinedAuthor">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.UndefinedAuthor"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.UndefinedAuthor">
+        <xs:attribute name="name" use="required" type="xs:NMTOKEN"/>
+    </xs:attributeGroup>
+    <xs:element name="Monitors">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Monitor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SubCategoryErrors">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="TypeErrors"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.SubCategoryErrors"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.SubCategoryErrors">
+        <xs:attribute name="authCount" use="required"/>
+        <xs:attribute name="authUrgCount" use="required"/>
+        <xs:attribute name="count" use="required"/>
+        <xs:attribute name="subCat" use="required"/>
+    </xs:attributeGroup>
+    <xs:element name="TestCases">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="X"/>
+                <xs:element ref="Y"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SubCategory">
+        <xs:complexType>
+            <xs:attributeGroup ref="attlist.SubCategory"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.SubCategory">
+        <xs:attribute name="id" use="required"/>
+        <xs:attribute name="name" use="required"/>
+        <xs:attribute name="short" use="required"/>
+    </xs:attributeGroup>
+    <xs:complexType name="ExecCategory">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="SubCategory"/>
+            <xs:element type="ExecCategory" name="Category"/>
+        </xs:choice>
+        <xs:attribute name="desc"/>
+        <xs:attribute name="id"/>
+        <xs:attribute name="label"/>
+        <xs:attribute name="label0"/>
+        <xs:attribute name="label1"/>
+        <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ListCategory">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element type="ListCategory" name="Category"/>
+            <xs:element ref="Stats"/>
+        </xs:choice>
+        <xs:attribute name="desc"/>
+        <xs:attribute name="name" use="required"/>
+        <xs:attribute name="total"/>
+    </xs:complexType>
+    <xs:element name="Categories">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="Category" type="ExecCategory"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Res">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Res"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="attlist.Res"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="attlist.Res">
+        <xs:attribute name="loc"/>
+        <xs:attribute name="locType" type="xs:NMTOKEN"/>
+        <xs:attribute name="name" use="required"/>
+        <xs:attribute name="supp" use="required"/>
+        <xs:attribute name="total" use="required"/>
+    </xs:attributeGroup>
+</xs:schema>

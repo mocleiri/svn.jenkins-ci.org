@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResultsSession time="02/03/11 15:13:58" toolName="C++test" toolVer="9.0.0.155">
+    <Authors>
+        <Author id="dev1" name="jenkins"/>
+    </Authors>
+    <VersionInfos>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.execution" resultId="IExecutionViolation" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.execution" resultId="InsureViolation" ver="3"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.codereview" resultId="ICodeReviewUndefinedAuthorsInfo"
+                     ver="1"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.codereview" resultId="ICodeReviewScannerInfo" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.generation" resultId="IGenerationInfo" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.generation" resultId="IGenerationProjectInfo" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.scope" resultId="IScopeProjectInfo" ver="3"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.standards" resultId="IMetricsViolation" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.standards" resultId="IFlowAnalysisViolation" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.standards" resultId="ICodingStandardsViolation" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.standards" resultId="IMetricEstimationInfo" ver="2"/>
+        <StorageInfo ownerId="com.parasoft.xtest.checkers.api.standards" resultId="IDupCodeViolation" ver="2"/>
+    </VersionInfos>
+
+    <Locations>
+        <Loc fsPath="M:\ama_P_test_cpp_int\exercice_new2\test_cpp\ATM\ATM.cxx" loc="/ATM/ATM/ATM.cxx"/>
+        <Loc fsPath="M:\ama_P_test_cpp_int\exercice_new2\test_cpp\ATM\include\BaseDisplay.hxx"
+             loc="/ATM/ATM/include/BaseDisplay.hxx"/>
+        <Loc fsPath="M:\ama_P_test_cpp_int\exercice_new2\test_cpp\ATM\Bank.cxx" loc="/ATM/ATM/Bank.cxx"/>
+        <Loc fsPath="M:\ama_P_test_cpp_int\exercice_new2\test_cpp\ATM\include\Account.hxx"
+             loc="/ATM/ATM/include/Account.hxx"/>
+    </Locations>
+
+
+    <Scope>
+        <ProjectInformations>
+            <ScopeProjectInfo fltFiles="8" fltLns="259" project="/ATM" totFiles="8" totLns="259"/>
+        </ProjectInformations>
+    </Scope>
+    <CodingStandards ownerId="com.parasoft.xtest.checkers.api.standards" time="0:00:01">
+        <Goal mode="1" name="Static"/>
+        <Projects>
+            <Project checkedFiles="8" checkedLns="259" name="ATM" qfixErrs="0" suppErrs="0" totErrs="6" totFiles="8"
+                     totLns="259"/>
+        </Projects>
+
+        <StdViols>
+            <StdViol sev="1" ln="4" cat="INIT" hash="-318977119" urgent="true" tool="c++test" locType="sr"
+                     msg="Constructor does not initialize members: 'myCurrentAccount'" lang="cpp" rule="INIT-06"
+                     auth="t0087419" locStartln="4" locStartPos="5" locEndLn="4" locEndPos="6"
+                     locFile="/ATM/ATM/ATM.cxx"/>
+            <StdViol sev="3" ln="10" cat="OPT" hash="-318977119" urgent="true" tool="c++test" locType="sr"
+                     msg="The parameter 'password' of function 'viewAccount' is passed by value" lang="cpp"
+                     rule="OPT-14" auth="t0087419" locStartln="10" locStartPos="48" locEndLn="10" locEndPos="49"
+                     locFile="/ATM/ATM/ATM.cxx"/>
+            <StdViol sev="3" ln="12" cat="MISRA2004" hash="-318977119" urgent="true" tool="c++test" locType="sr"
+                     msg="Assignment to 'myCurrentAccount' used in expression that yield a Boolean value" lang="cpp"
+                     rule="MISRA2004-13_1" auth="t0087419" locStartln="12" locStartPos="11" locEndLn="12" locEndPos="12"
+                     locFile="/ATM/ATM/ATM.cxx"/>
+            <StdViol sev="3" ln="15" cat="OPT" hash="-1422048276" urgent="true" tool="c++test" locType="sr"
+                     msg="The parameter 'password' of function 'getAccount' is passed by value" lang="cpp" rule="OPT-14"
+                     auth="t0087419" locStartln="15" locStartPos="42" locEndLn="15" locEndPos="43"
+                     locFile="/ATM/ATM/Bank.cxx"/>
+            <StdViol sev="1" ln="16" cat="CODSTA-CPP" hash="2036829073" urgent="true" tool="c++test" locType="sr"
+                     msg="Constructor 'Account' allowing conversion should be made explicit" lang="cpp"
+                     rule="CODSTA-CPP-04" auth="t0087419" locStartln="16" locStartPos="8" locEndLn="16" locEndPos="9"
+                     locFile="/ATM/ATM/include/Account.hxx"/>
+            <StdViol sev="2" ln="4" cat="OOP" hash="-2070703729" urgent="true" tool="c++test" locType="sr"
+                     msg="Class 'BaseDisplay' has virtual functions without a virtual destructor" lang="cpp"
+                     rule="OOP-23" auth="t0087419" locStartln="4" locStartPos="6" locEndLn="4" locEndPos="7"
+                     locFile="/ATM/ATM/include/BaseDisplay.hxx"/>
+        </StdViols>
+
+        <Supps/>
+
+        <FADetails/>
+
+
+        <Rules>
+            <RulesList>
+                <Rule cat="CODSTA"
+                      desc="Local variables and variables of class/parent classes/parent structs should have different name"
+                      id="CODSTA-44" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="CODSTA-CPP" desc="Constructors allowing for conversion should be made explicit"
+                      id="CODSTA-CPP-04" sev="1">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Rule>
+                <Rule cat="CODSTA-CPP" desc="Do not use user-defined conversion functions" id="CODSTA-CPP-05" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="EXCEPT"
+                      desc="Never allow an exception to be thrown from a destructor, deallocation, and swap"
+                      id="EXCEPT-01" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="EXCEPT" desc="Throw by value, catch by reference" id="EXCEPT-02" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="EXCEPT" desc="Do not throw from within destructor" id="EXCEPT-03" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="INIT" desc="All member variables should be initialized in constructor" id="INIT-06" sev="1">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Rule>
+                <Rule cat="INIT" desc="Initialize static class members" id="INIT-09" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="METRICS" desc="Follow the Cyclomatic Complexity limit of 10" id="METRICS-18" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MISRA2004"
+                      desc="Assignment operators shall not be used in expressions that yield a Boolean value"
+                      id="MISRA2004-13_1" sev="3">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Rule>
+                <Rule cat="MISRA2004" desc="Floating-point expressions shall not be tested for equality or inequality"
+                      id="MISRA2004-13_3" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MISRA2004"
+                      desc="The controlling expression of a for statement shall not contain any objects of floating type"
+                      id="MISRA2004-13_4" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Do not invoke malloc/realloc for objects having constructors" id="MRM-08" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Never return a reference to a local object" id="MRM-24" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Avoid hiding the global new" id="MRM-32" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Declare an assignment operator for classes with dynamically allocated memory"
+                      id="MRM-37" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Declare a copy constructor for classes with dynamically allocated memory"
+                      id="MRM-38" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Adhere to convention when writing new" id="MRM-13" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Write operator delete if you write operator new" id="MRM-26" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Write operator delete[] if you write operator new[]" id="MRM-27" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Never provide brackets ([]) for delete when deallocating non-arrays" id="MRM-35"
+                      sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="MRM" desc="Always provide empty brackets ([]) for delete when deallocating arrays"
+                      id="MRM-36" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OOP" desc="Do not directly access global data from a constructor" id="OOP-08" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OOP" desc="Avoid calling virtual functions from constructors and destructors" id="OOP-16"
+                      sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OOP" desc="Make destructors virtual in base classes" id="OOP-24" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OOP"
+                      desc="A pointer to an abstract class shall not be converted to a pointer of a class that inherits from that abstract class"
+                      id="OOP-29" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OOP" desc="Make base class destructors public and virtual, or protected and nonvirtual"
+                      id="OOP-31" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OOP" desc="If a class has virtual functions it shall have a virtual destructor" id="OOP-23"
+                      sev="2">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Rule>
+                <Rule cat="OOP"
+                      desc="Public member functions shall not return non-const handles to private/protected class-data"
+                      id="OOP-36" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OPT" desc="Declare member variables in the descending size order" id="OPT-13" sev="3">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="OPT" desc="Pass objects by reference instead of by value" id="OPT-14" sev="3">
+                    <Stats authTot="2;" authUrg="2;" total="2"/>
+                </Rule>
+                <Rule cat="PB" desc="Do not call delete on non-pointers" id="PB-13" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+                <Rule cat="SECURITY" desc="Never use gets()" id="SECURITY-16" sev="1">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Rule>
+            </RulesList>
+            <CategoriesList>
+                <Category desc="BugDetective (License Required)" name="BD" total="26">
+                    <Category desc="Miscellaneous" name="BD-MISC" total="1">
+                        <Stats authTot="0;" authUrg="0;" total="0"/>
+                    </Category>
+                    <Category desc="Security" name="BD-SECURITY" total="7">
+                        <Stats authTot="0;" authUrg="0;" total="0"/>
+                    </Category>
+                    <Category desc="Resources" name="BD-RES" total="4">
+                        <Stats authTot="0;" authUrg="0;" total="0"/>
+                    </Category>
+                    <Category desc="Possible Bugs" name="BD-PB" total="11">
+                        <Stats authTot="0;" authUrg="0;" total="0"/>
+                    </Category>
+                    <Category desc="Threads &amp; Synchronization" name="BD-TRS" total="3">
+                        <Stats authTot="0;" authUrg="0;" total="0"/>
+                    </Category>
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Coding Conventions" name="CODSTA" total="171">
+                    <Category desc="Coding Conventions for C++" name="CODSTA-CPP" total="78">
+                        <Stats authTot="1;" authUrg="1;" total="1"/>
+                    </Category>
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Comments" name="COMMENT" total="10">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Exceptions" name="EXCEPT" total="18">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Formatting" name="FORMAT" total="38">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Initialization" name="INIT" total="14">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Category>
+                <Category desc="Joint Strike Fighter" name="JSF" total="220">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Metrics" name="METRICS" total="41">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="MISRA C" name="MISRA" total="57">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="MISRA C 2004" name="MISRA2004" total="194">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Category>
+                <Category desc="MISRA C++ 2008" name="MISRA2008" total="264">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Memory and Resource Management" name="MRM" total="47">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Naming Conventions" name="NAMING" total="92">
+                    <Category desc="Hungarian Notation" name="NAMING-HN" total="44">
+                        <Stats authTot="0;" authUrg="0;" total="0"/>
+                    </Category>
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Object Oriented" name="OOP" total="51">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Category>
+                <Category desc="Optimization" name="OPT" total="33">
+                    <Stats authTot="2;" authUrg="2;" total="2"/>
+                </Category>
+                <Category desc="Possible Bugs" name="PB" total="49">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Physical File Organization" name="PFO" total="9">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Portability" name="PORT" total="24">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Preprocessor" name="PREPROC" total="15">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Qt Best Practices" name="QT" total="18">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Security" name="SECURITY" total="38">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="STL Best Practices" name="STL" total="42">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+                <Category desc="Template" name="TEMPL" total="12">
+                    <Stats authTot="0;" authUrg="0;" total="0"/>
+                </Category>
+            </CategoriesList>
+            <SeverityList>
+                <Severity id="1">
+                    <Stats authTot="2;" authUrg="2;" total="2"/>
+                </Severity>
+                <Severity id="2">
+                    <Stats authTot="1;" authUrg="1;" total="1"/>
+                </Severity>
+                <Severity id="3">
+                    <Stats authTot="3;" authUrg="3;" total="3"/>
+                </Severity>
+            </SeverityList>
+        </Rules>
+    </CodingStandards>
+    <Metrics ownerId="com.parasoft.xtest.checkers.api.standards" time="0:00:01" visibleDepth="1">
+
+    </Metrics>
+</ResultsSession>
