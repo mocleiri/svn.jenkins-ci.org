@@ -58,7 +58,7 @@ public class Klocwork extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "klocwork-1.1-to-tusar-3.0.xsl";
+        return "klocwork-1.1-to-tusar-7.0.xsl";
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Klocwork extends InputMetricXSL {
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_3_0;
+        return TusarModel.OUTPUT_TUSAR_7_0;
     }
 }
 
