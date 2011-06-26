@@ -53,4 +53,11 @@ public class JUnitModel implements Serializable {
             set(new ValidationService());
         }
     };
+
+    @SuppressWarnings("unused")
+    public static JUnit4 OUTPUT_JUNIT_4 = new JUnit4() {
+        {
+            set(new ValidationService());
+        }
+    };
 }

@@ -107,6 +107,20 @@
                             <goal>xjc</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>junitv4</id>
+                        <configuration>
+                            <schemaDirectory>${basedir}/src/main/resources/com/thalesgroup/dtkit/junit/model/xsd
+                            </schemaDirectory>
+                            <schemaFiles>junit-4.xsd</schemaFiles>
+                            <staleFile>${project.build.directory}/generated-sources/jaxb/junitv4/.staleFlag.</staleFile>
+                            <clearOutputDir>false</clearOutputDir>
+                        </configuration>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+
                 </executions>
             </plugin>
 
