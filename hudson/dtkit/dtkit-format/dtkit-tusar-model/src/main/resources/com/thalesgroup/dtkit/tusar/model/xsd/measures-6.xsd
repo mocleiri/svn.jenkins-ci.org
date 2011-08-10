@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema
+        xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
+        xmlns:design="http://www.thalesgroup.com/tusar/design/v1"
+        xmlns:documentation="http://www.thalesgroup.com/tusar/documentation/v1"
+        xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
+        targetNamespace="http://www.thalesgroup.com/tusar/measures/v6"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <xs:import namespace="http://www.thalesgroup.com/tusar/duplications/v1"
+               schemaLocation="duplications-1.xsd"/>
+    <xs:import namespace="http://www.thalesgroup.com/tusar/design/v1"
+               schemaLocation="design-1.xsd"/>
+    <xs:import namespace="http://www.thalesgroup.com/tusar/documentation/v1"
+               schemaLocation="documentation-1.xsd"/>
+    <xs:import namespace="http://www.thalesgroup.com/tusar/size/v1"
+               schemaLocation="size-1.xsd"/>
+
+    <xs:complexType name="MeasuresComplexType">
+        <xs:sequence>
+            <xs:element name="duplications" type="duplications:DuplicationsComplexType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="design" type="design:DesignComplexType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="documentation" type="documentation:DocumentationComplexType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="size" type="size:SizeComplexType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="toolname" type="xs:string" use="optional"/>
+        <xs:attribute name="version" type="xs:string" use="optional"/>
+        <xs:attribute name="xmlns_xsi" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+</xs:schema>
