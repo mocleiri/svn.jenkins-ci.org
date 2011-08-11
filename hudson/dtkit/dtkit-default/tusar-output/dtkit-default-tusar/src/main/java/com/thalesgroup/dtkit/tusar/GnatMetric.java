@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Joel Forner                                                         *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -63,7 +62,7 @@ public class GnatMetric extends InputMetricXSL {
 
     @Override
     public String[] getInputXsdNameList() {
-        return new String[]{"gnatmetric-1.0.xsd"};
+        return new String[]{"gnatmetric-1.1.xsd"};
     }
 
     @Override
