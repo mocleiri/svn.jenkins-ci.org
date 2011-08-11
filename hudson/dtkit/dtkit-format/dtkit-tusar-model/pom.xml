@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.thalesgroup.dtkit</groupId>
         <artifactId>dtkit-metrics-parent</artifactId>
-        <version>7</version>
+        <version>9-SNAPSHOT</version>
     </parent>
 
     <artifactId>dtkit-tusar-model</artifactId>
@@ -185,6 +185,21 @@
                             <goal>xjc</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>tusarv8</id>
+                        <configuration>
+                            <schemaDirectory>${basedir}/src/main/resources/com/thalesgroup/dtkit/tusar/model/xsd
+                            </schemaDirectory>
+                            <schemaFiles>tusar-8.xsd</schemaFiles>
+                            <staleFile>${project.build.directory}/generated-sources/jaxb/tusar
+v8/.staleFlag.</staleFile>
+                            <clearOutputDir>false</clearOutputDir>
+                        </configuration>
+                        <goals>                       
+			     <goal>xjc</goal>
+                        </goals>             
+                   </execution>
 
                 </executions>
             </plugin>

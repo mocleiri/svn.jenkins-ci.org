@@ -39,7 +39,6 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Cause;
 import hudson.model.FreeStyleProject;
-import hudson.model.Job;
 import hudson.model.ParametersAction;
 import hudson.model.StringParameterValue;
 import hudson.scm.SubversionSCM.ModuleLocation;

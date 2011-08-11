@@ -16,9 +16,13 @@
  */
 package org.jvnet.hudson.plugins.thinbackup.backup;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Calendar;
+import java.util.Date;
 
 import junit.framework.Assert;
 
@@ -26,15 +30,36 @@ import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.junit.Test;
 import org.jvnet.hudson.plugins.thinbackup.HudsonDirectoryStructureSetup;
 import org.jvnet.hudson.plugins.thinbackup.ThinBackupPeriodicWork.BackupType;
+import org.jvnet.hudson.plugins.thinbackup.ThinBackupPluginImpl;
 
 public class TestHudsonBackup extends HudsonDirectoryStructureSetup {
+
+  private ThinBackupPluginImpl createMockPlugin() {
+    final ThinBackupPluginImpl mockPlugin = mock(ThinBackupPluginImpl.class);
+
+    when(mockPlugin.getHudsonHome()).thenReturn(root);
+    when(mockPlugin.getFullBackupSchedule()).thenReturn("");
+    when(mockPlugin.getDiffBackupSchedule()).thenReturn("");
+    when(mockPlugin.getBackupPath()).thenReturn(backupDir.getAbsolutePath());
+    when(mockPlugin.getNrMaxStoredFull()).thenReturn(-1);
+    when(mockPlugin.isCleanupDiff()).thenReturn(false);
+    when(mockPlugin.isMoveOldBackupsToZipFile()).thenReturn(false);
+    when(mockPlugin.isBackupBuildResults()).thenReturn(true);
+    when(mockPlugin.isBackupBuildArchive()).thenReturn(false);
+    when(mockPlugin.isBackupNextBuildNumber()).thenReturn(false);
+    when(mockPlugin.getExcludedFilesRegex()).thenReturn("");
+
+    return mockPlugin;
+  }
 
   @Test
   public void testBackup() throws Exception {
     final Calendar cal = Calendar.getInstance();
     cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE - 10));
 
-    new HudsonBackup(backupDir, root, BackupType.FULL, -1, false, false, true, cal.getTime(), "").backup();
+    final ThinBackupPluginImpl mockPlugin = createMockPlugin();
+
+    new HudsonBackup(mockPlugin, BackupType.FULL, cal.getTime()).backup();
 
     String[] list = backupDir.list();
     Assert.assertEquals(1, list.length);
@@ -56,7 +81,10 @@ public class TestHudsonBackup extends HudsonDirectoryStructureSetup {
     final Calendar cal = Calendar.getInstance();
     cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE - 10));
 
-    new HudsonBackup(backupDir, root, BackupType.FULL, -1, false, false, true, cal.getTime(), "^.*\\.(log)$").backup();
+    final ThinBackupPluginImpl mockPlugin = createMockPlugin();
+    when(mockPlugin.getExcludedFilesRegex()).thenReturn("^.*\\.(log)$");
+
+    new HudsonBackup(mockPlugin, BackupType.FULL, cal.getTime()).backup();
 
     String[] list = backupDir.list();
     Assert.assertEquals(1, list.length);
@@ -86,7 +114,10 @@ public class TestHudsonBackup extends HudsonDirectoryStructureSetup {
     final Calendar cal = Calendar.getInstance();
     cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE - 10));
 
-    new HudsonBackup(backupDir, root, BackupType.FULL, -1, false, false, false, cal.getTime(), "").backup();
+    final ThinBackupPluginImpl mockPlugin = createMockPlugin();
+    when(mockPlugin.isBackupBuildResults()).thenReturn(false);
+
+    new HudsonBackup(mockPlugin, BackupType.FULL, cal.getTime()).backup();
 
     String[] list = backupDir.list();
     Assert.assertEquals(1, list.length);
@@ -105,7 +136,9 @@ public class TestHudsonBackup extends HudsonDirectoryStructureSetup {
     final Calendar cal = Calendar.getInstance();
     cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE - 10));
 
-    new HudsonBackup(backupDir, root, BackupType.FULL, -1, false, false, true, cal.getTime(), "").backup();
+    final ThinBackupPluginImpl mockPlugin = createMockPlugin();
+
+    new HudsonBackup(mockPlugin, BackupType.FULL, cal.getTime()).backup();
 
     // fake modification
     backupDir.listFiles((FileFilter) FileFilterUtils.prefixFileFilter(BackupType.FULL.toString()))[0]
@@ -115,24 +148,10 @@ public class TestHudsonBackup extends HudsonDirectoryStructureSetup {
       globalConfigFile.setLastModified(System.currentTimeMillis() - 60000 * 120);
     }
 
-    new HudsonBackup(backupDir, root, BackupType.DIFF, -1, false, false, true, "").backup();
+    new HudsonBackup(mockPlugin, BackupType.DIFF, new Date()).backup();
     final File lastDiffBackup = backupDir.listFiles((FileFilter) FileFilterUtils.prefixFileFilter(BackupType.DIFF
         .toString()))[0];
     Assert.assertEquals(1, lastDiffBackup.list().length);
   }
 
-  @Test
-  public void testNullFileExclusionRegexTestConstructor() {
-    final Calendar cal = Calendar.getInstance();
-    cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE - 10));
-    final HudsonBackup backup = new HudsonBackup(backupDir, root, BackupType.FULL, -1, false, false, true, cal.getTime(), null);
-    Assert.assertNotNull(backup);
-  }
-  
-  @Test
-  public void testNullFileExclusionRegex() {
-    final HudsonBackup backup = new HudsonBackup(backupDir, root, BackupType.FULL, -1, false, false, true, null);
-    Assert.assertNotNull(backup);
-  }
-  
 }

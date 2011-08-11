@@ -574,7 +574,7 @@ public class SubversionSCM extends SCM implements Serializable {
      *      A build may not have a revision file for any number of reasons (such as failure, interruption, etc.)
      * @return
      *      map from {@link SvnInfo#url Subversion URL} to its revision.  If there is more than one, choose
-     *      the one with the least revision
+     *      the one with the smallest revision number
      */
     /*package*/ static Map<String,Long> parseRevisionFile(AbstractBuild<?,?> build, boolean findClosest, boolean prunePinnedExternals) throws IOException {
         Map<String,Long> revisions = new HashMap<String,Long>(); // module -> revision
@@ -624,9 +624,9 @@ public class SubversionSCM extends SCM implements Serializable {
                         		// For unpinned, take minimum
                         		revisions.put(url, revision);
                     	}
-                    	} catch (NumberFormatException e) {
-                    		// perhaps a corrupted line. ignore
-                    	}
+                	} catch (NumberFormatException e) {
+                		// perhaps a corrupted line. ignore
+                	}
                 }
             } finally {
                 br.close();
@@ -902,7 +902,10 @@ public class SubversionSCM extends SCM implements Serializable {
         private static final long serialVersionUID = 1L;
     }
 
-    public static final class SvnInfoP implements Serializable {
+    /**
+     * {@link SvnInfo} plus a flag if the revision is fixed.
+     */
+    private static final class SvnInfoP implements Serializable {
         /**
          * SvnInfo with an indicator boolean indicating whether this is a pinned external
          */
