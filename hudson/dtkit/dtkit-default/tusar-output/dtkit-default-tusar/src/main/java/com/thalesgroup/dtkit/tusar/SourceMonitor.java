@@ -17,7 +17,7 @@ public class SourceMonitor extends InputMetricXSL {
 
     @Override
     public InputType getToolType() {
-        return InputType.TEST;
+        return InputType.MEASURE;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class SourceMonitor extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "sourcemonitor-2.6-1.0-to-tusar-8.0.xsl";
+        return "sourcemonitor-2.6-to-tusar-8.0.xsl";
     }
 
     @Override
