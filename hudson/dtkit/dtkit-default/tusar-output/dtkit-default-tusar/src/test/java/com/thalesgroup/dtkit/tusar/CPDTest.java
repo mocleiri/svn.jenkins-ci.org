@@ -2,8 +2,6 @@ package com.thalesgroup.dtkit.tusar;
 
 import org.junit.Test;
 
-import java.io.File;
-
 /**
  * @author Gregory Boissinot
  */

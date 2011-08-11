@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd-cpd>
-<duplication lines="22" tokens="119">
-<file line="43" path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"/>
-<file line="43" path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/warnings/DefaultWarningsRule.java"/>
-<codefragment>
-<![CDATA[
+    <duplication lines="22" tokens="119">
+        <file line="43"
+              path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"/>
+        <file line="43"
+              path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/warnings/DefaultWarningsRule.java"/>
+        <codefragment>
+            <![CDATA[
                                 Messages.WarningsRuleSet_DefaultRule_FixedWarningsCount(newWarnings * -1));
         }
         return RuleResult.EMPTY_INT_RESULT;
@@ -35,13 +37,15 @@
 
         List<WarningsResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, WarningsResultAction.class);
 ]]>
-</codefragment>
-</duplication>
-<duplication lines="22" tokens="114">
-<file line="43" path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"/>
-<file line="48" path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/opentasks/DefaultOpenTasksRule.java"/>
-<codefragment>
-    <![CDATA[
+        </codefragment>
+    </duplication>
+    <duplication lines="22" tokens="114">
+        <file line="43"
+              path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"/>
+        <file line="48"
+              path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/opentasks/DefaultOpenTasksRule.java"/>
+        <codefragment>
+            <![CDATA[
                                     Messages.OpenTasksRule_DefaultRule_FixedTasksCount(newTasks * -1, tasksPriority.name()));
             }
             return RuleResult.EMPTY_INT_RESULT;
@@ -66,6 +70,6 @@
             List<TasksResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, TasksResultAction.class);
 
 ]]>
-</codefragment>
-</duplication>
+        </codefragment>
+    </duplication>
 </pmd-cpd>
