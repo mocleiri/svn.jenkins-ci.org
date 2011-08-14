@@ -23,7 +23,8 @@
 	*******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -61,18 +62,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${jaxb.api.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>${jaxb.impl.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>com.thalesgroup.dtkit</groupId>
             <artifactId>dtkit-metrics-model</artifactId>
@@ -193,13 +182,14 @@
                             </schemaDirectory>
                             <schemaFiles>tusar-8.xsd</schemaFiles>
                             <staleFile>${project.build.directory}/generated-sources/jaxb/tusar
-v8/.staleFlag.</staleFile>
+                                v8/.staleFlag.
+                            </staleFile>
                             <clearOutputDir>false</clearOutputDir>
                         </configuration>
-                        <goals>                       
-			     <goal>xjc</goal>
-                        </goals>             
-                   </execution>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
 
                 </executions>
             </plugin>
@@ -210,7 +200,7 @@ v8/.staleFlag.</staleFile>
         <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-format/dtkit-tusar-model</connection>
         <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/dtkit/dtkit-format/dtkit-tusar-model
         </developerConnection>
-      <url>https://github.com/jenkinsci/pom/dtkit-metrics-parent/dtkit-tusar-model</url>
-  </scm>
+        <url>https://github.com/jenkinsci/pom/dtkit-metrics-parent/dtkit-tusar-model</url>
+    </scm>
 
 </project>
