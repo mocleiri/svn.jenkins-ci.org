@@ -165,6 +165,9 @@ public abstract class InputMetricXSL extends InputMetric {
      */
     @JsonIgnore
     public String[] getOutputXsdNameList() {
+        if (getOutputFormatType() == null) {
+            return null;
+        }
         return getOutputFormatType().getXsdNameList();
     }
 
@@ -231,10 +234,17 @@ public abstract class InputMetricXSL extends InputMetric {
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
 
+        //If no format is specified, exit validation and returns true
+        if (this.getOutputFormatType() == null) {
+            return true;
+        }
+
+        //If there no given xsd, exit validation and returns true
         if (this.getOutputXsdNameList() == null) {
             return true;
         }
 
+        //Validate given XSD
         Source[] sources = new Source[getOutputXsdNameList().length];
         for (int i = 0; i < sources.length; i++) {
             sources[i] = new StreamSource(this.getOutputFormatType().getClass().getResourceAsStream(getOutputXsdNameList()[i]));
