@@ -26,6 +26,8 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 import com.thalesgroup.dtkit.util.validator.ValidationService;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 
 @SuppressWarnings("unused")
@@ -88,7 +90,20 @@ public class TusarModel implements Serializable {
             set(new ValidationService());
         }
     };
- 
+
     public static OutputMetric LATEST = OUTPUT_TUSAR_8_0;
+
+    public static List<OutputMetric> getAllTUSAROutput() {
+        return Arrays.asList(new OutputMetric[]{
+                OUTPUT_TUSAR_1_0,
+                OUTPUT_TUSAR_2_0,
+                OUTPUT_TUSAR_3_0,
+                OUTPUT_TUSAR_4_0,
+                OUTPUT_TUSAR_5_0,
+                OUTPUT_TUSAR_6_0,
+                OUTPUT_TUSAR_7_0,
+                OUTPUT_TUSAR_8_0
+        });
+    }
 
 }
