@@ -46,17 +46,9 @@ public class HudsonGenerator {
     out << "public class " + className + " extends ${hudsonType} {\n"
     out << "\n"
 
-    out << "    private static ${hudsonDescriptorType}<? extends ${hudsonType}> DESCRIPTOR = new " + className + ".DescriptorImpl();\n"
-    out << "\n"
-
     out << "    @DataBoundConstructor\n"
     out << "    public " + className + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {\n"
     out << "        super(pattern, faildedIfNotNew, deleteOutputFiles, stopProcessingIfError);\n"
-    out << "    }\n"
-    out << "\n"
-
-    out << "    public ${hudsonDescriptorType}<? extends ${hudsonType}> getDescriptor() {\n"
-    out << "        return  DESCRIPTOR;\n"
     out << "    }\n"
     out << "\n"
 
