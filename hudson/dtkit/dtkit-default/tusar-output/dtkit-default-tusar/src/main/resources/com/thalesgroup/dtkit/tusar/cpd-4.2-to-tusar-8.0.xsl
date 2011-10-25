@@ -26,7 +26,7 @@
                 xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
                 xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" cdata-section-elements="duplications:codefragment"/>
     <xsl:template match="pmd-cpd">
         <tusar:tusar xmlns:xs="http://www.w3.org/2001/XMLSchema"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -45,11 +45,6 @@
                             <xsl:attribute name="tokens">
                                 <xsl:value-of select="@tokens"/>
                             </xsl:attribute>
-                            <!-- Removing the fragment code
-                            <xsl:attribute name="codefragment">
-                                <xsl:value-of select="."/>
-                            </xsl:attribute>
-                            -->
                             <xsl:for-each select="file">
                                 <xsl:element name="duplications:resource">
                                     <xsl:attribute name="path">
@@ -60,6 +55,9 @@
                                     </xsl:attribute>
                                 </xsl:element>
                             </xsl:for-each>
+                            <xsl:element name="duplications:codefragment">
+                                <xsl:copy-of select="codefragment/text()"/>
+                            </xsl:element>
                         </xsl:element>
                     </xsl:for-each>
                 </xsl:element>

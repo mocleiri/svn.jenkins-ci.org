@@ -5,24 +5,80 @@
              xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
              xmlns:tusar="http://www.thalesgroup.com/tusar/v8"
              version="8.0">
-    <tusar:measures toolname="cpd">
-        <measures:duplications>
-            <duplications:set lines="22" tokens="119">
-                <duplications:resource
-                        path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
-                        line="43"/>
-                <duplications:resource
-                        path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/warnings/DefaultWarningsRule.java"
-                        line="43"/>
-            </duplications:set>
-            <duplications:set lines="22" tokens="114">
-            <duplications:resource
-            path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
-                        line="43"/>
-                <duplications:resource
-                        path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/opentasks/DefaultOpenTasksRule.java"
-                        line="48"/>
-            </duplications:set>
-        </measures:duplications>
-    </tusar:measures>
+   <tusar:measures toolname="cpd">
+      <measures:duplications>
+         <duplications:set lines="22" tokens="119">
+            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
+                                   line="43"/>
+            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/warnings/DefaultWarningsRule.java"
+                                   line="43"/>
+            <duplications:codefragment><![CDATA[
+            
+                                Messages.WarningsRuleSet_DefaultRule_FixedWarningsCount(newWarnings * -1));
+        }
+        return RuleResult.EMPTY_INT_RESULT;
+        }
+
+        @Override
+        public RuleResult<Integer> evaluate(AbstractBuild<?, ?> previousBuild,
+                        AbstractBuild<?, ?> build) {
+                if (build != null && build.getResult() != null && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+                return RuleResult.EMPTY_INT_RESULT;
+        }
+
+        if (previousBuild == null) {
+                if ( !(build instanceof MavenBuild)) {
+                        // backward compatibility
+                        return RuleResult.EMPTY_INT_RESULT;
+                return RuleResult.EMPTY_INT_RESULT;
+        }
+
+        if (previousBuild == null) {
+                if ( !(build instanceof MavenBuild)) {
+                        // backward compatibility
+                        return RuleResult.EMPTY_INT_RESULT;
+                }
+        } else if (previousBuild.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+                return RuleResult.EMPTY_INT_RESULT;
+        }
+
+        List<WarningsResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, WarningsResultAction.class);
+
+        ]]></duplications:codefragment>
+         </duplications:set>
+         <duplications:set lines="22" tokens="114">
+            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
+                                   line="43"/>
+            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/opentasks/DefaultOpenTasksRule.java"
+                                   line="48"/>
+            <duplications:codefragment><![CDATA[
+            
+                                    Messages.OpenTasksRule_DefaultRule_FixedTasksCount(newTasks * -1, tasksPriority.name()));
+            }
+            return RuleResult.EMPTY_INT_RESULT;
+            }
+
+            @Override
+            public RuleResult<Integer> evaluate(AbstractBuild<?, ?> previousBuild,
+                            AbstractBuild<?, ?> build) {
+                    if (build != null && build.getResult() != null && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+                    return RuleResult.EMPTY_INT_RESULT;
+            }
+
+            if (previousBuild == null) {
+                    if ( !(build instanceof MavenBuild)) {
+                            // backward compatibility
+                            return RuleResult.EMPTY_INT_RESULT;
+                    }
+            } else if (previousBuild.getResult().isWorseOrEqualTo(Result.FAILURE)) {
+                    return RuleResult.EMPTY_INT_RESULT;
+            }
+
+            List<TasksResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, TasksResultAction.class);
+
+
+        ]]></duplications:codefragment>
+         </duplications:set>
+      </measures:duplications>
+   </tusar:measures>
 </tusar:tusar>
