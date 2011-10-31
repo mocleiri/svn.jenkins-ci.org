@@ -26,9 +26,7 @@ package com.thalesgroup.dtkit.util.validator;
 
 public class ValidationServiceFactory {
 
-    private static ValidationService INSTANCE = new ValidationService();
-
     public static ValidationService getInstance() {
-        return INSTANCE;
+        return new ValidationService();
     }
 }

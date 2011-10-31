@@ -23,8 +23,8 @@
 
 package com.thalesgroup.dtkit.metrics.model;
 
-import com.thalesgroup.dtkit.util.converter.ConversionServiceFactory;
-import com.thalesgroup.dtkit.util.validator.ValidationServiceFactory;
+import com.thalesgroup.dtkit.util.converter.ConversionService;
+import com.thalesgroup.dtkit.util.validator.ValidationService;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -38,7 +38,7 @@ public class InputMetricFactory {
 
     private static void wireInputMetricDependencies(Class<? extends InputMetric> classInputMetric, InputMetric inputMetric) {
         if ((InputMetricXSL.class).isAssignableFrom(classInputMetric)) {
-            ((InputMetricXSL) inputMetric).set(ConversionServiceFactory.getInstance(), ValidationServiceFactory.getInstance());
+            ((InputMetricXSL) inputMetric).set(new ConversionService(), new ValidationService());
         }
     }
 
@@ -52,11 +52,9 @@ public class InputMetricFactory {
         try {
             inputMetric = classInputMetric.newInstance();
             instanceDictionnary.put(classInputMetric, inputMetric);
-        }
-        catch (InstantiationException ie) {
+        } catch (InstantiationException ie) {
             throw new InputMetricException(ie);
-        }
-        catch (IllegalAccessException iae) {
+        } catch (IllegalAccessException iae) {
             throw new InputMetricException(iae);
         }
 
@@ -78,17 +76,13 @@ public class InputMetricFactory {
             Constructor<? extends InputMetric> constructor = classInputMetric.getDeclaredConstructor(parameterTypes);
             inputMetric = constructor.newInstance(parameters);
             instanceDictionnary.put(classInputMetric, inputMetric);
-        }
-        catch (InstantiationException ie) {
+        } catch (InstantiationException ie) {
             throw new InputMetricException(ie);
-        }
-        catch (IllegalAccessException iae) {
+        } catch (IllegalAccessException iae) {
             throw new InputMetricException(iae);
-        }
-        catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException e) {
             throw new InputMetricException(e);
-        }
-        catch (InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             throw new InputMetricException(e);
         }
 

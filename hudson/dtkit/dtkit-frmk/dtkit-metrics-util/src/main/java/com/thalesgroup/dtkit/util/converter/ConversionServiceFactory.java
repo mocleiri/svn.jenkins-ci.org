@@ -26,9 +26,7 @@ package com.thalesgroup.dtkit.util.converter;
 
 public class ConversionServiceFactory {
 
-    private static ConversionService INSTANCE = new ConversionService();
-
     public static ConversionService getInstance() {
-        return INSTANCE;
+        return new ConversionService();
     }
 }

@@ -32,10 +32,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -181,10 +178,16 @@ public abstract class InputMetricXSL extends InputMetric {
         return InputMetricType.XSL;
     }
 
+    public String getUserContentXSLDirRelativePath() {
+        if (getToolVersion() == null || getToolVersion().endsWith("N/A")) {
+            return "xunit/" + getToolName() + "/";
+        }
+        return "xunit/" + getToolName() + "/" + getToolVersion();
+    }
+
     /*
      *  Convert the input file against the current xsl of the tool and put the result in the outFile
      */
-
     @Override
     public void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
         if (getXslFile() == null) {
@@ -199,10 +202,43 @@ public abstract class InputMetricXSL extends InputMetric {
         convert(inputFile, outFile, null);
     }
 
+    /**
+     * Convert an input file to an output file
+     * Give your conversion process
+     * Input and Output files are relatives to the filesystem where the process is executed on (like Hudson agent)
+     *
+     * @param inputFile   the input file to convert
+     * @param outFile     the output file to convert
+     * @param externalXsl an external xsl file such as a user xsl
+     * @param params      the conversion parameters
+     * @throws com.thalesgroup.dtkit.util.converter.ConversionException
+     *          an application Exception to throw when there is an error of conversion
+     *          The exception is catched by the API client (as Hudson plugin)
+     */
+    public void convert(File inputFile, File outFile, File externalXsl, Map<String, Object> params) throws ConversionException {
+        conversionService.convert(externalXsl, inputFile, outFile, params);
+    }
+
+    /**
+     * Convert an input file to an output file
+     * Give your conversion process
+     * Input and Output files are relatives to the filesystem where the process is executed on (like Hudson agent)
+     *
+     * @param inputFile          the input file to convert
+     * @param outFile            the output file to convert
+     * @param externalXslContent an external xsl content such as a user xsl
+     * @param params             the conversion parameters
+     * @throws com.thalesgroup.dtkit.util.converter.ConversionException
+     *          an application Exception to throw when there is an error of conversion
+     *          The exception is catched by the API client (as Hudson plugin)
+     */
+    public void convert(File inputFile, File outFile, String externalXslContent, Map<String, Object> params) throws ConversionException {
+        conversionService.convert(new StreamSource(new StringReader(externalXslContent)), inputFile, outFile, params);
+    }
+
     /*
     *  Validates the input file against the current grammar of the tool
     */
-
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
 
@@ -253,6 +289,7 @@ public abstract class InputMetricXSL extends InputMetric {
         setOutputValidationErrors(validationService.processValidation(sources, inputXMLFile));
         return getOutputValidationErrors().size() == 0;
     }
+
 
     /**
      * --------------------------------------------------------
