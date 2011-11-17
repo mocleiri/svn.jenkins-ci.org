@@ -5,12 +5,12 @@
     <delete dir="build"/>
   </target>
   
-  <target name="compile">
+  <target name="compile" unless="skip.compile">
     <mkdir dir="build/classes" />
     <javac srcdir="src" destdir="build/classes" />
   </target>
   
-  <target name="jar" depends="compile">
+  <target name="jar" depends="compile" unless="skip.jar">
     <jar file="build/hello.jar">
       <fileset dir="build/classes"/>
     </jar>
@@ -33,6 +33,7 @@
         <pathelement path="build/test-classes" />
       </classpath>
       <formatter type="xml"/>
+      <formatter type="plain"/>
       <batchtest fork="yes" todir="build/test-reports">
         <fileset dir="test">
           <include name="**/*Test*.java"/>
