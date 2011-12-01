@@ -41,4 +41,16 @@
       </batchtest>
     </junit>
   </target>
+
+  <target name="findbugs" depends="jar">
+    <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+      <classpath>
+        <fileset dir="lib/findbugs/lib" includes="*.jar"/>
+      </classpath>
+    </taskdef>
+    <findbugs home="lib/findbugs" output="xml" outputFile="build/findbugs.xml">
+      <sourcePath path="src"/>
+      <class location="build/hello.jar"/>
+    </findbugs>
+  </target>
 </project>
