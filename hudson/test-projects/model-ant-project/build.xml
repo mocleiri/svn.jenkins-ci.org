@@ -7,7 +7,7 @@
   
   <target name="compile" unless="skip.compile">
     <mkdir dir="build/classes" />
-    <javac srcdir="src" destdir="build/classes" />
+    <javac srcdir="src" destdir="build/classes" debug="true"/>
   </target>
   
   <target name="jar" depends="compile" unless="skip.jar">
@@ -18,7 +18,7 @@
   
   <target name="test-compile">
     <mkdir dir="build/test-classes" />
-    <javac srcdir="test" destdir="build/test-classes" debug="true">
+    <javac srcdir="test" destdir="build/test-classes">
       <classpath>
         <pathelement path="lib/junit.jar"/>
       </classpath>
