@@ -18,7 +18,7 @@
   
   <target name="test-compile">
     <mkdir dir="build/test-classes" />
-    <javac srcdir="test" destdir="build/test-classes">
+    <javac srcdir="test" destdir="build/test-classes" debug="true">
       <classpath>
         <pathelement path="lib/junit.jar"/>
       </classpath>
@@ -41,4 +41,18 @@
       </batchtest>
     </junit>
   </target>
+
+  <target name="findbugs" depends="jar">
+    <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+      <classpath>
+        <fileset dir="lib/findbugs/lib" includes="*.jar"/>
+      </classpath>
+    </taskdef>
+
+    <findbugs home="lib/findbugs" outputFile="build/findbugs.xml" output="xml" effort="max" reportLevel="low">
+      <sourcePath path="src"/>
+      <class location="build/hello.jar"/>
+    </findbugs>
+  </target>
+
 </project>
