@@ -33,7 +33,7 @@
     </parent>
 
     <artifactId>dtkit-tusar-model</artifactId>
-    <version>0.19-SNAPSHOT</version>
+    <version>0.19-SNAPSHPOT</version>
     <name>DTKit TUSAR Model</name>
 
     <licenses>
@@ -182,6 +182,22 @@
                             <schemaFiles>tusar-8.xsd</schemaFiles>
                             <staleFile>${project.build.directory}/generated-sources/jaxb/tusar
                                 v8/.staleFlag.
+                            </staleFile>
+                            <clearOutputDir>false</clearOutputDir>
+                        </configuration>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>tusarv9</id>
+                        <configuration>
+                            <schemaDirectory>${basedir}/src/main/resources/com/thalesgroup/dtkit/tusar/model/xsd
+                            </schemaDirectory>
+                            <schemaFiles>tusar-9.xsd</schemaFiles>
+                            <staleFile>${project.build.directory}/generated-sources/jaxb/tusar
+                                v9/.staleFlag.
                             </staleFile>
                             <clearOutputDir>false</clearOutputDir>
                         </configuration>
