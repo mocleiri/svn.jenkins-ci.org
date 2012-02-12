@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema
+        xmlns:line-coverage="http://www.thalesgroup.com/tusar/line-coverage/v1"
+        xmlns:branch-coverage="http://www.thalesgroup.com/tusar/branch-coverage/v1"
+        targetNamespace="http://www.thalesgroup.com/tusar/coverage/v4"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified">
+
+    <xs:import namespace="http://www.thalesgroup.com/tusar/line-coverage/v1"
+               schemaLocation="line-coverage-1.xsd"/>
+    <xs:import namespace="http://www.thalesgroup.com/tusar/branch-coverage/v1"
+               schemaLocation="branch-coverage-1.xsd"/>
+
+    <xs:complexType name="CoverageComplexType">
+        <xs:sequence>
+            <xs:element name="line-coverage" type="line-coverage:LineCoverageComplexType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="branch-coverage" type="branch-coverage:BranchCoverageComplexType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="toolname" type="xs:string" use="optional"/>
+        <xs:attribute name="version" type="xs:string" use="optional"/>
+        <xs:attribute name="xmlns_xsi" type="xs:string" use="optional"/>
+    </xs:complexType>
+
+</xs:schema>
