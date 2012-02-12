@@ -58,7 +58,7 @@ public class Cobertura extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "cobertura-1.0-to-tusar-3.0.xsl";
+        return "cobertura-1.0-to-tusar-10.0.xsl";
     }
 
     @Override
