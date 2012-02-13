@@ -68,7 +68,7 @@ public class Cobertura extends InputMetricXSL {
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_3_0;
+        return TusarModel.OUTPUT_TUSAR_10_0;
     }
 }
 
