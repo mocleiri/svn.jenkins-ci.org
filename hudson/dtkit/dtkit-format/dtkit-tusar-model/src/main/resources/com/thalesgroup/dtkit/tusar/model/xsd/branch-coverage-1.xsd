@@ -9,7 +9,7 @@
             <xs:element name="resource" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="line">
+                        <xs:element name="line" maxOccurs="unbounded">
                             <xs:complexType>
                             
                                 <!-- Branches details-->
@@ -35,7 +35,7 @@
                                 <xs:attribute name="number" type="xs:string" use="required"/>
                                 
                                 <!-- Branches coverage percentage -->
-                                <xs:attribute name="branchesCoverage" type="xs:string" use="required"/>
+                                <xs:attribute name="branchesCoverage" type="xs:string" use="optional"/>
                                 
                                 <!-- Total number of branches -->
                                 <xs:attribute name="numberOfBranches" type="xs:string" use="required"/>
