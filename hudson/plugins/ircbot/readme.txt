@@ -1,1 +1,0 @@
-The sources have moved to Github. See https://github.com/jenkinsci/ircbot-plugin
