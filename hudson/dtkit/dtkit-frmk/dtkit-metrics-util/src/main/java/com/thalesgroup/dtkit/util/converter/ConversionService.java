@@ -35,6 +35,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.nio.CharBuffer;
 import java.util.Map;
 
 public class ConversionService implements Serializable {
@@ -67,12 +68,11 @@ public class ConversionService implements Serializable {
      *
      * @param xslFile   the xsl file
      * @param inputFile the input file
-     * @param outFile   the output file
      * @param params    the parameter map
      * @return the converted string
      * @throws ConversionException the convert exception
      */
-    public String convertAndReturn(File xslFile, File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
+    public String convertAndReturn(File xslFile, File inputFile, Map<String, Object> params) throws ConversionException {
         FileInputStream fis = null;
         try {
             Reader reader = new FileReader(xslFile);
@@ -80,15 +80,12 @@ public class ConversionService implements Serializable {
             String result = convertAndReturn(new StreamSource(reader), new InputSource(fis), params);
             reader.close();
             return result;
-        }
-        catch (FileNotFoundException fne) {
+        } catch (FileNotFoundException fne) {
             throw new ConversionException(fne);
 
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new ConversionException("Conversion Error", ioe);
-        }
-        finally {
+        } finally {
             if (fis != null) {
                 try {
                     fis.close();
@@ -145,11 +142,9 @@ public class ConversionService implements Serializable {
         try {
             fis = new FileInputStream(inputFile);
             return convertAndReturn(xslSource, new InputSource(fis), params);
-        }
-        catch (FileNotFoundException fne) {
+        } catch (FileNotFoundException fne) {
             throw new ConversionException(fne);
-        }
-        finally {
+        } finally {
             if (fis != null) {
                 try {
                     fis.close();
@@ -175,11 +170,9 @@ public class ConversionService implements Serializable {
         try {
             fis = new FileInputStream(inputFile);
             convert(xslSource, new InputSource(fis), outFile, params);
-        }
-        catch (FileNotFoundException fne) {
+        } catch (FileNotFoundException fne) {
             throw new ConversionException(fne);
-        }
-        finally {
+        } finally {
             if (fis != null) {
                 try {
                     fis.close();
@@ -252,6 +245,7 @@ public class ConversionService implements Serializable {
             // create the output with its options
             Serializer out = new Serializer();
             out.setOutputProperty(Serializer.Property.INDENT, "yes");
+
             File fileOut = File.createTempFile("serializer", "convert");
             FileOutputStream fos = new FileOutputStream(fileOut);
             out.setOutputStream(fos);
@@ -269,30 +263,28 @@ public class ConversionService implements Serializable {
             xsltTransformer.setDestination(out);
             xsltTransformer.transform();
 
-            Reader reader = new FileReader(fileOut);
-            BufferedReader bufferedReader = new BufferedReader(reader);
             StringBuffer sb = new StringBuffer();
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
+            CharBuffer buffer = CharBuffer.allocate(4096);
+            int bufferLength = 0;
+            Reader reader = new FileReader(fileOut);
+            while (bufferLength != -1) {
+                bufferLength = reader.read(buffer);
+                if (bufferLength > 0) {
+                    sb.append(buffer.flip());
+                }
             }
+
             reader.close();
-            ;
-            bufferedReader.close();
             fos.close();
 
             return sb.toString();
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new ConversionException("Error to convert - A file not found", ioe);
-        }
-        catch (SaxonApiException sae) {
+        } catch (SaxonApiException sae) {
             throw new ConversionException("Error to convert the input XML document", sae);
-        }
-        catch (SAXException sae) {
+        } catch (SAXException sae) {
             throw new ConversionException("Error to convert - A file not found", sae);
-        }
-        catch (ParserConfigurationException pe) {
+        } catch (ParserConfigurationException pe) {
             throw new ConversionException("Error to convert - A file not found", pe);
         }
     }
@@ -358,17 +350,13 @@ public class ConversionService implements Serializable {
             xsltTransformer.transform();
 
             fos.close();
-        }
-        catch (IOException ioe) {
+        } catch (IOException ioe) {
             throw new ConversionException("Error to convert - A file not found", ioe);
-        }
-        catch (SaxonApiException sae) {
+        } catch (SaxonApiException sae) {
             throw new ConversionException("Error to convert the input XML document", sae);
-        }
-        catch (SAXException sae) {
+        } catch (SAXException sae) {
             throw new ConversionException("Error to convert - A file not found", sae);
-        }
-        catch (ParserConfigurationException pe) {
+        } catch (ParserConfigurationException pe) {
             throw new ConversionException("Error to convert - A file not found", pe);
         }
     }
