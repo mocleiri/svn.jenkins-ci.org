@@ -1,7 +1,8 @@
 <!--
 /*******************************************************************************
-* Copyright (c) 2011 Thales Corporate Services SAS                             *
-* Author : Mohamed Koundoussi                                *
+* Copyright (c) 2009 Thales Corporate Services SAS                             *
+* Author : Mohamed Koundoussi                                                  *
+* version 1.3                                                                  *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
 * of this software and associated documentation files (the "Software"), to deal*
@@ -22,6 +23,7 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
+
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:measures="http://www.thalesgroup.com/tusar/measures/v5"
                 xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
@@ -40,8 +42,26 @@
                 <xsl:attribute name="version">
                     <xsl:value-of select="/sourcemonitor_metrics/project/@version"/>
                 </xsl:attribute>
-                <xsl:if test="//project_language='Java'">
-                    <xsl:element name="measures:size">
+                <xsl:element name="measures:size">
+                    <xsl:if test="//checkpoints/checkpoint/files[@file_count]">
+
+                        <xsl:element name="size:resource">
+                            <xsl:attribute name="type">PROJECT</xsl:attribute>
+                            <xsl:attribute name="value">
+                                <xsl:value-of select="//project_directory"/>
+                            </xsl:attribute>
+                            <xsl:element name="size:measure">
+                                <xsl:attribute name="key">files</xsl:attribute>
+                                <xsl:attribute name="value">
+                                    <xsl:value-of
+                                            select="number(translate(//checkpoints/checkpoint/files/@file_count,',','.'))"/>
+                                </xsl:attribute>
+                            </xsl:element>
+                        </xsl:element>
+
+                    </xsl:if>
+                    <xsl:if test="//project_language='Java'">
+
                         <xsl:for-each select="//files/file">
                             <xsl:element name="size:resource">
                                 <xsl:attribute name="type">FILE</xsl:attribute>
@@ -49,44 +69,71 @@
                                     <xsl:value-of select="@file_name"/>
                                 </xsl:attribute>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M4']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metrics/metric[@id='M4'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))- ((number(translate(metrics/metric[@id='M4'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metrics/metric[@id='M4'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M4'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M4')],',','.'))*100 div number(translate(metrics/metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-number(translate(metrics/metric[@id='M4'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                 <xsl:value-of select="(number(translate(metrics/metric[@id='M4'],',','.'))*100) div number(translate(metrics/metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
 
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
+                                    <xsl:attribute name="key">classes</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M5'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M6']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M6'],',','.'))"/>
                                         </xsl:attribute>
@@ -94,23 +141,31 @@
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M6']/@type='ratio'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M6')],',','.'))*number(translate(metrics/metric[(@id='M5')],',','.')) div 100"/>
+                                                    select="number(translate(metrics/metric[(@id='M6')],',','.'))*number(translate(metrics/metric[(@id='M5')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M10'],',','.'))"/>
+                                        <xsl:value-of select="number(translate(metrics/metric[@id='M14'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M14'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M14'],',','.'))*number(translate(metrics/metric[@id='M6'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M14'],',','.'))*number(translate(metrics/metric[@id='M6'],',','.'))*number(translate(metrics/metric[@id='M5'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                             </xsl:element>
@@ -121,44 +176,79 @@
                                 <xsl:attribute name="value">
                                     <xsl:value-of select="//project_directory"/>
                                 </xsl:attribute>
+                                <xsl:if test="//checkpoints/checkpoint[@checkpoint_files]">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">files</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M4']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metric[@id='M4'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metric[@id='M0'],',','.'))-((number(translate(metric[@id='M4'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metric[@id='M4'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M4'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M4')],',','.'))*100 div number(translate(metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metric[@id='M0'],',','.'))-number(translate(metric[@id='M4'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metric[@id='M4'],',','.'))*100) div number(translate(metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
+                                    <xsl:attribute name="key">classes</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M5'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M6']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M6'],',','.'))"/>
                                         </xsl:attribute>
@@ -166,32 +256,45 @@
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M6']/@type='ratio'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M6')],',','.'))*number(translate(metric[(@id='M5')],',','.')) div 100"/>
+                                                    select="number(translate(metric[(@id='M6')],',','.'))*number(translate(metric[(@id='M5')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M10'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M14'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M14'],',','.'))*number(translate(metric[@id='M6'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">file_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="(number(translate(metric[@id='M14'],',','.'))*number(translate(metric[@id='M6'],',','.'))*number(translate(metric[@id='M5'],',','.'))) div number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M14'],',','.'))*number(translate(metric[@id='M6'],',','.'))*number(translate(metric[@id='M5'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
                             </xsl:element>
                         </xsl:for-each>
-                    </xsl:element>
-                </xsl:if>
-                <xsl:if test="//project_language='C'">
 
-                    <xsl:element name="measures:size">
+                    </xsl:if>
+                    <xsl:if test="//project_language='C'">
                         <xsl:for-each select="//files/file">
                             <xsl:element name="size:resource">
                                 <xsl:attribute name="type">FILE</xsl:attribute>
@@ -199,54 +302,82 @@
                                     <xsl:value-of select="@file_name"/>
                                 </xsl:attribute>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metrics/metric[@id='M3'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.')) -((number(translate(metrics/metric[@id='M3'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metrics/metric[@id='M3'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M3')],',','.'))*100 div number(translate(metrics/metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-number(translate(metrics/metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metrics/metric[@id='M3'],',','.'))*100) div number(translate(metrics/metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M4'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M8'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M12'],',','.'))*number(translate(metrics/metric[@id='M4'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M12'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
+
                             </xsl:element>
                         </xsl:for-each>
                         <xsl:for-each select="//checkpoints/checkpoint/metrics">
@@ -255,61 +386,103 @@
                                 <xsl:attribute name="value">
                                     <xsl:value-of select="//project_directory"/>
                                 </xsl:attribute>
+                                <xsl:if test="//checkpoints/checkpoint[@checkpoint_files]">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">files</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metric[@id='M3'],',','.'))*number(translate(metric[@id='M3'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metric[@id='M0'],',','.'))-((number(translate(metric[@id='M3'],',','.'))*number(translate(metric[@id='M3'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metric[@id='M3'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M3')],',','.'))*100 div number(translate(metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metric[@id='M0'],',','.'))-number(translate(metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metric[@id='M3'],',','.'))*100) div number(translate(metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M4'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M8'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M12'],',','.'))*number(translate(metric[@id='M4'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">file_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="(number(translate(metric[@id='M12'],',','.'))*number(translate(metric[@id='M4'],',','.'))) div number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M12'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                             </xsl:element>
                         </xsl:for-each>
-                    </xsl:element>
-                </xsl:if>
-                <xsl:if test="//project_language='C++'">
-                    <xsl:element name="measures:size">
+
+                    </xsl:if>
+                    <xsl:if test="//project_language='C++'">
                         <xsl:for-each select="//files/file">
                             <xsl:element name="size:resource">
                                 <xsl:attribute name="type">FILE</xsl:attribute>
@@ -317,43 +490,69 @@
                                     <xsl:value-of select="@file_name"/>
                                 </xsl:attribute>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='percent'">
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metrics/metric[@id='M3'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-((number(translate(metrics/metric[@id='M3'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metrics/metric[@id='M3'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M3')],',','.'))*100 div number(translate(metrics/metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-number(translate(metrics/metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metrics/metric[@id='M3'],',','.'))*100) div number(translate(metrics/metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
+                                    <xsl:attribute name="key">classes</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M4'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M5'],',','.'))"/>
                                         </xsl:attribute>
@@ -361,21 +560,29 @@
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M5')],',','.'))*number(translate(metrics/metric[(@id='M4')],',','.')) div 100"/>
+                                                    select="number(translate(metrics/metric[(@id='M5')],',','.'))*number(translate(metrics/metric[(@id='M4')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M9'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M5'],',','.'))*number(translate(metrics/metric[@id='M4'],',','.'))*number(translate(metrics/metric[@id='M13'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M13'],',','.'))*number(translate(metrics/metric[@id='M5'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M13'],',','.'))"/>
                                     </xsl:attribute>
@@ -388,45 +595,80 @@
                                 <xsl:attribute name="value">
                                     <xsl:value-of select="//project_directory"/>
                                 </xsl:attribute>
+                                <xsl:if test="//checkpoints/checkpoint[@checkpoint_files]">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">files</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='percent'">
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metric[@id='M3'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metric[@id='M0'],',','.'))-((number(translate(metric[@id='M3'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metric[@id='M3'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M4']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M3')],',','.'))*100 div number(translate(metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metric[@id='M0'],',','.'))-number(translate(metric[@id='M3'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metric[@id='M3'],',','.'))*100) div number(translate(metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
 
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
+                                    <xsl:attribute name="key">classes</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M4'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M5'],',','.'))"/>
                                         </xsl:attribute>
@@ -434,31 +676,44 @@
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M5')],',','.'))*number(translate(metric[(@id='M4')],',','.')) div 100"/>
+                                                    select="number(translate(metric[(@id='M5')],',','.'))*number(translate(metric[(@id='M4')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M9'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M5'],',','.'))*number(translate(metric[@id='M4'],',','.'))*number(translate(metric[@id='M13'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M13'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M13'],',','.'))*number(translate(metric[@id='M5'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">file_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="(number(translate(metric[@id='M5'],',','.'))*number(translate(metric[@id='M4'],',','.'))*number(translate(metric[@id='M13'],',','.'))) div number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
                             </xsl:element>
                         </xsl:for-each>
-                    </xsl:element>
-                </xsl:if>
-                <xsl:if test="//project_language='VB.NET'">
-                    <xsl:element name="measures:size">
+                    </xsl:if>
+                    <xsl:if test="//project_language='VB.NET'">
                         <xsl:for-each select="//files/file">
                             <xsl:element name="size:resource">
                                 <xsl:attribute name="type">FILE</xsl:attribute>
@@ -466,60 +721,87 @@
                                     <xsl:value-of select="@file_name"/>
                                 </xsl:attribute>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M2']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metrics/metric[@id='M2'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-((number(translate(metrics/metric[@id='M2'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metrics/metric[@id='M2'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M2'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M2')],',','.'))*100 div number(translate(metrics/metric[(@id='M1')],',','.'))"/>
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-number(translate(metrics/metric[@id='M2'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metrics/metric[@id='M2'],',','.'))*100) div number(translate(metrics/metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
                                         <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metrics/metric[@id='M3'],',','.'))"/>
+                                            <xsl:value-of
+                                                    select="(number(translate(metrics/metric[@id='M3'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M3')],',','.'))*100 div number(translate(metrics/metric[(@id='M1')],',','.'))"/>
+                                                    select="number(translate(metrics/metric[(@id='M3')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
+                                    <xsl:attribute name="key">classes</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M4'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M5'],',','.'))"/>
                                         </xsl:attribute>
@@ -527,21 +809,294 @@
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M5')],',','.'))*number(translate(metrics/metric[(@id='M4')],',','.')) div 100"/>
+                                                    select="number(translate(metrics/metric[(@id='M5')],',','.'))*number(translate(metrics/metric[(@id='M4')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M8'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M4'],',','.'))*number(translate(metrics/metric[@id='M5'],',','.'))*number(translate(metrics/metric[@id='M11'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metrics/metric[@id='M11'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M11'],',','.'))*number(translate(metrics/metric[@id='M5'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                            </xsl:element>
+                        </xsl:for-each>
+                        <xsl:for-each select="//checkpoints/checkpoint/metrics">
+                            <xsl:element name="size:resource">
+                                <xsl:attribute name="type">PROJECT</xsl:attribute>
+                                <xsl:attribute name="value">
+                                    <xsl:value-of select="//project_directory"/>
+                                </xsl:attribute>
+                                <xsl:if test="//checkpoints/checkpoint[@checkpoint_files]">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">files</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">lines</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metric[@id='M0'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">statements</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='percent'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metric[@id='M2'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metric[@id='M0'],',','.'))-((number(translate(metric[@id='M2'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metric[@id='M2'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of select="number(translate(metric[@id='M2'],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metric[@id='M0'],',','.'))-number(translate(metric[@id='M2'],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metric[@id='M2'],',','.'))*100) div number(translate(metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metric[@id='M3'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of select="number(translate(metric[(@id='M3')],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">classes</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metric[@id='M4'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M11'],',','.'))*number(translate(metric[@id='M5'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metric[@id='M11'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">functions</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of select="number(translate(metric[@id='M5'],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">functions</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metric[(@id='M5')],',','.'))*number(translate(metric[(@id='M4')],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M11'],',','.'))*number(translate(metric[@id='M5'],',','.'))*number(translate(metric[@id='M4'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">file_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="(number(translate(metric[@id='M11'],',','.'))*number(translate(metric[@id='M5'],',','.'))*number(translate(metric[@id='M4'],',','.'))) div number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                            </xsl:element>
+                        </xsl:for-each>
+                    </xsl:if>
+                    <xsl:if test="//project_language='C#'">
+                        <xsl:for-each select="//files/file">
+                            <xsl:element name="size:resource">
+                                <xsl:attribute name="type">FILE</xsl:attribute>
+                                <xsl:attribute name="value">
+                                    <xsl:value-of select="@file_name"/>
+                                </xsl:attribute>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">lines</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metrics/metric[@id='M0'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">statements</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='percent'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metrics/metric[@id='M2'],',','.'))*number(translate(metrics/metric[@id='M2'],',','.')))div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-((number(translate(metrics/metric[@id='M2'],',','.'))*number(translate(metrics/metric[@id='M2'],',','.')))div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metrics/metric[@id='M2'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of select="number(translate(metrics/metric[@id='M2'],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-number(translate(metrics/metric[@id='M2'],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metrics/metric[@id='M2'],',','.'))*100) div number(translate(metrics/metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metrics/metric[@id='M3'],',','.'))*number(translate(metrics/metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[(@id='M3')],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">classes</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of select="number(translate(metrics/metric[@id='M4'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">functions</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of select="number(translate(metrics/metric[@id='M5'],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">functions</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metrics/metric[(@id='M5')],',','.'))*number(translate(metrics/metric[(@id='M4')],',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M5'],',','.'))*number(translate(metrics/metric[@id='M4'],',','.'))*number(translate(metrics/metric[@id='M13'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
+                                    <xsl:attribute name="value">
+                                        <xsl:value-of
+                                                select="number(translate(metrics/metric[@id='M13'],',','.'))*number(translate(metrics/metric[@id='M5'],',','.'))"/>
+                                    </xsl:attribute>
+                                </xsl:element>
+                                <xsl:element name="size:measure">
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M13'],',','.'))"/>
                                     </xsl:attribute>
@@ -554,243 +1109,109 @@
                                 <xsl:attribute name="value">
                                     <xsl:value-of select="//project_directory"/>
                                 </xsl:attribute>
+                                <xsl:if test="//checkpoints/checkpoint[@checkpoint_files]">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">files</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
+                                    <xsl:attribute name="key">statements</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M2']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="(number(translate(metric[@id='M2'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(metric[@id='M0'],',','.'))-((number(translate(metric[@id='M2'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100)"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="number(translate(metric[@id='M2'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
+                                </xsl:if>
+                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M2'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M2')],',','.'))*100 div number(translate(metric[(@id='M1')],',','.'))"/>
+                                                    select="number(translate(metric[@id='M0'],',','.'))-number(translate(metric[@id='M2'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
+                                    <!--xsl:element name="size:measure">
+                                                 <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                 <xsl:attribute name="value">
+                                                     <xsl:value-of select="(number(translate(metric[@id='M2'],',','.'))*100) div number(translate(metric[@id='M0'],',','.'))"/>
+                                                 </xsl:attribute>
+                                             </xsl:element-->
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
                                         <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metric[@id='M3'],',','.'))"/>
+                                            <xsl:value-of
+                                                    select="(number(translate(metric[@id='M3'],',','.'))*number(translate(metric[@id='M0'],',','.'))) div 100"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">public_api</xsl:attribute>
                                         <xsl:attribute name="value">
-                                            <xsl:value-of
-                                                    select="number(translate(metric[(@id='M3')],',','.'))*100 div number(translate(metric[(@id='M1')],',','.'))"/>
+                                            <xsl:value-of select="number(translate(metric[(@id='M3')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
+                                    <xsl:attribute name="key">classes</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M4'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metric[@id='M5'],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of
-                                                    select="number(translate(metric[(@id='M5')],',','.'))*number(translate(metric[(@id='M4')],',','.')) div 100"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M8'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">function_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M13'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
-                            </xsl:element>
-                        </xsl:for-each>
-                    </xsl:element>
-                </xsl:if>
-                <xsl:if test="//project_language='C#'">
-                    <xsl:element name="measures:size">
-                        <xsl:for-each select="//files/file">
-                            <xsl:element name="size:resource">
-                                <xsl:attribute name="type">FILE</xsl:attribute>
-                                <xsl:attribute name="value">
-                                    <xsl:value-of select="@file_name"/>
-                                </xsl:attribute>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">class_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M0'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='percent'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metrics/metric[@id='M2'],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M2')],',','.'))*100 div number(translate(metrics/metric[(@id='M1')],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metrics/metric[@id='M3'],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M3')],',','.'))*100 div number(translate(metrics/metric[(@id='M1')],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M4'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M13'],',','.'))*number(translate(metric[@id='M5'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metrics/metric[@id='M5'],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M5')],',','.'))*number(translate(metrics/metric[(@id='M4')],',','.')) div 100"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M10'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metrics/metric[@id='M14'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                            </xsl:element>
-                        </xsl:for-each>
-                        <xsl:for-each select="//checkpoints/checkpoint/metrics">
-                            <xsl:element name="size:resource">
-                                <xsl:attribute name="type">PROJECT</xsl:attribute>
-                                <xsl:attribute name="value">
-                                    <xsl:value-of select="//project_directory"/>
-                                </xsl:attribute>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M0'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">STATEMENTS</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='percent'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metric[@id='M2'],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M2']/@type='number'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of
-                                                    select="number(translate(metric[(@id='M2')],',','.'))*100 div number(translate(metric[(@id='M1')],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='percent'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of select="number(translate(metric[@id='M3'],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M3']/@type='number'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">PUBLIC_DOCUMENTED_API_DENSITY</xsl:attribute>
-                                        <xsl:attribute name="value">
-                                            <xsl:value-of
-                                                    select="number(translate(metric[(@id='M3')],',','.'))*100 div number(translate(metric[(@id='M1')],',','.'))"/>
-                                        </xsl:attribute>
-                                    </xsl:element>
-                                </xsl:if>
-                                <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">CLASSES</xsl:attribute>
-                                    <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M4'],',','.'))"/>
-                                    </xsl:attribute>
-                                </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M5']/@type='number'">
-                                    <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M5'],',','.'))"/>
                                         </xsl:attribute>
@@ -798,31 +1219,31 @@
                                 </xsl:if>
                                 <xsl:if test="//metric_names/metric_name[@id='M5']/@type='ratio'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">FUNCTIONS</xsl:attribute>
+                                        <xsl:attribute name="key">functions</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M5')],',','.'))*number(translate(metric[(@id='M4')],',','.')) div 100"/>
+                                                    select="number(translate(metric[(@id='M5')],',','.'))*number(translate(metric[(@id='M4')],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FUNCTION_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M10'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="number(translate(metric[@id='M5'],',','.'))*number(translate(metric[@id='M4'],',','.'))*number(translate(metric[@id='M13'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">FILE_COMPLEXITY</xsl:attribute>
+                                    <xsl:attribute name="key">file_complexity</xsl:attribute>
                                     <xsl:attribute name="value">
-                                        <xsl:value-of select="number(translate(metric[@id='M14'],',','.'))"/>
+                                        <xsl:value-of
+                                                select="(number(translate(metric[@id='M5'],',','.'))*number(translate(metric[@id='M4'],',','.'))*number(translate(metric[@id='M13'],',','.'))) div number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
                             </xsl:element>
                         </xsl:for-each>
-                    </xsl:element>
-                </xsl:if>
-                <xsl:if test="//project_language='HTML'">
-                    <xsl:element name="measures:size">
+                    </xsl:if>
+                    <xsl:if test="//project_language='HTML'">
                         <xsl:for-each select="//files/file">
                             <xsl:element name="size:resource">
                                 <xsl:attribute name="type">FILE</xsl:attribute>
@@ -830,25 +1251,31 @@
                                     <xsl:value-of select="@file_name"/>
                                 </xsl:attribute>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metrics/metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M1']/@type='percent'">
+                                <!--xsl:if test="//metric_names/metric_name[@id='M1']/@type='percent'">
+                                            <xsl:element name="size:measure">
+                                                <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                <xsl:attribute name="value">
+                                                    <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
+                                                </xsl:attribute>
+                                            </xsl:element>
+                                        </xsl:if-->
+                                <xsl:if test="//metric_names/metric_name[@id='M1']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metrics/metric[@id='M1'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M1']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metrics/metric[(@id='M1')],',','.'))*100 div number(translate(metrics/metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metrics/metric[@id='M0'],',','.'))-number(translate(metrics/metric[@id='M1'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
@@ -861,34 +1288,52 @@
                                 <xsl:attribute name="value">
                                     <xsl:value-of select="//project_directory"/>
                                 </xsl:attribute>
+                                <xsl:if test="//checkpoints/checkpoint[@checkpoint_files]">
+                                    <xsl:element name="size:measure">
+                                        <xsl:attribute name="key">files</xsl:attribute>
+                                        <xsl:attribute name="value">
+                                            <xsl:value-of
+                                                    select="number(translate(//checkpoints/checkpoint/@checkpoint_files,',','.'))"/>
+                                        </xsl:attribute>
+                                    </xsl:element>
+                                </xsl:if>
                                 <xsl:element name="size:measure">
-                                    <xsl:attribute name="key">LINES</xsl:attribute>
+                                    <xsl:attribute name="key">lines</xsl:attribute>
                                     <xsl:attribute name="value">
                                         <xsl:value-of select="number(translate(metric[@id='M0'],',','.'))"/>
                                     </xsl:attribute>
                                 </xsl:element>
-                                <xsl:if test="//metric_names/metric_name[@id='M1']/@type='percent'">
+                                <!--xsl:if test="//metric_names/metric_name[@id='M1']/@type='percent'">
+                                            <xsl:element name="size:measure">
+                                                <xsl:attribute name="key">comment_lines_density</xsl:attribute>
+                                                <xsl:attribute name="value">
+                                                    <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
+                                                </xsl:attribute>
+                                            </xsl:element>
+                                        </xsl:if-->
+                                <xsl:if test="//metric_names/metric_name[@id='M1']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">comment_lines</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of select="number(translate(metric[@id='M1'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
-                                </xsl:if>
-                                <xsl:if test="//metric_names/metric_name[@id='M1']/@type='number'">
                                     <xsl:element name="size:measure">
-                                        <xsl:attribute name="key">COMMENT_LINES_DENSITY</xsl:attribute>
+                                        <xsl:attribute name="key">ncloc</xsl:attribute>
                                         <xsl:attribute name="value">
                                             <xsl:value-of
-                                                    select="number(translate(metric[(@id='M1')],',','.'))*100 div number(translate(metric[(@id='M0')],',','.'))"/>
+                                                    select="number(translate(metric[@id='M0'],',','.'))-number(translate(metric[@id='M1'],',','.'))"/>
                                         </xsl:attribute>
                                     </xsl:element>
                                 </xsl:if>
                             </xsl:element>
                         </xsl:for-each>
-                    </xsl:element>
-                </xsl:if>
+                    </xsl:if>
+
+                </xsl:element>
             </xsl:element>
         </tusar:tusar>
     </xsl:template>
 </xsl:stylesheet>
+
+
