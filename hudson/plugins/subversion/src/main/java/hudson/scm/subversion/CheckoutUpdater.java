@@ -35,7 +35,6 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.tmatesoft.svn.core.SVNCancelException;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.internal.wc2.SvnWcGeneration;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNUpdateClient;
 
@@ -45,6 +44,7 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -88,7 +88,7 @@ public class CheckoutUpdater extends WorkspaceUpdater {
                     throw (InterruptedException)new InterruptedException().initCause(e);
                 } catch (SVNException e) {
                     e.printStackTrace(listener.error("Failed to check out " + location.remote));
-                    return null;
+                    return Collections.EMPTY_LIST;
                 } finally {
                     try {
                         pos.close();
