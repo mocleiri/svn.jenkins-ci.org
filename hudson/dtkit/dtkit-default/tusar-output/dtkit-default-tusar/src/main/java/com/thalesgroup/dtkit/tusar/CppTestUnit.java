@@ -42,7 +42,7 @@ public class CppTestUnit extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "7.3";
+        return "7.3+";
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CppTestUnit extends InputMetricXSL {
 
     @Override
     public String getToolName() {
-        return "CppTest";
+        return "ParasoftTest";
     }
 
     @Override
