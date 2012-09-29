@@ -71,9 +71,9 @@ public class GnatcheckParser {
     private String str_filehead =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<tusar:tusar xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"\n" +
                     "             xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-                    "             xmlns:violations=\"http://www.thalesgroup.com/tusar/violations/v3\"\n" +
-                    "             xmlns:tusar=\"http://www.thalesgroup.com/tusar/v3\"\n" +
-                    "             version=\"3.0\">\n" +
+                    "             xmlns:violations=\"http://www.thalesgroup.com/tusar/violations/v4\"\n" +
+                    "             xmlns:tusar=\"http://www.thalesgroup.com/tusar/v10\"\n" +
+                    "             version=\"10.0\">\n" +
                     "    <tusar:violations>\n";
 
     private String str_filetail =

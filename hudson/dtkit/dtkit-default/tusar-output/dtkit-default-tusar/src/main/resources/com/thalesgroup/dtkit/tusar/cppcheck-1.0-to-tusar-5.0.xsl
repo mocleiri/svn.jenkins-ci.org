@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*******************************************************************************
-* Copyright (c) 2011 Thales Corporate Services SAS                             *
-* Author : Gregory Boissinot                                                   *
+* Copyright (c) 2012 Thales Corporate Services SAS                             *
+* Author : Gregory Boissinot, Julien Dort, Aravindan Mahendran                 *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
 * of this software and associated documentation files (the "Software"), to deal*
@@ -39,41 +39,88 @@
             <xsl:element name="tusar:violations">
 
                 <xsl:attribute name="toolname">cppcheck</xsl:attribute>
-                <xsl:attribute name="version">1.43</xsl:attribute>
-
-                <xsl:for-each-group select="error" group-by="@file">
-
-                    <xsl:element name="violations:file">
-                        <xsl:attribute name="path">
-                            <xsl:value-of select="@file"/>
+                
+                <xsl:choose>
+                    <xsl:when test="@version=2">
+                        <xsl:attribute name="version">
+                            <xsl:value-of select="cppcheck/@version"/>
                         </xsl:attribute>
+                        <xsl:apply-templates select="errors"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="version">1.43</xsl:attribute>
+                        <xsl:for-each-group select="error" group-by="@file">
 
-                        <xsl:for-each select="current-group()">
-
-                            <xsl:element name="violations:violation">
-                                <xsl:attribute name="line">
-                                    <xsl:value-of select="@line"/>
+                            <xsl:element name="violations:file">
+                                <xsl:attribute name="path">
+                                    <xsl:value-of select="@file"/>
                                 </xsl:attribute>
 
-                                <xsl:attribute name="message">
-                                    <xsl:value-of select="@msg"/>
-                                </xsl:attribute>
+                                <xsl:for-each select="current-group()">
 
-                                <xsl:attribute name="key">
-                                    <xsl:value-of select="@id"/>
-                                </xsl:attribute>
+                                    <xsl:element name="violations:violation">
+                                        <xsl:attribute name="line">
+                                            <xsl:value-of select="@line"/>
+                                        </xsl:attribute>
 
-                                <xsl:attribute name="severity">
-                                    <xsl:value-of select="@severity"/>
-                                </xsl:attribute>
+                                        <xsl:attribute name="message">
+                                            <xsl:value-of select="@msg"/>
+                                        </xsl:attribute>
 
+                                        <xsl:attribute name="key">
+                                            <xsl:value-of select="@id"/>
+                                        </xsl:attribute>
+
+                                        <xsl:attribute name="severity">
+                                            <xsl:value-of select="@severity"/>
+                                        </xsl:attribute>
+
+                                    </xsl:element>
+
+                                </xsl:for-each>
                             </xsl:element>
 
-                        </xsl:for-each>
-                    </xsl:element>
-
-                </xsl:for-each-group>
+                        </xsl:for-each-group>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:element>
         </tusar:tusar>
     </xsl:template>
+    
+    <xsl:template match="errors">
+         <xsl:for-each-group select="error" group-by="location/@file">
+
+            <xsl:element name="violations:file">
+                <xsl:attribute name="path">
+                    <xsl:value-of select="location/@file"/>
+                </xsl:attribute>
+
+                    <xsl:for-each select="current-group()">
+                        <xsl:element name="violations:violation">
+                            <xsl:attribute name="line">
+                                <xsl:value-of select="location/@line"/>
+                            </xsl:attribute>
+
+                            <xsl:attribute name="message">
+                                <xsl:value-of select="@verbose"/>
+                            </xsl:attribute>
+
+                            <xsl:attribute name="key">
+                                <xsl:value-of select="@id"/>
+                            </xsl:attribute>
+
+                            <xsl:attribute name="severity">
+                                <xsl:value-of select="@severity"/>
+                            </xsl:attribute>
+
+                        </xsl:element>
+                    </xsl:for-each>
+
+            </xsl:element>
+            
+        </xsl:for-each-group>        
+    </xsl:template>
+    
+    
+    
 </xsl:stylesheet>

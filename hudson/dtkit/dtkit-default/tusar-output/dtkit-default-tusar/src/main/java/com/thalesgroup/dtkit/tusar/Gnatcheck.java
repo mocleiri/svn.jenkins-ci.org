@@ -96,7 +96,7 @@ public class Gnatcheck extends InputMetricOther {
      */
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
-        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_3_0.validate(inputXMLFile);
+        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_10_0.validate(inputXMLFile);
         this.setOutputValidationErrors(errors);
         return errors.isEmpty();
     }
