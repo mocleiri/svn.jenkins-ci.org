@@ -47,8 +47,8 @@ public class HudsonGenerator {
     out << "\n"
 
     out << "    @DataBoundConstructor\n"
-    out << "    public " + className + "(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {\n"
-    out << "        super(pattern, faildedIfNotNew, deleteOutputFiles, stopProcessingIfError);\n"
+    out << "    public " + className + "(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {\n"
+    out << "        super(pattern, failIfNotNew, deleteOutputFiles, stopProcessingIfError);\n"
     out << "    }\n"
     out << "\n"
 
