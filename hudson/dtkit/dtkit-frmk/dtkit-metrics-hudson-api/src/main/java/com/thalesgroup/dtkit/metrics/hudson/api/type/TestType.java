@@ -32,12 +32,12 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class TestType extends MetricsType implements Describable<TestType> {
 
-    protected TestType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
-        super(pattern, failureIfNotNew, deleteOutputFiles, stopProcessingIfError);
+    protected TestType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
+        super(pattern, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
     }
 
-    protected TestType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles) {
-        super(pattern, failureIfNotNew, deleteOutputFiles);
+    protected TestType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles) {
+        super(pattern, failIfNotNew, deleteOutputFiles);
     }
 
     protected TestType(String pattern) {

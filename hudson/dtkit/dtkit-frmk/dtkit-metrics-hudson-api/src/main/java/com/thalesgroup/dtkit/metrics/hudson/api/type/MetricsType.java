@@ -33,29 +33,31 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
 
     private final String pattern;
 
-    private final Boolean faildedIfNotNew;
+    private transient Boolean faildedIfNotNew;
 
-    private final Boolean deleteOutputFiles;
+    private Boolean failIfNotNew;
+
+    private Boolean deleteOutputFiles;
 
     private Boolean stopProcessingIfError;
 
-    protected MetricsType(String pattern, Boolean faildedIfNotNew, Boolean deleteOutputFiles, Boolean stopProcessingIfError) {
+    protected MetricsType(String pattern, Boolean failIfNotNew, Boolean deleteOutputFiles, Boolean stopProcessingIfError) {
         this.pattern = pattern;
-        this.faildedIfNotNew = faildedIfNotNew;
+        this.failIfNotNew = failIfNotNew;
         this.deleteOutputFiles = deleteOutputFiles;
         this.stopProcessingIfError = stopProcessingIfError;
     }
 
-    protected MetricsType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
+    protected MetricsType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles) {
         this.pattern = pattern;
-        this.faildedIfNotNew = faildedIfNotNew;
+        this.failIfNotNew = failIfNotNew;
         this.deleteOutputFiles = deleteOutputFiles;
         this.stopProcessingIfError = true;
     }
 
     protected MetricsType(String pattern) {
         this.pattern = pattern;
-        this.faildedIfNotNew = false;
+        this.failIfNotNew = false;
         this.deleteOutputFiles = false;
         this.stopProcessingIfError = true;
     }
@@ -66,6 +68,12 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
     }
 
     @SuppressWarnings("unused")
+    public boolean isFailIfNotNew() {
+        return (failIfNotNew == null ? true : failIfNotNew);
+    }
+
+    @SuppressWarnings("unused")
+    @Deprecated
     public boolean isFaildedIfNotNew() {
         return (faildedIfNotNew == null ? true : faildedIfNotNew);
     }
@@ -84,10 +92,17 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
     public abstract InputMetric getInputMetric();
 
 
+    @SuppressWarnings("unused")
     public Object readResolve() {
-        if (stopProcessingIfError == null){
+
+        if (stopProcessingIfError == null) {
             stopProcessingIfError = true;
         }
+
+        if (failIfNotNew == null) {
+            failIfNotNew = (faildedIfNotNew == null) ? false : faildedIfNotNew.booleanValue();
+        }
+
         return this;
     }
 }

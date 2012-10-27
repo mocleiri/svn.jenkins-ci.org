@@ -32,12 +32,12 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class MeasureType extends MetricsType implements Describable<MeasureType> {
 
-    protected MeasureType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
-        super(pattern, failureIfNotNew, deleteOutputFiles, stopProcessingIfError);
+    protected MeasureType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
+        super(pattern, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
     }
 
-    protected MeasureType(String pattern, boolean failureIfNotNew, boolean deleteOutputFiles) {
-        super(pattern, failureIfNotNew, deleteOutputFiles);
+    protected MeasureType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles) {
+        super(pattern, failIfNotNew, deleteOutputFiles);
     }
 
     protected MeasureType(String pattern) {
