@@ -158,7 +158,7 @@
                         <xsl:value-of select="$metric" />
                     </xsl:attribute>
                     <xsl:choose>
-                        <xsl:when test="@val = ''">
+                        <xsl:when test="not (@val) or @val = ''">
                             <xsl:attribute name="value">0</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
@@ -195,7 +195,7 @@
                         <xsl:value-of select="$metric" />
                     </xsl:attribute>
                     <xsl:choose>
-                        <xsl:when test="@avg = ''">
+                        <xsl:when test="not (@avg) or @avg=''">
                             <xsl:attribute name="value">0</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
@@ -232,7 +232,7 @@
                         <xsl:value-of select="$metric" />
                     </xsl:attribute>
                     <xsl:choose>
-                        <xsl:when test="@val = ''">
+                        <xsl:when test="not (@val) or @val = ''">
                             <xsl:attribute name="value">0</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
