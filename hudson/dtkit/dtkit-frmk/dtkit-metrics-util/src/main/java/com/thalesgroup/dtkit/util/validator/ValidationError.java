@@ -77,7 +77,11 @@ public class ValidationError implements Serializable {
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("At line ").append(line).append(" of ").append(errorId).append(":").append((message));
+        if (line != -1) {
+            sb.append("At line ").append(line).append(" of ").append(errorId).append(":").append((message));
+        } else {
+            sb.append("Technical validation:").append(message);
+        }
         return sb.toString();
     }
 }

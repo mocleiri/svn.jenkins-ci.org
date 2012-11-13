@@ -128,11 +128,11 @@ public class ValidationService implements Serializable {
             }
 
             return handler.getErrors();
-        }
-        catch (SAXException sae) {
-            return handler.getErrors();
-        }
-        catch (IOException ioe) {
+        } catch (SAXException sae) {
+            List<ValidationError> errors = handler.getErrors();
+            errors.add(new ValidationError(ErrorType.ERROR, -1, "-1", sae.getMessage()));
+            return errors;
+        } catch (IOException ioe) {
             throw new ValidationException("Validation error", ioe);
         }
     }
