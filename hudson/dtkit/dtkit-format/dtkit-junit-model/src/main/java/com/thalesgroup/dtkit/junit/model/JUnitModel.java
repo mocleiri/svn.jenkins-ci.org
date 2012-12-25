@@ -60,4 +60,12 @@ public class JUnitModel implements Serializable {
             set(new ValidationService());
         }
     };
+
+    @SuppressWarnings("unused")
+    public static JUnit5 OUTPUT_JUNIT_5 = new JUnit5() {
+        {
+            set(new ValidationService());
+        }
+    };
+
 }
