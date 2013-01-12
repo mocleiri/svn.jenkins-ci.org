@@ -2,7 +2,7 @@
 <!--
 /*******************************************************************************
 * Copyright (c) 2009 Thales Corporate Services SAS                             *
-* Author : Gregory Boissinot, Guillaume Tanier                                 *
+* Author : Gregory Boissinot, Guillaume Tanier, Aravindan Mahendran            *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
 * of this software and associated documentation files (the "Software"), to deal*
@@ -42,38 +42,40 @@
                 <xsl:attribute name="toolname">klocwork</xsl:attribute>
 
                 <xsl:for-each-group select="tag:problem" group-by="tag:file">
-
                     <xsl:element name="violations:file">
                         <xsl:attribute name="path">
                             <xsl:value-of select="tag:file"/>
                         </xsl:attribute>
+                        
+                        
+                            <xsl:for-each select="current-group()">
+                                <xsl:variable name="state"><xsl:value-of select="tag:state"/></xsl:variable>
+                                <xsl:if test="not($state='Fixed')">
+                                    <xsl:element name="violations:violation">
+                                        <xsl:attribute name="line">
+                                            <xsl:value-of select="tag:line"/>
+                                        </xsl:attribute>
 
-                        <xsl:for-each select="current-group()">
+                                        <xsl:attribute name="message">
+                                            <xsl:value-of select="tag:message"/>
+                                        </xsl:attribute>
 
-                            <xsl:element name="violations:violation">
-                                <xsl:attribute name="line">
-                                    <xsl:value-of select="tag:line"/>
-                                </xsl:attribute>
+                                        <xsl:attribute name="key">
+                                            <xsl:value-of select="tag:code"/>
+                                        </xsl:attribute>
 
-                                <xsl:attribute name="message">
-                                    <xsl:value-of select="tag:message"/>
-                                </xsl:attribute>
+                                        <xsl:attribute name="column">
+                                            <xsl:value-of select="tag:column"/>
+                                        </xsl:attribute>
 
-                                <xsl:attribute name="key">
-                                    <xsl:value-of select="tag:code"/>
-                                </xsl:attribute>
+                                        <xsl:attribute name="severity">
+                                            <xsl:value-of select="tag:severity"/>
+                                        </xsl:attribute>
 
-                                <xsl:attribute name="column">
-                                    <xsl:value-of select="tag:column"/>
-                                </xsl:attribute>
-
-                                <xsl:attribute name="severity">
-                                    <xsl:value-of select="tag:severity"/>
-                                </xsl:attribute>
-
-                            </xsl:element>
-
-                        </xsl:for-each>
+                                    </xsl:element>
+                                </xsl:if>
+                            </xsl:for-each>
+                        
                     </xsl:element>
                 </xsl:for-each-group>
             </xsl:element>
