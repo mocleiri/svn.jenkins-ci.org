@@ -33,6 +33,10 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class CoverageType extends MetricsType implements Describable<CoverageType> {
 
+    protected CoverageType(String pattern, boolean skipNoTestFiles, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
+        super(pattern, skipNoTestFiles, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
+    }
+
     protected CoverageType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
         super(pattern, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
     }

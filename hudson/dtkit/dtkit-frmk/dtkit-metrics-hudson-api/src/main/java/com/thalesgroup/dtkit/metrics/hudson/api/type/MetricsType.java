@@ -35,11 +35,21 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
 
     private transient Boolean faildedIfNotNew;
 
+    private Boolean skipNoTestFiles;
+
     private Boolean failIfNotNew;
 
     private Boolean deleteOutputFiles;
 
     private Boolean stopProcessingIfError;
+
+    protected MetricsType(String pattern, Boolean skipNoTestFiles, Boolean failIfNotNew, Boolean deleteOutputFiles, Boolean stopProcessingIfError) {
+        this.pattern = pattern;
+        this.skipNoTestFiles = skipNoTestFiles;
+        this.failIfNotNew = failIfNotNew;
+        this.deleteOutputFiles = deleteOutputFiles;
+        this.stopProcessingIfError = stopProcessingIfError;
+    }
 
     protected MetricsType(String pattern, Boolean failIfNotNew, Boolean deleteOutputFiles, Boolean stopProcessingIfError) {
         this.pattern = pattern;
@@ -62,12 +72,14 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
         this.stopProcessingIfError = true;
     }
 
-    @SuppressWarnings("unused")
     public String getPattern() {
         return pattern;
     }
 
-    @SuppressWarnings("unused")
+    public boolean isSkipNoTestFiles() {
+        return skipNoTestFiles;
+    }
+
     public boolean isFailIfNotNew() {
         return (failIfNotNew == null ? true : failIfNotNew);
     }
@@ -78,21 +90,16 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
         return (faildedIfNotNew == null ? true : faildedIfNotNew);
     }
 
-    @SuppressWarnings("unused")
     public boolean isDeleteOutputFiles() {
         return (deleteOutputFiles == null ? true : deleteOutputFiles);
     }
 
-    @SuppressWarnings("unused")
     public boolean isStopProcessingIfError() {
         return stopProcessingIfError;
     }
 
-    @SuppressWarnings("unused")
     public abstract InputMetric getInputMetric();
 
-
-    @SuppressWarnings("unused")
     public Object readResolve() {
 
         if (stopProcessingIfError == null) {

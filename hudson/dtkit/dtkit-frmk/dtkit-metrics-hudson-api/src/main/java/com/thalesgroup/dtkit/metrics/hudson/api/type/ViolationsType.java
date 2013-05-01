@@ -32,6 +32,11 @@ import hudson.model.Hudson;
 @SuppressWarnings("unused")
 public abstract class ViolationsType extends MetricsType implements Describable<ViolationsType> {
 
+
+    protected ViolationsType(String pattern, boolean skipNoTestFiles, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
+        super(pattern, skipNoTestFiles, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
+    }
+
     protected ViolationsType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
         super(pattern, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
     }
