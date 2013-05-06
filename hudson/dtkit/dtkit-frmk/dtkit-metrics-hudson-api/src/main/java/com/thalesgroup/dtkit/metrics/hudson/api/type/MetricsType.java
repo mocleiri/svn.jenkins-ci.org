@@ -110,6 +110,10 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
             failIfNotNew = (faildedIfNotNew == null) ? false : faildedIfNotNew.booleanValue();
         }
 
+        if (skipNoTestFiles == null) {
+            skipNoTestFiles = (skipNoTestFiles == null) ? false : skipNoTestFiles.booleanValue();
+        }
+
         return this;
     }
 }
