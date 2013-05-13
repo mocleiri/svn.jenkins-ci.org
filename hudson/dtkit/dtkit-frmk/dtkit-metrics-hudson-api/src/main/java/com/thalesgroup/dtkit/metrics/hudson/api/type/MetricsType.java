@@ -77,11 +77,11 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
     }
 
     public boolean isSkipNoTestFiles() {
-        return skipNoTestFiles;
+        return (skipNoTestFiles == null) ? false : skipNoTestFiles.booleanValue();
     }
 
     public boolean isFailIfNotNew() {
-        return (failIfNotNew == null ? true : failIfNotNew);
+        return (failIfNotNew == null ? true : failIfNotNew.booleanValue());
     }
 
     @SuppressWarnings("unused")
@@ -111,7 +111,7 @@ public abstract class MetricsType implements ExtensionPoint, Serializable {
         }
 
         if (skipNoTestFiles == null) {
-            skipNoTestFiles = (skipNoTestFiles == null) ? false : skipNoTestFiles.booleanValue();
+            skipNoTestFiles = false;
         }
 
         return this;
