@@ -105,7 +105,15 @@ public class TusarModel implements Serializable {
         }
     };
 
-    public static OutputMetric LATEST = OUTPUT_TUSAR_10_0;
+
+    @SuppressWarnings("unused")
+    public static OutputMetric OUTPUT_TUSAR_11_0 = new Tusarv11() {
+        {
+            set(new ValidationService());
+        }
+    };
+
+    public static OutputMetric LATEST = OUTPUT_TUSAR_11_0;
 
     public static List<OutputMetric> getAllTUSAROutput() {
         return Arrays.asList(new OutputMetric[]{
@@ -118,7 +126,8 @@ public class TusarModel implements Serializable {
                 OUTPUT_TUSAR_7_0,
                 OUTPUT_TUSAR_8_0,
                 OUTPUT_TUSAR_9_0,
-                OUTPUT_TUSAR_10_0
+                OUTPUT_TUSAR_10_0,
+                OUTPUT_TUSAR_11_0
         });
     }
 
