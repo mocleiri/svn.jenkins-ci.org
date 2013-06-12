@@ -19,7 +19,7 @@ public class JUnit6 extends AbstractOutputMetric implements Serializable {
     @Override
     @XmlElement
     public String getDescription() {
-        return "JUNIT OUTPUT FORMAT 5.0";
+        return "JUNIT OUTPUT FORMAT 6.0";
     }
 
     @Override
