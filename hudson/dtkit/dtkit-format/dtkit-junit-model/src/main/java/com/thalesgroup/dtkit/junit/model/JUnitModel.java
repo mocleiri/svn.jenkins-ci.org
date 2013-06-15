@@ -75,4 +75,10 @@ public class JUnitModel implements Serializable {
         }
     };
 
+    @SuppressWarnings("unused")
+    public static JUnit7 OUTPUT_JUNIT_7 = new JUnit7() {
+        {
+            set(new ValidationService());
+        }
+    };
 }
