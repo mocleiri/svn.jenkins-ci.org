@@ -24,7 +24,6 @@
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
 
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.CoverageType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
@@ -36,19 +35,17 @@ import hudson.model.Hudson;
 
 public abstract class CoverageTypeDescriptor<T extends CoverageType> extends Descriptor<CoverageType> {
 
+    private transient Class<? extends InputMetric> inputMetricClass;
+
     protected CoverageTypeDescriptor(Class<T> clazz, final Class<? extends InputMetric> inputMetricClass) {
         super(clazz);
-        if (inputMetricClass != null) {
-            RegistryService.addElement(getId(), inputMetricClass);
-        }
+        this.inputMetricClass = inputMetricClass;
     }
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> all() {
         return Hudson.getInstance().<CoverageType, CoverageTypeDescriptor<?>>getDescriptorList(CoverageType.class);
     }
-
-    public abstract String getId();
 
     @SuppressWarnings("unused")
     public String getDisplayName() {
@@ -57,11 +54,11 @@ public abstract class CoverageTypeDescriptor<T extends CoverageType> extends Des
 
     @SuppressWarnings("unused")
     public InputMetric getInputMetric() {
-        Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
         try {
             return InputMetricFactory.getInstance(inputMetricClass);
         } catch (InputMetricException e) {
             return null;
         }
     }
+
 }

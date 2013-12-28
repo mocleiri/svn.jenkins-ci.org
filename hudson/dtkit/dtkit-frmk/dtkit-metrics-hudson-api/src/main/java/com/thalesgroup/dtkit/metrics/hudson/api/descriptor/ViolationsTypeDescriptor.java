@@ -23,7 +23,6 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.ViolationsType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
@@ -35,19 +34,17 @@ import hudson.model.Hudson;
 
 public abstract class ViolationsTypeDescriptor<T extends ViolationsType> extends Descriptor<ViolationsType> {
 
+    private transient Class<? extends InputMetric> inputMetricClass;
+
     protected ViolationsTypeDescriptor(Class<T> classType, final Class<? extends InputMetric> inputMetricClass) {
         super(classType);
-        if (inputMetricClass != null) {
-            RegistryService.addElement(getId(), inputMetricClass);
-        }
+        this.inputMetricClass = inputMetricClass;
     }
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> all() {
         return Hudson.getInstance().<ViolationsType, ViolationsTypeDescriptor<?>>getDescriptorList(ViolationsType.class);
     }
-
-    public abstract String getId();
 
     @SuppressWarnings("unused")
     public String getDisplayName() {
@@ -56,11 +53,11 @@ public abstract class ViolationsTypeDescriptor<T extends ViolationsType> extends
 
     @SuppressWarnings("unused")
     public InputMetric getInputMetric() {
-        Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
         try {
             return InputMetricFactory.getInstance(inputMetricClass);
         } catch (InputMetricException e) {
             return null;
         }
     }
+
 }

@@ -23,7 +23,6 @@
 
 package com.thalesgroup.dtkit.metrics.model;
 
-import com.google.inject.Inject;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
 import com.thalesgroup.dtkit.util.converter.ConversionService;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
@@ -46,19 +45,6 @@ public abstract class InputMetricXSL extends InputMetric {
     private String[] inputXsdNameList;
     private File[] inputXsdFileList;
 
-    /**
-     * -----------------------------------------
-     * The business services
-     */
-    private ConversionService conversionService;
-
-    private ValidationService validationService;
-
-    @Inject
-    void set(ConversionService conversionService, ValidationService validationService) {
-        this.conversionService = conversionService;
-        this.validationService = validationService;
-    }
 
     /**
      * Gets the Class (namespace) of the xsl file resource
@@ -190,6 +176,7 @@ public abstract class InputMetricXSL extends InputMetric {
      */
     @Override
     public void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
+        ConversionService conversionService = new ConversionService();
         if (getXslFile() == null) {
             conversionService.convert(new StreamSource(this.getXslResourceClass().getResourceAsStream(this.getXslName())), inputFile, outFile, params);
         } else {
@@ -216,6 +203,7 @@ public abstract class InputMetricXSL extends InputMetric {
      *          The exception is catched by the API client (as Hudson plugin)
      */
     public void convert(File inputFile, File outFile, File externalXsl, Map<String, Object> params) throws ConversionException {
+        ConversionService conversionService = new ConversionService();
         conversionService.convert(externalXsl, inputFile, outFile, params);
     }
 
@@ -233,6 +221,7 @@ public abstract class InputMetricXSL extends InputMetric {
      *          The exception is catched by the API client (as Hudson plugin)
      */
     public void convert(File inputFile, File outFile, String externalXslContent, Map<String, Object> params) throws ConversionException {
+        ConversionService conversionService = new ConversionService();
         conversionService.convert(new StreamSource(new StringReader(externalXslContent)), inputFile, outFile, params);
     }
 
@@ -241,6 +230,8 @@ public abstract class InputMetricXSL extends InputMetric {
     */
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
+
+        ValidationService validationService = new ValidationService();
 
         if ((this.getInputXsdNameList() == null) && (this.getInputXsdFileList() == null)) {
             return true;
@@ -286,6 +277,7 @@ public abstract class InputMetricXSL extends InputMetric {
             sources[i] = new StreamSource(this.getOutputFormatType().getClass().getResourceAsStream(getOutputXsdNameList()[i]));
         }
 
+        ValidationService validationService = new ValidationService();
         setOutputValidationErrors(validationService.processValidation(sources, inputXMLFile));
         return getOutputValidationErrors().size() == 0;
     }

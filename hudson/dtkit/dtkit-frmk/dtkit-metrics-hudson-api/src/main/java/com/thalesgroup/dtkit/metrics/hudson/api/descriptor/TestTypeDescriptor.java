@@ -23,7 +23,6 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
@@ -35,19 +34,17 @@ import hudson.model.Hudson;
 
 public abstract class TestTypeDescriptor<T extends TestType> extends Descriptor<TestType> {
 
+    private transient Class<? extends InputMetric> inputMetricClass;
+
     protected TestTypeDescriptor(Class<T> classType, final Class<? extends InputMetric> inputMetricClass) {
         super(classType);
-        if (inputMetricClass != null) {
-            RegistryService.addElement(getId(), inputMetricClass);
-        }
+        this.inputMetricClass = inputMetricClass;
     }
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<TestType, TestTypeDescriptor<?>> all() {
         return Hudson.getInstance().<TestType, TestTypeDescriptor<?>>getDescriptorList(TestType.class);
     }
-
-    public abstract String getId();
 
     @SuppressWarnings("unused")
     @Override
@@ -57,23 +54,6 @@ public abstract class TestTypeDescriptor<T extends TestType> extends Descriptor<
 
     @SuppressWarnings("unused")
     public InputMetric getInputMetric() {
-        final Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
-        /** Can't retrieve the instance with guice due to a
-         java.lang.NoClassDefFoundError: com/google/inject/internal/Finalizer$ShutDown
-         thrown when used by the DTKIT library is used by a Hudson plugin as the xUnit Hudson plugin.
-         The exception is thrown on slave usage (works for master usage).
-         **/
-//        Injector injector = Guice.createInjector(new AbstractModule() {
-//            @Override
-//            protected void configure() {
-//                //Optional binding, provided by default in Guice)
-//                bind(ValidationService.class).in(Singleton.class);
-//                bind(ConversionService.class).in(Singleton.class);
-//                //Make the instance of inputMetricClass also a Singleton
-//                bind(inputMetricClass).in(Singleton.class);
-//            }
-//        });
-//        return injector.getInstance(inputMetricClass);
         try {
             return InputMetricFactory.getInstance(inputMetricClass);
         } catch (InputMetricException e) {

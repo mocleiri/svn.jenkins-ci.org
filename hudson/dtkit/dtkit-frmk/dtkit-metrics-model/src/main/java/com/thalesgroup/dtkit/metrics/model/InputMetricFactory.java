@@ -23,59 +23,27 @@
 
 package com.thalesgroup.dtkit.metrics.model;
 
-import com.thalesgroup.dtkit.util.converter.ConversionService;
-import com.thalesgroup.dtkit.util.validator.ValidationService;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 public class InputMetricFactory {
 
-    private static Map<Class<? extends InputMetric>, InputMetric> instanceDictionnary = new ConcurrentHashMap<Class<? extends InputMetric>, InputMetric>();
-
-    private static void wireInputMetricDependencies(Class<? extends InputMetric> classInputMetric, InputMetric inputMetric) {
-        if ((InputMetricXSL.class).isAssignableFrom(classInputMetric)) {
-            ((InputMetricXSL) inputMetric).set(new ConversionService(), new ValidationService());
-        }
-    }
-
     public static InputMetric getInstance(Class<? extends InputMetric> classInputMetric) throws InputMetricException {
 
-        InputMetric inputMetric;
-        if ((inputMetric = instanceDictionnary.get(classInputMetric)) != null) {
-            return inputMetric;
-        }
-
         try {
-            inputMetric = classInputMetric.newInstance();
-            instanceDictionnary.put(classInputMetric, inputMetric);
+            return classInputMetric.newInstance();
         } catch (InstantiationException ie) {
             throw new InputMetricException(ie);
         } catch (IllegalAccessException iae) {
             throw new InputMetricException(iae);
         }
-
-        //Compute inputMetric dependencies
-        wireInputMetricDependencies(classInputMetric, inputMetric);
-
-        return inputMetric;
     }
 
-
-    @SuppressWarnings("unused")
     public static InputMetric getInstanceWithNoDefaultConstructor(Class<? extends InputMetric> classInputMetric, Class<?>[] parameterTypes, Object[] parameters) throws InputMetricException {
-        InputMetric inputMetric;
-        if ((inputMetric = instanceDictionnary.get(classInputMetric)) != null) {
-            return inputMetric;
-        }
-
         try {
             Constructor<? extends InputMetric> constructor = classInputMetric.getDeclaredConstructor(parameterTypes);
-            inputMetric = constructor.newInstance(parameters);
-            instanceDictionnary.put(classInputMetric, inputMetric);
+            return constructor.newInstance(parameters);
         } catch (InstantiationException ie) {
             throw new InputMetricException(ie);
         } catch (IllegalAccessException iae) {
@@ -85,11 +53,6 @@ public class InputMetricFactory {
         } catch (InvocationTargetException e) {
             throw new InputMetricException(e);
         }
-
-        //Compute inputMetric dependencies
-        wireInputMetricDependencies(classInputMetric, inputMetric);
-
-        return inputMetric;
     }
 
 }

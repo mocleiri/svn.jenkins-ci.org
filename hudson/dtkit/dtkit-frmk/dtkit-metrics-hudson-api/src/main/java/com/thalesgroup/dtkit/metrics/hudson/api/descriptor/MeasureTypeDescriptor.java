@@ -23,7 +23,6 @@
 
 package com.thalesgroup.dtkit.metrics.hudson.api.descriptor;
 
-import com.thalesgroup.dtkit.metrics.hudson.api.registry.RegistryService;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.MeasureType;
 import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.metrics.model.InputMetricException;
@@ -35,19 +34,17 @@ import hudson.model.Hudson;
 
 public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descriptor<MeasureType> {
 
+    private transient Class<? extends InputMetric> inputMetricClass;
+
     protected MeasureTypeDescriptor(Class<T> clazz, final Class<? extends InputMetric> inputMetricClass) {
         super(clazz);
-        if (inputMetricClass != null) {
-            RegistryService.addElement(getId(), inputMetricClass);
-        }
+        this.inputMetricClass = inputMetricClass;
     }
 
     @SuppressWarnings("unused")
     public static DescriptorExtensionList<MeasureType, MeasureTypeDescriptor<?>> all() {
         return Hudson.getInstance().<MeasureType, MeasureTypeDescriptor<?>>getDescriptorList(MeasureType.class);
     }
-
-    public abstract String getId();
 
     @SuppressWarnings("unused")
     public String getDisplayName() {
@@ -56,11 +53,10 @@ public abstract class MeasureTypeDescriptor<T extends MeasureType> extends Descr
 
     @SuppressWarnings("unused")
     public InputMetric getInputMetric() {
-        Class<? extends InputMetric> inputMetricClass = RegistryService.getElement(getId());
         try {
             return InputMetricFactory.getInstance(inputMetricClass);
         } catch (InputMetricException e) {
-            throw new RuntimeException("Can't instanciate the inputMeric object for the class " + inputMetricClass);
+            return null;
         }
     }
 }
