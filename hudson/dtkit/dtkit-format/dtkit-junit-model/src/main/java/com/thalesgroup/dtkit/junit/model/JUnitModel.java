@@ -34,51 +34,23 @@ import java.io.Serializable;
 public class JUnitModel implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_JUNIT_1_0 = new JUnit1() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_JUNIT_1_0 = new JUnit1();
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_JUNIT_2 = new JUnit2() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_JUNIT_2 = new JUnit2();
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_JUNIT_3 = new JUnit3() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_JUNIT_3 = new JUnit3();
 
     @SuppressWarnings("unused")
-    public static JUnit4 OUTPUT_JUNIT_4 = new JUnit4() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static JUnit4 OUTPUT_JUNIT_4 = new JUnit4();
 
     @SuppressWarnings("unused")
-    public static JUnit5 OUTPUT_JUNIT_5 = new JUnit5() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static JUnit5 OUTPUT_JUNIT_5 = new JUnit5();
 
     @SuppressWarnings("unused")
-    public static JUnit6 OUTPUT_JUNIT_6 = new JUnit6() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static JUnit6 OUTPUT_JUNIT_6 = new JUnit6();
 
     @SuppressWarnings("unused")
-    public static JUnit7 OUTPUT_JUNIT_7 = new JUnit7() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static JUnit7 OUTPUT_JUNIT_7 = new JUnit7();
 }
