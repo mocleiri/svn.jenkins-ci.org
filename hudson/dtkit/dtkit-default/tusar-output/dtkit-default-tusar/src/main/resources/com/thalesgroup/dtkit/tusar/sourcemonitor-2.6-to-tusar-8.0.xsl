@@ -24,19 +24,18 @@
 *******************************************************************************/
 -->
 
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:measures="http://www.thalesgroup.com/tusar/measures/v5"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:measures="http://www.thalesgroup.com/tusar/measures/v5"
                 xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema">
+                version="2.0"
+        >
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
     <xsl:decimal-format name="euro" decimal-separator="," grouping-separator="."/>
     <xsl:template match="sourcemonitor_metrics">
-        <tusar:tusar xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                     xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
-                     xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
-                     xmlns:tusar="http://www.thalesgroup.com/tusar/v8"
-                     version="8.0">
+        <tusar:tusar
+                xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
+                xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
+                xmlns:tusar="http://www.thalesgroup.com/tusar/v8"
+                version="8.0">
             <xsl:element name="tusar:measures">
                 <xsl:attribute name="toolname">sourcemonitor</xsl:attribute>
                 <xsl:attribute name="version">

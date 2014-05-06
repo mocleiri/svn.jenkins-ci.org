@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tusar:tusar xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
-             xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
-             xmlns:tusar="http://www.thalesgroup.com/tusar/v8"
-             version="8.0">
-   <tusar:measures toolname="cpd">
-      <measures:duplications>
-         <duplications:set lines="22" tokens="119">
-            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
-                                   line="43"/>
-            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/warnings/DefaultWarningsRule.java"
-                                   line="43"/>
-            <duplications:codefragment><![CDATA[
+<tusar:tusar
+        xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
+        xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
+        xmlns:tusar="http://www.thalesgroup.com/tusar/v8"
+        version="8.0">
+    <tusar:measures toolname="cpd">
+        <measures:duplications>
+            <duplications:set lines="22" tokens="119">
+                <duplications:resource
+                        path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
+                        line="43"/>
+                <duplications:resource
+                        path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/warnings/DefaultWarningsRule.java"
+                        line="43"/>
+                <duplications:codefragment><![CDATA[
             
                                 Messages.WarningsRuleSet_DefaultRule_FixedWarningsCount(newWarnings * -1));
         }
@@ -45,13 +46,15 @@
         List<WarningsResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE, WarningsResultAction.class);
 
         ]]></duplications:codefragment>
-         </duplications:set>
-         <duplications:set lines="22" tokens="114">
-            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
-                                   line="43"/>
-            <duplications:resource path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/opentasks/DefaultOpenTasksRule.java"
-                                   line="48"/>
-            <duplications:codefragment><![CDATA[
+            </duplications:set>
+            <duplications:set lines="22" tokens="114">
+                <duplications:resource
+                        path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/checkstyle/DefaultCheckstyleRule.java"
+                        line="43"/>
+                <duplications:resource
+                        path="/Users/gregory/trunk/hudson/git/ci-game-plugin/src/main/java/hudson/plugins/cigame/rules/plugins/opentasks/DefaultOpenTasksRule.java"
+                        line="48"/>
+                <duplications:codefragment><![CDATA[
             
                                     Messages.OpenTasksRule_DefaultRule_FixedTasksCount(newTasks * -1, tasksPriority.name()));
             }
@@ -78,7 +81,7 @@
 
 
         ]]></duplications:codefragment>
-         </duplications:set>
-      </measures:duplications>
-   </tusar:measures>
+            </duplications:set>
+        </measures:duplications>
+    </tusar:measures>
 </tusar:tusar>

@@ -23,9 +23,9 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:measures="http://www.thalesgroup.com/tusar/measures/v4"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:measures="http://www.thalesgroup.com/tusar/measures/v4"
+                version="2.0"
+        >
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
     <xsl:template match="/">
@@ -33,7 +33,7 @@
         <tusar:tusar
                 xmlns:measures="http://www.thalesgroup.com/tusar/measures/v4"
                 xmlns:tusar="http://www.thalesgroup.com/tusar/v4"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                >
 
             <xsl:element name="tusar:measures">
 

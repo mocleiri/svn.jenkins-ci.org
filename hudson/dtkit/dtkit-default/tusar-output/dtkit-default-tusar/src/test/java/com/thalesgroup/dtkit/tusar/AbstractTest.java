@@ -42,6 +42,7 @@ public class AbstractTest {
     }
 
 
+
     public void convertAndValidate(Class<? extends InputMetric> inputMetricClassType, String inputXMLPath, String expectedResultPath) throws Exception {
 
         InputMetric inputMetric = injector.getInstance(inputMetricClassType);

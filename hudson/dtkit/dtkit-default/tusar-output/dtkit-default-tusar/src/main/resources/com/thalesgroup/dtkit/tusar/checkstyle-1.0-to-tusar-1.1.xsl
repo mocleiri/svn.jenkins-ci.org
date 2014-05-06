@@ -23,14 +23,14 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:t="http://www.thalesgroup.com/tusar/tests/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
+        >
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
     <xsl:template match="checkstyle">
         <tusar:tusar xmlns:violations="http://www.thalesgroup.com/tusar/violations/v1"
                      xmlns:tusar="http://www.thalesgroup.com/tusar/v2"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                >
             <tusar:violations>
                 <xsl:for-each select="file">
                     <violations:file>

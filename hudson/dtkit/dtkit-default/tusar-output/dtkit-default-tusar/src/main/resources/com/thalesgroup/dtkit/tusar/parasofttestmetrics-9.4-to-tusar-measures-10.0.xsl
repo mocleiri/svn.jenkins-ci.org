@@ -23,40 +23,43 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-				xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
-				xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
+                xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
                 xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
-				xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" />
-	<xsl:decimal-format name="euro" decimal-separator="," grouping-separator="." />
+                version="2.0"
+        >
+    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+    <xsl:decimal-format name="euro" decimal-separator="," grouping-separator="."/>
 
-	<xsl:template match="ResultsSession">
-		<tusar:tusar xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-			xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
-			xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
-            xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
-			xmlns:tusar="http://www.thalesgroup.com/tusar/v10"
-			version="10.0">
-			<xsl:element name="tusar:measures">
+    <xsl:template match="ResultsSession">
+        <tusar:tusar
+                xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
+                xmlns:size="http://www.thalesgroup.com/tusar/size/v1"
+                xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
+                xmlns:tusar="http://www.thalesgroup.com/tusar/v10"
+                version="10.0">
+            <xsl:element name="tusar:measures">
                 <xsl:element name="measures:duplications">
                     <xsl:apply-templates select="CodingStandards/StdViols/DupViol"></xsl:apply-templates>
                 </xsl:element>
-				<xsl:element name="measures:size">
-					<xsl:attribute name="toolname"><xsl:value-of select="/ResultsSession/@toolName" /></xsl:attribute>
-					<xsl:attribute name="version"><xsl:value-of	select="/ResultsSession/@toolVer" /></xsl:attribute>
-					<xsl:apply-templates select="CodingStandards/StdViols"></xsl:apply-templates>
-					<xsl:apply-templates select="Metrics/Metric"></xsl:apply-templates>
+                <xsl:element name="measures:size">
+                    <xsl:attribute name="toolname">
+                        <xsl:value-of select="/ResultsSession/@toolName"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="version">
+                        <xsl:value-of select="/ResultsSession/@toolVer"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates select="CodingStandards/StdViols"></xsl:apply-templates>
+                    <xsl:apply-templates select="Metrics/Metric"></xsl:apply-templates>
                     <!--<xsl:apply-templates select="//CvgInfo"></xsl:apply-templates>-->
-				</xsl:element>
-			</xsl:element>
-		</tusar:tusar>
-	</xsl:template>
+                </xsl:element>
+            </xsl:element>
+        </tusar:tusar>
+    </xsl:template>
 
     <!-- In C++test (not in JTest), Complexity is seen as a violation (in Sonar, it is a measure) -->
-	<xsl:template match="StdViols">
-		<xsl:for-each-group select="StdViol[@rule='METRICS-29']" group-by="@locFile">
+    <xsl:template match="StdViols">
+        <xsl:for-each-group select="StdViol[@rule='METRICS-29']" group-by="@locFile">
             <xsl:variable name="locFile">
                 <xsl:value-of select="@locFile"/>
             </xsl:variable>
@@ -70,21 +73,26 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
-            
+
             <xsl:element name="size:resource">
-                <xsl:attribute name="type">FILE</xsl:attribute>					
-                <xsl:attribute name="value"><xsl:value-of select="$fsPath" /></xsl:attribute>
+                <xsl:attribute name="type">FILE</xsl:attribute>
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$fsPath"/>
+                </xsl:attribute>
                 <xsl:element name="size:measure">
                     <xsl:attribute name="key">Complexity</xsl:attribute>
-                    <xsl:attribute name="value"><xsl:value-of select="sum(current-group()/number(substring-after(@msg, 'has Cyclomatic Complexity value: ' )))"/></xsl:attribute>
-                </xsl:element> 
+                    <xsl:attribute name="value">
+                        <xsl:value-of
+                                select="sum(current-group()/number(substring-after(@msg, 'has Cyclomatic Complexity value: ' )))"/>
+                    </xsl:attribute>
+                </xsl:element>
             </xsl:element>
         </xsl:for-each-group>
-	</xsl:template>
+    </xsl:template>
 
-    
+
     <xsl:template match="Metric">
-        
+
         <xsl:variable name="metric">
             <xsl:choose>
                 <xsl:when test="@short = 'ID'">
@@ -131,7 +139,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
+
         <!-- Info nodes without children and with an attribute "elem" containing a '.'-->
         <xsl:for-each select="descendant::Info[not(child::*) and contains(@elem,'.')]">
             <xsl:element name="size:resource">
@@ -144,7 +152,8 @@
                 <xsl:variable name="fsPath">
                     <xsl:choose>
                         <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">
-                            <xsl:value-of select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
+                            <xsl:value-of
+                                    select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$locFile"/>
@@ -152,25 +161,30 @@
                     </xsl:choose>
                 </xsl:variable>
                 <xsl:attribute name="type">FILE</xsl:attribute>
-                <xsl:attribute name="value"><xsl:value-of select="$fsPath"/></xsl:attribute>
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$fsPath"/>
+                </xsl:attribute>
                 <xsl:element name="size:measure">
                     <xsl:attribute name="key">
-                        <xsl:value-of select="$metric" />
+                        <xsl:value-of select="$metric"/>
                     </xsl:attribute>
                     <xsl:choose>
                         <xsl:when test="not (@val) or @val = ''">
                             <xsl:attribute name="value">0</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:attribute name="value"><xsl:value-of select="@val" /></xsl:attribute>
+                            <xsl:attribute name="value">
+                                <xsl:value-of select="@val"/>
+                            </xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:element>
             </xsl:element>
         </xsl:for-each>
-        
+
         <!-- Info nodes corresponding to a file (first ancestor of an orphan Info node with an attribute "elem" containing a '.')-->
-        <xsl:for-each select="descendant::Info[not(child::*) and not(contains(@elem,'.'))]/ancestor::Info[contains(@elem,'.')][position()=1]">
+        <xsl:for-each
+                select="descendant::Info[not(child::*) and not(contains(@elem,'.'))]/ancestor::Info[contains(@elem,'.')][position()=1]">
             <xsl:element name="size:resource">
                 <xsl:variable name="locFile">
                     <xsl:call-template name="constructResource">
@@ -181,7 +195,8 @@
                 <xsl:variable name="fsPath">
                     <xsl:choose>
                         <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">
-                            <xsl:value-of select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
+                            <xsl:value-of
+                                    select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$locFile"/>
@@ -189,23 +204,27 @@
                     </xsl:choose>
                 </xsl:variable>
                 <xsl:attribute name="type">FILE</xsl:attribute>
-                <xsl:attribute name="value"><xsl:value-of select="$fsPath"/></xsl:attribute>
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$fsPath"/>
+                </xsl:attribute>
                 <xsl:element name="size:measure">
                     <xsl:attribute name="key">
-                        <xsl:value-of select="$metric" />
+                        <xsl:value-of select="$metric"/>
                     </xsl:attribute>
                     <xsl:choose>
                         <xsl:when test="not (@avg) or @avg=''">
                             <xsl:attribute name="value">0</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:attribute name="value"><xsl:value-of select="@avg" /></xsl:attribute>
+                            <xsl:attribute name="value">
+                                <xsl:value-of select="@avg"/>
+                            </xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:element>
             </xsl:element>
         </xsl:for-each>
-        
+
         <!-- Info nodes corresponding to a directory (Orphan Info node with an attribute @disp)-->
         <xsl:for-each select="descendant::Info[not(child::*)][@disp]">
             <xsl:element name="size:resource">
@@ -218,7 +237,8 @@
                 <xsl:variable name="fsPath">
                     <xsl:choose>
                         <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">
-                            <xsl:value-of select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
+                            <xsl:value-of
+                                    select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$locFile"/>
@@ -226,38 +246,45 @@
                     </xsl:choose>
                 </xsl:variable>
                 <xsl:attribute name="type">DIRECTORY</xsl:attribute>
-                <xsl:attribute name="value"><xsl:value-of select="$fsPath"/></xsl:attribute>
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$fsPath"/>
+                </xsl:attribute>
                 <xsl:element name="size:measure">
                     <xsl:attribute name="key">
-                        <xsl:value-of select="$metric" />
+                        <xsl:value-of select="$metric"/>
                     </xsl:attribute>
                     <xsl:choose>
                         <xsl:when test="not (@val) or @val = ''">
                             <xsl:attribute name="value">0</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:attribute name="value"><xsl:value-of select="@val" /></xsl:attribute>
+                            <xsl:attribute name="value">
+                                <xsl:value-of select="@val"/>
+                            </xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:element>
             </xsl:element>
         </xsl:for-each>
     </xsl:template>
-    
-    
+
+
     <xsl:template match="DupViol">
         <xsl:for-each select="ElDescList">
             <xsl:element name="duplications:set">
-                <xsl:attribute name="lines"><xsl:value-of select="*[1]/@srcRngEndLn - *[1]/@srcRngStartln + 1"/></xsl:attribute>
+                <xsl:attribute name="lines">
+                    <xsl:value-of select="*[1]/@srcRngEndLn - *[1]/@srcRngStartln + 1"/>
+                </xsl:attribute>
                 <xsl:attribute name="tokens">0</xsl:attribute>
                 <xsl:for-each select="ElDesc">
                     <xsl:variable name="locFile">
-                        <xsl:value-of select="@srcRngFile" />
+                        <xsl:value-of select="@srcRngFile"/>
                     </xsl:variable>
                     <xsl:variable name="fsPath">
                         <xsl:choose>
                             <xsl:when test="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)">
-                                <xsl:value-of select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
+                                <xsl:value-of
+                                        select="distinct-values(/ResultsSession/Locations/Loc[@loc=$locFile]/@fsPath)"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of select="$locFile"/>
@@ -276,7 +303,7 @@
             </xsl:element>
         </xsl:for-each>
     </xsl:template>
-    
+
     <xsl:template name="constructResource">
         <xsl:param name="resource"/>
         <xsl:param name="node"/>
@@ -286,9 +313,9 @@
                 <xsl:with-param name="node" select="$node/parent::node()"/>
             </xsl:call-template>
         </xsl:if>
-        <xsl:text>/</xsl:text><xsl:value-of select="$node/@elem"/>      
-        
+        <xsl:text>/</xsl:text><xsl:value-of select="$node/@elem"/>
+
     </xsl:template>
-	
+
 
 </xsl:stylesheet>

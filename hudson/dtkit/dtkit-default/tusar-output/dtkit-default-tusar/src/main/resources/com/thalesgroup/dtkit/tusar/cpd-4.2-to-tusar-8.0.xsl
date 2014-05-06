@@ -22,18 +22,18 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
+                xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
+                version="2.0"
+        >
+    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
+                cdata-section-elements="duplications:codefragment"/>
+    <xsl:template match="pmd-cpd">
+        <tusar:tusar
                 xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
                 xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" cdata-section-elements="duplications:codefragment"/>
-    <xsl:template match="pmd-cpd">
-        <tusar:tusar xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                     xmlns:measures="http://www.thalesgroup.com/tusar/measures/v6"
-                     xmlns:duplications="http://www.thalesgroup.com/tusar/duplications/v1"
-                     xmlns:tusar="http://www.thalesgroup.com/tusar/v8"
-                     version="8.0">
+                xmlns:tusar="http://www.thalesgroup.com/tusar/v8"
+                version="8.0">
             <xsl:element name="tusar:measures">
                 <xsl:attribute name="toolname">cpd</xsl:attribute>
                 <xsl:element name="measures:duplications">

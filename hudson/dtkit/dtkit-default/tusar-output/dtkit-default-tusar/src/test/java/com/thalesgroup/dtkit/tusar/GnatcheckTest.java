@@ -33,5 +33,4 @@ public class GnatcheckTest extends AbstractTest {
         convertAndValidate(Gnatcheck.class, "gnatcheck/testcase1/input.xml", "gnatcheck/testcase1/tusar-result.xml");
     }
 
-
 }

@@ -23,10 +23,9 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:violations="http://www.thalesgroup.com/tusar/violations/v4"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:tag="http://www.klocwork.com/inForce/report/1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:violations="http://www.thalesgroup.com/tusar/violations/v4"
+                xmlns:tag="http://www.klocwork.com/inForce/report/1.0"
+                version="2.0">
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
     <xsl:template match="tag:errorList">
@@ -34,7 +33,6 @@
         <tusar:tusar
                 xmlns:violations="http://www.thalesgroup.com/tusar/violations/v4"
                 xmlns:tusar="http://www.thalesgroup.com/tusar/v7"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 version="7.0">
 
             <xsl:element name="tusar:violations">
@@ -46,36 +44,38 @@
                         <xsl:attribute name="path">
                             <xsl:value-of select="tag:file"/>
                         </xsl:attribute>
-                        
-                        
-                            <xsl:for-each select="current-group()">
-                                <xsl:variable name="state"><xsl:value-of select="tag:state"/></xsl:variable>
-                                <xsl:if test="not($state='Fixed')">
-                                    <xsl:element name="violations:violation">
-                                        <xsl:attribute name="line">
-                                            <xsl:value-of select="tag:line"/>
-                                        </xsl:attribute>
 
-                                        <xsl:attribute name="message">
-                                            <xsl:value-of select="tag:message"/>
-                                        </xsl:attribute>
 
-                                        <xsl:attribute name="key">
-                                            <xsl:value-of select="tag:code"/>
-                                        </xsl:attribute>
+                        <xsl:for-each select="current-group()">
+                            <xsl:variable name="state">
+                                <xsl:value-of select="tag:state"/>
+                            </xsl:variable>
+                            <xsl:if test="not($state='Fixed')">
+                                <xsl:element name="violations:violation">
+                                    <xsl:attribute name="line">
+                                        <xsl:value-of select="tag:line"/>
+                                    </xsl:attribute>
 
-                                        <xsl:attribute name="column">
-                                            <xsl:value-of select="tag:column"/>
-                                        </xsl:attribute>
+                                    <xsl:attribute name="message">
+                                        <xsl:value-of select="tag:message"/>
+                                    </xsl:attribute>
 
-                                        <xsl:attribute name="severity">
-                                            <xsl:value-of select="tag:severity"/>
-                                        </xsl:attribute>
+                                    <xsl:attribute name="key">
+                                        <xsl:value-of select="tag:code"/>
+                                    </xsl:attribute>
 
-                                    </xsl:element>
-                                </xsl:if>
-                            </xsl:for-each>
-                        
+                                    <xsl:attribute name="column">
+                                        <xsl:value-of select="tag:column"/>
+                                    </xsl:attribute>
+
+                                    <xsl:attribute name="severity">
+                                        <xsl:value-of select="tag:severity"/>
+                                    </xsl:attribute>
+
+                                </xsl:element>
+                            </xsl:if>
+                        </xsl:for-each>
+
                     </xsl:element>
                 </xsl:for-each-group>
             </xsl:element>

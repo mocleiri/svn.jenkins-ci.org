@@ -23,9 +23,9 @@
 * THE SOFTWARE.                                                                *
 *******************************************************************************/
 -->
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:violations="http://www.thalesgroup.com/tusar/violations/v4"
-                xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:violations="http://www.thalesgroup.com/tusar/violations/v4"
+                version="2.0"
+        >
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
     <xsl:template match="results">
@@ -33,13 +33,12 @@
         <tusar:tusar
                 xmlns:violations="http://www.thalesgroup.com/tusar/violations/v4"
                 xmlns:tusar="http://www.thalesgroup.com/tusar/v5"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 version="5.0">
 
             <xsl:element name="tusar:violations">
 
                 <xsl:attribute name="toolname">cppcheck</xsl:attribute>
-                
+
                 <xsl:choose>
                     <xsl:when test="@version=2">
                         <xsl:attribute name="version">
@@ -86,41 +85,40 @@
             </xsl:element>
         </tusar:tusar>
     </xsl:template>
-    
+
     <xsl:template match="errors">
-         <xsl:for-each-group select="error" group-by="location/@file">
+        <xsl:for-each-group select="error" group-by="location/@file">
 
             <xsl:element name="violations:file">
                 <xsl:attribute name="path">
                     <xsl:value-of select="location/@file"/>
                 </xsl:attribute>
 
-                    <xsl:for-each select="current-group()">
-                        <xsl:element name="violations:violation">
-                            <xsl:attribute name="line">
-                                <xsl:value-of select="location/@line"/>
-                            </xsl:attribute>
+                <xsl:for-each select="current-group()">
+                    <xsl:element name="violations:violation">
+                        <xsl:attribute name="line">
+                            <xsl:value-of select="location/@line"/>
+                        </xsl:attribute>
 
-                            <xsl:attribute name="message">
-                                <xsl:value-of select="@verbose"/>
-                            </xsl:attribute>
+                        <xsl:attribute name="message">
+                            <xsl:value-of select="@verbose"/>
+                        </xsl:attribute>
 
-                            <xsl:attribute name="key">
-                                <xsl:value-of select="@id"/>
-                            </xsl:attribute>
+                        <xsl:attribute name="key">
+                            <xsl:value-of select="@id"/>
+                        </xsl:attribute>
 
-                            <xsl:attribute name="severity">
-                                <xsl:value-of select="@severity"/>
-                            </xsl:attribute>
+                        <xsl:attribute name="severity">
+                            <xsl:value-of select="@severity"/>
+                        </xsl:attribute>
 
-                        </xsl:element>
-                    </xsl:for-each>
+                    </xsl:element>
+                </xsl:for-each>
 
             </xsl:element>
-            
-        </xsl:for-each-group>        
+
+        </xsl:for-each-group>
     </xsl:template>
-    
-    
-    
+
+
 </xsl:stylesheet>
