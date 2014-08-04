@@ -72,6 +72,13 @@ public class HudsonGenerator {
     out << "    }\n"
     out << "\n"
 
+	//ReadResolve
+    out << "    @Override\n"
+    out << "    public Object readResolve(){\n"
+    out << "        return super.readResolve();\n"
+    out << "    }\n"
+    out << "\n"
+
     // Finish the  class
     out << "}\n"
 
