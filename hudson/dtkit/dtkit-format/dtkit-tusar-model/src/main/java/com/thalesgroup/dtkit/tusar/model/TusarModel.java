@@ -34,84 +34,40 @@ import java.util.List;
 public class TusarModel implements Serializable {
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_1_0 = new Tusarv1() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_1_0 = new Tusarv1() ;
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_2_0 = new Tusarv2() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_2_0 = new Tusarv2() ;
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_3_0 = new Tusarv3() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_3_0 = new Tusarv3() ;
 
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_4_0 = new Tusarv4() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_4_0 = new Tusarv4() ;
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_5_0 = new Tusarv5() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_5_0 = new Tusarv5() ;
 
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_6_0 = new Tusarv6() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_6_0 = new Tusarv6() ;
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_7_0 = new Tusarv7() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_7_0 = new Tusarv7() ;
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_8_0 = new Tusarv8() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_8_0 = new Tusarv8() ;
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_9_0 = new Tusarv9() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_9_0 = new Tusarv9() ;
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_10_0 = new Tusarv10() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_10_0 = new Tusarv10() ;
 
 
     @SuppressWarnings("unused")
-    public static OutputMetric OUTPUT_TUSAR_11_0 = new Tusarv11() {
-        {
-            set(new ValidationService());
-        }
-    };
+    public static OutputMetric OUTPUT_TUSAR_11_0 = new Tusarv11() ;
 
     public static OutputMetric LATEST = OUTPUT_TUSAR_11_0;
 
