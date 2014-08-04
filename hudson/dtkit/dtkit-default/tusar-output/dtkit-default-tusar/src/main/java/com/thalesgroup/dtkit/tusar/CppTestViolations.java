@@ -58,7 +58,7 @@ public class CppTestViolations extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "cpptestviolations-1.1-to-tusar-violations-3.0.xsl";
+        return "cpptestviolations-1.1-to-tusar-violations-4.0.xsl";
     }
 
     @Override
@@ -68,7 +68,7 @@ public class CppTestViolations extends InputMetricXSL {
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_3_0;
+        return TusarModel.OUTPUT_TUSAR_11_0;
     }
 }
 
