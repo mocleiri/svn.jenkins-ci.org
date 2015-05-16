@@ -105,10 +105,10 @@ public class ImageComparator extends Recorder implements Serializable {
 		
 		if (dif < difThreshold)
 		{
-			listener.error("Image similarity " + dif + "% is under configured reuirded similarity " + difThreshold + "% !\n");
+			listener.error("Image similarity " + dif + "% is under configured required similarity " + difThreshold + "% !\n");
 			return false;
 		}
-		listener.getLogger().print("Image similarity " + dif + "% is over configured reuirded similarity " + difThreshold + "% ==> OK!\n");
+		listener.getLogger().print("Image similarity " + dif + "% is over configured required similarity " + difThreshold + "% ==> OK!\n");
 		return true;
 	}
 
@@ -116,7 +116,7 @@ public class ImageComparator extends Recorder implements Serializable {
 	@Extension
 	public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
 		public String getDisplayName() {
-			return "Compare screenshots or images";
+			return "Compare images (png or jpeg)";
 		}
 
 		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
