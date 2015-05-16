@@ -26,6 +26,7 @@ package org.jenkinsci.plugins.imagecomparison;
 
 import hudson.Extension;
 import hudson.Launcher;
+import hudson.Util;
 import hudson.model.BuildListener;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
@@ -88,8 +89,11 @@ public class ImageComparator extends Recorder implements Serializable {
 	}
 
 	public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-		File f1 = new File(image1);
-		File f2 = new File(image2);
+		String image1Replaced = Util.replaceMacro(image1 ,build.getEnvironment(listener));
+		String image2Replaced = Util.replaceMacro(image2, build.getEnvironment(listener));
+		File f1 = new File(image1Replaced);
+		File f2 = new File(image2Replaced);
+		
 		if(!f1.isFile() || !f1.canRead())
 		{
 			listener.error("Can't access " + f1.getAbsolutePath() + "!\n");
