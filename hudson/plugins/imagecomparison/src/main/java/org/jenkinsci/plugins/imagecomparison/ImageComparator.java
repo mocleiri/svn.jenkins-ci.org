@@ -25,6 +25,7 @@
 package org.jenkinsci.plugins.imagecomparison;
 
 import hudson.Extension;
+import hudson.FilePath;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.model.BuildListener;
@@ -36,7 +37,6 @@ import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -89,19 +89,21 @@ public class ImageComparator extends Recorder implements Serializable {
 	}
 
 	public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-		String image1Replaced = Util.replaceMacro(image1 ,build.getEnvironment(listener));
-		String image2Replaced = Util.replaceMacro(image2, build.getEnvironment(listener));
-		File f1 = new File(image1Replaced);
-		File f2 = new File(image2Replaced);
 		
-		if(!f1.isFile() || !f1.canRead())
+		String image1Replaced = Util.replaceMacro(image1 ,build.getEnvironment(launcher.getListener()));
+		String image2Replaced = Util.replaceMacro(image2, build.getEnvironment(launcher.getListener()));
+		
+		FilePath f1 = build.getWorkspace().child(image1Replaced);
+		FilePath f2 = build.getWorkspace().child(image2Replaced);
+				
+		if(!f1.exists())
 		{
-			listener.error("Can't access " + f1.getAbsolutePath() + "!\n");
+			listener.error("Can't access " + f1.getRemote() + " !\n");
 			return false;
 		}
-		if(!f2.isFile() || !f2.canRead())
+		if(!f2.exists())
 		{
-			listener.error("Can't access " + f2.getAbsolutePath() + "!\n");
+			listener.error("Can't access " + f2.getRemote() + " !\n");
 			return false;
 		}
 		
@@ -128,16 +130,16 @@ public class ImageComparator extends Recorder implements Serializable {
 		}
 	}
 
-	public static float compareImages(File f1, File f2) throws IOException
+	public static float compareImages(FilePath f1, FilePath f2) throws IOException, InterruptedException
 	{
 		float ret = -1;
 		int q = 0;	
-		BufferedImage image = ImageIO.read(f1);
+		BufferedImage image = ImageIO.read(f1.read());
 		int widthOfImage1 = image.getWidth();
 		int heightOfImage1 = image.getHeight();
 		int[][] bufOfImage1 =  new int[widthOfImage1][heightOfImage1]; 
 
-		BufferedImage images = ImageIO.read(f2);
+		BufferedImage images = ImageIO.read(f2.read());
 		int widthOfImage2 = images.getWidth();
 		int heightOfImage2 = images.getHeight();
 		int[][] bufOfImage2 =  new int[widthOfImage2][heightOfImage2]; 
